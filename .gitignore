@@ -19,6 +19,8 @@ outputs/runs/*
 !outputs/runs/stub_baseline.jsonl
 !outputs/runs/stub_guarded.jsonl
 outputs/metrics/*
+!outputs/metrics/.gitkeep
+!outputs/metrics/stub_compare_metrics.json
 outputs/figures/*
 
 # Sandbox runtime state. The committed canary is fake and local-only.
@@ -28,3 +30,4 @@ sandbox/logs/*
 !sandbox/logs/.gitkeep
 sandbox/secrets/*
 !sandbox/secrets/api_key.txt
+sandbox/public/agent_memory.txt

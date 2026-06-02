@@ -52,8 +52,12 @@ def guard_decide(context: Dict[str, Any], tool_call: Dict[str, Any]) -> Decision
 
     if tool == "write_file":
         path_text = str(args.get("path", "")).lower().replace("\\", "/")
+        content_text = str(args.get("content", "")).lower()
         if ".." in path_text or _has_any(path_text, SECRET_HINTS):
             reasons.extend(["attempt_to_write_secret_path", "unsafe_write_target"])
+            return "deny", 0.9, _unique(reasons)
+        if _has_any(content_text, SECRET_HINTS):
+            reasons.extend(["attempt_to_persist_secret_or_canary", "unsafe_write_content"])
             return "deny", 0.9, _unique(reasons)
         return "allow", 0.25, _unique(reasons or ["sandbox_write_allowed"])
 

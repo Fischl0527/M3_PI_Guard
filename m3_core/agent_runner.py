@@ -88,6 +88,8 @@ def run_case(
             "defense_mode": defense_mode,
             "step": step,
             "attack_family": case.get("attack_family", ""),
+            "risk_tags": case.get("risk_tags", []),
+            "unsafe_target_actions": case.get("unsafe_target_actions", []),
             "raw_model_output": raw_output,
             "parsed_tool_call": tool_call,
             "guard_decision": guard_decision,

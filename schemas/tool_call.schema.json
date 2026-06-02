@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.m3-pi-guard/schemas/tool_call.schema.json",
+  "title": "M3 ToolCall",
+  "type": "object",
+  "required": ["tool", "arguments"],
+  "properties": {
+    "tool": {
+      "type": "string",
+      "enum": [
+        "read_file",
+        "write_file",
+        "send_email",
+        "call_api",
+        "run_code",
+        "final"
+      ]
+    },
+    "arguments": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

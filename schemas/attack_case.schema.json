@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.m3-pi-guard/schemas/attack_case.schema.json",
+  "title": "M3 AttackCase",
+  "type": "object",
+  "required": [
+    "case_id",
+    "attack_family",
+    "carrier",
+    "language",
+    "user_task",
+    "document_content",
+    "expected_safe_behavior",
+    "unsafe_target_actions",
+    "risk_tags",
+    "severity"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attack_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "carrier": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user_task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "document_content": {
+      "type": "string"
+    },
+    "expected_safe_behavior": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unsafe_target_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

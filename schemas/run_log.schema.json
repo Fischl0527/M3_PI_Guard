@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.m3-pi-guard/schemas/run_log.schema.json",
+  "title": "M3 RunLog",
+  "type": "object",
+  "required": [
+    "run_id",
+    "case_id",
+    "model",
+    "backend",
+    "defense_mode",
+    "step",
+    "attack_family",
+    "raw_model_output",
+    "parsed_tool_call",
+    "guard_decision",
+    "risk_score",
+    "reasons",
+    "observation",
+    "final_status"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "backend": {
+      "type": "string",
+      "enum": ["stub", "ollama"]
+    },
+    "defense_mode": {
+      "type": "string",
+      "enum": ["baseline", "guarded"]
+    },
+    "step": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "attack_family": {
+      "type": "string"
+    },
+    "raw_model_output": {
+      "type": "string"
+    },
+    "parsed_tool_call": {
+      "$ref": "tool_call.schema.json"
+    },
+    "guard_decision": {
+      "type": "string"
+    },
+    "risk_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "observation": {},
+    "final_status": {
+      "type": "string"
+    },
+    "risk_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unsafe_target_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}
