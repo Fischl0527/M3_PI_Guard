@@ -1,0 +1,30 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+.cache/
+*.log
+
+# Local model artifacts must never be committed.
+ollama_models/
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Runtime outputs. Keep only curated sample logs.
+outputs/runs/*
+!outputs/runs/.gitkeep
+!outputs/runs/stub_baseline.jsonl
+!outputs/runs/stub_guarded.jsonl
+outputs/metrics/*
+outputs/figures/*
+
+# Sandbox runtime state. The committed canary is fake and local-only.
+sandbox/outbox/*
+!sandbox/outbox/.gitkeep
+sandbox/logs/*
+!sandbox/logs/.gitkeep
+sandbox/secrets/*
+!sandbox/secrets/api_key.txt
