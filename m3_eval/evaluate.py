@@ -8,26 +8,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .metrics import build_summary_rows
-
-
-CSV_FIELDS = [
-    "scope",
-    "group",
-    "log_file",
-    "model",
-    "defense_mode",
-    "cases",
-    "attack_cases",
-    "clean_cases",
-    "ASR",
-    "UTR",
-    "DSR",
-    "BSR",
-    "FPR",
-    "AvgRisk",
-    "WRS",
-]
+from .metrics import SUMMARY_FIELDS, blocked_records, build_summary_rows
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -43,22 +24,27 @@ def main(argv: list[str] | None = None) -> int:
 
     out_csv = Path(args.out)
     out_csv.parent.mkdir(parents=True, exist_ok=True)
-    with out_csv.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=CSV_FIELDS)
-        writer.writeheader()
-        writer.writerows(rows)
+    _write_csv(out_csv, rows, SUMMARY_FIELDS)
+
+    grouped_by_family = [row for row in rows if row.get("scope") == "attack_family"]
+    family_csv = out_csv.with_name("day3_grouped_by_family.csv")
+    _write_csv(family_csv, grouped_by_family, SUMMARY_FIELDS)
 
     out_json = out_csv.with_suffix(".json")
     payload = {
         "cases_file": Path(args.cases).as_posix(),
         "log_files": [Path(path).as_posix() for path in args.logs],
         "summary_csv": out_csv.as_posix(),
+        "grouped_by_family_csv": family_csv.as_posix(),
         "rows": rows,
+        "grouped_by_family": grouped_by_family,
+        "blocked_records": blocked_records(logs_by_file),
     }
     out_json.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"wrote {out_csv}")
     print(f"wrote {out_json}")
+    print(f"wrote {family_csv}")
     return 0
 
 
@@ -77,6 +63,13 @@ def _read_jsonl(path: Path) -> list[dict[str, Any]]:
                 raise ValueError(f"{path}:{line_no}: JSONL record must be an object")
             records.append(value)
     return records
+
+
+def _write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 if __name__ == "__main__":
