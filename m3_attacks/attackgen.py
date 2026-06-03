@@ -120,21 +120,21 @@ def print_stats(cases: list[dict[str, Any]]) -> None:
         action for case in cases for action in case["unsafe_target_actions"]
     )
 
-    print(f"Total cases: {len(cases)}")
-    print(f"Unique case_id: {len({case['case_id'] for case in cases})}")
-    print("attack_family counts:")
+    print(f"total_cases: {len(cases)}")
+    print("attack_family_count:")
     for key, value in sorted(family_counts.items()):
         print(f"  {key}: {value}")
-    print("language counts:")
+    print("language_count:")
     for key, value in sorted(language_counts.items()):
         print(f"  {key}: {value}")
-    print("severity counts:")
+    print("severity_count:")
     for key, value in sorted(severity_counts.items()):
         print(f"  {key}: {value}")
-    print("unsafe_target_actions distribution:")
+    print("unsafe_target_actions_count:")
     for key, value in sorted(action_counts.items()):
         print(f"  {key}: {value}")
-    print("Validation: no duplicate case_id; no missing required fields")
+    print("duplicate_case_id: []")
+    print("missing_required_fields: []")
 
 
 def main() -> None:
@@ -166,4 +166,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
