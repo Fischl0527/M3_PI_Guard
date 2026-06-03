@@ -6,6 +6,7 @@ __pycache__/
 *.log
 
 # Local model artifacts must never be committed.
+models/
 ollama_models/
 *.gguf
 *.safetensors
@@ -18,6 +19,7 @@ outputs/runs/*
 !outputs/runs/.gitkeep
 !outputs/runs/stub_baseline.jsonl
 !outputs/runs/stub_guarded.jsonl
+!outputs/runs/qwen25_baseline_day2.jsonl
 outputs/metrics/*
 !outputs/metrics/.gitkeep
 !outputs/metrics/stub_compare_metrics.json
