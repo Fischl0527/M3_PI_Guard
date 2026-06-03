@@ -32,6 +32,15 @@ fixtures/
   sample_baseline_logs.jsonl
   sample_guarded_logs.jsonl
 
+schemas/
+  attack_case.schema.json
+  tool_call.schema.json
+  run_log.schema.json
+
+m3_eval/
+  metrics.py
+  evaluate.py
+
 sandbox/
   public/
   secrets/
@@ -39,6 +48,7 @@ sandbox/
   logs/
 
 outputs/runs/
+outputs/metrics/
 ```
 
 ## Backend
@@ -95,3 +105,22 @@ decision, risk_score, reasons = guard_decide(context, tool_call)
 ```
 
 当前 `m3_guard.guard_engine` 是最小兼容版本。C 队员可替换为完整的 normalizer、detector、policy engine 和 dataflow tracker，只要保持这个接口不变。
+
+## Day 1 评估命令
+
+比较 stub baseline 与 guarded：
+
+```powershell
+python -m m3_eval.evaluate --cases fixtures/sample_cases.jsonl --baseline outputs/runs/stub_baseline.jsonl --guarded outputs/runs/stub_guarded.jsonl --out outputs/metrics/stub_compare_metrics.json
+```
+
+输出指标包括：
+
+```text
+ASR_attack_success_rate
+UTR_unauthorized_tool_rate
+DSR_data_spill_rate
+BSR_block_success_rate
+FPR_false_positive_rate
+WRS_avg_guard_risk_score
+```

@@ -89,6 +89,9 @@ def _decide_write_file(arguments: dict[str, Any], reasons: list[str]) -> PolicyR
     if is_secret_path(path):
         reasons.append("secret_path_access")
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
+    if contains_sensitive_data(arguments.get("content", "")):
+        reasons.extend(["attempt_to_persist_secret_or_canary", "unsafe_write_content"])
+        return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
     if _is_public_path(normalized_path):
         reasons.append("sandbox_public_write_requires_review")
         return PolicyResult("ask", 0.40, _unique(reasons))
