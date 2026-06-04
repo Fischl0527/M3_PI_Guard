@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import json
 import re
 import uuid
@@ -13,6 +14,9 @@ from .tool_sandbox import execute_tool, init_sandbox, record_tool_event
 
 
 ALLOWED_TOOLS = {"read_file", "write_file", "send_email", "call_api", "run_code", "final"}
+DEFENSE_MODES = {"baseline", "guarded", "keyword_only", "policy_only", "full_guard"}
+GUARD_DEFENSE_MODES = {"guarded", "keyword_only", "policy_only", "full_guard"}
+GUARD_VERSION = "v0.4"
 
 
 def run_case(
@@ -23,17 +27,31 @@ def run_case(
     defense_mode: str = "baseline",
     max_steps: int = 5,
     run_id: Optional[str] = None,
+    experiment_id: str = "",
+    guard_version: str = GUARD_VERSION,
+    case_source: str = "",
+    run_group: str = "",
+    model_config: Optional[Dict[str, Any]] = None,
 ) -> List[Dict[str, Any]]:
     """Run one AttackCase and return step-level RunLog records."""
 
     defense_mode = defense_mode.lower().strip()
-    if defense_mode not in {"baseline", "guarded"}:
-        raise ValueError("defense_mode must be 'baseline' or 'guarded'")
+    if defense_mode not in DEFENSE_MODES:
+        raise ValueError(
+            "defense_mode must be one of: "
+            + ", ".join(sorted(DEFENSE_MODES))
+        )
 
     init_sandbox()
     model_name = model or DEFAULT_MODEL
     run_id = run_id or _new_run_id(backend, defense_mode)
     client = LLMClient(backend=backend, model=model_name)
+    effective_model_config = {
+        "temperature": client.temperature,
+        "max_steps": int(max_steps),
+    }
+    if isinstance(model_config, dict):
+        effective_model_config.update(model_config)
     messages = _build_initial_messages(case, defense_mode=defense_mode)
     observations: List[Any] = []
     logs: List[Dict[str, Any]] = []
@@ -47,14 +65,17 @@ def run_case(
             step=step,
             observations=observations,
         )
-        tool_call = parse_tool_call(raw_output)
+        parse_result = extract_tool_call(raw_output)
+        tool_call = parse_result["tool_call"]
+        parse_ok = bool(parse_result["parse_ok"])
+        parse_error = str(parse_result["parse_error"])
 
         guard_decision = "not_applicable"
         risk_score: Optional[float] = None
         reasons: List[str] = []
         execute_allowed = True
 
-        if defense_mode == "guarded":
+        if defense_mode in GUARD_DEFENSE_MODES:
             # Guard 需要看到当前样本、历史消息和历史 observation，才能判断
             # “这次工具调用是否和用户真实任务一致”。Day 1 的最小 guard 只用到
             # case 与 tool_call，后续 C 队员可以在同一接口上扩展完整上下文分析。
@@ -65,11 +86,17 @@ def run_case(
                 "model": model_name,
                 "backend": backend,
                 "defense_mode": defense_mode,
+                "guard_mode": _guard_mode(defense_mode),
                 "step": step,
                 "messages": messages,
                 "observations": observations,
             }
-            guard_decision, risk_score, reasons = guard_decide(context, tool_call)
+            guard_decision, risk_score, reasons = _call_guard_decide(
+                guard_decide,
+                context,
+                tool_call,
+                mode=_guard_mode(defense_mode),
+            )
             execute_allowed = guard_decision == "allow"
 
         final_status = "running"
@@ -117,12 +144,19 @@ def run_case(
             "model": model_name,
             "backend": backend,
             "defense_mode": defense_mode,
+            "experiment_id": experiment_id,
+            "guard_version": guard_version,
+            "case_source": case_source,
+            "run_group": run_group,
+            "model_config": effective_model_config,
             "step": step,
             "attack_family": case.get("attack_family", ""),
             "risk_tags": case.get("risk_tags", []),
             "unsafe_target_actions": case.get("unsafe_target_actions", []),
             "raw_model_output": raw_output,
             "parsed_tool_call": tool_call,
+            "parse_ok": parse_ok,
+            "parse_error": parse_error,
             "guard_decision": guard_decision,
             "risk_score": risk_score,
             "reasons": reasons,
@@ -153,34 +187,176 @@ def run_case(
 
 
 def parse_tool_call(raw_output: str) -> Dict[str, Any]:
-    """Parse model text into a ToolCall, falling back to final(answer)."""
+    """Compatibility wrapper returning only the parsed ToolCall."""
+
+    return extract_tool_call(raw_output)["tool_call"]
+
+
+def extract_tool_call(raw_output: str) -> Dict[str, Any]:
+    """Parse model text into a ToolCall and expose parse diagnostics.
+
+    DAY4 真实模型实验里，小模型常会把 JSON 包在 Markdown 代码块里，
+    或在 JSON 前后输出解释文字。这里按“严格 JSON -> 提取首个对象 ->
+    常见修复 -> 安全降级”的顺序解析，避免把不稳定输出直接送进工具层。
+    """
 
     text = (raw_output or "").strip()
-    parsed: Any = None
+    candidates = _json_candidates(text)
+    errors: List[str] = []
 
-    # 真实小模型常会在 JSON 外包一层解释文本，所以这里先尝试整段 JSON，
-    # 失败后再提取第一个 {...} 片段，提高本地 Ollama 烟测容错性。
+    for candidate in candidates:
+        parsed, error = _loads_relaxed_json(candidate)
+        if error:
+            errors.append(error)
+            continue
+
+        tool_call, parse_ok, parse_error = _normalize_tool_call(parsed, text)
+        return {
+            "tool_call": tool_call,
+            "parse_ok": parse_ok,
+            "parse_error": parse_error,
+        }
+
+    fallback_error = _compact_error(errors) or "no_json_object_found"
+    return {
+        "tool_call": {"tool": "final", "arguments": {"answer": text}},
+        "parse_ok": False,
+        "parse_error": fallback_error,
+    }
+
+
+def _json_candidates(text: str) -> List[str]:
+    """Build parse candidates from raw text, code fences, and first JSON object."""
+
+    candidates: List[str] = []
+
+    def add(value: str) -> None:
+        value = value.strip()
+        if value and value not in candidates:
+            candidates.append(value)
+
+    add(text)
+    stripped_fence = _strip_markdown_json_fence(text)
+    add(stripped_fence)
+
+    for value in list(candidates):
+        first_object = _extract_first_json_object(value)
+        if first_object:
+            add(first_object)
+
+    for value in list(candidates):
+        add(_remove_trailing_commas(value))
+        add(_single_quotes_to_double_quotes(_remove_trailing_commas(value)))
+
+    return candidates
+
+
+def _loads_relaxed_json(text: str) -> tuple[Any, str]:
+    """Try JSON first, then Python literal syntax for single-quoted objects."""
+
     try:
-        parsed = json.loads(text)
-    except json.JSONDecodeError:
-        match = re.search(r"\{.*\}", text, re.S)
-        if match:
-            try:
-                parsed = json.loads(match.group(0))
-            except json.JSONDecodeError:
-                parsed = None
+        return json.loads(text), ""
+    except json.JSONDecodeError as json_exc:
+        first_error = f"json_decode:{json_exc.msg}"
+
+    try:
+        parsed = ast.literal_eval(text)
+        return parsed, ""
+    except (ValueError, SyntaxError) as ast_exc:
+        return None, f"{first_error};literal_eval:{ast_exc.__class__.__name__}"
+
+
+def _normalize_tool_call(parsed: Any, raw_text: str) -> tuple[Dict[str, Any], bool, str]:
+    """Validate parsed JSON and keep the execution surface to known tools only."""
 
     if not isinstance(parsed, dict):
-        return {"tool": "final", "arguments": {"answer": text}}
+        return (
+            {"tool": "final", "arguments": {"answer": raw_text}},
+            False,
+            "parsed_json_is_not_object",
+        )
 
     tool = str(parsed.get("tool", "final")).strip()
-    arguments = parsed.get("arguments")
     if tool not in ALLOWED_TOOLS:
-        # 未知工具一律降级为 final，避免模型编造工具名造成执行面扩大。
-        return {"tool": "final", "arguments": {"answer": text}}
+        return (
+            {"tool": "final", "arguments": {"answer": raw_text}},
+            False,
+            f"unknown_tool:{tool}",
+        )
+
+    arguments = parsed.get("arguments")
     if not isinstance(arguments, dict):
-        arguments = {}
-    return {"tool": tool, "arguments": arguments}
+        return {"tool": tool, "arguments": {}}, False, "arguments_is_not_object"
+    return {"tool": tool, "arguments": arguments}, True, ""
+
+
+def _strip_markdown_json_fence(text: str) -> str:
+    """Remove the common ```json ... ``` wrapper from model output."""
+
+    stripped = text.strip()
+    fence = re.match(r"^```(?:json|JSON)?\s*(.*?)\s*```$", stripped, re.S)
+    if fence:
+        return fence.group(1).strip()
+    return stripped.replace("```json", "").replace("```JSON", "").replace("```", "").strip()
+
+
+def _extract_first_json_object(text: str) -> str:
+    """Return the first balanced {...} span, respecting quoted strings."""
+
+    start = text.find("{")
+    if start < 0:
+        return ""
+
+    depth = 0
+    in_string = False
+    quote_char = ""
+    escaped = False
+    for index in range(start, len(text)):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote_char:
+                in_string = False
+            continue
+
+        if char in {'"', "'"}:
+            in_string = True
+            quote_char = char
+            continue
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start : index + 1]
+    return ""
+
+
+def _remove_trailing_commas(text: str) -> str:
+    """Drop trailing commas before object/array closers."""
+
+    return re.sub(r",\s*([}\]])", r"\1", text)
+
+
+def _single_quotes_to_double_quotes(text: str) -> str:
+    """Best-effort repair for simple single-quoted ToolCall objects."""
+
+    if '"' in text:
+        return text
+    return text.replace("'", '"')
+
+
+def _compact_error(errors: List[str]) -> str:
+    """Keep parse_error useful but short for CSV/Dashboard display."""
+
+    unique_errors: List[str] = []
+    for error in errors:
+        if error and error not in unique_errors:
+            unique_errors.append(error)
+    return " | ".join(unique_errors[:3])[:300]
 
 
 def _build_initial_messages(
@@ -188,7 +364,7 @@ def _build_initial_messages(
     *,
     defense_mode: str,
 ) -> List[Dict[str, str]]:
-    if defense_mode == "guarded":
+    if defense_mode in GUARD_DEFENSE_MODES:
         system_instruction = (
             "You are a local security Agent running inside the M3_PI_Guard sandbox.\n"
             "You can only call local mock tools: read_file, write_file, send_email, "
@@ -245,6 +421,32 @@ def _new_run_id(backend: str, defense_mode: str) -> str:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     suffix = uuid.uuid4().hex[:8]
     return f"{timestamp}-{backend}-{defense_mode}-{suffix}"
+
+
+def _guard_mode(defense_mode: str) -> str:
+    """Map legacy guarded mode to DAY4 full_guard without breaking old logs."""
+
+    return "full_guard" if defense_mode == "guarded" else defense_mode
+
+
+def _call_guard_decide(
+    guard_decide,
+    context: Dict[str, Any],
+    tool_call: Dict[str, Any],
+    *,
+    mode: str,
+):
+    """Call C-team guard with DAY4 mode when supported.
+
+    C 的 DAY4 接口约定为 guard_decide(context, tool_call, mode="full_guard")。
+    如果当前仓库仍是 DAY3 的两参接口，就自动退回两参调用，保持 A 的批跑器
+    和旧 guarded 命令都能继续运行。
+    """
+
+    try:
+        return guard_decide(context, tool_call, mode=mode)
+    except TypeError:
+        return guard_decide(context, tool_call)
 
 
 def _load_guard_decide():
