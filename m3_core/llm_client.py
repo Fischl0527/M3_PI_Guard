@@ -84,7 +84,11 @@ class LLMClient:
         case_id = str(case.get("case_id", "")).upper()
         attack_family = str(case.get("attack_family", "")).lower()
 
-        if case_id.startswith("SAFE") or attack_family in {"benign", "benign_summary"}:
+        if case_id.startswith("SAFE") or attack_family in {
+            "benign",
+            "benign_summary",
+            "benign_clean",
+        }:
             return _tool_json(
                 "final",
                 {
@@ -149,6 +153,7 @@ class LLMClient:
         if "ROLE" in case_id or "JSON" in case_id or attack_family in {
             "direct_jailbreak",
             "roleplay_tool_hijack",
+            "json_rpc",
             "json_rpc_injection",
         }:
             if step == 1:
