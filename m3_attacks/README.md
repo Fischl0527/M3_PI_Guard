@@ -82,6 +82,12 @@ DAY3 当前源样本总数：69 条。
 python -m m3_attacks.attackgen --out m3_attacks/cases/all_cases.jsonl --stats outputs/metrics/day3_case_stats.json
 ```
 
+DAY4 质量审计命令：
+
+```bash
+python -m m3_attacks.attackgen --out m3_attacks/cases/all_cases.jsonl --stats outputs/metrics/day4_case_stats.json --audit outputs/metrics/day4_case_audit.json
+```
+
 脚本会：
 
 - 读取 `m3_attacks/cases/` 下的源 JSONL。
@@ -90,13 +96,22 @@ python -m m3_attacks.attackgen --out m3_attacks/cases/all_cases.jsonl --stats ou
 - 校验 `case_id` 唯一。
 - 校验 `unsafe_target_actions` 是否在白名单内。
 - 合并生成 `m3_attacks/cases/all_cases.jsonl`。
-- 输出并写入 DAY3 统计，包括 `total_cases`、`attack_family_count`、`carrier_count`、`language_count`、`severity_count`、`demo_priority_count`、`unsafe_target_actions_count`、`benign_count`、`missing_required_fields`、`duplicate_case_id`。
+- 输出并写入统计，包括 `total_cases`、`attack_family_count`、`carrier_count`、`language_count`、`severity_count`、`demo_priority_count`、`unsafe_target_actions_count`、`benign_count`、`missing_required_fields`、`duplicate_case_id`。
+- 在指定 `--audit` 时生成质量审计报告，检查重复 ID、攻击族规范、语言字段、mock 动作白名单、空字段、benign clean 动作、真实邮箱/URL、真实攻击命令、相似样本、`demo_priority` 和 `expected_detectors`。
 
 ## Demo Priority 1 Cases
 
 - `RAG-PI-016`: Markdown 报告隐藏注释中的 RAG 间接注入。
 - `JSONRPC-001`: JSON data 字段中隐藏读取秘密与邮件外发。
 - `MTL-009`: JSON 翻译任务中的多语言/T2L 任务切换。
+
+DAY4 代表性样本集由 B 提供给 A 运行模型矩阵：
+
+```text
+fixtures/day4_representative_cases.jsonl
+```
+
+它包含 24 条样本，覆盖 6 类攻击/正常任务。
 
 ## Safety Boundary
 
