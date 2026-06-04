@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import random
 import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, List
@@ -35,6 +36,13 @@ CONFIG = {
     "out": "outputs/runs/stub_baseline.jsonl",
     "csv_out": "outputs/runs/stub_baseline.csv",
     "max_steps": 5,
+    "limit": None,
+    "families": "",
+    "case_ids": "",
+    "seed": 42,
+    "shuffle": False,
+    "resume": False,
+    "fail_fast": False,
 }
 
 
@@ -52,8 +60,10 @@ def main(argv: List[str] | None = None) -> None:
     result = run_batch(config)
     csv_part = f", wrote CSV to {result['csv_out']}" if result.get("csv_out") else ""
     print(
-        f"OK: ran {result['case_count']} cases, wrote {result['log_count']} "
-        f"log rows to {result['out']}{csv_part}"
+        f"OK: selected {result['selected_case_count']} cases, ran "
+        f"{result['case_count']} cases, skipped {result['skipped_case_count']} "
+        f"by resume, wrote {result['log_count']} log rows to {result['out']}"
+        f"{csv_part}"
     )
 
 
@@ -69,30 +79,64 @@ def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
     out_path = _repo_path(str(config["out"]))
     csv_out = config.get("csv_out")
     csv_path = _repo_path(str(csv_out)) if csv_out else None
-    cases = list(read_jsonl(cases_path))
-    if not cases:
+    all_cases = list(read_jsonl(cases_path))
+    if not all_cases:
         raise SystemExit(f"No cases found in {cases_path}")
 
-    all_logs: List[Dict[str, Any]] = []
-    for case in cases:
+    selected_cases = _filter_cases(all_cases, config)
+    existing_logs: List[Dict[str, Any]] = []
+    skipped_case_count = 0
+    if _enabled(config.get("resume")) and out_path.exists():
+        existing_logs = list(read_jsonl(out_path))
+        completed_case_ids = _completed_case_ids(existing_logs)
+        before_resume = len(selected_cases)
+        selected_cases = [
+            case
+            for case in selected_cases
+            if str(case.get("case_id", "")) not in completed_case_ids
+        ]
+        skipped_case_count = before_resume - len(selected_cases)
+
+    selected_cases = _order_and_limit_cases(selected_cases, config)
+
+    all_logs: List[Dict[str, Any]] = list(existing_logs)
+    error_count = 0
+    for case in selected_cases:
         # 每个 case 会产生多行 RunLog：baseline 中可能多步执行工具；
         # guarded 中通常第一步高风险工具就被 deny/ask 截断。
-        all_logs.extend(
-            run_case(
+        try:
+            case_logs = run_case(
                 case,
                 model=str(config.get("model") or DEFAULT_MODEL),
                 backend=str(config.get("backend", "stub")),
                 defense_mode=str(config.get("defense", "baseline")),
                 max_steps=int(config.get("max_steps", 5)),
             )
-        )
+        except Exception as exc:
+            error_count += 1
+            if _enabled(config.get("fail_fast")):
+                raise
+            case_logs = [
+                _error_log(
+                    case,
+                    model=str(config.get("model") or DEFAULT_MODEL),
+                    backend=str(config.get("backend", "stub")),
+                    defense_mode=str(config.get("defense", "baseline")),
+                    exc=exc,
+                )
+            ]
+        all_logs.extend(case_logs)
 
     write_jsonl(out_path, all_logs)
     if csv_path:
         write_runlog_csv(csv_path, all_logs)
 
     return {
-        "case_count": len(cases),
+        "input_case_count": len(all_cases),
+        "selected_case_count": len(selected_cases) + skipped_case_count,
+        "case_count": len(selected_cases),
+        "skipped_case_count": skipped_case_count,
+        "error_count": error_count,
         "log_count": len(all_logs),
         "out": str(out_path),
         "csv_out": str(csv_path) if csv_path else "",
@@ -110,8 +154,137 @@ def _parse_args(argv: List[str]) -> Dict[str, Any]:
     parser.add_argument("--out", required=True, help="Output RunLog JSONL path")
     parser.add_argument("--csv-out", help="Optional output RunLog CSV path")
     parser.add_argument("--max-steps", type=int, default=5)
+    parser.add_argument("--limit", type=int, help="Only run the first N selected cases")
+    parser.add_argument(
+        "--families",
+        help="Comma-separated attack_family filter, for example rag_indirect,json_rpc",
+    )
+    parser.add_argument(
+        "--case-ids",
+        help="Comma-separated case_id filter, for example RAG-PI-001,JSONRPC-001",
+    )
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for --shuffle")
+    parser.add_argument("--shuffle", action="store_true", help="Shuffle selected cases")
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Skip case_ids that already have terminal logs in --out",
+    )
+    parser.add_argument(
+        "--fail-fast",
+        action="store_true",
+        help="Stop immediately if a case raises an exception",
+    )
     args = parser.parse_args(argv)
     return vars(args)
+
+
+def _filter_cases(
+    cases: List[Dict[str, Any]],
+    config: Dict[str, Any],
+) -> List[Dict[str, Any]]:
+    """Apply family and case-id filters while preserving file order."""
+
+    selected = list(cases)
+    families = set(_csv_values(config.get("families")))
+    case_ids = set(_csv_values(config.get("case_ids")))
+
+    if families:
+        selected = [
+            case
+            for case in selected
+            if str(case.get("attack_family", "")).strip() in families
+        ]
+    if case_ids:
+        selected = [
+            case for case in selected if str(case.get("case_id", "")).strip() in case_ids
+        ]
+    return selected
+
+
+def _order_and_limit_cases(
+    cases: List[Dict[str, Any]],
+    config: Dict[str, Any],
+) -> List[Dict[str, Any]]:
+    """Apply optional shuffle and limit after filters and resume skipping."""
+
+    selected = list(cases)
+    if _enabled(config.get("shuffle")):
+        rng = random.Random(int(config.get("seed", 42)))
+        rng.shuffle(selected)
+
+    limit = config.get("limit")
+    if limit not in {None, ""}:
+        selected = selected[: int(limit)]
+    return selected
+
+
+def _completed_case_ids(logs: Iterable[Dict[str, Any]]) -> set[str]:
+    """Return case_ids with terminal RunLog status for resume mode."""
+
+    terminal_statuses = {
+        "completed",
+        "blocked",
+        "needs_confirmation",
+        "max_steps_reached",
+        "error",
+    }
+    completed = set()
+    for row in logs:
+        status = str(row.get("final_status", ""))
+        if status in terminal_statuses:
+            case_id = str(row.get("case_id", "")).strip()
+            if case_id:
+                completed.add(case_id)
+    return completed
+
+
+def _error_log(
+    case: Dict[str, Any],
+    *,
+    model: str,
+    backend: str,
+    defense_mode: str,
+    exc: Exception,
+) -> Dict[str, Any]:
+    """Create a schema-compatible RunLog row for non-fail-fast errors."""
+
+    return {
+        "run_id": "runner-error",
+        "case_id": case.get("case_id", ""),
+        "model": model,
+        "backend": backend,
+        "defense_mode": defense_mode,
+        "step": 0,
+        "attack_family": case.get("attack_family", ""),
+        "risk_tags": case.get("risk_tags", []),
+        "unsafe_target_actions": case.get("unsafe_target_actions", []),
+        "raw_model_output": "",
+        "parsed_tool_call": {},
+        "guard_decision": "error",
+        "risk_score": None,
+        "reasons": ["runner_exception"],
+        "observation": f"ERROR: {type(exc).__name__}: {exc}",
+        "final_status": "error",
+    }
+
+
+def _csv_values(value: Any) -> List[str]:
+    """Normalize comma-separated config values into non-empty strings."""
+
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple, set)):
+        return [str(item).strip() for item in value if str(item).strip()]
+    return [item.strip() for item in str(value).split(",") if item.strip()]
+
+
+def _enabled(value: Any) -> bool:
+    """Interpret booleans from CONFIG or argparse consistently."""
+
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() in {"1", "true", "yes", "on"}
 
 
 def read_jsonl(path: Path) -> Iterable[Dict[str, Any]]:
