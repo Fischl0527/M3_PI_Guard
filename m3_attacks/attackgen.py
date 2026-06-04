@@ -104,6 +104,32 @@ def load_cases(paths: list[Path]) -> list[dict[str, Any]]:
     return cases
 
 
+def build_stats(cases: list[dict[str, Any]]) -> dict[str, Any]:
+    family_counts = Counter(case["attack_family"] for case in cases)
+    carrier_counts = Counter(case["carrier"] for case in cases)
+    language_counts = Counter(case["language"] for case in cases)
+    severity_counts = Counter(case["severity"] for case in cases)
+    demo_priority_counts = Counter(
+        str(case.get("demo_priority", "unset")) for case in cases
+    )
+    action_counts = Counter(
+        action for case in cases for action in case["unsafe_target_actions"]
+    )
+
+    return {
+        "total_cases": len(cases),
+        "attack_family_count": dict(sorted(family_counts.items())),
+        "carrier_count": dict(sorted(carrier_counts.items())),
+        "language_count": dict(sorted(language_counts.items())),
+        "severity_count": dict(sorted(severity_counts.items())),
+        "demo_priority_count": dict(sorted(demo_priority_counts.items())),
+        "unsafe_target_actions_count": dict(sorted(action_counts.items())),
+        "benign_count": family_counts.get("benign_clean", 0),
+        "missing_required_fields": 0,
+        "duplicate_case_id": 0,
+    }
+
+
 def write_cases(cases: list[dict[str, Any]], out_path: Path) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8", newline="\n") as handle:
@@ -112,29 +138,35 @@ def write_cases(cases: list[dict[str, Any]], out_path: Path) -> None:
             handle.write("\n")
 
 
-def print_stats(cases: list[dict[str, Any]]) -> None:
-    family_counts = Counter(case["attack_family"] for case in cases)
-    language_counts = Counter(case["language"] for case in cases)
-    severity_counts = Counter(case["severity"] for case in cases)
-    action_counts = Counter(
-        action for case in cases for action in case["unsafe_target_actions"]
-    )
+def write_stats(stats: dict[str, Any], stats_path: Path) -> None:
+    stats_path.parent.mkdir(parents=True, exist_ok=True)
+    with stats_path.open("w", encoding="utf-8", newline="\n") as handle:
+        json.dump(stats, handle, ensure_ascii=False, indent=2, sort_keys=True)
+        handle.write("\n")
 
-    print(f"total_cases: {len(cases)}")
+def print_stats(stats: dict[str, Any]) -> None:
+    print(f"total_cases: {stats['total_cases']}")
     print("attack_family_count:")
-    for key, value in sorted(family_counts.items()):
+    for key, value in stats["attack_family_count"].items():
+        print(f"  {key}: {value}")
+    print("carrier_count:")
+    for key, value in stats["carrier_count"].items():
         print(f"  {key}: {value}")
     print("language_count:")
-    for key, value in sorted(language_counts.items()):
+    for key, value in stats["language_count"].items():
         print(f"  {key}: {value}")
     print("severity_count:")
-    for key, value in sorted(severity_counts.items()):
+    for key, value in stats["severity_count"].items():
+        print(f"  {key}: {value}")
+    print("demo_priority_count:")
+    for key, value in stats["demo_priority_count"].items():
         print(f"  {key}: {value}")
     print("unsafe_target_actions_count:")
-    for key, value in sorted(action_counts.items()):
+    for key, value in stats["unsafe_target_actions_count"].items():
         print(f"  {key}: {value}")
-    print("duplicate_case_id: []")
-    print("missing_required_fields: []")
+    print(f"benign_count: {stats['benign_count']}")
+    print(f"duplicate_case_id: {stats['duplicate_case_id']}")
+    print(f"missing_required_fields: {stats['missing_required_fields']}")
 
 
 def main() -> None:
@@ -145,6 +177,10 @@ def main() -> None:
         "--out",
         default="m3_attacks/cases/all_cases.jsonl",
         help="Output JSONL path. Defaults to m3_attacks/cases/all_cases.jsonl.",
+    )
+    parser.add_argument(
+        "--stats",
+        help="Optional JSON statistics output path, for example outputs/metrics/day3_case_stats.json.",
     )
     args = parser.parse_args()
 
@@ -160,8 +196,15 @@ def main() -> None:
 
     cases = load_cases(paths)
     write_cases(cases, out_path)
-    print_stats(cases)
+    stats = build_stats(cases)
+    print_stats(stats)
     print(f"Wrote: {out_path}")
+    if args.stats:
+        stats_path = Path(args.stats)
+        if not stats_path.is_absolute():
+            stats_path = Path.cwd() / stats_path
+        write_stats(stats, stats_path)
+        print(f"Wrote stats: {stats_path}")
 
 
 if __name__ == "__main__":

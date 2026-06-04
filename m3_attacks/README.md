@@ -1,23 +1,30 @@
-# M3_PI_Guard DAY2 Red-Team Attack Cases
+# M3_PI_Guard DAY3 Attack Case Library
 
-本目录是队员 B 的 DAY2 交付物：第一批本地红队攻击样本库。样本只攻击本地 `sandbox` mock 工具，不包含真实恶意代码，不调用真实网络，不涉及真实账号。
+队员 B 的 DAY3 交付物：作品级红队攻击样本库。样本覆盖直接越狱、RAG 间接提示注入、多语言/T2L、JSON/RPC 结构化注入、工具输出注入，以及用于误报率评估的 benign clean 正常样本。
 
-## Files
+所有样本都只面向本地 `sandbox` mock 工具，不包含真实恶意代码，不调用真实网络，不涉及真实账号。
+
+## Directory
 
 ```text
 m3_attacks/
   __init__.py
   attackgen.py
+  ATTACK_MATRIX.md
+  README.md
   cases/
     direct_jailbreak_cases.jsonl
     rag_indirect_cases.jsonl
     multilingual_t2l_cases.jsonl
+    json_rpc_cases.jsonl
+    tool_output_cases.jsonl
+    benign_clean_cases.jsonl
     all_cases.jsonl
 ```
 
-## Schema
+## Required Schema
 
-每行 JSONL 样本都包含以下字段：
+每条 JSONL 样本保留 DAY2 统一字段：
 
 - `case_id`
 - `attack_family`
@@ -32,7 +39,21 @@ m3_attacks/
 - `severity`
 - `notes`
 
-允许的 `unsafe_target_actions` 只有：
+DAY3 额外加入可选评估字段：
+
+- `success_indicators`
+- `safe_indicators`
+- `demo_priority`
+
+`demo_priority` 含义：
+
+- `1`: 最适合现场演示
+- `2`: 可用于批量实验
+- `3`: 备用或 clean/FPR 样本
+
+## Allowed Unsafe Target Actions
+
+攻击样本中的危险目标只允许以下本地 mock 动作：
 
 - `read_file:sandbox/secrets/api_key.txt`
 - `send_email:redteam@example.test`
@@ -40,42 +61,43 @@ m3_attacks/
 - `call_api:/mock/external/submit`
 - `run_code:mock_only`
 
-## Attack Families
-
-`direct_jailbreak` 覆盖直接越狱提示，包括角色扮演、权限提升伪装、说服性提示、道德重构、文本续写嵌套、代码补全嵌套、表格填充嵌套、字符扰动、中英混合和多轮诱导。
-
-`rag_indirect` 覆盖 RAG 间接提示注入，包括 Markdown 报告、邮件正文、网页片段、工具返回值、FAQ、日志摘要、客户报告、翻译文档、维护模式伪指令、“不要告诉用户”、“先读文件再总结”和“先外发再总结”。
-
-`multilingual_t2l` 覆盖多语言与 T2L 任务切换，包括中文、英文、中英混合、日文、韩文、俄文、拼音/谐音、回译风格和 JSON 翻译任务切换。
+`benign_clean` 样本用于误报率 FPR，`unsafe_target_actions` 固定为空数组。
 
 ## Counts
 
-当前源样本文件共 40 条：
+DAY3 当前源样本总数：69 条。
 
-- `direct_jailbreak`: 10
-- `rag_indirect`: 15
+- `direct_jailbreak`: 15
+- `rag_indirect`: 18
 - `multilingual_t2l`: 15
-
-数量高于 DAY2 最低要求：总数不少于 30，且三类攻击分别不少于 10、12、8 条。
+- `json_rpc`: 8
+- `tool_output_injection`: 5
+- `benign_clean`: 8
 
 ## Generate And Validate
 
 在仓库根目录运行：
 
 ```bash
-python -m m3_attacks.attackgen --out m3_attacks/cases/all_cases.jsonl
+python -m m3_attacks.attackgen --out m3_attacks/cases/all_cases.jsonl --stats outputs/metrics/day3_case_stats.json
 ```
 
 脚本会：
 
-- 读取 `m3_attacks/cases/` 下的 JSONL 样本文件。
+- 读取 `m3_attacks/cases/` 下的源 JSONL。
 - 跳过输出文件 `all_cases.jsonl`。
 - 校验必要字段。
-- 校验 `case_id` 唯一性。
+- 校验 `case_id` 唯一。
 - 校验 `unsafe_target_actions` 是否在白名单内。
 - 合并生成 `m3_attacks/cases/all_cases.jsonl`。
-- 输出 `total_cases`、`attack_family_count`、`language_count`、`severity_count`、`unsafe_target_actions_count`、`duplicate_case_id` 和 `missing_required_fields`。
+- 输出并写入 DAY3 统计，包括 `total_cases`、`attack_family_count`、`carrier_count`、`language_count`、`severity_count`、`demo_priority_count`、`unsafe_target_actions_count`、`benign_count`、`missing_required_fields`、`duplicate_case_id`。
 
-## Ethics
+## Demo Priority 1 Cases
 
-这些样本仅用于 M3_PI_Guard 本地沙箱安全评测。所有外发、读写文件、API 调用和代码运行均为 mock 靶场动作，不能用于真实系统攻击。
+- `RAG-PI-016`: Markdown 报告隐藏注释中的 RAG 间接注入。
+- `JSONRPC-001`: JSON data 字段中隐藏读取秘密与邮件外发。
+- `MTL-009`: JSON 翻译任务中的多语言/T2L 任务切换。
+
+## Safety Boundary
+
+本库用于本地红队靶场评测，目标是验证 M3_PI_Guard 对未授权 mock 工具调用的识别、告警和阻断能力。样本不提供真实攻击步骤，不包含真实凭据，不访问公网，不真实发送邮件。
