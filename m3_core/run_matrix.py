@@ -1,4 +1,4 @@
-"""DAY4 experiment matrix runner for M3_PI_Guard.
+"""DAY5 experiment matrix runner for M3_PI_Guard.
 
 This module keeps run_batch.py as the single-case-set executor, and adds a
 thin orchestration layer for repeated ablation runs.
@@ -24,7 +24,10 @@ else:
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-GUARD_VERSION = "v0.4"
+PROJECT_VERSION = "v0.5-day5"
+GUARD_VERSION = "guard-v0.5"
+DATASET_VERSION = "cases-v0.5"
+EXPERIMENT_VERSION = "exp-day5-final"
 SUPPORTED_DEFENSE_MODES = {
     "baseline",
     "guarded",
@@ -41,15 +44,15 @@ CONFIG = {
     "defense_modes": "baseline,keyword_only,policy_only,full_guard",
     "families": "",
     "limit": None,
-    "out_dir": "outputs/runs/day4_stub_matrix",
+    "out_dir": "outputs/runs/day5_stub_matrix",
     "max_steps": 5,
-    "run_prefix": "day4_stub_all",
-    "run_group": "day4",
+    "run_prefix": "day5_stub_all",
+    "run_group": "day5",
     "seed": 42,
     "shuffle": False,
     "resume": False,
     "fail_fast": False,
-    "notes": "DAY4 experiment matrix run",
+    "notes": "DAY5 final experiment matrix run",
 }
 
 
@@ -80,7 +83,7 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
     defense_modes = _defense_modes(config.get("defense_modes"))
     run_prefix = str(config.get("run_prefix") or _default_run_prefix(backend))
     max_steps = int(config.get("max_steps", 5))
-    run_group = str(config.get("run_group") or "day4")
+    run_group = str(config.get("run_group") or "day5")
 
     results: List[Dict[str, Any]] = []
     for defense_mode in defense_modes:
@@ -103,7 +106,10 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
             "resume": bool(config.get("resume", False)),
             "fail_fast": bool(config.get("fail_fast", False)),
             "experiment_id": run_prefix,
+            "experiment_version": EXPERIMENT_VERSION,
+            "project_version": PROJECT_VERSION,
             "guard_version": GUARD_VERSION,
+            "dataset_version": DATASET_VERSION,
             "case_source": _relative_or_name(cases_path),
             "run_group": run_group,
             "temperature": float(config.get("temperature", 0.2)),
@@ -125,6 +131,8 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
     manifest = {
         "run_prefix": run_prefix,
         "experiment_id": run_prefix,
+        "experiment_version": EXPERIMENT_VERSION,
+        "project_version": PROJECT_VERSION,
         "run_group": run_group,
         "backend": backend,
         "model": model,
@@ -133,6 +141,7 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
         "created_at": datetime.now(timezone.utc).isoformat(),
         "git_commit": _git_commit(),
         "guard_version": GUARD_VERSION,
+        "dataset_version": DATASET_VERSION,
         "model_config": {
             "temperature": float(config.get("temperature", 0.2)),
             "max_steps": max_steps,
@@ -157,7 +166,7 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _parse_args(argv: List[str]) -> Dict[str, Any]:
-    parser = argparse.ArgumentParser(description="Run M3 DAY4 experiment matrix.")
+    parser = argparse.ArgumentParser(description="Run M3 DAY5 experiment matrix.")
     parser.add_argument("--cases", required=True, help="Input AttackCase JSONL path")
     parser.add_argument("--backend", choices=["ollama", "stub"], default="stub")
     parser.add_argument("--model", default="", help="Model name; defaults to stub or m3-target-qwen25-7b")
@@ -172,12 +181,12 @@ def _parse_args(argv: List[str]) -> Dict[str, Any]:
     parser.add_argument("--out-dir", required=True, help="Output directory for matrix logs")
     parser.add_argument("--max-steps", type=int, default=5)
     parser.add_argument("--run-prefix", required=True, help="Prefix for output files and experiment_id")
-    parser.add_argument("--run-group", default="day4", help="Run group label written to RunLog")
+    parser.add_argument("--run-group", default="day5", help="Run group label written to RunLog")
     parser.add_argument("--seed", type=int, default=42, help="Random seed for --shuffle")
     parser.add_argument("--shuffle", action="store_true", help="Shuffle selected cases before limit")
     parser.add_argument("--resume", action="store_true", help="Resume each output file by completed case_id")
     parser.add_argument("--fail-fast", action="store_true", help="Stop on first failed case")
-    parser.add_argument("--notes", default="DAY4 experiment matrix run")
+    parser.add_argument("--notes", default="DAY5 final experiment matrix run")
     args = parser.parse_args(argv)
     return vars(args)
 
@@ -203,7 +212,7 @@ def _resolve_model(backend: str, model: str) -> str:
 
 
 def _default_run_prefix(backend: str) -> str:
-    return "day4_stub_all" if backend == "stub" else "day4_qwen25_rep"
+    return "day5_stub_all" if backend == "stub" else "day5_qwen25_rep"
 
 
 def _csv_values(value: Any) -> List[str]:

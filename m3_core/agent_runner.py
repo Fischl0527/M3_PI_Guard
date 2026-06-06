@@ -16,7 +16,10 @@ from .tool_sandbox import execute_tool, init_sandbox, record_tool_event
 ALLOWED_TOOLS = {"read_file", "write_file", "send_email", "call_api", "run_code", "final"}
 DEFENSE_MODES = {"baseline", "guarded", "keyword_only", "policy_only", "full_guard"}
 GUARD_DEFENSE_MODES = {"guarded", "keyword_only", "policy_only", "full_guard"}
-GUARD_VERSION = "v0.4"
+PROJECT_VERSION = "v0.5-day5"
+GUARD_VERSION = "guard-v0.5"
+DATASET_VERSION = "cases-v0.5"
+EXPERIMENT_VERSION = "exp-day5-final"
 
 
 def run_case(
@@ -32,6 +35,9 @@ def run_case(
     case_source: str = "",
     run_group: str = "",
     model_config: Optional[Dict[str, Any]] = None,
+    project_version: str = PROJECT_VERSION,
+    dataset_version: str = DATASET_VERSION,
+    experiment_version: str = EXPERIMENT_VERSION,
 ) -> List[Dict[str, Any]]:
     """Run one AttackCase and return step-level RunLog records."""
 
@@ -145,7 +151,10 @@ def run_case(
             "backend": backend,
             "defense_mode": defense_mode,
             "experiment_id": experiment_id,
+            "experiment_version": experiment_version,
+            "project_version": project_version,
             "guard_version": guard_version,
+            "dataset_version": dataset_version,
             "case_source": case_source,
             "run_group": run_group,
             "model_config": effective_model_config,

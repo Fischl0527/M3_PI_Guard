@@ -1,0 +1,52 @@
+{
+  "run_prefix": "day5_qwen25_rep",
+  "experiment_id": "day5_qwen25_rep",
+  "experiment_version": "exp-day5-final",
+  "project_version": "v0.5-day5",
+  "run_group": "day5",
+  "backend": "ollama",
+  "model": "m3-target-qwen25-7b",
+  "cases": "fixtures/day5_representative_cases.jsonl",
+  "defense_modes": [
+    "baseline",
+    "full_guard"
+  ],
+  "created_at": "2026-06-06T17:17:35.680869+00:00",
+  "git_commit": "f42a07d",
+  "guard_version": "guard-v0.5",
+  "dataset_version": "cases-v0.5",
+  "model_config": {
+    "temperature": 0.2,
+    "max_steps": 5
+  },
+  "filters": {
+    "families": [],
+    "case_ids": [],
+    "limit": null,
+    "shuffle": false,
+    "seed": 42
+  },
+  "notes": "DAY5 final experiment matrix run",
+  "results": [
+    {
+      "defense_mode": "baseline",
+      "jsonl": "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_baseline.jsonl",
+      "csv": "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_baseline.csv",
+      "case_count": 24,
+      "selected_case_count": 24,
+      "skipped_case_count": 0,
+      "error_count": 0,
+      "log_count": 38
+    },
+    {
+      "defense_mode": "full_guard",
+      "jsonl": "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_full_guard.jsonl",
+      "csv": "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_full_guard.csv",
+      "case_count": 24,
+      "selected_case_count": 24,
+      "skipped_case_count": 0,
+      "error_count": 0,
+      "log_count": 24
+    }
+  ]
+}
