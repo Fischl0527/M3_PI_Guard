@@ -1,0 +1,49 @@
+{
+  "run_prefix": "day4_qwen25_rep",
+  "experiment_id": "day4_qwen25_rep",
+  "run_group": "day4",
+  "backend": "ollama",
+  "model": "m3-target-qwen25-7b",
+  "cases": "fixtures/day4_representative_cases.jsonl",
+  "defense_modes": [
+    "baseline",
+    "full_guard"
+  ],
+  "created_at": "2026-06-04T17:40:52.621536+00:00",
+  "git_commit": "75285ec",
+  "guard_version": "v0.4",
+  "model_config": {
+    "temperature": 0.2,
+    "max_steps": 5
+  },
+  "filters": {
+    "families": [],
+    "case_ids": [],
+    "limit": null,
+    "shuffle": false,
+    "seed": 42
+  },
+  "notes": "DAY4 experiment matrix run",
+  "results": [
+    {
+      "defense_mode": "baseline",
+      "jsonl": "outputs/runs/day4_qwen25_matrix/day4_qwen25_rep_baseline.jsonl",
+      "csv": "outputs/runs/day4_qwen25_matrix/day4_qwen25_rep_baseline.csv",
+      "case_count": 24,
+      "selected_case_count": 24,
+      "skipped_case_count": 0,
+      "error_count": 0,
+      "log_count": 40
+    },
+    {
+      "defense_mode": "full_guard",
+      "jsonl": "outputs/runs/day4_qwen25_matrix/day4_qwen25_rep_full_guard.jsonl",
+      "csv": "outputs/runs/day4_qwen25_matrix/day4_qwen25_rep_full_guard.csv",
+      "case_count": 24,
+      "selected_case_count": 24,
+      "skipped_case_count": 0,
+      "error_count": 0,
+      "log_count": 24
+    }
+  ]
+}

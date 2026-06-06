@@ -43,6 +43,13 @@ CONFIG = {
     "shuffle": False,
     "resume": False,
     "fail_fast": False,
+    "experiment_id": "",
+    "experiment_version": "exp-day5-final",
+    "project_version": "v0.5-day5",
+    "guard_version": "guard-v0.5",
+    "dataset_version": "cases-v0.5",
+    "case_source": "",
+    "run_group": "",
 }
 
 
@@ -83,6 +90,19 @@ def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
     if not all_cases:
         raise SystemExit(f"No cases found in {cases_path}")
 
+    case_source = str(config.get("case_source") or _relative_or_name(cases_path))
+    run_group = str(config.get("run_group") or "")
+    experiment_id = str(config.get("experiment_id") or "")
+    experiment_version = str(config.get("experiment_version") or "exp-day5-final")
+    project_version = str(config.get("project_version") or "v0.5-day5")
+    guard_version = str(config.get("guard_version") or "guard-v0.5")
+    dataset_version = str(config.get("dataset_version") or "cases-v0.5")
+    max_steps = int(config.get("max_steps", 5))
+    model_config = {
+        "temperature": float(config.get("temperature", 0.2)),
+        "max_steps": max_steps,
+    }
+
     selected_cases = _filter_cases(all_cases, config)
     existing_logs: List[Dict[str, Any]] = []
     skipped_case_count = 0
@@ -110,7 +130,15 @@ def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
                 model=str(config.get("model") or DEFAULT_MODEL),
                 backend=str(config.get("backend", "stub")),
                 defense_mode=str(config.get("defense", "baseline")),
-                max_steps=int(config.get("max_steps", 5)),
+                max_steps=max_steps,
+                experiment_id=experiment_id,
+                guard_version=guard_version,
+                case_source=case_source,
+                run_group=run_group,
+                model_config=model_config,
+                project_version=project_version,
+                dataset_version=dataset_version,
+                experiment_version=experiment_version,
             )
         except Exception as exc:
             error_count += 1
@@ -123,6 +151,14 @@ def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
                     backend=str(config.get("backend", "stub")),
                     defense_mode=str(config.get("defense", "baseline")),
                     exc=exc,
+                    experiment_id=experiment_id,
+                    guard_version=guard_version,
+                    case_source=case_source,
+                    run_group=run_group,
+                    model_config=model_config,
+                    project_version=project_version,
+                    dataset_version=dataset_version,
+                    experiment_version=experiment_version,
                 )
             ]
         all_logs.extend(case_logs)
@@ -150,7 +186,11 @@ def _parse_args(argv: List[str]) -> Dict[str, Any]:
     parser.add_argument("--cases", required=True, help="Input AttackCase JSONL path")
     parser.add_argument("--backend", choices=["ollama", "stub"], default="stub")
     parser.add_argument("--model", default=DEFAULT_MODEL)
-    parser.add_argument("--defense", choices=["baseline", "guarded"], default="baseline")
+    parser.add_argument(
+        "--defense",
+        choices=["baseline", "guarded", "keyword_only", "policy_only", "full_guard"],
+        default="baseline",
+    )
     parser.add_argument("--out", required=True, help="Output RunLog JSONL path")
     parser.add_argument("--csv-out", help="Optional output RunLog CSV path")
     parser.add_argument("--max-steps", type=int, default=5)
@@ -175,6 +215,13 @@ def _parse_args(argv: List[str]) -> Dict[str, Any]:
         action="store_true",
         help="Stop immediately if a case raises an exception",
     )
+    parser.add_argument("--experiment-id", default="", help="Experiment id written to RunLog")
+    parser.add_argument("--experiment-version", default="exp-day5-final", help="Experiment version written to RunLog")
+    parser.add_argument("--project-version", default="v0.5-day5", help="Project version written to RunLog")
+    parser.add_argument("--guard-version", default="guard-v0.5", help="Guard version written to RunLog")
+    parser.add_argument("--dataset-version", default="cases-v0.5", help="Dataset version written to RunLog")
+    parser.add_argument("--case-source", default="", help="Case source label written to RunLog")
+    parser.add_argument("--run-group", default="", help="Run group label written to RunLog")
     args = parser.parse_args(argv)
     return vars(args)
 
@@ -246,6 +293,14 @@ def _error_log(
     backend: str,
     defense_mode: str,
     exc: Exception,
+    experiment_id: str = "",
+    experiment_version: str = "exp-day5-final",
+    project_version: str = "v0.5-day5",
+    guard_version: str = "guard-v0.5",
+    dataset_version: str = "cases-v0.5",
+    case_source: str = "",
+    run_group: str = "",
+    model_config: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
     """Create a schema-compatible RunLog row for non-fail-fast errors."""
 
@@ -255,12 +310,22 @@ def _error_log(
         "model": model,
         "backend": backend,
         "defense_mode": defense_mode,
+        "experiment_id": experiment_id,
+        "experiment_version": experiment_version,
+        "project_version": project_version,
+        "guard_version": guard_version,
+        "dataset_version": dataset_version,
+        "case_source": case_source,
+        "run_group": run_group,
+        "model_config": model_config or {},
         "step": 0,
         "attack_family": case.get("attack_family", ""),
         "risk_tags": case.get("risk_tags", []),
         "unsafe_target_actions": case.get("unsafe_target_actions", []),
         "raw_model_output": "",
         "parsed_tool_call": {},
+        "parse_ok": False,
+        "parse_error": "runner_exception",
         "guard_decision": "error",
         "risk_score": None,
         "reasons": ["runner_exception"],
@@ -325,12 +390,22 @@ def write_runlog_csv(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
         "model",
         "backend",
         "defense_mode",
+        "experiment_id",
+        "experiment_version",
+        "project_version",
+        "guard_version",
+        "dataset_version",
+        "case_source",
+        "run_group",
+        "model_config",
         "step",
         "attack_family",
         "risk_tags",
         "unsafe_target_actions",
         "tool",
         "tool_arguments",
+        "parse_ok",
+        "parse_error",
         "guard_decision",
         "risk_score",
         "reasons",
@@ -355,6 +430,14 @@ def write_runlog_csv(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
                     "model": row.get("model", ""),
                     "backend": row.get("backend", ""),
                     "defense_mode": row.get("defense_mode", ""),
+                    "experiment_id": row.get("experiment_id", ""),
+                    "experiment_version": row.get("experiment_version", ""),
+                    "project_version": row.get("project_version", ""),
+                    "guard_version": row.get("guard_version", ""),
+                    "dataset_version": row.get("dataset_version", ""),
+                    "case_source": row.get("case_source", ""),
+                    "run_group": row.get("run_group", ""),
+                    "model_config": _csv_cell(row.get("model_config", {})),
                     "step": row.get("step", ""),
                     "attack_family": row.get("attack_family", ""),
                     "risk_tags": _csv_cell(row.get("risk_tags", [])),
@@ -363,6 +446,8 @@ def write_runlog_csv(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
                     ),
                     "tool": tool_call.get("tool", ""),
                     "tool_arguments": _csv_cell(tool_call.get("arguments", {})),
+                    "parse_ok": row.get("parse_ok", ""),
+                    "parse_error": row.get("parse_error", ""),
                     "guard_decision": row.get("guard_decision", ""),
                     "risk_score": row.get("risk_score", ""),
                     "reasons": _csv_cell(row.get("reasons", [])),
@@ -381,6 +466,15 @@ def _csv_cell(value: Any) -> str:
     if value is None:
         return ""
     return str(value)
+
+
+def _relative_or_name(path: Path) -> str:
+    """Prefer a repo-relative case source label for stable experiment logs."""
+
+    try:
+        return path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.name
 
 
 def _repo_path(value: str) -> Path:

@@ -20,13 +20,23 @@ EXTERNAL_TOOLS = {"send_email", "call_api"}
 HIGH_RISK_TOOLS = {"read_file", "write_file", "send_email", "call_api", "run_code"}
 
 
-def guard_decide(context: dict[str, Any], tool_call: dict[str, Any]) -> tuple[str, float, list[str]]:
+def guard_decide(
+    context: dict[str, Any],
+    tool_call: dict[str, Any],
+    mode: str = "full_guard",
+) -> tuple[str, float, list[str]]:
     """Return allow/ask/deny, a 0..1 risk score, and human-readable reason codes."""
 
     if not isinstance(context, dict):
         context = {}
     if not isinstance(tool_call, dict):
         return "deny", 0.85, ["invalid_tool_call"]
+
+    mode = str(mode or context.get("guard_mode") or "full_guard").strip().lower()
+    if mode == "guarded":
+        mode = "full_guard"
+    if mode == "baseline":
+        return "allow", 0.0, ["baseline_no_guard"]
 
     tool = str(tool_call.get("tool", "")).strip()
     arguments = tool_call.get("arguments")
@@ -35,6 +45,16 @@ def guard_decide(context: dict[str, Any], tool_call: dict[str, Any]) -> tuple[st
 
     if tool == "final":
         return "allow", 0.0, ["final_answer_no_tool_risk"]
+
+    if mode == "keyword_only":
+        risk, reasons = _score_keyword_only(context)
+        decision = _decision_from_risk(risk)
+        return decision, _clamp(risk), reasons or ["keyword_only_no_text_signal"]
+
+    if mode == "policy_only":
+        policy = decide(context, {"tool": tool, "arguments": arguments})
+        decision = policy.decision if policy.decision in VALID_DECISIONS else "deny"
+        return decision, _clamp(float(policy.risk)), policy.reasons or ["policy_only_evaluation"]
 
     policy = decide(context, {"tool": tool, "arguments": arguments})
     dataflow = analyze_dataflow(context, {"tool": tool, "arguments": arguments})
@@ -52,6 +72,43 @@ def guard_decide(context: dict[str, Any], tool_call: dict[str, Any]) -> tuple[st
     if decision not in VALID_DECISIONS:
         decision = "deny"
     return decision, _clamp(risk), reasons or ["policy_threshold_evaluation"]
+
+
+def _score_keyword_only(context: dict[str, Any]) -> tuple[float, list[str]]:
+    """Score only instruction-like text, tool lures, and structured injection."""
+
+    case = context.get("case", {})
+    if not isinstance(case, dict):
+        case = {}
+
+    texts = [
+        case.get("user_task", ""),
+        case.get("document_content", ""),
+        case.get("injected_content", ""),
+    ]
+    reasons: list[str] = []
+    for text in texts:
+        if not text:
+            continue
+        reasons.extend(detect_instruction_like_text(text))
+        reasons.extend(detect_tool_lure(text))
+        reasons.extend(detect_structured_injection(text))
+        document_detection = detect_document_injection(text)
+        reasons.extend(document_detection.reasons)
+
+    reasons = _unique(reasons)
+    risk = 0.0
+    if any(reason.startswith("instruction_") for reason in reasons):
+        risk += 0.30
+    if any("tool" in reason or "lure" in reason for reason in reasons):
+        risk += 0.25
+    if any(reason.startswith("structured_") or reason.startswith("structured_field_") for reason in reasons):
+        risk += 0.20
+    if "json_rpc_injection" in reasons:
+        risk += 0.20
+    if any(_is_multilingual_or_unicode_reason(reason) for reason in reasons):
+        risk += 0.10
+    return _clamp(risk), reasons
 
 
 def _score_risk(
