@@ -1,6 +1,6 @@
 # M3_PI_Guard DAY3 Attack Case Library
 
-队员 B 的 DAY3 交付物：作品级红队攻击样本库。样本覆盖直接越狱、RAG 间接提示注入、多语言/T2L、JSON/RPC 结构化注入、工具输出注入，以及用于误报率评估的 benign clean 正常样本。
+DAY3 交付物：作品级红队攻击样本库。样本覆盖直接越狱、RAG 间接提示注入、多语言/T2L、JSON/RPC 结构化注入、工具输出注入，以及用于误报率评估的 benign clean 正常样本。
 
 所有样本都只面向本地 `sandbox` mock 工具，不包含真实恶意代码，不调用真实网络，不涉及真实账号。
 

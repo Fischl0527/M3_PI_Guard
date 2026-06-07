@@ -84,7 +84,7 @@ def run_case(
         if defense_mode in GUARD_DEFENSE_MODES:
             # Guard 需要看到当前样本、历史消息和历史 observation，才能判断
             # “这次工具调用是否和用户真实任务一致”。Day 1 的最小 guard 只用到
-            # case 与 tool_call，后续 C 队员可以在同一接口上扩展完整上下文分析。
+            # case 与 tool_call，后续模块可以在同一接口上扩展完整上下文分析。
             guard_decide = _load_guard_decide()
             context = {
                 "run_id": run_id,
@@ -462,7 +462,7 @@ def _load_guard_decide():
     """Load C-team guard_decide, falling back to a local safe minimum.
 
     DAY2 要求 guarded 模式优先调用 m3_guard.guard_engine.guard_decide。
-    但 A 队员的本地闭环不能因为 C 模块暂时缺失或导入失败而中断，所以这里
+    但本地闭环不能因为外部模块暂时缺失或导入失败而中断，所以这里
     捕获导入异常，并返回本文件内的 fallback guard。
     """
 

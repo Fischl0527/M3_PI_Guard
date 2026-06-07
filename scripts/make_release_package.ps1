@@ -63,7 +63,8 @@ Get-ChildItem -LiteralPath $ResolvedRelease -Recurse -Force -File |
   Where-Object {
     $_.Name -like "DAY*-TASK.md" -or
     $_.Name -like "DAY*-REPORT-A.md" -or
-    $_.Name -like "DAY*-TARGET-A.md"
+    $_.Name -like "DAY*-TARGET-A.md" -or
+    $_.Name -eq "build_final_report.py"
   } |
   Remove-Item -Force
 
@@ -87,7 +88,15 @@ foreach ($UnsafePath in @(
 $QualityDir = Join-Path $RepoRoot "outputs/quality"
 New-Item -ItemType Directory -Force -Path $QualityDir | Out-Null
 $ChecklistPath = Join-Path $QualityDir "day6_release_checklist.md"
-$ReportPath = Join-Path $ResolvedRelease "docs/report/作品报告_终稿.docx"
+$ReportDir = Join-Path $ResolvedRelease "docs/report"
+$PresentationDir = Join-Path $ResolvedRelease "docs/presentation"
+$HasFinalReport = (Test-Path $ReportDir) -and ((Get-ChildItem -LiteralPath $ReportDir -Filter "*.docx" -ErrorAction SilentlyContinue | Measure-Object).Count -ge 2)
+$HasPresentationPpt = (Test-Path $PresentationDir) -and ((Get-ChildItem -LiteralPath $PresentationDir -Filter "*.pptx" -ErrorAction SilentlyContinue | Measure-Object).Count -ge 1)
+$RunbookPath = Join-Path $ResolvedRelease "docs/RUNBOOK.md"
+$EvidencePath = Join-Path $ResolvedRelease "docs/SUBMISSION_EVIDENCE_INDEX.md"
+$ReleaseChecklistPath = Join-Path $ResolvedRelease "docs/RELEASE_CHECKLIST.md"
+$DatasetCardPath = Join-Path $ResolvedRelease "docs/DATASET_CARD.md"
+$ArchitecturePath = Join-Path $ResolvedRelease "docs/SYSTEM_ARCHITECTURE.md"
 $Checklist = @(
   "# DAY6 Release Checklist",
   "",
@@ -97,8 +106,14 @@ $Checklist = @(
   "- includes_attack_cases: $(Test-Path (Join-Path $ResolvedRelease 'm3_attacks/cases/all_cases.jsonl'))",
   "- includes_guard: $(Test-Path (Join-Path $ResolvedRelease 'm3_guard'))",
   "- includes_eval: $(Test-Path (Join-Path $ResolvedRelease 'm3_eval'))",
+  "- includes_dataset_card: $(Test-Path $DatasetCardPath)",
+  "- includes_system_architecture: $(Test-Path $ArchitecturePath)",
+  "- includes_runbook: $(Test-Path $RunbookPath)",
+  "- includes_evidence_index: $(Test-Path $EvidencePath)",
+  "- includes_release_checklist: $(Test-Path $ReleaseChecklistPath)",
   "- includes_demo_stub_logs: $(Test-Path (Join-Path $ResolvedRelease 'outputs/runs/day6_demo_stub_matrix'))",
-  "- includes_final_report_docx: $(Test-Path $ReportPath)",
+  "- includes_final_report_docx: $HasFinalReport",
+  "- includes_presentation_pptx: $HasPresentationPpt",
   "- excludes_model_dirs: $(-not (Test-Path (Join-Path $ResolvedRelease 'models')))",
   "- excludes_sandbox_secrets: $(-not (Test-Path (Join-Path $ResolvedRelease 'sandbox/secrets')))",
   "- excludes_sandbox_outbox: $(-not (Test-Path (Join-Path $ResolvedRelease 'sandbox/outbox')))",

@@ -1,13 +1,19 @@
 ﻿# DAY6 Release Checklist
 
 - release_dir: release/Redteam_LLM_Security_v1.0
-- generated_at: 2026-06-07T23:31:25
+- generated_at: 2026-06-08T07:17:05
 - includes_core_modules: True
 - includes_attack_cases: True
 - includes_guard: True
 - includes_eval: True
+- includes_dataset_card: True
+- includes_system_architecture: True
+- includes_runbook: True
+- includes_evidence_index: True
+- includes_release_checklist: True
 - includes_demo_stub_logs: True
-- includes_final_report_docx: False
+- includes_final_report_docx: True
+- includes_presentation_pptx: True
 - excludes_model_dirs: True
 - excludes_sandbox_secrets: True
 - excludes_sandbox_outbox: True

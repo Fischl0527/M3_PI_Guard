@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 
-# DAY3 评测汇总配置区。当前 m3_eval 输出 JSON；C 队员后续可扩展 CSV。
+# DAY3 评测汇总配置区。当前 m3_eval 输出 JSON；后续可扩展 CSV。
 $ScriptDir = if ($PSScriptRoot) { $PSScriptRoot } elseif ($MyInvocation.MyCommand.Path) { Split-Path -Parent $MyInvocation.MyCommand.Path } else { "" }
 $RepoRoot = if ($ScriptDir) { (Resolve-Path (Join-Path $ScriptDir "..")).Path } else { (Get-Location).Path }
 $Cases = "m3_attacks/cases/all_cases.jsonl"
