@@ -532,7 +532,8 @@ def scrub_docx_package(path: Path) -> None:
     with zipfile.ZipFile(path, "r") as zin, zipfile.ZipFile(temp, "w", zipfile.ZIP_DEFLATED) as zout:
         for item in zin.infolist():
             data = zin.read(item.filename)
-            if item.filename.startswith("docProps/") or item.filename.startswith("word/"):
+            is_text_part = item.filename.endswith(".xml") or item.filename.endswith(".rels")
+            if is_text_part and (item.filename.startswith("docProps/") or item.filename.startswith("word/")):
                 text = data.decode("utf-8", errors="ignore")
                 text = re.sub(r'w:rsid\w+="[^"]+"', "", text)
                 data = text.encode("utf-8")
