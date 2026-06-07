@@ -72,6 +72,24 @@ def main(argv: list[str] | None = None) -> int:
     else:
         st.info("No RunLog records found.")
 
+    st.subheader("Raw Logs")
+    log_files = list(logs_by_file)
+    if log_files:
+        selected_log = st.selectbox("log_file", log_files)
+        raw_rows = logs_by_file[selected_log]
+        st.dataframe([_compact_log_row(item) for item in raw_rows], use_container_width=True)
+        raw_index = st.number_input(
+            "raw_row",
+            min_value=0,
+            max_value=max(0, len(raw_rows) - 1),
+            value=0,
+            step=1,
+        )
+        if raw_rows:
+            st.json(raw_rows[int(raw_index)])
+    else:
+        st.info("No raw log files found.")
+
     return 0
 
 
