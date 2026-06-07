@@ -1,0 +1,229 @@
+.\2ã€å…·ä½“å®ç°æ–¹æ¡ˆ.md:2:ç”¨å“ªä¸€ä¸ªæ¨¡å‹ä½œä¸ºé¶åœºæ¯”è¾ƒåˆé€‚ï¼ˆç»™å‡ºä½ ä¸Šé¢æå‡ºçš„çš„å„ä¸ªæ¨¡å‹çš„ä¼˜åŠ£ç‚¹è¿›è¡Œæ¯”è¾ƒï¼‰ï¼Ÿç”±äºæˆ‘ä»¬å‡ ä¸ªæ˜¯å­¦ç”Ÿï¼Œç›®å‰æ²¡æœ‰å¥½çš„æ˜¾å¡ï¼Œæœ¬åœ°éƒ¨ç½²çš„æ¨¡å‹éƒ½æ¯”è¾ƒä½çº§ï¼Œæ²¡æœ‰ä»€ä¹ˆè¯´æœåŠ›ï¼Œè°ƒç”¨è¿œç¨‹çš„å®¹æ˜“å—é™åˆ¶ï¼ˆæ¶æ„æ”»å‡»è¢«å°å·ï¼Œç½‘ç»œå®‰å…¨é£é™©ç¦æ­¢å¯¹è¯ç­‰ï¼‰ï¼Œæœ‰ä»€ä¹ˆæ¯”è¾ƒå¥½çš„è§£å†³æ–¹æ³•å—ï¼Ÿè¯·ç»™å‡ºä¸€ä¸ªè¯¦ç»†å…·ä½“çš„æœ¬åœ°éƒ¨ç½²çš„å®ç°æ–¹æ¡ˆï¼Œæ–¹ä¾¿ç›´æ¥ç»™æœ¬åœ°çš„AIAgentè¿›è¡Œæ“ä½œã€‚
+.\2ã€å…·ä½“å®ç°æ–¹æ¡ˆ.md:765:# 9. ç›´æ¥ç»™æœ¬åœ° AIAgent çš„æ‰§è¡Œä»»åŠ¡ä¹¦
+.\2ã€å…·ä½“å®ç°æ–¹æ¡ˆ.md:767:å¯ä»¥æŠŠä¸‹é¢è¿™æ®µç›´æ¥äº¤ç»™ä½ ä»¬æœ¬åœ° AIAgentï¼š
+.\DAY3-TASK.md:497:## A å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY3 æŒ‡ä»¤
+.\DAY3-TASK.md:500:ä½ æ˜¯é˜Ÿå‘˜ A çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY3ã€‚DAY2 çš„æœ€å° Agent é—­ç¯å·²ç»å®Œæˆã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠæœ¬åœ° Agent é¶åœºå‡çº§ä¸ºå¯æ‰¹é‡å®éªŒã€å¯æ¼”ç¤ºçš„ç‰ˆæœ¬ã€‚
+.\DAY3-TASK.md:502:è¯·åªä¿®æ”¹ï¼š
+.\DAY3-TASK.md:534:å®Œæˆåè¯·è¾“å‡ºï¼š
+.\DAY3-TASK.md:814:## B å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY3 æŒ‡ä»¤
+.\DAY3-TASK.md:817:ä½ æ˜¯é˜Ÿå‘˜ B çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY3ã€‚DAY2 å·²ç»å®Œæˆ 30 æ¡åŸºç¡€æ”»å‡»æ ·æœ¬ã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠæ”»å‡»æ ·æœ¬åº“æ‰©å±•ä¸ºä½œå“çº§çº¢é˜Ÿæµ‹è¯•é›†ã€‚
+.\DAY3-TASK.md:819:è¯·åªä¿®æ”¹ï¼š
+.\DAY3-TASK.md:1305:## C å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY3 æŒ‡ä»¤
+.\DAY3-TASK.md:1308:ä½ æ˜¯é˜Ÿå‘˜ C çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY3ã€‚DAY2 å·²ç»å®Œæˆ Guard åˆç‰ˆå’Œ evaluate.py åˆç‰ˆã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠ M3-PI Guard å‡çº§ä¸ºå¯å±•ç¤ºçš„è¡Œä¸ºç›‘ç£ä¸è¯„æµ‹æ¨¡å—ã€‚
+.\DAY3-TASK.md:1310:è¯·åªä¿®æ”¹ï¼š
+.\DAY2-TASK.md:367:## A å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY2 æŒ‡ä»¤
+.\DAY2-TASK.md:370:ä½ æ˜¯é˜Ÿå‘˜ A çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY2ï¼Œä½ çš„ä»»åŠ¡æ˜¯å®Œæˆ M3_PI_Guard çš„æœ¬åœ° Agent é¶åœºæœ€å°é—­ç¯ã€‚
+.\DAY2-TASK.md:372:è¯·åªä¿®æ”¹ä»¥ä¸‹ç›®å½•ï¼š
+.\DAY2-TASK.md:643:## B å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY2 æŒ‡ä»¤
+.\DAY2-TASK.md:646:ä½ æ˜¯é˜Ÿå‘˜ B çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY2ï¼Œä½ çš„ä»»åŠ¡æ˜¯ä¸º M3_PI_Guard é¡¹ç›®æ„é€ ç¬¬ä¸€æ‰¹çº¢é˜Ÿæ”»å‡»æ ·æœ¬åº“ã€‚
+.\DAY2-TASK.md:648:è¯·åªä¿®æ”¹ï¼š
+.\DAY2-TASK.md:983:## C å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY2 æŒ‡ä»¤
+.\DAY2-TASK.md:986:ä½ æ˜¯é˜Ÿå‘˜ C çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY2ï¼Œä½ çš„ä»»åŠ¡æ˜¯å®Œæˆ M3_PI_Guard çš„ Guard åˆç‰ˆå’Œè¯„æµ‹è„šæœ¬åˆç‰ˆã€‚
+.\DAY2-TASK.md:988:è¯·åªä¿®æ”¹ï¼š
+.\DAY4-TASK.md:418:## A å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY4 æŒ‡ä»¤
+.\DAY4-TASK.md:421:ä½ æ˜¯é˜Ÿå‘˜ A çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY4ã€‚DAY3 å·²ç»å®Œæˆæ ·æœ¬æ‰©å±•ã€Guard åˆç‰ˆå¢å¼ºå’Œ Dashboard åˆç‰ˆã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠ m3_core å‡çº§ä¸ºå¯é‡å¤å®éªŒå¹³å°ã€‚
+.\DAY4-TASK.md:423:è¯·åªä¿®æ”¹ï¼š
+.\DAY4-TASK.md:449:å®Œæˆåè¯·è¾“å‡ºï¼š
+.\DAY4-TASK.md:752:## B å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY4 æŒ‡ä»¤
+.\DAY4-TASK.md:755:ä½ æ˜¯é˜Ÿå‘˜ B çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY4ã€‚DAY3 å·²ç»å®Œæˆè‡³å°‘ 60 æ¡æ ·æœ¬å’Œæ”»å‡»çŸ©é˜µã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯è¿›è¡Œçº¢é˜Ÿæ ·æœ¬è´¨é‡å®¡è®¡ã€ä»£è¡¨æ€§æ¡ˆä¾‹é€‰æ‹©å’Œæ”»å‡»ç« èŠ‚å†™ä½œã€‚
+.\DAY4-TASK.md:757:è¯·åªä¿®æ”¹ï¼š
+.\DAY4-TASK.md:783:å®Œæˆåè¯·è¾“å‡ºï¼š
+.\DAY4-TASK.md:1102:## C å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY4 æŒ‡ä»¤
+.\DAY4-TASK.md:1105:ä½ æ˜¯é˜Ÿå‘˜ C çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY4ã€‚DAY3 å·²ç»å®Œæˆ Guard å¢å¼ºã€æŒ‡æ ‡åˆç‰ˆå’Œ Dashboard åˆç‰ˆã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠé˜²å¾¡è¯„æµ‹ç³»ç»Ÿå‡çº§ä¸ºå¯ç­”è¾©å±•ç¤ºç‰ˆæœ¬ã€‚
+.\DAY4-TASK.md:1107:è¯·åªä¿®æ”¹ï¼š
+.\DAY4-TASK.md:1152:å®Œæˆåè¯·è¾“å‡ºï¼š
+.\DAY6-TASK.md:6:1. ÇåÀíÏîÄ¿ÖĞËùÓĞ AIagent / Codex / ×Ô¶¯Éú³ÉÖ¸ÁîºÛ¼£
+.\DAY6-TASK.md:20:1. Ò»¸öÎŞ AIagent / Codex / ×Ô¶¯Éú³ÉÖ¸ÁîºÛ¼£µÄ¸É¾»ÏîÄ¿Ä¿Â¼
+.\DAY6-TASK.md:42:AIagent Ö¸Áî
+.\DAY6-TASK.md:43:Codex Ö¸Áî
+.\DAY6-TASK.md:44:¡°ÄãÊÇ¶ÓÔ± A/B/C µÄ±¾µØ AIagent¡±ÕâÀàÌáÊ¾
+.\DAY6-TASK.md:47:DAY2/DAY3/DAY4/DAY5 ¸ø AIagent µÄÈÎÎñÖ¸Áî
+.\DAY6-TASK.md:49:¡°ChatGPT Éú³É¡±
+.\DAY6-TASK.md:50:¡°Codex Éú³É¡±
+.\DAY6-TASK.md:174:1. É¨Ãè´úÂëºÍ½Å±¾ÖĞµÄ AIagent / Codex ºÛ¼£
+.\DAY6-TASK.md:189:rg -n --hidden --glob "!.git/**" --glob "!release/**" --glob "!outputs/runs/**" --glob "!*.png" --glob "!*.jpg" --glob "!*.pdf" "AIagent|AI Agent|AIAgent|Codex|Copilot|ChatGPT|GPTÉú³É|AIÉú³É|ÓÉAI|ÓÉ AI|±¾µØ AIagent|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸ø AIagent|¸øAIagent|DAY[0-9].*AIagent" . > outputs/quality/day6_ai_trace_scan_before.txt
+.\DAY6-TASK.md:199:    r"AIagent", r"AI Agent", r"AIAgent", r"Codex", r"Copilot",
+.\DAY6-TASK.md:200:    r"ChatGPT", r"GPTÉú³É", r"AIÉú³É", r"ÓÉAI", r"ÓÉ AI",
+.\DAY6-TASK.md:201:    r"±¾µØ AIagent", r"ÄãÊÇ¶ÓÔ±", r"ÇëÖ»ĞŞ¸Ä", r"Íê³ÉºóÇëÊä³ö",
+.\DAY6-TASK.md:202:    r"¸ø AIagent", r"¸øAIagent", r"DAY[0-9].*AIagent"
+.\DAY6-TASK.md:255:AIagent ¹¤×÷µ¥
+.\DAY6-TASK.md:256:Codex Ö¸Áî
+.\DAY6-TASK.md:257:¡°ÄãÊÇ±¾µØ AIagent¡­¡­¡±
+.\DAY6-TASK.md:287:# AIagent generated
+.\DAY6-TASK.md:289:# prompt from ChatGPT
+.\DAY6-TASK.md:290:# ÈÃ AIagent ĞŞ¸ÄÕâÀï
+.\DAY6-TASK.md:399:DAY2/DAY3/DAY4/DAY5 AIagent Ö¸ÁîÎÄµµ
+.\DAY6-TASK.md:410:rg -n --hidden "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" release/Redteam_LLM_Security_v1.0 > outputs/quality/day6_release_ai_trace_scan.txt
+.\DAY6-TASK.md:416:day6_release_ai_trace_scan.txt Îª¿Õ£¬»òÕßÖ»°üº¬ºÏÀíµÄÏîÄ¿ÑĞ¾¿¶ÔÏóÃèÊö£¬¶ø²»ÊÇ AIagent/Codex Éú³ÉºÛ¼£¡£
+.\DAY6-TASK.md:434:## A ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY6 Ö¸Áî
+.\DAY6-TASK.md:449:1. É¨ÃèÕû¸öÏîÄ¿ÖĞÓë AIagent¡¢Codex¡¢Copilot¡¢ChatGPT Éú³ÉºÛ¼£Ïà¹ØµÄÄÚÈİ¡£
+.\DAY6-TASK.md:450:2. É¾³ı¿ª·¢¹ı³ÌÖĞµÄ AIagent Ö¸Áî¡¢Codex Ö¸Áî¡¢ÈÎÎñÌáÊ¾ÎÄ±¾£¬ÀıÈç£º
+.\DAY6-TASK.md:451:   - ¡°ÄãÊÇ¶ÓÔ± A µÄ±¾µØ AIagent¡±
+.\DAY6-TASK.md:454:   - ¡°¸ø AIagent µÄÖ¸Áî¡±
+.\DAY6-TASK.md:455:   - ¡°Codex Éú³É¡±
+.\DAY6-TASK.md:468:   - AIagent/Codex Ö¸ÁîÎÄµµ
+.\DAY6-TASK.md:472:rg -n --hidden --glob "!.git/**" --glob "!release/**" --glob "!outputs/runs/**" --glob "!*.png" --glob "!*.jpg" --glob "!*.pdf" "AIagent|AI Agent|AIAgent|Codex|Copilot|ChatGPT|GPTÉú³É|AIÉú³É|ÓÉAI|ÓÉ AI|±¾µØ AIagent|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸ø AIagent|¸øAIagent|DAY[0-9].*AIagent" . > outputs/quality/day6_ai_trace_scan_before.txt
+.\DAY6-TASK.md:480:rg -n --hidden "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" release/Redteam_LLM_Security_v1.0 > outputs/quality/day6_release_ai_trace_scan.txt
+.\DAY6-TASK.md:502:1. ÇåÀí docs ÖĞËùÓĞ AIagent Ö¸ÁîºÛ¼£
+.\DAY6-TASK.md:529:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs m3_attacks > outputs/quality/day6_docs_ai_trace_scan.txt
+.\DAY6-TASK.md:539:ÄãÊÇ¶ÓÔ± B µÄ±¾µØ AIagent¡­¡­
+.\DAY6-TASK.md:551:ÄãÊÇ¶ÓÔ± B µÄ±¾µØ AIagent£¬½ñÌìµÄÈÎÎñÊÇ¹¹ÔìÑù±¾¡­¡­
+.\DAY6-TASK.md:648:²»Òª³öÏÖ¡°AIagent Ö¸Áî¡±¡£
+.\DAY6-TASK.md:682:Çë AIagent¡­¡­
+.\DAY6-TASK.md:737:## B ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY6 Ö¸Áî
+.\DAY6-TASK.md:740:ÄãÊÇ¶ÓÔ± B µÄÎÄµµÕûÀíÖúÊÖ¡£½ñÌìÊÇ DAY6£¬ÏîÄ¿½øÈëÌá½»Ç°ÇåÏ´ºÍ±¨¸æ³É¸å½×¶Î¡£ÄãµÄÈÎÎñÊÇÇåÀíÎÄµµÖĞµÄ AIagent/Codex/×Ô¶¯Éú³ÉÖ¸ÁîºÛ¼££¬²¢°Ñ¹¥»÷Ñù±¾ºÍ°¸ÀıÃèÊö¸Ä³ÉÕıÊ½¾ºÈü±¨¸æ¿ÚÎÇ¡£
+.\DAY6-TASK.md:751:1. É¨Ãè docs/ ºÍ m3_attacks/ ÖĞËùÓĞ AIagent¡¢Codex¡¢ChatGPT¡¢AIÉú³É¡¢ÄãÊÇ¶ÓÔ±¡¢ÇëÖ»ĞŞ¸Ä¡¢Íê³ÉºóÇëÊä³öµÈ¿ª·¢¹ı³ÌÖ¸ÁîºÛ¼£¡£
+.\DAY6-TASK.md:766:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs m3_attacks > outputs/quality/day6_docs_ai_trace_scan.txt
+.\DAY6-TASK.md:795:6. ¼ì²é AIagent/Codex ºÛ¼£
+.\DAY6-TASK.md:1019:Èç¹ûÄãÃÇÈÃ±¾µØ AIagent ×Ô¶¯Éú³É docx£¬¿ÉÒÔÈÃËüÊ¹ÓÃ `python-docx`£º
+.\DAY6-TASK.md:1073:ÎŞ AIagent/Codex/ChatGPT Éú³ÉºÛ¼£
+.\DAY6-TASK.md:1085:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs/report docs/report_sections docs/case_cards > outputs/quality/day6_report_ai_trace_scan.txt
+.\DAY6-TASK.md:1093:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" outputs/quality/report_docx_unzip > outputs/quality/day6_report_docx_ai_trace_scan.txt
+.\DAY6-TASK.md:1114:## C ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY6 Ö¸Áî
+.\DAY6-TASK.md:1117:ÄãÊÇ¶ÓÔ± C µÄ±¨¸æÉú³ÉÖúÊÖ¡£½ñÌìÊÇ DAY6£¬ÏîÄ¿ĞèÒª°´ÕÕ¹Ù·½¡¶×÷Æ·±¨¸æÄ£°å.docx¡·Éú³É×îÖÕ±¨¸æ£¬²¢ÇåÀíËùÓĞ AIagent/Codex/×Ô¶¯Éú³ÉÖ¸ÁîºÛ¼£¡£
+.\DAY6-TASK.md:1165:AIagent
+.\DAY6-TASK.md:1166:AIAgent
+.\DAY6-TASK.md:1167:Codex
+.\DAY6-TASK.md:1168:Copilot
+.\DAY6-TASK.md:1169:ChatGPT Éú³É
+.\DAY6-TASK.md:1174:¸ø AIagent µÄÖ¸Áî
+.\DAY6-TASK.md:1192:3. É¨Ãè±¨¸æÔ´ÎÄ¼şºÍ docx ½âÑ¹ÄÚÈİ£¬È·ÈÏÎŞ AIagent/Codex ºÛ¼£¡£
+.\DAY6-TASK.md:1212:´úÂëÓëÎÄµµ AIagent/Codex ºÛ¼£µÚÒ»ÂÖÇåÀíÍê³É
+.\DAY6-TASK.md:1234:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs m3_attacks > outputs/quality/day6_docs_ai_trace_scan.txt
+.\DAY6-TASK.md:1240:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs/report docs/report_sections docs/case_cards > outputs/quality/day6_report_ai_trace_scan.txt
+.\DAY6-TASK.md:1247:Ö÷Òª docs ²»ÔÙÓĞ AIagent ¹¤×÷µ¥
+.\DAY6-TASK.md:1267:rg -n --hidden "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" release/Redteam_LLM_Security_v1.0 > outputs/quality/day6_release_ai_trace_scan.txt
+.\DAY6-TASK.md:1273:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs/report docs/report_sections docs/case_cards > outputs/quality/day6_report_ai_trace_scan.txt
+.\DAY6-TASK.md:1295:rg -n --hidden --glob "!.git/**" --glob "!outputs/runs/**" --glob "!release/**" --glob "!*.png" --glob "!*.jpg" --glob "!*.pdf" "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|GPTÉú³É|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" . > outputs/quality/day6_final_project_ai_trace_scan.txt
+.\DAY6-TASK.md:1301:rg -n --hidden "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" release/Redteam_LLM_Security_v1.0 > outputs/quality/day6_final_release_ai_trace_scan.txt
+.\DAY6-TASK.md:1324:| A  | ´úÂë AI ºÛ¼£ÇåÀí | release °üÖĞÎŞ AIagent/Codex/ChatGPT Éú³ÉºÛ¼£        |
+.\DAY6-TASK.md:1327:| B  | ÎÄµµÇåÀí       | docs/case_cards ºÍ attack matrix ÎŞ AIagent ¹¤×÷µ¥ |
+.\DAY6-TASK.md:1392:[ ] ±¨¸æÀïÃ»ÓĞ AIagent / Codex / ChatGPT Éú³ÉºÛ¼£
+.\DAY6-TASK.md:1419:DAY6 ½áÊøºó£¬ÄãÃÇÓ¦¸ÃÒÑ¾­ÓµÓĞÒ»¸ö**¿ÉÒÔÕıÊ½Ìá½»µÄ¸É¾»×÷Æ·°ü**£ºÃ»ÓĞ AIagent/Codex Ö¸ÁîºÛ¼££¬ÓĞ¹Ù·½Ä£°å±¨¸æ£¬ÓĞÍêÕûÊµÑé½á¹û£¬ÓĞ°²È«±ß½çËµÃ÷£¬ÓĞ¿É¸´ÏÖ demo¡£
+.\DAY5-TASK.md:591:## A ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY5 Ö¸Áî
+.\DAY5-TASK.md:594:ÄãÊÇ¶ÓÔ± A µÄ±¾µØ AIagent¡£½ñÌìÊÇ DAY5£¬ÏîÄ¿ÒÑ¾­Íê³É DAY4 µÄÏûÈÚÊµÑéºÍ Dashboard ³õ°æ¡£½ñÌìÄãµÄÈÎÎñÊÇ¸ºÔğ×îÖÕÔËĞĞ¡¢ÎÈ¶¨ĞÔ¼ì²é¡¢Ò»¼ü½Å±¾ºÍÌá½»°ü¡£
+.\DAY5-TASK.md:943:## B ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY5 Ö¸Áî
+.\DAY5-TASK.md:946:ÄãÊÇ¶ÓÔ± B µÄ±¾µØ AIagent¡£½ñÌìÊÇ DAY5£¬ÏîÄ¿ÒÑ¾­½øÈë¾ºÈü×÷Æ·ÊÕÎ²½×¶Î¡£ÄãµÄÈÎÎñÊÇ¸ºÔğºì¶ÓÑù±¾Éó¼Æ¡¢´ú±í°¸ÀıÑ¡Ôñ¡¢¹¥»÷ÕÂ½ÚºÍ´ğ±ç¹¥»÷²à²ÄÁÏ¡£
+.\DAY5-TASK.md:1322:## C ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY5 Ö¸Áî
+.\DAY5-TASK.md:1325:ÄãÊÇ¶ÓÔ± C µÄ±¾µØ AIagent¡£½ñÌìÊÇ DAY5£¬ÏîÄ¿ÒÑ¾­½øÈë×îÖÕÌá½»ºÍ´ğ±ç×¼±¸½×¶Î¡£ÄãµÄÈÎÎñÊÇÉú³É×îÖÕÖ¸±ê¡¢Í¼±í¡¢Dashboard ÑİÊ¾°æ¡¢±¨¸æ v0.3 ºÍ½á¹û½²¸å¡£
+.\3ã€ABCåˆ†é…ä»»åŠ¡.md:2:æˆ‘ä»¬æ˜¯ä¸‰äººé˜Ÿä¼ï¼Œéœ€è¦åœ¨æœ‰æ•ˆæ—¶é—´å†…å®Œæˆæœ‰æ•ˆå·¥ä½œï¼Œä½†æ˜¯ç”±äºæ¯ä¸ªäººçš„ç”µè„‘ï¼Œç¯å¢ƒï¼Œé…ç½®ä¸å°½ç›¸åŒï¼Œæˆ‘ä»¬åº”è¯¥æ€ä¹ˆæ ·åˆ†å·¥æ‰èƒ½æœ€å¤§åŒ–æ•ˆç‡ï¼Œå¹¶ä¸”ä¸ä¼šå‡ºç°äº’ç›¸å½±å“çš„å±€é¢ï¼Œä¾‹å¦‚ç”±äºæˆ‘çš„é…ç½®ä¸å…¶ä»–äººæœ‰å·®å¼‚ï¼Œä»¥æˆ‘ä¸ºåŸºç¡€çš„äº‹æƒ…è½¬äº¤ç»™å…¶ä»–äººæ— æ³•è½»æ¾ç»§ç»­æ¥åŠ›ã€‚ä½ æœ‰ä»€ä¹ˆå¥½ä¸»æ„å—ã€‚è¯·ä½ å°†æˆ‘ä»¬çš„ä½œå“æ‹†æˆä¸‰ä»½ç„¶åæ¯ä¸ªäººå®Œæˆè‡ªå·±çš„éƒ¨åˆ†æœ€ç»ˆåœ¨æŸä¸ªåœ°æ–¹è¿›è¡Œæ±‡æ€»ï¼Œå¹¶ä¸”ç”Ÿæˆä¸‰ä¸ªå¯ä»¥ç›´æ¥ç»™AIagentçš„æ­¥éª¤ï¼Œå†æ¥åˆ†åˆ«åœ¨è‡ªå·±çš„ç”µè„‘ä¸‹ç”¨ä¸ªäººçš„è¯¥æ­¥éª¤è¿›è¡Œå®Œæˆï¼Œè¿™æ ·äº’ä¸å½±å“ã€‚
+.\3ã€ABCåˆ†é…ä»»åŠ¡.md:435:# å…­ã€ç»™é˜Ÿå‘˜ A çš„ AIAgent å·¥ä½œå•
+.\3ã€ABCåˆ†é…ä»»åŠ¡.md:437:ä¸‹é¢è¿™æ®µå¯ä»¥ç›´æ¥å¤åˆ¶ç»™è´Ÿè´£é¶åœºçš„äººæˆ–æœ¬åœ° AIAgentã€‚
+.\3ã€ABCåˆ†é…ä»»åŠ¡.md:440:ä½ æ˜¯é˜Ÿå‘˜ A çš„æœ¬åœ° AIAgentã€‚ä½ çš„ä»»åŠ¡æ˜¯åœ¨æœ¬æœºæ­å»º M3_PI_Guard çš„æœ¬åœ° Agent é¶åœºå’Œæœ€ç»ˆé›†æˆæ¡†æ¶ã€‚
+.\3ã€ABCåˆ†é…ä»»åŠ¡.md:588:# ä¸ƒã€ç»™é˜Ÿå‘˜ B çš„ AIAgent å·¥ä½œå•
+.\3ã€ABCåˆ†é…ä»»åŠ¡.md:593:ä½ æ˜¯é˜Ÿå‘˜ B çš„æœ¬åœ° AIAgentã€‚ä½ çš„ä»»åŠ¡æ˜¯ä¸º M3_PI_Guard é¡¹ç›®æ„é€ æç¤ºæ³¨å…¥ä¸è¶Šç‹±æ”»å‡»æµ‹è¯•ç”¨ä¾‹é›†ã€‚ä½ ä¸éœ€è¦è¿è¡Œæœ¬åœ°å¤§æ¨¡å‹ï¼Œä¸éœ€è¦ GPUï¼Œåªéœ€è¦ç”Ÿæˆæ ‡å‡† JSONL æ”»å‡»æ ·æœ¬å’Œæ”»å‡»å˜æ¢è„šæœ¬ã€‚
+.\3ã€ABCåˆ†é…ä»»åŠ¡.md:762:# å…«ã€ç»™é˜Ÿå‘˜ C çš„ AIAgent å·¥ä½œå•
+.\3ã€ABCåˆ†é…ä»»åŠ¡.md:767:ä½ æ˜¯é˜Ÿå‘˜ C çš„æœ¬åœ° AIAgentã€‚ä½ çš„ä»»åŠ¡æ˜¯ä¸º M3_PI_Guard é¡¹ç›®å®ç°è¡Œä¸ºç›‘ç£ã€é˜²å¾¡ç­–ç•¥ã€è¯„æµ‹æŒ‡æ ‡å’Œå±•ç¤ºé¢æ¿ã€‚ä½ ä¸éœ€è¦è¿è¡Œæœ¬åœ°å¤§æ¨¡å‹ï¼Œä¸éœ€è¦ GPUã€‚ä½ åªéœ€è¦è¯»å– AttackCase JSONL å’Œ RunLog JSONLï¼Œå¹¶è¾“å‡ºè¯„æµ‹ç»“æœå’Œ Dashboardã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:1:.\2ã€å…·ä½“å®ç°æ–¹æ¡ˆ.md:2:ç”¨å“ªä¸€ä¸ªæ¨¡å‹ä½œä¸ºé¶åœºæ¯”è¾ƒåˆé€‚ï¼ˆç»™å‡ºä½ ä¸Šé¢æå‡ºçš„çš„å„ä¸ªæ¨¡å‹çš„ä¼˜åŠ£ç‚¹è¿›è¡Œæ¯”è¾ƒï¼‰ï¼Ÿç”±äºæˆ‘ä»¬å‡ ä¸ªæ˜¯å­¦ç”Ÿï¼Œç›®å‰æ²¡æœ‰å¥½çš„æ˜¾å¡ï¼Œæœ¬åœ°éƒ¨ç½²çš„æ¨¡å‹éƒ½æ¯”è¾ƒä½çº§ï¼Œæ²¡æœ‰ä»€ä¹ˆè¯´æœåŠ›ï¼Œè°ƒç”¨è¿œç¨‹çš„å®¹æ˜“å—é™åˆ¶ï¼ˆæ¶æ„æ”»å‡»è¢«å°å·ï¼Œç½‘ç»œå®‰å…¨é£é™©ç¦æ­¢å¯¹è¯ç­‰ï¼‰ï¼Œæœ‰ä»€ä¹ˆæ¯”è¾ƒå¥½çš„è§£å†³æ–¹æ³•å—ï¼Ÿè¯·ç»™å‡ºä¸€ä¸ªè¯¦ç»†å…·ä½“çš„æœ¬åœ°éƒ¨ç½²çš„å®ç°æ–¹æ¡ˆï¼Œæ–¹ä¾¿ç›´æ¥ç»™æœ¬åœ°çš„AIAgentè¿›è¡Œæ“ä½œã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:2:.\2ã€å…·ä½“å®ç°æ–¹æ¡ˆ.md:765:# 9. ç›´æ¥ç»™æœ¬åœ° AIAgent çš„æ‰§è¡Œä»»åŠ¡ä¹¦
+.\outputs\quality\day6_ai_trace_scan_before.txt:3:.\2ã€å…·ä½“å®ç°æ–¹æ¡ˆ.md:767:å¯ä»¥æŠŠä¸‹é¢è¿™æ®µç›´æ¥äº¤ç»™ä½ ä»¬æœ¬åœ° AIAgentï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:4:.\DAY3-TASK.md:497:## A å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY3 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:5:.\DAY3-TASK.md:500:ä½ æ˜¯é˜Ÿå‘˜ A çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY3ã€‚DAY2 çš„æœ€å° Agent é—­ç¯å·²ç»å®Œæˆã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠæœ¬åœ° Agent é¶åœºå‡çº§ä¸ºå¯æ‰¹é‡å®éªŒã€å¯æ¼”ç¤ºçš„ç‰ˆæœ¬ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:6:.\DAY3-TASK.md:502:è¯·åªä¿®æ”¹ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:7:.\DAY3-TASK.md:534:å®Œæˆåè¯·è¾“å‡ºï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:8:.\DAY3-TASK.md:814:## B å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY3 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:9:.\DAY3-TASK.md:817:ä½ æ˜¯é˜Ÿå‘˜ B çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY3ã€‚DAY2 å·²ç»å®Œæˆ 30 æ¡åŸºç¡€æ”»å‡»æ ·æœ¬ã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠæ”»å‡»æ ·æœ¬åº“æ‰©å±•ä¸ºä½œå“çº§çº¢é˜Ÿæµ‹è¯•é›†ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:10:.\DAY3-TASK.md:819:è¯·åªä¿®æ”¹ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:11:.\DAY3-TASK.md:1305:## C å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY3 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:12:.\DAY3-TASK.md:1308:ä½ æ˜¯é˜Ÿå‘˜ C çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY3ã€‚DAY2 å·²ç»å®Œæˆ Guard åˆç‰ˆå’Œ evaluate.py åˆç‰ˆã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠ M3-PI Guard å‡çº§ä¸ºå¯å±•ç¤ºçš„è¡Œä¸ºç›‘ç£ä¸è¯„æµ‹æ¨¡å—ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:13:.\DAY3-TASK.md:1310:è¯·åªä¿®æ”¹ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:14:.\DAY2-TASK.md:367:## A å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY2 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:15:.\DAY2-TASK.md:370:ä½ æ˜¯é˜Ÿå‘˜ A çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY2ï¼Œä½ çš„ä»»åŠ¡æ˜¯å®Œæˆ M3_PI_Guard çš„æœ¬åœ° Agent é¶åœºæœ€å°é—­ç¯ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:16:.\DAY2-TASK.md:372:è¯·åªä¿®æ”¹ä»¥ä¸‹ç›®å½•ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:17:.\DAY2-TASK.md:643:## B å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY2 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:18:.\DAY2-TASK.md:646:ä½ æ˜¯é˜Ÿå‘˜ B çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY2ï¼Œä½ çš„ä»»åŠ¡æ˜¯ä¸º M3_PI_Guard é¡¹ç›®æ„é€ ç¬¬ä¸€æ‰¹çº¢é˜Ÿæ”»å‡»æ ·æœ¬åº“ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:19:.\DAY2-TASK.md:648:è¯·åªä¿®æ”¹ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:20:.\DAY2-TASK.md:983:## C å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY2 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:21:.\DAY2-TASK.md:986:ä½ æ˜¯é˜Ÿå‘˜ C çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY2ï¼Œä½ çš„ä»»åŠ¡æ˜¯å®Œæˆ M3_PI_Guard çš„ Guard åˆç‰ˆå’Œè¯„æµ‹è„šæœ¬åˆç‰ˆã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:22:.\DAY2-TASK.md:988:è¯·åªä¿®æ”¹ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:23:.\DAY4-TASK.md:418:## A å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY4 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:24:.\DAY4-TASK.md:421:ä½ æ˜¯é˜Ÿå‘˜ A çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY4ã€‚DAY3 å·²ç»å®Œæˆæ ·æœ¬æ‰©å±•ã€Guard åˆç‰ˆå¢å¼ºå’Œ Dashboard åˆç‰ˆã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠ m3_core å‡çº§ä¸ºå¯é‡å¤å®éªŒå¹³å°ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:25:.\DAY4-TASK.md:423:è¯·åªä¿®æ”¹ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:26:.\DAY4-TASK.md:449:å®Œæˆåè¯·è¾“å‡ºï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:27:.\DAY4-TASK.md:752:## B å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY4 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:28:.\DAY4-TASK.md:755:ä½ æ˜¯é˜Ÿå‘˜ B çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY4ã€‚DAY3 å·²ç»å®Œæˆè‡³å°‘ 60 æ¡æ ·æœ¬å’Œæ”»å‡»çŸ©é˜µã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯è¿›è¡Œçº¢é˜Ÿæ ·æœ¬è´¨é‡å®¡è®¡ã€ä»£è¡¨æ€§æ¡ˆä¾‹é€‰æ‹©å’Œæ”»å‡»ç« èŠ‚å†™ä½œã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:29:.\DAY4-TASK.md:757:è¯·åªä¿®æ”¹ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:30:.\DAY4-TASK.md:783:å®Œæˆåè¯·è¾“å‡ºï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:31:.\DAY4-TASK.md:1102:## C å¯ä»¥ç›´æ¥ç»™ AIagent çš„ DAY4 æŒ‡ä»¤
+.\outputs\quality\day6_ai_trace_scan_before.txt:32:.\DAY4-TASK.md:1105:ä½ æ˜¯é˜Ÿå‘˜ C çš„æœ¬åœ° AIagentã€‚ä»Šå¤©æ˜¯ DAY4ã€‚DAY3 å·²ç»å®Œæˆ Guard å¢å¼ºã€æŒ‡æ ‡åˆç‰ˆå’Œ Dashboard åˆç‰ˆã€‚ä»Šå¤©ä½ çš„ä»»åŠ¡æ˜¯æŠŠé˜²å¾¡è¯„æµ‹ç³»ç»Ÿå‡çº§ä¸ºå¯ç­”è¾©å±•ç¤ºç‰ˆæœ¬ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:33:.\DAY4-TASK.md:1107:è¯·åªä¿®æ”¹ï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:34:.\DAY4-TASK.md:1152:å®Œæˆåè¯·è¾“å‡ºï¼š
+.\outputs\quality\day6_ai_trace_scan_before.txt:35:.\DAY6-TASK.md:6:1. ÇåÀíÏîÄ¿ÖĞËùÓĞ AIagent / Codex / ×Ô¶¯Éú³ÉÖ¸ÁîºÛ¼£
+.\outputs\quality\day6_ai_trace_scan_before.txt:36:.\DAY6-TASK.md:20:1. Ò»¸öÎŞ AIagent / Codex / ×Ô¶¯Éú³ÉÖ¸ÁîºÛ¼£µÄ¸É¾»ÏîÄ¿Ä¿Â¼
+.\outputs\quality\day6_ai_trace_scan_before.txt:37:.\DAY6-TASK.md:42:AIagent Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:38:.\DAY6-TASK.md:43:Codex Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:39:.\DAY6-TASK.md:44:¡°ÄãÊÇ¶ÓÔ± A/B/C µÄ±¾µØ AIagent¡±ÕâÀàÌáÊ¾
+.\outputs\quality\day6_ai_trace_scan_before.txt:40:.\DAY6-TASK.md:47:DAY2/DAY3/DAY4/DAY5 ¸ø AIagent µÄÈÎÎñÖ¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:41:.\DAY6-TASK.md:49:¡°ChatGPT Éú³É¡±
+.\outputs\quality\day6_ai_trace_scan_before.txt:42:.\DAY6-TASK.md:50:¡°Codex Éú³É¡±
+.\outputs\quality\day6_ai_trace_scan_before.txt:43:.\DAY6-TASK.md:174:1. É¨Ãè´úÂëºÍ½Å±¾ÖĞµÄ AIagent / Codex ºÛ¼£
+.\outputs\quality\day6_ai_trace_scan_before.txt:44:.\DAY6-TASK.md:189:rg -n --hidden --glob "!.git/**" --glob "!release/**" --glob "!outputs/runs/**" --glob "!*.png" --glob "!*.jpg" --glob "!*.pdf" "AIagent|AI Agent|AIAgent|Codex|Copilot|ChatGPT|GPTÉú³É|AIÉú³É|ÓÉAI|ÓÉ AI|±¾µØ AIagent|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸ø AIagent|¸øAIagent|DAY[0-9].*AIagent" . > outputs/quality/day6_ai_trace_scan_before.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:45:.\DAY6-TASK.md:199:    r"AIagent", r"AI Agent", r"AIAgent", r"Codex", r"Copilot",
+.\outputs\quality\day6_ai_trace_scan_before.txt:46:.\DAY6-TASK.md:200:    r"ChatGPT", r"GPTÉú³É", r"AIÉú³É", r"ÓÉAI", r"ÓÉ AI",
+.\outputs\quality\day6_ai_trace_scan_before.txt:47:.\DAY6-TASK.md:201:    r"±¾µØ AIagent", r"ÄãÊÇ¶ÓÔ±", r"ÇëÖ»ĞŞ¸Ä", r"Íê³ÉºóÇëÊä³ö",
+.\outputs\quality\day6_ai_trace_scan_before.txt:48:.\DAY6-TASK.md:202:    r"¸ø AIagent", r"¸øAIagent", r"DAY[0-9].*AIagent"
+.\outputs\quality\day6_ai_trace_scan_before.txt:49:.\DAY6-TASK.md:255:AIagent ¹¤×÷µ¥
+.\outputs\quality\day6_ai_trace_scan_before.txt:50:.\DAY6-TASK.md:256:Codex Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:51:.\DAY6-TASK.md:257:¡°ÄãÊÇ±¾µØ AIagent¡­¡­¡±
+.\outputs\quality\day6_ai_trace_scan_before.txt:52:.\DAY6-TASK.md:287:# AIagent generated
+.\outputs\quality\day6_ai_trace_scan_before.txt:53:.\DAY6-TASK.md:289:# prompt from ChatGPT
+.\outputs\quality\day6_ai_trace_scan_before.txt:54:.\DAY6-TASK.md:290:# ÈÃ AIagent ĞŞ¸ÄÕâÀï
+.\outputs\quality\day6_ai_trace_scan_before.txt:55:.\DAY6-TASK.md:399:DAY2/DAY3/DAY4/DAY5 AIagent Ö¸ÁîÎÄµµ
+.\outputs\quality\day6_ai_trace_scan_before.txt:56:.\DAY6-TASK.md:410:rg -n --hidden "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" release/Redteam_LLM_Security_v1.0 > outputs/quality/day6_release_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:57:.\DAY6-TASK.md:416:day6_release_ai_trace_scan.txt Îª¿Õ£¬»òÕßÖ»°üº¬ºÏÀíµÄÏîÄ¿ÑĞ¾¿¶ÔÏóÃèÊö£¬¶ø²»ÊÇ AIagent/Codex Éú³ÉºÛ¼£¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:58:.\DAY6-TASK.md:434:## A ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY6 Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:59:.\DAY6-TASK.md:449:1. É¨ÃèÕû¸öÏîÄ¿ÖĞÓë AIagent¡¢Codex¡¢Copilot¡¢ChatGPT Éú³ÉºÛ¼£Ïà¹ØµÄÄÚÈİ¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:60:.\DAY6-TASK.md:450:2. É¾³ı¿ª·¢¹ı³ÌÖĞµÄ AIagent Ö¸Áî¡¢Codex Ö¸Áî¡¢ÈÎÎñÌáÊ¾ÎÄ±¾£¬ÀıÈç£º
+.\outputs\quality\day6_ai_trace_scan_before.txt:61:.\DAY6-TASK.md:451:   - ¡°ÄãÊÇ¶ÓÔ± A µÄ±¾µØ AIagent¡±
+.\outputs\quality\day6_ai_trace_scan_before.txt:62:.\DAY6-TASK.md:454:   - ¡°¸ø AIagent µÄÖ¸Áî¡±
+.\outputs\quality\day6_ai_trace_scan_before.txt:63:.\DAY6-TASK.md:455:   - ¡°Codex Éú³É¡±
+.\outputs\quality\day6_ai_trace_scan_before.txt:64:.\DAY6-TASK.md:468:   - AIagent/Codex Ö¸ÁîÎÄµµ
+.\outputs\quality\day6_ai_trace_scan_before.txt:65:.\DAY6-TASK.md:472:rg -n --hidden --glob "!.git/**" --glob "!release/**" --glob "!outputs/runs/**" --glob "!*.png" --glob "!*.jpg" --glob "!*.pdf" "AIagent|AI Agent|AIAgent|Codex|Copilot|ChatGPT|GPTÉú³É|AIÉú³É|ÓÉAI|ÓÉ AI|±¾µØ AIagent|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸ø AIagent|¸øAIagent|DAY[0-9].*AIagent" . > outputs/quality/day6_ai_trace_scan_before.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:66:.\DAY6-TASK.md:480:rg -n --hidden "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" release/Redteam_LLM_Security_v1.0 > outputs/quality/day6_release_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:67:.\DAY6-TASK.md:502:1. ÇåÀí docs ÖĞËùÓĞ AIagent Ö¸ÁîºÛ¼£
+.\outputs\quality\day6_ai_trace_scan_before.txt:68:.\DAY6-TASK.md:529:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs m3_attacks > outputs/quality/day6_docs_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:69:.\DAY6-TASK.md:539:ÄãÊÇ¶ÓÔ± B µÄ±¾µØ AIagent¡­¡­
+.\outputs\quality\day6_ai_trace_scan_before.txt:70:.\DAY6-TASK.md:551:ÄãÊÇ¶ÓÔ± B µÄ±¾µØ AIagent£¬½ñÌìµÄÈÎÎñÊÇ¹¹ÔìÑù±¾¡­¡­
+.\outputs\quality\day6_ai_trace_scan_before.txt:71:.\DAY6-TASK.md:648:²»Òª³öÏÖ¡°AIagent Ö¸Áî¡±¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:72:.\DAY6-TASK.md:682:Çë AIagent¡­¡­
+.\outputs\quality\day6_ai_trace_scan_before.txt:73:.\DAY6-TASK.md:737:## B ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY6 Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:74:.\DAY6-TASK.md:740:ÄãÊÇ¶ÓÔ± B µÄÎÄµµÕûÀíÖúÊÖ¡£½ñÌìÊÇ DAY6£¬ÏîÄ¿½øÈëÌá½»Ç°ÇåÏ´ºÍ±¨¸æ³É¸å½×¶Î¡£ÄãµÄÈÎÎñÊÇÇåÀíÎÄµµÖĞµÄ AIagent/Codex/×Ô¶¯Éú³ÉÖ¸ÁîºÛ¼££¬²¢°Ñ¹¥»÷Ñù±¾ºÍ°¸ÀıÃèÊö¸Ä³ÉÕıÊ½¾ºÈü±¨¸æ¿ÚÎÇ¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:75:.\DAY6-TASK.md:751:1. É¨Ãè docs/ ºÍ m3_attacks/ ÖĞËùÓĞ AIagent¡¢Codex¡¢ChatGPT¡¢AIÉú³É¡¢ÄãÊÇ¶ÓÔ±¡¢ÇëÖ»ĞŞ¸Ä¡¢Íê³ÉºóÇëÊä³öµÈ¿ª·¢¹ı³ÌÖ¸ÁîºÛ¼£¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:76:.\DAY6-TASK.md:766:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs m3_attacks > outputs/quality/day6_docs_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:77:.\DAY6-TASK.md:795:6. ¼ì²é AIagent/Codex ºÛ¼£
+.\outputs\quality\day6_ai_trace_scan_before.txt:78:.\DAY6-TASK.md:1019:Èç¹ûÄãÃÇÈÃ±¾µØ AIagent ×Ô¶¯Éú³É docx£¬¿ÉÒÔÈÃËüÊ¹ÓÃ `python-docx`£º
+.\outputs\quality\day6_ai_trace_scan_before.txt:79:.\DAY6-TASK.md:1073:ÎŞ AIagent/Codex/ChatGPT Éú³ÉºÛ¼£
+.\outputs\quality\day6_ai_trace_scan_before.txt:80:.\DAY6-TASK.md:1085:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs/report docs/report_sections docs/case_cards > outputs/quality/day6_report_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:81:.\DAY6-TASK.md:1093:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" outputs/quality/report_docx_unzip > outputs/quality/day6_report_docx_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:82:.\DAY6-TASK.md:1114:## C ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY6 Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:83:.\DAY6-TASK.md:1117:ÄãÊÇ¶ÓÔ± C µÄ±¨¸æÉú³ÉÖúÊÖ¡£½ñÌìÊÇ DAY6£¬ÏîÄ¿ĞèÒª°´ÕÕ¹Ù·½¡¶×÷Æ·±¨¸æÄ£°å.docx¡·Éú³É×îÖÕ±¨¸æ£¬²¢ÇåÀíËùÓĞ AIagent/Codex/×Ô¶¯Éú³ÉÖ¸ÁîºÛ¼£¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:84:.\DAY6-TASK.md:1165:AIagent
+.\outputs\quality\day6_ai_trace_scan_before.txt:85:.\DAY6-TASK.md:1166:AIAgent
+.\outputs\quality\day6_ai_trace_scan_before.txt:86:.\DAY6-TASK.md:1167:Codex
+.\outputs\quality\day6_ai_trace_scan_before.txt:87:.\DAY6-TASK.md:1168:Copilot
+.\outputs\quality\day6_ai_trace_scan_before.txt:88:.\DAY6-TASK.md:1169:ChatGPT Éú³É
+.\outputs\quality\day6_ai_trace_scan_before.txt:89:.\DAY6-TASK.md:1174:¸ø AIagent µÄÖ¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:90:.\DAY6-TASK.md:1192:3. É¨Ãè±¨¸æÔ´ÎÄ¼şºÍ docx ½âÑ¹ÄÚÈİ£¬È·ÈÏÎŞ AIagent/Codex ºÛ¼£¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:91:.\DAY6-TASK.md:1212:´úÂëÓëÎÄµµ AIagent/Codex ºÛ¼£µÚÒ»ÂÖÇåÀíÍê³É
+.\outputs\quality\day6_ai_trace_scan_before.txt:92:.\DAY6-TASK.md:1234:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs m3_attacks > outputs/quality/day6_docs_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:93:.\DAY6-TASK.md:1240:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs/report docs/report_sections docs/case_cards > outputs/quality/day6_report_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:94:.\DAY6-TASK.md:1247:Ö÷Òª docs ²»ÔÙÓĞ AIagent ¹¤×÷µ¥
+.\outputs\quality\day6_ai_trace_scan_before.txt:95:.\DAY6-TASK.md:1267:rg -n --hidden "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" release/Redteam_LLM_Security_v1.0 > outputs/quality/day6_release_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:96:.\DAY6-TASK.md:1273:rg -n "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" docs/report docs/report_sections docs/case_cards > outputs/quality/day6_report_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:97:.\DAY6-TASK.md:1295:rg -n --hidden --glob "!.git/**" --glob "!outputs/runs/**" --glob "!release/**" --glob "!*.png" --glob "!*.jpg" --glob "!*.pdf" "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|GPTÉú³É|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" . > outputs/quality/day6_final_project_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:98:.\DAY6-TASK.md:1301:rg -n --hidden "AIagent|AIAgent|AI Agent|Codex|Copilot|ChatGPT|AIÉú³É|ÓÉAI|ÓÉ AI|ÄãÊÇ¶ÓÔ±|ÇëÖ»ĞŞ¸Ä|Íê³ÉºóÇëÊä³ö|¸øAIagent|¸ø AIagent" release/Redteam_LLM_Security_v1.0 > outputs/quality/day6_final_release_ai_trace_scan.txt
+.\outputs\quality\day6_ai_trace_scan_before.txt:99:.\DAY6-TASK.md:1324:| A  | ´úÂë AI ºÛ¼£ÇåÀí | release °üÖĞÎŞ AIagent/Codex/ChatGPT Éú³ÉºÛ¼£        |
+.\outputs\quality\day6_ai_trace_scan_before.txt:100:.\DAY6-TASK.md:1327:| B  | ÎÄµµÇåÀí       | docs/case_cards ºÍ attack matrix ÎŞ AIagent ¹¤×÷µ¥ |
+.\outputs\quality\day6_ai_trace_scan_before.txt:101:.\DAY6-TASK.md:1392:[ ] ±¨¸æÀïÃ»ÓĞ AIagent / Codex / ChatGPT Éú³ÉºÛ¼£
+.\outputs\quality\day6_ai_trace_scan_before.txt:102:.\DAY6-TASK.md:1419:DAY6 ½áÊøºó£¬ÄãÃÇÓ¦¸ÃÒÑ¾­ÓµÓĞÒ»¸ö**¿ÉÒÔÕıÊ½Ìá½»µÄ¸É¾»×÷Æ·°ü**£ºÃ»ÓĞ AIagent/Codex Ö¸ÁîºÛ¼££¬ÓĞ¹Ù·½Ä£°å±¨¸æ£¬ÓĞÍêÕûÊµÑé½á¹û£¬ÓĞ°²È«±ß½çËµÃ÷£¬ÓĞ¿É¸´ÏÖ demo¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:103:.\DAY5-TASK.md:591:## A ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY5 Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:104:.\DAY5-TASK.md:594:ÄãÊÇ¶ÓÔ± A µÄ±¾µØ AIagent¡£½ñÌìÊÇ DAY5£¬ÏîÄ¿ÒÑ¾­Íê³É DAY4 µÄÏûÈÚÊµÑéºÍ Dashboard ³õ°æ¡£½ñÌìÄãµÄÈÎÎñÊÇ¸ºÔğ×îÖÕÔËĞĞ¡¢ÎÈ¶¨ĞÔ¼ì²é¡¢Ò»¼ü½Å±¾ºÍÌá½»°ü¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:105:.\DAY5-TASK.md:943:## B ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY5 Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:106:.\DAY5-TASK.md:946:ÄãÊÇ¶ÓÔ± B µÄ±¾µØ AIagent¡£½ñÌìÊÇ DAY5£¬ÏîÄ¿ÒÑ¾­½øÈë¾ºÈü×÷Æ·ÊÕÎ²½×¶Î¡£ÄãµÄÈÎÎñÊÇ¸ºÔğºì¶ÓÑù±¾Éó¼Æ¡¢´ú±í°¸ÀıÑ¡Ôñ¡¢¹¥»÷ÕÂ½ÚºÍ´ğ±ç¹¥»÷²à²ÄÁÏ¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:107:.\DAY5-TASK.md:1322:## C ¿ÉÒÔÖ±½Ó¸ø AIagent µÄ DAY5 Ö¸Áî
+.\outputs\quality\day6_ai_trace_scan_before.txt:108:.\DAY5-TASK.md:1325:ÄãÊÇ¶ÓÔ± C µÄ±¾µØ AIagent¡£½ñÌìÊÇ DAY5£¬ÏîÄ¿ÒÑ¾­½øÈë×îÖÕÌá½»ºÍ´ğ±ç×¼±¸½×¶Î¡£ÄãµÄÈÎÎñÊÇÉú³É×îÖÕÖ¸±ê¡¢Í¼±í¡¢Dashboard ÑİÊ¾°æ¡¢±¨¸æ v0.3 ºÍ½á¹û½²¸å¡£
+.\outputs\quality\day6_ai_trace_scan_before.txt:109:.\3ã€ABCåˆ†é…ä»»åŠ¡.md:2:æˆ‘ä»¬æ˜¯ä¸‰äººé˜Ÿä¼ï¼Œéœ€è¦åœ¨æœ‰æ•ˆæ—¶é—´å†…å®Œæˆæœ‰æ•ˆå·¥ä½œï¼Œä½†æ˜¯ç”±äºæ¯ä¸ªäººçš„ç”µè„‘ï¼Œç¯å¢ƒï¼Œé…ç½®ä¸å°½ç›¸åŒï¼Œæˆ‘ä»¬åº”è¯¥æ€ä¹ˆæ ·åˆ†å·¥æ‰èƒ½æœ€å¤§åŒ–æ•ˆç‡ï¼Œå¹¶ä¸”ä¸ä¼šå‡ºç°äº’ç›¸å½±å“çš„å±€é¢ï¼Œä¾‹å¦‚ç”±äºæˆ‘çš„é…ç½®ä¸å…¶ä»–äººæœ‰å·®å¼‚ï¼Œä»¥æˆ‘ä¸ºåŸºç¡€çš„äº‹æƒ…è½¬äº¤ç»™å…¶ä»–äººæ— æ³•è½»æ¾ç»§ç»­æ¥åŠ›ã€‚ä½ æœ‰ä»€ä¹ˆå¥½ä¸»æ„å—ã€‚è¯·ä½ å°†æˆ‘ä»¬çš„ä½œå“æ‹†æˆä¸‰ä»½ç„¶åæ¯ä¸ªäººå®Œæˆè‡ªå·±çš„éƒ¨åˆ†æœ€ç»ˆåœ¨æŸä¸ªåœ°æ–¹è¿›è¡Œæ±‡æ€»ï¼Œå¹¶ä¸”ç”Ÿæˆä¸‰ä¸ªå¯ä»¥ç›´æ¥ç»™AIagentçš„æ­¥éª¤ï¼Œå†æ¥åˆ†åˆ«åœ¨è‡ªå·±çš„ç”µè„‘ä¸‹ç”¨ä¸ªäººçš„è¯¥æ­¥éª¤è¿›è¡Œå®Œæˆï¼Œè¿™æ ·äº’ä¸å½±å“ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:110:.\3ã€ABCåˆ†é…ä»»åŠ¡.md:435:# å…­ã€ç»™é˜Ÿå‘˜ A çš„ AIAgent å·¥ä½œå•
+.\outputs\quality\day6_ai_trace_scan_before.txt:111:.\3ã€ABCåˆ†é…ä»»åŠ¡.md:437:ä¸‹é¢è¿™æ®µå¯ä»¥ç›´æ¥å¤åˆ¶ç»™è´Ÿè´£é¶åœºçš„äººæˆ–æœ¬åœ° AIAgentã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:112:.\3ã€ABCåˆ†é…ä»»åŠ¡.md:440:ä½ æ˜¯é˜Ÿå‘˜ A çš„æœ¬åœ° AIAgentã€‚ä½ çš„ä»»åŠ¡æ˜¯åœ¨æœ¬æœºæ­å»º M3_PI_Guard çš„æœ¬åœ° Agent é¶åœºå’Œæœ€ç»ˆé›†æˆæ¡†æ¶ã€‚
+.\outputs\quality\day6_ai_trace_scan_before.txt:113:.\3ã€ABCåˆ†é…ä»»åŠ¡.md:588:# ä¸ƒã€ç»™é˜Ÿå‘˜ B çš„ AIAgent å·¥ä½œå•

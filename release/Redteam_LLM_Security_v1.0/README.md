@@ -2,7 +2,7 @@
 
 ## M3_PI_Guard Local Agent Range
 
-这是队员 A 的本地 Agent 靶场与最终集成框架。项目核心关注 Agent 工具调用行为链路，而不是把低能力本地模型本身作为研究贡献。
+M3_PI_Guard 是一个完全本地运行的 LLM Agent 工具调用靶场与防护评测框架。项目核心关注 Agent 工具调用行为链路，而不是把低能力本地模型本身作为研究贡献。
 
 ## 安全边界
 
@@ -60,7 +60,7 @@ outputs/metrics/
   - 默认 `model`: `m3-target-qwen25-7b`
   - 代码会强制校验 endpoint 只能是 `localhost`、`127.0.0.1` 或 `::1`
 
-本机已有 `D:\Ollama\models` 中的 `vicuna:7b` 时，可作为烟测模型使用，但不作为主体研究贡献。
+本机已有其他 Ollama 模型时，可作为烟测模型使用，但不作为主体研究贡献。
 
 ## 验收命令
 
@@ -104,7 +104,7 @@ from m3_guard.guard_engine import guard_decide
 decision, risk_score, reasons = guard_decide(context, tool_call)
 ```
 
-当前 `m3_guard.guard_engine` 是最小兼容版本。C 队员可替换为完整的 normalizer、detector、policy engine 和 dataflow tracker，只要保持这个接口不变。
+当前 `m3_guard.guard_engine` 提供可替换的防御接口。后续可扩展 normalizer、detector、policy engine 和 dataflow tracker，只要保持这个接口不变。
 
 ## Day 1 评估命令
 
