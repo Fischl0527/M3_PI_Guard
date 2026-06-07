@@ -5,6 +5,11 @@ __pycache__/
 .cache/
 *.log
 
+# Local task prompts and personal progress notes are not submission artifacts.
+DAY*-TASK.md
+DAY*-REPORT-A.md
+private_notes/
+
 # Local model artifacts must never be committed.
 models/
 ollama_models/
@@ -32,11 +37,16 @@ outputs/runs/*
 !outputs/runs/day3_qwen25_demo_guarded.csv
 !outputs/runs/day3_qwen25_baseline_20.csv
 !outputs/runs/day3_qwen25_guarded_20.csv
+!outputs/runs/day6_demo_stub_matrix/
+!outputs/runs/day6_demo_stub_matrix/**
 outputs/metrics/*
 !outputs/metrics/.gitkeep
 !outputs/metrics/stub_compare_metrics.json
 !outputs/metrics/day3_stub_summary.json
 !outputs/metrics/day3_qwen25_summary_20.json
+!outputs/metrics/day6_demo_stub_summary.csv
+!outputs/metrics/day6_demo_stub_summary.json
+!outputs/metrics/day6_demo_stub_summary_grouped_by_family.csv
 outputs/figures/*
 
 # Sandbox runtime state. The committed canary is fake and local-only.
@@ -48,3 +58,6 @@ sandbox/translated_message.json
 sandbox/secrets/*
 !sandbox/secrets/api_key.txt
 sandbox/public/agent_memory.txt
+
+# Keep older generated packages local-only after the final v1.0 package exists.
+release/M3_PI_Guard_v0.5/

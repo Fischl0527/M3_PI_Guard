@@ -1,5 +1,4 @@
-"""DAY5 experiment matrix runner for M3_PI_Guard.
-
+"""Experiment matrix runner for M3_PI_Guard.
 This module keeps run_batch.py as the single-case-set executor, and adds a
 thin orchestration layer for repeated ablation runs.
 """
@@ -24,10 +23,10 @@ else:
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-PROJECT_VERSION = "v0.5-day5"
-GUARD_VERSION = "guard-v0.5"
-DATASET_VERSION = "cases-v0.5"
-EXPERIMENT_VERSION = "exp-day5-final"
+PROJECT_VERSION = "v1.0-day6"
+GUARD_VERSION = "guard-v1.0"
+DATASET_VERSION = "cases-v1.0"
+EXPERIMENT_VERSION = "exp-day6-release"
 SUPPORTED_DEFENSE_MODES = {
     "baseline",
     "guarded",
@@ -38,21 +37,21 @@ SUPPORTED_DEFENSE_MODES = {
 
 # 直接运行本文件时优先修改这里。命令行参数仍然可用于脚本和自动化。
 CONFIG = {
-    "cases": "m3_attacks/cases/all_cases.jsonl",
+    "cases": "fixtures/demo_cases.jsonl",
     "backend": "stub",
     "model": "",
-    "defense_modes": "baseline,keyword_only,policy_only,full_guard",
+    "defense_modes": "baseline,full_guard",
     "families": "",
     "limit": None,
-    "out_dir": "outputs/runs/day5_stub_matrix",
+    "out_dir": "outputs/runs/day6_demo_stub_matrix",
     "max_steps": 5,
-    "run_prefix": "day5_stub_all",
-    "run_group": "day5",
+    "run_prefix": "day6_demo_stub",
+    "run_group": "day6",
     "seed": 42,
     "shuffle": False,
     "resume": False,
     "fail_fast": False,
-    "notes": "DAY5 final experiment matrix run",
+    "notes": "DAY6 release validation demo run",
 }
 
 
@@ -166,7 +165,7 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _parse_args(argv: List[str]) -> Dict[str, Any]:
-    parser = argparse.ArgumentParser(description="Run M3 DAY5 experiment matrix.")
+    parser = argparse.ArgumentParser(description="Run M3 experiment matrix.")
     parser.add_argument("--cases", required=True, help="Input AttackCase JSONL path")
     parser.add_argument("--backend", choices=["ollama", "stub"], default="stub")
     parser.add_argument("--model", default="", help="Model name; defaults to stub or m3-target-qwen25-7b")
@@ -181,12 +180,12 @@ def _parse_args(argv: List[str]) -> Dict[str, Any]:
     parser.add_argument("--out-dir", required=True, help="Output directory for matrix logs")
     parser.add_argument("--max-steps", type=int, default=5)
     parser.add_argument("--run-prefix", required=True, help="Prefix for output files and experiment_id")
-    parser.add_argument("--run-group", default="day5", help="Run group label written to RunLog")
+    parser.add_argument("--run-group", default="day6", help="Run group label written to RunLog")
     parser.add_argument("--seed", type=int, default=42, help="Random seed for --shuffle")
     parser.add_argument("--shuffle", action="store_true", help="Shuffle selected cases before limit")
     parser.add_argument("--resume", action="store_true", help="Resume each output file by completed case_id")
     parser.add_argument("--fail-fast", action="store_true", help="Stop on first failed case")
-    parser.add_argument("--notes", default="DAY5 final experiment matrix run")
+    parser.add_argument("--notes", default="DAY6 release validation demo run")
     args = parser.parse_args(argv)
     return vars(args)
 
@@ -212,7 +211,7 @@ def _resolve_model(backend: str, model: str) -> str:
 
 
 def _default_run_prefix(backend: str) -> str:
-    return "day5_stub_all" if backend == "stub" else "day5_qwen25_rep"
+    return "day6_demo_stub" if backend == "stub" else "day6_demo_qwen"
 
 
 def _csv_values(value: Any) -> List[str]:
