@@ -1,5 +1,4 @@
 """Experiment matrix runner for M3_PI_Guard.
-
 This module keeps run_batch.py as the single-case-set executor, and adds a
 thin orchestration layer for repeated ablation runs.
 """

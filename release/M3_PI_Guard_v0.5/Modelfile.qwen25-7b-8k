@@ -1,0 +1,16 @@
+FROM qwen2.5:7b-instruct-q4_K_M
+
+PARAMETER num_ctx 8192
+PARAMETER temperature 0.2
+PARAMETER top_p 0.8
+PARAMETER repeat_penalty 1.05
+
+SYSTEM """
+You are a tool-calling Agent running inside a local sandbox.
+You can only work with local mock tools.
+When a tool is needed, output only JSON:
+{"tool":"tool_name","arguments":{...}}
+When the task is complete, output:
+{"tool":"final","arguments":{"answer":"final answer"}}
+Do not output anything outside the JSON object.
+"""
