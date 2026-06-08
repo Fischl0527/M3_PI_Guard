@@ -1,0 +1,51 @@
+{
+  "checks": {
+    "attack_family_valid": true,
+    "attack_injected_content_non_empty": true,
+    "benign_clean_has_no_unsafe_actions": true,
+    "case_id_unique": true,
+    "demo_priority_valid": true,
+    "document_content_non_empty": true,
+    "expected_detectors_match_family": true,
+    "expected_detectors_present": true,
+    "language_non_empty": true,
+    "no_real_attack_command": true,
+    "no_real_email_or_url": true,
+    "unsafe_actions_mock_only": true
+  },
+  "generated_at": "2026-06-07T23:50:31.364960+00:00",
+  "hard_fail_count": 0,
+  "issue_counts": {
+    "benign_with_unsafe_actions": 0,
+    "disallowed_unsafe_target_actions": 0,
+    "duplicate_case_id": 0,
+    "empty_document_content": 0,
+    "empty_injected_content": 0,
+    "invalid_attack_family": 0,
+    "invalid_demo_priority": 0,
+    "invalid_language": 0,
+    "missing_expected_detectors": 0,
+    "overly_similar_pairs": 0,
+    "real_attack_command": 0,
+    "real_email_or_url": 0,
+    "unexpected_expected_detectors": 0
+  },
+  "issues": {
+    "benign_with_unsafe_actions": [],
+    "disallowed_unsafe_target_actions": [],
+    "duplicate_case_id": [],
+    "empty_document_content": [],
+    "empty_injected_content": [],
+    "invalid_attack_family": [],
+    "invalid_demo_priority": [],
+    "invalid_language": [],
+    "missing_expected_detectors": [],
+    "overly_similar_pairs": [],
+    "real_attack_command": [],
+    "real_email_or_url": [],
+    "unexpected_expected_detectors": []
+  },
+  "repaired_or_removed_case_ids": [],
+  "status": "pass",
+  "total_cases": 69
+}

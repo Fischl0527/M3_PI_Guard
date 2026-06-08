@@ -4,12 +4,13 @@
 
 - 当前分支：`team-a/m3-core-day7`
 - 基底分支：`origin/team-a/m3-core-day6`
-- 已合并上游：`upstream/main`
+- 已合并上游：`upstream/main`，并在队友最新 PR 合入后完成二次补全
 - 上游 DAY7 材料来源：
   - `4c5cfa7 Merge pull request #8 from Alysia163/codex/day7-final-submission-materials`
   - `52e76cf Fix report image embedding`
   - `4b9e2a6 Finalize submission materials`
-- A 侧本次新增：RUNBOOK、release checklist、证据索引、DAY7 smoke 脚本、最终 zip/hash/扫描记录。
+  - `8c9a100 Add DAY6 DAY7 B documentation and compliance materials`
+- A 侧本次新增与补全：RUNBOOK、release checklist、证据索引、DAY7 smoke 脚本、最终 zip/hash/扫描记录；合并并吸收 B 侧样本审计、攻击侧创新章节、案例卡和答辩问答材料。
 
 ## 2. 远端同步结果
 
@@ -18,11 +19,13 @@ DAY7 开始时发现远端已有新内容：
 - `origin/team-a/m3-core-day6` 已更新到 `4d570f3`
 - `upstream/main` 已更新到 `4c5cfa7`
 - `upstream/codex/day7-final-submission-materials` 已存在并已合入 `upstream/main`
+- DAY7 后续复核时，`upstream/main` 又更新到 `8c9a100`，补充了 B 侧 DAY6/DAY7 文档和样本合规材料
 
 处理方式：
 
 - 从最新 `origin/team-a/m3-core-day6` 创建 `team-a/m3-core-day7`
 - 合并 `upstream/main`
+- 二次合并 `upstream/main@8c9a100`，解决 `DATASET_CARD`、`RUNBOOK`、`RELEASE_CHECKLIST`、`SUBMISSION_EVIDENCE_INDEX` 和 `m3_attacks/README` 的文档冲突
 - 保留本地 DAY6 补充文档：`docs/DATASET_CARD.md`、`docs/SYSTEM_ARCHITECTURE.md`
 - 不修改 Agent 主流程、Guard 评分、攻击样本结构和指标公式
 
@@ -36,6 +39,8 @@ DAY7 开始时发现远端已有新内容：
 | 可复现说明 | 完成 | `docs/RUNBOOK.md` |
 | 发布检查说明 | 完成 | `docs/RELEASE_CHECKLIST.md` |
 | 提交证据索引 | 完成 | `docs/SUBMISSION_EVIDENCE_INDEX.md` |
+| 攻击侧补充材料 | 完成 | `docs/report_sections/04_innovation_attack_side.md`、`docs/presentation/答辩问题准备_攻击侧.md` |
+| 样本审计材料 | 完成 | `m3_attacks/SAMPLE_REVIEW.md`、`outputs/metrics/final_case_audit.json`、`outputs/metrics/final_case_stats.json` |
 | smoke 脚本 | 完成 | `scripts/run_day7_smoke_test.ps1` |
 | release 包 | 完成 | `release/Redteam_LLM_Security_v1.0/` |
 | release zip | 完成 | `release/Redteam_LLM_Security_v1.0.zip` |
@@ -99,13 +104,13 @@ release/Redteam_LLM_Security_v1.0.zip
 zip 大小：
 
 ```text
-479438 bytes
+488932 bytes
 ```
 
 SHA256：
 
 ```text
-CCD902446DBCA1E4AB83C59E14BF26E0F6DE6E1F0CD03D70729D49BD9E58B848
+B0E3337F30A1A480D285AC62088DDA3B1765AF7585CE09C5A1A835BA88D35E6B
 ```
 
 zip 已在独立目录完成解压检查。
@@ -130,6 +135,8 @@ zip 已在独立目录完成解压检查。
 - `outputs/runs/day6_demo_stub_matrix/`
 - `sandbox/public/`
 
+其中，最新补充后的 release 包已包含正式 Word、PPT、攻击侧答辩问答、攻击侧创新章节、样本审计统计和 B 侧 DAY7 checklist。
+
 最终 release 包不包含：
 
 - `.git/`
@@ -153,4 +160,4 @@ zip 已在独立目录完成解压检查。
 
 ## 8. 结论
 
-A 侧 DAY7 任务已完成。最终 release 包可以独立运行 stub demo，扫描无命中，zip 可解压，SHA256 已生成。当前状态已经满足 A 侧“最终提交包、可复现运行和演示环境负责人”的验收要求。
+A 侧 DAY7 任务已完成，且已吸收队友最新 PR 中的正式文档和样本合规材料。最终 release 包可以独立运行 stub demo，扫描无命中，zip 可解压，SHA256 已生成。当前状态已经满足 A 侧“最终提交包、可复现运行和演示环境负责人”的验收要求。

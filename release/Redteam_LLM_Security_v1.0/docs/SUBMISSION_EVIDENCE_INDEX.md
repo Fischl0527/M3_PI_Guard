@@ -1,68 +1,151 @@
 # Submission Evidence Index
 
-This index maps the final submission requirements to files in the release package.
+本索引用于把赛题要求与项目文件一一对应，便于快速定位安全风险分析、攻击样本、行为监督、运行日志和演示材料。
 
-## 1. Safety Risk Analysis
+## 1. 安全风险分析
 
-- Main report: `docs/report/作品报告_终稿.docx`
-- Scope and boundaries: `docs/ETHICS_AND_SCOPE.md`
-- System overview: `docs/SYSTEM_ARCHITECTURE.md`
+对应文件：
 
-## 2. Attack Scenarios
+- `docs/report/作品报告_终稿.docx`
+- `docs/report_sections/03_attack_scenarios.md`
+- `docs/report_sections/04_innovation_attack_side.md`
+- `docs/ETHICS_AND_SCOPE.md`
+- `docs/SYSTEM_ARCHITECTURE.md`
 
-- Attack chapter source: `docs/report_sections/03_attack_scenarios.md`
-- Case cards: `docs/case_cards/`
-- Attack matrix: `m3_attacks/ATTACK_MATRIX.md`
+说明：报告正文和攻击场景章节描述大模型智能体提示注入攻击面、威胁模型、测试方案、结果分析和创新点。
 
-## 3. Test Case Set
+## 2. 至少三类攻击场景
 
-- Full dataset: `m3_attacks/cases/all_cases.jsonl`
-- Dataset card: `docs/DATASET_CARD.md`
-- Representative set: `fixtures/day5_representative_cases.jsonl`
-- Demo set: `fixtures/demo_cases.jsonl`
+对应文件：
 
-## 4. Agent Attack Execution
+- `m3_attacks/ATTACK_MATRIX.md`
+- `m3_attacks/cases/direct_jailbreak_cases.jsonl`
+- `m3_attacks/cases/rag_indirect_cases.jsonl`
+- `m3_attacks/cases/multilingual_t2l_cases.jsonl`
+- `m3_attacks/cases/json_rpc_cases.jsonl`
+- `m3_attacks/cases/tool_output_cases.jsonl`
 
-- Agent runner: `m3_core/agent_runner.py`
-- Batch runner: `m3_core/run_batch.py`
-- Matrix runner: `m3_core/run_matrix.py`
-- Local model client: `m3_core/llm_client.py`
+说明：样本库覆盖直接越狱、RAG 间接提示注入、多语言/T2L、JSON/RPC 结构化注入和工具输出注入，超过三类攻击场景要求。
 
-## 5. Behavior Supervision Prototype
+## 3. 测试用例集
 
-- Guard entry point: `m3_guard/guard_engine.py`
-- Detector: `m3_guard/detector.py`
-- Policy engine: `m3_guard/policy_engine.py`
-- Data-flow tracker: `m3_guard/dataflow.py`
+对应文件：
 
-## 6. Simulated Business Tools
+- `m3_attacks/cases/all_cases.jsonl`
+- `m3_attacks/README.md`
+- `m3_attacks/SAMPLE_REVIEW.md`
+- `docs/DATASET_CARD.md`
+- `fixtures/demo_cases.jsonl`
+- `fixtures/day5_representative_cases.jsonl`
 
-- Tool sandbox: `m3_core/tool_sandbox.py`
-- Sandbox public files: `sandbox/public/`
+说明：`all_cases.jsonl` 是自动合并后的完整样本库，`DATASET_CARD.md` 描述数据规模、字段、边界和限制。
 
-## 7. Monitoring and Logs
+## 4. Agent 攻击脚本与运行入口
 
-- DAY5 demo logs: `outputs/runs/day5_demo_matrix/`
-- DAY5 local-model representative logs: `outputs/runs/day5_qwen25_matrix/`
-- DAY6 release demo logs: `outputs/runs/day6_demo_stub_matrix/`
-- Metrics summaries: `outputs/metrics/`
+对应文件：
 
-## 8. Alert or Blocking Evidence
+- `m3_core/agent_runner.py`
+- `m3_core/run_batch.py`
+- `m3_core/run_matrix.py`
+- `m3_core/llm_client.py`
+- `scripts/run_day5_demo.ps1`
+- `scripts/run_day7_smoke_test.ps1`
 
-- Guarded/full-guard logs: `outputs/runs/day5_demo_matrix/day5_demo_full_guard.jsonl`
-- Summary metrics: `outputs/metrics/day5_demo_summary.csv`
-- Log audit: `outputs/metrics/day5_log_audit.json`
+说明：运行入口用于批量执行 AttackCase，记录模型响应、工具调用和 Guard 决策。
 
-## 9. Reproducibility
+## 5. 行为监督原型系统
 
-- Runbook: `docs/RUNBOOK.md`
-- Smoke test script: `scripts/run_day7_smoke_test.ps1`
-- Core requirements: `requirements-core.txt`
-- Dashboard requirements: `requirements-dashboard.txt`
+对应文件：
 
-## 10. Presentation Materials
+- `m3_guard/guard_engine.py`
+- `m3_guard/detector.py`
+- `m3_guard/policy_engine.py`
+- `m3_guard/dataflow.py`
+- `m3_guard/normalizer.py`
 
-- Slide deck: `docs/presentation/Redteam_LLM_Security_答辩PPT.pptx`
-- Demo notes: `docs/presentation/演示讲稿.md`
-- Question preparation: `docs/presentation/答辩问题准备_综合.md`
-- Screenshot list: `docs/presentation/截图清单.md`
+说明：Guard 模块负责识别指令性文本、结构化注入、工具调用诱导、敏感路径访问、外发风险和意图-动作不一致。
+
+## 6. 模拟业务工具
+
+对应文件：
+
+- `m3_core/tool_sandbox.py`
+- `sandbox/public/`
+
+模拟工具：
+
+- `read_file`
+- `write_file`
+- `send_email`
+- `call_api`
+- `run_code`
+
+说明：工具均为本地 mock 实现，不访问真实网络，不发送真实邮件，不执行真实恶意代码。
+
+## 7. 运行日志与监控
+
+对应文件：
+
+- `outputs/runs/day5_demo_matrix/`
+- `outputs/runs/day5_qwen25_matrix/`
+- `outputs/runs/day5_stub_matrix/`
+- `outputs/runs/day6_demo_stub_matrix/`
+- `m3_eval/dashboard.py`
+
+说明：运行日志记录用户任务、模型输出、工具调用、Guard 决策、风险原因和最终状态，可用于复核调用链。
+
+## 8. 告警或阻断证据
+
+对应文件：
+
+- `outputs/metrics/day5_demo_summary.csv`
+- `outputs/metrics/day5_qwen25_summary.csv`
+- `outputs/metrics/day5_stub_summary.csv`
+- `outputs/metrics/day5_log_audit.json`
+- `outputs/metrics/final_case_audit.json`
+
+说明：指标文件记录 ASR、UTR、DSR、BSR、FPR、AvgRisk 和 WRS 等结果，审计文件记录样本库质量和运行日志质量。
+
+## 9. 代表案例卡
+
+对应文件：
+
+- `docs/case_cards/DEMO_001_RAG_INDIRECT.md`
+- `docs/case_cards/DEMO_002_JSON_RPC.md`
+- `docs/case_cards/DEMO_003_MULTILINGUAL_T2L.md`
+
+说明：三张案例卡分别对应 RAG 间接提示注入、JSON/RPC 结构化注入和多语言/T2L 任务切换，适合演示讲解。
+
+## 10. 可复现说明
+
+对应文件：
+
+- `README.md`
+- `docs/RUNBOOK.md`
+- `scripts/check_env.ps1`
+- `scripts/run_day7_smoke_test.ps1`
+- `requirements-core.txt`
+- `requirements-dashboard.txt`
+
+说明：运行说明和 smoke test 脚本用于复现最小演示链路。
+
+## 11. 演示材料
+
+对应文件：
+
+- `docs/presentation/Redteam_LLM_Security_答辩PPT.pptx`
+- `docs/presentation/演示讲稿.md`
+- `docs/presentation/答辩问题准备_综合.md`
+- `docs/presentation/答辩问题准备_攻击侧.md`
+- `docs/presentation/截图清单.md`
+
+## 12. 最终提交包
+
+对应文件：
+
+- `release/Redteam_LLM_Security_v1.0/`
+- `release/Redteam_LLM_Security_v1.0.zip`
+- `outputs/quality/day7_final_checklist.md`
+- `outputs/quality/day7_release_sha256.txt`
+
+说明：最终 release 包排除 `.git`、虚拟环境、缓存、模型文件、sandbox secret、runtime outbox 和过程性任务文本。
