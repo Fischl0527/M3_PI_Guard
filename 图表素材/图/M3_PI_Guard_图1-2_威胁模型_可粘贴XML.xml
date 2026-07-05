@@ -1,0 +1,45 @@
+<mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="t12" value="图1-2 提示注入威胁模型" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+  <mxGeometry x="350" y="30" width="470" height="55" as="geometry"/>
+</mxCell><mxCell id="attacker" value="攻击者
+控制或污染不可信文本载体" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+  <mxGeometry x="60" y="300" width="180" height="100" as="geometry"/>
+</mxCell><mxCell id="carrier" value="不可信载体
+文档、网页、邮件正文、JSON字段、翻译文本、工具输出" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1">
+  <mxGeometry x="300" y="280" width="230" height="140" as="geometry"/>
+</mxCell><mxCell id="agent" value="工具调用智能体
+读取上下文并生成回答或候选工具调用" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="1">
+  <mxGeometry x="610" y="280" width="220" height="140" as="geometry"/>
+</mxCell><mxCell id="tool" value="候选工具调用
+读取文件、发送邮件、调用接口、写入文件、代码执行请求" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="1">
+  <mxGeometry x="905" y="280" width="220" height="140" as="geometry"/>
+</mxCell><mxCell id="risk1" value="风险一
+不可信数据被提升为执行指令" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" vertex="1" parent="1">
+  <mxGeometry x="300" y="500" width="230" height="75" as="geometry"/>
+</mxCell><mxCell id="risk2" value="风险二
+工具动作与用户任务不一致" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" vertex="1" parent="1">
+  <mxGeometry x="610" y="500" width="220" height="75" as="geometry"/>
+</mxCell><mxCell id="risk3" value="风险三
+敏感标记进入外发链路" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" vertex="1" parent="1">
+  <mxGeometry x="905" y="500" width="220" height="75" as="geometry"/>
+</mxCell><mxCell id="defender" value="防护假设
+攻击者不能修改系统提示、行为监督器代码、工具实现和本地策略" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" vertex="1" parent="1">
+  <mxGeometry x="270" y="670" width="630" height="55" as="geometry"/>
+</mxCell><mxCell id="e122" value="注入隐藏指令" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="attacker" target="carrier">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell><mxCell id="e123" value="作为上下文输入" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="carrier" target="agent">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell><mxCell id="e124" value="生成候选动作" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="agent" target="tool">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell><mxCell id="e125" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="carrier" target="risk1">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell><mxCell id="e126" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="agent" target="risk2">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell><mxCell id="e127" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="tool" target="risk3">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+  </root>
+</mxGraphModel>

@@ -1,0 +1,29 @@
+<mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="t3" value="行为监督器融合决策机制" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=22;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="330" y="30" width="510" height="55" as="geometry"/></mxCell><mxCell id="i1" value="输入一
+用户任务 + 不可信上下文
+文档、JSON、翻译文本、工具输出" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1"><mxGeometry x="80" y="165" width="225" height="95" as="geometry"/></mxCell><mxCell id="i2" value="输入二
+候选工具调用
+工具名、路径、端点、参数、外发内容" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1"><mxGeometry x="80" y="330" width="225" height="95" as="geometry"/></mxCell><mxCell id="m1" value="文本归一化
+Unicode归一化
+零宽字符清理
+混合脚本识别" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="390" y="110" width="175" height="90" as="geometry"/></mxCell><mxCell id="m2" value="注入检测
+指令覆盖
+工具诱导
+结构化字段
+多语言混淆" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="390" y="225" width="175" height="105" as="geometry"/></mxCell><mxCell id="m3" value="数据流追踪
+canary
+token
+api_key
+secret" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="390" y="355" width="175" height="95" as="geometry"/></mxCell><mxCell id="m4" value="工具策略
+sandbox路径
+模拟端点
+外发限制
+run_code禁用" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="390" y="475" width="175" height="105" as="geometry"/></mxCell><mxCell id="m5" value="意图一致性
+用户任务是否需要该工具
+工具动作是否越界" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="390" y="610" width="175" height="90" as="geometry"/></mxCell><mxCell id="g" value="融合裁决引擎
+汇总风险信号
+生成 risk_score 与 reasons" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=16;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="680" y="310" width="230" height="150" as="geometry"/></mxCell><mxCell id="o1" value="allow
+符合任务与策略要求" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="970" y="175" width="155" height="75" as="geometry"/></mxCell><mxCell id="o2" value="ask
+存在不确定风险
+请求人工确认" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="970" y="325" width="155" height="85" as="geometry"/></mxCell><mxCell id="o3" value="deny
+明确越权、外发或高危执行
+直接拒绝" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="970" y="490" width="155" height="95" as="geometry"/></mxCell><mxCell id="n3" value="强规则：secret路径读取、非sandbox路径、非模拟端点、敏感数据外发、代码执行请求 → deny" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" vertex="1" parent="1"><mxGeometry x="160" y="740" width="850" height="45" as="geometry"/></mxCell><mxCell id="e31" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="i1" target="m1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e32" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="i1" target="m2"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e33" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="i2" target="m3"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e34" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="i2" target="m4"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e35" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="i1" target="m5"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e36" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="m1" target="g"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e37" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="m2" target="g"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e38" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="m3" target="g"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e39" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="m4" target="g"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e40" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="m5" target="g"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e41" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="g" target="o1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e42" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="g" target="o2"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e43" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="g" target="o3"><mxGeometry relative="1" as="geometry"/></mxCell></root></mxGraphModel>
