@@ -1,5 +1,6 @@
-"""Minimal guard package for the local M3 Agent range."""
+"""Configurable Guard package for the local M3 Agent range."""
 
-from .guard_engine import guard_decide
+from .config import GuardConfig
+from .guard_engine import GuardResult, evaluate_guard, guard_decide
 
-__all__ = ["guard_decide"]
+__all__ = ["GuardConfig", "GuardResult", "evaluate_guard", "guard_decide"]

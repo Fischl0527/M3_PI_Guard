@@ -1,0 +1,32 @@
+{
+  "by_condition": {
+    "derived_normal_full": {
+      "case_runs": 60,
+      "ci_high": 0.2217878802417086,
+      "ci_low": 0.0576772064005603,
+      "rate": 0.11666666666666667,
+      "unresolved_runs": 7
+    },
+    "derived_normal_off": {
+      "case_runs": 60,
+      "ci_high": 0.2217878802417086,
+      "ci_low": 0.0576772064005603,
+      "rate": 0.11666666666666667,
+      "unresolved_runs": 7
+    }
+  },
+  "definition": "unresolved_runs divided by all E9 context-position case_runs; no row is dropped",
+  "experiment_id": "E9",
+  "generated_at": "2026-07-16T00:37:13.752615+00:00",
+  "interpretation": "Unresolved model or parser outcomes remain in the formal E9 denominator and limit long-context inference.",
+  "overall": {
+    "case_runs": 120,
+    "ci_high": 0.18633351617603885,
+    "ci_low": 0.0707811780783005,
+    "rate": 0.11666666666666667,
+    "unresolved_runs": 14
+  },
+  "row_count": 40,
+  "schema_version": "1.0",
+  "source": "E:/M3_PI_Guard_test/outputs/experiments/E9_context_correction_v2_r3/context_position.csv"
+}

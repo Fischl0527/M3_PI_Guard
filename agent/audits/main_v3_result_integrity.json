@@ -1,0 +1,2506 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-13T23:26:03.709393+00:00",
+  "status": "pass",
+  "scope": {
+    "program_manifest": "E:\\M3_PI_Guard_test\\outputs\\experiments\\program_manifest_final_v3.json",
+    "program_manifest_sha256": "9c1af2977db3eadcebdbe9f9ffc4b1c6fef629065ce71a4e856f86e430474907",
+    "blind_freeze": "E:\\M3_PI_Guard_test\\outputs\\experiments\\blind_freeze_v3.json",
+    "blind_freeze_sha256": "a36791aa0dfb530d2829b9e3eabec2f89c7df0d864b2b5a146e4569cfd79554e",
+    "thresholds": "E:\\M3_PI_Guard_test\\outputs\\experiments\\E13\\frozen_thresholds.json",
+    "thresholds_sha256": "c1ebcddb1199ae9a2a728702ce6ed97c8688c47fea060e4dae90c289ae430dbf",
+    "stages": [
+      "main"
+    ]
+  },
+  "freeze_files": {
+    "declared_files": 65,
+    "verified_files": 65,
+    "mismatches": 0
+  },
+  "models": {
+    "gemma3:4b": {
+      "digests": [
+        "a2af6cc3eb7f"
+      ],
+      "ollama_versions": [
+        "ollama version is 0.24.0"
+      ]
+    },
+    "llama3.2:3b": {
+      "digests": [
+        "a80c4f17acd5"
+      ],
+      "ollama_versions": [
+        "ollama version is 0.24.0"
+      ]
+    },
+    "phi4-mini:3.8b": {
+      "digests": [
+        "78fad5d182a7"
+      ],
+      "ollama_versions": [
+        "ollama version is 0.24.0"
+      ]
+    },
+    "qwen3:4b-instruct": {
+      "digests": [
+        "0edcdef34593"
+      ],
+      "ollama_versions": [
+        "ollama version is 0.24.0"
+      ]
+    }
+  },
+  "stages": [
+    {
+      "stage": "main",
+      "status": "completed",
+      "scanned": true,
+      "job_count": 12,
+      "condition_count": 72,
+      "expected_runs": 6480,
+      "logical_runs": 6480,
+      "log_rows": 12538,
+      "parse_failure_rows": 457,
+      "parse_failure_runs": 455,
+      "timeout_rows": 0,
+      "timeout_runs": 0,
+      "max_step_runs": 108,
+      "nonterminal_runs": 0,
+      "missing_runs": 0,
+      "duplicate_logical_runs": 0,
+      "duplicate_run_steps": 0,
+      "sandbox_cleanup_failures": 0,
+      "sandbox_reused_instances": 0,
+      "final_status_counts": {
+        "blocked": 1341,
+        "completed": 4668,
+        "max_steps_reached": 108,
+        "needs_confirmation": 363
+      },
+      "lifecycle": {
+        "required_models": 4,
+        "verified_models": 4,
+        "verified_model_tags": [
+          "gemma3:4b",
+          "llama3.2:3b",
+          "phi4-mini:3.8b",
+          "qwen3:4b-instruct"
+        ],
+        "matching_event_count": 4
+      },
+      "jobs": [
+        {
+          "job_id": "main__qwen3_4b-instruct__seed_104729",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 918,
+          "parse_failure_rows": 13,
+          "parse_failure_runs": 13,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 72,
+            "completed": 458,
+            "needs_confirmation": 10
+          },
+          "manifest_sha256": "0a3ce87dfe9649a840a87298479ab6492204c1c5992e3426cdf3bb79f1e52f0f",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 176,
+              "parse_failure_rows": 5,
+              "parse_failure_runs": 5,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "fa0ea7d240079cd9529a3329377ee385143e7d5eeeffa53ba0ff7835838516f7",
+                "csv": "c0fe593f758296b978a30b6333c97d799a48408a1410c67046c778cd9a86d1cb"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 185,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "be499a4e4edf8e88d2b96a529d44dfe1f08f54b5bda35c58f7a3389494e566fe",
+                "csv": "d267ca517841cf898a991716219d46dc6fa40f19678dd737a1c58ea6488be74b"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 168,
+              "parse_failure_rows": 4,
+              "parse_failure_runs": 4,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "3dee537b56031d8faeb2354825c7ba9e486f95861b5d271beaa979ec6931c2ea",
+                "csv": "eac493e8ae57acf1024920857ab101ddb46a209dff1a43155a35af671ab1dc7f"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 128,
+              "parse_failure_rows": 2,
+              "parse_failure_runs": 2,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 21,
+                "completed": 65,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "6033ed77b210ce4ecd304eb3f8155ab4b96994ef94d8c6458860ae8af690c20e",
+                "csv": "027a3971bde25963baa78aeaf8fd3ad4ee40eecf76ca8af466c445e193bf8eec"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 128,
+              "parse_failure_rows": 2,
+              "parse_failure_runs": 2,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 23,
+                "completed": 65,
+                "needs_confirmation": 2
+              },
+              "hashes": {
+                "jsonl": "2a47ac87b86e7c3edcb332a3a6a6037531afa2a815cd5ff35d49218b4b717068",
+                "csv": "329c41b8452db6d9c2ff911adb44e8d79a02ff9c6a52145aa7abe21efc709cf5"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 133,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 28,
+                "completed": 58,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "3ed0403d34110f8526ea3058242660614c6685de9240c9c8e5c0255aa7d67e81",
+                "csv": "d29aaa18707b701e0f4868195858323e8ba3109ff21c275cb5ce4ca8451f0ef6"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__qwen3_4b-instruct__seed_130363",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 911,
+          "parse_failure_rows": 12,
+          "parse_failure_runs": 12,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 72,
+            "completed": 460,
+            "needs_confirmation": 8
+          },
+          "manifest_sha256": "8fee4c555cfabdc2a3a9061dae3d1b7732c9cd7e52db271e61eb1401a9579f95",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 168,
+              "parse_failure_rows": 4,
+              "parse_failure_runs": 4,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "b8e77fdfe757569550392067026ff54a632a4ed79156395b32cb7ad99f45ab13",
+                "csv": "df1044ddfca95f0d7ed797e7ee8955cd0c8f53cfa1353c2a3985d2a9ae33a082"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 184,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "c814607fff827c7cdb1ceeed9eb18a8b4606d8c41e6a9b924974c4a3171c0faa",
+                "csv": "a59638a51e1f272cb8d8dec80b159fe1f69d0e6d29eef10c14e723491979e572"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 168,
+              "parse_failure_rows": 4,
+              "parse_failure_runs": 4,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "6ed7948baf06dc565903fb5c29f0dc877371c4fa23f9d8e012f1193cb6db94a1",
+                "csv": "87731519e8e2c58f4a312188a9bbfa226ef03f32ab80e3e85599eeca7646054e"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 129,
+              "parse_failure_rows": 2,
+              "parse_failure_runs": 2,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 21,
+                "completed": 66,
+                "needs_confirmation": 3
+              },
+              "hashes": {
+                "jsonl": "a8108619020f43c3710c9aab5c62e94c95e2160ba26db49852259a712586ef33",
+                "csv": "bdcd863b1e7c041b231ea53c5bd5f41e16a3e76316b78e83e0e0fbae17fd18ed"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 129,
+              "parse_failure_rows": 2,
+              "parse_failure_runs": 2,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 23,
+                "completed": 66,
+                "needs_confirmation": 1
+              },
+              "hashes": {
+                "jsonl": "23f0630c436aa2217fd5c1990cf3d07e4e26ce6a3d423c2281eab41cd07264d7",
+                "csv": "5800ba1981e6780488a8c34d309218aa3f1334f15cdcc17a1874744bf86913df"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 133,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 28,
+                "completed": 58,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "5e73fd3aee290d80800b9d6abc59aac29006919179e713d0cbd36ec3b189e016",
+                "csv": "e04d212de015406e01218248fb594bc873e6a5c5e3b2da2113c112e2bc6b7172"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__qwen3_4b-instruct__seed_155921",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 903,
+          "parse_failure_rows": 10,
+          "parse_failure_runs": 10,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 65,
+            "completed": 463,
+            "needs_confirmation": 12
+          },
+          "manifest_sha256": "89801521049e2d41bf05c0c113f5e43580a3515862627e38d6679d4a01294f18",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 168,
+              "parse_failure_rows": 3,
+              "parse_failure_runs": 3,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "b7751273662f49040020ab8c4b59e363102dcfbe1ec2f60cb22b5412ccd8c176",
+                "csv": "8c89d5040d0cbfc8bd5766cb5ee59acd4f5a3d77f00ca5744c6711aa4431a348"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 178,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "6f1ae6da886f6f07de1c46616fbf45bf3b1c973f8595ee45f826df6e1bf765ee",
+                "csv": "4f80faedaaf6f28037ed36eec6fd20fae6447fa4c7a376e1137451fe972311df"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 168,
+              "parse_failure_rows": 3,
+              "parse_failure_runs": 3,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "b4de932054ee7e3ef939dacc2066f409a54e83b1a7998e03e2b23e847fbc95f7",
+                "csv": "9c90cb1e85248a38e893f8ae81b44bf8364327256af402edc9158d5fd31925bf"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 129,
+              "parse_failure_rows": 2,
+              "parse_failure_runs": 2,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 19,
+                "completed": 66,
+                "needs_confirmation": 5
+              },
+              "hashes": {
+                "jsonl": "0a85907de3a9a51481f001f2f30659347494f38028c1eb9b8ddeeef1be5daed8",
+                "csv": "f88675f12ad960b17be41dc4446d0a272877121cf73c59388b3852afd80b46bb"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 129,
+              "parse_failure_rows": 2,
+              "parse_failure_runs": 2,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 21,
+                "completed": 66,
+                "needs_confirmation": 3
+              },
+              "hashes": {
+                "jsonl": "d0c0e2fddc349606b477b8b457ccd63d5caed11310ff533b1a9a94fb4cb85234",
+                "csv": "2129705d9334e411aab6a1163ac2d67514519f0b43d241360525cbaeb16b5d33"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 131,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 25,
+                "completed": 61,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "f2ae55b4d2ee1aa0334809219ec9ec27b14850adf3c12c9712efe28d2763fe87",
+                "csv": "f724d82db5f06a83aace8b5dc6a0966dabae1922982a641d58aa208c8a52ffa7"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__phi4-mini_3_8b__seed_104729",
+          "model": "phi4-mini:3.8b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 863,
+          "parse_failure_rows": 62,
+          "parse_failure_runs": 62,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 2,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 70,
+            "completed": 453,
+            "max_steps_reached": 2,
+            "needs_confirmation": 15
+          },
+          "manifest_sha256": "5b4d385b4093646dec2e13b7d5678e0fdafb53db7c892c179d3c1e2d2024cf1e",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 157,
+              "parse_failure_rows": 13,
+              "parse_failure_runs": 13,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 1,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 89,
+                "max_steps_reached": 1
+              },
+              "hashes": {
+                "jsonl": "d0dc4d8a8e7baf3fe13d3925db114fd818d63053af4dcd85fd99b14c06453983",
+                "csv": "76ef17fb645555984a79e491e564aaca23ff3d2b21d2e79665428f35f0593948"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 162,
+              "parse_failure_rows": 11,
+              "parse_failure_runs": 11,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "15a23329a1deff310a5cbba0ef45db0fd9ad546424ccfe0c35bdbc2e20b1b26a",
+                "csv": "d0c8ccf38132eb79ef4c75fe9b540de915cb75fdbf9db2407ba528d4d0137f6c"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 160,
+              "parse_failure_rows": 11,
+              "parse_failure_runs": 11,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 1,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 89,
+                "max_steps_reached": 1
+              },
+              "hashes": {
+                "jsonl": "a012ea06e12f686d7d6193f0fead73eca98e3c41a8577b3997b25a7ef7af1c61",
+                "csv": "e4f29e1e4b307e6f5dc95cc0bbaef9b02fc455a4a81333b75b76d8051ffeac02"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 129,
+              "parse_failure_rows": 8,
+              "parse_failure_runs": 8,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 18,
+                "completed": 65,
+                "needs_confirmation": 7
+              },
+              "hashes": {
+                "jsonl": "5c68e25627a8bb015ddcd146954d91208b6e681b04622fcd8727f7f74a64dcaf",
+                "csv": "a1d1f7e30cf1ab8ef43450dd84f99805af58d1b7a2057e19ba7e9566853b2f8f"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 129,
+              "parse_failure_rows": 8,
+              "parse_failure_runs": 8,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 22,
+                "completed": 64,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "1d807474943a823a54ac48f6eaa2d9d99b6368e96422c9cea79c52853655a2bb",
+                "csv": "ea5a2cd3e8120bbcabdf8661a3dc3a9f61ac3411ef3a4d57800e874b79dcb446"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 126,
+              "parse_failure_rows": 11,
+              "parse_failure_runs": 11,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 30,
+                "completed": 56,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "75f8b01f5b5d6cfc937c0f3529b25a5ad914fd68dff8b17d4080b916f59c6891",
+                "csv": "bc4fae4faa67d57e0da14b16c888ed31e787f4129e17d345013d605379128254"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__phi4-mini_3_8b__seed_130363",
+          "model": "phi4-mini:3.8b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 864,
+          "parse_failure_rows": 60,
+          "parse_failure_runs": 58,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 73,
+            "completed": 452,
+            "needs_confirmation": 15
+          },
+          "manifest_sha256": "beb38d183cfe7d7a954d42e45a1afe2fa0223a84ef5b0e3257ca1637fa6ecec9",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 158,
+              "parse_failure_rows": 10,
+              "parse_failure_runs": 9,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "79fe1e1918dd1ab818b1857f4c07014f332e6c4f1b4f003532faa37dd275532f",
+                "csv": "81385f4547a1b3b680274af577ca66d3be7a6d05e145025b05af729ce2457f9a"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 166,
+              "parse_failure_rows": 13,
+              "parse_failure_runs": 13,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "2ce72b845f11a7d31fee2ce05e4c08f1604ddfd10aee8e9eb2957d521b90ff87",
+                "csv": "fa0700fe96969cfff81739be6bcc5b903c869545bc9eb923f44dccef9c43fc9e"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 158,
+              "parse_failure_rows": 10,
+              "parse_failure_runs": 9,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "624bba822b32c241e808d0ce947a551b81630d77157a1981c66f0c0e6316a20e",
+                "csv": "baf960b97b9e0fbbc7c4849b429b14b941a6b2954d6cc8bc1a9c98ff7c7b94a3"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 127,
+              "parse_failure_rows": 8,
+              "parse_failure_runs": 8,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 21,
+                "completed": 62,
+                "needs_confirmation": 7
+              },
+              "hashes": {
+                "jsonl": "5b4750686c10950a8e520cbffce9ea0e24e04be1ec3a70b1da27316e020eb65e",
+                "csv": "1e5b2ca60bc2cd192f29aa8f059c6b631dc96308134a683e668ce444b86973f7"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 127,
+              "parse_failure_rows": 8,
+              "parse_failure_runs": 8,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 24,
+                "completed": 62,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "798de743711f002ceb2722ce2eb4cc60580b92e56dde291bcf2106fb5843e794",
+                "csv": "393091f8cf2d0b5a9e8e4bd24a219bfa6aa7868814ded3c70d2589629e2f6191"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 128,
+              "parse_failure_rows": 11,
+              "parse_failure_runs": 11,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 28,
+                "completed": 58,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "c6580619e2bf843c2de9907c37fb60537f074e9ff572172c89aa3a8edd87ea99",
+                "csv": "d7f681660571451c01615c156837d08d231ac6ef3602634bbaba5571870bad07"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__phi4-mini_3_8b__seed_155921",
+          "model": "phi4-mini:3.8b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 868,
+          "parse_failure_rows": 60,
+          "parse_failure_runs": 60,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 4,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 73,
+            "completed": 448,
+            "max_steps_reached": 4,
+            "needs_confirmation": 15
+          },
+          "manifest_sha256": "5695c67360462e25fbf8d590e3d84d7de413b9a23f592aba2181af35ea5a4bca",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 162,
+              "parse_failure_rows": 12,
+              "parse_failure_runs": 12,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "cb69322c49788cc7d9d522853a871efbeec99ab417ecee7eade101f6448e4632",
+                "csv": "5fb33a1e7fed506216d615a5be6d37a66f2dee4a30c414527f0e8e3e1a770eda"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 161,
+              "parse_failure_rows": 10,
+              "parse_failure_runs": 10,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 90
+              },
+              "hashes": {
+                "jsonl": "171daad83248315c8041ffa4c6c56b3ed22bdebdfdc0ca8bdce03979a76192cb",
+                "csv": "42f9c4f58063661544fe83cab523c5096ec0746b6778d76730fc20c2ca5476a7"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 162,
+              "parse_failure_rows": 12,
+              "parse_failure_runs": 12,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "334ee0d8604c44026465d4afaed77553ef3e5ac4a0038079e338d62f67172420",
+                "csv": "cfd508123ccfd89ef63c4eda7961b669288e3b663b292e17e1753e747ab8e500"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 129,
+              "parse_failure_rows": 8,
+              "parse_failure_runs": 8,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 19,
+                "completed": 64,
+                "needs_confirmation": 7
+              },
+              "hashes": {
+                "jsonl": "910d179d6cb37348869ce1b7be19c11cf62f07c1f18f3e4f7d4a2f3f46f31c6b",
+                "csv": "ae4e4a0758d9c01a2cafe67ad7607e1c3c91b6a3df02ef6bc656794b90d36e2d"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 129,
+              "parse_failure_rows": 8,
+              "parse_failure_runs": 8,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 23,
+                "completed": 63,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "4d4be1eb4f1acdf52b471d7ab188a28a345c5635b55bfc67e1b7339f1cd09f5b",
+                "csv": "24b66f93de694fd24300d1743b7f944815c3ebfd1377ffb55fc991858bd5585b"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 125,
+              "parse_failure_rows": 10,
+              "parse_failure_runs": 10,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 31,
+                "completed": 55,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "481c15c0e715b43560e8180bab6c237fa3e15d0c2e20a3d57e0f1e64719b2f0f",
+                "csv": "69ea89d8c4791aa24537031b59f59f9295d13bdeff5d47ec5ac86eeeb2c50a39"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__llama3_2_3b__seed_104729",
+          "model": "llama3.2:3b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 1377,
+          "parse_failure_rows": 72,
+          "parse_failure_runs": 72,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 28,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 176,
+            "completed": 272,
+            "max_steps_reached": 28,
+            "needs_confirmation": 64
+          },
+          "manifest_sha256": "978d50abf7c44b88937e8dcc1875261e6072d5f8968955b31a5e815ed50e6aa9",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 333,
+              "parse_failure_rows": 18,
+              "parse_failure_runs": 18,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 11,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 79,
+                "max_steps_reached": 11
+              },
+              "hashes": {
+                "jsonl": "6c39da6255f33b981eb4dcd11848ff83ba2d30af3052f0b46dfe0d7b3674c298",
+                "csv": "8eaf56890169a08b89214da619c8ca74466d9eb3a695dd55736a9bc60b0d5d50"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 275,
+              "parse_failure_rows": 19,
+              "parse_failure_runs": 19,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 3,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 87,
+                "max_steps_reached": 3
+              },
+              "hashes": {
+                "jsonl": "a0ad4809a833b78be467f7ac4b40bca060271a1f46f0a60dc727714ee249de3a",
+                "csv": "2f0b65582db96c64a609aebff5a73ad4bd59551159a398fe19a17ec99076f904"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 358,
+              "parse_failure_rows": 17,
+              "parse_failure_runs": 17,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 14,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 76,
+                "max_steps_reached": 14
+              },
+              "hashes": {
+                "jsonl": "250ee6b2de4cb39d2f8398fb2b9ae0a0500712ce9b1701bff5e9bceddfdee4c9",
+                "csv": "55e718029f37155e88146763404a5cf18253b6aebdd4b1ef0be3f538085aacf9"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 137,
+              "parse_failure_rows": 3,
+              "parse_failure_runs": 3,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 57,
+                "completed": 5,
+                "needs_confirmation": 28
+              },
+              "hashes": {
+                "jsonl": "bee13a6bac7e844f36885ab4d9b8d661a26f99cb3c40ca2bd18d307cbc7ddd02",
+                "csv": "2078be0e674552a781e911e5151b0d696169a46c4d5103879a9809eb6653ad80"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 137,
+              "parse_failure_rows": 3,
+              "parse_failure_runs": 3,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 62,
+                "completed": 5,
+                "needs_confirmation": 23
+              },
+              "hashes": {
+                "jsonl": "3d3b99921843556490949db0ec92ff5048c1e5c8aabaaa34445dc46633e4def4",
+                "csv": "d2c52f38ec48be18f6b7eda8a85ab9a5c9a34ad4c9f9b3c1a6dcc79c24011327"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 137,
+              "parse_failure_rows": 12,
+              "parse_failure_runs": 12,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 57,
+                "completed": 20,
+                "needs_confirmation": 13
+              },
+              "hashes": {
+                "jsonl": "f26fa043f3158c00ddf1a7cef35d3a2382e43ffeeb3caf94e1b1eac08c0ce243",
+                "csv": "f1f0401569ee32962b8670d1667177260a07ddb7c197c21284d6e5445f88f5b4"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__llama3_2_3b__seed_130363",
+          "model": "llama3.2:3b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 1356,
+          "parse_failure_rows": 84,
+          "parse_failure_runs": 84,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 20,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 178,
+            "completed": 282,
+            "max_steps_reached": 20,
+            "needs_confirmation": 60
+          },
+          "manifest_sha256": "f2678b31f44f1bd8facf385a42609b2771e8f12223d70e786feac7027b3fddce",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 337,
+              "parse_failure_rows": 23,
+              "parse_failure_runs": 23,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 8,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 82,
+                "max_steps_reached": 8
+              },
+              "hashes": {
+                "jsonl": "cdc8afa42fb9a95669943e04ea91028b9794971b836cc79f55f24a7b205bb808",
+                "csv": "50b09ee8d5f4626773410a7c538073ff5c4b8ad4922d3c31f717cc95034ae211"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 281,
+              "parse_failure_rows": 20,
+              "parse_failure_runs": 20,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 4,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 86,
+                "max_steps_reached": 4
+              },
+              "hashes": {
+                "jsonl": "50c1e643104077c1b164e8cb96e1fac237e7538b8bb78131040b26178b377a41",
+                "csv": "cd46dbddfcaf7758a3bdbe94d6fbfeab68493e389cf193640edf56c6703cf3f2"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 337,
+              "parse_failure_rows": 23,
+              "parse_failure_runs": 23,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 8,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 82,
+                "max_steps_reached": 8
+              },
+              "hashes": {
+                "jsonl": "da6b238a248cffcd26ec80ddbdeb6d5db3b8c18eb4ba2b88c292fa855a76d174",
+                "csv": "c50b895358b3a1cf26c29c7f4d5caea22378d1ab1bb9471fc380b9a84330b7a4"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 134,
+              "parse_failure_rows": 3,
+              "parse_failure_runs": 3,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 60,
+                "completed": 6,
+                "needs_confirmation": 24
+              },
+              "hashes": {
+                "jsonl": "6eae7e8b419cc1aa9430d77898cd5f10a71a58e54d10497a31c46f89dfd324b9",
+                "csv": "fff5b7c4f35e93e3cd264e65a4ed4ced0115ccb9b6abce07832b6ccda0f3288c"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 132,
+              "parse_failure_rows": 3,
+              "parse_failure_runs": 3,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 63,
+                "completed": 6,
+                "needs_confirmation": 21
+              },
+              "hashes": {
+                "jsonl": "bb88153b99fd3377f48baf660df9afd98d53d6e48b6254e91a27770328c274f9",
+                "csv": "9f9f63385a16854c38e662aed77e98406b7a977369914f22ee390173d6da0dc8"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 135,
+              "parse_failure_rows": 12,
+              "parse_failure_runs": 12,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 55,
+                "completed": 20,
+                "needs_confirmation": 15
+              },
+              "hashes": {
+                "jsonl": "7d10d245f87bab0d421439f604c3a98258f69a24cb33605505433bcf5704927c",
+                "csv": "2bf82badcbd7b9dacc02554b8a15deecb402c21aa8c94b668c9e0456c1d049d3"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__llama3_2_3b__seed_155921",
+          "model": "llama3.2:3b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 1372,
+          "parse_failure_rows": 79,
+          "parse_failure_runs": 79,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 34,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 177,
+            "completed": 270,
+            "max_steps_reached": 34,
+            "needs_confirmation": 59
+          },
+          "manifest_sha256": "34bec4f496280ebea00811afa0384cdc9c5538001a02215e92191bfbe6f06387",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 337,
+              "parse_failure_rows": 21,
+              "parse_failure_runs": 21,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 14,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 76,
+                "max_steps_reached": 14
+              },
+              "hashes": {
+                "jsonl": "4ecc75a5405e1806952df728a034aa374848925af14ff6197ac251199ea2a3a7",
+                "csv": "1dd0b6fc2e0d1dea6c41ecf4b63fd66f83560eb2ae74a67f8dd85d3a43b52d66"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 289,
+              "parse_failure_rows": 21,
+              "parse_failure_runs": 21,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 6,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 84,
+                "max_steps_reached": 6
+              },
+              "hashes": {
+                "jsonl": "ebcecb1e030d9864a7e67c36e1a5b45b2876f4e5a44f0f754055fc8b50133361",
+                "csv": "85420d59bc3404dc4a17c26091e37e0dbde995b64c0f351e027f05b47dfaa13a"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 337,
+              "parse_failure_rows": 20,
+              "parse_failure_runs": 20,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 14,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 76,
+                "max_steps_reached": 14
+              },
+              "hashes": {
+                "jsonl": "b492aefae312fd6c0e22a4a69a6d6987450dc6e9621ed1ebb076766f4bbb6b06",
+                "csv": "8541edf38456ec715b5a701caa1720d0cd1d02f46ae9bdfa237c7d23d575dbe1"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 137,
+              "parse_failure_rows": 2,
+              "parse_failure_runs": 2,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 59,
+                "completed": 7,
+                "needs_confirmation": 24
+              },
+              "hashes": {
+                "jsonl": "859c132c25c5c7a7507a78a6d7edad3c427d8324b8e20d209afc9a6530b9a2fb",
+                "csv": "c75a149a55203419599ce5e308cadc422811ee2b41104eb2f1871b2a81d7e04c"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 135,
+              "parse_failure_rows": 2,
+              "parse_failure_runs": 2,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 62,
+                "completed": 7,
+                "needs_confirmation": 21
+              },
+              "hashes": {
+                "jsonl": "1fdfd13e28ab435862034907f03f50259980703cafc4c3fbd5d410056f9c1b7d",
+                "csv": "2a7917c242aeb4f346298aeb76b554a81e1f6b527cb3ce3654517f69b5aebfa7"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 137,
+              "parse_failure_rows": 13,
+              "parse_failure_runs": 13,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 56,
+                "completed": 20,
+                "needs_confirmation": 14
+              },
+              "hashes": {
+                "jsonl": "79d04c2951314601133707d70840242627bc252b1f0b26d953a9a4ee293968fe",
+                "csv": "2b61f99a678fcd80dad0fd1677ae7c798c9dcbc80f90bfe1d18f5cac2433fd34"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__gemma3_4b__seed_104729",
+          "model": "gemma3:4b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 1030,
+          "parse_failure_rows": 4,
+          "parse_failure_runs": 4,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 7,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 127,
+            "completed": 371,
+            "max_steps_reached": 7,
+            "needs_confirmation": 35
+          },
+          "manifest_sha256": "60e59794cdd12cf8310eb48a08b142b6f65f6e4a25f7404342bc186f2b62b349",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 206,
+              "parse_failure_rows": 1,
+              "parse_failure_runs": 1,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "21369caebea060055df4540f05efabf8f147bc92f76daefb390c90f3e801c9bb",
+                "csv": "6a8a1a60cfb8f8bf47c73d1dbb7a0fcd14b282a93c7f81689caf4094f5b328a3"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 212,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 3,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 87,
+                "max_steps_reached": 3
+              },
+              "hashes": {
+                "jsonl": "61ecd035dce9a0b33f1066363b59ef6782194f18a84b042291efffc92c455284",
+                "csv": "2c3f5999729bc08921db8192e8a5b8191df2942cedf00a61f9b0f60c00bc2937"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 215,
+              "parse_failure_rows": 1,
+              "parse_failure_runs": 1,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "21585ccb76ecaaf68a4afb9fc056784320c91a51e52046b9dc96cebc225765d4",
+                "csv": "8eabefe823367352b14a14f5a1608460928ed2a85282e7d62abc28dc90a8ce2e"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 131,
+              "parse_failure_rows": 1,
+              "parse_failure_runs": 1,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 40,
+                "completed": 35,
+                "needs_confirmation": 15
+              },
+              "hashes": {
+                "jsonl": "e7fb19a95d6ccc20239163a8ab9939cacbab4ddb8d227fe83767bba8139392ea",
+                "csv": "6d1359e21452a20b4c8b5f04c3b519338c18366d6c49f8a9688c0a63334622f3"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 131,
+              "parse_failure_rows": 1,
+              "parse_failure_runs": 1,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 44,
+                "completed": 35,
+                "needs_confirmation": 11
+              },
+              "hashes": {
+                "jsonl": "8f6442b0f5897ee0b7c1064a9f33603abfbf9ba31cdd2b052a9605dddcf52b9a",
+                "csv": "731f08b310926a6447fb9d4ff7e1715569e5cb74e60599ea458269e53dbcbcb3"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 135,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 43,
+                "completed": 38,
+                "needs_confirmation": 9
+              },
+              "hashes": {
+                "jsonl": "2b23e5e09b492d12e733d859da33d7f06cd7f8e55ff9f75a03452f2157a5fb2c",
+                "csv": "8eb95525fbb03b5d47bc82888c9dfba63a7528dacb3fc9649777df5471b3cda7"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__gemma3_4b__seed_130363",
+          "model": "gemma3:4b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 1037,
+          "parse_failure_rows": 0,
+          "parse_failure_runs": 0,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 7,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 129,
+            "completed": 369,
+            "max_steps_reached": 7,
+            "needs_confirmation": 35
+          },
+          "manifest_sha256": "03d2b7a25e271113b84ca78273fd78832ea1d183c92c2d69fdb8449b766c4807",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 214,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "eb7f8be6ef7ad91e1faaca0848a1a2e41fc5dd5badd3a62f38458a473894c14d",
+                "csv": "d72a6f29bdc97d214b8a9c7ce7511480bc01250c179d540a451e645168e8d173"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 212,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 3,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 87,
+                "max_steps_reached": 3
+              },
+              "hashes": {
+                "jsonl": "018ed1fc11b864050cf2be7f5220453c7b6cbecdf20807f4ece599dba5e24572",
+                "csv": "d6a0c5abefa23523c638bfdcb89274177a0894d65afe2e14bd8101d00ff74cd9"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 214,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "6dcb568c09f902685c3843f65c4549f9c6720c96affc000979e0190edc4bb356",
+                "csv": "043ab243b791605957d7b06c45c83dc8ae7b4a8cbeb2c793efbe48e2cf57df6c"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 131,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 41,
+                "completed": 34,
+                "needs_confirmation": 15
+              },
+              "hashes": {
+                "jsonl": "decbd0fe727ea886eae57365fe4ad46c8e473b12fa28988a03631c2891965eb0",
+                "csv": "64134683951d053e8b26f7ff2cee4760a3330e4d238bb928dae50552bc722fca"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 131,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 45,
+                "completed": 34,
+                "needs_confirmation": 11
+              },
+              "hashes": {
+                "jsonl": "e95205fa32d8c8315f5ea5171af979e30b27f0f3e8900050cf13fd4615d48e12",
+                "csv": "e85d61697976a7ac199a245fe3860fb200746b7f2c4dc8849ab7d9b5647b8091"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 135,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 43,
+                "completed": 38,
+                "needs_confirmation": 9
+              },
+              "hashes": {
+                "jsonl": "5b0418303ed9da822e732f444ff75bcc302b6057a5215f2efbb27fd2ee9f509e",
+                "csv": "27ba1f7ad540e060f72125ed1978a4c411142d4237da718d8946a4dcaa21e995"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "main__gemma3_4b__seed_155921",
+          "model": "gemma3:4b",
+          "status": "completed",
+          "expected_runs": 540,
+          "completed_runs": 540,
+          "condition_count": 6,
+          "logical_runs": 540,
+          "log_rows": 1039,
+          "parse_failure_rows": 1,
+          "parse_failure_runs": 1,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 6,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 129,
+            "completed": 370,
+            "max_steps_reached": 6,
+            "needs_confirmation": 35
+          },
+          "manifest_sha256": "994ca3e311c77c24d39f91b144c24b72bda07540be6fda139106195038fa9554",
+          "conditions": [
+            {
+              "condition_id": "regular_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 216,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "1ba154115a427cd67024f1dc7bab8ac3b6a4b9946f2ad2756a9d58842979a9bb",
+                "csv": "369a48c6273a32d17f65afdf37831a5a61277a9c79f6e0aa449b9d219cfa7a43"
+              }
+            },
+            {
+              "condition_id": "hardened_none",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 210,
+              "parse_failure_rows": 1,
+              "parse_failure_runs": 1,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "cbcec58a4ef4edd4bde3814586eb0e6c1f92bbf49c21a9d2d5f13de51ef1c5c6",
+                "csv": "9d0e6b540279e4bfd6880fc262f2c58167c14e5ca050ec7a808953e8ab49f648"
+              }
+            },
+            {
+              "condition_id": "regular_keyword",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 216,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 2,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 88,
+                "max_steps_reached": 2
+              },
+              "hashes": {
+                "jsonl": "09f0c1175d75a1fb58e476daec8276eca50aab945031a4411e95bc7b1d5f6703",
+                "csv": "ae7c127d0b4dbf62b28b94fb07d661798349b128631cc14d01390809e34cd821"
+              }
+            },
+            {
+              "condition_id": "regular_policy",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 131,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 41,
+                "completed": 34,
+                "needs_confirmation": 15
+              },
+              "hashes": {
+                "jsonl": "9c18751a95c8cfff7ed4929bb563b8b5b3c1d6f0bae8f32007f9c519d4dee70c",
+                "csv": "0edd7ee508bbe8b1890ff1edb32632e1e7f8518e3c377f41f985dd5d2ff9ccc9"
+              }
+            },
+            {
+              "condition_id": "regular_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 131,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 45,
+                "completed": 34,
+                "needs_confirmation": 11
+              },
+              "hashes": {
+                "jsonl": "93fe6e4ce270edb7b35f272ea5705a7fdd2ab26bbad95b6c40d86212811cec60",
+                "csv": "146e510fd01ec1982bb690a1c4f675d1896fb24f44abf2e89c44934fb00c13a5"
+              }
+            },
+            {
+              "condition_id": "hardened_full",
+              "status": "completed",
+              "expected_runs": 90,
+              "logical_runs": 90,
+              "log_rows": 135,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 43,
+                "completed": 38,
+                "needs_confirmation": 9
+              },
+              "hashes": {
+                "jsonl": "373e2c3feac28dbfef0f0aeb26932c77049e516aef5f08cb16727c5ad8f472fb",
+                "csv": "56f6720fdd1b476173732266e38d5ac025d7c385f21784c70eaf8f6570f9c7a8"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "jobs": 12,
+    "conditions": 72,
+    "logical_runs": 6480,
+    "log_rows": 12538,
+    "parse_failure_rows": 457,
+    "timeout_runs": 0,
+    "max_step_runs": 108,
+    "nonterminal_runs": 0
+  },
+  "finding_counts": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "findings": []
+}

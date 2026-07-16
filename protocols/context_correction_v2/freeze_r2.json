@@ -1,0 +1,327 @@
+{
+  "created_at": "2026-07-15T13:57:52.528354+00:00",
+  "environment": {
+    "dirty_worktree": true,
+    "git_branch": "test1",
+    "git_head": "2c53f52c475e6838dc82246c821db5ed7ac0209c",
+    "git_status_sha256": "0bdd646335c91cdb978753155b3fdbb74e18fa3e06d6e952a07e699d0ff73a69",
+    "ollama_version": "ollama version is 0.24.0",
+    "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "files": [
+    {
+      "bytes": 7807,
+      "path": "protocols/context_correction_v2/protocol.md",
+      "sha256": "8284577863ad9302d96831896cab47b3979ee1d7c8e32c5f8b7ddfbf70d37dd9"
+    },
+    {
+      "bytes": 3055,
+      "path": "protocols/context_correction_v2/protocol.json",
+      "sha256": "a491e21bc0830fc2b6ac62ae02deaca80182ea94e5dc79df26d7f14cb414824c"
+    },
+    {
+      "bytes": 7372,
+      "path": "protocols/context_correction_v2/calibration_r2.json",
+      "sha256": "4d24f683cc8271bd1e80fe884897b255f499fbc0f49e12401b5837289574eff7"
+    },
+    {
+      "bytes": 134062,
+      "path": "protocols/context_correction_v2/prompt_verification_r2.json",
+      "sha256": "60377eb4a5c6d9a4a195ed8b1d6acee564632d6336988480441b1511e961d09d"
+    },
+    {
+      "bytes": 3728455,
+      "path": "protocols/context_correction_v2/fixtures/e9_cases.jsonl",
+      "sha256": "1f7f745259c28121def6cdde68caa33ba0e76c8e06790249e7b96f346b53bc91"
+    },
+    {
+      "bytes": 2473438,
+      "path": "protocols/context_correction_v2/fixtures/e14_cases_r2.jsonl",
+      "sha256": "27ff66990271e470b6781c9b08cee9309ee3853b859e7a8bb2660bcf7d44bac3"
+    },
+    {
+      "bytes": 3976,
+      "path": "agent/audits/context_experiment_validity.json",
+      "sha256": "9a5d1ed228eccc18b254e491ee5100cb6a8d831279a24bf033ebd897f22d349f"
+    },
+    {
+      "bytes": 6060,
+      "path": "experiments/catalog.py",
+      "sha256": "fa24067050182cc1ea54f59132243732b6599cbb7b4a6022dbab41bbeaa2332a"
+    },
+    {
+      "bytes": 8085,
+      "path": "experiments/manifest.py",
+      "sha256": "995bb84f8721e82244a081aaa356ddf1caa1ad92d340b8dcc50feafa68d5f09f"
+    },
+    {
+      "bytes": 6778,
+      "path": "experiments/model_manager.py",
+      "sha256": "289feedc963b6704cc2c0f5500f5d1dc395f0cd90c50560c5d53f33b5d117597"
+    },
+    {
+      "bytes": 38578,
+      "path": "experiments/context_workloads.py",
+      "sha256": "3ac16b5e7a2e62de351d89ac4adc5b34219eafbd0a4d13aa9181c3d31dab752d"
+    },
+    {
+      "bytes": 26904,
+      "path": "experiments/context_correction_runtime.py",
+      "sha256": "da78ad9a4c6b452a8125a751bbe9de1154b3719495838568c821b7674a68bdfe"
+    },
+    {
+      "bytes": 36085,
+      "path": "experiments/e9_context_correction.py",
+      "sha256": "2406bc562ae596018a32cb79d53c201d909a963f1ecba43c9efe7118025b0516"
+    },
+    {
+      "bytes": 68764,
+      "path": "experiments/e14_context_correction.py",
+      "sha256": "65aa47cbffd572b83b37608bc789aec24bdad6afe60f9041b612aa49155f7f79"
+    },
+    {
+      "bytes": 46,
+      "path": "experiments/modelfiles/Qwen3-4B-Ctx4K.Modelfile",
+      "sha256": "c26dad256a1f46fc64360322a6265c0e92a2b7aa68ba010b3acf83a4bab9244a"
+    },
+    {
+      "bytes": 46,
+      "path": "experiments/modelfiles/Qwen3-4B-Ctx8K.Modelfile",
+      "sha256": "2b9dd24a65da38c5cb5d768cc24a9baff2007fd6d5f8c78e5d42d92b684ea8ed"
+    },
+    {
+      "bytes": 47,
+      "path": "experiments/modelfiles/Qwen3-4B-Ctx16K.Modelfile",
+      "sha256": "269ebf2e1569bbb8840087d804e4cddeb50b8081ce4265939f2d51f30225bc9a"
+    },
+    {
+      "bytes": 47,
+      "path": "experiments/modelfiles/Qwen3-4B-Ctx32K.Modelfile",
+      "sha256": "ee161789b483f0e96e2ecac9de1fcd27d1671fd805d32979ccfc57ff6379055a"
+    },
+    {
+      "bytes": 37038,
+      "path": "m3_core/agent_runner.py",
+      "sha256": "1763f8f1ddf5fb6dfcdf13e2e1798902a5130a27d96ed6a8a8189b391a6df02d"
+    },
+    {
+      "bytes": 2489,
+      "path": "m3_core/case_views.py",
+      "sha256": "a706b64ea4cdc6a7517451f99545c921faa871cd543f798ce62c7cd5701ab31f"
+    },
+    {
+      "bytes": 14667,
+      "path": "m3_core/llm_client.py",
+      "sha256": "150ae873e5831bade5b9e160344929d3a589ca472ef6ae39998962bac12d660b"
+    },
+    {
+      "bytes": 34961,
+      "path": "m3_core/run_batch.py",
+      "sha256": "9aac196cd712b8994ba8dd0717f0ddcf2300cdd9686a8ad95d7f2e19dd90d6ea"
+    },
+    {
+      "bytes": 28429,
+      "path": "m3_core/run_matrix.py",
+      "sha256": "0f6eb27a387792eb43d78232b3e2decfea668e5e96f714395992eaa9e3b656ea"
+    },
+    {
+      "bytes": 23487,
+      "path": "m3_core/tool_sandbox.py",
+      "sha256": "4eda3424212ac368d3d9d99ffcc1d424e64fbe4f868afdf3177f0b7222371e3b"
+    },
+    {
+      "bytes": 15214,
+      "path": "m3_eval/figure_manifest.py",
+      "sha256": "3077d257568e5e6c27161f3e43495178d87f7cd0e82bb39b9c62e0fa1171a6e6"
+    },
+    {
+      "bytes": 53043,
+      "path": "m3_eval/metrics.py",
+      "sha256": "66265b7a7076f7e56a6459b92af31daaa91fba0dd713ca01e1274dc0353dc069"
+    },
+    {
+      "bytes": 12015,
+      "path": "m3_eval/statistics.py",
+      "sha256": "86216e53b1ace635450ffa9a3d113fba7fa0848d58a0d391d28e119dbbc0fec1"
+    },
+    {
+      "bytes": 240,
+      "path": "m3_guard/__init__.py",
+      "sha256": "bdbf53579fd2616402a6c0db0be0d48825bcffb1c3a260ebafef53ab8ae50b01"
+    },
+    {
+      "bytes": 3987,
+      "path": "m3_guard/config.py",
+      "sha256": "31eeb37c9c26500c55565141d7d715ecc88d04673132f67df0b8e71389a3f828"
+    },
+    {
+      "bytes": 6275,
+      "path": "m3_guard/dataflow.py",
+      "sha256": "752a357a835bd0ae58a666d9a6d96a26a47652593b980ccbee0f68f7bcaf3347"
+    },
+    {
+      "bytes": 8462,
+      "path": "m3_guard/detector.py",
+      "sha256": "c6e41918058c454393e043580b297bbf695566229b82f68975b562a460622aa8"
+    },
+    {
+      "bytes": 8657,
+      "path": "m3_guard/guard_engine.py",
+      "sha256": "3ef92353b915ca326f764c1289192f81768baa82bcda2954c89f3151829169d4"
+    },
+    {
+      "bytes": 5860,
+      "path": "m3_guard/normalizer.py",
+      "sha256": "c9b9c024ba4572d0addda1041582c69cde7aaed8249e9cb6d4d0e4654958e178"
+    },
+    {
+      "bytes": 10149,
+      "path": "m3_guard/policy_engine.py",
+      "sha256": "b9bc427b3aa3b7e936fbd52a5846592012daced3ce1d8606295660e201247ec0"
+    },
+    {
+      "bytes": 4124,
+      "path": "schemas/attack_case.schema.json",
+      "sha256": "0b20b62e9f7d19e1732fd4a9db8ab1f2716aacbae637d8a73c8b791eeed81130"
+    },
+    {
+      "bytes": 5456,
+      "path": "schemas/run_log.schema.json",
+      "sha256": "360d983cb35069343a0e6d166c9df05555043dbbd75d1f01527c5e2080080750"
+    },
+    {
+      "bytes": 730,
+      "path": "schemas/tool_call.schema.json",
+      "sha256": "73e3e472118a8206c82459683f5adf7128716379deeb2a4c66a5a76fb679c01e"
+    },
+    {
+      "bytes": 7624,
+      "path": "tests/unit/test_context_workloads.py",
+      "sha256": "60de6f9d62f0007f423485b956aead2ab39dcbb751787e2533f348ce4595760b"
+    },
+    {
+      "bytes": 5186,
+      "path": "tests/unit/test_context_correction_runtime.py",
+      "sha256": "e79a569c48576829392dd419c60a6dbb4b2e0c783295d7a1266c8b62fe0ecd38"
+    },
+    {
+      "bytes": 3265,
+      "path": "tests/unit/test_e9_context_correction.py",
+      "sha256": "98e168737777c580bca73591d7ece0f60378e8ed7970a0f42a1abf009ad032bd"
+    },
+    {
+      "bytes": 9059,
+      "path": "tests/unit/test_e14_context_correction.py",
+      "sha256": "bdc161c758c1094a17ae19b28bef078abf9f2038eb1511368a2496a84c01b8fd"
+    },
+    {
+      "bytes": 11607,
+      "path": "tests/unit/test_core_runtime.py",
+      "sha256": "a712f577733563e2cd6c00511ba32530ed4afa34c1cd4774b10d6fa0ed87987e"
+    }
+  ],
+  "formal_execution_started": false,
+  "freeze_complete": true,
+  "model_profiles": {
+    "16384": {
+      "alias_digest": "ef6929a22b3708ba43609e704d4717ddad11020689873b92c0016d82557b2be4",
+      "alias_id": "ef6929a22b37",
+      "effective_context_window_tokens": 32768,
+      "resident_context_window_tokens": 32768,
+      "served_model": "m3-qwen3-4b-ctx32k:latest"
+    },
+    "2048": {
+      "alias_digest": "0ce262040abbcb4b119f9118a09ce2c9a54119495bc45d815ccfe9c0fde46a20",
+      "alias_id": "0ce262040abb",
+      "effective_context_window_tokens": 4096,
+      "resident_context_window_tokens": 4096,
+      "served_model": "m3-qwen3-4b-ctx4k:latest"
+    },
+    "4096": {
+      "alias_digest": "81f2e7df722a0599ab61e7782a994e01787af7ae17d305e4e4dc8ffde5fd7316",
+      "alias_id": "81f2e7df722a",
+      "effective_context_window_tokens": 8192,
+      "resident_context_window_tokens": 8192,
+      "served_model": "m3-qwen3-4b-ctx8k:latest"
+    },
+    "8192": {
+      "alias_digest": "b7c705adc68aab8aef94b0b162c01a58c9a464122e5a3a5d63656014fb25c2de",
+      "alias_id": "b7c705adc68a",
+      "effective_context_window_tokens": 16384,
+      "resident_context_window_tokens": 16384,
+      "served_model": "m3-qwen3-4b-ctx16k:latest"
+    }
+  },
+  "mutation_policy": "any frozen-file change requires a new revision and full affected rerun",
+  "old_v3_policy": "preserved_invalid_diagnostic_provenance_excluded_from_v2_denominators",
+  "pre_r2_smoke_policy": "preserved_failed_pre_freeze_diagnostic_not_resumable_or_poolable",
+  "prompt_verification": {
+    "bytes": 134062,
+    "case_count": 100,
+    "checks": {
+      "all_within_one_percent": true,
+      "exact_case_count": true,
+      "installed_alias_ids_match": true,
+      "native_usage_all": true,
+      "provider_done_all": true,
+      "resident_contexts_match": true,
+      "strict_target_medians": true,
+      "unique_case_ids": true
+    },
+    "kind": "prompt_workload_verification",
+    "path": "protocols/context_correction_v2/prompt_verification_r2.json",
+    "sha256": "60377eb4a5c6d9a4a195ed8b1d6acee564632d6336988480441b1511e961d09d",
+    "status": "pass",
+    "target_medians": {
+      "16384": 16386,
+      "2048": 2050,
+      "4096": 4098,
+      "8192": 8194
+    },
+    "workload_revision": "r2"
+  },
+  "protocol_id": "CONTEXT_CORRECTION_V2",
+  "schema_version": "2.0",
+  "smoke_evidence": {
+    "E14": {
+      "bytes": 18420,
+      "expected_case_runs": 48,
+      "experiment_id": "E14",
+      "manifest_path": "outputs/experiments/E14_context_correction_v2_r2_smoke/manifest.json",
+      "observed_case_runs": 48,
+      "sha256": "ea7afbba2d42c851b751eb3e26433cf8cb9d241421bf695d95e51b66285b612e",
+      "status": "pass",
+      "validity_status": "pass"
+    },
+    "E9": {
+      "bytes": 16693,
+      "expected_case_runs": 48,
+      "experiment_id": "E9",
+      "manifest_path": "outputs/experiments/E9_context_correction_v2_r2_smoke/manifest.json",
+      "observed_case_runs": 48,
+      "sha256": "534fdbfa884a09fce28104e4bc7af07b1c86583d990c14541fff2556761c779b",
+      "status": "pass",
+      "validity_status": "pass"
+    }
+  },
+  "status": "pass",
+  "test_gate": {
+    "command": [
+      "F:\\robot\\Anaconda3\\python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/unit/test_context_workloads.py",
+      "tests/unit/test_context_correction_runtime.py",
+      "tests/unit/test_e9_context_correction.py",
+      "tests/unit/test_e14_context_correction.py",
+      "tests/unit/test_core_runtime.py"
+    ],
+    "output_sha256": "d227a8710ef85513f1f889e113b29f6baecbcd9347661aac2028dffb4c634680",
+    "output_tail": ".............................                                            [100%]\n29 passed in 0.87s",
+    "passed": 29,
+    "returncode": 0,
+    "status": "pass"
+  },
+  "workload_revision": "r2"
+}

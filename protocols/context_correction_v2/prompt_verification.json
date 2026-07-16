@@ -1,0 +1,3030 @@
+{
+  "checks": {
+    "all_within_one_percent": true,
+    "exact_case_count": true,
+    "installed_alias_ids_match": true,
+    "native_usage_all": true,
+    "provider_done_all": true,
+    "resident_contexts_match": true,
+    "strict_target_medians": true,
+    "unique_case_ids": true
+  },
+  "created_at": "2026-07-15T13:05:32.981621+00:00",
+  "fixture_files": {
+    "E14": {
+      "path": "E:\\M3_PI_Guard_test\\protocols\\context_correction_v2\\fixtures\\e14_cases.jsonl",
+      "sha256": "81c6b34da837e8439361a0ab51a28a6a4ce5d4dbe9edc4c9d5a2e198c609d946"
+    },
+    "E9": {
+      "path": "E:\\M3_PI_Guard_test\\protocols\\context_correction_v2\\fixtures\\e9_cases.jsonl",
+      "sha256": "1f7f745259c28121def6cdde68caa33ba0e76c8e06790249e7b96f346b53bc91"
+    }
+  },
+  "measurement_role": "frozen_first_turn_workload_proof_not_model_outcome",
+  "model_evidence": {
+    "16384": {
+      "expected_alias_id_prefix": "ef6929a22b37",
+      "expected_effective_context_window_tokens": 32768,
+      "installed_alias_id": "ef6929a22b37",
+      "resident_snapshot": {
+        "available": true,
+        "captured_at": "2026-07-15T13:05:32.343618+00:00",
+        "models": [
+          {
+            "context_length": 32768,
+            "digest": "ef6929a22b3708ba43609e704d4717ddad11020689873b92c0016d82557b2be4",
+            "expires_at": "2026-07-15T21:10:32.3372617+08:00",
+            "model": "m3-qwen3-4b-ctx32k:latest",
+            "name": "m3-qwen3-4b-ctx32k:latest",
+            "size": 7930192896,
+            "size_vram": 6890596352
+          }
+        ],
+        "reason": ""
+      },
+      "served_model": "m3-qwen3-4b-ctx32k:latest"
+    },
+    "2048": {
+      "expected_alias_id_prefix": "0ce262040abb",
+      "expected_effective_context_window_tokens": 4096,
+      "installed_alias_id": "0ce262040abb",
+      "resident_snapshot": {
+        "available": true,
+        "captured_at": "2026-07-15T13:00:49.898407+00:00",
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "0ce262040abbcb4b119f9118a09ce2c9a54119495bc45d815ccfe9c0fde46a20",
+            "expires_at": "2026-07-15T21:05:49.895514+08:00",
+            "model": "m3-qwen3-4b-ctx4k:latest",
+            "name": "m3-qwen3-4b-ctx4k:latest",
+            "size": 3517133952,
+            "size_vram": 3517133952
+          }
+        ],
+        "reason": ""
+      },
+      "served_model": "m3-qwen3-4b-ctx4k:latest"
+    },
+    "4096": {
+      "expected_alias_id_prefix": "81f2e7df722a",
+      "expected_effective_context_window_tokens": 8192,
+      "installed_alias_id": "81f2e7df722a",
+      "resident_snapshot": {
+        "available": true,
+        "captured_at": "2026-07-15T13:01:21.373459+00:00",
+        "models": [
+          {
+            "context_length": 8192,
+            "digest": "81f2e7df722a0599ab61e7782a994e01787af7ae17d305e4e4dc8ffde5fd7316",
+            "expires_at": "2026-07-15T21:06:21.3468711+08:00",
+            "model": "m3-qwen3-4b-ctx8k:latest",
+            "name": "m3-qwen3-4b-ctx8k:latest",
+            "size": 4128453760,
+            "size_vram": 4128453760
+          }
+        ],
+        "reason": ""
+      },
+      "served_model": "m3-qwen3-4b-ctx8k:latest"
+    },
+    "8192": {
+      "expected_alias_id_prefix": "b7c705adc68a",
+      "expected_effective_context_window_tokens": 16384,
+      "installed_alias_id": "b7c705adc68a",
+      "resident_snapshot": {
+        "available": true,
+        "captured_at": "2026-07-15T13:02:24.620232+00:00",
+        "models": [
+          {
+            "context_length": 16384,
+            "digest": "b7c705adc68aab8aef94b0b162c01a58c9a464122e5a3a5d63656014fb25c2de",
+            "expires_at": "2026-07-15T21:07:24.6162406+08:00",
+            "model": "m3-qwen3-4b-ctx16k:latest",
+            "name": "m3-qwen3-4b-ctx16k:latest",
+            "size": 5363676288,
+            "size_vram": 5363676288
+          }
+        ],
+        "reason": ""
+      },
+      "served_model": "m3-qwen3-4b-ctx16k:latest"
+    }
+  },
+  "num_predict": 1,
+  "observations": [
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 14324908900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-2048-BEN-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "3820fe6342e8964768388348e632ead2ae8f56e6a1a9e949a6abe301b9e29e68",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 14324908900,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "ff5f7f473c5bdefb87f629864c93da0ee4933bc4b7e9ffe79d43c5c0a3219ed2",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 915568200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-2048-BEN-V-002",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "3fed72de92a58dc102d6d28e9f12a3d189c701227e2389297d8568305125ccf7",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 915568200,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "923de0362a3da20d54682eba4669e2a0c20a862acc67d2dad88d2345cb28e302",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 578137400,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-2048-BEN-V-003",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "a7c7b0ba3e8b58c64331a91560ecfd033623bba465685feda62384210fa9d499",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 578137400,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "fa3b78751ca533ade51d5406f9d7b6ffad3b5810ac354d8f049e1074f4d855aa",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 583803700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-2048-BEN-V-004",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "817d023f65c5e1acfaa10a36fb472e42c440f6c31717d71b33b7a4200cd049e8",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 583803700,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "b64d1131c52199f3a82bc98990e877df8dc637400b634f4693fd658d7e8574cf",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 581200700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-2048-SMOKE-BEN-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "7826e0cf65833c84d6383a352821cb2c7b0d75bd5303155fd1d725abd21da45e",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 581200700,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "ff5f7f473c5bdefb87f629864c93da0ee4933bc4b7e9ffe79d43c5c0a3219ed2",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 577561300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-2048-SMOKE-BEN-V-010",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "539aa52357038c0449c33572a650173f3611146d062dcded21ce417b1c3e31e6",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 577561300,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "e7c3740ca20029b57dc90b30c9b2beaaf518f4169b9e18ef8380c42b0dc453cf",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 581216500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-2048-SMOKE-CHAINX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "9212f60a1db78b53be00feba020105c11ba57b2b1d38dea51c95cb01ba4d8024",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 581216500,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "666d23fde3c66c3d71356ed64cda88e715c89039c0a5ceab3eb763abfb56e2e5",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 581159600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-2048-SMOKE-DJX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "4b767696087d1f218afbdf1b090dc335184f415665530e2315f3d21fd9b9c739",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 581159600,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "d6743eed49486053b3d72ee19a46168112d9517e48264235b24e29042f3b331a",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 577511800,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-2048-SMOKE-MTLX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "83f842c5e2ca95e82773a7191a5c38e72c5b7279dedbffef6190726db9cbc3f3",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 577511800,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "3a094f444853ad8585dd83d17e264470965062e0699175528560297492105a2e",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 593089100,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-2048-SMOKE-RAGX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "94364f9f22a28e8cba8df714011296b553489ff32eedf5cd955cc9ddd4465047",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 593089100,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "f5aad508921743a15c0cd6e459b39eedd47597666cd943a2a009e187216e50f5",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2049,
+          "provider_done": true,
+          "provider_total_duration_ns": 586441800,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-2048-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "22e2876c0b0a35b34cc53d069dbe2f6a722637b0206b43281a64a006a5fd135e",
+      "observed_prompt_eval_count": 2049,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 586441800,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "0e8c6bdf4e63a5525b84b9b418028c1fa77c92b2efb9c60b5d10069658a117d3",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2049,
+          "provider_done": true,
+          "provider_total_duration_ns": 590518600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-2048-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "dd29461f63fb06805ed842981f3d4dffba97a338febb777dc111ad74e338d206",
+      "observed_prompt_eval_count": 2049,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 590518600,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "e526703c0b4393510227de77c9b961990462340c736d0da918bc6b8c511e5759",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 520882600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-2048-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "b346abbf436babc35e892e85a219521de08d1013426782db714d5a25caef5474",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 520882600,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "23a5381b843e2ec827a656633c429134d81ee2e330ea4fadaae0ceafd1f01300",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 482198300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-2048-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "b50935bb3f306ccb24ee782a5910496926d44dc51ae72f05410b3bfdbcd49ce6",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 482198300,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "2de74519c4f9a232c9fcf6216870af2a802070358c94ad4ddf89cfa3e68781d9",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 380992100,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-2048-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "41d2a2011d1af8bcef101afbb0e456dbce664dca31be67d258dc319808d637e1",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 380992100,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "e9d42fcbdcec9b71bfee297c0e4dad6561dcf08a596464e988181ee5635748a4",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2049,
+          "provider_done": true,
+          "provider_total_duration_ns": 634653200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-2048-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "f761780ec52c05529c67658b5d7eea7c2553cd5d1af811d4f99242280d41faab",
+      "observed_prompt_eval_count": 2049,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 634653200,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "66c87fe72a32f517533c6ec15e4f73261d2636fab67804dbd4bde7d0bb960878",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2049,
+          "provider_done": true,
+          "provider_total_duration_ns": 588669200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-2048-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "b3701d531d7ad769352629d443698134a2fec761d66f67a31b46d14fb76d73ca",
+      "observed_prompt_eval_count": 2049,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 588669200,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "68e785b0cca6e2638497ab45cf2f1cda13947739d20eca859f8c8e98776078c1",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 477559400,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-2048-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "b32b102e359ecb23a9ebe1f4976de39c30578835eb711be3800f669c4a921a29",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 477559400,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "72d384bf82694fb3ba156cd276dd167075ae96fd9d3fd27544103b797008e935",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 468544700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-2048-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "16e932ad59c0f20aa66759b52efd83abab5ef1cc72cac564b685b0f8e9f5709d",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 468544700,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "0d79c5d569016eb59a21a658395fe54152cd5ed53d50179be39b14ecb762a16d",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 355865600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-2048-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "7644ffc87a0386c7b49b7277518ce625993fef931abe69a09872e237b367110a",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 355865600,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "4ba9981436cc55255bf8a452690f05f6cd0db8e1ac4597f30f31a893cfc91916",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2049,
+          "provider_done": true,
+          "provider_total_duration_ns": 584251200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-2048-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "7353b0e9c33def15210d744d58ce07e9cabc892218c3c32e1812649465a86af0",
+      "observed_prompt_eval_count": 2049,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 584251200,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "0cc276ef69409f7e8a6e86afe05c133e243a01bc35b993a288ac27cd59361182",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2049,
+          "provider_done": true,
+          "provider_total_duration_ns": 575885500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-2048-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "9675e9b8f76abc86bd15a22acb2897c4e534d4e947ce54d762b4a1b71eab8bbb",
+      "observed_prompt_eval_count": 2049,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 575885500,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "ec2b46434ff7bbcebfbe2717a1dccd829eb63860cabc7addeb99c3452b47e1c5",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 467357000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-2048-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "762d9dd272a5d38f86f2d8e9e84da54974ee3d587c3216da8de29096651c72c4",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 467357000,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "c721bfa0165897a6a89cb3cb3a26b8c92db86134e2cf7e7d0fb45f003f98db26",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 516647900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-2048-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "9a14feea9fc16c00ad11124416c38695d0c29b0083402be7ed53b3ba029fb46c",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 516647900,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "969d30dea21c75cde07ba8d7478c4899fcb72be0b6eceaa6adad46843ec68af5",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 2050,
+          "provider_done": true,
+          "provider_total_duration_ns": 372689000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-2048-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 4096,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "efce290bf1ba13f97db15d5958cdf7e47b9d7c51328de797ed7be54616d8886c",
+      "observed_prompt_eval_count": 2050,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 372689000,
+      "relative_error": 0.0009765625,
+      "rendered_messages_sha256": "4d7fec1c65028fd054e1f05734800b589d97239a6686dab111eb6e6602819bf9",
+      "served_model": "m3-qwen3-4b-ctx4k:latest",
+      "target_prompt_tokens": 2048,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 5014143200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-4096-BEN-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "7eae0b5b3f4549be4f1eb2eded2a19096aafa1313ab6cf588e88d3877854a479",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 5014143200,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "1d5021e025c85f39c33af711d4e7a106fd06db3e6c320240b875a106cd2619e8",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1179036200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-4096-BEN-V-002",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "da239e299261e55458c6f049ee56ee7f4c73547905c9ed2ac326d555993b44a3",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1179036200,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "5f7538495278417202dd08e1f67abb524f22e68508e55656b279a62baca372df",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1154279000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-4096-BEN-V-003",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "416668bfdcec0a81ae3a3399d2a48ace1e973a1f0498385b098340d9494b16fb",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1154279000,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "52c42ec6af52158e7fa7bf5fd30a3e61991af8ba840992580d4863c7bd9d625d",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1158354700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-4096-BEN-V-004",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "d1cb0dd4a245409b6536d93dedee1ee328e1015da935ac47704ff46a62d9fd36",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1158354700,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "34ef609085ecbbbe8bdd4e6789a654386f06575d09a4e9ebe58b49ba2705bd1c",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1201881200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-4096-SMOKE-BEN-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "c9cf18382475494d8d0dafc1c2d82e1c07dbeb7c72bbdaac41439a5ab7e4e0b7",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1201881200,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "1d5021e025c85f39c33af711d4e7a106fd06db3e6c320240b875a106cd2619e8",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1180917900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-4096-SMOKE-BEN-V-010",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "23481d11e38ab4c462766f22ea04f3c9357de463070e87320babb78b8c54b852",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1180917900,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "280b710dd7f949b15951ddcb94c9e5ac0bc40368182edb52515be16004393baf",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1190749000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-4096-SMOKE-CHAINX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "2ac9808a60a544ac602ae60806b3db2a44fbd43e2ca933940b3bec9c305da34e",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1190749000,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "9b3c34693177f80732872a7e0f694e381d79d7293a3b00dec53b3d019ba17544",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1191955100,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-4096-SMOKE-DJX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "1bc0c261a4b6943ccac81e969187b9ec036faeaae968651770969463f2e351bf",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1191955100,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "aab442211ce6141fd938d492c655d3def48f1984503518a3a15faa5bcb745b82",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1223915000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-4096-SMOKE-MTLX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "62c5d07798f864d22e4f76683054497f62162d89d6ef714c4bd9ffeb39433612",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1223915000,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "79ffcd108e2ad17075b82af0b103b8ed4dd62ad42ee820c912ba079725b30225",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1175074000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-4096-SMOKE-RAGX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "c91a85778b7205ca78b31ec1a5c333599819abe8ad742c4f80f7dbffb9828250",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1175074000,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "3e50856b0711216aa9165cf65ab4677bd1f904219cb6a8f2e13aa944f44444f9",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4097,
+          "provider_done": true,
+          "provider_total_duration_ns": 1218303300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-4096-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "a701c6bbc7950c6a268c32bd1cb15e4c1b6e11991afd529d19bd90923abdce31",
+      "observed_prompt_eval_count": 4097,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1218303300,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "0693f2a2327507528b3afaab88f1ff61cbf205860bbc11bacf8597e21249ebab",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4097,
+          "provider_done": true,
+          "provider_total_duration_ns": 1234391500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-4096-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "82afb9a2098c6340f439e53ec000e1b4c3a9b7a684f556c3f85666eb1a0a3932",
+      "observed_prompt_eval_count": 4097,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1234391500,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "f430716ede09d59e78fc1aa27bc3c12a17f8639a5d922e357e7d858d87825440",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 1057338500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-4096-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "9145d88bbd8038a516c8079b4f1af7ecad0b2042af1d4a300fc3dd9526fd547b",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1057338500,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "cf1ed654911992827b962039a59221adc71294b61c27069f612b4e3dccfb5c7b",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 968521900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-4096-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "8ef2f70e87b595ac6ade9a375f51a58158f5bbf74a7c21122d50d09cd5a96a47",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 968521900,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "4d6d8c29acc814b9c757d77689dc3598e1bc2ec0bd2cbc30d3e1ce5817d64591",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 696947900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-4096-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "45189752d07c7eba3c95bc027ec6285696a4af90b97895ccd35ba40127f41977",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 696947900,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "dfe19865861419e76999b4b272de87b4e073e7c1e54c8157ed85cfa409e36e71",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4097,
+          "provider_done": true,
+          "provider_total_duration_ns": 1164509900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-4096-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "a4393ee6e1455b4973ee69ff79dc311e6411121817af5862fa8f9d8d4b985cf0",
+      "observed_prompt_eval_count": 4097,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1164509900,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "d25da1bd12ed5344f99c1c12ced02b7c3b94ba18078ebe97e66a0bc622dc2506",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4097,
+          "provider_done": true,
+          "provider_total_duration_ns": 1195180800,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-4096-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "33f0488fb95c8829fb260f2a26b7121d74a00c83e8423f5e82024201dd134582",
+      "observed_prompt_eval_count": 4097,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1195180800,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "815bc2540954cf5823e0978cb798da489aa92d9a903b19a3f424b1da0db1f6ea",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 983962700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-4096-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "2ec6a23e222416bfee30faa8ee856505b792f32e81ceaa15ce65c195b50dc5bf",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 983962700,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "f6facdaccc723e142cca0f95249130c4c31d56b4fa13f9d17c8048c0c0ed7a6b",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 954091700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-4096-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "eb9f9bd5a516d6f198dcfa9ca4c96f99ecc9d2f94702904fba5c9bda76df1723",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 954091700,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "91aaca65213a98d03744456a31d266c543d8ee40546a63481b70899549f54f34",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 744679500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-4096-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "d3620bc988d3844cec44d8c0c23321302f9d40321da0f59208b296474b103ad0",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 744679500,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "aeac2aa63e275f80dc9a45baeb5d31bd447b8d388f018179468bd2f354eb5dd3",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4097,
+          "provider_done": true,
+          "provider_total_duration_ns": 1215249300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-4096-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "dced91c06acc11daff8783cf6640af4c0a6de9b9f2e1ca07590345a39333acaa",
+      "observed_prompt_eval_count": 4097,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1215249300,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "3a62b98bcf841e95f566a6bbfae8fed8d59193eee886f7bd726325390729cb93",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4097,
+          "provider_done": true,
+          "provider_total_duration_ns": 1158822400,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-4096-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "779caf30c74e80ea5b58d0c506411332dfe3d64b91cbd974401e6b9cfaadebcf",
+      "observed_prompt_eval_count": 4097,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1158822400,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "3ec399d8fe884a06ddff8467d79e7189aa02bfb680d06506d3ae022ace3a5fd0",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 935823100,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-4096-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "3e5fba15fe693987efafb733fb481c5fe78c6000d514338f613588ea6f768858",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 935823100,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "dd7724338febfd215b494eb6d7ae53f41492ddd974f92b9e00dcd166193a0234",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 915708700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-4096-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "a9256e7792fb007d5d4d0cd767cfc37b9bfb71333f97f0078db17b79fdaf2433",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 915708700,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "4eaa169d2e0b8cb4f1dd11d4169d57fbc044a43376c41c624a583c5f04f36463",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 4098,
+          "provider_done": true,
+          "provider_total_duration_ns": 681120700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-4096-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 8192,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "30464d85aa1d08d6e00a7a076ea5bb1c9ab9c3e5fcf212f9d1a7ffb19e45107a",
+      "observed_prompt_eval_count": 4098,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 681120700,
+      "relative_error": 0.00048828125,
+      "rendered_messages_sha256": "644801dfc05a302bc4a35ffdad13186c2e0077451a5a0955cd437e5e8af44d3b",
+      "served_model": "m3-qwen3-4b-ctx8k:latest",
+      "target_prompt_tokens": 4096,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 6374315900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-8192-BEN-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "fc51cea90f680ac7623e7fb97b1b1ac8ce7944b9f1323ccfca2ad18a3e08ca21",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 6374315900,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "7e9ee6b4fee99abcf8c3d28131948400f769bbda75d526016aba1f0281ff7ac9",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2579348800,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-8192-BEN-V-002",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "03e2a3e194c487b999e986ccd23d6a0d774c1bb9321f956bd0fb9623de9c5690",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2579348800,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "2897f5cbf30d2d561c99615e61e794094cc92f42fb4b0265b73644d1ad6d4cd0",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2532683400,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-8192-BEN-V-003",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "f7da36cc81b0f981865f8be4b37fa77df71e6680c46e3e2e6b74ae1e6c96fc65",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2532683400,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "8f1be62ff114a0b6cf6980767a41502e553ddb68a7e8068051dbd8b6fd371bc5",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2620502200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-8192-BEN-V-004",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "3894c9bae58c71f4aef9c65f3e295a1ad60babe427814f0c7ead1e4e347ceeb2",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2620502200,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "0081b17ae1859cf3e59b577d0f5c21fa3ca20b3707856069d1b4d563f609fd11",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2647728900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-8192-SMOKE-BEN-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "f441ed9985991d7a4a0abf94a4b3b46befbb9145eb808d845d117bc62b4cea91",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2647728900,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "7e9ee6b4fee99abcf8c3d28131948400f769bbda75d526016aba1f0281ff7ac9",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2574290600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-8192-SMOKE-BEN-V-010",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "34022ff25142266959ec00ad40742b52d2343a289980fc54d7c7791b32c7aa21",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2574290600,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "312cfa015705bd9101c558c6b0593c1a07df78021be40b1166b27b300ff9fb83",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2587831000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-8192-SMOKE-CHAINX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "f13e4e7bd29cffbd32f2fdf4c38c27b6fc3704bc923822254cbc818c2f063a44",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2587831000,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "dc24d9c27982c8c3af26ff98cd6137659f3353e91ba1aecbbc1912705b3f02b2",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2596356500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-8192-SMOKE-DJX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "ed4039a753adc1d97470b075934bbb633f4ec07898737e801d76e7b105ea3844",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2596356500,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "6bd8016459ff8669600f4fc730c4e7da39498d25a1d73e70f1e2449dee443614",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2584349600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-8192-SMOKE-MTLX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "911c2c37bfbb5a8978c54c29428135cb8d8d4c37d5e6b20f2d41ac540affddea",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2584349600,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "bc7af4ad670ac9b0286c8723080097c5198cde6c3cd5d180ed7f5938363f0ae9",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2596254900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-8192-SMOKE-RAGX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "4fd6574f5d543b09f612de6050058e7701c5a1a312ad7c16f96ca8fc38dc9e40",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2596254900,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "d1eeb5755e3dcdab829d9388b78a7eb4b896c74b8ecaabf73538bfa2e68d9e5b",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8193,
+          "provider_done": true,
+          "provider_total_duration_ns": 2595940700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-8192-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "e6154af27f9bcb4c661a5cf3dda3b3ab7af6b119490f406fb32d2fb64ad711cf",
+      "observed_prompt_eval_count": 8193,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2595940700,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "6c1b45e9a37b35028b3a415ba7861c2c209e5e7bb66e98caed3120d08796e5a7",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8193,
+          "provider_done": true,
+          "provider_total_duration_ns": 2599577200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-8192-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "8ebe9d25ac38e3385b0c0f4096b44cda67e44447e7100e54ddb1b43f4788b819",
+      "observed_prompt_eval_count": 8193,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2599577200,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "993a346de43a1257bc5fecab630ff872d3acef8d94ee86badf28fd83fae207e1",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2103201300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-8192-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "89406bbdae48cd951d8c35334b29660f004668cf01ab7372ed57ff522a81e19b",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2103201300,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "1fb20ce6f8e62bae604ffaeb8e3ce71d042f3e6e5a62fcd4442bb63fc5f19a60",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2114933800,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-8192-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "d4a750e2287b4fa50b2a0c84ddf2ed9582a17929f6f705dcdea96b127690451e",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2114933800,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "bfa3ed2151851517a7dc93117c241846285c25ef47b11f6c9304eb8a61d87313",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 1534692000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-8192-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "e61524d145266e5c117f460e43a66aa481687d8fe61d18343540475c7fe846ee",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1534692000,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "74a5b8e15dea65032acabaaf6bc1ab70963f2f538af3de36356b62e5a626ceb6",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8193,
+          "provider_done": true,
+          "provider_total_duration_ns": 2597060400,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-8192-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "7a8b38117cf4077fb5a138eb3fda7c4a83dccfeed3b1a51a0f9b630b1edd690b",
+      "observed_prompt_eval_count": 8193,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2597060400,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "b919567d4d2c89605373c513e53034ccce48634abdc2e18d004e2f6f2ab6d8dc",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8193,
+          "provider_done": true,
+          "provider_total_duration_ns": 2611563300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-8192-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "6d9f30d34afb436af5cd50b01214837019d0672140ce0b28b0dd70e017e3b150",
+      "observed_prompt_eval_count": 8193,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2611563300,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "d879dd8951bf89748201e8cf864aaef6f2b9a7225ea14d009b78e98321d139e8",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2100846000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-8192-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "5d85f7c93ab859ade7eaf235203b9e1b1b36978ee8ea68a6b941034ca9d7902a",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2100846000,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "798b4217662e71623b956bfbc37474baa3bdc1b61b0aee83ca9fd10a1be36b4d",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2098859600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-8192-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "7407ad8eab8b7602a29954ba595d90c2414a29f8e8cc023a630668a82fb3e2ac",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2098859600,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "c61ba928580252e6a6476e609fbca5cc6bad1833ee670eb92e37c2e2f77107b3",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 1555532000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-8192-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "c68e062f2c73fd144978f81a92de4b877c9e854eadde9f822b2cd5ad21f31393",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1555532000,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "32774f65a2374f773aec6c5b02bd3ff8fe521b5a917f0c6cf921d2d3545260cc",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8193,
+          "provider_done": true,
+          "provider_total_duration_ns": 2624069500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-8192-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "cc8fe185c5d10d4b029532385f1db9e1ae82100863277c7435928e0a51944c9a",
+      "observed_prompt_eval_count": 8193,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2624069500,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "b44392396ad1bac2668895032c659a2bc1d892686fd18a5697f5cbe2d71bfd59",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8193,
+          "provider_done": true,
+          "provider_total_duration_ns": 2603818100,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-8192-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "47e239eab109af07cb1e22faa6f1a30cffb741b30fe6765f6c1f1179cf5278b4",
+      "observed_prompt_eval_count": 8193,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2603818100,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "aae3d13daa950fcb0e7e9f759934883e935c694cc97416f873f19fd1af12ae0f",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2102392900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-8192-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "490871c4031f5f47061d45647b07d8d3cd502588e3f750cbbcd00f47ca7fb584",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2102392900,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "82b65adb1a12a471554ada0c2d310555f0a3dc5811de251a98d76a30d7e30c70",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 2088311600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-8192-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "0cf134e182e92a5b446fc65de849b101f9b256a229d564c657b41761e1fb818f",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 2088311600,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "fd0785b3d91239586abe6655468043e4fa8ffc5ee5dc3d332b4c1707650cc9d9",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 8194,
+          "provider_done": true,
+          "provider_total_duration_ns": 1554306300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-8192-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 16384,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "8088a815582ec240c6faf1e04b1061c5e1152cff4d05a2ab823813186e6be2ed",
+      "observed_prompt_eval_count": 8194,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 1554306300,
+      "relative_error": 0.000244140625,
+      "rendered_messages_sha256": "3749703a37bf0398c57f3c8ec1181e59a9543e14d54ae6a4484f59c708395ae6",
+      "served_model": "m3-qwen3-4b-ctx16k:latest",
+      "target_prompt_tokens": 8192,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 12034935500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-16384-BEN-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "bd8e3ec4a5938c5115fc1ddd87adfe21730db0ab4dba362c5f913a2705f54f8a",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 12034935500,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "fe7bbc084b81fb610b9284d1e6400dd098fc98d88574e5965d55a9ca3029cc98",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7845993100,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-16384-BEN-V-002",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "6094cc8935c41bad40c46a8b658f54829ee180be7eca841a39e56e3ce52e8c8f",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7845993100,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "6d22025bd1d5cd81122d8cc83f6ae49b1dd8155dbd6aba2319a270e1e8b9dccb",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7878605800,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-16384-BEN-V-003",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "aae71b8b57ca738ead56b016af02bf1a7a001b1fcd18768ccf3b20ffc6b804ec",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7878605800,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "b60bfb4e6ea0bf19ca6a0629fdb038954780c1f59fe10b494b7e00049bde97dd",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7737849900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-matched_benign_latency-16384-BEN-V-004",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "e621833e4cecf2b940a0903f9c91c666accaa86bb1369287c47673b60018b1c5",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7737849900,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "e3094038d3fa051dd8e05e6d3c669ef5960824f76a3fdcec4d40536a5c22bcca",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7799728400,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-16384-SMOKE-BEN-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "6b33d906174726b0420c466e8e775522191dcf72825030344b6aa893efd859ae",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7799728400,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "fe7bbc084b81fb610b9284d1e6400dd098fc98d88574e5965d55a9ca3029cc98",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7761627700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-16384-SMOKE-BEN-V-010",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "e8d6bd1977a4253f95cb57623acb8fb1e595a457e9e89ff2a45004e0fc0c8984",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7761627700,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "fed989b8e5b22ee323f6162dd356307763d392960c8c66d34bd60e25884c5a03",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7974535900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-16384-SMOKE-CHAINX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "1f8ed9d79fdd753fd7bc71921de3b40bc538701425aee79aab75f2198965fdc7",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7974535900,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "b0f48862bcc234b749281561365d4e14d077f8086d27735110470d799a397884",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7768214300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-16384-SMOKE-DJX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "22ceeea605a156df5570eea7e7f20db0b8044f71bea5890736bf14563916e27d",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7768214300,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "6d1a6db5789441d836ef65d21a64ca1df12db7470d0605a99bc2a0fd591ed415",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7806681800,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-16384-SMOKE-MTLX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "191a6af2c581f65ad576b3f29677867df59786991b90035c03c3e3fb7cdbe818",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7806681800,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "f2732f3fd45ce61ca5ada4c331841a5283e1db17defa473f366991d5b641a9a8",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7707809900,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E14V2-mixed_throughput-16384-SMOKE-RAGX-V-001",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E14",
+      "fixture_row_sha256": "5e8a5e3a940dbd7b44164362110116ea9e05bdc1274ead2e3cf7d6179d775f64",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7707809900,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "2c3b5b7c177cbf8818f5ff1d7b282465188fc5ce9cad83a5fc2bca95addb65d3",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16385,
+          "provider_done": true,
+          "provider_total_duration_ns": 7734338500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-16384-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "8e9e42d5acb8624ac777d6762aabb9bb51038cd9b49ac6225e259588552fc519",
+      "observed_prompt_eval_count": 16385,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7734338500,
+      "relative_error": 6.103515625e-05,
+      "rendered_messages_sha256": "d688858fcb0d9ebce6926e596191e3bebb5c5592b6c48d4297fcf27f4bf36769",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16385,
+          "provider_done": true,
+          "provider_total_duration_ns": 7868975400,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-16384-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "94aa6a45a4e6c7c367ca31c6346d9be1a3739ae33a81d30ad3901b0c761a6ab6",
+      "observed_prompt_eval_count": 16385,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7868975400,
+      "relative_error": 6.103515625e-05,
+      "rendered_messages_sha256": "2a57dce52aefe1616ff4bce882dfc836844a22cd12ad2cae834885ba27762b83",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 6475750500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-16384-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "c3feac05af0f4cff9256955642c3f2567c777c74a0d266db6931e7a09b1156ea",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 6475750500,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "1fa6b57947045f59ff14d18f989406943392802a461ae6aa0f39b1a16c423f58",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 6441820700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-16384-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "3b29a835ef14606491e8b1a7274efc1f7615d7636a9fb949775e63cc6d0b66ef",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 6441820700,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "2151010e8034e9b96212a77609561d28a1f571587841ff7f292930fa78b581b3",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 4956568300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-ENVX-V-001-16384-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "9edd0cfe995675ebf153b7da522e048ef732326d4518d065fa7c8e22e727a844",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 4956568300,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "30ebef1c0e57d2035703b4df47c5c579c94cee7f0bd5196dfbe458d60abadb19",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16385,
+          "provider_done": true,
+          "provider_total_duration_ns": 7682687000,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-16384-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "3788b5580940360c21fe064f6dd4185cbe6e83ab92300565d314978443a1af39",
+      "observed_prompt_eval_count": 16385,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7682687000,
+      "relative_error": 6.103515625e-05,
+      "rendered_messages_sha256": "71356c0c82b0475f08fef531a1c83b7cc49a9ed6801980c1b2b548d283257008",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16385,
+          "provider_done": true,
+          "provider_total_duration_ns": 7855156300,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-16384-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "2a43ea9ce4e6506c8b80e01510ae35b015d6afc836e89809b4f841feb5fda8cb",
+      "observed_prompt_eval_count": 16385,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7855156300,
+      "relative_error": 6.103515625e-05,
+      "rendered_messages_sha256": "3bd501c7aa593489ddcc5abdf27f26d7bc5fbb7a37be228042a462b760b713ab",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 6405178400,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-16384-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "cd11475ede39fa6673ad41fc239739776dff6f8a6cfeaf6e41e855a848d49319",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 6405178400,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "67321e756b180539acf89659e2021881e314c79e6a391942274536c55d2b4fd7",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 6464006600,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-16384-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "5ca05c07acb5722f547802fc2186332549919f162f60b6ade5a94f51893ff37d",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 6464006600,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "b80fd99c85bb3afdfa90256b05a2022637142decd7db75d2ecf6b23a84fadc4e",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 4979418700,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-RAGX-V-001-16384-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "4c4df551fd06fd4b538d93bad5fc83b8bc3482d96306d8154bf7cac602315b6c",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 4979418700,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "fa76caa58c10a286568554dcba0c897ce9a67c2991e1b19b4475dfa6ef187cc7",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16385,
+          "provider_done": true,
+          "provider_total_duration_ns": 8182180200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-16384-0",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "c52f4136044f30f589ad20c6542afccd9381b4f4ed5bdcd0813d5acdf997d011",
+      "observed_prompt_eval_count": 16385,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 8182180200,
+      "relative_error": 6.103515625e-05,
+      "rendered_messages_sha256": "0c54ad91f57a8cf1c8a44be024055493262cb1c984dc2be0682d10765e924816",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 1,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16385,
+          "provider_done": true,
+          "provider_total_duration_ns": 8634556200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-16384-100",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "358dd974a2813221774518297e58da8325fa7fef008075f3e43e348887cc5c2e",
+      "observed_prompt_eval_count": 16385,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 8634556200,
+      "relative_error": 6.103515625e-05,
+      "rendered_messages_sha256": "553720ad2f488aee83f5c814ef29af7cce7d6cd01fd18da4ea7fd37cbf88862b",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 7107271200,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-16384-25",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "50096da95515a2a637db4c0ca2ef5a946d569f7c635509184ca0d64ba3bc407e",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 7107271200,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "94f3848c5e43c8b8cb06e59ede3ae0e9b1134ff743014279f7988e54c5d96331",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 8144203500,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-16384-50",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "34209de2c33571e1d2c5df91195bc8a09bb0b90bc7b6993c84b307a482f61af5",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 8144203500,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "c961e1661baf4dcfbab5655c490e3d7cbc4263d5e61586faea3f491c18cd9025",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    },
+    {
+      "absolute_error_tokens": 2,
+      "attempt_trace": [
+        {
+          "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+          "prompt_eval_count": 16386,
+          "provider_done": true,
+          "provider_total_duration_ns": 5753795800,
+          "usage_source": "ollama_native_prompt_eval_count",
+          "verification_attempt": 1
+        }
+      ],
+      "case_id": "E9V2-TOOLX-V-001-16384-75",
+      "discarded_completion_sha256": "6017dbca8e3eeb2f73be4123b0032c736d8c8f9bf8c86e6631887342c06fec90",
+      "effective_context_window_tokens": 32768,
+      "experiment_id": "E9",
+      "fixture_row_sha256": "8352a23957459caa082f78926d56f42f4e1e5680327bec1a6077e3f5c7650682",
+      "observed_prompt_eval_count": 16386,
+      "provider_attempts": 1,
+      "provider_done": true,
+      "provider_total_duration_ns": 5753795800,
+      "relative_error": 0.0001220703125,
+      "rendered_messages_sha256": "2f89bed9b0cb680d510793e5e991d280f546b1470ae9f486b0f189f4c31f93b6",
+      "served_model": "m3-qwen3-4b-ctx32k:latest",
+      "target_prompt_tokens": 16384,
+      "usage_source": "ollama_native_prompt_eval_count",
+      "verification_request_attempts": 1,
+      "within_tolerance": true
+    }
+  ],
+  "ollama_version": "ollama version is 0.24.0",
+  "protocol_id": "CONTEXT_CORRECTION_V2",
+  "schema_version": "2.0",
+  "seed": 419,
+  "status": "pass",
+  "target_medians": {
+    "16384": 16386,
+    "2048": 2050,
+    "4096": 4098,
+    "8192": 8194
+  },
+  "temperature": 0.0,
+  "tolerance_fraction": 0.01
+}

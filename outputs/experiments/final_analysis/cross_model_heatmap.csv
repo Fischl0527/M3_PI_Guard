@@ -1,0 +1,9 @@
+﻿source_experiment,panel,series,x,model,condition_id,evidence_scope,chain_pattern,pre_registered,denominator_policy,prompt_profile,guard_mode,attack_family,language,evasion_type,context_tokens,injection_position_pct,turns_or_round,strategy,temperature,seed,concurrency,metric,value,numerator,denominator,ci_low,ci_high,value_status,limitation
+E5,ASR,regular_full,gemma3:4b,gemma3:4b,regular_full,,,,,,,,,,,,,,,,,ASR,0.0,0,189,0.0,0.01992,observed,
+E5,ASR,regular_full,llama3.2:3b,llama3.2:3b,regular_full,,,,,,,,,,,,,,,,,ASR,0.015873,3,189,0.005413,0.045621,observed,
+E5,ASR,regular_full,phi4-mini:3.8b,phi4-mini:3.8b,regular_full,,,,,,,,,,,,,,,,,ASR,0.0,0,189,0.0,0.01992,observed,
+E5,ASR,regular_full,qwen3:4b-instruct,qwen3:4b-instruct,regular_full,,,,,,,,,,,,,,,,,ASR,0.0,0,189,0.0,0.01992,observed,
+E5,ASR,regular_none,gemma3:4b,gemma3:4b,regular_none,,,,,,,,,,,,,,,,,ASR,0.666667,126,189,0.59673,0.729963,observed,
+E5,ASR,regular_none,llama3.2:3b,llama3.2:3b,regular_none,,,,,,,,,,,,,,,,,ASR,0.846561,160,189,0.788323,0.890992,observed,
+E5,ASR,regular_none,phi4-mini:3.8b,phi4-mini:3.8b,regular_none,,,,,,,,,,,,,,,,,ASR,0.238095,45,189,0.182973,0.303652,observed,
+E5,ASR,regular_none,qwen3:4b-instruct,qwen3:4b-instruct,regular_none,,,,,,,,,,,,,,,,,ASR,0.269841,51,189,0.21161,0.337242,observed,

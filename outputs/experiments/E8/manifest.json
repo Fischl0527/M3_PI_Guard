@@ -1,0 +1,220 @@
+{
+  "artifacts": [
+    {
+      "bytes": 10263,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/manifest.json",
+      "sha256": "919e102eec62664820b69c232add66b1b03383e8d0e82fcf1c28cb4e17fb1609"
+    },
+    {
+      "bytes": 53729,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/smoke__qwen3_4b-instruct_smoke_normal_off.jsonl",
+      "sha256": "bec3a63d38350c959be267138f56644d8809ee783840a6409fb06ba76bf30914"
+    },
+    {
+      "bytes": 33922,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/smoke__qwen3_4b-instruct_smoke_normal_full.jsonl",
+      "sha256": "07fc685d6fc7156fb216065a332973e2527fce1d32900e636c04dde309ee79c5"
+    },
+    {
+      "bytes": 10196,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/manifest.json",
+      "sha256": "228e697cfd462edf551779813b4c57aa7f96bc41575c136453c3da5b52eb3ab1"
+    },
+    {
+      "bytes": 368096,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_off.jsonl",
+      "sha256": "c36a7354a0f3de0ae90a706628f8b44decbbaffe3a606e212266d92ec3caf37a"
+    },
+    {
+      "bytes": 314612,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_full.jsonl",
+      "sha256": "71e0becb2e86cbca7db41ab758f1e37583d4dbd51e8bca32c69a9a50b12f7509"
+    },
+    {
+      "bytes": 4787,
+      "kind": "raw_log_index",
+      "path": "outputs/experiments/E8/raw_run_index.json",
+      "sha256": "39ae23598c75bc5d468d5b09156bdb67affdc59afd8a49239731cb3839f27e1b"
+    },
+    {
+      "bytes": 16263,
+      "kind": "metrics",
+      "path": "outputs/experiments/E8/metrics.csv",
+      "sha256": "f9bcd0c5d91f1186f170461dbcaf4b7a0a3586653cc4b03b27b7d7e575d2bd64"
+    },
+    {
+      "bytes": 29459,
+      "kind": "statistics",
+      "path": "outputs/experiments/E8/statistics.json",
+      "sha256": "f94f14f1d5509244d975109d5a8f43f617b30cf6a35a1edaad489533f91b5f1f"
+    },
+    {
+      "bytes": 4909,
+      "kind": "analysis",
+      "path": "outputs/experiments/E8/analysis.md",
+      "sha256": "6ad11233d7811efad2aab5c47e404473485aa70cf02c2c0f2241d93c5f2ca372"
+    },
+    {
+      "bytes": 3222,
+      "kind": "figure_data",
+      "path": "outputs/experiments/E8/primary_chart_data.csv",
+      "sha256": "64f678e6ed5ccebee4544d4dd7f45666bdf2aba32b9fc5372d1bda2f10a8afea"
+    },
+    {
+      "bytes": 102064,
+      "kind": "figure",
+      "path": "outputs/experiments/E8/primary_chart.png",
+      "sha256": "d6d4d7f2247835110a70ad9c3f196ae86cc1637d929cac97a0994ff92d82a91a"
+    },
+    {
+      "bytes": 58789,
+      "kind": "figure",
+      "path": "outputs/experiments/E8/primary_chart.svg",
+      "sha256": "8fc5cce8c131e9f3b99002ac45d449c138492ae9b01b2c176ad6f4b535f3155d"
+    },
+    {
+      "bytes": 16263,
+      "kind": "specialized_metrics",
+      "path": "outputs/experiments/E8/by_mutation.csv",
+      "sha256": "f9bcd0c5d91f1186f170461dbcaf4b7a0a3586653cc4b03b27b7d7e575d2bd64"
+    },
+    {
+      "bytes": 9586,
+      "kind": "evasion_strength_view",
+      "path": "outputs/experiments/E8/strength_curve.csv",
+      "sha256": "86f5b695afb4fb536fa9cb179e8618462d46c72cc1a75a680fb42bda54c49508"
+    },
+    {
+      "bytes": 1155,
+      "kind": "figure_manifest",
+      "path": "outputs/experiments/E8/figure_manifest.json",
+      "sha256": "991be229d03e5ba528c5ae4577096757ae006e615124217b9c14a846fbbcc066"
+    }
+  ],
+  "command": [
+    "python",
+    "-m",
+    "experiments.analyze_program",
+    "--experiments",
+    "E8",
+    "--program-root",
+    "outputs/experiments/program_final_v3",
+    "--out-root",
+    "outputs/experiments"
+  ],
+  "compatibility_only_models": [],
+  "completed_at": "2026-07-13T23:49:39.027664+00:00",
+  "configuration": {
+    "bootstrap_iterations": 10000,
+    "bootstrap_seed": 42,
+    "chart_contract": {
+      "analytical_question": "How robust is the system to encoded and hidden variants?",
+      "dimension": "obfuscation_type",
+      "family": "matrix_and_cohort",
+      "metric": "ASR",
+      "na_policy": "undefined values are labelled NA and never rendered as zero",
+      "palette_policy": "single_root",
+      "renderer": "matplotlib_static_png_svg",
+      "uncertainty": "numerators, denominators and Wilson intervals remain in chart CSV",
+      "variant": "annotated_heatmap"
+    },
+    "evidence_tier": "formal_model_only",
+    "registry_mutation": false,
+    "source_program_root": "outputs/experiments/program_final_v3",
+    "source_status": "completed",
+    "strict_sample_type": true,
+    "stub_policy": "regression_only_excluded_from_formal_denominators",
+    "undefined_metric_policy": "null_not_zero"
+  },
+  "created_at": "2026-07-13T23:49:37.344982+00:00",
+  "dataset": {
+    "paths": [
+      "experiments/fixtures/derived/e8_cases.jsonl"
+    ],
+    "sha256": "4c9532f964a02e939188daaa160945271a571e013e24d5619dbe5bffe6608ce9"
+  },
+  "environment": {
+    "captured_at": "2026-07-13T23:49:32.637118+00:00",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 610.47, 8188, 6607",
+    "ollama_models": "NAME                 ID              SIZE      MODIFIED     \ngemma3:4b            a2af6cc3eb7f    3.3 GB    10 hours ago    \nllama3.2:3b          a80c4f17acd5    2.0 GB    12 hours ago    \nphi4-mini:3.8b       78fad5d182a7    2.5 GB    13 hours ago    \nqwen3:4b-instruct    0edcdef34593    2.5 GB    13 hours ago    \nvicuna:7b            370739dc897b    3.8 GB    7 weeks ago",
+    "ollama_version": "ollama version is 0.24.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.5"
+  },
+  "events": [
+    {
+      "at": "2026-07-13T23:49:37.344982+00:00",
+      "message": "shared program evidence analysis started",
+      "type": "analysis_started"
+    },
+    {
+      "at": "2026-07-13T23:49:39.027640+00:00",
+      "details": {
+        "formal_runs": 90
+      },
+      "message": "all required real-model logs and smoke gates validated",
+      "type": "input_validated"
+    },
+    {
+      "at": "2026-07-13T23:49:39.027667+00:00",
+      "details": {
+        "completed_runs": 90
+      },
+      "message": "experiment completed",
+      "type": "completed"
+    }
+  ],
+  "experiment_id": "E8",
+  "experiment_name": "encoding_evasion",
+  "failure": null,
+  "git": {
+    "branch": "test1",
+    "commit": "2c53f52c475e6838dc82246c821db5ed7ac0209c",
+    "dirty": true,
+    "status_sha256": "d3f742873ab5fd5bc6455d81f53e0295869a3cf5b2f7ada0cf390ddf10728e1e"
+  },
+  "input_quality": {
+    "duplicate_run_step_rows": 0,
+    "formal_raw_log_count": 2,
+    "issue_count": 0,
+    "issues": [],
+    "logical_case_runs": 90,
+    "nonterminal_case_runs": 0,
+    "parse_failure_rows": 4,
+    "raw_step_rows": 129,
+    "status": "completed",
+    "unresolved_case_runs": 4
+  },
+  "models": [
+    "qwen3:4b-instruct"
+  ],
+  "progress": {
+    "completed_runs": 90,
+    "expected_runs": 90,
+    "failed_jobs": 0,
+    "unresolved_cases": 4
+  },
+  "question": "How robust is the system to encoded and hidden variants?",
+  "required_artifacts": [
+    "outputs/experiments/E8/manifest.json",
+    "outputs/experiments/E8/raw_run_index.json",
+    "outputs/experiments/E8/metrics.csv",
+    "outputs/experiments/E8/statistics.json",
+    "outputs/experiments/E8/analysis.md",
+    "outputs/experiments/E8/primary_chart_data.csv",
+    "outputs/experiments/E8/primary_chart.png",
+    "outputs/experiments/E8/primary_chart.svg",
+    "outputs/experiments/E8/figure_manifest.json",
+    "outputs/experiments/E8/by_mutation.csv",
+    "outputs/experiments/E8/strength_curve.csv"
+  ],
+  "schema_version": "2.0",
+  "status": "completed",
+  "updated_at": "2026-07-13T23:49:39.027785+00:00"
+}

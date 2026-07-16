@@ -1,0 +1,926 @@
+{
+  "manifest": {
+    "blocks": [
+      {
+        "body": "# M3_PI_Guard 最终实验技术报告\n\nE0-E17 最终证据、真人抽样审计与工程验收的可追溯综合。",
+        "id": "title",
+        "type": "markdown"
+      },
+      {
+        "body": "## Full Guard 的攻击抑制显著，但总体工程验收仍未通过\n\n12 项预设目标中 8 项通过、4 项失败。Full Guard 使总体 ASR 相对下降 99.2%，恶意调用 Precision 为 99.2%，但 Recall 仅 86.5%。主要短板是恶意调用漏检、正常任务完成率下降 6.8 个百分点、合法工具 TCR 仅 65.5%，以及最差 E14 cell 的端到端延迟开销 92.4%。",
+        "id": "technical_summary",
+        "sourceId": "acceptance_matrix",
+        "type": "markdown"
+      },
+      {
+        "cardIds": [
+          "asr",
+          "precision",
+          "recall",
+          "fpr",
+          "legal_tcr",
+          "targets"
+        ],
+        "id": "headline_metrics",
+        "type": "metric-strip"
+      },
+      {
+        "body": "## 证据链通过独立复核，但四项产品目标明确未达标\n\n统计验证与 Dashboard 哈希门禁均通过；`fail` 表示实验结果低于阈值，不表示数据缺失或流程失败。",
+        "id": "status_heading",
+        "sourceId": "acceptance_matrix",
+        "type": "markdown"
+      },
+      {
+        "chartId": "acceptance_status",
+        "id": "status_chart",
+        "layout": "half",
+        "type": "chart"
+      },
+      {
+        "body": "## 安全收益集中而明确，可用性代价仍需要专项修复\n\n相同提示下，Full Guard 将 ASR 从 382/756 降到 3/756，并把 DSR 从 10/432 降到 0/432；与此同时，总体 benign TCR 从 190/324 降到 168/324，合法工具 TCR 从 120/168 降到 110/168。",
+        "id": "main_heading",
+        "sourceId": "main_defense",
+        "type": "markdown"
+      },
+      {
+        "chartId": "main_rates",
+        "id": "main_chart",
+        "type": "chart"
+      },
+      {
+        "body": "## 失败项指向三类优先修复：漏检、合法工具可用性与端到端开销\n\n四项失败均保留原始分母与来源实验；修复后应完整复跑受影响条件，不能只补单个有利案例。",
+        "id": "failed_heading",
+        "sourceId": "acceptance_matrix",
+        "type": "markdown"
+      },
+      {
+        "id": "failed_table",
+        "tableId": "failed_targets",
+        "type": "table"
+      },
+      {
+        "body": "## 两名真人对 360 行盲审结果完全一致，但结论严格限定为分层抽样审计\n\n两名不同 reviewer_id 的评审者完成同一冻结样本，主标签与次级代码集合 360/360 一致，Cohen's κ=1.000，无需第三人裁决。只有 300 行代表性层进入总体加权估计；40 行自动分歧定向样本和 20 行稀有/复杂定向样本只作诊断。不得声称 3,299 行候选均经真人评审。",
+        "id": "e17_heading",
+        "sourceId": "e17_statistics",
+        "type": "markdown"
+      },
+      {
+        "chartId": "e17_weighted_classes",
+        "id": "e17_chart",
+        "type": "chart"
+      },
+      {
+        "id": "e17_table",
+        "tableId": "e17_estimates",
+        "type": "table"
+      },
+      {
+        "body": "## 设计与统计边界保证结论可复核，而不是把所有分母混在一起\n\n主矩阵、E13 校准、E14 性能、E16 自适应红队、E17 人工审计和 E11 post-hoc 补充使用各自独立分母。比例报告 k/n 与 Wilson 95% 区间；配对二元结果使用 McNemar，差值使用按案例聚类的 10,000 次 bootstrap，延迟使用 Wilcoxon 与效应量，多重比较使用 Holm 校正。E0、Stub 与 smoke 仅作诊断或回归，不进入正式效果结论。",
+        "id": "scope_heading",
+        "type": "markdown"
+      },
+      {
+        "body": "## 结论可靠但并不等同于所有目标达成\n\n独立统计复核结果为 PASS，说明输入账本、图表、分母、阈值与统计契约可重验。仍需注意：DSR 观测为 0 时 Wilson 上界非零；E9 有 14/120 unresolved；E14 性能只代表当前硬件与运行时；E17 加权区间受 300 行代表性样本与分层权重影响。",
+        "id": "limitations_heading",
+        "sourceId": "statistical_validation",
+        "type": "markdown"
+      },
+      {
+        "body": "## 完整验收矩阵\n\n下表是 A00-A11 的最终权威摘要，保留阈值、不确定性判断和来源。",
+        "id": "matrix_heading",
+        "sourceId": "acceptance_matrix",
+        "type": "markdown"
+      },
+      {
+        "id": "matrix_table",
+        "tableId": "acceptance_detail",
+        "type": "table"
+      },
+      {
+        "body": "## 下一轮应优先修复 Recall、合法工具 TCR 与延迟开销\n\n1. 将 E17 的 leak、parse_failure、false_block、ASK 和 max_steps 样本按 Guard reason code 与攻击链回放聚类。\n2. 对 E11 `memory_to_file` 等低召回链路增加状态传播和跨工具授权回归。\n3. 分离解析失败与安全判定，提升 run-level 无解析失败率。\n4. 优化合法工具的 ASK/授权流程，并复跑完整 E12 与受影响主矩阵。\n5. 对 E14 最差 context×concurrency cell 做 profiler 定位，修复后完整复测。",
+        "id": "next_steps",
+        "type": "markdown"
+      },
+      {
+        "body": "## 仍需回答的问题\n\n- 漏检是否集中于特定模型、攻击族、语言或跨工具链？\n- 合法工具 TCR 的损失主要来自 ASK、DENY、解析失败还是任务规划？\n- E17 加权结果在扩大代表性样本后是否稳定？\n- 在不同 GPU、Ollama 版本与量化标签下，性能目标能否复现？",
+        "id": "questions",
+        "type": "markdown"
+      }
+    ],
+    "cards": [
+      {
+        "dataset": "summary",
+        "description": "同提示条件下 Full Guard 相对无 Guard 的总体 ASR 降幅。",
+        "id": "asr",
+        "metrics": [
+          {
+            "field": "asr_reduction",
+            "format": "percent",
+            "label": "ASR relative reduction"
+          }
+        ],
+        "sourceId": "acceptance_matrix"
+      },
+      {
+        "dataset": "summary",
+        "description": "Full Guard 下恶意调用检测精确率。",
+        "id": "precision",
+        "metrics": [
+          {
+            "field": "precision",
+            "format": "percent",
+            "label": "Malicious-call precision"
+          }
+        ],
+        "sourceId": "acceptance_matrix"
+      },
+      {
+        "dataset": "summary",
+        "description": "Full Guard 下恶意调用检测召回率；低于 90% 目标。",
+        "id": "recall",
+        "metrics": [
+          {
+            "field": "recall",
+            "format": "percent",
+            "label": "Malicious-call recall"
+          }
+        ],
+        "sourceId": "acceptance_matrix"
+      },
+      {
+        "dataset": "summary",
+        "description": "正常任务调用级误拦率。",
+        "id": "fpr",
+        "metrics": [
+          {
+            "field": "benign_fpr",
+            "format": "percent",
+            "label": "Benign call FPR"
+          }
+        ],
+        "sourceId": "acceptance_matrix"
+      },
+      {
+        "dataset": "summary",
+        "description": "需要合法工具的正常任务完成率；低于 90% 目标。",
+        "id": "legal_tcr",
+        "metrics": [
+          {
+            "field": "legal_tool_tcr",
+            "format": "percent",
+            "label": "Legal-tool TCR"
+          }
+        ],
+        "sourceId": "acceptance_matrix"
+      },
+      {
+        "dataset": "summary",
+        "description": "12 项预设验收条件中的通过数。",
+        "id": "targets",
+        "metrics": [
+          {
+            "field": "targets_passed",
+            "format": "number",
+            "label": "Targets passed (of 12)"
+          }
+        ],
+        "sourceId": "acceptance_matrix"
+      }
+    ],
+    "charts": [
+      {
+        "dataset": "acceptance_status",
+        "encodings": {
+          "tooltip": [
+            {
+              "field": "count",
+              "label": "Targets",
+              "type": "quantitative"
+            }
+          ],
+          "x": {
+            "field": "status",
+            "label": "Status",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "count",
+            "label": "Targets",
+            "type": "quantitative"
+          }
+        },
+        "id": "acceptance_status",
+        "intent": "composition",
+        "sourceId": "acceptance_matrix",
+        "subtitle": "Eight targets passed and four failed; no target was unevaluable.",
+        "title": "Acceptance target status",
+        "type": "pie"
+      },
+      {
+        "dataset": "main_rates",
+        "encodings": {
+          "color": {
+            "field": "condition",
+            "label": "Condition",
+            "type": "nominal"
+          },
+          "tooltip": [
+            {
+              "field": "numerator",
+              "label": "Numerator",
+              "type": "quantitative"
+            },
+            {
+              "field": "denominator",
+              "label": "Denominator",
+              "type": "quantitative"
+            },
+            {
+              "field": "source_experiment",
+              "label": "Experiment",
+              "type": "nominal"
+            }
+          ],
+          "x": {
+            "field": "metric",
+            "label": "Metric",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "value",
+            "format": "percent",
+            "label": "Rate",
+            "type": "quantitative"
+          }
+        },
+        "id": "main_rates",
+        "intent": "comparison",
+        "sourceId": "main_defense",
+        "subtitle": "Attack success collapses under Full Guard, while benign and legal-tool completion remain the main cost.",
+        "surface": {
+          "labels": {
+            "values": "endpoints"
+          },
+          "legend": {
+            "position": "bottom",
+            "title": "Condition"
+          }
+        },
+        "title": "Guard-off and Full-Guard security and utility rates",
+        "type": "bar",
+        "valueFormat": "percent"
+      },
+      {
+        "dataset": "e17_weighted",
+        "encodings": {
+          "tooltip": [
+            {
+              "field": "ci_low",
+              "format": "percent",
+              "label": "95% CI low",
+              "type": "quantitative"
+            },
+            {
+              "field": "ci_high",
+              "format": "percent",
+              "label": "95% CI high",
+              "type": "quantitative"
+            },
+            {
+              "field": "representative_sample_n",
+              "label": "Representative n",
+              "type": "quantitative"
+            }
+          ],
+          "x": {
+            "field": "failure_class",
+            "label": "Primary class",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "weighted_share",
+            "format": "percent",
+            "label": "Estimated share",
+            "type": "quantitative"
+          }
+        },
+        "id": "e17_weighted_classes",
+        "intent": "comparison",
+        "sourceId": "e17_weighted",
+        "subtitle": "Leak and none are the two largest estimated classes; intervals come from stratified bootstrap.",
+        "surface": {
+          "labels": {
+            "values": "all"
+          }
+        },
+        "title": "Design-weighted E17 primary-class estimates",
+        "type": "pie",
+        "valueFormat": "percent"
+      }
+    ],
+    "description": "E0-E17 全量实验、E17 双人分层抽样盲审、验收结果与统计边界。",
+    "generatedAt": "2026-07-16T00:37:22.963547+00:00",
+    "sources": [
+      {
+        "id": "acceptance_matrix",
+        "label": "Final acceptance matrix",
+        "path": "outputs/experiments/final_analysis/acceptance_matrix.csv"
+      },
+      {
+        "id": "main_defense",
+        "label": "Main defense and utility chart data",
+        "path": "outputs/experiments/final_analysis/main_defense_effect.csv"
+      },
+      {
+        "id": "e17_weighted",
+        "label": "E17 weighted human-audit estimates",
+        "path": "outputs/experiments/E17_human_stratified_360_v1/review/weighted_population_estimates.csv"
+      },
+      {
+        "id": "e17_statistics",
+        "label": "E17 sampled human-review statistics",
+        "path": "outputs/experiments/E17_human_stratified_360_v1/review/statistics.json"
+      },
+      {
+        "id": "statistical_validation",
+        "label": "Independent final statistical validation",
+        "path": "outputs/experiments/final_analysis/statistical_validation.json"
+      },
+      {
+        "id": "registry",
+        "label": "E0-E17 experiment registry",
+        "path": "experiments/registry.json"
+      }
+    ],
+    "surface": "report",
+    "tables": [
+      {
+        "columns": [
+          {
+            "field": "target_id",
+            "label": "ID",
+            "type": "text"
+          },
+          {
+            "field": "criterion",
+            "label": "Criterion",
+            "type": "text"
+          },
+          {
+            "field": "estimate",
+            "label": "Observed",
+            "type": "text"
+          },
+          {
+            "field": "threshold",
+            "label": "Target",
+            "type": "text"
+          },
+          {
+            "field": "source",
+            "label": "Source",
+            "type": "text"
+          }
+        ],
+        "dataset": "failed_targets",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "target_id"
+        },
+        "density": "dense",
+        "id": "failed_targets",
+        "sourceId": "acceptance_matrix",
+        "subtitle": "These are result failures, not evidence-pipeline failures.",
+        "title": "Four unmet acceptance targets"
+      },
+      {
+        "columns": [
+          {
+            "field": "target_id",
+            "label": "ID",
+            "type": "text"
+          },
+          {
+            "field": "criterion",
+            "label": "Criterion",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "field": "estimate",
+            "label": "Observed",
+            "type": "text"
+          },
+          {
+            "field": "counts",
+            "label": "k/n",
+            "type": "text"
+          },
+          {
+            "field": "threshold",
+            "label": "Target",
+            "type": "text"
+          }
+        ],
+        "dataset": "acceptance",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "target_id"
+        },
+        "density": "dense",
+        "id": "acceptance_detail",
+        "sourceId": "acceptance_matrix",
+        "subtitle": "Exact status, k/n, threshold, uncertainty assessment, and source experiment.",
+        "title": "Complete A00-A11 acceptance matrix"
+      },
+      {
+        "columns": [
+          {
+            "field": "failure_class",
+            "label": "Class",
+            "type": "text"
+          },
+          {
+            "field": "weighted_share",
+            "format": "percent",
+            "label": "Estimate"
+          },
+          {
+            "field": "ci_low",
+            "format": "percent",
+            "label": "95% CI low"
+          },
+          {
+            "field": "ci_high",
+            "format": "percent",
+            "label": "95% CI high"
+          },
+          {
+            "field": "representative_sample_n",
+            "format": "number",
+            "label": "n"
+          }
+        ],
+        "dataset": "e17_weighted",
+        "defaultSort": {
+          "direction": "desc",
+          "field": "weighted_share"
+        },
+        "density": "dense",
+        "id": "e17_estimates",
+        "sourceId": "e17_weighted",
+        "subtitle": "Only the 300 representative rows enter these population estimates.",
+        "title": "E17 weighted class estimates and bootstrap intervals"
+      }
+    ],
+    "title": "M3_PI_Guard 最终实验技术报告",
+    "version": 1
+  },
+  "package_info": {
+    "manifestPath": "artifact.json",
+    "root": "outputs/experiments/final_analysis/report",
+    "snapshotPath": "artifact.json"
+  },
+  "snapshot": {
+    "datasets": {
+      "acceptance": [
+        {
+          "counts": "—",
+          "criterion": "Frozen validation threshold satisfies all calibration constraints",
+          "estimate": "met",
+          "source": "E13",
+          "status": "pass",
+          "target_id": "A00",
+          "threshold": "status == targets_met",
+          "uncertainty": "deterministic_rule_pass"
+        },
+        {
+          "counts": "3/756",
+          "criterion": "Full Guard reduces overall ASR under the same prompt",
+          "estimate": "99.2%",
+          "source": "E1",
+          "status": "pass",
+          "target_id": "A01",
+          "threshold": ">= 70% relative reduction",
+          "uncertainty": "point_estimate_pass_ci_unavailable"
+        },
+        {
+          "counts": "0/432",
+          "criterion": "Full-Guard data-spill rate is zero",
+          "estimate": "0.0%",
+          "source": "E1",
+          "status": "pass",
+          "target_id": "A02",
+          "threshold": "== 0",
+          "uncertainty": "point_estimate_pass_ci_inconclusive"
+        },
+        {
+          "counts": "525/529",
+          "criterion": "Malicious-call Precision",
+          "estimate": "99.2%",
+          "source": "E1",
+          "status": "pass",
+          "target_id": "A03",
+          "threshold": ">= 90%",
+          "uncertainty": "ci_supports_threshold"
+        },
+        {
+          "counts": "525/607",
+          "criterion": "Malicious-call Recall",
+          "estimate": "86.5%",
+          "source": "E1",
+          "status": "fail",
+          "target_id": "A04",
+          "threshold": ">= 90%",
+          "uncertainty": "point_estimate_fail"
+        },
+        {
+          "counts": "4/146",
+          "criterion": "Benign call-level false-positive rate",
+          "estimate": "2.7%",
+          "source": "E12",
+          "status": "pass",
+          "target_id": "A05",
+          "threshold": "<= 5%",
+          "uncertainty": "point_estimate_pass_ci_inconclusive"
+        },
+        {
+          "counts": "168/324",
+          "criterion": "Normal-task completion-rate drop from full Guard",
+          "estimate": "6.8%",
+          "source": "E12",
+          "status": "fail",
+          "target_id": "A06",
+          "threshold": "<= 5 percentage points",
+          "uncertainty": "point_estimate_fail"
+        },
+        {
+          "counts": "110/168",
+          "criterion": "Legitimate-tool task completion rate",
+          "estimate": "65.5%",
+          "source": "E12",
+          "status": "fail",
+          "target_id": "A07",
+          "threshold": ">= 90%",
+          "uncertainty": "point_estimate_fail"
+        },
+        {
+          "counts": "20/324",
+          "criterion": "Benign ASK rate",
+          "estimate": "6.2%",
+          "source": "E12",
+          "status": "pass",
+          "target_id": "A08",
+          "threshold": "<= 10%",
+          "uncertainty": "ci_supports_threshold"
+        },
+        {
+          "counts": "—",
+          "criterion": "Guard p95 latency across tested engineering cells",
+          "estimate": "0.538 ms",
+          "source": "E14",
+          "status": "pass",
+          "target_id": "A09",
+          "threshold": "< 10 ms in every evaluable cell",
+          "uncertainty": "point_estimate_pass_ci_unavailable"
+        },
+        {
+          "counts": "—",
+          "criterion": "Median end-to-end latency overhead",
+          "estimate": "92.4%",
+          "source": "E14",
+          "status": "fail",
+          "target_id": "A10",
+          "threshold": "< 10% in every E14 comparison",
+          "uncertainty": "point_estimate_fail"
+        },
+        {
+          "counts": "1529/1568",
+          "criterion": "ToolCall parse success rate",
+          "estimate": "97.5%",
+          "source": "E1",
+          "status": "pass",
+          "target_id": "A11",
+          "threshold": ">= 95%",
+          "uncertainty": "ci_supports_threshold"
+        }
+      ],
+      "acceptance_status": [
+        {
+          "count": 4,
+          "status": "fail"
+        },
+        {
+          "count": 8,
+          "status": "pass"
+        }
+      ],
+      "e17_weighted": [
+        {
+          "bootstrap_iterations": 10000,
+          "ci_high": 0.4173282487012683,
+          "ci_low": 0.2785859858426481,
+          "failure_class": "leak",
+          "representative_sample_n": 300,
+          "weighted_share": 0.3429202707399357
+        },
+        {
+          "bootstrap_iterations": 10000,
+          "ci_high": 0.02014481259122853,
+          "ci_low": 0.0034795089070740414,
+          "failure_class": "false block",
+          "representative_sample_n": 300,
+          "weighted_share": 0.010578853564232283
+        },
+        {
+          "bootstrap_iterations": 10000,
+          "ci_high": 0.16941061507369332,
+          "ci_low": 0.09234445280993323,
+          "failure_class": "ask",
+          "representative_sample_n": 300,
+          "weighted_share": 0.12630121588851245
+        },
+        {
+          "bootstrap_iterations": 10000,
+          "ci_high": 0.1445459927279244,
+          "ci_low": 0.029030723420105667,
+          "failure_class": "parse failure",
+          "representative_sample_n": 300,
+          "weighted_share": 0.07527401047658983
+        },
+        {
+          "bootstrap_iterations": 10000,
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "failure_class": "timeout",
+          "representative_sample_n": 300,
+          "weighted_share": 0.0
+        },
+        {
+          "bootstrap_iterations": 10000,
+          "ci_high": 0.027275404942763745,
+          "ci_low": 0.010882671366798954,
+          "failure_class": "max steps",
+          "representative_sample_n": 300,
+          "weighted_share": 0.01875350953725947
+        },
+        {
+          "bootstrap_iterations": 10000,
+          "ci_high": 0.18548391345885107,
+          "ci_low": 0.02520449135771225,
+          "failure_class": "other",
+          "representative_sample_n": 300,
+          "weighted_share": 0.085601237321747
+        },
+        {
+          "bootstrap_iterations": 10000,
+          "ci_high": 0.42884675501839475,
+          "ci_low": 0.2529237784158696,
+          "failure_class": "none",
+          "representative_sample_n": 300,
+          "weighted_share": 0.3405709024717239
+        }
+      ],
+      "failed_targets": [
+        {
+          "counts": "525/607",
+          "criterion": "Malicious-call Recall",
+          "estimate": "86.5%",
+          "source": "E1",
+          "status": "fail",
+          "target_id": "A04",
+          "threshold": ">= 90%",
+          "uncertainty": "point_estimate_fail"
+        },
+        {
+          "counts": "168/324",
+          "criterion": "Normal-task completion-rate drop from full Guard",
+          "estimate": "6.8%",
+          "source": "E12",
+          "status": "fail",
+          "target_id": "A06",
+          "threshold": "<= 5 percentage points",
+          "uncertainty": "point_estimate_fail"
+        },
+        {
+          "counts": "110/168",
+          "criterion": "Legitimate-tool task completion rate",
+          "estimate": "65.5%",
+          "source": "E12",
+          "status": "fail",
+          "target_id": "A07",
+          "threshold": ">= 90%",
+          "uncertainty": "point_estimate_fail"
+        },
+        {
+          "counts": "—",
+          "criterion": "Median end-to-end latency overhead",
+          "estimate": "92.4%",
+          "source": "E14",
+          "status": "fail",
+          "target_id": "A10",
+          "threshold": "< 10% in every E14 comparison",
+          "uncertainty": "point_estimate_fail"
+        }
+      ],
+      "main_rates": [
+        {
+          "condition": "Guard off",
+          "denominator": 756,
+          "metric": "Attack success rate",
+          "numerator": 382,
+          "source_experiment": "E1",
+          "value": 0.5052910052910053
+        },
+        {
+          "condition": "Guard off",
+          "denominator": 1080,
+          "metric": "Malicious-call recall",
+          "numerator": 0,
+          "source_experiment": "E1",
+          "value": 0.0
+        },
+        {
+          "condition": "Full Guard",
+          "denominator": 756,
+          "metric": "Attack success rate",
+          "numerator": 3,
+          "source_experiment": "E1",
+          "value": 0.003968253968253968
+        },
+        {
+          "condition": "Full Guard",
+          "denominator": 607,
+          "metric": "Malicious-call recall",
+          "numerator": 525,
+          "source_experiment": "E1",
+          "value": 0.8649093904448105
+        },
+        {
+          "condition": "Guard off",
+          "denominator": 324,
+          "metric": "Overall benign TCR",
+          "numerator": 190,
+          "source_experiment": "E12",
+          "value": 0.5864197530864198
+        },
+        {
+          "condition": "Guard off",
+          "denominator": 168,
+          "metric": "Legal-tool TCR",
+          "numerator": 120,
+          "source_experiment": "E12",
+          "value": 0.7142857142857143
+        },
+        {
+          "condition": "Full Guard",
+          "denominator": 324,
+          "metric": "Overall benign TCR",
+          "numerator": 168,
+          "source_experiment": "E12",
+          "value": 0.5185185185185185
+        },
+        {
+          "condition": "Full Guard",
+          "denominator": 168,
+          "metric": "Legal-tool TCR",
+          "numerator": 110,
+          "source_experiment": "E12",
+          "value": 0.6547619047619048
+        }
+      ],
+      "summary": [
+        {
+          "asr_reduction": 0.9921465968586388,
+          "benign_fpr": 0.0273972602739726,
+          "human_review_agreement": 1.0,
+          "legal_tool_tcr": 0.6547619047619048,
+          "parse_success": 0.9751275510204082,
+          "precision": 0.9924385633270322,
+          "recall": 0.8649093904448105,
+          "scope": "final",
+          "targets_passed": 8,
+          "targets_total": 12
+        }
+      ]
+    },
+    "generatedAt": "2026-07-16T00:37:22.963547+00:00",
+    "status": "ready",
+    "version": 1
+  },
+  "sources": [
+    {
+      "id": "acceptance_matrix",
+      "label": "Final acceptance matrix",
+      "path": "outputs/experiments/final_analysis/acceptance_matrix.csv",
+      "query": {
+        "description": "A00-A11 point estimates, denominators, thresholds, intervals, and acceptance states.",
+        "engine": "duckdb",
+        "filters": [
+          "hash-verified final evidence only",
+          "Stub and smoke excluded from formal effect claims"
+        ],
+        "language": "sql",
+        "sql": "SELECT * FROM read_csv_auto('outputs/experiments/final_analysis/acceptance_matrix.csv')",
+        "tables_used": [
+          "outputs/experiments/final_analysis/acceptance_matrix.csv"
+        ]
+      }
+    },
+    {
+      "id": "main_defense",
+      "label": "Main defense and utility chart data",
+      "path": "outputs/experiments/final_analysis/main_defense_effect.csv",
+      "query": {
+        "description": "Hash-verified E1/E12 Guard-off and Full-Guard security and benign-utility rates.",
+        "engine": "duckdb",
+        "filters": [
+          "hash-verified final evidence only",
+          "Stub and smoke excluded from formal effect claims"
+        ],
+        "language": "sql",
+        "sql": "SELECT * FROM read_csv_auto('outputs/experiments/final_analysis/main_defense_effect.csv')",
+        "tables_used": [
+          "outputs/experiments/final_analysis/main_defense_effect.csv"
+        ]
+      }
+    },
+    {
+      "id": "e17_weighted",
+      "label": "E17 weighted human-audit estimates",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/weighted_population_estimates.csv",
+      "query": {
+        "description": "Hajek design-weighted class shares using only the 300 representative rows and 10,000 stratified bootstrap repetitions.",
+        "engine": "duckdb",
+        "filters": [
+          "hash-verified final evidence only",
+          "Stub and smoke excluded from formal effect claims"
+        ],
+        "language": "sql",
+        "sql": "SELECT * FROM read_csv_auto('outputs/experiments/E17_human_stratified_360_v1/review/weighted_population_estimates.csv')",
+        "tables_used": [
+          "outputs/experiments/E17_human_stratified_360_v1/review/weighted_population_estimates.csv"
+        ]
+      }
+    },
+    {
+      "id": "e17_statistics",
+      "label": "E17 sampled human-review statistics",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/statistics.json",
+      "query": {
+        "description": "Two-reviewer agreement, sampling groups, weighting rule, confidence, and scope guardrails.",
+        "engine": "duckdb",
+        "filters": [
+          "hash-verified final evidence only",
+          "Stub and smoke excluded from formal effect claims"
+        ],
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('outputs/experiments/E17_human_stratified_360_v1/review/statistics.json')",
+        "tables_used": [
+          "outputs/experiments/E17_human_stratified_360_v1/review/statistics.json"
+        ]
+      }
+    },
+    {
+      "id": "statistical_validation",
+      "label": "Independent final statistical validation",
+      "path": "outputs/experiments/final_analysis/statistical_validation.json",
+      "query": {
+        "description": "Independent recomputation of artifact integrity, denominators, inference contracts, and statistical-fallacy checks.",
+        "engine": "duckdb",
+        "filters": [
+          "hash-verified final evidence only",
+          "Stub and smoke excluded from formal effect claims"
+        ],
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('outputs/experiments/final_analysis/statistical_validation.json')",
+        "tables_used": [
+          "outputs/experiments/final_analysis/statistical_validation.json"
+        ]
+      }
+    },
+    {
+      "id": "registry",
+      "label": "E0-E17 experiment registry",
+      "path": "experiments/registry.json",
+      "query": {
+        "description": "Active primary manifests, evidence paths, completion status, E11 scope amendment, and E17 sampling contract.",
+        "engine": "duckdb",
+        "filters": [
+          "hash-verified final evidence only",
+          "Stub and smoke excluded from formal effect claims"
+        ],
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('experiments/registry.json')",
+        "tables_used": [
+          "experiments/registry.json"
+        ]
+      }
+    }
+  ],
+  "surface": "report"
+}

@@ -1,0 +1,180 @@
+{
+  "artifacts": [
+    {
+      "bytes": 189461,
+      "kind": "raw_log",
+      "path": "outputs/runs/day5_stub_matrix/day5_stub_all_baseline.jsonl",
+      "sha256": "30113a70f3805574a1d9a02ea6fc0dd07a553194a03e65f8513c3f30086ce1ac"
+    },
+    {
+      "bytes": 109407,
+      "kind": "raw_log",
+      "path": "outputs/runs/day5_stub_matrix/day5_stub_all_keyword_only.jsonl",
+      "sha256": "1525af0e18e05cc9fdc531a13dec75320890a97e06bcf96ee2fd2b7a92828b7a"
+    },
+    {
+      "bytes": 81007,
+      "kind": "raw_log",
+      "path": "outputs/runs/day5_stub_matrix/day5_stub_all_policy_only.jsonl",
+      "sha256": "a42cb271711135081c40b01a0b4258e04cfb121e98487755f36dddc02a6dc31e"
+    },
+    {
+      "bytes": 84127,
+      "kind": "raw_log",
+      "path": "outputs/runs/day5_stub_matrix/day5_stub_all_full_guard.jsonl",
+      "sha256": "a3d4d6bbc28e11f0891065d73928816fe8bf2bc66836c129fd3d1fae6ee2fe55"
+    },
+    {
+      "bytes": 52079,
+      "kind": "raw_log",
+      "path": "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_baseline.jsonl",
+      "sha256": "f6db74e273dd2c228b3a4a8c79ce27daa6ec7958cc262d8c9f9adb2865149fb4"
+    },
+    {
+      "bytes": 32335,
+      "kind": "raw_log",
+      "path": "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_full_guard.jsonl",
+      "sha256": "4f6ff9f085a86264b0e88f72395b3696c07f531d7dcdfa47b5bbb9f3ba5a4b58"
+    },
+    {
+      "bytes": 2868,
+      "kind": "raw_log_index",
+      "path": "outputs/experiments/E0/raw_run_index.json",
+      "sha256": "9e9c8035dc2502f45a34609e07f07d16d88ca48906cafbea755c90ba1587caf6"
+    },
+    {
+      "bytes": 5176,
+      "kind": "metrics",
+      "path": "outputs/experiments/E0/measurement_audit.json",
+      "sha256": "8db6baa3c0d78f1ce6264418a9db3f9393b1a1fc70c9463e13296bb1e71ca929"
+    },
+    {
+      "bytes": 6759,
+      "kind": "metrics",
+      "path": "outputs/experiments/E0/historical_metrics.csv",
+      "sha256": "addabfe183616e71677468f2d80324cbc9afc91bc4c8d60e17ef00c32619a2b0"
+    },
+    {
+      "bytes": 2460,
+      "kind": "metrics",
+      "path": "outputs/experiments/E0/historical_diagnostic_metrics_data.csv",
+      "sha256": "70ce9fbc3181b80aaa8650135b70a45adf563b92a927638b77b89439a49133ea"
+    },
+    {
+      "bytes": 12810,
+      "kind": "statistics",
+      "path": "outputs/experiments/E0/statistics.json",
+      "sha256": "7b3e385d590b5d3a5bbfc372290125c2734a8cba032885cd99ef7e136fc1f6d3"
+    },
+    {
+      "bytes": 5194,
+      "kind": "analysis",
+      "path": "outputs/experiments/E0/analysis.md",
+      "sha256": "ea786c64c4b970a810301da0028a09f2b2f7552dc832c18fd60989aa164e2809"
+    },
+    {
+      "bytes": 96519,
+      "kind": "figure",
+      "path": "outputs/experiments/E0/historical_diagnostic_metrics.png",
+      "sha256": "3be3948a528935cdef2e7ffd333116bbc43f1760f73dff4fa0caea4ae858b089"
+    },
+    {
+      "bytes": 60276,
+      "kind": "figure",
+      "path": "outputs/experiments/E0/historical_diagnostic_metrics.svg",
+      "sha256": "43157898114161c29b767bca3e04ff9ac018c2e47e20263272b4e11e67bf9804"
+    },
+    {
+      "bytes": 1740,
+      "kind": "figure_manifest",
+      "path": "outputs/experiments/E0/figure_manifest.json",
+      "sha256": "017b279c2aa880eb3832be31ec5d1994231a4e0804edf53ad2d9fdaa1e13fada"
+    }
+  ],
+  "command": [
+    "python",
+    "-m",
+    "experiments.e0_audit",
+    "--out-dir",
+    "outputs/experiments/E0"
+  ],
+  "completed_at": "2026-07-13T15:58:52.472549+00:00",
+  "configuration": {
+    "bootstrap_iterations": 10000,
+    "bootstrap_seed": 42,
+    "historical_interpretation": "diagnostic_only",
+    "historical_run_count": 6,
+    "strict_sample_type_after_legacy_normalization": true,
+    "undefined_metric_policy": "null_not_zero"
+  },
+  "created_at": "2026-07-13T15:58:40.368064+00:00",
+  "dataset": {
+    "paths": [
+      "m3_attacks/cases/all_cases.jsonl",
+      "release/Redteam_LLM_Security_v1.0/m3_attacks/cases/all_cases.jsonl",
+      "fixtures/day5_representative_cases.jsonl",
+      "outputs/runs/day5_stub_matrix/day5_stub_all_baseline.jsonl",
+      "outputs/runs/day5_stub_matrix/day5_stub_all_keyword_only.jsonl",
+      "outputs/runs/day5_stub_matrix/day5_stub_all_policy_only.jsonl",
+      "outputs/runs/day5_stub_matrix/day5_stub_all_full_guard.jsonl",
+      "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_baseline.jsonl",
+      "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_full_guard.jsonl"
+    ],
+    "sha256": "91fa15f8676076729853af6babbf7f900c5c0d822334fcbc57f2b5044efef435"
+  },
+  "environment": {
+    "captured_at": "2026-07-13T15:58:40.574869+00:00",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 610.47, 8188, 6680",
+    "ollama_models": "NAME                 ID              SIZE      MODIFIED    \ngemma3:4b            a2af6cc3eb7f    3.3 GB    2 hours ago    \nllama3.2:3b          a80c4f17acd5    2.0 GB    5 hours ago    \nphi4-mini:3.8b       78fad5d182a7    2.5 GB    5 hours ago    \nqwen3:4b-instruct    0edcdef34593    2.5 GB    5 hours ago    \nvicuna:7b            370739dc897b    3.8 GB    7 weeks ago",
+    "ollama_version": "ollama version is 0.24.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.5"
+  },
+  "events": [
+    {
+      "at": "2026-07-13T15:58:41.178138+00:00",
+      "message": "experiment started",
+      "type": "started"
+    },
+    {
+      "at": "2026-07-13T15:58:52.472520+00:00",
+      "details": {
+        "evaluator_label_leakage": true,
+        "prompt_guard_coupling": true
+      },
+      "message": "historical evidence restricted to diagnostic use",
+      "type": "audit_findings"
+    },
+    {
+      "at": "2026-07-13T15:58:52.472552+00:00",
+      "details": {
+        "completed_runs": 6
+      },
+      "message": "experiment completed",
+      "type": "completed"
+    }
+  ],
+  "experiment_id": "E0",
+  "experiment_name": "measurement_integrity",
+  "failure": null,
+  "git": {
+    "branch": "test1",
+    "commit": "2c53f52c475e6838dc82246c821db5ed7ac0209c",
+    "dirty": true,
+    "status_sha256": "9e3333cf06e36af87ebd1a948845d98898fa34bf87010366246de4b05ff206af"
+  },
+  "models": [
+    "stub",
+    "m3-target-qwen25-7b"
+  ],
+  "progress": {
+    "completed_runs": 6,
+    "expected_runs": 6,
+    "failed_jobs": 0,
+    "unresolved_cases": 5
+  },
+  "question": "Are labels, denominators and prompts trustworthy?",
+  "schema_version": "2.0",
+  "status": "completed",
+  "updated_at": "2026-07-13T15:58:52.472837+00:00"
+}

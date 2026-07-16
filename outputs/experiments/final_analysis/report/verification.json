@@ -1,0 +1,28 @@
+{
+  "status": "completed_with_browser_qa_limitation",
+  "canonical_builder": "data-analytics deliver_portable_artifact.mjs",
+  "validation": "passed",
+  "package": "passed",
+  "verification": "structural_only",
+  "counts": {
+    "blocks": 23,
+    "charts": 3,
+    "html": 0,
+    "metrics": 6,
+    "tables": 3
+  },
+  "browser_qa": {
+    "attempted": true,
+    "result": "failed_before_publication",
+    "code": "horizontal_overflow",
+    "desktop_client_width": 1425,
+    "desktop_scroll_width": 1433,
+    "root_cause": "The packaged reader top bar uses width:100vw; on Windows the vertical scrollbar leaves a 15-pixel client-width difference and creates an 8-pixel right overflow.",
+    "artifact_content_offender": false,
+    "runtime_modified": false,
+    "follow_up": "Re-run browser verification after the shared portable-reader top-bar CSS is fixed upstream."
+  },
+  "source_dialog": "not_verified",
+  "source_interaction": "not_verified",
+  "self_contained_html": "report.html"
+}

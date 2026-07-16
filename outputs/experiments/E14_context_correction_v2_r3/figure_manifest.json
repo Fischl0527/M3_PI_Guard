@@ -1,0 +1,134 @@
+{
+  "evidence_tier": "formal_context_correction_v2",
+  "experiment_id": "E14",
+  "figures": [
+    {
+      "caption": "Matched benign identical-path median latency by calibrated prompt target, offered concurrency and condition.",
+      "chart_type": "multi_series_line",
+      "files": {
+        "data": {
+          "bytes": 1748,
+          "path": "latency_by_context_data.csv",
+          "sha256": "d175909dd8765025f220ceb8c181ccec71c535ebf3d46109da8a55e7880e348d"
+        },
+        "png": {
+          "bytes": 117521,
+          "path": "latency_by_context.png",
+          "sha256": "d653d9a13f0e5ef9beaee8292874f87931c7bd4b2c4fa4f3ac4751bb5da3f77b"
+        },
+        "svg": {
+          "bytes": 51610,
+          "path": "latency_by_context.svg",
+          "sha256": "96e03075ca4cdf3903e6ccd271f442d14deeaa2175fb82b30c284e9d71a73153"
+        }
+      },
+      "grain": [
+        "target_prompt_tokens",
+        "concurrency",
+        "condition_id"
+      ],
+      "id": "latency_by_context",
+      "metrics": [
+        "median_total_latency_ms",
+        "p95_total_latency_ms"
+      ],
+      "order": 0,
+      "role": "primary",
+      "title": "E14 V2 matched-path latency",
+      "uncertainty": [
+        {
+          "method": "paired Wilcoxon in statistics.json; p95 is descriptive"
+        }
+      ],
+      "warnings": [
+        "Only identical one-step benign paths enter Guard overhead."
+      ]
+    },
+    {
+      "caption": "Successful mixed case-runs per wall-clock second by calibrated prompt target and offered client concurrency.",
+      "chart_type": "multi_series_line",
+      "files": {
+        "data": {
+          "bytes": 3009,
+          "path": "throughput_by_concurrency_data.csv",
+          "sha256": "edd6dda511846464df33d2ca71bac2adc9e10114255ad77720673a4d687ae164"
+        },
+        "png": {
+          "bytes": 97945,
+          "path": "throughput_by_concurrency.png",
+          "sha256": "31ff8beda15d532dacca042ee7004038974fc2518163962e4e2c4bee86dd5432"
+        },
+        "svg": {
+          "bytes": 50216,
+          "path": "throughput_by_concurrency.svg",
+          "sha256": "f175ad802985767f625bd78204434912e79377c441fab166df3beecdac4be40d"
+        }
+      },
+      "grain": [
+        "target_prompt_tokens",
+        "concurrency",
+        "condition_id"
+      ],
+      "id": "throughput_by_concurrency",
+      "metrics": [
+        "successful_case_runs_per_s"
+      ],
+      "order": 1,
+      "role": "secondary",
+      "title": "E14 V2 mixed-workload system throughput",
+      "uncertainty": [
+        {
+          "method": "none",
+          "reason": "one wall-clock mixed job per cell"
+        }
+      ],
+      "warnings": [
+        "System throughput by strategy is not pure Guard overhead."
+      ]
+    },
+    {
+      "caption": "Device-wide polled GPU memory peak by target, offered concurrency and condition.",
+      "chart_type": "annotated_heatmap",
+      "files": {
+        "data": {
+          "bytes": 934,
+          "path": "gpu_memory_by_context_data.csv",
+          "sha256": "536002d921bb1343f5f6bbb8b75fdf8d8e20b4f8c76b9d747bc89ed89ab3d3c7"
+        },
+        "png": {
+          "bytes": 88692,
+          "path": "gpu_memory_by_context.png",
+          "sha256": "55ca00d541060dc143f9b3525e6f4ae2919fac9d072d5ded58f951eb8c62b260"
+        },
+        "svg": {
+          "bytes": 55832,
+          "path": "gpu_memory_by_context.svg",
+          "sha256": "af6334bdb20f1a16c66e52307e95ad5e06d56a16e6465451311d6ad6a2ac23aa"
+        }
+      },
+      "grain": [
+        "target_prompt_tokens",
+        "concurrency",
+        "condition_id"
+      ],
+      "id": "gpu_memory_by_context",
+      "metrics": [
+        "gpu_peak_memory_mib",
+        "gpu_memory_delta_mib"
+      ],
+      "order": 2,
+      "role": "secondary",
+      "title": "E14 V2 observed GPU memory peak",
+      "uncertainty": [
+        {
+          "method": "none",
+          "reason": "polled device-wide telemetry"
+        }
+      ],
+      "warnings": [
+        "Polling may miss transient peaks and is not Guard-exclusive."
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,51 @@
+{
+  "ask_threshold": 1.0,
+  "constraint_violation": 0.0,
+  "deny_threshold": 1.0,
+  "experiment_id": "E13",
+  "feasible_point_count": 55,
+  "guard_mode": "full_guard",
+  "scanned_point_count": 5151,
+  "schema_version": "1.0",
+  "scope": "validation_only",
+  "selection_rule": "First require Precision>=0.90, Recall>=0.90, FPR<=0.05, and benign ASK<=0.10; among feasible points minimize weighted error. If none are feasible, minimize normalized constraint violation, then weighted error.",
+  "status": "targets_met",
+  "target_checks": {
+    "benign_ask_rate": {
+      "normalized_violation": 0.0,
+      "operator": "<=",
+      "passed": true,
+      "target": 0.1,
+      "value": 0.0
+    },
+    "fpr": {
+      "normalized_violation": 0.0,
+      "operator": "<=",
+      "passed": true,
+      "target": 0.05,
+      "value": 0.045454545454545456
+    },
+    "precision": {
+      "normalized_violation": 0.0,
+      "operator": ">=",
+      "passed": true,
+      "target": 0.9,
+      "value": 0.9655172413793104
+    },
+    "recall": {
+      "normalized_violation": 0.0,
+      "operator": ">=",
+      "passed": true,
+      "target": 0.9,
+      "value": 1.0
+    }
+  },
+  "targets": {
+    "benign_ask_rate_max": 0.1,
+    "fpr_max": 0.05,
+    "precision_min": 0.9,
+    "recall_min": 0.9
+  },
+  "undefined_constraints": [],
+  "warning": null
+}

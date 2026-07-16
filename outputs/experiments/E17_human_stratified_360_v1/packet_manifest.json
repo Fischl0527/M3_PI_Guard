@@ -1,0 +1,21 @@
+{
+  "blind_id_order_sha256": "48c17841b11a032a82b188327a2a4c94b7d55a7b98e9fe65edd4c09e40e05d66",
+  "blind_id_set_sha256": "a47ef513478773868f7ea2135fe475659a3e36d57eb407d100c3c08896d3d423",
+  "canonical_evidence_sha256": "e027707284f20a1164bad1fe91387404121f6baf6cd8c006daff175be271f32d",
+  "formula_like_evidence_cells": 0,
+  "review_fields_all_blank": true,
+  "reviewer_1_template": {
+    "bytes": 331713,
+    "path": "outputs/experiments/E17_human_stratified_360_v1/packets/reviewer_1_blinded_template.csv",
+    "sha256": "0b18a0c4f6e9ea38ef6ebbe6416a35700f3d420c2c0e17acc48cdee506db78f7"
+  },
+  "reviewer_2_template": {
+    "bytes": 331713,
+    "path": "outputs/experiments/E17_human_stratified_360_v1/packets/reviewer_2_blinded_template.csv",
+    "sha256": "0b18a0c4f6e9ea38ef6ebbe6416a35700f3d420c2c0e17acc48cdee506db78f7"
+  },
+  "reviewer_packets_byte_identical": true,
+  "row_count": 360,
+  "schema_version": "e17-human-sample-v1",
+  "unique_blind_id_count": 360
+}

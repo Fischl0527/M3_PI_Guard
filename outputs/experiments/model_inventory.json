@@ -1,0 +1,42 @@
+{
+  "captured_at": "2026-07-13T13:36:18.596431+00:00",
+  "approved_models": [
+    "qwen3:4b-instruct",
+    "phi4-mini:3.8b",
+    "llama3.2:3b",
+    "gemma3:4b",
+    "vicuna:7b"
+  ],
+  "installed": {
+    "gemma3:4b": {
+      "id": "a2af6cc3eb7f",
+      "size": "3.3 GB"
+    },
+    "llama3.2:3b": {
+      "id": "a80c4f17acd5",
+      "size": "2.0 GB"
+    },
+    "phi4-mini:3.8b": {
+      "id": "78fad5d182a7",
+      "size": "2.5 GB"
+    },
+    "qwen3:4b-instruct": {
+      "id": "0edcdef34593",
+      "size": "2.5 GB"
+    },
+    "vicuna:7b": {
+      "id": "370739dc897b",
+      "size": "3.8 GB"
+    }
+  },
+  "missing_core": [],
+  "gpu": {
+    "captured_at": "2026-07-13T13:36:19.176515+00:00",
+    "available": true,
+    "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "utilization_percent": 9.0,
+    "memory_used_mib": 1543.0,
+    "memory_free_mib": 6414.0,
+    "memory_total_mib": 8188.0
+  }
+}

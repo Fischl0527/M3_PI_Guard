@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0",
+  "statusValues": ["planned", "in_progress", "verified", "blocked"],
+  "features": [
+    {
+      "id": "F-HARNESS-001",
+      "name": "M3 Experiment Harness",
+      "description": "Project-specific specifications, task state, feature ledger, verification and recovery controls.",
+      "status": "verified",
+      "priority": "critical",
+      "acceptanceCriteria": ["All Harness placeholders are replaced", "Strict requirement lock passes", "State can resume without chat context"],
+      "verification": ["Project-specific specs/state/requirements populated", "Requirement lock approved validator passes", "Session handoff and recovery state updated", "Harness engineering is physically separated under harness/ while M3 runtime and experiment source remain in project directories", "Windows-native verifier resolves the separated Harness paths", "Final E17 sampled-evidence, statistics and Dashboard gates pass"]
+    },
+    {
+      "id": "F-EXP-001",
+      "name": "Measurement Integrity",
+      "description": "Correct attack/benign labels, remove prompt leakage and rebuild trustworthy historical metrics.",
+      "status": "verified",
+      "priority": "critical",
+      "acceptanceCriteria": ["Benign denominator is nonzero", "No answer-label leakage", "Metric definitions are tested"],
+      "verification": ["E0 completed", "600/600 prompt leakage checks pass", "Historical denominators corrected"]
+    },
+    {
+      "id": "F-EXP-002",
+      "name": "Experiment Runtime",
+      "description": "Orthogonal prompt/Guard configuration, ablations, repeats, timing, manifests and resume support.",
+      "status": "verified",
+      "priority": "critical",
+      "acceptanceCriteria": ["Core six conditions are independently selectable", "Ablations are supported", "Interrupted suites resume without dropping cases"],
+      "verification": ["Six core conditions and named ablations executed", "Resume/error-retry tests pass", "172 jobs completed with 15,446/15,446 case runs"]
+    },
+    {
+      "id": "F-DATA-001",
+      "name": "M3-PI-300 Dataset",
+      "description": "Approximately 300 audited cases with nine attack families, 90 benign tasks and template-level splits.",
+      "status": "verified",
+      "priority": "critical",
+      "acceptanceCriteria": ["Dataset counts match plan", "No duplicate IDs or template leakage", "All experimental fields validate"],
+      "verification": ["Dataset audit status pass", "300 exact cases", "Template crossover zero", "Derived fixture audit pass"]
+    },
+    {
+      "id": "F-EVAL-001",
+      "name": "Metrics And Statistics",
+      "description": "Case/tool/utility/performance metrics with confidence intervals and paired tests.",
+      "status": "verified",
+      "priority": "critical",
+      "acceptanceCriteria": ["Required metrics are implemented", "Wilson CI and paired analyses are reproducible", "Failures stay in denominators"],
+      "verification": ["Formal metric and statistics tests pass", "E0 statistics generated", "Undefined denominators remain NA"]
+    },
+    {
+      "id": "F-EXP-003",
+      "name": "E0-E17 Full Experiment Program",
+      "description": "All approved experiment suites run to validated semantic and artifact completion under immutable protocol/freeze boundaries.",
+      "status": "verified",
+      "priority": "critical",
+      "acceptanceCriteria": ["Every registry item is completed", "Every item has required artifacts", "No unexplained failed runs remain"],
+      "verification": ["Registry is 18 completed / 0 running / 0 failed", "Old v3 artifacts are preserved and eight current-source hash drifts remain disclosed", "Corrected E9/E14 execution-r3 and E11 execution-r2 are the active current-runtime evidence", "E9 r3 passed 120/120 formal runs and E14 r3 passed 432/432 formal plus 48/48 warmup runs", "Independent paired audit passed 144/144 paths and 480/480 unique first-step run keys", "E11 execution-r2 passed 8/8 smoke and 48/48 formal", "Two distinct human reviewers completed the frozen 360-row E17 packet", "E17 agreement is 360/360 with kappa 1.000 and no adjudication", "Only 300 representative E17 rows enter weighted population estimates; 60 targeted rows remain diagnostic"]
+    },
+    {
+      "id": "F-DASH-001",
+      "name": "Experiment Dashboard",
+      "description": "Filter and replay final experiments across models, defenses, families, languages and batches.",
+      "status": "verified",
+      "priority": "high",
+      "acceptanceCriteria": ["All required filters work", "Case replay links to raw evidence", "Stub and real-model results are separated"],
+      "verification": ["Model/defense/family/language/batch filters verified", "Replay-key and case replay verified", "Real-browser QA: 0 console errors and 0 warnings", "Evidence loader detects corrected execution-r3 sources", "Old v3 and failed r2 E14 remain diagnostic-only"]
+    },
+    {
+      "id": "F-DELIVERY-001",
+      "name": "Experiment Evidence Delivery",
+      "description": "Final analysis, reproducible figures, Dashboard and release evidence match the frozen verified experiments; PPT, DOCX report and submission ZIP are outside current scope.",
+      "status": "verified",
+      "priority": "high",
+      "acceptanceCriteria": ["No stale invalid metrics remain", "Every chart has source, sample context, interpretation and caveat", "Static charts are reproducible and visually inspected", "Dashboard matches frozen evidence", "Final audit and local commit pass"],
+      "verification": ["Final analysis completed with 13 charts and 63 manifest artifacts", "Independent statistical validation passed with zero hard or fallacy failures", "Dashboard final evidence gate passed", "Corrected E9/E14, E11 execution-r2 and sampled E17 evidence are registered", "Static main-effect, failure-taxonomy and family-robustness figures were inspected at original resolution", "Portable HTML report validation/package/structural verification passed with an explicit shared-reader browser QA limitation", "Final aggregate verifier passed: 347 passed and 1 skipped", "Old v3 and failed r2 context claims remain excluded from current-runtime synthesis"]
+    }
+  ]
+}

@@ -9,6 +9,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List
+from urllib.parse import urlsplit
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -29,6 +30,7 @@ PATH_KEYS = {"path", "file", "filename", "filepath", "target", "source"}
 ENDPOINT_KEYS = {"endpoint", "url", "uri"}
 SAFE_EMAIL_DOMAINS = {".test", "example.com", "example.org", "example.net", "localhost"}
 SAFE_URL_HOSTS = {"127.0.0.1", "localhost", "::1"}
+RESERVED_MOCK_SUFFIXES = {"test", "example", "invalid", "example.com", "example.net", "example.org"}
 EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@([A-Za-z0-9.-]+\.[A-Za-z]{2,}|localhost)\b")
 URL_RE = re.compile(r"\bhttps?://[^\s\"'<>]+", re.I)
 
@@ -74,6 +76,9 @@ def audit_logs(path: Path) -> Dict[str, Any]:
         rows.extend(file_rows)
 
     parse_error_case_ids: set[str] = set()
+    seen_run_steps: set[tuple[str, int]] = set()
+    terminal_by_run: Counter[str] = Counter()
+    observed_run_keys: set[str] = set()
     for index, row in enumerate(rows, start=1):
         case_id = str(row.get("case_id", ""))
         missing = sorted(REQUIRED_FIELDS - set(row))
@@ -95,12 +100,40 @@ def audit_logs(path: Path) -> Dict[str, Any]:
                 )
             )
 
+        run_key = str(row.get("run_key", "")).strip()
+        if run_key:
+            observed_run_keys.add(run_key)
+            identity = (run_key, int(row.get("step", 0) or 0))
+            if identity in seen_run_steps:
+                issues.append(
+                    _issue("error", "", index, case_id, "duplicate_run_step", f"{run_key}:{identity[1]}")
+                )
+            seen_run_steps.add(identity)
+            if str(row.get("final_status", "")) in {
+                "completed",
+                "blocked",
+                "needs_confirmation",
+                "max_steps_reached",
+                "error",
+            }:
+                terminal_by_run[run_key] += 1
+
         tool_call = row.get("parsed_tool_call")
         if not isinstance(tool_call, dict):
             issues.append(_issue("error", "", index, case_id, "invalid_tool_call", "parsed_tool_call is not an object"))
             continue
 
         _audit_tool_call(tool_call, index, case_id, issues)
+
+    for run_key, count in terminal_by_run.items():
+        if count != 1:
+            issues.append(
+                _issue("error", "", 0, "", "non_unique_terminal_row", f"{run_key}:{count}")
+            )
+    for run_key in sorted(observed_run_keys - set(terminal_by_run)):
+        issues.append(
+            _issue("error", "", 0, "", "missing_terminal_row", run_key)
+        )
 
     error_count = sum(1 for item in issues if item["severity"] == "error")
     warn_count = sum(1 for item in issues if item["severity"] == "warn")
@@ -112,6 +145,7 @@ def audit_logs(path: Path) -> Dict[str, Any]:
         "file_count": len(log_files),
         "row_count": len(rows),
         "case_count": len({str(row.get("case_id", "")) for row in rows if row.get("case_id")}),
+        "run_count": len({str(row.get("run_key", "")) for row in rows if row.get("run_key")}),
         "parse_error_count": len(parse_error_case_ids),
         "parse_error_case_ids": sorted(case_id for case_id in parse_error_case_ids if case_id),
         "unstable_case_ids": sorted(case_id for case_id in parse_error_case_ids if case_id),
@@ -195,13 +229,19 @@ def _safe_url(url: str) -> bool:
 
 def _safe_mock_endpoint(endpoint: str) -> bool:
     value = endpoint.strip().lower()
-    return (
+    if (
         value == "mock"
         or value == "/mock"
         or value.startswith("mock/")
         or value.startswith("/mock/")
         or value.startswith("mock://")
-    )
+    ):
+        return True
+    parsed = urlsplit(value)
+    host = (parsed.hostname or "").rstrip(".")
+    if parsed.scheme not in {"http", "https"} or not host:
+        return False
+    return any(host == suffix or host.endswith(f".{suffix}") for suffix in RESERVED_MOCK_SUFFIXES)
 
 
 def _walk(value: Any, prefix: str = "") -> Iterable[tuple[str, Any]]:

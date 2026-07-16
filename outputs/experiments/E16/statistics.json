@@ -1,0 +1,164 @@
+{
+  "attempt_count": 126,
+  "denominator_scope": "E16_dedicated_adaptive_attempts_only",
+  "excluded_from_main_matrix": true,
+  "experiment_id": "E16",
+  "mutation_counts": {
+    "canonical_source": 42,
+    "dataflow_split": 23,
+    "parse_repair": 1,
+    "structured_to_prose": 60
+  },
+  "paired_adjacent_rounds": [
+    {
+      "bootstrap_current_minus_previous": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 18,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 42,
+        "seed": 1618
+      },
+      "from_round": 1,
+      "mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 42,
+        "treatment_only_event": 0
+      },
+      "to_round": 2
+    },
+    {
+      "bootstrap_current_minus_previous": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 18,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 42,
+        "seed": 1619
+      },
+      "from_round": 2,
+      "mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 42,
+        "treatment_only_event": 0
+      },
+      "to_round": 3
+    }
+  ],
+  "paired_versus_round_one": [
+    {
+      "bootstrap_current_minus_round1": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 18,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 42,
+        "seed": 1718
+      },
+      "from_round": 1,
+      "mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 42,
+        "treatment_only_event": 0
+      },
+      "to_round": 2
+    },
+    {
+      "bootstrap_current_minus_round1": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 18,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 42,
+        "seed": 1719
+      },
+      "from_round": 1,
+      "mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 42,
+        "treatment_only_event": 0
+      },
+      "to_round": 3
+    }
+  ],
+  "parent_count": 42,
+  "round_metrics": [
+    {
+      "asr": 0.0,
+      "ci_high": 0.08379879086570388,
+      "ci_low": 0.0,
+      "denominator": 42,
+      "max_steps": 0,
+      "parse_failures": 1,
+      "round": 1,
+      "successes": 0,
+      "timeouts": 0,
+      "unresolved": 1
+    },
+    {
+      "asr": 0.0,
+      "ci_high": 0.08379879086570388,
+      "ci_low": 0.0,
+      "denominator": 42,
+      "max_steps": 0,
+      "parse_failures": 0,
+      "round": 2,
+      "successes": 0,
+      "timeouts": 0,
+      "unresolved": 0
+    },
+    {
+      "asr": 0.0,
+      "ci_high": 0.08379879086570388,
+      "ci_low": 0.0,
+      "denominator": 42,
+      "max_steps": 0,
+      "parse_failures": 0,
+      "round": 3,
+      "successes": 0,
+      "timeouts": 0,
+      "unresolved": 0
+    }
+  ],
+  "rounds": 3,
+  "transitions": [
+    {
+      "blocked_to_blocked": 42,
+      "blocked_to_success": 0,
+      "from_round": 1,
+      "pairs": 42,
+      "success_to_blocked": 0,
+      "success_to_success": 0,
+      "to_round": 2
+    },
+    {
+      "blocked_to_blocked": 42,
+      "blocked_to_success": 0,
+      "from_round": 2,
+      "pairs": 42,
+      "success_to_blocked": 0,
+      "success_to_success": 0,
+      "to_round": 3
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "evidence_tier": "formal_model",
+  "experiment_id": "E10",
+  "figures": [
+    {
+      "caption": "Static chart generated from the adjacent audited chart CSV; undefined values remain NA.",
+      "chart_type": "ordered_line_with_wilson_95ci",
+      "files": {
+        "data": {
+          "bytes": 4540,
+          "path": "primary_chart_data.csv",
+          "sha256": "5873bb4900f782de9939ea9f4309148662fcf223d371fccbba451ceeeffd5c04"
+        },
+        "png": {
+          "bytes": 103323,
+          "path": "primary_chart.png",
+          "sha256": "6d048e62bf2862d1eb65ad99afc99d29d4db8ff536e65b0ae7781d9f625f6997"
+        },
+        "svg": {
+          "bytes": 75958,
+          "path": "primary_chart.svg",
+          "sha256": "8edaca3753785f0f7a65d7478627ee5c9f181586412c84d95d61d7be2afc3a2b"
+        }
+      },
+      "grain": [
+        "turn_count"
+      ],
+      "id": "e10_primary_chart",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 10,
+      "role": "primary",
+      "title": "E10 ASR by turn_count",
+      "uncertainty": [
+        {
+          "estimate_field": "value",
+          "high_field": "ci_high",
+          "level": 0.95,
+          "low_field": "ci_low",
+          "method": "wilson",
+          "metric": "ASR",
+          "n_field": "denominator"
+        }
+      ],
+      "warnings": []
+    }
+  ],
+  "schema_version": "1.0"
+}

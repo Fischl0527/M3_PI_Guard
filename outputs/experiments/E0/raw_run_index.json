@@ -1,0 +1,80 @@
+{
+  "experiment_id": "E0",
+  "historical_run_count": 6,
+  "purpose": "Immutable source index for six historical diagnostic runs",
+  "records": [
+    {
+      "distinct_case_count": 300,
+      "duplicate_case_id_rows": 0,
+      "kind": "case_dataset",
+      "path": "m3_attacks/cases/all_cases.jsonl",
+      "row_count": 300,
+      "sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462"
+    },
+    {
+      "distinct_case_count": 69,
+      "duplicate_case_id_rows": 0,
+      "kind": "case_dataset",
+      "path": "release/Redteam_LLM_Security_v1.0/m3_attacks/cases/all_cases.jsonl",
+      "row_count": 69,
+      "sha256": "7ae24f3a06773925750322303d08e85acdb3c2d065b296f9e1c08e09c4f32877"
+    },
+    {
+      "distinct_case_count": 24,
+      "duplicate_case_id_rows": 0,
+      "kind": "case_dataset",
+      "path": "fixtures/day5_representative_cases.jsonl",
+      "row_count": 24,
+      "sha256": "2b42e02407ab5c70a5f29c59e0714adc25b3a4df8a2afc6a6bf0588f309cd95e"
+    },
+    {
+      "distinct_case_count": 69,
+      "duplicate_case_id_rows": null,
+      "kind": "run_log",
+      "path": "outputs/runs/day5_stub_matrix/day5_stub_all_baseline.jsonl",
+      "row_count": 163,
+      "sha256": "30113a70f3805574a1d9a02ea6fc0dd07a553194a03e65f8513c3f30086ce1ac"
+    },
+    {
+      "distinct_case_count": 69,
+      "duplicate_case_id_rows": null,
+      "kind": "run_log",
+      "path": "outputs/runs/day5_stub_matrix/day5_stub_all_keyword_only.jsonl",
+      "row_count": 91,
+      "sha256": "1525af0e18e05cc9fdc531a13dec75320890a97e06bcf96ee2fd2b7a92828b7a"
+    },
+    {
+      "distinct_case_count": 69,
+      "duplicate_case_id_rows": null,
+      "kind": "run_log",
+      "path": "outputs/runs/day5_stub_matrix/day5_stub_all_policy_only.jsonl",
+      "row_count": 69,
+      "sha256": "a42cb271711135081c40b01a0b4258e04cfb121e98487755f36dddc02a6dc31e"
+    },
+    {
+      "distinct_case_count": 69,
+      "duplicate_case_id_rows": null,
+      "kind": "run_log",
+      "path": "outputs/runs/day5_stub_matrix/day5_stub_all_full_guard.jsonl",
+      "row_count": 69,
+      "sha256": "a3d4d6bbc28e11f0891065d73928816fe8bf2bc66836c129fd3d1fae6ee2fe55"
+    },
+    {
+      "distinct_case_count": 24,
+      "duplicate_case_id_rows": null,
+      "kind": "run_log",
+      "path": "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_baseline.jsonl",
+      "row_count": 38,
+      "sha256": "f6db74e273dd2c228b3a4a8c79ce27daa6ec7958cc262d8c9f9adb2865149fb4"
+    },
+    {
+      "distinct_case_count": 24,
+      "duplicate_case_id_rows": null,
+      "kind": "run_log",
+      "path": "outputs/runs/day5_qwen25_matrix/day5_qwen25_rep_full_guard.jsonl",
+      "row_count": 24,
+      "sha256": "4f6ff9f085a86264b0e88f72395b3696c07f531d7dcdfa47b5bbb9f3ba5a4b58"
+    }
+  ],
+  "schema_version": "1.0"
+}

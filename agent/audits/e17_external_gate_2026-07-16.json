@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "audit_date": "2026-07-16",
+  "status": "pass_external_blocker_confirmed",
+  "registry": {
+    "completed": 17,
+    "running": 1,
+    "failed": 0,
+    "e17_status": "running"
+  },
+  "e17": {
+    "manifest_status": "pending",
+    "review_items": 3299,
+    "human_reviewers_received": 0,
+    "human_reviewers_required": 2,
+    "automated_diagnostic_eligible": false,
+    "source_index_sha256": "6d3baa721317b50d9dca82c958d5b0f47b23114066c9e2a42e922c8c512fd17d"
+  },
+  "admission_checks": {
+    "registrar_exit_code": 2,
+    "registrar_expected_rejection": true,
+    "registrar_message": "E17 registration rejected: E17 manifest must already be status=completed and phase=completed before registration",
+    "registrar_traceback_present": false,
+    "final_analysis_validate_only_exit_code": 2,
+    "final_analysis_expected_rejection": true,
+    "final_analysis_message": "final analysis rejected: final synthesis requires E0-E17 completed; E17 is 'running'",
+    "final_analysis_existed_before": false,
+    "final_analysis_exists_after": false
+  },
+  "verification": {
+    "pytest_passed": 340,
+    "pytest_skipped": 1,
+    "verifier_failures": 0,
+    "requirement_lock": "pass",
+    "requirement_ledger": "pass_30_satisfied_3_blocked",
+    "source_log": "pass_18_sources",
+    "final_audit": "pass_blocked"
+  },
+  "conclusion": "All internally executable gates pass. The remaining E17 input is external human judgment and was not fabricated, inferred, or substituted."
+}

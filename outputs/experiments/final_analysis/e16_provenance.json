@@ -1,0 +1,46 @@
+{
+  "configuration": {
+    "model": "qwen3:4b-instruct",
+    "rounds": 3,
+    "seed": 1601,
+    "split": "validation",
+    "temperature": 0.2
+  },
+  "configuration_hash": "398714caee4722de60303893f69a5da32e84845133327a1b56104fdc0adb1f31",
+  "denominator_scope": "E16_dedicated_adaptive_attempts_only",
+  "evidence_tier": "formal_dedicated",
+  "excluded_from_main_matrix": true,
+  "experiment_id": "E16",
+  "generated_at": "2026-07-16T00:37:13.770077+00:00",
+  "interpretation": "The sandbox runtime label is observed in every E16 raw log row and is not the E16 manifest schema version. E16 uses a dedicated adaptive-validation denominator and is excluded from main-matrix, E14 performance, and latency pooling.",
+  "mutation_policy": "predefined_text_and_format_only",
+  "plan_hash": "e9f7869c87e28dcf21ce99903b1367cdc6511576027ef92558bad59e9ced15a0",
+  "raw_log_binding": {
+    "bytes": 1580205,
+    "kind": "raw_log",
+    "path": "outputs/experiments/E16/raw_attempts.jsonl",
+    "secondary_ledger_sha256": "aeb425737acfd104b838b70280a83774030bd150cb42d2d495ed77bb9e9358c7",
+    "sha256": "aeb425737acfd104b838b70280a83774030bd150cb42d2d495ed77bb9e9358c7"
+  },
+  "runtime_observation": {
+    "attempts": 126,
+    "direct_field_versions": [
+      "isolated-tool-sandbox-v1"
+    ],
+    "log_rows": 175,
+    "mismatch_rows": 0,
+    "missing_runtime_field_rows": 0,
+    "model_config_field_versions": [
+      "isolated-tool-sandbox-v1"
+    ],
+    "sandbox_runtime_version": "isolated-tool-sandbox-v1"
+  },
+  "schema_version": "1.0",
+  "source_manifest": {
+    "bytes": 349804,
+    "manifest_schema_version": "2.0",
+    "path": "outputs/experiments/E16/manifest.json",
+    "sha256": "64709a9aab3a0160e9c738d9997a088c691056712ea666089075da1f02ddd150"
+  },
+  "thresholds_sha256": "c1ebcddb1199ae9a2a728702ce6ed97c8688c47fea060e4dae90c289ae430dbf"
+}

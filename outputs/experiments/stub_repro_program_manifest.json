@@ -1,0 +1,142 @@
+{
+  "blocked_models": {},
+  "created_at": "2026-07-13T13:26:45.227353+00:00",
+  "events": [
+    {
+      "at": "2026-07-13T13:26:45.227490+00:00",
+      "stage": "stub",
+      "type": "stage_started"
+    }
+  ],
+  "model_lifecycle": [],
+  "program_id": "M3-E0-E17-full-experiment-program",
+  "progress": {
+    "completed_runs": 3300,
+    "error_count": 0,
+    "expected_runs": 3300
+  },
+  "schema_version": "1.0",
+  "stages": {
+    "stub": {
+      "completed_at": "2026-07-13T13:27:22.231079+00:00",
+      "condition_count": 11,
+      "created_at": "2026-07-13T13:26:45.227469+00:00",
+      "error": null,
+      "expected_run_count": 3300,
+      "freeze_required": false,
+      "freeze_verification": null,
+      "job_count": 1,
+      "jobs": [
+        {
+          "attempt_history": [
+            {
+              "at": "2026-07-13T13:27:22.230142+00:00",
+              "status": "completed"
+            }
+          ],
+          "attempts": 1,
+          "command": [
+            "F:\\robot\\Anaconda3\\python.exe",
+            "-m",
+            "m3_core.run_matrix",
+            "--cases",
+            "m3_attacks/cases/all_cases.jsonl",
+            "--backend",
+            "stub",
+            "--model",
+            "stub",
+            "--conditions",
+            "stub_normal_off=normal:off,stub_normal_keyword=normal:keyword_only,stub_normal_policy=normal:policy_only,stub_normal_detector=normal:detector_only,stub_normal_full=normal:full_guard,stub_normal_no_dataflow=normal:no_dataflow,stub_normal_no_intent_action=normal:no_intent_action,stub_normal_no_structured=normal:no_structured_detector,stub_normal_no_multilingual=normal:no_multilingual_detector,stub_hardened_off=hardened:off,stub_hardened_full=hardened:full_guard",
+            "--ask-threshold",
+            "0.35",
+            "--deny-threshold",
+            "0.65",
+            "--out-dir",
+            "outputs/experiments/program_repro/stub/stub__canonical_all_modes",
+            "--max-steps",
+            "5",
+            "--run-prefix",
+            "stub__canonical_all_modes",
+            "--run-group",
+            "stub",
+            "--seed",
+            "42",
+            "--selection-seed",
+            "42",
+            "--generation-seed",
+            "42",
+            "--repeats",
+            "1",
+            "--temperature",
+            "0.0",
+            "--max-tokens",
+            "512",
+            "--timeout",
+            "120.0",
+            "--notes",
+            "M3 full experiment program stage=stub job=stub__canonical_all_modes",
+            "--fail-fast"
+          ],
+          "completed_at": "2026-07-13T13:27:22.230133+00:00",
+          "completed_run_count": 3300,
+          "error": null,
+          "error_count": 0,
+          "evidence_tier": "regression_only",
+          "expected_run_count": 3300,
+          "job_id": "stub__canonical_all_modes",
+          "matrix_config": {
+            "allow_fallback_guard": false,
+            "ask_threshold": 0.35,
+            "backend": "stub",
+            "case_ids": "",
+            "cases": "m3_attacks/cases/all_cases.jsonl",
+            "conditions": "stub_normal_off=normal:off,stub_normal_keyword=normal:keyword_only,stub_normal_policy=normal:policy_only,stub_normal_detector=normal:detector_only,stub_normal_full=normal:full_guard,stub_normal_no_dataflow=normal:no_dataflow,stub_normal_no_intent_action=normal:no_intent_action,stub_normal_no_structured=normal:no_structured_detector,stub_normal_no_multilingual=normal:no_multilingual_detector,stub_hardened_off=hardened:off,stub_hardened_full=hardened:full_guard",
+            "deny_threshold": 0.65,
+            "fail_fast": true,
+            "families": "",
+            "generation_seed": 42,
+            "guard_modules": "",
+            "limit": null,
+            "max_steps": 5,
+            "max_tokens": 512,
+            "model": "stub",
+            "notes": "M3 full experiment program stage=stub job=stub__canonical_all_modes",
+            "num_ctx": null,
+            "out_dir": "outputs/experiments/program_repro/stub/stub__canonical_all_modes",
+            "repeats": 1,
+            "resume": false,
+            "run_group": "stub",
+            "run_prefix": "stub__canonical_all_modes",
+            "sample_types": "",
+            "seed": 42,
+            "selection_seed": 42,
+            "shuffle": false,
+            "splits": "",
+            "task_types": "",
+            "temperature": 0.0,
+            "timeout": 120.0
+          },
+          "model": "stub",
+          "result_manifest": "outputs/experiments/program_repro/stub/stub__canonical_all_modes/manifest.json",
+          "selected_run_count": 3300,
+          "stage": "stub",
+          "started_at": "2026-07-13T13:26:45.228642+00:00",
+          "status": "completed"
+        }
+      ],
+      "plan_hash": "a14817ad48e1d13956f61740d39eb0f5fb665ef5eb989958cc96156acad8f1a2",
+      "progress": {
+        "completed_runs": 3300,
+        "error_count": 0,
+        "expected_runs": 3300
+      },
+      "required_models": [],
+      "stage": "stub",
+      "status": "completed",
+      "threshold_freeze": null,
+      "updated_at": "2026-07-13T13:27:22.231086+00:00"
+    }
+  },
+  "status": "running",
+  "updated_at": "2026-07-13T13:27:22.231202+00:00"
+}

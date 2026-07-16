@@ -1,0 +1,109 @@
+{
+  "evidence_tier": "formal_model",
+  "experiment_id": "E4",
+  "figures": [
+    {
+      "caption": "Both panels use variant minus named full Guard; positive ASR is worse safety, while positive TCR is improved task completion.",
+      "chart_type": "paired_effect_forest",
+      "files": {
+        "data": {
+          "bytes": 6172,
+          "path": "ablation_contributions.csv",
+          "sha256": "6825062a46c07f691afd9c24b6df35cf988bc6611119df0fe17bb964b462e4b4"
+        },
+        "png": {
+          "bytes": 299763,
+          "path": "ablation_contribution_forest.png",
+          "sha256": "e336f6ae44f92d2c23787554bf09eac838a4986a8071538251481ebb768d93cc"
+        },
+        "svg": {
+          "bytes": 170772,
+          "path": "ablation_contribution_forest.svg",
+          "sha256": "7014c687c5f8f71e93d4b91a79712f690511c00c7683f78b53976d7c5d4c20f4"
+        }
+      },
+      "grain": [
+        "variant_condition_id"
+      ],
+      "id": "e4_ablation_contribution",
+      "metrics": [
+        "ASR",
+        "TCR"
+      ],
+      "order": 10,
+      "role": "primary",
+      "title": "E4 paired ablation contribution: ASR and TCR",
+      "uncertainty": [
+        {
+          "estimate_field": "ASR_variant_minus_full_bootstrap",
+          "high_field": "ASR_variant_minus_full_ci_high",
+          "level": 0.95,
+          "low_field": "ASR_variant_minus_full_ci_low",
+          "method": "case_clustered_paired_bootstrap",
+          "metric": "ASR",
+          "n_field": "ASR_paired_pairs"
+        },
+        {
+          "estimate_field": "TCR_variant_minus_full_bootstrap",
+          "high_field": "TCR_variant_minus_full_ci_high",
+          "level": 0.95,
+          "low_field": "TCR_variant_minus_full_ci_low",
+          "method": "case_clustered_paired_bootstrap",
+          "metric": "TCR",
+          "n_field": "TCR_paired_pairs"
+        }
+      ],
+      "warnings": [
+        "single-model ablation; do not generalize across models",
+        "parse-warning and unresolved case-runs remain in denominators; warnings are not discarded"
+      ]
+    },
+    {
+      "caption": "Static chart generated from the adjacent audited chart CSV; undefined values remain NA.",
+      "chart_type": "absolute_proportion_bar_with_wilson_95ci",
+      "files": {
+        "data": {
+          "bytes": 5091,
+          "path": "primary_chart_data.csv",
+          "sha256": "74bfb6d64bc56cbc04ee1a78831c57e3e323a342e2f7f41c88721586c77e0db2"
+        },
+        "png": {
+          "bytes": 244122,
+          "path": "primary_chart.png",
+          "sha256": "7bc8c088ef5925651a4b22c3679a89a31782f387911bb66f1be941aac9cfd3d0"
+        },
+        "svg": {
+          "bytes": 119711,
+          "path": "primary_chart.svg",
+          "sha256": "45be16f618e1e8f07d6678697d1ca598e8c59feada97840c4aa6697d675dd9ef"
+        }
+      },
+      "grain": [
+        "condition"
+      ],
+      "id": "e4_primary_chart",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 20,
+      "role": "secondary",
+      "title": "E4 ASR by condition",
+      "uncertainty": [
+        {
+          "estimate_field": "value",
+          "high_field": "ci_high",
+          "level": 0.95,
+          "low_field": "ci_low",
+          "method": "wilson",
+          "metric": "ASR",
+          "n_field": "denominator"
+        }
+      ],
+      "warnings": [
+        "absolute ASR proportions are secondary; use the paired contribution forest for effects",
+        "parse-warning rows remain in the registered case-run denominators and are not dropped (parse_failure_rows=47, logical_case_runs=1500)"
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

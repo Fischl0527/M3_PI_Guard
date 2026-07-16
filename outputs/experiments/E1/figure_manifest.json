@@ -1,0 +1,50 @@
+{
+  "evidence_tier": "formal_model",
+  "experiment_id": "E1",
+  "figures": [
+    {
+      "caption": "Static chart generated from the adjacent audited chart CSV; undefined values remain NA.",
+      "chart_type": "grouped_bar_with_wilson_95ci",
+      "files": {
+        "data": {
+          "bytes": 1507,
+          "path": "primary_chart_data.csv",
+          "sha256": "ca67372c8c7800e8a1ab53025af93aadefdfeaccbcd8d4f8f802d369ef589e9a"
+        },
+        "png": {
+          "bytes": 81299,
+          "path": "primary_chart.png",
+          "sha256": "2ac7f75b5b4db13c41daf9c70b7a4e08504ba9ada2cd749ad4d3fe7e8d3a7b6d"
+        },
+        "svg": {
+          "bytes": 49885,
+          "path": "primary_chart.svg",
+          "sha256": "1c1547fd31b0e11e8b0655188b92dca408456c29312fdedb57ffd882e807d394"
+        }
+      },
+      "grain": [
+        "model"
+      ],
+      "id": "e1_primary_chart",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 10,
+      "role": "primary",
+      "title": "E1 ASR by model",
+      "uncertainty": [
+        {
+          "estimate_field": "value",
+          "high_field": "ci_high",
+          "level": 0.95,
+          "low_field": "ci_low",
+          "method": "wilson",
+          "metric": "ASR",
+          "n_field": "denominator"
+        }
+      ],
+      "warnings": []
+    }
+  ],
+  "schema_version": "1.0"
+}

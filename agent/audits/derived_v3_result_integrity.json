@@ -1,0 +1,756 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-13T23:47:25.319984+00:00",
+  "status": "pass",
+  "scope": {
+    "program_manifest": "E:\\M3_PI_Guard_test\\outputs\\experiments\\program_manifest_final_v3.json",
+    "program_manifest_sha256": "7520d929900a0ff509f2538dcdc4b9391a9f53e0a6b37117af8ea37e125cd064",
+    "blind_freeze": "E:\\M3_PI_Guard_test\\outputs\\experiments\\blind_freeze_v3.json",
+    "blind_freeze_sha256": "a36791aa0dfb530d2829b9e3eabec2f89c7df0d864b2b5a146e4569cfd79554e",
+    "thresholds": "E:\\M3_PI_Guard_test\\outputs\\experiments\\E13\\frozen_thresholds.json",
+    "thresholds_sha256": "c1ebcddb1199ae9a2a728702ce6ed97c8688c47fea060e4dae90c289ae430dbf",
+    "stages": [
+      "derived"
+    ]
+  },
+  "freeze_files": {
+    "declared_files": 65,
+    "verified_files": 65,
+    "mismatches": 0
+  },
+  "models": {
+    "qwen3:4b-instruct": {
+      "digests": [
+        "0edcdef34593"
+      ],
+      "ollama_versions": [
+        "ollama version is 0.24.0"
+      ]
+    }
+  },
+  "stages": [
+    {
+      "stage": "derived",
+      "status": "completed",
+      "scanned": true,
+      "job_count": 8,
+      "condition_count": 16,
+      "expected_runs": 446,
+      "logical_runs": 446,
+      "log_rows": 619,
+      "parse_failure_rows": 105,
+      "parse_failure_runs": 105,
+      "timeout_rows": 0,
+      "timeout_runs": 0,
+      "max_step_runs": 0,
+      "nonterminal_runs": 0,
+      "missing_runs": 0,
+      "duplicate_logical_runs": 0,
+      "duplicate_run_steps": 0,
+      "sandbox_cleanup_failures": 0,
+      "sandbox_reused_instances": 0,
+      "final_status_counts": {
+        "blocked": 54,
+        "completed": 379,
+        "needs_confirmation": 13
+      },
+      "lifecycle": {
+        "required_models": 1,
+        "verified_models": 1,
+        "verified_model_tags": [
+          "qwen3:4b-instruct"
+        ],
+        "matching_event_count": 1
+      },
+      "jobs": [
+        {
+          "job_id": "derived__e8__qwen",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 90,
+          "completed_runs": 90,
+          "condition_count": 2,
+          "logical_runs": 90,
+          "log_rows": 129,
+          "parse_failure_rows": 4,
+          "parse_failure_runs": 4,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 14,
+            "completed": 73,
+            "needs_confirmation": 3
+          },
+          "manifest_sha256": "228e697cfd462edf551779813b4c57aa7f96bc41575c136453c3da5b52eb3ab1",
+          "conditions": [
+            {
+              "condition_id": "derived_normal_off",
+              "status": "completed",
+              "expected_runs": 45,
+              "logical_runs": 45,
+              "log_rows": 75,
+              "parse_failure_rows": 4,
+              "parse_failure_runs": 4,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 45
+              },
+              "hashes": {
+                "jsonl": "c36a7354a0f3de0ae90a706628f8b44decbbaffe3a606e212266d92ec3caf37a",
+                "csv": "150774f99706ecbe6260637a726345d4e8d1c01a81e238498b06da225c9d55b7"
+              }
+            },
+            {
+              "condition_id": "derived_normal_full",
+              "status": "completed",
+              "expected_runs": 45,
+              "logical_runs": 45,
+              "log_rows": 54,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 14,
+                "completed": 28,
+                "needs_confirmation": 3
+              },
+              "hashes": {
+                "jsonl": "71e0becb2e86cbca7db41ab758f1e37583d4dbd51e8bca32c69a9a50b12f7509",
+                "csv": "b6c7a4771cf7cf11b51cbba0f9b44915cb87ea0a681c4cf7d47a8d4156362baa"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "derived__e10__qwen",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 72,
+          "completed_runs": 72,
+          "condition_count": 2,
+          "logical_runs": 72,
+          "log_rows": 76,
+          "parse_failure_rows": 0,
+          "parse_failure_runs": 0,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 4,
+            "completed": 68
+          },
+          "manifest_sha256": "bd187c6ae27fd41377a364908f8f57b1f009b125fc8f42ecf6670f79e6578198",
+          "conditions": [
+            {
+              "condition_id": "derived_normal_off",
+              "status": "completed",
+              "expected_runs": 36,
+              "logical_runs": 36,
+              "log_rows": 40,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 36
+              },
+              "hashes": {
+                "jsonl": "1a39438e5c2b0fab703b38d4e775826f55e8d856a5d87ef5855f6c679893cb98",
+                "csv": "463f3b67b809c3261cc0e3d35dc4bb07e68e26b3bbb0e218311ab6b8370a79ee"
+              }
+            },
+            {
+              "condition_id": "derived_normal_full",
+              "status": "completed",
+              "expected_runs": 36,
+              "logical_runs": 36,
+              "log_rows": 36,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 4,
+                "completed": 32
+              },
+              "hashes": {
+                "jsonl": "a8f446dc53eb0d2058e502fe0a7e393ed2ead7630271cf156a559f61d2441c43",
+                "csv": "ac1e33e32583dfaa3163c864285758bd1635854a6214d6e8c496c17ae08d6640"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "derived__e9__qwen__ctx_2048",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 30,
+          "completed_runs": 30,
+          "condition_count": 2,
+          "logical_runs": 30,
+          "log_rows": 42,
+          "parse_failure_rows": 4,
+          "parse_failure_runs": 4,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 5,
+            "completed": 21,
+            "needs_confirmation": 4
+          },
+          "manifest_sha256": "9e934312b857b8fcb2de0dcf211de2b65c801c0d6071f56a594555e1df8e08a8",
+          "conditions": [
+            {
+              "condition_id": "derived_normal_off",
+              "status": "completed",
+              "expected_runs": 15,
+              "logical_runs": 15,
+              "log_rows": 27,
+              "parse_failure_rows": 4,
+              "parse_failure_runs": 4,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 15
+              },
+              "hashes": {
+                "jsonl": "d2eeb7cc45990e2186bfbc858a663e3aee77d0a79a5fca821ff751c0c254f4a8",
+                "csv": "1e8aeaba3f282dfb582b0b8d77688fa07831c542131a34c977c4b44719f06f4c"
+              }
+            },
+            {
+              "condition_id": "derived_normal_full",
+              "status": "completed",
+              "expected_runs": 15,
+              "logical_runs": 15,
+              "log_rows": 15,
+              "parse_failure_rows": 0,
+              "parse_failure_runs": 0,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 5,
+                "completed": 6,
+                "needs_confirmation": 4
+              },
+              "hashes": {
+                "jsonl": "269b676fb8e9d9d10e3493d6e233d7fb42c66ff5a7b26f26b8bcd3916950dd9f",
+                "csv": "572f8631ff4f0616a86965dd325b32385b4086bd85053c8016bdc8a8a610babb"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "derived__e9__qwen__ctx_4096",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 30,
+          "completed_runs": 30,
+          "condition_count": 2,
+          "logical_runs": 30,
+          "log_rows": 30,
+          "parse_failure_rows": 30,
+          "parse_failure_runs": 30,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 4,
+            "completed": 26
+          },
+          "manifest_sha256": "19eeeedc89f08d9c2c5722dcbcb62330d3d4b0c266d3163f8d416db495a0e62a",
+          "conditions": [
+            {
+              "condition_id": "derived_normal_off",
+              "status": "completed",
+              "expected_runs": 15,
+              "logical_runs": 15,
+              "log_rows": 15,
+              "parse_failure_rows": 15,
+              "parse_failure_runs": 15,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 15
+              },
+              "hashes": {
+                "jsonl": "08bc735062ed934b41e6c37f13f3d57c0d2bff2b6613695682a3e0fc010c77e5",
+                "csv": "90ea124f9859f7ef8727e1114dc42f4e51f44d2e23cb0091e768e7b1fe12218b"
+              }
+            },
+            {
+              "condition_id": "derived_normal_full",
+              "status": "completed",
+              "expected_runs": 15,
+              "logical_runs": 15,
+              "log_rows": 15,
+              "parse_failure_rows": 15,
+              "parse_failure_runs": 15,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 4,
+                "completed": 11
+              },
+              "hashes": {
+                "jsonl": "db4b560919757252b172288f71969596507c75cbbff1393d57b6f00ec31c239b",
+                "csv": "30c151e094618c3df254c754681bece81f77ce933beee978273a72a166265f98"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "derived__e9__qwen__ctx_8192",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 30,
+          "completed_runs": 30,
+          "condition_count": 2,
+          "logical_runs": 30,
+          "log_rows": 30,
+          "parse_failure_rows": 30,
+          "parse_failure_runs": 30,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 1,
+            "completed": 29
+          },
+          "manifest_sha256": "396a107de24aa029d1d1d9245901d5c0667cd3255f33400b100edb3ee2d0d2ac",
+          "conditions": [
+            {
+              "condition_id": "derived_normal_off",
+              "status": "completed",
+              "expected_runs": 15,
+              "logical_runs": 15,
+              "log_rows": 15,
+              "parse_failure_rows": 15,
+              "parse_failure_runs": 15,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 15
+              },
+              "hashes": {
+                "jsonl": "194c6b0c59ca4089a0ea7023d1ffd29712420c358266c7dff962bcf086228a2c",
+                "csv": "aaf1eb1fcdfdeed2bf90bc49a234ed9ff9ea643daeb4252f99c6037d9cacf0ca"
+              }
+            },
+            {
+              "condition_id": "derived_normal_full",
+              "status": "completed",
+              "expected_runs": 15,
+              "logical_runs": 15,
+              "log_rows": 15,
+              "parse_failure_rows": 15,
+              "parse_failure_runs": 15,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 1,
+                "completed": 14
+              },
+              "hashes": {
+                "jsonl": "a8bbd1a3b29082f8f5280e3e37f4b323f9f77decb01c5c759c7ecd43f1effd9f",
+                "csv": "fb4968df756b7548f9ee8c996a58cb9765c74fac76796fcdb447c54f15d7d985"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "derived__e9__qwen__ctx_16384",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 30,
+          "completed_runs": 30,
+          "condition_count": 2,
+          "logical_runs": 30,
+          "log_rows": 30,
+          "parse_failure_rows": 30,
+          "parse_failure_runs": 30,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 2,
+            "completed": 28
+          },
+          "manifest_sha256": "859ce116a6734439b1c5d961fc6ea30e08272cfc0c7ba1c3545b9eb0f5177002",
+          "conditions": [
+            {
+              "condition_id": "derived_normal_off",
+              "status": "completed",
+              "expected_runs": 15,
+              "logical_runs": 15,
+              "log_rows": 15,
+              "parse_failure_rows": 15,
+              "parse_failure_runs": 15,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 15
+              },
+              "hashes": {
+                "jsonl": "18e73f6b105a95847c511229eae1ab824f1b1be64248ce062606c4e3a77898f8",
+                "csv": "16e5e13c6d39c99a51bae22984fe4c7dfd03ddbf3ad62c5cab2ab77b8a395056"
+              }
+            },
+            {
+              "condition_id": "derived_normal_full",
+              "status": "completed",
+              "expected_runs": 15,
+              "logical_runs": 15,
+              "log_rows": 15,
+              "parse_failure_rows": 15,
+              "parse_failure_runs": 15,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 2,
+                "completed": 13
+              },
+              "hashes": {
+                "jsonl": "69fd57eb75d008f98b00f8c7f005461fcddc09469d73d308efc619520fc6e8f3",
+                "csv": "0f543e16ca2f20d87ed63800a42e540222e5b7d929aee8c35d5a8bcb3bd6b7ba"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "derived__e7__qwen",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 120,
+          "completed_runs": 120,
+          "condition_count": 2,
+          "logical_runs": 120,
+          "log_rows": 202,
+          "parse_failure_rows": 5,
+          "parse_failure_runs": 5,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 17,
+            "completed": 100,
+            "needs_confirmation": 3
+          },
+          "manifest_sha256": "d301becd4e77c44c766b0280e6b57cfc5d1f07f465abbcd0fc2d4fed56204d25",
+          "conditions": [
+            {
+              "condition_id": "derived_normal_off",
+              "status": "completed",
+              "expected_runs": 60,
+              "logical_runs": 60,
+              "log_rows": 118,
+              "parse_failure_rows": 4,
+              "parse_failure_runs": 4,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 60
+              },
+              "hashes": {
+                "jsonl": "c0e47226642b7bee258bef83823e78c652cbfca555b98ac2f94625579d4a7cb9",
+                "csv": "c77ddccd4758e5d7fbd9ac52463d4d689d885fcc7ce8c12ddd16aff45e2c5d9a"
+              }
+            },
+            {
+              "condition_id": "derived_normal_full",
+              "status": "completed",
+              "expected_runs": 60,
+              "logical_runs": 60,
+              "log_rows": 84,
+              "parse_failure_rows": 1,
+              "parse_failure_runs": 1,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 17,
+                "completed": 40,
+                "needs_confirmation": 3
+              },
+              "hashes": {
+                "jsonl": "0acbfcd570d1cc79f8e82cee3100aae9cd2d3fee6f0be6e917c5e57b46d0450f",
+                "csv": "e6f10c37ff2d5485751c8e95e9c20816086d43b24181dc0c58f7fea02a4f4f7e"
+              }
+            }
+          ]
+        },
+        {
+          "job_id": "derived__e11__qwen",
+          "model": "qwen3:4b-instruct",
+          "status": "completed",
+          "expected_runs": 44,
+          "completed_runs": 44,
+          "condition_count": 2,
+          "logical_runs": 44,
+          "log_rows": 80,
+          "parse_failure_rows": 2,
+          "parse_failure_runs": 2,
+          "timeout_rows": 0,
+          "timeout_runs": 0,
+          "max_step_runs": 0,
+          "nonterminal_runs": 0,
+          "missing_runs": 0,
+          "duplicate_logical_runs": 0,
+          "duplicate_run_steps": 0,
+          "sandbox_cleanup_failures": 0,
+          "sandbox_reused_instances": 0,
+          "final_status_counts": {
+            "blocked": 7,
+            "completed": 34,
+            "needs_confirmation": 3
+          },
+          "manifest_sha256": "cab9a6b4cdecbb4d827af1e70f1f3fe402be052fc93c91cbfc3370ea32bd1a03",
+          "conditions": [
+            {
+              "condition_id": "derived_normal_off",
+              "status": "completed",
+              "expected_runs": 22,
+              "logical_runs": 22,
+              "log_rows": 50,
+              "parse_failure_rows": 1,
+              "parse_failure_runs": 1,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "completed": 22
+              },
+              "hashes": {
+                "jsonl": "97ed7c7d1b32cd28d6e0f1a7ba451af9084616554f72c302c07e964427247e22",
+                "csv": "8cbc9937db3ba26a67f6be933e951bdf048ffdbcf9e2189171b96c4d0a06849d"
+              }
+            },
+            {
+              "condition_id": "derived_normal_full",
+              "status": "completed",
+              "expected_runs": 22,
+              "logical_runs": 22,
+              "log_rows": 30,
+              "parse_failure_rows": 1,
+              "parse_failure_runs": 1,
+              "timeout_rows": 0,
+              "timeout_runs": 0,
+              "max_step_runs": 0,
+              "nonterminal_runs": 0,
+              "missing_runs": 0,
+              "extra_runs": 0,
+              "duplicate_run_steps": 0,
+              "duplicate_logical_runs": 0,
+              "sandbox_missing_instances": 0,
+              "sandbox_reused_instances": 0,
+              "sandbox_cleanup_failures": 0,
+              "final_status_counts": {
+                "blocked": 7,
+                "completed": 12,
+                "needs_confirmation": 3
+              },
+              "hashes": {
+                "jsonl": "94984c8ee782a350272b177027031da9f419df7c04ff639e8e7499cc0fec30ff",
+                "csv": "064bd1650f7a96d5508298ff775e8d1be4e49d7f94423e28af2a995622775229"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "jobs": 8,
+    "conditions": 16,
+    "logical_runs": 446,
+    "log_rows": 619,
+    "parse_failure_rows": 105,
+    "timeout_runs": 0,
+    "max_step_runs": 0,
+    "nonterminal_runs": 0
+  },
+  "finding_counts": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "findings": []
+}

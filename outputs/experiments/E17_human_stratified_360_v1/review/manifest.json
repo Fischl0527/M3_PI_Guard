@@ -1,0 +1,235 @@
+{
+  "artifacts": [
+    {
+      "bytes": 413,
+      "kind": "package_status",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/HUMAN_REVIEW_STATUS.md",
+      "sha256": "fe58f763bb769ecd9b08360d4d525923a4775880fad883e1899f7d436ec95d81"
+    },
+    {
+      "bytes": 1280,
+      "kind": "technical_analysis",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/analysis.md",
+      "sha256": "f68c528472ce244709f016e0c622872a202ded9c870ee5696fe6f8fb17a2901f"
+    },
+    {
+      "bytes": 67,
+      "kind": "review_confidence_statistics",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/confidence_counts.csv",
+      "sha256": "d8e06773d18d16a2bf3336b6d4ccad554ab344588af4252fe8c60c716f7d5e81"
+    },
+    {
+      "bytes": 783,
+      "kind": "representative_count_statistics",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/failure_class_counts.csv",
+      "sha256": "e61c72ca42955ed2b7312f23e2644de3cc93f906fc2ec0a90ebb37520b64efa9"
+    },
+    {
+      "bytes": 198897,
+      "kind": "final_human_labels",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/failure_taxonomy.csv",
+      "sha256": "2c6e7912d48d01015de0670ddeae38e6f375389018d9f08bf91f26ef42435c12"
+    },
+    {
+      "bytes": 4369,
+      "kind": "figure_manifest",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/figure_manifest.json",
+      "sha256": "5d9fa434c6b87926ef362eed9ac322b95fe8e242e35cbf4b167e53a95c5c5974"
+    },
+    {
+      "bytes": 61678,
+      "kind": "figure_asset",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/representative_failure_counts.png",
+      "sha256": "071e2a638824a0b1e9893af97343e6204f4c695f87e01b69ca80ecbfd447a31d"
+    },
+    {
+      "bytes": 54842,
+      "kind": "figure_asset",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/representative_failure_counts.svg",
+      "sha256": "efe68f3b8db5c970afa19b549f1f95521754135753fed109fbb8eda7dbd6877e"
+    },
+    {
+      "bytes": 2244,
+      "kind": "interrater_statistics",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/reviewer_agreement.json",
+      "sha256": "2c4bfe52210512f869b40f752c180088fc5909de10df2584829db59a6fe64ac2"
+    },
+    {
+      "bytes": 54680,
+      "kind": "figure_asset",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/sample_group_composition.png",
+      "sha256": "d01d699a765df933036e2fc27bab1e7714fed42b3015e815489045e38e4d019c"
+    },
+    {
+      "bytes": 52653,
+      "kind": "figure_asset",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/sample_group_composition.svg",
+      "sha256": "7511d7885f34902f15afed1537d884811f9ec62b15da321ef5da68b5b4eca317"
+    },
+    {
+      "bytes": 2561,
+      "kind": "diagnostic_group_statistics",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/sample_group_counts.csv",
+      "sha256": "a8eeeac98bc27363ee30499f442d8db9d2404ed234dfe56ac8131d63ddb33709"
+    },
+    {
+      "bytes": 8270,
+      "kind": "final_statistics",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/statistics.json",
+      "sha256": "89326e2a79b149fc1892dd057fe0d8143c274c70bc678aea3f1ec239a295cf04"
+    },
+    {
+      "bytes": 1782,
+      "kind": "weighted_population_statistics",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/weighted_population_estimates.csv",
+      "sha256": "a65cbb1cc598086a0fccd4a98c080d44030e59af13eb00931b0bb93b77122236"
+    },
+    {
+      "bytes": 63827,
+      "kind": "figure_asset",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/weighted_population_estimates.png",
+      "sha256": "bc71adef1e5450cc94a35e25ad43f938d2d477394f764a564d41ac82a24a11f5"
+    },
+    {
+      "bytes": 55369,
+      "kind": "figure_asset",
+      "path": "outputs/experiments/E17_human_stratified_360_v1/review/weighted_population_estimates.svg",
+      "sha256": "85e758c9c654f25fc3181a725df77dd279d3a85652dc2a84b9452f0ec0c2e277"
+    }
+  ],
+  "completed_at": "2026-07-16T00:03:40.745227+00:00",
+  "configuration": {
+    "bootstrap_iterations": 10000,
+    "bootstrap_seed": 20260717,
+    "coverage": {
+      "full_population_human_reviewed": false,
+      "population_rows": 3299,
+      "representative_rows": 300,
+      "reviewed_sample_rows": 360,
+      "targeted_rows": 60
+    },
+    "evidence_tier": "human_stratified_sample",
+    "registry_eligible": true,
+    "source_index": {
+      "path": "outputs/experiments/e17_source_index_corrected_v2.json",
+      "schema_version": "2.0",
+      "sha256": "6d3baa721317b50d9dca82c958d5b0f47b23114066c9e2a42e922c8c512fd17d"
+    },
+    "source_mode": "human_stratified_sample",
+    "workflow": "blinded_dual_review_stratified_sample_without_adjudication"
+  },
+  "created_at": "2026-07-16T00:03:40.745227+00:00",
+  "dataset": {
+    "inputs": {
+      "blank_template": {
+        "path": "outputs/experiments/E17_human_stratified_360_v1/packets/reviewer_1_blinded_template.csv",
+        "sha256": "0b18a0c4f6e9ea38ef6ebbe6416a35700f3d420c2c0e17acc48cdee506db78f7"
+      },
+      "packet_manifest": {
+        "path": "outputs/experiments/E17_human_stratified_360_v1/packet_manifest.json",
+        "sha256": "94020ce3ee094f3b07d411a079648403edeb19ff87986596598f069edcd37f7e"
+      },
+      "private_sample_items": {
+        "path": "outputs/experiments/E17_human_stratified_360_v1/private/review_items_360.jsonl",
+        "sha256": "6b9553f1477a345a9e5f838e5ddc8bcf0b3e5f02994468875d097a1819ed950f"
+      },
+      "reviewer_1_submission": {
+        "path": "outputs/experiments/E17_human_stratified_360_v1/submissions/reviewer_1_completed.csv",
+        "reviewer_id": "human_gaohang_r1",
+        "sha256": "cdfe68e6d17e09ff82c790259f970cb19da9ea40d343cc9eb7167092185cf8ec"
+      },
+      "reviewer_2_submission": {
+        "path": "outputs/experiments/E17_human_stratified_360_v1/submissions/reviewer_2_completed.csv",
+        "reviewer_id": "human_hg02",
+        "sha256": "36be4a7bb68e77ff7669d5b3ea6c7c04255442d2dda4dcf7a46155e506bcf37b"
+      },
+      "sample_manifest": {
+        "path": "outputs/experiments/E17_human_stratified_360_v1/manifest.json",
+        "sha256": "4a6faf97f0f043960830fc5d8feeffcc8ada4aa678dd740c5bdaacce8e650964"
+      }
+    },
+    "sha256": "d2249a09d21d539f79cf04408fdfb4bab3ae0b1cd00d6e072744a3dbcc8c9093"
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.5"
+  },
+  "experiment_id": "E17",
+  "failure": null,
+  "final_statistics": {
+    "cohen_kappa": 1.0,
+    "percent_agreement": 1.0,
+    "representative_primary_class_counts": {
+      "ask": 50,
+      "false_block": 7,
+      "leak": 112,
+      "max_steps": 6,
+      "none": 91,
+      "other": 17,
+      "parse_failure": 17,
+      "timeout": 0
+    }
+  },
+  "git": {
+    "branch": "test1",
+    "commit": "2c53f52c475e6838dc82246c821db5ed7ac0209c",
+    "dirty": true
+  },
+  "models": [],
+  "phase": "completed_stratified_sample_audit",
+  "plan": {
+    "packet_manifest": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/packet_manifest.json",
+      "sha256": "94020ce3ee094f3b07d411a079648403edeb19ff87986596598f069edcd37f7e"
+    },
+    "population_rows": 3299,
+    "representative_rows": 300,
+    "sample_rows": 360,
+    "sampling_manifest": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/manifest.json",
+      "sha256": "4a6faf97f0f043960830fc5d8feeffcc8ada4aa678dd740c5bdaacce8e650964"
+    },
+    "source_index": {
+      "path": "outputs/experiments/e17_source_index_corrected_v2.json",
+      "sha256": "6d3baa721317b50d9dca82c958d5b0f47b23114066c9e2a42e922c8c512fd17d"
+    },
+    "source_mode": "human_stratified_sample",
+    "targeted_rows": 60
+  },
+  "progress": {
+    "completed_runs": 360,
+    "expected_runs": 360,
+    "failed_jobs": 0,
+    "unresolved_cases": 0
+  },
+  "protocol_id": "E17_HUMAN_STRATIFIED_360_V1",
+  "review_progress": {
+    "adjudications_completed": 0,
+    "code_set_agreements": 360,
+    "code_set_disagreements": 0,
+    "review_items": 360,
+    "reviewer_ids": [
+      "human_gaohang_r1",
+      "human_hg02"
+    ],
+    "reviewers_received": 2,
+    "reviewers_required": 2
+  },
+  "sampling_contract": {
+    "allowed_claim": "two independent humans reviewed the frozen 360-row stratified audit sample",
+    "population_estimation_group": "representative",
+    "population_rows": 3299,
+    "prohibited_claim": "all 3299 E17 items received human review",
+    "protocol_id": "E17_HUMAN_STRATIFIED_360_V1",
+    "representative_rows": 300,
+    "sample_rows": 360,
+    "targeted_groups": [
+      "targeted_auto_disagreement",
+      "targeted_rare_complex"
+    ],
+    "targeted_groups_pooled_into_population_estimates": false,
+    "targeted_rows": 60
+  },
+  "schema_version": "e17-human-sample-review-v1",
+  "status": "completed"
+}

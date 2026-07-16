@@ -1,0 +1,413 @@
+{
+  "comparisons": [
+    {
+      "baseline": "stub_baseline",
+      "case_source": "release/Redteam_LLM_Security_v1.0/m3_attacks/cases/all_cases.jsonl",
+      "causal_interpretation": "diagnostic_only",
+      "comparison_id": "stub_baseline_vs_keyword",
+      "delta": {
+        "ASR_reduction": 0.442622,
+        "ASR_relative_reduction": 0.771428,
+        "BSR_gain": 0.6,
+        "DSR_reduction": 0.411765,
+        "TCR_change": 0.0
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": -0.32786885245901637,
+          "ci_low": -0.5737704918032787,
+          "clusters": 61,
+          "estimate": -0.4426229508196721,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 61,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 27,
+          "discordant_pairs": 27,
+          "holm_adjusted_p": 1.4901161193847656e-07,
+          "method": "mcnemar_exact",
+          "p_value": 1.4901161193847656e-08,
+          "pairs": 61,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": -0.23529411764705882,
+          "ci_low": -0.5882352941176471,
+          "clusters": 34,
+          "estimate": -0.4117647058823529,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 34,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 14,
+          "discordant_pairs": 14,
+          "holm_adjusted_p": 0.0008544921875,
+          "method": "mcnemar_exact",
+          "p_value": 0.0001220703125,
+          "pairs": 34,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 8,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 8,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 8,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "method": "wilcoxon_signed_rank",
+          "p_value": null,
+          "pairs": 0,
+          "rank_biserial": null
+        },
+        "pairs": 69,
+        "status": "paired"
+      },
+      "treatment": "stub_keyword_only"
+    },
+    {
+      "baseline": "stub_baseline",
+      "case_source": "release/Redteam_LLM_Security_v1.0/m3_attacks/cases/all_cases.jsonl",
+      "causal_interpretation": "diagnostic_only",
+      "comparison_id": "stub_baseline_vs_policy",
+      "delta": {
+        "ASR_reduction": 0.57377,
+        "ASR_relative_reduction": 1.0,
+        "BSR_gain": 1.0,
+        "DSR_reduction": 0.529412,
+        "TCR_change": 0.0
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": -0.4426229508196721,
+          "ci_low": -0.6885245901639344,
+          "clusters": 61,
+          "estimate": -0.5737704918032787,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 61,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 35,
+          "discordant_pairs": 35,
+          "holm_adjusted_p": 6.984919309616089e-10,
+          "method": "mcnemar_exact",
+          "p_value": 5.820766091346741e-11,
+          "pairs": 61,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": -0.35294117647058826,
+          "ci_low": -0.7058823529411765,
+          "clusters": 34,
+          "estimate": -0.5294117647058824,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 34,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 18,
+          "discordant_pairs": 18,
+          "holm_adjusted_p": 6.866455078125e-05,
+          "method": "mcnemar_exact",
+          "p_value": 7.62939453125e-06,
+          "pairs": 34,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 8,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 8,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 8,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "method": "wilcoxon_signed_rank",
+          "p_value": null,
+          "pairs": 0,
+          "rank_biserial": null
+        },
+        "pairs": 69,
+        "status": "paired"
+      },
+      "treatment": "stub_policy_only"
+    },
+    {
+      "baseline": "stub_baseline",
+      "case_source": "release/Redteam_LLM_Security_v1.0/m3_attacks/cases/all_cases.jsonl",
+      "causal_interpretation": "diagnostic_only",
+      "comparison_id": "stub_baseline_vs_full",
+      "delta": {
+        "ASR_reduction": 0.57377,
+        "ASR_relative_reduction": 1.0,
+        "BSR_gain": 1.0,
+        "DSR_reduction": 0.529412,
+        "TCR_change": 0.0
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": -0.4426229508196721,
+          "ci_low": -0.6885245901639344,
+          "clusters": 61,
+          "estimate": -0.5737704918032787,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 61,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 35,
+          "discordant_pairs": 35,
+          "holm_adjusted_p": 6.984919309616089e-10,
+          "method": "mcnemar_exact",
+          "p_value": 5.820766091346741e-11,
+          "pairs": 61,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": -0.35294117647058826,
+          "ci_low": -0.7058823529411765,
+          "clusters": 34,
+          "estimate": -0.5294117647058824,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 34,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 18,
+          "discordant_pairs": 18,
+          "holm_adjusted_p": 6.866455078125e-05,
+          "method": "mcnemar_exact",
+          "p_value": 7.62939453125e-06,
+          "pairs": 34,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 8,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 8,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 8,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "method": "wilcoxon_signed_rank",
+          "p_value": null,
+          "pairs": 0,
+          "rank_biserial": null
+        },
+        "pairs": 69,
+        "status": "paired"
+      },
+      "treatment": "stub_full_guard"
+    },
+    {
+      "baseline": "qwen25_baseline",
+      "case_source": "fixtures/day5_representative_cases.jsonl",
+      "causal_interpretation": "diagnostic_only",
+      "comparison_id": "qwen25_baseline_vs_full",
+      "delta": {
+        "ASR_reduction": 0.157895,
+        "ASR_relative_reduction": 1.0,
+        "BSR_gain": 1.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": -0.3157894736842105,
+          "clusters": 19,
+          "estimate": -0.15789473684210525,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 19,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 3,
+          "discordant_pairs": 3,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 0.25,
+          "pairs": 19,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 13,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 13,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 13,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 5,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 5,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 5,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "method": "wilcoxon_signed_rank",
+          "p_value": null,
+          "pairs": 0,
+          "rank_biserial": null
+        },
+        "pairs": 24,
+        "status": "paired"
+      },
+      "treatment": "qwen25_full_guard"
+    }
+  ],
+  "experiment_id": "E0",
+  "holm_correction": [
+    {
+      "comparison_id": "stub_baseline_vs_keyword",
+      "holm_adjusted_p": 1.4901161193847656e-07,
+      "metric": "ASR",
+      "raw_p": 1.4901161193847656e-08
+    },
+    {
+      "comparison_id": "stub_baseline_vs_keyword",
+      "holm_adjusted_p": 0.0008544921875,
+      "metric": "DSR",
+      "raw_p": 0.0001220703125
+    },
+    {
+      "comparison_id": "stub_baseline_vs_keyword",
+      "holm_adjusted_p": 1.0,
+      "metric": "TCR",
+      "raw_p": 1.0
+    },
+    {
+      "comparison_id": "stub_baseline_vs_policy",
+      "holm_adjusted_p": 6.984919309616089e-10,
+      "metric": "ASR",
+      "raw_p": 5.820766091346741e-11
+    },
+    {
+      "comparison_id": "stub_baseline_vs_policy",
+      "holm_adjusted_p": 6.866455078125e-05,
+      "metric": "DSR",
+      "raw_p": 7.62939453125e-06
+    },
+    {
+      "comparison_id": "stub_baseline_vs_policy",
+      "holm_adjusted_p": 1.0,
+      "metric": "TCR",
+      "raw_p": 1.0
+    },
+    {
+      "comparison_id": "stub_baseline_vs_full",
+      "holm_adjusted_p": 6.984919309616089e-10,
+      "metric": "ASR",
+      "raw_p": 5.820766091346741e-11
+    },
+    {
+      "comparison_id": "stub_baseline_vs_full",
+      "holm_adjusted_p": 6.866455078125e-05,
+      "metric": "DSR",
+      "raw_p": 7.62939453125e-06
+    },
+    {
+      "comparison_id": "stub_baseline_vs_full",
+      "holm_adjusted_p": 1.0,
+      "metric": "TCR",
+      "raw_p": 1.0
+    },
+    {
+      "comparison_id": "qwen25_baseline_vs_full",
+      "holm_adjusted_p": 1.0,
+      "metric": "ASR",
+      "raw_p": 0.25
+    },
+    {
+      "comparison_id": "qwen25_baseline_vs_full",
+      "holm_adjusted_p": 1.0,
+      "metric": "DSR",
+      "raw_p": 1.0
+    },
+    {
+      "comparison_id": "qwen25_baseline_vs_full",
+      "holm_adjusted_p": 1.0,
+      "metric": "TCR",
+      "raw_p": 1.0
+    }
+  ],
+  "methods": {
+    "binary_paired": "two-sided exact McNemar",
+    "multiple_comparisons": "Holm family-wise correction across historical McNemar tests",
+    "paired_difference_ci": "case-clustered paired bootstrap, 10,000 iterations, seed 42",
+    "undefined_metric_policy": "zero denominators remain null/NA"
+  },
+  "schema_version": "1.0",
+  "scope": "historical_diagnostic_only",
+  "status": "completed",
+  "warning": "Prompt/Guard coupling and evaluator-label leakage in the archived runner make all effect comparisons diagnostic only, irrespective of p-values."
+}

@@ -1,0 +1,45 @@
+{
+  "automated_checks": [
+    "nonempty_title_and_single_tagged_footer",
+    "footer_tick_nonoverlap",
+    "adjacent_tick_nonoverlap",
+    "png_signature_dimensions_and_minimum_readability_floor",
+    "parseable_svg_with_viewbox"
+  ],
+  "axes_count": 1,
+  "canvas_height_px": 600,
+  "canvas_width_px": 2400,
+  "coordinate_space": "matplotlib_pre_export_canvas_pixels",
+  "footer_bbox": {
+    "height_px": 10.0,
+    "width_px": 764.0,
+    "x0_px": 24.0,
+    "x1_px": 788.0,
+    "y0_px": 4.8,
+    "y1_px": 14.8
+  },
+  "footer_tick_overlap_count": 0,
+  "footer_to_nearest_tick_gap_px": 53.58853063982795,
+  "layout_status": "pass",
+  "manual_review_still_required": true,
+  "png_bytes": 94970,
+  "png_height_px": 1041,
+  "png_width_px": 4140,
+  "required_footer_to_tick_gap_px": 4.0,
+  "schema_version": "1.0",
+  "svg_bytes": 99856,
+  "svg_view_box": "0 0 1656 416.381812",
+  "title_bbox": {
+    "height_px": 19.0,
+    "width_px": 477.12499999999994,
+    "x0_px": 336.00000000000006,
+    "x1_px": 813.125,
+    "y0_px": 544.3333333333334,
+    "y1_px": 563.3333333333334
+  },
+  "title_source": "primary_axis_title",
+  "x_tick_box_count": 12,
+  "x_tick_overlap_count": 0,
+  "y_tick_box_count": 7,
+  "y_tick_overlap_count": 0
+}

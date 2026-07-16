@@ -1,0 +1,68 @@
+version: "1.0"
+
+principles:
+  - "Repository files are the source of truth for agent state."
+  - "Verification evidence is required before completion claims."
+  - "Safety boundaries override speed."
+
+allowed:
+  - id: read_source
+    description: "Read source code, tests, docs, specs, and harness files."
+  - id: modify_development_files
+    description: "Modify files inside normal development directories when task scope allows it."
+  - id: run_tests
+    description: "Run local tests, lint, typecheck, and build commands."
+  - id: update_agent_state
+    description: "Update agent progress, task, handoff, memory, and failure records."
+  - id: update_docs
+    description: "Update documentation and specs related to implemented behavior."
+
+requires_confirmation:
+  - id: delete_files
+    description: "Delete files or directories, except safe generated temporary artifacts."
+  - id: modify_database
+    description: "Change database schema, migrations, seed data, or live data."
+  - id: deploy_production
+    description: "Deploy, restart, or reconfigure production systems."
+  - id: modify_permissions
+    description: "Change authentication, authorization, roles, policies, or permission checks."
+  - id: add_dependency
+    description: "Add new runtime dependencies or external services."
+  - id: rewrite_history
+    description: "Rewrite git history or discard existing work."
+
+forbidden:
+  - id: access_secrets
+    description: "Read, print, copy, infer, or expose secrets."
+  - id: output_sensitive_information
+    description: "Output tokens, passwords, private keys, customer data, or secret-bearing logs."
+  - id: bypass_security_rules
+    description: "Disable or bypass authentication, authorization, validation, tests, or audit controls."
+  - id: hide_failures
+    description: "Suppress failing checks or mark unverified work as complete."
+  - id: destructive_unscoped_changes
+    description: "Perform broad destructive changes outside the approved task scope."
+
+sensitive_file_patterns:
+  - ".env"
+  - ".env.*"
+  - "*secret*"
+  - "*secrets*"
+  - "*credential*"
+  - "*credentials*"
+  - "*.pem"
+  - "*.key"
+  - "id_rsa"
+  - "id_ed25519"
+
+safe_generated_paths:
+  - "harness/tmp"
+  - "coverage"
+  - ".pytest_cache"
+
+confirmation_prompt_required_for:
+  - "Any deletion outside safe_generated_paths."
+  - "Any production deployment or infrastructure change."
+  - "Any database mutation."
+  - "Any authentication or authorization behavior change."
+  - "Any action that may expose secrets or sensitive data."

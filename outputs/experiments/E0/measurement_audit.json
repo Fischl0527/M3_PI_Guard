@@ -1,0 +1,167 @@
+{
+  "canonical_dataset": {
+    "attack_family_count": {
+      "cross_tool_attack_chain": 22,
+      "direct_jailbreak": 27,
+      "environment_context_pollution": 22,
+      "json_rpc": 20,
+      "memory_poisoning": 23,
+      "multilingual_t2l": 27,
+      "obfuscation_evasion": 22,
+      "rag_indirect": 30,
+      "tool_output_injection": 17
+    },
+    "benign_tool_requirement_count": {
+      "no_tool": 45,
+      "tool": 45
+    },
+    "cross_split_templates": [],
+    "dataset_audit_hard_fail_count": 0,
+    "dataset_audit_status": "pass",
+    "dataset_audit_warning_count": {
+      "cross_split_near_duplicate": 0
+    },
+    "file_sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462",
+    "legacy_case_count": 69,
+    "legacy_case_split_count": {
+      "dev": 69
+    },
+    "path": "m3_attacks/cases/all_cases.jsonl",
+    "sample_type_count": {
+      "attack": 210,
+      "benign": 90
+    },
+    "semantic_sha256": "4d397967b4dc1cfbaa147969b68b1e339c8e0caadb7e3aa3369946c1138f10ee",
+    "split_count": {
+      "blind": 90,
+      "dev": 150,
+      "validation": 60
+    },
+    "template_count": 151,
+    "total_cases": 300
+  },
+  "current_measurement_checks": {
+    "canonical_benign_tool_balance": true,
+    "canonical_dataset_audit": true,
+    "canonical_explicit_sample_type": true,
+    "canonical_nine_attack_families": true,
+    "canonical_split_quota": true,
+    "canonical_total_300": true,
+    "historical_denominators_corrected": true,
+    "legacy_69_development_only": true,
+    "no_template_cross_split": true,
+    "runtime_prompt_no_evaluator_leakage": true,
+    "unique_case_ids": true
+  },
+  "experiment_id": "E0",
+  "generated_at": "2026-07-13T15:58:49.276291+00:00",
+  "historical_denominator_audit": {
+    "benign_clean_excluded_from_attack_denominator": true,
+    "expected": {
+      "qwen25": {
+        "attack": 19,
+        "benign": 5,
+        "total_case_runs": 24
+      },
+      "stub": {
+        "attack": 61,
+        "benign": 8,
+        "total_case_runs": 69
+      }
+    },
+    "label_policy": "Frozen pre-schema cases were copied in memory and assigned explicit sample_type: benign only for benign/benign_clean/benign_summary; all others attack.",
+    "observed": {
+      "qwen25_baseline": {
+        "attack": 19,
+        "benign": 5,
+        "total_case_runs": 24
+      },
+      "qwen25_full_guard": {
+        "attack": 19,
+        "benign": 5,
+        "total_case_runs": 24
+      },
+      "stub_baseline": {
+        "attack": 61,
+        "benign": 8,
+        "total_case_runs": 69
+      },
+      "stub_full_guard": {
+        "attack": 61,
+        "benign": 8,
+        "total_case_runs": 69
+      },
+      "stub_keyword_only": {
+        "attack": 61,
+        "benign": 8,
+        "total_case_runs": 69
+      },
+      "stub_policy_only": {
+        "attack": 61,
+        "benign": 8,
+        "total_case_runs": 69
+      }
+    },
+    "status": "pass"
+  },
+  "historical_evidence_interpretation": "diagnostic_only",
+  "historical_source_findings": {
+    "causal_interpretation": "diagnostic_only",
+    "model_input_label_leakage": {
+      "detected": true,
+      "impact": "Historical model outputs were generated with evaluator-only answer metadata.",
+      "leaked_fields": [
+        "case_id",
+        "attack_family",
+        "expected_safe_behavior"
+      ],
+      "markers": {
+        "attack_family": true,
+        "case_id": true,
+        "expected_safe_behavior": true
+      }
+    },
+    "prompt_guard_coupling": {
+      "detected": true,
+      "impact": "Guard mode and prompt hardening cannot be isolated in historical guarded runs.",
+      "markers": {
+        "guard_modes_declared": true,
+        "prompt_selected_from_defense_mode": true
+      }
+    },
+    "runner_sha256": "cae90066a420c41403a99581921412241b126e57d516411cc60ff0dc9eabeb7a",
+    "runner_source": "release/Redteam_LLM_Security_v1.0/m3_core/agent_runner.py",
+    "stub_oracle_label_dependency": {
+      "detected": true,
+      "impact": "Stub results are deterministic regression evidence only, never formal model-effect evidence.",
+      "markers": {
+        "uses_attack_family": true,
+        "uses_case_id": true
+      }
+    },
+    "stub_sha256": "b7da7084a1ec2836939f497df57b01300d2d1f7374c2368a4888a8e7cc28fa2f",
+    "stub_source": "release/Redteam_LLM_Security_v1.0/m3_core/llm_client.py"
+  },
+  "runtime_prompt_audit": {
+    "cases_checked": 300,
+    "messages_compared": 600,
+    "metamorphic_invariance_failures": [],
+    "method": "For every canonical case, mutate every non-runtime field to a unique sentinel and require byte-equivalent normal/hardened message objects.",
+    "projection_failures": [],
+    "prompt_profiles_checked": [
+      "normal",
+      "hardened"
+    ],
+    "runtime_allowlist": [
+      "user_task",
+      "document_content",
+      "requires_tool",
+      "authorized_actions",
+      "conversation_turns"
+    ],
+    "sentinel_leakage_failures": [],
+    "status": "pass"
+  },
+  "schema_version": "1.0",
+  "status": "pass_with_historical_findings"
+}

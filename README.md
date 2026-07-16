@@ -15,7 +15,10 @@ M3_PI_Guard 是一个完全本地运行的 LLM Agent 工具调用靶场与防护
 
 ## 目录
 
+仓库已经按用途分区：M3 项目源码保留在根目录的项目包中；AI Agent Harness 工程统一放在 `harness/`。根目录 `AGENTS.md` 只是 Agent 自动发现入口，`agent/` 只保留被实验哈希和报告引用的项目完整性审计代码/证据，不是当前 Harness 状态目录。
+
 ```text
+m3_attacks/                 攻击数据与生成/审计
 m3_core/
   __init__.py
   llm_client.py
@@ -41,6 +44,21 @@ m3_eval/
   metrics.py
   evaluate.py
 
+experiments/                E0-E17 实验实现与注册表
+protocols/                  冻结实验协议与夹具
+tests/                      项目测试
+scripts/                    项目运行、分析与报告脚本
+
+harness/                    与项目源码分离的 Agent Harness 工程
+  config/                   权限、策略与工作流
+  state/                    当前任务、进度、失败与交接
+  specs/                    产品/技术/验收规格
+  features/                 功能状态台账
+  tasks/                    任务模板
+  docs/                     Harness 文档与决策
+  scripts/                  Harness 初始化、测试、验证、清理
+  workspaces/               Runpro 工作区与阶段报告
+
 sandbox/
   public/
   secrets/
@@ -50,6 +68,8 @@ sandbox/
 outputs/runs/
 outputs/metrics/
 ```
+
+Harness 使用说明见 `harness/README.md`；项目目录的完整分类见 `文件夹说明.md`。
 
 ## Backend
 

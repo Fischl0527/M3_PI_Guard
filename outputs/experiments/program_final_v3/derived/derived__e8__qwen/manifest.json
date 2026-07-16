@@ -1,0 +1,232 @@
+{
+  "schema_version": "1.1",
+  "run_prefix": "derived__e8__qwen",
+  "experiment_id": "derived__e8__qwen",
+  "experiment_version": "exp-v1.1-reproducible",
+  "project_version": "v1.1-experiments",
+  "guard_version": "guard-v1.1-modular",
+  "dataset_version": "cases-v1.1",
+  "status": "completed",
+  "created_at": "2026-07-13T23:31:59.385716+00:00",
+  "updated_at": "2026-07-13T23:33:45.168982+00:00",
+  "config": {
+    "cases": "experiments/fixtures/derived/e8_cases.jsonl",
+    "dataset_sha256": "5909b260d2602f8a61af8baacf1185cf9c2e017b8ddb10d8e7bf590388114416",
+    "implementation_sha256": "9cd74dd86a36d4a0561864967d8289815a97f7f9da46e371785115e65ed934fd",
+    "backend": "ollama",
+    "model": "qwen3:4b-instruct",
+    "run_prefix": "derived__e8__qwen",
+    "run_group": "derived",
+    "conditions": [
+      {
+        "condition_id": "derived_normal_off",
+        "prompt_profile": "normal",
+        "guard_mode": "off"
+      },
+      {
+        "condition_id": "derived_normal_full",
+        "prompt_profile": "normal",
+        "guard_mode": "full_guard"
+      }
+    ],
+    "guard_modules": [],
+    "ask_threshold": 1.0,
+    "deny_threshold": 1.0,
+    "max_steps": 5,
+    "limit": null,
+    "families": [],
+    "splits": [],
+    "sample_types": [],
+    "task_types": [],
+    "case_ids": [],
+    "shuffle": false,
+    "selection_seed": 401,
+    "generation_seed": 401,
+    "repeats": 1,
+    "temperature": 0.2,
+    "max_tokens": 512,
+    "num_ctx": null,
+    "timeout": 120.0,
+    "allow_fallback_guard": false,
+    "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+    "sandbox_fixture_version": "tool-sandbox-public-v1",
+    "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+    "sandbox_seed_sha256": {
+      "401": "accef720c8475406cff39da395054683244c9125819cbefa3f70e34020ef3d58"
+    },
+    "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+    "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+    "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue"
+  },
+  "config_hash": "b5da01959fc06140343054be583b1af501cd71bd94384d3c54bc915fc81672d2",
+  "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+  "sandbox_fixture_version": "tool-sandbox-public-v1",
+  "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+  "sandbox_seed_sha256": {
+    "401": "accef720c8475406cff39da395054683244c9125819cbefa3f70e34020ef3d58"
+  },
+  "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+  "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+  "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+  "git_commit": "2c53f52c475e6838dc82246c821db5ed7ac0209c",
+  "git_dirty": true,
+  "dataset": {
+    "path": "experiments/fixtures/derived/e8_cases.jsonl",
+    "sha256": "5909b260d2602f8a61af8baacf1185cf9c2e017b8ddb10d8e7bf590388114416",
+    "row_count": 45
+  },
+  "backend": "ollama",
+  "oracle_stub": false,
+  "evidence_tier": "formal_model",
+  "model": "qwen3:4b-instruct",
+  "model_identity": {
+    "tag": "qwen3:4b-instruct",
+    "digest": "0edcdef34593",
+    "ollama_version": "ollama version is 0.24.0",
+    "executable": "D:\\Ollama\\app\\ollama.exe"
+  },
+  "defense_modes": [
+    "baseline",
+    "full_guard"
+  ],
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "run_group": "derived",
+  "notes": "M3 full experiment program stage=derived job=derived__e8__qwen",
+  "conditions": [
+    {
+      "condition_id": "derived_normal_off",
+      "prompt_profile": "normal",
+      "guard_mode": "off",
+      "guard_modules": [],
+      "ask_threshold": 1.0,
+      "deny_threshold": 1.0,
+      "status": "completed",
+      "started_at": "2026-07-13T23:32:00.196721+00:00",
+      "updated_at": "2026-07-13T23:33:03.187082+00:00",
+      "defense_mode": "baseline",
+      "jsonl": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_off.jsonl",
+      "csv": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_off.csv",
+      "jsonl_sha256": "c36a7354a0f3de0ae90a706628f8b44decbbaffe3a606e212266d92ec3caf37a",
+      "csv_sha256": "150774f99706ecbe6260637a726345d4e8d1c01a81e238498b06da225c9d55b7",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "401": "accef720c8475406cff39da395054683244c9125819cbefa3f70e34020ef3d58"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 45,
+      "selected_case_count": 45,
+      "selected_run_count": 45,
+      "skipped_case_count": 0,
+      "completed_run_count": 45,
+      "error_count": 0,
+      "log_count": 75,
+      "completed_at": "2026-07-13T23:33:03.187071+00:00"
+    },
+    {
+      "condition_id": "derived_normal_full",
+      "prompt_profile": "normal",
+      "guard_mode": "full_guard",
+      "guard_modules": [
+        "dataflow",
+        "instruction_detector",
+        "intent_action",
+        "multilingual_detector",
+        "output_dlp",
+        "policy",
+        "structured_detector",
+        "tool_lure_detector"
+      ],
+      "ask_threshold": 1.0,
+      "deny_threshold": 1.0,
+      "status": "completed",
+      "started_at": "2026-07-13T23:33:03.191067+00:00",
+      "updated_at": "2026-07-13T23:33:45.165062+00:00",
+      "defense_mode": "full_guard",
+      "jsonl": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_full.jsonl",
+      "csv": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_full.csv",
+      "jsonl_sha256": "71e0becb2e86cbca7db41ab758f1e37583d4dbd51e8bca32c69a9a50b12f7509",
+      "csv_sha256": "b6c7a4771cf7cf11b51cbba0f9b44915cb87ea0a681c4cf7d47a8d4156362baa",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "401": "accef720c8475406cff39da395054683244c9125819cbefa3f70e34020ef3d58"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 45,
+      "selected_case_count": 45,
+      "selected_run_count": 45,
+      "skipped_case_count": 0,
+      "completed_run_count": 45,
+      "error_count": 0,
+      "log_count": 54,
+      "completed_at": "2026-07-13T23:33:45.165050+00:00"
+    }
+  ],
+  "results": [
+    {
+      "condition_id": "derived_normal_off",
+      "prompt_profile": "normal",
+      "guard_mode": "off",
+      "defense_mode": "baseline",
+      "status": "completed",
+      "jsonl": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_off.jsonl",
+      "csv": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_off.csv",
+      "jsonl_sha256": "c36a7354a0f3de0ae90a706628f8b44decbbaffe3a606e212266d92ec3caf37a",
+      "csv_sha256": "150774f99706ecbe6260637a726345d4e8d1c01a81e238498b06da225c9d55b7",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "401": "accef720c8475406cff39da395054683244c9125819cbefa3f70e34020ef3d58"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 45,
+      "selected_case_count": 45,
+      "selected_run_count": 45,
+      "skipped_case_count": 0,
+      "completed_run_count": 45,
+      "error_count": 0,
+      "log_count": 75
+    },
+    {
+      "condition_id": "derived_normal_full",
+      "prompt_profile": "normal",
+      "guard_mode": "full_guard",
+      "defense_mode": "full_guard",
+      "status": "completed",
+      "jsonl": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_full.jsonl",
+      "csv": "outputs/experiments/program_final_v3/derived/derived__e8__qwen/derived__e8__qwen_derived_normal_full.csv",
+      "jsonl_sha256": "71e0becb2e86cbca7db41ab758f1e37583d4dbd51e8bca32c69a9a50b12f7509",
+      "csv_sha256": "b6c7a4771cf7cf11b51cbba0f9b44915cb87ea0a681c4cf7d47a8d4156362baa",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "401": "accef720c8475406cff39da395054683244c9125819cbefa3f70e34020ef3d58"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 45,
+      "selected_case_count": 45,
+      "selected_run_count": 45,
+      "skipped_case_count": 0,
+      "completed_run_count": 45,
+      "error_count": 0,
+      "log_count": 54
+    }
+  ],
+  "completed_at": "2026-07-13T23:33:45.168970+00:00"
+}

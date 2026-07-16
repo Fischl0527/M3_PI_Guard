@@ -1,88 +1,158 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://local.m3-pi-guard/schemas/run_log.schema.json",
-  "title": "M3 RunLog",
+  "title": "M3 Reproducible RunLog",
   "type": "object",
   "required": [
     "run_id",
+    "run_key",
     "case_id",
     "model",
     "backend",
     "defense_mode",
+    "prompt_profile",
+    "guard_mode",
+    "guard_modules",
+    "condition_id",
+    "replicate_id",
+    "seed",
+    "sandbox_seed_sha256",
+    "sandbox_instance_id",
+    "sandbox_reset_status",
+    "sandbox_runtime_version",
+    "sandbox_fixture_sha256",
     "step",
-    "attack_family",
     "raw_model_output",
     "parsed_tool_call",
+    "parse_ok",
+    "parse_error",
     "guard_decision",
     "risk_score",
     "reasons",
     "observation",
-    "final_status"
+    "final_status",
+    "model_latency_ms",
+    "guard_latency_ms",
+    "total_latency_ms",
+    "prompt_tokens",
+    "completion_tokens",
+    "total_tokens",
+    "usage_available",
+    "timed_out"
   ],
   "properties": {
-    "run_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "case_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "model": {
-      "type": "string",
-      "minLength": 1
-    },
-    "backend": {
-      "type": "string",
-      "enum": ["stub", "ollama"]
-    },
+    "run_id": {"type": "string", "minLength": 1},
+    "run_key": {"type": "string"},
+    "case_id": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "backend": {"type": "string", "enum": ["stub", "ollama"]},
+    "oracle_stub": {"type": "boolean"},
+    "evidence_tier": {"type": "string", "enum": ["regression_only", "formal_model"]},
     "defense_mode": {
       "type": "string",
-      "enum": ["baseline", "guarded"]
+      "enum": [
+        "baseline",
+        "guarded",
+        "keyword_only",
+        "policy_only",
+        "detector_only",
+        "full_guard",
+        "no_dataflow",
+        "no_intent_action",
+        "no_structured_detector",
+        "no_multilingual_detector"
+      ]
     },
-    "step": {
-      "type": "integer",
-      "minimum": 1
+    "prompt_profile": {"type": "string", "enum": ["normal", "hardened"]},
+    "guard_mode": {
+      "type": "string",
+      "enum": [
+        "off",
+        "keyword_only",
+        "policy_only",
+        "detector_only",
+        "full_guard",
+        "no_dataflow",
+        "no_intent_action",
+        "no_structured_detector",
+        "no_multilingual_detector"
+      ]
     },
-    "attack_family": {
-      "type": "string"
-    },
-    "raw_model_output": {
-      "type": "string"
-    },
-    "parsed_tool_call": {
-      "$ref": "tool_call.schema.json"
-    },
-    "guard_decision": {
-      "type": "string"
-    },
-    "risk_score": {
-      "type": ["number", "null"],
-      "minimum": 0,
-      "maximum": 1
-    },
-    "reasons": {
+    "guard_modules": {
       "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "items": {"type": "string"},
+      "uniqueItems": true
     },
+    "guard_config": {"type": "object"},
+    "guard_backend": {"type": "string"},
+    "condition_id": {"type": "string"},
+    "replicate_id": {"type": "integer", "minimum": 0},
+    "seed": {"type": ["integer", "null"]},
+    "sandbox_seed_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sandbox_instance_id": {"type": "string", "minLength": 1},
+    "sandbox_reset_status": {
+      "type": "string",
+      "enum": ["fresh_cleaned", "setup_or_run_failed", "cleanup_failed"]
+    },
+    "sandbox_runtime_version": {"type": "string", "minLength": 1},
+    "sandbox_fixture_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sandbox_final_state_sha256": {"type": "string"},
+    "sandbox_event_count": {"type": "integer", "minimum": 0},
+    "sandbox_event": {"type": ["object", "null"]},
+    "selection_seed": {"type": ["integer", "null"]},
+    "step": {"type": "integer", "minimum": 0},
+    "sample_type": {"type": "string"},
+    "attack_family": {"type": "string"},
+    "evaluation_metadata": {"type": "object"},
+    "raw_model_output": {"type": "string"},
+    "parsed_tool_call": {
+      "anyOf": [
+        {"$ref": "tool_call.schema.json"},
+        {"type": "object", "maxProperties": 0}
+      ]
+    },
+    "parse_ok": {"type": "boolean"},
+    "parse_error": {"type": "string"},
+    "guard_decision": {"type": "string"},
+    "risk_score": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "reasons": {"type": "array", "items": {"type": "string"}},
+    "guard_trace": {"type": "array", "items": {"type": "object"}},
     "observation": {},
     "final_status": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "running",
+        "completed",
+        "blocked",
+        "needs_confirmation",
+        "max_steps_reached",
+        "error"
+      ]
     },
-    "risk_tags": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "unsafe_target_actions": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    }
+    "model_config": {"type": "object"},
+    "model_latency_ms": {"type": ["number", "null"], "minimum": 0},
+    "guard_latency_ms": {"type": ["number", "null"], "minimum": 0},
+    "tool_latency_ms": {"type": ["number", "null"], "minimum": 0},
+    "total_latency_ms": {"type": ["number", "null"], "minimum": 0},
+    "case_latency_ms": {"type": ["number", "null"], "minimum": 0},
+    "prompt_tokens": {"type": ["integer", "null"], "minimum": 0},
+    "completion_tokens": {"type": ["integer", "null"], "minimum": 0},
+    "total_tokens": {"type": ["integer", "null"], "minimum": 0},
+    "finish_reason": {"type": "string"},
+    "usage_available": {"type": "boolean"},
+    "usage_source": {"type": "string"},
+    "prompt_eval_count": {"type": ["integer", "null"], "minimum": 0},
+    "eval_count": {"type": ["integer", "null"], "minimum": 0},
+    "provider_total_duration_ns": {"type": ["integer", "null"], "minimum": 0},
+    "provider_load_duration_ns": {"type": ["integer", "null"], "minimum": 0},
+    "provider_prompt_eval_duration_ns": {"type": ["integer", "null"], "minimum": 0},
+    "provider_eval_duration_ns": {"type": ["integer", "null"], "minimum": 0},
+    "provider_attempts": {"type": "integer", "minimum": 1},
+    "provider_done": {"type": ["boolean", "null"]},
+    "tool_execution_attempted": {"type": "boolean"},
+    "timed_out": {"type": "boolean"},
+    "risk_tags": {"type": "array", "items": {"type": "string"}},
+    "unsafe_target_actions": {"type": "array", "items": {"type": "string"}}
   },
   "additionalProperties": true
 }

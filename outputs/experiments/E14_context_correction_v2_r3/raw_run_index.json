@@ -1,0 +1,27 @@
+{
+  "experiment_id": "E14",
+  "old_v3_policy": "excluded_invalid_context_axis_provenance",
+  "protocol_id": "CONTEXT_CORRECTION_V2",
+  "records": [
+    {
+      "bytes": 2473438,
+      "distinct_case_count": 40,
+      "kind": "case_dataset",
+      "path": "E:\\M3_PI_Guard_test\\protocols\\context_correction_v2\\fixtures\\e14_cases_r2.jsonl",
+      "row_count": 40,
+      "sha256": "27ff66990271e470b6781c9b08cee9309ee3853b859e7a8bb2660bcf7d44bac3"
+    },
+    {
+      "bytes": 3106021,
+      "distinct_case_count": 40,
+      "evidence_tier": "formal_context_correction_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 432,
+      "path": "E:\\M3_PI_Guard_test\\outputs\\experiments\\E14_context_correction_v2_r3\\formal_raw_runs.jsonl",
+      "row_count": 510,
+      "sha256": "7e89687d2407045e24edda137756425d5e79a7d7d404a10a9fae8251cc2a0a66"
+    }
+  ],
+  "schema_version": "2.0",
+  "warmup_policy": "retained_in_raw_runs_but_excluded_from_formal_raw_index"
+}

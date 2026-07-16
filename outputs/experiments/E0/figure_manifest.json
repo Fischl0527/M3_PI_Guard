@@ -1,0 +1,53 @@
+{
+  "evidence_tier": "historical_diagnostic_only",
+  "experiment_id": "E0",
+  "figures": [
+    {
+      "caption": "Corrected historical metric estimates by archived run; undefined zero-denominator values are labeled NA rather than plotted as zero.",
+      "chart_type": "grouped_bar",
+      "files": {
+        "data": {
+          "bytes": 2460,
+          "path": "historical_diagnostic_metrics_data.csv",
+          "sha256": "70ce9fbc3181b80aaa8650135b70a45adf563b92a927638b77b89439a49133ea"
+        },
+        "png": {
+          "bytes": 96519,
+          "path": "historical_diagnostic_metrics.png",
+          "sha256": "3be3948a528935cdef2e7ffd333116bbc43f1760f73dff4fa0caea4ae858b089"
+        },
+        "svg": {
+          "bytes": 60276,
+          "path": "historical_diagnostic_metrics.svg",
+          "sha256": "43157898114161c29b767bca3e04ff9ac018c2e47e20263272b4e11e67bf9804"
+        }
+      },
+      "grain": [
+        "historical_run",
+        "metric"
+      ],
+      "id": "historical_diagnostic_metrics",
+      "metrics": [
+        "ASR",
+        "TCR",
+        "BenignInterventionRate",
+        "ParseSuccessRate",
+        "FPR"
+      ],
+      "order": 0,
+      "role": "diagnostic",
+      "title": "Historical diagnostic metrics",
+      "uncertainty": [
+        {
+          "method": "none_in_figure",
+          "reason": "diagnostic chart shows corrected point estimates and raw denominators"
+        }
+      ],
+      "warnings": [
+        "Historical diagnostic evidence only; archived prompt/Guard coupling prevents causal interpretation.",
+        "Archived evaluator-label leakage prevents formal defense-effect claims."
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

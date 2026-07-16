@@ -8,25 +8,9 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .metrics import SUMMARY_FIELDS
 
-FIELDS = [
-    "dataset",
-    "scope",
-    "group",
-    "log_file",
-    "model",
-    "defense_mode",
-    "cases",
-    "attack_cases",
-    "clean_cases",
-    "ASR",
-    "UTR",
-    "DSR",
-    "BSR",
-    "FPR",
-    "AvgRisk",
-    "WRS",
-]
+FIELDS = ["dataset", *SUMMARY_FIELDS]
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -51,7 +35,7 @@ def main(argv: list[str] | None = None) -> int:
     out_csv = Path(args.out)
     out_csv.parent.mkdir(parents=True, exist_ok=True)
     with out_csv.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDS)
+        writer = csv.DictWriter(handle, fieldnames=FIELDS, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -82,7 +66,11 @@ def _build_notes(rows: list[dict[str, Any]]) -> list[str]:
         if row.get("dataset") == "qwen25_representative" and row.get("scope") == "overall"
     ]
     if any(str(row.get("clean_cases")) == "0" for row in qwen_overall):
-        notes.append("Qwen representative fixture currently reports clean_cases=0; FPR is not informative for that subset.")
+        notes.append(
+            "Qwen representative fixture reports clean_cases=0; FPR is undefined and must be emitted as NA."
+        )
+    if any(str(row.get("legacy_inferred_labels", "0")) not in {"", "0"} for row in rows):
+        notes.append("Legacy sample labels were inferred; use explicit sample_type for formal conclusions.")
     return notes
 
 

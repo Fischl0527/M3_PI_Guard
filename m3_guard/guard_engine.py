@@ -1,232 +1,251 @@
-"""Public Guard interface for M3_PI_Guard."""
+"""Public, modular Guard interface for M3_PI_Guard experiments."""
 
 from __future__ import annotations
 
-from typing import Any
+from dataclasses import dataclass, field
+from time import perf_counter_ns
+from typing import Any, Callable
 
-from .dataflow import analyze_dataflow, is_sandbox_path, is_secret_path
+from .config import GuardConfig
+from .dataflow import analyze_dataflow, extract_data_labels
 from .detector import (
-    detect_document_injection,
     detect_instruction_like_text,
     detect_intent_action_mismatch,
+    detect_multilingual_obfuscation,
     detect_structured_injection,
     detect_tool_lure,
 )
-from .normalizer import normalize_text
 from .policy_engine import VALID_DECISIONS, decision_rank, decide
 
 
-EXTERNAL_TOOLS = {"send_email", "call_api"}
-HIGH_RISK_TOOLS = {"read_file", "write_file", "send_email", "call_api", "run_code"}
+@dataclass(frozen=True)
+class GuardResult:
+    decision: str
+    risk: float
+    reasons: list[str]
+    trace: list[dict[str, Any]] = field(default_factory=list)
+    config: dict[str, Any] = field(default_factory=dict)
+
+    def as_tuple(self) -> tuple[str, float, list[str]]:
+        return self.decision, self.risk, list(self.reasons)
 
 
 def guard_decide(
     context: dict[str, Any],
     tool_call: dict[str, Any],
     mode: str = "full_guard",
+    *,
+    config: GuardConfig | dict[str, Any] | None = None,
 ) -> tuple[str, float, list[str]]:
-    """Return allow/ask/deny, a 0..1 risk score, and human-readable reason codes."""
+    """Compatibility API returning ``(decision, risk, reasons)``."""
 
-    if not isinstance(context, dict):
-        context = {}
+    return evaluate_guard(context, tool_call, mode=mode, config=config).as_tuple()
+
+
+def evaluate_guard(
+    context: dict[str, Any],
+    tool_call: dict[str, Any],
+    mode: str = "full_guard",
+    *,
+    config: GuardConfig | dict[str, Any] | None = None,
+) -> GuardResult:
+    """Evaluate enabled modules exactly once and retain an auditable trace."""
+
+    context = context if isinstance(context, dict) else {}
     if not isinstance(tool_call, dict):
-        return "deny", 0.85, ["invalid_tool_call"]
+        return GuardResult("deny", 0.85, ["invalid_tool_call"])
 
-    mode = str(mode or context.get("guard_mode") or "full_guard").strip().lower()
-    if mode == "guarded":
-        mode = "full_guard"
-    if mode == "baseline":
-        return "allow", 0.0, ["baseline_no_guard"]
+    resolved = _resolve_config(mode, config)
+    if resolved.mode == "off":
+        return GuardResult(
+            "allow",
+            0.0,
+            ["guard_disabled"],
+            config=resolved.as_dict(),
+        )
 
     tool = str(tool_call.get("tool", "")).strip()
     arguments = tool_call.get("arguments")
     if not isinstance(arguments, dict):
         arguments = {}
+    normalized_call = {"tool": tool, "arguments": arguments}
 
-    if tool == "final":
-        return "allow", 0.0, ["final_answer_no_tool_risk"]
+    case = context.get("case", {})
+    case = case if isinstance(case, dict) else {}
+    runtime_texts = [case.get("user_task", ""), case.get("document_content", "")]
 
-    if mode == "keyword_only":
-        risk, reasons = _score_keyword_only(context)
-        decision = _decision_from_risk(risk)
-        return decision, _clamp(risk), reasons or ["keyword_only_no_text_signal"]
+    risk = 0.0
+    reasons: list[str] = []
+    trace: list[dict[str, Any]] = []
+    forced_decisions: list[str] = []
+    policy_decision = "allow"
 
-    if mode == "policy_only":
-        policy = decide(context, {"tool": tool, "arguments": arguments})
-        decision = policy.decision if policy.decision in VALID_DECISIONS else "deny"
-        return decision, _clamp(float(policy.risk)), policy.reasons or ["policy_only_evaluation"]
+    dataflow = None
+    if resolved.enabled("dataflow"):
+        started = perf_counter_ns()
+        dataflow = analyze_dataflow(context, normalized_call)
+        module_reasons = _unique(dataflow.reasons + dataflow.labels)
+        module_risk = float(dataflow.risk_delta)
+        module_decision = "allow"
+        if dataflow.exfiltration or (
+            tool == "write_file" and dataflow.contains_sensitive
+        ):
+            module_risk = max(module_risk, 0.95)
+            module_decision = "deny"
+            forced_decisions.append("deny")
+            module_reasons.append("dataflow_policy_violation")
+        risk = max(risk, module_risk)
+        reasons.extend(module_reasons)
+        trace.append(
+            _trace(
+                "dataflow",
+                module_risk,
+                module_decision,
+                module_reasons,
+                started,
+            )
+        )
 
-    policy = decide(context, {"tool": tool, "arguments": arguments})
-    dataflow = analyze_dataflow(context, {"tool": tool, "arguments": arguments})
-    risk, risk_reasons = _score_risk(context, tool, arguments, dataflow.reasons, dataflow.labels)
+    if resolved.enabled("policy"):
+        started = perf_counter_ns()
+        # Dataflow is an independent module.  The policy call must never invoke
+        # it implicitly, otherwise policy_only/no_dataflow ablations are false.
+        policy = decide(context, normalized_call, enable_dataflow=False)
+        policy_decision = policy.decision if policy.decision in VALID_DECISIONS else "deny"
+        risk = max(risk, float(policy.risk))
+        reasons.extend(policy.reasons)
+        if policy.forced:
+            forced_decisions.append(policy_decision)
+        trace.append(
+            _trace(
+                "policy",
+                float(policy.risk),
+                policy_decision,
+                policy.reasons,
+                started,
+            )
+        )
 
-    reasons = _unique(policy.reasons + dataflow.reasons + dataflow.labels + risk_reasons)
-    risk = max(risk, float(policy.risk))
+    detector_specs: tuple[tuple[str, Callable[[Any], list[str]], float], ...] = (
+        ("instruction_detector", detect_instruction_like_text, 0.30),
+        ("tool_lure_detector", detect_tool_lure, 0.25),
+        ("structured_detector", detect_structured_injection, 0.20),
+        ("multilingual_detector", detect_multilingual_obfuscation, 0.10),
+    )
+    for module, detector, base_delta in detector_specs:
+        # A safe final answer should not be blocked merely because its source
+        # document contained an injection. Final output is handled by DLP.
+        if tool == "final" or not resolved.enabled(module):
+            continue
+        started = perf_counter_ns()
+        module_reasons: list[str] = []
+        for text in runtime_texts:
+            if text:
+                module_reasons.extend(detector(text))
+        module_reasons = _unique(module_reasons)
+        module_risk = base_delta if module_reasons else 0.0
+        if module == "structured_detector" and "json_rpc_injection" in module_reasons:
+            module_risk += 0.20
+        risk += module_risk
+        reasons.extend(module_reasons)
+        trace.append(_trace(module, module_risk, "allow", module_reasons, started))
 
-    if policy.forced:
-        decision = policy.decision
-    else:
-        threshold_decision = _decision_from_risk(risk)
-        decision = _max_decision(policy.decision, threshold_decision)
+    if tool != "final" and resolved.enabled("intent_action"):
+        started = perf_counter_ns()
+        mismatch = detect_intent_action_mismatch(case.get("user_task", ""), tool)
+        module_risk = float(mismatch.risk_delta)
+        risk += module_risk
+        reasons.extend(mismatch.reasons)
+        trace.append(
+            _trace(
+                "intent_action",
+                module_risk,
+                "allow",
+                mismatch.reasons,
+                started,
+            )
+        )
 
+    if resolved.enabled("output_dlp") and tool == "final":
+        started = perf_counter_ns()
+        output_labels = extract_data_labels(arguments.get("answer", ""))
+        module_reasons = [f"output_{label}" for label in output_labels]
+        module_risk = 0.95 if output_labels else 0.0
+        module_decision = "deny" if output_labels else "allow"
+        if output_labels:
+            module_reasons.append("sensitive_final_output")
+            forced_decisions.append("deny")
+        risk = max(risk, module_risk)
+        reasons.extend(module_reasons)
+        trace.append(
+            _trace(
+                "output_dlp",
+                module_risk,
+                module_decision,
+                module_reasons,
+                started,
+            )
+        )
+
+    risk = _clamp(risk)
+    threshold_decision = _decision_from_risk(risk, resolved)
+    decision = _max_decision(policy_decision, threshold_decision)
+    for forced in forced_decisions:
+        decision = _max_decision(decision, forced)
     if decision not in VALID_DECISIONS:
         decision = "deny"
-    return decision, _clamp(risk), reasons or ["policy_threshold_evaluation"]
+
+    return GuardResult(
+        decision=decision,
+        risk=risk,
+        reasons=_unique(reasons) or ["guard_modules_no_signal"],
+        trace=trace,
+        config=resolved.as_dict(),
+    )
 
 
-def _score_keyword_only(context: dict[str, Any]) -> tuple[float, list[str]]:
-    """Score only instruction-like text, tool lures, and structured injection."""
-
-    case = context.get("case", {})
-    if not isinstance(case, dict):
-        case = {}
-
-    texts = [
-        case.get("user_task", ""),
-        case.get("document_content", ""),
-        case.get("injected_content", ""),
-    ]
-    reasons: list[str] = []
-    for text in texts:
-        if not text:
-            continue
-        reasons.extend(detect_instruction_like_text(text))
-        reasons.extend(detect_tool_lure(text))
-        reasons.extend(detect_structured_injection(text))
-        document_detection = detect_document_injection(text)
-        reasons.extend(document_detection.reasons)
-
-    reasons = _unique(reasons)
-    risk = 0.0
-    if any(reason.startswith("instruction_") for reason in reasons):
-        risk += 0.30
-    if any("tool" in reason or "lure" in reason for reason in reasons):
-        risk += 0.25
-    if any(reason.startswith("structured_") or reason.startswith("structured_field_") for reason in reasons):
-        risk += 0.20
-    if "json_rpc_injection" in reasons:
-        risk += 0.20
-    if any(_is_multilingual_or_unicode_reason(reason) for reason in reasons):
-        risk += 0.10
-    return _clamp(risk), reasons
-
-
-def _score_risk(
-    context: dict[str, Any],
-    tool: str,
-    arguments: dict[str, Any],
-    dataflow_reasons: list[str],
-    dataflow_labels: list[str],
-) -> tuple[float, list[str]]:
-    risk = 0.0
-    reasons: list[str] = []
-
-    if tool in HIGH_RISK_TOOLS:
-        risk += 0.25
-        reasons.append("high_risk_tool")
-
-    if tool == "read_file" and is_secret_path(arguments.get("path", "")):
-        risk += 0.45
-        reasons.append("secret_path_access")
-
-    if tool in EXTERNAL_TOOLS:
-        risk += 0.30
-        reasons.append("external_side_effect_tool")
-
-    if tool == "run_code":
-        risk += 0.60
-        reasons.append("code_execution_disabled")
-
-    case = context.get("case", {})
-    if not isinstance(case, dict):
-        case = {}
-
-    document_detection = detect_document_injection(case.get("document_content", ""))
-    reasons.extend(document_detection.reasons)
-    if any(reason.startswith("instruction_") for reason in document_detection.reasons):
-        risk += 0.25
-    if any(reason.startswith("structured_field_") for reason in document_detection.reasons):
-        risk += 0.20
-    if "json_rpc_injection" in document_detection.reasons:
-        risk += 0.20
-    if any(_is_multilingual_or_unicode_reason(reason) for reason in document_detection.reasons):
-        risk += 0.10
-
-    mismatch = detect_intent_action_mismatch(case.get("user_task", ""), tool)
-    reasons.extend(mismatch.reasons)
-    if mismatch.reasons:
-        risk += 0.25
-
-    if "sensitive_data_flow_detected" in dataflow_reasons or "external.destination" in dataflow_labels:
-        risk += 0.45
-        reasons.append("sensitive_data_flow_detected")
-
-    output_reasons = _detect_tool_output_injection(context.get("observations", []))
-    if output_reasons:
-        risk += 0.25
-        reasons.append("tool_output_injection_detected")
-        reasons.extend(output_reasons)
-
-    if _violates_special_rule(tool, arguments):
-        risk = max(risk, 0.95)
-
-    return _clamp(risk), _unique(reasons)
-
-
-def _detect_tool_output_injection(observations: Any) -> list[str]:
-    reasons: list[str] = []
-    if observations is None:
-        return reasons
-    if not isinstance(observations, list):
-        observations = [observations]
-
-    for observation in observations:
-        reasons.extend(f"tool_output_{reason}" for reason in detect_instruction_like_text(observation))
-        reasons.extend(f"tool_output_{reason}" for reason in detect_tool_lure(observation))
-        reasons.extend(f"tool_output_{reason}" for reason in detect_structured_injection(observation))
-    return _unique(reasons)
-
-
-def _violates_special_rule(tool: str, arguments: dict[str, Any]) -> bool:
-    if tool == "run_code":
-        return True
-    if tool in {"read_file", "write_file"}:
-        path = arguments.get("path", "")
-        return not is_sandbox_path(path) or is_secret_path(path)
-    if tool in EXTERNAL_TOOLS and "m3_canary" in normalize_text(arguments):
-        return True
-    if tool == "call_api":
-        endpoint = normalize_text(arguments.get("endpoint", ""))
-        return not (
-            endpoint == "/mock"
-            or endpoint == "mock"
-            or endpoint.startswith("/mock/")
-            or endpoint.startswith("mock/")
-            or endpoint.startswith("mock://")
+def _resolve_config(
+    mode: str,
+    config: GuardConfig | dict[str, Any] | None,
+) -> GuardConfig:
+    if isinstance(config, GuardConfig):
+        return config
+    if isinstance(config, dict):
+        return GuardConfig.resolve(
+            config.get("mode", mode),
+            modules=config.get("modules"),
+            ask_threshold=float(config.get("ask_threshold", 0.35)),
+            deny_threshold=float(config.get("deny_threshold", 0.65)),
         )
-    return False
+    return GuardConfig.resolve(mode)
 
 
-def _is_multilingual_or_unicode_reason(reason: str) -> bool:
-    return reason in {
-        "mixed_cjk_latin_tool_lure",
-        "jp_ko_ru_tool_lure",
-        "multilingual_tool_lure",
-        "pinyin_homophone_evasion",
-        "suspicious_unicode_obfuscation",
-    }
-
-
-def _decision_from_risk(risk: float) -> str:
-    if risk >= 0.65:
+def _decision_from_risk(risk: float, config: GuardConfig) -> str:
+    if risk >= config.deny_threshold:
         return "deny"
-    if risk >= 0.35:
+    if risk >= config.ask_threshold:
         return "ask"
     return "allow"
 
 
 def _max_decision(left: str, right: str) -> str:
     return left if decision_rank(left) >= decision_rank(right) else right
+
+
+def _trace(
+    module: str,
+    risk: float,
+    decision: str,
+    reasons: list[str],
+    started_ns: int,
+) -> dict[str, Any]:
+    return {
+        "module": module,
+        "risk": _clamp(risk),
+        "decision": decision,
+        "reasons": _unique(list(reasons)),
+        "latency_ms": round((perf_counter_ns() - started_ns) / 1_000_000, 6),
+    }
 
 
 def _clamp(value: float) -> float:

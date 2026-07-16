@@ -1,0 +1,25 @@
+﻿sample_group,failure_class,count,total,percent,ci_low_percent,ci_high_percent,interval_method
+representative,leak,112,300,37.333333333333336,32.05246855955491,42.93448671146692,Wilson score interval
+representative,false_block,7,300,2.3333333333333335,1.1347660299125235,4.737197226827531,Wilson score interval
+representative,ask,50,300,16.666666666666664,12.87653312036807,21.299664961268324,Wilson score interval
+representative,parse_failure,17,300,5.666666666666666,3.567747646328952,8.886595802247461,Wilson score interval
+representative,timeout,0,300,0.0,0.0,1.264297122454603,Wilson score interval
+representative,max_steps,6,300,2.0,0.919763155770362,4.293962081786057,Wilson score interval
+representative,other,17,300,5.666666666666666,3.567747646328952,8.886595802247461,Wilson score interval
+representative,none,91,300,30.333333333333336,25.40711301237818,35.75684385578729,Wilson score interval
+targeted_auto_disagreement,leak,6,40,15.0,7.061187717320358,29.0723243664897,Wilson score interval
+targeted_auto_disagreement,false_block,0,40,0.0,6.938893903907228e-16,8.76216011972866,Wilson score interval
+targeted_auto_disagreement,ask,5,40,12.5,5.459500250945401,26.11211983885109,Wilson score interval
+targeted_auto_disagreement,parse_failure,6,40,15.0,7.061187717320358,29.0723243664897,Wilson score interval
+targeted_auto_disagreement,timeout,0,40,0.0,6.938893903907228e-16,8.76216011972866,Wilson score interval
+targeted_auto_disagreement,max_steps,1,40,2.5,0.44268315026813954,12.881368963474088,Wilson score interval
+targeted_auto_disagreement,other,2,40,5.0,1.3820667386148358,16.503877369140955,Wilson score interval
+targeted_auto_disagreement,none,20,40,50.0,35.199526933465386,64.80047306653461,Wilson score interval
+targeted_rare_complex,leak,12,20,60.0,38.65815007622532,78.1193467627183,Wilson score interval
+targeted_rare_complex,false_block,0,20,0.0,1.3877787807814457e-15,16.11251580528193,Wilson score interval
+targeted_rare_complex,ask,6,20,30.0,14.54772448676043,51.89728183535234,Wilson score interval
+targeted_rare_complex,parse_failure,0,20,0.0,1.3877787807814457e-15,16.11251580528193,Wilson score interval
+targeted_rare_complex,timeout,0,20,0.0,1.3877787807814457e-15,16.11251580528193,Wilson score interval
+targeted_rare_complex,max_steps,1,20,5.0,0.8881448800795375,23.6131193446742,Wilson score interval
+targeted_rare_complex,other,0,20,0.0,1.3877787807814457e-15,16.11251580528193,Wilson score interval
+targeted_rare_complex,none,1,20,5.0,0.8881448800795375,23.6131193446742,Wilson score interval

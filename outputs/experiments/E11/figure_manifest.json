@@ -1,0 +1,40 @@
+{
+  "evidence_tier": "formal_model",
+  "experiment_id": "E11",
+  "figures": [
+    {
+      "caption": "Static chart generated from the adjacent audited chart CSV; undefined values remain NA.",
+      "chart_type": "annotated_proportion_heatmap",
+      "files": {
+        "data": {
+          "bytes": 1859,
+          "path": "primary_chart_data.csv",
+          "sha256": "e98304c555c19a2bfe0831d9748796531d6bf07acf049ab1eaca4f5307b98050"
+        },
+        "png": {
+          "bytes": 83609,
+          "path": "primary_chart.png",
+          "sha256": "e065defd3b018c7ee9575b16742fc59b803957e908dd7bc03b6a67069dbdaf78"
+        },
+        "svg": {
+          "bytes": 51281,
+          "path": "primary_chart.svg",
+          "sha256": "e341997b93717e9633843530821677baa0675afa4e97003ce6c2342848813e81"
+        }
+      },
+      "grain": [
+        "chain_pattern"
+      ],
+      "id": "e11_primary_chart",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 10,
+      "role": "primary",
+      "title": "E11 ASR by chain_pattern",
+      "uncertainty": [],
+      "warnings": []
+    }
+  ],
+  "schema_version": "1.0"
+}

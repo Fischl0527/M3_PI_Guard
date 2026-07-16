@@ -1,0 +1,591 @@
+{
+  "evidence_tier": "formal_synthesis",
+  "experiment_id": "E18",
+  "figures": [
+    {
+      "caption": "Core-model micro-averages compare regular_none with regular_full. E1 supplies attack-security metrics; E12 explicitly supplies overall benign TCR, legitimate-tool TCR, call-level FPR, and benign ASK rate. Every bar retains its own k/n and Wilson 95% interval.",
+      "chart_type": "faceted_micro_horizontal_bar_with_wilson_95ci",
+      "files": {
+        "data": {
+          "bytes": 3188,
+          "path": "main_defense_effect.csv",
+          "sha256": "b22806d2a508ac97611b0a5b13339e795b115f683bf429892e3b4347a879b889"
+        },
+        "png": {
+          "bytes": 231882,
+          "path": "main_defense_effect.png",
+          "sha256": "b9f6d8fb4f8e22a65895c7f0a072f3f911caa098d6d078e950ed9f257bc693d9"
+        },
+        "svg": {
+          "bytes": 165997,
+          "path": "main_defense_effect.svg",
+          "sha256": "2507378f48d395f6d101b47f03294a4788f56286a5c7aa41c7f76abf33eb91fe"
+        }
+      },
+      "grain": [
+        "source_experiment",
+        "condition_id",
+        "metric",
+        "evidence_scope"
+      ],
+      "id": "main_defense_effect",
+      "metrics": [
+        "ASR",
+        "DSR",
+        "Recall",
+        "TCR",
+        "FPR",
+        "BenignASKRate"
+      ],
+      "order": 0,
+      "role": "primary",
+      "title": "Main defense effect and benign-task utility",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval",
+          "n_field": "denominator"
+        }
+      ],
+      "warnings": [
+        "E1 and E12 use distinct metric-specific denominators and are never pooled with each other.",
+        "E0 historical, Stub, and smoke rows are excluded.",
+        "Automated layout QA passed; metadata=main_defense_effect.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E2 isolates prompt hardening without Guard; E3 isolates full Guard under the hardened prompt. Values are paired ASR reductions with case-clustered bootstrap 95% intervals.",
+      "chart_type": "paired_dot_and_interval",
+      "files": {
+        "data": {
+          "bytes": 2502,
+          "path": "prompt_guard_increment.csv",
+          "sha256": "784fbb0db8558f5a07c920594eed83d377bb4b9e5b845376494b53028a437a14"
+        },
+        "png": {
+          "bytes": 119354,
+          "path": "prompt_guard_increment.png",
+          "sha256": "a367cafaf50bb5edaa99606d801a3ff1378859e44f72e41078c28e9f9a10627b"
+        },
+        "svg": {
+          "bytes": 102373,
+          "path": "prompt_guard_increment.svg",
+          "sha256": "c05080c183dfd377ccd278f1c4fe4b67ef703f8c838b9fa4654ba05b2338bbda"
+        }
+      },
+      "grain": [
+        "experiment_id",
+        "model",
+        "comparison"
+      ],
+      "id": "prompt_guard_increment",
+      "metrics": [
+        "paired_ASR_reduction"
+      ],
+      "order": 1,
+      "role": "secondary",
+      "title": "Prompt hardening and Guard incremental ASR reduction",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "case-clustered paired bootstrap"
+        }
+      ],
+      "warnings": [
+        "Positive values indicate lower ASR in the treatment condition.",
+        "Automated layout QA passed; metadata=prompt_guard_increment.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "Paired ASR increase when each ablation variant replaces full Guard. Positive values indicate degradation; intervals are case-clustered bootstrap 95% intervals.",
+      "chart_type": "ranked_delta_forest",
+      "files": {
+        "data": {
+          "bytes": 6853,
+          "path": "guard_ablation.csv",
+          "sha256": "fe73b5048c33f3bceca24974e152aebf79740bbf80a20b4bffd9782f8aafde4d"
+        },
+        "png": {
+          "bytes": 235970,
+          "path": "guard_ablation.png",
+          "sha256": "179c1be62d2316398c66e0637789c6dec5253530b536082f6545fef7c4f56c03"
+        },
+        "svg": {
+          "bytes": 196339,
+          "path": "guard_ablation.svg",
+          "sha256": "498dd6ce52d18dfca72b8831ecf0b593a940b6d64ffaed06738a987a80e929cd"
+        }
+      },
+      "grain": [
+        "ablation_variant"
+      ],
+      "id": "guard_ablation",
+      "metrics": [
+        "ASR_increase_when_variant_replaces_full"
+      ],
+      "order": 2,
+      "role": "secondary",
+      "title": "Guard component contribution",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "case-clustered paired bootstrap"
+        }
+      ],
+      "warnings": [
+        "This is a delta chart, not an absolute ASR chart; the zero reference is authoritative.",
+        "Automated layout QA passed; metadata=guard_ablation.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E5 ASR by model and condition. Each observed cell shows percentage and k/n; NA cells are hatched/labelled and never rendered as zero.",
+      "chart_type": "annotated_heatmap",
+      "files": {
+        "data": {
+          "bytes": 1313,
+          "path": "cross_model_heatmap.csv",
+          "sha256": "6d3bb0eb8291f2e13059a5a9f3fd3591c10c40f968b0873c57ee0fe2d531bbef"
+        },
+        "png": {
+          "bytes": 84866,
+          "path": "cross_model_heatmap.png",
+          "sha256": "515a3507d6e5ddc765743b97cd1306fcda3f3118b4371925e8f5105dbc25827b"
+        },
+        "svg": {
+          "bytes": 59221,
+          "path": "cross_model_heatmap.svg",
+          "sha256": "69c4b72bbe5dcc1faf97b678fadb03e18e046be2069da4e72a8f7612714989de"
+        }
+      },
+      "grain": [
+        "model",
+        "condition_id"
+      ],
+      "id": "cross_model_heatmap",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 3,
+      "role": "secondary",
+      "title": "Cross-model ASR robustness",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval retained in CSV"
+        }
+      ],
+      "warnings": [
+        "Vicuna, when present, is compatibility-only and is not pooled with the four core models.",
+        "Automated layout QA passed; metadata=cross_model_heatmap.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E6 full-Guard ASR, Recall, and DSR by attack family and model. Cells show exact k/n and Wilson intervals remain in the CSV.",
+      "chart_type": "faceted_annotated_heatmap",
+      "files": {
+        "data": {
+          "bytes": 15341,
+          "path": "family_robustness.csv",
+          "sha256": "1506d1cc6022ffc6b661f0e98d2a7d936f295b8ce8192331b34ec2adc30e0abf"
+        },
+        "png": {
+          "bytes": 316485,
+          "path": "family_robustness.png",
+          "sha256": "a42365d9b97a12486549b23e865ed8a180457de09880993cf755d660f0547aa0"
+        },
+        "svg": {
+          "bytes": 204590,
+          "path": "family_robustness.svg",
+          "sha256": "43790bbb6c1f8ab7e1bb66fc48e8498f2f59eba1a39e3870d5e93963c0f75919"
+        }
+      },
+      "grain": [
+        "metric",
+        "attack_family",
+        "model"
+      ],
+      "id": "family_robustness",
+      "metrics": [
+        "ASR",
+        "Recall",
+        "DSR"
+      ],
+      "order": 4,
+      "role": "secondary",
+      "title": "Attack-family robustness under full Guard",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval"
+        }
+      ],
+      "warnings": [
+        "Family-level sample sizes can be small; interpret wide intervals directly.",
+        "Automated layout QA passed; metadata=family_robustness.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E7 language and E8 encoding/evasion results are shown in separate panels; they are not pooled into one denominator. Exact labels show k/n.",
+      "chart_type": "faceted_horizontal_bar_with_wilson_95ci",
+      "files": {
+        "data": {
+          "bytes": 5026,
+          "path": "language_evasion.csv",
+          "sha256": "ddc0b61c24278ab50d4df163801c73262ac9eb47174627c51bac0e59dcb3fa50"
+        },
+        "png": {
+          "bytes": 294249,
+          "path": "language_evasion.png",
+          "sha256": "b7df1e29ee77780ce2c0b98863ee13f4b4d0b4c3ae2966b6aa5b3719b69f5c02"
+        },
+        "svg": {
+          "bytes": 224504,
+          "path": "language_evasion.svg",
+          "sha256": "fd1b55fa142199f29212bd6d7e7b8f3bca062b8d211956357fa3e017965c1e37"
+        }
+      },
+      "grain": [
+        "experiment_id",
+        "variant",
+        "metric"
+      ],
+      "id": "language_evasion",
+      "metrics": [
+        "ASR",
+        "Recall"
+      ],
+      "order": 5,
+      "role": "secondary",
+      "title": "Language and encoding-evasion robustness",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval"
+        }
+      ],
+      "warnings": [
+        "E8 mutation types are categorical; no ordinal attack-strength axis is inferred.",
+        "Automated layout QA passed; metadata=language_evasion.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E9 full-Guard ASR, descriptive case-latency p95, and unresolved rate across ordered injection positions, faceted by context length. Across both registered E9 conditions, 14/120 (11.7%) case-runs were unresolved; this value is recomputed from context_position.csv rather than hard-coded.",
+      "chart_type": "three_panel_ordered_line",
+      "files": {
+        "data": {
+          "bytes": 9004,
+          "path": "context_position_trends.csv",
+          "sha256": "7a302328e5c785db92658916aa2da549148af58bf3a24ff97df722e43c0b68f6"
+        },
+        "png": {
+          "bytes": 248113,
+          "path": "context_position_trends.png",
+          "sha256": "19f4c9e8e733fa404dbbe4b1fe5b28ee6dacfdd628966bf8ad4385c4b951da28"
+        },
+        "svg": {
+          "bytes": 187987,
+          "path": "context_position_trends.svg",
+          "sha256": "537d0adcbcaf230b9928abb5852dd16fbb55afbf570ab49dfaea19ca5c806bd9"
+        }
+      },
+      "grain": [
+        "context_tokens",
+        "injection_position_pct"
+      ],
+      "id": "context_position_trends",
+      "metrics": [
+        "ASR",
+        "CaseLatencyP95",
+        "UnresolvedRate"
+      ],
+      "order": 6,
+      "role": "secondary",
+      "title": "Context length and injection-position trends",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval",
+          "metric": "ASR"
+        },
+        {
+          "level": 0.95,
+          "method": "Wilson score interval",
+          "metric": "UnresolvedRate"
+        }
+      ],
+      "warnings": [
+        "E9 has 14/120 (11.7%) unresolved case-runs across both conditions; long-context security estimates are incomplete without this disclosure.",
+        "Latency is descriptive and has no inferential interval; separate E14 evidence governs engineering acceptance.",
+        "Automated layout QA passed; metadata=context_position_trends.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E10 turn-count and E16 adaptive-round ASR are shown in separate panels. Exact point labels show k/n; the two denominators are never pooled.",
+      "chart_type": "faceted_ordered_line_with_wilson_95ci",
+      "files": {
+        "data": {
+          "bytes": 2516,
+          "path": "multiturn_adaptive_trends.csv",
+          "sha256": "1920a06eb2c9ea030d88552110e727a606be95c3fe1efc6fcc95684ae3d03308"
+        },
+        "png": {
+          "bytes": 100374,
+          "path": "multiturn_adaptive_trends.png",
+          "sha256": "00eb9439fdebabdea8b674e6c1467ec213f1e61653b7274a8908a9bf460af39d"
+        },
+        "svg": {
+          "bytes": 100468,
+          "path": "multiturn_adaptive_trends.svg",
+          "sha256": "77173ba37449eecd18258eb6428dca749f405a725986ea32e5be1dc5b3a89f54"
+        }
+      },
+      "grain": [
+        "experiment_id",
+        "turn_or_round",
+        "strategy"
+      ],
+      "id": "multiturn_adaptive_trends",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 7,
+      "role": "secondary",
+      "title": "Multi-turn and adaptive attack trends",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval"
+        }
+      ],
+      "warnings": [
+        "Round/turn axes are discrete designed attempts, not continuous time.",
+        "Automated layout QA passed; metadata=multiturn_adaptive_trends.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E13 validation-only operating points over the two-dimensional ASK×DENY grid. Points are not connected because no single scalar threshold orders this grid; the frozen pair is marked with a star.",
+      "chart_type": "two_panel_operating_point_scatter_no_interpolated_path",
+      "files": {
+        "data": {
+          "bytes": 4698098,
+          "path": "threshold_calibration.csv",
+          "sha256": "63885e7831b80f535cf1b3673a1db9d622f8252a89346fa0eaaf6a2bfd1d316d"
+        },
+        "png": {
+          "bytes": 83863,
+          "path": "threshold_calibration.png",
+          "sha256": "7412687b8b0208a4d9b4aeeabd43e2cb66af2569ab77e66c1307363a948ca289"
+        },
+        "svg": {
+          "bytes": 1786337,
+          "path": "threshold_calibration.svg",
+          "sha256": "2bb66a8247132631e7a5d8c41b5ce8c0f10ac0b412f2b9a8ae94a999dc6d9c96"
+        }
+      },
+      "grain": [
+        "ask_threshold",
+        "deny_threshold"
+      ],
+      "id": "threshold_calibration",
+      "metrics": [
+        "precision",
+        "recall",
+        "fpr",
+        "benign_ask_rate"
+      ],
+      "order": 8,
+      "role": "secondary",
+      "title": "Validation-only two-threshold operating points",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval"
+        }
+      ],
+      "warnings": [
+        "E13 is calibration evidence only and is not used as blind-test outcome evidence.",
+        "Automated layout QA passed; metadata=threshold_calibration.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E15 seed-level ASR distributions by model and temperature. Raw seed points are retained; box whiskers are descriptive, not confidence intervals.",
+      "chart_type": "boxplot_with_seed_points",
+      "files": {
+        "data": {
+          "bytes": 17092,
+          "path": "random_stability.csv",
+          "sha256": "7b5d8fee2fd4106758f455a4e034a783373c678a9cb0cd188f42394352d52d97"
+        },
+        "png": {
+          "bytes": 94970,
+          "path": "random_stability.png",
+          "sha256": "13543a00ccdabd61454abac38b75ca65a8839e9b34776481e48e0b41652a9383"
+        },
+        "svg": {
+          "bytes": 99856,
+          "path": "random_stability.svg",
+          "sha256": "b3e3990999b7c81d177a4df5886a87b84ef8e66b8ed85bf58a678d21f41f4c96"
+        }
+      },
+      "grain": [
+        "model",
+        "temperature",
+        "seed"
+      ],
+      "id": "random_stability",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 9,
+      "role": "secondary",
+      "title": "Random stability across seeds and temperatures",
+      "uncertainty": [],
+      "warnings": [
+        "The 10 seeds are repeated stochastic evaluations, not independent new cases.",
+        "Automated layout QA passed; metadata=random_stability.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E14 descriptive p95 latency and throughput by context, concurrency, and condition. Labels show successful/expected case-runs; missing and failed runs remain explicit.",
+      "chart_type": "three_panel_ordered_line",
+      "files": {
+        "data": {
+          "bytes": 17026,
+          "path": "performance_profile.csv",
+          "sha256": "82f1019d03f1a08d137bae2da42a50542187daa15082f036c82a93adac6073f0"
+        },
+        "png": {
+          "bytes": 241946,
+          "path": "performance_profile.png",
+          "sha256": "eb30b570200893c273ac187fe00492fd5c4d1c4a736c01a5bdaa7ce01b98f0dc"
+        },
+        "svg": {
+          "bytes": 148656,
+          "path": "performance_profile.svg",
+          "sha256": "c018e12114d553536f441f4ba924772c551b5eba4eb14a50103397f04219293d"
+        }
+      },
+      "grain": [
+        "context_tokens",
+        "concurrency",
+        "condition"
+      ],
+      "id": "performance_profile",
+      "metrics": [
+        "total_latency_p95_ms",
+        "guard_latency_p95_ms",
+        "throughput_case_runs_per_s"
+      ],
+      "order": 10,
+      "role": "secondary",
+      "title": "Latency and throughput by context and concurrency",
+      "uncertainty": [],
+      "warnings": [
+        "Engineering measurements are hardware- and runtime-specific; no inferential interval is claimed.",
+        "Automated layout QA passed; metadata=performance_profile.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "E17 primary classes in the 300-row representative audit stratum. The 60 targeted rows are excluded; the share panel uses dots and Wilson 95% intervals because the composition is too dense for an honest donut. Labels show count/total.",
+      "chart_type": "authoritative_count_bar_plus_share_dot_with_wilson_95ci",
+      "files": {
+        "data": {
+          "bytes": 2449,
+          "path": "failure_taxonomy.csv",
+          "sha256": "9607aaaffc27dfd4f7f9c3fa2f629f677e1831f5b369510e044b1271404275c1"
+        },
+        "png": {
+          "bytes": 129031,
+          "path": "failure_taxonomy.png",
+          "sha256": "672c61f122d1ddbd80b9fefd4ba77e27552a6e23562d778574db151d4a538925"
+        },
+        "svg": {
+          "bytes": 97156,
+          "path": "failure_taxonomy.svg",
+          "sha256": "359260cfa921e953a06f4fde27bad8547692a7206a32279f72308f5fff5c093a"
+        }
+      },
+      "grain": [
+        "representative_sample_primary_failure_class"
+      ],
+      "id": "failure_taxonomy",
+      "metrics": [
+        "failure_share",
+        "failure_count"
+      ],
+      "order": 11,
+      "role": "diagnostic",
+      "title": "Stratified human-audit failure taxonomy",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval"
+        }
+      ],
+      "warnings": [
+        "Weighted population estimates and targeted-group diagnostics remain in the E17 source bundle.",
+        "Automated layout QA passed; metadata=failure_taxonomy.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    },
+    {
+      "caption": "ASR by chain pattern and Guard condition. The upper panel is the original frozen v3 E11 scope; the lower panel is a post-hoc, not-pre-registered supplement. Every bar shows its own k/n and Wilson 95% interval; panels and denominators are never pooled.",
+      "chart_type": "two_panel_grouped_bar_with_wilson_95ci_and_separate_denominators",
+      "files": {
+        "data": {
+          "bytes": 6712,
+          "path": "cross_tool_chain_patterns.csv",
+          "sha256": "4f55960131a7816b569581d37e41922fa4a853e8c28414261d8edafc76932cc0"
+        },
+        "png": {
+          "bytes": 177411,
+          "path": "cross_tool_chain_patterns.png",
+          "sha256": "74ee5bab524d4e1646a5e76a11c8db9414c4c9b40309d0b35e7132ea52adcd0c"
+        },
+        "svg": {
+          "bytes": 124190,
+          "path": "cross_tool_chain_patterns.svg",
+          "sha256": "6ff206d39eed7513ce5575592838b7048c57d6c1f4927efd6e189559fd11ca36"
+        }
+      },
+      "grain": [
+        "evidence_scope",
+        "chain_pattern",
+        "condition_id"
+      ],
+      "id": "cross_tool_chain_patterns",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 12,
+      "role": "secondary",
+      "title": "Original E11 scope versus post-hoc requested cross-tool patterns",
+      "uncertainty": [
+        {
+          "level": 0.95,
+          "method": "Wilson score interval",
+          "n_field": "denominator"
+        }
+      ],
+      "warnings": [
+        "The supplement is post-hoc (pre_registered=false) and cannot retroactively replace the original E11 scope.",
+        "Only read_file_to_send_email directly overlaps the requested read_to_send semantics; all other requested patterns use independent supplement denominators.",
+        "No original and supplement counts are added, averaged, or used to change the acceptance matrix.",
+        "Automated layout QA passed; metadata=cross_tool_chain_patterns.layout.json; manual original-resolution review remains required.",
+        "E18 is a synthesis artifact identifier and is not an E0-E17 registry experiment."
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

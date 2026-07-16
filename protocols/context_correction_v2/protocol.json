@@ -1,0 +1,93 @@
+{
+  "schema_version": "2.0",
+  "protocol_id": "CONTEXT_CORRECTION_V2",
+  "workload_revision": "r2",
+  "execution_revision": "r3",
+  "protocol_type": "post_freeze_measurement_correction",
+  "pre_registered": false,
+  "registered_before_formal_v2": true,
+  "registered_before_formal_r3": true,
+  "correction_of": [
+    "outputs/experiments/program_final_v3/derived E9 cells",
+    "outputs/experiments/E14"
+  ],
+  "old_result_policy": "preserve_as_invalid_diagnostic_provenance_exclude_from_v2_denominators",
+  "superseded_pre_freeze_r1": {
+    "reason": "E14_16K_matched_path_gate_failed_4_of_16_pairs",
+    "policy": "preserve_bytes_exclude_from_r2_resume_freeze_and_denominators",
+    "paths": [
+      "protocols/context_correction_v2/fixtures/e14_cases.jsonl",
+      "protocols/context_correction_v2/calibration.json",
+      "protocols/context_correction_v2/prompt_verification.json",
+      "outputs/experiments/E14_context_correction_v2_smoke_final"
+    ]
+  },
+  "superseded_formal_r2": {
+    "reason": "E14_global_run_key_collisions_across_concurrency_jobs",
+    "policy": "preserve_bytes_exclude_from_registration_resume_and_corrected_denominators",
+    "evidence": {
+      "formal_case_runs": 432,
+      "warmup_case_runs": 48,
+      "duplicate_run_keys": 144,
+      "duplicate_first_step_rows": 288,
+      "within_job_duplicate_run_keys": 0
+    },
+    "paths": [
+      "protocols/context_correction_v2/freeze_r2.json",
+      "outputs/experiments/E9_context_correction_v2_r2",
+      "outputs/experiments/E14_context_correction_v2_r2"
+    ]
+  },
+  "active_artifacts": {
+    "e9_fixture": "protocols/context_correction_v2/fixtures/e9_cases.jsonl",
+    "e14_fixture": "protocols/context_correction_v2/fixtures/e14_cases_r2.jsonl",
+    "calibration": "protocols/context_correction_v2/calibration_r2.json",
+    "prompt_verification": "protocols/context_correction_v2/prompt_verification_r2.json",
+    "freeze": "protocols/context_correction_v2/freeze_r3.json"
+  },
+  "transport": "ollama_native",
+  "request_level_num_ctx": null,
+  "base_model": "qwen3:4b-instruct",
+  "seed": 419,
+  "temperature": 0.0,
+  "formal_provider_request_attempts": 1,
+  "provider_incomplete_policy": "retain_as_non_executable_error_in_original_denominator",
+  "prompt_preflight": {
+    "case_count": 100,
+    "num_predict": 1,
+    "temperature": 0.0,
+    "seed": 419,
+    "tolerance_fraction": 0.01,
+    "retry_only_when_first_lacks_final_native_counter": 1,
+    "fallback_scope": "exact_first_turn_only_when_formal_provider_done_false"
+  },
+  "formal_prompt_token_tolerance_fraction": 0.05,
+  "minimum_output_headroom_tokens": 512,
+  "context_profiles": {
+    "2048": {"served_model": "m3-qwen3-4b-ctx4k:latest", "effective_context_window_tokens": 4096},
+    "4096": {"served_model": "m3-qwen3-4b-ctx8k:latest", "effective_context_window_tokens": 8192},
+    "8192": {"served_model": "m3-qwen3-4b-ctx16k:latest", "effective_context_window_tokens": 16384},
+    "16384": {"served_model": "m3-qwen3-4b-ctx32k:latest", "effective_context_window_tokens": 32768}
+  },
+  "e9": {
+    "parent_cases": 3,
+    "targets": [2048, 4096, 8192, 16384],
+    "positions": [0, 25, 50, 75, 100],
+    "conditions": ["derived_normal_off", "derived_normal_full"],
+    "repeats": 1,
+    "expected_formal_case_runs": 120
+  },
+  "e14": {
+    "warmup_case_runs": 48,
+    "matched_benign_latency_case_runs": 288,
+    "mixed_throughput_case_runs": 144,
+    "expected_formal_case_runs": 432,
+    "offered_concurrency": [1, 2, 4],
+    "mixed_payload_position_pct": 50,
+    "matched_control_count": 4,
+    "matched_requires_tool": false,
+    "matched_payload_position_pct": 100,
+    "matched_required_toolcall": "final",
+    "matched_path_gate_relaxed": false
+  }
+}

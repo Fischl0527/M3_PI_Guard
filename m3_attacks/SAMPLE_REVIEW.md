@@ -6,11 +6,15 @@
 
 ## 复核结论
 
-- 样本总数为 69 条，覆盖 6 类样本：`direct_jailbreak`、`rag_indirect`、`multilingual_t2l`、`json_rpc`、`tool_output_injection` 和 `benign_clean`。
+- canonical 样本总数为 300 条，其中 210 条攻击、90 条正常任务。
+- 攻击覆盖 9 个攻击族：`direct_jailbreak`、`rag_indirect`、`multilingual_t2l`、`json_rpc`、`tool_output_injection`、`memory_poisoning`、`environment_context_pollution`、`cross_tool_attack_chain` 和 `obfuscation_evasion`。
+- 数据按模板切分为 `dev=150`、`validation=60`、`blind=90`；原有 69 条样本仅保留在 `dev`。
 - 每条样本均采用统一 AttackCase 字段，便于评测模块读取和日志回放。
 - `case_id` 保持唯一。
 - `unsafe_target_actions` 仅使用本地 sandbox mock 动作白名单。
 - `benign_clean` 样本用于误报率观察，不包含危险目标动作。
+- 90 条正常样本严格平衡为 45 条无工具任务和 45 条合法工具任务；合法动作由 `authorized_actions` 精确标注。
+- `sample_type` 是攻击/正常分母的唯一来源，不能根据 `risk_tags` 猜测。
 - 样本不包含真实恶意代码、真实服务地址、真实账号或真实凭证。
 
 ## 演示样本
@@ -38,7 +42,8 @@
 提交前建议重新运行：
 
 ```powershell
-python -m m3_attacks.attackgen --out m3_attacks/cases/all_cases.jsonl --stats outputs/metrics/final_case_stats.json --audit outputs/metrics/final_case_audit.json
+python -m m3_attacks.attackgen
 ```
 
-重点检查 `duplicate_case_id`、`missing_required_fields` 和 `audit_hard_fail_count` 是否为 0。
+重点检查 `total_cases=300`、`dataset_sha256` 固定、`audit_status=pass`、
+`audit_hard_fail_count=0`，以及 schema 单元测试全部通过。

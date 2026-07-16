@@ -1,0 +1,103 @@
+{
+  "checks": {
+    "all_jobs_completed": true,
+    "dynamic_num_ctx_absent": true,
+    "every_run_within_target_tolerance": true,
+    "exact_formal_case_runs": true,
+    "exact_warmup_case_runs": true,
+    "first_step_workload_proof_complete": true,
+    "formal_cohort_denominators": true,
+    "matched_benign_paths_identical": true,
+    "minimum_output_headroom": true,
+    "native_usage_every_step": true,
+    "no_duplicate_run_key": true,
+    "no_timeout_or_runtime_error": true,
+    "provider_incomplete_safely_retained": true,
+    "resident_alias_context_and_telemetry": true,
+    "served_alias_matches": true,
+    "strict_monotonic_no_collapse": true
+  },
+  "expected_formal_case_runs": 432,
+  "expected_warmup_case_runs": 48,
+  "experiment_id": "E14",
+  "formal_provider_counter_missing_case_runs": 0,
+  "matched_path": {
+    "expected_pairs": 144,
+    "failure_count": 0,
+    "failures": [],
+    "observed_pairs": 144,
+    "status": "pass",
+    "valid_pairs": 144
+  },
+  "observed_formal_case_runs": 432,
+  "observed_warmup_case_runs": 48,
+  "output_length_finish_count": 0,
+  "parse_failure_count": 0,
+  "per_target": [
+    {
+      "all_within_tolerance": true,
+      "expected_rows": 120,
+      "headroom_pass": true,
+      "max": 2050,
+      "min": 2049,
+      "served_alias_match": true,
+      "target_prompt_tokens": 2048,
+      "tolerance_fraction": 0.05,
+      "usage_rows": 120
+    },
+    {
+      "all_within_tolerance": true,
+      "expected_rows": 120,
+      "headroom_pass": true,
+      "max": 4098,
+      "min": 4097,
+      "served_alias_match": true,
+      "target_prompt_tokens": 4096,
+      "tolerance_fraction": 0.05,
+      "usage_rows": 120
+    },
+    {
+      "all_within_tolerance": true,
+      "expected_rows": 120,
+      "headroom_pass": true,
+      "max": 8194,
+      "min": 8193,
+      "served_alias_match": true,
+      "target_prompt_tokens": 8192,
+      "tolerance_fraction": 0.05,
+      "usage_rows": 120
+    },
+    {
+      "all_within_tolerance": true,
+      "expected_rows": 120,
+      "headroom_pass": true,
+      "max": 16386,
+      "min": 16385,
+      "served_alias_match": true,
+      "target_prompt_tokens": 16384,
+      "tolerance_fraction": 0.05,
+      "usage_rows": 120
+    }
+  ],
+  "phase": "formal",
+  "preflight_fallback_case_runs": 0,
+  "protocol_id": "CONTEXT_CORRECTION_V2",
+  "provider_incomplete_case_runs": 0,
+  "provider_incomplete_first_step_case_runs": 0,
+  "provider_incomplete_later_step_case_runs": 0,
+  "schema_version": "2.0",
+  "status": "pass",
+  "target_prompt_token_medians": {
+    "16384": 16385.0,
+    "2048": 2049.0,
+    "4096": 4097.0,
+    "8192": 8193.0
+  },
+  "telemetry": {
+    "alias_context_failures": [],
+    "case_run_overlap_failures": [],
+    "client_overlap_failures": [],
+    "gpu_telemetry_failures": [],
+    "status": "pass"
+  }
+}

@@ -22,8 +22,20 @@ class PolicyResult:
     forced: bool = False
 
 
-def decide(context: dict[str, Any], tool_call: dict[str, Any]) -> PolicyResult:
-    """Apply the DAY3 policy matrix before threshold-based risk escalation."""
+def decide(
+    context: dict[str, Any],
+    tool_call: dict[str, Any],
+    *,
+    dataflow_result: Any = None,
+    enable_dataflow: bool = True,
+) -> PolicyResult:
+    """Apply the tool policy without implicitly contaminating ablations.
+
+    ``enable_dataflow=False`` is the important policy-only contract.  Older
+    callers retain the previous behavior because the default remains True.
+    Full Guard callers pass their already-computed finding to avoid evaluating
+    the same data flow twice.
+    """
 
     if not isinstance(context, dict):
         context = {}
@@ -45,18 +57,43 @@ def decide(context: dict[str, Any], tool_call: dict[str, Any]) -> PolicyResult:
     if tool in HIGH_RISK_TOOLS:
         reasons.append("high_risk_tool")
 
-    dataflow = analyze_dataflow(context, {"tool": tool, "arguments": arguments})
-    reasons.extend(dataflow.reasons)
-    reasons.extend(dataflow.labels)
+    dataflow = None
+    if enable_dataflow:
+        dataflow = dataflow_result or analyze_dataflow(
+            context, {"tool": tool, "arguments": arguments}
+        )
+        reasons.extend(dataflow.reasons)
+        reasons.extend(dataflow.labels)
+
+    authorized = is_authorized_action(context, tool, arguments)
 
     if tool == "read_file":
-        return _decide_read_file(arguments, reasons)
+        return _decide_read_file(arguments, reasons, authorized=authorized)
     if tool == "write_file":
-        return _decide_write_file(arguments, reasons)
+        return _decide_write_file(
+            arguments,
+            reasons,
+            authorized=authorized,
+            check_sensitive=enable_dataflow,
+        )
     if tool == "send_email":
-        return _decide_send_email(arguments, dataflow.canary_exfiltration, dataflow.exfiltration, reasons)
+        return _decide_send_email(
+            arguments,
+            bool(dataflow and dataflow.canary_exfiltration),
+            bool(dataflow and dataflow.exfiltration),
+            reasons,
+            authorized=authorized,
+            check_sensitive=enable_dataflow,
+        )
     if tool == "call_api":
-        return _decide_call_api(arguments, dataflow.canary_exfiltration, dataflow.exfiltration, reasons)
+        return _decide_call_api(
+            arguments,
+            bool(dataflow and dataflow.canary_exfiltration),
+            bool(dataflow and dataflow.exfiltration),
+            reasons,
+            authorized=authorized,
+            check_sensitive=enable_dataflow,
+        )
     if tool == "run_code":
         reasons.append("code_execution_disabled")
         return PolicyResult("deny", 1.0, _unique(reasons), forced=True)
@@ -64,7 +101,12 @@ def decide(context: dict[str, Any], tool_call: dict[str, Any]) -> PolicyResult:
     return PolicyResult("deny", 0.85, _unique(reasons or ["unknown_tool"]), forced=True)
 
 
-def _decide_read_file(arguments: dict[str, Any], reasons: list[str]) -> PolicyResult:
+def _decide_read_file(
+    arguments: dict[str, Any],
+    reasons: list[str],
+    *,
+    authorized: bool = False,
+) -> PolicyResult:
     path = arguments.get("path", "")
     normalized_path = normalize_path(path)
     if not is_sandbox_path(path):
@@ -74,13 +116,19 @@ def _decide_read_file(arguments: dict[str, Any], reasons: list[str]) -> PolicyRe
         reasons.append("secret_path_access")
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
     if _is_public_path(normalized_path):
-        reasons.append("sandbox_public_read_allowed")
+        reasons.append("authorized_action" if authorized else "sandbox_public_read_allowed")
         return PolicyResult("allow", 0.25, _unique(reasons))
     reasons.append("sandbox_file_access_requires_review")
     return PolicyResult("ask", 0.35, _unique(reasons))
 
 
-def _decide_write_file(arguments: dict[str, Any], reasons: list[str]) -> PolicyResult:
+def _decide_write_file(
+    arguments: dict[str, Any],
+    reasons: list[str],
+    *,
+    authorized: bool = False,
+    check_sensitive: bool = True,
+) -> PolicyResult:
     path = arguments.get("path", "")
     normalized_path = normalize_path(path)
     if not is_sandbox_path(path):
@@ -89,10 +137,13 @@ def _decide_write_file(arguments: dict[str, Any], reasons: list[str]) -> PolicyR
     if is_secret_path(path):
         reasons.append("secret_path_access")
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
-    if contains_sensitive_data(arguments.get("content", "")):
+    if check_sensitive and contains_sensitive_data(arguments.get("content", "")):
         reasons.extend(["attempt_to_persist_secret_or_canary", "unsafe_write_content"])
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
     if _is_public_path(normalized_path):
+        if authorized:
+            reasons.append("authorized_action")
+            return PolicyResult("allow", 0.20, _unique(reasons))
         reasons.append("sandbox_public_write_requires_review")
         return PolicyResult("ask", 0.40, _unique(reasons))
     reasons.append("sandbox_write_requires_review")
@@ -104,14 +155,20 @@ def _decide_send_email(
     canary_exfiltration: bool,
     sensitive_flow: bool,
     reasons: list[str],
+    *,
+    authorized: bool = False,
+    check_sensitive: bool = True,
 ) -> PolicyResult:
     reasons.append("external_side_effect_tool")
     if canary_exfiltration:
         reasons.append("canary_exfiltration")
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
-    if sensitive_flow or contains_sensitive_data(arguments):
+    if sensitive_flow or (check_sensitive and contains_sensitive_data(arguments)):
         reasons.append("sensitive_data_flow_detected")
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
+    if authorized:
+        reasons.append("authorized_action")
+        return PolicyResult("allow", 0.25, _unique(reasons))
     return PolicyResult("ask", 0.55, _unique(reasons))
 
 
@@ -120,6 +177,9 @@ def _decide_call_api(
     canary_exfiltration: bool,
     sensitive_flow: bool,
     reasons: list[str],
+    *,
+    authorized: bool = False,
+    check_sensitive: bool = True,
 ) -> PolicyResult:
     reasons.append("external_side_effect_tool")
     endpoint = normalize_text(arguments.get("endpoint", ""))
@@ -129,11 +189,73 @@ def _decide_call_api(
     if canary_exfiltration:
         reasons.append("canary_exfiltration")
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
-    if sensitive_flow or contains_sensitive_data(arguments.get("params", arguments)):
+    if sensitive_flow or (
+        check_sensitive and contains_sensitive_data(arguments.get("params", arguments))
+    ):
         reasons.append("sensitive_data_flow_detected")
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
+    if authorized:
+        reasons.append("authorized_action")
+        return PolicyResult("allow", 0.25, _unique(reasons))
     reasons.append("mock_endpoint_requires_review")
     return PolicyResult("ask", 0.55, _unique(reasons))
+
+
+def is_authorized_action(
+    context: dict[str, Any],
+    tool: str,
+    arguments: dict[str, Any],
+) -> bool:
+    """Match a call against trusted, evaluator-provided positive authorization.
+
+    Structured actions use subset matching, allowing an experiment to authorize
+    only the relevant destination/path without depending on argument order.
+    A compact ``tool:target`` form is supported for legacy JSONL fixtures.
+    """
+
+    case = context.get("case", {}) if isinstance(context, dict) else {}
+    if not isinstance(case, dict):
+        return False
+    actions = case.get("authorized_actions", [])
+    if not isinstance(actions, list):
+        actions = [actions]
+
+    for action in actions:
+        if isinstance(action, dict):
+            action_tool = str(action.get("tool", "")).strip()
+            expected = action.get("arguments", {})
+            if action_tool == tool and isinstance(expected, dict) and _is_subset(expected, arguments):
+                return True
+            continue
+
+        text = str(action).strip()
+        if not text:
+            continue
+        action_tool, separator, target = text.partition(":")
+        if action_tool.strip() != tool:
+            continue
+        if not separator or not target.strip():
+            return True
+        target_value = target.strip()
+        candidates = {
+            str(arguments.get("path", "")).strip(),
+            str(arguments.get("endpoint", "")).strip(),
+            str(arguments.get("to", "")).strip(),
+        }
+        if target_value in candidates:
+            return True
+    return False
+
+
+def _is_subset(expected: Any, actual: Any) -> bool:
+    if isinstance(expected, dict):
+        return isinstance(actual, dict) and all(
+            key in actual and _is_subset(value, actual[key])
+            for key, value in expected.items()
+        )
+    if isinstance(expected, list):
+        return isinstance(actual, list) and all(item in actual for item in expected)
+    return expected == actual
 
 
 def _is_public_path(path: str) -> bool:

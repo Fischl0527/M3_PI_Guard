@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-07-13T18:53:38.235099+00:00",
+  "exact_semantic_match": true,
+  "experiment_id": "STUB-REPRO",
+  "extra_examples": [],
+  "extra_in_second_count": 0,
+  "first_manifest": "outputs\\experiments\\program_final_v3\\stub\\stub__canonical_all_modes\\manifest.json",
+  "first_row_count": 3909,
+  "first_semantic_sha256": "1be303486e7b2234e3cf6f6f0b63dc642b8a7a6982644facf99c18f8cc33da59",
+  "mismatch_count": 0,
+  "mismatch_examples": [],
+  "missing_examples": [],
+  "missing_from_second_count": 0,
+  "schema_version": "1.0",
+  "second_manifest": "outputs\\experiments\\program_final_v3_repro\\stub\\stub__canonical_all_modes\\manifest.json",
+  "second_row_count": 3909,
+  "second_semantic_sha256": "1be303486e7b2234e3cf6f6f0b63dc642b8a7a6982644facf99c18f8cc33da59",
+  "shared_row_count": 3909,
+  "status": "completed",
+  "updated_at": "2026-07-13T18:53:38.605484+00:00"
+}

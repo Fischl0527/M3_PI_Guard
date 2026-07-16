@@ -1,28 +1,68 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://local.m3-pi-guard/schemas/attack_case.schema.json",
-  "title": "M3 AttackCase",
+  "title": "M3 AttackCase v2",
   "type": "object",
   "required": [
+    "schema_version",
     "case_id",
+    "sample_type",
     "attack_family",
+    "template_id",
+    "mutation_id",
+    "split",
     "carrier",
     "language",
+    "task_type",
+    "requires_tool",
+    "authorized_actions",
     "user_task",
     "document_content",
+    "injected_content",
     "expected_safe_behavior",
     "unsafe_target_actions",
     "risk_tags",
-    "severity"
+    "severity",
+    "expected_detectors"
   ],
   "properties": {
+    "schema_version": {
+      "const": "2.0"
+    },
     "case_id": {
       "type": "string",
       "minLength": 1
     },
+    "sample_type": {
+      "type": "string",
+      "enum": ["attack", "benign"]
+    },
     "attack_family": {
       "type": "string",
+      "enum": [
+        "benign_clean",
+        "direct_jailbreak",
+        "rag_indirect",
+        "multilingual_t2l",
+        "json_rpc",
+        "tool_output_injection",
+        "memory_poisoning",
+        "environment_context_pollution",
+        "cross_tool_attack_chain",
+        "obfuscation_evasion"
+      ]
+    },
+    "template_id": {
+      "type": "string",
       "minLength": 1
+    },
+    "mutation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split": {
+      "type": "string",
+      "enum": ["dev", "validation", "blind"]
     },
     "carrier": {
       "type": "string",
@@ -32,11 +72,41 @@
       "type": "string",
       "minLength": 1
     },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "summary",
+        "translation",
+        "extraction",
+        "classification",
+        "normalization",
+        "file_read",
+        "file_write",
+        "email_send",
+        "api_call",
+        "multi_step"
+      ]
+    },
+    "requires_tool": {
+      "type": "boolean"
+    },
+    "authorized_actions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
     "user_task": {
       "type": "string",
       "minLength": 1
     },
     "document_content": {
+      "type": "string",
+      "minLength": 1
+    },
+    "injected_content": {
       "type": "string"
     },
     "expected_safe_behavior": {
@@ -45,23 +115,76 @@
     },
     "unsafe_target_actions": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       }
     },
     "risk_tags": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       }
     },
     "severity": {
       "type": "string",
-      "enum": ["low", "medium", "high", "critical"]
+      "enum": ["none", "low", "medium", "high", "critical"]
     },
     "notes": {
       "type": "string"
+    },
+    "success_indicators": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "safe_indicators": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "demo_priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3
+    },
+    "expected_detectors": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "parent_case_id": {
+      "type": ["string", "null"]
+    },
+    "attack_dimensions": {
+      "type": "object"
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"sample_type": {"const": "benign"}},
+        "required": ["sample_type"]
+      },
+      "then": {
+        "properties": {
+          "attack_family": {"const": "benign_clean"},
+          "severity": {"const": "none"},
+          "unsafe_target_actions": {"maxItems": 0},
+          "expected_detectors": {"maxItems": 0}
+        }
+      },
+      "else": {
+        "properties": {
+          "attack_family": {"not": {"const": "benign_clean"}},
+          "severity": {"enum": ["medium", "high", "critical"]},
+          "unsafe_target_actions": {"minItems": 1},
+          "risk_tags": {"minItems": 1},
+          "expected_detectors": {"minItems": 1}
+        }
+      }
+    }
+  ],
   "additionalProperties": true
 }

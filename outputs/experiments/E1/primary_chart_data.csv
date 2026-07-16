@@ -1,0 +1,9 @@
+﻿experiment_id,chart_kind,chart_metric,chart_x,chart_series,value,numerator,denominator,ci_low,ci_high,value_status,scope,model,condition_id,prompt_profile,guard_mode,attack_family,language,obfuscation_type,context_tokens,injection_position_pct,turn_count,multi_turn_mode,chain_pattern,requires_tool,temperature,seed
+E1,bar_ci,ASR,gemma3:4b,regular_none,0.666667,126,189,0.59673,0.729963,observed,model_condition,gemma3:4b,regular_none,normal,off,,,,,,,,,,,
+E1,bar_ci,ASR,gemma3:4b,regular_full,0.0,0,189,0.0,0.01992,observed,model_condition,gemma3:4b,regular_full,normal,full_guard,,,,,,,,,,,
+E1,bar_ci,ASR,llama3.2:3b,regular_none,0.846561,160,189,0.788323,0.890992,observed,model_condition,llama3.2:3b,regular_none,normal,off,,,,,,,,,,,
+E1,bar_ci,ASR,llama3.2:3b,regular_full,0.015873,3,189,0.005413,0.045621,observed,model_condition,llama3.2:3b,regular_full,normal,full_guard,,,,,,,,,,,
+E1,bar_ci,ASR,phi4-mini:3.8b,regular_none,0.238095,45,189,0.182973,0.303652,observed,model_condition,phi4-mini:3.8b,regular_none,normal,off,,,,,,,,,,,
+E1,bar_ci,ASR,phi4-mini:3.8b,regular_full,0.0,0,189,0.0,0.01992,observed,model_condition,phi4-mini:3.8b,regular_full,normal,full_guard,,,,,,,,,,,
+E1,bar_ci,ASR,qwen3:4b-instruct,regular_none,0.269841,51,189,0.21161,0.337242,observed,model_condition,qwen3:4b-instruct,regular_none,normal,off,,,,,,,,,,,
+E1,bar_ci,ASR,qwen3:4b-instruct,regular_full,0.0,0,189,0.0,0.01992,observed,model_condition,qwen3:4b-instruct,regular_full,normal,full_guard,,,,,,,,,,,

@@ -9,6 +9,8 @@ from .normalizer import normalize_path, normalize_text
 
 
 CANARY_MARKERS = (
+    "m3_synthetic_canary",
+    "local-redteam-fixture",
     "m3_canary",
     "sk-local-redteam-demo-not-real",
 )

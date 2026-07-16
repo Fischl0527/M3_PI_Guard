@@ -1,0 +1,156 @@
+{
+  "audit": {
+    "checks": {
+      "capacity_headroom_at_least_512": true,
+      "e14_cohort_counts": true,
+      "e14_exact_40": true,
+      "e9_exact_60": true,
+      "e9_grid_complete": true,
+      "sentinels_unique": true,
+      "unique_case_ids": true
+    },
+    "e14_cohort_counts": {
+      "matched_benign_latency": 16,
+      "mixed_throughput": 24
+    },
+    "e9_grid_size": 60,
+    "protocol_id": "CONTEXT_CORRECTION_V2",
+    "schema_version": "1.0",
+    "status": "pass"
+  },
+  "calibration_rows": [
+    {
+      "base_prompt_tokens": 208,
+      "experiment_id": "E9",
+      "parent_case_id": "ENVX-V-001",
+      "source_case_id": "E9-ENVX-V-001-2048-0"
+    },
+    {
+      "base_prompt_tokens": 196,
+      "experiment_id": "E9",
+      "parent_case_id": "RAGX-V-001",
+      "source_case_id": "E9-RAGX-V-001-2048-0"
+    },
+    {
+      "base_prompt_tokens": 198,
+      "experiment_id": "E9",
+      "parent_case_id": "TOOLX-V-001",
+      "source_case_id": "E9-TOOLX-V-001-2048-0"
+    },
+    {
+      "base_prompt_tokens": 225,
+      "experiment_id": "E14",
+      "source_case_id": "SMOKE-DJX-V-001",
+      "workload_cohort": "mixed_throughput"
+    },
+    {
+      "base_prompt_tokens": 224,
+      "experiment_id": "E14",
+      "source_case_id": "SMOKE-RAGX-V-001",
+      "workload_cohort": "mixed_throughput"
+    },
+    {
+      "base_prompt_tokens": 262,
+      "experiment_id": "E14",
+      "source_case_id": "SMOKE-CHAINX-V-001",
+      "workload_cohort": "mixed_throughput"
+    },
+    {
+      "base_prompt_tokens": 264,
+      "experiment_id": "E14",
+      "source_case_id": "SMOKE-MTLX-V-001",
+      "workload_cohort": "mixed_throughput"
+    },
+    {
+      "base_prompt_tokens": 199,
+      "experiment_id": "E14",
+      "source_case_id": "SMOKE-BEN-V-001",
+      "workload_cohort": "mixed_throughput"
+    },
+    {
+      "base_prompt_tokens": 226,
+      "experiment_id": "E14",
+      "source_case_id": "SMOKE-BEN-V-010",
+      "workload_cohort": "mixed_throughput"
+    },
+    {
+      "base_prompt_tokens": 199,
+      "experiment_id": "E14",
+      "source_case_id": "BEN-V-001",
+      "workload_cohort": "matched_benign_latency"
+    },
+    {
+      "base_prompt_tokens": 199,
+      "experiment_id": "E14",
+      "source_case_id": "BEN-V-002",
+      "workload_cohort": "matched_benign_latency"
+    },
+    {
+      "base_prompt_tokens": 206,
+      "experiment_id": "E14",
+      "source_case_id": "BEN-V-003",
+      "workload_cohort": "matched_benign_latency"
+    },
+    {
+      "base_prompt_tokens": 205,
+      "experiment_id": "E14",
+      "source_case_id": "BEN-V-004",
+      "workload_cohort": "matched_benign_latency"
+    }
+  ],
+  "filler_slope_contract": "one filler unit adds one Qwen prompt token",
+  "filler_unit": "context",
+  "generated_at": "2026-07-15T12:07:54.917624+00:00",
+  "generator_version": "context-workloads-v2.0",
+  "measurement_transport": "ollama_native_prompt_eval_count",
+  "model_profiles": {
+    "16384": {
+      "alias_id": "ef6929a22b37",
+      "effective_context_window_tokens": 32768,
+      "model_alias": "m3-qwen3-4b-ctx32k:latest",
+      "modelfile": "E:\\M3_PI_Guard_test\\experiments\\modelfiles\\Qwen3-4B-Ctx32K.Modelfile",
+      "modelfile_sha256": "ee161789b483f0e96e2ecac9de1fcd27d1671fd805d32979ccfc57ff6379055a",
+      "target_prompt_tokens": 16384
+    },
+    "2048": {
+      "alias_id": "0ce262040abb",
+      "effective_context_window_tokens": 4096,
+      "model_alias": "m3-qwen3-4b-ctx4k:latest",
+      "modelfile": "E:\\M3_PI_Guard_test\\experiments\\modelfiles\\Qwen3-4B-Ctx4K.Modelfile",
+      "modelfile_sha256": "c26dad256a1f46fc64360322a6265c0e92a2b7aa68ba010b3acf83a4bab9244a",
+      "target_prompt_tokens": 2048
+    },
+    "4096": {
+      "alias_id": "81f2e7df722a",
+      "effective_context_window_tokens": 8192,
+      "model_alias": "m3-qwen3-4b-ctx8k:latest",
+      "modelfile": "E:\\M3_PI_Guard_test\\experiments\\modelfiles\\Qwen3-4B-Ctx8K.Modelfile",
+      "modelfile_sha256": "2b9dd24a65da38c5cb5d768cc24a9baff2007fd6d5f8c78e5d42d92b684ea8ed",
+      "target_prompt_tokens": 4096
+    },
+    "8192": {
+      "alias_id": "b7c705adc68a",
+      "effective_context_window_tokens": 16384,
+      "model_alias": "m3-qwen3-4b-ctx16k:latest",
+      "modelfile": "E:\\M3_PI_Guard_test\\experiments\\modelfiles\\Qwen3-4B-Ctx16K.Modelfile",
+      "modelfile_sha256": "269ebf2e1569bbb8840087d804e4cddeb50b8081ce4265939f2d51f30225bc9a",
+      "target_prompt_tokens": 8192
+    }
+  },
+  "protocol_id": "CONTEXT_CORRECTION_V2",
+  "schema_version": "2.0",
+  "sources": {
+    "canonical": {
+      "path": "E:\\M3_PI_Guard_test\\m3_attacks\\cases\\all_cases.jsonl",
+      "sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462"
+    },
+    "e14_mixed": {
+      "path": "E:\\M3_PI_Guard_test\\experiments\\fixtures\\smoke_cases.jsonl",
+      "sha256": "5149543448f5e79325b7c577e5e3be09a2e264e9001f6cccbaf2371c22ebcd04"
+    },
+    "e9": {
+      "path": "E:\\M3_PI_Guard_test\\experiments\\fixtures\\derived\\e9_cases.jsonl",
+      "sha256": "470aa54333441ce71e84d91e133a37519dbec7fca44c9d0fc3e5bc3fb98f740e"
+    }
+  }
+}

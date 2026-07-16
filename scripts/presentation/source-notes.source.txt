@@ -1,0 +1,19 @@
+Content and evidence provenance
+
+Template
+- docs/presentation/Redteam_LLM_Security_答辩PPT.pptx
+- SHA-256 b94156c6f36a23d1fdbd42e10a8c029d766175d91e982c0e2d351480d709b16a
+
+Formal mode
+- experiments/registry.json must contain exact ordered E0-E17 and every status must be completed.
+- outputs/experiments/final_analysis/manifest.json must be a completed E18 formal synthesis and bind the live registry SHA-256.
+- Every declared final_analysis artifact and every selected figure CSV/PNG/SVG is rehashed before deck authoring.
+- Slide 12 binds result_integrity_audit.json, main_parse_quality.json and e16_provenance.json; it keeps A11 regular_full separate from all-condition step-row/run-level diagnostics and discloses the exact E16 sandbox runtime and denominator exclusions.
+- Metric cards use executive_summary.json targets A01 (ASR relative reduction), A02 (DSR) and A05 (call-level FPR).
+- Slides 6-10 use main_defense_effect, prompt_guard_increment, guard_ablation, threshold_calibration, cross_model_heatmap, family_robustness, language_evasion, multiturn_adaptive_trends, performance_profile and failure_taxonomy.
+- cross_tool_chain_patterns is intentionally omitted from the 12-slide deck for density, but remains a required, hash-bound E18 figure in the formal report and Dashboard. It facets original frozen-v3 E11 separately from E11_POSTHOC_AMENDMENT_V1 visualization revision 2, labels the supplement pre_registered=false, and prohibits denominator pooling or retroactive replacement of the original E11 claim. Revision 1 failed original-resolution chart layout QA and is archived under outputs/experiments/_invalid/e11_amendment_v1_visual_qa.
+
+Synthetic preview mode
+- scripts/presentation/synthetic-fixture.json and generated synthetic chart PNGs are layout-only inputs.
+- Every preview chart and the title-slide footer are visibly marked SYNTHETIC PREVIEW / 非正式结果.
+- Synthetic values are never admitted by the formal evidence gate.

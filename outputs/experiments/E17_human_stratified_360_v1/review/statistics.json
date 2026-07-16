@@ -1,0 +1,284 @@
+{
+  "adjudication_required": false,
+  "bootstrap": {
+    "confidence_level": 0.95,
+    "iterations": 10000,
+    "method": "stratified_design_weighted_percentile_bootstrap",
+    "resampling_unit": "sampled evidence cluster within flag_combination stratum",
+    "seed": 20260717
+  },
+  "confidence_counts": {
+    "high": 310,
+    "medium": 50
+  },
+  "coverage": {
+    "full_population_human_reviewed": false,
+    "human_reviewers": 2,
+    "population_rows": 3299,
+    "representative_rows": 300,
+    "reviewed_sample_rows": 360,
+    "targeted_auto_disagreement_rows": 40,
+    "targeted_rare_complex_rows": 20
+  },
+  "evidence_tier": "human_stratified_sample",
+  "experiment_id": "E17",
+  "interrater": {
+    "agreement_policy": "adjudicate_primary_or_secondary_code_set_difference",
+    "agreements": 360,
+    "cohen_kappa": 1.0,
+    "confusion_matrix": {
+      "ask": {
+        "ask": 61,
+        "false_block": 0,
+        "leak": 0,
+        "max_steps": 0,
+        "none": 0,
+        "other": 0,
+        "parse_failure": 0,
+        "timeout": 0
+      },
+      "false_block": {
+        "ask": 0,
+        "false_block": 7,
+        "leak": 0,
+        "max_steps": 0,
+        "none": 0,
+        "other": 0,
+        "parse_failure": 0,
+        "timeout": 0
+      },
+      "leak": {
+        "ask": 0,
+        "false_block": 0,
+        "leak": 130,
+        "max_steps": 0,
+        "none": 0,
+        "other": 0,
+        "parse_failure": 0,
+        "timeout": 0
+      },
+      "max_steps": {
+        "ask": 0,
+        "false_block": 0,
+        "leak": 0,
+        "max_steps": 8,
+        "none": 0,
+        "other": 0,
+        "parse_failure": 0,
+        "timeout": 0
+      },
+      "none": {
+        "ask": 0,
+        "false_block": 0,
+        "leak": 0,
+        "max_steps": 0,
+        "none": 112,
+        "other": 0,
+        "parse_failure": 0,
+        "timeout": 0
+      },
+      "other": {
+        "ask": 0,
+        "false_block": 0,
+        "leak": 0,
+        "max_steps": 0,
+        "none": 0,
+        "other": 19,
+        "parse_failure": 0,
+        "timeout": 0
+      },
+      "parse_failure": {
+        "ask": 0,
+        "false_block": 0,
+        "leak": 0,
+        "max_steps": 0,
+        "none": 0,
+        "other": 0,
+        "parse_failure": 23,
+        "timeout": 0
+      },
+      "timeout": {
+        "ask": 0,
+        "false_block": 0,
+        "leak": 0,
+        "max_steps": 0,
+        "none": 0,
+        "other": 0,
+        "parse_failure": 0,
+        "timeout": 0
+      }
+    },
+    "disagreements": 0,
+    "expected_agreement": 0.263641975308642,
+    "items": 360,
+    "kappa_note": null,
+    "percent_agreement": 1.0,
+    "primary_agreements": 360,
+    "primary_disagreements": 0,
+    "primary_percent_agreement": 1.0,
+    "reviewer_1_counts": {
+      "ask": 61,
+      "false_block": 7,
+      "leak": 130,
+      "max_steps": 8,
+      "none": 112,
+      "other": 19,
+      "parse_failure": 23
+    },
+    "reviewer_1_id": "human_gaohang_r1",
+    "reviewer_2_counts": {
+      "ask": 61,
+      "false_block": 7,
+      "leak": 130,
+      "max_steps": 8,
+      "none": 112,
+      "other": 19,
+      "parse_failure": 23
+    },
+    "reviewer_2_id": "human_hg02"
+  },
+  "protocol_id": "E17_HUMAN_STRATIFIED_360_V1",
+  "representative_primary_class_counts": {
+    "ask": 50,
+    "false_block": 7,
+    "leak": 112,
+    "max_steps": 6,
+    "none": 91,
+    "other": 17,
+    "parse_failure": 17,
+    "timeout": 0
+  },
+  "scope_guardrail": {
+    "allowed_claim": "two independent humans reviewed the frozen 360-row stratified audit sample",
+    "population_estimation_group": "representative",
+    "prohibited_claim": "all 3299 E17 items received human review",
+    "targeted_groups": [
+      "targeted_auto_disagreement",
+      "targeted_rare_complex"
+    ],
+    "targeted_groups_pooled_into_population_estimates": false
+  },
+  "secondary_code_set_counts": {
+    "ask": 17,
+    "ask|parse_failure": 3,
+    "max_steps": 13,
+    "max_steps|parse_failure": 1,
+    "none": 302,
+    "parse_failure": 24
+  },
+  "source_mode": "human_stratified_sample",
+  "weighted_population_estimates": [
+    {
+      "bootstrap_iterations": 10000,
+      "bootstrap_seed": 20260717,
+      "ci_high": 0.4173282487012683,
+      "ci_high_percent": 41.73282487012683,
+      "ci_low": 0.2785859858426481,
+      "ci_low_percent": 27.85859858426481,
+      "failure_class": "leak",
+      "interval_method": "stratified_design_weighted_percentile_bootstrap",
+      "representative_sample_n": 300,
+      "weighted_denominator": 3412.6945611350675,
+      "weighted_percent": 34.292027073993566,
+      "weighted_share": 0.3429202707399357
+    },
+    {
+      "bootstrap_iterations": 10000,
+      "bootstrap_seed": 20260717,
+      "ci_high": 0.02014481259122853,
+      "ci_high_percent": 2.014481259122853,
+      "ci_low": 0.0034795089070740414,
+      "ci_low_percent": 0.34795089070740415,
+      "failure_class": "false_block",
+      "interval_method": "stratified_design_weighted_percentile_bootstrap",
+      "representative_sample_n": 300,
+      "weighted_denominator": 3412.6945611350675,
+      "weighted_percent": 1.0578853564232282,
+      "weighted_share": 0.010578853564232283
+    },
+    {
+      "bootstrap_iterations": 10000,
+      "bootstrap_seed": 20260717,
+      "ci_high": 0.16941061507369332,
+      "ci_high_percent": 16.94106150736933,
+      "ci_low": 0.09234445280993323,
+      "ci_low_percent": 9.234445280993322,
+      "failure_class": "ask",
+      "interval_method": "stratified_design_weighted_percentile_bootstrap",
+      "representative_sample_n": 300,
+      "weighted_denominator": 3412.6945611350675,
+      "weighted_percent": 12.630121588851246,
+      "weighted_share": 0.12630121588851245
+    },
+    {
+      "bootstrap_iterations": 10000,
+      "bootstrap_seed": 20260717,
+      "ci_high": 0.1445459927279244,
+      "ci_high_percent": 14.45459927279244,
+      "ci_low": 0.029030723420105667,
+      "ci_low_percent": 2.903072342010567,
+      "failure_class": "parse_failure",
+      "interval_method": "stratified_design_weighted_percentile_bootstrap",
+      "representative_sample_n": 300,
+      "weighted_denominator": 3412.6945611350675,
+      "weighted_percent": 7.527401047658983,
+      "weighted_share": 0.07527401047658983
+    },
+    {
+      "bootstrap_iterations": 10000,
+      "bootstrap_seed": 20260717,
+      "ci_high": 0.0,
+      "ci_high_percent": 0.0,
+      "ci_low": 0.0,
+      "ci_low_percent": 0.0,
+      "failure_class": "timeout",
+      "interval_method": "stratified_design_weighted_percentile_bootstrap",
+      "representative_sample_n": 300,
+      "weighted_denominator": 3412.6945611350675,
+      "weighted_percent": 0.0,
+      "weighted_share": 0.0
+    },
+    {
+      "bootstrap_iterations": 10000,
+      "bootstrap_seed": 20260717,
+      "ci_high": 0.027275404942763745,
+      "ci_high_percent": 2.7275404942763743,
+      "ci_low": 0.010882671366798954,
+      "ci_low_percent": 1.0882671366798955,
+      "failure_class": "max_steps",
+      "interval_method": "stratified_design_weighted_percentile_bootstrap",
+      "representative_sample_n": 300,
+      "weighted_denominator": 3412.6945611350675,
+      "weighted_percent": 1.8753509537259472,
+      "weighted_share": 0.01875350953725947
+    },
+    {
+      "bootstrap_iterations": 10000,
+      "bootstrap_seed": 20260717,
+      "ci_high": 0.18548391345885107,
+      "ci_high_percent": 18.548391345885108,
+      "ci_low": 0.02520449135771225,
+      "ci_low_percent": 2.520449135771225,
+      "failure_class": "other",
+      "interval_method": "stratified_design_weighted_percentile_bootstrap",
+      "representative_sample_n": 300,
+      "weighted_denominator": 3412.6945611350675,
+      "weighted_percent": 8.5601237321747,
+      "weighted_share": 0.085601237321747
+    },
+    {
+      "bootstrap_iterations": 10000,
+      "bootstrap_seed": 20260717,
+      "ci_high": 0.42884675501839475,
+      "ci_high_percent": 42.884675501839475,
+      "ci_low": 0.2529237784158696,
+      "ci_low_percent": 25.292377841586962,
+      "failure_class": "none",
+      "interval_method": "stratified_design_weighted_percentile_bootstrap",
+      "representative_sample_n": 300,
+      "weighted_denominator": 3412.6945611350675,
+      "weighted_percent": 34.05709024717239,
+      "weighted_share": 0.3405709024717239
+    }
+  ]
+}

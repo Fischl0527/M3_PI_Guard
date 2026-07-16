@@ -1,0 +1,25 @@
+{
+  "experiment_id": "E9",
+  "old_v3_policy": "excluded_invalid_diagnostic_provenance",
+  "protocol_id": "CONTEXT_CORRECTION_V2",
+  "records": [
+    {
+      "bytes": 3728455,
+      "distinct_case_count": 60,
+      "kind": "case_dataset",
+      "path": "E:\\M3_PI_Guard_test\\protocols\\context_correction_v2\\fixtures\\e9_cases.jsonl",
+      "row_count": 60,
+      "sha256": "1f7f745259c28121def6cdde68caa33ba0e76c8e06790249e7b96f346b53bc91"
+    },
+    {
+      "bytes": 1104002,
+      "distinct_case_count": 60,
+      "evidence_tier": "formal_context_correction_v2",
+      "kind": "formal_raw_log",
+      "path": "E:\\M3_PI_Guard_test\\outputs\\experiments\\E9_context_correction_v2_r3\\raw_runs.jsonl",
+      "row_count": 178,
+      "sha256": "3f4617ae951dad4cd13164b50eeea836d60fdbeecff6d21ba180f026fd4b775c"
+    }
+  ],
+  "schema_version": "2.0"
+}

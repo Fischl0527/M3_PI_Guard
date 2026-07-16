@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.1",
+  "run_prefix": "ablation__ablation_remove_intent_action",
+  "experiment_id": "ablation__ablation_remove_intent_action",
+  "experiment_version": "exp-v1.1-reproducible",
+  "project_version": "v1.1-experiments",
+  "guard_version": "guard-v1.1-modular",
+  "dataset_version": "cases-v1.1",
+  "status": "completed",
+  "created_at": "2026-07-13T19:14:09.582652+00:00",
+  "updated_at": "2026-07-13T19:15:19.105226+00:00",
+  "config": {
+    "cases": "m3_attacks/cases/all_cases.jsonl",
+    "dataset_sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462",
+    "implementation_sha256": "9cd74dd86a36d4a0561864967d8289815a97f7f9da46e371785115e65ed934fd",
+    "backend": "ollama",
+    "model": "qwen3:4b-instruct",
+    "run_prefix": "ablation__ablation_remove_intent_action",
+    "run_group": "ablation",
+    "conditions": [
+      {
+        "condition_id": "ablation_remove_intent_action",
+        "prompt_profile": "normal",
+        "guard_mode": "full_guard"
+      }
+    ],
+    "guard_modules": [
+      "dataflow",
+      "instruction_detector",
+      "multilingual_detector",
+      "output_dlp",
+      "policy",
+      "structured_detector",
+      "tool_lure_detector"
+    ],
+    "ask_threshold": 1.0,
+    "deny_threshold": 1.0,
+    "max_steps": 5,
+    "limit": null,
+    "families": [],
+    "splits": [
+      "validation"
+    ],
+    "sample_types": [],
+    "task_types": [],
+    "case_ids": [],
+    "shuffle": false,
+    "selection_seed": 307,
+    "generation_seed": 307,
+    "repeats": 1,
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "num_ctx": null,
+    "timeout": 120.0,
+    "allow_fallback_guard": false,
+    "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+    "sandbox_fixture_version": "tool-sandbox-public-v1",
+    "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+    "sandbox_seed_sha256": {
+      "307": "33f5a3b8806f6689df46e2a3f483a216b7554619ca099bdce6597a3d75f25b1f"
+    },
+    "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+    "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+    "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue"
+  },
+  "config_hash": "3ed9144b37a8776753cf18ae9f50b411b7d2be8011bfb686ff7b209f27eef948",
+  "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+  "sandbox_fixture_version": "tool-sandbox-public-v1",
+  "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+  "sandbox_seed_sha256": {
+    "307": "33f5a3b8806f6689df46e2a3f483a216b7554619ca099bdce6597a3d75f25b1f"
+  },
+  "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+  "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+  "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+  "git_commit": "2c53f52c475e6838dc82246c821db5ed7ac0209c",
+  "git_dirty": true,
+  "dataset": {
+    "path": "m3_attacks/cases/all_cases.jsonl",
+    "sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462",
+    "row_count": 300
+  },
+  "backend": "ollama",
+  "oracle_stub": false,
+  "evidence_tier": "formal_model",
+  "model": "qwen3:4b-instruct",
+  "model_identity": {
+    "tag": "qwen3:4b-instruct",
+    "digest": "0edcdef34593",
+    "ollama_version": "ollama version is 0.24.0",
+    "executable": "D:\\Ollama\\app\\ollama.exe"
+  },
+  "defense_modes": [
+    "full_guard"
+  ],
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "run_group": "ablation",
+  "notes": "M3 full experiment program stage=ablation job=ablation__ablation_remove_intent_action",
+  "conditions": [
+    {
+      "condition_id": "ablation_remove_intent_action",
+      "prompt_profile": "normal",
+      "guard_mode": "full_guard",
+      "guard_modules": [
+        "dataflow",
+        "instruction_detector",
+        "multilingual_detector",
+        "output_dlp",
+        "policy",
+        "structured_detector",
+        "tool_lure_detector"
+      ],
+      "ask_threshold": 1.0,
+      "deny_threshold": 1.0,
+      "status": "completed",
+      "started_at": "2026-07-13T19:14:10.397724+00:00",
+      "updated_at": "2026-07-13T19:15:19.101390+00:00",
+      "defense_mode": "full_guard",
+      "jsonl": "outputs/experiments/program_final_v3/ablation/ablation__ablation_remove_intent_action/ablation__ablation_remove_intent_action_ablation_remove_intent_action.jsonl",
+      "csv": "outputs/experiments/program_final_v3/ablation/ablation__ablation_remove_intent_action/ablation__ablation_remove_intent_action_ablation_remove_intent_action.csv",
+      "jsonl_sha256": "f6c6f365d2f78a19ea7296b24b8160499a37702c0b90d16dde0ab0be3a877c94",
+      "csv_sha256": "e7469840745160f4c563f4e285ff207b11c2e78004a2eecb530fdc266468b583",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "307": "33f5a3b8806f6689df46e2a3f483a216b7554619ca099bdce6597a3d75f25b1f"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 60,
+      "selected_case_count": 60,
+      "selected_run_count": 60,
+      "skipped_case_count": 0,
+      "completed_run_count": 60,
+      "error_count": 0,
+      "log_count": 86,
+      "completed_at": "2026-07-13T19:15:19.101379+00:00"
+    }
+  ],
+  "results": [
+    {
+      "condition_id": "ablation_remove_intent_action",
+      "prompt_profile": "normal",
+      "guard_mode": "full_guard",
+      "defense_mode": "full_guard",
+      "status": "completed",
+      "jsonl": "outputs/experiments/program_final_v3/ablation/ablation__ablation_remove_intent_action/ablation__ablation_remove_intent_action_ablation_remove_intent_action.jsonl",
+      "csv": "outputs/experiments/program_final_v3/ablation/ablation__ablation_remove_intent_action/ablation__ablation_remove_intent_action_ablation_remove_intent_action.csv",
+      "jsonl_sha256": "f6c6f365d2f78a19ea7296b24b8160499a37702c0b90d16dde0ab0be3a877c94",
+      "csv_sha256": "e7469840745160f4c563f4e285ff207b11c2e78004a2eecb530fdc266468b583",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "307": "33f5a3b8806f6689df46e2a3f483a216b7554619ca099bdce6597a3d75f25b1f"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 60,
+      "selected_case_count": 60,
+      "selected_run_count": 60,
+      "skipped_case_count": 0,
+      "completed_run_count": 60,
+      "error_count": 0,
+      "log_count": 86
+    }
+  ],
+  "completed_at": "2026-07-13T19:15:19.105172+00:00"
+}

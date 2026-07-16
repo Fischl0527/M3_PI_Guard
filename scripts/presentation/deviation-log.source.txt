@@ -1,0 +1,16 @@
+Intentional departures from copied source slides
+
+Slides 1, 4, 5 and 12
+- Rewrite only the inherited text targets declared in template-frame-map.json.
+- Reason: remove stale Qwen2.5/Stub-result copy and align the narrative with the frozen full experiment program.
+
+Slides 6-10
+- Delete the inherited result/demo objects declared in template-frame-map.json.
+- Add two concrete chart PNGs inside the bounded left/right zones after deletion.
+- Reason: the source deck contains hand-built early-prototype bars and no reusable image/chart placeholders. Exact replacement of the deleted region is the closest viable source-slide option and retains all surrounding template chrome.
+
+Slides 2, 3 and 11
+- No departure. Preserve source objects exactly.
+
+Global
+- No font resizing, palette change, slide addition, master/layout mutation, OOXML mutation, python-pptx use or in-place overwrite of the source deck.

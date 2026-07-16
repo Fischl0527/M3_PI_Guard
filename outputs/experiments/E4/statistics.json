@@ -1,0 +1,2923 @@
+{
+  "comparison_count": 24,
+  "comparisons": [
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_named_detector_only",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_named_detector_only"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 7.931869542843195e-06,
+          "median_difference": 31.816250000000025,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 8.528891981551823e-08,
+          "pairs": 60,
+          "rank_biserial": 0.7956284153005464,
+          "statistic": 187.0,
+          "w_minus": 187.0,
+          "w_plus": 1643.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_named_detector_only",
+        "guard_mode": "detector_only",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_named_keyword_only",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_named_keyword_only"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 4.510366247600928e-06,
+          "median_difference": 36.38794999999993,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 4.798261965532902e-08,
+          "pairs": 60,
+          "rank_biserial": 0.8109289617486338,
+          "statistic": 173.0,
+          "w_minus": 173.0,
+          "w_plus": 1657.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_named_keyword_only",
+        "guard_mode": "keyword_only",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_named_no_dataflow",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_named_no_dataflow"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.0,
+          "median_difference": -5.610700000000065,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.3951776893138378,
+          "pairs": 60,
+          "rank_biserial": -0.126775956284153,
+          "statistic": 799.0,
+          "w_minus": 1031.0,
+          "w_plus": 799.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_named_no_dataflow",
+        "guard_mode": "no_dataflow",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_named_no_intent_action",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_named_no_intent_action"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.0,
+          "median_difference": 3.6043999999999983,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.5633411988523376,
+          "pairs": 60,
+          "rank_biserial": 0.08633879781420765,
+          "statistic": 836.0,
+          "w_minus": 836.0,
+          "w_plus": 994.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_named_no_intent_action",
+        "guard_mode": "no_intent_action",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_named_no_multilingual_detector",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_named_no_multilingual_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.0,
+          "median_difference": 2.85734999999994,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.5583813514010625,
+          "pairs": 60,
+          "rank_biserial": 0.08743169398907104,
+          "statistic": 835.0,
+          "w_minus": 835.0,
+          "w_plus": 995.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_named_no_multilingual_detector",
+        "guard_mode": "no_multilingual_detector",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_named_no_structured_detector",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_named_no_structured_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.0,
+          "median_difference": -1.840400000000045,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.8166230675729362,
+          "pairs": 60,
+          "rank_biserial": 0.034972677595628415,
+          "statistic": 883.0,
+          "w_minus": 883.0,
+          "w_plus": 947.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_named_no_structured_detector",
+        "guard_mode": "no_structured_detector",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_named_off",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_named_off"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.00039899887331107387,
+          "median_difference": 27.20830000000001,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 4.433320814567487e-06,
+          "pairs": 60,
+          "rank_biserial": 0.6819672131147541,
+          "statistic": 291.0,
+          "w_minus": 291.0,
+          "w_plus": 1539.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_named_off",
+        "guard_mode": "off",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_named_policy_only",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_named_policy_only"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.0,
+          "median_difference": 2.5445000000000277,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.8453283783639872,
+          "pairs": 60,
+          "rank_biserial": 0.029508196721311476,
+          "statistic": 888.0,
+          "w_minus": 888.0,
+          "w_plus": 942.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_named_policy_only",
+        "guard_mode": "policy_only",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_remove_dataflow",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_remove_dataflow"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.0,
+          "median_difference": 4.78004999999996,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.42872675604432997,
+          "pairs": 60,
+          "rank_biserial": 0.1180327868852459,
+          "statistic": 807.0,
+          "w_minus": 807.0,
+          "w_plus": 1023.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_remove_dataflow",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_remove_instruction_detector",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_remove_instruction_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.0,
+          "median_difference": -1.7456000000000245,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.9442452134618636,
+          "pairs": 60,
+          "rank_biserial": -0.01092896174863388,
+          "statistic": 905.0,
+          "w_minus": 925.0,
+          "w_plus": 905.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_remove_instruction_detector",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_remove_intent_action",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_remove_intent_action"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.0019325281366340263,
+          "median_difference": 23.03449999999998,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 2.1960547007204845e-05,
+          "pairs": 60,
+          "rank_biserial": 0.6306010928961748,
+          "statistic": 338.0,
+          "w_minus": 338.0,
+          "w_plus": 1492.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_remove_intent_action",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_remove_multilingual_detector",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_remove_multilingual_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.0031351489583519854,
+          "median_difference": 20.45474999999999,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 3.68841053923763e-05,
+          "pairs": 60,
+          "rank_biserial": 0.6131147540983607,
+          "statistic": 354.0,
+          "w_minus": 354.0,
+          "w_plus": 1476.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_remove_multilingual_detector",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_remove_output_dlp",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_remove_output_dlp"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.0036333825144576615,
+          "median_difference": 20.404049999999984,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 4.325455374354359e-05,
+          "pairs": 60,
+          "rank_biserial": 0.6076502732240437,
+          "statistic": 359.0,
+          "w_minus": 359.0,
+          "w_plus": 1471.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_remove_output_dlp",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_remove_policy",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_remove_policy"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.7507394467486392e-06,
+          "median_difference": 37.24865,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 1.8236869236964992e-08,
+          "pairs": 60,
+          "rank_biserial": 0.8360655737704918,
+          "statistic": 150.0,
+          "w_minus": 150.0,
+          "w_plus": 1680.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_remove_policy",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_remove_structured_detector",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_remove_structured_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.009366517803259367,
+          "median_difference": 15.759499999999889,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.00011284961208746225,
+          "pairs": 60,
+          "rank_biserial": 0.5737704918032787,
+          "statistic": 390.0,
+          "w_minus": 390.0,
+          "w_plus": 1440.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_remove_structured_detector",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_remove_tool_lure_detector",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_remove_tool_lure_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.3405776842068253,
+          "median_difference": 12.385899999999936,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.004865395488668933,
+          "pairs": 60,
+          "rank_biserial": 0.41857923497267757,
+          "statistic": 532.0,
+          "w_minus": 532.0,
+          "w_plus": 1298.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_remove_tool_lure_detector",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_solo_dataflow",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_solo_dataflow"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.45029225634226466,
+          "median_difference": 12.890849999999944,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.006525974729598039,
+          "pairs": 60,
+          "rank_biserial": 0.40437158469945356,
+          "statistic": 545.0,
+          "w_minus": 545.0,
+          "w_plus": 1285.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_solo_dataflow",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_solo_instruction_detector",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_solo_instruction_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.0008524502058691e-05,
+          "median_difference": 55.3236,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 1.0878830980498577e-07,
+          "pairs": 60,
+          "rank_biserial": 0.7890710382513662,
+          "statistic": 193.0,
+          "w_minus": 193.0,
+          "w_plus": 1637.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_solo_instruction_detector",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_solo_intent_action",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_solo_intent_action"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 1.7507394467486392e-06,
+          "median_difference": 53.828100000000006,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 1.8236869236964992e-08,
+          "pairs": 60,
+          "rank_biserial": 0.8360655737704918,
+          "statistic": 150.0,
+          "w_minus": 150.0,
+          "w_plus": 1680.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_solo_intent_action",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_solo_multilingual_detector",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_solo_multilingual_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.0023734169320119847,
+          "median_difference": 26.175799999999867,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 2.7597871302464938e-05,
+          "pairs": 60,
+          "rank_biserial": 0.6229508196721312,
+          "statistic": 345.0,
+          "w_minus": 345.0,
+          "w_plus": 1485.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_solo_multilingual_detector",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_solo_output_dlp",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_solo_output_dlp"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 6.989225417719513e-05,
+          "median_difference": 25.307699999999954,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 7.680467491999465e-07,
+          "pairs": 60,
+          "rank_biserial": 0.7344262295081967,
+          "statistic": 243.0,
+          "w_minus": 243.0,
+          "w_plus": 1587.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_solo_output_dlp",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_solo_policy",
+      "delta": {
+        "ASR_reduction": 0.0,
+        "ASR_relative_reduction": null,
+        "BSR_gain": 0.0,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.0
+      },
+      "dimensions": {
+        "condition_id": "ablation_solo_policy"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 42,
+          "treatment_only_event": 0
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 0
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.05980754833292812,
+          "median_difference": 10.059499999999957,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 0.0008423598356750439,
+          "pairs": 60,
+          "rank_biserial": 0.4961748633879781,
+          "statistic": 461.0,
+          "w_minus": 461.0,
+          "w_plus": 1369.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_solo_policy",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_solo_structured_detector",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_solo_structured_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.0011483348127220294,
+          "median_difference": 20.47810000000004,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 1.2902638345191342e-05,
+          "pairs": 60,
+          "rank_biserial": 0.6480874316939891,
+          "statistic": 322.0,
+          "w_minus": 322.0,
+          "w_plus": 1508.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_solo_structured_detector",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    },
+    {
+      "baseline": {
+        "condition_id": "ablation_named_full_guard",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      },
+      "comparison_id": "e4__full_vs__ablation_solo_tool_lure_detector",
+      "delta": {
+        "ASR_reduction": -0.309524,
+        "ASR_relative_reduction": null,
+        "BSR_gain": -0.789474,
+        "DSR_reduction": 0.0,
+        "TCR_change": 0.055555
+      },
+      "dimensions": {
+        "condition_id": "ablation_solo_tool_lure_detector"
+      },
+      "paired_statistics": {
+        "ASR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.4444444444444444,
+          "ci_low": 0.175,
+          "clusters": 18,
+          "estimate": 0.30952380952380953,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 42,
+          "seed": 42
+        },
+        "ASR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 13,
+          "holm_adjusted_p": 0.02001953125,
+          "method": "mcnemar_exact",
+          "p_value": 0.000244140625,
+          "pairs": 42,
+          "treatment_only_event": 13
+        },
+        "DSR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "clusters": 16,
+          "estimate": 0.0,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 21,
+          "seed": 42
+        },
+        "DSR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 21,
+          "treatment_only_event": 0
+        },
+        "TCR_bootstrap_guard_minus_baseline": {
+          "ci_high": 0.16666666666666666,
+          "ci_low": 0.0,
+          "clusters": 18,
+          "estimate": 0.05555555555555555,
+          "iterations": 10000,
+          "method": "clustered_paired_bootstrap",
+          "pairs": 18,
+          "seed": 42
+        },
+        "TCR_mcnemar": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "holm_adjusted_p": 1.0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 18,
+          "treatment_only_event": 1
+        },
+        "latency_wilcoxon": {
+          "holm_adjusted_p": 0.0020399858547447414,
+          "median_difference": 20.222699999999975,
+          "method": "wilcoxon_signed_rank_normal",
+          "nonzero_pairs": 60,
+          "p_value": 2.344811327292806e-05,
+          "pairs": 60,
+          "rank_biserial": 0.6284153005464481,
+          "statistic": 340.0,
+          "w_minus": 340.0,
+          "w_plus": 1490.0,
+          "zero_pairs": 0
+        },
+        "pairs": 60,
+        "status": "paired"
+      },
+      "treatment": {
+        "condition_id": "ablation_solo_tool_lure_detector",
+        "guard_mode": "full_guard",
+        "prompt_profile": "normal"
+      }
+    }
+  ],
+  "evidence_tier": "formal_model_only",
+  "experiment_id": "E4",
+  "holm_correction": [
+    {
+      "comparison_id": "e4__full_vs__ablation_named_detector_only",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_detector_only",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_detector_only",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_detector_only",
+      "holm_adjusted_p": 7.931869542843195e-06,
+      "raw_p": 8.528891981551823e-08,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_keyword_only",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_keyword_only",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_keyword_only",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_keyword_only",
+      "holm_adjusted_p": 4.510366247600928e-06,
+      "raw_p": 4.798261965532902e-08,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 0.3951776893138378,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 0.5633411988523376,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 0.5583813514010625,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_no_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 0.8166230675729362,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_off",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_off",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_off",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_off",
+      "holm_adjusted_p": 0.00039899887331107387,
+      "raw_p": 4.433320814567487e-06,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_policy_only",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_policy_only",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_policy_only",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_named_policy_only",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 0.8453283783639872,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 0.42872675604432997,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_instruction_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_instruction_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_instruction_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_instruction_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 0.9442452134618636,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_intent_action",
+      "holm_adjusted_p": 0.0019325281366340263,
+      "raw_p": 2.1960547007204845e-05,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_multilingual_detector",
+      "holm_adjusted_p": 0.0031351489583519854,
+      "raw_p": 3.68841053923763e-05,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_output_dlp",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_output_dlp",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_output_dlp",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_output_dlp",
+      "holm_adjusted_p": 0.0036333825144576615,
+      "raw_p": 4.325455374354359e-05,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_policy",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_policy",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_policy",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_policy",
+      "holm_adjusted_p": 1.7507394467486392e-06,
+      "raw_p": 1.8236869236964992e-08,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_structured_detector",
+      "holm_adjusted_p": 0.009366517803259367,
+      "raw_p": 0.00011284961208746225,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_tool_lure_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_tool_lure_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_tool_lure_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_remove_tool_lure_detector",
+      "holm_adjusted_p": 0.3405776842068253,
+      "raw_p": 0.004865395488668933,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_dataflow",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_dataflow",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_dataflow",
+      "holm_adjusted_p": 0.45029225634226466,
+      "raw_p": 0.006525974729598039,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_instruction_detector",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_instruction_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_instruction_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_instruction_detector",
+      "holm_adjusted_p": 1.0008524502058691e-05,
+      "raw_p": 1.0878830980498577e-07,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_intent_action",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_intent_action",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_intent_action",
+      "holm_adjusted_p": 1.7507394467486392e-06,
+      "raw_p": 1.8236869236964992e-08,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_multilingual_detector",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_multilingual_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_multilingual_detector",
+      "holm_adjusted_p": 0.0023734169320119847,
+      "raw_p": 2.7597871302464938e-05,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_output_dlp",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_output_dlp",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_output_dlp",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_output_dlp",
+      "holm_adjusted_p": 6.989225417719513e-05,
+      "raw_p": 7.680467491999465e-07,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_policy",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_policy",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_policy",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_policy",
+      "holm_adjusted_p": 0.05980754833292812,
+      "raw_p": 0.0008423598356750439,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_structured_detector",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_structured_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_structured_detector",
+      "holm_adjusted_p": 0.0011483348127220294,
+      "raw_p": 1.2902638345191342e-05,
+      "test": "latency_wilcoxon"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_tool_lure_detector",
+      "holm_adjusted_p": 0.02001953125,
+      "raw_p": 0.000244140625,
+      "test": "ASR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_tool_lure_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "DSR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_tool_lure_detector",
+      "holm_adjusted_p": 1.0,
+      "raw_p": 1.0,
+      "test": "TCR_mcnemar"
+    },
+    {
+      "comparison_id": "e4__full_vs__ablation_solo_tool_lure_detector",
+      "holm_adjusted_p": 0.0020399858547447414,
+      "raw_p": 2.344811327292806e-05,
+      "test": "latency_wilcoxon"
+    }
+  ],
+  "methods": {
+    "latency": "paired Wilcoxon signed-rank plus rank-biserial effect size",
+    "multiplicity": "Holm correction within this experiment evidence family",
+    "paired_binary": "two-sided exact McNemar",
+    "paired_effect_ci": "case-clustered paired bootstrap, 10,000 iterations, seed 42",
+    "proportions": "raw numerator/denominator plus Wilson 95% confidence interval",
+    "undefined_values": "null/NA, never numeric zero"
+  },
+  "schema_version": "1.0",
+  "status": "completed"
+}

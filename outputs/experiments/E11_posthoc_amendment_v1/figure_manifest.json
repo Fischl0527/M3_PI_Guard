@@ -1,0 +1,50 @@
+{
+  "evidence_tier": "formal_model_posthoc",
+  "experiment_id": "E11",
+  "figures": [
+    {
+      "caption": "Six attack cases per pattern under the same normal prompt with Guard off or full Guard. Visualization revision 2 passes fixed-margin, text-bbox, and bottom-pixel guard checks. This post-hoc evidence is excluded from the original E11 denominator.",
+      "chart_type": "grouped_bar_with_wilson_95ci",
+      "files": {
+        "data": {
+          "bytes": 559,
+          "path": "primary_chart_data.csv",
+          "sha256": "926226f0de63f930dd1c1ad04e8244f5344beecaa9dc88915dc1bcdeced70bba"
+        },
+        "png": {
+          "bytes": 92597,
+          "path": "primary_chart.png",
+          "sha256": "6a35036c82238338103e6a769999d70850d01bdd8c2b6273ce822ce52086e3fb"
+        },
+        "svg": {
+          "bytes": 65113,
+          "path": "primary_chart.svg",
+          "sha256": "0b6e368f6d0441c489869676e989f8486972659fad44c3cb192f4550ff124058"
+        }
+      },
+      "grain": [
+        "pattern",
+        "condition_id"
+      ],
+      "id": "e11_posthoc_asr_by_pattern",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 0,
+      "role": "primary",
+      "title": "Post-hoc ASR by observation-to-next-action pattern",
+      "uncertainty": [
+        {
+          "confidence": 0.95,
+          "denominator_per_bar": 6,
+          "method": "Wilson score interval",
+          "metric": "ASR"
+        }
+      ],
+      "warnings": [
+        "Post-hoc protocol amendment; pre_registered=false; excluded from original E11 denominator; visualization_revision=2."
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

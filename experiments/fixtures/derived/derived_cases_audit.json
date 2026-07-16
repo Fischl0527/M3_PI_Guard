@@ -1,0 +1,58 @@
+{
+  "audit_sha256": "65ba7229da7224ac56a8d3cba6dbda38220738a78eeeaa39884fa8278777bcbe",
+  "bundle_sha256": "fc73f9b9dc46c65864ba73db20eeabf4d88419a99b503c4863c657ef123ee531",
+  "canonical_case_count": 300,
+  "canonical_sha256": "4d397967b4dc1cfbaa147969b68b1e339c8e0caadb7e3aa3369946c1138f10ee",
+  "checks": {
+    "all_parent_ids_resolve": true,
+    "canonical_has_300_cases": true,
+    "e10_is_three_by_four_by_three_grid": true,
+    "e10_turn_arrays_match_declared_counts": true,
+    "e11_contains_all_canonical_cross_tool_cases": true,
+    "e15_covers_all_attack_families": true,
+    "e15_has_20_attack_and_10_benign": true,
+    "e7_covers_entire_validation_split": true,
+    "e7_has_all_language_buckets": true,
+    "e8_is_five_by_nine_grid": true,
+    "e9_context_token_targets_are_exact": true,
+    "e9_is_three_by_four_by_five_grid": true,
+    "exact_dataset_counts": true,
+    "no_live_endpoint_or_credential_material": true,
+    "smoke_covers_cross_tool_and_multilingual": true,
+    "smoke_has_authorized_tool_benign": true,
+    "smoke_has_exactly_six_cases": true,
+    "smoke_has_four_attack_and_two_benign": true,
+    "smoke_parent_ids_resolve": true,
+    "unique_derived_case_ids": true
+  },
+  "dataset_counts": {
+    "E10": 36,
+    "E11": 22,
+    "E15": 30,
+    "E7": 60,
+    "E8": 45,
+    "E9": 60
+  },
+  "dataset_sha256": {
+    "E10": "fcd75682414fb81e42a3af5f26276abbc74d48035f5c353ea14ece8ceb27442d",
+    "E11": "bd165d5b63b4e1332210ff1d28f8b0ec723c7c7ce6a7e87cc92bc9338e6970e7",
+    "E15": "c0223005d86d1853a0a888c5497abe41493fe75345523716005253a322186312",
+    "E7": "7d493fe8541dba6b48a1770d859021accd092fb88c8bc929a5357ba61dab49d0",
+    "E8": "5909b260d2602f8a61af8baacf1185cf9c2e017b8ddb10d8e7bf590388114416",
+    "E9": "470aa54333441ce71e84d91e133a37519dbec7fca44c9d0fc3e5bc3fb98f740e",
+    "SMOKE": "5149543448f5e79325b7c577e5e3be09a2e264e9001f6cccbaf2371c22ebcd04"
+  },
+  "generator_version": "derived-cases-v1.0",
+  "parent_case_count": 78,
+  "security_issues": [],
+  "smoke_case_count": 6,
+  "smoke_parent_case_ids": [
+    "DJX-V-001",
+    "RAGX-V-001",
+    "CHAINX-V-001",
+    "MTLX-V-001",
+    "BEN-V-001",
+    "BEN-V-010"
+  ],
+  "status": "pass"
+}

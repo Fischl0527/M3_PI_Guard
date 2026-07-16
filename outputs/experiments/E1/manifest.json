@@ -1,0 +1,461 @@
+{
+  "artifacts": [
+    {
+      "bytes": 10263,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/manifest.json",
+      "sha256": "919e102eec62664820b69c232add66b1b03383e8d0e82fcf1c28cb4e17fb1609"
+    },
+    {
+      "bytes": 53729,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/smoke__qwen3_4b-instruct_smoke_normal_off.jsonl",
+      "sha256": "bec3a63d38350c959be267138f56644d8809ee783840a6409fb06ba76bf30914"
+    },
+    {
+      "bytes": 33922,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/smoke__qwen3_4b-instruct_smoke_normal_full.jsonl",
+      "sha256": "07fc685d6fc7156fb216065a332973e2527fce1d32900e636c04dde309ee79c5"
+    },
+    {
+      "bytes": 10194,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__phi4-mini_3_8b/manifest.json",
+      "sha256": "dcce7da09e2a43490bc54a73731dcde816d3a414e22024b9d709e2aed6b20366"
+    },
+    {
+      "bytes": 49646,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__phi4-mini_3_8b/smoke__phi4-mini_3_8b_smoke_normal_off.jsonl",
+      "sha256": "faef7dc9b36dad872a0894aa286a48b19357253e8c386d9d14c60136a77e1c34"
+    },
+    {
+      "bytes": 34484,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__phi4-mini_3_8b/smoke__phi4-mini_3_8b_smoke_normal_full.jsonl",
+      "sha256": "7abbbc0c29e3e7aff844425c3d5637379cf7b43d6849f70483df1048d698b767"
+    },
+    {
+      "bytes": 10125,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__llama3_2_3b/manifest.json",
+      "sha256": "3f93ac07a6e158522d6f6359626a99336e190ae393ad96055ff70d404b8257bd"
+    },
+    {
+      "bytes": 109027,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__llama3_2_3b/smoke__llama3_2_3b_smoke_normal_off.jsonl",
+      "sha256": "6da617e932be93ce1c5445b7450819260681b2b4a2e94b1c2bc16f9b680090d4"
+    },
+    {
+      "bytes": 34093,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__llama3_2_3b/smoke__llama3_2_3b_smoke_normal_full.jsonl",
+      "sha256": "740567c29d27467239032d5b93f4ef13ec532e5c183f5717330f4b39aed3ed1a"
+    },
+    {
+      "bytes": 10079,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__gemma3_4b/manifest.json",
+      "sha256": "2bd62116db32c0be3ff2114ca32cbf7153ca64bb9ad7ba649a4ef2b53ff9bee9"
+    },
+    {
+      "bytes": 80655,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__gemma3_4b/smoke__gemma3_4b_smoke_normal_off.jsonl",
+      "sha256": "8d264480124a795725885c0dea27597fe7f81db0c94e4b57e3715bc4a8305609"
+    },
+    {
+      "bytes": 34810,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__gemma3_4b/smoke__gemma3_4b_smoke_normal_full.jsonl",
+      "sha256": "1fc075538bfda19757a940d6e8cce865f317f7693bc0d19fd86ddfc2d76fe2eb"
+    },
+    {
+      "bytes": 24383,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_104729/manifest.json",
+      "sha256": "0a3ce87dfe9649a840a87298479ab6492204c1c5992e3426cdf3bb79f1e52f0f"
+    },
+    {
+      "bytes": 845192,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_104729/main__qwen3_4b-instruct__seed_104729_regular_none.jsonl",
+      "sha256": "fa0ea7d240079cd9529a3329377ee385143e7d5eeeffa53ba0ff7835838516f7"
+    },
+    {
+      "bytes": 731900,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_104729/main__qwen3_4b-instruct__seed_104729_regular_full.jsonl",
+      "sha256": "2a47ac87b86e7c3edcb332a3a6a6037531afa2a815cd5ff35d49218b4b717068"
+    },
+    {
+      "bytes": 24383,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_130363/manifest.json",
+      "sha256": "8fee4c555cfabdc2a3a9061dae3d1b7732c9cd7e52db271e61eb1401a9579f95"
+    },
+    {
+      "bytes": 807128,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_130363/main__qwen3_4b-instruct__seed_130363_regular_none.jsonl",
+      "sha256": "b8e77fdfe757569550392067026ff54a632a4ed79156395b32cb7ad99f45ab13"
+    },
+    {
+      "bytes": 737381,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_130363/main__qwen3_4b-instruct__seed_130363_regular_full.jsonl",
+      "sha256": "23f0630c436aa2217fd5c1990cf3d07e4e26ce6a3d423c2281eab41cd07264d7"
+    },
+    {
+      "bytes": 24383,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_155921/manifest.json",
+      "sha256": "89801521049e2d41bf05c0c113f5e43580a3515862627e38d6679d4a01294f18"
+    },
+    {
+      "bytes": 806923,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_155921/main__qwen3_4b-instruct__seed_155921_regular_none.jsonl",
+      "sha256": "b7751273662f49040020ab8c4b59e363102dcfbe1ec2f60cb22b5412ccd8c176"
+    },
+    {
+      "bytes": 737006,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__qwen3_4b-instruct__seed_155921/main__qwen3_4b-instruct__seed_155921_regular_full.jsonl",
+      "sha256": "d0c0e2fddc349606b477b8b457ccd63d5caed11310ff533b1a9a94fb4cb85234"
+    },
+    {
+      "bytes": 24218,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_104729/manifest.json",
+      "sha256": "5b4d385b4093646dec2e13b7d5678e0fdafb53db7c892c179d3c1e2d2024cf1e"
+    },
+    {
+      "bytes": 772346,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_104729/main__phi4-mini_3_8b__seed_104729_regular_none.jsonl",
+      "sha256": "d0dc4d8a8e7baf3fe13d3925db114fd818d63053af4dcd85fd99b14c06453983"
+    },
+    {
+      "bytes": 753258,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_104729/main__phi4-mini_3_8b__seed_104729_regular_full.jsonl",
+      "sha256": "1d807474943a823a54ac48f6eaa2d9d99b6368e96422c9cea79c52853655a2bb"
+    },
+    {
+      "bytes": 24218,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_130363/manifest.json",
+      "sha256": "beb38d183cfe7d7a954d42e45a1afe2fa0223a84ef5b0e3257ca1637fa6ecec9"
+    },
+    {
+      "bytes": 779784,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_130363/main__phi4-mini_3_8b__seed_130363_regular_none.jsonl",
+      "sha256": "79fe1e1918dd1ab818b1857f4c07014f332e6c4f1b4f003532faa37dd275532f"
+    },
+    {
+      "bytes": 741030,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_130363/main__phi4-mini_3_8b__seed_130363_regular_full.jsonl",
+      "sha256": "798de743711f002ceb2722ce2eb4cc60580b92e56dde291bcf2106fb5843e794"
+    },
+    {
+      "bytes": 24218,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_155921/manifest.json",
+      "sha256": "5695c67360462e25fbf8d590e3d84d7de413b9a23f592aba2181af35ea5a4bca"
+    },
+    {
+      "bytes": 797565,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_155921/main__phi4-mini_3_8b__seed_155921_regular_none.jsonl",
+      "sha256": "cb69322c49788cc7d9d522853a871efbeec99ab417ecee7eade101f6448e4632"
+    },
+    {
+      "bytes": 754228,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__phi4-mini_3_8b__seed_155921/main__phi4-mini_3_8b__seed_155921_regular_full.jsonl",
+      "sha256": "4d4be1eb4f1acdf52b471d7ab188a28a345c5635b55bfc67e1b7339f1cd09f5b"
+    },
+    {
+      "bytes": 24053,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_104729/manifest.json",
+      "sha256": "978d50abf7c44b88937e8dcc1875261e6072d5f8968955b31a5e815ed50e6aa9"
+    },
+    {
+      "bytes": 1573228,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_104729/main__llama3_2_3b__seed_104729_regular_none.jsonl",
+      "sha256": "6c39da6255f33b981eb4dcd11848ff83ba2d30af3052f0b46dfe0d7b3674c298"
+    },
+    {
+      "bytes": 812363,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_104729/main__llama3_2_3b__seed_104729_regular_full.jsonl",
+      "sha256": "3d3b99921843556490949db0ec92ff5048c1e5c8aabaaa34445dc46633e4def4"
+    },
+    {
+      "bytes": 24053,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_130363/manifest.json",
+      "sha256": "f2678b31f44f1bd8facf385a42609b2771e8f12223d70e786feac7027b3fddce"
+    },
+    {
+      "bytes": 1596292,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_130363/main__llama3_2_3b__seed_130363_regular_none.jsonl",
+      "sha256": "cdc8afa42fb9a95669943e04ea91028b9794971b836cc79f55f24a7b205bb808"
+    },
+    {
+      "bytes": 786680,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_130363/main__llama3_2_3b__seed_130363_regular_full.jsonl",
+      "sha256": "bb88153b99fd3377f48baf660df9afd98d53d6e48b6254e91a27770328c274f9"
+    },
+    {
+      "bytes": 24053,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_155921/manifest.json",
+      "sha256": "34bec4f496280ebea00811afa0384cdc9c5538001a02215e92191bfbe6f06387"
+    },
+    {
+      "bytes": 1601405,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_155921/main__llama3_2_3b__seed_155921_regular_none.jsonl",
+      "sha256": "4ecc75a5405e1806952df728a034aa374848925af14ff6197ac251199ea2a3a7"
+    },
+    {
+      "bytes": 801788,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__llama3_2_3b__seed_155921/main__llama3_2_3b__seed_155921_regular_full.jsonl",
+      "sha256": "1fdfd13e28ab435862034907f03f50259980703cafc4c3fbd5d410056f9c1b7d"
+    },
+    {
+      "bytes": 23943,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_104729/manifest.json",
+      "sha256": "60e59794cdd12cf8310eb48a08b142b6f65f6e4a25f7404342bc186f2b62b349"
+    },
+    {
+      "bytes": 971106,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_104729/main__gemma3_4b__seed_104729_regular_none.jsonl",
+      "sha256": "21369caebea060055df4540f05efabf8f147bc92f76daefb390c90f3e801c9bb"
+    },
+    {
+      "bytes": 765183,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_104729/main__gemma3_4b__seed_104729_regular_full.jsonl",
+      "sha256": "8f6442b0f5897ee0b7c1064a9f33603abfbf9ba31cdd2b052a9605dddcf52b9a"
+    },
+    {
+      "bytes": 23943,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_130363/manifest.json",
+      "sha256": "03d2b7a25e271113b84ca78273fd78832ea1d183c92c2d69fdb8449b766c4807"
+    },
+    {
+      "bytes": 1004949,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_130363/main__gemma3_4b__seed_130363_regular_none.jsonl",
+      "sha256": "eb7f8be6ef7ad91e1faaca0848a1a2e41fc5dd5badd3a62f38458a473894c14d"
+    },
+    {
+      "bytes": 763315,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_130363/main__gemma3_4b__seed_130363_regular_full.jsonl",
+      "sha256": "e95205fa32d8c8315f5ea5171af979e30b27f0f3e8900050cf13fd4615d48e12"
+    },
+    {
+      "bytes": 23943,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_155921/manifest.json",
+      "sha256": "994ca3e311c77c24d39f91b144c24b72bda07540be6fda139106195038fa9554"
+    },
+    {
+      "bytes": 1013805,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_155921/main__gemma3_4b__seed_155921_regular_none.jsonl",
+      "sha256": "1ba154115a427cd67024f1dc7bab8ac3b6a4b9946f2ad2756a9d58842979a9bb"
+    },
+    {
+      "bytes": 763154,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/main/main__gemma3_4b__seed_155921/main__gemma3_4b__seed_155921_regular_full.jsonl",
+      "sha256": "93fe6e4ce270edb7b35f272ea5705a7fdd2ab26bbad95b6c40d86212811cec60"
+    },
+    {
+      "bytes": 32148,
+      "kind": "raw_log_index",
+      "path": "outputs/experiments/E1/raw_run_index.json",
+      "sha256": "5e607598a6af709c4a9889fb638e3570ea1e1978b22b482b10ee7b5da80d253f"
+    },
+    {
+      "bytes": 12736,
+      "kind": "metrics",
+      "path": "outputs/experiments/E1/metrics.csv",
+      "sha256": "e368ea390f48440451293447b725cd17108e46645ed42fc315c9236e8a92c4d4"
+    },
+    {
+      "bytes": 15952,
+      "kind": "statistics",
+      "path": "outputs/experiments/E1/statistics.json",
+      "sha256": "45dd0eda93bacb196b5f457ca59be2dcf8c871ad496d6a4199c7556b4e8be813"
+    },
+    {
+      "bytes": 3673,
+      "kind": "analysis",
+      "path": "outputs/experiments/E1/analysis.md",
+      "sha256": "2c05c0ceb3be5d25a8b745cf3ec17be260db59a7002dbebca417e0a0ae413c03"
+    },
+    {
+      "bytes": 1507,
+      "kind": "figure_data",
+      "path": "outputs/experiments/E1/primary_chart_data.csv",
+      "sha256": "ca67372c8c7800e8a1ab53025af93aadefdfeaccbcd8d4f8f802d369ef589e9a"
+    },
+    {
+      "bytes": 81299,
+      "kind": "figure",
+      "path": "outputs/experiments/E1/primary_chart.png",
+      "sha256": "2ac7f75b5b4db13c41daf9c70b7a4e08504ba9ada2cd749ad4d3fe7e8d3a7b6d"
+    },
+    {
+      "bytes": 49885,
+      "kind": "figure",
+      "path": "outputs/experiments/E1/primary_chart.svg",
+      "sha256": "1c1547fd31b0e11e8b0655188b92dca408456c29312fdedb57ffd882e807d394"
+    },
+    {
+      "bytes": 1391,
+      "kind": "figure_manifest",
+      "path": "outputs/experiments/E1/figure_manifest.json",
+      "sha256": "61c70454e9354d792175c94b0d866077806935ab3b2464167b7f45b89c6304ba"
+    }
+  ],
+  "command": [
+    "python",
+    "-m",
+    "experiments.analyze_program",
+    "--experiments",
+    "E1",
+    "--program-root",
+    "outputs/experiments/program_final_v3",
+    "--out-root",
+    "outputs/experiments"
+  ],
+  "compatibility_only_models": [],
+  "completed_at": "2026-07-13T23:28:19.654748+00:00",
+  "configuration": {
+    "bootstrap_iterations": 10000,
+    "bootstrap_seed": 42,
+    "chart_contract": {
+      "analytical_question": "What is the same-prompt incremental effect of full Guard?",
+      "dimension": "model",
+      "family": "comparison_and_uncertainty",
+      "metric": "ASR",
+      "na_policy": "undefined values are labelled NA and never rendered as zero",
+      "palette_policy": "hard_two_root_plus_non_color_styles",
+      "renderer": "matplotlib_static_png_svg",
+      "uncertainty": "Wilson 95% confidence intervals",
+      "variant": "grouped_bar_with_wilson_95ci"
+    },
+    "evidence_tier": "formal_model_only",
+    "registry_mutation": false,
+    "source_program_root": "outputs/experiments/program_final_v3",
+    "source_status": "completed",
+    "strict_sample_type": true,
+    "stub_policy": "regression_only_excluded_from_formal_denominators",
+    "undefined_metric_policy": "null_not_zero"
+  },
+  "created_at": "2026-07-13T23:28:08.404051+00:00",
+  "dataset": {
+    "paths": [
+      "m3_attacks/cases/all_cases.jsonl"
+    ],
+    "sha256": "1f007210826bec5ca53d81e44652ff6d09d3efec874438b50087c441b2b059a5"
+  },
+  "environment": {
+    "captured_at": "2026-07-13T23:28:07.776835+00:00",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 610.47, 8188, 6615",
+    "ollama_models": "NAME                 ID              SIZE      MODIFIED     \ngemma3:4b            a2af6cc3eb7f    3.3 GB    10 hours ago    \nllama3.2:3b          a80c4f17acd5    2.0 GB    12 hours ago    \nphi4-mini:3.8b       78fad5d182a7    2.5 GB    12 hours ago    \nqwen3:4b-instruct    0edcdef34593    2.5 GB    13 hours ago    \nvicuna:7b            370739dc897b    3.8 GB    7 weeks ago",
+    "ollama_version": "ollama version is 0.24.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.5"
+  },
+  "events": [
+    {
+      "at": "2026-07-13T23:28:08.404051+00:00",
+      "message": "shared program evidence analysis started",
+      "type": "analysis_started"
+    },
+    {
+      "at": "2026-07-13T23:28:19.654693+00:00",
+      "details": {
+        "formal_runs": 2160
+      },
+      "message": "all required real-model logs and smoke gates validated",
+      "type": "input_validated"
+    },
+    {
+      "at": "2026-07-13T23:28:19.654751+00:00",
+      "details": {
+        "completed_runs": 2160
+      },
+      "message": "experiment completed",
+      "type": "completed"
+    }
+  ],
+  "experiment_id": "E1",
+  "experiment_name": "main_guard_effect",
+  "failure": null,
+  "git": {
+    "branch": "test1",
+    "commit": "2c53f52c475e6838dc82246c821db5ed7ac0209c",
+    "dirty": true,
+    "status_sha256": "d3f742873ab5fd5bc6455d81f53e0295869a3cf5b2f7ada0cf390ddf10728e1e"
+  },
+  "input_quality": {
+    "duplicate_run_step_rows": 0,
+    "formal_raw_log_count": 24,
+    "issue_count": 0,
+    "issues": [],
+    "logical_case_runs": 2160,
+    "nonterminal_case_runs": 0,
+    "parse_failure_rows": 149,
+    "raw_step_rows": 4200,
+    "status": "completed",
+    "unresolved_case_runs": 190
+  },
+  "models": [
+    "qwen3:4b-instruct",
+    "phi4-mini:3.8b",
+    "llama3.2:3b",
+    "gemma3:4b"
+  ],
+  "progress": {
+    "completed_runs": 2160,
+    "expected_runs": 2160,
+    "failed_jobs": 0,
+    "unresolved_cases": 190
+  },
+  "question": "What is the same-prompt incremental effect of full Guard?",
+  "required_artifacts": [
+    "outputs/experiments/E1/manifest.json",
+    "outputs/experiments/E1/raw_run_index.json",
+    "outputs/experiments/E1/metrics.csv",
+    "outputs/experiments/E1/statistics.json",
+    "outputs/experiments/E1/analysis.md",
+    "outputs/experiments/E1/primary_chart_data.csv",
+    "outputs/experiments/E1/primary_chart.png",
+    "outputs/experiments/E1/primary_chart.svg",
+    "outputs/experiments/E1/figure_manifest.json"
+  ],
+  "schema_version": "2.0",
+  "status": "completed",
+  "updated_at": "2026-07-13T23:28:19.654934+00:00"
+}

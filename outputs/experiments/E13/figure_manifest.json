@@ -1,0 +1,143 @@
+{
+  "evidence_tier": "validation_calibration",
+  "experiment_id": "E13",
+  "figures": [
+    {
+      "caption": "ASK×DENY validation grid showing weighted error proxy and normalized constraint violation; the star is the frozen operating point.",
+      "chart_type": "two_panel_heatmap",
+      "files": {
+        "data": {
+          "bytes": 617133,
+          "path": "threshold_heatmap_data.csv",
+          "sha256": "2976520158fba5ea65d12462ce7e51ac0a7121a30d0e1fe0986cda23857fc691"
+        },
+        "png": {
+          "bytes": 129710,
+          "path": "threshold_heatmap.png",
+          "sha256": "14ed99920eb03dbd857d889b0bade469ba6042c0603e66c4123f3dc430abfcaa"
+        },
+        "svg": {
+          "bytes": 1560400,
+          "path": "threshold_heatmap.svg",
+          "sha256": "8898b6728a2cea09b623d731eb82dd795a96afb59e67c3273f8dd0544a1aa366"
+        }
+      },
+      "grain": [
+        "ask_threshold",
+        "deny_threshold"
+      ],
+      "id": "threshold_surface",
+      "metrics": [
+        "weighted_error_proxy",
+        "constraint_violation",
+        "precision",
+        "recall",
+        "fpr",
+        "benign_ask_rate"
+      ],
+      "order": 0,
+      "role": "primary",
+      "title": "E13 validation threshold surface",
+      "uncertainty": [
+        {
+          "encoding": "not_encoded_in_heatmap",
+          "method": "Wilson 95%",
+          "source": "threshold_scan.csv metric-specific ci_low/ci_high fields"
+        }
+      ],
+      "warnings": [
+        "Validation-only calibration; blind-test outcomes are not included.",
+        "Undefined weighted-error cells remain blank and are not replaced by zero."
+      ]
+    },
+    {
+      "caption": "Validation-grid false-positive rate versus recall, colored by DENY threshold.",
+      "chart_type": "scatter",
+      "files": {
+        "data": {
+          "bytes": 280236,
+          "path": "roc_curve_data.csv",
+          "sha256": "cd6d2798731fd2b5bb303faca705011e6e8472dea5dab8d8c8c5ed325b646a93"
+        },
+        "png": {
+          "bytes": 71489,
+          "path": "roc_curve.png",
+          "sha256": "03533eca931505e81bc48b26c6719aceac82c3c621c1a68283a1331d9193a96b"
+        },
+        "svg": {
+          "bytes": 891374,
+          "path": "roc_curve.svg",
+          "sha256": "8a234539befca9c256c2391a600e109176e6482343e08c93fb93c4251a976a64"
+        }
+      },
+      "grain": [
+        "ask_threshold",
+        "deny_threshold"
+      ],
+      "id": "roc_operating_points",
+      "metrics": [
+        "fpr",
+        "recall"
+      ],
+      "order": 1,
+      "role": "secondary",
+      "title": "E13 validation threshold-grid ROC operating points",
+      "uncertainty": [
+        {
+          "encoding": "not_encoded_in_scatter",
+          "method": "Wilson 95%",
+          "source": "threshold_scan.csv"
+        }
+      ],
+      "warnings": [
+        "Validation-only operating points, not a blind-test performance curve.",
+        "Undefined metric pairs are omitted rather than plotted at zero."
+      ]
+    },
+    {
+      "caption": "Validation-grid recall versus precision, colored by DENY threshold.",
+      "chart_type": "scatter",
+      "files": {
+        "data": {
+          "bytes": 312178,
+          "path": "pr_curve_data.csv",
+          "sha256": "1652caca7f9f7ddb833be20093d97916dea16785bef33cac8c0dc34411b3ade9"
+        },
+        "png": {
+          "bytes": 64898,
+          "path": "pr_curve.png",
+          "sha256": "5a0f222043ba1edc830340328e83932e88d19a4136e8ab728b764cd3ba3b01f5"
+        },
+        "svg": {
+          "bytes": 892873,
+          "path": "pr_curve.svg",
+          "sha256": "e4f2916b1dc20688c55a143603b1028cd4b913c6cda66666665b845cae7208cc"
+        }
+      },
+      "grain": [
+        "ask_threshold",
+        "deny_threshold"
+      ],
+      "id": "pr_operating_points",
+      "metrics": [
+        "recall",
+        "precision"
+      ],
+      "order": 2,
+      "role": "secondary",
+      "title": "E13 validation threshold-grid PR operating points",
+      "uncertainty": [
+        {
+          "encoding": "not_encoded_in_scatter",
+          "method": "Wilson 95%",
+          "source": "threshold_scan.csv"
+        }
+      ],
+      "warnings": [
+        "Validation-only operating points, not a blind-test performance curve.",
+        "Undefined metric pairs are omitted rather than plotted at zero."
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -9,6 +9,14 @@ __pycache__/
 DAY*-TASK.md
 DAY*-REPORT-A.md
 private_notes/
+harness/tmp/
+.tmp.driveupload/
+
+# Resumable experiment lane/part files are transient; completed bundles keep
+# consolidated raw logs, indices, manifests, metrics and statistics instead.
+outputs/experiments/**/work/
+outputs/experiments/**/.parts/
+outputs/experiments/**/.*/
 
 # Local model artifacts must never be committed.
 models/

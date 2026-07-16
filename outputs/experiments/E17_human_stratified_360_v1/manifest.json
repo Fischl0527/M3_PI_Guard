@@ -1,0 +1,146 @@
+{
+  "analysis_contract": {
+    "human_coverage_claim": "two independent humans reviewed a shared stratified sample of 360 items",
+    "prohibited_claim": "all 3299 E17 items received human review",
+    "representative_group": "may estimate the flagged-run population using the private design weights",
+    "targeted_groups": "diagnostic stress audit only; do not pool raw proportions into population estimates"
+  },
+  "duplicate_row_excess": 1407,
+  "inputs": {
+    "automated_disagreements": {
+      "path": "outputs/experiments/E17_auto_review_corrected_r3/automated_disagreements.csv",
+      "rows": 1071,
+      "sha256": "dbef1d831a329c0c73949b2af41764fed2dd64f1bccc05542b8b52c5bea969f6"
+    },
+    "corrected_source_index": {
+      "path": "outputs/experiments/e17_source_index_corrected_v2.json",
+      "sha256": "6d3baa721317b50d9dca82c958d5b0f47b23114066c9e2a42e922c8c512fd17d"
+    },
+    "full_template_1": {
+      "path": "outputs/experiments/E17/packets/reviewer_1_blinded_template.csv",
+      "sha256": "ad36d81604273a6efb7d6a9c806640effec6755c164a0a14f2ca11bbaea07650"
+    },
+    "full_template_2": {
+      "path": "outputs/experiments/E17/packets/reviewer_2_blinded_template.csv",
+      "sha256": "ad36d81604273a6efb7d6a9c806640effec6755c164a0a14f2ca11bbaea07650"
+    },
+    "parent_e17_manifest": {
+      "path": "outputs/experiments/E17/manifest.json",
+      "sha256": "921946fde3984030bacc1e12b1b9201baa7bbcbff70fa71edcd0bb1c34ff3c6c"
+    },
+    "private_items": {
+      "path": "outputs/experiments/E17/private/review_items.jsonl",
+      "sha256": "145456d73ad9bf80fc91bef12624998ee130e1b21f972de2ba2f81791f7b1155"
+    }
+  },
+  "outputs": {
+    "guide": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/REVIEW_INSTRUCTIONS.md",
+      "sha256": "f10f3130000a769845a79f524f40a75ca5d1bbc108db5ae249da15df3204982c"
+    },
+    "package_readme": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/README.md",
+      "sha256": "b173569c95cb5f9462b8f550a0aba2f8f66811b1cf1ad6a911af65655f8dadd0"
+    },
+    "packet_manifest": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/packet_manifest.json",
+      "sha256": "94020ce3ee094f3b07d411a079648403edeb19ff87986596598f069edcd37f7e"
+    },
+    "packet_readme": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/packets/README.md",
+      "sha256": "128f9380391786866a48c7d4b7b9600a20a7f35876d8172613eb98a1119d47b6"
+    },
+    "private_readme": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/private/README.md",
+      "sha256": "3dff8fd3a15bf162509e26bbe1dc547f2ab6e77d54f74f63814218a4f2fe8466"
+    },
+    "private_sample_items": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/private/review_items_360.jsonl",
+      "sha256": "6b9553f1477a345a9e5f838e5ddc8bcf0b3e5f02994468875d097a1819ed950f"
+    },
+    "reviewer_1_template": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/packets/reviewer_1_blinded_template.csv",
+      "sha256": "0b18a0c4f6e9ea38ef6ebbe6416a35700f3d420c2c0e17acc48cdee506db78f7"
+    },
+    "reviewer_2_template": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/packets/reviewer_2_blinded_template.csv",
+      "sha256": "0b18a0c4f6e9ea38ef6ebbe6416a35700f3d420c2c0e17acc48cdee506db78f7"
+    },
+    "sampling_strata": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/sampling_strata.csv",
+      "sha256": "c79a573bca7ddc98f75860718e6acee3d07c1916d6b6d3733ce573ad83b80c32"
+    },
+    "submissions_readme": {
+      "path": "outputs/experiments/E17_human_stratified_360_v1/submissions/README.md",
+      "sha256": "628df75597bd4f86dfb87ef1c4c8ecb9cbbd30844249f1de2090d623a7cf139b"
+    }
+  },
+  "population_rows": 3299,
+  "protocol_id": "E17_HUMAN_STRATIFIED_360_V1",
+  "registry_effect": "none_until_sampled_human_review_and_separate_validation_are_complete",
+  "representative_allocation": {
+    "ask": 56,
+    "false_block": 79,
+    "false_block|ask": 13,
+    "false_block|parse_failure": 1,
+    "leak": 80,
+    "leak|max_steps": 4,
+    "leak|parse_failure": 4,
+    "max_steps": 7,
+    "parse_failure": 56
+  },
+  "reviewers_required": 2,
+  "same_items_required_for_both_reviewers": true,
+  "sample_group_counts": {
+    "representative": 300,
+    "targeted_auto_disagreement": 40,
+    "targeted_rare_complex": 20
+  },
+  "sample_group_flag_counts": {
+    "representative": {
+      "ask": 56,
+      "false_block": 79,
+      "false_block|ask": 13,
+      "false_block|parse_failure": 1,
+      "leak": 80,
+      "leak|max_steps": 4,
+      "leak|parse_failure": 4,
+      "max_steps": 7,
+      "parse_failure": 56
+    },
+    "targeted_auto_disagreement": {
+      "ask": 1,
+      "false_block": 24,
+      "false_block|ask": 5,
+      "leak": 1,
+      "leak|max_steps": 1,
+      "leak|parse_failure": 4,
+      "max_steps": 1,
+      "parse_failure": 3
+    },
+    "targeted_rare_complex": {
+      "ask": 1,
+      "false_block|ask": 5,
+      "leak": 3,
+      "leak|max_steps": 8,
+      "leak|parse_failure": 1,
+      "max_steps": 1,
+      "parse_failure": 1
+    }
+  },
+  "sample_rows_per_reviewer": 360,
+  "schema_version": "e17-human-sample-v1",
+  "seed": 20260716,
+  "status": "ready_for_two_independent_human_reviewers",
+  "targeted_auto_disagreement_allocation": {
+    "ask": 1,
+    "false_block": 24,
+    "false_block|ask": 5,
+    "leak": 1,
+    "leak|max_steps": 1,
+    "leak|parse_failure": 4,
+    "max_steps": 1,
+    "parse_failure": 3
+  },
+  "unique_evidence_clusters": 1892
+}

@@ -1,0 +1,220 @@
+{
+  "artifacts": [
+    {
+      "bytes": 10263,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/manifest.json",
+      "sha256": "919e102eec62664820b69c232add66b1b03383e8d0e82fcf1c28cb4e17fb1609"
+    },
+    {
+      "bytes": 53729,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/smoke__qwen3_4b-instruct_smoke_normal_off.jsonl",
+      "sha256": "bec3a63d38350c959be267138f56644d8809ee783840a6409fb06ba76bf30914"
+    },
+    {
+      "bytes": 33922,
+      "kind": "smoke_gate_log",
+      "path": "outputs/experiments/program_final_v3/smoke/smoke__qwen3_4b-instruct/smoke__qwen3_4b-instruct_smoke_normal_full.jsonl",
+      "sha256": "07fc685d6fc7156fb216065a332973e2527fce1d32900e636c04dde309ee79c5"
+    },
+    {
+      "bytes": 10218,
+      "kind": "source_manifest",
+      "path": "outputs/experiments/program_final_v3/derived/derived__e11__qwen/manifest.json",
+      "sha256": "cab9a6b4cdecbb4d827af1e70f1f3fe402be052fc93c91cbfc3370ea32bd1a03"
+    },
+    {
+      "bytes": 253173,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/derived/derived__e11__qwen/derived__e11__qwen_derived_normal_off.jsonl",
+      "sha256": "97ed7c7d1b32cd28d6e0f1a7ba451af9084616554f72c302c07e964427247e22"
+    },
+    {
+      "bytes": 182455,
+      "kind": "raw_log",
+      "path": "outputs/experiments/program_final_v3/derived/derived__e11__qwen/derived__e11__qwen_derived_normal_full.jsonl",
+      "sha256": "94984c8ee782a350272b177027031da9f419df7c04ff639e8e7499cc0fec30ff"
+    },
+    {
+      "bytes": 4796,
+      "kind": "raw_log_index",
+      "path": "outputs/experiments/E11/raw_run_index.json",
+      "sha256": "c4cd440c70da27d8aa942147490853b4edde1a3a4af28a17f6510b68f46da374"
+    },
+    {
+      "bytes": 8709,
+      "kind": "metrics",
+      "path": "outputs/experiments/E11/metrics.csv",
+      "sha256": "9c2daba3f405c6714c3c58536eff05a3e8269bb1a0213c18f017136790cdd278"
+    },
+    {
+      "bytes": 13493,
+      "kind": "statistics",
+      "path": "outputs/experiments/E11/statistics.json",
+      "sha256": "34797ea4fbf55f9c7e5c9cfad5379f2d3ee16ad283fb5056f335448c6ded4281"
+    },
+    {
+      "bytes": 3805,
+      "kind": "analysis",
+      "path": "outputs/experiments/E11/analysis.md",
+      "sha256": "04e72d9062a22669aecc13f5d451cc0b2ee468d04f5092b769f1307a30410a5a"
+    },
+    {
+      "bytes": 1859,
+      "kind": "figure_data",
+      "path": "outputs/experiments/E11/primary_chart_data.csv",
+      "sha256": "e98304c555c19a2bfe0831d9748796531d6bf07acf049ab1eaca4f5307b98050"
+    },
+    {
+      "bytes": 83609,
+      "kind": "figure",
+      "path": "outputs/experiments/E11/primary_chart.png",
+      "sha256": "e065defd3b018c7ee9575b16742fc59b803957e908dd7bc03b6a67069dbdaf78"
+    },
+    {
+      "bytes": 51281,
+      "kind": "figure",
+      "path": "outputs/experiments/E11/primary_chart.svg",
+      "sha256": "e341997b93717e9633843530821677baa0675afa4e97003ce6c2342848813e81"
+    },
+    {
+      "bytes": 8709,
+      "kind": "specialized_metrics",
+      "path": "outputs/experiments/E11/chain_metrics.csv",
+      "sha256": "9c2daba3f405c6714c3c58536eff05a3e8269bb1a0213c18f017136790cdd278"
+    },
+    {
+      "bytes": 125249,
+      "kind": "case_replay",
+      "path": "outputs/experiments/E11/case_replays.json",
+      "sha256": "a5a1009343b6a4653ad9ebcd88189883f7ba5fc8660a20c4bbed2d5b2ee71273"
+    },
+    {
+      "bytes": 1151,
+      "kind": "figure_manifest",
+      "path": "outputs/experiments/E11/figure_manifest.json",
+      "sha256": "c63edb4d22c8784ba7a698c6e16a13e8981d425e317111a1146e2d8c00710bc2"
+    }
+  ],
+  "command": [
+    "python",
+    "-m",
+    "experiments.analyze_program",
+    "--experiments",
+    "E11",
+    "--program-root",
+    "outputs/experiments/program_final_v3",
+    "--out-root",
+    "outputs/experiments"
+  ],
+  "compatibility_only_models": [],
+  "completed_at": "2026-07-13T23:49:44.975018+00:00",
+  "configuration": {
+    "bootstrap_iterations": 10000,
+    "bootstrap_seed": 42,
+    "chart_contract": {
+      "analytical_question": "Can attacks propagate across authorized tool chains?",
+      "dimension": "chain_pattern",
+      "family": "matrix_and_cohort",
+      "metric": "ASR",
+      "na_policy": "undefined values are labelled NA and never rendered as zero",
+      "palette_policy": "single_root",
+      "renderer": "matplotlib_static_png_svg",
+      "uncertainty": "numerators, denominators and Wilson intervals remain in chart CSV",
+      "variant": "annotated_heatmap"
+    },
+    "evidence_tier": "formal_model_only",
+    "registry_mutation": false,
+    "source_program_root": "outputs/experiments/program_final_v3",
+    "source_status": "completed",
+    "strict_sample_type": true,
+    "stub_policy": "regression_only_excluded_from_formal_denominators",
+    "undefined_metric_policy": "null_not_zero"
+  },
+  "created_at": "2026-07-13T23:49:44.024968+00:00",
+  "dataset": {
+    "paths": [
+      "experiments/fixtures/derived/e11_cases.jsonl"
+    ],
+    "sha256": "0715ca8c518ebff3ca6da4e04f22c90367375624f336ffecfe29c5e763ec2723"
+  },
+  "environment": {
+    "captured_at": "2026-07-13T23:49:32.637118+00:00",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 610.47, 8188, 6607",
+    "ollama_models": "NAME                 ID              SIZE      MODIFIED     \ngemma3:4b            a2af6cc3eb7f    3.3 GB    10 hours ago    \nllama3.2:3b          a80c4f17acd5    2.0 GB    12 hours ago    \nphi4-mini:3.8b       78fad5d182a7    2.5 GB    13 hours ago    \nqwen3:4b-instruct    0edcdef34593    2.5 GB    13 hours ago    \nvicuna:7b            370739dc897b    3.8 GB    7 weeks ago",
+    "ollama_version": "ollama version is 0.24.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.5"
+  },
+  "events": [
+    {
+      "at": "2026-07-13T23:49:44.024968+00:00",
+      "message": "shared program evidence analysis started",
+      "type": "analysis_started"
+    },
+    {
+      "at": "2026-07-13T23:49:44.974994+00:00",
+      "details": {
+        "formal_runs": 44
+      },
+      "message": "all required real-model logs and smoke gates validated",
+      "type": "input_validated"
+    },
+    {
+      "at": "2026-07-13T23:49:44.975021+00:00",
+      "details": {
+        "completed_runs": 44
+      },
+      "message": "experiment completed",
+      "type": "completed"
+    }
+  ],
+  "experiment_id": "E11",
+  "experiment_name": "cross_tool_chain",
+  "failure": null,
+  "git": {
+    "branch": "test1",
+    "commit": "2c53f52c475e6838dc82246c821db5ed7ac0209c",
+    "dirty": true,
+    "status_sha256": "d3f742873ab5fd5bc6455d81f53e0295869a3cf5b2f7ada0cf390ddf10728e1e"
+  },
+  "input_quality": {
+    "duplicate_run_step_rows": 0,
+    "formal_raw_log_count": 2,
+    "issue_count": 0,
+    "issues": [],
+    "logical_case_runs": 44,
+    "nonterminal_case_runs": 0,
+    "parse_failure_rows": 2,
+    "raw_step_rows": 80,
+    "status": "completed",
+    "unresolved_case_runs": 2
+  },
+  "models": [
+    "qwen3:4b-instruct"
+  ],
+  "progress": {
+    "completed_runs": 44,
+    "expected_runs": 44,
+    "failed_jobs": 0,
+    "unresolved_cases": 2
+  },
+  "question": "Can attacks propagate across authorized tool chains?",
+  "required_artifacts": [
+    "outputs/experiments/E11/manifest.json",
+    "outputs/experiments/E11/raw_run_index.json",
+    "outputs/experiments/E11/metrics.csv",
+    "outputs/experiments/E11/statistics.json",
+    "outputs/experiments/E11/analysis.md",
+    "outputs/experiments/E11/primary_chart_data.csv",
+    "outputs/experiments/E11/primary_chart.png",
+    "outputs/experiments/E11/primary_chart.svg",
+    "outputs/experiments/E11/figure_manifest.json",
+    "outputs/experiments/E11/chain_metrics.csv",
+    "outputs/experiments/E11/case_replays.json"
+  ],
+  "schema_version": "2.0",
+  "status": "completed",
+  "updated_at": "2026-07-13T23:49:44.975181+00:00"
+}

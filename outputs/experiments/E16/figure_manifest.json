@@ -1,0 +1,57 @@
+{
+  "evidence_tier": "formal_dedicated",
+  "experiment_id": "E16",
+  "figures": [
+    {
+      "caption": "Dedicated adaptive-attempt ASR by round with raw success/denominator labels and Wilson 95% confidence bands. The zero-anchored, data-driven focused 0–10% y-scale improves legibility without amplifying the evidence; exact k/n labels are authoritative.",
+      "chart_type": "line_with_interval",
+      "files": {
+        "data": {
+          "bytes": 228,
+          "path": "adaptive_rounds.csv",
+          "sha256": "074c7e129e8092d50a14e0e4b97d6a04aff571d99075d0afdb22f8a54f0af3dc"
+        },
+        "png": {
+          "bytes": 85804,
+          "path": "adaptive_asr_by_round.png",
+          "sha256": "c8d07245355fafc908029cd0296a836fb5e22e38ef68dab0d43166089b100dc5"
+        },
+        "svg": {
+          "bytes": 66363,
+          "path": "adaptive_asr_by_round.svg",
+          "sha256": "d4888fc387ab63049be63eeb6f6e6e834bbc6c2922cf84d145e433d51a27897a"
+        }
+      },
+      "grain": [
+        "adaptive_round"
+      ],
+      "id": "adaptive_asr_by_round",
+      "metrics": [
+        "asr",
+        "successes",
+        "denominator"
+      ],
+      "order": 0,
+      "role": "primary",
+      "title": "E16 attack success rate by adaptive round",
+      "uncertainty": [
+        {
+          "confidence_level": 0.95,
+          "encoding": "shaded confidence band",
+          "fields": [
+            "ci_low",
+            "ci_high"
+          ],
+          "method": "Wilson score interval"
+        }
+      ],
+      "warnings": [
+        "Dedicated E16 denominator; do not combine with the frozen six-condition main matrix.",
+        "Parse failures, timeouts, and unresolved outcomes remain in the round denominator.",
+        "The focused 0–10% y-axis is anchored at 0% and expands from the observed ASR and Wilson bounds; do not read the visual scale as a larger effect.",
+        "Rounds are discrete designed attempts; connecting segments do not imply a continuous time trend."
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

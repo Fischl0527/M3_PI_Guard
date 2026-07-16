@@ -1,0 +1,146 @@
+{
+  "amendment_type": "posthoc_protocol_amendment",
+  "artifacts": [
+    {
+      "bytes": 2403,
+      "path": "metrics.csv",
+      "sha256": "82a6b1f040146ea8e025f8be6a808afe45278c51a77e7f62d606ca9ef0bc9e17"
+    },
+    {
+      "bytes": 3730,
+      "path": "statistics.json",
+      "sha256": "4ed442f9a1474bf405ec029c1a1473202bdbe7f767fd8ad7d1b99460e1341ce9"
+    },
+    {
+      "bytes": 1457,
+      "path": "analysis.md",
+      "sha256": "783ff9e93a20f1f0346394144205b8a1ceecd33302a1827e248d933074bf23cf"
+    },
+    {
+      "bytes": 18195,
+      "path": "raw_run_index.json",
+      "sha256": "1c6677a4118f9263af74214e8577eb3d6775b5a6a2c43936fb6a9f9849702d30"
+    },
+    {
+      "bytes": 73560,
+      "path": "case_replays.json",
+      "sha256": "08df39aca86b2c02590922c32485a8837815ff8c3ef164d11b5ea4e52f3e35e4"
+    },
+    {
+      "bytes": 559,
+      "path": "primary_chart_data.csv",
+      "sha256": "926226f0de63f930dd1c1ad04e8244f5344beecaa9dc88915dc1bcdeced70bba"
+    },
+    {
+      "bytes": 1884,
+      "path": "primary_chart_layout.json",
+      "sha256": "1a2b01632ddad6807a351b4ad8d3286f8e7f8b8c9cd7b3a7d51764588b78275e"
+    },
+    {
+      "bytes": 92597,
+      "path": "primary_chart.png",
+      "sha256": "6a35036c82238338103e6a769999d70850d01bdd8c2b6273ce822ce52086e3fb"
+    },
+    {
+      "bytes": 65113,
+      "path": "primary_chart.svg",
+      "sha256": "0b6e368f6d0441c489869676e989f8486972659fad44c3cb192f4550ff124058"
+    },
+    {
+      "bytes": 1676,
+      "path": "figure_manifest.json",
+      "sha256": "b943bd89649f8a6cd32485d5af9f17cee7d0c73d930af2df37290227e5257686"
+    }
+  ],
+  "case_count": 24,
+  "conditions": [
+    "posthoc_off",
+    "posthoc_full"
+  ],
+  "denominator_policy": "excluded_from_original_e11_denominator",
+  "evidence_tier": "formal_model_posthoc",
+  "execution_revision": "r2",
+  "experiment_id": "E11",
+  "logical_run_count": 48,
+  "model": "qwen3:4b-instruct",
+  "pattern_counts": {
+    "memory_to_file": 6,
+    "read_to_send": 6,
+    "search_to_api": 6,
+    "tool_output_to_next_action": 6
+  },
+  "pre_registered": false,
+  "protocol_id": "E11_POSTHOC_AMENDMENT_V1",
+  "schema_version": "1.0",
+  "source_execution_manifest": {
+    "actual_logical_runs": 48,
+    "amendment_freeze_path": "protocols/e11_amendment_v1/freeze_r2.json",
+    "amendment_freeze_sha256": "ceb320a915d301d6658b5caa9b662cb2ed13e24c63ec5d79f8ff7caa9ad0ba37",
+    "amendment_type": "posthoc_protocol_amendment",
+    "ask_threshold": 1.0,
+    "backend": "ollama",
+    "completed_at": "2026-07-15T16:48:57.171626+00:00",
+    "conditions": [
+      "posthoc_off",
+      "posthoc_full"
+    ],
+    "denominator_policy": "excluded_from_original_e11_denominator",
+    "deny_threshold": 1.0,
+    "e13_thresholds_path": "outputs/experiments/E13/frozen_thresholds.json",
+    "e13_thresholds_sha256": "c1ebcddb1199ae9a2a728702ce6ed97c8688c47fea060e4dae90c289ae430dbf",
+    "evidence_tier": "formal_model_posthoc",
+    "execution_revision": "r2",
+    "expected_case_count_per_condition": 24,
+    "expected_logical_runs": 48,
+    "materialized_cases_path": "outputs/experiments/E11_posthoc_amendment_v1_runs/formal/materialized_cases.jsonl",
+    "materialized_cases_sha256": "a4d3924f142254f6c860ad08c5a87c6e020604ed79fe978336d10de735941ad9",
+    "matrix_manifest_path": "outputs/experiments/E11_posthoc_amendment_v1_runs/formal/raw/manifest.json",
+    "matrix_manifest_sha256": "aa500c25056bcfdfa1349cd30ba9f6471d39ac45cc79fd7bf3ae6b0b649d0fcc",
+    "max_steps": 5,
+    "max_tokens": 512,
+    "model": "qwen3:4b-instruct",
+    "phase": "formal",
+    "pre_registered": false,
+    "protocol_id": "E11_POSTHOC_AMENDMENT_V1",
+    "repeats": 1,
+    "schema_version": "1.0",
+    "seed": 433,
+    "selected_case_ids": [
+      "E11A-RTS-01",
+      "E11A-RTS-02",
+      "E11A-RTS-03",
+      "E11A-RTS-04",
+      "E11A-RTS-05",
+      "E11A-RTS-06",
+      "E11A-STA-01",
+      "E11A-STA-02",
+      "E11A-STA-03",
+      "E11A-STA-04",
+      "E11A-STA-05",
+      "E11A-STA-06",
+      "E11A-MTF-01",
+      "E11A-MTF-02",
+      "E11A-MTF-03",
+      "E11A-MTF-04",
+      "E11A-MTF-05",
+      "E11A-MTF-06",
+      "E11A-TON-01",
+      "E11A-TON-02",
+      "E11A-TON-03",
+      "E11A-TON-04",
+      "E11A-TON-05",
+      "E11A-TON-06"
+    ],
+    "started_at": "2026-07-15T16:47:46.477525+00:00",
+    "status": "completed",
+    "temperature": 0.2,
+    "timeout_seconds": 120.0,
+    "v3_blind_freeze_path": "outputs/experiments/blind_freeze_v3.json",
+    "v3_blind_freeze_sha256": "a36791aa0dfb530d2829b9e3eabec2f89c7df0d864b2b5a146e4569cfd79554e",
+    "visualization_revision": 2
+  },
+  "source_execution_manifest_path": "outputs/experiments/E11_posthoc_amendment_v1_runs/formal/execution_manifest.json",
+  "source_execution_manifest_sha256": "7e3bcb97e2c39b738680edfd46a5d2d3dd1ecf5223bbac84d31417bb6d046324",
+  "status": "completed",
+  "visualization_revision": 2
+}

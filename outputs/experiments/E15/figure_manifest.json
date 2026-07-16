@@ -1,0 +1,43 @@
+{
+  "evidence_tier": "formal_model",
+  "experiment_id": "E15",
+  "figures": [
+    {
+      "caption": "Static chart generated from the adjacent audited chart CSV; undefined values remain NA.",
+      "chart_type": "boxplot_with_deterministic_seed_points",
+      "files": {
+        "data": {
+          "bytes": 19988,
+          "path": "primary_chart_data.csv",
+          "sha256": "31f63bd328f0e9ca66957741b5e937ead4a11775f4d725bdbf1962f3a31c82ab"
+        },
+        "png": {
+          "bytes": 139358,
+          "path": "primary_chart.png",
+          "sha256": "09dd8a6f88b424be39da2b089aa5a7e0fd2637ef049783e9f1037f8b5a9fce0c"
+        },
+        "svg": {
+          "bytes": 131257,
+          "path": "primary_chart.svg",
+          "sha256": "70a56e2c9410bbf6c65adbc01ca15995d8816e46b8234d59841ce98c1c3a1ff7"
+        }
+      },
+      "grain": [
+        "model_temperature",
+        "seed"
+      ],
+      "id": "e15_primary_chart",
+      "metrics": [
+        "ASR"
+      ],
+      "order": 10,
+      "role": "primary",
+      "title": "E15 ASR by model_temperature",
+      "uncertainty": [],
+      "warnings": [
+        "box whiskers summarize seed distributions and are not confidence intervals"
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

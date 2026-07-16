@@ -1,0 +1,131 @@
+{
+  "E14": {
+    "conditions": [
+      {
+        "condition": "full_guard",
+        "largest_to_smallest_prompt_ratio": 1.0,
+        "material_workload_scaling": false,
+        "observed_contexts": [
+          2048,
+          4096,
+          8192,
+          16384
+        ],
+        "prompt_tokens_median_by_context": {
+          "16384": 230.5,
+          "2048": 230.5,
+          "4096": 230.5,
+          "8192": 230.5
+        },
+        "strictly_increasing_prompt_load": false,
+        "valid": false
+      },
+      {
+        "condition": "off",
+        "largest_to_smallest_prompt_ratio": 1.0,
+        "material_workload_scaling": false,
+        "observed_contexts": [
+          2048,
+          4096,
+          8192,
+          16384
+        ],
+        "prompt_tokens_median_by_context": {
+          "16384": 486.5,
+          "2048": 486.5,
+          "4096": 486.5,
+          "8192": 486.5
+        },
+        "strictly_increasing_prompt_load": false,
+        "valid": false
+      }
+    ],
+    "expected_contexts": [
+      2048,
+      4096,
+      8192,
+      16384
+    ],
+    "interpretation": "E14 changes a context label/configuration without materially changing prompt workload; it cannot support latency/throughput claims by context length.",
+    "row_count": 24,
+    "status": "fail"
+  },
+  "E9": {
+    "all_targets_calibrated": false,
+    "cells": [
+      {
+        "first_step_rows": 30,
+        "parse_success_count": 0,
+        "parse_success_rate": 0.0,
+        "prompt_tokens_max": 8192,
+        "prompt_tokens_median": 8192.0,
+        "prompt_tokens_min": 8192,
+        "relative_error": 0.5,
+        "target_prompt_tokens": 16384,
+        "usage_rows": 30,
+        "within_tolerance": false
+      },
+      {
+        "first_step_rows": 30,
+        "parse_success_count": 30,
+        "parse_success_rate": 1.0,
+        "prompt_tokens_max": 6320,
+        "prompt_tokens_median": 6310.0,
+        "prompt_tokens_min": 6307,
+        "relative_error": 2.0810546875,
+        "target_prompt_tokens": 2048,
+        "usage_rows": 30,
+        "within_tolerance": false
+      },
+      {
+        "first_step_rows": 30,
+        "parse_success_count": 0,
+        "parse_success_rate": 0.0,
+        "prompt_tokens_max": 8192,
+        "prompt_tokens_median": 8192.0,
+        "prompt_tokens_min": 8192,
+        "relative_error": 1.0,
+        "target_prompt_tokens": 4096,
+        "usage_rows": 30,
+        "within_tolerance": false
+      },
+      {
+        "first_step_rows": 30,
+        "parse_success_count": 0,
+        "parse_success_rate": 0.0,
+        "prompt_tokens_max": 8192,
+        "prompt_tokens_median": 8192.0,
+        "prompt_tokens_min": 8192,
+        "relative_error": 0.0,
+        "target_prompt_tokens": 8192,
+        "usage_rows": 30,
+        "within_tolerance": true
+      }
+    ],
+    "expected_contexts": [
+      2048,
+      4096,
+      8192,
+      16384
+    ],
+    "interpretation": "Declared E9 lengths are not represented by calibrated prompt usage; security rates from collapsed/truncated cells are not interpretable as long-context robustness.",
+    "no_context_collapse": false,
+    "observed_contexts": [
+      2048,
+      4096,
+      8192,
+      16384
+    ],
+    "relative_tolerance": 0.05,
+    "status": "fail",
+    "strictly_increasing_prompt_load": false
+  },
+  "audit_type": "post_freeze_context_design_validity",
+  "e14_csv": "E:\\M3_PI_Guard_test\\outputs\\experiments\\E14\\performance.csv",
+  "e9_root": "E:\\M3_PI_Guard_test\\outputs\\experiments\\program_final_v3\\derived",
+  "non_causal": true,
+  "original_bundles_mutated": false,
+  "required_action": "Reopen failed experiments, create a new protocol/freeze with token-calibrated workloads and effective Ollama context configuration, rerun all affected cells, rebuild E17 source input and final analysis.",
+  "schema_version": "1.0",
+  "status": "fail"
+}

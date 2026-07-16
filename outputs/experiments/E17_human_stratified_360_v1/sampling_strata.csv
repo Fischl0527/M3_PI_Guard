@@ -1,0 +1,25 @@
+﻿sample_group,flag_combination,eligible_population_rows,eligible_population_clusters,sample_clusters,cluster_inclusion_probability,analysis_weight_rule,population_estimate_eligible
+representative,ask,617,278,56,0.2014388489208633,cluster_size / cluster_inclusion_probability,true
+representative,false_block,874,323,79,0.24458204334365324,cluster_size / cluster_inclusion_probability,true
+representative,false_block|ask,141,96,13,0.13541666666666666,cluster_size / cluster_inclusion_probability,true
+representative,false_block|parse_failure,2,1,1,1.0,cluster_size / cluster_inclusion_probability,true
+representative,leak,884,626,80,0.12779552715654952,cluster_size / cluster_inclusion_probability,true
+representative,leak|max_steps,41,40,4,0.1,cluster_size / cluster_inclusion_probability,true
+representative,leak|parse_failure,46,45,4,0.08888888888888889,cluster_size / cluster_inclusion_probability,true
+representative,max_steps,76,64,7,0.109375,cluster_size / cluster_inclusion_probability,true
+representative,parse_failure,618,419,56,0.13365155131264916,cluster_size / cluster_inclusion_probability,true
+targeted_auto_disagreement,ask,18,14,1,0.07142857142857142,not_applicable_diagnostic_only,false
+targeted_auto_disagreement,false_block,579,237,24,0.10126582278481013,not_applicable_diagnostic_only,false
+targeted_auto_disagreement,false_block|ask,86,55,5,0.09090909090909091,not_applicable_diagnostic_only,false
+targeted_auto_disagreement,leak,7,7,1,0.14285714285714285,not_applicable_diagnostic_only,false
+targeted_auto_disagreement,leak|max_steps,1,1,1,1.0,not_applicable_diagnostic_only,false
+targeted_auto_disagreement,leak|parse_failure,39,38,4,0.10526315789473684,not_applicable_diagnostic_only,false
+targeted_auto_disagreement,max_steps,10,10,1,0.1,not_applicable_diagnostic_only,false
+targeted_auto_disagreement,parse_failure,29,26,3,0.11538461538461539,not_applicable_diagnostic_only,false
+targeted_rare_complex,ask,61,29,1,,not_applicable_diagnostic_only,false
+targeted_rare_complex,false_block|ask,122,78,5,,not_applicable_diagnostic_only,false
+targeted_rare_complex,leak,230,146,3,,not_applicable_diagnostic_only,false
+targeted_rare_complex,leak|max_steps,36,35,8,,not_applicable_diagnostic_only,false
+targeted_rare_complex,leak|parse_failure,38,37,1,,not_applicable_diagnostic_only,false
+targeted_rare_complex,max_steps,65,56,1,,not_applicable_diagnostic_only,false
+targeted_rare_complex,parse_failure,74,33,1,,not_applicable_diagnostic_only,false

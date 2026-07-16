@@ -19,31 +19,48 @@ m3_attacks/
     tool_output_cases.jsonl
     benign_clean_cases.jsonl
     all_cases.jsonl
+    dataset_stats.json
+    dataset_audit.json
 ```
 
 ## 样本规模
 
-当前样本库共 69 条：
+当前 canonical 数据集为 `cases-v1.0-300`，共 300 条。原有 69 条样本仅作为
+`dev` legacy 数据保留；其余样本由固定模板确定性生成。
 
 | attack_family | 数量 |
 |---|---:|
-| benign_clean | 8 |
-| direct_jailbreak | 15 |
-| json_rpc | 8 |
-| multilingual_t2l | 15 |
-| rag_indirect | 18 |
-| tool_output_injection | 5 |
+| benign_clean | 90 |
+| direct_jailbreak | 27 |
+| rag_indirect | 30 |
+| multilingual_t2l | 27 |
+| json_rpc | 20 |
+| tool_output_injection | 17 |
+| memory_poisoning | 23 |
+| environment_context_pollution | 22 |
+| cross_tool_attack_chain | 22 |
+| obfuscation_evasion | 22 |
 
-样本覆盖直接越狱、RAG 间接提示注入、多语言/T2L、JSON/RPC 结构化注入、工具输出注入和正常任务，用于观察攻击成功率、未授权工具调用、敏感数据外流风险和误报率。
+攻击样本共 210 条，正常样本共 90 条；正常样本进一步严格平衡为 45 条
+无工具任务和 45 条合法工具任务。模板级切分为 `dev=150`、
+`validation=60`、`blind=90`，同一 `template_id` 不跨集合。
 
 ## 统一字段
 
 每条 JSONL 样本至少包含：
 
 - `case_id`
+- `schema_version`
+- `sample_type`
 - `attack_family`
+- `template_id`
+- `mutation_id`
+- `split`
 - `carrier`
 - `language`
+- `task_type`
+- `requires_tool`
+- `authorized_actions`
 - `user_task`
 - `document_content`
 - `injected_content`
@@ -53,7 +70,9 @@ m3_attacks/
 - `severity`
 - `notes`
 
-评测扩展字段包括 `success_indicators`、`safe_indicators`、`demo_priority` 和 `expected_detectors`。
+评测扩展字段包括 `success_indicators`、`safe_indicators`、`demo_priority`、
+`expected_detectors`、`parent_case_id` 和 `attack_dimensions`。真实模型输入只能使用
+`user_task` 与 `document_content`；标签、预期行为和危险目标均为 evaluator-only。
 
 ## 本地 mock 动作白名单
 
@@ -72,10 +91,13 @@ m3_attacks/
 在项目根目录运行：
 
 ```powershell
-python -m m3_attacks.attackgen --out m3_attacks/cases/all_cases.jsonl --stats outputs/metrics/final_case_stats.json --audit outputs/metrics/final_case_audit.json
+python -m m3_attacks.attackgen
 ```
 
-脚本会合并源 JSONL、校验必要字段、检查 `case_id` 唯一性、检查 mock 动作白名单，并输出样本统计与审计结果。
+脚本会读取显式列出的 69 条 legacy sources，补齐元数据并按冻结配额生成 300 条
+canonical JSONL，同时输出 `dataset_stats.json` 和 `dataset_audit.json`。审计覆盖
+字段完整性、精确数量、ID 唯一性、模板跨 split、授权动作、危险动作、标签字段名
+泄漏、真实地址以及跨 split 重复。固定输入重复运行会得到相同数据哈希。
 
 ## 演示样本
 

@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://local.m3-pi-guard/schemas/tool_call.schema.json",
-  "title": "M3 ToolCall",
+  "title": "M3 Runtime ToolCall",
+  "description": "The only model-emitted structure allowed to reach the local tool sandbox.",
   "type": "object",
   "required": ["tool", "arguments"],
   "properties": {
@@ -17,7 +18,8 @@
       ]
     },
     "arguments": {
-      "type": "object"
+      "type": "object",
+      "description": "Tool-specific arguments. Policy and authorization are evaluated separately."
     }
   },
   "additionalProperties": true

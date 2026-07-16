@@ -1,0 +1,115 @@
+{
+  "agreement_policy": "adjudicate_primary_or_secondary_code_set_difference",
+  "agreements": 360,
+  "cohen_kappa": 1.0,
+  "confusion_matrix": {
+    "ask": {
+      "ask": 61,
+      "false_block": 0,
+      "leak": 0,
+      "max_steps": 0,
+      "none": 0,
+      "other": 0,
+      "parse_failure": 0,
+      "timeout": 0
+    },
+    "false_block": {
+      "ask": 0,
+      "false_block": 7,
+      "leak": 0,
+      "max_steps": 0,
+      "none": 0,
+      "other": 0,
+      "parse_failure": 0,
+      "timeout": 0
+    },
+    "leak": {
+      "ask": 0,
+      "false_block": 0,
+      "leak": 130,
+      "max_steps": 0,
+      "none": 0,
+      "other": 0,
+      "parse_failure": 0,
+      "timeout": 0
+    },
+    "max_steps": {
+      "ask": 0,
+      "false_block": 0,
+      "leak": 0,
+      "max_steps": 8,
+      "none": 0,
+      "other": 0,
+      "parse_failure": 0,
+      "timeout": 0
+    },
+    "none": {
+      "ask": 0,
+      "false_block": 0,
+      "leak": 0,
+      "max_steps": 0,
+      "none": 112,
+      "other": 0,
+      "parse_failure": 0,
+      "timeout": 0
+    },
+    "other": {
+      "ask": 0,
+      "false_block": 0,
+      "leak": 0,
+      "max_steps": 0,
+      "none": 0,
+      "other": 19,
+      "parse_failure": 0,
+      "timeout": 0
+    },
+    "parse_failure": {
+      "ask": 0,
+      "false_block": 0,
+      "leak": 0,
+      "max_steps": 0,
+      "none": 0,
+      "other": 0,
+      "parse_failure": 23,
+      "timeout": 0
+    },
+    "timeout": {
+      "ask": 0,
+      "false_block": 0,
+      "leak": 0,
+      "max_steps": 0,
+      "none": 0,
+      "other": 0,
+      "parse_failure": 0,
+      "timeout": 0
+    }
+  },
+  "disagreements": 0,
+  "expected_agreement": 0.263641975308642,
+  "items": 360,
+  "kappa_note": null,
+  "percent_agreement": 1.0,
+  "primary_agreements": 360,
+  "primary_disagreements": 0,
+  "primary_percent_agreement": 1.0,
+  "reviewer_1_counts": {
+    "ask": 61,
+    "false_block": 7,
+    "leak": 130,
+    "max_steps": 8,
+    "none": 112,
+    "other": 19,
+    "parse_failure": 23
+  },
+  "reviewer_1_id": "human_gaohang_r1",
+  "reviewer_2_counts": {
+    "ask": 61,
+    "false_block": 7,
+    "leak": 130,
+    "max_steps": 8,
+    "none": 112,
+    "other": 19,
+    "parse_failure": 23
+  },
+  "reviewer_2_id": "human_hg02"
+}

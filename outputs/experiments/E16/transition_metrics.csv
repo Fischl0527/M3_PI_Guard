@@ -1,0 +1,3 @@
+﻿from_round,to_round,pairs,blocked_to_success,success_to_blocked,success_to_success,blocked_to_blocked
+1,2,42,0,0,0,42
+2,3,42,0,0,0,42

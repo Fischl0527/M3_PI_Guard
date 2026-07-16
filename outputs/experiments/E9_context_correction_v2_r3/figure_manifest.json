@@ -1,0 +1,51 @@
+{
+  "evidence_tier": "formal_context_correction_v2",
+  "experiment_id": "E9",
+  "figures": [
+    {
+      "caption": "ASR by calibrated first-step prompt target, operational injection position and Guard condition.",
+      "chart_type": "two_panel_multi_series_line_with_wilson_ci",
+      "files": {
+        "data": {
+          "bytes": 7317,
+          "path": "primary_chart_data.csv",
+          "sha256": "c44df8f312a49ef3222902de5bb5dd26e5c26697a75059d25222580d1302ba2e"
+        },
+        "png": {
+          "bytes": 111142,
+          "path": "primary_chart.png",
+          "sha256": "2ea1ab38619f8b0eb5dd3f6d75243ed50268acd5f315bdcc4bb1d86b308f9765"
+        },
+        "svg": {
+          "bytes": 86352,
+          "path": "primary_chart.svg",
+          "sha256": "28f87e37fd8c8003b7fd3b4cd69774f53ad9ddb7a18f0a07e3371c49cfd914d8"
+        }
+      },
+      "grain": [
+        "target_prompt_tokens",
+        "injection_position_pct",
+        "condition_id"
+      ],
+      "id": "e9_calibrated_context_position",
+      "metrics": [
+        "ASR",
+        "ASR_ci_low",
+        "ASR_ci_high"
+      ],
+      "order": 0,
+      "role": "primary",
+      "title": "E9 V2 calibrated long-context attack success",
+      "uncertainty": [
+        {
+          "method": "Wilson 95% confidence interval"
+        }
+      ],
+      "warnings": [
+        "Three attack cases per cell; intervals are wide.",
+        "Old V3 E9 context cells are invalid diagnostic provenance and excluded."
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}
