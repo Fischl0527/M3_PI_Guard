@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "policy": "historical_freezes_remain_immutable_and_current_claims_require_a_separate_verified_freeze",
+  "current_evidence": {
+    "freeze": {
+      "path": "protocols/acceptance_remediation_v2/freeze.json",
+      "sha256": "f2f98c0fdeee874ca298b6140b5c43d5103ad4221e2fd0613eabd4c9f95a04c9"
+    }
+  },
+  "historical_bundles": [
+    {
+      "id": "e11_amendment_execution_r2",
+      "freeze": {
+        "path": "protocols/e11_amendment_v1/freeze_r2.json",
+        "sha256": "ceb320a915d301d6658b5caa9b662cb2ed13e24c63ec5d79f8ff7caa9ad0ba37",
+        "entries_key": "artifacts"
+      },
+      "evidence_roots": [
+        {
+          "path": "outputs/experiments/E11_posthoc_amendment_v1/manifest.json",
+          "sha256": "2c2107103ca5467f1b3369bdf6a9dbcb7c1a4aee18d35caeaddc76cdab50ff41"
+        }
+      ],
+      "declared_current_source_drifts": [
+        {"path": "m3_core/agent_runner.py", "frozen_sha256": "1763f8f1ddf5fb6dfcdf13e2e1798902a5130a27d96ed6a8a8189b391a6df02d", "current_sha256": "686eb838b059691542f06bbe6cafb8e9a17f555a53a7e9ce7602a95ee717cdb4"},
+        {"path": "m3_core/run_batch.py", "frozen_sha256": "2675c0a990e79b21dcab8c903a062e031311d6aca51654942bd3f6f46044a309", "current_sha256": "dde9b11e64d4ca76c2050bac7aaa64824f0ca519f9f2a8bfd84e07e4ead8b360"},
+        {"path": "m3_core/run_matrix.py", "frozen_sha256": "0f6eb27a387792eb43d78232b3e2decfea668e5e96f714395992eaa9e3b656ea", "current_sha256": "c542aa81838e45956473cdfb6d86f8251af589d4c5bbd0f425b4327ef407172b"},
+        {"path": "m3_guard/guard_engine.py", "frozen_sha256": "3ef92353b915ca326f764c1289192f81768baa82bcda2954c89f3151829169d4", "current_sha256": "78f6040482d953505d708280448dbaf90b26da44135c4e864caba6f72cf9c61f"},
+        {"path": "m3_guard/policy_engine.py", "frozen_sha256": "b9bc427b3aa3b7e936fbd52a5846592012daced3ce1d8606295660e201247ec0", "current_sha256": "dbcb29b68f9c17765968e833169389aaa136765ea909e8b36b3902edb8cff76f"},
+        {"path": "m3_eval/metrics.py", "frozen_sha256": "66265b7a7076f7e56a6459b92af31daaa91fba0dd713ca01e1274dc0353dc069", "current_sha256": "e4533334179ee93eb61e96f49546bdb03ac44c0bb27cc693f85e33be3cb200cd"}
+      ]
+    },
+    {
+      "id": "context_correction_v2_execution_r3_and_sampled_e17",
+      "freeze": {
+        "path": "protocols/context_correction_v2/freeze_r3.json",
+        "sha256": "314aa9ed1aa9b578019827a754d45254e093d755e4fd09bee18332f93ecd3ae3",
+        "entries_key": "files"
+      },
+      "evidence_roots": [
+        {
+          "path": "outputs/experiments/e17_source_index_corrected_v2.json",
+          "sha256": "6d3baa721317b50d9dca82c958d5b0f47b23114066c9e2a42e922c8c512fd17d"
+        },
+        {
+          "path": "outputs/experiments/E17_human_stratified_360_v1/manifest.json",
+          "sha256": "4a6faf97f0f043960830fc5d8feeffcc8ada4aa678dd740c5bdaacce8e650964"
+        },
+        {
+          "path": "outputs/experiments/E17_human_stratified_360_v1/review/manifest.json",
+          "sha256": "03704f5cc91d9b42fff459213b58e4bf9fdc957c9492ba2129da94040a6385f0"
+        }
+      ],
+      "declared_current_source_drifts": [
+        {"path": "m3_core/agent_runner.py", "frozen_sha256": "1763f8f1ddf5fb6dfcdf13e2e1798902a5130a27d96ed6a8a8189b391a6df02d", "current_sha256": "686eb838b059691542f06bbe6cafb8e9a17f555a53a7e9ce7602a95ee717cdb4"},
+        {"path": "m3_core/run_batch.py", "frozen_sha256": "2675c0a990e79b21dcab8c903a062e031311d6aca51654942bd3f6f46044a309", "current_sha256": "dde9b11e64d4ca76c2050bac7aaa64824f0ca519f9f2a8bfd84e07e4ead8b360"},
+        {"path": "m3_core/run_matrix.py", "frozen_sha256": "0f6eb27a387792eb43d78232b3e2decfea668e5e96f714395992eaa9e3b656ea", "current_sha256": "c542aa81838e45956473cdfb6d86f8251af589d4c5bbd0f425b4327ef407172b"},
+        {"path": "m3_eval/metrics.py", "frozen_sha256": "66265b7a7076f7e56a6459b92af31daaa91fba0dd713ca01e1274dc0353dc069", "current_sha256": "e4533334179ee93eb61e96f49546bdb03ac44c0bb27cc693f85e33be3cb200cd"},
+        {"path": "m3_guard/guard_engine.py", "frozen_sha256": "3ef92353b915ca326f764c1289192f81768baa82bcda2954c89f3151829169d4", "current_sha256": "78f6040482d953505d708280448dbaf90b26da44135c4e864caba6f72cf9c61f"},
+        {"path": "m3_guard/policy_engine.py", "frozen_sha256": "b9bc427b3aa3b7e936fbd52a5846592012daced3ce1d8606295660e201247ec0", "current_sha256": "dbcb29b68f9c17765968e833169389aaa136765ea909e8b36b3902edb8cff76f"},
+        {"path": "tests/unit/test_core_runtime.py", "frozen_sha256": "a712f577733563e2cd6c00511ba32530ed4afa34c1cd4774b10d6fa0ed87987e", "current_sha256": "aabdc347201ca379a23175546084f69f0d65341a1ca719e4f9ffa85672e2ba64"}
+      ]
+    }
+  ]
+}

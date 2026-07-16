@@ -78,6 +78,12 @@ CONFIG = {
     "limit": None,
     "out_dir": "outputs/runs/day6_demo_stub_matrix",
     "max_steps": 5,
+    "recover_guard_stops": False,
+    "max_guard_recoveries": 2,
+    "recover_incomplete_tasks": False,
+    "max_task_recoveries": 2,
+    "recover_parse_errors": False,
+    "max_parse_recoveries": 2,
     "run_prefix": "day6_demo_stub",
     "run_group": "day6",
     "seed": 42,
@@ -178,6 +184,12 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
             "out": str(jsonl_path),
             "csv_out": str(csv_path),
             "max_steps": int(config.get("max_steps", 5)),
+            "recover_guard_stops": bool(config.get("recover_guard_stops", False)),
+            "max_guard_recoveries": int(config.get("max_guard_recoveries", 2)),
+            "recover_incomplete_tasks": bool(config.get("recover_incomplete_tasks", False)),
+            "max_task_recoveries": int(config.get("max_task_recoveries", 2)),
+            "recover_parse_errors": bool(config.get("recover_parse_errors", False)),
+            "max_parse_recoveries": int(config.get("max_parse_recoveries", 2)),
             "limit": config.get("limit"),
             "families": str(config.get("families") or ""),
             "splits": str(config.get("splits") or ""),
@@ -374,6 +386,12 @@ def _request_config(
         "ask_threshold": float(config.get("ask_threshold", 0.35)),
         "deny_threshold": float(config.get("deny_threshold", 0.65)),
         "max_steps": int(config.get("max_steps", 5)),
+        "recover_guard_stops": bool(config.get("recover_guard_stops", False)),
+        "max_guard_recoveries": int(config.get("max_guard_recoveries", 2)),
+        "recover_incomplete_tasks": bool(config.get("recover_incomplete_tasks", False)),
+        "max_task_recoveries": int(config.get("max_task_recoveries", 2)),
+        "recover_parse_errors": bool(config.get("recover_parse_errors", False)),
+        "max_parse_recoveries": int(config.get("max_parse_recoveries", 2)),
         "limit": config.get("limit"),
         "families": _csv_values(config.get("families")),
         "splits": _csv_values(config.get("splits")),
@@ -549,6 +567,12 @@ def _parse_args(argv: List[str]) -> Dict[str, Any]:
     parser.add_argument("--limit", type=int)
     parser.add_argument("--out-dir", required=True)
     parser.add_argument("--max-steps", type=int, default=5)
+    parser.add_argument("--recover-guard-stops", action="store_true")
+    parser.add_argument("--max-guard-recoveries", type=int, default=2)
+    parser.add_argument("--recover-incomplete-tasks", action="store_true")
+    parser.add_argument("--max-task-recoveries", type=int, default=2)
+    parser.add_argument("--recover-parse-errors", action="store_true")
+    parser.add_argument("--max-parse-recoveries", type=int, default=2)
     parser.add_argument("--run-prefix", required=True)
     parser.add_argument("--run-group", default="experiment")
     parser.add_argument("--seed", type=int, default=42)

@@ -1,0 +1,241 @@
+{
+  "schema_version": "1.1",
+  "run_prefix": "e18_gemma3_4b_s130363",
+  "experiment_id": "e18_gemma3_4b_s130363",
+  "experiment_version": "exp-v1.1-reproducible",
+  "project_version": "v1.1-experiments",
+  "guard_version": "guard-v1.1-modular",
+  "dataset_version": "cases-v1.1",
+  "status": "completed",
+  "created_at": "2026-07-16T06:17:24.387539+00:00",
+  "updated_at": "2026-07-16T06:22:16.419897+00:00",
+  "config": {
+    "cases": "m3_attacks/cases/all_cases.jsonl",
+    "dataset_sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462",
+    "implementation_sha256": "45cab184edc1d996844198c2f2f7eac3dc84a6417c38be5449933bd47a4fce2a",
+    "backend": "ollama",
+    "model": "gemma3:4b",
+    "run_prefix": "e18_gemma3_4b_s130363",
+    "run_group": "ACCEPTANCE_REMEDIATION_V2",
+    "conditions": [
+      {
+        "condition_id": "remediation_off",
+        "prompt_profile": "normal",
+        "guard_mode": "off"
+      },
+      {
+        "condition_id": "remediation_full",
+        "prompt_profile": "normal",
+        "guard_mode": "full_guard"
+      }
+    ],
+    "guard_modules": [],
+    "ask_threshold": 0.35,
+    "deny_threshold": 0.65,
+    "max_steps": 6,
+    "recover_guard_stops": true,
+    "max_guard_recoveries": 2,
+    "recover_incomplete_tasks": true,
+    "max_task_recoveries": 2,
+    "recover_parse_errors": true,
+    "max_parse_recoveries": 2,
+    "limit": null,
+    "families": [],
+    "splits": [
+      "blind"
+    ],
+    "sample_types": [],
+    "task_types": [],
+    "case_ids": [],
+    "shuffle": false,
+    "selection_seed": 130363,
+    "generation_seed": 130363,
+    "repeats": 1,
+    "temperature": 0.2,
+    "max_tokens": 256,
+    "num_ctx": null,
+    "ollama_transport": "openai_compat",
+    "timeout": 120.0,
+    "allow_fallback_guard": false,
+    "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+    "sandbox_fixture_version": "tool-sandbox-public-v1",
+    "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+    "sandbox_seed_sha256": {
+      "130363": "07f87ca98bbdb3e9fcf5a4792719cdf7305b9eba7352e08f214b8acacd36e637"
+    },
+    "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+    "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+    "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue"
+  },
+  "config_hash": "94f86b75bd29d16fb17a0b64f8c70200172cf1389b0d52888961b6092006b279",
+  "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+  "sandbox_fixture_version": "tool-sandbox-public-v1",
+  "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+  "sandbox_seed_sha256": {
+    "130363": "07f87ca98bbdb3e9fcf5a4792719cdf7305b9eba7352e08f214b8acacd36e637"
+  },
+  "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+  "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+  "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+  "git_commit": "1cbbbc4ff96af256e0230e54fa9e17af475f7914",
+  "git_dirty": true,
+  "dataset": {
+    "path": "m3_attacks/cases/all_cases.jsonl",
+    "sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462",
+    "row_count": 300
+  },
+  "backend": "ollama",
+  "oracle_stub": false,
+  "evidence_tier": "formal_model",
+  "model": "gemma3:4b",
+  "model_identity": {
+    "tag": "gemma3:4b",
+    "digest": "a2af6cc3eb7f",
+    "ollama_version": "ollama version is 0.24.0",
+    "executable": "D:\\Ollama\\app\\ollama.exe"
+  },
+  "defense_modes": [
+    "baseline",
+    "full_guard"
+  ],
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "run_group": "ACCEPTANCE_REMEDIATION_V2",
+  "notes": "FORMAL post-hoc engineering remediation; diagnostics excluded; source/config frozen before execution",
+  "conditions": [
+    {
+      "condition_id": "remediation_off",
+      "prompt_profile": "normal",
+      "guard_mode": "off",
+      "guard_modules": [],
+      "ask_threshold": 0.35,
+      "deny_threshold": 0.65,
+      "status": "completed",
+      "started_at": "2026-07-16T06:17:25.006756+00:00",
+      "updated_at": "2026-07-16T06:19:52.540212+00:00",
+      "defense_mode": "baseline",
+      "jsonl": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_off.jsonl",
+      "csv": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_off.csv",
+      "jsonl_sha256": "ba48c4024434f5abba083786a81c3f3aed07a20e10c76c7fd1fec9afbece4ddd",
+      "csv_sha256": "65ca78bcdec39a5f9eb299f8edad6cd48d3cf74092577959d16bb807db1a36c1",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "130363": "07f87ca98bbdb3e9fcf5a4792719cdf7305b9eba7352e08f214b8acacd36e637"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 90,
+      "selected_case_count": 90,
+      "selected_run_count": 90,
+      "skipped_case_count": 0,
+      "completed_run_count": 90,
+      "error_count": 0,
+      "log_count": 134,
+      "completed_at": "2026-07-16T06:19:52.540202+00:00"
+    },
+    {
+      "condition_id": "remediation_full",
+      "prompt_profile": "normal",
+      "guard_mode": "full_guard",
+      "guard_modules": [
+        "dataflow",
+        "instruction_detector",
+        "intent_action",
+        "multilingual_detector",
+        "output_dlp",
+        "policy",
+        "structured_detector",
+        "tool_lure_detector"
+      ],
+      "ask_threshold": 0.35,
+      "deny_threshold": 0.65,
+      "status": "completed",
+      "started_at": "2026-07-16T06:19:52.544060+00:00",
+      "updated_at": "2026-07-16T06:22:16.416117+00:00",
+      "defense_mode": "full_guard",
+      "jsonl": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_full.jsonl",
+      "csv": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_full.csv",
+      "jsonl_sha256": "6b93f1ec8b66c2e09316e9d46a2a59e676a265d568813b01f20714de33838e30",
+      "csv_sha256": "e015a5426a3605a1357ba4bf46306ab948960ffe44c764e938e2f1713e0cba13",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "130363": "07f87ca98bbdb3e9fcf5a4792719cdf7305b9eba7352e08f214b8acacd36e637"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 90,
+      "selected_case_count": 90,
+      "selected_run_count": 90,
+      "skipped_case_count": 0,
+      "completed_run_count": 90,
+      "error_count": 0,
+      "log_count": 134,
+      "completed_at": "2026-07-16T06:22:16.416107+00:00"
+    }
+  ],
+  "results": [
+    {
+      "condition_id": "remediation_off",
+      "prompt_profile": "normal",
+      "guard_mode": "off",
+      "defense_mode": "baseline",
+      "status": "completed",
+      "jsonl": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_off.jsonl",
+      "csv": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_off.csv",
+      "jsonl_sha256": "ba48c4024434f5abba083786a81c3f3aed07a20e10c76c7fd1fec9afbece4ddd",
+      "csv_sha256": "65ca78bcdec39a5f9eb299f8edad6cd48d3cf74092577959d16bb807db1a36c1",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "130363": "07f87ca98bbdb3e9fcf5a4792719cdf7305b9eba7352e08f214b8acacd36e637"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 90,
+      "selected_case_count": 90,
+      "selected_run_count": 90,
+      "skipped_case_count": 0,
+      "completed_run_count": 90,
+      "error_count": 0,
+      "log_count": 134
+    },
+    {
+      "condition_id": "remediation_full",
+      "prompt_profile": "normal",
+      "guard_mode": "full_guard",
+      "defense_mode": "full_guard",
+      "status": "completed",
+      "jsonl": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_full.jsonl",
+      "csv": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_full.csv",
+      "jsonl_sha256": "6b93f1ec8b66c2e09316e9d46a2a59e676a265d568813b01f20714de33838e30",
+      "csv_sha256": "e015a5426a3605a1357ba4bf46306ab948960ffe44c764e938e2f1713e0cba13",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "130363": "07f87ca98bbdb3e9fcf5a4792719cdf7305b9eba7352e08f214b8acacd36e637"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 90,
+      "selected_case_count": 90,
+      "selected_run_count": 90,
+      "skipped_case_count": 0,
+      "completed_run_count": 90,
+      "error_count": 0,
+      "log_count": 134
+    }
+  ],
+  "completed_at": "2026-07-16T06:22:16.419885+00:00"
+}

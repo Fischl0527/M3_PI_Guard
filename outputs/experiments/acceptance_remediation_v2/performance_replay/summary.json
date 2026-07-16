@@ -1,0 +1,16 @@
+{
+  "A09_pass": true,
+  "A10_pass": true,
+  "all_decisions_allow": true,
+  "cells": 12,
+  "claim_boundary": "post_hoc_engineering_remediation_v2_after_original_and_v1_failures",
+  "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+  "generated_at": "2026-07-16T05:30:21.359918+00:00",
+  "protocol_id": "ACCEPTANCE_REMEDIATION_V2",
+  "schema_version": "1.0",
+  "source_cases_sha256": "27ff66990271e470b6781c9b08cee9309ee3853b859e7a8bb2660bcf7d44bac3",
+  "source_logs_sha256": "7e89687d2407045e24edda137756425d5e79a7d7d404a10a9fae8251cc2a0a66",
+  "source_rows": 144,
+  "worst_cell_median_overhead": 9.461159812343387e-05,
+  "worst_guard_p95_ms": 0.08964000000000005
+}

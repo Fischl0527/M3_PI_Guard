@@ -158,8 +158,8 @@ Invoke-Check "Experiment registry structure" {
 }
 
 if (Test-Path -LiteralPath "outputs/experiments/e17_source_index_corrected_v2.json" -PathType Leaf) {
-    Invoke-Check "Corrected E17 source index" {
-        Invoke-External $PythonExe @("scripts/build_e17_source_index.py", "--check")
+    Invoke-Check "Historical evidence and current V2 freeze" {
+        Invoke-External $PythonExe @("scripts/verify_historical_evidence.py")
     }
 }
 

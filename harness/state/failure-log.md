@@ -568,3 +568,33 @@ Likely Cause: Terminating the orchestration cell stopped its parent PowerShell b
 Attempts: Checked process identity, command lines, CPU deltas and thread wait state; then terminated only the two orphaned pytest PIDs.  
 Final Resolution: Re-ran every collected `test_*.py` file independently with fail-fast semantics. All 50 test files completed: 343 passed, 1 skipped, 0 failed.  
 Follow-Up: When stopping a Windows verification cell, audit and explicitly terminate its child process tree before starting another full test run. The subsequent authoritative aggregate Harness verifier completed with 347 passed, 1 skipped and `Verification failed=0`.
+
+Date: 2026-07-16
+Task ID: M3-EXPANSION-001
+Feature ID: F-EXP-004 / V2-REPORT-LAYER-COMPATIBILITY
+Error: The frozen analyzer completed the 2,160-tuple audit but stopped first on a `value`/`estimate` serialization mismatch and then because its main manifest omitted the Dashboard-required `kind=figure_manifest` discriminator. A later visual repair attempt initially read a UTF-8 BOM as part of the recovery CSV header.
+Impact: Formal RunLogs, counts and metrics were already complete and unchanged; only result serialization, Dashboard anchoring and chart presentation were blocked.
+Likely Cause: The frozen analysis script and stable statistics/Dashboard contracts used different report-field conventions; CSV output uses UTF-8 with BOM.
+Attempts: Rejected editing the frozen analyzer, manually changing acceptance CSV values or weakening Dashboard validation. Added an external hashed wrapper, then changed its CSV reader to `utf-8-sig` after reproducing the BOM header.
+Final Resolution: The wrapper aliases `value` to `estimate`, adds the artifact kind, re-renders two charts from unchanged CSV values, refreshes hashes and reruns the original Dashboard loader. Final validation is 12/12 acceptance with 10 metric rows, 3,780 logs, 4 figures and zero warnings.
+Follow-Up: Keep execution/metric freezes separate from report adapters and validate both schema compatibility and rendered charts before final handoff.
+
+Date: 2026-07-16
+Task ID: M3-EXPANSION-001
+Feature ID: F-EXP-004 / HISTORICAL-FREEZE-COMPATIBILITY
+Error: The first final Harness verifier correctly rejected the current checkout against historical E11 execution-r2 and context/E17 execution-r3 source hashes after remediation changed six/seven bound files.
+Impact: One unit test and the old corrected-source rebuild check failed; V2 formal runs, its 12/12 acceptance result and all historical result files remained intact.
+Likely Cause: The verifier still treated historical current-runtime freezes as if no later engineering revision could exist.
+Attempts: Rejected overwriting old freeze hashes, silently skipping checks or rerunning unrelated historical human review.
+Final Resolution: Added an exact compatibility declaration and verifier. It recursively verifies old evidence roots, permits only the declared old/current hash pairs, and independently verifies all 27 current V2 freeze records. The final Harness run passed 361 tests with one skip and zero verification failures.
+Follow-Up: Every later runtime revision must either match V2 or add a new immutable current-evidence freeze plus an exact compatibility revision; never mutate historical freezes.
+
+Date: 2026-07-16
+Task ID: M3-EXPANSION-001
+Feature ID: F-EXP-004 / GIT-BYTE-EXACT-FREEZE
+Error: Initial Git staging under the machine-wide `core.autocrlf=true` normalized mixed line endings in 11 of 27 V2 source records, so the working-tree freeze passed while the index bytes would not.
+Impact: A commit made in that state would fail source-hash verification after checkout even though all runtime results were valid.
+Likely Cause: Several pre-existing files contain mixed LF/CRLF bytes and Git's default text clean filter silently normalized them.
+Attempts: Rejected changing frozen hashes after execution or normalizing executed source files post hoc.
+Final Resolution: Added path-scoped `.gitattributes -text`, re-staged the exact working bytes, and compared index blobs directly. All 27 source records and 56 result/figure/raw evidence references now match their declared SHA-256 values.
+Follow-Up: Any new hash-bound evidence root must add byte-exact Git attributes before freezing and run the index-blob audit before commit.

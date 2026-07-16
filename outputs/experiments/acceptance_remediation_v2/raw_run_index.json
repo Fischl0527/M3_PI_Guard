@@ -1,0 +1,223 @@
+{
+  "experiment_id": "E18",
+  "program_root": "E:\\M3_PI_Guard_test",
+  "records": [
+    {
+      "bytes": 747221,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/qwen3_4b_instruct/seed_104729/e18_qwen3_4b_instruct_s104729_remediation_off.jsonl",
+      "row_count": 134,
+      "sha256": "f8442eb6f7ceb9465fcdd9ef664302af472ef16ebf928315c0b95937dcaa9d69"
+    },
+    {
+      "bytes": 853707,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/qwen3_4b_instruct/seed_104729/e18_qwen3_4b_instruct_s104729_remediation_full.jsonl",
+      "row_count": 134,
+      "sha256": "cf16971066885feafd6465a7abe63dad3f8575535d20cdc9e04a320d46790a09"
+    },
+    {
+      "bytes": 746396,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/qwen3_4b_instruct/seed_130363/e18_qwen3_4b_instruct_s130363_remediation_off.jsonl",
+      "row_count": 134,
+      "sha256": "fa805702cf9c21f28444954c04c09bb9f26486d46b77c6ab01ca35629bc334ab"
+    },
+    {
+      "bytes": 859198,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/qwen3_4b_instruct/seed_130363/e18_qwen3_4b_instruct_s130363_remediation_full.jsonl",
+      "row_count": 135,
+      "sha256": "8ae23acf405164dd2cf874fe3439fe387032c949422ece9a0c57002d13a8b520"
+    },
+    {
+      "bytes": 746276,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/qwen3_4b_instruct/seed_155921/e18_qwen3_4b_instruct_s155921_remediation_off.jsonl",
+      "row_count": 134,
+      "sha256": "e07f28605f1c4c42e289eac0160f2e4889dc44021f65209f2c1fc8d776769ba3"
+    },
+    {
+      "bytes": 859057,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/qwen3_4b_instruct/seed_155921/e18_qwen3_4b_instruct_s155921_remediation_full.jsonl",
+      "row_count": 135,
+      "sha256": "93d84b942774dcb5c63b30e107b76b3a1c7811cdad2517edee2a8c92ec4305fc"
+    },
+    {
+      "bytes": 788482,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/phi4_mini_3_8b/seed_104729/e18_phi4_mini_3_8b_s104729_remediation_off.jsonl",
+      "row_count": 142,
+      "sha256": "2398d8c87cd62a56a64d7a78a47f835dd5d70441e165643496f37909434f01ad"
+    },
+    {
+      "bytes": 901689,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/phi4_mini_3_8b/seed_104729/e18_phi4_mini_3_8b_s104729_remediation_full.jsonl",
+      "row_count": 142,
+      "sha256": "8fc8194ed12a9722eafe4b703c750a5e13c51b2904870243d836bf4f62b32a63"
+    },
+    {
+      "bytes": 787960,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/phi4_mini_3_8b/seed_130363/e18_phi4_mini_3_8b_s130363_remediation_off.jsonl",
+      "row_count": 141,
+      "sha256": "4d41b754cd6b349e533f98e9d19143ad630968a04301605d4950a1c657865458"
+    },
+    {
+      "bytes": 923296,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/phi4_mini_3_8b/seed_130363/e18_phi4_mini_3_8b_s130363_remediation_full.jsonl",
+      "row_count": 145,
+      "sha256": "b266a1083f58484bfc6534dc03ce4ef8ca3cb2a880dfceb6762bb11a864ed96a"
+    },
+    {
+      "bytes": 789948,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/phi4_mini_3_8b/seed_155921/e18_phi4_mini_3_8b_s155921_remediation_off.jsonl",
+      "row_count": 142,
+      "sha256": "8f3641f0fcbc75ca011002d02236f6c4e472d5e43f38092fbc3692dcf0af8289"
+    },
+    {
+      "bytes": 902373,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/phi4_mini_3_8b/seed_155921/e18_phi4_mini_3_8b_s155921_remediation_full.jsonl",
+      "row_count": 142,
+      "sha256": "5347e6890995cf4b44f330642fa6843d63a88de311b0faeec1704f95eb864b2e"
+    },
+    {
+      "bytes": 1367644,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_off.jsonl",
+      "row_count": 249,
+      "sha256": "e667da45d8a6d9cd2cbb38c54db747ebb9dc8efdffdab9f3ff846fb8f8d852dc"
+    },
+    {
+      "bytes": 1243995,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_full.jsonl",
+      "row_count": 196,
+      "sha256": "f1d67aa000393041782d587b3f08356750fc644e6e5f846c9432b6ce999b304e"
+    },
+    {
+      "bytes": 1310176,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_130363/e18_llama3_2_3b_s130363_remediation_off.jsonl",
+      "row_count": 237,
+      "sha256": "c4d5816b5ee8e03e4c85957551620da64872e431362c2fa6a6da08858f260b40"
+    },
+    {
+      "bytes": 1202427,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_130363/e18_llama3_2_3b_s130363_remediation_full.jsonl",
+      "row_count": 188,
+      "sha256": "83ae3a7e3150b4fba289c8ba1e7accb5a8bf0f5b4a96c9272d944dcfca9f51e4"
+    },
+    {
+      "bytes": 1351954,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_155921/e18_llama3_2_3b_s155921_remediation_off.jsonl",
+      "row_count": 245,
+      "sha256": "8feb8dab2ad1c82d4bcd7985b748907f54851c05804c9cc3c5346f577b12d7cd"
+    },
+    {
+      "bytes": 1240500,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_155921/e18_llama3_2_3b_s155921_remediation_full.jsonl",
+      "row_count": 195,
+      "sha256": "adc2bf38757f316559d6784127458a6ac4579216872d2db6b278f9ca6f97a899"
+    },
+    {
+      "bytes": 743258,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_104729/e18_gemma3_4b_s104729_remediation_off.jsonl",
+      "row_count": 135,
+      "sha256": "5f2210c50e119606be0b3b79118416302898e3b947dedfecf37364f72437a64c"
+    },
+    {
+      "bytes": 852218,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_104729/e18_gemma3_4b_s104729_remediation_full.jsonl",
+      "row_count": 135,
+      "sha256": "203e056d5177156cf1a5dcab7aae1113c9830e84f9d9d2dedd12d27e580b1d3f"
+    },
+    {
+      "bytes": 737982,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_off.jsonl",
+      "row_count": 134,
+      "sha256": "ba48c4024434f5abba083786a81c3f3aed07a20e10c76c7fd1fec9afbece4ddd"
+    },
+    {
+      "bytes": 845476,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_130363/e18_gemma3_4b_s130363_remediation_full.jsonl",
+      "row_count": 134,
+      "sha256": "6b93f1ec8b66c2e09316e9d46a2a59e676a265d568813b01f20714de33838e30"
+    },
+    {
+      "bytes": 748177,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_155921/e18_gemma3_4b_s155921_remediation_off.jsonl",
+      "row_count": 136,
+      "sha256": "09cc2017cf54703b43d683ea7f48605f177f0639333870d3c9676143637eae50"
+    },
+    {
+      "bytes": 857517,
+      "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+      "kind": "formal_raw_log",
+      "logical_case_runs": 90,
+      "path": "outputs/experiments/acceptance_remediation_v2/formal/gemma3_4b/seed_155921/e18_gemma3_4b_s155921_remediation_full.jsonl",
+      "row_count": 136,
+      "sha256": "6d07b9e57707c55c15d69d575efe234f7cfea53d1f2b263f4f6812a6e0c00d43"
+    }
+  ],
+  "schema_version": "2.0"
+}

@@ -15,7 +15,7 @@ from .detector import (
     detect_structured_injection,
     detect_tool_lure,
 )
-from .policy_engine import VALID_DECISIONS, decision_rank, decide
+from .policy_engine import VALID_DECISIONS, decision_rank, decide, is_authorized_action
 
 
 @dataclass(frozen=True)
@@ -132,6 +132,9 @@ def evaluate_guard(
         ("structured_detector", detect_structured_injection, 0.20),
         ("multilingual_detector", detect_multilingual_obfuscation, 0.10),
     )
+    authorized_action = bool(
+        tool != "final" and is_authorized_action(context, tool, arguments)
+    )
     for module, detector, base_delta in detector_specs:
         # A safe final answer should not be blocked merely because its source
         # document contained an injection. Final output is handled by DLP.
@@ -139,9 +142,16 @@ def evaluate_guard(
             continue
         started = perf_counter_ns()
         module_reasons: list[str] = []
-        for text in runtime_texts:
-            if text:
-                module_reasons.extend(detector(text))
+        # Document detectors describe the untrusted carrier, not the semantic
+        # safety of an exact trusted action. Penalizing a positively authorized
+        # first step because its source document contains an injection creates
+        # false positives and prevents the Agent from reaching the later unsafe
+        # proposal that Guard must inspect. Dataflow and policy still run first
+        # and can deny sensitive content, off-targets, or forbidden effects.
+        if not authorized_action:
+            for text in runtime_texts:
+                if text:
+                    module_reasons.extend(detector(text))
         module_reasons = _unique(module_reasons)
         module_risk = base_delta if module_reasons else 0.0
         if module == "structured_detector" and "json_rpc_injection" in module_reasons:
@@ -152,16 +162,24 @@ def evaluate_guard(
 
     if tool != "final" and resolved.enabled("intent_action"):
         started = perf_counter_ns()
-        mismatch = detect_intent_action_mismatch(case.get("user_task", ""), tool)
-        module_risk = float(mismatch.risk_delta)
+        # Exact positive authorization is the strongest available statement of
+        # trusted intent. Re-applying a keyword-only mismatch to the same call
+        # double-counts risk and can turn a legitimate side effect into ASK.
+        mismatch = (
+            detect_intent_action_mismatch(case.get("user_task", ""), tool)
+            if not authorized_action
+            else None
+        )
+        module_risk = 0.0 if mismatch is None else float(mismatch.risk_delta)
+        module_reasons = [] if mismatch is None else mismatch.reasons
         risk += module_risk
-        reasons.extend(mismatch.reasons)
+        reasons.extend(module_reasons)
         trace.append(
             _trace(
                 "intent_action",
                 module_risk,
                 "allow",
-                mismatch.reasons,
+                module_reasons,
                 started,
             )
         )

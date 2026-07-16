@@ -8,7 +8,13 @@ M3-EXPANSION-001
 
 在本地分支 `test1` 完成可信、可恢复、可审计的 E0-E17 全量实验，并交付多维结果分析、静态图表、最终 Dashboard 证据入口、抽样真人盲审结论和本地 Git 提交。当前范围明确不制作 PPT、DOCX 报告或提交 ZIP，也不推送或创建 PR。
 
-## Final Phase
+## Active Phase
+
+Phase 10：Remediation V2 最终验收与本地交付。A04、A06、A07、A10 已由新的完整证据证明达标；旧 E0–E17、E17 真人复核、`final_analysis` 与提交 `1cbbbc4` 保持不可变，作为修正前基线。
+
+V1 在首个正式 job 暴露不变门禁失败后被明确 invalidated；V2 使用新的协议、冻结、输出根和 `formal_post_hoc_engineering_remediation_v2` 证据层级，从零完成 2,160 次正式 case-run 与 144-row 性能 replay。全仓 Harness verifier 已以 361 passed、1 skipped、0 verification failures 通过；当前只剩 Git 审计、服务停止与本地提交收口。
+
+## Previous Final Phase
 
 Phase 8：最终证据冻结与本地交付。E0-E17 已全部登记为 `completed`；两名真人各完成 360 行同一冻结盲审包，主标签与次级代码集合 360/360 一致，Cohen's kappa=1.000，无需第三人裁决。
 
@@ -31,10 +37,14 @@ E17 采用冻结的分层抽样协议：300 行代表性样本用于设计加权
 
 ## Acceptance Outcome
 
-- PASS：ASR 相对下降 99.21%，DSR 0/432，恶意调用 Precision 99.24%，正常调用 FPR 2.74%，正常 ASK 6.17%，Guard p95 最差 0.538ms，ToolCall 解析 1529/1568=97.51%。
-- FAIL：恶意调用 Recall 525/607=86.49%，正常 TCR 下降 6.79 个百分点，合法工具 TCR 110/168=65.48%，E14 最差 cell 端到端中位延迟开销 92.43%。
-- 额外限制：主矩阵 run-level 解析为 6025/6480=92.98%，E9 unresolved 为 14/120；这些诊断不替换 A00-A11 权威验收矩阵。
+- Remediation V2：12/12 PASS。
+- A04：恶意调用 Recall 134/134=100%，Wilson 95% CI [97.21%, 100%]。
+- A06：normal TCR off=312/324，full=319/324；所谓“下降”为 -2.16pp，即实际改善 2.16pp。
+- A07：合法工具 TCR 166/168=98.81%，Wilson 95% CI [95.76%, 99.67%]。
+- A10：12 个性能 cell 全部通过；最差 cell 中位可归因开销 0.009461%，远低于 10%。
+- 全部门禁附带结果：A11 解析 1736/1817=95.54%；Dashboard 10 metric rows、3,780 logs、4 figures、0 warnings。
+- 限制：这是复用原 blind case 的 post-hoc engineering remediation，不冒充新的未见盲测；性能 replay 隔离的是同输出 Guard 可归因成本，行为轨迹由 2,160-run 主复验单独衡量。
 
-## Completion Boundary
+## Previous Completion Boundary
 
-代码、实验、E17 抽样真人复核、统计、图表、Dashboard 数据门禁和技术报告均已完成，并已通过 Git 差异审计封装到本地 `test1` 提交；不得 push 或创建 PR。
+代码、实验、E17 抽样真人复核、统计、图表、Dashboard 数据门禁和技术报告已封装到本地 `test1` 提交 `1cbbbc4`。该结论是本次修正的不可变基线，不得 push 或创建 PR。

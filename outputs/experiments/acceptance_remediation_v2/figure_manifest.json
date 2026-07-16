@@ -1,0 +1,169 @@
+{
+  "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+  "experiment_id": "E18",
+  "figures": [
+    {
+      "caption": "The four originally failed gates are shown with unchanged thresholds.",
+      "chart_type": "small_multiple_bar",
+      "files": {
+        "data": {
+          "bytes": 252,
+          "path": "acceptance_before_after_data.csv",
+          "sha256": "67345872d9c20f4d1c4a0611c6aa0210def39a806153409460339438e35fa86c"
+        },
+        "png": {
+          "bytes": 106109,
+          "path": "acceptance_before_after.png",
+          "sha256": "9f801ca269d14cebfd256d10cec151393b0d373b93c4d04e9cdeba7091c94730"
+        },
+        "svg": {
+          "bytes": 73248,
+          "path": "acceptance_before_after.svg",
+          "sha256": "ef0db42b657d340a6d4fe05230d9fe824dd4c8812ef7cb609af743c5a63c1d62"
+        }
+      },
+      "grain": [
+        "acceptance_target",
+        "evidence_version"
+      ],
+      "id": "acceptance_before_after",
+      "metrics": [
+        "Recall",
+        "TCRDrop",
+        "LegalToolTCR",
+        "E2EOverhead"
+      ],
+      "order": 0,
+      "role": "primary",
+      "title": "Original failures versus remediation",
+      "uncertainty": [
+        {
+          "method": "Wilson/paired statistics in statistics.json"
+        }
+      ],
+      "warnings": [
+        "This is post-hoc remediation, not the original blind result."
+      ]
+    },
+    {
+      "caption": "Security recall and benign utility are separated by model.",
+      "chart_type": "grouped_bar",
+      "files": {
+        "data": {
+          "bytes": 571,
+          "path": "model_effects_data.csv",
+          "sha256": "9543dd170751d3e5112ef01fed63dc1c40c1cc52bdf34c839f20fade99d0adf6"
+        },
+        "png": {
+          "bytes": 59149,
+          "path": "model_effects.png",
+          "sha256": "5742459f5487cf196267b199b9ffc3117f199e37f801a35900505d9b80df262a"
+        },
+        "svg": {
+          "bytes": 39879,
+          "path": "model_effects.svg",
+          "sha256": "e0e2dc5a95526bce0205e49f2717c0a545bd71ca672b39b46e39aeef24ee25ad"
+        }
+      },
+      "grain": [
+        "model"
+      ],
+      "id": "model_effects",
+      "metrics": [
+        "Recall",
+        "TCR",
+        "LegalToolTCR"
+      ],
+      "order": 1,
+      "role": "primary",
+      "title": "Remediation effects by model",
+      "uncertainty": [
+        {
+          "method": "Wilson intervals in metrics.csv"
+        }
+      ],
+      "warnings": [
+        "Aggregate gates are micro-averaged; inspect model rows for heterogeneity."
+      ]
+    },
+    {
+      "caption": "Each point is the cell median after replaying identical retained ToolCalls.",
+      "chart_type": "multi_series_line",
+      "files": {
+        "data": {
+          "bytes": 1601,
+          "path": "performance_overhead_data.csv",
+          "sha256": "4daf26a8bffd09ed020f4d92b999e0dcc216f7d5b92460918ce48d162a2268ec"
+        },
+        "png": {
+          "bytes": 146274,
+          "path": "performance_overhead.png",
+          "sha256": "a17b2c3aade1d46fe2e19756fdc73f62fdcd8eb15b9a57e2bc40054773cd0cd4"
+        },
+        "svg": {
+          "bytes": 49881,
+          "path": "performance_overhead.svg",
+          "sha256": "a0205e8328a447a9dd442b288ef3f96d2f7452dbad78d74e316ee6690b66d50b"
+        }
+      },
+      "grain": [
+        "target_prompt_tokens",
+        "offered_concurrency"
+      ],
+      "id": "performance_overhead",
+      "metrics": [
+        "MedianPairedE2EOverhead",
+        "GuardLatencyP95"
+      ],
+      "order": 2,
+      "role": "primary",
+      "title": "Same-output counterfactual Guard overhead",
+      "uncertainty": [
+        {
+          "method": "paired Wilcoxon and rank-biserial in performance_replay/statistics.json"
+        }
+      ],
+      "warnings": [
+        "The replay isolates Guard cost and does not model changed tool trajectories.",
+        "Rendering was repaired post-freeze for legibility; source CSV values are unchanged."
+      ]
+    },
+    {
+      "caption": "Recovered events remain present in raw logs and parse/ASK denominators.",
+      "chart_type": "pie",
+      "files": {
+        "data": {
+          "bytes": 188,
+          "path": "recovery_profile_data.csv",
+          "sha256": "b8d9e8df4a69670a109d2d8b11adbc0ea0703998bed2c2306b42ce655da76d5e"
+        },
+        "png": {
+          "bytes": 137912,
+          "path": "recovery_profile.png",
+          "sha256": "613c6fbd031299e55bbd145cdb26f3cb8e7a9fc7a2b22f8d6a5589988ebd76cb"
+        },
+        "svg": {
+          "bytes": 49620,
+          "path": "recovery_profile.svg",
+          "sha256": "08f796b0be042790c56314040a1fd2ee30102ccad2bc01e0978b14857802a877"
+        }
+      },
+      "grain": [
+        "recovery_type"
+      ],
+      "id": "recovery_profile",
+      "metrics": [
+        "RecoveryCaseRuns"
+      ],
+      "order": 3,
+      "role": "secondary",
+      "title": "Full-Guard recovery profile",
+      "uncertainty": [],
+      "warnings": [
+        "A case-run with multiple recovery types is assigned to the combined category.",
+        "Rendering was repaired post-freeze for legibility; source CSV values are unchanged."
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

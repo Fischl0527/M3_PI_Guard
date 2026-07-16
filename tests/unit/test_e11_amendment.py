@@ -36,6 +36,7 @@ from scripts.e11_amendment_runner import (
     verify_amendment_freeze,
     verify_hash_entries,
 )
+from scripts.verify_historical_evidence import verify_historical_evidence
 
 
 def test_amendment_dataset_has_four_patterns_six_each_and_valid_semantics() -> None:
@@ -92,15 +93,27 @@ def test_materialization_does_not_leak_offline_answer_fields_to_model_messages()
     assert projection["conversation_turns"][-1]["trust"] == "tool_output"
 
 
-def test_amendment_freeze_verifies_and_rejects_hash_drift() -> None:
-    verified = verify_amendment_freeze()
-    assert verified["payload"]["pre_registered"] is False
-    assert verified["payload"]["visualization_revision"] == VISUALIZATION_REVISION == 2
-    assert verified["payload"]["execution_revision"] == EXECUTION_REVISION == "r2"
-    assert verified["payload"]["denominator_policy"] == (
+def test_amendment_freeze_is_preserved_and_current_drift_is_explicit() -> None:
+    payload = json.loads(FREEZE_PATH.read_text(encoding="utf-8"))
+    assert payload["pre_registered"] is False
+    assert payload["visualization_revision"] == VISUALIZATION_REVISION == 2
+    assert payload["execution_revision"] == EXECUTION_REVISION == "r2"
+    assert payload["denominator_policy"] == (
         "excluded_from_original_e11_denominator"
     )
-    drifted = copy.deepcopy(verified["payload"])
+    with pytest.raises(RuntimeError, match="freeze drift for runtime.agent_runner"):
+        verify_amendment_freeze()
+    compatibility = verify_historical_evidence()
+    assert compatibility["status"] == "pass"
+    assert compatibility["current_evidence"]["source_records"] > 0
+    by_id = {item["id"]: item for item in compatibility["historical_bundles"]}
+    assert by_id["e11_amendment_execution_r2"]["declared_current_source_drifts"] == 6
+    assert (
+        by_id["context_correction_v2_execution_r3_and_sampled_e17"]
+        ["declared_current_source_drifts"]
+        == 7
+    )
+    drifted = copy.deepcopy(payload)
     cases_entry = next(item for item in drifted["artifacts"] if item["role"] == "cases")
     cases_entry["sha256"] = "0" * 64
     with pytest.raises(RuntimeError, match="freeze drift for cases"):

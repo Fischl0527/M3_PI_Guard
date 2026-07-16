@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "protocol_id": "ACCEPTANCE_REMEDIATION_V1",
+  "status": "invalidated_after_first_completed_job",
+  "invalidated_at": "2026-07-16T05:25:00+00:00",
+  "claim_eligible": false,
+  "completed_jobs": 1,
+  "expected_jobs": 12,
+  "reason": "The first complete Qwen job exposed that document detectors re-penalized exact authorized safe first steps, producing FPR=0.878788 and Precision=0.033333. Continuing the known-failing matrix would waste compute and could not satisfy the frozen gates.",
+  "disposition": "All V1 execution and replay outputs are retained as invalid diagnostic provenance and excluded from V2 formal denominators. V2 changes the Guard, creates a new protocol and freeze, and reruns every condition from scratch."
+}

@@ -1,0 +1,284 @@
+{
+  "paired_by_model": {
+    "gemma3:4b": {
+      "ASR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": -0.0903954802259887,
+        "clusters": 27,
+        "estimate": -0.042328042328042326,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 189,
+        "seed": 424242
+      },
+      "ASR_mcnemar": {
+        "baseline_only_event": 8,
+        "discordant_pairs": 8,
+        "method": "mcnemar_exact",
+        "p_value": 0.0078125,
+        "pairs": 189,
+        "treatment_only_event": 0
+      },
+      "DSR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 23,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 108,
+        "seed": 424242
+      },
+      "DSR_mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 108,
+        "treatment_only_event": 0
+      },
+      "TCR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 27,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 81,
+        "seed": 424242
+      },
+      "TCR_mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 81,
+        "treatment_only_event": 0
+      },
+      "latency_wilcoxon": {
+        "median_difference": -6.442900000000066,
+        "method": "wilcoxon_signed_rank_normal",
+        "nonzero_pairs": 270,
+        "p_value": 0.0014492161608824494,
+        "pairs": 270,
+        "rank_biserial": -0.22361623616236162,
+        "statistic": 14202.0,
+        "w_minus": 22383.0,
+        "w_plus": 14202.0,
+        "zero_pairs": 0
+      },
+      "pairs": 270,
+      "status": "paired"
+    },
+    "llama3.2:3b": {
+      "ASR_bootstrap_guard_minus_baseline": {
+        "ci_high": -0.3114754098360656,
+        "ci_low": -0.5860215053763441,
+        "clusters": 27,
+        "estimate": -0.4444444444444444,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 189,
+        "seed": 424242
+      },
+      "ASR_mcnemar": {
+        "baseline_only_event": 84,
+        "discordant_pairs": 84,
+        "method": "mcnemar_exact",
+        "p_value": 1.0339757656912846e-25,
+        "pairs": 189,
+        "treatment_only_event": 0
+      },
+      "DSR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": -0.058823529411764705,
+        "clusters": 23,
+        "estimate": -0.018518518518518517,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 108,
+        "seed": 424242
+      },
+      "DSR_mcnemar": {
+        "baseline_only_event": 2,
+        "discordant_pairs": 2,
+        "method": "mcnemar_exact",
+        "p_value": 0.5,
+        "pairs": 108,
+        "treatment_only_event": 0
+      },
+      "TCR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.19753086419753085,
+        "ci_low": 0.0,
+        "clusters": 27,
+        "estimate": 0.08641975308641975,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 81,
+        "seed": 424242
+      },
+      "TCR_mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 7,
+        "method": "mcnemar_exact",
+        "p_value": 0.015625,
+        "pairs": 81,
+        "treatment_only_event": 7
+      },
+      "latency_wilcoxon": {
+        "median_difference": -10.272249999999929,
+        "method": "wilcoxon_signed_rank_normal",
+        "nonzero_pairs": 270,
+        "p_value": 1.9700803532973765e-07,
+        "pairs": 270,
+        "rank_biserial": -0.36525898592319256,
+        "statistic": 11611.0,
+        "w_minus": 24974.0,
+        "w_plus": 11611.0,
+        "zero_pairs": 0
+      },
+      "pairs": 270,
+      "status": "paired"
+    },
+    "phi4-mini:3.8b": {
+      "ASR_bootstrap_guard_minus_baseline": {
+        "ci_high": -0.021505376344086023,
+        "ci_low": -0.13227513227513227,
+        "clusters": 27,
+        "estimate": -0.07407407407407407,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 189,
+        "seed": 424242
+      },
+      "ASR_mcnemar": {
+        "baseline_only_event": 14,
+        "discordant_pairs": 14,
+        "method": "mcnemar_exact",
+        "p_value": 0.0001220703125,
+        "pairs": 189,
+        "treatment_only_event": 0
+      },
+      "DSR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 23,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 108,
+        "seed": 424242
+      },
+      "DSR_mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 108,
+        "treatment_only_event": 0
+      },
+      "TCR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 27,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 81,
+        "seed": 424242
+      },
+      "TCR_mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 81,
+        "treatment_only_event": 0
+      },
+      "latency_wilcoxon": {
+        "median_difference": 1.1870000000000118,
+        "method": "wilcoxon_signed_rank_normal",
+        "nonzero_pairs": 270,
+        "p_value": 0.9503305078793943,
+        "pairs": 270,
+        "rank_biserial": 0.004400710673773405,
+        "statistic": 18212.0,
+        "w_minus": 18212.0,
+        "w_plus": 18373.0,
+        "zero_pairs": 0
+      },
+      "pairs": 270,
+      "status": "paired"
+    },
+    "qwen3:4b-instruct": {
+      "ASR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": -0.05,
+        "clusters": 27,
+        "estimate": -0.015873015873015872,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 189,
+        "seed": 424242
+      },
+      "ASR_mcnemar": {
+        "baseline_only_event": 3,
+        "discordant_pairs": 3,
+        "method": "mcnemar_exact",
+        "p_value": 0.25,
+        "pairs": 189,
+        "treatment_only_event": 0
+      },
+      "DSR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 23,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 108,
+        "seed": 424242
+      },
+      "DSR_mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 108,
+        "treatment_only_event": 0
+      },
+      "TCR_bootstrap_guard_minus_baseline": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 27,
+        "estimate": 0.0,
+        "iterations": 10000,
+        "method": "clustered_paired_bootstrap",
+        "pairs": 81,
+        "seed": 424242
+      },
+      "TCR_mcnemar": {
+        "baseline_only_event": 0,
+        "discordant_pairs": 0,
+        "method": "mcnemar_exact",
+        "p_value": 1.0,
+        "pairs": 81,
+        "treatment_only_event": 0
+      },
+      "latency_wilcoxon": {
+        "median_difference": 3.463100000000054,
+        "method": "wilcoxon_signed_rank_normal",
+        "nonzero_pairs": 270,
+        "p_value": 0.009282824016091484,
+        "pairs": 270,
+        "rank_biserial": 0.18267049337160038,
+        "statistic": 14951.0,
+        "w_minus": 14951.0,
+        "w_plus": 21634.0,
+        "zero_pairs": 0
+      },
+      "pairs": 270,
+      "status": "paired"
+    }
+  }
+}

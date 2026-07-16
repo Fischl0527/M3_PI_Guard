@@ -1,0 +1,8 @@
+﻿recovery_type,case_runs
+none,916
+parse_error,36
+guard_stop,95
+guard_stop+parse_error,10
+guard_stop+premature_final,20
+guard_stop+parse_error+premature_final,2
+premature_final,1

@@ -1,0 +1,241 @@
+{
+  "schema_version": "1.1",
+  "run_prefix": "e18_llama3_2_3b_s104729",
+  "experiment_id": "e18_llama3_2_3b_s104729",
+  "experiment_version": "exp-v1.1-reproducible",
+  "project_version": "v1.1-experiments",
+  "guard_version": "guard-v1.1-modular",
+  "dataset_version": "cases-v1.1",
+  "status": "completed",
+  "created_at": "2026-07-16T05:55:20.039299+00:00",
+  "updated_at": "2026-07-16T06:01:09.704546+00:00",
+  "config": {
+    "cases": "m3_attacks/cases/all_cases.jsonl",
+    "dataset_sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462",
+    "implementation_sha256": "45cab184edc1d996844198c2f2f7eac3dc84a6417c38be5449933bd47a4fce2a",
+    "backend": "ollama",
+    "model": "llama3.2:3b",
+    "run_prefix": "e18_llama3_2_3b_s104729",
+    "run_group": "ACCEPTANCE_REMEDIATION_V2",
+    "conditions": [
+      {
+        "condition_id": "remediation_off",
+        "prompt_profile": "normal",
+        "guard_mode": "off"
+      },
+      {
+        "condition_id": "remediation_full",
+        "prompt_profile": "normal",
+        "guard_mode": "full_guard"
+      }
+    ],
+    "guard_modules": [],
+    "ask_threshold": 0.35,
+    "deny_threshold": 0.65,
+    "max_steps": 6,
+    "recover_guard_stops": true,
+    "max_guard_recoveries": 2,
+    "recover_incomplete_tasks": true,
+    "max_task_recoveries": 2,
+    "recover_parse_errors": true,
+    "max_parse_recoveries": 2,
+    "limit": null,
+    "families": [],
+    "splits": [
+      "blind"
+    ],
+    "sample_types": [],
+    "task_types": [],
+    "case_ids": [],
+    "shuffle": false,
+    "selection_seed": 104729,
+    "generation_seed": 104729,
+    "repeats": 1,
+    "temperature": 0.2,
+    "max_tokens": 256,
+    "num_ctx": null,
+    "ollama_transport": "openai_compat",
+    "timeout": 120.0,
+    "allow_fallback_guard": false,
+    "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+    "sandbox_fixture_version": "tool-sandbox-public-v1",
+    "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+    "sandbox_seed_sha256": {
+      "104729": "3a54940b5058f9de3af6212e9e0c9731fae3092786fe15d9136d058f30949a71"
+    },
+    "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+    "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+    "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue"
+  },
+  "config_hash": "9e2c01a68b14c92c66288e4e6c0dabc18fe4236ad2a426a8477c14cb2ca21534",
+  "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+  "sandbox_fixture_version": "tool-sandbox-public-v1",
+  "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+  "sandbox_seed_sha256": {
+    "104729": "3a54940b5058f9de3af6212e9e0c9731fae3092786fe15d9136d058f30949a71"
+  },
+  "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+  "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+  "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+  "git_commit": "1cbbbc4ff96af256e0230e54fa9e17af475f7914",
+  "git_dirty": true,
+  "dataset": {
+    "path": "m3_attacks/cases/all_cases.jsonl",
+    "sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462",
+    "row_count": 300
+  },
+  "backend": "ollama",
+  "oracle_stub": false,
+  "evidence_tier": "formal_model",
+  "model": "llama3.2:3b",
+  "model_identity": {
+    "tag": "llama3.2:3b",
+    "digest": "a80c4f17acd5",
+    "ollama_version": "ollama version is 0.24.0",
+    "executable": "D:\\Ollama\\app\\ollama.exe"
+  },
+  "defense_modes": [
+    "baseline",
+    "full_guard"
+  ],
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "run_group": "ACCEPTANCE_REMEDIATION_V2",
+  "notes": "FORMAL post-hoc engineering remediation; diagnostics excluded; source/config frozen before execution",
+  "conditions": [
+    {
+      "condition_id": "remediation_off",
+      "prompt_profile": "normal",
+      "guard_mode": "off",
+      "guard_modules": [],
+      "ask_threshold": 0.35,
+      "deny_threshold": 0.65,
+      "status": "completed",
+      "started_at": "2026-07-16T05:55:20.689932+00:00",
+      "updated_at": "2026-07-16T05:58:37.122164+00:00",
+      "defense_mode": "baseline",
+      "jsonl": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_off.jsonl",
+      "csv": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_off.csv",
+      "jsonl_sha256": "e667da45d8a6d9cd2cbb38c54db747ebb9dc8efdffdab9f3ff846fb8f8d852dc",
+      "csv_sha256": "d3786be20aad00f9f71095c7b7eb64728bd7c2bc7503a2175a89e0b2d12fd29e",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "104729": "3a54940b5058f9de3af6212e9e0c9731fae3092786fe15d9136d058f30949a71"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 90,
+      "selected_case_count": 90,
+      "selected_run_count": 90,
+      "skipped_case_count": 0,
+      "completed_run_count": 90,
+      "error_count": 0,
+      "log_count": 249,
+      "completed_at": "2026-07-16T05:58:37.122153+00:00"
+    },
+    {
+      "condition_id": "remediation_full",
+      "prompt_profile": "normal",
+      "guard_mode": "full_guard",
+      "guard_modules": [
+        "dataflow",
+        "instruction_detector",
+        "intent_action",
+        "multilingual_detector",
+        "output_dlp",
+        "policy",
+        "structured_detector",
+        "tool_lure_detector"
+      ],
+      "ask_threshold": 0.35,
+      "deny_threshold": 0.65,
+      "status": "completed",
+      "started_at": "2026-07-16T05:58:37.126080+00:00",
+      "updated_at": "2026-07-16T06:01:09.700643+00:00",
+      "defense_mode": "full_guard",
+      "jsonl": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_full.jsonl",
+      "csv": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_full.csv",
+      "jsonl_sha256": "f1d67aa000393041782d587b3f08356750fc644e6e5f846c9432b6ce999b304e",
+      "csv_sha256": "452fd3bbd896cb5e61b997259615ff586d5ee13e0e8121b0109aea6416a1eaba",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "104729": "3a54940b5058f9de3af6212e9e0c9731fae3092786fe15d9136d058f30949a71"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 90,
+      "selected_case_count": 90,
+      "selected_run_count": 90,
+      "skipped_case_count": 0,
+      "completed_run_count": 90,
+      "error_count": 0,
+      "log_count": 196,
+      "completed_at": "2026-07-16T06:01:09.700634+00:00"
+    }
+  ],
+  "results": [
+    {
+      "condition_id": "remediation_off",
+      "prompt_profile": "normal",
+      "guard_mode": "off",
+      "defense_mode": "baseline",
+      "status": "completed",
+      "jsonl": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_off.jsonl",
+      "csv": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_off.csv",
+      "jsonl_sha256": "e667da45d8a6d9cd2cbb38c54db747ebb9dc8efdffdab9f3ff846fb8f8d852dc",
+      "csv_sha256": "d3786be20aad00f9f71095c7b7eb64728bd7c2bc7503a2175a89e0b2d12fd29e",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "104729": "3a54940b5058f9de3af6212e9e0c9731fae3092786fe15d9136d058f30949a71"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 90,
+      "selected_case_count": 90,
+      "selected_run_count": 90,
+      "skipped_case_count": 0,
+      "completed_run_count": 90,
+      "error_count": 0,
+      "log_count": 249
+    },
+    {
+      "condition_id": "remediation_full",
+      "prompt_profile": "normal",
+      "guard_mode": "full_guard",
+      "defense_mode": "full_guard",
+      "status": "completed",
+      "jsonl": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_full.jsonl",
+      "csv": "outputs/experiments/acceptance_remediation_v2/formal/llama3_2_3b/seed_104729/e18_llama3_2_3b_s104729_remediation_full.csv",
+      "jsonl_sha256": "f1d67aa000393041782d587b3f08356750fc644e6e5f846c9432b6ce999b304e",
+      "csv_sha256": "452fd3bbd896cb5e61b997259615ff586d5ee13e0e8121b0109aea6416a1eaba",
+      "sandbox_runtime_version": "isolated-tool-sandbox-v2",
+      "sandbox_fixture_version": "tool-sandbox-public-v1",
+      "sandbox_fixture_sha256": "f716de2fdcdb881a74f6558116a525edf7e3bc6d1d9c370cab4e1766e0ff5605",
+      "sandbox_seed_sha256": {
+        "104729": "3a54940b5058f9de3af6212e9e0c9731fae3092786fe15d9136d058f30949a71"
+      },
+      "sandbox_isolation_policy": "fresh_temporary_workspace_per_logical_run",
+      "sandbox_secret_policy": "virtual_in_memory_canary_no_secret_filesystem_access",
+      "sandbox_cleanup_policy": "finally_remove_attempt_tree_and_fail_on_residue",
+      "case_count": 90,
+      "selected_case_count": 90,
+      "selected_run_count": 90,
+      "skipped_case_count": 0,
+      "completed_run_count": 90,
+      "error_count": 0,
+      "log_count": 196
+    }
+  ],
+  "completed_at": "2026-07-16T06:01:09.704534+00:00"
+}

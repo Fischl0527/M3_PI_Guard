@@ -65,6 +65,12 @@ CONFIG = {
     "out": "outputs/runs/stub_baseline.jsonl",
     "csv_out": "outputs/runs/stub_baseline.csv",
     "max_steps": 5,
+    "recover_guard_stops": False,
+    "max_guard_recoveries": 2,
+    "recover_incomplete_tasks": False,
+    "max_task_recoveries": 2,
+    "recover_parse_errors": False,
+    "max_parse_recoveries": 2,
     "limit": None,
     "families": "",
     "splits": "",
@@ -133,6 +139,18 @@ def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
     guard_version = str(config.get("guard_version") or "guard-v0.5")
     dataset_version = str(config.get("dataset_version") or "cases-v0.5")
     max_steps = int(config.get("max_steps", 5))
+    recover_guard_stops = _enabled(config.get("recover_guard_stops"))
+    max_guard_recoveries = int(config.get("max_guard_recoveries", 2))
+    if max_guard_recoveries < 0:
+        raise ValueError("max_guard_recoveries must be non-negative")
+    recover_incomplete_tasks = _enabled(config.get("recover_incomplete_tasks"))
+    max_task_recoveries = int(config.get("max_task_recoveries", 2))
+    if max_task_recoveries < 0:
+        raise ValueError("max_task_recoveries must be non-negative")
+    recover_parse_errors = _enabled(config.get("recover_parse_errors"))
+    max_parse_recoveries = int(config.get("max_parse_recoveries", 2))
+    if max_parse_recoveries < 0:
+        raise ValueError("max_parse_recoveries must be non-negative")
     defense_mode = str(config.get("defense", "baseline"))
     prompt_profile, guard_mode = _resolve_execution_modes(
         defense_mode,
@@ -160,6 +178,12 @@ def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
             config.get("ollama_transport") or "openai_compat"
         ),
         "max_steps": max_steps,
+        "recover_guard_stops": recover_guard_stops,
+        "max_guard_recoveries": max_guard_recoveries,
+        "recover_incomplete_tasks": recover_incomplete_tasks,
+        "max_task_recoveries": max_task_recoveries,
+        "recover_parse_errors": recover_parse_errors,
+        "max_parse_recoveries": max_parse_recoveries,
     }
 
     selected_cases = _filter_cases(all_cases, config)
@@ -206,6 +230,12 @@ def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
                     deny_threshold=deny_threshold,
                     allow_fallback_guard=_enabled(config.get("allow_fallback_guard")),
                     max_steps=max_steps,
+                    recover_guard_stops=recover_guard_stops,
+                    max_guard_recoveries=max_guard_recoveries,
+                    recover_incomplete_tasks=recover_incomplete_tasks,
+                    max_task_recoveries=max_task_recoveries,
+                    recover_parse_errors=recover_parse_errors,
+                    max_parse_recoveries=max_parse_recoveries,
                     experiment_id=experiment_id,
                     guard_version=guard_version,
                     case_source=case_source,
@@ -357,6 +387,24 @@ def _parse_args(argv: List[str]) -> Dict[str, Any]:
     parser.add_argument("--out", required=True, help="Output RunLog JSONL path")
     parser.add_argument("--csv-out", help="Optional output RunLog CSV path")
     parser.add_argument("--max-steps", type=int, default=5)
+    parser.add_argument(
+        "--recover-guard-stops",
+        action="store_true",
+        help="Continue after a non-executed Guard stop so the model can safely return final",
+    )
+    parser.add_argument("--max-guard-recoveries", type=int, default=2)
+    parser.add_argument(
+        "--recover-incomplete-tasks",
+        action="store_true",
+        help="Retry a premature final while required authorized actions remain",
+    )
+    parser.add_argument("--max-task-recoveries", type=int, default=2)
+    parser.add_argument(
+        "--recover-parse-errors",
+        action="store_true",
+        help="Retry an invalid ToolCall without executing its parser fallback",
+    )
+    parser.add_argument("--max-parse-recoveries", type=int, default=2)
     parser.add_argument("--limit", type=int, help="Only run the first N selected cases")
     parser.add_argument(
         "--families",

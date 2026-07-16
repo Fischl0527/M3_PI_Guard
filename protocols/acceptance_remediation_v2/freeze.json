@@ -1,0 +1,149 @@
+{
+  "blind_case_ids_sha256": "27de7c4ee3b4a6142991554edd5a7590e99cf2e50263a0598490152503c7b19f",
+  "claim_boundary": "post_hoc_engineering_remediation_v2_after_original_and_v1_failures",
+  "created_at": "2026-07-16T05:30:19.913851+00:00",
+  "git": {
+    "branch": "test1",
+    "commit": "1cbbbc4ff96af256e0230e54fa9e17af475f7914",
+    "dirty": true
+  },
+  "protocol_id": "ACCEPTANCE_REMEDIATION_V2",
+  "schema_version": "1.0",
+  "source_records": [
+    {
+      "bytes": 3651,
+      "path": "protocols/acceptance_remediation_v2/protocol.md",
+      "sha256": "5fdd611fc69ea4068e42fc461c1acce19321fe941cee554f8a8afa179556a281"
+    },
+    {
+      "bytes": 2234,
+      "path": "protocols/acceptance_remediation_v2/protocol.json",
+      "sha256": "d769e1277a71f8c52dcb5d09adad1a3a56c25dfdccdc7984735da9f73a5bc975"
+    },
+    {
+      "bytes": 759,
+      "path": "protocols/acceptance_remediation_v1/INVALIDATED.json",
+      "sha256": "968cc58711e5f63dd980c16eeb49ecc8c9fe34b78625fa3b71fc7c261548277b"
+    },
+    {
+      "bytes": 50966,
+      "path": "experiments/acceptance_remediation.py",
+      "sha256": "16842616471b53afd2eb116a29336d8b581e3bb51e6bf0e9cff965275690697c"
+    },
+    {
+      "bytes": 438591,
+      "path": "m3_attacks/cases/all_cases.jsonl",
+      "sha256": "31327e383343ba71591e34637b0b10468d248a34dd5942174329c5ee42655462"
+    },
+    {
+      "bytes": 46559,
+      "path": "m3_core/agent_runner.py",
+      "sha256": "686eb838b059691542f06bbe6cafb8e9a17f555a53a7e9ce7602a95ee717cdb4"
+    },
+    {
+      "bytes": 2489,
+      "path": "m3_core/case_views.py",
+      "sha256": "a706b64ea4cdc6a7517451f99545c921faa871cd543f798ce62c7cd5701ab31f"
+    },
+    {
+      "bytes": 14667,
+      "path": "m3_core/llm_client.py",
+      "sha256": "150ae873e5831bade5b9e160344929d3a589ca472ef6ae39998962bac12d660b"
+    },
+    {
+      "bytes": 37692,
+      "path": "m3_core/run_batch.py",
+      "sha256": "dde9b11e64d4ca76c2050bac7aaa64824f0ca519f9f2a8bfd84e07e4ead8b360"
+    },
+    {
+      "bytes": 30031,
+      "path": "m3_core/run_matrix.py",
+      "sha256": "c542aa81838e45956473cdfb6d86f8251af589d4c5bbd0f425b4327ef407172b"
+    },
+    {
+      "bytes": 23487,
+      "path": "m3_core/tool_sandbox.py",
+      "sha256": "4eda3424212ac368d3d9d99ffcc1d424e64fbe4f868afdf3177f0b7222371e3b"
+    },
+    {
+      "bytes": 3987,
+      "path": "m3_guard/config.py",
+      "sha256": "31eeb37c9c26500c55565141d7d715ecc88d04673132f67df0b8e71389a3f828"
+    },
+    {
+      "bytes": 6275,
+      "path": "m3_guard/dataflow.py",
+      "sha256": "752a357a835bd0ae58a666d9a6d96a26a47652593b980ccbee0f68f7bcaf3347"
+    },
+    {
+      "bytes": 8462,
+      "path": "m3_guard/detector.py",
+      "sha256": "c6e41918058c454393e043580b297bbf695566229b82f68975b562a460622aa8"
+    },
+    {
+      "bytes": 9723,
+      "path": "m3_guard/guard_engine.py",
+      "sha256": "78f6040482d953505d708280448dbaf90b26da44135c4e864caba6f72cf9c61f"
+    },
+    {
+      "bytes": 5860,
+      "path": "m3_guard/normalizer.py",
+      "sha256": "c9b9c024ba4572d0addda1041582c69cde7aaed8249e9cb6d4d0e4654958e178"
+    },
+    {
+      "bytes": 10655,
+      "path": "m3_guard/policy_engine.py",
+      "sha256": "dbcb29b68f9c17765968e833169389aaa136765ea909e8b36b3902edb8cff76f"
+    },
+    {
+      "bytes": 53321,
+      "path": "m3_eval/metrics.py",
+      "sha256": "e4533334179ee93eb61e96f49546bdb03ac44c0bb27cc693f85e33be3cb200cd"
+    },
+    {
+      "bytes": 12015,
+      "path": "m3_eval/statistics.py",
+      "sha256": "86216e53b1ace635450ffa9a3d113fba7fa0848d58a0d391d28e119dbbc0fec1"
+    },
+    {
+      "bytes": 78265,
+      "path": "m3_eval/evidence_dashboard.py",
+      "sha256": "ee6db1e25ff403915914846d91ec18e6a580d4ba2609fb662c4c453e6c1f835d"
+    },
+    {
+      "bytes": 15214,
+      "path": "m3_eval/figure_manifest.py",
+      "sha256": "3077d257568e5e6c27161f3e43495178d87f7cd0e82bb39b9c62e0fa1171a6e6"
+    },
+    {
+      "bytes": 4124,
+      "path": "schemas/attack_case.schema.json",
+      "sha256": "0b20b62e9f7d19e1732fd4a9db8ab1f2716aacbae637d8a73c8b791eeed81130"
+    },
+    {
+      "bytes": 5456,
+      "path": "schemas/run_log.schema.json",
+      "sha256": "360d983cb35069343a0e6d166c9df05555043dbbd75d1f01527c5e2080080750"
+    },
+    {
+      "bytes": 730,
+      "path": "schemas/tool_call.schema.json",
+      "sha256": "73e3e472118a8206c82459683f5adf7128716379deeb2a4c66a5a76fb679c01e"
+    },
+    {
+      "bytes": 2473438,
+      "path": "protocols/context_correction_v2/fixtures/e14_cases_r2.jsonl",
+      "sha256": "27ff66990271e470b6781c9b08cee9309ee3853b859e7a8bb2660bcf7d44bac3"
+    },
+    {
+      "bytes": 3106021,
+      "path": "outputs/experiments/E14_context_correction_v2_r3/formal_raw_runs.jsonl",
+      "sha256": "7e89687d2407045e24edda137756425d5e79a7d7d404a10a9fae8251cc2a0a66"
+    },
+    {
+      "bytes": 3983,
+      "path": "outputs/experiments/final_analysis/acceptance_matrix.csv",
+      "sha256": "e6472b6be3bb88a5b380666a6f678aac6a2b3dd6bf7a5236309f859c63f4bf32"
+    }
+  ]
+}

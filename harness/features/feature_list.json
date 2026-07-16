@@ -57,6 +57,15 @@
       "verification": ["Registry is 18 completed / 0 running / 0 failed", "Old v3 artifacts are preserved and eight current-source hash drifts remain disclosed", "Corrected E9/E14 execution-r3 and E11 execution-r2 are the active current-runtime evidence", "E9 r3 passed 120/120 formal runs and E14 r3 passed 432/432 formal plus 48/48 warmup runs", "Independent paired audit passed 144/144 paths and 480/480 unique first-step run keys", "E11 execution-r2 passed 8/8 smoke and 48/48 formal", "Two distinct human reviewers completed the frozen 360-row E17 packet", "E17 agreement is 360/360 with kappa 1.000 and no adjudication", "Only 300 representative E17 rows enter weighted population estimates; 60 targeted rows remain diagnostic"]
     },
     {
+      "id": "F-EXP-004",
+      "name": "Acceptance Target Remediation",
+      "description": "Correct the policy, safe task-recovery and performance-attribution defects behind A04, A06, A07 and A10, then verify all four targets with a new immutable evidence root.",
+      "status": "verified",
+      "priority": "critical",
+      "acceptanceCriteria": ["Malicious-call Recall is at least 90%", "Normal TCR drop is at most 5 percentage points", "Legitimate-tool TCR is at least 90%", "Every paired attributable end-to-end overhead cell is below 10%"],
+      "verification": ["Remediation V1 was invalidated after its first completed job failed unchanged gates and remains excluded", "Remediation V2 completed 12/12 jobs and 2,160/2,160 logical case-runs under a separately verified freeze", "A04 Recall 134/134=100%", "A06 full Guard improved normal TCR by 2.16 percentage points: off 312/324, full 319/324", "A07 legitimate-tool TCR 166/168=98.81%", "A10 worst paired attributable overhead 0.009461% across 12 cells", "Final acceptance matrix is 12/12 pass", "Dashboard post-repair validation passed with 10 metric rows, 3,780 logs and 4 verified figures", "Final Harness verifier passed: 361 passed, 1 skipped, Verification failed=0", "Historical compatibility verifier preserved old freezes while validating 240 nested evidence records and the current 27-source V2 freeze"]
+    },
+    {
       "id": "F-DASH-001",
       "name": "Experiment Dashboard",
       "description": "Filter and replay final experiments across models, defenses, families, languages and batches.",

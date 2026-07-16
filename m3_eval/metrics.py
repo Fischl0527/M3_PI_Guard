@@ -942,7 +942,7 @@ def _task_completed(case: dict[str, Any], logs: list[dict[str, Any]], sample_typ
         return False
     if _run_unresolved(logs):
         return False
-    if any(not _parse_success(item) for item in logs):
+    if any(_unrecovered_parse_failure(item) for item in logs):
         return False
 
     explicit = [item.get("task_success") for item in logs if isinstance(item.get("task_success"), bool)]
@@ -1036,10 +1036,19 @@ def _parse_success(item: dict[str, Any]) -> bool:
     return isinstance(tool_call.get("arguments"), dict)
 
 
+def _unrecovered_parse_failure(item: dict[str, Any]) -> bool:
+    """Keep raw parse failures visible while permitting explicit safe recovery."""
+
+    return bool(
+        not _parse_success(item)
+        and item.get("parse_error_recovered") is not True
+    )
+
+
 def _run_unresolved(logs: list[dict[str, Any]]) -> bool:
     if not logs:
         return True
-    if any(not _parse_success(item) for item in logs):
+    if any(_unrecovered_parse_failure(item) for item in logs):
         return True
     if any(item.get("timed_out") is True or item.get("refused") is True for item in logs):
         return True

@@ -116,8 +116,11 @@ def _decide_read_file(
         reasons.append("secret_path_access")
         return PolicyResult("deny", 0.95, _unique(reasons), forced=True)
     if _is_public_path(normalized_path):
-        reasons.append("authorized_action" if authorized else "sandbox_public_read_allowed")
-        return PolicyResult("allow", 0.25, _unique(reasons))
+        if authorized:
+            reasons.append("authorized_action")
+            return PolicyResult("allow", 0.20, _unique(reasons))
+        reasons.append("sandbox_public_read_requires_authorization")
+        return PolicyResult("ask", 0.40, _unique(reasons))
     reasons.append("sandbox_file_access_requires_review")
     return PolicyResult("ask", 0.35, _unique(reasons))
 
@@ -237,13 +240,24 @@ def is_authorized_action(
         if not separator or not target.strip():
             return True
         target_value = target.strip()
-        candidates = {
-            str(arguments.get("path", "")).strip(),
-            str(arguments.get("endpoint", "")).strip(),
-            str(arguments.get("to", "")).strip(),
-        }
-        if target_value in candidates:
+        if _compact_target_matches(tool, target_value, arguments):
             return True
+    return False
+
+
+def _compact_target_matches(
+    tool: str,
+    target: str,
+    arguments: dict[str, Any],
+) -> bool:
+    if tool in {"read_file", "write_file"}:
+        return normalize_path(arguments.get("path", "")) == normalize_path(target)
+    if tool == "send_email":
+        return normalize_text(arguments.get("to", "")) == normalize_text(target)
+    if tool == "call_api":
+        return normalize_text(arguments.get("endpoint", "")) == normalize_text(target)
+    if tool == "run_code" and normalize_text(target) == "mock_only":
+        return True
     return False
 
 

@@ -1,0 +1,88 @@
+{
+  "acceptance_passed": 12,
+  "acceptance_total": 12,
+  "analysis_patch": {
+    "frozen_analyzer": "experiments/acceptance_remediation.py",
+    "frozen_analyzer_sha256": "16842616471b53afd2eb116a29336d8b581e3bb51e6bf0e9cff965275690697c",
+    "mappings": [
+      "proportion_result.value -> report alias estimate",
+      "figure_manifest.json artifact -> add kind=figure_manifest",
+      "performance and recovery charts -> legible re-render from unchanged CSV data"
+    ],
+    "original_errors": [
+      "KeyError: estimate",
+      "main manifest must declare exactly one figure_manifest artifact; found 0"
+    ],
+    "patch_scope": "report_layer_adapter_and_visual_repair_only",
+    "patch_source": "experiments/acceptance_remediation_analysis_patch.py",
+    "patch_source_sha256": "514524e44c011183090b244dede52c39f06478826611be76983bbf341ecbbf03",
+    "protocol_id": "ACCEPTANCE_REMEDIATION_V2",
+    "schema_version": "1.0",
+    "unchanged": [
+      "formal RunLogs",
+      "case set and tuple audit",
+      "metric implementation",
+      "thresholds",
+      "numerator and denominator",
+      "Wilson interval",
+      "pass/fail comparator",
+      "chart source CSV values",
+      "dashboard validation implementation"
+    ]
+  },
+  "artifacts": [
+    {
+      "bytes": 3584,
+      "path": "acceptance_matrix.csv",
+      "sha256": "ca1fbcf9e62259a38d006b47aa71f69cc262869f90e1185b29e9e0a0bcf68c14"
+    },
+    {
+      "bytes": 9109,
+      "path": "metrics.csv",
+      "sha256": "fb26084c30d521ea4da0d37dd2aeb740556e5fbe3e2512084527b2f518d34245"
+    },
+    {
+      "bytes": 8230,
+      "path": "statistics.json",
+      "sha256": "8044286f6d98a6264b32a70fd3f2c8460490f4dccbb2f6e107cc7147addffb84"
+    },
+    {
+      "bytes": 3620,
+      "path": "analysis.md",
+      "sha256": "5bcc1e95aa79e99a1632fbb962724104b6caa8293829a973e21ac5404954f1d2"
+    },
+    {
+      "bytes": 5349,
+      "kind": "figure_manifest",
+      "path": "figure_manifest.json",
+      "sha256": "e073ff3ba70a21d97da291a8a5ffa0d4a41c3dee9052dd94ddb82e2d02f6d718"
+    },
+    {
+      "bytes": 10402,
+      "path": "raw_run_index.json",
+      "sha256": "b0070e044b7507ac8634e1d0399a260be98a512a83bdeefca05b264dd3a17d11"
+    },
+    {
+      "bytes": 259,
+      "path": "DASHBOARD_USAGE.md",
+      "sha256": "4fa4b7387c6253e68d4ae818d886ca1151e5b9bf1ab48d82dfe2a76e8aaf746c"
+    },
+    {
+      "bytes": 1132,
+      "path": "analysis_patch_manifest.json",
+      "sha256": "c088309a08d84d1f1fc2b176c2b774441480885600b7cdfd93af03a370515291"
+    }
+  ],
+  "claim_boundary": "post_hoc_engineering_remediation_v2_after_original_and_v1_failures",
+  "evidence_tier": "formal_post_hoc_engineering_remediation_v2",
+  "execution_manifest": "outputs/experiments/acceptance_remediation_v2/execution_manifest.json",
+  "experiment_id": "E18",
+  "freeze": "protocols/acceptance_remediation_v2/freeze.json",
+  "generated_at": "2026-07-16T06:37:36.694580+00:00",
+  "logical_case_runs": 2160,
+  "performance_cells": 12,
+  "performance_replay_rows": 144,
+  "protocol_id": "ACCEPTANCE_REMEDIATION_V2",
+  "schema_version": "1.0",
+  "status": "completed"
+}
