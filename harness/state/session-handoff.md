@@ -18,6 +18,9 @@
 - 定向验证为 pytest 4/4、Ruff/py_compile 通过；没有执行 Full Harness。
 - 恢复时从最小新运行器开始，先完成定向测试，再只跑 DeepSeek/Gemini
   各 6 行 formal prefix。只允许重跑无官方响应的失败行，已成功行永不重跑。
+- 最小运行器与上述恢复语义已实现，定向测试 8/8，Ruff/py_compile 通过。
+  下一步直接运行 `deepseek --stage canary`；它只会执行 6 个尚无终态的
+  formal-prefix work key。
 - 禁止 Full Harness、历史递归重放、盲测、Pro500/2000、真实工具/effect
   和未经单独授权的 push。F-PAPER-002 仍为 `in_progress`。
 

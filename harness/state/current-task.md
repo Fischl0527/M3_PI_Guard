@@ -33,6 +33,10 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
   没有重跑任何已成功的模型记录。
 - 下一步仅实现最小运行器与定向测试，然后执行两家各 6 行
   canary。F-PAPER-002 保持 `in_progress`。
+- 最小运行器已实现：单 provider 单 raw JSONL、内容无关的官方请求链、
+  成功行不重跑、无官方响应失败行仅在显式 `--retry-failed` 下重跑、
+  Gemini 固定 free/USD 0。定向验证 8/8、Ruff/py_compile 通过；
+  Full Harness 未运行。下一操作是 DeepSeek 6 行 formal prefix。
 
 ### 2026-08-19 精简实证路线正式启用
 

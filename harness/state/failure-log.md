@@ -1,5 +1,16 @@
 # Failure Log
 
+## 2026-08-19 — Lean runner focused pytest base-temp parent was absent
+
+- Initial attempt: ran the eight lean-plan/analysis/runner tests with
+  `--basetemp outputs/test-tmp/lean-runner`.
+- Result: six tests passed and two `tmp_path` tests failed during setup because
+  pytest creates the base-temp leaf but not its missing `outputs/test-tmp`
+  parent on this Windows/Python combination. No provider/API call occurred and
+  no experiment record was written.
+- Changed hypothesis/fix: create only the dedicated test-temp parent, then rerun
+  the same focused tests. Do not run the Full Harness.
+
 ## 2026-08-04 — Flash recovery-v3 完整执行后技术门失败
 
 - Result: s0/s1 执行均 exit 0 且完成 652/654 条；review 程序也 exit 0，但

@@ -251,6 +251,7 @@ def _work_item(
         "evaluation_case_type": case["evaluation_case_type"],
         "context_dependent": case["context_dependent"],
         "source_reference": dict(case["source_reference"]),
+        "source_record_sha256": str(case["source_reference"]["sha256"]),
         "selection_stratum": dict(case["selection_stratum"]),
         "condition_id": condition_id,
         "authorization_regime": authorization_regime,

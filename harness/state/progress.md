@@ -15,6 +15,18 @@
 - 验证：4 个定向 pytest 通过，Ruff 和 py_compile 通过。已修正 Medium
   303+177 互斥分片的输入定义，不重跑成功实验行。
 
+## 2026-08-19 精简实证里程碑 2：API 前最小运行器
+
+- 新运行器只消费冻结的 1,350 行计划，每家输出一个紧凑 raw JSONL；
+  provider 内部 trace/预算状态只保存到已忽略的运行目录。
+- 每行保存 local request ID、payload digest、official response ID、returned
+  model、unsafe effect、TCR、ASK/DENY、延迟、token 和成本；不保存 prompt/response 文本。
+- 恢复规则已由测试锁定：已有官方响应的行终态不重跑；仅无官方响应行
+  能通过显式参数单独重跑；自动重试始终为 0。
+- 聚焦测试 8/8、Ruff 和 py_compile 通过。首次 pytest 因专用 basetemp
+  父目录未存在而 6 pass/2 setup error，创建该临时父目录后 8/8 通过；
+  API/provider call=0，Full Harness=0。
+
 ## 2026-08-06 04:40 Gemini Public-v5 最小 recovery 日段完成并停止
 
 - fresh Harness gate v4 重放 v6 与当前六项前置证据通过，manifest

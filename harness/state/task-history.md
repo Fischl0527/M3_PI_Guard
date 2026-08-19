@@ -170,3 +170,14 @@ Record completed, blocked, and abandoned tasks here.
   13/600 on Pro and 24/400 vs 12/400 on Flash.
 - Focused tests passed 4/4 with Ruff and py_compile. No provider call, Full
   Harness, blind test, recursive replay, or successful-row rerun occurred.
+
+# 2026-08-19 — M3-PAPER-002 lean provider runner qualified
+
+- Added the minimal DeepSeek/Gemini runner with compact raw records, isolated
+  simulated effects, content-free request evidence, zero automatic retry and
+  explicit failed-row-only recovery.
+- Added the redundant source-record digest required by the existing frozen
+  offline resolvers before any new provider call.
+- Focused verification passed 8/8 plus Ruff and py_compile. A first 6-pass/2
+  setup-error run was caused only by a missing dedicated basetemp parent and
+  passed 8/8 after that directory was created. Provider calls remained zero.
