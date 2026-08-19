@@ -27,6 +27,7 @@ import experiments.paper_v2.formal_matrix_controller_v2 as medium_v2
 import experiments.paper_v2.gemini_fallback_controller_v2 as gemini_fallback
 import experiments.paper_v2.gemini_public_controller_v1 as gemini_public_v1
 import experiments.paper_v2.gemini_trace_attaching_runtime_v2 as gemini_trace_v2
+import experiments.paper_v2.public_live_controller_v2 as public_live_v2
 from experiments.paper_v2.boundary_rejection_runtime_v3 import (
     BoundaryAwareM3EffectBackendV3,
     BoundaryAwareM3OutcomeEvaluatorV3,
@@ -360,6 +361,21 @@ def _gemini_policy() -> dict[str, Any]:
     policy["gemini"]["allow_paid_tier"] = False
     policy["gemini"]["monetary_hard_limit_usd"] = 0.0
     return validate_policy(policy)
+
+
+def _deepseek_api_key(
+    values: Mapping[str, str], role_policy: Mapping[str, Any]
+) -> str:
+    api_key = public_live_v2._validate_runtime_config(
+        values,
+        role_policy=role_policy,
+    )
+    expected_model = str(role_policy["deepseek"]["model_id"])
+    if values.get("FRONTIER_DEEPSEEK_MODEL_ID") != expected_model:
+        raise LeanEmpiricalRunnerError(
+            "DeepSeek model differs from the lean study identity"
+        )
+    return api_key
 
 
 def _gemini_budget_state(
@@ -719,9 +735,7 @@ def run_provider(
     if dispatcher_factory is None:
         if provider_id == "deepseek":
             role_policy = build_role_policy(load_public_policy(), "primary")
-            api_key = medium_v2.v1._validate_runtime_config(
-                values, role_policy=role_policy
-            )
+            api_key = _deepseek_api_key(values, role_policy)
             dispatcher = _deepseek_dispatcher(
                 permit,
                 api_key=api_key,

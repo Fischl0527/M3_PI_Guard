@@ -21,6 +21,9 @@
 - 最小运行器与上述恢复语义已实现，定向测试 8/8，Ruff/py_compile 通过。
   下一步直接运行 `deepseek --stage canary`；它只会执行 6 个尚无终态的
   formal-prefix work key。
+- DeepSeek prefix 已成为终态，不得重跑：6/6 行、14 calls、CNY 0.0157848，
+  5 completed + 1 max_steps；6 行全部有官方 response ID 和精确 Pro 模型身份，
+  tools/effects/retry 为 0。恢复时应直接运行 `gemini --stage canary`。
 - 禁止 Full Harness、历史递归重放、盲测、Pro500/2000、真实工具/effect
   和未经单独授权的 push。F-PAPER-002 仍为 `in_progress`。
 

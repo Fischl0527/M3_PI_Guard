@@ -1,5 +1,17 @@
 # Failure Log
 
+## 2026-08-19 — DeepSeek lean canary stopped before transport on validator mismatch
+
+- Initial attempt: started the six-row DeepSeek formal prefix after the focused
+  runner tests passed.
+- Result: process exited before dispatcher construction because the runner
+  called the medium-v1 runtime validator with the public-v2 keyword signature.
+  Raw records, trace files and provider calls remained zero.
+- Changed hypothesis/fix: call the public-role validator actually used by the
+  Public DeepSeek client and add an explicit exact `deepseek-v4-pro` check plus
+  a focused regression. Re-run is the first provider attempt, not a model-row
+  retry, because no transport began.
+
 ## 2026-08-19 — Lean runner focused pytest base-temp parent was absent
 
 - Initial attempt: ran the eight lean-plan/analysis/runner tests with

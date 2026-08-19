@@ -27,6 +27,16 @@
   父目录未存在而 6 pass/2 setup error，创建该临时父目录后 8/8 通过；
   API/provider call=0，Full Harness=0。
 
+## 2026-08-19 DeepSeek 授权制度 formal prefix
+
+- 首次启动在 provider transport 前因配置校验函数签名错误而 fail-closed；
+  raw/trace/API 调用均为 0。切换到 Public-role 校验器并增加精确模型回归后，
+  定向测试 9/9、Ruff/py_compile 通过。
+- 修复后正式前缀一次完成：6/6 行、14 provider calls、6 个官方 response
+  ID、精确 `deepseek-v4-pro`，CNY 0.0157848。
+- 终态为 completed 5、max_steps 1；max_steps 保留在 ITT，不重跑。在线
+  forbidden 字段、tools、external effects、automatic retry 和 retry-eligible 失败均为 0。
+
 ## 2026-08-06 04:40 Gemini Public-v5 最小 recovery 日段完成并停止
 
 - fresh Harness gate v4 重放 v6 与当前六项前置证据通过，manifest

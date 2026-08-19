@@ -181,3 +181,14 @@ Record completed, blocked, and abandoned tasks here.
 - Focused verification passed 8/8 plus Ruff and py_compile. A first 6-pass/2
   setup-error run was caused only by a missing dedicated basetemp parent and
   passed 8/8 after that directory was created. Provider calls remained zero.
+
+# 2026-08-19 — M3-PAPER-002 DeepSeek lean formal prefix complete
+
+- Corrected one pre-transport runtime-validator signature error; regression
+  verification then passed 9/9 plus Ruff and py_compile with zero calls from
+  the failed launch.
+- Executed all six untouched DeepSeek prefix rows once: 14 official calls, six
+  response-bearing rows, exact deepseek-v4-pro identity and CNY 0.0157848.
+- Five rows completed and one reached max-steps; the latter remains in ITT and
+  is not retried. Online forbidden fields, tools, external effects, automatic
+  retries and retry-eligible failures are all zero.

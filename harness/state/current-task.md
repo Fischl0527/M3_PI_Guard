@@ -37,6 +37,11 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
   成功行不重跑、无官方响应失败行仅在显式 `--retry-failed` 下重跑、
   Gemini 固定 free/USD 0。定向验证 8/8、Ruff/py_compile 通过；
   Full Harness 未运行。下一操作是 DeepSeek 6 行 formal prefix。
+- DeepSeek formal prefix 已完成 6/6：14 次官方请求，6/6 行均有
+  response ID，返回模型全部为 `deepseek-v4-pro`；5 completed + 1 max_steps，
+  后者留在 ITT。成本 CNY 0.0157848，在线 forbidden 字段、provider tools、
+  外部 effect、自动重试和 retry-eligible 失败均为 0。下一步为 Gemini 6 行
+  formal prefix。
 
 ### 2026-08-19 精简实证路线正式启用
 

@@ -164,3 +164,17 @@ def test_gemini_policy_stays_free_and_has_no_paid_ceiling() -> None:
     assert policy["gemini"]["monetary_hard_limit_usd"] == 0.0
     assert policy["gemini"]["local_batch_caps"] == runner.GEMINI_FREE_CAPS
     assert policy["execution_authorization"]["formal_execution_authorized"] is False
+
+
+def test_deepseek_config_binds_exact_lean_model() -> None:
+    policy = runner.build_role_policy(runner.load_public_policy(), "primary")
+    values = {
+        "M3_FRONTIER_API_CONSENT": "yes_for_network_smoke",
+        "DEEPSEEK_API_KEY": "unit-test-placeholder-not-a-real-key",
+        "FRONTIER_DEEPSEEK_MODEL_ID": "deepseek-v4-pro",
+        "FRONTIER_DEEPSEEK_BASE_URL": "https://api.deepseek.com",
+    }
+    assert runner._deepseek_api_key(values, policy) == values["DEEPSEEK_API_KEY"]
+    values["FRONTIER_DEEPSEEK_MODEL_ID"] = "deepseek-v4-flash"
+    with pytest.raises(runner.LeanEmpiricalRunnerError):
+        runner._deepseek_api_key(values, policy)
