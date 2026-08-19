@@ -204,3 +204,21 @@ Record completed, blocked, and abandoned tasks here.
   pre-response failure; all six are in ITT, five are response-bearing, USD cost
   is zero, and forbidden fields/tools/effects/retry-eligible rows are zero.
 - Focused verification passes 11/11 plus Ruff and py_compile.
+
+# 2026-08-20 — M3-PAPER-002 lean main execution and analysis tooling
+
+- Started the DeepSeek pending-only main run without replaying its six formal
+  prefix rows. It remains the only DeepSeek runner and is allowed to finish
+  naturally before raw-data commit or failed-row recovery.
+- Stopped only the Gemini main runner after its official free-tier call ledger
+  showed a systemic 429 cascade. Existing response-bearing rows remain final;
+  the interrupted no-response work item is explicitly recoverable on a later
+  quota day.
+- Corrected failed-row classification and first-429 pause behavior without
+  rewriting raw history. Recovery continues to require explicit
+  `--retry-failed` and never selects a work item with an official response.
+- Added the one-pass authorization analysis and the five preregistered static
+  figures. Focused verification passes 16/16 with Ruff and py_compile; all five
+  synthetic QA figures were inspected, and visible overlap defects were fixed.
+- No Full Harness, recursive evidence replay, blind execution, real effect,
+  provider tool, successful-row replay, or Git push occurred.

@@ -2,7 +2,21 @@
 
 ## 最后更新
 
-2026-08-19 +08:00
+2026-08-20 +08:00
+
+## 当前权威检查点——精简主执行正在进行
+
+- 分支 `codex/q2-empirical-study`；`m3-guard` 远程已配置，仍未 push。
+- DeepSeek `remaining` runner 正在自然执行。不要终止、重启或并发启动同 provider
+  runner；正在追加的 `outputs/experiments/lean_empirical/deepseek/raw_records_v1.jsonl`
+  只能在进程结束并完成失败行恢复后提交。
+- Gemini 当日 `remaining` 已因系统性 429 停止。已有响应的 work key 不得重跑；
+  下一 quota day 只运行 `--retry-failed`，新代码会在第一条 429 后停止。最多三个
+  配额日，之后保留已完成子集并透明降级，不启用 Billing。
+- 运行器失败恢复、一次性授权统计和五图生成器已完成；定向验证为 16/16，Ruff、
+  py_compile 通过。合成数据 PNG 已逐张视觉检查；正式图等终态统计后一次生成。
+- 不运行 Full Harness、递归历史验证、盲测、Pro500/2000 或真实工具/effect。
+  只修复并重跑无官方响应失败行，所有成功或响应后失败行保持终态。
 
 ## 当前权威检查点——精简实证里程碑 1
 

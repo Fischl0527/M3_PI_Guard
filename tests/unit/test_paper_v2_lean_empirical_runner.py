@@ -223,3 +223,113 @@ def test_second_pre_response_failure_is_terminal_in_itt(tmp_path: Path) -> None:
     assert record["response_obtained"] is False
     assert record["retry_eligible"] is False
     assert record["included_in_primary_itt"] is True
+
+
+def test_runtime_returned_provider_failure_without_response_is_recoverable(
+    tmp_path: Path,
+) -> None:
+    work_item = runner._select_stage(runner._load_plan("gemini"), "canary")[0]
+    result = {
+        "unsafe_effect": False,
+        "task_completion": False,
+        "operational_status": "provider_failure",
+        "runtime_visibility_events": [],
+        "latency_ms": {},
+        "token_usage": {},
+        "provider_trace_bundle": {"activated_attestations": [], "usage_summary": {}},
+    }
+    first = runner._success_record(
+        work_item,
+        result,
+        {"forbidden_fields_present": False},
+        attempt=1,
+        trace_path=tmp_path / "absent.jsonl",
+    )
+    second = runner._success_record(
+        work_item,
+        result,
+        {"forbidden_fields_present": False},
+        attempt=2,
+        trace_path=tmp_path / "absent2.jsonl",
+    )
+    assert first["operational_status"] == "pre_response_provider_failure"
+    assert first["retry_eligible"] is True
+    assert first["included_in_primary_itt"] is False
+    assert second["operational_status"] == "repeated_pre_response_failure"
+    assert second["retry_eligible"] is False
+    assert second["included_in_primary_itt"] is True
+
+
+def test_legacy_no_response_provider_failure_is_normalized_for_recovery() -> None:
+    latest = runner._latest_by_work_key(
+        [
+            {
+                "work_key": "legacy",
+                "attempt": 1,
+                "response_obtained": False,
+                "operational_status": "provider_failure",
+                "retry_eligible": False,
+                "included_in_primary_itt": True,
+            }
+        ]
+    )["legacy"]
+    assert latest["operational_status"] == "pre_response_provider_failure"
+    assert latest["retry_eligible"] is True
+    assert latest["included_in_primary_itt"] is False
+
+
+def test_rate_limit_bundle_pauses_and_allows_three_quota_days(tmp_path: Path) -> None:
+    work_item = runner._select_stage(runner._load_plan("gemini"), "canary")[0]
+    result = {
+        "unsafe_effect": False,
+        "task_completion": False,
+        "operational_status": "provider_failure",
+        "runtime_visibility_events": [],
+        "latency_ms": {},
+        "token_usage": {},
+        "provider_trace_bundle": {
+            "activated_attestations": [],
+            "usage_summary": {},
+            "failures": [{"status": "paused"}],
+        },
+    }
+    second_day = runner._success_record(
+        work_item,
+        result,
+        {"forbidden_fields_present": False},
+        attempt=2,
+        trace_path=tmp_path / "missing.jsonl",
+    )
+    third_day = runner._success_record(
+        work_item,
+        result,
+        {"forbidden_fields_present": False},
+        attempt=3,
+        trace_path=tmp_path / "missing3.jsonl",
+    )
+    assert second_day["operational_status"] == "pre_response_rate_limited"
+    assert second_day["retry_eligible"] is True
+    assert third_day["operational_status"] == (
+        "rate_limit_exhausted_after_three_quota_days"
+    )
+    assert third_day["retry_eligible"] is False
+    assert third_day["included_in_primary_itt"] is True
+
+
+def test_paused_legacy_work_key_is_reclassified_from_call_ledger() -> None:
+    latest = runner._latest_by_work_key(
+        [
+            {
+                "work_key": "paused",
+                "attempt": 1,
+                "response_obtained": False,
+                "operational_status": "provider_failure",
+                "retry_eligible": False,
+                "included_in_primary_itt": True,
+            }
+        ],
+        paused_work_keys={"paused"},
+    )["paused"]
+    assert latest["operational_status"] == "pre_response_rate_limited"
+    assert latest["retry_eligible"] is True
+    assert latest["included_in_primary_itt"] is False

@@ -15,6 +15,23 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
 
 ## 当前阶段
 
+### 2026-08-20 精简实证里程碑 3：主执行与分析图表工具
+
+- DeepSeek `remaining` 主执行已启动并持续追加尚未触碰的 work key；formal
+  prefix 不重跑。该进程自然结束前不提交正在变化的 raw JSONL，也不并发启动
+  第二个 DeepSeek runner。
+- Gemini `remaining` 遇到系统性官方 429 后已停止当日执行；已有官方响应的行
+  保留且永不重跑。运行器已改为识别 trace 中的 paused/429 并在第一条限流记录后
+  停止；下一配额日仅用显式 `--retry-failed` 恢复无响应行和未触碰行，最多三个
+  配额日。
+- 新的一次性授权分析实现 Wilson CI、exact McNemar、10,000 次任务聚类
+  bootstrap、Holm 校正、负担与异质性统计。五图生成器输出 PNG+SVG，不读取
+  provider trace、不调用 API、不生成额外哈希包。
+- 定向验证当前为 pytest 16/16、Ruff 和 py_compile 通过；五张合成数据 QA 图已
+  逐张查看并修复标题/标签重叠。没有运行 Full Harness。
+- 下一稳定 Git 里程碑：提交运行器恢复修复、分析/图表代码和 Harness 状态；
+  DeepSeek raw 只在主执行自然结束并完成失败行恢复后单独提交。
+
 ### 2026-08-19 精简实证里程碑 1：样本冻结与现有结果单次分析
 
 - Git 分支 `codex/q2-empirical-study` 的基线提交为 `d533414`；远程

@@ -1,5 +1,36 @@
 # Failure Log
 
+## 2026-08-20 — Active Gemini continuation did not stop on runtime-returned 429
+
+- Observation: the Gemini continuation accumulated 70 call-ledger paused events
+  with `ProviderPausedError`/HTTP 429 while the process continued advancing work
+  keys. The live runtime returned diagnostic provider-failure objects instead
+  of re-raising the pause, so the runner's exception-only stop condition did not
+  fire.
+- Action: stopped only the Gemini process; DeepSeek remained live. The stop left
+  one open Gemini attempt without a compact raw row, which must be reconciled as
+  an interrupted no-response attempt before recovery.
+- Fix: detect paused failures inside the provider trace bundle, stop immediately
+  after appending the current compact row, recover already-written paused rows
+  from call-ledger status, and use a fresh internal continuation/recovery ledger
+  so the stopped base ledger is never rewritten. Gemini 429 rows may span at
+  most three quota-day attempts; response-bearing work keys remain immutable.
+
+## 2026-08-20 — Runtime-returned provider failures lacked recovery classification
+
+- Observation: while both pending-only runs continued, several runtime results
+  had `operational_status=provider_failure` and no official response ID. The
+  compact success-path assembler had unconditionally marked such rows terminal,
+  unlike exceptions raised before a result object was returned.
+- Risk: those no-response rows would be omitted from the plan's failed-row-only
+  recovery despite having no model outcome. Existing response-bearing rows are
+  unaffected.
+- Fix: classify response-less provider failures as retry-eligible on attempt 1
+  and terminal ITT failures on attempt 2. Normalize already-written legacy rows
+  in memory when building the recovery queue; preserve their original raw rows.
+  Do not stop or restart the active main runs and do not retry any response-
+  bearing work key.
+
 ## 2026-08-19 — Gemini VIGIL recovery repeated the same no-response failure
 
 - Recovery attempt: after separating attempt-2 trace/call state, ran only the

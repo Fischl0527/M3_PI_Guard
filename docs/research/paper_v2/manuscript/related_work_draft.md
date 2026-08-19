@@ -58,6 +58,15 @@ defense. Because neither work is treated here as peer reviewed, their reported
 effects define the contemporary claim boundary but are not used as settled
 comparative facts.
 
+*Auditing Provenance Sensitivity in LLM Agent Action Selection* supplies an
+especially close 2026 measurement counterpart: it holds task content and
+policy fixed while changing source authority, then measures whether action
+selection changes ([L35](https://arxiv.org/abs/2607.20827)). Its
+controlled next-action design is narrower than M3's executed-effect study, but
+it reinforces the need to separate evidence relevance from authorization. Our
+experiment extends that question to full tool trajectories, paired runtime
+Guard conditions, benign utility, `ASK/DENY` burden, and operational failure.
+
 The remaining defensible contribution is consequently methodological and
 empirical. We test whether authorization information itself changes measured
 security and utility; enforce a runtime projection that excludes evaluator
@@ -122,6 +131,7 @@ the measured security–utility frontier.
 | Task/action alignment checking | L03 | Peer reviewed, ACL 2025 | Goal-alignment comparator |
 | Context-dependent provenance auditing | L21 | Preprint | Novelty boundary; reported effects not treated as settled |
 | Authorization/execution dual graph and parameter source | L22 | Preprint | Prohibits first parameter-source claim |
+| Controlled provenance-sensitivity audit | L35 | Preprint | Closest measurement boundary; motivates paired source-authority analysis |
 | Isolated planning and hierarchical consistency | L23 | Preprint | Adjacent mechanism, not formal baseline without code admission |
 | Symbolic least privilege and approval-gated expansion | L24 | Preprint, arXiv v3 | Direct monotonic-permission overlap |
 | Tool-dependency-graph enforcement | L25 | Peer reviewed, EMNLP 2025 | Privilege/data-flow comparator |
@@ -130,16 +140,12 @@ the measured security–utility frontier.
 
 ## Bibliography export and remaining context gate
 
-The 34-entry bibliography is now exported to `references_v1.bib` from ACL
-Anthology BibTeX, official proceedings metadata, arXiv Atom records and
-DOI/Crossref metadata. It contains 24 peer-reviewed and 10 preprint-only
-records. The frozen bibliography SHA-256 is
-`40680e3eca610e9f9569a62a2ed08f5d27a8fbc78058c98a008d0d5897074828`;
-the build manifest SHA-256 is
-`d8ed622075d245faca520525b5b9177f1b43a2917d40a1a9b1e80a5dd1431ec0`.
-Offline reproduction checks all 34 keys and requires author, title, year, URL,
-and venue metadata (or explicit arXiv preprint metadata).
+The 35-entry bibliography in `references_v1.bib` is assembled from ACL
+Anthology, official proceedings pages, arXiv records and DOI/Crossref metadata.
+It distinguishes peer-reviewed work from preprints and requires author, title,
+year, URL, and venue or explicit preprint metadata.
 
 The remaining citation task is narrower: bind the final Introduction and
-Discussion sentences to these keys, verify every claim-context relation, and
-repeat the publication-status/JCR check on the submission date.
+Discussion sentences to these sources, verify every claim-context relation,
+and repeat the publication-status/JCR check on the submission date. The active
+lean study does not create another bibliography hash bundle.

@@ -1,5 +1,24 @@
 # 进展记录
 
+## 2026-08-20 精简实证里程碑 3：主执行、限流恢复与论文图表工具
+
+- DeepSeek 900 行计划已进入 pending-only `remaining` 顺序执行，6 行 formal
+  prefix 被跳过且不会重跑；运行期间不启动第二个 DeepSeek runner。
+- Gemini 主执行在官方免费层连续返回 429 后被停止。响应成功行保持终态；
+  一个中断时尚未形成 raw 记录的 work key 已补记为无响应、可恢复状态。后续只在
+  新配额日显式恢复失败/未触碰行，遇到首个 429 立即停止，第三个配额日仍失败则
+  作为透明 diagnostic 降级。
+- 修复了运行时把无响应 provider failure 当终态、以及没有从 Gemini paused
+  call events 识别限流的两个恢复缺陷。修复只影响失败分类和后继选择，不覆盖旧行。
+- 新增 compact authorization analysis：每个 work key 只取最新终态尝试，计算
+  条件端点、paired pp difference、Wilson 95% CI、exact McNemar、10,000 次
+  task-cluster bootstrap、Holm、ASK/DENY/失败/延迟/成本及预定义异质性。
+- 新增五图静态生成器和 lean figure/table plan：field-isolation、Pareto、forest、
+  runtime burden、adaptive budget-50/200。输出 PNG+SVG，不生成哈希清单；合成
+  数据视觉 QA 后已修复标题与点标签重叠。
+- 定向 pytest 16/16、Ruff、py_compile 通过；没有 Full Harness、历史递归重放、
+  盲测、真实外部 effect 或成功行重跑。
+
 ## 2026-08-19 精简实证里程碑 1
 
 - Git 基线已提交：`d533414` (`chore: checkpoint lean empirical paper baseline`)；

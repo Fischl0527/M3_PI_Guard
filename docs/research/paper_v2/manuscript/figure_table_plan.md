@@ -1,59 +1,51 @@
-# Figure and table plan
+# Figure and table plan — lean authorization study
 
-Status: `medium_public_primary_and_adaptive_canary_ready`
+Status: `lean_study_execution_in_progress`
 
-Every final visual must be regenerated from an admitted analysis artifact.
-Terminal diagnostic rows remain in ITT; technical-canary, partial, and pending
-rows are excluded from scientific panels. Figure captions must state the
-denominator, uncertainty method, model/benchmark scope, and failure handling.
+The paper uses the frozen 180/90/60 nested samples, the compact authorization
+analysis, and the already completed Pro/Flash/medium/adaptive analyses. No
+figure depends on the retired full Harness, blind test, budget 500/2,000, or a
+recursive historical evidence replay. Terminal model-response failures remain
+in ITT; response-less transport failures are recovered only under the frozen
+failed-row rule.
 
 ## Main figures
 
-| ID | Purpose | Geometry | Authoritative data | Current status |
+| ID | Analytical question | Geometry | Authoritative data | Status |
 |---|---|---|---|---|
-| Figure 1 | Show the online-state/evaluator boundary and append-only evidence flow | Compact system diagram | Methods contracts and provider-safety policy | Design ready; final artwork pending |
-| Figure 2 | Jointly show medium/public unsafe-effect rate and benign tool TCR | Two-panel point-range plot; one point per condition with Wilson CI | Admitted medium v8 and Public-primary v5 | Data available; combined final artwork pending |
-| Figure 3 | Quantify paired treatment effects without hiding utility | Forest plot of absolute pp differences with clustered-bootstrap CI | Medium and Public-primary paired-comparison objects | Eight rows available; final artwork pending |
-| Figure 4 | Show authorization-regime sensitivity and confirmation burden | Small multiples by regime, condition and outcome | Regime-probe analysis plus public regime strata | Medium probes available; formal-scale precision pending |
-| Figure 5 | Test adaptive robustness as a function of query budget | Cumulative first-success/survival curve at 50/200/500/2000 | Admitted adaptive query ledger | No scientific data yet |
+| Figure 1 | Which fields are visible to the online Guard? | Online/offline flow schematic | Runtime projection contract | Generator and QA preview ready |
+| Figure 2 | How do authorization regimes trade attack safety for benign utility? | Labeled safety–utility scatter | `authorization_results_v1.json` condition summaries | Generator ready; awaits terminal experiment |
+| Figure 3 | How large are the paired authorization and mechanism effects? | Forest plot of absolute pp difference with task-cluster bootstrap CI | Paired comparison objects | Generator ready; awaits terminal experiment |
+| Figure 4 | What ASK, DENY, failure and latency burden is incurred? | Four horizontal-bar small multiples | Compact per-condition burden summary | Generator ready; awaits terminal experiment |
+| Figure 5 | How does first unsafe effect accumulate by query budget? | Cumulative first-success step curve | Existing Pro budget-50/200 analysis | Generator and data ready; no saturation claim |
+
+Each figure is exported once as editable SVG and QA PNG. The generator does
+not create a hash bundle or reopen provider traces.
 
 ## Main tables
 
-| ID | Content | Admission dependency | Current status |
+| ID | Content | Source | Status |
 |---|---|---|---|
-| Table 1 | Dataset, model, condition and authorization-regime design | Frozen manifests | Ready |
-| Table 2 | Unsafe-effect and TCR raw counts with Wilson CI | Medium + Public result admissions | Populated |
-| Table 3 | Paired security/utility effects, McNemar, Holm and bootstrap CI | Medium + Public result admissions | Populated |
-| Table 4 | ASK reasons, confirmation outcomes, failures, latency, calls and cost | Medium + Public result admissions | Populated; confirmation remains synthetic/pending |
-| Table 5 | Benchmark heterogeneity under the primary model | Complete admitted Public-primary matrix | Populated; no cross-model row authorized |
-| Table 6 | Adaptive first-success and saturation | Complete 40/20/hardest-20 adaptive panel | Pending |
+| Table 1 | Models, datasets, nested samples, conditions and authorization regimes | Frozen lean execution plan | Ready |
+| Table 2 | Unsafe-effect and benign-tool TCR counts with Wilson 95% CI | Condition summaries | Awaits terminal experiment |
+| Table 3 | Paired absolute effects, McNemar, Holm and clustered-bootstrap CI | Paired comparisons | Awaits terminal experiment |
+| Table 4 | ASK, DENY, failures, p50/p95 latency, tokens and API cost | Burden summaries | Awaits terminal experiment |
+| Table 5 | Benchmark and attack-family heterogeneity | Predefined strata | Awaits terminal experiment |
+| Table 6 | Adaptive budget-50/200 first-success results | Existing Pro analysis | Ready; explicitly not a saturation table |
 
 ## Visual integrity rules
 
-1. Never plot a favorable zero for missing, failed, or unadmitted evidence.
-2. Display raw numerators and denominators next to every proportion.
-3. Keep security and utility on separate, clearly labeled axes; do not combine
-   them into an unregistered composite score.
-4. Use identical axis ranges for condition comparisons within a panel.
-5. Distinguish M3 policy-only from M3-full directly; neither may be omitted
-   from a mechanism-contribution figure.
-6. Show operational failures by condition in the main paper or an immediately
-   referenced appendix table.
-7. Label exact-gold as an oracle sensitivity condition and keep it outside the
-   primary endpoint.
-8. Do not use color alone to encode pass/fail or model identity.
-9. Export editable vector artwork for submission and a raster preview only for
-   QA.
-10. Bind each final figure to the analysis file hash and generation-command
-    manifest.
-
-## Caption shell for Figure 2
-
-“Unsafe-effect rate on assigned attack tasks and task-completion rate on benign
-tool tasks. Points show raw proportions and bars show Wilson 95% confidence
-intervals. All assigned cases, including terminal operational failures, remain
-in the intention-to-treat denominator. The exact-gold authorization ablation is
-excluded from the primary panel.”
-
-The final caption must identify DeepSeek v4 Pro as the single primary model and
-state that no cross-model inference is authorized.
+1. Never plot a favorable zero for missing evidence.
+2. State model, task population, endpoint and denominator in the subtitle or
+   caption.
+3. Keep security and utility as separate axes; do not invent a composite score.
+4. Include policy-only and M3-full in all mechanism-contribution comparisons.
+5. Label `exact_gold` as an oracle sensitivity condition, not the primary
+   authorization regime.
+6. Show failures and confirmation/blocking burden in the main paper.
+7. Use color plus shape, ordering, labels or faceting; do not rely on color
+   alone.
+8. Keep percentage axes honest and use a visible zero line for paired effects.
+9. Report Gemini only as a cross-vendor result if all 450 planned work items
+   become terminal; otherwise label the observed subset diagnostic.
+10. Do not claim adaptive saturation from budgets 50 and 200.

@@ -582,6 +582,30 @@ def _success_record(
     response_obtained = any(item.get("provider_response_id") for item in requests)
     ask_count, deny_count = _guard_counts(result)
     status = str(result.get("operational_status", "runner_failure"))
+    bundle_failures = (
+        bundle.get("failures", []) if isinstance(bundle, Mapping) else []
+    )
+    rate_limited = not response_obtained and any(
+        isinstance(item, Mapping) and item.get("status") == "paused"
+        for item in bundle_failures
+    )
+    pre_response_provider_failure = (
+        not response_obtained and status == "provider_failure" and not rate_limited
+    )
+    repeated_pre_response_failure = pre_response_provider_failure and attempt >= 2
+    rate_limit_exhausted = rate_limited and attempt >= 3
+    if rate_limited:
+        status = (
+            "rate_limit_exhausted_after_three_quota_days"
+            if rate_limit_exhausted
+            else "pre_response_rate_limited"
+        )
+    elif pre_response_provider_failure:
+        status = (
+            "repeated_pre_response_failure"
+            if repeated_pre_response_failure
+            else "pre_response_provider_failure"
+        )
     return {
         "schema_version": "m3-paper-v2-lean-raw-record-1.0",
         "study_id": work_item["study_id"],
@@ -612,8 +636,21 @@ def _success_record(
         "cost": _cost(bundle, str(work_item["provider_id"])),
         "online_visible_field_digest_sha256": sha256_canonical_json(digest),
         "online_forbidden_fields_present": bool(digest["forbidden_fields_present"]),
-        "included_in_primary_itt": True,
-        "retry_eligible": False,
+        "included_in_primary_itt": (
+            (
+                not pre_response_provider_failure
+                and not rate_limited
+            )
+            or repeated_pre_response_failure
+            or rate_limit_exhausted
+        ),
+        "retry_eligible": (
+            (
+                pre_response_provider_failure
+                and not repeated_pre_response_failure
+            )
+            or (rate_limited and not rate_limit_exhausted)
+        ),
         "provider_tools_enabled": False,
         "external_effects_enabled": False,
         "recorded_at": result.get("recorded_at", _now()),
@@ -684,14 +721,63 @@ def _failure_record(
     }
 
 
-def _latest_by_work_key(rows: Iterable[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
+def _latest_by_work_key(
+    rows: Iterable[Mapping[str, Any]],
+    *,
+    paused_work_keys: set[str] | None = None,
+) -> dict[str, dict[str, Any]]:
+    paused = paused_work_keys or set()
     result: dict[str, dict[str, Any]] = {}
     for row in rows:
         key = str(row["work_key"])
         if key in result and int(row["attempt"]) <= int(result[key]["attempt"]):
             raise LeanEmpiricalRunnerError("raw record attempts are not increasing")
-        result[key] = copy.deepcopy(dict(row))
+        normalized = copy.deepcopy(dict(row))
+        if normalized.get("response_obtained") is False and key in paused:
+            exhausted = int(normalized["attempt"]) >= 3
+            normalized["operational_status"] = (
+                "rate_limit_exhausted_after_three_quota_days"
+                if exhausted
+                else "pre_response_rate_limited"
+            )
+            normalized["included_in_primary_itt"] = exhausted
+            normalized["retry_eligible"] = not exhausted
+        elif (
+            normalized.get("response_obtained") is False
+            and normalized.get("operational_status") == "provider_failure"
+            and int(normalized["attempt"]) == 1
+        ):
+            normalized["operational_status"] = "pre_response_provider_failure"
+            normalized["included_in_primary_itt"] = False
+            normalized["retry_eligible"] = True
+        result[key] = normalized
     return result
+
+
+def _gemini_call_ledger_paths(root: Path) -> list[Path]:
+    internal = root / "internal"
+    return (
+        sorted(internal.glob("gemini_call_events*.jsonl"))
+        if internal.exists()
+        else []
+    )
+
+
+def _gemini_paused_work_keys(root: Path) -> set[str]:
+    paused: set[str] = set()
+    for path in _gemini_call_ledger_paths(root):
+        for event in load_call_events(path):
+            if event.get("event_type") == "paused":
+                paused.add(str(event["work_key"]))
+    return paused
+
+
+def _next_gemini_continuation_call_path(path: Path) -> Path:
+    for index in range(1, 100):
+        candidate = path.parent / f"gemini_call_events.continuation{index}.jsonl"
+        if not candidate.exists():
+            return candidate
+    raise LeanEmpiricalRunnerError("too many Gemini continuation call ledgers")
 
 
 def _select_stage(rows: Sequence[dict[str, Any]], stage: str) -> list[dict[str, Any]]:
@@ -717,7 +803,14 @@ def run_provider(
     selected = _select_stage(all_rows, stage)
     permit = _permit(provider_id, selected)
     prior_rows = _read_jsonl(permit.raw_path)
-    latest = _latest_by_work_key(prior_rows)
+    latest = _latest_by_work_key(
+        prior_rows,
+        paused_work_keys=(
+            _gemini_paused_work_keys(permit.output_root)
+            if provider_id == "gemini"
+            else None
+        ),
+    )
     pending: list[tuple[dict[str, Any], int]] = []
     for row in selected:
         existing = latest.get(str(row["work_key"]))
@@ -754,6 +847,11 @@ def run_provider(
                 permit.call_path.parent
                 / f"gemini_call_events.recovery{recovery}.jsonl"
             ),
+        )
+    elif provider_id == "gemini" and permit.call_path.exists():
+        permit = replace(
+            permit,
+            call_path=_next_gemini_continuation_call_path(permit.call_path),
         )
 
     values = (
@@ -798,6 +896,11 @@ def run_provider(
                 trace_path=trace_path,
             )
             completed += 1
+            if record["operational_status"] in {
+                "pre_response_rate_limited",
+                "rate_limit_exhausted_after_three_quota_days",
+            }:
+                paused = True
         except Exception as exc:
             record = _failure_record(
                 work_item,
