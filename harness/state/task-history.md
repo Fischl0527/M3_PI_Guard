@@ -158,3 +158,15 @@ Record completed, blocked, and abandoned tasks here.
 - Stopped v12 without deleting logs or fabricating a receipt.
 - Removed blind, Pro-500/2000, full Gemini and Full Harness from completion.
 - Began work on one-pass analysis and fixed authorization-regime experiments.
+
+# 2026-08-19 — M3-PAPER-002 lean empirical milestone 1
+
+- Created Git baseline commit `d533414` on `codex/q2-empirical-study`; configured
+  the non-pushed `m3-guard` remote.
+- Froze nested 180/60/90 samples and 1,350 unique DeepSeek/Gemini work items,
+  including six formal-prefix cases per provider.
+- Performed one-pass analysis of 5,082 Pro Public, 1,791 Flash Public, 480 Medium,
+  and 40-task Adaptive B50/B200 data. Full/policy unsafe effects were 38/600 vs
+  13/600 on Pro and 24/400 vs 12/400 on Flash.
+- Focused tests passed 4/4 with Ruff and py_compile. No provider call, Full
+  Harness, blind test, recursive replay, or successful-row rerun occurred.

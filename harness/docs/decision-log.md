@@ -1701,3 +1701,17 @@ Consequences:
   checks only. Failures are repaired and rerun only where affected.
 - Consequence: the paper is an empirical security-utility study; independent
   blind, saturation, SOTA and universal cross-model claims are prohibited.
+
+## 2026-08-19 — Freeze the lean study before provider execution
+
+- Decision: freeze deterministic nested samples (180 DeepSeek main, 60 regime
+  extension, 90 Gemini) and the complete 900+450 work-item plan before running
+  any new provider request.
+- Decision: analyze each existing result source once. The Medium endpoint is the
+  disjoint 303-row v8 prefix plus 177-row v9 remainder, not the remainder alone.
+- Evidence: focused plan/analysis tests pass 4/4; Ruff and py_compile pass. The
+  compact analysis shows full has higher unsafe-effect counts than policy-only
+  on both Pro (38/600 vs 13/600) and Flash (24/400 vs 12/400).
+- Consequence: retain the empirical/negative-result framing. The next gate is
+  only provider-specific focused tests plus six formal-prefix rows per provider;
+  no Full Harness or recursive historical proof is required.

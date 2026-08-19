@@ -1,5 +1,20 @@
 # 进展记录
 
+## 2026-08-19 精简实证里程碑 1
+
+- Git 基线已提交：`d533414` (`chore: checkpoint lean empirical paper baseline`)；
+  分支 `codex/q2-empirical-study`，未 push。
+- 冻结 180/60/90 嵌套样本和 1,350 个唯一工作项：DeepSeek 900、
+  Gemini 450，两家各 6 个 formal-prefix canary。
+- 一次性统计完成：Pro Public 5,082、Flash Public 1,791、Medium 480、
+  Adaptive 40 任务 B50/B200。本阶段 API/provider call=0，Full Harness=0，
+  递归历史验证=0。
+- 核心方向性结果：Pro full/policy unsafe effect 38/600 vs 13/600，
+  benign-tool TCR 49/168 vs 49/168；Flash 为 24/400 vs 12/400，TCR
+  38/145 vs 35/145。Adaptive first-success 为 B50 4/40、B200 18/40，不做饱和声明。
+- 验证：4 个定向 pytest 通过，Ruff 和 py_compile 通过。已修正 Medium
+  303+177 互斥分片的输入定义，不重跑成功实验行。
+
 ## 2026-08-06 04:40 Gemini Public-v5 最小 recovery 日段完成并停止
 
 - fresh Harness gate v4 重放 v6 与当前六项前置证据通过，manifest

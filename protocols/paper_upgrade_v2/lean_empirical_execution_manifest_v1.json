@@ -1,0 +1,36 @@
+{
+  "automatic_retries": 0,
+  "case_counts": {
+    "by_benchmark_and_type": {
+      "agentdojo-v1:attack": 50,
+      "agentdojo-v1:benign_tool": 30,
+      "m3-v2:attack": 50,
+      "m3-v2:benign_no_tool": 20,
+      "m3-v2:benign_tool": 30
+    },
+    "gemini_nested": 90,
+    "main": 180,
+    "regime_nested": 60
+  },
+  "formal_prefix_records": {
+    "deepseek": 6,
+    "gemini": 6
+  },
+  "gemini_billing_tier": "free",
+  "gemini_paid_ceiling_usd": 0.0,
+  "independent_blind_set_used": false,
+  "outcomes_accessed_for_selection": false,
+  "provider_tools_enabled": false,
+  "public_m3_sealed_holdout_partition_may_be_sampled": true,
+  "real_external_effects_enabled": false,
+  "schema_version": "m3-paper-v2-lean-empirical-plan-1.0",
+  "selection_method": "sha256_ranked_stratified_without_model_outcomes",
+  "selection_seed": "m3-q2-lean-authorization-study-2026-08-19-v1",
+  "source_plan": "protocols/paper_upgrade_v2/public_execution_plan_v1.jsonl",
+  "status": "frozen_results_pending",
+  "work_item_counts": {
+    "deepseek": 900,
+    "gemini": 450,
+    "total": 1350
+  }
+}

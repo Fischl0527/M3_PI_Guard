@@ -5133,3 +5133,13 @@ credential, changed a historical ledger, or enabled an external effect.
 - Changed hypothesis: 改用仓库既有只读 WPS 渲染脚本，不安装或修改办公环境。
 - Result: 15 页全部成功渲染，最终页图像与已人工检查版本 15/15 哈希一致；结构、
   表格、图片 alt text、secret scan 和可访问性检查均通过。
+# 2026-08-19 — Lean existing-result analyzer selected only the remainder
+
+- Command: `python -B -m experiments.paper_v2.lean_existing_results`.
+- Failure: the first implementation read only the 177-row medium v9 remainder
+  while requiring the combined 480-row endpoint.
+- Cause: the admitted medium endpoint is a disjoint 303-row v8 prefix plus a
+  177-row v9 remainder; the implementation treated the latter as a complete
+  run.
+- Fix: declare both terminal record ledgers as the one-pass medium input. No API
+  call occurred and no successful experimental row was replayed.

@@ -15,6 +15,25 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
 
 ## 当前阶段
 
+### 2026-08-19 精简实证里程碑 1：样本冻结与现有结果单次分析
+
+- Git 分支 `codex/q2-empirical-study` 的基线提交为 `d533414`；远程
+  `m3-guard` 已配置，未 push。
+- 已在不读取旧实验 outcome 的前提下冻结 180 个 DeepSeek 主样本、
+  60 个授权扩展子集和 90 个 Gemini 嵌套子集；执行计划为
+  DeepSeek 900 行 + Gemini 450 行，每个 provider 各有 6 行 formal prefix。
+- 已对现有 Public Pro 5,082、Public Flash 1,791、Medium 480 和
+  Adaptive B50/B200 执行一次性分析；没有 API 调用、历史递归验证或
+  Full Harness。关键观察是 Pro 上 M3-full attack unsafe effect 38/600，
+  policy-only 13/600，两者 benign-tool TCR 均为 49/168；Flash 方向一致
+  （24/400 vs 12/400）。这支持继续负面结果/授权制度实证路线。
+- 定向测试共 4/4 通过，Ruff 与 py_compile 通过。Medium 首次分析
+  只读到 177 行 v9 remainder，根据失败日志改为合并互斥的
+  303 行 v8 prefix + 177 行 v9 remainder，修复后得到 480/480；
+  没有重跑任何已成功的模型记录。
+- 下一步仅实现最小运行器与定向测试，然后执行两家各 6 行
+  canary。F-PAPER-002 保持 `in_progress`。
+
 ### 2026-08-19 精简实证路线正式启用
 
 - Owner 已批准《SCI 二区精简实证论文计划》，旧 21 天实验结项计划废止。

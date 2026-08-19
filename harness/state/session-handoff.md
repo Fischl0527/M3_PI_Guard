@@ -2,7 +2,24 @@
 
 ## 最后更新
 
-2026-08-07 13:10 +08:00
+2026-08-19 +08:00
+
+## 当前权威检查点——精简实证里程碑 1
+
+- 分支是 `codex/q2-empirical-study`，基线提交 `d533414`；`m3-guard`
+  远程已配置但未 push。
+- 权威新计划是
+  `protocols/paper_upgrade_v2/lean_empirical_execution_manifest_v1.json`：
+  180 主样本、60 授权扩展子集、90 Gemini 嵌套子集，对应 900+450 行。
+- 现有结果只做过一次性分析，紧凑结果在
+  `docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json`。
+  Pro/Flash 都显示 full 的 unsafe effect 高于 policy-only，因此保持实证研究与
+  负面结果定位，不做领先防御声明。
+- 定向验证为 pytest 4/4、Ruff/py_compile 通过；没有执行 Full Harness。
+- 恢复时从最小新运行器开始，先完成定向测试，再只跑 DeepSeek/Gemini
+  各 6 行 formal prefix。只允许重跑无官方响应的失败行，已成功行永不重跑。
+- 禁止 Full Harness、历史递归重放、盲测、Pro500/2000、真实工具/effect
+  和未经单独授权的 push。F-PAPER-002 仍为 `in_progress`。
 
 ## 当前权威检查点——Gemini Public-v5 segment 0 技术门通过，按 owner 指示停止
 
