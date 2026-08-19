@@ -1,0 +1,98 @@
+{
+  "schema_version": "m3-paper-v2-medium-falsification-gate-2.0",
+  "status": "blocked_provider_and_cost_gate",
+  "evaluated_at": "2026-07-23T22:20:00+08:00",
+  "result_eligible_for_formal_tables": false,
+  "preregistration": "protocols/paper_upgrade_v2/preregistration_v1.json",
+  "required_inputs": {
+    "case_selection": {
+      "status": "pass",
+      "case_count": 72,
+      "attack": 36,
+      "benign_tool": 24,
+      "benign_no_tool": 12,
+      "context_dependent": 25,
+      "manifest": "protocols/paper_upgrade_v2/medium_case_manifest_v1.json"
+    },
+    "online_state_source_audit": {
+      "status": "pass_for_path_scoped_medium_design",
+      "completed_units": 22,
+      "distinct_artifacts": 16,
+      "official_source_code_units": 20,
+      "disclosed_reproduction_units": 1,
+      "official_source_unavailable_units": 2,
+      "independent_second_reviews": 0,
+      "domain_oracle_claim_allowed": false,
+      "registry": "protocols/paper_upgrade_v2/online_state_audit_registry_v2.json"
+    },
+    "structural_baseline": {
+      "status": "pass_zero_call_adapter_qualification",
+      "preferred": "VIGIL",
+      "fallback": "DRIFT",
+      "official_model_dependent_run_status": "pending_provider",
+      "registry": "protocols/paper_upgrade_v2/structural_baseline_registry_v1.json"
+    },
+    "primary_model": {
+      "status": "candidate_frozen_runtime_attestation_pending",
+      "allowed_endpoint_types": [
+        "official_api",
+        "auditable_gateway"
+      ],
+      "unverified_relay_allowed": "diagnostic_only",
+      "candidate": "protocols/paper_upgrade_v2/provider_cost_decision_candidate_v1.json",
+      "preflight": "protocols/paper_upgrade_v2/provider_cost_preflight_v1.json",
+      "recommended_model": "gpt-5.6-terra"
+    },
+    "cost_ceiling": {
+      "status": "estimated_user_approval_pending",
+      "hard_limit_required": true,
+      "approval_required": true,
+      "provider_calls_upper_bound": 4416,
+      "input_tokens_upper_bound": 34407984,
+      "output_tokens_upper_bound": 2260992,
+      "total_cost_upper_bound_usd": 119.93484,
+      "preflight": "protocols/paper_upgrade_v2/provider_cost_preflight_v1.json"
+    },
+    "execution_ledger": {
+      "status": "condition_specific_runtime_frozen_results_pending",
+      "work_items": 480,
+      "execution_authorized": false,
+      "source_projection_digest": "case-level input projection",
+      "initial_online_visible_field_digest": "condition-specific agent, guard and authorization state",
+      "exact_gold_disclosure": "evaluator_derived_authorization_and_primary_endpoint_excluded",
+      "plan": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl",
+      "manifest": "protocols/paper_upgrade_v2/medium_execution_manifest_v2.json",
+      "superseded_pre_run_plan": "protocols/paper_upgrade_v2/medium_execution_plan_v1.jsonl"
+    },
+    "provider_effect_safety": {
+      "status": "frozen_and_locally_enforced",
+      "policy": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+      "allowed_effect_backends": [
+        "no_effect",
+        "m3_sandbox_fixture",
+        "agentdojo_in_memory_copy"
+      ],
+      "external_connectors_enabled": false,
+      "provider_managed_tools_enabled": false,
+      "dangerous_or_unknown_effect": "DENY",
+      "formal_executor_without_safety_receipt": "reject"
+    }
+  },
+  "expected_records": {
+    "primary_paired_matrix": 432,
+    "authorization_regime_probes": 48,
+    "total": 480
+  },
+  "analysis": {
+    "gate_spec": "protocols/paper_upgrade_v2/medium_gate_spec_v1.json",
+    "current_report": "outputs/paper_upgrade_v2/medium/analysis_v1.json",
+    "current_status": "results_pending"
+  },
+  "start_authorized": false,
+  "remaining_blockers": [
+    "A real smoke response must attest the exact upstream model and stable request/response identifiers.",
+    "The logging redaction review is pending.",
+    "The user must approve the provider candidate and a hard USD spend limit that covers the abort ceiling."
+  ],
+  "reason": "Cases, all 22 source-audit units, adapters, statistics, a conservative 119.93484 USD upper bound, and the condition-specific 480-item v2 runtime ledger are ready. The earlier v1 ledger created no results and is superseded because it recorded only case-level visibility. DeepSeek/Gemini effects are now fail-closed to sandbox or copied in-memory environments. Paid execution remains blocked by runtime provider attestation, logging review, and explicit user cost approval."
+}

@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/provider_trace_bundle_v2.schema.json",
+  "title": "M3-PI Guard ordered provider request trace bundle v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "execution_identity",
+    "work_key",
+    "provider_id",
+    "model_id",
+    "bundle_status",
+    "result_tier_ceiling",
+    "request_count",
+    "completed_request_count",
+    "open_request_count",
+    "trace_event_count",
+    "trace_tail_sha256",
+    "trace_rows_sha256",
+    "trace_rows",
+    "activated_attestations",
+    "usage_evidence",
+    "usage_summary",
+    "failures",
+    "append_flush_fsync",
+    "automatic_retry",
+    "provider_tools_declared",
+    "external_effects_enabled",
+    "prompt_or_response_content_stored",
+    "bundle_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-provider-trace-bundle-2.1"
+    },
+    "execution_identity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "work_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provider_id": {
+      "const": "deepseek"
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bundle_status": {
+      "enum": [
+        "completed",
+        "incomplete_provider_failure",
+        "incomplete_paused",
+        "incomplete_evidence_failure"
+      ]
+    },
+    "result_tier_ceiling": {
+      "enum": ["formal_candidate", "diagnostic"]
+    },
+    "request_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "completed_request_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "open_request_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "trace_event_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "trace_tail_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "trace_rows_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "trace_rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "activated_attestations": {
+      "type": "array",
+      "items": {
+        "$ref": "https://m3-pi-guard.local/schemas/paper_v2/provider_trace_attestation_v2.schema.json"
+      }
+    },
+    "usage_evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/usage_evidence"
+      }
+    },
+    "usage_summary": {
+      "$ref": "#/$defs/usage_summary"
+    },
+    "failures": {
+      "type": "array",
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "client_request_id",
+          "status",
+          "error_type"
+        ],
+        "properties": {
+          "client_request_id": {
+            "type": "string",
+            "pattern": "^m3req-[0-9a-f]{32}$"
+          },
+          "status": {
+            "enum": ["provider_failure", "paused", "evidence_failure"]
+          },
+          "error_type": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "append_flush_fsync": {
+      "const": true
+    },
+    "automatic_retry": {
+      "const": false
+    },
+    "provider_tools_declared": {
+      "const": false
+    },
+    "external_effects_enabled": {
+      "const": false
+    },
+    "prompt_or_response_content_stored": {
+      "const": false
+    },
+    "bundle_sha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "bundle_status": {"const": "completed"}
+        },
+        "required": ["bundle_status"]
+      },
+      "then": {
+        "properties": {
+          "result_tier_ceiling": {"const": "formal_candidate"},
+          "open_request_count": {"const": 0},
+          "failures": {"maxItems": 0}
+        }
+      },
+      "else": {
+        "properties": {
+          "result_tier_ceiling": {"const": "diagnostic"},
+          "open_request_count": {"const": 1},
+          "failures": {"minItems": 1, "maxItems": 1}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "usage_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "call_index",
+        "client_request_id",
+        "provider_response_id",
+        "provider_receipt_sha256",
+        "prompt_tokens",
+        "prompt_cache_hit_tokens",
+        "prompt_cache_miss_tokens",
+        "completion_tokens",
+        "total_tokens",
+        "cache_accounting_complete",
+        "request_cost_cny",
+        "cumulative_cost_cny",
+        "budget_status_after_request"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "m3-paper-v2-deepseek-usage-evidence-1.0"
+        },
+        "call_index": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "client_request_id": {
+          "type": "string",
+          "pattern": "^m3req-[0-9a-f]{32}$"
+        },
+        "provider_response_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider_receipt_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prompt_cache_hit_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prompt_cache_miss_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completion_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cache_accounting_complete": {
+          "const": true
+        },
+        "request_cost_cny": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cumulative_cost_cny": {
+          "type": "number",
+          "minimum": 0
+        },
+        "budget_status_after_request": {
+          "enum": ["continue", "pause_before_next_request"]
+        }
+      }
+    },
+    "usage_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completed_call_count",
+        "prompt_tokens",
+        "prompt_cache_hit_tokens",
+        "prompt_cache_miss_tokens",
+        "completion_tokens",
+        "total_tokens",
+        "cache_accounting_complete",
+        "cumulative_cost_cny",
+        "abort_ceiling_cny",
+        "within_abort_ceiling"
+      ],
+      "properties": {
+        "completed_call_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prompt_cache_hit_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prompt_cache_miss_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completion_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cache_accounting_complete": {
+          "const": true
+        },
+        "cumulative_cost_cny": {
+          "type": "number",
+          "minimum": 0
+        },
+        "abort_ceiling_cny": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "within_abort_ceiling": {
+          "const": true
+        }
+      }
+    }
+  }
+}

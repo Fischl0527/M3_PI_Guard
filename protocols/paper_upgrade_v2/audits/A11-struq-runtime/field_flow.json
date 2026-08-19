@@ -1,0 +1,180 @@
+{
+  "audit_id": "A11-struq-runtime",
+  "authorization_source": "mixed_or_unclear",
+  "missing_component": null,
+  "offline_boundaries": [
+    {
+      "end_line": 118,
+      "forbidden_identifier_hits": [
+        "label"
+      ],
+      "parameters": [
+        "sources",
+        "targets",
+        "tokenizer"
+      ],
+      "path": "external/paper_v2_audits/struq/struq.py",
+      "phase": "supervised_training_label_construction",
+      "referenced_identifiers": [
+        "IGNORE_INDEX",
+        "_tokenize_fn",
+        "deepcopy",
+        "dict",
+        "examples",
+        "examples_tokenized",
+        "input_ids",
+        "label",
+        "labels",
+        "s",
+        "source_len",
+        "sources",
+        "sources_tokenized",
+        "strings",
+        "t",
+        "targets",
+        "tokenizer",
+        "zip"
+      ],
+      "referenced_string_keys": [
+        "input_ids",
+        "input_ids_lens"
+      ],
+      "required_token_checks": {
+        "labels": true,
+        "targets": true
+      },
+      "sha256": "88d0a1fc8660c6705c2dd418cb365b782e15b0e9cb52e57139b3b74f2605ad22",
+      "start_line": 112,
+      "symbol": "preprocess"
+    }
+  ],
+  "online_boundaries": [
+    {
+      "end_line": 132,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "data",
+        "injection_method",
+        "prompt_format",
+        "apply_defensive_filter",
+        "defense",
+        "sample_ids"
+      ],
+      "path": "external/paper_v2_audits/struq/test.py",
+      "phase": "benchmark_prompt_construction",
+      "referenced_identifiers": [
+        "NotImplementedError",
+        "_",
+        "append",
+        "apply_defensive_filter",
+        "choice",
+        "d",
+        "d_item",
+        "d_item_demo",
+        "data",
+        "deepcopy",
+        "defense",
+        "enumerate",
+        "format_map",
+        "hackaprompt",
+        "i",
+        "injection_method",
+        "llm_input",
+        "llm_input_i",
+        "none",
+        "np",
+        "number_of_demonstrations",
+        "prompt_format",
+        "random",
+        "range",
+        "recursive_filter",
+        "replace",
+        "sample_ids"
+      ],
+      "referenced_string_keys": [
+        "id",
+        "input",
+        "instruction",
+        "output",
+        "prompt_input",
+        "prompt_no_input"
+      ],
+      "required_token_checks": {
+        "defense": true,
+        "input": true,
+        "instruction": true
+      },
+      "sha256": "8fccebe992b8c66ab851ac8d983190ba7c3b466d55e9913959e34c0e7c0aa0eb",
+      "start_line": 91,
+      "symbol": "form_llm_input"
+    },
+    {
+      "end_line": 79,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "llm_input",
+        "model",
+        "tokenizer"
+      ],
+      "path": "external/paper_v2_audits/struq/test.py",
+      "phase": "model_inference",
+      "referenced_identifiers": [
+        "TEST_INJECTED_WORD",
+        "_tokenize_fn",
+        "append",
+        "attention_mask",
+        "begin_with",
+        "decode",
+        "device",
+        "do_sample",
+        "end",
+        "enumerate",
+        "eos_token",
+        "find",
+        "flush",
+        "generate",
+        "generation_config",
+        "i",
+        "in_response",
+        "inpt",
+        "input_ids",
+        "len",
+        "llm_input",
+        "lower",
+        "max_new_tokens",
+        "model",
+        "model_max_length",
+        "ones_like",
+        "outp",
+        "outputs",
+        "pad_token_id",
+        "print",
+        "sample_begin_with",
+        "sample_in_response",
+        "shape",
+        "start",
+        "startswith",
+        "stdout",
+        "strip",
+        "sys",
+        "temperature",
+        "to",
+        "tokenizer",
+        "torch",
+        "unsqueeze"
+      ],
+      "referenced_string_keys": [
+        "input_ids"
+      ],
+      "required_token_checks": {
+        "llm_input": true,
+        "model.generate": true
+      },
+      "sha256": "8fccebe992b8c66ab851ac8d983190ba7c3b466d55e9913959e34c0e7c0aa0eb",
+      "start_line": 49,
+      "symbol": "test_model_output"
+    }
+  ],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

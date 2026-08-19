@@ -1,0 +1,17 @@
+{
+  "audit_id": "A02-siren-loader",
+  "authorization_source": "mixed_or_unclear",
+  "missing_component": {
+    "expected_absent": true,
+    "matches": [],
+    "passed": true,
+    "patterns": [
+      "**/*siren*",
+      "**/*SIREN*"
+    ]
+  },
+  "offline_boundaries": [],
+  "online_boundaries": [],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

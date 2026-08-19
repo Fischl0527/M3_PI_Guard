@@ -1,0 +1,233 @@
+{
+  "artifact_locks": [
+    {
+      "bytes": 32576,
+      "path": "experiments/paper_v2/formal_condition_executors.py",
+      "sha256": "dcd39222d04c0081ed66b0bc51c37a4949f187dfc83b36ca42022b7acfc6aa93"
+    },
+    {
+      "bytes": 26839,
+      "path": "experiments/paper_v2/formal_record_store_v2.py",
+      "sha256": "67075156efa12a7a447b160b8140b16002fd5bd4d24261cf37b2b21226d7b157"
+    },
+    {
+      "bytes": 79361,
+      "path": "experiments/paper_v2/live_condition_runtime.py",
+      "sha256": "44b1eb05a87f23b46e3860a22dbdfc92b08b9aba26d9e055af85f97dc9af5f98"
+    },
+    {
+      "bytes": 6513,
+      "path": "experiments/paper_v2/public_analysis_v1.py",
+      "sha256": "7b999b72b1b7a9fc0e2c944cd4a9e9f800cbe490f51a42be09a54c116a7f3bbb"
+    },
+    {
+      "bytes": 3519,
+      "path": "experiments/paper_v2/public_deepseek_client_v1.py",
+      "sha256": "7975098f38e1938363368427eb2f7bba3bc4d03c45b25d4d6584d63b6c5038be"
+    },
+    {
+      "bytes": 25304,
+      "path": "experiments/paper_v2/public_execution_store_v1.py",
+      "sha256": "3f8b4733babb418c3a303b709a4152c0aff36028469dd1af7ba37dc09486e65b"
+    },
+    {
+      "bytes": 28557,
+      "path": "experiments/paper_v2/public_live_controller_v1.py",
+      "sha256": "66dc55140bd63b3f4ceb24678aeda872c8fe8976b1cf5a4ee6078590728b376b"
+    },
+    {
+      "bytes": 23097,
+      "path": "experiments/paper_v2/public_matrix_controller_v1.py",
+      "sha256": "116ee931382b0359dd56d647aba4366503f68ea2e95c92cfb5ba5d29241d286e"
+    },
+    {
+      "bytes": 25124,
+      "path": "experiments/paper_v2/public_matrix_plan_v1.py",
+      "sha256": "286a0b5ea4cf7ea00e1600d01133a5bfaefd04b8ea56d6891ca8de9d0e6ed0bc"
+    },
+    {
+      "bytes": 15396,
+      "path": "experiments/paper_v2/public_provider_budget_v1.py",
+      "sha256": "2fec7840673687f4d323e09582a8115fd07e7173ea6d20595e05b1ed9a39667b"
+    },
+    {
+      "bytes": 20428,
+      "path": "experiments/paper_v2/public_provider_trace_v1.py",
+      "sha256": "a96689dc3b62b9fd753c6bdc45796893d97d1d092a97ccdeaf221ea63d566421"
+    },
+    {
+      "bytes": 5387,
+      "path": "experiments/paper_v2/public_result_gate_v1.py",
+      "sha256": "78fc0700af0e43eea7c835d8c6f5700b1819cfafcae26388d228eb0c16c05dfe"
+    },
+    {
+      "bytes": 1921,
+      "path": "protocols/paper_upgrade_v2/provider_request_trace_activation_v2.json",
+      "sha256": "ac15d82bc5631eb49c3e7b4344e143f753f17d40725845fa8a3507dc26de2b45"
+    },
+    {
+      "bytes": 2586,
+      "path": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+      "sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+    },
+    {
+      "bytes": 3492,
+      "path": "protocols/paper_upgrade_v2/public_analysis_preregistration_v1.json",
+      "sha256": "8a9596ecb2a66ba9c7ce4e0bcd1ace2f1549579d32f50a898fd5bc2ecfebc350"
+    },
+    {
+      "bytes": 503990,
+      "path": "protocols/paper_upgrade_v2/public_benchmark_freeze_v1.json",
+      "sha256": "9c5437b750e96771fcd6db736996c2c1f56fb504a7c74664e64ef81a6c316020"
+    },
+    {
+      "bytes": 4132,
+      "path": "protocols/paper_upgrade_v2/public_budget_policy_v1.json",
+      "sha256": "4b924f3d3974d90ddd51311d5c28e2d3717fb40e67b37acaf5d792b4c24c818a"
+    },
+    {
+      "bytes": 4691,
+      "path": "protocols/paper_upgrade_v2/public_execution_manifest_v1.json",
+      "sha256": "92b957182c49c971bc9512ede1224f2b950adeb433c78a9be9554fdc0c1102b2"
+    },
+    {
+      "bytes": 9707359,
+      "path": "protocols/paper_upgrade_v2/public_execution_plan_v1.jsonl",
+      "sha256": "034232257dd666c80bbf4de1e7f7df645de587eb84387337739bee55b8a5633f"
+    },
+    {
+      "bytes": 4392,
+      "path": "protocols/paper_upgrade_v2/public_matrix_controller_qualification_v1.json",
+      "sha256": "d2bb0d8960bb45d8f9743d9181005c05f0e56f61ba11e08e6293bd36cda42608"
+    },
+    {
+      "bytes": 2782,
+      "path": "schemas/paper_v2/public_matrix_admission_v1.schema.json",
+      "sha256": "81ef73357d9ec854ca18de55adf962d509fb61d09f488ec6b619fc5b94cd370b"
+    },
+    {
+      "bytes": 3887,
+      "path": "schemas/paper_v2/public_matrix_candidate_v1.schema.json",
+      "sha256": "ed5ea1dd27d5ea3f88b087c39f983d5488ab9ba7f395bc3fd2cd7e0d5ecbd566"
+    }
+  ],
+  "artifact_role": "owner_review_candidate",
+  "authorization": {
+    "active_admission_present": false,
+    "canary_execution_authorized": false,
+    "candidate_only": true,
+    "matrix_continuation_authorized": false,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "model_calls_while_building": 0,
+    "network_calls_while_building": 0,
+    "scientific_outcomes_accessed": false
+  },
+  "generated_at": "2026-07-28T00:30:00+08:00",
+  "manifest_sha256": "b9fd7d55c78dcdcfe050ce1cc3802dce0b40b2756355eab871b424b48cfe1da8",
+  "schema_version": "m3-paper-v2-public-matrix-candidate-1.0",
+  "scope": {
+    "budget": {
+      "automatic_retries": 0,
+      "cost_ledger": "append_only_cache_aware_actual_usage",
+      "incremental_hard_limit_cny": 25.0,
+      "role_hard_limits_cny": {
+        "primary": 20.0,
+        "second": 5.0
+      },
+      "untouched_reserve_cny": 5.0
+    },
+    "canary": {
+      "primary_records": 24,
+      "primary_work_key_sequence_sha256": "803684ec8199b8e1cc986f776a515064ec9149f2d78a2e37df53791d4ed7ad2d",
+      "records_remain_in_formal_matrix": true,
+      "scientific_outcomes_accessed": false,
+      "second_records": 12,
+      "second_work_key_sequence_sha256": "fba897661b8005af952003ed95022b98f829952461087a24a277eaa9385d9154",
+      "selection_is_outcome_blind": true,
+      "selection_method": "first_frozen_attack_and_benign_case_per_benchmark"
+    },
+    "execution_order": [
+      "primary_canary",
+      "primary_matrix",
+      "second_canary",
+      "second_matrix"
+    ],
+    "failure_policy": {
+      "all_failures_remain_in_intention_to_treat": true,
+      "budget_ceiling": "pause_before_next_request",
+      "completed_terminal_items_retried": false,
+      "first_http_429": "pause",
+      "first_identity_mismatch": "pause",
+      "first_unknown_runner_failure": "pause",
+      "pending_only_resume_requires_new_identity": true
+    },
+    "model_roles": {
+      "primary": {
+        "base_url": "https://api.deepseek.com",
+        "claim_boundary": "primary_model",
+        "conditions": [
+          "no_defense",
+          "safe_prompt_or_spotlighting",
+          "promptguard_detector_only",
+          "strongest_peer_reviewed_structural_baseline",
+          "m3_policy_only",
+          "m3_full"
+        ],
+        "endpoint_type": "official_api",
+        "execution_identity": "e19149d307d58463cf3fba2a1db1b49caa907e653b3b0d79b219f94092bef27a",
+        "model_id": "deepseek-v4-pro",
+        "provider_id": "deepseek",
+        "records": 5082
+      },
+      "second": {
+        "base_url": "https://api.deepseek.com",
+        "claim_boundary": "cross_model_not_cross_provider",
+        "conditions": [
+          "strongest_peer_reviewed_structural_baseline",
+          "m3_policy_only",
+          "m3_full"
+        ],
+        "endpoint_type": "official_api",
+        "execution_identity": "a9fafa3b7807c55feacc88336c9b21b4ad489adfd7829579c3f69caa230ec078",
+        "model_id": "deepseek-v4-flash",
+        "provider_id": "deepseek",
+        "records": 1791
+      }
+    },
+    "provider": {
+      "execution_concurrency": 1,
+      "external_effects_enabled": false,
+      "max_tokens": 512,
+      "provider_managed_tools_enabled": false,
+      "timeout_seconds": 120.0
+    },
+    "qualification": {
+      "path": "protocols/paper_upgrade_v2/public_matrix_controller_qualification_v1.json",
+      "qualified_pairs": 18,
+      "sha256": "d2bb0d8960bb45d8f9743d9181005c05f0e56f61ba11e08e6293bd36cda42608"
+    },
+    "records": 6873,
+    "runs": {
+      "primary": {
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v1-primary-e19149d307d58463cf3fba2a1db1b49caa907e653b3b0d79b219f94092bef27a",
+        "run_id": "paper-v2-public-v1-primary-20260728"
+      },
+      "second": {
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v1-second-a9fafa3b7807c55feacc88336c9b21b4ad489adfd7829579c3f69caa230ec078",
+        "run_id": "paper-v2-public-v1-second-20260728"
+      }
+    },
+    "scientific_boundary": {
+      "canary_review_is_outcome_blind": true,
+      "flash_claim": "cross_model_not_cross_provider",
+      "result_admission_is_separate": true
+    }
+  },
+  "scope_sha256": "be6173b1782519982065e379c438b60a677e74793ee45be1e24563b88b9c980d",
+  "status": "candidate_pending_exact_command_canary_approval"
+}

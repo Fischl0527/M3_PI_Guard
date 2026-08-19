@@ -1,0 +1,23 @@
+{
+  "append_flush_fsync": true,
+  "complete_chain_revalidated_after_each_append": true,
+  "completed_records_written": 1,
+  "diagnostic_itt_failure_records_written": 1,
+  "external_effects": false,
+  "formal_results_created": 0,
+  "hash_chain_complete": true,
+  "live_runtime_v2_wiring_qualified": false,
+  "negative_cases_expected": 2,
+  "negative_cases_rejected": 2,
+  "network_calls_made": 0,
+  "project_experiment_records_persisted": 0,
+  "provider_safety_receipt_persisted": true,
+  "provider_tools_declared": false,
+  "qualification_evidence_only": true,
+  "recorded_at": "2026-07-24T02:00:00+08:00",
+  "schema_version": "m3-paper-v2-formal-record-store-qualification-2.2",
+  "status": "offline_v2_record_store_qualified",
+  "transient_entries_written": 2,
+  "v1_record_contract_modified": false,
+  "v1_record_store_modified": false
+}

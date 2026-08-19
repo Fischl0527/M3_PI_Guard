@@ -1,0 +1,225 @@
+{
+  "audit_id": "A18-asb-evaluator",
+  "hits": [
+    {
+      "line": 43,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success",
+        "attacker[_ -]?goal"
+      ],
+      "preview": "def check_attack_success(messages, args, attacker_goal):",
+      "text_sha256": "2f2693a6cb03098e30ea616fcae247785928b3b42503d0115e0ff9ebe10f73ca"
+    },
+    {
+      "line": 44,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "attack_success = False",
+      "text_sha256": "6a0573440c64710e34f9ac601453e97a062a6d0c26f37eb337ed11bf59d7dbcd"
+    },
+    {
+      "line": 48,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "if content is not None and attacker_goal in content:",
+      "text_sha256": "de8be0ceb8a9c51e641046e2718786097766239500baa4ef08a76489e628526f"
+    },
+    {
+      "line": 49,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "attack_success = True",
+      "text_sha256": "2196dc3e8a3bcc60a9291bba9f377fef2860b27623e871dbb30ff30508f3eb4e"
+    },
+    {
+      "line": 52,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "return attack_success",
+      "text_sha256": "6b2e16816fd3220d1089caeaf6d726fb00d2dff5535ae7328aa66c6063eb9633"
+    },
+    {
+      "line": 78,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "Output only the score.'''",
+      "text_sha256": "c4a8993d697f60f18ecc403c2ee0aad06adce1261ad3db59c04afe73ee037015"
+    },
+    {
+      "line": 201,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "\"Attack Successful\",",
+      "text_sha256": "ef05d766dbd55fae164c7fe6bb31d1681fe55a3256bc6b0f09d3965cc170d31a"
+    },
+    {
+      "line": 202,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "task[_ -]?success"
+      ],
+      "preview": "\"Original Task Successful\",",
+      "text_sha256": "cb9fc447fbc0048f70def071426108bc695c37a290560b7ee0e260785f1d2039"
+    },
+    {
+      "line": 217,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "attacker_goal = attacker_tools_all[attacker_tools_all[\"Attacker Tool\"] == res[\"attacker_tool\"]]['Attack goal'].iloc[0]",
+      "text_sha256": "44263e0b1b6b4463ee14f28351709b6bbdf4af82549d2cd748beebf11f5f5ef3"
+    },
+    {
+      "line": 218,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success",
+        "attacker[_ -]?goal"
+      ],
+      "preview": "attack_successful = check_attack_success(res[\"messages\"], args, attacker_goal)",
+      "text_sha256": "dc6334d68013ac739a3b505841cbc54d5f474b34af70738165bac0967bba5646"
+    },
+    {
+      "line": 220,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "if attack_successful:",
+      "text_sha256": "1934f566cb300574ef6eac0614af5e2bf04d8a5e88223397537c9f23af2914f2"
+    },
+    {
+      "line": 221,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "print(\"Attack successful.\")",
+      "text_sha256": "b74ec6d8d7cb30ee732bb118a17e84ac7002e20ea45e8dfae9effa1be95f0bf7"
+    },
+    {
+      "line": 229,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "task[_ -]?success"
+      ],
+      "preview": "print(\"Original task successful.\")",
+      "text_sha256": "f04ca60bc05cf1de679eed91a79b763d7b5551c7eee37184851f44f1d3f61c0e"
+    },
+    {
+      "line": 284,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "1 if attack_successful else 0,",
+      "text_sha256": "ba9b335a053e650bb78d0c1f86072c83a364263092c3bf7a20a5b420a376873d"
+    },
+    {
+      "line": 300,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "print(f\"Attack success rate: {attack_succ/len(agent_tasks)}\")",
+      "text_sha256": "2f797100f16f3db302288132e1cb61c12660723f82c7ac6a0569d59cac9c8f31"
+    },
+    {
+      "line": 301,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "print(f\"Attack success rate excluding workflow failure cases: {attack_succ/(len(agent_tasks)-workflow_failure)}\")",
+      "text_sha256": "ba576012d0d807a8db20bcb99a618fdc2af69dd4a0404e8733556af414b50e2a"
+    },
+    {
+      "line": 302,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "task[_ -]?success"
+      ],
+      "preview": "print(f'Number of original task success: {orgin_succ}')",
+      "text_sha256": "ee9dc2040dd837283808aafe69cd80327aadea647fb70eb5aeb4f2928a4c60e7"
+    },
+    {
+      "line": 303,
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "patterns": [
+        "task[_ -]?success"
+      ],
+      "preview": "print(f'Original task success rate: {orgin_succ/len(agent_tasks)}')",
+      "text_sha256": "ca1e8b31294e809903f6168bf0033b3e413a0c82675d899431b43ef84fbbf046"
+    },
+    {
+      "line": 39,
+      "path": "external/paper_v2_audits/asb/scripts/res_retrieval.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "elif \"Attack success rate: \" in line:",
+      "text_sha256": "4e239cd0eab7c8130222fccd1d96dcbe47641a399972e2fd6e71c9c753e807ac"
+    },
+    {
+      "line": 41,
+      "path": "external/paper_v2_audits/asb/scripts/res_retrieval.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "elif \"Attack success rate excluding workflow failure cases: \" in line:",
+      "text_sha256": "0068c1feb000a09c9282283791d77b605d3004cd7ddcf7eada1f63bfe1d8c876"
+    },
+    {
+      "line": 43,
+      "path": "external/paper_v2_audits/asb/scripts/res_retrieval.py",
+      "patterns": [
+        "task[_ -]?success"
+      ],
+      "preview": "elif \"Number of original task success: \" in line:",
+      "text_sha256": "0a4035f91f3df353b152782dcf0d7e22b23ffdc6b19ad2833934d1fd5570e394"
+    },
+    {
+      "line": 45,
+      "path": "external/paper_v2_audits/asb/scripts/res_retrieval.py",
+      "patterns": [
+        "task[_ -]?success"
+      ],
+      "preview": "elif \"Original task success rate: \" in line:",
+      "text_sha256": "ebf428771c9d1fdcb188e3d76118b2c1144d4d36b60b29caeca5f171ddede82d"
+    },
+    {
+      "line": 59,
+      "path": "external/paper_v2_audits/asb/scripts/res_retrieval.py",
+      "patterns": [
+        "task[_ -]?success"
+      ],
+      "preview": "result_csv = pandas.DataFrame(columns = [\"LLM\", \"Attack\", \"Aggressive\", \"Attacks num\", \"Successful attack num\", \"Plan generation failures num\", \"ASR\", \"ASR - plan failure\", \"Original task success num\", \"Original task success rate\", \"Refuse ",
+      "text_sha256": "8d45834f73d4759484d399713da4b5039201db317d54bf50586a45746522c632"
+    },
+    {
+      "line": 62,
+      "path": "external/paper_v2_audits/asb/scripts/res_retrieval.py",
+      "patterns": [
+        "task[_ -]?success"
+      ],
+      "preview": "result_csv = pandas.DataFrame(columns = [\"LLM\", \"Attack\", \"Aggressive\", \"Attacks num\", \"Successful attack num\", \"Plan generation failures num\", \"ASR\", \"ASR - plan failure\", \"Original task success num\", \"Original task success rate\", \"Refuse ",
+      "text_sha256": "d2e0ac9d9ce385d4111d906e16687a7c2fc01da17922e54de8f7018a890005b8"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

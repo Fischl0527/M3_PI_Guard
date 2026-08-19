@@ -1,0 +1,54 @@
+{
+  "audit_id": "A03-drift-runtime",
+  "auditor": "Codex primary agent",
+  "claim_ready": false,
+  "command": "python -m experiments.paper_v2.source_audit --spec protocols/paper_upgrade_v2/online_state_audit_specs_v1.json --unit A03-drift-runtime",
+  "conclusion": "no_online_gold_observed",
+  "exit_code": 0,
+  "files": [
+    {
+      "bytes": 340,
+      "path": "protocols/paper_upgrade_v2/audits/A03-drift-runtime/differential_test_result.json",
+      "sha256": "cf6758e7a6793065dd33db001bd0a2023ae776e74975785185013d5c82350dc3"
+    },
+    {
+      "bytes": 996,
+      "path": "protocols/paper_upgrade_v2/audits/A03-drift-runtime/entrypoints.md",
+      "sha256": "7e82576056adc13ea1f91a68c70e201e7b2939724d5cc24c6ea17af578e38c07"
+    },
+    {
+      "bytes": 8294,
+      "path": "protocols/paper_upgrade_v2/audits/A03-drift-runtime/field_flow.json",
+      "sha256": "f348eea8a42682502459a0855af2ef60bb7304f7ac57a81e7543c96a5dc08d11"
+    },
+    {
+      "bytes": 841,
+      "path": "protocols/paper_upgrade_v2/audits/A03-drift-runtime/finding.md",
+      "sha256": "0c813367e2dc845fa4e51da299f75b096db84a7ea02393eaa0470bb2b3c6a199"
+    },
+    {
+      "bytes": 509,
+      "path": "protocols/paper_upgrade_v2/audits/A03-drift-runtime/projection_test.py",
+      "sha256": "6f20a4a51122236ad20048ff839173ba026b9fc98248256911edc20c2ca9246d"
+    },
+    {
+      "bytes": 584,
+      "path": "protocols/paper_upgrade_v2/audits/A03-drift-runtime/projection_test_result.json",
+      "sha256": "9d1c94e74511750f246d17c6d7ae066906d38818a6c65f8171b6d5cde2db1473"
+    },
+    {
+      "bytes": 795,
+      "path": "protocols/paper_upgrade_v2/audits/A03-drift-runtime/source_lock.json",
+      "sha256": "852998145a9d9ecfda2199eb032685729e508803aa450934cbe550bf31e3362c"
+    },
+    {
+      "bytes": 9356,
+      "path": "protocols/paper_upgrade_v2/audits/A03-drift-runtime/static_hits.json",
+      "sha256": "7399745429cdbf8126afa474a1c6e272e0a0938e327e68aa65930a66e0c677e3"
+    }
+  ],
+  "generated_at": "2026-07-23T19:00:00+08:00",
+  "review_status": "single_reviewer_complete",
+  "schema_version": "m3-paper-v2-source-audit-evidence-manifest-1.0",
+  "status": "completed"
+}

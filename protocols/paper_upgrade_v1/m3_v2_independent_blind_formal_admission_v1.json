@@ -1,0 +1,180 @@
+{
+  "artifact_checks": [
+    {
+      "actual_sha256": "",
+      "declared_sha256": "",
+      "exists": false,
+      "name": "runs",
+      "passed": false,
+      "path": ""
+    },
+    {
+      "actual_sha256": "",
+      "declared_sha256": "",
+      "exists": false,
+      "name": "metrics",
+      "passed": false,
+      "path": ""
+    },
+    {
+      "actual_sha256": "",
+      "declared_sha256": "",
+      "exists": false,
+      "name": "statistics",
+      "passed": false,
+      "path": ""
+    },
+    {
+      "actual_sha256": "",
+      "declared_sha256": "",
+      "exists": false,
+      "name": "figures_manifest",
+      "passed": false,
+      "path": ""
+    }
+  ],
+  "blockers": [
+    "candidate_audit_admitted",
+    "candidate_audit_result_eligible",
+    "candidate_sha_declared",
+    "run_manifest_exists",
+    "run_status_completed_formal",
+    "run_result_eligible",
+    "exact_600_cases",
+    "independent_blind_scope",
+    "candidate_sha_matches",
+    "case_runs_complete",
+    "required_artifacts_complete"
+  ],
+  "boundary": "Admission only. A missing, partial, failed, hash-mismatched or non-independent result cannot update the paper-v1 evidence index. The preregistration-bound v1 audit and historical final_analysis manifest are never rewritten.",
+  "candidate_audit_path": "protocols/paper_upgrade_v1/m3_v2_independent_blind_admission_audit_v2.json",
+  "candidate_audit_sha256": "f890b23042f9b83b9aa704ea21fbfe2047dd5d4200d9e4321183ca24bcfd1e34",
+  "checks": [
+    {
+      "detail": "protocols/paper_upgrade_v1/m3_v2_independent_blind_admission_audit_v2.json",
+      "name": "candidate_audit_exists",
+      "passed": true
+    },
+    {
+      "detail": "blocked_missing_candidate",
+      "name": "candidate_audit_admitted",
+      "passed": false
+    },
+    {
+      "detail": false,
+      "name": "candidate_audit_result_eligible",
+      "passed": false
+    },
+    {
+      "detail": "",
+      "name": "candidate_sha_declared",
+      "passed": false
+    },
+    {
+      "detail": "outputs/paper_upgrade_v1/m3_v2_independent_blind_v1/manifest.json",
+      "name": "run_manifest_exists",
+      "passed": false
+    },
+    {
+      "detail": "",
+      "name": "run_status_completed_formal",
+      "passed": false
+    },
+    {
+      "detail": null,
+      "name": "run_result_eligible",
+      "passed": false
+    },
+    {
+      "detail": 0,
+      "name": "exact_600_cases",
+      "passed": false
+    },
+    {
+      "detail": {
+        "evidence_level": "",
+        "split": ""
+      },
+      "name": "independent_blind_scope",
+      "passed": false
+    },
+    {
+      "detail": {
+        "expected": "",
+        "observed": ""
+      },
+      "name": "candidate_sha_matches",
+      "passed": false
+    },
+    {
+      "detail": {
+        "completed": 0,
+        "expected": 0
+      },
+      "name": "case_runs_complete",
+      "passed": false
+    },
+    {
+      "detail": 0,
+      "name": "zero_failed_case_runs",
+      "passed": true
+    },
+    {
+      "detail": [
+        {
+          "actual_sha256": "",
+          "declared_sha256": "",
+          "exists": false,
+          "name": "runs",
+          "passed": false,
+          "path": ""
+        },
+        {
+          "actual_sha256": "",
+          "declared_sha256": "",
+          "exists": false,
+          "name": "metrics",
+          "passed": false,
+          "path": ""
+        },
+        {
+          "actual_sha256": "",
+          "declared_sha256": "",
+          "exists": false,
+          "name": "statistics",
+          "passed": false,
+          "path": ""
+        },
+        {
+          "actual_sha256": "",
+          "declared_sha256": "",
+          "exists": false,
+          "name": "figures_manifest",
+          "passed": false,
+          "path": ""
+        }
+      ],
+      "name": "required_artifacts_complete",
+      "passed": false
+    },
+    {
+      "detail": "protocols/paper_upgrade_v1/paper_v1_evidence_index_v1.json",
+      "name": "evidence_index_exists",
+      "passed": true
+    },
+    {
+      "detail": "paper-v1-evidence-index-1.0",
+      "name": "evidence_index_schema",
+      "passed": true
+    }
+  ],
+  "checks_sha256": "68c35d2369dd47d7c4b43bf6eb4d25204c8c150cd8c6a9fef88d0fad213d261c",
+  "evidence_index_path": "protocols/paper_upgrade_v1/paper_v1_evidence_index_v1.json",
+  "evidence_index_written": false,
+  "result_eligible_for_confirmatory_q2_tables": false,
+  "run_manifest_path": "outputs/paper_upgrade_v1/m3_v2_independent_blind_v1/manifest.json",
+  "run_manifest_sha256": "",
+  "schema_version": "paper-independent-blind-formal-admission-1.0",
+  "status": "blocked_not_admitted",
+  "write_evidence_index_requested": false
+}

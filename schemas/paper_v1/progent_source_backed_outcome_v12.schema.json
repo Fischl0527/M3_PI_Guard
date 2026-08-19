@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "progent_source_backed_outcome_v12.schema.json",
+  "title": "Progent v1.2 source-backed case outcome",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "runner_version",
+    "status",
+    "benchmark_case_id",
+    "case_kind",
+    "metric_semantics_version",
+    "official_injection_goal_achieved",
+    "execution_grounded_injection_goal_achieved",
+    "attack_outcome",
+    "operational_status",
+    "trace_event_path",
+    "trace_event_sha256",
+    "trace_snapshot_path",
+    "trace_snapshot_sha256",
+    "trace_sealed"
+  ],
+  "properties": {
+    "schema_version": {"const": "paper-progent-source-backed-case-1.2"},
+    "runner_version": {"type": "string", "minLength": 1},
+    "status": {"enum": ["completed", "failed"]},
+    "benchmark_case_id": {"type": "string", "minLength": 1},
+    "case_kind": {"enum": ["utility", "security"]},
+    "metric_semantics_version": {"const": "agentdojo_official_v2"},
+    "official_injection_goal_achieved": {"type": ["boolean", "null"]},
+    "execution_grounded_injection_goal_achieved": {"type": ["boolean", "null"]},
+    "attack_outcome": {"enum": ["success", "failure", "unresolved", null]},
+    "operational_status": {
+      "enum": [
+        "completed",
+        "timeout",
+        "transport_failure",
+        "parser_failure",
+        "runtime_failure"
+      ]
+    },
+    "trace_event_path": {"type": "string", "minLength": 1},
+    "trace_event_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "trace_snapshot_path": {"type": "string", "minLength": 1},
+    "trace_snapshot_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "trace_sealed": {"const": true}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"operational_status": {"const": "completed"}}},
+      "then": {"properties": {"status": {"const": "completed"}}}
+    },
+    {
+      "if": {"properties": {"case_kind": {"const": "utility"}}},
+      "then": {
+        "properties": {
+          "official_injection_goal_achieved": {"type": "null"},
+          "execution_grounded_injection_goal_achieved": {"type": "null"},
+          "attack_outcome": {"type": "null"}
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}

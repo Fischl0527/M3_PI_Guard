@@ -1,0 +1,520 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/formal_matrix_admission_v1.schema.json",
+  "title": "M3 paper-v2 DeepSeek medium-matrix admission manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "status",
+    "artifact_role",
+    "scope",
+    "scope_sha256",
+    "authorization",
+    "evidence_boundary",
+    "next_gate",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-formal-matrix-admission-1.0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "candidate_pending_owner_activation",
+        "activated_for_deepseek_medium_matrix"
+      ]
+    },
+    "artifact_role": {
+      "enum": [
+        "owner_review_candidate",
+        "deepseek_medium_matrix_execution_authorization"
+      ]
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "scope_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "authorization": {
+      "$ref": "#/$defs/authorization"
+    },
+    "evidence_boundary": {
+      "$ref": "#/$defs/evidence_boundary"
+    },
+    "next_gate": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "project_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "locked_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/project_path"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_id",
+        "endpoint_type",
+        "base_url",
+        "model_id",
+        "temperature",
+        "max_tokens",
+        "timeout_seconds",
+        "concurrency",
+        "automatic_retries",
+        "cross_provider_fallback",
+        "provider_managed_tools"
+      ],
+      "properties": {
+        "provider_id": {
+          "const": "deepseek"
+        },
+        "endpoint_type": {
+          "const": "official_api"
+        },
+        "base_url": {
+          "const": "https://api.deepseek.com"
+        },
+        "model_id": {
+          "const": "deepseek-v4-pro"
+        },
+        "temperature": {
+          "const": 0.0
+        },
+        "max_tokens": {
+          "const": 512
+        },
+        "timeout_seconds": {
+          "const": 120.0
+        },
+        "concurrency": {
+          "const": 1
+        },
+        "automatic_retries": {
+          "const": 0
+        },
+        "cross_provider_fallback": {
+          "const": false
+        },
+        "provider_managed_tools": {
+          "const": false
+        }
+      }
+    },
+    "plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "execution_identity",
+        "work_items",
+        "primary_records",
+        "authorization_regime_probes",
+        "provider_calls_upper_bound",
+        "work_key_sequence_sha256"
+      ],
+      "properties": {
+        "path": {
+          "const": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "execution_identity": {
+          "$ref": "#/$defs/sha256"
+        },
+        "work_items": {
+          "const": 480
+        },
+        "primary_records": {
+          "const": 432
+        },
+        "authorization_regime_probes": {
+          "const": 48
+        },
+        "provider_calls_upper_bound": {
+          "const": 4416
+        },
+        "work_key_sequence_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "pilot_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "file_sha256",
+        "review_sha256",
+        "status",
+        "checks_passed",
+        "ready_for_owner_matrix_review"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/project_path"
+        },
+        "file_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "review_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "status": {
+          "const": "official_pilot_technical_gate_pass"
+        },
+        "checks_passed": {
+          "const": 15
+        },
+        "ready_for_owner_matrix_review": {
+          "const": true
+        }
+      }
+    },
+    "deepseek_usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prompt_tokens",
+        "prompt_cache_hit_tokens",
+        "prompt_cache_miss_tokens",
+        "completion_tokens"
+      ],
+      "properties": {
+        "prompt_tokens": {
+          "const": 278
+        },
+        "prompt_cache_hit_tokens": {
+          "const": 0
+        },
+        "prompt_cache_miss_tokens": {
+          "const": 278
+        },
+        "completion_tokens": {
+          "const": 136
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_path",
+        "policy_sha256",
+        "hard_spend_limit_cny",
+        "abort_ceiling_cny",
+        "prior_official_pilot_usage",
+        "prior_official_pilot_cost_cny",
+        "check_before_every_provider_call",
+        "usage_ledger_fsync_after_every_completed_call"
+      ],
+      "properties": {
+        "policy_path": {
+          "const": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v1.json"
+        },
+        "policy_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hard_spend_limit_cny": {
+          "const": 30.0
+        },
+        "abort_ceiling_cny": {
+          "const": 27.0
+        },
+        "prior_official_pilot_usage": {
+          "$ref": "#/$defs/deepseek_usage"
+        },
+        "prior_official_pilot_cost_cny": {
+          "const": 0.00165
+        },
+        "check_before_every_provider_call": {
+          "const": true
+        },
+        "usage_ledger_fsync_after_every_completed_call": {
+          "const": true
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_path",
+        "policy_sha256",
+        "allowed_payload_classes",
+        "effect_backends",
+        "external_effects",
+        "host_or_provider_tools",
+        "external_connectors",
+        "model_output_is_untrusted_proposal"
+      ],
+      "properties": {
+        "policy_path": {
+          "const": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json"
+        },
+        "policy_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "allowed_payload_classes": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "synthetic_m3_case"
+            },
+            {
+              "const": "public_benchmark_case"
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "effect_backends": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "m3_sandbox_fixture"
+            },
+            {
+              "const": "agentdojo_in_memory_copy"
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "external_effects": {
+          "const": false
+        },
+        "host_or_provider_tools": {
+          "const": false
+        },
+        "external_connectors": {
+          "const": false
+        },
+        "model_output_is_untrusted_proposal": {
+          "const": true
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root",
+        "record_ledger_path",
+        "attempt_ledger_path",
+        "budget_ledger_path",
+        "trace_root",
+        "single_trace_per_work_item",
+        "automatic_resume_of_open_attempts"
+      ],
+      "properties": {
+        "root": {
+          "$ref": "#/$defs/project_path"
+        },
+        "record_ledger_path": {
+          "$ref": "#/$defs/project_path"
+        },
+        "attempt_ledger_path": {
+          "$ref": "#/$defs/project_path"
+        },
+        "budget_ledger_path": {
+          "$ref": "#/$defs/project_path"
+        },
+        "trace_root": {
+          "$ref": "#/$defs/project_path"
+        },
+        "single_trace_per_work_item": {
+          "const": true
+        },
+        "automatic_resume_of_open_attempts": {
+          "const": false
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "matrix_identity",
+        "provider",
+        "plan",
+        "pilot_review",
+        "budget",
+        "safety",
+        "outputs",
+        "locked_inputs"
+      ],
+      "properties": {
+        "run_id": {
+          "const": "paper-v2-deepseek-medium-v1-20260724"
+        },
+        "matrix_identity": {
+          "$ref": "#/$defs/sha256"
+        },
+        "provider": {
+          "$ref": "#/$defs/provider"
+        },
+        "plan": {
+          "$ref": "#/$defs/plan"
+        },
+        "pilot_review": {
+          "$ref": "#/$defs/pilot_review"
+        },
+        "budget": {
+          "$ref": "#/$defs/budget"
+        },
+        "safety": {
+          "$ref": "#/$defs/safety"
+        },
+        "outputs": {
+          "$ref": "#/$defs/outputs"
+        },
+        "locked_inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/locked_input"
+          }
+        }
+      }
+    },
+    "owner_approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approval_kind",
+        "approved_by_role",
+        "approved_at",
+        "approval_scope",
+        "statement_sha256"
+      ],
+      "properties": {
+        "approval_kind": {
+          "const": "delegated_safe_api_iteration"
+        },
+        "approved_by_role": {
+          "const": "project_owner"
+        },
+        "approved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approval_scope": {
+          "const": "deepseek_frozen_480_item_medium_matrix"
+        },
+        "statement_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_only",
+        "matrix_execution_authorized",
+        "result_admission_authorized",
+        "candidate_manifest_sha256",
+        "owner_approval"
+      ],
+      "properties": {
+        "candidate_only": {
+          "type": "boolean"
+        },
+        "matrix_execution_authorized": {
+          "type": "boolean"
+        },
+        "result_admission_authorized": {
+          "const": false
+        },
+        "candidate_manifest_sha256": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/sha256"
+            }
+          ]
+        },
+        "owner_approval": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/owner_approval"
+            }
+          ]
+        }
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentials_read_while_building",
+        "network_calls_while_building",
+        "formal_results_created",
+        "candidate_is_executable"
+      ],
+      "properties": {
+        "credentials_read_while_building": {
+          "const": false
+        },
+        "network_calls_while_building": {
+          "const": 0
+        },
+        "formal_results_created": {
+          "const": 0
+        },
+        "candidate_is_executable": {
+          "const": false
+        }
+      }
+    }
+  }
+}

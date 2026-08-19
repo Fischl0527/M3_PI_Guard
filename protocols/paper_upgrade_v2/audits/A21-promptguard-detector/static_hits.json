@@ -1,0 +1,16 @@
+{
+  "audit_id": "A21-promptguard-detector",
+  "hits": [
+    {
+      "line": 23,
+      "path": "external/baselines/PurpleLlama/Llama-Prompt-Guard-2/86M/MODEL_CARD.md",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "*   **No injection sub-labels**: Unlike with Prompt Guard 1, we don’t include a specific “injection” label to detect prompts that may cause unintentional instruction-following. In practice, we found this objective too broad to be useful.",
+      "text_sha256": "e86f2b1521b4c95af7fb86b21a4d3c42e50bb5a5468ff94df32413fa637055d0"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

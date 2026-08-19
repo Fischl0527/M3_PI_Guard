@@ -1,0 +1,55 @@
+{
+  "admission_criteria": {
+    "all_budget_ledgers_cross_bind": true,
+    "all_provider_trace_chains_reconstruct": true,
+    "all_record_hash_chains_reconstruct": true,
+    "all_safety_receipts_isolated": true,
+    "all_source_projections_reconstruct": true,
+    "analysis_preregistration_bound": "99d9cf85a8a0adf12cee8f0e73ad0e2efdb29633e3ad92f74d0dfed617721801",
+    "exact_terminal_records": 6873,
+    "failures_retained_in_intention_to_treat": true,
+    "independent_analysis_rebuild_required": true,
+    "no_open_attempts": true,
+    "no_unexplained_runner_failure": true,
+    "one_terminal_record_per_work_key": true,
+    "primary_exact_model": "deepseek-v4-pro",
+    "primary_technical_canary_pass": true,
+    "primary_terminal_records": 5082,
+    "second_exact_model": "deepseek-v4-flash",
+    "second_technical_canary_pass": true,
+    "second_terminal_records": 1791
+  },
+  "analysis_preregistration": {
+    "file_sha256": "8a9596ecb2a66ba9c7ce4e0bcd1ace2f1549579d32f50a898fd5bc2ecfebc350",
+    "path": "protocols/paper_upgrade_v2/public_analysis_preregistration_v1.json",
+    "preregistration_sha256": "99d9cf85a8a0adf12cee8f0e73ad0e2efdb29633e3ad92f74d0dfed617721801"
+  },
+  "authorization": {
+    "analysis_execution_authorized": false,
+    "canary_execution_authorized": false,
+    "matrix_continuation_authorized": false,
+    "result_admission_authorized": false
+  },
+  "candidate": {
+    "file_sha256": "4f6fad8a5a84b1b5ecdc6519b54851a6c4dbb7f2079355137df9225ed32149c2",
+    "manifest_sha256": "b9fd7d55c78dcdcfe050ce1cc3802dce0b40b2756355eab871b424b48cfe1da8",
+    "path": "protocols/paper_upgrade_v2/public_matrix_candidate_v1.json",
+    "scope_sha256": "be6173b1782519982065e379c438b60a677e74793ee45be1e24563b88b9c980d"
+  },
+  "criteria_sha256": "dea823e3b5c5966051253bc83bc163034f3fcc09a17ffdce47600dcc74b020d7",
+  "evidence_boundary": {
+    "experiment_ledgers_loaded": false,
+    "formal_results_created": 0,
+    "scientific_outcomes_accessed": false
+  },
+  "failure_outcome": {
+    "partial_completion_score": "report completed fraction; do not assign 100/100",
+    "primary_only_completion": "primary-model evidence only; no cross-model claim",
+    "scientific_gate_failure": "retain empirical-study fallback; no defense superiority claim",
+    "technical_chain_failure": "diagnostic_only_not_scientific_result"
+  },
+  "frozen_at": "2026-07-28T00:50:00+08:00",
+  "gate_sha256": "6f8eac085229940d0b9805488c596c396e1ae465cfc7dbe2d5e079e8d3ac1b75",
+  "schema_version": "m3-paper-v2-public-result-gate-1.0",
+  "status": "prospective_gate_frozen_results_pending"
+}

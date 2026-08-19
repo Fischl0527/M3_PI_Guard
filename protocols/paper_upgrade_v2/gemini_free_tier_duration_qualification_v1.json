@@ -1,0 +1,113 @@
+{
+  "artifact_locks": [
+    {
+      "bytes": 11777,
+      "path": "experiments/paper_v2/gemini_free_tier_duration_qualification_v1.py",
+      "sha256": "a384eb409a9067151db9eb957a133bbe43fdeecbcc0e4a348bf81c5bfb9b0887"
+    },
+    {
+      "bytes": 2595,
+      "path": "protocols/paper_upgrade_v2/gemini_free_tier_quota_snapshot_v2.json",
+      "sha256": "359f19b5b6ac6dc716ed5a6c8f730d2ec2b49fdf3c3cb1204114fcc94c29faba"
+    },
+    {
+      "bytes": 2936922,
+      "path": "protocols/paper_upgrade_v2/gemini_public_execution_plan_v1.jsonl",
+      "sha256": "dd8ba9f2e114a270740f296845169f81f0b68a2a736b51ab8096b47bc71fde5d"
+    },
+    {
+      "bytes": 11044,
+      "path": "protocols/paper_upgrade_v2/adaptive_formal_gemini_flash_plan_candidate_v1.json",
+      "sha256": "f745bf257dc9fa487828cf05f6f2193fb5b97614e0c61742f788f8c85dfd8eda"
+    },
+    {
+      "bytes": 37286,
+      "path": "experiments/paper_v2/gemini_public_controller_v4.py",
+      "sha256": "3ec2e1eda3d799e067fc0f78d0ef08dcaaef767015e6bfa9ffe6ed628c19b9c8"
+    }
+  ],
+  "artifact_role": "offline_gemini_free_tier_duration_qualification",
+  "conclusion": {
+    "billing_enablement_authorized": false,
+    "completion_may_not_be_claimed_from_elapsed_calendar_days": true,
+    "schedule_extension_mandatory": true,
+    "twenty_one_day_completion_possible_under_current_free_tier": false
+  },
+  "duration_bounds_quota_days": {
+    "precommitted_worst_case_safe_packing": {
+      "adaptive": 2000,
+      "canary": 8,
+      "public_pending_only": 1186,
+      "total": 3194
+    },
+    "prospective_minimum_with_locked_canary": {
+      "adaptive": 223,
+      "canary": 8,
+      "public_pending_only": 99,
+      "total": 330
+    },
+    "theoretical_one_call_per_item": {
+      "adaptive": 223,
+      "canary": 1,
+      "public_pending_only": 99,
+      "total": 323
+    }
+  },
+  "evidence_boundary": {
+    "credentials_read": false,
+    "execution_authorized": false,
+    "network_calls_made": 0,
+    "scientific_outcomes_read": 0
+  },
+  "generated_at": "2026-08-02T12:02:20+08:00",
+  "manifest_sha256": "851543ee4fdf48f363fc4a56a43ca400994bb697d2238d0d2b6eac00037a13e6",
+  "model_id": "gemini-3.6-flash",
+  "provider_id": "gemini",
+  "quota": {
+    "billing_tier": "free",
+    "local_requests_per_day": 18,
+    "one_formal_workload_per_quota_day": true,
+    "paid_ceiling_usd": 0.0,
+    "provider_requests_per_day": 20,
+    "quota_timezone": "America/Los_Angeles",
+    "reserved_requests_per_day": 2
+  },
+  "schema_version": "m3-paper-v2-gemini-free-tier-duration-qualification-1.0",
+  "status": "qualified_schedule_extension_required",
+  "workloads": {
+    "adaptive": {
+      "maximum_provider_calls": 32000,
+      "maximum_queries": 4000,
+      "safe_queries_per_quota_day": 2,
+      "safe_quota_days": 2000,
+      "tasks": 20
+    },
+    "canary": {
+      "maximum_provider_calls": 128,
+      "records": 12,
+      "safe_quota_days": 8
+    },
+    "public_matrix": {
+      "by_condition": {
+        "m3_full": {
+          "maximum_provider_calls": 4776,
+          "records": 597
+        },
+        "m3_policy_only": {
+          "maximum_provider_calls": 4776,
+          "records": 597
+        },
+        "strongest_peer_reviewed_structural_baseline": {
+          "maximum_provider_calls": 9552,
+          "records": 597
+        }
+      },
+      "canary_prefix_records": 12,
+      "maximum_provider_calls": 19104,
+      "pending_only_maximum_provider_calls": 18976,
+      "pending_only_records": 1779,
+      "pending_only_safe_quota_days": 1186,
+      "records": 1791
+    }
+  }
+}

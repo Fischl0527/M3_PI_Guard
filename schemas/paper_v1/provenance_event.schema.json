@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v1/provenance_event.schema.json",
+  "title": "M3 paper-v1 ProvenanceEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_id", "proposal_id", "argument_path", "source_type", "trust_level", "value_sha256", "data_labels", "evidence"],
+  "properties": {
+    "event_id": {"type": "string"},
+    "proposal_id": {"type": "string"},
+    "argument_path": {"type": "string", "pattern": "^arguments"},
+    "source_type": {"enum": ["trusted_user", "trusted_app_context", "tool_schema", "untrusted_document", "untrusted_tool_output", "untrusted_memory", "model_generated"]},
+    "trust_level": {"enum": ["trusted", "untrusted", "model_generated"]},
+    "value_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_event_id": {"type": ["string", "null"]},
+    "data_labels": {"type": "array", "items": {"type": "string"}},
+    "evidence": {"type": "string"}
+  }
+}

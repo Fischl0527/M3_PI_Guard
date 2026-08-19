@@ -1,0 +1,27 @@
+{
+  "schema_version": "m3-paper-v2-gemini-public-controller-qualification-2.0",
+  "status": "offline_gemini_json_public_canary_qualified",
+  "provider_id": "gemini",
+  "model_id": "gemini-3.6-flash",
+  "plan_manifest_sha256": "11b23e6fdc64b294add44d7ea391121dc57220d1286fb4ec127d26579a2ec313",
+  "plan_records": 1791,
+  "canary_records": 12,
+  "canary_work_key_sequence_sha256": "9a855dfd61776fb8bff089196b4cf34fc8c5bc2bae41220b6325cd640f03cbc2",
+  "base_controller_qualification_sha256": "80a43a5fda82f67db50c3ea807218e42c94eda1f9a48b1a2db6bd82173c3a849",
+  "json_client_qualification_sha256": "69bd7294c7634bcba4259e5a482cb08d87595af92edf746f5a2dbccd6281f845",
+  "json_payload_sha256": "f9c23d174d64b7e4f52b3a65ae18db45b4441c520baad7c7415a1374e26520c6",
+  "vigil_constraint_set_sha256": "e8df028a7fc71688bb6988fa9bf063e526db3143f8be1c9ab1814a82ea5f8c27",
+  "v1_supersession_manifest_sha256": "37a547359bdbe513b88b3746df064a3bfe3f52b3eb9cbae32378520c95118c85",
+  "controls": {
+    "automatic_retries": 0,
+    "billing_tier": "free",
+    "external_effects_enabled": false,
+    "first_http_429": "seal_current_run",
+    "paid_ceiling_usd": 0.0,
+    "provider_managed_tools_enabled": false
+  },
+  "network_calls_made": 0,
+  "credentials_read": false,
+  "scientific_outcomes_read": 0,
+  "manifest_sha256": "7b59adbfdc19a053201ef76966282748a2299768a40aaf053869fb39bc89ee3d"
+}

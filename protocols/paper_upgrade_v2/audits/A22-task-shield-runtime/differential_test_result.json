@@ -1,0 +1,8 @@
+{
+  "audit_id": "A22-task-shield-runtime",
+  "base_digest": "1b3b5bc713336deaf46091c395d0ee344e9d79260a77b12acd246e5c0d1887bc",
+  "mutated_digest": "1b3b5bc713336deaf46091c395d0ee344e9d79260a77b12acd246e5c0d1887bc",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

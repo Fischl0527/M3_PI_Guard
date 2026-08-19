@@ -1,0 +1,92 @@
+{
+  "audit_id": "A07-agentdojo-evaluator",
+  "authorization_source": "mixed_or_unclear",
+  "missing_component": null,
+  "offline_boundaries": [
+    {
+      "end_line": 295,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "task",
+        "model_output",
+        "pre_environment",
+        "task_environment",
+        "functions_stack_trace"
+      ],
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "phase": "posthoc_utility_evaluation",
+      "referenced_identifiers": [
+        "BaseUserTask",
+        "Env",
+        "FunctionCall",
+        "MessageContentBlock",
+        "Sequence",
+        "bool",
+        "functions_stack_trace",
+        "get_text_content_as_str",
+        "list",
+        "model_output",
+        "output_text_content",
+        "pre_environment",
+        "task",
+        "task_environment",
+        "utility",
+        "utility_from_stack_traces",
+        "utility_from_traces"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "task.utility": true,
+        "utility_from_traces": true
+      },
+      "sha256": "5a989815b0d66d87a0f1b802b1753c6a37d181d02b3dbc5933a330f2eb85fef1",
+      "start_line": 281,
+      "symbol": "TaskSuite._check_user_task_utility"
+    },
+    {
+      "end_line": 311,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "task",
+        "model_output",
+        "pre_environment",
+        "task_environment",
+        "functions_stack_trace"
+      ],
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "phase": "posthoc_security_evaluation",
+      "referenced_identifiers": [
+        "BaseInjectionTask",
+        "Env",
+        "FunctionCall",
+        "MessageContentBlock",
+        "Sequence",
+        "bool",
+        "functions_stack_trace",
+        "get_text_content_as_str",
+        "list",
+        "model_output",
+        "output_text_content",
+        "pre_environment",
+        "security",
+        "security_from_stack_traces",
+        "security_from_traces",
+        "task",
+        "task_environment"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "security_from_traces": true,
+        "task.security": true
+      },
+      "sha256": "5a989815b0d66d87a0f1b802b1753c6a37d181d02b3dbc5933a330f2eb85fef1",
+      "start_line": 297,
+      "symbol": "TaskSuite._check_injection_task_security"
+    }
+  ],
+  "online_boundaries": [],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

@@ -1,0 +1,8 @@
+{
+  "audit_id": "A15-piarena-defense-registry",
+  "base_digest": "73dba5669d8d9c1637fd46c24b9cd38444cc40557b2b53a511ac101676128704",
+  "mutated_digest": "73dba5669d8d9c1637fd46c24b9cd38444cc40557b2b53a511ac101676128704",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

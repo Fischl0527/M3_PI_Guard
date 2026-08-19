@@ -1,0 +1,85 @@
+{
+  "benchmark_cases_executed": 0,
+  "boundary": "Import/build preflight only. It proves that the disclosed paper reproduction can be constructed in a network-blocked fresh process. It does not call a verifier, probe Ollama, execute a case, or reproduce the paper's GPT-4o results.",
+  "checks": [
+    {
+      "detail": "completed_frozen_formal_protocol",
+      "name": "freeze_completed",
+      "status": "pass"
+    },
+    {
+      "detail": "E:\\M3_PI_Guard_test\\external\\baselines\\task-shield-paper\\2025.acl-long.1435.pdf",
+      "name": "paper_hash_matches",
+      "status": "pass"
+    },
+    {
+      "detail": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\taskshield_paper_runtime.py",
+      "name": "runtime_hash_matches",
+      "status": "pass"
+    },
+    {
+      "detail": "m3-paper-qwen3-8b-v1-latest-task-shield-paper-reproduction",
+      "name": "pipeline_builds_without_model_call",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "assistant_llm": 2,
+        "init_query": 1,
+        "tools_executor": 1
+      },
+      "name": "all_required_elements_replaced",
+      "status": "pass"
+    },
+    {
+      "detail": "TaskShieldPaperVerifier",
+      "name": "verifier_constructed",
+      "status": "pass"
+    },
+    {
+      "detail": true,
+      "name": "network_guard_active",
+      "status": "pass"
+    },
+    {
+      "detail": "disclosed_paper_reproduction_not_official_source",
+      "name": "paper_reproduction_not_official_source",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "analyzer": "10500e194ffc3fba19eebbe3d7f91d4d5d45b41286dc992c1bc1e36edef02e3e",
+        "import_preflight": "7e5600e829f7e16c501adf48a054f1d61ce29095588c3dc38a5f519281c31d6d",
+        "protocol": "eb8bae31b60dd1a1968ac7a95125ed06138d0181b3f2b8477a454863780d7444",
+        "resume_identity_helper": "a785085cbf0aa904ddbf7a924926dae1834e40795755c547640f0892abe48432",
+        "runner": "9acc0c3e3170142ef015126bfc89d3fe8e827c47d0e975444b2316ca134eee77",
+        "runtime": "ceaa231f909bf2b2755f2ff42fe90bfa3e84034f2ea33a5312d748e6ae4dcfa2"
+      },
+      "name": "local_adapter_hashes_match_freeze",
+      "status": "pass"
+    }
+  ],
+  "child_build": {
+    "local_adapter_hashes_valid": true,
+    "network_guard_active": true,
+    "pipeline_name": "m3-paper-qwen3-8b-v1-latest-task-shield-paper-reproduction",
+    "replacements": {
+      "assistant_llm": 2,
+      "init_query": 1,
+      "tools_executor": 1
+    },
+    "trace_class": "TaskShieldTrace",
+    "verifier_class": "TaskShieldPaperVerifier"
+  },
+  "created_at": "2026-07-21T11:57:55.174311+00:00",
+  "failed_checks": [],
+  "freeze_path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\taskshield_paper_formal_freeze_v1.json",
+  "freeze_sha256": "a2ac513fd59525d7de5082abb6b38c521c64bd30379317f50ed1b2e1e9196de7",
+  "network_calls_performed": false,
+  "ollama_probe_performed": false,
+  "passed_checks": 9,
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-taskshield-import-preflight-1.0",
+  "status": "completed_import_preflight_only",
+  "total_checks": 9
+}

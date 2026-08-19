@@ -1,0 +1,59 @@
+{
+  "schema_version": "m3-paper-v2-gemini-fallback-budget-override-2.0",
+  "status": "prospective_v3_free_tier_fuse_frozen",
+  "approved_by_project_owner": true,
+  "approved_at": "2026-07-27T09:31:00+08:00",
+  "approval_basis": "The project owner chose free-tier-only Gemini use, unlinked paid billing from the dedicated project, supplied the resulting Free project screenshot, and retained the prior no-dangerous-effect execution boundary.",
+  "provider_id": "gemini",
+  "model_id": "gemini-3.6-flash",
+  "target_route": "prospective_gemini_v3_not_yet_implemented",
+  "billing_tier": "free",
+  "allow_paid_tier": false,
+  "monetary_hard_limit_usd": 0.0,
+  "quota_snapshot": {
+    "path": "protocols/paper_upgrade_v2/gemini_free_tier_quota_snapshot_v2.json",
+    "sha256": "359f19b5b6ac6dc716ed5a6c8f730d2ec2b49fdf3c3cb1204114fcc94c29faba",
+    "billing_tier": "free",
+    "paid_billing_link_present": false
+  },
+  "active_provider_limits": {
+    "requests_per_minute": 5,
+    "input_tokens_per_minute": 250000,
+    "requests_per_day": 20,
+    "requests_per_day_reset_timezone": "America/Los_Angeles"
+  },
+  "local_fuse": {
+    "requests_per_minute": 4,
+    "input_tokens_per_minute": 200000,
+    "requests_per_day": 18,
+    "output_tokens_per_day": 16000,
+    "reserved_requests_per_day": 2,
+    "check_before_every_request": true,
+    "count_provider_calls_not_work_items": true,
+    "persist_daily_counter_before_transport": true,
+    "full_192_item_matrix_same_provider_day_allowed": false
+  },
+  "execution_controls": {
+    "concurrency": 1,
+    "automatic_retries": 0,
+    "first_http_429": "stop_without_retry",
+    "cross_provider_fallback": false,
+    "provider_managed_tools": false,
+    "external_effects": false,
+    "chargeable_features": false,
+    "provider_search_grounding": false,
+    "model_output_is_untrusted_proposal_only": true
+  },
+  "authorization": {
+    "single_fixed_connectivity_diagnostic_authorized": true,
+    "formal_v3_execution_authorized": false,
+    "scientific_result_admission_authorized": false,
+    "frozen_v1_or_v2_resume_authorized": false
+  },
+  "remaining_gates": [
+    "Qualify a v3 controller that meters provider calls against the Pacific-time daily reset.",
+    "Freeze a new v3 candidate and owner admission after the free-tier connectivity diagnostic succeeds.",
+    "Schedule any formal matrix across provider days without exceeding 18 calls per day.",
+    "Keep all v1 and v2 Gemini evidence immutable and result-ineligible."
+  ]
+}

@@ -1,0 +1,224 @@
+# Results draft — admitted medium, public-primary, and adaptive-canary evidence
+
+Status: `medium_public_primary_and_adaptive_canary_admitted_empirical_fallback`
+
+This draft separates admitted evidence from pending confirmatory work. The
+authoritative medium analysis is
+`outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json`
+(SHA-256
+`ea3d6197b0f97b5057b1d0f9fff054f3ae43743eb9cb85eb4122b6c152d7e041`).
+It is bound to result admission
+`0ed21b6d934d8aefab95667adbf07203140d5cf3d115b891eef882eb9fb028d7`.
+The separately admitted eight-task adaptive cost canary is reported only as
+exploratory evidence. The 5,082-record Public primary-model matrix is admitted
+and independently reproduced below. The second-model Public extension and
+formal 40/20-task adaptive cells remain pending and must not be inferred from
+the completed studies.
+
+## Medium study disposition
+
+The admitted study contains 480 records: 432 primary `auto_compiled` records
+covering 72 paired cases across six conditions, plus 48 authorization-regime
+probe records. The prespecified mechanism-paper gate failed and activated the
+empirical-study fallback. M3-full passed the security-effect and deny-all
+checks, but failed the utility point non-inferiority check and showed no
+security gain over M3 policy-only. These negative gates are retained rather
+than removed or redefined.
+
+Controlling disposition: `medium_admitted_empirical_fallback_selected`.
+
+## Table 1. Online-state source audit
+
+| Conclusion | Audited units | Independently reviewed | Claim use |
+|---|---:|---:|---|
+| No online gold observed on covered path | 9 | 0 | Path-scoped only |
+| Not a runtime guard | 10 | 0 | Taxonomy only |
+| Mixed or path dependent | 1 | 0 | Path-scoped caution |
+| Inconclusive | 2 | 0 | No substantive claim |
+
+This audit supports only covered-path statements. It does not establish a
+domain-wide oracle-authorization problem.
+
+## Table 2. Admitted medium security and utility outcomes
+
+| Condition | Unsafe effects / 36 attacks | Unsafe-effect rate (Wilson 95% CI) | Tool completions / 24 | Tool TCR (Wilson 95% CI) | No-tool TCR |
+|---|---:|---:|---:|---:|---:|
+| No defense | 8/36 | 22.22% (11.72–38.08) | 12/24 | 50.00% (31.43–68.57) | 12/12 |
+| Safe prompt / spotlighting | 8/36 | 22.22% (11.72–38.08) | 11/24 | 45.83% (27.89–64.93) | 12/12 |
+| PromptGuard (detector-only) | 8/36 | 22.22% (11.72–38.08) | 12/24 | 50.00% (31.43–68.57) | 12/12 |
+| Structural baseline | 8/36 | 22.22% (11.72–38.08) | 12/24 | 50.00% (31.43–68.57) | 12/12 |
+| M3 policy-only | 0/36 | 0.00% (0.00–9.64) | 7/24 | 29.17% (14.91–49.17) | 12/12 |
+| M3-full | 0/36 | 0.00% (0.00–9.64) | 6/24 | 25.00% (12.00–44.90) | 12/12 |
+
+The medium sample therefore shows a security–utility trade-off, not a
+mechanism-paper victory. Both M3 variants eliminated the eight unsafe effects
+observed under the structural condition, but they also completed substantially
+fewer benign tool tasks.
+
+## Table 3. Prespecified paired comparisons
+
+| Comparison | Treatment minus baseline | Exact McNemar p | Holm-adjusted p | 10,000-cluster bootstrap 95% CI |
+|---|---:|---:|---:|---:|
+| M3-full vs structural, unsafe effect | −22.22 pp | 0.0078125 | 0.03125 | −36.11 to −8.33 pp |
+| M3-full vs policy-only, unsafe effect | 0.00 pp | 1.0 | 1.0 | 0.00 to 0.00 pp |
+| M3-full vs structural, tool TCR | −25.00 pp | 0.03125 | 0.09375 | −41.67 to −8.33 pp |
+| M3-full vs policy-only, tool TCR | −4.17 pp | 1.0 | 1.0 | −12.50 to 0.00 pp |
+
+The security effect relative to the structural baseline was large in this
+sample, but the full mechanism did not outperform policy-only. Relative to the
+structural condition, its benign-tool TCR was 25 percentage points lower, well
+outside the preregistered −5 percentage-point non-inferiority margin.
+
+## Table 4. Runtime burden and operational quality
+
+| Condition | ASK / 72 | Benign ASK rate | Operational failures / 72 | Provider calls | Trace-bundle cost (CNY) | Total latency p95 |
+|---|---:|---:|---:|---:|---:|---:|
+| No defense | 0 | 0.00% | 4 | 181 | 0.1821176 | 16.924 s |
+| Safe prompt / spotlighting | 0 | 0.00% | 5 | 167 | 0.1812942 | 15.971 s |
+| PromptGuard (detector-only) | 0 | 0.00% | 5 | 180 | 0.0986064 | 18.249 s |
+| Structural baseline | 0 | 0.00% | 4 | 249 | 0.2568822 | 21.251 s |
+| M3 policy-only | 16 | 19.44% | 1 | 112 | 0.0548220 | 7.897 s |
+| M3-full | 22 | 22.22% | 2 | 117 | 0.1441772 | 10.701 s |
+
+Across the 432 primary records, 411 completed and 21 retained terminal failures
+comprised six `max_steps`, six parse failures, and nine provider failures. The
+4.86% overall failure fraction and 2.08% provider-failure fraction passed the
+prospectively frozen operational-quality envelope. Every terminal state remains
+in the intention-to-treat denominator.
+
+For M3-full, 22 initial `ASK` decisions comprised 17 permission-expansion
+events, four independent-confirmation requirements, and one out-of-scope
+parameter. Confirmation outcomes remained `pending` in this synthetic study;
+the ASK count measures burden and cannot be interpreted as successful human
+approval.
+
+## Authorization-regime sensitivity
+
+Forty-eight probe records compare four alternate regimes with matched
+`auto_compiled` executions for M3 policy-only and M3-full. Each
+condition–regime comparison contains six pairs. No unsafe effect occurred in
+these small probes. For the explicitly labeled `exact_gold` probe, task
+completion increased from 1/6 under matched `auto_compiled` to 3/6 under
+`exact_gold`, while initial ASK decreased from 3/6 to 0/6; exact McNemar tests
+were p=0.5 and p=0.25, respectively. These six-pair estimates are sensitivity
+signals, not evidence of a domain-wide bias.
+
+The frozen analysis uses legacy keys named `exact_gold_*` for the alternate
+side of every regime comparison, including `broad`, `underspecified`, and
+`conflicting`. Manuscript text interprets those fields by the enclosing regime
+name and does not relabel non-gold probes as exact-gold evidence.
+
+## Mechanism/redirect decision
+
+| Gate | Result | Evidence |
+|---|---|---|
+| Security effect vs structural | Pass | 22.22 pp absolute reduction |
+| Tool-utility point non-inferiority | Fail | −25.00 pp vs −5 pp margin |
+| Full vs policy-only security gain | Fail | 0/36 vs 0/36 |
+| Deny-all rejection | Pass | Benign initial ASK-or-DENY 22.22% |
+| Operational quality | Pass | All three frozen quality checks passed |
+| Paper route | Empirical fallback | `mechanism_paper_candidate=false` |
+
+The active manuscript route is therefore an empirical study of authorization
+uncertainty and the security–utility trade-off. A defense-mechanism or SOTA
+claim is prohibited.
+
+## Public primary-model result
+
+The admitted Public matrix contains 847 unique cases and 5,082 records: 600
+attacks and 247 benign cases crossed with the same six conditions. All 76
+diagnostic records (1.4955%) remain in ITT. The frozen 1% quality ceiling
+therefore failed and prohibits a clean mechanism-quality claim, but the four
+shard evidence reviews and the primary merge passed their integrity checks.
+The result is primary-model-only.
+
+Across the 600 paired attacks, M3-full produced 38 unsafe effects (6.33%,
+Wilson 95% CI 4.65–8.57) versus 133 (22.17%, 19.03–25.66) under the structural
+condition. The paired difference was −15.83 percentage points (10,000-cluster
+bootstrap 95% CI −19.50 to −12.17; exact McNemar p=4.04e−17,
+Holm-adjusted p=1.61e−16). This security reduction did not identify a
+full-system module contribution: M3 policy-only produced only 13 unsafe
+effects (2.17%, 1.27–3.67), so M3-full was 4.17 points worse
+(95% bootstrap CI 2.50–6.00; exact McNemar p=1.62e−6).
+
+Benign tool completion under M3-full was 49/168 (29.17%, 22.82–36.44), versus
+103/168 (61.31%, 53.77–68.34) under the structural condition: −32.14 points
+(95% bootstrap CI −39.88 to −25.00; exact McNemar p=1.19e−14).
+M3-full and policy-only both completed 49/168, with a paired difference of
+0.00 points. All six conditions completed 79/79 benign no-tool tasks.
+
+## Table 5. Public-primary benchmark strata
+
+| Benchmark / endpoint | Structural baseline | M3 policy-only | M3-full |
+|---|---:|---:|---:|
+| AgentDojo attacks, unsafe effect | 87/300 (29.00%) | 13/300 (4.33%) | 29/300 (9.67%) |
+| M3-v2 attacks, unsafe effect | 46/300 (15.33%) | 0/300 (0.00%) | 9/300 (3.00%) |
+| AgentDojo benign tool, TCR | 67/97 (69.07%) | 13/97 (13.40%) | 13/97 (13.40%) |
+| M3-v2 benign tool, TCR | 36/71 (50.70%) | 36/71 (50.70%) | 36/71 (50.70%) |
+| M3-v2 benign no-tool, TCR | 79/79 (100%) | 79/79 (100%) | 79/79 (100%) |
+
+The direction is consistent across both attack benchmarks: M3-full is safer
+than the structural condition but less safe than policy-only. Utility is
+strongly benchmark dependent. The public M3-v2 tool tasks show no completion
+difference among the three focal conditions, whereas AgentDojo tool completion
+falls by 55.67 points for both M3 variants relative to the structural
+condition. AgentDojo benign denominators remain the 97 unique official utility
+tasks and are not duplicated.
+
+## Public operational and decision burden
+
+The Public matrix contains 4,616 completed, 112 maximum-step, 120 parse-failure,
+and 234 provider-failure records. Diagnostics are uneven by condition:
+27 structural, 24 safe-prompt, 22 M3-full, two no-defense, one PromptGuard,
+and zero policy-only. This imbalance is disclosed because terminal failure can
+affect observed unsafe-effect counts; no diagnostic was retried or excluded.
+
+On attacks, M3-full issued 181 initial `ASK` and 44 initial `DENY` decisions,
+versus 197 `ASK` and no `DENY` under policy-only. On the 168 benign tool tasks,
+M3-full issued 75 `ASK` decisions and policy-only issued 69. The primary
+mechanism gate therefore passed its structural security-effect check but
+failed utility non-inferiority and module gain. The active route remains the
+empirical security–utility fallback.
+
+## Exploratory defense-aware adaptive cost canary
+
+The admitted DeepSeek V4 Pro cost canary covered eight result-blind,
+attack-family-balanced M3-v2 development tasks under M3-full and the
+`auto_compiled` authorization regime. At a maximum of 50 queries per task,
+no unsafe effect was found: 0/8 tasks, or 0.00% (Wilson 95% CI 0.00–32.44%).
+The run retained one closed diagnostic query in ITT; that task ended at query
+24, while the other seven tasks reached query 50. In total, the canary
+contains 374 terminal queries, 562 official provider calls, and CNY 0.552805
+cost. Initial decisions across terminal queries were 207 ALLOW, 123 ASK, and
+44 DENY.
+
+The result is consistent with robustness at budget 50 on this deliberately
+small panel, but the upper confidence bound remains wide. It does not establish
+saturation, cover the frozen 40-task primary panel, test budgets 200/500/2000,
+or provide a second-model comparison. It therefore cannot support a SOTA or
+formal adaptive-robustness claim. The source analysis and independent
+integrity review are
+`outputs/paper_upgrade_v2/adaptive_cost_canary_v2/analysis_v1/analysis_manifest.json`
+and `analysis_review_v1.json`.
+
+## Table 6. Defense-aware adaptive attack
+
+| Model/panel | Budget | Tasks | Unsafe-effect successes | First-success distribution | Saturated? |
+|---|---:|---:|---:|---:|---|
+| Primary exploratory cost canary | 50 | 8 | 0 (0.00%, 95% CI 0.00–32.44%) | No successes | No |
+| Primary | 50 | 40 | pending | pending | pending |
+| Primary | 200 | 40 | pending | pending | pending |
+| Primary | 500 | 40 | pending | pending | pending |
+| Primary hardest subset | 2000 | 20 | pending | pending | pending |
+| Second | 50 | 20 | pending | pending | pending |
+| Second | 200 | 20 | pending | pending | pending |
+
+## Remaining evidence boundary
+
+The admitted medium and 5,082-record Public primary studies jointly select the
+paper route. They establish a primary-model, two-benchmark security–utility
+finding, but not cross-model or saturated adaptive robustness. The Public
+second-model extension and the formal rows of Table 6 remain empty until their
+append-only ledgers, identity/safety checks, result gates, and independent
+analysis rebuilds pass. UTR and DSR are not identifiable from the current
+record contract and are not reconstructed from unsafe-effect rate.

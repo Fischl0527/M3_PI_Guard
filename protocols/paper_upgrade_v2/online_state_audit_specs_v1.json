@@ -1,0 +1,901 @@
+{
+  "schema_version": "m3-paper-v2-online-state-audit-specs-1.0",
+  "audited_at": "2026-07-23T19:00:00+08:00",
+  "review_policy": {
+    "primary_reviewer": "Codex primary agent",
+    "independent_second_reviewer": null,
+    "domain_claim_allowed": false,
+    "reason": "A second independent source review has not occurred."
+  },
+  "audit_units": [
+    {
+      "audit_id": "A01-vigil-runtime",
+      "artifact": "VIGIL",
+      "component": "verify-before-commit runtime guard",
+      "source_url": "https://github.com/Touring-686/vigil.git",
+      "repository_path": "external/paper_v2_audits/vigil",
+      "expected_commit": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+      "discovery_head": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+      "license_path": null,
+      "online_boundaries": [
+        {
+          "path": "vigil/constraint_generator.py",
+          "symbol": "ConstraintGenerator.generate_constraints",
+          "phase": "online_policy_compilation",
+          "required_tokens": ["user_query", "prompt_template.format"]
+        },
+        {
+          "path": "vigil/runtime_auditor.py",
+          "symbol": "RuntimeAuditor.audit_tool_call",
+          "phase": "online_guard",
+          "required_tokens": ["tool_call_info", "self.constraint_set"]
+        },
+        {
+          "path": "vigil/vigil_executor.py",
+          "symbol": "VIGILToolsExecutor.query",
+          "phase": "online_enforcement",
+          "required_tokens": ["audit_tool_call", "run_function"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["vigil/types.py", "vigil/vigil_pipeline.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score"],
+      "projection": {
+        "online_fields": ["user_query", "tool_name", "arguments", "constraints"],
+        "offline_fields": ["gold_answer", "attack_success_label", "expected_malicious_tool", "task_success_label"]
+      },
+      "authorization_source": "auto_compiled_non_gold",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "The traced path compiles constraints from the user query and audits proposed tool name/arguments before runtime execution.",
+      "finding": "At the fixed commit, the inspected VIGIL path derives constraints from user_query and passes only tool-call identity and arguments into RuntimeAuditor. No evaluator label or answer-key parameter is present at those online boundaries.",
+      "limitations": "No paid model call was executed. Constraint quality and uninspected enhanced paths remain outside this unit; an independent second reviewer is still required."
+    },
+    {
+      "audit_id": "A02-siren-loader",
+      "artifact": "SIREN",
+      "component": "benchmark loader and evaluator",
+      "source_url": "https://github.com/Touring-686/vigil.git",
+      "repository_path": "external/paper_v2_audits/vigil",
+      "expected_commit": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+      "discovery_head": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+      "source_provenance": "official_repository_absence_evidence",
+      "official_source_available": false,
+      "license_path": null,
+      "online_boundaries": [],
+      "offline_boundaries": [],
+      "additional_files": ["README.md"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success"],
+      "projection": {
+        "online_fields": [],
+        "offline_fields": ["gold_answer", "attack_success_label"]
+      },
+      "missing_component_check": {
+        "globs": ["**/*siren*", "**/*SIREN*"],
+        "expected_absent": true
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "inconclusive",
+      "evidence_strength": "pinned_repository_absence_check",
+      "scope_note": "The fixed public VIGIL checkout does not contain a file or directory named for SIREN, so a loader-to-guard trace cannot be completed from this artifact.",
+      "finding": "The official repository commit is pinned, but no SIREN loader/evaluator implementation is present under the inspected checkout. This unit is completed as inconclusive rather than inferred from the paper.",
+      "limitations": "No source-level claim about SIREN online visibility is allowed until the benchmark implementation is released or another official artifact is identified."
+    },
+    {
+      "audit_id": "A03-drift-runtime",
+      "artifact": "DRIFT",
+      "component": "planner, dynamic validator, and injection isolator",
+      "source_url": "https://github.com/SaFoLab-WISC/DRIFT.git",
+      "repository_path": "external/paper_v2_audits/drift",
+      "expected_commit": "6fd3df4763fad77398c3c273c2a4fe14dd50f7ea",
+      "discovery_head": "6fd3df4763fad77398c3c273c2a4fe14dd50f7ea",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "DRIFTLLM.py",
+          "symbol": "DRIFTLLM.query",
+          "phase": "online_guard_and_planner",
+          "required_tokens": ["query", "runtime", "messages"]
+        },
+        {
+          "path": "DRIFTLLM.py",
+          "symbol": "DRIFTLLM.trajectory_constraint_validation",
+          "phase": "online_control_flow_validation",
+          "required_tokens": ["query", "function_trajectory"]
+        },
+        {
+          "path": "DRIFTLLM.py",
+          "symbol": "DRIFTLLM.checklist_constraint_validation",
+          "phase": "online_parameter_validation",
+          "required_tokens": ["query", "node_checklist"]
+        }
+      ],
+      "offline_boundaries": [
+        {
+          "path": "DRIFTTaskSuite.py",
+          "symbol": "DRIFTTaskSuite.run_task_with_pipeline",
+          "phase": "benchmark_orchestration_and_posthoc_evaluation",
+          "required_tokens": ["_check_task_result", "injection_task"]
+        }
+      ],
+      "additional_files": ["pipeline_main.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["query", "tool_definitions", "messages", "initial_trajectory", "node_checklist"],
+        "offline_fields": ["gold_answer", "utility_label", "security_label", "injection_task_id"]
+      },
+      "authorization_source": "auto_compiled_non_gold",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "The DRIFT guard receives the original query, tool definitions, trajectory/checklist state and tool messages; the task suite computes utility/security after the pipeline returns.",
+      "finding": "No evaluator result or injection-task identity is referenced by the inspected DRIFTLLM online validation boundaries. Utility/security are computed in DRIFTTaskSuite after agent execution.",
+      "limitations": "The repository bundles historical result files and AgentDojo-derived code. This unit covers the named DRIFTLLM path only and has not run a paid model."
+    },
+    {
+      "audit_id": "A04-agentdojo-case-loader",
+      "artifact": "AgentDojo",
+      "component": "task and injection case loader",
+      "source_url": "https://github.com/ethz-spylab/agentdojo.git",
+      "repository_path": "external/benchmarks/agentdojo",
+      "expected_commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "discovery_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "src/agentdojo/agent_pipeline/agent_pipeline.py",
+          "symbol": "AgentPipeline.query",
+          "phase": "online_pipeline",
+          "required_tokens": ["query", "element.query"]
+        }
+      ],
+      "offline_boundaries": [
+        {
+          "path": "src/agentdojo/task_suite/task_suite.py",
+          "symbol": "TaskSuite.run_task_with_pipeline",
+          "phase": "benchmark_initialization_and_posthoc_evaluation",
+          "required_tokens": ["prompt", "agent_pipeline.query", "_check_task_result"]
+        }
+      ],
+      "additional_files": ["src/agentdojo/base_tasks.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["prompt", "runtime_tools", "environment", "injected_tool_output"],
+        "offline_fields": ["user_task_ground_truth", "injection_task_ground_truth", "utility_label", "security_label"]
+      },
+      "authorization_source": "broad_default",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "TaskSuite owns task objects and evaluators, while AgentPipeline.query receives a prompt/runtime/environment projection.",
+      "finding": "The fixed loader/orchestrator retains task objects outside the pipeline call. The online AgentPipeline boundary itself does not accept answer or success fields.",
+      "limitations": "The environment deliberately contains injected content. This finding concerns evaluator/gold separation, not the absence of malicious content."
+    },
+    {
+      "audit_id": "A05-agentdojo-tool-filter",
+      "artifact": "AgentDojo",
+      "component": "ToolFilter defense",
+      "source_url": "https://github.com/ethz-spylab/agentdojo.git",
+      "repository_path": "external/benchmarks/agentdojo",
+      "expected_commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "discovery_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "src/agentdojo/agent_pipeline/llms/openai_llm.py",
+          "symbol": "OpenAILLMToolFilter.query",
+          "phase": "online_tool_filter",
+          "required_tokens": ["messages", "runtime.functions", "update_functions"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["src/agentdojo/agent_pipeline/agent_pipeline.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["conversation_messages", "tool_names", "tool_schemas", "filter_prompt"],
+        "offline_fields": ["expected_tool", "gold_answer", "attack_success_label", "task_success_label"]
+      },
+      "authorization_source": "auto_compiled_non_gold",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "ToolFilter asks a model to select from runtime tools using the current conversation and a fixed filtering prompt.",
+      "finding": "No per-case expected tool or evaluator label is present at OpenAILLMToolFilter.query; the selected runtime tool set is derived from messages and tool schemas.",
+      "limitations": "The filter is OpenAI-model-specific in this commit and this audit does not establish security effectiveness."
+    },
+    {
+      "audit_id": "A06-agentdojo-detector",
+      "artifact": "AgentDojo",
+      "component": "transformer prompt-injection detector defense",
+      "source_url": "https://github.com/ethz-spylab/agentdojo.git",
+      "repository_path": "external/benchmarks/agentdojo",
+      "expected_commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "discovery_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "src/agentdojo/agent_pipeline/pi_detector.py",
+          "symbol": "PromptInjectionDetector.query",
+          "phase": "online_tool_output_detector",
+          "required_tokens": ["messages", "detect", "AbortAgentError"]
+        },
+        {
+          "path": "src/agentdojo/agent_pipeline/pi_detector.py",
+          "symbol": "TransformersBasedPIDetector.detect",
+          "phase": "online_detector_inference",
+          "required_tokens": ["tool_output", "threshold"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["src/agentdojo/agent_pipeline/agent_pipeline.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "allow_explained_online_forbidden_hits": true,
+      "projection": {
+        "online_fields": ["tool_output", "detector_threshold", "detector_model"],
+        "offline_fields": ["attack_success_label", "task_success_label", "expected_tool"]
+      },
+      "authorization_source": "broad_default",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "The detector sees tool-output text and a fixed detector threshold/model; model class labels are detector outputs, not benchmark gold labels.",
+      "finding": "The online detector is label-independent with respect to benchmark evaluation. Its own model output label and safe_label configuration are intrinsic detector state.",
+      "limitations": "This is detector-only evidence and cannot be equated with runtime authorization or unsafe-effect prevention."
+    },
+    {
+      "audit_id": "A07-agentdojo-evaluator",
+      "artifact": "AgentDojo",
+      "component": "utility and security evaluators",
+      "source_url": "https://github.com/ethz-spylab/agentdojo.git",
+      "repository_path": "external/benchmarks/agentdojo",
+      "expected_commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "discovery_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "license_path": "LICENSE",
+      "online_boundaries": [],
+      "offline_boundaries": [
+        {
+          "path": "src/agentdojo/task_suite/task_suite.py",
+          "symbol": "TaskSuite._check_user_task_utility",
+          "phase": "posthoc_utility_evaluation",
+          "required_tokens": ["utility_from_traces", "task.utility"]
+        },
+        {
+          "path": "src/agentdojo/task_suite/task_suite.py",
+          "symbol": "TaskSuite._check_injection_task_security",
+          "phase": "posthoc_security_evaluation",
+          "required_tokens": ["security_from_traces", "task.security"]
+        }
+      ],
+      "additional_files": ["src/agentdojo/benchmark.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": [],
+        "offline_fields": ["task_object", "pre_environment", "post_environment", "messages", "utility", "security"]
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "source_phase_separation",
+      "scope_note": "These functions evaluate completed traces/environments and are not inserted as guard inputs.",
+      "finding": "AgentDojo utility/security methods are post-hoc evaluators. Their access to task definitions is expected and must not be confused with online defense visibility.",
+      "limitations": "This unit does not audit every third-party defense integrated into AgentDojo."
+    },
+    {
+      "audit_id": "A08-progent-runtime",
+      "artifact": "Progent",
+      "component": "policy generator and deterministic privilege enforcement",
+      "source_url": "https://github.com/sunblaze-ucb/progent.git",
+      "repository_path": "external/baselines/progent",
+      "expected_commit": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+      "discovery_head": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+      "license_path": null,
+      "online_boundaries": [
+        {
+          "path": "secagent/tool.py",
+          "symbol": "generate_security_policy",
+          "phase": "online_policy_compilation",
+          "required_tokens": ["USER_QUERY", "get_available_tools"]
+        },
+        {
+          "path": "secagent/tool.py",
+          "symbol": "generate_update_security_policy",
+          "phase": "online_policy_update",
+          "required_tokens": ["TOOL_CALL_RESULT", "security_policy_subset_check"]
+        },
+        {
+          "path": "secagent/tool.py",
+          "symbol": "check_tool_call",
+          "phase": "online_enforcement",
+          "required_tokens": ["tool_name", "kwargs"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["secagent/progent_proxy.py", "secagent/policy_analysis.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["user_query", "available_tools", "tool_call_parameters", "tool_call_result", "current_policy"],
+        "offline_fields": ["expected_tool", "gold_answer", "attack_success_label", "task_success_label"]
+      },
+      "authorization_source": "auto_compiled_non_gold",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "Policy generation consumes user query/tool schemas; updates may consume tool outputs, and enforcement consumes tool name/kwargs.",
+      "finding": "No evaluator/gold fields are present at the inspected Progent policy/enforcement boundaries. Automatic narrowing is optional via SECAGENT_ONLY_ALLOW_NARROW and is not the default, which remains a material mechanism difference from M3.",
+      "limitations": "No live policy-model request was made. The absent root license and optional rather than default narrowing must be disclosed."
+    },
+    {
+      "audit_id": "A09-camel-runtime",
+      "artifact": "CaMeL",
+      "component": "interpreter, capabilities, and security policies",
+      "source_url": "https://github.com/google-research/camel-prompt-injection.git",
+      "repository_path": "external/baselines/camel-prompt-injection",
+      "expected_commit": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+      "discovery_head": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "src/camel/pipeline_elements/privileged_llm.py",
+          "symbol": "PrivilegedLLM.query",
+          "phase": "online_live_interpreter",
+          "required_tokens": ["query", "runtime", "env"]
+        },
+        {
+          "path": "src/camel/pipeline_elements/privileged_llm.py",
+          "symbol": "PrivilegedLLM.run_code",
+          "phase": "online_security_policy_enforcement",
+          "required_tokens": ["self.security_policy_engine", "parse_and_interpret_code"]
+        },
+        {
+          "path": "src/camel/pipeline_elements/replay_privileged_llm.py",
+          "symbol": "UserInjectionTasksGetter.query",
+          "phase": "online_replay_metadata_capture",
+          "required_tokens": ["user_task_id", "injection_task_id"]
+        },
+        {
+          "path": "src/camel/pipeline_elements/replay_privileged_llm.py",
+          "symbol": "PrivilegedLLMReplayer.query",
+          "phase": "online_replay_path",
+          "required_tokens": ["user_task_id", "injection_task_id"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["src/camel/models.py", "src/camel/security_policy.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id", "user_task_id"],
+      "allow_explained_online_forbidden_hits": true,
+      "projection": {
+        "online_fields": ["query", "runtime_tools", "environment", "capabilities", "security_policy"],
+        "offline_fields": ["gold_answer", "attack_success_label", "task_success_label", "injection_task_id", "user_task_id"]
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "mixed_or_path_dependent",
+      "evidence_strength": "source_path_comparison_plus_declared_projection_differential",
+      "scope_note": "The live PrivilegedLLM path uses query/runtime/environment, while the optional replay path introspects benchmark stack frames and routes by user/injection task IDs.",
+      "finding": "The live interpreter path does not expose benchmark labels, but replay components explicitly capture user_task_id and injection_task_id to select historical traces. Comparisons must distinguish live CaMeL from replay mode.",
+      "limitations": "Task IDs are not themselves success labels, but they can select case-specific artifacts. A dynamic replay sentinel test and independent review are still required before stronger claims."
+    },
+    {
+      "audit_id": "A10-ipiguard-runtime",
+      "artifact": "IPIGuard",
+      "component": "tool dependency graph planner and executor",
+      "source_url": "https://github.com/Greysahy/ipiguard.git",
+      "repository_path": "external/baselines/ipiguard",
+      "expected_commit": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+      "discovery_head": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py",
+          "symbol": "OpenAIConstructLLM.query",
+          "phase": "online_dag_construction",
+          "required_tokens": ["query", "runtime.functions", "construct_dag"]
+        },
+        {
+          "path": "agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py",
+          "symbol": "OpenAITraverseLLM.query_args_update",
+          "phase": "online_dag_argument_resolution",
+          "required_tokens": ["query", "extra_args", "current_tool_call"]
+        },
+        {
+          "path": "agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py",
+          "symbol": "OpenAITraverseLLM.query_node_expansion",
+          "phase": "online_dag_expansion",
+          "required_tokens": ["query", "runtime.functions", "extra_args"]
+        }
+      ],
+      "offline_boundaries": [
+        {
+          "path": "run/eval.py",
+          "symbol": "AgentTask.run",
+          "phase": "benchmark_orchestration_and_evaluation",
+          "required_tokens": ["user_task", "injection_task"]
+        }
+      ],
+      "additional_files": ["run/data_module.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["query", "tool_definitions", "messages", "dag", "tool_outputs"],
+        "offline_fields": ["utility_label", "security_label", "expected_tool", "injection_task_id"]
+      },
+      "authorization_source": "auto_compiled_non_gold",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "The DAG constructor receives user query and runtime tool documentation; benchmark task objects remain in run/eval.py.",
+      "finding": "No evaluator label or expected tool is present in the inspected IPIGuard DAG construction/traversal boundaries.",
+      "limitations": "The pinned implementation previously failed local qualification on unstable DAG JSON. This audit establishes field visibility, not runtime reliability."
+    },
+    {
+      "audit_id": "A11-struq-runtime",
+      "artifact": "StruQ",
+      "component": "structured-query frontend and model interface",
+      "source_url": "https://github.com/Sizhe-Chen/StruQ.git",
+      "repository_path": "external/paper_v2_audits/struq",
+      "expected_commit": "e4372b9e3d45ecdfc7c0ad70662094efe6e3850b",
+      "discovery_head": "e4372b9e3d45ecdfc7c0ad70662094efe6e3850b",
+      "license_path": "LICENSE.txt",
+      "online_boundaries": [
+        {
+          "path": "test.py",
+          "symbol": "form_llm_input",
+          "phase": "benchmark_prompt_construction",
+          "required_tokens": ["instruction", "input", "defense"]
+        },
+        {
+          "path": "test.py",
+          "symbol": "test_model_output",
+          "phase": "model_inference",
+          "required_tokens": ["llm_input", "model.generate"]
+        }
+      ],
+      "offline_boundaries": [
+        {
+          "path": "struq.py",
+          "symbol": "preprocess",
+          "phase": "supervised_training_label_construction",
+          "required_tokens": ["targets", "labels"]
+        }
+      ],
+      "additional_files": ["struq.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "allow_explained_online_forbidden_hits": true,
+      "projection": {
+        "online_fields": ["instruction", "untrusted_input", "prompt_format", "defense_mode"],
+        "offline_fields": ["reference_output", "evaluation_label", "attack_success"]
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "source_phase_trace",
+      "scope_note": "StruQ structures natural-language instruction/data for a model and does not enforce tool authorization.",
+      "finding": "The inspected StruQ code is a prompt-structure/training defense rather than a tool-execution runtime guard. Some attack constructors use reference outputs to craft completion attacks, which is attack generation rather than online authorization.",
+      "limitations": "StruQ remains relevant to prompt injection but is not comparable to M3's ALLOW/ASK/DENY execution mechanism."
+    },
+    {
+      "audit_id": "A12-injecagent-loader",
+      "artifact": "InjecAgent",
+      "component": "benchmark loader and online prompt construction",
+      "source_url": "https://github.com/uiuc-kang-lab/InjecAgent.git",
+      "repository_path": "external/benchmarks/injecagent",
+      "expected_commit": "f19c9f2c79a41046eb13c03c51a24c567a8ffa07",
+      "discovery_head": "f19c9f2c79a41046eb13c03c51a24c567a8ffa07",
+      "license_path": "LICENCE",
+      "online_boundaries": [
+        {
+          "path": "src/evaluate_prompted_agent.py",
+          "symbol": "predict_one_case",
+          "phase": "online_prompt_construction_and_model_call",
+          "required_tokens": ["User Instruction", "Tool Response", "prepare_input"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["src/prompts/agent_prompts.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["user_instruction", "available_tool_descriptions", "tool_response", "scratchpad"],
+        "offline_fields": ["target_attacker_tool", "evaluation_result", "attack_success_label"]
+      },
+      "authorization_source": "broad_default",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "The prompted agent receives the user instruction, all available tool descriptions and a scratchpad built from tool observations.",
+      "finding": "The model-call boundary does not consume the evaluator's target tool or eval result. All attacker tools are intentionally available to the agent as benchmark attack surface.",
+      "limitations": "This benchmark does not provide an independent runtime authorization policy and therefore cannot test parameter-level authorization without an adapter."
+    },
+    {
+      "audit_id": "A13-injecagent-evaluator",
+      "artifact": "InjecAgent",
+      "component": "attack and utility evaluator",
+      "source_url": "https://github.com/uiuc-kang-lab/InjecAgent.git",
+      "repository_path": "external/benchmarks/injecagent",
+      "expected_commit": "f19c9f2c79a41046eb13c03c51a24c567a8ffa07",
+      "discovery_head": "f19c9f2c79a41046eb13c03c51a24c567a8ffa07",
+      "license_path": "LICENCE",
+      "online_boundaries": [],
+      "offline_boundaries": [
+        {
+          "path": "src/output_parsing.py",
+          "symbol": "evaluate_output_prompted",
+          "phase": "posthoc_attack_evaluation",
+          "required_tokens": ["target_tool", "attacker_tools", "eval"]
+        },
+        {
+          "path": "src/output_parsing.py",
+          "symbol": "evaluate_output_finetuned",
+          "phase": "posthoc_attack_evaluation",
+          "required_tokens": ["target_tool", "tool_calls"]
+        }
+      ],
+      "additional_files": ["src/evaluate_prompted_agent.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": [],
+        "offline_fields": ["target_tool", "attacker_instruction", "agent_output", "eval"]
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "source_phase_separation",
+      "scope_note": "The evaluator explicitly receives target_tool and attacker metadata after the model output is produced.",
+      "finding": "InjecAgent answer-key fields are used by post-hoc evaluation functions, not by the inspected model-call boundary.",
+      "limitations": "A future defense adapter must preserve this separation; wrapping the evaluator as a Guard would create oracle leakage."
+    },
+    {
+      "audit_id": "A14-piarena-runtime",
+      "artifact": "PIArena",
+      "component": "common attack/defense runtime",
+      "source_url": "https://github.com/sleeepeer/PIArena.git",
+      "repository_path": "external/paper_v2_audits/piarena",
+      "expected_commit": "c39fd88e733493242a8ea6bdbc824ad30245bcf7",
+      "discovery_head": "c39fd88e733493242a8ea6bdbc824ad30245bcf7",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "piarena/defenses/base.py",
+          "symbol": "BaseDefense.get_response",
+          "phase": "online_prompt_defense_and_target_query",
+          "required_tokens": ["target_inst", "context", "llm.query"]
+        },
+        {
+          "path": "piarena/defenses/base.py",
+          "symbol": "BaseDefense._build_messages",
+          "phase": "online_prompt_projection",
+          "required_tokens": ["target_inst", "context", "system_prompt"]
+        }
+      ],
+      "offline_boundaries": [
+        {
+          "path": "piarena/evaluations/__init__.py",
+          "symbol": "substring_match",
+          "phase": "posthoc_answer_evaluation",
+          "required_tokens": ["ground_truth", "response"]
+        }
+      ],
+      "additional_files": ["main.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["target_instruction", "untrusted_context", "system_prompt", "defense_output"],
+        "offline_fields": ["ground_truth", "target_task_answer", "injected_task_answer", "success_label"]
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "source_phase_trace",
+      "scope_note": "The common runtime applies a prompt/context defense before a target LLM query; it does not authorize tool execution.",
+      "finding": "PIArena's BaseDefense boundary is separated from answer evaluators, but it is a prompt-defense runtime rather than an action authorization guard.",
+      "limitations": "Adaptive attack modules may legitimately use attack targets; they are attacker/evaluator components and are outside this defense boundary."
+    },
+    {
+      "audit_id": "A15-piarena-defense-registry",
+      "artifact": "PIArena",
+      "component": "defense adapters and parameter projection",
+      "source_url": "https://github.com/sleeepeer/PIArena.git",
+      "repository_path": "external/paper_v2_audits/piarena",
+      "expected_commit": "c39fd88e733493242a8ea6bdbc824ad30245bcf7",
+      "discovery_head": "c39fd88e733493242a8ea6bdbc824ad30245bcf7",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "piarena/defenses/__init__.py",
+          "symbol": "get_defense",
+          "phase": "defense_construction",
+          "required_tokens": ["DEFENSE_REGISTRY", "config"]
+        },
+        {
+          "path": "piarena/defenses/base.py",
+          "symbol": "BaseDefense.execute_batch",
+          "phase": "online_batch_projection",
+          "required_tokens": ["target_insts", "contexts"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["piarena/registry.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["defense_name", "defense_config", "target_instructions", "contexts"],
+        "offline_fields": ["ground_truths", "attack_success_labels", "reference_answers"]
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "source_boundary_trace_plus_declared_projection_differential",
+      "scope_note": "The registry constructs prompt-defense adapters from a defense name/config and batches target instructions/contexts.",
+      "finding": "No evaluator fields are part of the inspected registry/execute_batch signatures, but these adapters do not implement tool authorization.",
+      "limitations": "Individual third-party defenses registered by PIArena require their own audits before use as formal comparators."
+    },
+    {
+      "audit_id": "A16-bipia-runtime",
+      "artifact": "BIPIA",
+      "component": "benchmark prompt construction and defenses",
+      "source_url": "https://github.com/microsoft/BIPIA.git",
+      "repository_path": "external/paper_v2_audits/bipia",
+      "expected_commit": "a004b69ec0dd446e0afd461d98cb5e96e120a5d0",
+      "discovery_head": "a004b69ec0dd446e0afd461d98cb5e96e120a5d0",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "bipia/data/abstract.py",
+          "symbol": "AbstractIPIADataset.construct_prompt",
+          "phase": "online_prompt_construction",
+          "required_tokens": ["context", "guidance"]
+        },
+        {
+          "path": "bipia/model/gpt.py",
+          "symbol": "GPTModelWSystem.process_fn",
+          "phase": "online_model_message_projection",
+          "required_tokens": ["prompt_construct_fn", "system_prompt", "user_prompt"]
+        }
+      ],
+      "offline_boundaries": [
+        {
+          "path": "bipia/data/abstract.py",
+          "symbol": "AbstractIPIADataset.construct_response",
+          "phase": "reference_response_construction",
+          "required_tokens": ["example"]
+        }
+      ],
+      "additional_files": ["examples/run.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["context", "guidance", "system_prompt", "user_prompt"],
+        "offline_fields": ["reference_response", "attack_success_label", "utility_label"]
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "source_phase_trace_plus_declared_projection_differential",
+      "scope_note": "BIPIA constructs indirect-prompt-injection prompts and model messages; it does not gate tool execution.",
+      "finding": "Prompt construction is separated from reference-response construction, but the artifact is not a runtime authorization guard.",
+      "limitations": "BIPIA can support prompt-injection generalization only; an M3 tool-action adapter would be a new benchmark layer."
+    },
+    {
+      "audit_id": "A17-asb-loader",
+      "artifact": "Agent Security Bench",
+      "component": "scenario, attack, and defense loader",
+      "source_url": "https://github.com/agiresearch/ASB.git",
+      "repository_path": "external/paper_v2_audits/asb",
+      "expected_commit": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+      "discovery_head": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "pyopenagi/agents/react_agent_attack.py",
+          "symbol": "ReactAgentAttack.run",
+          "phase": "online_attack_benchmark_execution",
+          "required_tokens": ["task_input", "attacker_tool", "messages"]
+        },
+        {
+          "path": "pyopenagi/agents/react_agent.py",
+          "symbol": "ReactAgent.run",
+          "phase": "online_benign_execution",
+          "required_tokens": ["task_input", "messages"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["main_attacker.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "allow_explained_online_forbidden_hits": true,
+      "projection": {
+        "online_fields": ["task_input", "tool_descriptions", "attacker_tool_payload", "messages"],
+        "offline_fields": ["attacker_goal", "attack_success", "original_task_success"]
+      },
+      "authorization_source": "broad_default",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "source_phase_trace",
+      "scope_note": "ASB intentionally installs attacker tools/payloads into the online attack environment; this is benchmark construction rather than a defense authorization key.",
+      "finding": "The loader makes attacker tool content visible as attack surface, while attacker_goal is used by post-hoc evaluation. No independent per-case authorization policy is enforced.",
+      "limitations": "ASB is useful for attack generalization and over-blocking analysis but needs an explicit M3 authorization manifest for action-level evaluation."
+    },
+    {
+      "audit_id": "A18-asb-evaluator",
+      "artifact": "Agent Security Bench",
+      "component": "security and utility metrics",
+      "source_url": "https://github.com/agiresearch/ASB.git",
+      "repository_path": "external/paper_v2_audits/asb",
+      "expected_commit": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+      "discovery_head": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+      "license_path": "LICENSE",
+      "online_boundaries": [],
+      "offline_boundaries": [
+        {
+          "path": "main_attacker.py",
+          "symbol": "check_attack_success",
+          "phase": "posthoc_attack_evaluation",
+          "required_tokens": ["attacker_goal", "messages"]
+        },
+        {
+          "path": "main_attacker.py",
+          "symbol": "check_original_success",
+          "phase": "posthoc_utility_evaluation",
+          "required_tokens": ["normal_tools", "messages"]
+        }
+      ],
+      "additional_files": ["scripts/res_retrieval.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": [],
+        "offline_fields": ["messages", "attacker_goal", "normal_tools", "attack_success", "original_success"]
+      },
+      "authorization_source": "mixed_or_unclear",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "source_phase_separation",
+      "scope_note": "The metric helpers consume attacker_goal or the expected normal tool set after execution.",
+      "finding": "ASB answer-key information belongs to post-hoc metrics. It would be oracle leakage only if a defense adapter passed these fields into its online Guard.",
+      "limitations": "The upstream script also reports an ASR excluding workflow failures; paper-v2 must retain such failures in the ITT denominator."
+    },
+    {
+      "audit_id": "A19-wasp-benchmark",
+      "artifact": "WASP",
+      "component": "web-agent benchmark task construction, online agent loop, and evaluator separation",
+      "source_url": "https://github.com/facebookresearch/wasp.git",
+      "repository_path": "external/paper_v2_audits/wasp-http1",
+      "expected_commit": "ffee6f41fde76acd14bd792db442479c506260c2",
+      "discovery_head": "ffee6f41fde76acd14bd792db442479c506260c2",
+      "source_provenance": "official_source_code",
+      "official_source_available": true,
+      "repository_archived_at": "2026-07-01",
+      "license_path": "LICENSE",
+      "online_boundaries": [
+        {
+          "path": "visualwebarena/agent/agent.py",
+          "symbol": "PromptAgent.next_action",
+          "phase": "online_web_agent_action_generation",
+          "required_tokens": ["trajectory", "intent", "call_llm"]
+        }
+      ],
+      "offline_boundaries": [
+        {
+          "path": "webarena_prompt_injections/prompt_injector.py",
+          "symbol": "WebArenaPromptInjector._create_task_dicts",
+          "phase": "benchmark_user_and_attacker_evaluator_task_construction",
+          "required_tokens": ["task_for_this_prompt_injection", "task_for_this_attack", "eval"]
+        },
+        {
+          "path": "webarena_prompt_injections/run.py",
+          "symbol": "run_single_end_to_end",
+          "phase": "posthoc_user_and_attacker_result_collection",
+          "required_tokens": ["run_attacker_utility.json", "run_user_utility.json", "results_dict"]
+        }
+      ],
+      "additional_files": ["README.md", "visualwebarena/run.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "attacker_goal", "eval"],
+      "projection": {
+        "online_fields": ["intent", "trajectory", "web_observation", "prompt_injection", "system_prompt"],
+        "offline_fields": ["user_goal_eval", "attacker_goal_eval", "attacker_utility", "user_utility", "success_label"]
+      },
+      "authorization_source": "broad_default",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "official_source_phase_trace_plus_declared_projection_differential",
+      "scope_note": "The archived Meta repository constructs separate user-goal and attacker-goal evaluator task dictionaries. The inspected PromptAgent boundary receives the user intent, trajectory/web observations, prompts and injected content, but not the separate eval dictionaries.",
+      "finding": "WASP is a web-agent attack benchmark, not a tool-authorization defense. Its attacker objective is intentionally embedded in the environment/prompt as attack surface, while user and attacker eval objects are constructed and consumed outside the inspected action-generation boundary.",
+      "limitations": "The repository was archived on 2026-07-01 and uses subproject code derived from WebArena/VisualWebArena. This static audit did not install the web environments, call a model, or establish M3 compatibility."
+    },
+    {
+      "audit_id": "A20-toolsafe-runtime",
+      "artifact": "ToolSafe",
+      "component": "step-level tool guardrail and feedback",
+      "source_url": "https://github.com/MurrayTom/ToolSafe.git",
+      "repository_path": "external/paper_v2_audits/toolsafe",
+      "expected_commit": "46358fa424a927a895c6c8322f99032c4eb5155e",
+      "discovery_head": "46358fa424a927a895c6c8322f99032c4eb5155e",
+      "license_path": null,
+      "online_boundaries": [
+        {
+          "path": "src/model/model.py",
+          "symbol": "Guardian.tool_safety_guardian",
+          "phase": "online_step_guard",
+          "required_tokens": ["user_request", "interaction_history", "current_action", "current_action_description"]
+        },
+        {
+          "path": "src/model/model.py",
+          "symbol": "Guardian.alignment_check",
+          "phase": "online_alignment_guard",
+          "required_tokens": ["user_request", "interaction_history", "current_action"]
+        }
+      ],
+      "offline_boundaries": [
+        {
+          "path": "src/guardian_evaluator/agentdojo.py",
+          "symbol": "AgentDojoProcessor.run",
+          "phase": "guard_dataset_orchestration_and_label_collection",
+          "required_tokens": ["get_judgment_res", "labels.append"]
+        }
+      ],
+      "additional_files": ["src/guardian_experiment.py"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["user_request", "interaction_history", "current_action", "current_action_description"],
+        "offline_fields": ["score", "label", "attack_success", "task_success"]
+      },
+      "authorization_source": "auto_compiled_non_gold",
+      "conclusion": "no_online_gold_observed",
+      "evidence_strength": "source_call_argument_trace_plus_declared_projection_differential",
+      "scope_note": "Guardian methods format only user request, interaction history, current action and environment/action description. Dataset score is appended after the call.",
+      "finding": "The inspected ToolSafe guard-call payload excludes sample score/label even though the surrounding evaluator later appends sample['score']. This is a valid phase separation at the call boundary.",
+      "limitations": "The repository has no root license file at the fixed commit, and this audit does not reproduce guard-model weights or effectiveness."
+    },
+    {
+      "audit_id": "A21-promptguard-detector",
+      "artifact": "PromptGuard",
+      "component": "detector-only model and threshold adapter",
+      "source_url": "https://github.com/meta-llama/PurpleLlama.git",
+      "repository_path": "external/baselines/PurpleLlama",
+      "expected_commit": "b71c6350a2acf2fb62c2328a734cbf440ecac386",
+      "discovery_head": null,
+      "license_path": "LICENSE",
+      "online_boundaries": [],
+      "offline_boundaries": [],
+      "additional_files": ["Llama-Prompt-Guard-2/README.md", "Llama-Prompt-Guard-2/86M/MODEL_CARD.md"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["text", "model_revision", "threshold"],
+        "offline_fields": ["attack_success_label", "task_success_label", "expected_tool"]
+      },
+      "authorization_source": "broad_default",
+      "conclusion": "not_a_runtime_guard",
+      "evidence_strength": "model_artifact_and_adapter_role_classification",
+      "scope_note": "PromptGuard is a text classifier artifact. It does not decide or execute parameter-level tool authorization by itself.",
+      "finding": "PromptGuard must remain detector-only in paper-v2 tables. Its detector scores cannot be reported as unsafe-effect prevention without a separate enforcement policy.",
+      "limitations": "The model artifact has no generic tool-authorization interface; runtime behavior is supplied by the host adapter and requires its own source audit."
+    },
+    {
+      "audit_id": "A22-task-shield-runtime",
+      "artifact": "Task Shield",
+      "component": "paper-disclosed task alignment and local reproduction boundary",
+      "source_url": "https://aclanthology.org/2025.acl-long.1435/",
+      "repository_path": ".",
+      "expected_commit": "d74cef2739551591a49c722c5c6273bac6edf91e",
+      "discovery_head": null,
+      "source_provenance": "disclosed_local_reproduction",
+      "official_source_available": false,
+      "license_path": null,
+      "paper_artifact": {
+        "path": "external/baselines/task-shield-paper/2025.acl-long.1435.pdf",
+        "bytes": 1491650,
+        "sha256": "057ff02152c0bb61892b08abdc80f7af22416c03819e526878091ee87d3bf1e6",
+        "source_url": "https://aclanthology.org/2025.acl-long.1435.pdf"
+      },
+      "online_boundaries": [
+        {
+          "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+          "symbol": "TaskShieldPaperVerifier.initialize",
+          "phase": "local_reproduction_user_task_initialization",
+          "required_tokens": ["self.trace.reset", "self.extract", "trusted_user"]
+        },
+        {
+          "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+          "symbol": "TaskShieldPaperVerifier.check_tool_call",
+          "phase": "local_reproduction_tool_alignment_check",
+          "required_tokens": ["self._scores", "tool", "arguments"]
+        },
+        {
+          "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+          "symbol": "TaskShieldPaperVerifier.check_content",
+          "phase": "local_reproduction_message_alignment_check",
+          "required_tokens": ["self.extract", "self._scores", "history"]
+        }
+      ],
+      "offline_boundaries": [],
+      "additional_files": ["protocols/paper_upgrade_v1/taskshield_paper_formal_protocol_v1.md"],
+      "forbidden_identifiers": ["gold", "ground_truth", "expected_answer", "attack_success", "task_success", "target_tool", "label", "score", "injection_task_id"],
+      "projection": {
+        "online_fields": ["trusted_user_tasks", "proposal", "tool_name", "arguments", "conversation_history", "source"],
+        "offline_fields": ["attack_success_label", "task_success_label", "expected_tool", "gold_answer"]
+      },
+      "authorization_source": "auto_compiled_non_gold",
+      "conclusion": "inconclusive",
+      "evidence_strength": "hash_pinned_peer_reviewed_paper_plus_disclosed_local_reproduction_trace",
+      "scope_note": "ACL Anthology and the paper contain no official code link. The inspected Python is this project's explicitly disclosed paper reproduction, hash-bound separately from the official PDF; it is not represented as author code.",
+      "finding": "The local reproduction derives user tasks from the trusted query and checks assistant content/tool proposals against those tasks without evaluator fields. This supports only the local adapter's online projection; the authors' exact implementation remains unavailable for source audit.",
+      "limitations": "No official Task Shield source repository was identified on the ACL or arXiv record. The local reproduction has historical negative qualification evidence and cannot establish source-faithful effectiveness or the authors' implementation details."
+    }
+  ]
+}

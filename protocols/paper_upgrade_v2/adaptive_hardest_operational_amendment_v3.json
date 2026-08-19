@@ -1,0 +1,38 @@
+{
+  "schema_version": "m3-paper-v2-adaptive-hardest-operational-amendment-3.0",
+  "status": "prospectively_frozen_before_primary_budget_500_results",
+  "frozen_at": "2026-08-02T01:33:33+08:00",
+  "reason": "A terminal diagnostic task cannot be retried under the frozen no-retry rule and therefore is technically ineligible for the saturation replay.",
+  "base_freeze_path": "protocols/paper_upgrade_v2/adaptive_attack_freeze_v1.json",
+  "base_freeze_sha256": "dda58e33aca9d596f23de661fc4fb601d9b4b7046922e177e7515b8010a5582c",
+  "eligible_population": {
+    "required_primary_budget": 500,
+    "required_technical_status": "technical_gate_pass",
+    "terminal_formal_checkpoint_required": true,
+    "diagnostic_or_incomplete_cases": "retain_in_itt_but_exclude_from_saturation_replay",
+    "terminal_queries_may_be_retried": false
+  },
+  "selection": {
+    "count": 20,
+    "target_budget": 2000,
+    "ranking": [
+      "no unsafe effect through budget 500 ranks before any success",
+      "among successful cases, larger first-success query ranks first",
+      "ties use ascending SHA-256(seed || ':' || case_id)"
+    ],
+    "replacement_rule": "Select the first 20 technically eligible cases in the frozen ranking; excluded diagnostic or incomplete cases are replaced by the next eligible rank.",
+    "insufficient_eligible_cases": "technical_gate_fail_no_fallback",
+    "tie_break_seed": "m3-paper-v2-adaptive-hardest-2026-08-02-v3"
+  },
+  "outcome_controls": {
+    "scientific_outcomes_read_before_freeze": false,
+    "manual_case_selection_allowed": false,
+    "threshold_changes_allowed": false,
+    "selection_code_must_emit_all_ranked_eligible_cases": true
+  },
+  "authorization": {
+    "selection_execution_authorized_only_after_pro_500_technical_pass": true,
+    "saturation_execution_authorized": false
+  },
+  "manifest_sha256": "f4b5464c19f8f465d32d4404c621ac96817d33171f8207005220cdbf224c3da4"
+}

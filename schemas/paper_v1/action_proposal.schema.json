@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v1/action_proposal.schema.json",
+  "title": "M3 paper-v1 ActionProposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["proposal_id", "proposal_sha256", "tool", "arguments", "provenance", "preceding_tools", "step"],
+  "properties": {
+    "proposal_id": {"type": "string"},
+    "proposal_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "tool": {"type": "string"},
+    "arguments": {"type": "object"},
+    "provenance": {"type": "array", "items": {"$ref": "provenance_event.schema.json"}},
+    "preceding_tools": {"type": "array", "items": {"type": "string"}},
+    "step": {"type": "integer", "minimum": 1}
+  }
+}

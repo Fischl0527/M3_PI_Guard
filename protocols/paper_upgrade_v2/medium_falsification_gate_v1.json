@@ -1,0 +1,59 @@
+{
+  "schema_version": "m3-paper-v2-medium-falsification-gate-1.0",
+  "status": "blocked_inputs_not_frozen",
+  "result_eligible_for_formal_tables": false,
+  "preregistration": "protocols/paper_upgrade_v2/preregistration_v1.json",
+  "required_inputs": {
+    "case_selection": {
+      "status": "pending",
+      "minimum": 60,
+      "maximum": 80,
+      "paired": true,
+      "required_strata": [
+        "attack",
+        "benign_tool",
+        "benign_no_tool",
+        "context_dependent"
+      ]
+    },
+    "primary_model": {
+      "status": "pending",
+      "allowed_endpoint_types": [
+        "official_api",
+        "auditable_gateway"
+      ],
+      "unverified_relay_allowed": "diagnostic_only"
+    },
+    "structural_baseline": {
+      "status": "pending",
+      "priority": ["VIGIL", "DRIFT"],
+      "faithful_adapter_required": true
+    },
+    "cost_ceiling": {
+      "status": "pending",
+      "currency": "USD_or_CNY",
+      "hard_limit_required": true
+    }
+  },
+  "conditions": [
+    "no_defense",
+    "safe_prompt_or_spotlighting",
+    "promptguard_detector_only",
+    "strongest_peer_reviewed_structural_baseline",
+    "m3_policy_only",
+    "m3_full"
+  ],
+  "run_order": "paired_case_block_randomized",
+  "required_outputs": [
+    "experiment records conforming to schemas/paper_v2/experiment_record_v1.schema.json",
+    "provider attestation",
+    "case-level raw outcomes",
+    "condition-level ITT summary",
+    "paired comparison",
+    "latency and token/cost summary",
+    "gate decision with failed checks retained"
+  ],
+  "start_authorized": false,
+  "reason": "Model identity, exact cases, structural baseline, and cost ceiling are not yet frozen."
+}
+

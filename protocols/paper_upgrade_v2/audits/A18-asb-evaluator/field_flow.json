@@ -1,0 +1,75 @@
+{
+  "audit_id": "A18-asb-evaluator",
+  "authorization_source": "mixed_or_unclear",
+  "missing_component": null,
+  "offline_boundaries": [
+    {
+      "end_line": 52,
+      "forbidden_identifier_hits": [
+        "attack_success"
+      ],
+      "parameters": [
+        "messages",
+        "args",
+        "attacker_goal"
+      ],
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "phase": "posthoc_attack_evaluation",
+      "referenced_identifiers": [
+        "attack_success",
+        "attacker_goal",
+        "content",
+        "get",
+        "message",
+        "messages"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "attacker_goal": true,
+        "messages": true
+      },
+      "sha256": "b70bed269991a2a8a97b28c76340c8841d6636fef3dfe2dd6d73b2390b85cf80",
+      "start_line": 43,
+      "symbol": "check_attack_success"
+    },
+    {
+      "end_line": 66,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "messages",
+        "args",
+        "normal_tools"
+      ],
+      "path": "external/paper_v2_audits/asb/main_attacker.py",
+      "phase": "posthoc_utility_evaluation",
+      "referenced_identifiers": [
+        "add",
+        "all",
+        "content",
+        "expected_achivement",
+        "found_tools",
+        "get",
+        "instance",
+        "items",
+        "message",
+        "messages",
+        "name",
+        "normal_tools",
+        "set",
+        "success",
+        "tool"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "messages": true,
+        "normal_tools": true
+      },
+      "sha256": "b70bed269991a2a8a97b28c76340c8841d6636fef3dfe2dd6d73b2390b85cf80",
+      "start_line": 54,
+      "symbol": "check_original_success"
+    }
+  ],
+  "online_boundaries": [],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "m3-paper-v2-public-budget-policy-1.0",
+  "status": "user_approved_budget_boundary_not_execution_authorization",
+  "approved_by_user": true,
+  "approved_at": "2026-07-28T00:15:00+08:00",
+  "approval_basis": "The user approved the frozen public-benchmark plan, made the remaining DeepSeek balance available for useful experiments, and required a fail-closed boundary that preserves enough balance to avoid blocking the project.",
+  "study_target": {
+    "public_case_condition_records": 6873,
+    "primary_model_records": 5082,
+    "second_model_records": 1791,
+    "primary_canary_records": 24,
+    "second_model_canary_records": 12,
+    "source_bound": "protocols/paper_upgrade_v2/public_execution_manifest_v1.json",
+    "cross_model_substitution": false,
+    "sample_shrinking_on_budget_pressure": false
+  },
+  "common_controls": {
+    "canary_concurrency": 1,
+    "formal_concurrency_upper_bound": 4,
+    "automatic_retries": 0,
+    "checkpoint_every_completed_records": 250,
+    "provider_managed_tools_enabled": false,
+    "external_effects_enabled": false,
+    "model_output_is_untrusted_proposal_only": true,
+    "payload_classes_allowed": [
+      "synthetic_m3_case",
+      "public_benchmark_case",
+      "fixed_non_sensitive_runtime_instruction"
+    ],
+    "payload_classes_forbidden": [
+      "credential_or_secret",
+      "personal_or_customer_data",
+      "human_participant_data",
+      "private_account_content",
+      "unpublished_manuscript_prose",
+      "private_project_notes",
+      "nonpublic_source_code"
+    ],
+    "first_http_429": "pause",
+    "first_identity_mismatch": "pause",
+    "first_unknown_runner_failure": "pause"
+  },
+  "deepseek": {
+    "provider": "DeepSeek",
+    "endpoint_type": "official_api",
+    "base_url": "https://api.deepseek.com",
+    "user_declared_balance_cny": 30.0,
+    "incremental_hard_limit_cny": 25.0,
+    "untouched_reserve_cny": 5.0,
+    "roles": {
+      "primary": {
+        "model_id": "deepseek-v4-pro",
+        "record_count": 5082,
+        "canary_record_count": 24,
+        "role_hard_limit_cny": 20.0,
+        "claim_boundary": "primary_model",
+        "pricing": {
+          "currency": "CNY",
+          "cache_hit_input_per_million_tokens": 0.025,
+          "cache_miss_input_per_million_tokens": 3.0,
+          "output_per_million_tokens": 6.0
+        }
+      },
+      "second": {
+        "model_id": "deepseek-v4-flash",
+        "record_count": 1791,
+        "canary_record_count": 12,
+        "role_hard_limit_cny": 5.0,
+        "claim_boundary": "cross_model_not_cross_provider",
+        "pricing": {
+          "currency": "CNY",
+          "cache_hit_input_per_million_tokens": 0.02,
+          "cache_miss_input_per_million_tokens": 1.0,
+          "output_per_million_tokens": 2.0
+        }
+      }
+    },
+    "pricing_source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+    "pricing_verified_at": "2026-07-27",
+    "usage_requirements": {
+      "prompt_cache_hit_tokens_required": true,
+      "prompt_cache_miss_tokens_required": true,
+      "prompt_tokens_must_equal_hit_plus_miss": true,
+      "missing_cache_accounting": "pause_before_next_request",
+      "actual_usage_is_primary_spend_ledger": true
+    },
+    "dynamic_fuse": {
+      "check_before_every_request": true,
+      "next_request_assumes_all_input_cache_miss": true,
+      "next_request_input_tokens_upper_bound": 20000,
+      "next_request_output_tokens_upper_bound": 512,
+      "ceiling_reached_or_next_request_cannot_fit": "stop_before_request",
+      "automatic_model_downgrade": false
+    }
+  },
+  "execution_authorization": {
+    "formal_execution_authorized": false,
+    "canary_execution_authorized": false,
+    "result_admission_authorized": false,
+    "policy_does_not_read_credentials": true,
+    "policy_makes_network_calls": false,
+    "remaining_gates": [
+      "Qualify both exact model identities and the public budget adapter offline.",
+      "Freeze a non-executable public execution candidate.",
+      "Obtain exact-command approval for the primary-model canary.",
+      "Activate a separate hash-bound canary admission."
+    ]
+  }
+}

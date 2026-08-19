@@ -1,0 +1,8 @@
+{
+  "audit_id": "A08-progent-runtime",
+  "base_digest": "c58ceb68f9938073cd70e41d8bb4e9fd07a18725a1c9374c9e9c5b64a3bffeed",
+  "mutated_digest": "c58ceb68f9938073cd70e41d8bb4e9fd07a18725a1c9374c9e9c5b64a3bffeed",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

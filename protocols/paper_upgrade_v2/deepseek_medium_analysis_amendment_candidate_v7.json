@@ -1,0 +1,77 @@
+{
+  "analysis_policy": {
+    "all_480_records_retained_in_itt": true,
+    "bootstrap_iterations": 10000,
+    "closed_diagnostic_count": 1,
+    "diagnostic_outcomes_copied_verbatim": true,
+    "diagnostic_provider_response_attested": false,
+    "formal_candidate_projection_unchanged": true,
+    "no_api_or_execution_authorized": true
+  },
+  "artifact_role": "analysis_amendment_candidate",
+  "locked_inputs": {
+    "analysis_v3": {
+      "bytes": 7893,
+      "path": "experiments/paper_v2/medium_analysis_v3.py",
+      "sha256": "a10ce426e896c5e38a7257f4ba68ab73947acfe36cdb67fa039d9061c8934b67"
+    },
+    "analysis_v4": {
+      "bytes": 7886,
+      "path": "experiments/paper_v2/medium_analysis_v4.py",
+      "sha256": "669a3f6562e4985a41aafe293e6ecd7c943a857dc71e068238b7c3718886d2d2"
+    },
+    "case_index": {
+      "bytes": 304338,
+      "path": "protocols/paper_upgrade_v2/medium_case_index_v1.jsonl",
+      "sha256": "1d649122630e1aa6aa683efa744d2c225903d3d2f982b572136173a80db40ba7"
+    },
+    "case_manifest": {
+      "bytes": 1630,
+      "path": "protocols/paper_upgrade_v2/medium_case_manifest_v1.json",
+      "sha256": "1ea8e5a2b2d99224e7817cd5366c1540727a2df1440a9856fc84b78b39d7a94f"
+    },
+    "gate_spec": {
+      "bytes": 2776,
+      "path": "protocols/paper_upgrade_v2/medium_gate_spec_v2.json",
+      "sha256": "86a0f8a027c9fbdf21e1ed4cd4e241bba82c8cdd05aa2ff17e5aee35aef55526"
+    },
+    "gate_v6": {
+      "bytes": 29032,
+      "path": "experiments/paper_v2/formal_result_gate_v6.py",
+      "sha256": "5cf20855bcbb2219b0c8d1e94c83985dbbc415b5f9385778731eb40d62178099"
+    },
+    "gate_v6_admission": {
+      "bytes": 3455,
+      "path": "protocols/paper_upgrade_v2/admissions/deepseek_medium_combined_result_admission_v6.json",
+      "sha256": "dc810245a27d6121ecf145cf779324433e537486e7f4ba96116e7f13017b8a43"
+    },
+    "gate_v6_technical_review": {
+      "bytes": 5171,
+      "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/formal_result_technical_review_v6.json",
+      "sha256": "8b1d3f1db6a8b02f815087fc36e129ed99f398285e9b47124958a22a7021aeda"
+    },
+    "remainder_record_ledger": {
+      "bytes": 7253351,
+      "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/experiment_records_v2.jsonl",
+      "sha256": "ae01a38301481005db1bc4048678186a07da87738516c796bd667e5d8f4419ab"
+    },
+    "source_record_ledger": {
+      "bytes": 4631207,
+      "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/8d08cab3febccdf5a4360d208766c39cef851fa9ec8b9c15799ee30171a213bf/experiment_records_v2.jsonl",
+      "sha256": "3ca93cb56a301085dc44586a9fddd3fd93186edca88f34eddd8232aebf4dfed2"
+    }
+  },
+  "manifest_sha256": "d179b05fd1062a5321158ec12df94ecf9cb80c1f01093d224a0815ec982d9d10",
+  "planned_output": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v7.json",
+  "post_access_disclosure": {
+    "aggregate_results_seen_before_freeze": false,
+    "amendment_is_post_admission": true,
+    "analysis_method_scope": "evidence-envelope projection only; outcome fields remain verbatim",
+    "diagnostic_fields_inspected_for_debugging": true,
+    "trigger": "v6 projector rejected the admitted closed diagnostic before aggregate statistics"
+  },
+  "qualification_manifest_sha256": "1b9b2db822988e2d3d73eb9b398cf2c0b7172f50a4b090e03b38ab06f6a53353",
+  "run_id": "paper-v2-deepseek-medium-v8-v9-analysis-amendment-v7-20260726",
+  "schema_version": "m3-paper-v2-formal-analysis-amendment-7.0",
+  "status": "frozen_before_aggregate_analysis"
+}

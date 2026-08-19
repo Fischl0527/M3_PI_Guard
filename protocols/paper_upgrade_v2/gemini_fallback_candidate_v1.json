@@ -1,0 +1,201 @@
+{
+  "artifact_role": "owner_review_candidate",
+  "authorization": {
+    "canary_execution_authorized": false,
+    "canary_review_sha256": null,
+    "candidate_manifest_sha256": null,
+    "candidate_only": true,
+    "continuation_execution_authorized": false,
+    "owner_approval": null,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "scientific_outcomes_read_while_building": 0
+  },
+  "generated_at": "2026-07-26T23:30:00+08:00",
+  "manifest_sha256": "33984e93ab9148336f2f97b0c9bf810aa508755f40e836d282ad7ad6957b7cd2",
+  "schema_version": "m3-paper-v2-gemini-fallback-admission-1.0",
+  "scope": {
+    "budget": {
+      "base_policy_path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v2.json",
+      "base_policy_sha256": "55ceeea5335ddd05f2eff9c5b1be8a858e055a8d8a56c6482ebe8fe006e3b7b7",
+      "charged_usd_ceiling": 0.0,
+      "first_http_429": "pause",
+      "free_only": true,
+      "local_batch_caps": {
+        "input_tokens": 20000000,
+        "output_tokens": 2000000,
+        "requests": 3000
+      },
+      "override_path": "protocols/paper_upgrade_v2/gemini_fallback_budget_override_v1.json",
+      "override_sha256": "3b5ab359708c2544b711fae7016511b70787884856fdf40c3cac84c4e801da4d"
+    },
+    "canary": {
+      "conditions": [
+        "strongest_peer_reviewed_structural_baseline",
+        "m3_policy_only",
+        "m3_full"
+      ],
+      "review_filename": "gemini_three_condition_canary_review_v1.json",
+      "scientific_outcomes_reviewed": false,
+      "technical_review_before_continuation": true,
+      "work_items": 3,
+      "work_key_sequence_sha256": "7883058b4454d55572240450139db7557da4b1e31bfdffd83a29ed5b842992ee"
+    },
+    "execution_identity": "fd3a11240570097a1156d8a90dae690d792b4b3ed9e41a4185fb28dc1f50a837",
+    "locked_inputs": [
+      {
+        "bytes": 4926643,
+        "path": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl",
+        "sha256": "573625a9e1e56c9a8be68fe21368d3e90e268974aa7285bec926d4591f8ec254"
+      },
+      {
+        "bytes": 3050231,
+        "path": "protocols/paper_upgrade_v2/gemini_fallback_plan_v1.jsonl",
+        "sha256": "a4761f1572ce68c234240fb5e72fe6646dbf049f9672cc145c22bf9ed75e1edc"
+      },
+      {
+        "bytes": 6100,
+        "path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v2.json",
+        "sha256": "55ceeea5335ddd05f2eff9c5b1be8a858e055a8d8a56c6482ebe8fe006e3b7b7"
+      },
+      {
+        "bytes": 1292,
+        "path": "protocols/paper_upgrade_v2/gemini_fallback_budget_override_v1.json",
+        "sha256": "3b5ab359708c2544b711fae7016511b70787884856fdf40c3cac84c4e801da4d"
+      },
+      {
+        "bytes": 2586,
+        "path": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+        "sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+      },
+      {
+        "bytes": 2773,
+        "path": "schemas/paper_v2/gemini_fallback_admission_v1.schema.json",
+        "sha256": "7ddd552f3c1444ba59fe7077b1c461df866f149cb46aef0765ce076303d03236"
+      },
+      {
+        "bytes": 615,
+        "path": "protocols/paper_upgrade_v2/gemini_fallback_controller_qualification_v1.json",
+        "sha256": "6ed42d11b09e47131d7b52fd66bd9a55f638f1935017bcd36554b0cd447db5ac"
+      },
+      {
+        "bytes": 67370,
+        "path": "experiments/paper_v2/gemini_fallback_controller_v1.py",
+        "sha256": "4a822b1c9aae7b6e8453b0f06d1f312570d6f1e10f9b0137f32797b4773cd2e4"
+      },
+      {
+        "bytes": 14840,
+        "path": "experiments/paper_v2/gemini_evidence_store_v1.py",
+        "sha256": "eda8db293b88633f2326138dade7e818fb33c3b127d65d1b208a306221544a95"
+      },
+      {
+        "bytes": 43604,
+        "path": "experiments/paper_v2/official_provider_executor.py",
+        "sha256": "3b33057adddacc68863d14e313d975ecd8d359c18b72585a774161793801aa54"
+      },
+      {
+        "bytes": 79361,
+        "path": "experiments/paper_v2/live_condition_runtime.py",
+        "sha256": "44b1eb05a87f23b46e3860a22dbdfc92b08b9aba26d9e055af85f97dc9af5f98"
+      },
+      {
+        "bytes": 32097,
+        "path": "experiments/paper_v2/formal_record_store.py",
+        "sha256": "6952810ab390b554f16cf3a9211169d6d5a4e6b54e8d2b85604c5b9c334aaf19"
+      },
+      {
+        "bytes": 32576,
+        "path": "experiments/paper_v2/formal_condition_executors.py",
+        "sha256": "dcd39222d04c0081ed66b0bc51c37a4949f187dfc83b36ca42022b7acfc6aa93"
+      },
+      {
+        "bytes": 10188,
+        "path": "experiments/paper_v2/boundary_rejection_runtime_v3.py",
+        "sha256": "442fab1951d9c63e1a12c5b8746a8c2555c3766a8a8fc0a844fd45dafb4a964a"
+      },
+      {
+        "bytes": 10777,
+        "path": "experiments/paper_v2/trusted_context_runtime_v2.py",
+        "sha256": "8a1c24eb9ced51fb907fd402bd93b49c6fc98a8dcf654f61b4886e5b1641aaf7"
+      },
+      {
+        "bytes": 10499,
+        "path": "schemas/paper_v2/experiment_record_v1.schema.json",
+        "sha256": "6eefb47e727c342ad26ca3362524f001724c72ca2f60c1d71a80d67e99bc47bd"
+      },
+      {
+        "bytes": 1839,
+        "path": "schemas/paper_v2/provider_safety_receipt_v1.schema.json",
+        "sha256": "3149fc852e28b1203564564f1b8097a77ccd8e5dde4e5ae3007d7e419e84a531"
+      }
+    ],
+    "matrix_identity": "0c5e6f64b6abc296b727fd9e57bbd954fb0eed85051a29e749aca801a51785af",
+    "outputs": {
+      "attempt_ledger_path": "outputs/paper_upgrade_v2/formal_medium/gemini/0c5e6f64b6abc296b727fd9e57bbd954fb0eed85051a29e749aca801a51785af/matrix_attempts_v1.jsonl",
+      "call_ledger_path": "outputs/paper_upgrade_v2/formal_medium/gemini/0c5e6f64b6abc296b727fd9e57bbd954fb0eed85051a29e749aca801a51785af/provider_calls_v1.jsonl",
+      "evidence_ledger_path": "outputs/paper_upgrade_v2/formal_medium/gemini/0c5e6f64b6abc296b727fd9e57bbd954fb0eed85051a29e749aca801a51785af/gemini_evidence_v1.jsonl",
+      "record_ledger_path": "outputs/paper_upgrade_v2/formal_medium/gemini/0c5e6f64b6abc296b727fd9e57bbd954fb0eed85051a29e749aca801a51785af/experiment_records_v1.jsonl",
+      "root": "outputs/paper_upgrade_v2/formal_medium/gemini/0c5e6f64b6abc296b727fd9e57bbd954fb0eed85051a29e749aca801a51785af"
+    },
+    "provider": {
+      "automatic_retries": 0,
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+      "billing_tier": "free",
+      "concurrency": 1,
+      "cross_provider_fallback": false,
+      "endpoint_type": "official_api",
+      "max_tokens": 512,
+      "model_id": "gemini-3.6-flash",
+      "monetary_hard_limit_usd": 0.0,
+      "provider_id": "gemini",
+      "provider_managed_tools": false,
+      "temperature": 0.0,
+      "timeout_seconds": 120.0
+    },
+    "qualification": {
+      "path": "protocols/paper_upgrade_v2/gemini_fallback_controller_qualification_v1.json",
+      "sha256": "6ed42d11b09e47131d7b52fd66bd9a55f638f1935017bcd36554b0cd447db5ac",
+      "status": "gemini_fallback_controller_qualified_offline"
+    },
+    "research_route": "authorization_leakage_uncertainty_empirical_fallback",
+    "run_id": "paper-v2-gemini-fallback-v1-20260726",
+    "safety": {
+      "allowed_payloads": [
+        "synthetic_m3_case",
+        "public_benchmark_case"
+      ],
+      "effect_backends": [
+        "m3_sandbox_fixture",
+        "agentdojo_in_memory_copy"
+      ],
+      "external_connectors": false,
+      "external_effects": false,
+      "model_output_is_untrusted_proposal": true,
+      "provider_tools": false
+    },
+    "selection": {
+      "authorization_regime_probe_rows": 48,
+      "plan_path": "protocols/paper_upgrade_v2/gemini_fallback_plan_v1.jsonl",
+      "plan_sha256": "a4761f1572ce68c234240fb5e72fe6646dbf049f9672cc145c22bf9ed75e1edc",
+      "primary_rows": 216,
+      "prior_scientific_outcomes_used_for_selection": false,
+      "provider_calls_upper_bound": 2688,
+      "selected_conditions": [
+        "strongest_peer_reviewed_structural_baseline",
+        "m3_policy_only",
+        "m3_full"
+      ],
+      "selection_rule": "all_rows_with_selected_condition_ids",
+      "source_plan_path": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl",
+      "source_plan_sha256": "573625a9e1e56c9a8be68fe21368d3e90e268974aa7285bec926d4591f8ec254",
+      "work_items": 264,
+      "work_key_sequence_sha256": "e4691cf09a52ec0015cca62824a4b04459553ae16202fec0557abec24ec1ce05"
+    }
+  },
+  "scope_sha256": "a2447f2addbf53236de413cf9b27077919122608b42a7cfc3dc6b6361fab4df6",
+  "status": "candidate_frozen_non_executable"
+}

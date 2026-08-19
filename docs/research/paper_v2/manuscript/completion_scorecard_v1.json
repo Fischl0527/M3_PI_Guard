@@ -1,0 +1,92 @@
+{
+  "schema_version": "m3-paper-v2-completion-scorecard-1.0",
+  "measured_at": "2026-07-28T05:08:00+08:00",
+  "interpretation": {
+    "engineering_readiness": "Implementation, frozen inputs, validators, and reproducible analysis code; excludes actual model evidence.",
+    "scientific_evidence_completion": "Evidence that can support paper findings; absent API, blind-custodian, and formal benchmark results count as zero."
+  },
+  "engineering_readiness_percent": 99,
+  "scientific_evidence_completion_points": 753,
+  "scientific_evidence_completion_max_points": 1200,
+  "scientific_evidence_completion_percent": 63,
+  "paper_submission_readiness_percent": 60,
+  "workstreams": [
+    {
+      "name": "frontier_literature_and_positioning",
+      "engineering_readiness_percent": 100,
+      "scientific_evidence_completion_percent": 98,
+      "remaining": "The 34-entry matrix has a 34/34 authoritative metadata and abstract-scope audit. Final in-text citation contexts, bibliography export, and submission-date version/status refresh remain."
+    },
+    {
+      "name": "online_state_source_audit",
+      "engineering_readiness_percent": 100,
+      "scientific_evidence_completion_percent": 65,
+      "remaining": "Independent second review; Task Shield remains a disclosed local reproduction because no official code source was established."
+    },
+    {
+      "name": "paper_v2_contracts_and_invariants",
+      "engineering_readiness_percent": 100,
+      "scientific_evidence_completion_percent": 95,
+      "remaining": "The admitted 480-record DeepSeek matrix retains the condition-specific visibility digest and safety receipt chain. Repeat the same contract for the second model."
+    },
+    {
+      "name": "medium_falsification",
+      "engineering_readiness_percent": 100,
+      "scientific_evidence_completion_percent": 100,
+      "remaining": "None for the medium falsification decision. The admitted 480-record DeepSeek analysis rejected the mechanism-paper route and activated the prespecified empirical fallback."
+    },
+    {
+      "name": "structural_baselines",
+      "engineering_readiness_percent": 90,
+      "scientific_evidence_completion_percent": 60,
+      "remaining": "The VIGIL-backed structural condition completed in the admitted medium matrix. A separate model-dependent DRIFT effect run and second-model structural comparison remain absent."
+    },
+    {
+      "name": "formal_public_benchmarks",
+      "engineering_readiness_percent": 80,
+      "scientific_evidence_completion_percent": 10,
+      "remaining": "The medium matrix contains admitted AgentDojo security and utility subsets, but the frozen 6873-record public expansion and its independent result admission remain absent."
+    },
+    {
+      "name": "independent_blind_holdout",
+      "engineering_readiness_percent": 50,
+      "scientific_evidence_completion_percent": 0,
+      "remaining": "External author/custodian, candidate content, and custody audit."
+    },
+    {
+      "name": "adaptive_attack",
+      "engineering_readiness_percent": 85,
+      "scientific_evidence_completion_percent": 0,
+      "remaining": "Cost gate and 40/20 task execution plus hardest-20 extension."
+    },
+    {
+      "name": "statistics_and_power",
+      "engineering_readiness_percent": 100,
+      "scientific_evidence_completion_percent": 90,
+      "remaining": "Primary paired effects, Wilson intervals, exact McNemar tests, Holm correction, 10,000-iteration clustered bootstrap and power analysis are complete and independently rebuilt. Second-model and expanded empirical-fallback statistics remain."
+    },
+    {
+      "name": "manuscript",
+      "engineering_readiness_percent": 90,
+      "scientific_evidence_completion_percent": 45,
+      "remaining": "Methods, admitted-medium Results, Discussion, branch-locked abstract, figure/table source plan, claim ledger, and pre-result integrity audit exist. Public/adaptive results, final figures, venue formatting, final bibliography/context audit, institutional JCR check, and formal Stage 2.5 review remain."
+    },
+    {
+      "name": "provider_cost_and_execution_evidence",
+      "engineering_readiness_percent": 99,
+      "scientific_evidence_completion_percent": 95,
+      "remaining": "The admitted v8+v9 run binds 1,084 official DeepSeek calls and CNY 1.8623798 cumulative cost through append-only usage evidence. A Gemini-specific formal route is still absent and remains free-only with a USD 0 paid-tier limit."
+    },
+    {
+      "name": "provider_effect_safety",
+      "engineering_readiness_percent": 100,
+      "scientific_evidence_completion_percent": 95,
+      "remaining": "The combined DeepSeek technical gate verified disabled provider tools, no real external effects and the receipt chain across the admitted matrix. Repeat the same review for Gemini."
+    }
+  ],
+  "blocking_external_inputs": [
+    "independent blind-set author/custodian",
+    "institutional Clarivate/JCR verification"
+  ],
+  "no_false_completion_rule": "The active project goal must remain incomplete: the mechanism route was prospectively rejected, and second-model empirical evidence, the formal public expansion, adaptive evidence, manuscript completion, and blind custody evidence are absent."
+}

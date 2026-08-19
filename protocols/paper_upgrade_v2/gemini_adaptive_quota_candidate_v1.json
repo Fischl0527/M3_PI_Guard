@@ -1,0 +1,69 @@
+{
+  "artifact_locks": [
+    {
+      "bytes": 13664,
+      "path": "experiments/paper_v2/gemini_adaptive_quota_schedule_v1.py",
+      "sha256": "d64b1e04829b6649dcf2f7715843461c7a47f868fb318c889598686caac22c9d"
+    },
+    {
+      "bytes": 11044,
+      "path": "protocols/paper_upgrade_v2/adaptive_formal_gemini_flash_plan_candidate_v1.json",
+      "sha256": "f745bf257dc9fa487828cf05f6f2193fb5b97614e0c61742f788f8c85dfd8eda"
+    },
+    {
+      "bytes": 2595,
+      "path": "protocols/paper_upgrade_v2/gemini_free_tier_quota_snapshot_v2.json",
+      "sha256": "359f19b5b6ac6dc716ed5a6c8f730d2ec2b49fdf3c3cb1204114fcc94c29faba"
+    },
+    {
+      "bytes": 1710244,
+      "path": "protocols/paper_upgrade_v2/gemini_adaptive_quota_schedule_v1.jsonl",
+      "sha256": "ebbf7d0d97512cde56f813bde7542f5fc650027285f26f26013b8bc6ed9441f8"
+    }
+  ],
+  "artifact_role": "non_executable_gemini_adaptive_quota_capacity_plan",
+  "authorization": {
+    "candidate_only": true,
+    "quota_segment_execution_authorized": false,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "credentials_read": false,
+    "mutable_checkpoint_created": false,
+    "network_calls_made": 0,
+    "scientific_outcomes_read": 0
+  },
+  "generated_at": "2026-08-02T02:28:06+08:00",
+  "manifest_sha256": "46080eb36ccbd1f6bb9cac0b1d1740668fff84bfac1553b8abf26b93540107dc",
+  "schema_version": "m3-paper-v2-gemini-adaptive-quota-plan-1.0",
+  "scope": {
+    "adaptive_plan_manifest_sha256": "cc7d2f965ee9e1521c52c11a240f412565b3d0b5cbbe00d0ef6afb20f57c70ba",
+    "budget_nodes": [
+      50,
+      200
+    ],
+    "maximum_provider_calls": 32000,
+    "maximum_query_slots": 4000,
+    "model_id": "gemini-3.6-flash",
+    "model_role": "gemini_replication",
+    "provider_id": "gemini",
+    "query_work_key_sequence_sha256": "03f51446e25a566165a605ba72fd9e51ec58da580d53ea778e143d42819c8c12",
+    "quota": {
+      "automatic_retries": 0,
+      "billing_tier": "free",
+      "local_requests_per_day": 18,
+      "maximum_requests_per_segment": 16,
+      "one_formal_workload_per_quota_day": true,
+      "paid_ceiling_usd": 0.0,
+      "reserved_requests_per_day": 2
+    },
+    "quota_segment_count": 2000,
+    "runtime_rule": "Select the earliest two capacity slots whose tasks have neither succeeded nor ended diagnostic; preserve each task checkpoint prefix and never replay a touched work key.",
+    "schedule_path": "protocols/paper_upgrade_v2/gemini_adaptive_quota_schedule_v1.jsonl",
+    "schedule_sha256": "ebbf7d0d97512cde56f813bde7542f5fc650027285f26f26013b8bc6ed9441f8",
+    "task_count": 20,
+    "technical_canary_prefix_query_slots": 2
+  },
+  "scope_sha256": "f9d4d444d07800cf397e5216d5e9f4e21de491a18b0e52b1520db03fe04bde49",
+  "status": "offline_qualified_pending_daily_successor_controller"
+}

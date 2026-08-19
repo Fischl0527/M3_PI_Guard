@@ -1,0 +1,141 @@
+{
+  "credentials_read": false,
+  "event_redaction_contract": {
+    "action_arguments_persisted_after_secret_scan": true,
+    "ask_handling": "pending_not_executed",
+    "case_decision_reducer": "first_parsed_proposal",
+    "observation_content_persisted": false,
+    "prompt_content_persisted": false,
+    "response_and_observation_hashes_persisted": true,
+    "response_content_persisted": false,
+    "status": "pass"
+  },
+  "experiment_records_persisted": 0,
+  "forbidden_runtime_context_fields_present": false,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-24T02:00:00+08:00",
+  "interpretation": {
+    "not_supported": [
+      "Any real provider, PromptGuard, VIGIL or tool-effect execution.",
+      "Any unsafe-effect, utility, latency or model-quality conclusion.",
+      "Formal execution authorization or scientific result admission."
+    ],
+    "supported": [
+      "All six condition shells register through the common dispatcher.",
+      "Online runtimes receive frozen online state and minimal scheduling identity but no evaluator fields.",
+      "Twelve benchmark-condition stub records validate in memory after prompt, response and observation content redaction."
+    ]
+  },
+  "live_dependencies_qualified": false,
+  "model_calls_made": 0,
+  "network_calls_made": 0,
+  "offline_evaluator_field_count": 20,
+  "profiles": {
+    "m3_full": {
+      "agentdojo_effect_backend": "agentdojo_in_memory_copy",
+      "agentdojo_prompt_profile": "safe_prompt",
+      "ask_handling": "pending_not_executed",
+      "case_decision_reducer": "first_parsed_proposal",
+      "condition_id": "m3_full",
+      "controller": "m3_runtime_monitor",
+      "dependency": "m3_full_runtime_modules",
+      "m3_effect_backend": "m3_sandbox_fixture",
+      "m3_prompt_profile": "safe_prompt",
+      "max_provider_calls": 8
+    },
+    "m3_policy_only": {
+      "agentdojo_effect_backend": "agentdojo_in_memory_copy",
+      "agentdojo_prompt_profile": "normal",
+      "ask_handling": "pending_not_executed",
+      "case_decision_reducer": "first_parsed_proposal",
+      "condition_id": "m3_policy_only",
+      "controller": "m3_runtime_monitor",
+      "dependency": "m3_policy_module",
+      "m3_effect_backend": "m3_sandbox_fixture",
+      "m3_prompt_profile": "normal",
+      "max_provider_calls": 8
+    },
+    "no_defense": {
+      "agentdojo_effect_backend": "agentdojo_in_memory_copy",
+      "agentdojo_prompt_profile": "normal",
+      "ask_handling": "pending_not_executed",
+      "case_decision_reducer": "first_parsed_proposal",
+      "condition_id": "no_defense",
+      "controller": "unmonitored",
+      "dependency": "official_provider_transport",
+      "m3_effect_backend": "m3_sandbox_fixture",
+      "m3_prompt_profile": "normal",
+      "max_provider_calls": 8
+    },
+    "promptguard_detector_only": {
+      "agentdojo_effect_backend": "agentdojo_in_memory_copy",
+      "agentdojo_prompt_profile": "normal",
+      "ask_handling": "pending_not_executed",
+      "case_decision_reducer": "first_parsed_proposal",
+      "condition_id": "promptguard_detector_only",
+      "controller": "promptguard_detector_gate",
+      "dependency": "promptguard_pinned_local_runtime",
+      "m3_effect_backend": "m3_sandbox_fixture",
+      "m3_prompt_profile": "normal",
+      "max_provider_calls": 8
+    },
+    "safe_prompt_or_spotlighting": {
+      "agentdojo_effect_backend": "agentdojo_in_memory_copy",
+      "agentdojo_prompt_profile": "spotlighting_with_delimiting",
+      "ask_handling": "pending_not_executed",
+      "case_decision_reducer": "first_parsed_proposal",
+      "condition_id": "safe_prompt_or_spotlighting",
+      "controller": "unmonitored",
+      "dependency": "official_provider_transport",
+      "m3_effect_backend": "m3_sandbox_fixture",
+      "m3_prompt_profile": "spotlighting",
+      "max_provider_calls": 8
+    },
+    "strongest_peer_reviewed_structural_baseline": {
+      "agentdojo_effect_backend": "agentdojo_in_memory_copy",
+      "agentdojo_prompt_profile": "normal",
+      "ask_handling": "pending_not_executed",
+      "case_decision_reducer": "first_parsed_proposal",
+      "condition_id": "strongest_peer_reviewed_structural_baseline",
+      "controller": "vigil_verify_before_commit",
+      "dependency": "vigil_acl_2026_pinned_source",
+      "m3_effect_backend": "m3_sandbox_fixture",
+      "m3_prompt_profile": "normal",
+      "max_provider_calls": 16
+    }
+  },
+  "qualified_benchmark_condition_pairs": 12,
+  "record_digests": {
+    "agentdojo-v1::m3_full": "1bf4d54d355ec0e8f0babdab986839164dc24d721ba4005e2d6bea0933a258a3",
+    "agentdojo-v1::m3_policy_only": "16eb25f47e7719af9b288cbf0ad6d118a0d4ef119bdd2ae92f62e9e59d181c11",
+    "agentdojo-v1::no_defense": "f73194944383e62caee339f87bc1a1430684b15e24010e3d416b4b7e95193029",
+    "agentdojo-v1::promptguard_detector_only": "1ae3504efe54a9aef8e9abf285336b63ad0626f39a7830d07e953cee3b74c964",
+    "agentdojo-v1::safe_prompt_or_spotlighting": "10114ae4b0e8495898400e53461be6b1d5f5e6ccb225c23dd1d62780117267a3",
+    "agentdojo-v1::strongest_peer_reviewed_structural_baseline": "6dfd263bedf49b646709cfdb59af69637df57b235a6a29c06fa64164a23ac18a",
+    "m3-v2::m3_full": "e4a4059928b8477d0634ba8e279132ff7e42b526be6c69006181375c92ed9061",
+    "m3-v2::m3_policy_only": "a72041170c99fe8ddbab4541cdfea874461a5004ebf9f393ef118860e1373c16",
+    "m3-v2::no_defense": "b91642c2bdd2859d720b7d4ec51f79b2948eb6abb40b36b8cf466dc56e234970",
+    "m3-v2::promptguard_detector_only": "1e97abe2d5770298fc7a7efb55f793374c7ad76342d522162b4b22c824546e17",
+    "m3-v2::safe_prompt_or_spotlighting": "bcf62c7b4fd26a84b7dab957754441e12bb09416bf500b286652cbc15e30fe1f",
+    "m3-v2::strongest_peer_reviewed_structural_baseline": "e8eaf14716e67615d188c46ad5013a39a6c3bcce5285cbb407459cdd3a1fde92"
+  },
+  "registered_condition_count": 6,
+  "registered_conditions": [
+    "no_defense",
+    "safe_prompt_or_spotlighting",
+    "promptguard_detector_only",
+    "strongest_peer_reviewed_structural_baseline",
+    "m3_policy_only",
+    "m3_full"
+  ],
+  "runtime_context_fields": [
+    "benchmark",
+    "condition_id",
+    "execution_identity",
+    "max_provider_calls",
+    "online_state",
+    "work_key"
+  ],
+  "schema_version": "m3-paper-v2-formal-condition-executor-qualification-1.0",
+  "status": "offline_executor_shells_qualified_live_dependencies_pending"
+}

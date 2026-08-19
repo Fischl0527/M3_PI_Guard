@@ -1,5 +1,7 @@
 # Task M3-EXPANSION-001
 
+> Historical task record retained for Harness continuity.
+
 ## Goal
 
 Deliver the fully executed and truthfully evaluated M3-PI Guard experiment expansion on local branch `test1`.

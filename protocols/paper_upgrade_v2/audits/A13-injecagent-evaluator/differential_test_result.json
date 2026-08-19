@@ -1,0 +1,8 @@
+{
+  "audit_id": "A13-injecagent-evaluator",
+  "base_digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "mutated_digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

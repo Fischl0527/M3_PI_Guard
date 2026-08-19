@@ -1,0 +1,473 @@
+{
+  "adapter_preflight_snapshots": {
+    "camel_or_fides": {
+      "method_selected": true,
+      "path": "protocols/paper_upgrade_v1/camel_fides_ifc_adapter_preflight_v1.json",
+      "selected_candidate": "camel",
+      "sha256": "be3d8c0a08e4d89180d92444fa3b80cbcbd498728d9bfeb2201932f04cc8c1f8",
+      "source_backed_compat_formal_result_eligible": false,
+      "source_backed_compat_network_attempted": false,
+      "source_backed_compat_passed_checks": 8,
+      "source_backed_compat_path": "protocols/paper_upgrade_v1/camel_source_backed_compat_preflight_v1.json",
+      "source_backed_compat_qualification_blockers": [
+        "camel_interpreter_benchmark_runner_not_implemented",
+        "model_or_api_transport_for_privileged_llm_not_frozen",
+        "label_capability_mapping_not_validated_on_public_benchmarks",
+        "complete_formal_logs_absent"
+      ],
+      "source_backed_compat_sha256": "299119469ebd33633d6beeaab8d8e01cbc5c734fa1ca9ab51334709813ad5675",
+      "source_backed_compat_status": "completed_compat_preflight_only",
+      "source_backed_compat_total_checks": 8,
+      "source_backed_freeze_case_count": 726,
+      "source_backed_freeze_formal_result_eligible": false,
+      "source_backed_freeze_passed_checks": 17,
+      "source_backed_freeze_path": "protocols/paper_upgrade_v1/camel_source_backed_formal_freeze_v1.json",
+      "source_backed_freeze_qualification_blockers": [
+        "real_model_two_case_qualification_not_completed",
+        "formal_runner_execution_not_started",
+        "complete_formal_logs_absent"
+      ],
+      "source_backed_freeze_sha256": "2d8ea437a7013d8fb99d15ca2658b68fe7e91ea6aa1d78162ff0e898403fa867",
+      "source_backed_freeze_status": "completed_frozen_formal_protocol",
+      "source_backed_freeze_total_checks": 17,
+      "source_backed_import_formal_result_eligible": false,
+      "source_backed_import_network_attempt_rows": 0,
+      "source_backed_import_passed_checks": 12,
+      "source_backed_import_path": "protocols/paper_upgrade_v1/camel_source_backed_import_preflight_v1.json",
+      "source_backed_import_qualification_blockers": [
+        "camel_agentdojo_suite_circular_import_blocks_official_pipeline",
+        "camel_interpreter_benchmark_runner_not_implemented",
+        "model_or_api_transport_for_privileged_llm_not_frozen",
+        "label_capability_mapping_not_validated_on_public_benchmarks",
+        "complete_formal_logs_absent"
+      ],
+      "source_backed_import_sha256": "d454ab934851855309cbfa29529aea3b09e087520fecba2840fbad4cb9896bd7",
+      "source_backed_import_status": "completed_dependency_import_preflight_blocked",
+      "source_backed_import_total_checks": 12,
+      "source_backed_runner_benchmark_case_count": 0,
+      "source_backed_runner_formal_result_eligible": false,
+      "source_backed_runner_model_or_api_calls": 0,
+      "source_backed_runner_network_attempted": false,
+      "source_backed_runner_passed_checks": 14,
+      "source_backed_runner_path": "protocols/paper_upgrade_v1/camel_source_backed_runner_preflight_v1.json",
+      "source_backed_runner_qualification_blockers": [
+        "transport_and_capability_mapping_not_proven_by_runner_wiring_preflight",
+        "complete_formal_logs_absent",
+        "formal_runner_execution_not_started"
+      ],
+      "source_backed_runner_sha256": "ac5422fef4540befe7531a26d8b22cdc4a4b674ac5e78d05ce88f9daeed568b0",
+      "source_backed_runner_status": "completed_runner_wiring_preflight_only",
+      "source_backed_runner_suites_constructed": [
+        "banking",
+        "slack",
+        "travel",
+        "workspace"
+      ],
+      "source_backed_runner_total_checks": 14,
+      "source_checkout_ready": true,
+      "source_smoke_formal_result_eligible": false,
+      "source_smoke_network_calls": false,
+      "source_smoke_passed_checks": 8,
+      "source_smoke_path": "protocols/paper_upgrade_v1/camel_official_source_smoke_v1.json",
+      "source_smoke_sha256": "2fa7055e0b28581c9378c2a97b6f43452cbb521c585082fc5f8c215477256211",
+      "source_smoke_status": "completed_source_smoke_only",
+      "source_smoke_total_checks": 8,
+      "status": "selected_source_ready_dependency_blocked_stub_preflight_only",
+      "transport_mapping_benchmark_case_count": 0,
+      "transport_mapping_formal_result_eligible": false,
+      "transport_mapping_model_or_api_calls": 0,
+      "transport_mapping_network_attempted": false,
+      "transport_mapping_passed_checks": 16,
+      "transport_mapping_path": "protocols/paper_upgrade_v1/camel_transport_mapping_preflight_v1.json",
+      "transport_mapping_sha256": "535fc67f9552c32a9a102a0974bd050e02db7d3d8756e58b6bfdc53dbd20aa6b",
+      "transport_mapping_status": "completed_transport_and_mapping_preflight_only",
+      "transport_mapping_suites_mapped": [
+        "banking",
+        "slack",
+        "travel",
+        "workspace"
+      ],
+      "transport_mapping_total_checks": 16
+    },
+    "ipiguard": {
+      "source_backed_import_formal_result_eligible": false,
+      "source_backed_import_network_calls": false,
+      "source_backed_import_passed_checks": 7,
+      "source_backed_import_path": "protocols/paper_upgrade_v1/ipiguard_source_backed_import_preflight_v1.json",
+      "source_backed_import_sha256": "2fa2fb552dc56930478f9a2ec604569b4f57471ac53901e17aa74c4d335073cb",
+      "source_backed_import_status": "completed_import_preflight_only",
+      "source_backed_import_total_checks": 7,
+      "source_smoke_formal_result_eligible": false,
+      "source_smoke_passed_checks": 8,
+      "source_smoke_path": "protocols/paper_upgrade_v1/ipiguard_official_source_smoke_v1.json",
+      "source_smoke_sha256": "9251b121883257ad090a108fc146bec65ac7daed04c76f8160f524b7d76a7e09",
+      "source_smoke_status": "completed_source_smoke_only",
+      "source_smoke_total_checks": 8,
+      "tdg_preflight_path": "protocols/paper_upgrade_v1/ipiguard_tdg_adapter_preflight_v1.json",
+      "tdg_preflight_sha256": "f81e3a0ccdfab5966672fe7665a24d9a8302aa799655d0e91a8df50a0a7306d6",
+      "tdg_preflight_source_checkout_ready": true,
+      "tdg_preflight_status": "ready_for_official_source_smoke"
+    },
+    "progent": {
+      "formal_result_eligible": false,
+      "network_calls_performed": false,
+      "offline_runtime_smoke_passed": true,
+      "source_backed_freeze_case_count": 726,
+      "source_backed_freeze_formal_result_eligible": false,
+      "source_backed_freeze_passed_checks": 13,
+      "source_backed_freeze_path": "protocols/paper_upgrade_v1/progent_source_backed_formal_freeze_v1.json",
+      "source_backed_freeze_sha256": "046bd926fe9a96b1eb89b45f7223381d1fa83b79fa6c431b7b174150cb26afa1",
+      "source_backed_freeze_status": "completed_frozen_formal_protocol",
+      "source_backed_freeze_total_checks": 13,
+      "source_backed_freeze_version": "m3-paper-v1-progent-source-backed-freeze-1.1",
+      "source_backed_import_formal_result_eligible": false,
+      "source_backed_import_network_calls": false,
+      "source_backed_import_passed_checks": 10,
+      "source_backed_import_path": "protocols/paper_upgrade_v1/progent_source_backed_import_preflight_v1.json",
+      "source_backed_import_sha256": "d8e7d9d64ced2816cac04f9924d6ce5f70f2c3ad64af9f5e1b971dbd9ab5adf6",
+      "source_backed_import_status": "completed_import_preflight_only",
+      "source_backed_import_total_checks": 10,
+      "source_checkout_ready": true,
+      "source_smoke_path": "protocols/paper_upgrade_v1/progent_official_source_smoke_v1.json",
+      "source_smoke_sha256": "54cf5584c05250de97524f267600754c13cbdda61bb6d675e3351510c7601f01",
+      "source_smoke_status": "completed_source_smoke_only"
+    },
+    "promptguard": {
+      "formal_analysis_path": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/analysis/analysis_manifest.json",
+      "formal_analysis_sha256": "e2b9d1133783f11f6bcf3be1ea1c5ebc3600a05ea6b1d16b794b4707495accb0",
+      "formal_analysis_status": "completed_source_backed_formal_detector_baseline",
+      "formal_detector_case_count": 3280,
+      "formal_detector_result_eligible": true,
+      "formal_detector_scope": [
+        "detector_performance"
+      ],
+      "formal_result_eligible": false,
+      "path": "protocols/paper_upgrade_v1/promptguard_detector_adapter_preflight_v1.json",
+      "real_detector_ready": true,
+      "real_smoke_completed": true,
+      "real_smoke_sha256": "847d8d77f0890cb40bc8c8d1fc253d70e416175153d66bf91f719973ecc52282",
+      "sha256": "baaa09e14679e8c5158b985d2f298ccd6386ca55eb3463dd9105ac097da100bd",
+      "status": "real_detector_smoke_completed_formal_run_pending"
+    },
+    "task_shield": {
+      "paper_freeze_case_count": 726,
+      "paper_freeze_formal_result_eligible": false,
+      "paper_freeze_passed_checks": 16,
+      "paper_freeze_path": "protocols/paper_upgrade_v1/taskshield_paper_formal_freeze_v14.json",
+      "paper_freeze_sha256": "608cca38b8dd066a8d18f69fe199a32db2358f078b3d3c51118781f37d0a3ca8",
+      "paper_freeze_status": "completed_frozen_formal_protocol",
+      "paper_freeze_total_checks": 16,
+      "paper_freeze_version": "m3-paper-v1-taskshield-reproduction-freeze-1.4",
+      "paper_import_formal_result_eligible": false,
+      "paper_import_network_calls": false,
+      "paper_import_passed_checks": 9,
+      "paper_import_path": "protocols/paper_upgrade_v1/taskshield_paper_import_preflight_v1.json",
+      "paper_import_sha256": "8f08535fe817acc3c8e5a3c0c917cf57b84e965c8b5b2d1dd4be82725e88c2ec",
+      "paper_import_status": "completed_import_preflight_only",
+      "paper_import_total_checks": 9,
+      "paper_reproduction_classification": "disclosed_paper_reproduction_not_official_source"
+    }
+  },
+  "baseline_root": "external/baselines",
+  "boundary": "Dependency/source snapshot only. It records local environment and source-checkout state for required strong baselines, but it does not run baselines or create formal effect evidence.",
+  "checks": [
+    {
+      "detail": {
+        "entries": 6,
+        "path": "protocols/paper_upgrade_v1/external_strong_baselines_v1.json"
+      },
+      "name": "external_registry_loaded",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "missing": [],
+        "present": [
+          "camel_or_fides",
+          "ipiguard",
+          "progent",
+          "promptguard",
+          "task_shield"
+        ]
+      },
+      "name": "all_required_keys_have_entries",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "camel_google_research": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+        "fides_microsoft": "669c046c4adbc56ee49c9672fdd30c54937ea062",
+        "ipiguard_github_emnlp2025": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+        "progent_arxiv2025": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+        "promptguard_llama_prompt_guard_2": "b71c6350a2acf2fb62c2328a734cbf440ecac386"
+      },
+      "name": "repository_entries_record_expected_remote_heads",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "camel_or_fides": [],
+        "ipiguard": [],
+        "progent": [],
+        "promptguard": [],
+        "task_shield": []
+      },
+      "name": "ready_keys_have_no_unresolved_blockers",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "detail": false,
+      "name": "snapshot_not_result_eligible",
+      "severity": "warning",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "b676d279793509006d3fc70a92ba5cf89368d0279d1522ff16b1f460ab7a4e10",
+  "created_at": "2026-07-22T09:39:14.121701+00:00",
+  "dependency_probe": {
+    "executables": {
+      "git": "C:\\Program Files\\Git\\cmd\\git.EXE",
+      "uv": ""
+    },
+    "packages": {
+      "huggingface_hub": {
+        "installed": true,
+        "origin": "C:\\Users\\gaohang\\AppData\\Roaming\\Python\\Python313\\site-packages\\huggingface_hub\\__init__.py"
+      },
+      "numpy": {
+        "installed": true,
+        "origin": "F:\\robot\\Anaconda3\\Lib\\site-packages\\numpy\\__init__.py"
+      },
+      "openai": {
+        "installed": true,
+        "origin": "C:\\Users\\gaohang\\AppData\\Roaming\\Python\\Python313\\site-packages\\openai\\__init__.py"
+      },
+      "pandas": {
+        "installed": true,
+        "origin": "F:\\robot\\Anaconda3\\Lib\\site-packages\\pandas\\__init__.py"
+      },
+      "torch": {
+        "installed": true,
+        "origin": "C:\\Users\\gaohang\\AppData\\Roaming\\Python\\Python313\\site-packages\\torch\\__init__.py"
+      },
+      "transformers": {
+        "installed": false,
+        "origin": ""
+      }
+    },
+    "promptguard_download_snapshot": {
+      "blocker": "",
+      "path": "",
+      "resolved_revision": "",
+      "retry_performed": null,
+      "sha256": "",
+      "status": "missing"
+    },
+    "promptguard_environment_snapshot": {
+      "path": "",
+      "python_executable": "",
+      "selected_packages": {},
+      "sha256": "",
+      "status": "missing"
+    },
+    "promptguard_model_cache": {
+      "meta-llama/Llama-Prompt-Guard-2-22M": {
+        "complete_snapshot_revisions": [],
+        "hub_cache_root": "E:\\ai_cache\\huggingface\\hub",
+        "model_cache_complete": false,
+        "model_cache_exists": false,
+        "model_cache_path": "E:\\ai_cache\\huggingface\\hub\\models--meta-llama--Llama-Prompt-Guard-2-22M",
+        "model_id": "meta-llama/Llama-Prompt-Guard-2-22M",
+        "snapshot_count": 0,
+        "snapshots": []
+      },
+      "meta-llama/Llama-Prompt-Guard-2-86M": {
+        "complete_snapshot_revisions": [
+          "a8ded8e697ce7c355e395a0df51f94adb4a2fd27"
+        ],
+        "hub_cache_root": "E:\\ai_cache\\huggingface\\hub",
+        "model_cache_complete": true,
+        "model_cache_exists": true,
+        "model_cache_path": "E:\\ai_cache\\huggingface\\hub\\models--meta-llama--Llama-Prompt-Guard-2-86M",
+        "model_id": "meta-llama/Llama-Prompt-Guard-2-86M",
+        "snapshot_count": 1,
+        "snapshots": [
+          {
+            "complete": true,
+            "file_count": 10,
+            "has_config": true,
+            "has_tokenizer": true,
+            "has_weights": true,
+            "path": "E:\\ai_cache\\huggingface\\hub\\models--meta-llama--Llama-Prompt-Guard-2-86M\\snapshots\\a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "revision": "a8ded8e697ce7c355e395a0df51f94adb4a2fd27"
+          }
+        ]
+      }
+    },
+    "python_executable": "F:\\robot\\Anaconda3\\python.exe",
+    "python_version": "3.13.5"
+  },
+  "external_registry_path": "protocols/paper_upgrade_v1/external_strong_baselines_v1.json",
+  "external_registry_sha256": "bee1db3a71cb02fa2280db6f0eed5dc880319c5fb9e761b755ca2cde7e6d4a80",
+  "json_path": "protocols/paper_upgrade_v1/strong_baseline_dependency_snapshot_v1.json",
+  "markdown_path": "protocols/paper_upgrade_v1/strong_baseline_dependency_snapshot_v1.md",
+  "passed_checks": 5,
+  "q2_strong_baseline_gate": "not_satisfied",
+  "readiness_by_key": {
+    "camel_or_fides": {
+      "blockers": [],
+      "entry_ids": [
+        "camel_google_research",
+        "fides_microsoft"
+      ],
+      "registry_key": "camel_or_fides",
+      "result_eligible_for_formal_tables": false,
+      "snapshot_ready": true
+    },
+    "ipiguard": {
+      "blockers": [],
+      "entry_ids": [
+        "ipiguard_github_emnlp2025"
+      ],
+      "registry_key": "ipiguard",
+      "result_eligible_for_formal_tables": false,
+      "snapshot_ready": true
+    },
+    "progent": {
+      "blockers": [],
+      "entry_ids": [
+        "progent_arxiv2025"
+      ],
+      "registry_key": "progent",
+      "result_eligible_for_formal_tables": false,
+      "snapshot_ready": true
+    },
+    "promptguard": {
+      "blockers": [],
+      "entry_ids": [
+        "promptguard_llama_prompt_guard_2"
+      ],
+      "registry_key": "promptguard",
+      "result_eligible_for_formal_tables": true,
+      "snapshot_ready": true
+    },
+    "task_shield": {
+      "blockers": [],
+      "entry_ids": [
+        "task_shield_acl2025"
+      ],
+      "registry_key": "task_shield",
+      "result_eligible_for_formal_tables": false,
+      "snapshot_ready": true
+    }
+  },
+  "readiness_by_key_sha256": "8025e511acb31ba1afb661d6b7774ff7afa4be10aaa7e003dd80b10bf2047e97",
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-strong-baseline-dependency-snapshot-1.0",
+  "snapshot_version": "m3-paper-v1-strong-baseline-dependency-snapshot-1.0",
+  "source_snapshots": {
+    "camel_google_research": {
+      "display_name": "CaMeL",
+      "entry_id": "camel_google_research",
+      "expected_remote_head_observed_at": "2026-07-18",
+      "expected_remote_head_sha": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+      "local_checkout_exists": true,
+      "local_checkout_expected": true,
+      "local_git_head": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+      "local_head_matches_expected": true,
+      "local_path": "external/baselines/camel-prompt-injection",
+      "registry_key": "camel_or_fides",
+      "relevant_path": "",
+      "relevant_path_exists": false,
+      "repository_url": "https://github.com/google-research/camel-prompt-injection",
+      "source_snapshot_status": "source_checkout_matched"
+    },
+    "fides_microsoft": {
+      "display_name": "FIDES",
+      "entry_id": "fides_microsoft",
+      "expected_remote_head_observed_at": "2026-07-18",
+      "expected_remote_head_sha": "669c046c4adbc56ee49c9672fdd30c54937ea062",
+      "local_checkout_exists": true,
+      "local_checkout_expected": true,
+      "local_git_head": "669c046c4adbc56ee49c9672fdd30c54937ea062",
+      "local_head_matches_expected": true,
+      "local_path": "external/baselines/fides",
+      "registry_key": "camel_or_fides",
+      "relevant_path": "",
+      "relevant_path_exists": false,
+      "repository_url": "https://github.com/microsoft/fides",
+      "source_snapshot_status": "source_checkout_matched"
+    },
+    "ipiguard_github_emnlp2025": {
+      "display_name": "IPIGuard",
+      "entry_id": "ipiguard_github_emnlp2025",
+      "expected_remote_head_observed_at": "2026-07-18",
+      "expected_remote_head_sha": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+      "local_checkout_exists": true,
+      "local_checkout_expected": true,
+      "local_git_head": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+      "local_head_matches_expected": true,
+      "local_path": "external/baselines/ipiguard",
+      "registry_key": "ipiguard",
+      "relevant_path": "",
+      "relevant_path_exists": false,
+      "repository_url": "https://github.com/Greysahy/ipiguard",
+      "source_snapshot_status": "source_checkout_matched"
+    },
+    "progent_arxiv2025": {
+      "display_name": "Progent",
+      "entry_id": "progent_arxiv2025",
+      "expected_remote_head_observed_at": "2026-07-21",
+      "expected_remote_head_sha": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+      "local_checkout_exists": true,
+      "local_checkout_expected": true,
+      "local_git_head": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+      "local_head_matches_expected": true,
+      "local_path": "external/baselines/progent",
+      "registry_key": "progent",
+      "relevant_path": "secagent/tool.py",
+      "relevant_path_exists": true,
+      "repository_url": "https://github.com/sunblaze-ucb/progent",
+      "source_snapshot_status": "source_checkout_matched"
+    },
+    "promptguard_llama_prompt_guard_2": {
+      "display_name": "Meta Llama Prompt Guard 2",
+      "entry_id": "promptguard_llama_prompt_guard_2",
+      "expected_remote_head_observed_at": "2026-07-18",
+      "expected_remote_head_sha": "b71c6350a2acf2fb62c2328a734cbf440ecac386",
+      "local_checkout_exists": true,
+      "local_checkout_expected": true,
+      "local_git_head": "b71c6350a2acf2fb62c2328a734cbf440ecac386",
+      "local_head_matches_expected": true,
+      "local_path": "external/baselines/PurpleLlama",
+      "registry_key": "promptguard",
+      "relevant_path": "Prompt-Guard/",
+      "relevant_path_exists": true,
+      "repository_url": "https://github.com/meta-llama/PurpleLlama",
+      "source_snapshot_status": "source_checkout_matched"
+    },
+    "task_shield_acl2025": {
+      "display_name": "Task Shield",
+      "entry_id": "task_shield_acl2025",
+      "expected_remote_head_observed_at": "",
+      "expected_remote_head_sha": "",
+      "local_checkout_exists": false,
+      "local_checkout_expected": false,
+      "local_git_head": "",
+      "local_head_matches_expected": false,
+      "local_path": "",
+      "registry_key": "task_shield",
+      "relevant_path": "",
+      "relevant_path_exists": false,
+      "repository_url": "",
+      "source_snapshot_status": "paper_or_model_card_only_no_checkout_expected"
+    }
+  },
+  "source_snapshots_sha256": "33a77da78f9bdade7de95eb8a6d2901dbabe6173c0b6da447f0fd25ef6ce40db",
+  "status": "completed",
+  "total_checks": 5
+}

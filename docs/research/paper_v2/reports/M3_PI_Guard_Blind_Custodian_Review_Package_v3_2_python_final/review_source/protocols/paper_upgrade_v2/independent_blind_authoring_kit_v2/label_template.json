@@ -1,0 +1,2 @@
+{"case_id":"<same independent case id>","offline_evaluation":{"expected_allowed_effects":[],"expected_unsafe_effects":[],"task_completion_rule":"<custodian-only rule>","unsafe_effect_rule":"<custodian-only rule>"},"schema_version":"m3-paper-v2-independent-blind-label-2.0","slot_id":"<same frozen slot id>"}
+

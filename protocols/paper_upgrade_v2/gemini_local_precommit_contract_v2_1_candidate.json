@@ -1,0 +1,110 @@
+{
+  "artifact_locks": [
+    {
+      "bytes": 11065,
+      "path": "experiments/paper_v2/gemini_local_precommit_contract_v2_candidate.py",
+      "sha256": "4aa2c994a90607eaeff2cf2bbead060ee60c51728cad76b65fda8253aa2ab5ba"
+    },
+    {
+      "bytes": 10578,
+      "path": "experiments/paper_v2/gemini_trace_attaching_runtime_v2.py",
+      "sha256": "7d3989fdcea59a08577ce1cc770f5bc6a20c2c99ddb44aafdfe230ba267003ca"
+    },
+    {
+      "bytes": 15777,
+      "path": "tests/unit/test_paper_v2_gemini_trace_attaching_runtime_v2.py",
+      "sha256": "1f482d9b5bbb1ca176462fbc216dd213a97bab02a5f4f0f83831ff27d15e35bf"
+    },
+    {
+      "bytes": 19607,
+      "path": "experiments/paper_v2/gemini_public_trace_v1.py",
+      "sha256": "a355750f3d85886f047018afadbd72940cccef3d09bb78a29b9ab496efd2432d"
+    },
+    {
+      "bytes": 16730,
+      "path": "experiments/paper_v2/gemini_public_execution_store_v1.py",
+      "sha256": "b26a0fcf8882c0c4449fba195d13f9ecd377de9a2281d54a1c493d7f3845f906"
+    },
+    {
+      "bytes": 26148,
+      "path": "experiments/paper_v2/gemini_json_client_v1.py",
+      "sha256": "f470a6c1753c455fd02752e87fb0ba790061e2d628caa2c31605b55eb9a2a58f"
+    },
+    {
+      "bytes": 43604,
+      "path": "experiments/paper_v2/official_provider_executor.py",
+      "sha256": "3b33057adddacc68863d14e313d975ecd8d359c18b72585a774161793801aa54"
+    },
+    {
+      "bytes": 3749,
+      "path": "protocols/paper_upgrade_v2/gemini_public_canary_v4_s1_abort_review_v1.json",
+      "sha256": "ab75017d9fbcca34bc2e745fb1adcc2de5b3892408608497e8c0ae87a91f5606"
+    },
+    {
+      "bytes": 3988,
+      "path": "protocols/paper_upgrade_v2/gemini_local_precommit_contract_v2_candidate.json",
+      "sha256": "e4aff3a679ff4f2219dba724e9252d05b7148b2d7f9c3f7a7c1d051fcc405f10"
+    }
+  ],
+  "artifact_role": "non_executable_prospective_contract_candidate",
+  "authorization": {
+    "candidate_only": true,
+    "historical_response_upgrade_authorized": false,
+    "provider_execution_authorized": false,
+    "result_admission_authorized": false,
+    "same_segment_retry_authorized": false
+  },
+  "contract": {
+    "accepted_trace_mode": "precommitted_local_plus_provider_response",
+    "append_flush_fsync_required": true,
+    "automatic_retries": 0,
+    "billing_tier": "free",
+    "canonical_payload_sha256_required": true,
+    "complete_bundle_required": true,
+    "contract_id": "gemini_local_precommit_plus_official_response_v2",
+    "exact_returned_model_required": true,
+    "external_effects_enabled": false,
+    "local_client_request_id_required": true,
+    "model_id": "gemini-3.6-flash",
+    "official_response_id_required": true,
+    "open_request_count_required": 0,
+    "paid_ceiling_usd": 0.0,
+    "provider_id": "gemini",
+    "provider_request_id": null,
+    "provider_request_id_must_not_be_fabricated": true,
+    "provider_tools_enabled": false,
+    "upstream_provider": "Google"
+  },
+  "contract_sha256": "c4714e2db7357052537f65f0e180b83f73b88ab05f88081c12858cb508ef7b4b",
+  "evidence_boundary": {
+    "credentials_read": false,
+    "historical_files_mutated": 0,
+    "network_calls_made": 0,
+    "scientific_outcomes_read": 0
+  },
+  "generated_at": "2026-08-04T02:45:00+08:00",
+  "manifest_sha256": "accc5941608fd1194c8e8cdbcce4a858ca84142dfaab3d293443871042c93bb8",
+  "negative_probes": [
+    "non_google_provider",
+    "model_identity_drift",
+    "response_id_drift_or_missing",
+    "payload_sha256_drift",
+    "prompt_rewrite_not_none",
+    "identity_not_verified",
+    "invented_provider_request_id",
+    "trace_mode_request_id_mismatch",
+    "trace_bundle_hash_tamper",
+    "open_or_failed_trace",
+    "paid_tier_or_nonzero_charge",
+    "qualification_or_stub_tier",
+    "conflicting_runtime_bundle",
+    "secret_or_prompt_persistence"
+  ],
+  "negative_probes_sha256": "2ef5dc1d4ec59a33b96c17d4ea0d4969bb6bc5fd727161a85f3f855559620759",
+  "schema_version": "m3-paper-v2-gemini-local-precommit-contract-candidate-2.1",
+  "source_abort_review_manifest_sha256": "6d7605dd04605b6f7a2626c9ec47d6731a0c0c0130ee68b9ef68b4062e37d649",
+  "status": "candidate_pending_fresh_full_harness",
+  "superseded_candidate_manifest_sha256": "2e6fe4d4adc2b74f5be550b1dc392a5e6987065cb95f2cb4d3e641f8290c0d9c",
+  "supersedes_schema_version": "m3-paper-v2-gemini-local-precommit-contract-candidate-2.0",
+  "supersession_reason": "add_complete_bundle_post_response_failure_attestation_path"
+}

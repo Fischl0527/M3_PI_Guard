@@ -1,0 +1,23 @@
+{
+  "append_flush_fsync": true,
+  "external_effects": false,
+  "formal_results_created": 0,
+  "negative_cases_expected": 3,
+  "negative_cases_rejected": 3,
+  "network_calls_made": 0,
+  "old_smoke_retroactive_upgrade": false,
+  "payload_commitment_before_transport": true,
+  "provider_tools_declared": false,
+  "qualification_evidence_only": true,
+  "qualified_provider_count": 2,
+  "qualified_trace_modes": {
+    "deepseek": "precommitted_local_plus_provider_response",
+    "gemini": "provider_dual_id_plus_precommitted_local"
+  },
+  "recorded_at": "2026-07-24T01:10:00+08:00",
+  "schema_version": "m3-paper-v2-provider-trace-qualification-2.0",
+  "status": "qualified_candidate_not_activated",
+  "user_confirmation_recorded": false,
+  "v1_contract_modified": false,
+  "v2_schema_activated": false
+}

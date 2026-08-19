@@ -1,0 +1,19 @@
+{
+  "artifact": "DRIFT",
+  "audit_id": "A03-drift-runtime",
+  "commit_date": "2026-07-15T23:24:21-07:00",
+  "default_branch_head_at_discovery": "6fd3df4763fad77398c3c273c2a4fe14dd50f7ea",
+  "expected_commit": "6fd3df4763fad77398c3c273c2a4fe14dd50f7ea",
+  "license": {
+    "path": "external/paper_v2_audits/drift/LICENSE",
+    "sha256": "efd9ae9125bb486e317c00f5e42d3b479a149cf8f5f65d625119f741a8c119e6",
+    "status": "present"
+  },
+  "observed_commit": "6fd3df4763fad77398c3c273c2a4fe14dd50f7ea",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/paper_v2_audits/drift",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/SaFoLab-WISC/DRIFT.git"
+}

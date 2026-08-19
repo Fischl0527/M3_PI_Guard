@@ -1,0 +1,8 @@
+{
+  "audit_id": "A19-wasp-benchmark",
+  "base_digest": "b785c1f3d6e5f271f7c92647ae8e5d1528f4d05d5b744e9599764f1cff4decd6",
+  "mutated_digest": "b785c1f3d6e5f271f7c92647ae8e5d1528f4d05d5b744e9599764f1cff4decd6",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

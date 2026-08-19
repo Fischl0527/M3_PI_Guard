@@ -1,0 +1,891 @@
+{
+  "audit_version": "m3-paper-v1-camel-source-backed-compat-preflight-1.0",
+  "boundary": "Compatibility import preflight only. The process-local preloader resolves the pinned AgentDojo suite import-order cycle without editing external source, but this manifest does not execute CaMeL on any benchmark case, call an LLM/API, start Ollama, or admit a formal result.",
+  "checks": [
+    {
+      "detail": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+      "name": "camel_runtime_python_exists",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "camel_agentdojo_suite_circular_import_blocks_official_pipeline",
+        "camel_interpreter_benchmark_runner_not_implemented",
+        "model_or_api_transport_for_privileged_llm_not_frozen",
+        "label_capability_mapping_not_validated_on_public_benchmarks",
+        "complete_formal_logs_absent"
+      ],
+      "name": "plain_import_preflight_recorded_prior_blocker",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "agentdojo_root": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo",
+        "benchmark_versions": [
+          "v1",
+          "v1.1.1",
+          "v1.1.2",
+          "v1.2"
+        ],
+        "compat_version": "m3-paper-v1-camel-agentdojo-suite-import-compat-1.0",
+        "early_imports_present": [],
+        "ok": true,
+        "rows": [
+          {
+            "kind": "preloaded_module",
+            "module": "agentdojo.task_suite.task_suite",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\task_suite\\task_suite.py",
+            "sha256": "2e69da06f7e150dd6d238c53a74845b56eebeb224e07f694e1051a6e0c6a2bc1"
+          },
+          {
+            "kind": "preloaded_module",
+            "module": "agentdojo.default_suites.v1.banking.task_suite",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\task_suite.py",
+            "sha256": "c58ec73db16f713a16aaec787dac45856e546f4d95be84ab6a4bed9bc12613b6",
+            "tools": 11
+          },
+          {
+            "kind": "preloaded_module",
+            "module": "agentdojo.default_suites.v1.travel.task_suite",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\task_suite.py",
+            "sha256": "a2b58f094bd61a79e245ca74c94d9a3d62cc6bc744e5ee21bdadabb43960ba60",
+            "tools": 28
+          },
+          {
+            "kind": "preloaded_module",
+            "module": "agentdojo.default_suites.v1.workspace.task_suite",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\task_suite.py",
+            "sha256": "96fa51ab20f03c30cd2d7bc754b76d717ddbd68bdf39adc85f0e92fc4d2c7ec4",
+            "tools": 24
+          },
+          {
+            "kind": "preloaded_module",
+            "module": "agentdojo.default_suites.v1.slack.task_suite",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\task_suite.py",
+            "sha256": "bdc6798e8ef83a54e787af80ed44f94e4be8f24aba2eaec2103e3120958c3670",
+            "tools": 11
+          },
+          {
+            "kind": "registration_module",
+            "module": "agentdojo.default_suites.v1.banking.injection_tasks",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\injection_tasks.py"
+          },
+          {
+            "kind": "registration_module",
+            "module": "agentdojo.default_suites.v1.banking.user_tasks",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\user_tasks.py"
+          },
+          {
+            "kind": "registration_module",
+            "module": "agentdojo.default_suites.v1.travel.injection_tasks",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\injection_tasks.py"
+          },
+          {
+            "kind": "registration_module",
+            "module": "agentdojo.default_suites.v1.travel.user_tasks",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\user_tasks.py"
+          },
+          {
+            "kind": "registration_module",
+            "module": "agentdojo.default_suites.v1.workspace.injection_tasks",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\injection_tasks.py"
+          },
+          {
+            "kind": "registration_module",
+            "module": "agentdojo.default_suites.v1.workspace.user_tasks",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\user_tasks.py"
+          },
+          {
+            "kind": "registration_module",
+            "module": "agentdojo.default_suites.v1.slack.injection_tasks",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\injection_tasks.py"
+          },
+          {
+            "kind": "registration_module",
+            "module": "agentdojo.default_suites.v1.slack.user_tasks",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\user_tasks.py"
+          },
+          {
+            "kind": "preloaded_module",
+            "module": "agentdojo.task_suite.load_suites",
+            "ok": true,
+            "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\task_suite\\load_suites.py",
+            "sha256": "9fcbf5eaf9af38c6a5a85a202711f7575618e30d63bbb0156934c3702132392c"
+          }
+        ],
+        "suite_counts": {
+          "v1": {
+            "banking": {
+              "injection_tasks": 9,
+              "tools": 11,
+              "user_tasks": 16
+            },
+            "slack": {
+              "injection_tasks": 5,
+              "tools": 11,
+              "user_tasks": 21
+            },
+            "travel": {
+              "injection_tasks": 7,
+              "tools": 28,
+              "user_tasks": 20
+            },
+            "workspace": {
+              "injection_tasks": 6,
+              "tools": 24,
+              "user_tasks": 40
+            }
+          },
+          "v1.1.1": {
+            "banking": {
+              "injection_tasks": 9,
+              "tools": 11,
+              "user_tasks": 16
+            },
+            "slack": {
+              "injection_tasks": 5,
+              "tools": 11,
+              "user_tasks": 21
+            },
+            "travel": {
+              "injection_tasks": 7,
+              "tools": 28,
+              "user_tasks": 20
+            },
+            "workspace": {
+              "injection_tasks": 6,
+              "tools": 24,
+              "user_tasks": 40
+            }
+          },
+          "v1.1.2": {
+            "banking": {
+              "injection_tasks": 9,
+              "tools": 11,
+              "user_tasks": 16
+            },
+            "slack": {
+              "injection_tasks": 5,
+              "tools": 11,
+              "user_tasks": 21
+            },
+            "travel": {
+              "injection_tasks": 7,
+              "tools": 28,
+              "user_tasks": 20
+            },
+            "workspace": {
+              "injection_tasks": 6,
+              "tools": 24,
+              "user_tasks": 40
+            }
+          },
+          "v1.2": {
+            "banking": {
+              "injection_tasks": 9,
+              "tools": 11,
+              "user_tasks": 16
+            },
+            "slack": {
+              "injection_tasks": 5,
+              "tools": 11,
+              "user_tasks": 21
+            },
+            "travel": {
+              "injection_tasks": 7,
+              "tools": 28,
+              "user_tasks": 20
+            },
+            "workspace": {
+              "injection_tasks": 14,
+              "tools": 24,
+              "user_tasks": 40
+            }
+          }
+        },
+        "suites": [
+          "banking",
+          "travel",
+          "workspace",
+          "slack"
+        ]
+      },
+      "name": "compat_preloader_succeeded",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\task_suite.py",
+          "module": "agentdojo.default_suites.v1.banking.task_suite",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\task_suite.py",
+          "module": "agentdojo.default_suites.v1.travel.task_suite",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\task_suite.py",
+          "module": "agentdojo.default_suites.v1.workspace.task_suite",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\task_suite.py",
+          "module": "agentdojo.default_suites.v1.slack.task_suite",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\task_suite\\load_suites.py",
+          "module": "agentdojo.task_suite.load_suites",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\models.py",
+          "module": "camel.models",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\privileged_llm.py",
+          "module": "camel.pipeline_elements.privileged_llm",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\agentdojo_security_policies.py",
+          "module": "camel.pipeline_elements.security_policies.agentdojo_security_policies",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\workspace.py",
+          "module": "camel.pipeline_elements.security_policies.workspace",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\travel.py",
+          "module": "camel.pipeline_elements.security_policies.travel",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\banking.py",
+          "module": "camel.pipeline_elements.security_policies.banking",
+          "ok": true
+        },
+        {
+          "error": "",
+          "error_type": "",
+          "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\slack.py",
+          "module": "camel.pipeline_elements.security_policies.slack",
+          "ok": true
+        }
+      ],
+      "name": "required_imports_succeeded_after_compat",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "injection_tasks": 35,
+        "user_tasks": 97
+      },
+      "name": "agentdojo_v1_2_suite_totals_match_public_universe",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": false,
+      "name": "no_network_attempted_during_compat_preflight",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": 0,
+      "name": "no_benchmark_cases_executed",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "result_eligible": false,
+        "status": "completed_frozen_formal_protocol"
+      },
+      "name": "formal_freeze_still_nonformal",
+      "severity": "warning",
+      "status": "pass"
+    }
+  ],
+  "compat_probe": {
+    "compat": {
+      "agentdojo_root": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo",
+      "benchmark_versions": [
+        "v1",
+        "v1.1.1",
+        "v1.1.2",
+        "v1.2"
+      ],
+      "compat_version": "m3-paper-v1-camel-agentdojo-suite-import-compat-1.0",
+      "early_imports_present": [],
+      "ok": true,
+      "rows": [
+        {
+          "kind": "preloaded_module",
+          "module": "agentdojo.task_suite.task_suite",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\task_suite\\task_suite.py",
+          "sha256": "2e69da06f7e150dd6d238c53a74845b56eebeb224e07f694e1051a6e0c6a2bc1"
+        },
+        {
+          "kind": "preloaded_module",
+          "module": "agentdojo.default_suites.v1.banking.task_suite",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\task_suite.py",
+          "sha256": "c58ec73db16f713a16aaec787dac45856e546f4d95be84ab6a4bed9bc12613b6",
+          "tools": 11
+        },
+        {
+          "kind": "preloaded_module",
+          "module": "agentdojo.default_suites.v1.travel.task_suite",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\task_suite.py",
+          "sha256": "a2b58f094bd61a79e245ca74c94d9a3d62cc6bc744e5ee21bdadabb43960ba60",
+          "tools": 28
+        },
+        {
+          "kind": "preloaded_module",
+          "module": "agentdojo.default_suites.v1.workspace.task_suite",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\task_suite.py",
+          "sha256": "96fa51ab20f03c30cd2d7bc754b76d717ddbd68bdf39adc85f0e92fc4d2c7ec4",
+          "tools": 24
+        },
+        {
+          "kind": "preloaded_module",
+          "module": "agentdojo.default_suites.v1.slack.task_suite",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\task_suite.py",
+          "sha256": "bdc6798e8ef83a54e787af80ed44f94e4be8f24aba2eaec2103e3120958c3670",
+          "tools": 11
+        },
+        {
+          "kind": "registration_module",
+          "module": "agentdojo.default_suites.v1.banking.injection_tasks",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\injection_tasks.py"
+        },
+        {
+          "kind": "registration_module",
+          "module": "agentdojo.default_suites.v1.banking.user_tasks",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\user_tasks.py"
+        },
+        {
+          "kind": "registration_module",
+          "module": "agentdojo.default_suites.v1.travel.injection_tasks",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\injection_tasks.py"
+        },
+        {
+          "kind": "registration_module",
+          "module": "agentdojo.default_suites.v1.travel.user_tasks",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\user_tasks.py"
+        },
+        {
+          "kind": "registration_module",
+          "module": "agentdojo.default_suites.v1.workspace.injection_tasks",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\injection_tasks.py"
+        },
+        {
+          "kind": "registration_module",
+          "module": "agentdojo.default_suites.v1.workspace.user_tasks",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\user_tasks.py"
+        },
+        {
+          "kind": "registration_module",
+          "module": "agentdojo.default_suites.v1.slack.injection_tasks",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\injection_tasks.py"
+        },
+        {
+          "kind": "registration_module",
+          "module": "agentdojo.default_suites.v1.slack.user_tasks",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\user_tasks.py"
+        },
+        {
+          "kind": "preloaded_module",
+          "module": "agentdojo.task_suite.load_suites",
+          "ok": true,
+          "path": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\task_suite\\load_suites.py",
+          "sha256": "9fcbf5eaf9af38c6a5a85a202711f7575618e30d63bbb0156934c3702132392c"
+        }
+      ],
+      "suite_counts": {
+        "v1": {
+          "banking": {
+            "injection_tasks": 9,
+            "tools": 11,
+            "user_tasks": 16
+          },
+          "slack": {
+            "injection_tasks": 5,
+            "tools": 11,
+            "user_tasks": 21
+          },
+          "travel": {
+            "injection_tasks": 7,
+            "tools": 28,
+            "user_tasks": 20
+          },
+          "workspace": {
+            "injection_tasks": 6,
+            "tools": 24,
+            "user_tasks": 40
+          }
+        },
+        "v1.1.1": {
+          "banking": {
+            "injection_tasks": 9,
+            "tools": 11,
+            "user_tasks": 16
+          },
+          "slack": {
+            "injection_tasks": 5,
+            "tools": 11,
+            "user_tasks": 21
+          },
+          "travel": {
+            "injection_tasks": 7,
+            "tools": 28,
+            "user_tasks": 20
+          },
+          "workspace": {
+            "injection_tasks": 6,
+            "tools": 24,
+            "user_tasks": 40
+          }
+        },
+        "v1.1.2": {
+          "banking": {
+            "injection_tasks": 9,
+            "tools": 11,
+            "user_tasks": 16
+          },
+          "slack": {
+            "injection_tasks": 5,
+            "tools": 11,
+            "user_tasks": 21
+          },
+          "travel": {
+            "injection_tasks": 7,
+            "tools": 28,
+            "user_tasks": 20
+          },
+          "workspace": {
+            "injection_tasks": 6,
+            "tools": 24,
+            "user_tasks": 40
+          }
+        },
+        "v1.2": {
+          "banking": {
+            "injection_tasks": 9,
+            "tools": 11,
+            "user_tasks": 16
+          },
+          "slack": {
+            "injection_tasks": 5,
+            "tools": 11,
+            "user_tasks": 21
+          },
+          "travel": {
+            "injection_tasks": 7,
+            "tools": 28,
+            "user_tasks": 20
+          },
+          "workspace": {
+            "injection_tasks": 14,
+            "tools": 24,
+            "user_tasks": 40
+          }
+        }
+      },
+      "suites": [
+        "banking",
+        "travel",
+        "workspace",
+        "slack"
+      ]
+    },
+    "import_rows": [
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\task_suite.py",
+        "module": "agentdojo.default_suites.v1.banking.task_suite",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\task_suite.py",
+        "module": "agentdojo.default_suites.v1.travel.task_suite",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\task_suite.py",
+        "module": "agentdojo.default_suites.v1.workspace.task_suite",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\task_suite.py",
+        "module": "agentdojo.default_suites.v1.slack.task_suite",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\task_suite\\load_suites.py",
+        "module": "agentdojo.task_suite.load_suites",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\models.py",
+        "module": "camel.models",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\privileged_llm.py",
+        "module": "camel.pipeline_elements.privileged_llm",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\agentdojo_security_policies.py",
+        "module": "camel.pipeline_elements.security_policies.agentdojo_security_policies",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\workspace.py",
+        "module": "camel.pipeline_elements.security_policies.workspace",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\travel.py",
+        "module": "camel.pipeline_elements.security_policies.travel",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\banking.py",
+        "module": "camel.pipeline_elements.security_policies.banking",
+        "ok": true
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\slack.py",
+        "module": "camel.pipeline_elements.security_policies.slack",
+        "ok": true
+      }
+    ],
+    "network_attempted": false,
+    "ok": true,
+    "python_executable": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+    "returncode": 0,
+    "stderr_tail": "",
+    "stdout_tail": "\"slack\": {\"injection_tasks\": 5, \"tools\": 11, \"user_tasks\": 21}, \"travel\": {\"injection_tasks\": 7, \"tools\": 28, \"user_tasks\": 20}, \"workspace\": {\"injection_tasks\": 6, \"tools\": 24, \"user_tasks\": 40}}, \"v1.1.1\": {\"banking\": {\"injection_tasks\": 9, \"tools\": 11, \"user_tasks\": 16}, \"slack\": {\"injection_tasks\": 5, \"tools\": 11, \"user_tasks\": 21}, \"travel\": {\"injection_tasks\": 7, \"tools\": 28, \"user_tasks\": 20}, \"workspace\": {\"injection_tasks\": 6, \"tools\": 24, \"user_tasks\": 40}}, \"v1.1.2\": {\"banking\": {\"injection_tasks\": 9, \"tools\": 11, \"user_tasks\": 16}, \"slack\": {\"injection_tasks\": 5, \"tools\": 11, \"user_tasks\": 21}, \"travel\": {\"injection_tasks\": 7, \"tools\": 28, \"user_tasks\": 20}, \"workspace\": {\"injection_tasks\": 6, \"tools\": 24, \"user_tasks\": 40}}, \"v1.2\": {\"banking\": {\"injection_tasks\": 9, \"tools\": 11, \"user_tasks\": 16}, \"slack\": {\"injection_tasks\": 5, \"tools\": 11, \"user_tasks\": 21}, \"travel\": {\"injection_tasks\": 7, \"tools\": 28, \"user_tasks\": 20}, \"workspace\": {\"injection_tasks\": 14, \"tools\": 24, \"user_tasks\": 40}}}, \"suites\": [\"banking\", \"travel\", \"workspace\", \"slack\"]}, \"import_rows\": [{\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_runtime\\\\camel\\\\.venv\\\\lib\\\\site-packages\\\\agentdojo\\\\default_suites\\\\v1\\\\banking\\\\task_suite.py\", \"module\": \"agentdojo.default_suites.v1.banking.task_suite\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_runtime\\\\camel\\\\.venv\\\\lib\\\\site-packages\\\\agentdojo\\\\default_suites\\\\v1\\\\travel\\\\task_suite.py\", \"module\": \"agentdojo.default_suites.v1.travel.task_suite\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_runtime\\\\camel\\\\.venv\\\\lib\\\\site-packages\\\\agentdojo\\\\default_suites\\\\v1\\\\workspace\\\\task_suite.py\", \"module\": \"agentdojo.default_suites.v1.workspace.task_suite\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_runtime\\\\camel\\\\.venv\\\\lib\\\\site-packages\\\\agentdojo\\\\default_suites\\\\v1\\\\slack\\\\task_suite.py\", \"module\": \"agentdojo.default_suites.v1.slack.task_suite\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_runtime\\\\camel\\\\.venv\\\\lib\\\\site-packages\\\\agentdojo\\\\task_suite\\\\load_suites.py\", \"module\": \"agentdojo.task_suite.load_suites\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_test\\\\external\\\\baselines\\\\camel-prompt-injection\\\\src\\\\camel\\\\models.py\", \"module\": \"camel.models\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_test\\\\external\\\\baselines\\\\camel-prompt-injection\\\\src\\\\camel\\\\pipeline_elements\\\\privileged_llm.py\", \"module\": \"camel.pipeline_elements.privileged_llm\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_test\\\\external\\\\baselines\\\\camel-prompt-injection\\\\src\\\\camel\\\\pipeline_elements\\\\security_policies\\\\agentdojo_security_policies.py\", \"module\": \"camel.pipeline_elements.security_policies.agentdojo_security_policies\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_test\\\\external\\\\baselines\\\\camel-prompt-injection\\\\src\\\\camel\\\\pipeline_elements\\\\security_policies\\\\workspace.py\", \"module\": \"camel.pipeline_elements.security_policies.workspace\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_test\\\\external\\\\baselines\\\\camel-prompt-injection\\\\src\\\\camel\\\\pipeline_elements\\\\security_policies\\\\travel.py\", \"module\": \"camel.pipeline_elements.security_policies.travel\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_test\\\\external\\\\baselines\\\\camel-prompt-injection\\\\src\\\\camel\\\\pipeline_elements\\\\security_policies\\\\banking.py\", \"module\": \"camel.pipeline_elements.security_policies.banking\", \"ok\": true}, {\"error\": \"\", \"error_type\": \"\", \"file\": \"E:\\\\M3_PI_Guard_test\\\\external\\\\baselines\\\\camel-prompt-injection\\\\src\\\\camel\\\\pipeline_elements\\\\security_policies\\\\slack.py\", \"module\": \"camel.pipeline_elements.security_policies.slack\", \"ok\": true}], \"network_attempted\": false, \"ok\": true, \"python_executable\": \"E:\\\\M3_PI_Guard_runtime\\\\camel\\\\.venv\\\\Scripts\\\\python.exe\"}\n"
+  },
+  "created_at": "2026-07-21T09:35:23.653135+00:00",
+  "formal_freeze": {
+    "path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_formal_freeze_v1.json",
+    "result_eligible_for_formal_tables": false,
+    "status": "completed_frozen_formal_protocol"
+  },
+  "formal_result_admitted_now": false,
+  "import_rows": [
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\banking\\task_suite.py",
+      "module": "agentdojo.default_suites.v1.banking.task_suite",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\travel\\task_suite.py",
+      "module": "agentdojo.default_suites.v1.travel.task_suite",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\workspace\\task_suite.py",
+      "module": "agentdojo.default_suites.v1.workspace.task_suite",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\default_suites\\v1\\slack\\task_suite.py",
+      "module": "agentdojo.default_suites.v1.slack.task_suite",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\lib\\site-packages\\agentdojo\\task_suite\\load_suites.py",
+      "module": "agentdojo.task_suite.load_suites",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\models.py",
+      "module": "camel.models",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\privileged_llm.py",
+      "module": "camel.pipeline_elements.privileged_llm",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\agentdojo_security_policies.py",
+      "module": "camel.pipeline_elements.security_policies.agentdojo_security_policies",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\workspace.py",
+      "module": "camel.pipeline_elements.security_policies.workspace",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\travel.py",
+      "module": "camel.pipeline_elements.security_policies.travel",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\banking.py",
+      "module": "camel.pipeline_elements.security_policies.banking",
+      "ok": true
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "file": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection\\src\\camel\\pipeline_elements\\security_policies\\slack.py",
+      "module": "camel.pipeline_elements.security_policies.slack",
+      "ok": true
+    }
+  ],
+  "import_rows_sha256": "97cd9c39f9e3c98f3248fd42778c9e42bb6892c7cbd52aa492687b961e7c694c",
+  "next_required_work": [
+    "Freeze a source-backed CaMeL runner that calls the compatibility preloader before importing CaMeL pipeline modules.",
+    "Freeze privileged/quarantined model transport and cost policy.",
+    "Validate label/capability mapping on public benchmark online inputs.",
+    "Run a two-case qualification before any full 726-case AgentDojo run."
+  ],
+  "passed_checks": 8,
+  "plain_import_preflight": {
+    "path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_import_preflight_v1.json",
+    "qualification_blockers": [
+      "camel_agentdojo_suite_circular_import_blocks_official_pipeline",
+      "camel_interpreter_benchmark_runner_not_implemented",
+      "model_or_api_transport_for_privileged_llm_not_frozen",
+      "label_capability_mapping_not_validated_on_public_benchmarks",
+      "complete_formal_logs_absent"
+    ],
+    "sha256": "d454ab934851855309cbfa29529aea3b09e087520fecba2840fbad4cb9896bd7",
+    "status": "completed_dependency_import_preflight_blocked"
+  },
+  "qualification_blockers": [
+    "camel_interpreter_benchmark_runner_not_implemented",
+    "model_or_api_transport_for_privileged_llm_not_frozen",
+    "label_capability_mapping_not_validated_on_public_benchmarks",
+    "complete_formal_logs_absent"
+  ],
+  "result_eligible_for_formal_tables": false,
+  "runtime": {
+    "camel_python": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+    "python_executable": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+    "returncode": 0
+  },
+  "schema_version": "paper-camel-source-backed-compat-preflight-1.0",
+  "source": {
+    "camel_checkout": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection",
+    "compat_module": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\camel_agentdojo_compat.py",
+    "compat_module_sha256": "38147c49815d65889e7579be0c260ad5d51688eb791d1705ba80d546f41678a7"
+  },
+  "status": "completed_compat_preflight_only",
+  "suite_counts": {
+    "v1": {
+      "banking": {
+        "injection_tasks": 9,
+        "tools": 11,
+        "user_tasks": 16
+      },
+      "slack": {
+        "injection_tasks": 5,
+        "tools": 11,
+        "user_tasks": 21
+      },
+      "travel": {
+        "injection_tasks": 7,
+        "tools": 28,
+        "user_tasks": 20
+      },
+      "workspace": {
+        "injection_tasks": 6,
+        "tools": 24,
+        "user_tasks": 40
+      }
+    },
+    "v1.1.1": {
+      "banking": {
+        "injection_tasks": 9,
+        "tools": 11,
+        "user_tasks": 16
+      },
+      "slack": {
+        "injection_tasks": 5,
+        "tools": 11,
+        "user_tasks": 21
+      },
+      "travel": {
+        "injection_tasks": 7,
+        "tools": 28,
+        "user_tasks": 20
+      },
+      "workspace": {
+        "injection_tasks": 6,
+        "tools": 24,
+        "user_tasks": 40
+      }
+    },
+    "v1.1.2": {
+      "banking": {
+        "injection_tasks": 9,
+        "tools": 11,
+        "user_tasks": 16
+      },
+      "slack": {
+        "injection_tasks": 5,
+        "tools": 11,
+        "user_tasks": 21
+      },
+      "travel": {
+        "injection_tasks": 7,
+        "tools": 28,
+        "user_tasks": 20
+      },
+      "workspace": {
+        "injection_tasks": 6,
+        "tools": 24,
+        "user_tasks": 40
+      }
+    },
+    "v1.2": {
+      "banking": {
+        "injection_tasks": 9,
+        "tools": 11,
+        "user_tasks": 16
+      },
+      "slack": {
+        "injection_tasks": 5,
+        "tools": 11,
+        "user_tasks": 21
+      },
+      "travel": {
+        "injection_tasks": 7,
+        "tools": 28,
+        "user_tasks": 20
+      },
+      "workspace": {
+        "injection_tasks": 14,
+        "tools": 24,
+        "user_tasks": 40
+      }
+    }
+  },
+  "suite_counts_sha256": "e4c9be9e7744a569440eaa9277ce5921b420948a575d527a05b9f2f29e5f4764",
+  "summary": {
+    "network_attempted": false,
+    "passed_checks": 8,
+    "qualification_blockers": [
+      "camel_interpreter_benchmark_runner_not_implemented",
+      "model_or_api_transport_for_privileged_llm_not_frozen",
+      "label_capability_mapping_not_validated_on_public_benchmarks",
+      "complete_formal_logs_absent"
+    ],
+    "total_checks": 8,
+    "v1_2_totals": {
+      "injection_tasks": 35,
+      "user_tasks": 97
+    }
+  },
+  "total_checks": 8
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "m3-paper-v2-provider-cost-decision-2.0",
+  "status": "candidate_unapproved",
+  "approved_by_user": false,
+  "provider_attestation": {
+    "endpoint_type": "official_api",
+    "provider_name": "OpenAI",
+    "upstream_provider": "OpenAI",
+    "api_surface": "Responses API",
+    "base_url": "https://api.openai.com/v1",
+    "model_id": "gpt-5.6-terra",
+    "model_revision": "provider_managed",
+    "identity_evidence": "official_documentation_plus_pending_runtime_response",
+    "identity_verified": false,
+    "prompt_rewrite_declaration": "none_declared",
+    "request_id_available": false,
+    "response_id_available": false,
+    "pricing_source_url": "https://developers.openai.com/api/docs/models/compare",
+    "pricing_verified_at": "2026-07-23"
+  },
+  "request_parameters": {
+    "temperature": 0,
+    "max_output_tokens": 512,
+    "max_agent_steps": 8,
+    "fixed_input_token_allowance_per_call": 4096,
+    "seed_support": "not_required_record_provider_behavior",
+    "max_calls_per_condition": {
+      "no_defense": 8,
+      "safe_prompt_or_spotlighting": 8,
+      "promptguard_detector_only": 8,
+      "strongest_peer_reviewed_structural_baseline": 16,
+      "m3_policy_only": 8,
+      "m3_full": 8
+    }
+  },
+  "cost": {
+    "currency": "USD",
+    "input_price_per_million_tokens": 2.5,
+    "output_price_per_million_tokens": 15.0,
+    "hard_spend_limit_usd": null,
+    "abort_at_fraction": 0.9
+  },
+  "logging": {
+    "prompts_stored": true,
+    "responses_stored": true,
+    "request_and_response_ids_stored": true,
+    "credentials_stored": false,
+    "redaction_reviewed": false
+  },
+  "notes": "Offline candidate only. It does not authorize a paid call and contains no credentials."
+}

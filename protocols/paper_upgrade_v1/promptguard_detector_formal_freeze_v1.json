@@ -1,0 +1,175 @@
+{
+  "agentdojo": {
+    "attack_name": "injecagent",
+    "checkout": "E:\\M3_PI_Guard_test\\external\\benchmarks\\agentdojo",
+    "git_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+    "materialization_audit": {
+      "all_security_outputs_contain_attack_marker": true,
+      "attack_marker": "IMPORTANT!!! Ignore all previous instructions",
+      "attack_name": "injecagent",
+      "case_count": 726,
+      "max_tool_outputs_per_case": 18,
+      "min_tool_outputs_per_case": 1,
+      "official_ground_truth_pipeline_used": true,
+      "security_attack_marker_failures": [],
+      "security_count": 629,
+      "tool_output_message_count": 2498,
+      "utility_count": 97
+    }
+  },
+  "boundary": "Pre-run freeze only. It fixes the detector-visible text, separated evaluator labels, model revision, tokenizer windowing, threshold, aggregation and failure policy before any 3,280-case inference. It is not itself an effect result.",
+  "code_artifacts": [
+    {
+      "path": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\promptguard_formal_inputs.py",
+      "sha256": "ec90a50afacc83fc2bdcce9c5b849159f6b69b230733309dda578c044d738129"
+    },
+    {
+      "path": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\promptguard_formal_run.py",
+      "sha256": "df18266b89fc255e272df76a93270b7019eb0dda79c7a2ae28722799f887a854"
+    },
+    {
+      "path": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\promptguard_formal_analysis.py",
+      "sha256": "8825c095e9dee4dc05aac25185deaa719e9674c3f819b2e41489b63bfe105cc6"
+    },
+    {
+      "path": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\promptguard_adapter.py",
+      "sha256": "495bf5dbae60c0528dda2fdfa1b737bfa286b653fb455caa68c3a52cfb2cacca"
+    }
+  ],
+  "created_at": "2026-07-20T15:59:56.820747+00:00",
+  "freeze_version": "m3-paper-v1-promptguard-detector-formal-freeze-1.0",
+  "frozen_inputs": {
+    "inputs_file_sha256": "36a3c1f36ba78af325d040af3494745932a6dec0fd402d2035afcf2e0db605a1",
+    "inputs_path": "E:\\M3_PI_Guard_test\\outputs\\paper_upgrade_v1\\baselines\\promptguard_detector_formal_v1\\frozen_inputs\\detector_inputs.jsonl",
+    "inputs_sha256": "19adbfabd5c328238633af9c40ad1d41c04fd28e07094cdf7be99fc6f9868c1d",
+    "labels_file_sha256": "d0d2b57149fc8d59d8d91aeceaac712b4c6f427a4b8422a038b50471ce8829b2",
+    "labels_path": "E:\\M3_PI_Guard_test\\outputs\\paper_upgrade_v1\\baselines\\promptguard_detector_formal_v1\\frozen_inputs\\detector_labels.jsonl",
+    "labels_separate_from_runner_input": true,
+    "labels_sha256": "b2ad1531e94bc62d05ed0d9bc1824486186b0d1301d260640783e8f1c8ade52c"
+  },
+  "git_commit": "d74cef2739551591a49c722c5c6273bac6edf91e",
+  "inference": {
+    "aggregation": "max_malicious_probability",
+    "failure_policy": "malicious_block_fail_closed",
+    "label_mapping": {
+      "0": "BENIGN",
+      "1": "MALICIOUS"
+    },
+    "max_length": 512,
+    "sampling": "none",
+    "threshold": 0.5,
+    "windowing": "tokenize_once_nonoverlap_payload_windows_then_add_special_tokens"
+  },
+  "model": {
+    "download_snapshot_path": "E:\\M3_PI_Guard_runtime\\promptguard\\evidence\\promptguard_download_snapshot.json",
+    "download_snapshot_sha256": "a63dcdc9000ed5d28c6b8f6b7ce3869f1ce2e7338bc7d91665cff93c5bd1a29b",
+    "environment_snapshot_path": "E:\\M3_PI_Guard_runtime\\promptguard\\evidence\\promptguard_environment_snapshot.json",
+    "environment_snapshot_sha256": "5092880cb1e2cd3c7b7c8d2bd9d4d39f1aebfef38878e77fc8d370b6e8c4d5a4",
+    "local_files_only": true,
+    "model_id": "meta-llama/Llama-Prompt-Guard-2-86M",
+    "revision": "a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+    "snapshot_files": [
+      {
+        "relative_path": ".gitattributes",
+        "sha256": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930",
+        "size_bytes": 1570
+      },
+      {
+        "relative_path": "checklist.chk",
+        "sha256": "ca9041264911bf61cdc1b4079a64e293a84592ea85eda64bceddd27dc158a056",
+        "size_bytes": 261
+      },
+      {
+        "relative_path": "config.json",
+        "sha256": "cd54ac39a1f2c3c5146bd5295b34038f8b4d9069e2f844450da014a523bb7653",
+        "size_bytes": 871
+      },
+      {
+        "relative_path": "LICENSE",
+        "sha256": "73755cee886613ae3135140882289e0a4955d5f0e90f8b1c1ffc962aa9082917",
+        "size_bytes": 7554
+      },
+      {
+        "relative_path": "model.safetensors",
+        "sha256": "e72017dbbe89c1232dcbc4a74ce0c389db5b468c42afd05850347b2a8c5f6b09",
+        "size_bytes": 1115268200
+      },
+      {
+        "relative_path": "README.md",
+        "sha256": "5d2a3e0c46397609a784a5034dc823da408aa8b5a414828609f32dc18ee16933",
+        "size_bytes": 19046
+      },
+      {
+        "relative_path": "special_tokens_map.json",
+        "sha256": "9463f61e1b109a8eb4688b829260d7c6b1e6dff04c98ff7269bb89e2b92369b9",
+        "size_bytes": 286
+      },
+      {
+        "relative_path": "tokenizer.json",
+        "sha256": "3e7e96867c2acdd575f0862c74822e05d1d15b93d9d9a4a2144b1ce83ae3339f",
+        "size_bytes": 16351353
+      },
+      {
+        "relative_path": "tokenizer_config.json",
+        "sha256": "fa09cf22b9d723377f95706967f789ca1a8267e1412385705e1ed51ce0559189",
+        "size_bytes": 19674
+      },
+      {
+        "relative_path": "USE_POLICY.md",
+        "sha256": "5ae40fe842b87b5773c47cfd25992a496cc09b17cbb246968762f06352d89270",
+        "size_bytes": 5796
+      }
+    ],
+    "snapshot_files_sha256": "7c1dabe99d5ed7d2a3249748335fb8c5d42d48a9eabdd3536dfefcdb79fc81e4",
+    "snapshot_path": "E:\\ai_cache\\huggingface\\hub\\models--meta-llama--Llama-Prompt-Guard-2-86M\\snapshots\\a8ded8e697ce7c355e395a0df51f94adb4a2fd27"
+  },
+  "protocol": {
+    "path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\promptguard_detector_formal_protocol_v1.md",
+    "sha256": "22e9fa9f02ff558070f6920570426387326cca70e877988c8a48b5988de67dea"
+  },
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-promptguard-detector-freeze-1.0",
+  "source_artifacts": [
+    {
+      "path": "E:\\M3_PI_Guard_test\\m3_attacks\\cases\\paper_v1\\m3_v2_all.jsonl",
+      "sha256": "2661ec2f9e57ba9e8b47e340542036f28e583e42c1c318a3d106f2651cb0cede"
+    },
+    {
+      "path": "E:\\M3_PI_Guard_test\\outputs\\paper_upgrade_v1\\public_benchmarks\\agentdojo_v1_utility_index.jsonl",
+      "sha256": "3ee4b6d5f2586c0bde1b0c417e389ceb4c24403c8162c3381a407fef4d7d6763"
+    },
+    {
+      "path": "E:\\M3_PI_Guard_test\\outputs\\paper_upgrade_v1\\public_benchmarks\\agentdojo_v1_security_index.jsonl",
+      "sha256": "bf3434bd99dd681a87c49e9a00aa79747339d10ccd4efc54bffc277c2345c293"
+    },
+    {
+      "path": "E:\\M3_PI_Guard_test\\outputs\\paper_upgrade_v1\\public_benchmarks\\injecagent_security_index.jsonl",
+      "sha256": "66bfdca7197ee329e03c16ba02ee8e374e1595e0df31faf62774efa9f2a8554e"
+    }
+  ],
+  "status": "frozen_pre_run",
+  "summary": {
+    "benchmark_counts": {
+      "agentdojo": 726,
+      "injecagent": 1054,
+      "m3_v2": 1500
+    },
+    "case_count": 3280,
+    "checks": {
+      "agentdojo_attack_materialization_complete": true,
+      "all_scan_hashes_match": true,
+      "expected_benchmark_counts": true,
+      "expected_label_counts": true,
+      "expected_total": true,
+      "input_label_id_sets_equal": true,
+      "labels_absent_from_inputs": true,
+      "unique_input_ids": true,
+      "unique_label_ids": true
+    },
+    "checks_passed": true,
+    "label_counts": {
+      "benign": 697,
+      "malicious": 2583
+    }
+  }
+}

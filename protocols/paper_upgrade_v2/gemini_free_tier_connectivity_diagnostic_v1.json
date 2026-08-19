@@ -1,0 +1,61 @@
+{
+  "schema_version": "m3-paper-v2-gemini-free-tier-connectivity-diagnostic-1.0",
+  "status": "http_200_safe_response",
+  "diagnostic_id": "gemini-free-v3-d06fd024-cd10-469f-b5f1-59f824f19113",
+  "scope": "prospective_v3_free_tier_single_fixed_connectivity_diagnostic",
+  "provider_id": "gemini",
+  "provider_name": "Google",
+  "billing_tier": "free",
+  "started_at": "2026-07-27T01:39:42.932096+00:00",
+  "finished_at": "2026-07-27T01:39:44.936685+00:00",
+  "configured_model": "gemini-3.6-flash",
+  "returned_model": "gemini-3.6-flash",
+  "model_identity_exact_match": true,
+  "transport_result": {
+    "http_status": 200,
+    "call_attempts": 1,
+    "automatic_retries": 0,
+    "model_latency_ms": 1996.3301,
+    "finish_reason": "length",
+    "safe_exact_match": true,
+    "response_text_bytes": 4,
+    "prompt_tokens": 32,
+    "completion_tokens": 1,
+    "total_tokens": 44
+  },
+  "request_chain": {
+    "payload_sha256": "0c01dff1c60bc7d6a28492bf74fa02954f5ebe6aae4d99f46433de169114ba5f",
+    "request_id_present": false,
+    "request_id_sha256": null,
+    "response_id_present": true,
+    "response_id_sha256": "0a992aed6306eac0e0d712ad12827be9d0ac695e8e152e24ad57fbf911208b82",
+    "request_trace_complete": false,
+    "response_text_sha256": "10a87133a313ecf05f5be2f63a927977b5347ec0578bb5d21fcab2f86695d49c",
+    "receipt_evidence_sha256": "9f3b7162c3acba4d733eb35a8aee3d3084c0a802b0789e1873f8e803c0a6eb0b",
+    "identity_evidence_level": "official_exact_model_with_response_id_request_id_unavailable"
+  },
+  "frozen_inputs": {
+    "quota_snapshot_path": "protocols/paper_upgrade_v2/gemini_free_tier_quota_snapshot_v2.json",
+    "quota_snapshot_sha256": "359f19b5b6ac6dc716ed5a6c8f730d2ec2b49fdf3c3cb1204114fcc94c29faba",
+    "budget_override_path": "protocols/paper_upgrade_v2/gemini_fallback_budget_override_v2.json",
+    "budget_override_sha256": "d04004b1e07efd98bbff8295cd797a89df72285c35ffcbe0fbe6d204673f12b5",
+    "current_free_tier_project_screenshot_sha256": "de07fef9130efe9ab12a149e071abb42a8e91478d0fb65ae1c921eebe8b423bb",
+    "tier_comparison_screenshot_sha256": "7242c33eb068881c924d980e49bb5c8dade6e2cf9682830e96e261094de31f96"
+  },
+  "safety_boundary": {
+    "fixed_synthetic_public_prompt": true,
+    "prompt_or_response_content_persisted": false,
+    "provider_managed_tools": false,
+    "external_effects": false,
+    "cross_provider_fallback": false,
+    "formal_experiment": false,
+    "scientific_result_eligible": false,
+    "frozen_v1_or_v2_modified_or_resumed": false
+  },
+  "interpretation": [
+    "The dedicated project was reachable on the owner-confirmed Gemini Free tier at the recorded time.",
+    "The configured and returned model identities matched exactly and the fixed SAFE response was correct.",
+    "The provider returned a response ID but no usable request ID, so the trace is incomplete for formal paper evidence.",
+    "This diagnostic does not authorize or constitute a formal Gemini v3 experimental run."
+  ]
+}

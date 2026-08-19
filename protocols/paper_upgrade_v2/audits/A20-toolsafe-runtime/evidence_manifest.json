@@ -1,0 +1,54 @@
+{
+  "audit_id": "A20-toolsafe-runtime",
+  "auditor": "Codex primary agent",
+  "claim_ready": false,
+  "command": "python -m experiments.paper_v2.source_audit --spec protocols/paper_upgrade_v2/online_state_audit_specs_v1.json --unit A20-toolsafe-runtime",
+  "conclusion": "no_online_gold_observed",
+  "exit_code": 0,
+  "files": [
+    {
+      "bytes": 343,
+      "path": "protocols/paper_upgrade_v2/audits/A20-toolsafe-runtime/differential_test_result.json",
+      "sha256": "7928a3ff2ab9c6063d2c9f7609d5e93cf2fa114b64f42f1749593471e25f08d9"
+    },
+    {
+      "bytes": 903,
+      "path": "protocols/paper_upgrade_v2/audits/A20-toolsafe-runtime/entrypoints.md",
+      "sha256": "188ac4f315b1740e38ab8598fedde7d726ce52398b7d4e0a40fd4471ddafca2d"
+    },
+    {
+      "bytes": 4972,
+      "path": "protocols/paper_upgrade_v2/audits/A20-toolsafe-runtime/field_flow.json",
+      "sha256": "50e5a83488fbd8ce2e013a1018998533d9562ca80bbb6b6749244852d9e98514"
+    },
+    {
+      "bytes": 837,
+      "path": "protocols/paper_upgrade_v2/audits/A20-toolsafe-runtime/finding.md",
+      "sha256": "e053314127f7dd5eeade856fff82a35c536e49216dd6f0ee32a0e136451bfbf5"
+    },
+    {
+      "bytes": 512,
+      "path": "protocols/paper_upgrade_v2/audits/A20-toolsafe-runtime/projection_test.py",
+      "sha256": "9e6c1614bb3b4ef3ad87345587a516c1c6ed3cca3939a1d161f1b2d35bf17414"
+    },
+    {
+      "bytes": 569,
+      "path": "protocols/paper_upgrade_v2/audits/A20-toolsafe-runtime/projection_test_result.json",
+      "sha256": "5cb3cb429c4d581ab12655d0b14337f7b53a829a4a4b68f2f54b380501fc0ada"
+    },
+    {
+      "bytes": 727,
+      "path": "protocols/paper_upgrade_v2/audits/A20-toolsafe-runtime/source_lock.json",
+      "sha256": "7aff25b1539fef0e9f329c9d584e44261c0c1473b752047d10fb6e02b4d92b76"
+    },
+    {
+      "bytes": 8118,
+      "path": "protocols/paper_upgrade_v2/audits/A20-toolsafe-runtime/static_hits.json",
+      "sha256": "3439c2d1062c2b060848178d05d8f6873f0c8454b722004ea5cb2ca6b9f7c849"
+    }
+  ],
+  "generated_at": "2026-07-23T19:00:00+08:00",
+  "review_status": "single_reviewer_complete",
+  "schema_version": "m3-paper-v2-source-audit-evidence-manifest-1.0",
+  "status": "completed"
+}

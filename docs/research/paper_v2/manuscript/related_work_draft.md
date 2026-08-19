@@ -1,0 +1,145 @@
+# Related Work — source-status-aware draft
+
+Status: `critical_contexts_drafted_bibliography_export_complete`  
+Context audit date: 2026-07-30  
+Scope: the ten closest innovation-boundary papers plus the benchmark and
+adaptive-evaluation works needed to position the study.
+
+This draft uses stable source links and the literature-matrix identifiers. It
+does not convert a preprint into peer-reviewed evidence, and it does not repeat
+reported effect sizes unless the surrounding argument needs that number.
+
+## Runtime verification and task alignment
+
+VIGIL implements a verify-before-commit protocol for tool-stream injection and
+introduces the 959-case SIREN benchmark
+([L01](https://aclanthology.org/2026.acl-long.443/)). It is the closest
+peer-reviewed structural comparator to M3 because both systems interpose before
+an effect is committed. DRIFT instead combines dynamic rules with control- and
+data-level constraints and memory-stream isolation
+([L02](https://proceedings.neurips.cc/paper_files/paper/2025/hash/77f3b26c7907aa27b207df9b9d43f29a-Abstract-Conference.html)).
+The Task Shield verifies whether instructions and tool calls contribute to the
+user's declared objective
+([L03](https://aclanthology.org/2025.acl-long.1435/)). Together, these
+peer-reviewed systems prevent us from claiming that M3 introduced
+verify-before-commit, dynamic information-flow checks, or task-alignment
+verification.
+
+PlanGuard is a related preprint that isolates planning from untrusted context
+and applies hierarchical tool and parameter consistency checks
+([L23](https://arxiv.org/abs/2604.10134)). Its presence further narrows the
+possible novelty claim: planning consistency is an adjacent mechanism, not an
+unoccupied problem. We therefore use these works to define comparison classes
+and mechanism boundaries rather than to motivate a first-or-only claim.
+
+## Privilege, provenance, and information flow
+
+Progent represents least privilege as symbolic tool-and-argument rules. Its
+latest arXiv v3 description explicitly distinguishes automatic narrowing from
+expansion that requires approval
+([L24](https://arxiv.org/abs/2504.11703)). This overlaps directly with M3's
+permission-monotonicity and confirmation design. IPIGuard, published at EMNLP
+2025, constrains execution through a planned tool-dependency graph
+([L25](https://aclanthology.org/2025.emnlp-main.53/)). CaMeL separates trusted
+control and data flow and uses capabilities to prevent unauthorized flows
+([L26](https://arxiv.org/abs/2503.18813)). These systems occupy the privilege,
+dependency, and information-flow design space that a provenance-aware runtime
+must acknowledge.
+
+Two 2026 preprints overlap even more closely with provenance-aware
+authorization. ARGUS constructs an influence-provenance graph for
+context-dependent decisions
+([L21](https://arxiv.org/abs/2605.03378)), while AuthGraph compares an
+authorization graph derived in an isolated context against a parameter-source
+execution graph
+([L22](https://arxiv.org/abs/2605.26497)). Their existence rules out a claim
+that M3 is the first parameter-source or provenance-aware authorization
+defense. Because neither work is treated here as peer reviewed, their reported
+effects define the contemporary claim boundary but are not used as settled
+comparative facts.
+
+The remaining defensible contribution is consequently methodological and
+empirical. We test whether authorization information itself changes measured
+security and utility; enforce a runtime projection that excludes evaluator
+fields; compare policy-only and full provenance/temporal/confirmation variants
+in paired conditions; and quantify `ASK` burden, operational failures, and
+executed effects under a common evidence contract. These are study-design
+claims and must stand on M3's own admitted experiments.
+
+## Prompt-level defenses and execution-level outcomes
+
+Structured queries, spotlighting, instruction hierarchy, and injection
+detectors act at the prompt, representation, or model-output layer
+([L07](https://www.usenix.org/conference/usenixsecurity25/presentation/chen-sizhe),
+[L30](https://arxiv.org/abs/2403.14720),
+[L31](https://arxiv.org/abs/2404.13208),
+[L32](https://aclanthology.org/2025.acl-long.890/)). They are relevant
+baselines, but detector scores and model compliance are not equivalent to an
+executed-effect endpoint. Our evaluation therefore records whether a proposed
+action crossed the runtime boundary and changed the sandbox state, while also
+retaining benign task completion. This distinction is necessary because a
+defense can appear secure by refusing useful actions or by failing before an
+effect is attempted.
+
+## Benchmarks and adaptive evaluation
+
+AgentDojo supplies dynamic security and utility tasks and is the main public
+benchmark in this study
+([L09](https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html)).
+InjecAgent provides a complementary collection of indirect prompt injections
+for tool-integrated agents
+([L10](https://aclanthology.org/2024.findings-acl.624/)). ASB broadens the
+scenario and defense taxonomy
+([L34](https://proceedings.iclr.cc/paper_files/paper/2025/hash/5750f91d8fb9d5c02bd8ad2c3b44456b-Abstract-Conference.html)).
+The public expansion retains the benchmarks' unique task identities instead of
+duplicating benign cases to manufacture a denominator.
+
+Static attacks are insufficient for a robustness claim. *The Attacker Moves
+Second* argues that a defense-aware attacker should optimize against the
+defense design rather than replay a fixed attack set
+([L27](https://arxiv.org/abs/2510.09023)). The adaptive panel therefore exposes
+only public `ALLOW/ASK/DENY` and post-enforcement unsafe-effect feedback,
+searches frozen tasks at prespecified query budgets, and reports the
+first-success distribution. Since L27 remains a preprint, it motivates the
+protocol but is not described as a peer-reviewed theorem.
+
+## Positioning summary
+
+M3 is not positioned as the first runtime guard, the first provenance system,
+or a state-of-the-art defense. The medium experiment already showed that
+M3-full did not improve security over M3 policy-only and failed the benign-tool
+non-inferiority criterion. The active paper instead studies how non-oracle
+authorization, provenance-aware enforcement, confirmation, operational
+failure handling, benchmark choice, and adaptive attack budget jointly shape
+the measured security–utility frontier.
+
+## Critical citation-context audit
+
+| Context claim | Supporting IDs | Status boundary | Allowed use |
+|---|---|---|---|
+| Verify-before-commit and SIREN | L01 | Peer reviewed, ACL 2026 | Structural baseline and benchmark context |
+| Dynamic rule, control/data constraints, memory isolation | L02 | Peer reviewed, NeurIPS 2025 | Adjacent mechanism boundary |
+| Task/action alignment checking | L03 | Peer reviewed, ACL 2025 | Goal-alignment comparator |
+| Context-dependent provenance auditing | L21 | Preprint | Novelty boundary; reported effects not treated as settled |
+| Authorization/execution dual graph and parameter source | L22 | Preprint | Prohibits first parameter-source claim |
+| Isolated planning and hierarchical consistency | L23 | Preprint | Adjacent mechanism, not formal baseline without code admission |
+| Symbolic least privilege and approval-gated expansion | L24 | Preprint, arXiv v3 | Direct monotonic-permission overlap |
+| Tool-dependency-graph enforcement | L25 | Peer reviewed, EMNLP 2025 | Privilege/data-flow comparator |
+| Trusted control/data flow and capabilities | L26 | Preprint | Information-flow boundary |
+| Defense-aware adaptive attacks | L27 | Preprint | Protocol motivation, not peer-reviewed fact |
+
+## Bibliography export and remaining context gate
+
+The 34-entry bibliography is now exported to `references_v1.bib` from ACL
+Anthology BibTeX, official proceedings metadata, arXiv Atom records and
+DOI/Crossref metadata. It contains 24 peer-reviewed and 10 preprint-only
+records. The frozen bibliography SHA-256 is
+`40680e3eca610e9f9569a62a2ed08f5d27a8fbc78058c98a008d0d5897074828`;
+the build manifest SHA-256 is
+`d8ed622075d245faca520525b5b9177f1b43a2917d40a1a9b1e80a5dd1431ec0`.
+Offline reproduction checks all 34 keys and requires author, title, year, URL,
+and venue metadata (or explicit arXiv preprint metadata).
+
+The remaining citation task is narrower: bind the final Introduction and
+Discussion sentences to these keys, verify every claim-context relation, and
+repeat the publication-status/JCR check on the submission date.

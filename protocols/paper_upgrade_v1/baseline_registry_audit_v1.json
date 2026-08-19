@@ -1,0 +1,324 @@
+{
+  "agentdojo_checkout": "external/benchmarks/agentdojo",
+  "audit_version": "m3-paper-v1-baseline-registry-audit-1.0",
+  "baseline_registry": "protocols/paper_upgrade_v1/baseline_registry.json",
+  "baseline_registry_sha256": "7c0c117b0d18094ec69fc4156470330de7679ee92ae34d409143437f0b6fa346",
+  "boundary": "Readiness/exclusion audit only. Formal baseline comparisons still require exact adapters, dependency snapshots, frozen protocols and formal run manifests.",
+  "checks": [
+    {
+      "detail": [
+        "no_defense",
+        "safe_prompt",
+        "spotlighting",
+        "prompt_sandwich",
+        "agentdojo_repeat_user_prompt",
+        "agentdojo_spotlighting_with_delimiting",
+        "m3_policy_only",
+        "m3_policy_confirmation",
+        "m3_full_normal_prompt",
+        "m3_full",
+        "m3_no_provenance",
+        "m3_no_temporal",
+        "m3_no_dataflow",
+        "m3_no_confirmation",
+        "agentdojo_tool_filter",
+        "agentdojo_transformers_pi_detector",
+        "promptguard",
+        "task_shield",
+        "ipiguard",
+        "progent",
+        "camel_or_fides"
+      ],
+      "name": "unique_condition_ids",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "missing": []
+      },
+      "name": "required_external_baselines_represented",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "missing": []
+      },
+      "name": "required_agentdojo_official_baselines_represented",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "missing_runtime_entries": []
+      },
+      "name": "ready_and_diagnostic_local_conditions_have_runtime_entries",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "blocked_or_pending_rows_not_result_eligible",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "blocked_or_pending_rows_have_exclusion_rules",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "blocked_or_pending_rows_have_blockers_and_plans",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "agentdojo_defenses": [
+          "repeat_user_prompt",
+          "spotlighting_with_delimiting",
+          "tool_filter",
+          "transformers_pi_detector"
+        ]
+      },
+      "name": "agentdojo_official_defenses_present_upstream",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "openai_api_key_present": false,
+        "registry_status": "ready",
+        "tool_filter_formal_analysis_completed": true,
+        "tool_filter_formal_analysis_status": "completed_formal_analysis",
+        "tool_filter_formal_completed": true,
+        "tool_filter_formal_run_status": "completed_formal",
+        "tool_filter_freeze_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "tool_filter_freeze_status": "completed_frozen_formal_protocol",
+        "tool_filter_qualification_completed": true,
+        "tool_filter_qualification_status": "completed_diagnostic_partial",
+        "tool_filter_security_qualification_completed": true,
+        "tool_filter_security_qualification_status": "completed_diagnostic_partial",
+        "tool_filter_transport_ready": true
+      },
+      "name": "agentdojo_tool_filter_blocker_matches_probe",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "protectai_detector_cached": true,
+        "registry_status": "source_backed_official_detector_resource_blocked_exact_formal",
+        "transformers_installed": false,
+        "transformers_long_output_direct_smoke_chars": 27697,
+        "transformers_long_output_direct_smoke_status": "failed_long_output_direct_smoke",
+        "transformers_long_output_resource_blocked": true,
+        "transformers_runtime_ready": true,
+        "transformers_runtime_smoke_status": "completed_official_detector_smoke_only"
+      },
+      "name": "agentdojo_transformers_detector_blocker_matches_probe",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "current_gate_status": "not_satisfied",
+        "formal_ready_count": 2,
+        "formal_ready_strong_baselines": [
+          "agentdojo_tool_filter",
+          "promptguard"
+        ],
+        "minimum_exact_or_disclosed_exclusion_count": 5,
+        "required_named_methods": [
+          "PromptGuard",
+          "Task Shield",
+          "IPIGuard",
+          "Progent",
+          "CaMeL_or_Fides"
+        ],
+        "required_public_benchmark_official_defenses": [
+          "AgentDojo tool_filter",
+          "AgentDojo transformers_pi_detector"
+        ]
+      },
+      "name": "q2_gate_not_satisfied_until_strong_baselines_ready",
+      "severity": "warning",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "4aedb43e3f0bbe019bc55d64c556e3e4473b5d8eef9f8d42518f6118c1814bd0",
+  "created_at": "2026-07-22T09:39:07.142265+00:00",
+  "dependency_probe": {
+    "agentdojo_checkout_exists": true,
+    "agentdojo_defenses": [
+      "tool_filter",
+      "transformers_pi_detector",
+      "spotlighting_with_delimiting",
+      "repeat_user_prompt"
+    ],
+    "agentdojo_pipeline_sha256": "0de07a163216b996b42da3db2032236ba15065a5a781ff2cdde206fbf8306ad9",
+    "hf_hub_cache": "E:\\ai_cache\\huggingface\\hub",
+    "openai_api_key_present": false,
+    "protectai_detector_cache_path": "E:\\ai_cache\\huggingface\\hub\\models--protectai--deberta-v3-base-prompt-injection-v2",
+    "protectai_detector_cached": true,
+    "tool_filter_formal_analysis_completed": true,
+    "tool_filter_formal_analysis_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/analysis/analysis_manifest.json",
+    "tool_filter_formal_analysis_sha256": "ab170cd9e63c4f205a9ef334d4597a0be0121da58426541177c4c04dc6c08bbf",
+    "tool_filter_formal_analysis_status": "completed_formal_analysis",
+    "tool_filter_formal_completed": true,
+    "tool_filter_formal_run_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/run_manifest.json",
+    "tool_filter_formal_run_sha256": "8f014192c9309b7f32129fe2dd39e9cf0f94b5976031c4352b3706facefb0225",
+    "tool_filter_formal_run_status": "completed_formal",
+    "tool_filter_freeze": "protocols/paper_upgrade_v1/agentdojo_tool_filter_formal_freeze_v1.json",
+    "tool_filter_freeze_model_id": "m3-paper-qwen3-8b-v1:latest",
+    "tool_filter_freeze_sha256": "801f9a690aedd67ad93442a4f46f2d217f409f2a4d050005a8f1a67ee9473f1f",
+    "tool_filter_freeze_status": "completed_frozen_formal_protocol",
+    "tool_filter_openai_compatible_binding": {
+      "algorithm_changed": false,
+      "prompt_changed": false,
+      "reason": "upstream tool_filter receives provider name as llm_name for openai-compatible local transports",
+      "rebound_elements": [
+        {
+          "class": "OpenAILLMToolFilter",
+          "element_index": 2,
+          "model_after": "m3-paper-qwen3-8b-v1:latest",
+          "model_before": "openai-compatible"
+        }
+      ],
+      "selection_rule_changed": false,
+      "shim": "openai_compatible_tool_filter_model_binding"
+    },
+    "tool_filter_qualification_cases": {
+      "attack_successes": 0,
+      "case_manifests": 2,
+      "completed_cases": 2,
+      "detector_redacted_cases": 0,
+      "expected_cases": 2,
+      "failed_cases": 0,
+      "missing_cases": 0,
+      "security_cases": 0,
+      "status_counts": {
+        "completed": 2
+      },
+      "utility_cases": 2,
+      "utility_successes": 1
+    },
+    "tool_filter_qualification_completed": true,
+    "tool_filter_qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_qualification_v1/run_manifest.json",
+    "tool_filter_qualification_sha256": "f9e40da7f4a8ab56b5325f9939042563e2a37076407f06c97625c36f463c2c12",
+    "tool_filter_qualification_status": "completed_diagnostic_partial",
+    "tool_filter_security_openai_compatible_binding": {
+      "algorithm_changed": false,
+      "prompt_changed": false,
+      "reason": "upstream tool_filter receives provider name as llm_name for openai-compatible local transports",
+      "rebound_elements": [
+        {
+          "class": "OpenAILLMToolFilter",
+          "element_index": 2,
+          "model_after": "m3-paper-qwen3-8b-v1:latest",
+          "model_before": "openai-compatible"
+        }
+      ],
+      "selection_rule_changed": false,
+      "shim": "openai_compatible_tool_filter_model_binding"
+    },
+    "tool_filter_security_qualification_cases": {
+      "attack_successes": 1,
+      "case_manifests": 2,
+      "completed_cases": 2,
+      "detector_redacted_cases": 0,
+      "expected_cases": 2,
+      "failed_cases": 0,
+      "missing_cases": 0,
+      "security_cases": 1,
+      "status_counts": {
+        "completed": 2
+      },
+      "utility_cases": 1,
+      "utility_successes": 1
+    },
+    "tool_filter_security_qualification_completed": true,
+    "tool_filter_security_qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_security_qualification_v1/run_manifest.json",
+    "tool_filter_security_qualification_sha256": "e463c2f30a1d1412f9783b43a5e97b497c82f072d84dd263192d03cab0c552d0",
+    "tool_filter_security_qualification_status": "completed_diagnostic_partial",
+    "tool_filter_transport_provider": "openai-compatible",
+    "tool_filter_transport_ready": true,
+    "torch_installed": true,
+    "transformers_installed": false,
+    "transformers_long_output_direct_smoke_chars": 27697,
+    "transformers_long_output_direct_smoke_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_long_output_direct_smoke_v1/smoke_manifest.json",
+    "transformers_long_output_direct_smoke_status": "failed_long_output_direct_smoke",
+    "transformers_long_output_resource_blocked": true,
+    "transformers_runtime_ready": true,
+    "transformers_runtime_smoke_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_smoke_v1/smoke_manifest.json",
+    "transformers_runtime_smoke_required_passed": 3,
+    "transformers_runtime_smoke_required_total": 3,
+    "transformers_runtime_smoke_status": "completed_official_detector_smoke_only"
+  },
+  "error_failures": [],
+  "json_path": "protocols/paper_upgrade_v1/baseline_registry_audit_v1.json",
+  "markdown_path": "protocols/paper_upgrade_v1/baseline_registry_audit_v1.md",
+  "passed_checks": 11,
+  "q2_strong_baseline_gate": "not_satisfied",
+  "ready_required_strong_baselines": [
+    "agentdojo_tool_filter",
+    "promptguard"
+  ],
+  "required_strong_baselines": [
+    "agentdojo_tool_filter",
+    "agentdojo_transformers_pi_detector",
+    "camel_or_fides",
+    "ipiguard",
+    "progent",
+    "promptguard",
+    "task_shield"
+  ],
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-baseline-registry-audit-1.0",
+  "status": "completed",
+  "summary": {
+    "blocked_or_pending": [
+      "agentdojo_transformers_pi_detector",
+      "ipiguard"
+    ],
+    "condition_count": 21,
+    "family_counts": {
+      "agentdojo_official_prompt_baseline": 2,
+      "agentdojo_official_strong_baseline": 2,
+      "external_strong_baseline": 5,
+      "local_reproducible": 4,
+      "m3": 4,
+      "m3_ablation": 4
+    },
+    "result_eligible_by_registry": [
+      "agentdojo_tool_filter",
+      "m3_full",
+      "m3_full_normal_prompt",
+      "m3_no_confirmation",
+      "m3_no_dataflow",
+      "m3_no_provenance",
+      "m3_no_temporal",
+      "m3_policy_confirmation",
+      "m3_policy_only",
+      "no_defense",
+      "prompt_sandwich",
+      "promptguard",
+      "safe_prompt",
+      "spotlighting"
+    ],
+    "status_counts": {
+      "disclosed_paper_reproduction_v1_4_failure_recovery_protocol_prepared_qualification_pending": 1,
+      "ready": 13,
+      "ready_detector_only_formal": 1,
+      "ready_diagnostic_adapter": 2,
+      "source_backed_adapter_runtime_qualification_failed_model_dag_schema": 1,
+      "source_backed_official_detector_resource_blocked_exact_formal": 1,
+      "source_backed_v1_1_hash_bound_formal_protocol_import_preflight_completed_qualification_pending": 1,
+      "source_smoke_completed_transport_mapping_hash_bound_formal_runner_ready_qualification_pending": 1
+    }
+  },
+  "total_checks": 11
+}

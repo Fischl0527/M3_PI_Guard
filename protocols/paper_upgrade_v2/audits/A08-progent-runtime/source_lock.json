@@ -1,0 +1,19 @@
+{
+  "artifact": "Progent",
+  "audit_id": "A08-progent-runtime",
+  "commit_date": "2026-05-13T21:50:36-07:00",
+  "default_branch_head_at_discovery": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+  "expected_commit": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+  "license": {
+    "path": null,
+    "sha256": null,
+    "status": "not_found_at_repository_root"
+  },
+  "observed_commit": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/baselines/progent",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/sunblaze-ucb/progent.git"
+}

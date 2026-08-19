@@ -1,0 +1,19 @@
+{
+  "artifact": "IPIGuard",
+  "audit_id": "A10-ipiguard-runtime",
+  "commit_date": "2025-09-16T17:26:55+08:00",
+  "default_branch_head_at_discovery": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+  "expected_commit": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+  "license": {
+    "path": "external/baselines/ipiguard/LICENSE",
+    "sha256": "5ad8c213095c573921d7388edf93f6a9f54490b8ebf3b165ae8ef1947cf70846",
+    "status": "present"
+  },
+  "observed_commit": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/baselines/ipiguard",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/Greysahy/ipiguard.git"
+}

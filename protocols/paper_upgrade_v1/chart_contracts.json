@@ -1,0 +1,27 @@
+{
+  "schema_version": "paper-chart-contracts-1.0",
+  "surface": "standalone static PNG and SVG for manuscript figures",
+  "formal_input_policy": "Formal figures may only use a frozen paper-v1 analysis bundle. Demo figures must carry a visible DEMO / NOT FORMAL EVIDENCE mark and use a separate output root.",
+  "palette": {
+    "policy": "single-root preferred; hard two-root cap except the five-slice dataset composition pie",
+    "blue": "#2F5D8A",
+    "orange": "#D07A32",
+    "gold": "#B89B3C",
+    "olive": "#75864B",
+    "pink": "#B7657B",
+    "ink": "#25313C",
+    "grid": "#D9DEE3"
+  },
+  "figures": [
+    {"id": "F01", "name": "trust_dataflow_architecture", "question": "Where can authority and untrusted data enter the runtime?", "takeaway": "Untrusted content can provide data but cannot create permission; expansion is routed through independent confirmation.", "family": "architecture", "variant": "trusted-untrusted flow diagram", "source": "frozen mechanism specification"},
+    {"id": "F02", "name": "safety_utility_pareto", "question": "Which defenses provide non-dominated security and utility?", "takeaway": "Compare safety and task completion jointly rather than optimizing ASR alone.", "family": "relationship", "variant": "labeled Pareto scatter", "source": "main_results.csv"},
+    {"id": "F03", "name": "adaptive_budget_curve", "question": "How does worst-case ASR change as the black-box query budget grows?", "takeaway": "Static robustness must be distinguished from budgeted adaptive robustness.", "family": "trend", "variant": "discrete budget line with markers", "source": "adaptive_curve.csv"},
+    {"id": "F04", "name": "model_defense_heatmap", "question": "Are defense effects consistent across models?", "takeaway": "Model-specific failure pockets remain visible rather than being averaged away.", "family": "matrix", "variant": "annotated heatmap", "source": "model_defense.csv"},
+    {"id": "F05", "name": "family_language_heatmap", "question": "Which attack-family and language combinations remain vulnerable?", "takeaway": "Multilingual and cross-tool variation is evaluated at the cell level.", "family": "matrix", "variant": "annotated heatmap", "source": "family_language.csv"},
+    {"id": "F06", "name": "authorization_uncertainty_curve", "question": "How do ASR, TCR and ASK change as authorization quality degrades?", "takeaway": "Authorization uncertainty exposes the safety-utility-confirmation trade-off.", "family": "trend", "variant": "ordered multi-metric line", "source": "authorization_curve.csv"},
+    {"id": "F07", "name": "ablation_forest", "question": "Which components have an independently non-zero effect?", "takeaway": "Point estimates are shown with confidence intervals to prevent zero-contribution modules from being overstated.", "family": "uncertainty", "variant": "horizontal forest plot", "source": "ablation.csv"},
+    {"id": "F08", "name": "latency_ecdf", "question": "What is the end-to-end latency distribution for each defense?", "takeaway": "Tail behavior is reported in addition to medians.", "family": "distribution", "variant": "ECDF", "source": "latency.csv"},
+    {"id": "F09", "name": "failure_taxonomy", "question": "What types of failures remain under each defense?", "takeaway": "Unsafe effects, false blocks, ASK, parse failures and timeouts stay distinct.", "family": "composition", "variant": "100 percent stacked bar", "source": "failure_types.csv"},
+    {"id": "F10", "name": "dataset_composition", "question": "What is the high-level M3-v2 case composition?", "takeaway": "A single composition figure summarizes attacks and both benign task types.", "family": "composition", "variant": "three-slice pie", "source": "dataset_composition.csv"}
+  ]
+}

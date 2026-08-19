@@ -1,0 +1,50 @@
+{
+  "schema_version": "m3-v2-audit-1.0",
+  "dataset_version": "m3-v2-1500-paper-1.0",
+  "status": "pass",
+  "gates": {
+    "total_1500": true,
+    "unique_case_ids": true,
+    "split_600_300_600": true,
+    "sample_types_900_300_300": true,
+    "nine_families_100_each": true,
+    "family_split_40_20_40": true,
+    "template_isolation": true,
+    "unique_template_mutation": true,
+    "no_evaluator_fields_at_runtime_top_level": true,
+    "offline_labels_explicitly_bounded": true,
+    "no_exact_runtime_duplicate_across_splits": true,
+    "holdout_not_mislabelled_independent": true
+  },
+  "dataset_sha256": "02211977121a52f366e72f600bb6ed6ba7c178c676ab927623fc344de6a89790",
+  "total_cases": 1500,
+  "split_counts": {
+    "development": 600,
+    "sealed_holdout": 600,
+    "validation": 300
+  },
+  "sample_type_counts": {
+    "attack": 900,
+    "benign_legal_tool": 300,
+    "benign_no_tool": 300
+  },
+  "attack_family_counts": {
+    "cross_tool_attack_chain": 100,
+    "direct_jailbreak": 100,
+    "environment_context_pollution": 100,
+    "json_rpc": 100,
+    "memory_poisoning": 100,
+    "multilingual_t2l": 100,
+    "obfuscation_evasion": 100,
+    "rag_indirect": 100,
+    "tool_output_injection": 100
+  },
+  "template_count": 300,
+  "issues": {
+    "duplicate_ids": [],
+    "duplicate_template_mutation": [],
+    "forbidden_runtime_top_level_fields": [],
+    "invalid_offline_boundary": [],
+    "cross_split_exact_runtime_duplicate": []
+  }
+}

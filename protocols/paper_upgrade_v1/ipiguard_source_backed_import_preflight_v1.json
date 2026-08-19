@@ -1,0 +1,98 @@
+{
+  "audit_version": "m3-paper-v1-ipiguard-source-backed-import-preflight-1.0",
+  "benchmark_cases_executed": 0,
+  "boundary": "Import/build qualification only. It proves that the pinned IPIGuard source-backed adapter can be constructed in a fresh subprocess without Vertex dependencies or network access. Subprocess isolation prevents the older fork from contaminating the main project runtime. It is not a model smoke, benchmark result, or formal effect estimate.",
+  "checks": [
+    {
+      "detail": "completed_frozen_formal_protocol",
+      "name": "freeze_completed",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "agentdojo/src/agentdojo/agent_pipeline/basic_elements.py": "121c911b606eed3e95abd96827aafef834d375d7f669532651c4f0836e9651eb",
+        "agentdojo/src/agentdojo/agent_pipeline/llms/google_llm.py": "34e1d1080d0188f9196d0b58c2dd2cae400dc9f9bfbb189b3746d73f6346cbfd",
+        "agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py": "5bed3e68ae31dff804674edbc96a1b61fd74fdc0533083561cff78bcdbb88a5a",
+        "agentdojo/src/agentdojo/agent_pipeline/llms/openai_llm.py": "954fdc9cdae3a0977664975a8d609f6013bb10eca609b5ad4bdeffce0d24995e",
+        "agentdojo/src/agentdojo/agent_pipeline/tool_execution.py": "03be3212a6492b0a5015feb0000102824bfbb5ffdf1f960f4d5290273a6b42eb",
+        "agentdojo/src/agentdojo/attacks/baseline_attacks.py": "d79550b6f026d1fc7fdf204834db885f3b57eb80c98270d10752a0b153464bad",
+        "agentdojo/src/agentdojo/data/system_messages.yaml": "2e3fa3e8058454e6e1e0b48b0e75cf43f767e5e1f36c337d9b958324c9fc7a20",
+        "agentdojo/src/agentdojo/default_suites/v1/tools/tool_white_list.py": "c21f39a9bce9719cdc2c3714507c9aa21f7f9999ada802f55e2fa5133d540297",
+        "agentdojo/src/agentdojo/task_suite/task_suite.py": "c355e123d3b01dbcfd6bb65757e153a3e0790c4be3c0f769fa1df68696e249ca",
+        "run/data_module.py": "886f625bf79ca99b2065fc13f565d750c552811151bd96d9addde1238ab62992",
+        "run/eval.py": "a01dfb86d33bccb45b4ef68d38e77614235cb82727a415f8550c1bc8c87b9dfc"
+      },
+      "name": "source_hashes_match_freeze",
+      "status": "pass"
+    },
+    {
+      "detail": "m3-paper-qwen3-8b-v1-latest-ipiguard-source-backed",
+      "name": "adapter_builds_without_model_call",
+      "status": "pass"
+    },
+    {
+      "detail": "external/baselines/ipiguard/agentdojo/src",
+      "name": "source_root_matches_freeze",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "algorithm_change": false,
+        "pinned_google_source_sha256": "34e1d1080d0188f9196d0b58c2dd2cae400dc9f9bfbb189b3746d73f6346cbfd",
+        "reason": "The pinned fork imports the unused Vertex AI provider at package import time. The runner bypasses that package initializer and supplies only the exact EMPTY_FUNCTION_NAME constant imported by tool_execution.py. The OpenAI-compatible IPIGuard construct/traverse and DAG execution source files remain unchanged.",
+        "stubbed_module": "agentdojo.agent_pipeline.llms.google_llm",
+        "stubbed_symbol": "EMPTY_FUNCTION_NAME",
+        "stubbed_value": "<empty-function-name>"
+      },
+      "name": "optional_provider_isolation_active",
+      "status": "pass"
+    },
+    {
+      "detail": false,
+      "name": "algorithm_change_declared_false",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "analyzer": "e1ac17034b81a19b4ca79fb9c7144f17a0df8882501de28c08ce956ffbf95429",
+        "protocol": "22d9e6c2979515650d032fd4e11d749503a1485edcfcf040b6259095c5be36bf",
+        "runner": "229b525410ee7b059fcfe49d2b7dcf83311cb9b70105b42d1070ad41f878e668"
+      },
+      "name": "local_adapter_hashes_match_freeze",
+      "status": "pass"
+    }
+  ],
+  "child_build": {
+    "local_adapter_hashes_valid": true,
+    "optional_provider_isolation_active": true,
+    "pipeline_name": "m3-paper-qwen3-8b-v1-latest-ipiguard-source-backed",
+    "source_root": "external/baselines/ipiguard/agentdojo/src"
+  },
+  "created_at": "2026-07-22T08:22:56.772353+00:00",
+  "failed_checks": [],
+  "freeze_path": "protocols/paper_upgrade_v1/ipiguard_source_backed_formal_freeze_v1.json",
+  "freeze_sha256": "9d57f7257f0ddff3bfcb2d031feb418d390580ad143ac0c6650cb9fa26a2be55",
+  "network_calls_performed": false,
+  "ollama_probe_performed": false,
+  "passed_checks": 7,
+  "pipeline_name": "m3-paper-qwen3-8b-v1-latest-ipiguard-source-backed",
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-ipiguard-source-backed-import-preflight-1.0",
+  "source_hashes": {
+    "agentdojo/src/agentdojo/agent_pipeline/basic_elements.py": "121c911b606eed3e95abd96827aafef834d375d7f669532651c4f0836e9651eb",
+    "agentdojo/src/agentdojo/agent_pipeline/llms/google_llm.py": "34e1d1080d0188f9196d0b58c2dd2cae400dc9f9bfbb189b3746d73f6346cbfd",
+    "agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py": "5bed3e68ae31dff804674edbc96a1b61fd74fdc0533083561cff78bcdbb88a5a",
+    "agentdojo/src/agentdojo/agent_pipeline/llms/openai_llm.py": "954fdc9cdae3a0977664975a8d609f6013bb10eca609b5ad4bdeffce0d24995e",
+    "agentdojo/src/agentdojo/agent_pipeline/tool_execution.py": "03be3212a6492b0a5015feb0000102824bfbb5ffdf1f960f4d5290273a6b42eb",
+    "agentdojo/src/agentdojo/attacks/baseline_attacks.py": "d79550b6f026d1fc7fdf204834db885f3b57eb80c98270d10752a0b153464bad",
+    "agentdojo/src/agentdojo/data/system_messages.yaml": "2e3fa3e8058454e6e1e0b48b0e75cf43f767e5e1f36c337d9b958324c9fc7a20",
+    "agentdojo/src/agentdojo/default_suites/v1/tools/tool_white_list.py": "c21f39a9bce9719cdc2c3714507c9aa21f7f9999ada802f55e2fa5133d540297",
+    "agentdojo/src/agentdojo/task_suite/task_suite.py": "c355e123d3b01dbcfd6bb65757e153a3e0790c4be3c0f769fa1df68696e249ca",
+    "run/data_module.py": "886f625bf79ca99b2065fc13f565d750c552811151bd96d9addde1238ab62992",
+    "run/eval.py": "a01dfb86d33bccb45b4ef68d38e77614235cb82727a415f8550c1bc8c87b9dfc"
+  },
+  "source_hashes_sha256": "c3b0033bce0c5685a1fc95c00067f2a6c0514ac7fec65b55216ffb152de44976",
+  "source_root": "external/baselines/ipiguard/agentdojo/src",
+  "status": "completed_import_preflight_only",
+  "total_checks": 7
+}

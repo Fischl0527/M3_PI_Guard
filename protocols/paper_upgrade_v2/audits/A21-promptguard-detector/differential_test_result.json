@@ -1,0 +1,8 @@
+{
+  "audit_id": "A21-promptguard-detector",
+  "base_digest": "da15ea721be6988c2d421fca53e2899844f8f1386d6b9ca33ccfc47d4f581d1e",
+  "mutated_digest": "da15ea721be6988c2d421fca53e2899844f8f1386d6b9ca33ccfc47d4f581d1e",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

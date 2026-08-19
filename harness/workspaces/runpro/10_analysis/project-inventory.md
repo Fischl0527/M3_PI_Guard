@@ -1,6 +1,6 @@
 # Project Inventory
 
-- Root: `E:\M3_PI_Guard_test`
+- Root: repository root (`.`)
 - Snapshot type: bootstrap inventory captured before the E0-E16 program run.
 - Bootstrap snapshot files: `500` (not a current repository total).
 - Refresh policy: this long snapshot is retained for provenance and is not blindly regenerated because current exclusions include model blobs, generated experiment trees, secrets and human-review material.

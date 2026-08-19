@@ -1,113 +1,113 @@
-# Agent Workflow
+# 智能体工作流
 
-This workflow is binding for all coding agents working in this repository.
+本工作流对仓库内工作的所有编程智能体均有约束力。
 
-## Phase 1: Understand Requirements
+## 阶段 1：理解需求
 
-Inputs:
+输入：
 
-- User request.
+- 用户请求。
 - `AGENTS.md`.
 - `harness/state/current-task.md`.
-- Relevant product specs.
+- 相关产品规格。
 
-Actions:
+动作：
 
-- Restate the goal.
-- Identify the related feature.
-- Define acceptance criteria.
-- Define non-goals.
-- Update `harness/state/current-task.md`.
+- 重述目标。
+- 识别相关功能。
+- 定义验收标准。
+- 定义非目标。
+- 更新 `harness/state/current-task.md`。
 
-Exit criteria:
+退出标准：
 
-- Goal and scope are clear.
-- Related feature is identified or created.
+- 目标和范围清楚。
+- 已识别或创建相关功能。
 
-## Phase 2: Analyze Codebase
+## 阶段 2：分析代码库
 
-Inputs:
+输入：
 
 - `harness/docs/architecture.md`.
 - `harness/specs/technical-spec.md`.
-- Relevant source files and tests.
+- 相关源码和测试。
 
-Actions:
+动作：
 
-- Inspect existing code before editing.
-- Identify patterns and boundaries.
-- Identify tests and verification commands.
-- Note risks.
+- 编辑前检查现有代码。
+- 识别模式和边界。
+- 识别测试和验证命令。
+- 记录风险。
 
-Exit criteria:
+退出标准：
 
-- Affected files and constraints are known.
+- 已知受影响文件和约束。
 
-## Phase 3: Plan
+## 阶段 3：计划
 
-Actions:
+动作：
 
-- Create a short implementation plan.
-- Define allowed and forbidden modifications.
-- Define verification commands.
-- Set feature status to `in_progress`.
+- 创建简短实施计划。
+- 定义允许和禁止的改动。
+- 定义验证命令。
+- 将功能状态设为 `in_progress`。
 
-Exit criteria:
+退出标准：
 
-- Plan is recorded in the task record.
+- 计划已记录在任务文件中。
 
-## Phase 4: Implement
+## 阶段 4：实施
 
-Actions:
+动作：
 
-- Make focused changes.
-- Follow existing code style.
-- Update tests and docs when needed.
-- Record decisions if architecture changes.
+- 实施聚焦改动。
+- 遵循现有代码风格。
+- 按需更新测试和文档。
+- 架构变化时记录决策。
 
-Exit criteria:
+退出标准：
 
-- Implementation is ready for verification.
+- 实现已准备好验证。
 
-## Phase 5: Verify
+## 阶段 5：验证
 
-Actions:
+动作：
 
-- Run targeted checks during iteration.
-- Run full verification when appropriate:
+- 迭代期间运行针对性检查。
+- 适当时运行完整验证：
 
 ```bash
 bash harness/scripts/verify.sh
 ```
 
-Required verification categories:
+必需验证类别：
 
-- Unit tests
-- Integration tests
-- Type checks
-- Lint checks
-- Build checks
+- 单元测试
+- 集成测试
+- 类型检查
+- 代码规范检查
+- 构建检查
 
-Exit criteria:
+退出标准：
 
-- Results are recorded.
-- Failures are fixed or documented.
+- 结果已记录。
+- 失败已修复或记录。
 
-## Phase 6: Summarize And Update State
+## 阶段 6：总结并更新状态
 
-Actions:
+动作：
 
 - Update `harness/state/progress.md`.
 - Update `harness/state/task-history.md`.
 - Update `harness/features/feature_list.json`.
 - Update `harness/state/session-handoff.md`.
-- Write final report with evidence.
+- 编写带证据的最终报告。
 
-Exit criteria:
+退出标准：
 
-- Next session can resume from repository files.
+- 下一会话可以从仓库文件恢复。
 
-## Feature Status Transitions
+## 功能状态转换
 
 ```mermaid
 stateDiagram-v2
@@ -119,35 +119,58 @@ stateDiagram-v2
     verified --> in_progress: regression or new scope
 ```
 
-Rules:
+规则：
 
-- `planned` means known but not started.
-- `in_progress` means implementation or verification is active.
-- `blocked` means progress requires external input or dependency.
-- `verified` means implementation, acceptance criteria, and required checks passed.
+- `planned` 表示已知但尚未开始。
+- `in_progress` 表示实现或验证进行中。
+- `blocked` 表示需要外部输入或依赖才能继续。
+- `verified` 表示实现、验收标准和必需检查均已通过。
 
-## Multi-Agent Execution
+## 多智能体执行
 
-Planner Agent:
+规划智能体：
 
-- Understands requirements.
-- Creates task plan.
-- Defines acceptance criteria.
+- 理解需求。
+- 创建任务计划。
+- 定义验收标准。
 
-Builder Agent:
+构建智能体：
 
-- Implements scoped changes.
-- Updates task implementation notes.
+- 实施范围内改动。
+- 更新任务实施记录。
 
-Reviewer Agent:
+复核智能体：
 
-- Reviews correctness, maintainability, safety, and missing tests.
-- Records review findings.
+- 复核正确性、可维护性、安全性和缺失测试。
+- 记录复核发现。
 
-Verifier Agent:
+验证智能体：
 
-- Runs verification commands.
-- Records evidence.
-- Confirms whether feature status may become `verified`.
+- 运行验证命令。
+- 记录证据。
+- 确认功能状态是否可以变为 `verified`。
 
-All agents write to shared repository state files.
+所有智能体都将状态写入共享仓库文件。
+
+## 精简实证阶段的 Git 检查点
+
+`F-PAPER-002` 在 `codex/q2-empirical-study` 分支工作。远程
+`m3-guard` 指向 `https://github.com/Fischl0527/M3_PI_Guard.git`，保留原
+`origin`，禁止 force-push；没有单独授权时只做本地提交，不推送。
+
+按以下研究里程碑提交，避免在每条记录或每次失败后制造提交：
+
+1. API 实验前：提交精简研究协议、Harness 状态和当前源码基线；
+2. 固定样本与六条正式前缀通过后：提交选择清单、实现和定向测试；
+3. 每个 provider 的计划行达到终态后：提交代码、紧凑统计和图表，不提交原始
+   provider trace、API 凭据或临时验证目录；
+4. 统计/图表定稿及英文稿完成后各提交一次。
+
+Git 检查点必须满足：
+
+- 只暂存本阶段相关的源码、测试、协议、文档和 Harness 状态；
+- `config/project.local.env*`、`.env`、密钥、原始 API 输出和 `outputs/verification/`
+  永不进入索引；
+- 提交前运行受影响模块的定向测试和 staged secret-format 检查；
+- 已成功且未受修复影响的实验行不得为了提交或获得绿色状态而重跑；
+- 不运行 Full Harness，不递归重放历史证据，不生成额外哈希包。

@@ -1,0 +1,107 @@
+{
+  "condition_shells": {
+    "forbidden_runtime_context_fields_present": false,
+    "offline_evaluator_field_count": 28,
+    "pair_record_digests": {
+      "primary::agentdojo-v1::m3_full": "85fc663f1419aa835954c56b3fd5018aa19ec713c75d32ac0ad0696ca67a8a96",
+      "primary::agentdojo-v1::m3_policy_only": "4c0c3e6c351b4f0ef815579f6a6b037850e67469ea6d6e20af6146f870166398",
+      "primary::agentdojo-v1::no_defense": "bab88c6fa3251120f6f26cdd2ce1843f76914896d64754c8383fc53abc707f88",
+      "primary::agentdojo-v1::promptguard_detector_only": "c20755061e93d34da8ad31da3ecd5e13ec25ed9d3431b5f4ccf10e1a1fc67a76",
+      "primary::agentdojo-v1::safe_prompt_or_spotlighting": "2993cd21e3b42e9e29f0c4cf3a48267d391b3e85a7c2a48e04ca01d62686dec2",
+      "primary::agentdojo-v1::strongest_peer_reviewed_structural_baseline": "9d54d0082408858014425d7de55cbc2dc7a2e559f93729a688bb1e366ab72190",
+      "primary::m3-v2::m3_full": "1f7df8a0cd53fb3a6c659457ebc656fe969949d07fac899336af083f4a0c1385",
+      "primary::m3-v2::m3_policy_only": "e0ac0397e491c50fb8969bb8a5926be5eb4fc5cb54dbf2c94f4bb0409c69fb7f",
+      "primary::m3-v2::no_defense": "99f06f6651435fa024782580c1e864811e273853ae7fcc941feac190b03aa7df",
+      "primary::m3-v2::promptguard_detector_only": "42c2c493e91cc8ef81ad631652257ca7e306987a8bcbd8a9f972fa8d9e9d5ebd",
+      "primary::m3-v2::safe_prompt_or_spotlighting": "021666927fb85b1598fbbb7738246ea188acae8c1621b915db708843e95426d9",
+      "primary::m3-v2::strongest_peer_reviewed_structural_baseline": "38279d8a79c0e4d5e2ff33b2fcf9d7769072d0db9628f8737844f164861c96ca",
+      "second::agentdojo-v1::m3_full": "9e939272307d1c3739134dc15aaed21a15eb0b1a92673cf1b3627ee840d9a15a",
+      "second::agentdojo-v1::m3_policy_only": "15a78bb87b402408160befeeab518b6b10c8e236336c77063776a9a12fc8cd07",
+      "second::agentdojo-v1::strongest_peer_reviewed_structural_baseline": "128f3e981c17c225aec83913728d9c3e6653d4e5b12f994833bb9478cf96c484",
+      "second::m3-v2::m3_full": "a3f8c3eeec3f994067b54f454b966e4c5328cd824c710391baf9789f48ed0bbb",
+      "second::m3-v2::m3_policy_only": "5bd27bda511cf36c35191c9598891089d6559dcb122bbf2f32b6016639b8c456",
+      "second::m3-v2::strongest_peer_reviewed_structural_baseline": "caea0eecac4ee16975bac632ee3121033538f29c0dd1bc75afd7996eb46e0de3"
+    },
+    "qualified_pairs": 18,
+    "runtime_context_fields": [
+      "benchmark",
+      "condition_id",
+      "execution_identity",
+      "max_provider_calls",
+      "online_state",
+      "work_key"
+    ]
+  },
+  "evidence_boundary": {
+    "credentials_read": false,
+    "experiment_records_persisted": 0,
+    "formal_results_created": 0,
+    "model_calls_made": 0,
+    "network_calls_made": 0,
+    "scientific_outcomes_accessed": false
+  },
+  "generated_at": "2026-07-29T02:00:00+08:00",
+  "negative_coverage": {
+    "automatic_retry": 0,
+    "existing_trace_path_rejected": true,
+    "expanded_budget_rejected": true,
+    "forbidden_online_evaluator_fields_rejected": true,
+    "model_identity_mismatch_rejected_by_client": true,
+    "v3_active_identity_mismatch_reproduced": true,
+    "v4_active_identity_evaluator_completed": true
+  },
+  "plan": {
+    "manifest_sha256": "92b957182c49c971bc9512ede1224f2b950adeb433c78a9be9554fdc0c1102b2",
+    "primary_records": 5082,
+    "records": 6873,
+    "second_records": 1791,
+    "sha256": "034232257dd666c80bbf4de1e7f7df645de587eb84387337739bee55b8a5633f"
+  },
+  "provider_trace": {
+    "primary": {
+      "bundle_sha256": "66dcefc388e8205a99243c58f30a818045b458423ef9c7df36317006b4b9b57e",
+      "completed_request_count": 1,
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "existing_trace_rejected": true,
+      "model_id": "deepseek-v4-pro",
+      "provider_tools_declared": false,
+      "request_count": 1,
+      "response_format": "json_object",
+      "thinking_mode": "disabled"
+    },
+    "second": {
+      "bundle_sha256": "748259d33a6bdc18844094bd283f16040ec30eec2f0838e460cb5baf44796de2",
+      "completed_request_count": 1,
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "existing_trace_rejected": true,
+      "model_id": "deepseek-v4-flash",
+      "provider_tools_declared": false,
+      "request_count": 1,
+      "response_format": "json_object",
+      "thinking_mode": "disabled"
+    }
+  },
+  "public_m3_evaluator": {
+    "all_binding_digests_match": true,
+    "all_evaluator_probes_completed": true,
+    "network_calls_made": 0,
+    "private_selection_bindings": 750,
+    "public_work_items": 3600,
+    "qualification_probes": 4,
+    "qualification_sha256": "a92a5f3ec565d14421f3575c3dd199475fe1d28d8f050aeae0ac381e37b62c95"
+  },
+  "public_v3_abort": {
+    "binding_digest_matches_active_material": false,
+    "provider_calls_completed": 33,
+    "record_count": 12,
+    "result_admission_authorized": false,
+    "review_sha256": "8d5399717fcae84cc826d4bc661f283ea38df319a8a8f084b62a4f8f7bc5f3fa",
+    "run_resumable": false
+  },
+  "schema_version": "m3-paper-v2-public-matrix-controller-qualification-4.0",
+  "source_candidate": {
+    "execution_authorized": false,
+    "manifest_sha256": "7df71eda75083a36b787659b482549ff3b2a7085b5ad01f8830dd0d2f9a32ef1"
+  },
+  "status": "public_v4_controller_qualified_offline"
+}

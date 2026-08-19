@@ -1,0 +1,19 @@
+{
+  "artifact": "CaMeL",
+  "audit_id": "A09-camel-runtime",
+  "commit_date": "2025-06-20T15:59:27+02:00",
+  "default_branch_head_at_discovery": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+  "expected_commit": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+  "license": {
+    "path": "external/baselines/camel-prompt-injection/LICENSE",
+    "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
+    "status": "present"
+  },
+  "observed_commit": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/baselines/camel-prompt-injection",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/google-research/camel-prompt-injection.git"
+}

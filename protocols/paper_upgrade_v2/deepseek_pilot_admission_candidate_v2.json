@@ -1,0 +1,191 @@
+{
+  "artifact_role": "owner_review_candidate",
+  "authorization": {
+    "candidate_manifest_sha256": null,
+    "candidate_only": true,
+    "execution_authorized": false,
+    "formal_matrix_authorized": false,
+    "owner_approval": null,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0
+  },
+  "generated_at": "2026-07-24T09:00:00+08:00",
+  "manifest_sha256": "6ac0601865d76f5f808952b2f58e6587d02c303ac5e9a998ae4d751fbb3dd4cc",
+  "next_gate": "The project owner must explicitly approve this exact one-work-item DeepSeek pilot checkpoint. A separately frozen active manifest is then required; this candidate is never executable.",
+  "schema_version": "m3-paper-v2-pilot-admission-manifest-2.0",
+  "scope": {
+    "budget": {
+      "abort_ceiling_cny": 27.0,
+      "hard_spend_limit_cny": 30.0,
+      "max_provider_calls": 8,
+      "pilot_work_items": 1,
+      "policy_sha256": "b90e54c09b2ef9031f59afe678cdc300acf42c71ba9b4793a4e37025d8712253"
+    },
+    "locked_inputs": [
+      {
+        "bytes": 4926643,
+        "path": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl",
+        "sha256": "573625a9e1e56c9a8be68fe21368d3e90e268974aa7285bec926d4591f8ec254"
+      },
+      {
+        "bytes": 2870,
+        "path": "protocols/paper_upgrade_v2/medium_execution_manifest_v2.json",
+        "sha256": "1aea6fafefbf1770e7e3477a8e2fedce32c93bd79f697d22885bceb595cc64b0"
+      },
+      {
+        "bytes": 24083,
+        "path": "protocols/paper_upgrade_v2/medium_execution_manifest_v3_preflight.json",
+        "sha256": "e2dd2db7baa48d0bc636f4aa942451f48b08173ba1fee0aa9156c22b3b120c15"
+      },
+      {
+        "bytes": 5407,
+        "path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v1.json",
+        "sha256": "b90e54c09b2ef9031f59afe678cdc300acf42c71ba9b4793a4e37025d8712253"
+      },
+      {
+        "bytes": 2586,
+        "path": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+        "sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+      },
+      {
+        "bytes": 1921,
+        "path": "protocols/paper_upgrade_v2/provider_request_trace_activation_v2.json",
+        "sha256": "ac15d82bc5631eb49c3e7b4344e143f753f17d40725845fa8a3507dc26de2b45"
+      },
+      {
+        "bytes": 41688,
+        "path": "experiments/paper_v2/formal_execution_controller_v2.py",
+        "sha256": "2da79dfb1a39d3e747455b149ce2c3367a2ff9a6c42f37781b22cdf08328fe10"
+      },
+      {
+        "bytes": 9965,
+        "path": "schemas/paper_v2/pilot_admission_manifest_v2.schema.json",
+        "sha256": "cc79f403906763f26933f148000d38e0bb568f09bb7ed4e7fa337d5bb1c5bea9"
+      },
+      {
+        "bytes": 43604,
+        "path": "experiments/paper_v2/official_provider_executor.py",
+        "sha256": "3b33057adddacc68863d14e313d975ecd8d359c18b72585a774161793801aa54"
+      },
+      {
+        "bytes": 23949,
+        "path": "experiments/paper_v2/provider_budget.py",
+        "sha256": "e7b28ec63f37e8865bb20dcd58da344a809017ea34d70353cbc9d57a4fa6dc6e"
+      },
+      {
+        "bytes": 9053,
+        "path": "experiments/paper_v2/provider_safety.py",
+        "sha256": "cff599d07145b5e2ec1fb1e0fc4d099173eda11b5254be90359bdc5b6e463513"
+      },
+      {
+        "bytes": 28380,
+        "path": "experiments/paper_v2/provider_request_trace_candidate.py",
+        "sha256": "9f7a7b024baab51d22725ad535460d2a24a52d0b50ccf3a93c231abb72653c8c"
+      },
+      {
+        "bytes": 10520,
+        "path": "experiments/paper_v2/provider_request_trace_activation.py",
+        "sha256": "babf75b6c50a4725ff2e3c9abddc56ca556df317eb29ef0a4ccf7a7f1a6ef618"
+      },
+      {
+        "bytes": 27450,
+        "path": "experiments/paper_v2/provider_trace_bundle.py",
+        "sha256": "c7dd83bf8ab4dad7628a54fd9f270dc41d0dc59a0118a688c4ed734c03f5e5f1"
+      },
+      {
+        "bytes": 79361,
+        "path": "experiments/paper_v2/live_condition_runtime.py",
+        "sha256": "44b1eb05a87f23b46e3860a22dbdfc92b08b9aba26d9e055af85f97dc9af5f98"
+      },
+      {
+        "bytes": 32576,
+        "path": "experiments/paper_v2/formal_condition_executors.py",
+        "sha256": "dcd39222d04c0081ed66b0bc51c37a4949f187dfc83b36ca42022b7acfc6aa93"
+      },
+      {
+        "bytes": 26839,
+        "path": "experiments/paper_v2/formal_record_store_v2.py",
+        "sha256": "67075156efa12a7a447b160b8140b16002fd5bd4d24261cf37b2b21226d7b157"
+      },
+      {
+        "bytes": 4859,
+        "path": "experiments/paper_v2/contracts_v2.py",
+        "sha256": "4349aef13c7a87c908ddfde2f4459e8916d88d51f1a9ae407840cd40a5a18db7"
+      },
+      {
+        "bytes": 31075,
+        "path": "experiments/paper_v2/post_pilot_evidence_review.py",
+        "sha256": "e0a79d1103b7e4d43b821007faa0259cd884c4da028c98047c2eddc39c33aa77"
+      },
+      {
+        "bytes": 6649,
+        "path": "schemas/paper_v2/experiment_record_v2.schema.json",
+        "sha256": "b06a444bf711268cf8282f65b847bb32fa1990a23e25adafe76d4e1223f06007"
+      },
+      {
+        "bytes": 7446,
+        "path": "schemas/paper_v2/provider_trace_bundle_v2.schema.json",
+        "sha256": "d77e1f6bdbdb1e8b5b2424b97bdc2394f8e63e2fc1b7ea2563df78a0284d8f3c"
+      },
+      {
+        "bytes": 1839,
+        "path": "schemas/paper_v2/provider_safety_receipt_v1.schema.json",
+        "sha256": "3149fc852e28b1203564564f1b8097a77ccd8e5dde4e5ae3007d7e419e84a531"
+      },
+      {
+        "bytes": 7782,
+        "path": "schemas/paper_v2/post_pilot_review_v1.schema.json",
+        "sha256": "893ab761cc0c774a68eaae08bb2d43778d41e2ce20659263ddf5dd5c64bf16b0"
+      }
+    ],
+    "outputs": {
+      "must_not_exist_before_execution": true,
+      "provider_trace_path": "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/provider_trace_v2.jsonl",
+      "record_ledger_path": "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/experiment_record_v2.jsonl",
+      "single_use": true
+    },
+    "provider": {
+      "automatic_retries": 0,
+      "base_url": "https://api.deepseek.com",
+      "cross_provider_fallback": false,
+      "endpoint_type": "official_api",
+      "max_provider_calls": 8,
+      "max_tokens": 512,
+      "model_id": "deepseek-v4-pro",
+      "provider_id": "deepseek",
+      "provider_managed_tools": false,
+      "temperature": 0.0,
+      "timeout_seconds": 120.0
+    },
+    "run_id": "paper-v2-deepseek-pilot-20260724",
+    "safety": {
+      "allowed_payload_class": "synthetic_m3_case",
+      "effect_backend": "m3_sandbox_fixture",
+      "external_effects": false,
+      "host_or_provider_tools": false,
+      "model_output_is_untrusted_proposal": true,
+      "policy_sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+    },
+    "work_item": {
+      "analysis_tier": "primary",
+      "authorization_regime": "auto_compiled",
+      "benchmark": "m3-v2",
+      "case_id": "M3V2-D-003-BN",
+      "condition_id": "no_defense",
+      "evaluation_case_type": "benign_no_tool",
+      "execution_identity": "d7b8fe9ddb0ca74cd46d8e4e2dd0a9e7f3215ac37055da70c6944f07db689aab",
+      "selection_id": "medium-v1:M3V2-D-003-BN",
+      "sequence": 7,
+      "source_record_sha256": "be800b17c940abc17b4743af2ffbfce884bd0b220996b3711756af5294d0cccd",
+      "work_item_sha256": "939b5f4e56491fb1298c17186db77c92701d28a6336dc68bb0159196256d812f",
+      "work_key": "fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7"
+    }
+  },
+  "scope_sha256": "1d556e21e8823a0db198e51c28bb93aff331d2dc3bcf22dbf92f554ca32e683c",
+  "status": "candidate_pending_owner_activation"
+}

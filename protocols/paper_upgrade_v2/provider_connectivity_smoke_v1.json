@@ -1,0 +1,77 @@
+{
+  "schema_version": "m3-paper-v2-provider-connectivity-smoke-1.0",
+  "status": "completed_two_provider_connectivity_diagnostic",
+  "observed_at": "2026-07-23T13:20:11.465381+00:00",
+  "network_call_count": 2,
+  "attempts_per_provider": 1,
+  "automatic_retries": 0,
+  "fixed_prompt_class": "synthetic_public_connectivity_text",
+  "max_output_tokens_per_provider": 8,
+  "tools_declared": false,
+  "external_effects": false,
+  "provider_managed_tools_enabled": false,
+  "credential_values_persisted": false,
+  "prompt_or_response_content_persisted": false,
+  "result_eligible_for_formal_tables": false,
+  "formal_identity_attested": false,
+  "formal_identity_blockers": [
+    "Neither response exposed an HTTP request identifier in the checked response headers.",
+    "This diagnostic stores only hashes of response identifiers and cannot satisfy the formal request/response-ID receipt contract."
+  ],
+  "results": [
+    {
+      "provider": "deepseek",
+      "endpoint_origin": "https://api.deepseek.com",
+      "endpoint_path": "/chat/completions",
+      "configured_model": "deepseek-v4-pro",
+      "returned_model": "deepseek-v4-pro",
+      "model_identity_exact_match": true,
+      "status": "connected",
+      "http_status": 200,
+      "latency_ms": 1944.568,
+      "payload_sha256": "33d1ab333d4652948ab8d3fa608655234901790e909ecb55088555b75cdd0522",
+      "response_exact_safe": false,
+      "request_id_present": false,
+      "response_id_present": true,
+      "response_id_sha256": "b42a5097222d4d034f02e893e056fd3849e133529831135aa99989de2b87c16b",
+      "usage": {
+        "prompt_tokens": 30,
+        "completion_tokens": 8,
+        "total_tokens": 38
+      }
+    },
+    {
+      "provider": "gemini",
+      "endpoint_origin": "https://generativelanguage.googleapis.com",
+      "endpoint_path": "/v1beta/openai/chat/completions",
+      "configured_model": "gemini-3.6-flash",
+      "returned_model": "gemini-3.6-flash",
+      "model_identity_exact_match": true,
+      "status": "connected",
+      "http_status": 200,
+      "latency_ms": 1483.696,
+      "payload_sha256": "37626d9963edb99f74695df769f74cfd523b96dee920f465594c686c9416207d",
+      "response_exact_safe": false,
+      "request_id_present": false,
+      "response_id_present": true,
+      "response_id_sha256": "dbd87547c49e87b69b340af8adec11515bc995ac4ead6a6ad7597b6389c46a9d",
+      "usage": {
+        "prompt_tokens": 26,
+        "completion_tokens": 0,
+        "total_tokens": 30
+      }
+    }
+  ],
+  "interpretation": {
+    "supported": [
+      "The configured credentials authenticated successfully at both frozen official inference origins.",
+      "Both OpenAI-compatible chat-completions routes returned HTTP 200.",
+      "Both returned model identifiers exactly matched the configured model identifiers."
+    ],
+    "not_supported": [
+      "Instruction-following quality, because the eight-token cap did not yield an exact SAFE response.",
+      "Formal paper-result eligibility, because no benchmark case was executed.",
+      "Formal provider identity attestation, because the required HTTP request identifiers were absent."
+    ]
+  }
+}

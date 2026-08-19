@@ -1,0 +1,25 @@
+{
+  "credentials_read": 0,
+  "experiment_record_schema_version": "m3-paper-v2-experiment-record-2.2",
+  "formal_matrix_authorized": false,
+  "generated_at": "2026-07-24T09:20:00+08:00",
+  "negative_case_count": 4,
+  "negative_cases_rejected": [
+    "active_candidate_binding_drift",
+    "missing_persisted_safety_receipt",
+    "provider_trace_drift",
+    "tampered_cache_cost_evidence"
+  ],
+  "network_calls_made": 0,
+  "positive_injected_pilot_reviews": 1,
+  "positive_official_evidence_gate_passed": false,
+  "positive_ready_for_owner_matrix_review": false,
+  "positive_structural_evidence_gate_passed": true,
+  "project_active_admission_created": false,
+  "project_pilot_records_created": 0,
+  "provider_safety_receipt_persisted": true,
+  "qualification_boundary": "The injected pilot proves reviewer integrity and decision semantics only. It is not official-provider or effect evidence.",
+  "result_admission_authorized": false,
+  "schema_version": "m3-paper-v2-post-pilot-review-qualification-1.0",
+  "status": "post_pilot_reviewer_qualified_offline"
+}

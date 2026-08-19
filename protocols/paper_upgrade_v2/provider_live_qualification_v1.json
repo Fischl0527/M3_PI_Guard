@@ -1,0 +1,127 @@
+{
+  "credentials_stored": false,
+  "evidence_boundary": [
+    "This artifact qualifies connectivity and exact returned model identity only.",
+    "It is excluded from security and utility effect denominators.",
+    "Gemini active RPM, TPM and RPD must be copied from the owning project's AI Studio rate-limit page."
+  ],
+  "execution_boundary": {
+    "automatic_retries": 0,
+    "cross_provider_fallback": false,
+    "external_effects": false,
+    "fixed_synthetic_public_prompt_only": true,
+    "max_tokens": 16,
+    "provider_managed_tools": false,
+    "temperature": 0.0
+  },
+  "formal_results_created": 0,
+  "gemini_quota_snapshot": {
+    "billing_tier": "user_declared_free",
+    "charged_usd": 0.0,
+    "rpd": null,
+    "rpm": null,
+    "status": "active_project_limits_require_ai_studio_evidence",
+    "tpm": null
+  },
+  "network_call_attempts": 2,
+  "network_call_attempts_per_provider": 1,
+  "prompt_or_response_content_stored": false,
+  "providers": {
+    "deepseek": {
+      "attestation": {
+        "endpoint_type": "official_api",
+        "evidence_level": "diagnostic_only",
+        "identity_evidence": "official_response",
+        "identity_verified": true,
+        "model_id": "deepseek-v4-pro",
+        "model_revision": null,
+        "parameters_sha256": "f66a73ee40947d5f63fd1abf14886a1e200f3742210b4f72992574c92647d4be",
+        "prompt_rewrite_declaration": "none_declared",
+        "provider_name": "DeepSeek",
+        "request_id": null,
+        "requested_at": "2026-07-23T16:27:17.557102+00:00",
+        "response_id": "1fba79df-a86b-4b96-b974-f30bd404d8a6",
+        "upstream_provider": "DeepSeek"
+      },
+      "completion_tokens": 16,
+      "model_latency_ms": 1819.6592,
+      "prompt_tokens": 37,
+      "provider_attempts": 1,
+      "receipt": {
+        "credentials_stored": false,
+        "evidence": {
+          "budget": {
+            "cumulative_cost_cny": 0.000207,
+            "cumulative_usage": {
+              "completion_tokens": 16,
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 37,
+              "prompt_tokens": 37
+            },
+            "headroom": {
+              "actual_cost_cny": 0.000207,
+              "next_request_worst_case_cost_cny": 0.052566,
+              "observed_cache_hit_ratio": 0.0,
+              "projected_full_plan_cost_cny": null,
+              "remaining_abort_headroom_cny": 26.999793,
+              "status": "continue"
+            },
+            "pause_reason": null,
+            "status": "continue"
+          },
+          "configured_model": "deepseek-v4-pro",
+          "content_class": "synthetic_m3_case",
+          "endpoint_origin_and_path": "https://api.deepseek.com/chat/completions",
+          "evidence_level": "official_exact_model_with_response_id_request_id_unavailable",
+          "finish_reason": "length",
+          "http_status": 200,
+          "identity_verified": true,
+          "max_tokens": 16,
+          "model_id": "deepseek-v4-pro",
+          "model_identity_exact_match": true,
+          "model_latency_ms": 1819.6592,
+          "payload_sha256": "f66a73ee40947d5f63fd1abf14886a1e200f3742210b4f72992574c92647d4be",
+          "prompt_rewrite_declaration": "none_declared",
+          "provider_attempts": 1,
+          "provider_id": "deepseek",
+          "provider_tools_declared": false,
+          "request_id": null,
+          "request_trace_complete": false,
+          "requested_at": "2026-07-23T16:27:17.557102+00:00",
+          "response_id": "1fba79df-a86b-4b96-b974-f30bd404d8a6",
+          "response_text_bytes": 0,
+          "response_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "returned_model": "deepseek-v4-pro",
+          "temperature": 0.0,
+          "transport_kind": "official_network",
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 37,
+            "prompt_tokens": 37,
+            "total_tokens": 53
+          }
+        },
+        "evidence_sha256": "7f95b344be815c411c825cfc053d0235ee2154c3a90b5de816b535ced25b865c",
+        "prompt_or_response_content_stored": false,
+        "request_headers_stored": false,
+        "schema_version": "m3-paper-v2-official-provider-receipt-1.0"
+      },
+      "response_exact_safe": false,
+      "response_text_bytes": 0,
+      "response_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "diagnostic_identity_only",
+      "total_tokens": 53
+    },
+    "gemini": {
+      "error_type": "ProviderPausedError",
+      "provider_attempts": 1,
+      "response_text_persisted": false,
+      "status": "failed_single_attempt_preserved"
+    }
+  },
+  "qualified_provider_count": 0,
+  "result_eligible_for_effect_tables": false,
+  "schema_version": "m3-paper-v2-provider-live-qualification-1.0",
+  "status": "live_identity_qualification_incomplete"
+}

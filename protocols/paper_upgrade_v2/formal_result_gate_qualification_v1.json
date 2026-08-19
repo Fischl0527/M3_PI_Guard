@@ -1,0 +1,1 @@
+{"append_only_execution_ledgers_mutated":false,"negative_scenario_ids":["diagnostic_tier","incomplete_matrix","operational_failure","unverified_identity"],"negative_scenarios":4,"network_calls_made":0,"positive_scenarios":1,"schema_version":"m3-paper-v2-formal-result-gate-qualification-1.0","scientific_outcomes_read":0,"status":"formal_result_gate_qualified_offline"}

@@ -1,0 +1,108 @@
+{
+  "audit_id": "A10-ipiguard-runtime",
+  "hits": [
+    {
+      "line": 140,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "for user_task_id in tqdm(agent_test_dataset, desc=\"Evaluating on the test dataset\"):",
+      "text_sha256": "6472a8e0a1d0a5e4d8e9b213e28c1c6df993ce83ea7d8762403dcfd1559119e2"
+    },
+    {
+      "line": 141,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "if user_task_id < script_args.uid:",
+      "text_sha256": "82a602a2fd3ea8640f198fd6139145747b43b71b6b7a41445d2cd36acb80a123"
+    },
+    {
+      "line": 144,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_to_run = suite.get_user_task_by_id(f\"user_task_{user_task_id}\")",
+      "text_sha256": "434d627b653884906ba1cef618839ac315be8d1cf013a47070fab763a63c4852"
+    },
+    {
+      "line": 150,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "\"user_task_id\": user_task_id,",
+      "text_sha256": "bcb02ef2b578d09c7c007769f4303efdf9e7b3ba75c5a04f2cb11f1654f9b052"
+    },
+    {
+      "line": 173,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "for user_task_id, injection_task_id in tqdm(agent_test_dataset, desc=\"Evaluating on the test dataset\"):",
+      "text_sha256": "67acdb175783d37a861c13784de7d6b610f223eda57fa96e50e05eae63e6316d"
+    },
+    {
+      "line": 174,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "if user_task_id < script_args.uid:",
+      "text_sha256": "82a602a2fd3ea8640f198fd6139145747b43b71b6b7a41445d2cd36acb80a123"
+    },
+    {
+      "line": 176,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "if user_task_id == script_args.uid and injection_task_id < script_args.iid:",
+      "text_sha256": "3ab91f26a013236160f2f61c6213e356562129cb4e7fd2abe598bb75e739a3fd"
+    },
+    {
+      "line": 179,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_to_run = suite.get_user_task_by_id(f\"user_task_{user_task_id}\")",
+      "text_sha256": "434d627b653884906ba1cef618839ac315be8d1cf013a47070fab763a63c4852"
+    },
+    {
+      "line": 180,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_to_run = suite.get_injection_task_by_id(f\"injection_task_{injection_task_id}\")",
+      "text_sha256": "523ac9b93f8a576703ebd071514c8cfa2fe29c41ce2ba9586ab4d1f6c2024939"
+    },
+    {
+      "line": 189,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "\"user_task_id\": user_task_id,",
+      "text_sha256": "bcb02ef2b578d09c7c007769f4303efdf9e7b3ba75c5a04f2cb11f1654f9b052"
+    },
+    {
+      "line": 190,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "\"injection_task_id\": injection_task_id,",
+      "text_sha256": "9a11adf3673007a11f4b4b6b22a207946955d9f28345dde48757be385c4197d2"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

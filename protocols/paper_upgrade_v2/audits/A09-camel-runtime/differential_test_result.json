@@ -1,0 +1,8 @@
+{
+  "audit_id": "A09-camel-runtime",
+  "base_digest": "cf439021123803b70c19564d6f61e448e496d930df3736b78cf9c3f4bfd523a5",
+  "mutated_digest": "cf439021123803b70c19564d6f61e448e496d930df3736b78cf9c3f4bfd523a5",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

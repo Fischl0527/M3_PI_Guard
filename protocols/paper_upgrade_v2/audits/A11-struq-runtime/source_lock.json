@@ -1,0 +1,19 @@
+{
+  "artifact": "StruQ",
+  "audit_id": "A11-struq-runtime",
+  "commit_date": "2025-11-10T11:21:19-08:00",
+  "default_branch_head_at_discovery": "e4372b9e3d45ecdfc7c0ad70662094efe6e3850b",
+  "expected_commit": "e4372b9e3d45ecdfc7c0ad70662094efe6e3850b",
+  "license": {
+    "path": "external/paper_v2_audits/struq/LICENSE.txt",
+    "sha256": "10e57c9367b044bb317e74a157561964e67f312fedd0eac7400df93be9b577b9",
+    "status": "present"
+  },
+  "observed_commit": "e4372b9e3d45ecdfc7c0ad70662094efe6e3850b",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/paper_v2_audits/struq",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/Sizhe-Chen/StruQ.git"
+}

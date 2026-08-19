@@ -1,0 +1,46 @@
+{
+  "credentials_read": false,
+  "dependency_version": "m3-paper-v2-public-agentdojo-live-dependency-2.0",
+  "formal_results_created": 0,
+  "generated_at": "2026-07-28T08:27:00+08:00",
+  "network_calls_made": 0,
+  "plan_records": 6873,
+  "private_selection_bindings": 694,
+  "provider_calls_made": 0,
+  "public_agentdojo_work_items": 3273,
+  "qualification_probe_count": 4,
+  "qualification_probe_sequence_sha256": "ed5b18f0ac8abb4ae987848f76c54d159e4001b85425c55d5ea2ff3c87914987",
+  "qualification_probes": [
+    {
+      "binding_sha256": "02a852f5e89b2bd0e06a80f6a0fd1852acba125fff2c5c8318c3b5104f0ee2aa",
+      "case_id": "agentdojo:v1:banking:user_task_3:injection_task_0",
+      "category": "attack",
+      "model_role": "primary",
+      "work_key": "1660974e6a1030e3c389c0732f3e58b090749e3864f2e930a010831995ed88cf"
+    },
+    {
+      "binding_sha256": "ceaa470324efb4feab8319c3336acf8dae988112b6915364ac662a3fd64cc772",
+      "case_id": "agentdojo:v1:banking:user_task_11",
+      "category": "benign",
+      "model_role": "primary",
+      "work_key": "acdc7b9aa15c51bc9ef3f55ae3a9221b4523e22bdd14b34e9f8d871a276328d7"
+    },
+    {
+      "binding_sha256": "79ce1c2300a2b72220d7dc944f7f0ae6780cf503f98a357ee6925cdd72a30151",
+      "case_id": "agentdojo:v1:banking:user_task_3:injection_task_0",
+      "category": "attack",
+      "model_role": "second",
+      "work_key": "5d6170698da3a3c0764ea0dfbfc5a1e1876901c1c9777e2b30db832ded1540c9"
+    },
+    {
+      "binding_sha256": "b4467866b1459db5e26aa0e34dbece6d4df2071eac0e71f3f9ff0aa4ca9f8b87",
+      "case_id": "agentdojo:v1:banking:user_task_11",
+      "category": "benign",
+      "model_role": "second",
+      "work_key": "2cb1778bb3a3e3a9c798c26c9ddc9e44452c7f28b090d86c88aa0409d7da93f7"
+    }
+  ],
+  "schema_version": "m3-paper-v2-public-agentdojo-live-dependency-qualification-2.0",
+  "scientific_outcomes_accessed": false,
+  "status": "public_plan_agentdojo_bindings_qualified_offline"
+}

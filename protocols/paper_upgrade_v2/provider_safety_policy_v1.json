@@ -1,0 +1,67 @@
+{
+  "schema_version": "m3-paper-v2-provider-safety-policy-1.0",
+  "status": "frozen_user_required_boundary",
+  "frozen_at": "2026-07-23T22:20:00+08:00",
+  "user_constraint": "DeepSeek and Gemini APIs must not execute dangerous operations.",
+  "network_scope": {
+    "allowed": [
+      "Send synthetic or public-benchmark model-inference requests to an explicitly selected official provider endpoint.",
+      "Receive model text and tool-call proposals as untrusted data.",
+      "Query the same official provider for redacted identity metadata during an explicitly authorized smoke."
+    ],
+    "forbidden": [
+      "Send credentials inside prompts, logs, manifests, or benchmark payloads.",
+      "Connect model-proposed tools to production services or real user accounts.",
+      "Use provider-native computer-use, code-execution, web-search, payment, email, or managed-agent tools.",
+      "Follow a model-proposed URL or endpoint outside the frozen mock environment.",
+      "Allow a model response to invoke a host command directly."
+    ]
+  },
+  "official_provider_endpoints": {
+    "deepseek": {
+      "origin": "https://api.deepseek.com",
+      "allowed_paths": [
+        "/chat/completions",
+        "/v1/chat/completions"
+      ]
+    },
+    "gemini": {
+      "origin": "https://generativelanguage.googleapis.com",
+      "allowed_paths": [
+        "/v1beta/openai/chat/completions"
+      ]
+    }
+  },
+  "effect_backends": {
+    "no_effect": {
+      "description": "Text-only response; no tool effect is applied."
+    },
+    "m3_sandbox_fixture": {
+      "description": "Deterministic fixture tools limited to sandbox/public, example.test and /mock/."
+    },
+    "agentdojo_in_memory_copy": {
+      "description": "Official AgentDojo task environment copied in memory with no external connector."
+    }
+  },
+  "hard_denies": [
+    "host_shell_or_process_execution",
+    "host_filesystem_outside_sandbox_public",
+    "real_email_or_messaging",
+    "real_payment_or_financial_transfer",
+    "production_or_private_api",
+    "credential_or_secret_access",
+    "database_or_cloud_resource_mutation",
+    "browser_or_computer_control",
+    "provider_managed_tools"
+  ],
+  "enforcement": {
+    "model_output_is_untrusted_proposal": true,
+    "external_connectors_enabled": false,
+    "provider_managed_tools_enabled": false,
+    "all_effects_require_local_boundary_validation": true,
+    "unsafe_or_unknown_effect": "DENY",
+    "boundary_failure": "runner_failure_and_retain_in_itt",
+    "formal_executor_without_safety_receipt": "reject",
+    "credential_values_stored": false
+  }
+}

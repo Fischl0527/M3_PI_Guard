@@ -1,0 +1,173 @@
+{
+  "audit_version": "m3-paper-v1-frontier-api-model-slot-admission-audit-1.0",
+  "boundary": "This is a local configuration admission audit only. It never calls frontier APIs and never prints credentials. API providers can be registered as paper model slots only after explicit consent, network smoke, exact model identifiers, cost/log disclosure and frozen formal run manifests exist.",
+  "checks": [
+    {
+      "detail": "config/project.local.env",
+      "name": "local_config_exists",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "ignored": true,
+        "inside_repository": true,
+        "tracked": false
+      },
+      "name": "local_config_ignored_and_untracked",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "tracked_files_do_not_contain_configured_secrets",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "two_distinct_vendors_configured_for_network_smoke",
+      "severity": "error",
+      "status": "fail"
+    },
+    {
+      "detail": {
+        "current_status": "missing_or_placeholder",
+        "expected_value": "yes_for_network_smoke",
+        "field": "M3_FRONTIER_API_CONSENT"
+      },
+      "name": "explicit_network_smoke_consent_recorded",
+      "severity": "warning",
+      "status": "fail"
+    },
+    {
+      "detail": {
+        "registered_vendor_ids": [],
+        "selection_reason": "base_registry_no_admitted_frontier_candidate"
+      },
+      "name": "model_registry_has_two_frontier_api_vendor_slots",
+      "severity": "error",
+      "status": "fail"
+    },
+    {
+      "detail": {
+        "formal_result_eligible": false,
+        "frontier_client_present": true,
+        "network_call_count": 0,
+        "network_calls_performed": false,
+        "smoke_manifest": "outputs/paper_upgrade_v1/frontier_api_smoke_v1/manifest.json",
+        "smoke_status": "plan_only_no_network"
+      },
+      "name": "redacted_transport_and_plan_only_smoke_are_safe",
+      "severity": "warning",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "9b517f40aff3ab8bf111314765fd368a881bb55ff5dba64ff2180b997b7e9fed",
+  "config_errors": [],
+  "config_exists": true,
+  "config_git_safety": {
+    "ignored": true,
+    "inside_repository": true,
+    "tracked": false
+  },
+  "config_path": "config/project.local.env",
+  "config_redacted": {
+    "ANTHROPIC_API_KEY": "<placeholder>",
+    "HF_HOME": "E:\\AI_Cache\\huggingface",
+    "HF_HUB_CACHE": "E:\\AI_Cache\\huggingface\\hub",
+    "HF_TOKEN": "<redacted:set>",
+    "M3_OLLAMA_API_KEY": "<redacted:set>",
+    "M3_OLLAMA_BASE_URL": "http://127.0.0.1:11434/v1",
+    "M3_PRIVATE_DATA_ROOT": "__OPTIONAL_LOCAL_PATH__",
+    "M3_RUNTIME_ROOT": "E:\\M3_PI_Guard_runtime",
+    "OLLAMA_MODELS": "E:\\Ollama\\models",
+    "OPENAI_API_KEY": "<placeholder>",
+    "PROMPTGUARD_CHUNK_TOKEN_LIMIT": "512",
+    "PROMPTGUARD_DOWNLOAD_SNAPSHOT": "E:\\M3_PI_Guard_runtime\\promptguard\\evidence\\promptguard_download_snapshot.json",
+    "PROMPTGUARD_MODEL_ID": "meta-llama/Llama-Prompt-Guard-2-86M",
+    "PROMPTGUARD_REVISION": "a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+    "PROMPTGUARD_THRESHOLD": "0.5"
+  },
+  "configured_vendor_count": 0,
+  "configured_vendors": [],
+  "created_at": "2026-07-22T08:51:01.055651+00:00",
+  "error_failures": [
+    {
+      "detail": [],
+      "name": "two_distinct_vendors_configured_for_network_smoke",
+      "severity": "error",
+      "status": "fail"
+    },
+    {
+      "detail": {
+        "registered_vendor_ids": [],
+        "selection_reason": "base_registry_no_admitted_frontier_candidate"
+      },
+      "name": "model_registry_has_two_frontier_api_vendor_slots",
+      "severity": "error",
+      "status": "fail"
+    }
+  ],
+  "explicit_network_smoke_consent": false,
+  "frontier_api_q2_gate": "not_satisfied_registry_slots_missing",
+  "frontier_client_path": "experiments/paper_v1/frontier_client.py",
+  "frontier_client_sha256": "f9a2fcb724bc6eadde9cd20ae53feba06a862818540e3d4a67ae73462a8c9748",
+  "model_registry_exists": true,
+  "model_registry_path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+  "model_registry_selection": {
+    "base_model_registry_path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+    "registry_admission_path": "protocols/paper_upgrade_v1/frontier_api_model_slot_registry_admission_v1.json",
+    "registry_admission_sha256": "a57bd34f8c7cf086b143187eea6c421303ae29d877fbafcae426097609aac307",
+    "registry_admission_status": "blocked_smoke_not_qualified",
+    "selected_model_registry_path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+    "selection_reason": "base_registry_no_admitted_frontier_candidate"
+  },
+  "model_registry_sha256": "e630ef170add91510d50a594dae7afb216988694fe3a1f685c96ce622cbf5bdd",
+  "network_calls_performed": false,
+  "passed_checks": 4,
+  "provider_rows": [
+    {
+      "api_key_field": "OPENAI_API_KEY",
+      "api_key_status": "missing_or_placeholder",
+      "base_url_configured": false,
+      "base_url_field": "FRONTIER_OPENAI_BASE_URL",
+      "configured_for_network_smoke": false,
+      "formal_slot_status": "blocked_missing_local_config",
+      "missing_fields": [
+        "OPENAI_API_KEY",
+        "FRONTIER_OPENAI_MODEL_ID"
+      ],
+      "model_id": "",
+      "model_id_field": "FRONTIER_OPENAI_MODEL_ID",
+      "provider": "openai"
+    },
+    {
+      "api_key_field": "ANTHROPIC_API_KEY",
+      "api_key_status": "missing_or_placeholder",
+      "base_url_configured": false,
+      "base_url_field": "FRONTIER_ANTHROPIC_BASE_URL",
+      "configured_for_network_smoke": false,
+      "formal_slot_status": "blocked_missing_local_config",
+      "missing_fields": [
+        "ANTHROPIC_API_KEY",
+        "FRONTIER_ANTHROPIC_MODEL_ID"
+      ],
+      "model_id": "",
+      "model_id_field": "FRONTIER_ANTHROPIC_MODEL_ID",
+      "provider": "anthropic"
+    }
+  ],
+  "provider_rows_sha256": "4aa6a8c30d420d2e94f0ab43cd15e1a4fdd339af86adaac0351dbe1980f45c08",
+  "registered_frontier_api_vendor_count": 0,
+  "registered_frontier_api_vendor_ids": [],
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-frontier-api-model-slot-admission-audit-1.0",
+  "selected_model_registry_path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+  "smoke_manifest_path": "outputs/paper_upgrade_v1/frontier_api_smoke_v1/manifest.json",
+  "smoke_manifest_sha256": "bb389e28751de3191d74720eecd4fa3917bde4c5a3d21941ef0d3801e0d9780d",
+  "smoke_manifest_status": "plan_only_no_network",
+  "status": "blocked_missing_or_unsafe_local_config",
+  "total_checks": 7,
+  "tracked_secret_hits": []
+}

@@ -1,0 +1,34 @@
+{
+  "approved_at": "2026-07-30T01:34:03+08:00",
+  "artifact_role": "single_fresh_shard_execution_authorization",
+  "authorization": {
+    "candidate_manifest_sha256": "d05562406e081ae6c2b33fafc7e9f8963b8f04966ec4f9a819fd7dd397271692",
+    "owner_statement_sha256": "520476d1ea28e60cd2f07915f588aca8ae3ea7106f1e877cef67b4910e471146",
+    "result_admission_authorized": false,
+    "shard_execution_authorized": true
+  },
+  "evidence_boundary": {
+    "automatic_retries": 0,
+    "external_effects_enabled": false,
+    "old_records_reused": false,
+    "provider_tools_enabled": false,
+    "scientific_outcomes_may_be_reviewed": false
+  },
+  "manifest_sha256": "ad66fafea0da901816b38357bb8a41f86943f5a2ea2db549fe5d518d1ebef8eb",
+  "schema_version": "m3-paper-v2-public-sharded-continuation-admission-2.0",
+  "scope": {
+    "exact_command": "F:\\robot\\Anaconda3\\python.exe -m experiments.paper_v2.public_sharded_continuation_v2 --execute-shard --model-role primary --shard-index 3 --admission protocols\\paper_upgrade_v2\\admissions\\deepseek_public_primary_continuation_s3_admission_v2.json --config config\\project.local.env",
+    "exact_command_sha256": "7bd2daa350e31ff2034908172472b21a22c3c45b77c2e899c2fd407b591c942a",
+    "execution_identity": "ae6309d57e853267814c0e70201ce61254ff008d526dad9d933ae550e0c626b9",
+    "hard_spend_limit_cny": 4.9,
+    "model_id": "deepseek-v4-pro",
+    "model_role": "primary",
+    "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-primary-continuation-s3-v2-ae6309d57e853267814c0e70201ce61254ff008d526dad9d933ae550e0c626b9",
+    "records": 1264,
+    "run_id": "paper-v2-public-primary-continuation-s3-v2",
+    "shard_index": 3,
+    "work_key_sequence_sha256": "122ee225b74001d58684830730022578543c6763a656c5545dc8713d30c2ef2e"
+  },
+  "scope_sha256": "61b93d8362a5d5ebb92b49b387ad73dcfeac19c6b69089b571635771c7718c34",
+  "status": "activated_for_one_exact_fresh_recovery_shard"
+}

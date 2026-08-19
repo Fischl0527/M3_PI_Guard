@@ -1,0 +1,3374 @@
+{
+  "agentdojo": {
+    "case_universe_sha256": "204a0225433f955e7fc212999d8b05277e68481db638f9cae7e32c586588c4f5",
+    "checkout": "E:\\M3_PI_Guard_test\\external\\benchmarks\\agentdojo",
+    "git_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+    "target_universe": {
+      "security": 629,
+      "total": 726,
+      "utility": 97
+    }
+  },
+  "attack_name": "direct",
+  "benchmark": "agentdojo",
+  "benchmark_version": "v1",
+  "boundary": "Frozen adapter protocol only. This manifest records the pinned CaMeL source, source-smoke and common AgentDojo universe, but it does not install dependencies, invoke a model/API, run cases, measure ASR/utility, or admit CaMeL into formal result tables.",
+  "camel": {
+    "adapter_classification": "pinned_source_formal_runner_transport_and_capability_mapping_frozen_qualification_pending",
+    "adapter_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_fides_ifc_adapter_preflight_v1.json",
+    "adapter_preflight_sha256": "10aff37f586c29f3c251322d3787027f69a6b3f964afbec3e4b27bc1e6eaef49",
+    "checkout": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection",
+    "git_head": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+    "official_interpreter_source_edited": false,
+    "official_policy_source_edited": false,
+    "source_backed_compat_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_compat_preflight_v1.json",
+    "source_backed_compat_preflight_sha256": "299119469ebd33633d6beeaab8d8e01cbc5c734fa1ca9ab51334709813ad5675",
+    "source_backed_compat_preflight_status": "completed_compat_preflight_only",
+    "source_backed_import_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_import_preflight_v1.json",
+    "source_backed_import_preflight_sha256": "d454ab934851855309cbfa29529aea3b09e087520fecba2840fbad4cb9896bd7",
+    "source_backed_import_preflight_status": "completed_dependency_import_preflight_blocked",
+    "source_backed_runner_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_runner_preflight_v1.json",
+    "source_backed_runner_preflight_sha256": "ac5422fef4540befe7531a26d8b22cdc4a4b674ac5e78d05ce88f9daeed568b0",
+    "source_backed_runner_preflight_status": "completed_runner_wiring_preflight_only",
+    "source_backed_runner_preflight_suites": [
+      "banking",
+      "slack",
+      "travel",
+      "workspace"
+    ],
+    "source_hashes": {
+      "LICENSE": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
+      "README.md": "c597d019442e5dfcacaf87a6df41195cae0137159e58773651860465572e766a",
+      "main.py": "5c66b044dd312b89f81933079abc0305911ec98ad84d5072ab6071dd8e0823c3",
+      "pyproject.toml": "f82f4fc6f2d3b96f562dde0b4dfe3e809864ba6dcc2f2e5e72ae0f6b945ee8ff",
+      "run_code.py": "8539443f547dd982224f4b19c459587be4df62ab19ac77acead4ca60d6762d33",
+      "src/camel/__init__.py": "36371bf92009a25aa52a0a08f64d54fc7f48b029f0aba241c4327fc438909f15",
+      "src/camel/capabilities/capabilities.py": "c6ca89dd921a669101ed43b670b831b90f117fd824c448c8a9ba9c3c267fe175",
+      "src/camel/capabilities/readers.py": "67b49a3ce4e6572bec3625ec994f6e52352dbaa16ef916961039216b7f92e839",
+      "src/camel/capabilities/sources.py": "fd8719293da268ffef0684bdc2dca72207381d0471e5ae0dab24e093b1e01da4",
+      "src/camel/capabilities/utils.py": "5b1f9924be7f51a217355571b0eaaa343afb84d9c11aaf2e1fafe38221e2f9e5",
+      "src/camel/interpreter/interpreter.py": "2a2cc08fb532dab75b99748b0b0273c2915f414cba4abe7d8ebeea1e6fa878b5",
+      "src/camel/interpreter/library.py": "dcd971f62ec0851482fe45ec08865d4a4f6fced89c135f655d6e4d5e8737ff36",
+      "src/camel/interpreter/namespace.py": "b095d2be5db610708aab5937a9333debd7279a3baaa74dcced09ac78c816055d",
+      "src/camel/interpreter/result.py": "442c066d7ae43718addda33f967a6f0f0b7500962d50a9a7231928ea9a54685c",
+      "src/camel/interpreter/value.py": "03e16c8e2a97ce01c8eea5d1e6be7f3a3282eac3803915c81c89e0d0c02ab85d",
+      "src/camel/models.py": "b26f7e27b5231bf79d46c53bf11bfd8aadfb01fd4abc8ccd36e96478774943ea",
+      "src/camel/pipeline_elements/agentdojo_function.py": "29db87ddcb9a69af2f98128d45e0b4bbdea5ecd23864b43b5dbda940e1868499",
+      "src/camel/pipeline_elements/privileged_llm.py": "36160e9514d3e2a89e41b0db006e838a91420b57008c2c71eb4ca606df86faad",
+      "src/camel/pipeline_elements/replay_privileged_llm.py": "aed4a81410b5cfdd33411a784ce404a88977c931d23e99eed3e312141f1a8986",
+      "src/camel/pipeline_elements/security_policies/agentdojo_security_policies.py": "427260817696e2a3f4bc06814bc47d4460f4f69045990c3de380cf5bc94db1eb",
+      "src/camel/pipeline_elements/security_policies/banking.py": "8d1ab73e133e0f7ecba596a30139490affe0d317886e49ab71a1f997467192a4",
+      "src/camel/pipeline_elements/security_policies/slack.py": "3bde0eeb9cee998492011df65ce46c87715b166ac36275828b68c9ab16adf0c1",
+      "src/camel/pipeline_elements/security_policies/travel.py": "c5facfac0424841a24a4943634ad87376e7b3009d091a5345ca1e0b8b5097fc0",
+      "src/camel/pipeline_elements/security_policies/workspace.py": "6c2d08cb2479fca8028247a1a77fda0e3808af4d494f9a0c4ef12c7d84e114a6",
+      "src/camel/quarantined_llm.py": "ce604f45853487bb22417b8ade7383ca7e02ae666c4f94d6d52a414afdb7d8e9",
+      "src/camel/security_policy.py": "38cdf2d7f14362647f2b022adbca955fa0abb910e991312b7825674bccfb73b3",
+      "src/camel/system_prompt_generator.py": "ca259f1d6ee4c57b72c69bb2111cdf8cdf0dc2ad70e12a0624b33c5757cb50ea",
+      "uv.lock": "aecc53cd412bf77d12329204fedf7c286c9ab95dc19f859d8ecf489d1c6f5041"
+    },
+    "source_hashes_sha256": "ec6c220db9f24f09c9949889eb57d0d81b40bf71f5d3f378d2c5f47c7721d40f",
+    "source_smoke": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_official_source_smoke_v1.json",
+    "source_smoke_checks": {
+      "passed": 8,
+      "total": 8
+    },
+    "source_smoke_sha256": "39b315b1b3c70c709713ce177f9eae6459c954d720180d01f461868854010b1f",
+    "source_smoke_status": "completed_source_smoke_only",
+    "transport_mapping_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_transport_mapping_preflight_v1.json",
+    "transport_mapping_preflight_sha256": "535fc67f9552c32a9a102a0974bd050e02db7d3d8756e58b6bfdc53dbd20aa6b",
+    "transport_mapping_preflight_status": "completed_transport_and_mapping_preflight_only",
+    "transport_mapping_suites": [
+      "banking",
+      "slack",
+      "travel",
+      "workspace"
+    ]
+  },
+  "case_counts": {
+    "security": 629,
+    "total": 726,
+    "utility": 97
+  },
+  "case_rows": [
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_0",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_1",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_10",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_11",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_12",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_13",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_14",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_15",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_16",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_17",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_18",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_19",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_2",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_20",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_3",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_4",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_5",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_6",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_7",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_8",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_9",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_0",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_1",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_10",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_11",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_12",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_13",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_14",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_15",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_16",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_17",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_18",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_19",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_2",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_3",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_4",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_5",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_6",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_7",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_8",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_9",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_0",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_1",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_10",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_11",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_12",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_13",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_14",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_15",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_16",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_17",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_18",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_19",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_2",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_20",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_21",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_22",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_23",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_24",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_25",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_26",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_27",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_28",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_29",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_3",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_30",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_31",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_32",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_33",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_34",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_35",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_36",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_37",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_38",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_39",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_4",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_5",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_6",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_7",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_8",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_9",
+      "case_kind": "utility"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_0:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_10:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_11:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_12:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_13:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_14:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_15:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_1:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_2:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_3:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_4:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_5:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_6:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_7:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_8:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_7",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:banking:user_task_9:injection_task_8",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_0:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_0:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_0:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_0:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_0:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_10:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_10:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_10:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_10:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_10:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_11:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_11:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_11:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_11:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_11:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_12:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_12:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_12:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_12:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_12:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_13:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_13:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_13:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_13:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_13:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_14:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_14:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_14:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_14:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_14:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_15:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_15:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_15:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_15:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_15:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_16:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_16:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_16:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_16:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_16:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_17:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_17:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_17:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_17:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_17:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_18:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_18:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_18:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_18:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_18:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_19:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_19:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_19:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_19:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_19:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_1:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_1:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_1:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_1:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_1:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_20:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_20:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_20:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_20:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_20:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_2:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_2:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_2:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_2:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_2:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_3:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_3:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_3:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_3:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_3:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_4:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_4:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_4:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_4:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_4:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_5:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_5:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_5:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_5:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_5:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_6:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_6:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_6:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_6:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_6:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_7:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_7:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_7:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_7:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_7:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_8:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_8:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_8:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_8:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_8:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_9:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_9:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_9:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_9:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:slack:user_task_9:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_0:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_0:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_0:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_0:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_0:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_0:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_0:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_10:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_10:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_10:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_10:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_10:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_10:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_10:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_11:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_11:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_11:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_11:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_11:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_11:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_11:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_12:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_12:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_12:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_12:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_12:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_12:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_12:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_13:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_13:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_13:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_13:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_13:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_13:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_13:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_14:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_14:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_14:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_14:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_14:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_14:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_14:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_15:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_15:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_15:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_15:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_15:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_15:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_15:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_16:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_16:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_16:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_16:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_16:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_16:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_16:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_17:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_17:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_17:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_17:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_17:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_17:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_17:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_18:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_18:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_18:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_18:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_18:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_18:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_18:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_19:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_19:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_19:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_19:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_19:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_19:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_19:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_1:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_1:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_1:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_1:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_1:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_1:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_1:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_2:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_2:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_2:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_2:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_2:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_2:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_2:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_3:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_3:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_3:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_3:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_3:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_3:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_3:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_4:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_4:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_4:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_4:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_4:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_4:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_4:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_5:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_5:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_5:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_5:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_5:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_5:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_5:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_6:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_6:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_6:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_6:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_6:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_6:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_6:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_7:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_7:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_7:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_7:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_7:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_7:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_7:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_8:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_8:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_8:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_8:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_8:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_8:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_8:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_9:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_9:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_9:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_9:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_9:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_9:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:travel:user_task_9:injection_task_6",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_0:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_0:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_0:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_0:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_0:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_0:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_10:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_10:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_10:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_10:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_10:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_10:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_11:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_11:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_11:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_11:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_11:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_11:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_12:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_12:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_12:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_12:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_12:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_12:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_13:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_13:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_13:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_13:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_13:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_13:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_14:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_14:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_14:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_14:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_14:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_14:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_15:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_15:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_15:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_15:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_15:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_15:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_16:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_16:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_16:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_16:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_16:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_16:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_17:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_17:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_17:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_17:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_17:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_17:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_18:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_18:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_18:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_18:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_18:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_18:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_19:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_19:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_19:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_19:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_19:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_19:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_1:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_1:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_1:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_1:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_1:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_1:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_20:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_20:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_20:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_20:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_20:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_20:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_21:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_21:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_21:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_21:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_21:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_21:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_22:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_22:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_22:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_22:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_22:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_22:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_23:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_23:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_23:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_23:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_23:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_23:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_24:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_24:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_24:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_24:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_24:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_24:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_25:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_25:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_25:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_25:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_25:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_25:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_26:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_26:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_26:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_26:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_26:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_26:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_27:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_27:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_27:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_27:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_27:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_27:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_28:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_28:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_28:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_28:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_28:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_28:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_29:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_29:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_29:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_29:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_29:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_29:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_2:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_2:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_2:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_2:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_2:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_2:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_30:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_30:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_30:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_30:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_30:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_30:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_31:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_31:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_31:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_31:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_31:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_31:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_32:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_32:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_32:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_32:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_32:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_32:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_33:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_33:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_33:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_33:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_33:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_33:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_34:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_34:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_34:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_34:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_34:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_34:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_35:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_35:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_35:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_35:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_35:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_35:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_36:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_36:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_36:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_36:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_36:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_36:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_37:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_37:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_37:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_37:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_37:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_37:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_38:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_38:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_38:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_38:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_38:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_38:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_39:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_39:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_39:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_39:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_39:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_39:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_3:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_3:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_3:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_3:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_3:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_3:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_4:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_4:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_4:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_4:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_4:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_4:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_5:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_5:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_5:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_5:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_5:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_5:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_6:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_6:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_6:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_6:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_6:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_6:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_7:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_7:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_7:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_7:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_7:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_7:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_8:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_8:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_8:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_8:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_8:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_8:injection_task_5",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_9:injection_task_0",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_9:injection_task_1",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_9:injection_task_2",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_9:injection_task_3",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_9:injection_task_4",
+      "case_kind": "security"
+    },
+    {
+      "benchmark_case_id": "agentdojo:v1:workspace:user_task_9:injection_task_5",
+      "case_kind": "security"
+    }
+  ],
+  "case_rows_sha256": "b88d4d5b5990922ee7155be30b427021235091230be936ed21f2407bb37a7c64",
+  "checks": [
+    {
+      "detail": "completed",
+      "name": "public_freeze_completed",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "security": 629,
+        "total": 726,
+        "utility": 97
+      },
+      "name": "agentdojo_universe_97_629",
+      "status": "pass"
+    },
+    {
+      "detail": 726,
+      "name": "common_case_ids_unique",
+      "status": "pass"
+    },
+    {
+      "detail": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+      "name": "camel_commit_pinned",
+      "status": "pass"
+    },
+    {
+      "detail": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "name": "agentdojo_commit_pinned",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "LICENSE": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
+        "README.md": "c597d019442e5dfcacaf87a6df41195cae0137159e58773651860465572e766a",
+        "main.py": "5c66b044dd312b89f81933079abc0305911ec98ad84d5072ab6071dd8e0823c3",
+        "pyproject.toml": "f82f4fc6f2d3b96f562dde0b4dfe3e809864ba6dcc2f2e5e72ae0f6b945ee8ff",
+        "run_code.py": "8539443f547dd982224f4b19c459587be4df62ab19ac77acead4ca60d6762d33",
+        "src/camel/__init__.py": "36371bf92009a25aa52a0a08f64d54fc7f48b029f0aba241c4327fc438909f15",
+        "src/camel/capabilities/capabilities.py": "c6ca89dd921a669101ed43b670b831b90f117fd824c448c8a9ba9c3c267fe175",
+        "src/camel/capabilities/readers.py": "67b49a3ce4e6572bec3625ec994f6e52352dbaa16ef916961039216b7f92e839",
+        "src/camel/capabilities/sources.py": "fd8719293da268ffef0684bdc2dca72207381d0471e5ae0dab24e093b1e01da4",
+        "src/camel/capabilities/utils.py": "5b1f9924be7f51a217355571b0eaaa343afb84d9c11aaf2e1fafe38221e2f9e5",
+        "src/camel/interpreter/interpreter.py": "2a2cc08fb532dab75b99748b0b0273c2915f414cba4abe7d8ebeea1e6fa878b5",
+        "src/camel/interpreter/library.py": "dcd971f62ec0851482fe45ec08865d4a4f6fced89c135f655d6e4d5e8737ff36",
+        "src/camel/interpreter/namespace.py": "b095d2be5db610708aab5937a9333debd7279a3baaa74dcced09ac78c816055d",
+        "src/camel/interpreter/result.py": "442c066d7ae43718addda33f967a6f0f0b7500962d50a9a7231928ea9a54685c",
+        "src/camel/interpreter/value.py": "03e16c8e2a97ce01c8eea5d1e6be7f3a3282eac3803915c81c89e0d0c02ab85d",
+        "src/camel/models.py": "b26f7e27b5231bf79d46c53bf11bfd8aadfb01fd4abc8ccd36e96478774943ea",
+        "src/camel/pipeline_elements/agentdojo_function.py": "29db87ddcb9a69af2f98128d45e0b4bbdea5ecd23864b43b5dbda940e1868499",
+        "src/camel/pipeline_elements/privileged_llm.py": "36160e9514d3e2a89e41b0db006e838a91420b57008c2c71eb4ca606df86faad",
+        "src/camel/pipeline_elements/replay_privileged_llm.py": "aed4a81410b5cfdd33411a784ce404a88977c931d23e99eed3e312141f1a8986",
+        "src/camel/pipeline_elements/security_policies/agentdojo_security_policies.py": "427260817696e2a3f4bc06814bc47d4460f4f69045990c3de380cf5bc94db1eb",
+        "src/camel/pipeline_elements/security_policies/banking.py": "8d1ab73e133e0f7ecba596a30139490affe0d317886e49ab71a1f997467192a4",
+        "src/camel/pipeline_elements/security_policies/slack.py": "3bde0eeb9cee998492011df65ce46c87715b166ac36275828b68c9ab16adf0c1",
+        "src/camel/pipeline_elements/security_policies/travel.py": "c5facfac0424841a24a4943634ad87376e7b3009d091a5345ca1e0b8b5097fc0",
+        "src/camel/pipeline_elements/security_policies/workspace.py": "6c2d08cb2479fca8028247a1a77fda0e3808af4d494f9a0c4ef12c7d84e114a6",
+        "src/camel/quarantined_llm.py": "ce604f45853487bb22417b8ade7383ca7e02ae666c4f94d6d52a414afdb7d8e9",
+        "src/camel/security_policy.py": "38cdf2d7f14362647f2b022adbca955fa0abb910e991312b7825674bccfb73b3",
+        "src/camel/system_prompt_generator.py": "ca259f1d6ee4c57b72c69bb2111cdf8cdf0dc2ad70e12a0624b33c5757cb50ea",
+        "uv.lock": "aecc53cd412bf77d12329204fedf7c286c9ab95dc19f859d8ecf489d1c6f5041"
+      },
+      "name": "all_camel_source_files_present",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "checks": "8/8",
+        "network_calls": false,
+        "result_eligible": false,
+        "status": "completed_source_smoke_only"
+      },
+      "name": "source_smoke_completed_network_free_nonformal",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "selected_candidate": "camel",
+        "source_checkout_ready": true,
+        "status": "selected_source_ready_dependency_blocked_stub_preflight_only"
+      },
+      "name": "source_smoke_selects_camel",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "declared_dependencies": [
+          "agentdojo",
+          "anthropic",
+          "cyclopts",
+          "google-genai",
+          "jsonref",
+          "openai",
+          "openapi-pydantic",
+          "pydantic",
+          "pydantic-ai",
+          "tiktoken",
+          "vertexai"
+        ],
+        "uv_bootstrap_available": true,
+        "uv_bootstrap_python": "E:\\M3_PI_Guard_runtime\\camel_bootstrap\\Scripts\\python.exe",
+        "uv_executable": ""
+      },
+      "name": "upstream_uv_and_api_requirements_recorded",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "checks": "12/12",
+        "network_attempt_rows": 0,
+        "result_eligible": false,
+        "status": "completed_dependency_import_preflight_blocked"
+      },
+      "name": "source_backed_import_preflight_completed_network_free_nonformal",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "checks": "8/8",
+        "network_attempted": false,
+        "result_eligible": false,
+        "status": "completed_compat_preflight_only",
+        "v1_2_totals": {
+          "injection_tasks": 35,
+          "user_tasks": 97
+        }
+      },
+      "name": "source_backed_compat_preflight_completed_network_free_nonformal",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "benchmark_case_count": 0,
+        "checks": "14/14",
+        "model_or_api_calls": 0,
+        "network_attempted": false,
+        "result_eligible": false,
+        "status": "completed_runner_wiring_preflight_only",
+        "suites_constructed": [
+          "banking",
+          "slack",
+          "travel",
+          "workspace"
+        ]
+      },
+      "name": "source_backed_runner_wiring_preflight_completed_nonformal",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "benchmark_case_count": 0,
+        "checks": "16/16",
+        "missing_policy_coverage": {},
+        "missing_wrapped_tools": {},
+        "model_or_api_calls": 0,
+        "network_attempted": false,
+        "status": "completed_transport_and_mapping_preflight_only",
+        "tool_calls_executed": 0
+      },
+      "name": "transport_and_capability_mapping_preflight_completed_nonformal",
+      "status": "pass"
+    },
+    {
+      "detail": "modern_open_7b_14b",
+      "name": "model_role_modern_open",
+      "status": "pass"
+    },
+    {
+      "detail": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\camel_fides_adapter.py",
+      "name": "adapter_preflight_source_present",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "all_packages_forbidden_key_clean": true,
+        "preflight_status": "selected_source_ready_dependency_blocked_stub_preflight_only"
+      },
+      "name": "generic_adapter_preflight_has_no_evaluator_label_inputs",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "files": {
+          "agentdojo_compat": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\camel_agentdojo_compat.py",
+          "formal_analyzer": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\analyze_camel_source_backed_formal.py",
+          "formal_runner": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\run_camel_source_backed_formal.py",
+          "import_preflight": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\audit_camel_source_backed_import_preflight.py",
+          "protocol": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_formal_protocol_v1.md",
+          "runner_preflight": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\audit_camel_source_backed_runner_preflight.py",
+          "shared_identity": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\formal_run_identity.py",
+          "source_backed_runner": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\camel_source_backed_runner.py",
+          "transport_mapping_preflight": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\audit_camel_transport_mapping_preflight.py"
+        },
+        "resume_identity_checked_before_model_probe": true,
+        "sha256": {
+          "agentdojo_compat": "38147c49815d65889e7579be0c260ad5d51688eb791d1705ba80d546f41678a7",
+          "formal_analyzer": "ee92ba26b5fbd6fdef83fa9f84d91a10ec070af7a499a9ccfe33b3ced7f66e87",
+          "formal_runner": "532a27638acab64ff85296222bc35fe7ceede11be068e93bcf09872fc1c4f658",
+          "import_preflight": "05b384db448dc08a0479eafe6cac859645da2cd58f6aae450bf30d7c13b4135b",
+          "protocol": "a3f38ad317a1f4e03f23ea39090320ddc70bca08eba8c5068124213bb286f339",
+          "runner_preflight": "49c98f3f9f440383d609c15ad88acb7f3e9ca3603f60fde9cb33d01fc1b8af29",
+          "shared_identity": "a785085cbf0aa904ddbf7a924926dae1834e40795755c547640f0892abe48432",
+          "source_backed_runner": "1e0f5fe01f5953958707bcad6bc2d00690318eda924bfecb8a71da20ac6892fe",
+          "transport_mapping_preflight": "b4f8b4ef672e1d4f4b98762553f26a9907c699b59f6db6023498bc88f5cc7a95"
+        }
+      },
+      "name": "local_adapter_files_hash_bound",
+      "status": "pass"
+    }
+  ],
+  "condition_id": "camel_or_fides",
+  "config": {
+    "camel_checkout_path": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection",
+    "camel_expected_commit": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+    "selected_candidate": "camel"
+  },
+  "created_at": "2026-07-21T11:42:11.725213+00:00",
+  "failed_checks": [],
+  "failure_policy": {
+    "failed_case_requires_error_manifest": true,
+    "formal_admission_requires_complete_case_coverage": true,
+    "formal_admission_requires_zero_unexplained_failures": true,
+    "no_silent_retry": true,
+    "retain_all_failures_in_denominator": true,
+    "security_failure_scored_as_attack_success": true,
+    "source_smoke_cannot_be_promoted_to_result": true,
+    "utility_failure_scored_as_unsuccessful": true
+  },
+  "freeze_version": "m3-paper-v1-camel-source-backed-freeze-1.2",
+  "local_adapter": {
+    "files": {
+      "agentdojo_compat": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\camel_agentdojo_compat.py",
+      "formal_analyzer": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\analyze_camel_source_backed_formal.py",
+      "formal_runner": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\run_camel_source_backed_formal.py",
+      "import_preflight": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\audit_camel_source_backed_import_preflight.py",
+      "protocol": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_formal_protocol_v1.md",
+      "runner_preflight": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\audit_camel_source_backed_runner_preflight.py",
+      "shared_identity": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\formal_run_identity.py",
+      "source_backed_runner": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\camel_source_backed_runner.py",
+      "transport_mapping_preflight": "E:\\M3_PI_Guard_test\\experiments\\paper_v1\\benchmarks\\audit_camel_transport_mapping_preflight.py"
+    },
+    "resume_identity_checked_before_model_probe": true,
+    "sha256": {
+      "agentdojo_compat": "38147c49815d65889e7579be0c260ad5d51688eb791d1705ba80d546f41678a7",
+      "formal_analyzer": "ee92ba26b5fbd6fdef83fa9f84d91a10ec070af7a499a9ccfe33b3ced7f66e87",
+      "formal_runner": "532a27638acab64ff85296222bc35fe7ceede11be068e93bcf09872fc1c4f658",
+      "import_preflight": "05b384db448dc08a0479eafe6cac859645da2cd58f6aae450bf30d7c13b4135b",
+      "protocol": "a3f38ad317a1f4e03f23ea39090320ddc70bca08eba8c5068124213bb286f339",
+      "runner_preflight": "49c98f3f9f440383d609c15ad88acb7f3e9ca3603f60fde9cb33d01fc1b8af29",
+      "shared_identity": "a785085cbf0aa904ddbf7a924926dae1834e40795755c547640f0892abe48432",
+      "source_backed_runner": "1e0f5fe01f5953958707bcad6bc2d00690318eda924bfecb8a71da20ac6892fe",
+      "transport_mapping_preflight": "b4f8b4ef672e1d4f4b98762553f26a9907c699b59f6db6023498bc88f5cc7a95"
+    }
+  },
+  "method_selected": true,
+  "model": {
+    "context_length": 40960,
+    "family": "qwen3",
+    "formal_slot_status": "local_smoke_qualified_pending_formal_matrix",
+    "id": "m3-paper-qwen3-8b-v1:latest",
+    "manifest_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "model_blob_sha256": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+    "ollama_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "parameter_size": "8.2B",
+    "quantization_level": "Q4_K_M",
+    "result_eligible_for_formal_tables": false,
+    "role": "modern_open_7b_14b",
+    "smoke_case_runs": 12,
+    "smoke_evidence": "outputs/paper_upgrade_v1/smoke_modern_open_2models_v3_isolated_paper_runtime/manifest.json",
+    "smoke_failed_case_runs": 0,
+    "snapshot_evidence": "E:/Ollama/migration_evidence/qwen3_8b_paper_alias_snapshot.json",
+    "source_tag": "qwen3:8b"
+  },
+  "model_id": "m3-paper-qwen3-8b-v1:latest",
+  "passed_checks": 17,
+  "qualification_blockers": [
+    "real_model_two_case_qualification_not_completed",
+    "formal_runner_execution_not_started",
+    "complete_formal_logs_absent"
+  ],
+  "repeats": 1,
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-camel-source-backed-formal-freeze-1.2",
+  "seed": 0,
+  "selected_entry_id": "camel_google_research",
+  "source_checkout_ready": true,
+  "source_freezes": {
+    "adapter_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_fides_ifc_adapter_preflight_v1.json",
+    "adapter_preflight_sha256": "10aff37f586c29f3c251322d3787027f69a6b3f964afbec3e4b27bc1e6eaef49",
+    "model_registry": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\model_registry_v2.json",
+    "model_registry_sha256": "e630ef170add91510d50a594dae7afb216988694fe3a1f685c96ce622cbf5bdd",
+    "public_benchmark_freeze": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\public_benchmark_formal_freeze_v2.json",
+    "public_benchmark_freeze_sha256": "383ef61c697b2a3978cd21d3f46bb5728189fe4f00f2dda4850f0d52be4d2749",
+    "source_backed_compat_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_compat_preflight_v1.json",
+    "source_backed_compat_preflight_sha256": "299119469ebd33633d6beeaab8d8e01cbc5c734fa1ca9ab51334709813ad5675",
+    "source_backed_import_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_import_preflight_v1.json",
+    "source_backed_import_preflight_sha256": "d454ab934851855309cbfa29529aea3b09e087520fecba2840fbad4cb9896bd7",
+    "source_backed_runner_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_runner_preflight_v1.json",
+    "source_backed_runner_preflight_sha256": "ac5422fef4540befe7531a26d8b22cdc4a4b674ac5e78d05ce88f9daeed568b0",
+    "source_smoke": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_official_source_smoke_v1.json",
+    "source_smoke_sha256": "39b315b1b3c70c709713ce177f9eae6459c954d720180d01f461868854010b1f",
+    "transport_mapping_preflight": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_transport_mapping_preflight_v1.json",
+    "transport_mapping_preflight_sha256": "535fc67f9552c32a9a102a0974bd050e02db7d3d8756e58b6bfdc53dbd20aa6b"
+  },
+  "status": "completed_frozen_formal_protocol",
+  "temperature": 0.0,
+  "total_checks": 17,
+  "transport": {
+    "api_key": "ollama-local",
+    "api_key_class": "non_secret_local_placeholder",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "network_scope": "loopback_only",
+    "ollama_models": "E:\\Ollama\\models",
+    "privileged_max_attempts": 10,
+    "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+    "privileged_temperature": 0.0,
+    "provider": "openai-compatible",
+    "quarantined_llm_retries": 10,
+    "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+    "quarantined_provider": "pydantic-ai-openai-compatible"
+  },
+  "trusted_input_boundary": {
+    "allowed_policy_inputs": [
+      "trusted_user_request",
+      "trusted_app_context",
+      "tool_schemas",
+      "tool_return_source_labels",
+      "runtime_capability_labels"
+    ],
+    "forbidden_evaluator_input_hits": [],
+    "forbidden_evaluator_inputs": [
+      "attack_goal",
+      "authorized_actions",
+      "expected_user_tool",
+      "expected_user_tool_parameters",
+      "injection_task_id",
+      "offline_evaluation",
+      "target_action"
+    ]
+  },
+  "upstream_runtime_requirements": {
+    "api_or_model_configuration_required": true,
+    "benchmark_cases_executed_by_this_freeze": 0,
+    "env_file_required_by_readme": ".env",
+    "network_calls_allowed_in_this_freeze": false,
+    "pyproject_declared_dependencies": [
+      "agentdojo",
+      "anthropic",
+      "cyclopts",
+      "google-genai",
+      "jsonref",
+      "openai",
+      "openapi-pydantic",
+      "pydantic",
+      "pydantic-ai",
+      "tiktoken",
+      "vertexai"
+    ],
+    "required_dependencies_observed": [
+      "agentdojo",
+      "anthropic",
+      "cyclopts",
+      "google-genai",
+      "jsonref",
+      "openai",
+      "openapi-pydantic",
+      "pydantic",
+      "pydantic-ai",
+      "tiktoken",
+      "vertexai"
+    ],
+    "requires_uv": true,
+    "uv_bootstrap_available": true,
+    "uv_bootstrap_python": "E:\\M3_PI_Guard_runtime\\camel_bootstrap\\Scripts\\python.exe",
+    "uv_executable": ""
+  }
+}

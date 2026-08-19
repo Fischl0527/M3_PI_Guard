@@ -1,0 +1,40 @@
+{
+  "approved_at": "2026-07-30T02:04:00+08:00",
+  "artifact_role": "adaptive_cost_canary_execution_authorization",
+  "authorization": {
+    "canary_execution_authorized": true,
+    "candidate_manifest_sha256": "6570795d5da00b5d6093ad5997ee2720d0f1644cb0313d02dfd2e88af446578d",
+    "candidate_scope_sha256": "777d1e90eca5a15176e9257cbbfc789c3679f20f98f16d1853dcbbcddc73bf88",
+    "formal_continuation_authorized": false,
+    "owner_statement_sha256": "cbcd94f46048feee121eaa3cc5216b60856c9da03572f2a223f5ae0229415d99",
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "automatic_retries": 0,
+    "external_effects_enabled": false,
+    "old_v1_query_records_reused": false,
+    "provider_tools_enabled": false,
+    "scientific_outcomes_may_be_reviewed": false,
+    "technical_cost_gate_only": true
+  },
+  "manifest_sha256": "a179071c8d83884fede59731ee26c84b4b09d5dfff110c96b392f1a26fd3ccaf",
+  "schema_version": "m3-paper-v2-adaptive-cost-canary-admission-2.0",
+  "scope": {
+    "endpoint_type": "official_api",
+    "exact_command": "F:\\robot\\Anaconda3\\python.exe -m experiments.paper_v2.adaptive_cost_canary_controller_v2 --execute-canary --admission protocols\\paper_upgrade_v2\\admissions\\adaptive_cost_canary_admission_v2.json --config config\\project.local.env",
+    "exact_command_sha256": "5f363f5f28329282a3c6bb309b5f18bb6dfebffd2f2cdd1335c12b65f05fe09d",
+    "execution_identity": "df7e2f5c2a2d792f89b0a4e1e5350566108da4a4e2c8eb40f72967118b7c4203",
+    "hard_limit_cny": 5.0,
+    "maximum_provider_calls": 3200,
+    "maximum_queries": 400,
+    "model_id": "deepseek-v4-pro",
+    "model_role": "primary",
+    "output_root": "outputs/paper_upgrade_v2/adaptive_cost_canary_v2/primary",
+    "provider_id": "deepseek",
+    "query_budget_per_task": 50,
+    "run_id": "adaptive-cost-canary-primary-v2",
+    "task_count": 8
+  },
+  "scope_sha256": "067beca9222a7cf333a9ede2f6478d72a475a038cc65963982063e7fd5c66eb5",
+  "status": "activated_for_fresh_adaptive_cost_canary_only"
+}

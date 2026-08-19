@@ -1,0 +1,22 @@
+{
+  "append_only_execution_ledgers_mutated": false,
+  "diagnostic_rows_retained_in_itt": true,
+  "expected_records": 480,
+  "negative_scenarios": 7,
+  "network_calls_made": 0,
+  "positive_scenarios": 1,
+  "qualified_checks": {
+    "base_gate_negatives": true,
+    "base_gate_positive": true,
+    "full_coverage": true,
+    "no_overlap": true,
+    "remainder_count": true,
+    "source_count": true
+  },
+  "remainder_records": 177,
+  "result_admission_authorized": false,
+  "schema_version": "m3-paper-v2-formal-result-gate-qualification-6.0",
+  "scientific_outcomes_read": 0,
+  "source_records": 303,
+  "status": "combined_v8_v9_result_gate_qualified_offline"
+}

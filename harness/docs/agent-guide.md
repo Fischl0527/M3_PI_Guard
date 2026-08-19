@@ -1,17 +1,17 @@
-# Agent Guide
+# 智能体指南
 
-This guide explains how an AI coding agent should operate inside this repository.
+本指南说明 AI 编程智能体应如何在本仓库内工作。
 
-## Start Of Session
+## 会话开始
 
-Read these files first:
+先阅读以下文件：
 
 1. `AGENTS.md`
 2. `harness/state/current-task.md`
 3. `harness/docs/architecture.md`
 4. `harness/state/progress.md`
 
-Then load relevant support files:
+然后按需加载相关支持文件：
 
 - `harness/features/feature_list.json`
 - `harness/specs/product-spec.md`
@@ -22,88 +22,88 @@ Then load relevant support files:
 - `harness/state/memory.md`
 - `harness/state/session-handoff.md`
 
-## Creating A Task
+## 创建任务
 
-Use `harness/tasks/task.md` as the task record template.
+使用 `harness/tasks/task.md` 作为任务记录模板。
 
-A task must include:
+任务必须包括：
 
-- Goal
-- Scope
-- Plan
-- Implementation record
-- Verification record
-- Final report
+- 目标
+- 范围
+- 计划
+- 实施记录
+- 验证记录
+- 最终报告
 
-Update `harness/state/current-task.md` with the active task summary.
+在 `harness/state/current-task.md` 中更新当前任务摘要。
 
-## During Implementation
+## 实施期间
 
-- Inspect relevant code before edits.
-- Keep changes small.
-- Update task notes after meaningful steps.
-- Record architectural decisions immediately.
-- Record failures in `harness/state/failure-log.md`.
-- Update feature status as work progresses.
+- 编辑前检查相关代码。
+- 保持改动小而明确。
+- 完成有意义的步骤后更新任务记录。
+- 立即记录架构决策。
+- 在 `harness/state/failure-log.md` 中记录失败。
+- 随工作推进更新功能状态。
 
-## Verification
+## 验证
 
-Use the strongest available command on the primary Windows runtime:
+在主要 Windows 运行环境中使用可用的最强验证命令：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File harness/scripts/verify.ps1
 ```
 
-The equivalent WSL/Git Bash wrapper is:
+对应的 WSL/Git Bash 包装器为：
 
 ```bash
 bash harness/scripts/verify.sh
 ```
 
-For local iteration, use narrower commands such as:
+本地迭代时使用更窄的命令，例如：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File harness/scripts/test.ps1
 ```
 
-Always record:
+始终记录：
 
-- Command
-- Result
-- Important output
-- Skipped checks and reason
+- 命令
+- 结果
+- 重要输出
+- 跳过的检查及原因
 
-## Completing A Task
+## 完成任务
 
-Before claiming completion:
+声称完成前：
 
-1. Confirm acceptance criteria are met.
-2. Confirm required verification passed.
-3. Update `harness/features/feature_list.json`.
-4. Update `harness/state/progress.md`.
-5. Update `harness/state/task-history.md`.
-6. Update `harness/state/session-handoff.md`.
-7. Write a final report with evidence.
+1. 确认验收标准已经满足。
+2. 确认必需验证已经通过。
+3. 更新 `harness/features/feature_list.json`。
+4. 更新 `harness/state/progress.md`。
+5. 更新 `harness/state/task-history.md`。
+6. 更新 `harness/state/session-handoff.md`。
+7. 编写带证据的最终报告。
 
-## Handling Failure
+## 处理失败
 
-When a failure occurs:
+发生失败时：
 
-1. Record the error.
-2. Explain the likely cause.
-3. Record attempted fixes.
-4. Try a changed hypothesis.
-5. Stop if the next step needs confirmation.
+1. 记录错误。
+2. 解释可能原因。
+3. 记录已经尝试的修复。
+4. 使用不同假设继续验证。
+5. 如果下一步需要确认，则停止并等待。
 
-Do not repeat an identical failed attempt.
+不要重复完全相同的失败尝试。
 
-## Handoff
+## 移交
 
-At the end of a session, make sure `harness/state/session-handoff.md` answers:
+会话结束时，确保 `harness/state/session-handoff.md` 回答：
 
-- What is the current task?
-- What changed?
-- What remains?
-- What commands were run?
-- What is the next best action?
-- Are there blockers or risks?
+- 当前任务是什么？
+- 改变了什么？
+- 还剩什么？
+- 运行了哪些命令？
+- 最佳下一步是什么？
+- 是否存在阻塞或风险？

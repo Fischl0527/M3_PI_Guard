@@ -1,0 +1,28 @@
+{
+  "authoring_environment": "<separate directory/machine and dependency lock>",
+  "authoring_method": "<human|independent_program|mixed and version>",
+  "candidate_filename": "m3_v2_independent_blind_candidate.jsonl",
+  "candidate_row_count": 600,
+  "candidate_sha256": "<SHA-256 after final write>",
+  "custodian_id": "<person who controls release>",
+  "developer_access_before_seal": false,
+  "independent_author_ids": [
+    "<author-1>",
+    "<author-2-if-used>"
+  ],
+  "notes": "",
+  "reference_material_allowed": [
+    "public threat taxonomy",
+    "tool schemas without M3 expected answers",
+    "this content-free assignment kit"
+  ],
+  "reference_material_forbidden": [
+    "M3-v2 development/validation/holdout case content",
+    "M3 experiment outputs or failure cases",
+    "Guard rules, detector scores or thresholds"
+  ],
+  "release_condition": "after code, thresholds, hypotheses and exclusions freeze",
+  "schema_version": "m3-independent-blind-custody-1.0",
+  "sealed_at": "<ISO-8601>",
+  "status": "sealed_candidate"
+}

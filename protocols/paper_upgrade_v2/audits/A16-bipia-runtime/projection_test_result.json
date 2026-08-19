@@ -1,0 +1,19 @@
+{
+  "audit_id": "A16-bipia-runtime",
+  "limitations": "This test validates the source-audited boundary projection. It is not a full upstream model/API execution.",
+  "offline_fields": [
+    "reference_response",
+    "attack_success_label",
+    "utility_label"
+  ],
+  "online_fields": [
+    "context",
+    "guidance",
+    "system_prompt",
+    "user_prompt"
+  ],
+  "passed": true,
+  "schema_version": "m3-paper-v2-projection-test-result-1.0",
+  "scope": "declared_online_boundary_projection",
+  "sentinel_visible": false
+}

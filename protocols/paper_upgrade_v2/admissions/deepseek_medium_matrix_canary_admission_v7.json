@@ -1,0 +1,35 @@
+{
+  "artifact_role": "six_condition_canary_execution_authorization",
+  "authorization": {
+    "canary_execution_authorized": true,
+    "canary_review_sha256": null,
+    "candidate_manifest_sha256": "4c3e5a8657b9bb98735ad891fb8aed8a7d71aaedf837eff695b6605fcdb271be",
+    "candidate_only": false,
+    "matrix_continuation_authorized": false,
+    "owner_approval": {
+      "approval_kind": "delegated_safe_api_iteration",
+      "approval_scope": "deepseek_v7_six_condition_canary",
+      "approved_at": "2026-07-24T23:20:00+08:00",
+      "approved_by_role": "project_owner",
+      "statement_sha256": "2194cd7fd6734d220f7b38cd64fd717df8717270f0034dcaebece42185269ef2"
+    },
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "prior_runs_resumed": false
+  },
+  "generated_at": "2026-07-24T23:20:00+08:00",
+  "manifest_sha256": "e363f8cac514ab8e1ddec5d904af9f6ca6bb3a7b865447269afd8522fac074f9",
+  "next_gate": "Execute exactly six v7 canary items once.",
+  "schema_version": "m3-paper-v2-formal-matrix-admission-7.0",
+  "scope": {
+    "candidate_scope_sha256": "ac66bc62efba1089dc9f1731926663b9834240a60cdee8a3309f8e42e1cabee9",
+    "run_id": "paper-v2-deepseek-medium-v7-20260724"
+  },
+  "scope_sha256": "f1b29a226fd3d73d939e7b2e265ccb4d2e420055ed1c264242e40fb31bc68bea",
+  "status": "activated_for_six_condition_canary"
+}

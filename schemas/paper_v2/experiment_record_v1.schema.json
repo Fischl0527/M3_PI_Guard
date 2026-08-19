@@ -1,0 +1,432 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json",
+  "title": "M3-PI Guard paper-v2 experiment record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "run_id",
+    "case_id",
+    "benchmark_id",
+    "condition_id",
+    "evaluation_case_type",
+    "authorization_regime",
+    "online_visible_field_digest",
+    "initial_guard_decision",
+    "effective_decision",
+    "ask_reason",
+    "confirmation_result",
+    "unsafe_effect",
+    "unsafe_effect_itt",
+    "task_completion",
+    "operational_status",
+    "included_in_intention_to_treat",
+    "provider_attestation",
+    "result_tier",
+    "latency_ms",
+    "token_usage",
+    "recorded_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-experiment-record-1.0"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "condition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evaluation_case_type": {
+      "enum": ["attack", "benign_tool", "benign_no_tool"]
+    },
+    "authorization_regime": {
+      "enum": [
+        "exact_gold",
+        "auto_compiled",
+        "broad",
+        "underspecified",
+        "conflicting"
+      ]
+    },
+    "online_visible_field_digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "field_paths",
+        "field_count",
+        "field_names_sha256",
+        "visible_values_sha256",
+        "forbidden_fields_present",
+        "forbidden_field_paths"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256-canonical-json-v1"
+        },
+        "field_paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "field_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "field_names_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "visible_values_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "forbidden_fields_present": {
+          "const": false
+        },
+        "forbidden_field_paths": {
+          "type": "array",
+          "maxItems": 0
+        }
+      }
+    },
+    "initial_guard_decision": {
+      "enum": ["ALLOW", "ASK", "DENY"]
+    },
+    "effective_decision": {
+      "enum": ["ALLOW", "DENY", "NOT_EXECUTED"]
+    },
+    "ask_reason": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "permission_expansion",
+        "provenance_ambiguity",
+        "parameter_out_of_scope",
+        "context_dependency",
+        "independent_confirmation_required",
+        "other"
+      ]
+    },
+    "confirmation_result": {
+      "enum": [
+        "not_requested",
+        "pending",
+        "approved",
+        "denied",
+        "expired",
+        "error"
+      ]
+    },
+    "unsafe_effect": {
+      "type": ["boolean", "null"]
+    },
+    "unsafe_effect_itt": {
+      "type": "boolean"
+    },
+    "task_completion": {
+      "type": "boolean"
+    },
+    "operational_status": {
+      "enum": [
+        "completed",
+        "refusal",
+        "timeout",
+        "parse_failure",
+        "max_steps",
+        "provider_failure",
+        "runner_failure"
+      ]
+    },
+    "included_in_intention_to_treat": {
+      "const": true
+    },
+    "provider_attestation": {
+      "$ref": "#/$defs/provider_attestation"
+    },
+    "result_tier": {
+      "enum": [
+        "stub",
+        "diagnostic",
+        "qualification",
+        "formal_candidate",
+        "formal_admitted"
+      ]
+    },
+    "admission_manifest_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "latency_ms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "model", "guard", "tool"],
+      "properties": {
+        "total": {"type": "number", "minimum": 0},
+        "model": {"type": "number", "minimum": 0},
+        "guard": {"type": "number", "minimum": 0},
+        "tool": {"type": "number", "minimum": 0}
+      }
+    },
+    "token_usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "output", "total", "available"],
+      "properties": {
+        "input": {"type": "integer", "minimum": 0},
+        "output": {"type": "integer", "minimum": 0},
+        "total": {"type": "integer", "minimum": 0},
+        "available": {"type": "boolean"}
+      }
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "provider_attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint_type",
+        "provider_name",
+        "upstream_provider",
+        "model_id",
+        "model_revision",
+        "request_id",
+        "response_id",
+        "requested_at",
+        "parameters_sha256",
+        "prompt_rewrite_declaration",
+        "identity_evidence",
+        "identity_verified",
+        "evidence_level"
+      ],
+      "properties": {
+        "endpoint_type": {
+          "enum": [
+            "official_api",
+            "auditable_gateway",
+            "unverified_relay",
+            "local_runtime",
+            "stub"
+          ]
+        },
+        "provider_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "upstream_provider": {
+          "type": ["string", "null"]
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_revision": {
+          "type": ["string", "null"]
+        },
+        "request_id": {
+          "type": ["string", "null"]
+        },
+        "response_id": {
+          "type": ["string", "null"]
+        },
+        "requested_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "parameters_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "prompt_rewrite_declaration": {
+          "enum": [
+            "none_declared",
+            "declared",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "identity_evidence": {
+          "enum": [
+            "official_response",
+            "gateway_attestation",
+            "local_artifact_hash",
+            "unverified",
+            "not_applicable"
+          ]
+        },
+        "identity_verified": {
+          "type": "boolean"
+        },
+        "evidence_level": {
+          "enum": [
+            "formal_candidate",
+            "diagnostic_only",
+            "local_qualification",
+            "stub_only"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "initial_guard_decision": {"const": "ASK"}
+        },
+        "required": ["initial_guard_decision"]
+      },
+      "then": {
+        "properties": {
+          "ask_reason": {"type": "string"},
+          "confirmation_result": {
+            "enum": ["pending", "approved", "denied", "expired", "error"]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "ask_reason": {"type": "null"},
+          "confirmation_result": {"const": "not_requested"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "operational_status": {
+            "enum": [
+              "timeout",
+              "parse_failure",
+              "max_steps",
+              "provider_failure",
+              "runner_failure"
+            ]
+          }
+        },
+        "required": ["operational_status"]
+      },
+      "then": {
+        "properties": {
+          "unsafe_effect_itt": {"const": true},
+          "task_completion": {"const": false}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "operational_status": {"const": "refusal"}
+        },
+        "required": ["operational_status"]
+      },
+      "then": {
+        "properties": {
+          "unsafe_effect": {"const": false},
+          "unsafe_effect_itt": {"const": false},
+          "task_completion": {"const": false}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provider_attestation": {
+            "properties": {
+              "endpoint_type": {"const": "unverified_relay"}
+            },
+            "required": ["endpoint_type"]
+          }
+        },
+        "required": ["provider_attestation"]
+      },
+      "then": {
+        "properties": {
+          "provider_attestation": {
+            "properties": {
+              "identity_verified": {"const": false},
+              "identity_evidence": {"const": "unverified"},
+              "evidence_level": {"const": "diagnostic_only"}
+            }
+          },
+          "result_tier": {
+            "enum": ["stub", "diagnostic"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_tier": {
+            "enum": ["formal_candidate", "formal_admitted"]
+          }
+        },
+        "required": ["result_tier"]
+      },
+      "then": {
+        "properties": {
+          "provider_attestation": {
+            "properties": {
+              "endpoint_type": {
+                "enum": ["official_api", "auditable_gateway"]
+              },
+              "request_id": {"type": "string", "minLength": 1},
+              "response_id": {"type": "string", "minLength": 1},
+              "prompt_rewrite_declaration": {"const": "none_declared"},
+              "identity_verified": {"const": true},
+              "evidence_level": {"const": "formal_candidate"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_tier": {"const": "formal_admitted"}
+        },
+        "required": ["result_tier"]
+      },
+      "then": {
+        "required": ["admission_manifest_sha256"],
+        "properties": {
+          "admission_manifest_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "admission_manifest_sha256": {"type": ["null", "string"]}
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "canary_records": 12,
+  "canary_work_key_sequence_sha256": "9a855dfd61776fb8bff089196b4cf34fc8c5bc2bae41220b6325cd640f03cbc2",
+  "controls": {
+    "automatic_retries": 0,
+    "billing_tier": "free",
+    "external_effects_enabled": false,
+    "first_http_429": "seal_current_run",
+    "paid_ceiling_usd": 0.0,
+    "provider_managed_tools_enabled": false
+  },
+  "credentials_read": false,
+  "generated_at": "2026-08-02T00:00:00+08:00",
+  "network_calls_made": 0,
+  "plan_manifest_sha256": "11b23e6fdc64b294add44d7ea391121dc57220d1286fb4ec127d26579a2ec313",
+  "plan_records": 1791,
+  "resolver_probe_count": 4,
+  "resolver_probes": [
+    {
+      "benchmark": "agentdojo-v1",
+      "binding_sha256": "81c5b46e4a158d2d2eeb54980364b98c0794108b5603dbc7f3a11afc88e78bb2",
+      "category": "attack",
+      "work_key": "48e061f0accb237bf30024c972fb825444fe576418904db863043308d42b0654"
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "binding_sha256": "9ea6c125b71299ca4fa72abdb4e2beb47b90198c7b1008c81f7f30dc757170e2",
+      "category": "benign",
+      "work_key": "00b71f680aa5a2f5eb82f4d6a77d24f520eaa9f230cb36ec1e32f61d9813e540"
+    },
+    {
+      "benchmark": "m3-v2",
+      "binding_sha256": "c4efe30eb1bc50fba7d4cf7206c649b1213b0b513de5be48e4f992cc2bc3a5e7",
+      "category": "attack",
+      "work_key": "df2aa15b751296471494836a14748bd1133a340d6fc307eb3525013ec5bffcae"
+    },
+    {
+      "benchmark": "m3-v2",
+      "binding_sha256": "2f4052e0e1988bc299865b82c02d14df2fee1f78b90d8e087aa7b91984214f24",
+      "category": "benign",
+      "work_key": "120484e8faec221f9a07aab53b9eab0951da2842e98c4a66ef15537865de4786"
+    }
+  ],
+  "schema_version": "m3-paper-v2-gemini-public-qualification-1.0",
+  "scientific_outcomes_read": 0,
+  "status": "offline_interfaces_qualified_live_canary_pending"
+}

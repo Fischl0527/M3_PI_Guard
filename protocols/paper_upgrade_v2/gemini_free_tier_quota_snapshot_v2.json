@@ -1,0 +1,65 @@
+{
+  "schema_version": "m3-paper-v2-gemini-free-tier-quota-snapshot-2.0",
+  "status": "active_project_free_tier_confirmed_owner_console",
+  "captured_at": "2026-07-27T09:31:00+08:00",
+  "captured_at_semantics": "owner screenshot visible local time rounded to the minute",
+  "provider_id": "gemini",
+  "provider_name": "Google",
+  "model_id": "gemini-3.6-flash",
+  "billing_tier": "free",
+  "paid_billing_link_present": false,
+  "paid_tier_allowed": false,
+  "monetary_hard_limit_usd": 0.0,
+  "chargeable_features_enabled": false,
+  "active_limits": {
+    "requests_per_minute": 5,
+    "input_tokens_per_minute": 250000,
+    "requests_per_day": 20,
+    "requests_per_day_reset_timezone": "America/Los_Angeles"
+  },
+  "active_limit_derivation": {
+    "method": "owner_console_tier_comparison",
+    "paid_tier_1_limits": {
+      "requests_per_minute": 1000,
+      "input_tokens_per_minute": 2000000,
+      "requests_per_day": 10000
+    },
+    "displayed_free_tier_differences": {
+      "requests_per_minute": -995,
+      "input_tokens_per_minute": -1750000,
+      "requests_per_day": -9980
+    },
+    "post_unlink_project_page_shows_free_tier": true
+  },
+  "prospective_v3_local_caps": {
+    "requests_per_minute": 4,
+    "input_tokens_per_minute": 200000,
+    "requests_per_day": 18,
+    "output_tokens_per_day": 16000,
+    "reserved_requests_per_day": 2,
+    "concurrency": 1,
+    "automatic_retries": 0
+  },
+  "source_evidence": {
+    "current_free_tier_project_screenshot_sha256": "de07fef9130efe9ab12a149e071abb42a8e91478d0fb65ae1c921eebe8b423bb",
+    "tier_comparison_screenshot_sha256": "7242c33eb068881c924d980e49bb5c8dade6e2cf9682830e96e261094de31f96",
+    "screenshots_stored_in_repository": false,
+    "project_identifier_stored": false,
+    "api_key_or_credential_stored": false
+  },
+  "execution_boundary": {
+    "formal_execution_authorized": false,
+    "single_fixed_connectivity_diagnostic_authorized": true,
+    "provider_managed_tools": false,
+    "external_effects": false,
+    "cross_provider_fallback": false,
+    "first_http_429": "stop_without_retry",
+    "prompt_or_response_content_persisted": false
+  },
+  "evidence_boundary": [
+    "This snapshot supersedes the historical billing-tier interpretation only for a future prospective Gemini v3 route.",
+    "It does not mutate, resume, or promote frozen Gemini v1 or v2 evidence.",
+    "The full 192-work-item route cannot be executed in one provider day under the free-tier RPD limit.",
+    "A future v3 controller must meter provider calls rather than work items and preserve at least two daily requests as reserve."
+  ]
+}

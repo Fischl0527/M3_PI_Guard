@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3.local/schemas/paper_v2/public_sharded_continuation_admission_v2.schema.json",
+  "title": "M3 paper-v2 public sharded continuation admission v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_role",
+    "approved_at",
+    "status",
+    "scope",
+    "authorization",
+    "evidence_boundary",
+    "scope_sha256",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-public-sharded-continuation-admission-2.0"
+    },
+    "artifact_role": {
+      "const": "single_fresh_shard_execution_authorization"
+    },
+    "approved_at": {"type": "string", "format": "date-time"},
+    "status": {"const": "activated_for_one_exact_fresh_recovery_shard"},
+    "scope": {
+      "type": "object",
+      "required": [
+        "model_role",
+        "shard_index",
+        "run_id",
+        "execution_identity",
+        "model_id",
+        "records",
+        "work_key_sequence_sha256",
+        "output_root",
+        "hard_spend_limit_cny",
+        "exact_command",
+        "exact_command_sha256"
+      ]
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_manifest_sha256",
+        "owner_statement_sha256",
+        "shard_execution_authorized",
+        "result_admission_authorized"
+      ],
+      "properties": {
+        "candidate_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "owner_statement_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "shard_execution_authorized": {"const": true},
+        "result_admission_authorized": {"const": false}
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scientific_outcomes_may_be_reviewed",
+        "provider_tools_enabled",
+        "external_effects_enabled",
+        "automatic_retries",
+        "old_records_reused"
+      ],
+      "properties": {
+        "scientific_outcomes_may_be_reviewed": {"const": false},
+        "provider_tools_enabled": {"const": false},
+        "external_effects_enabled": {"const": false},
+        "automatic_retries": {"const": 0},
+        "old_records_reused": {"const": false}
+      }
+    },
+    "scope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

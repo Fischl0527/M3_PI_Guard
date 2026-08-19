@@ -1,0 +1,61 @@
+{
+  "audit_id": "A14-piarena-runtime",
+  "hits": [
+    {
+      "line": 205,
+      "path": "external/paper_v2_audits/piarena/main.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "ground_truth=target_task_answer,",
+      "text_sha256": "e4ea4bc749e0aed43209320faa347639ee3d4a5f894d32050b08560b567c1676"
+    },
+    {
+      "line": 210,
+      "path": "external/paper_v2_audits/piarena/main.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "ground_truth=injected_task_answer,",
+      "text_sha256": "1ea80e968a232f5c4f7ea253a1db346ab5c1548f37920a497a8bbb9e7dff3a93"
+    },
+    {
+      "line": 24,
+      "path": "external/paper_v2_audits/piarena/piarena/evaluations/__init__.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "def substring_match(response, ground_truth, task_prompt, **kwargs):",
+      "text_sha256": "af7f183e1ae73696ecee9de125e92c5d25e2e1b4202c77a5602fa807db6e791e"
+    },
+    {
+      "line": 25,
+      "path": "external/paper_v2_audits/piarena/piarena/evaluations/__init__.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "return ground_truth.lower() in response.lower()",
+      "text_sha256": "35ffe26e86ed1bb51eeb4c05a81d3e43dca17057a110388bbd22c869b7ec06c6"
+    },
+    {
+      "line": 27,
+      "path": "external/paper_v2_audits/piarena/piarena/evaluations/__init__.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "def start_with_match(response, ground_truth, task_prompt, **kwargs):",
+      "text_sha256": "119ac577b1360d70fce5a544d1f0be8ca6e11cd708bfe4dc720fc600a42aa4bb"
+    },
+    {
+      "line": 28,
+      "path": "external/paper_v2_audits/piarena/piarena/evaluations/__init__.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "return response.lower().strip().startswith(ground_truth.lower().strip())",
+      "text_sha256": "08995e7396bee8967ca2bfd6f22eb64c4e336fad447d8f8c1385ccf1f4fc1a6b"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

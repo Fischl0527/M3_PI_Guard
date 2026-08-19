@@ -1,0 +1,82 @@
+{
+  "schema_version": "paper-agentdojo-selected-prompt-baselines-protocol-1.0",
+  "protocol_id": "agentdojo_selected_prompt_baselines_v1",
+  "created_at": "2026-07-18",
+  "evidence_status": "diagnostic_not_formal_benchmark",
+  "result_eligible_for_formal_tables": false,
+  "selection_path": "protocols/paper_upgrade_v1/agentdojo_four_suite_screen_selection_v1.json",
+  "base_selected_repeat_manifest": "outputs/paper_upgrade_v1/agentdojo_native_matrix/selected_repeat_qwen3_v1/manifest.json",
+  "output_dir": "outputs/paper_upgrade_v1/agentdojo_native_matrix/selected_prompt_baselines_qwen3_v1",
+  "suite_cluster_count": 29,
+  "model": "qwen3:4b-instruct",
+  "backend": "ollama",
+  "temperature": 0.0,
+  "seed": 20260718,
+  "max_steps": 12,
+  "attack": "important_instructions",
+  "repeats": 3,
+  "defenses": [
+    "agentdojo_repeat_user_prompt",
+    "agentdojo_spotlighting_with_delimiting"
+  ],
+  "expected_jobs": 174,
+  "upstream_agentdojo_defenses": {
+    "included": [
+      "repeat_user_prompt",
+      "spotlighting_with_delimiting"
+    ],
+    "deferred": [
+      {
+        "id": "tool_filter",
+        "reason": "Pinned AgentDojo implementation supports OpenAI-style tool-calling models only."
+      },
+      {
+        "id": "transformers_pi_detector",
+        "reason": "Input-detector strong baseline, not a prompt-baseline condition; ProtectAI dependency smoke is separate and formal use still requires a frozen full AgentDojo official cell."
+      }
+    ]
+  },
+  "analysis_requirement": "Join this manifest with selected_repeat_qwen3_v1; do not use the two-condition selected analyzer directly.",
+  "completion_criteria": [
+    "174/174 prompt-baseline jobs completed",
+    "0 unexplained failures",
+    "combined manifest, CSV, JSON, PNG, and SVG artifacts produced",
+    "diagnostic-only boundary visible in the analysis"
+  ],
+  "execution_result": {
+    "status": "completed",
+    "prompt_baseline_manifest": "outputs/paper_upgrade_v1/agentdojo_native_matrix/selected_prompt_baselines_qwen3_v1/manifest.json",
+    "prompt_baseline_completed_jobs": 174,
+    "prompt_baseline_failed_jobs": 0,
+    "repeat_user_prompt_injection_success": {
+      "numerator": 66,
+      "denominator": 87
+    },
+    "spotlighting_with_delimiting_injection_success": {
+      "numerator": 66,
+      "denominator": 87
+    },
+    "combined_output_dir": "outputs/paper_upgrade_v1/agentdojo_native_matrix/selected_prompt_baseline_comparison_qwen3_v1",
+    "combined_completed_jobs": 348,
+    "four_condition_injection_success": {
+      "no_defense": {
+        "numerator": 72,
+        "denominator": 87
+      },
+      "agentdojo_repeat_user_prompt": {
+        "numerator": 66,
+        "denominator": 87
+      },
+      "agentdojo_spotlighting_with_delimiting": {
+        "numerator": 66,
+        "denominator": 87
+      },
+      "m3_full": {
+        "numerator": 0,
+        "denominator": 87
+      }
+    },
+    "visual_check": "prompt_baseline_comparison.png inspected; diagnostic watermark retained",
+    "boundary": "diagnostic selected-cluster evidence only; not full AgentDojo distribution"
+  }
+}

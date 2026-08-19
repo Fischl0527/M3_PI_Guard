@@ -1,0 +1,8 @@
+{
+  "audit_id": "A11-struq-runtime",
+  "base_digest": "b197bea856c74365f6b0006e58d1966648e5c9c6bb4503a26f4fc248c3855a7a",
+  "mutated_digest": "b197bea856c74365f6b0006e58d1966648e5c9c6bb4503a26f4fc248c3855a7a",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

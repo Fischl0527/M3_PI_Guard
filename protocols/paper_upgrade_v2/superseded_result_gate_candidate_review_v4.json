@@ -1,0 +1,17 @@
+{
+  "schema_version": "m3-paper-v2-superseded-result-gate-candidate-review-1.0",
+  "status": "superseded_before_scientific_outcome_access",
+  "superseded_candidate": {
+    "path": "protocols/paper_upgrade_v2/deepseek_medium_result_gate_candidate_v1.json",
+    "manifest_sha256": "d4ca0aed6e710e9f8d32484fc5311f0dbdb2813acc2a727aa0f4bbecd6271638",
+    "locked_analysis_sha256": "dcf1cfd6711b8a7723d1c8645e27e40577151b6aab5233146fb9740f95d0f9bc"
+  },
+  "reason": "The legacy primary analyzer validates experiment-record v1, while the formal DeepSeek matrix persists experiment-record v2.2 with a provider trace bundle and safety receipt.",
+  "discovery_method": "static_contract_version_compatibility_review",
+  "scientific_outcomes_reviewed": false,
+  "network_calls_made": 0,
+  "result_admission_authorized": false,
+  "analysis_authorized": false,
+  "execution_ledgers_mutated": false,
+  "remediation": "Validate each original v2.2 record first, construct a v1-compatible analysis-only evidence view without changing outcomes, decisions or append-only evidence, test it against a frozen official pilot record, and refreeze before result access."
+}

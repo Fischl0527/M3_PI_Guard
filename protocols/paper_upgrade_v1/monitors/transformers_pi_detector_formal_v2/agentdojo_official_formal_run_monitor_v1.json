@@ -1,0 +1,68 @@
+{
+  "boundary": "Read-only monitoring snapshot. It does not repair, retry, admit, exclude, or analyze formal results. Only a completed formal run with exact frozen coverage and zero unexplained failures may enter paper result tables.",
+  "condition_id": "agentdojo_transformers_pi_detector_official",
+  "counts": {
+    "case_manifest_count": 76,
+    "completed_cases": 75,
+    "expected_cases": 726,
+    "failed_cases": 1,
+    "missing_cases": 650,
+    "observed_outcomes": 76,
+    "outcome_case_kind_counts": {
+      "utility": 76
+    },
+    "outcome_status_counts": {
+      "completed": 75,
+      "failed": 1
+    },
+    "progress_events": 231,
+    "progress_status_counts": {
+      "completed": 75,
+      "failed": 2,
+      "resumed_completed": 75,
+      "running": 79
+    }
+  },
+  "created_at": "2026-07-22T08:29:16.491175+00:00",
+  "formal_result_admitted_now": false,
+  "health_blockers": [
+    "failed_cases_present"
+  ],
+  "health_status": "running_with_failures_requires_attention",
+  "last_progress_event": {
+    "benchmark_case_id": "agentdojo:v1:workspace:user_task_26",
+    "case_kind": "utility",
+    "created_at": "2026-07-21T03:59:57.225837+00:00",
+    "index": 77,
+    "selected_cases": 726,
+    "status": "running",
+    "suite": "workspace"
+  },
+  "manifest_status": "running",
+  "model_id": "m3-paper-qwen3-8b-v1:latest",
+  "monitor_version": "m3-paper-v1-agentdojo-official-formal-run-monitor-1.0",
+  "outcomes_exists": true,
+  "outcomes_path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector/outcomes.jsonl",
+  "outcomes_sha256": "0e5c30e9518caba9c74263e12b9918d0a62346148b9363628033f56777ff6744",
+  "pid": 21024,
+  "pid_alive": false,
+  "progress_exists": true,
+  "progress_path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector/progress.jsonl",
+  "progress_sha256": "b4db74532bc24f343fa226fa617ee37f028b8c360526c2c745f36adec2e17d31",
+  "run_dir": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector",
+  "run_manifest_exists": true,
+  "run_manifest_path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector/run_manifest.json",
+  "run_manifest_sha256": "61edceb6a7c82120fc0e3790e2cce672714f9ee28f2d11f0d84433c9f54dd087",
+  "schema_version": "paper-agentdojo-official-formal-run-monitor-1.0",
+  "snapshot_rows_sha256": "9ab01a0957ae1980c77b602e54c205bf2247763f835d0b2e29712c290a5e96d7",
+  "status": "completed",
+  "timing": {
+    "elapsed_seconds": 102724.716,
+    "eta_hours_at_current_rate": 244.046,
+    "last_update_age_seconds": 102559.265,
+    "latest_update_at": "2026-07-21T03:59:57.225837+00:00",
+    "observed_cases_per_hour": 2.663,
+    "stall_threshold_seconds": 2700,
+    "started_at": "2026-07-21T03:57:11.774717+00:00"
+  }
+}

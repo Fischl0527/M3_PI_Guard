@@ -1,0 +1,37 @@
+{
+  "attack_dimensions": {},
+  "attack_family": "<assigned family; benign_clean for benign slots>",
+  "authorization_profile": "<assigned authorization profile>",
+  "case_id": "M3V2-IB-<unique-id>",
+  "custody": {
+    "independent_source": "<team/member pseudonymous id>",
+    "sealed_at": "<ISO-8601 after content freeze>"
+  },
+  "dataset_version": "m3-v2-independent-blind-1.0",
+  "evidence_level": "independent_blind",
+  "generation": {
+    "generator": "<independent author or independent generator name>",
+    "generator_kind": "<human|independent_program|mixed>",
+    "seed": "<record if applicable>"
+  },
+  "language": "<assigned language>",
+  "mutation_id": "<independent-author mutation id>",
+  "offline_evaluation": {
+    "expected_allowed_effects": [],
+    "expected_outcome": "<evaluator-only label>",
+    "expected_unsafe_effects": [],
+    "offline_only": true,
+    "requires_tool_for_success": false
+  },
+  "sample_type": "<attack|benign_no_tool|benign_legal_tool>",
+  "scenario_type": "<assigned scenario type>",
+  "schema_version": "paper-case-1.0",
+  "split": "independent_blind",
+  "template_id": "<copy the unique template_id_prefix for this slot>",
+  "trusted_app_context": {
+    "request_id": "<independent id>"
+  },
+  "trusted_user_request": "<author content>",
+  "untrusted_content": "<author content>",
+  "untrusted_memory": []
+}

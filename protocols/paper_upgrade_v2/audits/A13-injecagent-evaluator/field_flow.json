@@ -1,0 +1,119 @@
+{
+  "audit_id": "A13-injecagent-evaluator",
+  "authorization_source": "mixed_or_unclear",
+  "missing_component": null,
+  "offline_boundaries": [
+    {
+      "end_line": 186,
+      "forbidden_identifier_hits": [
+        "target_tool"
+      ],
+      "parameters": [
+        "output",
+        "target_tool",
+        "attacker_tools",
+        "user_tool",
+        "attacker_instruction",
+        "word_num"
+      ],
+      "path": "external/benchmarks/injecagent/src/output_parsing.py",
+      "phase": "posthoc_attack_evaluation",
+      "referenced_identifiers": [
+        "DOTALL",
+        "action_cnt",
+        "action_index",
+        "attacker_instruction",
+        "attacker_tools",
+        "availabel_tools",
+        "cnt_meaningful_key",
+        "detect_overly_long_sequences",
+        "detect_repetitive_language",
+        "enumerate",
+        "findall",
+        "i",
+        "index",
+        "info_list",
+        "join",
+        "key",
+        "len",
+        "longest_match",
+        "matches",
+        "max",
+        "output",
+        "output_parser",
+        "output_word",
+        "parameters",
+        "parsed",
+        "parsed_output",
+        "pattern",
+        "range",
+        "re",
+        "replace",
+        "split",
+        "strip",
+        "target_tool",
+        "thought",
+        "truncate_at_marker",
+        "user_tool",
+        "value",
+        "word_num"
+      ],
+      "referenced_string_keys": [
+        "Attacker Tool Parameters",
+        "Attacker Tool Thought",
+        "eval",
+        "info_list",
+        "invalid_reason"
+      ],
+      "required_token_checks": {
+        "attacker_tools": true,
+        "eval": true,
+        "target_tool": true
+      },
+      "sha256": "ffbc9e8286d8bc19c53a3e4ee8ee37ae01707ae3b4f5de74f104bcbd9eb63ddd",
+      "start_line": 58,
+      "symbol": "evaluate_output_prompted"
+    },
+    {
+      "end_line": 202,
+      "forbidden_identifier_hits": [
+        "target_tool"
+      ],
+      "parameters": [
+        "output",
+        "target_tool",
+        "user_tool",
+        "tool_calls"
+      ],
+      "path": "external/benchmarks/injecagent/src/output_parsing.py",
+      "phase": "posthoc_attack_evaluation",
+      "referenced_identifiers": [
+        "list",
+        "output",
+        "parsed_output",
+        "target_tool",
+        "tool_call",
+        "tool_calls",
+        "type",
+        "user_tool"
+      ],
+      "referenced_string_keys": [
+        "Attacker Tool Parameters",
+        "arguments",
+        "eval",
+        "function",
+        "name"
+      ],
+      "required_token_checks": {
+        "target_tool": true,
+        "tool_calls": true
+      },
+      "sha256": "ffbc9e8286d8bc19c53a3e4ee8ee37ae01707ae3b4f5de74f104bcbd9eb63ddd",
+      "start_line": 189,
+      "symbol": "evaluate_output_finetuned"
+    }
+  ],
+  "online_boundaries": [],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

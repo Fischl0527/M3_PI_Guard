@@ -1,0 +1,16 @@
+{
+  "schema_version": "m3-paper-v2-superseded-result-gate-candidate-review-1.0",
+  "status": "superseded_before_scientific_outcome_access",
+  "superseded_candidate": {
+    "path": "protocols/paper_upgrade_v2/deepseek_medium_result_gate_candidate_v1.json",
+    "manifest_sha256": "d4ca0aed6e710e9f8d32484fc5311f0dbdb2813acc2a727aa0f4bbecd6271638"
+  },
+  "reason": "The prospective result gate confused the provider-trace attestation evidence_level with the record/bundle result tier. The attestation schema fixes prospective_formal_trace_eligible_v2, while formal_candidate belongs to the record and bundle ceiling.",
+  "discovery_method": "frozen_attestation_schema_and_content_free_v4_metadata_review",
+  "scientific_outcomes_reviewed": false,
+  "network_calls_made": 0,
+  "result_admission_authorized": false,
+  "analysis_authorized": false,
+  "execution_ledgers_mutated": false,
+  "remediation": "Check the schema-fixed attestation level separately from the formal-candidate record/bundle tiers, rerun qualification and projection tests, and refreeze before result access."
+}

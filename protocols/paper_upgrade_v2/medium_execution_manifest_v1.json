@@ -1,0 +1,81 @@
+{
+  "execution_authorized": false,
+  "execution_identity": "45f931d02ccd1eaaa614c48f76f4017e13893cf2913754aa53cdc470e65845c9",
+  "generated_at": "2026-07-23T20:30:00+08:00",
+  "locked_inputs": {
+    "experiments/paper_v2/contracts.py": {
+      "bytes": 11400,
+      "sha256": "cc3b320a269ef91227c26cafafa976a3831583f6c6057d8dfd57bdf18e3ac2aa"
+    },
+    "protocols/paper_upgrade_v2/medium_case_index_v1.jsonl": {
+      "bytes": 304338,
+      "sha256": "1d649122630e1aa6aa683efa744d2c225903d3d2f982b572136173a80db40ba7"
+    },
+    "protocols/paper_upgrade_v2/medium_case_manifest_v1.json": {
+      "bytes": 1630,
+      "sha256": "1ea8e5a2b2d99224e7817cd5366c1540727a2df1440a9856fc84b78b39d7a94f"
+    },
+    "protocols/paper_upgrade_v2/medium_gate_spec_v1.json": {
+      "bytes": 1306,
+      "sha256": "afc9a96e624056606ad1bf52bae05fa5326e6ccf4d3e548335aae90b9d12f7b8"
+    },
+    "protocols/paper_upgrade_v2/online_state_audit_registry_v2.json": {
+      "bytes": 20068,
+      "sha256": "d20dfbf34981aee3d7ba310a9c87a74e11b894bee68261e47c83fa9b4a1e1eaf"
+    },
+    "protocols/paper_upgrade_v2/provider_cost_decision_candidate_v1.json": {
+      "bytes": 1723,
+      "sha256": "a21eab97693ecac3ec12f72596c7d27475046b0a73b7f3ce677572f9751ee287"
+    },
+    "protocols/paper_upgrade_v2/provider_cost_preflight_v1.json": {
+      "bytes": 3125,
+      "sha256": "012b3ca0b8c58743fb2f660f4c216b537036e1e7baecec5fd3fc5d9d850e8257"
+    },
+    "protocols/paper_upgrade_v2/structural_baseline_registry_v1.json": {
+      "bytes": 2384,
+      "sha256": "eef0181207698b69ac6a6f1694ad9abbb689f1f5424d19d6256c43c043346fb0"
+    },
+    "schemas/paper_v2/experiment_record_v1.schema.json": {
+      "bytes": 10499,
+      "sha256": "6eefb47e727c342ad26ca3362524f001724c72ca2f60c1d71a80d67e99bc47bd"
+    }
+  },
+  "network_calls_made": 0,
+  "plan_bytes": 2150836,
+  "plan_path": "protocols/paper_upgrade_v2/medium_execution_plan_v1.jsonl",
+  "plan_sha256": "d3281b8468e101925acd86b6620276ed9fab33f2d09f18f40956c777c0161694",
+  "provider_calls_upper_bound": 4416,
+  "provider_gate": {
+    "blockers": [
+      "A real smoke response has not yet attested the exact upstream model.",
+      "Request-ID availability has not been attested.",
+      "Response-ID availability has not been attested.",
+      "The formal logging redaction review is pending.",
+      "The user has not approved this provider/cost decision.",
+      "No hard USD spend limit has been approved."
+    ],
+    "gate_pass": false,
+    "path": "protocols/paper_upgrade_v2/provider_cost_preflight_v1.json",
+    "sha256": "012b3ca0b8c58743fb2f660f4c216b537036e1e7baecec5fd3fc5d9d850e8257",
+    "status": "blocked_runtime_attestation_and_user_approval"
+  },
+  "results_present": false,
+  "resume_contract": {
+    "duplicate_terminal_event": "reject",
+    "failure_denominator_rule": "retain_operational_failure_in_itt",
+    "identity_drift": "reject",
+    "ledger_format": "append_only_jsonl",
+    "started_without_terminal": "retry_same_work_key",
+    "terminal_event_types": [
+      "completed",
+      "operational_failure"
+    ]
+  },
+  "schema_version": "m3-paper-v2-medium-execution-manifest-1.0",
+  "status": "blocked_provider_gate_results_pending",
+  "work_item_count": 480,
+  "work_item_counts": {
+    "authorization_regime_probe": 48,
+    "primary": 432
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v1/experiment_manifest.schema.json",
+  "title": "M3 paper-v1 ExperimentManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "experiment_id", "status", "git_commit", "code_freeze_sha256", "dataset", "policy_regime", "attack_budget", "models", "baselines", "random_seeds", "threshold_frozen", "hypotheses_frozen", "exclusion_rules_frozen", "effectiveness_eligible", "created_at"],
+  "properties": {
+    "schema_version": {"const": "paper-experiment-manifest-1.0"},
+    "experiment_id": {"type": "string"},
+    "status": {"enum": ["pending", "running", "completed", "failed", "blocked_external"]},
+    "git_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "git_dirty": {"type": "boolean"},
+    "code_freeze_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "configuration_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "baseline_registry_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "dataset": {
+      "type": "object",
+      "required": ["name", "split", "sha256", "evidence_level"],
+      "properties": {
+        "name": {"type": "string"},
+        "split": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "evidence_level": {"enum": ["development", "validation", "sealed_automated_holdout", "independent_blind", "public_benchmark"]}
+      },
+      "additionalProperties": true
+    },
+    "policy_regime": {"enum": ["exact_trusted", "auto_compiled", "ambiguous", "partial", "incorrect", "oracle_upper_bound"]},
+    "attack_budget": {"type": "integer", "minimum": 0},
+    "models": {"type": "array", "items": {"type": "string"}},
+    "baselines": {"type": "array", "items": {"type": "string"}},
+    "random_seeds": {"type": "array", "items": {"type": "integer"}},
+    "threshold_frozen": {"type": "boolean"},
+    "hypotheses_frozen": {"type": "boolean"},
+    "exclusion_rules_frozen": {"type": "boolean"},
+    "effectiveness_eligible": {"type": "boolean"},
+    "resource_blockers": {"type": "array", "items": {"type": "string"}},
+    "environment": {"type": "object", "additionalProperties": true},
+    "expected_case_runs": {"type": "integer", "minimum": 0},
+    "completed_case_runs": {"type": "integer", "minimum": 0},
+    "failed_case_runs": {"type": "integer", "minimum": 0},
+    "created_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": ["string", "null"], "format": "date-time"}
+  }
+}

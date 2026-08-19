@@ -1,0 +1,8 @@
+{
+  "schema_version": "paper-v1-evidence-index-1.0",
+  "status": "active_evidence_index",
+  "revision": 1,
+  "m3_v2_independent_blind_manifest": "",
+  "result_eligible_for_confirmatory_q2_tables": false,
+  "boundary": "Mutable paper-v1 evidence index only. Historical E0-E17 and final_analysis manifests remain immutable; an entry may be added only by a fail-closed admission tool after the referenced formal result passes every frozen identity and completeness check."
+}

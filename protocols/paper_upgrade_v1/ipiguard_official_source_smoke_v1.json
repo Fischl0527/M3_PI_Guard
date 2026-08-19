@@ -1,0 +1,431 @@
+{
+  "audit_version": "m3-paper-v1-ipiguard-official-source-smoke-1.0",
+  "boundary": "Source smoke only. It verifies pinned IPIGuard code structure and official TDG wiring markers without importing dependencies, calling APIs, executing models or scoring any benchmark case. Formal result eligibility remains false until an accepted source-backed adapter runs complete cells with raw logs and materializer admission.",
+  "checks": [
+    {
+      "detail": "protocols/paper_upgrade_v1/ipiguard_tdg_adapter_preflight_v1.json",
+      "name": "preflight_manifest_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": "ready_for_official_source_smoke",
+      "name": "preflight_source_ready",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "expected_commit": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+        "git_head": "4e686ed2f62c135cb12564a4466daa95f3ace878"
+      },
+      "name": "source_checkout_matches_expected_commit",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "agent_pipeline": true,
+        "eval_shell": true,
+        "ipiguard_llm": true,
+        "readme": true,
+        "run_data_module": true,
+        "run_eval": true,
+        "tool_execution": true,
+        "tool_whitelist": true
+      },
+      "name": "required_source_files_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "agent_pipeline": {
+          "error": "",
+          "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py",
+          "syntax_ok": true
+        },
+        "ipiguard_llm": {
+          "error": "",
+          "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py",
+          "syntax_ok": true
+        },
+        "run_data_module": {
+          "error": "",
+          "path": "external/baselines/ipiguard/run/data_module.py",
+          "syntax_ok": true
+        },
+        "run_eval": {
+          "error": "",
+          "path": "external/baselines/ipiguard/run/eval.py",
+          "syntax_ok": true
+        },
+        "tool_execution": {
+          "error": "",
+          "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/tool_execution.py",
+          "syntax_ok": true
+        },
+        "tool_whitelist": {
+          "error": "",
+          "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/default_suites/v1/tools/tool_white_list.py",
+          "syntax_ok": true
+        }
+      },
+      "name": "required_source_files_syntax_compile",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "dag_construction": {
+          "file": "ipiguard_llm",
+          "markers": [
+            "class OpenAIConstructLLM",
+            "def construct_dag",
+            "nx.DiGraph()",
+            "depends_on",
+            "dag.add_edge",
+            "extra_args[\"dag\"]"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "dag_execution_loop": {
+          "file": "tool_execution",
+          "markers": [
+            "class DagToolsExecutionLoop",
+            "topological_sort(dag)",
+            "extra_args[\"current_tool_call\"]",
+            "class DagToolsExecutor",
+            "query_node_expansion"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "dag_traversal_and_repair": {
+          "file": "ipiguard_llm",
+          "markers": [
+            "class OpenAITraverseLLM",
+            "def query_args_update",
+            "def query_node_expansion",
+            "def query_response",
+            "def query_reflection",
+            "topological_sort"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "evaluation_entrypoint": {
+          "file": "run_eval",
+          "markers": [
+            "HfArgumentParser(ScriptArguments)",
+            "defense=script_args.defense_name",
+            "initialize_dataset",
+            "save_result",
+            "mode",
+            "uid",
+            "iid"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "ipiguard_pipeline_wiring": {
+          "file": "agent_pipeline",
+          "markers": [
+            "config.defense == \"ipiguard\"",
+            "OpenAIConstructLLM",
+            "OpenAITraverseLLM",
+            "DagToolsExecutor",
+            "DagToolsExecutionLoop"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "whitelist_command_split": {
+          "file": "tool_execution",
+          "markers": [
+            "from agentdojo.default_suites.v1.tools.tool_white_list import whitelist",
+            "current_tool_call.function in whitelist",
+            "new_commands.append",
+            "New tool call success"
+          ],
+          "missing_markers": [],
+          "passed": true
+        }
+      },
+      "name": "official_source_marker_groups_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "error": "",
+        "expected_case_counts": {
+          "banking": 144,
+          "slack": 105,
+          "travel": 140,
+          "workspace": 240
+        },
+        "injection_task_num": {
+          "banking": 9,
+          "slack": 5,
+          "travel": 7,
+          "workspace": 6
+        },
+        "matches_expected_counts": true,
+        "parsed": true,
+        "path": "external/baselines/ipiguard/run/data_module.py",
+        "total_attack_pairs": 629,
+        "total_benign_user_tasks": 97,
+        "user_task_num": {
+          "banking": 16,
+          "slack": 21,
+          "travel": 20,
+          "workspace": 40
+        }
+      },
+      "name": "dataset_universe_counts_match_expected_public_script",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": false,
+      "name": "formal_result_eligibility_remains_false",
+      "severity": "error",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "6a349fef8e57b71b103548a3dc969bbdf11b613103735a3418f9660d71e7aa47",
+  "created_at": "2026-07-22T07:58:37.373686+00:00",
+  "dataset_universe": {
+    "error": "",
+    "expected_case_counts": {
+      "banking": 144,
+      "slack": 105,
+      "travel": 140,
+      "workspace": 240
+    },
+    "injection_task_num": {
+      "banking": 9,
+      "slack": 5,
+      "travel": 7,
+      "workspace": 6
+    },
+    "matches_expected_counts": true,
+    "parsed": true,
+    "path": "external/baselines/ipiguard/run/data_module.py",
+    "total_attack_pairs": 629,
+    "total_benign_user_tasks": 97,
+    "user_task_num": {
+      "banking": 16,
+      "slack": 21,
+      "travel": 20,
+      "workspace": 40
+    }
+  },
+  "marker_groups": {
+    "dag_construction": {
+      "file": "ipiguard_llm",
+      "markers": [
+        "class OpenAIConstructLLM",
+        "def construct_dag",
+        "nx.DiGraph()",
+        "depends_on",
+        "dag.add_edge",
+        "extra_args[\"dag\"]"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "dag_execution_loop": {
+      "file": "tool_execution",
+      "markers": [
+        "class DagToolsExecutionLoop",
+        "topological_sort(dag)",
+        "extra_args[\"current_tool_call\"]",
+        "class DagToolsExecutor",
+        "query_node_expansion"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "dag_traversal_and_repair": {
+      "file": "ipiguard_llm",
+      "markers": [
+        "class OpenAITraverseLLM",
+        "def query_args_update",
+        "def query_node_expansion",
+        "def query_response",
+        "def query_reflection",
+        "topological_sort"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "evaluation_entrypoint": {
+      "file": "run_eval",
+      "markers": [
+        "HfArgumentParser(ScriptArguments)",
+        "defense=script_args.defense_name",
+        "initialize_dataset",
+        "save_result",
+        "mode",
+        "uid",
+        "iid"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "ipiguard_pipeline_wiring": {
+      "file": "agent_pipeline",
+      "markers": [
+        "config.defense == \"ipiguard\"",
+        "OpenAIConstructLLM",
+        "OpenAITraverseLLM",
+        "DagToolsExecutor",
+        "DagToolsExecutionLoop"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "whitelist_command_split": {
+      "file": "tool_execution",
+      "markers": [
+        "from agentdojo.default_suites.v1.tools.tool_white_list import whitelist",
+        "current_tool_call.function in whitelist",
+        "new_commands.append",
+        "New tool call success"
+      ],
+      "missing_markers": [],
+      "passed": true
+    }
+  },
+  "next_required_for_formal_results": [
+    "install/freeze IPIGuard AgentDojo fork dependencies in an isolated environment",
+    "build a source-backed adapter that maps frozen M3/AgentDojo/InjecAgent tools into the official TDG flow",
+    "run complete formal cells with raw official logs and zero silent skips",
+    "materialize results only through the public-benchmark formal-cell gate"
+  ],
+  "preflight_manifest": {
+    "path": "protocols/paper_upgrade_v1/ipiguard_tdg_adapter_preflight_v1.json",
+    "sha256": "47308b60e30c21cbe4de7168070c00b51a91c5c096e1f8e61f90d800b1c79c67",
+    "status": "ready_for_official_source_smoke"
+  },
+  "required_files": {
+    "agent_pipeline": {
+      "exists": true,
+      "key": "agent_pipeline",
+      "line_count": 256,
+      "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py",
+      "relative_path": "agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py",
+      "sha256": "de794ed8bcf5e7ef18897ac3564257153c0a70a0858e1e3fbe779b8ad8dfdbd5"
+    },
+    "eval_shell": {
+      "exists": true,
+      "key": "eval_shell",
+      "line_count": 20,
+      "path": "external/baselines/ipiguard/eval.sh",
+      "relative_path": "eval.sh",
+      "sha256": "02ba807b2e91d60353b98bdc3067f26459ba2fa07f446c2dd8dcaddb0d4afadc"
+    },
+    "ipiguard_llm": {
+      "exists": true,
+      "key": "ipiguard_llm",
+      "line_count": 554,
+      "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py",
+      "relative_path": "agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py",
+      "sha256": "5bed3e68ae31dff804674edbc96a1b61fd74fdc0533083561cff78bcdbb88a5a"
+    },
+    "readme": {
+      "exists": true,
+      "key": "readme",
+      "line_count": 132,
+      "path": "external/baselines/ipiguard/README.md",
+      "relative_path": "README.md",
+      "sha256": "182c7cdf050903a5bf667ff1431a2f4d814d365cbccb5f745c79c8c02329a614"
+    },
+    "run_data_module": {
+      "exists": true,
+      "key": "run_data_module",
+      "line_count": 27,
+      "path": "external/baselines/ipiguard/run/data_module.py",
+      "relative_path": "run/data_module.py",
+      "sha256": "886f625bf79ca99b2065fc13f565d750c552811151bd96d9addde1238ab62992"
+    },
+    "run_eval": {
+      "exists": true,
+      "key": "run_eval",
+      "line_count": 258,
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "relative_path": "run/eval.py",
+      "sha256": "a01dfb86d33bccb45b4ef68d38e77614235cb82727a415f8550c1bc8c87b9dfc"
+    },
+    "tool_execution": {
+      "exists": true,
+      "key": "tool_execution",
+      "line_count": 398,
+      "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/tool_execution.py",
+      "relative_path": "agentdojo/src/agentdojo/agent_pipeline/tool_execution.py",
+      "sha256": "03be3212a6492b0a5015feb0000102824bfbb5ffdf1f960f4d5290273a6b42eb"
+    },
+    "tool_whitelist": {
+      "exists": true,
+      "key": "tool_whitelist",
+      "line_count": 52,
+      "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/default_suites/v1/tools/tool_white_list.py",
+      "relative_path": "agentdojo/src/agentdojo/default_suites/v1/tools/tool_white_list.py",
+      "sha256": "c21f39a9bce9719cdc2c3714507c9aa21f7f9999ada802f55e2fa5133d540297"
+    }
+  },
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-ipiguard-official-source-smoke-1.0",
+  "source_checkout": {
+    "checkout_path": "external/baselines/ipiguard",
+    "expected_commit": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+    "git_head": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+    "matches_expected_commit": true,
+    "python_executable": "F:\\robot\\Anaconda3\\python.exe",
+    "python_version": "3.13.5"
+  },
+  "status": "completed_source_smoke_only",
+  "summary": {
+    "failed_checks": 0,
+    "marker_group_count": 6,
+    "passed_checks": 8,
+    "required_file_count": 8,
+    "syntax_compiled_file_count": 6,
+    "total_checks": 8
+  },
+  "syntax_compile": {
+    "agent_pipeline": {
+      "error": "",
+      "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py",
+      "syntax_ok": true
+    },
+    "ipiguard_llm": {
+      "error": "",
+      "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/llms/ipiguard_llm.py",
+      "syntax_ok": true
+    },
+    "run_data_module": {
+      "error": "",
+      "path": "external/baselines/ipiguard/run/data_module.py",
+      "syntax_ok": true
+    },
+    "run_eval": {
+      "error": "",
+      "path": "external/baselines/ipiguard/run/eval.py",
+      "syntax_ok": true
+    },
+    "tool_execution": {
+      "error": "",
+      "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/agent_pipeline/tool_execution.py",
+      "syntax_ok": true
+    },
+    "tool_whitelist": {
+      "error": "",
+      "path": "external/baselines/ipiguard/agentdojo/src/agentdojo/default_suites/v1/tools/tool_white_list.py",
+      "syntax_ok": true
+    }
+  }
+}

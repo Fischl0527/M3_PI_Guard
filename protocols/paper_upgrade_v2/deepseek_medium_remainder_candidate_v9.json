@@ -1,0 +1,237 @@
+{
+  "artifact_role": "owner_review_candidate",
+  "authorization": {
+    "candidate_manifest_sha256": null,
+    "candidate_only": true,
+    "owner_approval": null,
+    "remainder_shard_execution_authorized": false,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "scientific_outcomes_reviewed": false,
+    "source_v8_mutated": false,
+    "terminal_source_item_retried": false
+  },
+  "generated_at": "2026-07-26T17:10:00+08:00",
+  "manifest_sha256": "7b006ab62f8f2c6f696373949a27c1db4b11dfae006456fadaef30a2d7a7c4b5",
+  "next_gate": "Write and verify a separate owner-approved pending-only shard admission, then freeze combined result gate v6 before API use.",
+  "schema_version": "m3-paper-v2-formal-matrix-remainder-admission-9.0",
+  "scope": {
+    "budget": {
+      "abort_ceiling_cny": 27.0,
+      "check_before_every_provider_call": true,
+      "hard_spend_limit_cny": 30.0,
+      "maximum_combined_diagnostic_records": 4,
+      "policy_path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v2.json",
+      "policy_sha256": "55ceeea5335ddd05f2eff9c5b1be8a858e055a8d8a56c6482ebe8fe006e3b7b7",
+      "prior_aborted_matrix_usage": {
+        "completion_tokens": 60557,
+        "prompt_cache_hit_tokens": 424064,
+        "prompt_cache_miss_tokens": 154822,
+        "prompt_tokens": 578886
+      },
+      "prior_official_pilot_cost_cny": 0.00165,
+      "prior_official_pilot_usage": {
+        "completion_tokens": 136,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 278,
+        "prompt_tokens": 278
+      },
+      "prior_project_cost_cny": 1.2069394,
+      "prior_project_usage": {
+        "completion_tokens": 99884,
+        "prompt_cache_hit_tokens": 687616,
+        "prompt_cache_miss_tokens": 196815,
+        "prompt_tokens": 884431
+      },
+      "usage_ledger_fsync_after_every_completed_call": true
+    },
+    "execution_identity": "d7b8fe9ddb0ca74cd46d8e4e2dd0a9e7f3215ac37055da70c6944f07db689aab",
+    "locked_inputs": [
+      {
+        "bytes": 32075,
+        "path": "experiments/paper_v2/formal_matrix_remainder_controller_v9.py",
+        "sha256": "a4c7a64cdc4ee54a4795468ae31c6208cac2db78f2fed7770ce7fa0fb548f4c3"
+      },
+      {
+        "bytes": 4134,
+        "path": "schemas/paper_v2/formal_matrix_remainder_admission_v9.schema.json",
+        "sha256": "69264b28e0130c0b243059d486a8b0981fd907e385a4e00a9ae20ec145c6d778"
+      },
+      {
+        "bytes": 891,
+        "path": "protocols/paper_upgrade_v2/formal_matrix_remainder_qualification_v9.json",
+        "sha256": "99f9f4e2c570db216a2b7e43ffa20bd5f3b256f8a9bce31de567ebff3b7942be"
+      },
+      {
+        "bytes": 34500,
+        "path": "experiments/paper_v2/formal_matrix_controller_v8.py",
+        "sha256": "1ad18deb4bcb03990db67cc4010c59808b2b87d59b544c802090afca19c21e25"
+      },
+      {
+        "bytes": 29106,
+        "path": "protocols/paper_upgrade_v2/deepseek_medium_matrix_candidate_v8.json",
+        "sha256": "56477b28e35be7d95d310298bd3551179fc6122021d2b266df93096403aad435"
+      },
+      {
+        "bytes": 1602,
+        "path": "protocols/paper_upgrade_v2/admissions/deepseek_medium_matrix_continuation_admission_v8.json",
+        "sha256": "64e6a4bc83cfdc75ce4ae6df60b80325c42dc14b245639baaece28b36b59f5df"
+      },
+      {
+        "bytes": 17017,
+        "path": "experiments/paper_v2/formal_result_gate_v5.py",
+        "sha256": "d53fca19bfa0e24c54125229c3a8fb461ec1c0d99731f7e3c449bb93ec228201"
+      },
+      {
+        "bytes": 7976,
+        "path": "protocols/paper_upgrade_v2/deepseek_medium_result_gate_candidate_v5.json",
+        "sha256": "c82f1495675f08e8f9428b0524d03a0a8b671a364a6f16998496feaff7e16936"
+      },
+      {
+        "bytes": 4926643,
+        "path": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl",
+        "sha256": "573625a9e1e56c9a8be68fe21368d3e90e268974aa7285bec926d4591f8ec254"
+      },
+      {
+        "bytes": 6100,
+        "path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v2.json",
+        "sha256": "55ceeea5335ddd05f2eff9c5b1be8a858e055a8d8a56c6482ebe8fe006e3b7b7"
+      }
+    ],
+    "matrix_identity": "ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373",
+    "outputs": {
+      "attempt_ledger_path": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/matrix_attempts_v1.jsonl",
+      "automatic_retry": false,
+      "budget_ledger_path": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/matrix_budget_v1.jsonl",
+      "record_ledger_path": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/experiment_records_v2.jsonl",
+      "root": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373",
+      "single_trace_per_work_item": true,
+      "trace_root": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/provider_traces"
+    },
+    "provider": {
+      "automatic_retries": 0,
+      "base_url": "https://api.deepseek.com",
+      "concurrency": 1,
+      "cross_provider_fallback": false,
+      "endpoint_type": "official_api",
+      "max_tokens": 512,
+      "model_id": "deepseek-v4-pro",
+      "provider_id": "deepseek",
+      "provider_managed_tools": false,
+      "temperature": 0.0,
+      "thinking_mode": "disabled",
+      "timeout_seconds": 120.0
+    },
+    "qualification": {
+      "automatic_retries": 0,
+      "combined_work_items": 480,
+      "credentials_read": 0,
+      "external_effects_enabled": false,
+      "formal_results_created": 0,
+      "generated_at": "2026-07-26T17:05:00+08:00",
+      "network_calls_made": 0,
+      "offline_fixture_diagnostics": 0,
+      "offline_fixture_records": 2,
+      "pending_only_manual_resume": true,
+      "provider_tools_enabled": false,
+      "result_admission_authorized": false,
+      "schema_version": "m3-paper-v2-formal-matrix-remainder-qualification-9.0",
+      "scientific_outcomes_read": 0,
+      "selected_pending_work_items": 177,
+      "selection_intersection_count": 0,
+      "source_technical_snapshot_sha256": "8ae40584249e372469943f54ca62b342254a35ab03616b4a419cbc6152a729fe",
+      "source_terminal_records": 303,
+      "source_v8_mutated": false,
+      "status": "pending_only_remainder_shard_qualified_offline",
+      "terminal_source_items_retryable": false
+    },
+    "result_boundary": {
+      "combined_gate_required": true,
+      "result_admission_authorized": false,
+      "scientific_outcomes_reviewed": false
+    },
+    "run_id": "paper-v2-deepseek-medium-v9-remainder-20260726",
+    "selection": {
+      "combined_expected_records": 480,
+      "pending_only_manual_resume": true,
+      "pending_rows_sha256": "d9951bc13f098c8c2ee18044489dbc8e16fa9524df67a4554de12174476236fb",
+      "pending_work_keys_sha256": "59643af2b546c6938e69104e2b50b09846e9751fda30ebb5e19fc406e92a99fb",
+      "selection_kind": "v8_never_started_work_items_only",
+      "source_terminal_items_retryable": false,
+      "work_items": 177
+    },
+    "source_v8": {
+      "budget_paused": false,
+      "candidate_manifest_sha256": "340246ec336281373f49a4d062734e01afa208c6ea5a76daa9881d21ac05cf6d",
+      "continuation_admission_sha256": "64e6a4bc83cfdc75ce4ae6df60b80325c42dc14b245639baaece28b36b59f5df",
+      "diagnostic_records": 1,
+      "evidence_locks": {
+        "attempt_ledger": {
+          "bytes": 395549,
+          "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/8d08cab3febccdf5a4360d208766c39cef851fa9ec8b9c15799ee30171a213bf/matrix_attempts_v1.jsonl",
+          "sha256": "80ef98e2b8720480202aae9a196dce568861521d08058ab57c0907bed62c54e6"
+        },
+        "budget_ledger": {
+          "bytes": 477070,
+          "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/8d08cab3febccdf5a4360d208766c39cef851fa9ec8b9c15799ee30171a213bf/matrix_budget_v1.jsonl",
+          "sha256": "b766e7c21580098c1839681b9320854f237001eba81340cde3203f653d1e321a"
+        },
+        "provider_traces": {
+          "file_count": 303,
+          "inventory_sha256": "da35efadcdd0b2fc6c4e5b0834071c699cc44c1e40ed88df2ab483e52e0d8b03",
+          "total_bytes": 1220937
+        },
+        "record_ledger": {
+          "bytes": 4631207,
+          "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/8d08cab3febccdf5a4360d208766c39cef851fa9ec8b9c15799ee30171a213bf/experiment_records_v2.jsonl",
+          "sha256": "3ca93cb56a301085dc44586a9fddd3fd93186edca88f34eddd8232aebf4dfed2"
+        }
+      },
+      "formal_candidate_records": 302,
+      "matrix_identity": "8d08cab3febccdf5a4360d208766c39cef851fa9ec8b9c15799ee30171a213bf",
+      "open_attempts": 0,
+      "operational_failures": 1,
+      "pending_rows_sha256": "d9951bc13f098c8c2ee18044489dbc8e16fa9524df67a4554de12174476236fb",
+      "pending_work_items": 177,
+      "pending_work_keys_sha256": "59643af2b546c6938e69104e2b50b09846e9751fda30ebb5e19fc406e92a99fb",
+      "project_cumulative_cost_cny": 1.2069394,
+      "project_cumulative_usage": {
+        "completion_tokens": 99884,
+        "prompt_cache_hit_tokens": 687616,
+        "prompt_cache_miss_tokens": 196815,
+        "prompt_tokens": 884431
+      },
+      "provider_calls_completed": 497,
+      "record_count": 303,
+      "run_id": "paper-v2-deepseek-medium-v8-20260726",
+      "scientific_outcomes_reviewed": false,
+      "source_run_resumable": false,
+      "technical_checks": {
+        "budget_unpaused": true,
+        "completed_count": true,
+        "diagnostic_count": true,
+        "diagnostic_is_closed_transport_failure": true,
+        "full_plan_coverage": true,
+        "no_record_declares_automatic_retry": true,
+        "no_record_declares_external_effects": true,
+        "no_record_declares_provider_tools": true,
+        "open_attempts": true,
+        "operational_failure_count": true,
+        "pending_count": true,
+        "record_count": true,
+        "terminal_pending_disjoint": true,
+        "usage_matches_frozen_process_summary": true
+      },
+      "technical_snapshot_sha256": "8ae40584249e372469943f54ca62b342254a35ab03616b4a419cbc6152a729fe",
+      "terminal_items_retryable": false,
+      "terminal_work_keys_sha256": "a055851cc9a4f08fd5df3f0e10ffbcfa17f80d39889aecf93c8ead41f802f0c7"
+    }
+  },
+  "scope_sha256": "4e9ff0cb03cc3204c5fe5671cab8eaacb0d015a4b4f753836e9d63e27df5baab",
+  "status": "remainder_shard_candidate_frozen"
+}

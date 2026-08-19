@@ -1,0 +1,505 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/formal_matrix_admission_v3.schema.json",
+  "title": "M3 paper-v2 DeepSeek matrix admission after trusted-context repair",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "status",
+    "artifact_role",
+    "scope",
+    "scope_sha256",
+    "authorization",
+    "evidence_boundary",
+    "next_gate",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-formal-matrix-admission-3.0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "candidate_pending_six_condition_canary",
+        "activated_for_six_condition_canary",
+        "activated_for_matrix_continuation"
+      ]
+    },
+    "artifact_role": {
+      "enum": [
+        "owner_review_candidate",
+        "six_condition_canary_execution_authorization",
+        "medium_matrix_continuation_authorization"
+      ]
+    },
+    "scope": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/candidate_scope"
+        },
+        {
+          "$ref": "#/$defs/active_scope"
+        }
+      ]
+    },
+    "scope_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "authorization": {
+      "$ref": "#/$defs/authorization"
+    },
+    "evidence_boundary": {
+      "$ref": "#/$defs/evidence_boundary"
+    },
+    "next_gate": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prompt_tokens",
+        "prompt_cache_hit_tokens",
+        "prompt_cache_miss_tokens",
+        "completion_tokens"
+      ],
+      "properties": {
+        "prompt_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prompt_cache_hit_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prompt_cache_miss_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completion_tokens": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "required": [
+        "provider_id",
+        "base_url",
+        "model_id",
+        "temperature",
+        "max_tokens",
+        "timeout_seconds",
+        "concurrency",
+        "automatic_retries",
+        "cross_provider_fallback",
+        "provider_managed_tools",
+        "thinking_mode"
+      ],
+      "properties": {
+        "provider_id": {
+          "const": "deepseek"
+        },
+        "base_url": {
+          "const": "https://api.deepseek.com"
+        },
+        "model_id": {
+          "const": "deepseek-v4-pro"
+        },
+        "temperature": {
+          "const": 0.0
+        },
+        "max_tokens": {
+          "const": 512
+        },
+        "timeout_seconds": {
+          "const": 120.0
+        },
+        "concurrency": {
+          "const": 1
+        },
+        "automatic_retries": {
+          "const": 0
+        },
+        "cross_provider_fallback": {
+          "const": false
+        },
+        "provider_managed_tools": {
+          "const": false
+        },
+        "thinking_mode": {
+          "const": "disabled"
+        }
+      }
+    },
+    "candidate_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "matrix_identity",
+        "provider",
+        "plan",
+        "pilot_review",
+        "budget",
+        "safety",
+        "outputs",
+        "locked_inputs",
+        "replaces_aborted_run",
+        "canary",
+        "trusted_context_prompt",
+        "failure_persistence"
+      ],
+      "properties": {
+        "run_id": {
+          "const": "paper-v2-deepseek-medium-v3-20260724"
+        },
+        "matrix_identity": {
+          "$ref": "#/$defs/sha256"
+        },
+        "provider": {
+          "$ref": "#/$defs/provider"
+        },
+        "plan": {
+          "type": "object"
+        },
+        "pilot_review": {
+          "type": "object"
+        },
+        "budget": {
+          "type": "object",
+          "required": [
+            "prior_project_usage",
+            "prior_project_cost_cny",
+            "abort_ceiling_cny"
+          ],
+          "properties": {
+            "prior_project_usage": {
+              "$ref": "#/$defs/usage"
+            },
+            "prior_project_cost_cny": {
+              "const": 0.0205298
+            },
+            "abort_ceiling_cny": {
+              "const": 27.0
+            }
+          }
+        },
+        "safety": {
+          "type": "object"
+        },
+        "outputs": {
+          "type": "object",
+          "required": [
+            "root",
+            "record_ledger_path",
+            "attempt_ledger_path",
+            "budget_ledger_path",
+            "trace_root",
+            "single_trace_per_work_item",
+            "automatic_resume_of_open_attempts"
+          ]
+        },
+        "locked_inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "bytes",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "bytes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "sha256": {
+                "$ref": "#/$defs/sha256"
+              }
+            }
+          }
+        },
+        "replaces_aborted_run": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id",
+            "matrix_identity",
+            "review_path",
+            "review_sha256",
+            "old_run_resumable",
+            "old_records_result_eligible"
+          ],
+          "properties": {
+            "run_id": {
+              "const": "paper-v2-deepseek-medium-v2-20260724"
+            },
+            "matrix_identity": {
+              "$ref": "#/$defs/sha256"
+            },
+            "review_path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "review_sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "old_run_resumable": {
+              "const": false
+            },
+            "old_records_result_eligible": {
+              "const": false
+            }
+          }
+        },
+        "canary": {
+          "type": "object",
+          "required": [
+            "work_items",
+            "conditions",
+            "required_before_continuation",
+            "automatic_continuation",
+            "review_filename"
+          ],
+          "properties": {
+            "work_items": {
+              "const": 6
+            },
+            "conditions": {
+              "type": "array",
+              "minItems": 6,
+              "maxItems": 6,
+              "uniqueItems": true
+            },
+            "required_before_continuation": {
+              "const": true
+            },
+            "automatic_continuation": {
+              "const": false
+            },
+            "review_filename": {
+              "const": "six_condition_canary_review_v3.json"
+            }
+          }
+        },
+        "trusted_context_prompt": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "allowed_fields",
+            "evaluator_or_gold_fields",
+            "exact_action_parameters_visible",
+            "qualification_path",
+            "qualification_sha256"
+          ],
+          "properties": {
+            "schema_version": {
+              "const": "m3-paper-v2-trusted-context-prompt-projection-2.0"
+            },
+            "allowed_fields": {
+              "const": [
+                "requested_actions",
+                "workspace_scope"
+              ]
+            },
+            "evaluator_or_gold_fields": {
+              "const": false
+            },
+            "exact_action_parameters_visible": {
+              "const": true
+            },
+            "qualification_path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "qualification_sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        "failure_persistence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "adapter_version",
+            "post_response_exception_terminal_status",
+            "pre_response_exception_policy",
+            "response_content_persisted"
+          ],
+          "properties": {
+            "adapter_version": {
+              "const": "m3-paper-v2-post-response-failure-adapter-2.0"
+            },
+            "post_response_exception_terminal_status": {
+              "const": "runner_failure"
+            },
+            "pre_response_exception_policy": {
+              "const": "abort_new_version_required"
+            },
+            "response_content_persisted": {
+              "const": false
+            }
+          }
+        }
+      }
+    },
+    "active_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "candidate_scope_sha256"
+      ],
+      "properties": {
+        "run_id": {
+          "const": "paper-v2-deepseek-medium-v3-20260724"
+        },
+        "candidate_scope_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "owner_approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approval_kind",
+        "approved_by_role",
+        "approved_at",
+        "approval_scope",
+        "statement_sha256"
+      ],
+      "properties": {
+        "approval_kind": {
+          "const": "delegated_safe_api_iteration"
+        },
+        "approved_by_role": {
+          "const": "project_owner"
+        },
+        "approved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approval_scope": {
+          "enum": [
+            "deepseek_v3_six_condition_canary",
+            "deepseek_v3_medium_matrix_continuation"
+          ]
+        },
+        "statement_sha256": {
+          "const": "2194cd7fd6734d220f7b38cd64fd717df8717270f0034dcaebece42185269ef2"
+        }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_only",
+        "canary_execution_authorized",
+        "matrix_continuation_authorized",
+        "result_admission_authorized",
+        "candidate_manifest_sha256",
+        "canary_review_sha256",
+        "owner_approval"
+      ],
+      "properties": {
+        "candidate_only": {
+          "type": "boolean"
+        },
+        "canary_execution_authorized": {
+          "type": "boolean"
+        },
+        "matrix_continuation_authorized": {
+          "type": "boolean"
+        },
+        "result_admission_authorized": {
+          "const": false
+        },
+        "candidate_manifest_sha256": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/sha256"
+            }
+          ]
+        },
+        "canary_review_sha256": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/sha256"
+            }
+          ]
+        },
+        "owner_approval": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/owner_approval"
+            }
+          ]
+        }
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentials_read_while_building",
+        "network_calls_while_building",
+        "formal_results_created",
+        "candidate_is_executable",
+        "prior_runs_resumed"
+      ],
+      "properties": {
+        "credentials_read_while_building": {
+          "const": false
+        },
+        "network_calls_while_building": {
+          "const": 0
+        },
+        "formal_results_created": {
+          "const": 0
+        },
+        "candidate_is_executable": {
+          "const": false
+        },
+        "prior_runs_resumed": {
+          "const": false
+        }
+      }
+    }
+  }
+}

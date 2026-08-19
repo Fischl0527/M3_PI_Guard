@@ -1,0 +1,82 @@
+{
+  "audit_id": "A05-agentdojo-tool-filter",
+  "authorization_source": "auto_compiled_non_gold",
+  "missing_component": null,
+  "offline_boundaries": [],
+  "online_boundaries": [
+    {
+      "end_line": 241,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "query",
+        "runtime",
+        "env",
+        "messages",
+        "extra_args"
+      ],
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/llms/openai_llm.py",
+      "phase": "online_tool_filter",
+      "referenced_identifiers": [
+        "ChatMessage",
+        "ChatUserMessage",
+        "EmptyEnv",
+        "Env",
+        "FunctionsRuntime",
+        "NOT_GIVEN",
+        "Sequence",
+        "_function_to_openai",
+        "_message_to_openai",
+        "_openai_to_assistant_message",
+        "chat",
+        "choices",
+        "client",
+        "completion",
+        "completions",
+        "content",
+        "create",
+        "dict",
+        "env",
+        "extra_args",
+        "functions",
+        "get_text_content_as_str",
+        "items",
+        "message",
+        "messages",
+        "model",
+        "new_tools",
+        "openai_messages",
+        "openai_tools",
+        "output",
+        "prompt",
+        "query",
+        "role",
+        "runtime",
+        "self",
+        "str",
+        "temperature",
+        "text_content_block_from_string",
+        "tool",
+        "tool_choice",
+        "tool_name",
+        "tools",
+        "tuple",
+        "update_functions",
+        "values"
+      ],
+      "referenced_string_keys": [
+        "content"
+      ],
+      "required_token_checks": {
+        "messages": true,
+        "runtime.functions": true,
+        "update_functions": true
+      },
+      "sha256": "487493a70b4d1cb5f580c4b0fab5b8d47e43b514c1409e9151e6f5d6414285a1",
+      "start_line": 213,
+      "symbol": "OpenAILLMToolFilter.query"
+    }
+  ],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

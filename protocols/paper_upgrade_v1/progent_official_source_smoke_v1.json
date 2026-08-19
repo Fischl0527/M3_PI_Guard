@@ -1,0 +1,150 @@
+{
+  "audit_version": "m3-paper-v1-progent-official-source-smoke-1.0",
+  "boundary": "Official-source and offline deterministic-runtime qualification only. It does not validate policy-generation quality, execute AgentDojo, measure ASR or utility, or admit Progent into formal result tables.",
+  "checks": [
+    {
+      "detail": "external/baselines/progent",
+      "name": "checkout_exists",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "actual": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+        "expected": "8a8eb894b9d568a32b4e58252fea85b47f789c77"
+      },
+      "name": "checkout_matches_expected_commit",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "kind": "repository",
+        "relevant_path": "secagent/tool.py",
+        "remote_head_observed_at": "2026-07-21",
+        "remote_head_sha": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+        "url": "https://github.com/sunblaze-ucb/progent"
+      },
+      "name": "registry_repository_matches_expected",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "README.md": true,
+        "agentdojo/README.md": true,
+        "agentdojo/run.sh": true,
+        "agentdojo/src/agentdojo/agent_pipeline/basic_elements.py": true,
+        "agentdojo/src/agentdojo/agent_pipeline/tool_execution.py": true,
+        "pyproject.toml": true,
+        "secagent/__init__.py": true,
+        "secagent/policy_analysis.py": true,
+        "secagent/tool.py": true
+      },
+      "name": "required_source_paths_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "allow_exact": "allow",
+        "deny_bad_recipient": {
+          "decision": "deny",
+          "exception": "ValidationError"
+        },
+        "deny_missing_tool": {
+          "decision": "deny",
+          "exception": "ValidationError"
+        },
+        "expand_is_subset": false,
+        "narrow_is_subset": true,
+        "network_guard_active": true
+      },
+      "name": "offline_runtime_smoke_passed",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "external/baselines/progent/LICENSE",
+        "external/baselines/progent/LICENSE.txt",
+        "external/baselines/progent/COPYING"
+      ],
+      "name": "top_level_license_present",
+      "severity": "warning",
+      "status": "fail"
+    },
+    {
+      "detail": false,
+      "name": "source_smoke_not_formal_effect_evidence",
+      "severity": "warning",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "6d783e55d148a2c59a03abc17c4200343abbb4debc7739c934e45ebf6911cc1a",
+  "created_at": "2026-07-22T08:05:54.546453+00:00",
+  "error_failures": [],
+  "network_calls_performed": false,
+  "offline_runtime_smoke": {
+    "expected": {
+      "allow_exact": "allow",
+      "deny_bad_recipient": {
+        "decision": "deny",
+        "exception": "ValidationError"
+      },
+      "deny_missing_tool": {
+        "decision": "deny",
+        "exception": "ValidationError"
+      },
+      "expand_is_subset": false,
+      "narrow_is_subset": true,
+      "network_guard_active": true
+    },
+    "network_guard_active": true,
+    "observed": {
+      "allow_exact": "allow",
+      "deny_bad_recipient": {
+        "decision": "deny",
+        "exception": "ValidationError"
+      },
+      "deny_missing_tool": {
+        "decision": "deny",
+        "exception": "ValidationError"
+      },
+      "expand_is_subset": false,
+      "narrow_is_subset": true,
+      "network_guard_active": true
+    },
+    "passed": true,
+    "python_executable": "F:\\robot\\Anaconda3\\python.exe",
+    "returncode": 0,
+    "stderr_tail": "Policy Model: offline-source-smoke\nsecurity policy reset\navailable tools updated: [{'name': 'send_email', 'description': 'send email', 'args': {'recipient': {'type': 'string'}, 'body': {'type': 'string'}}}, {'name': 'read_email', 'description': 'read email', 'args': {'email_id': {'type': 'string'}}}]\nsecurity policy updated: {'read_email': [(100, 0, {'email_id': {'type': 'string', 'enum': ['trusted-id']}}, 0)], 'send_email': [(100, 0, {'recipient': {'type': 'string', 'enum': ['alice@example.com']}}, 0)]}\n{'send_email': [(100, 0, {'recipient': {'type': 'string'}}, 0)]} {'send_email': [(100, 0, {'recipient': {'type': 'string', 'enum': ['alice@example.com']}}, 0)]}\n[(100, 0, {'recipient': {'type': 'string'}}, 0)] [(100, 0, {'recipient': {'type': 'string', 'enum': ['alice@example.com']}}, 0)]\n{'type': 'string'} {'type': 'string', 'enum': ['alice@example.com']}\nFound type: string\n{'send_email': [(100, 0, {'recipient': {'type': 'string', 'enum': ['alice@example.com']}}, 0)]} {'send_email': [(100, 0, {}, 0)]}\n[(100, 0, {'recipient': {'type': 'string', 'enum': ['alice@example.com']}}, 0)] [(100, 0, {}, 0)]\n",
+    "stdout_tail": "{\"allow_exact\": \"allow\", \"deny_bad_recipient\": {\"decision\": \"deny\", \"exception\": \"ValidationError\"}, \"deny_missing_tool\": {\"decision\": \"deny\", \"exception\": \"ValidationError\"}, \"expand_is_subset\": false, \"narrow_is_subset\": true, \"network_guard_active\": true}\n"
+  },
+  "passed_checks": 6,
+  "registry_path": "protocols/paper_upgrade_v1/external_strong_baselines_v1.json",
+  "registry_sha256": "e8a66158078a991a8f63466fb396663c1a351e9fbb0d994ed3bae17329c23f99",
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-progent-official-source-smoke-1.0",
+  "source_checkout": {
+    "actual_commit": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+    "expected_commit": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+    "matches_expected_commit": true,
+    "path": "external/baselines/progent",
+    "repository": "https://github.com/sunblaze-ucb/progent",
+    "required_paths": {
+      "README.md": true,
+      "agentdojo/README.md": true,
+      "agentdojo/run.sh": true,
+      "agentdojo/src/agentdojo/agent_pipeline/basic_elements.py": true,
+      "agentdojo/src/agentdojo/agent_pipeline/tool_execution.py": true,
+      "pyproject.toml": true,
+      "secagent/__init__.py": true,
+      "secagent/policy_analysis.py": true,
+      "secagent/tool.py": true
+    },
+    "top_level_license_present": false
+  },
+  "status": "completed_source_smoke_only",
+  "total_checks": 7
+}

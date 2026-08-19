@@ -1,0 +1,2 @@
+{"expected_author_group_counts":{"1":300,"2":300},"expected_sample_counts":{"attack":360,"benign_legal_tool":120,"benign_no_tool":120},"path":"protocols/paper_upgrade_v2/independent_blind_authoring_kit_v1/slots.jsonl","rows":600,"schema_version":"m3-paper-v2-independent-blind-slot-reference-2.0","sha256":"4ec78a15bf87473d56d9c4a1bb59f6fadd0d8fed76adf66a567c5e794b79a0a8"}
+

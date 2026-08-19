@@ -1,0 +1,8 @@
+{
+  "audit_id": "A01-vigil-runtime",
+  "base_digest": "e8657f79590593a6c319b2887545717a300ab8cd531566d8b1c1f3c1911aa8a4",
+  "mutated_digest": "e8657f79590593a6c319b2887545717a300ab8cd531566d8b1c1f3c1911aa8a4",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

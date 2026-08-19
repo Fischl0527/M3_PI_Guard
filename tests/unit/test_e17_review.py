@@ -8,10 +8,31 @@ from pathlib import Path
 import pytest
 
 from experiments import e17_review as e17
+from experiments import manifest as experiment_manifest
 from m3_eval.figure_manifest import load_figure_manifest
 
 
 FINAL_CALL = {"tool": "final", "arguments": {"answer": "synthetic local result"}}
+
+
+@pytest.fixture(autouse=True)
+def _offline_environment_snapshot(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Unit tests must not start or wait for a stopped Ollama service."""
+
+    monkeypatch.setattr(
+        experiment_manifest,
+        "environment_snapshot",
+        lambda: {
+            "captured_at": "2026-07-23T00:00:00+00:00",
+            "python": "test",
+            "platform": "test",
+            "ollama_version": "not_probed_in_unit_test",
+            "ollama_models": "not_probed_in_unit_test",
+            "gpu": "not_probed_in_unit_test",
+        },
+    )
 
 
 def _case(case_id: str, sample_type: str, *, unsafe: list[str] | None = None) -> dict[str, object]:

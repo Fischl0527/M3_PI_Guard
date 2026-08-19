@@ -1,0 +1,54 @@
+{
+  "audit_id": "A15-piarena-defense-registry",
+  "auditor": "Codex primary agent",
+  "claim_ready": false,
+  "command": "python -m experiments.paper_v2.source_audit --spec protocols/paper_upgrade_v2/online_state_audit_specs_v1.json --unit A15-piarena-defense-registry",
+  "conclusion": "not_a_runtime_guard",
+  "exit_code": 0,
+  "files": [
+    {
+      "bytes": 351,
+      "path": "protocols/paper_upgrade_v2/audits/A15-piarena-defense-registry/differential_test_result.json",
+      "sha256": "4964a73c6feb8760922ee0a5465372bd782240e0e66e4ca3f29ec10004223f4c"
+    },
+    {
+      "bytes": 675,
+      "path": "protocols/paper_upgrade_v2/audits/A15-piarena-defense-registry/entrypoints.md",
+      "sha256": "9de999bf0068799174ced29f5fd0c926513a7d8109fe41e2e3a2703d0bfc8e68"
+    },
+    {
+      "bytes": 1927,
+      "path": "protocols/paper_upgrade_v2/audits/A15-piarena-defense-registry/field_flow.json",
+      "sha256": "df258d56edb5dc0e71330c16f0c2665184ab83a24814aec21807ee8e11e76bf3"
+    },
+    {
+      "bytes": 753,
+      "path": "protocols/paper_upgrade_v2/audits/A15-piarena-defense-registry/finding.md",
+      "sha256": "69e99d9fca60d799eee9fc66b75c6e3acd8d0ff6612a070b043a9388a79f448e"
+    },
+    {
+      "bytes": 520,
+      "path": "protocols/paper_upgrade_v2/audits/A15-piarena-defense-registry/projection_test.py",
+      "sha256": "ffc7c29914cedbe61761cc703006ce93448bc89238deb428b62f0ba2483cb859"
+    },
+    {
+      "bytes": 565,
+      "path": "protocols/paper_upgrade_v2/audits/A15-piarena-defense-registry/projection_test_result.json",
+      "sha256": "5303c892b4078ca34d306b0374fc585f97f7b54d8bd332f8ba71cdbf7acb47a5"
+    },
+    {
+      "bytes": 811,
+      "path": "protocols/paper_upgrade_v2/audits/A15-piarena-defense-registry/source_lock.json",
+      "sha256": "f74ac7fae1dad42b2e379336945debd4d6604c3e673faff373d3ccb9086ae0ba"
+    },
+    {
+      "bytes": 242,
+      "path": "protocols/paper_upgrade_v2/audits/A15-piarena-defense-registry/static_hits.json",
+      "sha256": "fdfecf627beec83d4ae150e02ced086a636730ad5d6025132e13de2ddf4376e0"
+    }
+  ],
+  "generated_at": "2026-07-23T19:00:00+08:00",
+  "review_status": "single_reviewer_complete",
+  "schema_version": "m3-paper-v2-source-audit-evidence-manifest-1.0",
+  "status": "completed"
+}

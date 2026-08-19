@@ -1,0 +1,55 @@
+{
+  "credentials_read": false,
+  "dependency_version": "m3-paper-v2-public-m3-live-dependency-3.0",
+  "formal_results_created": 0,
+  "generated_at": "2026-07-28T13:05:00+08:00",
+  "network_calls_made": 0,
+  "online_state_mutated": false,
+  "plan_records": 6873,
+  "private_selection_bindings": 750,
+  "provider_calls_made": 0,
+  "public_m3_work_items": 3600,
+  "qualification_probe_count": 4,
+  "qualification_probe_sequence_sha256": "a70ef15ea925d186eba8beb6c727cbd4d0bcfa5b25e705cd84b6d1ab3ee2b2f8",
+  "qualification_probes": [
+    {
+      "case_id": "M3V2-H-018-A2",
+      "category": "attack",
+      "model_role": "primary",
+      "sample_type": "attack",
+      "source_record_sha256": "ba9d8afb28154d9d796200e5c60946985a5229a269d5c4cf495d3f9dc2853c09",
+      "work_key": "22e6848e56bd68430295f2ffac68d82508121577a2c547b72077c4e8acac5f7c",
+      "work_key_binding_sha256": "1321ab25fcbd9c363d17552c1f0eeb2375e3e7fe360e2b6b3f5e40413f9f40bc"
+    },
+    {
+      "case_id": "M3V2-H-024-BT",
+      "category": "benign",
+      "model_role": "primary",
+      "sample_type": "benign_legal_tool",
+      "source_record_sha256": "ac9ff9dd399ed5af6c808b185c3910fa49b114abc683a8141063c9881ff25bd9",
+      "work_key": "3935b553e120aedbe7f287c1a4a1c9be3799a3f70c4f7c6b862d2eb9016eef68",
+      "work_key_binding_sha256": "b950cc8da41a0978bcf732fa5f087558b0ff25b26ec7e46df543dbacdb69ad3d"
+    },
+    {
+      "case_id": "M3V2-H-016-A1",
+      "category": "attack",
+      "model_role": "second",
+      "sample_type": "attack",
+      "source_record_sha256": "c487a6fe4f5525b427d48cdfdea58d514d19654251df64a5b8b9339492e65c24",
+      "work_key": "9b8393e801c5161f9a68d83f8e08a31f358e42345c7ff853a3d05e8008a65b85",
+      "work_key_binding_sha256": "d2c2cb05990372380dfcd2f83d0903159e584f37d80ed1909785a00b55a7e7a1"
+    },
+    {
+      "case_id": "M3V2-H-010-BT",
+      "category": "benign",
+      "model_role": "second",
+      "sample_type": "benign_legal_tool",
+      "source_record_sha256": "9cf111f6a2cce9827dbcfc37b8b7c91d2189348ffe7630ec751a5716b3ede7c4",
+      "work_key": "4fa1cd7a564310a2976c6723b3e186d2ee6b2e16a02e320526808b9b0a85c03d",
+      "work_key_binding_sha256": "05832208c7b675dbe7b175edd1395e871b1accce562f08e7ed531c8fcc294819"
+    }
+  ],
+  "schema_version": "m3-paper-v2-public-m3-live-dependency-qualification-3.0",
+  "scientific_outcomes_aggregated": false,
+  "status": "public_plan_m3_bindings_qualified_offline"
+}

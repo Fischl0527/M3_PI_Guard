@@ -1,0 +1,818 @@
+{
+  "agentdojo_audit_path": "protocols/paper_upgrade_v1/agentdojo_official_strong_baseline_capability_audit_v1.json",
+  "agentdojo_audit_sha256": "71699b716fa81d0b911b9f116f02ef5de353624a2e9005c9d3b6ace0bda659fa",
+  "audit_version": "m3-paper-v1-strong-baseline-formal-readiness-audit-1.0",
+  "baseline_registry_path": "protocols/paper_upgrade_v1/baseline_registry.json",
+  "baseline_registry_sha256": "367590ce4531a8c389ba63c5acdeb55770b84c2c1ecd3cdd6e96a1a839f1fea9",
+  "boundary": "Formal-admission audit only. A strong baseline may enter paper result tables only after source-backed adapters, frozen dependency snapshots, formal manifests, complete logs and no-label-leakage checks exist. Current stub preflights remain outside formal effect claims.",
+  "checks": [
+    {
+      "detail": [],
+      "name": "all_required_strong_baselines_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "blocked_or_pending_strong_baselines_not_result_eligible",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "blocked_or_pending_strong_baselines_have_exclusion_rules",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "blocked_or_pending_strong_baselines_have_current_blockers",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "agentdojo_tool_filter",
+        "promptguard"
+      ],
+      "name": "no_formal_ready_baseline_without_all_admission_requirements",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "condition_marked_ready",
+        "condition_result_eligible_true",
+        "current_blockers_empty",
+        "external_entries_result_eligible_true",
+        "formal_manifest_and_complete_logs_declared"
+      ],
+      "name": "camel_or_fides_not_admitted_without_formal_adapter",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "expected_gate": "not_satisfied",
+        "formal_ready": [
+          "agentdojo_tool_filter",
+          "promptguard"
+        ],
+        "formal_ready_count": 2,
+        "minimum_required": 5,
+        "registry_gate": "not_satisfied"
+      },
+      "name": "q2_gate_matches_formal_ready_count",
+      "severity": "warning",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "2cf1caa4750407cd35f4fbd5e606ab6b0235f871b8e8ea63d291cbe1efa19406",
+  "created_at": "2026-07-22T10:49:22.168444+00:00",
+  "dependency_snapshot_path": "protocols/paper_upgrade_v1/strong_baseline_dependency_snapshot_v1.json",
+  "dependency_snapshot_sha256": "86a52679e35881941effbf0ea8b254d1c76e22ad4886c6dbd763977172469b24",
+  "dependency_snapshot_status": "completed",
+  "error_failures": [],
+  "external_registry_path": "protocols/paper_upgrade_v1/external_strong_baselines_v1.json",
+  "external_registry_sha256": "7552eb02595d8ddb1d8d67dc9ad219b983d8301d9b744d13f3b8f82ffa42ee35",
+  "formal_ready_strong_baselines": [
+    "agentdojo_tool_filter",
+    "promptguard"
+  ],
+  "passed_checks": 7,
+  "q2_strong_baseline_gate": "not_satisfied",
+  "readiness_rows": {
+    "agentdojo_tool_filter": {
+      "current_blockers": [],
+      "display_name": "AgentDojo tool_filter",
+      "failed_requirements": [],
+      "family": "agentdojo_official_strong_baseline",
+      "formal_admission_status": "formal_ready",
+      "formal_exclusion_rule": "Admitted only for the exact declared formal_manifest and complete_logs; any rerun, configuration drift, failed case, missing case or non-identical adapter must be admitted under a new manifest.",
+      "id": "agentdojo_tool_filter",
+      "implementation_status": "ready",
+      "requirements": [
+        {
+          "detail": "agentdojo_tool_filter",
+          "name": "condition_present",
+          "passed": true
+        },
+        {
+          "detail": "ready",
+          "name": "condition_marked_ready",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "condition_result_eligible_true",
+          "passed": true
+        },
+        {
+          "detail": [],
+          "name": "current_blockers_empty",
+          "passed": true
+        },
+        {
+          "detail": {
+            "formal_protocol": "protocols/paper_upgrade_v1/agentdojo_tool_filter_formal_protocol_v1.md",
+            "upstream_source": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py"
+          },
+          "name": "frozen_protocol_declared",
+          "passed": true
+        },
+        {
+          "detail": "completed",
+          "name": "agentdojo_capability_audit_completed",
+          "passed": true
+        },
+        {
+          "detail": [
+            "baseline_id",
+            "capability_status",
+            "compatibility_plan",
+            "dependency_blockers",
+            "m3_local_runner_mixing_rule",
+            "official_defense",
+            "official_run_command_template",
+            "result_eligible_for_formal_tables",
+            "result_exclusion_rule",
+            "source_files"
+          ],
+          "name": "agentdojo_baseline_entry_present",
+          "passed": true
+        },
+        {
+          "detail": {
+            "capability_status": "ready_official_tool_filter_qualification_completed_formal_run_pending",
+            "dependency_blockers": [],
+            "registry_status": "ready"
+          },
+          "name": "agentdojo_official_dependency_blockers_resolved",
+          "passed": true
+        },
+        {
+          "detail": {
+            "complete_logs": [
+              "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/run_manifest.json",
+              "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/outcomes.jsonl",
+              "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/progress.jsonl",
+              "protocols/paper_upgrade_v1/monitors/tool_filter_formal_v1/agentdojo_official_formal_run_monitor_v1.json"
+            ],
+            "formal_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/analysis/analysis_manifest.json"
+          },
+          "name": "formal_manifest_and_complete_logs_declared",
+          "passed": true
+        },
+        {
+          "detail": {
+            "snapshot_status": "completed",
+            "snapshot_version": "m3-paper-v1-strong-baseline-dependency-snapshot-1.0"
+          },
+          "name": "frozen_dependency_snapshot_declared",
+          "passed": true
+        }
+      ],
+      "result_eligible": true
+    },
+    "agentdojo_transformers_pi_detector": {
+      "current_blockers": [
+        "The dedicated E-drive detector smoke and a two-case official pipeline qualification are complete, but exact official full-run execution is resource blocked on the preserved 27,697-character AgentDojo workspace tool output. The v1 CUDA attempt was invalidated; the v2 CPU retry reproduced the same 2,185,056,432-byte CPU allocation failure on workspace/user_task_25; a direct long-output smoke that unloads Ollama before calling the pinned official detector also failed with the same allocation request. No rows from these roots may enter formal tables."
+      ],
+      "display_name": "AgentDojo transformers_pi_detector",
+      "failed_requirements": [
+        "condition_marked_ready",
+        "condition_result_eligible_true",
+        "current_blockers_empty",
+        "formal_manifest_and_complete_logs_declared"
+      ],
+      "family": "agentdojo_official_strong_baseline",
+      "formal_admission_status": "blocked_or_diagnostic",
+      "formal_exclusion_rule": "Exclude from exact-official formal tables until the preserved long-output direct smoke and full 726-case run both complete with exact input, complete official logs, exact coverage and zero unexplained failures.",
+      "id": "agentdojo_transformers_pi_detector",
+      "implementation_status": "source_backed_official_detector_resource_blocked_exact_formal",
+      "requirements": [
+        {
+          "detail": "agentdojo_transformers_pi_detector",
+          "name": "condition_present",
+          "passed": true
+        },
+        {
+          "detail": "source_backed_official_detector_resource_blocked_exact_formal",
+          "name": "condition_marked_ready",
+          "passed": false
+        },
+        {
+          "detail": null,
+          "name": "condition_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": [
+            "The dedicated E-drive detector smoke and a two-case official pipeline qualification are complete, but exact official full-run execution is resource blocked on the preserved 27,697-character AgentDojo workspace tool output. The v1 CUDA attempt was invalidated; the v2 CPU retry reproduced the same 2,185,056,432-byte CPU allocation failure on workspace/user_task_25; a direct long-output smoke that unloads Ollama before calling the pinned official detector also failed with the same allocation request. No rows from these roots may enter formal tables."
+          ],
+          "name": "current_blockers_empty",
+          "passed": false
+        },
+        {
+          "detail": {
+            "formal_protocol": "protocols/paper_upgrade_v1/agentdojo_transformers_pi_detector_formal_protocol_v1.md",
+            "upstream_source": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py"
+          },
+          "name": "frozen_protocol_declared",
+          "passed": true
+        },
+        {
+          "detail": "completed",
+          "name": "agentdojo_capability_audit_completed",
+          "passed": true
+        },
+        {
+          "detail": [
+            "baseline_id",
+            "capability_status",
+            "compatibility_plan",
+            "dependency_blockers",
+            "m3_local_runner_mixing_rule",
+            "official_defense",
+            "official_run_command_template",
+            "result_eligible_for_formal_tables",
+            "result_exclusion_rule",
+            "source_files"
+          ],
+          "name": "agentdojo_baseline_entry_present",
+          "passed": true
+        },
+        {
+          "detail": {
+            "capability_status": "ready_for_official_smoke_pending_run",
+            "dependency_blockers": [],
+            "registry_status": "source_backed_official_detector_resource_blocked_exact_formal"
+          },
+          "name": "agentdojo_official_dependency_blockers_resolved",
+          "passed": true
+        },
+        {
+          "detail": {
+            "complete_logs": null,
+            "formal_manifest": null
+          },
+          "name": "formal_manifest_and_complete_logs_declared",
+          "passed": false
+        },
+        {
+          "detail": {
+            "snapshot_status": "completed",
+            "snapshot_version": "m3-paper-v1-strong-baseline-dependency-snapshot-1.0"
+          },
+          "name": "frozen_dependency_snapshot_declared",
+          "passed": true
+        }
+      ],
+      "result_eligible": false
+    },
+    "camel_or_fides": {
+      "current_blockers": [
+        "CaMeL is selected and has an 8/8 official-source smoke, a 12/12 plain import preflight documenting the pinned AgentDojo circular-import failure, an 8/8 source-backed compatibility preflight resolving that cycle without editing external source, a 14/14 runner-wiring preflight, a 16/16 transport/capability mapping preflight, a v1.2 17/17 hash-bound formal freeze with local_adapter hashes, a resume identity gate before model probing, a frozen loopback privileged/quarantined transport, and a source-backed runner/analyzer. The two-case real-model qualification, complete 726-case logs and admitted formal analysis are still absent."
+      ],
+      "display_name": "CaMeL or Fides information-flow/capability baseline",
+      "failed_requirements": [
+        "condition_marked_ready",
+        "condition_result_eligible_true",
+        "current_blockers_empty",
+        "external_entries_result_eligible_true",
+        "formal_manifest_and_complete_logs_declared"
+      ],
+      "family": "external_strong_baseline",
+      "formal_admission_status": "blocked_or_diagnostic",
+      "formal_exclusion_rule": "Exclude until two-case qualification, exact 726-case execution, complete trace/log audit and formal analysis admission are complete.",
+      "id": "camel_or_fides",
+      "implementation_status": "source_smoke_completed_transport_mapping_hash_bound_formal_runner_ready_qualification_pending",
+      "requirements": [
+        {
+          "detail": "camel_or_fides",
+          "name": "condition_present",
+          "passed": true
+        },
+        {
+          "detail": "source_smoke_completed_transport_mapping_hash_bound_formal_runner_ready_qualification_pending",
+          "name": "condition_marked_ready",
+          "passed": false
+        },
+        {
+          "detail": null,
+          "name": "condition_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": [
+            "CaMeL is selected and has an 8/8 official-source smoke, a 12/12 plain import preflight documenting the pinned AgentDojo circular-import failure, an 8/8 source-backed compatibility preflight resolving that cycle without editing external source, a 14/14 runner-wiring preflight, a 16/16 transport/capability mapping preflight, a v1.2 17/17 hash-bound formal freeze with local_adapter hashes, a resume identity gate before model probing, a frozen loopback privileged/quarantined transport, and a source-backed runner/analyzer. The two-case real-model qualification, complete 726-case logs and admitted formal analysis are still absent."
+          ],
+          "name": "current_blockers_empty",
+          "passed": false
+        },
+        {
+          "detail": {
+            "formal_protocol": "protocols/paper_upgrade_v1/camel_source_backed_formal_protocol_v1.md",
+            "upstream_source": null
+          },
+          "name": "frozen_protocol_declared",
+          "passed": true
+        },
+        {
+          "detail": [
+            "camel_google_research",
+            "fides_microsoft"
+          ],
+          "name": "external_source_entries_present",
+          "passed": true
+        },
+        {
+          "detail": {
+            "camel_google_research": false,
+            "fides_microsoft": false
+          },
+          "name": "external_entries_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": {
+            "adapter_classification": "",
+            "adapter_manifest_path": "protocols/paper_upgrade_v1/camel_source_backed_formal_freeze_v1.json",
+            "adapter_manifest_status": "completed_frozen_formal_protocol",
+            "by_entry": {
+              "camel_google_research": "completed_frozen_formal_protocol",
+              "fides_microsoft": "completed_frozen_formal_protocol"
+            }
+          },
+          "name": "adapter_is_source_backed_not_stub_only",
+          "passed": true
+        },
+        {
+          "detail": {
+            "complete_logs": null,
+            "formal_manifest": null
+          },
+          "name": "formal_manifest_and_complete_logs_declared",
+          "passed": false
+        },
+        {
+          "detail": {
+            "blockers": [],
+            "registry_key_present": true,
+            "snapshot_ready": true,
+            "snapshot_status": "completed"
+          },
+          "name": "frozen_dependency_snapshot_declared",
+          "passed": true
+        },
+        {
+          "detail": {
+            "method_selected": true,
+            "selected_candidate": "camel",
+            "selected_entries": [
+              "camel_google_research"
+            ],
+            "selection_manifest_path": "protocols/paper_upgrade_v1/camel_source_backed_formal_freeze_v1.json"
+          },
+          "name": "exactly_one_ifc_capability_method_selected",
+          "passed": true
+        },
+        {
+          "detail": {
+            "selected_entry": "camel_google_research",
+            "unselected_entries": {
+              "fides_microsoft": false
+            }
+          },
+          "name": "unselected_ifc_methods_not_result_eligible",
+          "passed": true
+        },
+        {
+          "detail": {
+            "selected_candidate": "camel",
+            "selection_manifest_path": "protocols/paper_upgrade_v1/camel_source_backed_formal_freeze_v1.json",
+            "source_checkout_ready": true
+          },
+          "name": "selected_method_source_checkout_ready",
+          "passed": true
+        },
+        {
+          "detail": {
+            "source_smoke_formal_result_eligible": false,
+            "source_smoke_network_calls": false,
+            "source_smoke_passed_checks": 8,
+            "source_smoke_path": "protocols/paper_upgrade_v1/camel_official_source_smoke_v1.json",
+            "source_smoke_status": "completed_source_smoke_only",
+            "source_smoke_total_checks": 8
+          },
+          "name": "selected_method_source_smoke_completed",
+          "passed": true
+        }
+      ],
+      "result_eligible": false
+    },
+    "ipiguard": {
+      "current_blockers": [
+        "The first two-case runtime qualification remains retained at 1/2 completed: the failed case raised KeyError('function_name') inside upstream IPIGuard DAG construction and the completed case produced an empty DAG. The new 9/9 v1.1 freeze only adds hash-bound raw construct-output capture and does not repair keys, change the prompt, retry a completion, or alter upstream graph construction. A fresh v1.1 two-case qualification and complete 726-case formal logs are still absent."
+      ],
+      "display_name": "IPIGuard",
+      "failed_requirements": [
+        "condition_marked_ready",
+        "condition_result_eligible_true",
+        "current_blockers_empty",
+        "external_entries_result_eligible_true",
+        "formal_manifest_and_complete_logs_declared"
+      ],
+      "family": "external_strong_baseline",
+      "formal_admission_status": "blocked_or_diagnostic",
+      "formal_exclusion_rule": "Exclude until the source-backed qualification and exact 726-case formal run complete with frozen DAG traces, zero unexplained failures and admitted analysis.",
+      "id": "ipiguard",
+      "implementation_status": "source_backed_adapter_runtime_qualification_failed_model_dag_schema",
+      "requirements": [
+        {
+          "detail": "ipiguard",
+          "name": "condition_present",
+          "passed": true
+        },
+        {
+          "detail": "source_backed_adapter_runtime_qualification_failed_model_dag_schema",
+          "name": "condition_marked_ready",
+          "passed": false
+        },
+        {
+          "detail": null,
+          "name": "condition_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": [
+            "The first two-case runtime qualification remains retained at 1/2 completed: the failed case raised KeyError('function_name') inside upstream IPIGuard DAG construction and the completed case produced an empty DAG. The new 9/9 v1.1 freeze only adds hash-bound raw construct-output capture and does not repair keys, change the prompt, retry a completion, or alter upstream graph construction. A fresh v1.1 two-case qualification and complete 726-case formal logs are still absent."
+          ],
+          "name": "current_blockers_empty",
+          "passed": false
+        },
+        {
+          "detail": {
+            "formal_protocol": "protocols/paper_upgrade_v1/ipiguard_source_backed_formal_protocol_v1.md",
+            "upstream_source": null
+          },
+          "name": "frozen_protocol_declared",
+          "passed": true
+        },
+        {
+          "detail": [
+            "ipiguard_github_emnlp2025"
+          ],
+          "name": "external_source_entries_present",
+          "passed": true
+        },
+        {
+          "detail": {
+            "ipiguard_github_emnlp2025": false
+          },
+          "name": "external_entries_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": {
+            "adapter_classification": "source_backed_disclosed_transport_and_import_isolation",
+            "adapter_manifest_path": "protocols/paper_upgrade_v1/ipiguard_source_backed_formal_freeze_v1.json",
+            "adapter_manifest_status": "completed_frozen_formal_protocol",
+            "by_entry": {
+              "ipiguard_github_emnlp2025": "completed_frozen_formal_protocol"
+            }
+          },
+          "name": "adapter_is_source_backed_not_stub_only",
+          "passed": true
+        },
+        {
+          "detail": {
+            "complete_logs": null,
+            "formal_manifest": null
+          },
+          "name": "formal_manifest_and_complete_logs_declared",
+          "passed": false
+        },
+        {
+          "detail": {
+            "blockers": [],
+            "registry_key_present": true,
+            "snapshot_ready": true,
+            "snapshot_status": "completed"
+          },
+          "name": "frozen_dependency_snapshot_declared",
+          "passed": true
+        },
+        {
+          "detail": {
+            "formal_result_eligible": false,
+            "passed_checks": 8,
+            "source_smoke_path": "protocols/paper_upgrade_v1/ipiguard_official_source_smoke_v1.json",
+            "source_smoke_status": "completed_source_smoke_only",
+            "total_checks": 8
+          },
+          "name": "official_source_smoke_completed",
+          "passed": true
+        }
+      ],
+      "result_eligible": false
+    },
+    "progent": {
+      "current_blockers": [
+        "The official Progent policy engine is pinned and ported to the common 726-case AgentDojo universe with a 13/13 v1.1 freeze, 10/10 network-blocked import preflight, hash-bound local adapter files, resumable runner and dual-checker analyzer, but model qualification, complete 726-case logs and admitted formal analysis do not exist yet.",
+        "The official repository bundles only 686 v1 cases; the disclosed current-AgentDojo lifecycle port is required for the common comparison and must not be described as an upstream CLI byte-for-byte reproduction.",
+        "The upstream repository has no top-level license file, so redistribution terms still require clarification."
+      ],
+      "display_name": "Progent",
+      "failed_requirements": [
+        "condition_marked_ready",
+        "condition_result_eligible_true",
+        "current_blockers_empty",
+        "external_entries_result_eligible_true",
+        "formal_manifest_and_complete_logs_declared"
+      ],
+      "family": "external_strong_baseline",
+      "formal_admission_status": "blocked_or_diagnostic",
+      "formal_exclusion_rule": "Exclude until the pinned official implementation has a frozen AgentDojo adapter, trusted-input-only policy-generation audit, complete logs and admitted formal analysis.",
+      "id": "progent",
+      "implementation_status": "source_backed_v1_1_hash_bound_formal_protocol_import_preflight_completed_qualification_pending",
+      "requirements": [
+        {
+          "detail": "progent",
+          "name": "condition_present",
+          "passed": true
+        },
+        {
+          "detail": "source_backed_v1_1_hash_bound_formal_protocol_import_preflight_completed_qualification_pending",
+          "name": "condition_marked_ready",
+          "passed": false
+        },
+        {
+          "detail": null,
+          "name": "condition_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": [
+            "The official Progent policy engine is pinned and ported to the common 726-case AgentDojo universe with a 13/13 v1.1 freeze, 10/10 network-blocked import preflight, hash-bound local adapter files, resumable runner and dual-checker analyzer, but model qualification, complete 726-case logs and admitted formal analysis do not exist yet.",
+            "The official repository bundles only 686 v1 cases; the disclosed current-AgentDojo lifecycle port is required for the common comparison and must not be described as an upstream CLI byte-for-byte reproduction.",
+            "The upstream repository has no top-level license file, so redistribution terms still require clarification."
+          ],
+          "name": "current_blockers_empty",
+          "passed": false
+        },
+        {
+          "detail": {
+            "formal_protocol": "protocols/paper_upgrade_v1/progent_source_backed_formal_protocol_v1.md",
+            "upstream_source": null
+          },
+          "name": "frozen_protocol_declared",
+          "passed": true
+        },
+        {
+          "detail": [
+            "progent_arxiv2025"
+          ],
+          "name": "external_source_entries_present",
+          "passed": true
+        },
+        {
+          "detail": {
+            "progent_arxiv2025": false
+          },
+          "name": "external_entries_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": {
+            "adapter_classification": "",
+            "adapter_manifest_path": "protocols/paper_upgrade_v1/progent_source_backed_formal_freeze_v1.json",
+            "adapter_manifest_status": "completed_frozen_formal_protocol",
+            "by_entry": {
+              "progent_arxiv2025": "completed_frozen_formal_protocol"
+            }
+          },
+          "name": "adapter_is_source_backed_not_stub_only",
+          "passed": true
+        },
+        {
+          "detail": {
+            "complete_logs": null,
+            "formal_manifest": null
+          },
+          "name": "formal_manifest_and_complete_logs_declared",
+          "passed": false
+        },
+        {
+          "detail": {
+            "blockers": [],
+            "registry_key_present": true,
+            "snapshot_ready": true,
+            "snapshot_status": "completed"
+          },
+          "name": "frozen_dependency_snapshot_declared",
+          "passed": true
+        }
+      ],
+      "result_eligible": false
+    },
+    "promptguard": {
+      "current_blockers": [],
+      "display_name": "PromptGuard or equivalent input detector",
+      "failed_requirements": [],
+      "family": "external_strong_baseline",
+      "formal_admission_status": "formal_ready",
+      "formal_exclusion_rule": "",
+      "id": "promptguard",
+      "implementation_status": "ready_detector_only_formal",
+      "requirements": [
+        {
+          "detail": "promptguard",
+          "name": "condition_present",
+          "passed": true
+        },
+        {
+          "detail": "ready_detector_only_formal",
+          "name": "condition_marked_ready",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "condition_result_eligible_true",
+          "passed": true
+        },
+        {
+          "detail": [],
+          "name": "current_blockers_empty",
+          "passed": true
+        },
+        {
+          "detail": {
+            "formal_protocol": "protocols/paper_upgrade_v1/promptguard_detector_formal_protocol_v1.md",
+            "upstream_source": null
+          },
+          "name": "frozen_protocol_declared",
+          "passed": true
+        },
+        {
+          "detail": [
+            "promptguard_llama_prompt_guard_2"
+          ],
+          "name": "external_source_entries_present",
+          "passed": true
+        },
+        {
+          "detail": {
+            "promptguard_llama_prompt_guard_2": true
+          },
+          "name": "external_entries_result_eligible_true",
+          "passed": true
+        },
+        {
+          "detail": {
+            "adapter_classification": "",
+            "adapter_manifest_path": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/analysis/analysis_manifest.json",
+            "adapter_manifest_status": "completed_source_backed_formal_detector_baseline",
+            "by_entry": {
+              "promptguard_llama_prompt_guard_2": "completed_source_backed_formal_detector_baseline"
+            }
+          },
+          "name": "adapter_is_source_backed_not_stub_only",
+          "passed": true
+        },
+        {
+          "detail": {
+            "complete_logs": [
+              "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/raw_predictions.jsonl",
+              "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/progress.jsonl",
+              "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/failures.jsonl"
+            ],
+            "formal_manifest": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/analysis/analysis_manifest.json"
+          },
+          "name": "formal_manifest_and_complete_logs_declared",
+          "passed": true
+        },
+        {
+          "detail": {
+            "blockers": [],
+            "registry_key_present": true,
+            "snapshot_ready": true,
+            "snapshot_status": "completed"
+          },
+          "name": "frozen_dependency_snapshot_declared",
+          "passed": true
+        }
+      ],
+      "result_eligible": true
+    },
+    "task_shield": {
+      "current_blockers": [
+        "No public official Task Shield repository is pinned. The v1.3 ACL-paper reproduction root is stopped and sealed with 42 completed cases plus one APITimeoutError failed row and cannot be admitted. The separate v1.4 qualification completed 2/2 with zero operational failures, but its fresh 726-case root retained a TaskShieldVerifierError on agentdojo:v1:banking:user_task_1 because the verifier returned invalid JSON. The running v1.4 root is already inadmissible under the zero-unexplained-failure gate. The condition must always be labelled a disclosed paper reproduction, not official source."
+      ],
+      "display_name": "Task Shield",
+      "failed_requirements": [
+        "condition_marked_ready",
+        "condition_result_eligible_true",
+        "current_blockers_empty",
+        "external_entries_result_eligible_true",
+        "formal_manifest_and_complete_logs_declared"
+      ],
+      "family": "external_strong_baseline",
+      "formal_admission_status": "blocked_or_diagnostic",
+      "formal_exclusion_rule": "Exclude until the disclosed paper reproduction passes real-model qualification, exact 726-case execution, zero unexplained failures and analyzer admission; never describe it as an official-source reproduction.",
+      "id": "task_shield",
+      "implementation_status": "disclosed_paper_reproduction_v1_4_formal_running_failed_case_present",
+      "requirements": [
+        {
+          "detail": "task_shield",
+          "name": "condition_present",
+          "passed": true
+        },
+        {
+          "detail": "disclosed_paper_reproduction_v1_4_formal_running_failed_case_present",
+          "name": "condition_marked_ready",
+          "passed": false
+        },
+        {
+          "detail": null,
+          "name": "condition_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": [
+            "No public official Task Shield repository is pinned. The v1.3 ACL-paper reproduction root is stopped and sealed with 42 completed cases plus one APITimeoutError failed row and cannot be admitted. The separate v1.4 qualification completed 2/2 with zero operational failures, but its fresh 726-case root retained a TaskShieldVerifierError on agentdojo:v1:banking:user_task_1 because the verifier returned invalid JSON. The running v1.4 root is already inadmissible under the zero-unexplained-failure gate. The condition must always be labelled a disclosed paper reproduction, not official source."
+          ],
+          "name": "current_blockers_empty",
+          "passed": false
+        },
+        {
+          "detail": {
+            "formal_protocol": "protocols/paper_upgrade_v1/taskshield_paper_formal_freeze_v14.md",
+            "upstream_source": null
+          },
+          "name": "frozen_protocol_declared",
+          "passed": true
+        },
+        {
+          "detail": [
+            "task_shield_acl2025"
+          ],
+          "name": "external_source_entries_present",
+          "passed": true
+        },
+        {
+          "detail": {
+            "task_shield_acl2025": false
+          },
+          "name": "external_entries_result_eligible_true",
+          "passed": false
+        },
+        {
+          "detail": {
+            "adapter_classification": "",
+            "adapter_manifest_path": "protocols/paper_upgrade_v1/taskshield_paper_formal_freeze_v14.json",
+            "adapter_manifest_status": "completed_frozen_formal_protocol",
+            "by_entry": {
+              "task_shield_acl2025": "completed_frozen_formal_protocol"
+            }
+          },
+          "name": "adapter_is_source_backed_not_stub_only",
+          "passed": true
+        },
+        {
+          "detail": {
+            "complete_logs": null,
+            "formal_manifest": null
+          },
+          "name": "formal_manifest_and_complete_logs_declared",
+          "passed": false
+        },
+        {
+          "detail": {
+            "blockers": [],
+            "registry_key_present": true,
+            "snapshot_ready": true,
+            "snapshot_status": "completed"
+          },
+          "name": "frozen_dependency_snapshot_declared",
+          "passed": true
+        }
+      ],
+      "result_eligible": false
+    }
+  },
+  "readiness_rows_sha256": "c7c6793add488926de728a7b9972773bb0c91db63db3febe13ef73db93ecd5cd",
+  "required_strong_baselines": [
+    "agentdojo_tool_filter",
+    "agentdojo_transformers_pi_detector",
+    "camel_or_fides",
+    "ipiguard",
+    "progent",
+    "promptguard",
+    "task_shield"
+  ],
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-strong-baseline-formal-readiness-audit-1.0",
+  "status": "completed",
+  "total_checks": 7
+}

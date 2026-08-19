@@ -1,0 +1,53 @@
+{
+  "artifacts": {
+    "README.md": {
+      "path": "README.md",
+      "sha256": "91a9b5bb9a4235380167e2951b75a052802e73addc2f07a1a1cdafe1bc5d625d"
+    },
+    "authoring_slots.csv": {
+      "path": "authoring_slots.csv",
+      "sha256": "c7859d29018e5728e16629447f7d9fd18beb966511f32042d59095a575273f54"
+    },
+    "authoring_slots.jsonl": {
+      "path": "authoring_slots.jsonl",
+      "sha256": "5b2846ccd324b29e8e9d2aa9102c8a6c7b4e3c31521219be91827aa5586170d2"
+    },
+    "case_template.json": {
+      "path": "case_template.json",
+      "sha256": "fa69151be30a06d83c29097f28b29cc98475637c4eec9d37c6e1c9cb31add99e"
+    },
+    "custody_manifest_template.json": {
+      "path": "custody_manifest_template.json",
+      "sha256": "89346b8596481987bb6914ad63afa41bac47ee86ab0608a5f5048c14a2432be7"
+    },
+    "validate_candidate_before_release.py": {
+      "path": "validate_candidate_before_release.py",
+      "sha256": "4aac253dced9ce57330640e83a53be5eff6ee2acf6a4ea01c33f5e7e3811e7c7"
+    }
+  },
+  "assignment_slot_count": 600,
+  "assignment_slots_sha256": "3879ceb72a2a9eb8a83c26e9fe780e255acd2ecc3bf3a3919aa6790f0b162913",
+  "attack_family_counts": {
+    "cross_tool_attack_chain": 40,
+    "direct_jailbreak": 40,
+    "environment_context_pollution": 40,
+    "json_rpc": 40,
+    "memory_poisoning": 40,
+    "multilingual_t2l": 40,
+    "obfuscation_evasion": 40,
+    "rag_indirect": 40,
+    "tool_output_injection": 40
+  },
+  "boundary": "Content-free authoring/custody handoff only. Independent authors must create and seal the actual candidate without access to M3 cases, results or Guard internals.",
+  "candidate_cases_created": 0,
+  "created_at": "2026-07-22T07:21:00.207423+00:00",
+  "kit_version": "m3-paper-v1-independent-blind-authoring-kit-1.0",
+  "result_eligible_for_confirmatory_q2_tables": false,
+  "sample_type_counts": {
+    "attack": 360,
+    "benign_legal_tool": 120,
+    "benign_no_tool": 120
+  },
+  "schema_version": "paper-independent-blind-authoring-kit-manifest-1.0",
+  "status": "completed_authoring_kit_only"
+}

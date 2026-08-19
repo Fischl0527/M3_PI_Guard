@@ -1,0 +1,8 @@
+{
+  "audit_id": "A17-asb-loader",
+  "base_digest": "86c71a27beeec70c3250f69f5e84ec20462493c0aa1d12737f7a0cdbc02099e4",
+  "mutated_digest": "86c71a27beeec70c3250f69f5e84ec20462493c0aa1d12737f7a0cdbc02099e4",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

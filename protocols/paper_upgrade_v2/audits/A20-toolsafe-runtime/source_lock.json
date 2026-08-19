@@ -1,0 +1,19 @@
+{
+  "artifact": "ToolSafe",
+  "audit_id": "A20-toolsafe-runtime",
+  "commit_date": "2026-03-25T23:18:43+08:00",
+  "default_branch_head_at_discovery": "46358fa424a927a895c6c8322f99032c4eb5155e",
+  "expected_commit": "46358fa424a927a895c6c8322f99032c4eb5155e",
+  "license": {
+    "path": null,
+    "sha256": null,
+    "status": "not_found_at_repository_root"
+  },
+  "observed_commit": "46358fa424a927a895c6c8322f99032c4eb5155e",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/paper_v2_audits/toolsafe",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/MurrayTom/ToolSafe.git"
+}

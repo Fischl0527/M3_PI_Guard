@@ -1,0 +1,432 @@
+{
+  "schema_version": "m3-paper-external-strong-baseline-sources-1.0",
+  "created_at": "2026-07-18",
+  "evidence_boundary": "Source/readiness registry. Rows may become result_eligible_for_formal_tables only for their explicitly declared table scope after a frozen adapter, dependency snapshot, run manifest and complete logs exist; detector-only eligibility must not be used as end-to-end agent-defense evidence.",
+  "source_discovery_method": [
+    "primary paper or model-card pages checked by web search on 2026-07-18",
+    "GitHub HEAD commits observed with git ls-remote for code repositories without cloning",
+    "local dependency state checked without installing packages or downloading models"
+  ],
+  "required_registry_keys": [
+    "promptguard",
+    "task_shield",
+    "ipiguard",
+    "progent",
+    "camel_or_fides"
+  ],
+  "entries": [
+    {
+      "id": "promptguard_llama_prompt_guard_2",
+      "registry_key": "promptguard",
+      "display_name": "Meta Llama Prompt Guard 2",
+      "baseline_family": "input_detector",
+      "primary_reference": {
+        "kind": "model_card",
+        "url": "https://huggingface.co/meta-llama/Llama-Prompt-Guard-2-86M",
+        "observed_claims": [
+          "supports Transformers text-classification pipeline",
+          "512-token context window",
+          "multilingual prompt injection and jailbreak detection",
+          "AgentDojo evaluation reported on model card"
+        ]
+      },
+      "secondary_references": [
+        {
+          "kind": "model_card",
+          "url": "https://developer.meta.com/ai/docs/model-cards-and-prompt-formats/prompt-guard/"
+        },
+        {
+          "kind": "repository",
+          "url": "https://github.com/meta-llama/PurpleLlama",
+          "remote_head_observed_at": "2026-07-18",
+          "remote_head_sha": "b71c6350a2acf2fb62c2328a734cbf440ecac386",
+          "relevant_path": "Prompt-Guard/"
+        }
+      ],
+      "candidate_models": [
+        "meta-llama/Llama-Prompt-Guard-2-86M",
+        "meta-llama/Llama-Prompt-Guard-2-22M"
+      ],
+      "minimum_adapter_requirements": [
+        "use the pinned E:/M3_PI_Guard_runtime/promptguard environment",
+        "download/cache one selected Prompt Guard 2 model",
+        "freeze tokenization, 512-token chunking, threshold and aggregation rule",
+        "run detector-only baseline on the same frozen M3-v2, AgentDojo and InjecAgent inputs"
+      ],
+      "adapter_preflight": {
+        "protocol": "protocols/paper_upgrade_v1/promptguard_detector_adapter_v1.md",
+        "script": "experiments/paper_v1/benchmarks/promptguard_adapter.py",
+        "manifest": "protocols/paper_upgrade_v1/promptguard_detector_adapter_preflight_v1.json",
+        "status": "real_detector_smoke_completed_formal_run_pending",
+        "stub_smoke_completed": true,
+        "real_detector_ready": true,
+        "real_detector_smoke": "outputs/paper_upgrade_v1/baselines/promptguard_real_smoke_v1/promptguard_real_smoke_manifest.json"
+      },
+      "formal_result": {
+        "status": "completed_source_backed_formal_detector_baseline",
+        "eligible_table_scope": ["detector_performance"],
+        "ineligible_table_scope": ["end_to_end_agent_asr", "agent_tcr", "tool_execution_utility"],
+        "protocol": "protocols/paper_upgrade_v1/promptguard_detector_formal_protocol_v1.md",
+        "freeze": "protocols/paper_upgrade_v1/promptguard_detector_formal_freeze_v1.json",
+        "run_manifest": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/run_manifest.json",
+        "analysis_manifest": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/analysis/analysis_manifest.json",
+        "complete_logs": [
+          "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/raw_predictions.jsonl",
+          "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/progress.jsonl",
+          "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/failures.jsonl"
+        ],
+        "figures_manifest": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/analysis/figure_manifest.json",
+        "summary": {
+          "n": 3280,
+          "positive_n": 2583,
+          "negative_n": 697,
+          "tp": 635,
+          "fn": 1948,
+          "fp": 0,
+          "tn": 697,
+          "precision": 1.0,
+          "recall": 0.24583817266744096,
+          "fpr": 0.0,
+          "f1": 0.39465506525792415
+        }
+      },
+      "current_status": "completed_source_backed_formal_detector_baseline",
+      "current_blockers": [],
+      "formal_exclusion_rule": "No detector-performance exclusion remains for the declared frozen run. Exclude this entry from end-to-end agent ASR, TCR and tool-utility tables.",
+      "result_eligible_for_formal_tables": true
+    },
+    {
+      "id": "task_shield_acl2025",
+      "registry_key": "task_shield",
+      "display_name": "Task Shield",
+      "baseline_family": "task_alignment_runtime",
+      "primary_reference": {
+        "kind": "acl_anthology_paper",
+        "url": "https://aclanthology.org/2025.acl-long.1435/",
+        "doi": "10.18653/v1/2025.acl-long.1435",
+        "observed_claims": [
+          "test-time defense verifying whether each instruction and tool call contributes to user-specified goals",
+          "evaluated on AgentDojo",
+          "reported GPT-4o ASR and task utility in the paper abstract"
+        ]
+      },
+      "secondary_references": [
+        {
+          "kind": "arxiv",
+          "url": "https://arxiv.org/abs/2412.16682"
+        }
+      ],
+      "candidate_models": [],
+      "minimum_adapter_requirements": [
+        "pin official code if released, or create a disclosed reproduction from the paper algorithm",
+        "ensure task-alignment verifier sees no offline attack labels or expected tool answers",
+        "freeze verifier prompt/model, thresholds, decision labels and failure handling"
+      ],
+      "adapter_preflight": {
+        "protocol": "protocols/paper_upgrade_v1/taskshield_alignment_adapter_v1.md",
+        "script": "experiments/paper_v1/benchmarks/taskshield_adapter.py",
+        "manifest": "protocols/paper_upgrade_v1/taskshield_alignment_adapter_preflight_v1.json",
+        "status": "blocked_reproduction_semantics_stub_preflight_only",
+        "stub_smoke_completed": true,
+        "reproduction_semantics_ready": false
+      },
+      "paper_reproduction_formal_adapter": {
+        "classification": "disclosed_paper_reproduction_not_official_source",
+        "paper_pdf": "external/baselines/task-shield-paper/2025.acl-long.1435.pdf",
+        "paper_pdf_sha256": "057ff02152c0bb61892b08abdc80f7af22416c03819e526878091ee87d3bf1e6",
+        "freeze": "protocols/paper_upgrade_v1/taskshield_paper_formal_freeze_v14.json",
+        "import_preflight": "protocols/paper_upgrade_v1/taskshield_paper_import_preflight_v1.json",
+        "runtime": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+        "runtime_timeout_retry_patch": "experiments/paper_v1/benchmarks/taskshield_paper_runtime_v14.py",
+        "runner": "experiments/paper_v1/benchmarks/run_taskshield_paper_formal_v14.py",
+        "analyzer": "experiments/paper_v1/benchmarks/analyze_taskshield_paper_formal.py",
+        "freeze_version": "m3-paper-v1-taskshield-reproduction-freeze-1.4",
+        "hash_bound_local_adapter": true,
+        "resume_identity_checked_before_model_probe": true,
+        "previous_qualification_manifest_v13": "outputs/paper_upgrade_v1/baselines/taskshield_paper_qualification_v13/run_manifest.json",
+        "failed_run_manifest_v13": "outputs/paper_upgrade_v1/baselines/taskshield_paper_formal_v13/run_manifest.json",
+        "failed_run_monitor_v13": "protocols/paper_upgrade_v1/monitors/task_shield_formal_v13/agentdojo_official_formal_run_monitor_v1.json",
+        "qualification_manifest": "outputs/paper_upgrade_v1/baselines/taskshield_paper_qualification_v14/run_manifest.json",
+        "formal_run_manifest": "outputs/paper_upgrade_v1/baselines/taskshield_paper_formal_v14/run_manifest.json",
+        "formal_run_monitor": "protocols/paper_upgrade_v1/monitors/task_shield_formal_v14/agentdojo_official_formal_run_monitor_v1.json",
+        "status": "v1_4_formal_running_failed_case_present",
+        "result_eligible_for_formal_tables": false
+      },
+      "current_status": "disclosed_paper_reproduction_v1_4_formal_running_failed_case_present",
+      "current_blockers": [
+        "no official runnable repository is pinned, so this condition is limited to a disclosed paper reproduction",
+        "the v1.2 verifier-cardinality failure is preserved as diagnostic evidence and not retried in place",
+        "the v1.3 726-case formal root was stopped after 42 completed cases and one APITimeoutError failed row; the sealed failed root is preserved and cannot be admitted",
+        "v1.4 qualification completed 2/2 with zero operational failures, but the fresh 726-case root retained a TaskShieldVerifierError on agentdojo:v1:banking:user_task_1 because the verifier returned invalid JSON; the root is running but already inadmissible under the zero-unexplained-failure gate"
+      ],
+      "formal_exclusion_rule": "Exclude until the frozen disclosed reproduction passes qualification, exact 726-case execution, complete trace audit and formal analysis admission; never present it as official source.",
+      "result_eligible_for_formal_tables": false
+    },
+    {
+      "id": "ipiguard_github_emnlp2025",
+      "registry_key": "ipiguard",
+      "display_name": "IPIGuard",
+      "baseline_family": "tool_dependency_graph_runtime",
+      "primary_reference": {
+        "kind": "acl_anthology_paper",
+        "url": "https://aclanthology.org/2025.emnlp-main.53/",
+        "observed_claims": [
+          "tool dependency graph based defense",
+          "indirect prompt injection defense for LLM agents",
+          "EMNLP 2025 paper"
+        ]
+      },
+      "secondary_references": [
+        {
+          "kind": "repository",
+          "url": "https://github.com/Greysahy/ipiguard",
+          "remote_head_observed_at": "2026-07-18",
+          "remote_head_sha": "4e686ed2f62c135cb12564a4466daa95f3ace878"
+        },
+        {
+          "kind": "arxiv",
+          "url": "https://arxiv.org/abs/2508.15310"
+        }
+      ],
+      "candidate_models": [],
+      "minimum_adapter_requirements": [
+        "clone or vendor the exact observed repository commit into an isolated external baseline path",
+        "freeze TDG construction from trusted task/tool schemas without attack labels",
+        "map M3, AgentDojo and InjecAgent tool schemas to IPIGuard graph inputs",
+        "record all incompatible task/tool families before scoring"
+      ],
+    "adapter_preflight": {
+      "protocol": "protocols/paper_upgrade_v1/ipiguard_tdg_adapter_v1.md",
+      "script": "experiments/paper_v1/benchmarks/ipiguard_adapter.py",
+      "manifest": "protocols/paper_upgrade_v1/ipiguard_tdg_adapter_preflight_v1.json",
+      "status": "ready_for_official_source_smoke",
+      "stub_smoke_completed": true,
+      "source_checkout_ready": true,
+      "source_smoke_manifest": "protocols/paper_upgrade_v1/ipiguard_official_source_smoke_v1.json",
+      "source_smoke_status": "completed_source_smoke_only"
+    },
+    "source_backed_formal_adapter": {
+      "protocol": "protocols/paper_upgrade_v1/ipiguard_source_backed_formal_protocol_v1.md",
+      "freeze": "protocols/paper_upgrade_v1/ipiguard_source_backed_formal_freeze_v1.json",
+      "runner": "experiments/paper_v1/benchmarks/run_ipiguard_source_backed_formal.py",
+      "analyzer": "experiments/paper_v1/benchmarks/analyze_ipiguard_source_backed_formal.py",
+      "status": "v1_1_hash_bound_raw_capture_requalification_pending",
+      "compatibility_class": "source_backed_disclosed_transport_import_isolation_and_evidence_capture",
+      "raw_construct_output_capture": {
+        "enabled": true,
+        "changes_prompt": false,
+        "changes_upstream_parser": false,
+        "changes_selection_rule": false
+      }
+    },
+    "current_status": "source_backed_v1_qualification_failed_v1_1_instrumented_requalification_pending",
+    "current_blockers": [
+      "the retained v1 two-case qualification completed 1/2 and failed one case on upstream construct_dag KeyError('function_name'); the other case produced an empty DAG",
+      "the 9/9 v1.1 freeze hash-binds the local runner/analyzer/protocol and captures raw construct JSON without changing the prompt or parser, but its fresh two-case requalification has not run",
+      "the requalification must wait until the active AgentDojo ToolFilter job releases Ollama/GPU and must use a new output root",
+      "complete source-backed formal logs and admitted analysis do not yet exist"
+    ],
+      "formal_exclusion_rule": "Exclude until the exact source commit, disclosed import/transport adapter, two-case qualification, complete 726-case logs and analysis are all admitted.",
+      "result_eligible_for_formal_tables": false
+    },
+    {
+      "id": "progent_arxiv2025",
+      "registry_key": "progent",
+      "display_name": "Progent",
+      "baseline_family": "programmable_privilege_control",
+      "primary_reference": {
+        "kind": "arxiv",
+        "url": "https://arxiv.org/abs/2504.11703",
+        "observed_claims": [
+          "programmable privilege control for LLM agents",
+          "fine-grained tool-call policies and fallback actions",
+          "evaluated on AgentDojo, ASB and AgentPoison according to the paper abstract"
+        ]
+      },
+      "secondary_references": [
+        {
+          "kind": "arxiv_html",
+          "url": "https://arxiv.org/html/2504.11703"
+        },
+        {
+          "kind": "repository",
+          "url": "https://github.com/sunblaze-ucb/progent",
+          "remote_head_observed_at": "2026-07-21",
+          "remote_head_sha": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+          "relevant_path": "secagent/tool.py"
+        }
+      ],
+      "candidate_models": [],
+      "minimum_adapter_requirements": [
+        "pin the released official source and preserve its exact commit",
+        "freeze policy language subset, policy generator inputs and fallback semantics",
+        "prove the policy generator does not consume evaluator labels or gold actions",
+        "run utility/security paired tests under non-gold authorization"
+      ],
+      "adapter_preflight": {
+        "protocol": "protocols/paper_upgrade_v1/progent_policy_adapter_v1.md",
+        "script": "experiments/paper_v1/benchmarks/progent_adapter.py",
+        "manifest": "protocols/paper_upgrade_v1/progent_policy_adapter_preflight_v1.json",
+        "status": "official_source_checkout_and_offline_runtime_smoke_completed_adapter_pending",
+        "stub_smoke_completed": true,
+        "dsl_semantics_ready": true,
+        "official_source_checkout": "external/baselines/progent",
+        "official_source_commit": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+        "official_source_smoke": "protocols/paper_upgrade_v1/progent_official_source_smoke_v1.json"
+      },
+      "source_backed_formal_adapter": {
+        "classification": "source_backed_disclosed_agentdojo_version_and_transport_port",
+        "freeze": "protocols/paper_upgrade_v1/progent_source_backed_formal_freeze_v1.json",
+        "protocol": "protocols/paper_upgrade_v1/progent_source_backed_formal_protocol_v1.md",
+        "import_preflight": "protocols/paper_upgrade_v1/progent_source_backed_import_preflight_v1.json",
+        "adapter": "experiments/paper_v1/benchmarks/progent_source_backed_runtime.py",
+        "runner": "experiments/paper_v1/benchmarks/run_progent_source_backed_formal.py",
+        "analyzer": "experiments/paper_v1/benchmarks/analyze_progent_source_backed_formal.py",
+        "common_case_count": 726,
+        "official_bundled_case_count": 686,
+        "status": "v1_1_hash_bound_freeze_import_preflight_completed_qualification_pending",
+        "result_eligible_for_formal_tables": false
+      },
+      "current_status": "source_backed_v1_1_hash_bound_runner_analyzer_implemented_qualification_pending",
+      "current_blockers": [
+        "the source-backed 726-case v1.1 freeze, import preflight, hash-bound local adapter files, resumable runner and dual-checker analyzer are complete, but model qualification, complete formal logs and admitted analysis do not exist",
+        "the official checkout bundles 686 rather than 726 v1 cases, so the source-hashed current-AgentDojo compatibility port must remain disclosed",
+        "the upstream repository does not contain a top-level license file, so redistribution terms require clarification even though local research evaluation can proceed"
+      ],
+      "formal_exclusion_rule": "Exclude until the pinned official implementation has a frozen AgentDojo adapter, trusted-input-only policy-generation audit, complete logs and admitted formal analysis.",
+      "result_eligible_for_formal_tables": false
+    },
+    {
+      "id": "camel_google_research",
+      "registry_key": "camel_or_fides",
+      "display_name": "CaMeL",
+      "baseline_family": "control_data_flow_capability_runtime",
+      "primary_reference": {
+        "kind": "arxiv",
+        "url": "https://arxiv.org/abs/2503.18813",
+        "observed_claims": [
+          "explicitly extracts control and data flows from trusted query",
+          "prevents untrusted data from impacting program flow",
+          "uses capabilities to prevent unauthorized data exfiltration"
+        ]
+      },
+      "secondary_references": [
+        {
+          "kind": "repository",
+          "url": "https://github.com/google-research/camel-prompt-injection",
+          "remote_head_observed_at": "2026-07-18",
+          "remote_head_sha": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8"
+        }
+      ],
+      "candidate_models": [],
+      "minimum_adapter_requirements": [
+        "clone or vendor exact observed research-artifact commit",
+        "install uv and dependencies in an isolated environment only after disk-space approval",
+        "configure required API keys or compatible local model transport",
+        "map M3 task policies and public benchmark tools into CaMeL interpreter inputs"
+      ],
+      "adapter_preflight": {
+        "protocol": "protocols/paper_upgrade_v1/camel_fides_ifc_adapter_v1.md",
+        "script": "experiments/paper_v1/benchmarks/camel_fides_adapter.py",
+        "manifest": "protocols/paper_upgrade_v1/camel_fides_ifc_adapter_preflight_v1.json",
+      "status": "official_source_smoke_completed_transport_mapping_hash_bound_formal_runner_ready_qualification_pending",
+        "stub_smoke_completed": true,
+        "method_selected": true,
+        "source_checkout_ready": true,
+        "source_smoke_manifest": "protocols/paper_upgrade_v1/camel_official_source_smoke_v1.json",
+        "source_smoke_status": "completed_source_smoke_only",
+      "formal_freeze": "protocols/paper_upgrade_v1/camel_source_backed_formal_freeze_v1.json",
+      "source_backed_import_preflight": "protocols/paper_upgrade_v1/camel_source_backed_import_preflight_v1.json",
+      "source_backed_import_status": "completed_dependency_import_preflight_blocked",
+      "source_backed_compat_preflight": "protocols/paper_upgrade_v1/camel_source_backed_compat_preflight_v1.json",
+      "source_backed_compat_status": "completed_compat_preflight_only",
+      "source_backed_runner_preflight": "protocols/paper_upgrade_v1/camel_source_backed_runner_preflight_v1.json",
+      "source_backed_runner_status": "completed_runner_wiring_preflight_only",
+      "transport_mapping_preflight": "protocols/paper_upgrade_v1/camel_transport_mapping_preflight_v1.json",
+      "transport_mapping_status": "completed_transport_and_mapping_preflight_only"
+    },
+    "source_backed_formal_adapter": {
+      "classification": "official_source_dependency_runtime_transport_mapping_hash_bound_formal_runner_ready",
+      "protocol": "protocols/paper_upgrade_v1/camel_source_backed_formal_protocol_v1.md",
+      "freeze": "protocols/paper_upgrade_v1/camel_source_backed_formal_freeze_v1.json",
+      "freeze_version": "m3-paper-v1-camel-source-backed-freeze-1.2",
+      "import_preflight": "protocols/paper_upgrade_v1/camel_source_backed_import_preflight_v1.json",
+      "compat_preflight": "protocols/paper_upgrade_v1/camel_source_backed_compat_preflight_v1.json",
+      "runner_preflight": "protocols/paper_upgrade_v1/camel_source_backed_runner_preflight_v1.json",
+      "transport_mapping_preflight": "protocols/paper_upgrade_v1/camel_transport_mapping_preflight_v1.json",
+      "runner": "experiments/paper_v1/benchmarks/run_camel_source_backed_formal.py",
+      "analyzer": "experiments/paper_v1/benchmarks/analyze_camel_source_backed_formal.py",
+      "runtime_python": "E:/M3_PI_Guard_runtime/camel/.venv/Scripts/python.exe",
+      "runtime_cache": "E:/AI_Cache/uv",
+      "hash_bound_local_adapter": true,
+      "resume_identity_checked_before_model_probe": true,
+      "status": "dependency_runtime_completed_transport_mapping_hash_bound_runner_ready_qualification_pending",
+      "result_eligible_for_formal_tables": false
+    },
+    "current_status": "official_source_smoke_completed_transport_mapping_hash_bound_formal_runner_ready_qualification_pending",
+    "current_blockers": [
+      "CaMeL is selected as the IFC/capability baseline candidate and exact source checkout plus source-smoke are pinned locally",
+      "the isolated E-drive uv runtime is installed and dependency versions are recorded; the disclosed source-backed compatibility preflight resolves the AgentDojo suite import-order cycle without editing external source",
+      "runner-wiring and transport/capability mapping preflights construct upstream PrivilegedLLM/security-policy pipelines for all four suites with zero model/API/network/case execution",
+      "the source-backed formal freeze is v1.2 17/17 hash-bound with local_adapter hashes and a resume identity gate before model probing, but real-model two-case qualification, complete 726-case logs and admitted analysis do not yet exist"
+    ],
+    "formal_exclusion_rule": "Exclude until two-case qualification, exact 726-case execution, complete trace/log audit and formal analysis admission are complete.",
+      "result_eligible_for_formal_tables": false
+    },
+    {
+      "id": "fides_microsoft",
+      "registry_key": "camel_or_fides",
+      "display_name": "FIDES",
+      "baseline_family": "information_flow_control_runtime",
+      "primary_reference": {
+        "kind": "microsoft_research_page",
+        "url": "https://www.microsoft.com/en-us/research/publication/securing-ai-agents-with-information-flow-control/",
+        "observed_claims": [
+          "tracks confidentiality and integrity labels",
+          "deterministically enforces security policies",
+          "introduces primitives for selectively hiding information"
+        ]
+      },
+      "secondary_references": [
+        {
+          "kind": "repository",
+          "url": "https://github.com/microsoft/fides",
+          "remote_head_observed_at": "2026-07-18",
+          "remote_head_sha": "669c046c4adbc56ee49c9672fdd30c54937ea062"
+        },
+        {
+          "kind": "arxiv_pdf",
+          "url": "https://arxiv.org/pdf/2505.23643"
+        }
+      ],
+      "candidate_models": [],
+      "minimum_adapter_requirements": [
+        "clone or vendor exact observed repository commit",
+        "verify Python >=3.13 and package dependencies",
+        "convert tutorial/notebook mechanisms into a reproducible benchmark adapter",
+        "freeze label lattice, policies, hiding primitives and incompatible task rules"
+      ],
+      "adapter_preflight": {
+        "protocol": "protocols/paper_upgrade_v1/camel_fides_ifc_adapter_v1.md",
+        "script": "experiments/paper_v1/benchmarks/camel_fides_adapter.py",
+        "manifest": "protocols/paper_upgrade_v1/camel_fides_ifc_adapter_preflight_v1.json",
+        "status": "source_checkout_ready_not_selected",
+        "stub_smoke_completed": true,
+        "method_selected": false,
+        "source_checkout_ready": true
+      },
+      "current_status": "source_checkout_ready_not_selected",
+      "current_blockers": [
+        "exact source checkout is pinned locally but CaMeL is currently selected as the primary IFC/capability candidate",
+        "current code appears notebook/tutorial-oriented and no benchmark adapter exists in this checkout",
+        "label lattice and policy mapping for M3/AgentDojo/InjecAgent are not frozen",
+        "FIDES remains an alternate candidate unless CaMeL proves incompatible or weaker after source-backed smoke"
+      ],
+      "formal_exclusion_rule": "Exclude until exact source, dependency snapshot, notebook-to-benchmark adapter, label policies and complete logs are frozen.",
+      "result_eligible_for_formal_tables": false
+    }
+  ],
+  "selection_policy": {
+    "camel_or_fides": "Use CaMeL as the current primary information-flow/capability baseline candidate because it directly models trusted control/data flow and capabilities. Keep FIDES pinned as an alternate source-backed candidate if CaMeL cannot be adapted to AgentDojo, InjecAgent and M3-v2 without evaluator labels and complete raw logs."
+  }
+}

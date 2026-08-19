@@ -1,0 +1,24 @@
+{
+  "attempt_events_written": 4,
+  "automatic_retries": 0,
+  "budget_events_written": 2,
+  "credentials_read": 0,
+  "cross_provider_fallback": false,
+  "external_effects_enabled": false,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-24T15:45:00+08:00",
+  "negative_cases_rejected": [
+    "budget_cost_tamper",
+    "open_attempt_auto_resume",
+    "pending_trace_reuse"
+  ],
+  "network_calls_made": 0,
+  "project_matrix_records_created": 0,
+  "provider_calls_completed": 2,
+  "provider_tools_enabled": false,
+  "record_entries_written": 2,
+  "result_admission_authorized": false,
+  "schema_version": "m3-paper-v2-formal-matrix-controller-qualification-1.0",
+  "status": "matrix_controller_qualified_offline",
+  "work_items_executed": 2
+}

@@ -1,0 +1,124 @@
+{
+  "audit_id": "A19-wasp-benchmark",
+  "hits": [
+    {
+      "line": 435,
+      "path": "external/paper_v2_audits/wasp-http1/visualwebarena/run.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "score = evaluator(",
+      "text_sha256": "86447e04efb45ceaf7d402af420382eca7259f83dac401fc93faaf5cf287d3dd"
+    },
+    {
+      "line": 439,
+      "path": "external/paper_v2_audits/wasp-http1/visualwebarena/run.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "scores.append(score)",
+      "text_sha256": "0ea2c964331e084292642a526c7c9a44ba95c061ab41dd7d9e1f95818d4491e7"
+    },
+    {
+      "line": 441,
+      "path": "external/paper_v2_audits/wasp-http1/visualwebarena/run.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "if score == 1:",
+      "text_sha256": "6b733b180f59358ec274c75a8b10618879c1ebe0e99747dfecf83ee849cfce0c"
+    },
+    {
+      "line": 465,
+      "path": "external/paper_v2_audits/wasp-http1/visualwebarena/run.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "logger.info(f\"Average score: {sum(scores) / len(scores)}\")",
+      "text_sha256": "c109d8db3af36b04c58547f91a06ba95da41ed660bf065bda35754d4a319c4ac"
+    },
+    {
+      "line": 411,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "# Creating dict that describes webarena task for attacker goal (used for evaluations)",
+      "text_sha256": "f112fbcab7ea82863a8e3970dee6656bf61d4600f26bf344cdd8a5f0ab2e3b11"
+    },
+    {
+      "line": 449,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "# creating dict that describes webarena task for user and attacker goals",
+      "text_sha256": "21784c9c20db64b789498ab1b692b55825515b3395eff000aae3536d0e528efd"
+    },
+    {
+      "line": 451,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "task_for_this_prompt_injection, task_for_this_attacker_goal = (",
+      "text_sha256": "49f3eaebd80310b48f8b3f3ac39b8c0d105547e07d821ca170d2383d5c456179"
+    },
+    {
+      "line": 461,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "tasks_from_attacker.append(task_for_this_attacker_goal)",
+      "text_sha256": "c0d09a03436a2ca33fced8268cc699b7ca1a150fd100583f63c5285b1bb817f3"
+    },
+    {
+      "line": 538,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "# creating dict that describes webarena task for user and attacker goals",
+      "text_sha256": "21784c9c20db64b789498ab1b692b55825515b3395eff000aae3536d0e528efd"
+    },
+    {
+      "line": 540,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "task_for_this_prompt_injection, task_for_this_attacker_goal = (",
+      "text_sha256": "49f3eaebd80310b48f8b3f3ac39b8c0d105547e07d821ca170d2383d5c456179"
+    },
+    {
+      "line": 550,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "tasks_from_attacker.append(task_for_this_attacker_goal)",
+      "text_sha256": "c0d09a03436a2ca33fced8268cc699b7ca1a150fd100583f63c5285b1bb817f3"
+    },
+    {
+      "line": 597,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "task_for_this_attacker_goal = copy.deepcopy(",
+      "text_sha256": "388c5b19a9b15f04c93c78f3149c547f9ec9b8310d05a7810f21db9e17a980d5"
+    },
+    {
+      "line": 600,
+      "path": "external/paper_v2_audits/wasp-http1/webarena_prompt_injections/prompt_injector.py",
+      "patterns": [
+        "attacker[_ -]?goal"
+      ],
+      "preview": "tasks_from_attacker.append(task_for_this_attacker_goal)",
+      "text_sha256": "c0d09a03436a2ca33fced8268cc699b7ca1a150fd100583f63c5285b1bb817f3"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

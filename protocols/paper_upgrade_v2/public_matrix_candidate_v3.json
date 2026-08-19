@@ -1,0 +1,328 @@
+{
+  "artifact_locks": [
+    {
+      "bytes": 32576,
+      "path": "experiments/paper_v2/formal_condition_executors.py",
+      "sha256": "dcd39222d04c0081ed66b0bc51c37a4949f187dfc83b36ca42022b7acfc6aa93"
+    },
+    {
+      "bytes": 26839,
+      "path": "experiments/paper_v2/formal_record_store_v2.py",
+      "sha256": "67075156efa12a7a447b160b8140b16002fd5bd4d24261cf37b2b21226d7b157"
+    },
+    {
+      "bytes": 79361,
+      "path": "experiments/paper_v2/live_condition_runtime.py",
+      "sha256": "44b1eb05a87f23b46e3860a22dbdfc92b08b9aba26d9e055af85f97dc9af5f98"
+    },
+    {
+      "bytes": 6530,
+      "path": "experiments/paper_v2/public_abort_review_v1.py",
+      "sha256": "d22a26abba3d5205241c36bd00d931765a7d222c0eb40e93a6ea1aedaf71f150"
+    },
+    {
+      "bytes": 11960,
+      "path": "experiments/paper_v2/public_abort_review_v2.py",
+      "sha256": "d16810849296feaa0e580dcdcfdfce507e006ba28d120eb820324ea1c82c563d"
+    },
+    {
+      "bytes": 7116,
+      "path": "experiments/paper_v2/public_agentdojo_live_dependency_v2.py",
+      "sha256": "86441bf20adac8c533373872dce469c7538da5ed6b8d16270520d59ddc036f0f"
+    },
+    {
+      "bytes": 6513,
+      "path": "experiments/paper_v2/public_analysis_v1.py",
+      "sha256": "7b999b72b1b7a9fc0e2c944cd4a9e9f800cbe490f51a42be09a54c116a7f3bbb"
+    },
+    {
+      "bytes": 3519,
+      "path": "experiments/paper_v2/public_deepseek_client_v1.py",
+      "sha256": "7975098f38e1938363368427eb2f7bba3bc4d03c45b25d4d6584d63b6c5038be"
+    },
+    {
+      "bytes": 25304,
+      "path": "experiments/paper_v2/public_execution_store_v1.py",
+      "sha256": "3f8b4733babb418c3a303b709a4152c0aff36028469dd1af7ba37dc09486e65b"
+    },
+    {
+      "bytes": 28721,
+      "path": "experiments/paper_v2/public_live_controller_v2.py",
+      "sha256": "d5c6494bc51ff32e18f134e81f13c8f21c46f083e4b42a1aa1da060ed1da9eeb"
+    },
+    {
+      "bytes": 25281,
+      "path": "experiments/paper_v2/public_live_controller_v3.py",
+      "sha256": "b25e2ae56449da0add4cc05533da3426d4dd418a7041bd6db5bbff01644a5d48"
+    },
+    {
+      "bytes": 6766,
+      "path": "experiments/paper_v2/public_m3_live_dependency_v3.py",
+      "sha256": "6e06f546c405e3d8ce5f623dfefa9b3d912ea84491bfa34fc6f2a65c6932541f"
+    },
+    {
+      "bytes": 23097,
+      "path": "experiments/paper_v2/public_matrix_controller_v1.py",
+      "sha256": "116ee931382b0359dd56d647aba4366503f68ea2e95c92cfb5ba5d29241d286e"
+    },
+    {
+      "bytes": 26037,
+      "path": "experiments/paper_v2/public_matrix_controller_v2.py",
+      "sha256": "bf05cffa7555fbe02d0278d6518330a0b0fe26a47670d8f92322a1912a9177cf"
+    },
+    {
+      "bytes": 18655,
+      "path": "experiments/paper_v2/public_matrix_controller_v3.py",
+      "sha256": "be3d2882bc7361f4dd9d006135e3a242dc59ae2ef4453837bae116d777d435dc"
+    },
+    {
+      "bytes": 25124,
+      "path": "experiments/paper_v2/public_matrix_plan_v1.py",
+      "sha256": "286a0b5ea4cf7ea00e1600d01133a5bfaefd04b8ea56d6891ca8de9d0e6ed0bc"
+    },
+    {
+      "bytes": 15396,
+      "path": "experiments/paper_v2/public_provider_budget_v1.py",
+      "sha256": "2fec7840673687f4d323e09582a8115fd07e7173ea6d20595e05b1ed9a39667b"
+    },
+    {
+      "bytes": 20428,
+      "path": "experiments/paper_v2/public_provider_trace_v1.py",
+      "sha256": "a96689dc3b62b9fd753c6bdc45796893d97d1d092a97ccdeaf221ea63d566421"
+    },
+    {
+      "bytes": 5387,
+      "path": "experiments/paper_v2/public_result_gate_v1.py",
+      "sha256": "78fc0700af0e43eea7c835d8c6f5700b1819cfafcae26388d228eb0c16c05dfe"
+    },
+    {
+      "bytes": 1921,
+      "path": "protocols/paper_upgrade_v2/provider_request_trace_activation_v2.json",
+      "sha256": "ac15d82bc5631eb49c3e7b4344e143f753f17d40725845fa8a3507dc26de2b45"
+    },
+    {
+      "bytes": 2586,
+      "path": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+      "sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+    },
+    {
+      "bytes": 1995,
+      "path": "protocols/paper_upgrade_v2/public_agentdojo_live_dependency_qualification_v2.json",
+      "sha256": "9fcf27c1c87480ad68a40ee69b2ea1d0a9432dd3f3b23e5c9b9ed23b61b54612"
+    },
+    {
+      "bytes": 3492,
+      "path": "protocols/paper_upgrade_v2/public_analysis_preregistration_v1.json",
+      "sha256": "8a9596ecb2a66ba9c7ce4e0bcd1ace2f1549579d32f50a898fd5bc2ecfebc350"
+    },
+    {
+      "bytes": 503990,
+      "path": "protocols/paper_upgrade_v2/public_benchmark_freeze_v1.json",
+      "sha256": "9c5437b750e96771fcd6db736996c2c1f56fb504a7c74664e64ef81a6c316020"
+    },
+    {
+      "bytes": 4132,
+      "path": "protocols/paper_upgrade_v2/public_budget_policy_v1.json",
+      "sha256": "4b924f3d3974d90ddd51311d5c28e2d3717fb40e67b37acaf5d792b4c24c818a"
+    },
+    {
+      "bytes": 4691,
+      "path": "protocols/paper_upgrade_v2/public_execution_manifest_v1.json",
+      "sha256": "92b957182c49c971bc9512ede1224f2b950adeb433c78a9be9554fdc0c1102b2"
+    },
+    {
+      "bytes": 9707359,
+      "path": "protocols/paper_upgrade_v2/public_execution_plan_v1.jsonl",
+      "sha256": "034232257dd666c80bbf4de1e7f7df645de587eb84387337739bee55b8a5633f"
+    },
+    {
+      "bytes": 2473,
+      "path": "protocols/paper_upgrade_v2/public_m3_live_dependency_qualification_v3.json",
+      "sha256": "afb003bf858b1234dafb929a3d2c9120ad001546fd8ad0b62099c5dddcfe3af3"
+    },
+    {
+      "bytes": 8875,
+      "path": "protocols/paper_upgrade_v2/public_matrix_candidate_v1.json",
+      "sha256": "4f6fad8a5a84b1b5ecdc6519b54851a6c4dbb7f2079355137df9225ed32149c2"
+    },
+    {
+      "bytes": 10697,
+      "path": "protocols/paper_upgrade_v2/public_matrix_candidate_v2.json",
+      "sha256": "efb08490eef8644aaa347bf76b20bdfcd4793efe2df15bb34bda7701cb7868dd"
+    },
+    {
+      "bytes": 4809,
+      "path": "protocols/paper_upgrade_v2/public_matrix_controller_qualification_v2.json",
+      "sha256": "dd9ee2a036ff3780a81b0068643c2593e3a5807bdb5f56f55c688db03d7455e2"
+    },
+    {
+      "bytes": 5373,
+      "path": "protocols/paper_upgrade_v2/public_matrix_controller_qualification_v3.json",
+      "sha256": "e252329afb00e86fa77bf6dfb42fbc2581176a0862943bb5c734274c87e061ff"
+    },
+    {
+      "bytes": 2629,
+      "path": "protocols/paper_upgrade_v2/public_primary_canary_abort_review_v1.json",
+      "sha256": "659c91a39ca6bc31ccaee8e16fabae063856b72de7b6c63a69b1004f825261f6"
+    },
+    {
+      "bytes": 3562,
+      "path": "protocols/paper_upgrade_v2/public_primary_canary_abort_review_v2.json",
+      "sha256": "3944d5c67647fbd2f52c6d9842b60878ab9cf0a8f98086cfc814e57d1c7d1e8b"
+    },
+    {
+      "bytes": 2785,
+      "path": "schemas/paper_v2/public_matrix_admission_v2.schema.json",
+      "sha256": "3eac715405e871de6a09fa028f3484b18ea3b2679eefc9d885b06096b15cee05"
+    },
+    {
+      "bytes": 2785,
+      "path": "schemas/paper_v2/public_matrix_admission_v3.schema.json",
+      "sha256": "2c665a56a1366dfaeec1d0e4fbb51c81e238089679aab1aff965c880b26d8b2b"
+    },
+    {
+      "bytes": 3890,
+      "path": "schemas/paper_v2/public_matrix_candidate_v2.schema.json",
+      "sha256": "fa78a3d26fca78f2a0d94487fffa1dbb3cf0827daeedd39c239413f0c12fad3b"
+    },
+    {
+      "bytes": 3890,
+      "path": "schemas/paper_v2/public_matrix_candidate_v3.schema.json",
+      "sha256": "3eb15faa06dd0ad6db8cf9c0e98fd2155f69a758e574aaf064a68dd40f101bb1"
+    }
+  ],
+  "artifact_role": "owner_review_candidate",
+  "authorization": {
+    "active_admission_present": false,
+    "canary_execution_authorized": false,
+    "candidate_only": true,
+    "matrix_continuation_authorized": false,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "model_calls_while_building": 0,
+    "network_calls_while_building": 0,
+    "scientific_outcomes_accessed": false
+  },
+  "generated_at": "2026-07-28T13:10:00+08:00",
+  "manifest_sha256": "7df71eda75083a36b787659b482549ff3b2a7085b5ad01f8830dd0d2f9a32ef1",
+  "schema_version": "m3-paper-v2-public-matrix-candidate-3.0",
+  "scope": {
+    "budget": {
+      "automatic_retries": 0,
+      "cost_ledger": "append_only_cache_aware_actual_usage",
+      "incremental_hard_limit_cny": 25.0,
+      "role_hard_limits_cny": {
+        "primary": 20.0,
+        "second": 5.0
+      },
+      "untouched_reserve_cny": 5.0
+    },
+    "canary": {
+      "primary_records": 24,
+      "primary_work_key_sequence_sha256": "803684ec8199b8e1cc986f776a515064ec9149f2d78a2e37df53791d4ed7ad2d",
+      "records_remain_in_formal_matrix": true,
+      "scientific_outcomes_accessed": false,
+      "second_records": 12,
+      "second_work_key_sequence_sha256": "fba897661b8005af952003ed95022b98f829952461087a24a277eaa9385d9154",
+      "selection_is_outcome_blind": true,
+      "selection_method": "first_frozen_attack_and_benign_case_per_benchmark"
+    },
+    "execution_order": [
+      "primary_canary",
+      "primary_matrix",
+      "second_canary",
+      "second_matrix"
+    ],
+    "failure_policy": {
+      "all_failures_remain_in_intention_to_treat": true,
+      "budget_ceiling": "pause_before_next_request",
+      "completed_terminal_items_retried": false,
+      "first_http_429": "pause",
+      "first_identity_mismatch": "pause",
+      "first_unknown_runner_failure": "pause",
+      "pending_only_resume_requires_new_identity": true
+    },
+    "model_roles": {
+      "primary": {
+        "base_url": "https://api.deepseek.com",
+        "claim_boundary": "primary_model",
+        "conditions": [
+          "no_defense",
+          "safe_prompt_or_spotlighting",
+          "promptguard_detector_only",
+          "strongest_peer_reviewed_structural_baseline",
+          "m3_policy_only",
+          "m3_full"
+        ],
+        "endpoint_type": "official_api",
+        "execution_identity": "9dc7d657239c0ab4d10d4ba52ad585de3a499e19257aa3a2d9122993a11a9139",
+        "model_id": "deepseek-v4-pro",
+        "provider_id": "deepseek",
+        "public_v1_execution_identity": "e19149d307d58463cf3fba2a1db1b49caa907e653b3b0d79b219f94092bef27a",
+        "records": 5082,
+        "source_execution_identity": "7a95e3b65699d437681ed85df6e848e02e819db18feb7093caf2eda363ce7a1c"
+      },
+      "second": {
+        "base_url": "https://api.deepseek.com",
+        "claim_boundary": "cross_model_not_cross_provider",
+        "conditions": [
+          "strongest_peer_reviewed_structural_baseline",
+          "m3_policy_only",
+          "m3_full"
+        ],
+        "endpoint_type": "official_api",
+        "execution_identity": "df04d9f3e3ae38c7dca636516a16223736bd71e37d23a69a28a60752ca42e69a",
+        "model_id": "deepseek-v4-flash",
+        "provider_id": "deepseek",
+        "public_v1_execution_identity": "a9fafa3b7807c55feacc88336c9b21b4ad489adfd7829579c3f69caa230ec078",
+        "records": 1791,
+        "source_execution_identity": "b4db38b4913b3c04ff6d144d404fe3b7947cbe2ae7f5cd086ac99064a9aac353"
+      }
+    },
+    "provider": {
+      "execution_concurrency": 1,
+      "external_effects_enabled": false,
+      "max_tokens": 512,
+      "provider_managed_tools_enabled": false,
+      "timeout_seconds": 120.0
+    },
+    "qualification": {
+      "path": "protocols/paper_upgrade_v2/public_matrix_controller_qualification_v3.json",
+      "public_m3_probes": 4,
+      "qualified_pairs": 18,
+      "sha256": "e252329afb00e86fa77bf6dfb42fbc2581176a0862943bb5c734274c87e061ff"
+    },
+    "records": 6873,
+    "remediation": {
+      "fresh_execution_identity_required": true,
+      "public_agentdojo_qualification_sha256": "9fcf27c1c87480ad68a40ee69b2ea1d0a9432dd3f3b23e5c9b9ed23b61b54612",
+      "public_m3_qualification_sha256": "afb003bf858b1234dafb929a3d2c9120ad001546fd8ad0b62099c5dddcfe3af3",
+      "source_abort_review_sha256": "c3e17fe2f74bd807a348202c2ac632c9be6e4f6c2e426c4a8b7a3c5a70d4f1c5",
+      "source_candidate_manifest_sha256": "a17ab0926c0003e953b85834b8728a8ac98e360b684780b7fa98f10b9c07250b",
+      "source_run_resumable": false,
+      "source_work_keys_retained_under_fresh_run_identity": true
+    },
+    "runs": {
+      "primary": {
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v3-primary-9dc7d657239c0ab4d10d4ba52ad585de3a499e19257aa3a2d9122993a11a9139",
+        "run_id": "paper-v2-public-v3-primary-20260728"
+      },
+      "second": {
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v3-second-df04d9f3e3ae38c7dca636516a16223736bd71e37d23a69a28a60752ca42e69a",
+        "run_id": "paper-v2-public-v3-second-20260728"
+      }
+    },
+    "scientific_boundary": {
+      "canary_review_is_outcome_blind": true,
+      "flash_claim": "cross_model_not_cross_provider",
+      "partial_v2_records_admissible": false,
+      "result_admission_is_separate": true
+    }
+  },
+  "scope_sha256": "9a730e82de09ac52b1ecb18ca4c58d48eaa770647d5b30d0104d26cebb5c75f1",
+  "status": "candidate_pending_exact_command_canary_approval"
+}

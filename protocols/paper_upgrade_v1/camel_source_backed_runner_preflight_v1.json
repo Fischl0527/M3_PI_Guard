@@ -1,0 +1,715 @@
+{
+  "audit_version": "m3-paper-v1-camel-source-backed-runner-preflight-1.0",
+  "benchmark_case_count": 0,
+  "boundary": "Runner wiring preflight only. This constructs upstream CaMeL pipeline objects with a dry-run LLM and executes zero benchmark cases. It is not a CaMeL result and must not enter effect denominators.",
+  "camel_checkout": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection",
+  "camel_python": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+  "checks": [
+    {
+      "detail": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+      "name": "camel_runtime_python_exists",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection",
+      "name": "camel_checkout_exists",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "result_eligible": false,
+        "status": "completed_compat_preflight_only"
+      },
+      "name": "compat_preflight_completed_nonformal",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_formal_freeze_v1.json",
+        "reason": "prevents a cyclic freeze-to-preflight hash dependency",
+        "used_as_input": false
+      },
+      "name": "formal_freeze_not_used_as_runner_wiring_input",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "runner_wiring_probe_returned_zero",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": true,
+      "name": "compat_layer_loaded_in_runner_probe",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "banking",
+        "slack",
+        "travel",
+        "workspace"
+      ],
+      "name": "all_supported_suites_constructible",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463248,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "WorkspaceSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "workspace",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463632,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "TravelSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "travel",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463296,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "BankingSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "banking",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463488,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "SlackSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "slack",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        }
+      ],
+      "name": "upstream_privileged_llm_used",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "banking": "BankingSecurityPolicyEngine",
+        "slack": "SlackSecurityPolicyEngine",
+        "travel": "TravelSecurityPolicyEngine",
+        "workspace": "WorkspaceSecurityPolicyEngine"
+      },
+      "name": "upstream_security_policies_used",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463248,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "WorkspaceSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "workspace",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463632,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "TravelSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "travel",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463296,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "BankingSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "banking",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463488,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "SlackSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "slack",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        }
+      ],
+      "name": "privileged_llm_present_in_pipeline",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463248,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "WorkspaceSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "workspace",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463632,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "TravelSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "travel",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463296,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "BankingSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "banking",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        },
+        {
+          "benchmark_case_executed": false,
+          "dry_run_llm_class": "DryRunLLM",
+          "dry_run_llm_query_invoked": false,
+          "error": "",
+          "error_type": "",
+          "model_id": "m3-paper-qwen3-8b-v1:latest",
+          "model_or_network_invoked": false,
+          "ok": true,
+          "pipeline_class": "AgentPipeline",
+          "pipeline_element_classes": [
+            "InitQuery",
+            "PrivilegedLLM"
+          ],
+          "pipeline_id": 2074824463488,
+          "privileged_llm_class": "PrivilegedLLM",
+          "privileged_security_policy_engine": "SlackSecurityPolicyEngine",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "suite": "slack",
+          "uses_upstream_privileged_llm": true,
+          "uses_upstream_security_policy": true
+        }
+      ],
+      "name": "dry_run_llm_not_queried",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "benchmark_case_count": 0,
+        "compat_ok": true,
+        "model_or_api_calls": 0,
+        "network_attempted": false,
+        "ok": true,
+        "python_executable": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+        "returncode": 0,
+        "rows": [
+          {
+            "benchmark_case_executed": false,
+            "dry_run_llm_class": "DryRunLLM",
+            "dry_run_llm_query_invoked": false,
+            "error": "",
+            "error_type": "",
+            "model_id": "m3-paper-qwen3-8b-v1:latest",
+            "model_or_network_invoked": false,
+            "ok": true,
+            "pipeline_class": "AgentPipeline",
+            "pipeline_element_classes": [
+              "InitQuery",
+              "PrivilegedLLM"
+            ],
+            "pipeline_id": 2074824463248,
+            "privileged_llm_class": "PrivilegedLLM",
+            "privileged_security_policy_engine": "WorkspaceSecurityPolicyEngine",
+            "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+            "suite": "workspace",
+            "uses_upstream_privileged_llm": true,
+            "uses_upstream_security_policy": true
+          },
+          {
+            "benchmark_case_executed": false,
+            "dry_run_llm_class": "DryRunLLM",
+            "dry_run_llm_query_invoked": false,
+            "error": "",
+            "error_type": "",
+            "model_id": "m3-paper-qwen3-8b-v1:latest",
+            "model_or_network_invoked": false,
+            "ok": true,
+            "pipeline_class": "AgentPipeline",
+            "pipeline_element_classes": [
+              "InitQuery",
+              "PrivilegedLLM"
+            ],
+            "pipeline_id": 2074824463632,
+            "privileged_llm_class": "PrivilegedLLM",
+            "privileged_security_policy_engine": "TravelSecurityPolicyEngine",
+            "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+            "suite": "travel",
+            "uses_upstream_privileged_llm": true,
+            "uses_upstream_security_policy": true
+          },
+          {
+            "benchmark_case_executed": false,
+            "dry_run_llm_class": "DryRunLLM",
+            "dry_run_llm_query_invoked": false,
+            "error": "",
+            "error_type": "",
+            "model_id": "m3-paper-qwen3-8b-v1:latest",
+            "model_or_network_invoked": false,
+            "ok": true,
+            "pipeline_class": "AgentPipeline",
+            "pipeline_element_classes": [
+              "InitQuery",
+              "PrivilegedLLM"
+            ],
+            "pipeline_id": 2074824463296,
+            "privileged_llm_class": "PrivilegedLLM",
+            "privileged_security_policy_engine": "BankingSecurityPolicyEngine",
+            "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+            "suite": "banking",
+            "uses_upstream_privileged_llm": true,
+            "uses_upstream_security_policy": true
+          },
+          {
+            "benchmark_case_executed": false,
+            "dry_run_llm_class": "DryRunLLM",
+            "dry_run_llm_query_invoked": false,
+            "error": "",
+            "error_type": "",
+            "model_id": "m3-paper-qwen3-8b-v1:latest",
+            "model_or_network_invoked": false,
+            "ok": true,
+            "pipeline_class": "AgentPipeline",
+            "pipeline_element_classes": [
+              "InitQuery",
+              "PrivilegedLLM"
+            ],
+            "pipeline_id": 2074824463488,
+            "privileged_llm_class": "PrivilegedLLM",
+            "privileged_security_policy_engine": "SlackSecurityPolicyEngine",
+            "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+            "suite": "slack",
+            "uses_upstream_privileged_llm": true,
+            "uses_upstream_security_policy": true
+          }
+        ],
+        "stderr_tail": "",
+        "stdout_tail": "{\"benchmark_case_count\": 0, \"compat_ok\": true, \"model_or_api_calls\": 0, \"network_attempted\": false, \"ok\": true, \"python_executable\": \"E:\\\\M3_PI_Guard_runtime\\\\camel\\\\.venv\\\\Scripts\\\\python.exe\", \"rows\": [{\"benchmark_case_executed\": false, \"dry_run_llm_class\": \"DryRunLLM\", \"dry_run_llm_query_invoked\": false, \"error\": \"\", \"error_type\": \"\", \"model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"model_or_network_invoked\": false, \"ok\": true, \"pipeline_class\": \"AgentPipeline\", \"pipeline_element_classes\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_id\": 2074824463248, \"privileged_llm_class\": \"PrivilegedLLM\", \"privileged_security_policy_engine\": \"WorkspaceSecurityPolicyEngine\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"suite\": \"workspace\", \"uses_upstream_privileged_llm\": true, \"uses_upstream_security_policy\": true}, {\"benchmark_case_executed\": false, \"dry_run_llm_class\": \"DryRunLLM\", \"dry_run_llm_query_invoked\": false, \"error\": \"\", \"error_type\": \"\", \"model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"model_or_network_invoked\": false, \"ok\": true, \"pipeline_class\": \"AgentPipeline\", \"pipeline_element_classes\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_id\": 2074824463632, \"privileged_llm_class\": \"PrivilegedLLM\", \"privileged_security_policy_engine\": \"TravelSecurityPolicyEngine\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"suite\": \"travel\", \"uses_upstream_privileged_llm\": true, \"uses_upstream_security_policy\": true}, {\"benchmark_case_executed\": false, \"dry_run_llm_class\": \"DryRunLLM\", \"dry_run_llm_query_invoked\": false, \"error\": \"\", \"error_type\": \"\", \"model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"model_or_network_invoked\": false, \"ok\": true, \"pipeline_class\": \"AgentPipeline\", \"pipeline_element_classes\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_id\": 2074824463296, \"privileged_llm_class\": \"PrivilegedLLM\", \"privileged_security_policy_engine\": \"BankingSecurityPolicyEngine\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"suite\": \"banking\", \"uses_upstream_privileged_llm\": true, \"uses_upstream_security_policy\": true}, {\"benchmark_case_executed\": false, \"dry_run_llm_class\": \"DryRunLLM\", \"dry_run_llm_query_invoked\": false, \"error\": \"\", \"error_type\": \"\", \"model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"model_or_network_invoked\": false, \"ok\": true, \"pipeline_class\": \"AgentPipeline\", \"pipeline_element_classes\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_id\": 2074824463488, \"privileged_llm_class\": \"PrivilegedLLM\", \"privileged_security_policy_engine\": \"SlackSecurityPolicyEngine\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"suite\": \"slack\", \"uses_upstream_privileged_llm\": true, \"uses_upstream_security_policy\": true}]}\n"
+      },
+      "name": "no_network_or_model_api_invoked",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": 0,
+      "name": "no_benchmark_cases_executed",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": "runner wiring preflight only",
+      "name": "result_not_formally_admitted",
+      "severity": "error",
+      "status": "pass"
+    }
+  ],
+  "compat_preflight": {
+    "path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_compat_preflight_v1.json",
+    "sha256": "299119469ebd33633d6beeaab8d8e01cbc5c734fa1ca9ab51334709813ad5675",
+    "status": "completed_compat_preflight_only"
+  },
+  "created_at": "2026-07-21T09:35:34.087085+00:00",
+  "formal_freeze": {
+    "path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_formal_freeze_v1.json",
+    "reason": "the formal freeze consumes this preflight, so reverse hashing would be cyclic",
+    "sha256_recorded": false,
+    "used_as_input": false
+  },
+  "formal_result_admitted_now": false,
+  "json_path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_runner_preflight_v1.json",
+  "markdown_path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_runner_preflight_v1.md",
+  "model_id": "m3-paper-qwen3-8b-v1:latest",
+  "model_or_api_calls": 0,
+  "network_attempted": false,
+  "passed_checks": 14,
+  "policy_map": {
+    "banking": "BankingSecurityPolicyEngine",
+    "slack": "SlackSecurityPolicyEngine",
+    "travel": "TravelSecurityPolicyEngine",
+    "workspace": "WorkspaceSecurityPolicyEngine"
+  },
+  "probe": {
+    "benchmark_case_count": 0,
+    "compat_ok": true,
+    "model_or_api_calls": 0,
+    "network_attempted": false,
+    "ok": true,
+    "python_executable": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+    "returncode": 0,
+    "rows": [
+      {
+        "benchmark_case_executed": false,
+        "dry_run_llm_class": "DryRunLLM",
+        "dry_run_llm_query_invoked": false,
+        "error": "",
+        "error_type": "",
+        "model_id": "m3-paper-qwen3-8b-v1:latest",
+        "model_or_network_invoked": false,
+        "ok": true,
+        "pipeline_class": "AgentPipeline",
+        "pipeline_element_classes": [
+          "InitQuery",
+          "PrivilegedLLM"
+        ],
+        "pipeline_id": 2074824463248,
+        "privileged_llm_class": "PrivilegedLLM",
+        "privileged_security_policy_engine": "WorkspaceSecurityPolicyEngine",
+        "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "suite": "workspace",
+        "uses_upstream_privileged_llm": true,
+        "uses_upstream_security_policy": true
+      },
+      {
+        "benchmark_case_executed": false,
+        "dry_run_llm_class": "DryRunLLM",
+        "dry_run_llm_query_invoked": false,
+        "error": "",
+        "error_type": "",
+        "model_id": "m3-paper-qwen3-8b-v1:latest",
+        "model_or_network_invoked": false,
+        "ok": true,
+        "pipeline_class": "AgentPipeline",
+        "pipeline_element_classes": [
+          "InitQuery",
+          "PrivilegedLLM"
+        ],
+        "pipeline_id": 2074824463632,
+        "privileged_llm_class": "PrivilegedLLM",
+        "privileged_security_policy_engine": "TravelSecurityPolicyEngine",
+        "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "suite": "travel",
+        "uses_upstream_privileged_llm": true,
+        "uses_upstream_security_policy": true
+      },
+      {
+        "benchmark_case_executed": false,
+        "dry_run_llm_class": "DryRunLLM",
+        "dry_run_llm_query_invoked": false,
+        "error": "",
+        "error_type": "",
+        "model_id": "m3-paper-qwen3-8b-v1:latest",
+        "model_or_network_invoked": false,
+        "ok": true,
+        "pipeline_class": "AgentPipeline",
+        "pipeline_element_classes": [
+          "InitQuery",
+          "PrivilegedLLM"
+        ],
+        "pipeline_id": 2074824463296,
+        "privileged_llm_class": "PrivilegedLLM",
+        "privileged_security_policy_engine": "BankingSecurityPolicyEngine",
+        "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "suite": "banking",
+        "uses_upstream_privileged_llm": true,
+        "uses_upstream_security_policy": true
+      },
+      {
+        "benchmark_case_executed": false,
+        "dry_run_llm_class": "DryRunLLM",
+        "dry_run_llm_query_invoked": false,
+        "error": "",
+        "error_type": "",
+        "model_id": "m3-paper-qwen3-8b-v1:latest",
+        "model_or_network_invoked": false,
+        "ok": true,
+        "pipeline_class": "AgentPipeline",
+        "pipeline_element_classes": [
+          "InitQuery",
+          "PrivilegedLLM"
+        ],
+        "pipeline_id": 2074824463488,
+        "privileged_llm_class": "PrivilegedLLM",
+        "privileged_security_policy_engine": "SlackSecurityPolicyEngine",
+        "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "suite": "slack",
+        "uses_upstream_privileged_llm": true,
+        "uses_upstream_security_policy": true
+      }
+    ],
+    "stderr_tail": "",
+    "stdout_tail": "{\"benchmark_case_count\": 0, \"compat_ok\": true, \"model_or_api_calls\": 0, \"network_attempted\": false, \"ok\": true, \"python_executable\": \"E:\\\\M3_PI_Guard_runtime\\\\camel\\\\.venv\\\\Scripts\\\\python.exe\", \"rows\": [{\"benchmark_case_executed\": false, \"dry_run_llm_class\": \"DryRunLLM\", \"dry_run_llm_query_invoked\": false, \"error\": \"\", \"error_type\": \"\", \"model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"model_or_network_invoked\": false, \"ok\": true, \"pipeline_class\": \"AgentPipeline\", \"pipeline_element_classes\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_id\": 2074824463248, \"privileged_llm_class\": \"PrivilegedLLM\", \"privileged_security_policy_engine\": \"WorkspaceSecurityPolicyEngine\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"suite\": \"workspace\", \"uses_upstream_privileged_llm\": true, \"uses_upstream_security_policy\": true}, {\"benchmark_case_executed\": false, \"dry_run_llm_class\": \"DryRunLLM\", \"dry_run_llm_query_invoked\": false, \"error\": \"\", \"error_type\": \"\", \"model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"model_or_network_invoked\": false, \"ok\": true, \"pipeline_class\": \"AgentPipeline\", \"pipeline_element_classes\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_id\": 2074824463632, \"privileged_llm_class\": \"PrivilegedLLM\", \"privileged_security_policy_engine\": \"TravelSecurityPolicyEngine\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"suite\": \"travel\", \"uses_upstream_privileged_llm\": true, \"uses_upstream_security_policy\": true}, {\"benchmark_case_executed\": false, \"dry_run_llm_class\": \"DryRunLLM\", \"dry_run_llm_query_invoked\": false, \"error\": \"\", \"error_type\": \"\", \"model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"model_or_network_invoked\": false, \"ok\": true, \"pipeline_class\": \"AgentPipeline\", \"pipeline_element_classes\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_id\": 2074824463296, \"privileged_llm_class\": \"PrivilegedLLM\", \"privileged_security_policy_engine\": \"BankingSecurityPolicyEngine\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"suite\": \"banking\", \"uses_upstream_privileged_llm\": true, \"uses_upstream_security_policy\": true}, {\"benchmark_case_executed\": false, \"dry_run_llm_class\": \"DryRunLLM\", \"dry_run_llm_query_invoked\": false, \"error\": \"\", \"error_type\": \"\", \"model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"model_or_network_invoked\": false, \"ok\": true, \"pipeline_class\": \"AgentPipeline\", \"pipeline_element_classes\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_id\": 2074824463488, \"privileged_llm_class\": \"PrivilegedLLM\", \"privileged_security_policy_engine\": \"SlackSecurityPolicyEngine\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"suite\": \"slack\", \"uses_upstream_privileged_llm\": true, \"uses_upstream_security_policy\": true}]}\n"
+  },
+  "qualification_blockers": [
+    "transport_and_capability_mapping_not_proven_by_runner_wiring_preflight",
+    "complete_formal_logs_absent",
+    "formal_runner_execution_not_started"
+  ],
+  "result_eligible_for_formal_tables": false,
+  "runner_wiring_rows": [
+    {
+      "benchmark_case_executed": false,
+      "dry_run_llm_class": "DryRunLLM",
+      "dry_run_llm_query_invoked": false,
+      "error": "",
+      "error_type": "",
+      "model_id": "m3-paper-qwen3-8b-v1:latest",
+      "model_or_network_invoked": false,
+      "ok": true,
+      "pipeline_class": "AgentPipeline",
+      "pipeline_element_classes": [
+        "InitQuery",
+        "PrivilegedLLM"
+      ],
+      "pipeline_id": 2074824463248,
+      "privileged_llm_class": "PrivilegedLLM",
+      "privileged_security_policy_engine": "WorkspaceSecurityPolicyEngine",
+      "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+      "suite": "workspace",
+      "uses_upstream_privileged_llm": true,
+      "uses_upstream_security_policy": true
+    },
+    {
+      "benchmark_case_executed": false,
+      "dry_run_llm_class": "DryRunLLM",
+      "dry_run_llm_query_invoked": false,
+      "error": "",
+      "error_type": "",
+      "model_id": "m3-paper-qwen3-8b-v1:latest",
+      "model_or_network_invoked": false,
+      "ok": true,
+      "pipeline_class": "AgentPipeline",
+      "pipeline_element_classes": [
+        "InitQuery",
+        "PrivilegedLLM"
+      ],
+      "pipeline_id": 2074824463632,
+      "privileged_llm_class": "PrivilegedLLM",
+      "privileged_security_policy_engine": "TravelSecurityPolicyEngine",
+      "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+      "suite": "travel",
+      "uses_upstream_privileged_llm": true,
+      "uses_upstream_security_policy": true
+    },
+    {
+      "benchmark_case_executed": false,
+      "dry_run_llm_class": "DryRunLLM",
+      "dry_run_llm_query_invoked": false,
+      "error": "",
+      "error_type": "",
+      "model_id": "m3-paper-qwen3-8b-v1:latest",
+      "model_or_network_invoked": false,
+      "ok": true,
+      "pipeline_class": "AgentPipeline",
+      "pipeline_element_classes": [
+        "InitQuery",
+        "PrivilegedLLM"
+      ],
+      "pipeline_id": 2074824463296,
+      "privileged_llm_class": "PrivilegedLLM",
+      "privileged_security_policy_engine": "BankingSecurityPolicyEngine",
+      "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+      "suite": "banking",
+      "uses_upstream_privileged_llm": true,
+      "uses_upstream_security_policy": true
+    },
+    {
+      "benchmark_case_executed": false,
+      "dry_run_llm_class": "DryRunLLM",
+      "dry_run_llm_query_invoked": false,
+      "error": "",
+      "error_type": "",
+      "model_id": "m3-paper-qwen3-8b-v1:latest",
+      "model_or_network_invoked": false,
+      "ok": true,
+      "pipeline_class": "AgentPipeline",
+      "pipeline_element_classes": [
+        "InitQuery",
+        "PrivilegedLLM"
+      ],
+      "pipeline_id": 2074824463488,
+      "privileged_llm_class": "PrivilegedLLM",
+      "privileged_security_policy_engine": "SlackSecurityPolicyEngine",
+      "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+      "suite": "slack",
+      "uses_upstream_privileged_llm": true,
+      "uses_upstream_security_policy": true
+    }
+  ],
+  "runner_wiring_rows_sha256": "6e0320b52adaf259bde3eebf7a7c9bbb2ae9f1469ff4f65e6d627611c738ebea",
+  "schema_version": "paper-camel-source-backed-runner-preflight-1.0",
+  "status": "completed_runner_wiring_preflight_only",
+  "suites_constructed": [
+    "banking",
+    "slack",
+    "travel",
+    "workspace"
+  ],
+  "supported_suites": [
+    "workspace",
+    "travel",
+    "banking",
+    "slack"
+  ],
+  "total_checks": 14
+}

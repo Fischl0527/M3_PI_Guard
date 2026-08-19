@@ -1,0 +1,23 @@
+{
+  "automatic_retries": 0,
+  "combined_work_items": 480,
+  "credentials_read": 0,
+  "external_effects_enabled": false,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-26T17:05:00+08:00",
+  "network_calls_made": 0,
+  "offline_fixture_diagnostics": 0,
+  "offline_fixture_records": 2,
+  "pending_only_manual_resume": true,
+  "provider_tools_enabled": false,
+  "result_admission_authorized": false,
+  "schema_version": "m3-paper-v2-formal-matrix-remainder-qualification-9.0",
+  "scientific_outcomes_read": 0,
+  "selected_pending_work_items": 177,
+  "selection_intersection_count": 0,
+  "source_technical_snapshot_sha256": "8ae40584249e372469943f54ca62b342254a35ab03616b4a419cbc6152a729fe",
+  "source_terminal_records": 303,
+  "source_v8_mutated": false,
+  "status": "pending_only_remainder_shard_qualified_offline",
+  "terminal_source_items_retryable": false
+}

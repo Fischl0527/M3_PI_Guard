@@ -1,80 +1,77 @@
-# Development Rules
+# 开发规则
 
-## General Rules
+## 通用规则
 
-- Read before editing.
-- Keep changes small and scoped.
-- Preserve existing architecture and style unless the task explicitly changes it.
-- Prefer existing project utilities, patterns, and abstractions.
-- Avoid unrelated formatting churn.
-- Update tests and docs when behavior changes.
-- Record architectural decisions in `harness/docs/decision-log.md`.
+- 修改前先阅读。
+- 保持改动小而明确。
+- 除非任务明确要求改变，否则保留现有架构和风格。
+- 优先复用现有项目工具、模式和抽象。
+- 避免无关的格式改动。
+- 行为变化时同步更新测试和文档。
+- 在 `harness/docs/decision-log.md` 中记录架构决策。
 
-## Task Scope Rules
+## 任务范围规则
 
-Every task must define:
+每个任务必须定义：
 
-- Goal
-- Allowed files or directories
-- Forbidden files or directories
-- Acceptance criteria
-- Verification commands
+- 目标
+- 允许修改的文件或目录
+- 禁止修改的文件或目录
+- 验收标准
+- 验证命令
 
-If scope is unclear, the agent may inspect the codebase, but must not make risky
-changes until scope is clarified.
+如果范围不清楚，智能体可以检查代码库，但在范围澄清前不得实施高风险改动。
 
-## Code Rules
+## 代码规则
 
-- Implement the smallest design that satisfies the task.
-- Do not introduce a new dependency without a recorded reason.
-- Do not add broad abstractions for one-off behavior.
-- Keep public interfaces stable unless the task requires a change.
-- Make errors explicit and actionable.
-- Keep comments concise and useful.
+- 实现能满足任务的最小设计。
+- 没有记录理由时不得引入新依赖。
+- 不为一次性行为增加宽泛抽象。
+- 除非任务要求改变，否则保持公开接口稳定。
+- 错误信息必须明确且可操作。
+- 注释应简洁、有用，并优先使用中文；技术标识和上游原文可保留英文。
 
-## Testing Rules
+## 测试规则
 
-- Add or update tests for changed behavior.
-- Use the nearest existing test pattern.
-- Run targeted checks during development.
-- Run the full verification loop before claiming completion when feasible.
-- If a check is unavailable, record the reason.
-- Do not mark a feature `verified` with failing required checks.
+- 为变化的行为新增或更新测试。
+- 使用最接近的既有测试模式。
+- 开发过程中运行针对性检查。
+- 条件允许时，在声称完成前运行完整验证流程。
+- 若某项检查不可用，必须记录原因。
+- 必需检查失败时，不得将功能标记为 `verified`。
 
-## Documentation Rules
+## 文档规则
 
-Update documentation when:
+出现以下情况时更新文档：
 
-- User-visible behavior changes.
-- Setup, commands, or environment assumptions change.
-- Architecture or module boundaries change.
-- A decision creates future maintenance obligations.
+- 用户可见行为变化。
+- 配置、命令或环境假设变化。
+- 架构或模块边界变化。
+- 某项决策形成未来维护义务。
 
-## Security Rules
+## 安全规则
 
-- Never read or output secrets.
-- Never commit credentials.
-- Never weaken authentication, authorization, or permission checks without
-  explicit instruction and review.
-- Treat production deployment and database mutation as confirmation-required
-  actions.
-- Sanitize logs before recording them in repository files.
+- 不读取或输出密钥。
+- 不提交凭据。
+- 未经明确指示和复核，不得削弱认证、授权或权限检查。
+- 生产部署和数据库修改必须视为需要确认的动作。
+- 将日志写入仓库文件前先进行脱敏。
 
-## Git And Repository Rules
+## Git 与仓库规则
 
-- Do not destroy user work.
-- Do not run destructive history commands unless explicitly requested.
-- Do not revert unrelated changes.
-- Keep generated artifacts out of commits unless they are intended source assets.
-- Record meaningful changes in task history.
+- 不破坏用户工作。
+- 未经明确要求，不运行破坏性历史命令。
+- 不回退无关改动。
+- 除非生成物本来就是源资产，否则不将其纳入提交。
+- 在任务历史中记录有意义的改动。
 
-## Feature Status Rules
+## 功能状态规则
 
-Use `harness/features/feature_list.json` as the delivery ledger.
+使用 `harness/features/feature_list.json` 作为交付台账。
 
-- `planned`: feature is known but not started.
-- `in_progress`: implementation or verification is underway.
-- `verified`: implementation, acceptance criteria, and required checks passed.
-- `blocked`: work cannot continue without a decision, dependency, or external fix.
+- `planned`：已知但尚未开始。
+- `in_progress`：实现或验证进行中。
+- `verified`：实现、验收标准和必需检查均已通过。
+- `blocked`：没有决策、依赖或外部修复就无法继续。
 
-Never use `verified` as a synonym for "implemented".
+不得把 `verified` 当作“已经实现”的同义词。

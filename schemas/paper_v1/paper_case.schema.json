@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v1/paper_case.schema.json",
+  "title": "M3-v2 paper case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dataset_version", "case_id", "sample_type", "attack_family", "template_id", "mutation_id", "split", "evidence_level", "language", "authorization_profile", "scenario_type", "trusted_user_request", "trusted_app_context", "untrusted_content", "untrusted_memory", "attack_dimensions", "offline_evaluation", "generation"],
+  "properties": {
+    "schema_version": {"const": "paper-case-1.0"},
+    "dataset_version": {"const": "m3-v2-1500-paper-1.0"},
+    "case_id": {"type": "string", "pattern": "^M3V2-"},
+    "sample_type": {"enum": ["attack", "benign_no_tool", "benign_legal_tool"]},
+    "attack_family": {"enum": ["benign_clean", "direct_jailbreak", "rag_indirect", "multilingual_t2l", "json_rpc", "tool_output_injection", "memory_poisoning", "environment_context_pollution", "cross_tool_attack_chain", "obfuscation_evasion"]},
+    "template_id": {"type": "string", "pattern": "^M3V2-T-"},
+    "mutation_id": {"type": "string", "minLength": 1},
+    "split": {"enum": ["development", "validation", "sealed_holdout"]},
+    "evidence_level": {"enum": ["development", "validation", "sealed_automated_holdout"]},
+    "language": {"enum": ["zh", "en", "zh_en", "pinyin", "zh_hant", "cross_lingual"]},
+    "authorization_profile": {"enum": ["auto_compiled_exact", "trusted_context_exact", "ambiguous_recipient", "partial_resource_scope", "dynamic_parameter", "legal_cross_tool_chain"]},
+    "scenario_type": {"type": "string", "minLength": 1},
+    "trusted_user_request": {"type": "string", "minLength": 1},
+    "trusted_app_context": {"type": "object"},
+    "untrusted_content": {"type": "string"},
+    "untrusted_memory": {"type": "array"},
+    "attack_dimensions": {"type": "object"},
+    "offline_evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["offline_only", "requires_tool_for_success", "expected_allowed_effects", "expected_unsafe_effects", "expected_outcome", "scoring_note"],
+      "properties": {
+        "offline_only": {"const": true},
+        "requires_tool_for_success": {"type": "boolean"},
+        "expected_allowed_effects": {"type": "array", "items": {"$ref": "#/$defs/effect"}},
+        "expected_unsafe_effects": {"type": "array", "items": {"$ref": "#/$defs/effect"}},
+        "expected_outcome": {"type": "string"},
+        "scoring_note": {"type": "string"}
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generator", "seed", "generator_kind"],
+      "properties": {
+        "generator": {"const": "m3_attacks.m3_v2_generator"},
+        "seed": {"const": 20260718},
+        "generator_kind": {"const": "deterministic_local_program"}
+      }
+    }
+  },
+  "$defs": {
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "arguments"],
+      "properties": {
+        "tool": {"type": "string"},
+        "arguments": {"type": "object"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"sample_type": {"const": "attack"}}},
+      "then": {
+        "properties": {
+          "attack_family": {"not": {"const": "benign_clean"}},
+          "offline_evaluation": {"properties": {"expected_unsafe_effects": {"minItems": 1}}}
+        }
+      },
+      "else": {
+        "properties": {
+          "attack_family": {"const": "benign_clean"},
+          "offline_evaluation": {"properties": {"expected_unsafe_effects": {"maxItems": 0}}}
+        }
+      }
+    }
+  ]
+}

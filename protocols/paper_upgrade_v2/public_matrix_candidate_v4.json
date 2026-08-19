@@ -1,0 +1,201 @@
+{
+  "artifact_locks": [
+    {
+      "bytes": 16791,
+      "path": "experiments/paper_v2/public_abort_review_v3.py",
+      "sha256": "569600e9fb601fba22092d7d409fcd422599fc32c3f33af0a25eec73edb22275"
+    },
+    {
+      "bytes": 25361,
+      "path": "experiments/paper_v2/public_live_controller_v4.py",
+      "sha256": "e803d09093a8cd1ee2cb9352fd198a1bb5def7cd1bc94b891ddbcb0334abda34"
+    },
+    {
+      "bytes": 6550,
+      "path": "experiments/paper_v2/public_m3_live_dependency_v4.py",
+      "sha256": "baa417e2fb0aaf3944cf0daaced8c74308d701f1c83efb2eee28a62b44688a2a"
+    },
+    {
+      "bytes": 18215,
+      "path": "experiments/paper_v2/public_matrix_controller_v4.py",
+      "sha256": "69befd2082118b052f7a039e22f9df7fc5390aa0418ddf364102de289b1357d2"
+    },
+    {
+      "bytes": 4691,
+      "path": "protocols/paper_upgrade_v2/public_execution_manifest_v1.json",
+      "sha256": "92b957182c49c971bc9512ede1224f2b950adeb433c78a9be9554fdc0c1102b2"
+    },
+    {
+      "bytes": 9707359,
+      "path": "protocols/paper_upgrade_v2/public_execution_plan_v1.jsonl",
+      "sha256": "034232257dd666c80bbf4de1e7f7df645de587eb84387337739bee55b8a5633f"
+    },
+    {
+      "bytes": 2143,
+      "path": "protocols/paper_upgrade_v2/public_m3_live_dependency_qualification_v4.json",
+      "sha256": "a92a5f3ec565d14421f3575c3dd199475fe1d28d8f050aeae0ac381e37b62c95"
+    },
+    {
+      "bytes": 13198,
+      "path": "protocols/paper_upgrade_v2/public_matrix_candidate_v3.json",
+      "sha256": "18f06da6b53fa3ab244ee026a275e98a411b031deb00b8b4b7d198ee87045a25"
+    },
+    {
+      "bytes": 5308,
+      "path": "protocols/paper_upgrade_v2/public_matrix_controller_qualification_v4.json",
+      "sha256": "3cadb4112ceb555e5975a4c7f377b0fd982f4c410da10bda00775119eaee962f"
+    },
+    {
+      "bytes": 8725,
+      "path": "protocols/paper_upgrade_v2/public_primary_canary_abort_review_v3.json",
+      "sha256": "e290033a02e530c138faa3dffebbbaaa54a1311c9ce6d0ed08a838e47034c644"
+    },
+    {
+      "bytes": 2785,
+      "path": "schemas/paper_v2/public_matrix_admission_v4.schema.json",
+      "sha256": "80f54df36560b76a9e025b0bcad9f9cdb9cd88ac20f8956b2d969db7037ccb14"
+    },
+    {
+      "bytes": 3889,
+      "path": "schemas/paper_v2/public_matrix_candidate_v4.schema.json",
+      "sha256": "fe3286e95b7b2328e5a83ac9932f5d65dd01cc8418e7666f3841bcdb24fe71e4"
+    }
+  ],
+  "artifact_role": "owner_review_candidate",
+  "authorization": {
+    "active_admission_present": false,
+    "canary_execution_authorized": false,
+    "candidate_only": true,
+    "matrix_continuation_authorized": false,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "model_calls_while_building": 0,
+    "network_calls_while_building": 0,
+    "scientific_outcomes_accessed": false
+  },
+  "generated_at": "2026-07-29T02:00:00+08:00",
+  "manifest_sha256": "042c561e227e99e84bdea9caf098f1589f1a1f5e3faecfbb6c78639009565ffb",
+  "schema_version": "m3-paper-v2-public-matrix-candidate-4.0",
+  "scope": {
+    "budget": {
+      "automatic_retries": 0,
+      "cost_ledger": "append_only_cache_aware_actual_usage",
+      "incremental_hard_limit_cny": 25.0,
+      "role_hard_limits_cny": {
+        "primary": 20.0,
+        "second": 5.0
+      },
+      "untouched_reserve_cny": 5.0
+    },
+    "canary": {
+      "primary_records": 24,
+      "primary_work_key_sequence_sha256": "803684ec8199b8e1cc986f776a515064ec9149f2d78a2e37df53791d4ed7ad2d",
+      "records_remain_in_formal_matrix": true,
+      "scientific_outcomes_accessed": false,
+      "second_records": 12,
+      "second_work_key_sequence_sha256": "fba897661b8005af952003ed95022b98f829952461087a24a277eaa9385d9154",
+      "selection_is_outcome_blind": true,
+      "selection_method": "first_frozen_attack_and_benign_case_per_benchmark"
+    },
+    "execution_order": [
+      "primary_canary",
+      "primary_matrix",
+      "second_canary",
+      "second_matrix"
+    ],
+    "failure_policy": {
+      "all_failures_remain_in_intention_to_treat": true,
+      "budget_ceiling": "pause_before_next_request",
+      "completed_terminal_items_retried": false,
+      "first_http_429": "pause",
+      "first_identity_mismatch": "pause",
+      "first_unknown_runner_failure": "pause",
+      "pending_only_resume_requires_new_identity": true
+    },
+    "model_roles": {
+      "primary": {
+        "base_url": "https://api.deepseek.com",
+        "claim_boundary": "primary_model",
+        "conditions": [
+          "no_defense",
+          "safe_prompt_or_spotlighting",
+          "promptguard_detector_only",
+          "strongest_peer_reviewed_structural_baseline",
+          "m3_policy_only",
+          "m3_full"
+        ],
+        "endpoint_type": "official_api",
+        "execution_identity": "4b717417fec675c3540d186e4b6d6af403bb03c208ebc91e1b1e84b1e7e83e30",
+        "model_id": "deepseek-v4-pro",
+        "provider_id": "deepseek",
+        "public_v1_execution_identity": "e19149d307d58463cf3fba2a1db1b49caa907e653b3b0d79b219f94092bef27a",
+        "public_v3_execution_identity": "9dc7d657239c0ab4d10d4ba52ad585de3a499e19257aa3a2d9122993a11a9139",
+        "records": 5082,
+        "source_execution_identity": "9dc7d657239c0ab4d10d4ba52ad585de3a499e19257aa3a2d9122993a11a9139"
+      },
+      "second": {
+        "base_url": "https://api.deepseek.com",
+        "claim_boundary": "cross_model_not_cross_provider",
+        "conditions": [
+          "strongest_peer_reviewed_structural_baseline",
+          "m3_policy_only",
+          "m3_full"
+        ],
+        "endpoint_type": "official_api",
+        "execution_identity": "13e640041d69a2b4ce1d95c2471cd8644c3a1eac81885d0a5b96cf98b46a56a4",
+        "model_id": "deepseek-v4-flash",
+        "provider_id": "deepseek",
+        "public_v1_execution_identity": "a9fafa3b7807c55feacc88336c9b21b4ad489adfd7829579c3f69caa230ec078",
+        "public_v3_execution_identity": "df04d9f3e3ae38c7dca636516a16223736bd71e37d23a69a28a60752ca42e69a",
+        "records": 1791,
+        "source_execution_identity": "df04d9f3e3ae38c7dca636516a16223736bd71e37d23a69a28a60752ca42e69a"
+      }
+    },
+    "provider": {
+      "execution_concurrency": 1,
+      "external_effects_enabled": false,
+      "max_tokens": 512,
+      "provider_managed_tools_enabled": false,
+      "timeout_seconds": 120.0
+    },
+    "qualification": {
+      "path": "protocols/paper_upgrade_v2/public_matrix_controller_qualification_v4.json",
+      "public_m3_evaluator_probes": 4,
+      "qualified_pairs": 18,
+      "sha256": "3cadb4112ceb555e5975a4c7f377b0fd982f4c410da10bda00775119eaee962f"
+    },
+    "records": 6873,
+    "remediation": {
+      "active_execution_identity_injected_into_resolver": true,
+      "actual_evaluator_path_qualified": true,
+      "fresh_execution_identity_required": true,
+      "public_m3_evaluator_qualification_sha256": "a92a5f3ec565d14421f3575c3dd199475fe1d28d8f050aeae0ac381e37b62c95",
+      "source_abort_review_sha256": "8d5399717fcae84cc826d4bc661f283ea38df319a8a8f084b62a4f8f7bc5f3fa",
+      "source_candidate_manifest_sha256": "7df71eda75083a36b787659b482549ff3b2a7085b5ad01f8830dd0d2f9a32ef1",
+      "source_run_resumable": false,
+      "source_work_keys_retained_under_fresh_run_identity": true
+    },
+    "runs": {
+      "primary": {
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v4-primary-4b717417fec675c3540d186e4b6d6af403bb03c208ebc91e1b1e84b1e7e83e30",
+        "run_id": "paper-v2-public-v4-primary-20260729"
+      },
+      "second": {
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v4-second-13e640041d69a2b4ce1d95c2471cd8644c3a1eac81885d0a5b96cf98b46a56a4",
+        "run_id": "paper-v2-public-v4-second-20260729"
+      }
+    },
+    "scientific_boundary": {
+      "canary_review_is_outcome_blind": true,
+      "flash_claim": "cross_model_not_cross_provider",
+      "partial_v3_records_admissible": false,
+      "result_admission_is_separate": true
+    }
+  },
+  "scope_sha256": "957d8b2424374d9ef8262ba1a6d7c910723dd92dda0b890bf7e8cab324fa5a63",
+  "status": "candidate_pending_exact_command_canary_approval"
+}

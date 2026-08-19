@@ -1,0 +1,124 @@
+{
+  "audit_id": "A06-agentdojo-detector",
+  "authorization_source": "broad_default",
+  "missing_component": null,
+  "offline_boundaries": [],
+  "online_boundaries": [
+    {
+      "end_line": 115,
+      "forbidden_identifier_hits": [
+        "score"
+      ],
+      "parameters": [
+        "self",
+        "query",
+        "runtime",
+        "env",
+        "messages",
+        "extra_args"
+      ],
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/pi_detector.py",
+      "phase": "online_tool_output_detector",
+      "referenced_identifiers": [
+        "AbortAgentError",
+        "ChatMessage",
+        "DetectorTask",
+        "EmptyEnv",
+        "Env",
+        "FunctionsRuntime",
+        "Sequence",
+        "ValueError",
+        "append",
+        "detect",
+        "detection_result",
+        "dict",
+        "enumerate",
+        "env",
+        "extra_args",
+        "get_text_content_as_str",
+        "i",
+        "index",
+        "is_injection",
+        "isinstance",
+        "join",
+        "len",
+        "list",
+        "m",
+        "message",
+        "messages",
+        "messages_to_check",
+        "mode",
+        "n_tool_results",
+        "previous_messages",
+        "processed_messages",
+        "query",
+        "raise_on_injection",
+        "reversed",
+        "runtime",
+        "score",
+        "self",
+        "str",
+        "task",
+        "text",
+        "transform",
+        "tuple"
+      ],
+      "referenced_string_keys": [
+        "content",
+        "role"
+      ],
+      "required_token_checks": {
+        "AbortAgentError": true,
+        "detect": true,
+        "messages": true
+      },
+      "sha256": "96c8de3c3c2c42c18cc913e97cfedf29eaf295f5adcf199dc773f7eed69a0d19",
+      "start_line": 56,
+      "symbol": "PromptInjectionDetector.query"
+    },
+    {
+      "end_line": 161,
+      "forbidden_identifier_hits": [
+        "label",
+        "score"
+      ],
+      "parameters": [
+        "self",
+        "tool_output"
+      ],
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/pi_detector.py",
+      "phase": "online_detector_inference",
+      "referenced_identifiers": [
+        "bool",
+        "dict",
+        "float",
+        "is_injection",
+        "pipeline",
+        "result",
+        "safe_label",
+        "safety_score",
+        "self",
+        "str",
+        "threshold",
+        "tool_output",
+        "tuple"
+      ],
+      "referenced_string_keys": [
+        "label",
+        "score"
+      ],
+      "required_token_checks": {
+        "threshold": true,
+        "tool_output": true
+      },
+      "sha256": "96c8de3c3c2c42c18cc913e97cfedf29eaf295f5adcf199dc773f7eed69a0d19",
+      "start_line": 156,
+      "symbol": "TransformersBasedPIDetector.detect"
+    }
+  ],
+  "online_forbidden_identifier_hits": [
+    "label",
+    "score"
+  ],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

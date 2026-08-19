@@ -1,0 +1,335 @@
+{
+  "audit_id": "A07-agentdojo-evaluator",
+  "hits": [
+    {
+      "line": 82,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "for injection_task_id in injection_tasks_to_run:",
+      "text_sha256": "c9b80fd78d145b5e25fea8ada63876e316520394f015e66603acabebd6f9c4bd"
+    },
+    {
+      "line": 83,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task = suite.get_injection_task_by_id(injection_task_id)",
+      "text_sha256": "3f39d314d4f8361b575e5dac3f2b8838fb615b9e580aa1f0ce79e45c3ca771d1"
+    },
+    {
+      "line": 109,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_id=user_task.ID,",
+      "text_sha256": "d8aa010c59ff2aeb69127304a2896801ba7368925d0284f4246530bbe6b48382"
+    },
+    {
+      "line": 110,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id=injection_task_id,",
+      "text_sha256": "7983c9bc4cf2365f771e9ea1a3e8947fdf280f9bc762f9fcaaed705bf0b2e330"
+    },
+    {
+      "line": 155,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "utility_results[(user_task.ID, injection_task_id)] = utility",
+      "text_sha256": "b1596f1eec488025c46f8965b87a378a07e22c682c2f2e19c39fef89b78aecb4"
+    },
+    {
+      "line": 156,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "security_results[(user_task.ID, injection_task_id)] = security",
+      "text_sha256": "3d6929574cc44aceca156dc4c576aa99e90510e068814c952fb684f8a9ee7be8"
+    },
+    {
+      "line": 188,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_tasks_to_run = [suite.get_user_task_by_id(user_task_id) for user_task_id in user_tasks]",
+      "text_sha256": "59a1164a783a90b441426158c9fa308cbeb87dc7f158d56cfb73a961675f0146"
+    },
+    {
+      "line": 194,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id: suite.get_injection_task_by_id(injection_task_id)",
+      "text_sha256": "e009033d7a1371c430a3b37a8ac4721f68000c4cef1ab6af912c96955658cf30"
+    },
+    {
+      "line": 195,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "for injection_task_id in injection_tasks",
+      "text_sha256": "ef3eb41386a5791083032096c3cdf53cdf75ba7f5d7fd6ecf66d2f91dd78e3d4"
+    },
+    {
+      "line": 202,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "for injection_task_id, injection_task in injection_tasks_to_run.items():",
+      "text_sha256": "85f4418f6a9377852ae1cd7ae430d83f396ef92ed23db05359452da224a03fd9"
+    },
+    {
+      "line": 206,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_tasks_utility_results[injection_task_id] = successful",
+      "text_sha256": "b749b3d2b2d2522d31e41f399828f0da0b8f4d1321390fb89c949889022aa641"
+    },
+    {
+      "line": 275,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_id=task.ID,",
+      "text_sha256": "bbc9a76179be4c7c43130a97a6ce42a979bf0cb49109df56b3e7bd0315a3790d"
+    },
+    {
+      "line": 276,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id=None,",
+      "text_sha256": "735112e26a777ea18f543fd047d089d5f9ee0928cafb7ab1731df81d36ca5537"
+    },
+    {
+      "line": 343,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_tasks_to_run = [suite.get_user_task_by_id(user_task_id) for user_task_id in user_tasks]",
+      "text_sha256": "59a1164a783a90b441426158c9fa308cbeb87dc7f158d56cfb73a961675f0146"
+    },
+    {
+      "line": 366,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_id: str",
+      "text_sha256": "0941a614ebc7cf401f8a7b31291e630354b11de6f31c4b97f91ab883610c3a26"
+    },
+    {
+      "line": 367,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id: str | None",
+      "text_sha256": "10c7c11fa13b6c9b1609b0f26d28b3f4c1eab957a4b56075992e13d1abe2f673"
+    },
+    {
+      "line": 433,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "for user_task_id in suite.user_tasks.keys():",
+      "text_sha256": "88a7aa492860d3779855d004dd486973d386bacabac1ed9119901efcf8ba8e2a"
+    },
+    {
+      "line": 434,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "results_without_injections[(user_task_id, None)] = load_task_results(",
+      "text_sha256": "545a5f62828653966205be638495b6f855cf76c20a207a7e39a0bc7c279636fe"
+    },
+    {
+      "line": 435,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "pipeline_name, suite_name, user_task_id, \"none\", \"none\", logdir",
+      "text_sha256": "4bab5e58b77f3bbaa50bd74090d770ab0bc02bad77d5159e01001a50a4938628"
+    },
+    {
+      "line": 438,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id = next(iter(suite.injection_tasks.keys()))",
+      "text_sha256": "dbc3c7f6940e1a78bee411bcfe374caeebcdaa9cbdaa2e1d832744192f0513ab"
+    },
+    {
+      "line": 439,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "results_with_injections[(user_task_id, injection_task_id)] = load_task_results(",
+      "text_sha256": "7255f01ad1f78e5d112c6c2698ab8e24c4e19279fcdc5996a88e5de81fc2de31"
+    },
+    {
+      "line": 440,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "pipeline_name, suite_name, user_task_id, attack_name, injection_task_id, logdir",
+      "text_sha256": "e88547374995fa7e86dc1f28af2449fb668deae796ef11fdf67b413d3a75c646"
+    },
+    {
+      "line": 443,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "for injection_task_id in suite.injection_tasks.keys():",
+      "text_sha256": "29a5cadb5f6c16a1a3ac962c626290bf84675dbbd7c73ab63ebe9071099c8295"
+    },
+    {
+      "line": 444,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "results_with_injections[(user_task_id, injection_task_id)] = load_task_results(",
+      "text_sha256": "7255f01ad1f78e5d112c6c2698ab8e24c4e19279fcdc5996a88e5de81fc2de31"
+    },
+    {
+      "line": 445,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/benchmark.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "pipeline_name, suite_name, user_task_id, attack_name, injection_task_id, logdir",
+      "text_sha256": "e88547374995fa7e86dc1f28af2449fb668deae796ef11fdf67b413d3a75c646"
+    },
+    {
+      "line": 17,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "from agentdojo.agent_pipeline.ground_truth_pipeline import GroundTruthPipeline",
+      "text_sha256": "10d332620c5c223ec936388fc4943e828c15ef33708d41fb23d2be7b703bbd53"
+    },
+    {
+      "line": 277,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "def get_injection_task_by_id(self, injection_task_id: str) -> BaseInjectionTask[Env]:",
+      "text_sha256": "0d48d4aed12b2c69fef78df0d011cf9638d32393513e19d88b2e334487e72401"
+    },
+    {
+      "line": 279,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "return self.injection_tasks[injection_task_id]",
+      "text_sha256": "a18f7b79864a72832d1d0ae9e3f8c245b90d80d91dd9c04c45af1bff0231b4c6"
+    },
+    {
+      "line": 431,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "ground_truth_pipeline = GroundTruthPipeline(user_task)",
+      "text_sha256": "0ca3ac128c1820fbc5a2ecee0589c7096e325f0ebf8dc016b2c5b5d97cae0d8c"
+    },
+    {
+      "line": 434,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "ground_truth_pipeline,",
+      "text_sha256": "6541325e2f3cb85ee9aa218529755e75f9e28acaa70a7461c9556b299413e7d9"
+    },
+    {
+      "line": 443,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "\"Ground truth does not solve the task\",",
+      "text_sha256": "000c0dfb1dd099122e18df80196ba1bf8d591a8703e72f030880ca0e59b954a4"
+    },
+    {
+      "line": 447,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "_, _, _, responses, _ = ground_truth_pipeline.query(user_task.PROMPT, runtime, environment.copy(deep=True))",
+      "text_sha256": "ace6657e55f10d335a5b94fd12f9fc9281e03d20bd14931477c302cdf79bdd9a"
+    },
+    {
+      "line": 461,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "ground_truth_pipeline = GroundTruthPipeline(injection_task)",
+      "text_sha256": "bea3f15177ff5ffca6f81d1ddbd6a5a262efe2a45b0d7b57da7e32158007edaf"
+    },
+    {
+      "line": 464,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "ground_truth_pipeline,",
+      "text_sha256": "6541325e2f3cb85ee9aa218529755e75f9e28acaa70a7461c9556b299413e7d9"
+    },
+    {
+      "line": 471,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "for tool_call in injection_task.ground_truth(environment.copy(deep=True)):",
+      "text_sha256": "85afe18bba86e95e7268f2dbdc8cc049a7a0e0533778787be16e284de2be5e83"
+    },
+    {
+      "line": 473,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/task_suite/task_suite.py",
+      "patterns": [
+        "ground[_ -]?truth"
+      ],
+      "preview": "warnings.warn(f\"Missing placeholder_args in {injection_task.ID}'s ground truth\")",
+      "text_sha256": "eaf3bde5dcf90ac47c18aedc0cc749c3f8b6817a35bf4693c53ec4a986667395"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

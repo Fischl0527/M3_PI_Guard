@@ -1,0 +1,113 @@
+{
+  "audit_id": "A16-bipia-runtime",
+  "authorization_source": "mixed_or_unclear",
+  "missing_component": null,
+  "offline_boundaries": [
+    {
+      "end_line": 71,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "example"
+      ],
+      "path": "external/paper_v2_audits/bipia/bipia/data/abstract.py",
+      "phase": "reference_response_construction",
+      "referenced_identifiers": [
+        "Any",
+        "example",
+        "str"
+      ],
+      "referenced_string_keys": [
+        "ideal"
+      ],
+      "required_token_checks": {
+        "example": true
+      },
+      "sha256": "f29621c733071a0697383edf656e5a03040f03f75c06edca8f84952c38effb9f",
+      "start_line": 70,
+      "symbol": "AbstractIPIADataset.construct_response"
+    }
+  ],
+  "online_boundaries": [
+    {
+      "end_line": 68,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "example",
+        "require_system_prompt",
+        "ign_guidance"
+      ],
+      "path": "external/paper_v2_audits/bipia/bipia/data/abstract.py",
+      "phase": "online_prompt_construction",
+      "referenced_identifiers": [
+        "Any",
+        "Tuple",
+        "bool",
+        "context",
+        "example",
+        "format",
+        "guidance",
+        "ign_guidance",
+        "require_system_prompt",
+        "self",
+        "str",
+        "system_prompt",
+        "system_prompt_template",
+        "user_prompt",
+        "user_prompt_template"
+      ],
+      "referenced_string_keys": [
+        "context"
+      ],
+      "required_token_checks": {
+        "context": true,
+        "guidance": true
+      },
+      "sha256": "f29621c733071a0697383edf656e5a03040f03f75c06edca8f84952c38effb9f",
+      "start_line": 59,
+      "symbol": "AbstractIPIADataset.construct_prompt"
+    },
+    {
+      "end_line": 193,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "example",
+        "prompt_construct_fn"
+      ],
+      "path": "external/paper_v2_audits/bipia/bipia/model/gpt.py",
+      "phase": "online_model_message_projection",
+      "referenced_identifiers": [
+        "Any",
+        "Callable",
+        "Tuple",
+        "config",
+        "example",
+        "format",
+        "message",
+        "prompt_construct_fn",
+        "self",
+        "str",
+        "system_message",
+        "system_prompt",
+        "user_message",
+        "user_prompt"
+      ],
+      "referenced_string_keys": [
+        "chat",
+        "message"
+      ],
+      "required_token_checks": {
+        "prompt_construct_fn": true,
+        "system_prompt": true,
+        "user_prompt": true
+      },
+      "sha256": "9b4a0b293c1ed4987243fd5e63dbcdc4206fdf72009b636a17a7c37ed2a4ca11",
+      "start_line": 167,
+      "symbol": "GPTModelWSystem.process_fn"
+    }
+  ],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

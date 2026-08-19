@@ -79,6 +79,5 @@ class ToolArgumentNormalizationTests(unittest.TestCase):
             {"path": "sandbox/public/a.txt", "content": "safe"},
         )
 
-
 if __name__ == "__main__":
     unittest.main()

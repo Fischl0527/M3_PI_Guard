@@ -87,7 +87,7 @@ Approved
 
 ## User Confirmation Record
 
-2026-07-13: 用户明确发送“PLEASE IMPLEMENT THIS PLAN”，随后要求读取 `E:\M3_PI_Guard_test` Harness、补充完整并按计划持续到完成。
+2026-07-13: 用户明确发送“PLEASE IMPLEMENT THIS PLAN”，随后要求读取本仓库 Harness、补充完整并按计划持续到完成。
 
 2026-07-14: 用户进一步锁定“双代理自动复核后两名真人盲审”，并明确“不用做 PPT”“先不做 DOCX 报告，也不做提交 ZIP”；随后要求先忽略真人文件，把其余可运行工作全部完成。
 

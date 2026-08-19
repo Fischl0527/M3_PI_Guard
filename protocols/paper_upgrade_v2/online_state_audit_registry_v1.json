@@ -1,0 +1,268 @@
+{
+  "schema_version": "m3-paper-v2-online-state-audit-registry-1.0",
+  "created_at": "2026-07-23T00:00:00Z",
+  "protocol": "protocols/paper_upgrade_v2/online_state_audit_protocol_v1.md",
+  "summary": {
+    "audit_units_registered": 22,
+    "completed": 0,
+    "source_heads_resolved": 19,
+    "claim_ready_findings": 0
+  },
+  "status_values": [
+    "candidate_registered",
+    "source_pinned",
+    "in_progress",
+    "completed",
+    "blocked_no_official_source",
+    "blocked_not_runnable"
+  ],
+  "targets": [
+    {
+      "audit_id": "A01-vigil-runtime",
+      "artifact": "VIGIL",
+      "component": "verify-before-commit runtime guard",
+      "paper_url": "https://aclanthology.org/2026.acl-long.443/",
+      "source_url": "https://github.com/Touring-686/vigil.git",
+      "discovery_head": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A02-siren-loader",
+      "artifact": "SIREN",
+      "component": "benchmark loader and evaluator",
+      "paper_url": "https://aclanthology.org/2026.acl-long.443/",
+      "source_url": "https://github.com/Touring-686/vigil.git",
+      "discovery_head": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A03-drift-runtime",
+      "artifact": "DRIFT",
+      "component": "planner, dynamic validator, and injection isolator",
+      "paper_url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/77f3b26c7907aa27b207df9b9d43f29a-Abstract-Conference.html",
+      "source_url": "https://github.com/SaFoLab-WISC/DRIFT.git",
+      "discovery_head": "6fd3df4763fad77398c3c273c2a4fe14dd50f7ea",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A04-agentdojo-case-loader",
+      "artifact": "AgentDojo",
+      "component": "task and injection case loader",
+      "paper_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html",
+      "source_url": "https://github.com/ethz-spylab/agentdojo.git",
+      "discovery_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A05-agentdojo-tool-filter",
+      "artifact": "AgentDojo",
+      "component": "ToolFilter defense",
+      "paper_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html",
+      "source_url": "https://github.com/ethz-spylab/agentdojo.git",
+      "discovery_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A06-agentdojo-detector",
+      "artifact": "AgentDojo",
+      "component": "transformer prompt-injection detector defense",
+      "paper_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html",
+      "source_url": "https://github.com/ethz-spylab/agentdojo.git",
+      "discovery_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "supporting"
+    },
+    {
+      "audit_id": "A07-agentdojo-evaluator",
+      "artifact": "AgentDojo",
+      "component": "utility and security evaluators",
+      "paper_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html",
+      "source_url": "https://github.com/ethz-spylab/agentdojo.git",
+      "discovery_head": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A08-progent-runtime",
+      "artifact": "Progent",
+      "component": "policy generator and deterministic privilege enforcement",
+      "paper_url": "https://arxiv.org/abs/2504.11703",
+      "source_url": "https://github.com/sunblaze-ucb/progent.git",
+      "discovery_head": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+      "paper_status": "preprint",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A09-camel-runtime",
+      "artifact": "CaMeL",
+      "component": "interpreter, capabilities, and security policies",
+      "paper_url": "https://arxiv.org/abs/2503.18813",
+      "source_url": "https://github.com/google-research/camel-prompt-injection.git",
+      "discovery_head": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+      "paper_status": "preprint",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A10-ipiguard-runtime",
+      "artifact": "IPIGuard",
+      "component": "tool dependency graph planner and executor",
+      "paper_url": "https://aclanthology.org/2025.emnlp-main.53/",
+      "source_url": "https://github.com/Greysahy/ipiguard.git",
+      "discovery_head": "4e686ed2f62c135cb12564a4466daa95f3ace878",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A11-struq-runtime",
+      "artifact": "StruQ",
+      "component": "structured-query frontend and model interface",
+      "paper_url": "https://www.usenix.org/conference/usenixsecurity25/presentation/chen-sizhe",
+      "source_url": "https://github.com/Sizhe-Chen/StruQ.git",
+      "discovery_head": "e4372b9e3d45ecdfc7c0ad70662094efe6e3850b",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "supporting"
+    },
+    {
+      "audit_id": "A12-injecagent-loader",
+      "artifact": "InjecAgent",
+      "component": "benchmark loader and online prompt construction",
+      "paper_url": "https://aclanthology.org/2024.findings-acl.624/",
+      "source_url": "https://github.com/uiuc-kang-lab/InjecAgent.git",
+      "discovery_head": "f19c9f2c79a41046eb13c03c51a24c567a8ffa07",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A13-injecagent-evaluator",
+      "artifact": "InjecAgent",
+      "component": "attack and utility evaluator",
+      "paper_url": "https://aclanthology.org/2024.findings-acl.624/",
+      "source_url": "https://github.com/uiuc-kang-lab/InjecAgent.git",
+      "discovery_head": "f19c9f2c79a41046eb13c03c51a24c567a8ffa07",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A14-piarena-runtime",
+      "artifact": "PIArena",
+      "component": "common attack/defense runtime",
+      "paper_url": "https://aclanthology.org/2026.acl-long.1533/",
+      "source_url": "https://github.com/sleeepeer/PIArena.git",
+      "discovery_head": "c39fd88e733493242a8ea6bdbc824ad30245bcf7",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A15-piarena-defense-registry",
+      "artifact": "PIArena",
+      "component": "defense adapters and parameter projection",
+      "paper_url": "https://aclanthology.org/2026.acl-long.1533/",
+      "source_url": "https://github.com/sleeepeer/PIArena.git",
+      "discovery_head": "c39fd88e733493242a8ea6bdbc824ad30245bcf7",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "supporting"
+    },
+    {
+      "audit_id": "A16-bipia-runtime",
+      "artifact": "BIPIA",
+      "component": "benchmark prompt construction and defenses",
+      "paper_url": "https://github.com/microsoft/BIPIA",
+      "source_url": "https://github.com/microsoft/BIPIA.git",
+      "discovery_head": "a004b69ec0dd446e0afd461d98cb5e96e120a5d0",
+      "paper_status": "peer_reviewed_or_repository_metadata_pending",
+      "audit_status": "candidate_registered",
+      "audit_priority": "supporting"
+    },
+    {
+      "audit_id": "A17-asb-loader",
+      "artifact": "Agent Security Bench",
+      "component": "scenario, attack, and defense loader",
+      "paper_url": "https://proceedings.iclr.cc/paper_files/paper/2025/hash/5750f91d8fb9d5c02bd8ad2c3b44456b-Abstract-Conference.html",
+      "source_url": "https://github.com/agiresearch/ASB.git",
+      "discovery_head": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "supporting"
+    },
+    {
+      "audit_id": "A18-asb-evaluator",
+      "artifact": "Agent Security Bench",
+      "component": "security and utility metrics",
+      "paper_url": "https://proceedings.iclr.cc/paper_files/paper/2025/hash/5750f91d8fb9d5c02bd8ad2c3b44456b-Abstract-Conference.html",
+      "source_url": "https://github.com/agiresearch/ASB.git",
+      "discovery_head": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "supporting"
+    },
+    {
+      "audit_id": "A19-wasp-benchmark",
+      "artifact": "WASP",
+      "component": "web-agent benchmark loader and evaluator",
+      "paper_url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/1c9818387f5dd0a0bc151214660f059d-Abstract-Datasets_and_Benchmarks_Track.html",
+      "source_url": "https://github.com/facebookresearch/wasp.git",
+      "discovery_head": null,
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "supporting"
+    },
+    {
+      "audit_id": "A20-toolsafe-runtime",
+      "artifact": "ToolSafe",
+      "component": "step-level tool guardrail and feedback",
+      "paper_url": "https://aclanthology.org/2026.findings-acl.1850/",
+      "source_url": "https://github.com/MurrayTom/ToolSafe.git",
+      "discovery_head": "46358fa424a927a895c6c8322f99032c4eb5155e",
+      "paper_status": "peer_reviewed",
+      "audit_status": "candidate_registered",
+      "audit_priority": "supporting"
+    },
+    {
+      "audit_id": "A21-promptguard-detector",
+      "artifact": "PromptGuard",
+      "component": "detector-only model and threshold adapter",
+      "paper_url": "https://huggingface.co/meta-llama/Prompt-Guard-86M",
+      "source_url": "https://huggingface.co/meta-llama/Prompt-Guard-86M",
+      "discovery_head": null,
+      "paper_status": "model_artifact",
+      "audit_status": "candidate_registered",
+      "audit_priority": "core"
+    },
+    {
+      "audit_id": "A22-task-shield-runtime",
+      "artifact": "Task Shield",
+      "component": "task alignment and tool-call validation",
+      "paper_url": "https://aclanthology.org/2025.acl-long.1435/",
+      "source_url": null,
+      "discovery_head": null,
+      "paper_status": "peer_reviewed",
+      "audit_status": "blocked_no_official_source",
+      "audit_priority": "core"
+    }
+  ],
+  "claim_policy": {
+    "domain_oracle_problem_claim_allowed": false,
+    "reason": "No audit unit has completed source-level and dynamic projection review.",
+    "minimum_for_reconsideration": "At least 20 completed audit units covering no fewer than 10 distinct official artifacts, with source locks and reproducible evidence manifests."
+  }
+}

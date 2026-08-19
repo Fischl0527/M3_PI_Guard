@@ -1,0 +1,8 @@
+{
+  "audit_id": "A20-toolsafe-runtime",
+  "base_digest": "0955669d3d208a60641921f074180d6294ba3f277cbe4f0645e4bcc5c60c8f3f",
+  "mutated_digest": "0955669d3d208a60641921f074180d6294ba3f277cbe4f0645e4bcc5c60c8f3f",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

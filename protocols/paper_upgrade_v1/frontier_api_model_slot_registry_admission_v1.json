@@ -1,0 +1,91 @@
+{
+  "admission_version": "m3-paper-v1-frontier-api-registry-admission-1.0",
+  "base_registry_path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+  "base_registry_sha256": "e630ef170add91510d50a594dae7afb216988694fe3a1f685c96ce622cbf5bdd",
+  "boundary": "Offline registry admission only. It consumes redacted smoke metadata, never credentials, and does not make a model a formal paper result.",
+  "checks": [
+    {
+      "detail": "paper-model-registry-2.0",
+      "name": "base_registry_schema_supported",
+      "status": "pass"
+    },
+    {
+      "detail": "plan_only_no_network",
+      "name": "smoke_status_completed_two_vendors",
+      "status": "fail"
+    },
+    {
+      "detail": {
+        "completed_provider_count": 0,
+        "network_call_count": 0,
+        "network_calls_performed": false
+      },
+      "name": "smoke_performed_exactly_two_network_calls",
+      "status": "fail"
+    },
+    {
+      "detail": [],
+      "name": "exact_required_provider_set_completed",
+      "status": "fail"
+    },
+    {
+      "detail": [],
+      "name": "model_ids_are_exact_nonempty_and_unique",
+      "status": "fail"
+    },
+    {
+      "detail": [],
+      "name": "each_provider_used_one_attempt_and_followed_smoke_instruction",
+      "status": "fail"
+    },
+    {
+      "detail": false,
+      "name": "smoke_remains_non_formal",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "0b69cc73707362e70b3502bf5ee0d2098b15a59cec50110393dd39dd84b2effb",
+  "created_at": "2026-07-22T07:26:48.989410+00:00",
+  "failures": [
+    {
+      "detail": "plan_only_no_network",
+      "name": "smoke_status_completed_two_vendors",
+      "status": "fail"
+    },
+    {
+      "detail": {
+        "completed_provider_count": 0,
+        "network_call_count": 0,
+        "network_calls_performed": false
+      },
+      "name": "smoke_performed_exactly_two_network_calls",
+      "status": "fail"
+    },
+    {
+      "detail": [],
+      "name": "exact_required_provider_set_completed",
+      "status": "fail"
+    },
+    {
+      "detail": [],
+      "name": "model_ids_are_exact_nonempty_and_unique",
+      "status": "fail"
+    },
+    {
+      "detail": [],
+      "name": "each_provider_used_one_attempt_and_followed_smoke_instruction",
+      "status": "fail"
+    }
+  ],
+  "network_calls_performed_by_admission": false,
+  "output_registry_path": "protocols/paper_upgrade_v1/model_registry_v3_candidate.json",
+  "output_registry_sha256": "",
+  "output_registry_written": false,
+  "passed_checks": 2,
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-frontier-api-registry-admission-1.0",
+  "smoke_manifest_path": "outputs/paper_upgrade_v1/frontier_api_smoke_v1/manifest.json",
+  "smoke_manifest_sha256": "bb389e28751de3191d74720eecd4fa3917bde4c5a3d21941ef0d3801e0d9780d",
+  "status": "blocked_smoke_not_qualified",
+  "total_checks": 7
+}

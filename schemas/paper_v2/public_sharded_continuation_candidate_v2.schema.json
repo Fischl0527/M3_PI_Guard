@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3.local/schemas/paper_v2/public_sharded_continuation_candidate_v2.schema.json",
+  "title": "M3 paper-v2 public sharded continuation candidate v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_role",
+    "generated_at",
+    "status",
+    "scope",
+    "artifact_locks",
+    "authorization",
+    "evidence_boundary",
+    "scope_sha256",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-public-sharded-continuation-candidate-2.0"
+    },
+    "artifact_role": {
+      "const": "owner_review_candidate"
+    },
+    "generated_at": {"type": "string", "format": "date-time"},
+    "status": {
+      "const": "fresh_recovery_candidate_pending_exact_command_shard_approvals"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "model_role",
+        "model_id",
+        "source_canary_records",
+        "continuation_records",
+        "shard_count",
+        "shards",
+        "budget",
+        "recovery"
+      ]
+    },
+    "artifact_locks": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_only",
+        "shard_execution_authorized",
+        "result_admission_authorized"
+      ],
+      "properties": {
+        "candidate_only": {"const": true},
+        "shard_execution_authorized": {"const": false},
+        "result_admission_authorized": {"const": false}
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentials_read_while_building",
+        "network_calls_while_building",
+        "scientific_outcomes_accessed",
+        "formal_results_created",
+        "old_records_reused"
+      ],
+      "properties": {
+        "credentials_read_while_building": {"const": false},
+        "network_calls_while_building": {"const": 0},
+        "scientific_outcomes_accessed": {"const": false},
+        "formal_results_created": {"const": 0},
+        "old_records_reused": {"const": false}
+      }
+    },
+    "scope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

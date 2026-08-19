@@ -1,0 +1,66 @@
+{
+  "audit_id": "A12-injecagent-loader",
+  "authorization_source": "broad_default",
+  "missing_component": null,
+  "offline_boundaries": [],
+  "online_boundaries": [
+    {
+      "end_line": 26,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "system_prompt",
+        "user_prompt",
+        "params",
+        "item",
+        "model_class",
+        "tool_dict",
+        "step_2"
+      ],
+      "path": "external/benchmarks/injecagent/src/evaluate_prompted_agent.py",
+      "phase": "online_prompt_construction_and_model_call",
+      "referenced_identifiers": [
+        "agent_scratchpad",
+        "available_tool_descriptions",
+        "available_tool_names",
+        "call_model",
+        "dumps",
+        "format",
+        "indent",
+        "input",
+        "item",
+        "json",
+        "model_class",
+        "model_input",
+        "output",
+        "prepare_input",
+        "step_2",
+        "system_prompt",
+        "tool",
+        "tool_dict",
+        "user_prompt",
+        "user_prompt_filled"
+      ],
+      "referenced_string_keys": [
+        "Attacker Tool Parameters",
+        "Attacker Tool Response",
+        "Attacker Tool Thought",
+        "Attacker Tools",
+        "Thought",
+        "Tool Parameters",
+        "Tool Response",
+        "User Instruction",
+        "User Tool"
+      ],
+      "required_token_checks": {
+        "Tool Response": true,
+        "User Instruction": true,
+        "prepare_input": true
+      },
+      "sha256": "cd088c4672bcf7e82912c12c48bd5e5fc086f4decb4c086ff9c390f86990114b",
+      "start_line": 12,
+      "symbol": "predict_one_case"
+    }
+  ],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

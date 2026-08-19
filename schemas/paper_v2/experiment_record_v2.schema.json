@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v2.schema.json",
+  "title": "M3-PI Guard paper-v2 experiment record v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "run_id",
+    "case_id",
+    "benchmark_id",
+    "condition_id",
+    "evaluation_case_type",
+    "authorization_regime",
+    "online_visible_field_digest",
+    "initial_guard_decision",
+    "effective_decision",
+    "ask_reason",
+    "confirmation_result",
+    "unsafe_effect",
+    "unsafe_effect_itt",
+    "task_completion",
+    "operational_status",
+    "included_in_intention_to_treat",
+    "provider_trace_bundle",
+    "provider_safety_receipt",
+    "result_tier",
+    "latency_ms",
+    "token_usage",
+    "recorded_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-experiment-record-2.2"
+    },
+    "record_id": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/record_id"
+    },
+    "run_id": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/run_id"
+    },
+    "case_id": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/case_id"
+    },
+    "benchmark_id": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/benchmark_id"
+    },
+    "condition_id": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/condition_id"
+    },
+    "evaluation_case_type": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/evaluation_case_type"
+    },
+    "authorization_regime": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/authorization_regime"
+    },
+    "online_visible_field_digest": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/online_visible_field_digest"
+    },
+    "initial_guard_decision": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/initial_guard_decision"
+    },
+    "effective_decision": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/effective_decision"
+    },
+    "ask_reason": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/ask_reason"
+    },
+    "confirmation_result": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/confirmation_result"
+    },
+    "unsafe_effect": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/unsafe_effect"
+    },
+    "unsafe_effect_itt": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/unsafe_effect_itt"
+    },
+    "task_completion": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/task_completion"
+    },
+    "operational_status": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/operational_status"
+    },
+    "included_in_intention_to_treat": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/included_in_intention_to_treat"
+    },
+    "provider_trace_bundle": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/provider_trace_bundle_v2.schema.json"
+    },
+    "provider_safety_receipt": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/provider_safety_receipt_v1.schema.json"
+    },
+    "result_tier": {
+      "enum": ["diagnostic", "formal_candidate", "formal_admitted"]
+    },
+    "admission_manifest_sha256": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/admission_manifest_sha256"
+    },
+    "latency_ms": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/latency_ms"
+    },
+    "token_usage": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/token_usage"
+    },
+    "recorded_at": {
+      "$ref": "https://m3-pi-guard.local/schemas/paper_v2/experiment_record_v1.schema.json#/properties/recorded_at"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result_tier": {"const": "diagnostic"}
+        },
+        "required": ["result_tier"]
+      },
+      "then": {
+        "properties": {
+          "operational_status": {"const": "provider_failure"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "initial_guard_decision": {"const": "ASK"}
+        },
+        "required": ["initial_guard_decision"]
+      },
+      "then": {
+        "properties": {
+          "ask_reason": {"type": "string"},
+          "confirmation_result": {
+            "enum": ["pending", "approved", "denied", "expired", "error"]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "ask_reason": {"type": "null"},
+          "confirmation_result": {"const": "not_requested"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "operational_status": {
+            "enum": [
+              "timeout",
+              "parse_failure",
+              "max_steps",
+              "provider_failure",
+              "runner_failure"
+            ]
+          }
+        },
+        "required": ["operational_status"]
+      },
+      "then": {
+        "properties": {
+          "unsafe_effect_itt": {"const": true},
+          "task_completion": {"const": false}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "operational_status": {"const": "refusal"}
+        },
+        "required": ["operational_status"]
+      },
+      "then": {
+        "properties": {
+          "unsafe_effect": {"const": false},
+          "unsafe_effect_itt": {"const": false},
+          "task_completion": {"const": false}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_tier": {"const": "formal_admitted"}
+        },
+        "required": ["result_tier"]
+      },
+      "then": {
+        "required": ["admission_manifest_sha256"],
+        "properties": {
+          "admission_manifest_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  ]
+}

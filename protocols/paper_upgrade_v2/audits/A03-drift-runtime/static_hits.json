@@ -1,0 +1,224 @@
+{
+  "audit_id": "A03-drift-runtime",
+  "hits": [
+    {
+      "line": 14,
+      "path": "external/paper_v2_audits/drift/DRIFTLLM.py",
+      "patterns": [
+        "target[_ -]?tool"
+      ],
+      "preview": "self.target_tool_name = \"observation\"",
+      "text_sha256": "b13438bcdb0e6c3d171d43f91064ecc2e18d9bd5a0b7cae26cbec4b76da590ad"
+    },
+    {
+      "line": 101,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "target_user_task_id = args.target_user_tasks",
+      "text_sha256": "41bdda3ee91b5a6030c22351c24a4fd6dd9a22026b2937ace63d7fd2db2a7757"
+    },
+    {
+      "line": 103,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "logger.info(f\"Evaluate on User Tasks of {target_user_task_id}.\")",
+      "text_sha256": "a226ea38b6df2ad3fa2c2fa2ad75002188259a95682d03644407927e6423f128"
+    },
+    {
+      "line": 119,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id: suite.get_injection_task_by_id(injection_task_id)",
+      "text_sha256": "e009033d7a1371c430a3b37a8ac4721f68000c4cef1ab6af912c96955658cf30"
+    },
+    {
+      "line": 120,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "for injection_task_id in args.target_injection_tasks.split(\",\")",
+      "text_sha256": "8aa7aeb6138945164cc1f6299b410a341d9b7c42ac99fc18d70bd9c3ef90ce28"
+    },
+    {
+      "line": 130,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_idx = int(match.group(1))",
+      "text_sha256": "c273fb9449b6e7b9464156e0d65503dc601e08a743eaef02066a603c10e53a20"
+    },
+    {
+      "line": 131,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "for injec_idx, injection_task_id in enumerate(injection_tasks_to_run):",
+      "text_sha256": "8e6713217b06655d3806b983cb12ead2005924e891829b965a5e1478695de5bd"
+    },
+    {
+      "line": 132,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "match = re.fullmatch(r'injection_task_(\\d+)', injection_task_id)",
+      "text_sha256": "33a6659f5ae7ca80bc34ac89a026e6dea813632a85da135e1bf4d1171b4eda92"
+    },
+    {
+      "line": 133,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_idx = int(match.group(1))",
+      "text_sha256": "c01ec068de009f30bfc2439be6caa8f3c48701c70c4a9edf3384142464e9dc88"
+    },
+    {
+      "line": 136,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "result_file_path = Path(save_dir) / f\"user_task_{user_task_idx}\" / attacker / f\"injection_task_{injection_task_idx}.json\"",
+      "text_sha256": "8695f296792232562e8a3d416e182b10c82e30b205c92ba48fd6d091d08ba565"
+    },
+    {
+      "line": 145,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "attack[_ -]?success",
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "logger.info(f\"user_task_{user_task_idx} with injection_task_{injection_task_idx} result already exists; skipping run.\\nAttack Success Ratio: {security_result.count(True) + resume_security} / {len(security_result) + resume_total}\\nUtility Su",
+      "text_sha256": "00366a861a752d6af708cc6f86299d68a0511e61f9eaa205db163b1cf02314ff"
+    },
+    {
+      "line": 150,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "logger.info(f\"Re-runing user_task_{user_task_idx}-injection_task_{injection_task_idx} ...\")",
+      "text_sha256": "74722741b50d8d1b1cf1e1de7881f7f5fc489a48634c63681d9a1542d5c9e33c"
+    },
+    {
+      "line": 153,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task = suite.get_injection_task_by_id(injection_task_id)",
+      "text_sha256": "3f39d314d4f8361b575e5dac3f2b8838fb615b9e580aa1f0ce79e45c3ca771d1"
+    },
+    {
+      "line": 162,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "json.dump({\"suite_name\": suite_type, \"pipeline_name\": f\"{args.model}\", \"user_task_id\": f\"user_task_{user_task_idx}\", \"injection_task_id\": f\"injection_task_{injection_task_idx}\", \"attack_type\": f\"{attacker}\", \"build_constraints\": args.build_",
+      "text_sha256": "6b15698e01556f88fd03fb68ab2aafbb2976b18ea24b0f9667fa7bb454a73bd8"
+    },
+    {
+      "line": 164,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "logger.info(f\"user_task_{user_task_idx} with injection_task_{injection_task_idx} Utility Success Ratio: {utility_result.count(True) + resume_utility} / {len(utility_result) + resume_total}\")",
+      "text_sha256": "cf1bde81c19af31d6cec50528274c0f2d06d27e2ec14bf7e445afef5cd9384c4"
+    },
+    {
+      "line": 165,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "attack[_ -]?success",
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "logger.info(f\"user_task_{user_task_idx} with injection_task_{injection_task_idx} Attack Success Ratio: {security_result.count(True) + resume_security} / {len(security_result) + resume_total}\")",
+      "text_sha256": "b4071c540c6f5cf7e0c06b54ba08adcb730a0949998f7c46b3e7e3c8ad8eac01"
+    },
+    {
+      "line": 172,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_idx = int(match.group(1))",
+      "text_sha256": "c273fb9449b6e7b9464156e0d65503dc601e08a743eaef02066a603c10e53a20"
+    },
+    {
+      "line": 175,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "result_file_path = Path(save_dir) / f\"user_task_{user_task_idx}\" / \"none\" / f\"none.json\"",
+      "text_sha256": "780c73ad32f9cdebb792baa319623050f29bdeda2b1904f14398f78eff8be5f8"
+    },
+    {
+      "line": 184,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "attack[_ -]?success",
+        "user_task_id"
+      ],
+      "preview": "logger.info(f\"user_task_{user_task_idx} result already exists; skipping run.\\nAttack Success Ratio: {security_result.count(True) + resume_security} / {len(security_result) + resume_total}\\nUtility Success Ratio: {utility_result.count(True) ",
+      "text_sha256": "2d1f7ca7486015eec4e0cac421269b5d0cc20ccf47265c94f4f84175fce54d14"
+    },
+    {
+      "line": 189,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "logger.info(f\"Re-runing user_task_{user_task_idx} ...\")",
+      "text_sha256": "9a3decf6150e56c10f55eb662742ba7e8ccfe58be83dbcf9f978902feece4f70"
+    },
+    {
+      "line": 198,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "json.dump({\"suite_name\": suite_type, \"pipeline_name\": f\"{args.model}\", \"user_task_id\": f\"user_task_{user_task_idx}\", \"injection_task_id\": None, \"attack_type\": None, \"build_constraints\": args.build_constraints, \"injection_isolation\": args.in",
+      "text_sha256": "4e275f68712130a2252aee4a807707bfa911824189b5844ba9059404d9674806"
+    },
+    {
+      "line": 200,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "logger.info(f\"user_task_{user_task_idx} Utility Success Ratio: {utility_result.count(True) + resume_utility} / {len(utility_result) + resume_total}\")",
+      "text_sha256": "904d33018b07b5c14f480c823b9f689d5f9ed5461cf5d41adbbd5515dfbc3d81"
+    },
+    {
+      "line": 203,
+      "path": "external/paper_v2_audits/drift/pipeline_main.py",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "logger.info(f\"Overall Attack Success Ratio: {(security_result.count(True) + resume_security) / (len(security_result) + resume_total)}\")",
+      "text_sha256": "2a9917df8aef527e75b65cff07ef95be56210f621396786035af006c755ee359"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

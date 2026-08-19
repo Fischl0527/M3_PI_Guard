@@ -1,0 +1,91 @@
+{
+  "analysis_policy": {
+    "all_480_records_retained_in_itt": true,
+    "bootstrap_iterations": 10000,
+    "diagnostic_outcomes_copied_verbatim": true,
+    "diagnostic_response_identity_unverified": true,
+    "formal_response_identity_from_v6_gate": true,
+    "no_api_or_execution_authorized": true
+  },
+  "artifact_role": "analysis_amendment_candidate",
+  "locked_inputs": {
+    "amendment_v8": {
+      "bytes": 16101,
+      "path": "experiments/paper_v2/formal_analysis_amendment_v8.py",
+      "sha256": "9162664700c327aa480906f671b65739c4a81cac15bf9a5c98dc1e1ddd1c86fe"
+    },
+    "amendment_v8_schema": {
+      "bytes": 896,
+      "path": "schemas/paper_v2/formal_analysis_amendment_v8.schema.json",
+      "sha256": "dede50deaf46334006d670d836c00000501ca1e81e91c55978c77854573c6a32"
+    },
+    "analysis_v4": {
+      "bytes": 7886,
+      "path": "experiments/paper_v2/medium_analysis_v4.py",
+      "sha256": "669a3f6562e4985a41aafe293e6ecd7c943a857dc71e068238b7c3718886d2d2"
+    },
+    "analysis_v5": {
+      "bytes": 4279,
+      "path": "experiments/paper_v2/medium_analysis_v5.py",
+      "sha256": "1347aced59ea1d876500bb4d5d76e4f09584eedebbae41266fca98fad435b3e8"
+    },
+    "case_index": {
+      "bytes": 304338,
+      "path": "protocols/paper_upgrade_v2/medium_case_index_v1.jsonl",
+      "sha256": "1d649122630e1aa6aa683efa744d2c225903d3d2f982b572136173a80db40ba7"
+    },
+    "case_manifest": {
+      "bytes": 1630,
+      "path": "protocols/paper_upgrade_v2/medium_case_manifest_v1.json",
+      "sha256": "1ea8e5a2b2d99224e7817cd5366c1540727a2df1440a9856fc84b78b39d7a94f"
+    },
+    "failed_amendment_v7_candidate": {
+      "bytes": 3772,
+      "path": "protocols/paper_upgrade_v2/deepseek_medium_analysis_amendment_candidate_v7.json",
+      "sha256": "43a55fd690b277f3fa171095115d3d42676e370d943c90b86f3a3b21dfc964bc"
+    },
+    "gate_spec": {
+      "bytes": 2776,
+      "path": "protocols/paper_upgrade_v2/medium_gate_spec_v2.json",
+      "sha256": "86a0f8a027c9fbdf21e1ed4cd4e241bba82c8cdd05aa2ff17e5aee35aef55526"
+    },
+    "gate_v6": {
+      "bytes": 29032,
+      "path": "experiments/paper_v2/formal_result_gate_v6.py",
+      "sha256": "5cf20855bcbb2219b0c8d1e94c83985dbbc415b5f9385778731eb40d62178099"
+    },
+    "gate_v6_admission": {
+      "bytes": 3455,
+      "path": "protocols/paper_upgrade_v2/admissions/deepseek_medium_combined_result_admission_v6.json",
+      "sha256": "dc810245a27d6121ecf145cf779324433e537486e7f4ba96116e7f13017b8a43"
+    },
+    "gate_v6_technical_review": {
+      "bytes": 5171,
+      "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/formal_result_technical_review_v6.json",
+      "sha256": "8b1d3f1db6a8b02f815087fc36e129ed99f398285e9b47124958a22a7021aeda"
+    },
+    "remainder_record_ledger": {
+      "bytes": 7253351,
+      "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/experiment_records_v2.jsonl",
+      "sha256": "ae01a38301481005db1bc4048678186a07da87738516c796bd667e5d8f4419ab"
+    },
+    "source_record_ledger": {
+      "bytes": 4631207,
+      "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/8d08cab3febccdf5a4360d208766c39cef851fa9ec8b9c15799ee30171a213bf/experiment_records_v2.jsonl",
+      "sha256": "3ca93cb56a301085dc44586a9fddd3fd93186edca88f34eddd8232aebf4dfed2"
+    }
+  },
+  "manifest_sha256": "e0fb04b5bb008e5180cd4c39e573d49748d765b5ed7eda533e72f7d24dcc934e",
+  "planned_output": "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json",
+  "post_access_disclosure": {
+    "aggregate_results_seen_before_freeze": false,
+    "amendment_is_post_admission": true,
+    "diagnostic_fields_inspected_for_debugging": true,
+    "failed_v6_and_v7_aggregate_artifacts_created": 0,
+    "method_change": "schema-valid diagnostic-only identity projection and report-level no-response disclosure"
+  },
+  "qualification_manifest_sha256": "d494aba442ea422097b4f81b45b0648fc1d276d218cf0d9a3f650fb5f5ca4600",
+  "run_id": "paper-v2-deepseek-medium-v8-v9-analysis-amendment-v8-20260726",
+  "schema_version": "m3-paper-v2-formal-analysis-amendment-8.0",
+  "status": "frozen_before_aggregate_analysis"
+}

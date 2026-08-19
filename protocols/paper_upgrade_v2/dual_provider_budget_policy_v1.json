@@ -1,0 +1,127 @@
+{
+  "schema_version": "m3-paper-v2-dual-provider-budget-policy-1.0",
+  "status": "user_approved_budget_boundary_not_execution_authorization",
+  "approved_by_user": true,
+  "approved_at": "2026-07-23T23:30:00+08:00",
+  "approval_basis": "The user made the declared DeepSeek balance of CNY 30 and the Gemini free tier available for the project, asked for useful full-scale use, and prohibited exhausting either service in a way that blocks the project.",
+  "study_target": {
+    "scope": "full_480_item_medium_matrix_per_selected_model",
+    "work_items": 480,
+    "provider_calls_upper_bound": 4416,
+    "input_tokens_upper_bound": 34407984,
+    "output_tokens_upper_bound": 2260992,
+    "source_bound": "protocols/paper_upgrade_v2/provider_cost_preflight_v1.json",
+    "small_subset_is_not_the_target": true,
+    "providers_are_independent_model_matrices": true,
+    "cross_provider_fallback_within_a_matrix": false
+  },
+  "common_controls": {
+    "concurrency": 1,
+    "automatic_retries": 0,
+    "checkpoint_every_completed_calls": 100,
+    "provider_managed_tools_enabled": false,
+    "external_effects_enabled": false,
+    "model_output_is_untrusted_proposal_only": true,
+    "payload_classes_allowed": [
+      "synthetic_m3_case",
+      "public_benchmark_case",
+      "fixed_non_sensitive_runtime_instruction"
+    ],
+    "payload_classes_forbidden": [
+      "credential_or_secret",
+      "personal_or_customer_data",
+      "human_participant_data",
+      "private_account_content",
+      "unpublished_manuscript_prose",
+      "private_project_notes",
+      "nonpublic_source_code"
+    ],
+    "response_and_usage_logging": {
+      "credentials_stored": false,
+      "request_headers_stored": false,
+      "prompt_and_response_payloads_require_redaction_review": true,
+      "provider_response_id_stored_when_available": true,
+      "provider_request_id_stored_when_available": true,
+      "usage_tokens_stored": true
+    }
+  },
+  "deepseek": {
+    "provider": "DeepSeek",
+    "endpoint_type": "official_api",
+    "base_url": "https://api.deepseek.com",
+    "model_id": "deepseek-v4-pro",
+    "user_declared_balance_cny": 30.0,
+    "hard_spend_limit_cny": 30.0,
+    "abort_at_fraction": 0.9,
+    "abort_ceiling_cny": 27.0,
+    "untouched_reserve_cny": 3.0,
+    "pricing": {
+      "currency": "CNY",
+      "cache_hit_input_per_million_tokens": 0.025,
+      "cache_miss_input_per_million_tokens": 3.0,
+      "output_per_million_tokens": 6.0,
+      "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "verified_at": "2026-07-23"
+    },
+    "usage_requirements": {
+      "prompt_cache_hit_tokens_required": true,
+      "prompt_cache_miss_tokens_required": true,
+      "prompt_tokens_must_equal_hit_plus_miss": true,
+      "missing_cache_accounting": "pause_before_next_request",
+      "actual_usage_is_primary_spend_ledger": true
+    },
+    "dynamic_fuse": {
+      "check_before_every_request": true,
+      "next_request_assumes_all_input_cache_miss": true,
+      "next_request_input_tokens_upper_bound": 16498,
+      "next_request_output_tokens_upper_bound": 512,
+      "projection_enabled_after_observed_input_tokens": 500000,
+      "projection_above_abort_ceiling": "pause_for_budget_review",
+      "ceiling_reached_or_next_request_cannot_fit": "stop_before_request",
+      "automatic_model_downgrade": false
+    },
+    "rate_limit_handling": {
+      "first_http_429": "pause",
+      "automatic_retry": false,
+      "resume": "manual_after_provider_capacity_recovers_using_same_work_item_identity"
+    },
+    "data_use_boundary": "Only the common allowed synthetic/public non-sensitive payload classes may be sent because provider policy permits service improvement and research uses of submitted content."
+  },
+  "gemini": {
+    "provider": "Google",
+    "endpoint_type": "official_api",
+    "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+    "model_id": "gemini-3.6-flash",
+    "billing_tier": "free",
+    "allow_paid_tier": false,
+    "monetary_hard_limit_usd": 0.0,
+    "active_project_quota_snapshot_present": false,
+    "local_batch_caps": {
+      "requests": 100,
+      "input_tokens": 1000000,
+      "output_tokens": 128000
+    },
+    "quota_handling": {
+      "use_lower_of_local_and_active_provider_limits": true,
+      "first_http_429": "pause",
+      "automatic_retry": false,
+      "resume": "manual_after_quota_reset_using_same_work_item_identity",
+      "automatic_fallback_to_deepseek": false
+    },
+    "chargeable_features_enabled": false,
+    "provider_search_grounding_enabled": false,
+    "data_use_boundary": "Free-tier content may be used to improve Google products, so only the common allowed synthetic/public non-sensitive payload classes may be sent."
+  },
+  "execution_authorization": {
+    "formal_execution_authorized": false,
+    "policy_does_not_read_credentials": true,
+    "policy_makes_network_calls": false,
+    "remaining_gates": [
+      "Bind this policy and an exact provider/model identity to a new immutable execution manifest.",
+      "Implement and qualify a credential-redacting formal executor that records DeepSeek cache accounting and provider identity.",
+      "Complete the formal logging redaction review.",
+      "Record the active Gemini project RPM, TPM and RPD limits visible in AI Studio.",
+      "Define formal handling for missing request IDs without upgrading the diagnostic smoke."
+    ]
+  }
+}

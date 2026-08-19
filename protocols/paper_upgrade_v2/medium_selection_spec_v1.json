@@ -1,0 +1,55 @@
+{
+  "schema_version": "m3-paper-v2-medium-selection-spec-1.0",
+  "status": "prospectively_frozen_before_paper_v2_model_runs",
+  "frozen_at": "2026-07-23T15:30:00+08:00",
+  "seed": "m3-paper-v2-medium-falsification-v1",
+  "source_sets": {
+    "m3_v2_development": "m3_attacks/cases/paper_v1/m3_v2_development.jsonl",
+    "agentdojo_security": "outputs/paper_upgrade_v1/public_benchmarks/agentdojo_v1_security_index.jsonl",
+    "agentdojo_utility": "outputs/paper_upgrade_v1/public_benchmarks/agentdojo_v1_utility_index.jsonl"
+  },
+  "selection_counts": {
+    "m3_attack": 24,
+    "m3_benign_tool": 12,
+    "m3_benign_no_tool": 12,
+    "agentdojo_attack": 12,
+    "agentdojo_benign_context": 12,
+    "total": 72
+  },
+  "core_conditions": [
+    "no_defense",
+    "safe_prompt_or_spotlighting",
+    "promptguard_detector_only",
+    "strongest_peer_reviewed_structural_baseline",
+    "m3_policy_only",
+    "m3_full"
+  ],
+  "primary_authorization_regime": "auto_compiled",
+  "regime_probe": {
+    "regimes": [
+      "exact_gold",
+      "broad",
+      "underspecified",
+      "conflicting"
+    ],
+    "cases_per_regime": 6,
+    "conditions": [
+      "m3_policy_only",
+      "m3_full"
+    ],
+    "exact_gold_is_oracle_ablation": true,
+    "primary_endpoint_excluded": true
+  },
+  "selection_blinding": {
+    "outcome_fields_used": false,
+    "selection_fields": [
+      "case_id",
+      "benchmark/split",
+      "sample_type/record_kind",
+      "attack_family",
+      "language",
+      "scenario_type/suite"
+    ],
+    "sealed_holdout_used": false
+  }
+}

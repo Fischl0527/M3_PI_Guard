@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3.local/schemas/paper_v2/public_primary_merge_review_v1.schema.json",
+  "title": "M3 paper-v2 public primary technical merge review v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "status",
+    "model_role",
+    "model_id",
+    "candidate_manifest_sha256",
+    "coverage",
+    "operational_totals",
+    "checks",
+    "artifact_locks",
+    "authorization",
+    "review_boundary",
+    "checks_sha256",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-public-primary-merge-review-1.0"
+    },
+    "generated_at": {"type": "string", "format": "date-time"},
+    "status": {
+      "const": "primary_technical_merge_pass_result_access_still_sealed"
+    },
+    "model_role": {"const": "primary"},
+    "model_id": {"const": "deepseek-v4-pro"},
+    "candidate_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canary_records",
+        "continuation_records",
+        "primary_records",
+        "shard_records"
+      ],
+      "properties": {
+        "canary_records": {"const": 24},
+        "continuation_records": {"const": 5058},
+        "primary_records": {"const": 5082},
+        "shard_records": {
+          "type": "array",
+          "prefixItems": [
+            {"const": 1265},
+            {"const": 1265},
+            {"const": 1264},
+            {"const": 1264}
+          ],
+          "items": false,
+          "minItems": 4,
+          "maxItems": 4
+        }
+      }
+    },
+    "operational_totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_calls_completed",
+        "role_cumulative_usage",
+        "role_cumulative_cost_cny",
+        "automatic_retries",
+        "provider_tools_enabled",
+        "external_effects_enabled"
+      ],
+      "properties": {
+        "provider_calls_completed": {"type": "integer", "minimum": 5082},
+        "role_cumulative_usage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "prompt_tokens",
+            "completion_tokens",
+            "prompt_cache_hit_tokens",
+            "prompt_cache_miss_tokens"
+          ],
+          "properties": {
+            "prompt_tokens": {"type": "integer", "minimum": 0},
+            "completion_tokens": {"type": "integer", "minimum": 0},
+            "prompt_cache_hit_tokens": {"type": "integer", "minimum": 0},
+            "prompt_cache_miss_tokens": {"type": "integer", "minimum": 0}
+          }
+        },
+        "role_cumulative_cost_cny": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 19.6521812
+        },
+        "automatic_retries": {"const": 0},
+        "provider_tools_enabled": {"const": false},
+        "external_effects_enabled": {"const": false}
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": {"const": true},
+      "minProperties": 11,
+      "maxProperties": 11
+    },
+    "artifact_locks": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_technical_evidence_complete",
+        "ready_for_independent_result_admission",
+        "scientific_outcome_access_authorized",
+        "result_admission_authorized",
+        "second_role_execution_authorized"
+      ],
+      "properties": {
+        "primary_technical_evidence_complete": {"const": true},
+        "ready_for_independent_result_admission": {"const": true},
+        "scientific_outcome_access_authorized": {"const": false},
+        "result_admission_authorized": {"const": false},
+        "second_role_execution_authorized": {"const": false}
+      }
+    },
+    "review_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scientific_outcomes_accessed",
+        "unsafe_effect_aggregated",
+        "task_completion_aggregated",
+        "condition_effects_compared",
+        "selective_record_reuse"
+      ],
+      "properties": {
+        "scientific_outcomes_accessed": {"const": false},
+        "unsafe_effect_aggregated": {"const": false},
+        "task_completion_aggregated": {"const": false},
+        "condition_effects_compared": {"const": false},
+        "selective_record_reuse": {"const": false}
+      }
+    },
+    "checks_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

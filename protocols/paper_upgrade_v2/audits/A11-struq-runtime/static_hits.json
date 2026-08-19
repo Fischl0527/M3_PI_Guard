@@ -1,0 +1,70 @@
+{
+  "audit_id": "A11-struq-runtime",
+  "hits": [
+    {
+      "line": 101,
+      "path": "external/paper_v2_audits/struq/struq.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "input_ids = labels = [tokenized.input_ids[0] for tokenized in tokenized_list]",
+      "text_sha256": "a13a8c53583b06b2c63586247771b5098bd44396f25bd49534ab28453817ed6b"
+    },
+    {
+      "line": 107,
+      "path": "external/paper_v2_audits/struq/struq.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "labels=labels,",
+      "text_sha256": "9e608eb67c58b92deea7d4c40e44d5de4f2276ff2a869a012af34d2e4620297f"
+    },
+    {
+      "line": 116,
+      "path": "external/paper_v2_audits/struq/struq.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "labels = deepcopy(input_ids)",
+      "text_sha256": "3d60c96fd7d7f0a102d836b21e15c7783804b98990549aad5d5c4bf6c571804b"
+    },
+    {
+      "line": 117,
+      "path": "external/paper_v2_audits/struq/struq.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "for label, source_len in zip(labels, sources_tokenized[\"input_ids_lens\"]):label[:source_len] = IGNORE_INDEX",
+      "text_sha256": "b82440b94c9024a1d5356486ab30973df98f0fd46a95ec5dceecd2f24d05355b"
+    },
+    {
+      "line": 118,
+      "path": "external/paper_v2_audits/struq/struq.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "return dict(input_ids=input_ids, labels=labels)",
+      "text_sha256": "0626d44c6710cab09ea7a9f45cf6fe418ac6ecf2713a600a88a20dde73775c29"
+    },
+    {
+      "line": 153,
+      "path": "external/paper_v2_audits/struq/struq.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "self.labels = data_dict[\"labels\"]",
+      "text_sha256": "36dd0bb9db8c29a6ea3a7222226e69ca9bfb6ce311979828bab2e9fc19d5575c"
+    },
+    {
+      "line": 156,
+      "path": "external/paper_v2_audits/struq/struq.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "def __getitem__(self, i): return dict(input_ids=self.input_ids[i], labels=self.labels[i])",
+      "text_sha256": "e898d96977b37fce872b9031a133dfa4f28866f45ba57142e5f501247ba37940"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

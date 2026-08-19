@@ -1,0 +1,34 @@
+{
+  "approved_at": "2026-08-02T00:55:00+08:00",
+  "artifact_role": "technical_canary_execution_authorization",
+  "authorization": {
+    "canary_execution_authorized": true,
+    "candidate_manifest_sha256": "042c561e227e99e84bdea9caf098f1589f1a1f5e3faecfbb6c78639009565ffb",
+    "candidate_scope_sha256": "957d8b2424374d9ef8262ba1a6d7c910723dd92dda0b890bf7e8cab324fa5a63",
+    "matrix_continuation_authorized": false,
+    "owner_statement_sha256": "699725fd6ced43ee57875f86a66f0e409d7eb822a440bda26e30f4ffeb4119a4",
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "automatic_retries": 0,
+    "external_effects_enabled": false,
+    "provider_tools_enabled": false,
+    "scientific_outcomes_may_be_reviewed": false,
+    "technical_gate_only": true
+  },
+  "manifest_sha256": "0ff26062fdfb31e5c32a709dafadb9be927b3349bbcb893dce85fd05ac4ee56f",
+  "schema_version": "m3-paper-v2-public-matrix-admission-4.0",
+  "scope": {
+    "canary_records": 12,
+    "canary_work_key_sequence_sha256": "fba897661b8005af952003ed95022b98f829952461087a24a277eaa9385d9154",
+    "exact_command": "F:\\robot\\Anaconda3\\python.exe -m experiments.paper_v2.public_live_controller_v4 --execute-canary --model-role second --admission protocols\\paper_upgrade_v2\\admissions\\deepseek_public_second_canary_admission_v4.json --config config\\project.local.env",
+    "exact_command_sha256": "e1ca1dd5e31236c2430b6c887aba6d3e05f59268b1add408a4f723f37cb929db",
+    "execution_identity": "13e640041d69a2b4ce1d95c2471cd8644c3a1eac81885d0a5b96cf98b46a56a4",
+    "model_id": "deepseek-v4-flash",
+    "model_role": "second",
+    "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v4-second-13e640041d69a2b4ce1d95c2471cd8644c3a1eac81885d0a5b96cf98b46a56a4",
+    "run_id": "paper-v2-public-v4-second-20260729"
+  },
+  "scope_sha256": "a16866885ab155d30ad7661e0db89e0c9612ebee46aa6e5fe0ab1d6c07035934",
+  "status": "activated_for_one_model_role_technical_canary"
+}

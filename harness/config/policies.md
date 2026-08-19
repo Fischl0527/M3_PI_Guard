@@ -1,11 +1,10 @@
-# Agent Policies
+# 智能体策略
 
-## Repository As Source Of Truth
+## 仓库是真实状态来源
 
-All durable task state must be written into repository files. Private chat memory
-is not enough for long-running work.
+所有需要持久化的任务状态都必须写入仓库文件。私人聊天记忆不足以支撑长任务。
 
-Required state files:
+必需状态文件：
 
 - `harness/state/progress.md`
 - `harness/state/current-task.md`
@@ -14,76 +13,76 @@ Required state files:
 - `harness/features/feature_list.json`
 - `harness/docs/decision-log.md`
 
-## Verification Policy
+## 验证策略
 
-The agent may not claim that code works based only on reasoning.
+智能体不得仅凭推理声称代码可用。
 
-A valid completion claim requires:
+有效的完成声明需要：
 
-- Commands run.
-- Results observed.
-- Failing or skipped checks explained.
-- Acceptance criteria mapped to evidence.
+- 已运行的命令。
+- 已观察的结果。
+- 对失败或跳过检查的解释。
+- 验收标准与证据的对应关系。
 
-Use:
+使用：
 
 ```bash
 bash harness/scripts/verify.sh
 ```
 
-## Safety Policy
+## 安全策略
 
-Read `harness/config/permissions.yaml` before risky actions.
+执行高风险动作前阅读 `harness/config/permissions.yaml`。
 
-The agent must ask for confirmation before:
+智能体在以下动作前必须请求确认：
 
-- File deletion outside safe generated paths.
-- Database changes.
-- Production deployment.
-- Permission system changes.
-- Git history rewriting.
+- 删除安全生成路径之外的文件。
+- 修改数据库。
+- 部署到生产环境。
+- 修改权限系统。
+- 改写 Git 历史。
 
-The agent must never:
+智能体绝不能：
 
-- Access or output secrets.
-- Bypass security rules.
-- Disable tests to hide failures.
-- Mark unverified work complete.
+- 访问或输出密钥。
+- 绕过安全规则。
+- 通过禁用测试隐藏失败。
+- 将未验证工作标记为完成。
 
-## Failure Policy
+## 失败策略
 
-Failures are normal engineering events. Repeated blind retries are not.
+失败是正常工程事件，重复盲目重试不是。
 
-For each meaningful failure, update `harness/state/failure-log.md` with:
+对每个有意义的失败，更新 `harness/state/failure-log.md`，记录：
 
-- Error.
-- Cause analysis.
-- Attempts.
-- Final resolution.
-- Follow-up.
+- 错误。
+- 原因分析。
+- 已尝试动作。
+- 最终处理。
+- 后续事项。
 
-Before retrying, change the hypothesis or gather new evidence.
+重试前必须改变假设或收集新证据。
 
-## Documentation Policy
+## 文档策略
 
-Update documentation when a change affects:
+当变化影响以下内容时更新文档：
 
-- User behavior.
-- Developer setup.
-- Commands.
-- Architecture.
-- Security posture.
-- Acceptance criteria.
+- 用户行为。
+- 开发者配置。
+- 命令。
+- 架构。
+- 安全状态。
+- 验收标准。
 
-## Handoff Policy
+## 移交策略
 
-Every session must end with a usable handoff.
+每个会话都必须以可用的移交结束。
 
-`harness/state/session-handoff.md` must include:
+`harness/state/session-handoff.md` 必须包括：
 
-- Current task.
-- Files changed.
-- Commands run.
-- Verification result.
-- Open risks.
-- Next recommended action.
+- 当前任务。
+- 已修改文件。
+- 已运行命令。
+- 验证结果。
+- 未解决风险。
+- 建议下一步。

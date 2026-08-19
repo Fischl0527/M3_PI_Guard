@@ -1,0 +1,19 @@
+{
+  "artifact": "PromptGuard",
+  "audit_id": "A21-promptguard-detector",
+  "commit_date": "2026-07-01T12:04:51-07:00",
+  "default_branch_head_at_discovery": null,
+  "expected_commit": "b71c6350a2acf2fb62c2328a734cbf440ecac386",
+  "license": {
+    "path": "external/baselines/PurpleLlama/LICENSE",
+    "sha256": "4b13c24092a7ee5a8ff589f2186f343edb5c30e0653ea1fc474c910a8d33f4fa",
+    "status": "present"
+  },
+  "observed_commit": "b71c6350a2acf2fb62c2328a734cbf440ecac386",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/baselines/PurpleLlama",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/meta-llama/PurpleLlama.git"
+}

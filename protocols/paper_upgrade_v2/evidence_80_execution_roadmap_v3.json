@@ -1,0 +1,107 @@
+{
+  "schema_version": "m3-paper-v2-evidence-80-roadmap-3.0",
+  "created_at": "2026-07-28T05:10:00+08:00",
+  "status": "offline_ready_live_primary_canary_confirmation_pending",
+  "experiment_execution_authorized": false,
+  "network_calls_made_during_update": 0,
+  "formal_results_created_during_update": 0,
+  "supersedes_for_current_planning": "protocols/paper_upgrade_v2/evidence_80_execution_roadmap_v2.json",
+  "historical_v2_immutability": true,
+  "baseline": {
+    "scorecard_path": "docs/research/paper_v2/manuscript/completion_scorecard_v1.json",
+    "scorecard_sha256": "82fc6248abe569ba221d3c435c45e909e4571d946c62ec763a4d2c943e55c3ea",
+    "scientific_points": 753,
+    "scientific_points_maximum": 1200,
+    "scientific_percent_exact": 62.75,
+    "scientific_percent_reported": 63
+  },
+  "target": {
+    "scientific_points": 968,
+    "scientific_points_maximum": 1200,
+    "scientific_percent": 80.6666666667,
+    "required_increment_points": 215
+  },
+  "score_route": [
+    {
+      "workstream": "formal_public_benchmarks",
+      "current": 10,
+      "target": 100,
+      "increment": 90,
+      "admission_rule": "all_6873_terminal_itt_identity_safety_result_gate_and_analysis_rebuild"
+    },
+    {
+      "workstream": "adaptive_attack",
+      "current": 0,
+      "target": 100,
+      "increment": 100,
+      "admission_rule": "complete_primary_40_second_20_and_hardest_20_panel_with_independent_admission"
+    },
+    {
+      "workstream": "manuscript",
+      "current": 45,
+      "target": 70,
+      "increment": 25,
+      "admission_rule": "admitted_public_adaptive_results_abstract_main_figures_inline_citations_and_integrity_review"
+    },
+    {
+      "workstream": "other_nine_workstreams",
+      "current": 698,
+      "target": 698,
+      "increment": 0,
+      "admission_rule": "no_preemptive_score_change"
+    }
+  ],
+  "arithmetic_controls": {
+    "baseline_sum": 753,
+    "target_sum": 968,
+    "v2_disclosure_error": "other_nine_was_written_as_620_but_should_have_been_690_for_the_v2_730_point_baseline",
+    "v2_historical_file_modified": false
+  },
+  "locked_inputs": {
+    "public_freeze": {
+      "path": "protocols/paper_upgrade_v2/public_benchmark_freeze_v1.json",
+      "sha256": "9c5437b750e96771fcd6db736996c2c1f56fb504a7c74664e64ef81a6c316020",
+      "expected_case_condition_records": 6873
+    },
+    "adaptive_freeze": {
+      "path": "protocols/paper_upgrade_v2/adaptive_attack_freeze_v1.json",
+      "sha256": "dda58e33aca9d596f23de661fc4fb601d9b4b7046922e177e7515b8010a5582c",
+      "maximum_query_budget": 75000
+    },
+    "citation_manifest": {
+      "path": "protocols/paper_upgrade_v2/citation_integrity_manifest_v1.json",
+      "sha256": "0c6713700b9a77ba5ec9869b2259171ebc986421a135012c4c917fbf1f0c881e",
+      "authoritative_records_checked": 34
+    }
+  },
+  "live_sequence": [
+    "current_worktree_full_harness_green",
+    "exact_command_owner_confirmation",
+    "public_primary_24_record_canary",
+    "public_primary_continuation_separate_admission",
+    "public_second_12_record_canary_and_continuation",
+    "public_independent_result_admission",
+    "adaptive_8x50_separate_exact_command_confirmation",
+    "adaptive_cost_projection_and_formal_admission",
+    "manuscript_result_and_figure_backfill"
+  ],
+  "hard_stops": [
+    "provider_http_429",
+    "provider_credit_or_quota_error",
+    "returned_model_identity_mismatch",
+    "request_or_response_chain_incomplete_for_deepseek",
+    "append_only_chain_failure",
+    "unknown_runner_failure",
+    "provider_tool_or_external_effect_attempt",
+    "cost_fuse_reached"
+  ],
+  "claim_route": {
+    "mechanism_paper_candidate": false,
+    "empirical_fallback_active": true,
+    "first_only_sota_claims_allowed": false,
+    "independent_blind_required_for_80_percent": false,
+    "independent_blind_required_before_strong_external_validity_claim": true
+  },
+  "next_action": "finish_current_worktree_full_harness_then_wait_for_exact_public_primary_canary_confirmation",
+  "no_false_completion_rule": "No public, adaptive, blind, second-model or manuscript-result points are awarded before complete independent admission."
+}

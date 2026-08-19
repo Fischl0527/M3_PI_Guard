@@ -1,0 +1,48 @@
+{
+  "approval_scope": {
+    "accepted_complete_request_chain": [
+      "local request ID frozen before transport",
+      "canonical request payload SHA-256",
+      "official provider response ID",
+      "exact returned model identity",
+      "append-only hash-chained log with flush and fsync"
+    ],
+    "provider_ids": [
+      "deepseek"
+    ]
+  },
+  "approval_source": "direct_project_owner_message_with_quota_screenshot",
+  "approved_at": "2026-07-24T01:03:51.9003883+08:00",
+  "bound_inputs": {
+    "attestation_schema": {
+      "path": "schemas/paper_v2/provider_trace_attestation_v2.schema.json",
+      "sha256": "b0a2de59108f0dbcb066a5cf7070267a25528727a632bae0fc1800c7d68f419b"
+    },
+    "candidate_policy": {
+      "path": "protocols/paper_upgrade_v2/provider_request_trace_policy_v2_candidate.json",
+      "sha256": "2833c20631aa57ab96379ab49bb5128359aa79aebd7f194987cfa73cea26dc71"
+    },
+    "candidate_qualification": {
+      "path": "protocols/paper_upgrade_v2/provider_request_trace_v2_qualification.json",
+      "sha256": "6b0be60505395abf11754db8bda19a3e8c266d47867ceff766ac371e22d47648"
+    }
+  },
+  "credentials_stored": false,
+  "external_effects_enabled": false,
+  "formal_matrix_authorized": false,
+  "formal_matrix_remaining_requirements": [
+    "fresh live DeepSeek trace qualification under activated schema",
+    "experiment-record v2 and record-store v2 integration",
+    "provider execution preflight pass"
+  ],
+  "formal_results_created": 0,
+  "fresh_prospective_requests_only": true,
+  "historical_artifacts_retroactively_eligible": false,
+  "network_calls_made": 0,
+  "prompt_or_response_content_stored": false,
+  "provider_tools_declared": false,
+  "request_trace_protocol_activated": true,
+  "schema_version": "m3-paper-v2-provider-trace-activation-2.0",
+  "status": "approved_for_prospective_v2_trace",
+  "v1_contract_unchanged": true
+}

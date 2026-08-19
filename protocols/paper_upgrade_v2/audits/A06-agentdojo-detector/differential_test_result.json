@@ -1,0 +1,8 @@
+{
+  "audit_id": "A06-agentdojo-detector",
+  "base_digest": "77ed23231dbd1d489ad879fd5a54b2525763569d14ff4ef0bbbbcd97a239902a",
+  "mutated_digest": "77ed23231dbd1d489ad879fd5a54b2525763569d14ff4ef0bbbbcd97a239902a",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

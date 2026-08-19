@@ -3,7 +3,7 @@
 Usage for local checking:
 1. Edit the constants below if you want to change input/output paths.
 2. Run this file directly in VSCode/PyCharm, or run:
-   python convert_jsonl_to_csv.py
+   python jsonl_to_csv.py
 
 The script keeps JSONL as the canonical machine-readable format and creates
 spreadsheet-friendly CSV files for manual review.

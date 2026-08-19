@@ -1,0 +1,80 @@
+{
+  "artifact_locks": [
+    {
+      "bytes": 14260,
+      "path": "experiments/paper_v2/gemini_public_continuation_plan_v1.py",
+      "sha256": "b10a6982fb9644c08859fffcf11d5bb63936589eb786bde3660bccc0d0877e3b"
+    },
+    {
+      "bytes": 2936922,
+      "path": "protocols/paper_upgrade_v2/gemini_public_execution_plan_v1.jsonl",
+      "sha256": "dd8ba9f2e114a270740f296845169f81f0b68a2a736b51ab8096b47bc71fde5d"
+    },
+    {
+      "bytes": 9039,
+      "path": "protocols/paper_upgrade_v2/gemini_public_canary_candidate_v4.json",
+      "sha256": "dbb3aaff97c6b2c6d37f2bbee606aa11a8f484c860b3d94ef56d6482ae39925f"
+    },
+    {
+      "bytes": 37286,
+      "path": "experiments/paper_v2/gemini_public_controller_v4.py",
+      "sha256": "3ec2e1eda3d799e067fc0f78d0ef08dcaaef767015e6bfa9ffe6ed628c19b9c8"
+    },
+    {
+      "bytes": 2595,
+      "path": "protocols/paper_upgrade_v2/gemini_free_tier_quota_snapshot_v2.json",
+      "sha256": "359f19b5b6ac6dc716ed5a6c8f730d2ec2b49fdf3c3cb1204114fcc94c29faba"
+    },
+    {
+      "bytes": 712269,
+      "path": "protocols/paper_upgrade_v2/gemini_public_continuation_schedule_v1.jsonl",
+      "sha256": "5d0793779e7158e690348ee9b48895d2a8aa60c4c3f07d54d17308455c10a238"
+    }
+  ],
+  "artifact_role": "non_executable_pending_only_gemini_public_schedule",
+  "authorization": {
+    "candidate_only": true,
+    "quota_segment_execution_authorized": false,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "canary_work_keys_replayed": 0,
+    "credentials_read": false,
+    "network_calls_made": 0,
+    "scientific_outcomes_read": 0
+  },
+  "generated_at": "2026-08-02T12:08:00+08:00",
+  "manifest_sha256": "9ebcc18f75c6cec80f186812f7adc96b1bb865fb4733da16389ca41b7f4213b4",
+  "schema_version": "m3-paper-v2-gemini-public-continuation-plan-1.0",
+  "scope": {
+    "canary_work_key_sequence_sha256": "9a855dfd61776fb8bff089196b4cf34fc8c5bc2bae41220b6325cd640f03cbc2",
+    "continuation_requires_v4_aggregate_technical_pass": true,
+    "formal_canary_prefix_records": 12,
+    "logical_shard_count": 4,
+    "logical_shard_segment_counts": [
+      297,
+      297,
+      296,
+      296
+    ],
+    "matrix_records": 1791,
+    "model_id": "gemini-3.6-flash",
+    "model_role": "second",
+    "pending_only_records": 1779,
+    "pending_work_key_sequence_sha256": "437ca5cf39fbd07c0257671a64e7119e8a855856860747436d430a229c6061fd",
+    "provider_id": "gemini",
+    "quota": {
+      "automatic_retries": 0,
+      "billing_tier": "free",
+      "local_requests_per_day": 18,
+      "one_formal_segment_per_quota_day": true,
+      "paid_ceiling_usd": 0.0
+    },
+    "quota_segment_count": 1186,
+    "schedule_path": "protocols/paper_upgrade_v2/gemini_public_continuation_schedule_v1.jsonl",
+    "schedule_sha256": "5d0793779e7158e690348ee9b48895d2a8aa60c4c3f07d54d17308455c10a238",
+    "source_canary_candidate_manifest_sha256": "c28603732cf87b2bbd4a4f19b8aa7bc97a1e44841a8edf588c48614893b104e6"
+  },
+  "scope_sha256": "9c30080cf399ea568323bbfd6650256985374a74747725df356acef8bf4e6599",
+  "status": "offline_qualified_pending_canary_technical_gate"
+}

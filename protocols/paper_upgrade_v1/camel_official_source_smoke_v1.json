@@ -1,0 +1,353 @@
+{
+  "audit_version": "m3-paper-v1-camel-official-source-smoke-1.0",
+  "boundary": "Official-source and offline deterministic policy qualification only. It uses import isolation only for AgentDojo environment type names. It does not validate CaMeL interpreter generation, execute AgentDojo cases, measure ASR or utility, or admit CaMeL into formal tables.",
+  "checks": [
+    {
+      "detail": "external/baselines/camel-prompt-injection",
+      "name": "checkout_exists",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "actual": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+        "expected": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8"
+      },
+      "name": "checkout_matches_expected_commit",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "kind": "repository",
+        "remote_head_observed_at": "2026-07-18",
+        "remote_head_sha": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+        "url": "https://github.com/google-research/camel-prompt-injection"
+      },
+      "name": "registry_repository_matches_expected",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "selected_candidate": "camel",
+        "source_checkout_ready": true,
+        "status": "selected_source_ready_dependency_blocked_stub_preflight_only"
+      },
+      "name": "preflight_selects_camel_source",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "LICENSE": true,
+        "README.md": true,
+        "pyproject.toml": true,
+        "src/camel/__init__.py": true,
+        "src/camel/capabilities/capabilities.py": true,
+        "src/camel/capabilities/readers.py": true,
+        "src/camel/capabilities/sources.py": true,
+        "src/camel/capabilities/utils.py": true,
+        "src/camel/interpreter/value.py": true,
+        "src/camel/pipeline_elements/security_policies/agentdojo_security_policies.py": true,
+        "src/camel/pipeline_elements/security_policies/banking.py": true,
+        "src/camel/pipeline_elements/security_policies/slack.py": true,
+        "src/camel/pipeline_elements/security_policies/travel.py": true,
+        "src/camel/pipeline_elements/security_policies/workspace.py": true,
+        "src/camel/security_policy.py": true
+      },
+      "name": "required_source_paths_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "capability_metadata": {
+          "markers": [
+            "class Capabilities",
+            "sources_set",
+            "readers_set"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "security_policy_engine": {
+          "markers": [
+            "class SecurityPolicyEngine",
+            "def base_security_policy",
+            "Defaulting to denial"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "slack_policy": {
+          "markers": [
+            "class SlackSecurityPolicyEngine",
+            "def send_direct_message_policy",
+            "def send_channel_message_policy"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "trust_and_reader_checks": {
+          "markers": [
+            "def is_trusted",
+            "def can_readers_read_value",
+            "def get_all_readers"
+          ],
+          "missing_markers": [],
+          "passed": true
+        },
+        "workspace_policy": {
+          "markers": [
+            "class WorkspaceSecurityPolicyEngine",
+            "def send_email_policy",
+            "can_readers_read_value"
+          ],
+          "missing_markers": [],
+          "passed": true
+        }
+      },
+      "name": "official_source_marker_groups_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "base_policy_allows_private_no_side_effect": "Allowed",
+        "base_policy_denies_private_side_effect": "Denied",
+        "network_guard_active": true,
+        "slack_allows_channel_members": "Allowed",
+        "slack_allows_trusted_direct_recipient": "Allowed",
+        "slack_denies_reader_mismatch": "Denied",
+        "trusted_user_value_is_trusted": true,
+        "untrusted_tool_value_is_not_trusted": true,
+        "workspace_allows_authorized_reader": "Allowed",
+        "workspace_allows_trusted_recipient": "Allowed",
+        "workspace_denies_reader_mismatch": "Denied"
+      },
+      "name": "offline_policy_smoke_passed",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": false,
+      "name": "source_smoke_not_formal_effect_evidence",
+      "severity": "warning",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "bdb25c3a431a10158f7db2f34c05f3998d27fa211b51f89036ee2ae409c5face",
+  "created_at": "2026-07-22T08:12:08.589110+00:00",
+  "error_failures": [],
+  "marker_groups": {
+    "capability_metadata": {
+      "markers": [
+        "class Capabilities",
+        "sources_set",
+        "readers_set"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "security_policy_engine": {
+      "markers": [
+        "class SecurityPolicyEngine",
+        "def base_security_policy",
+        "Defaulting to denial"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "slack_policy": {
+      "markers": [
+        "class SlackSecurityPolicyEngine",
+        "def send_direct_message_policy",
+        "def send_channel_message_policy"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "trust_and_reader_checks": {
+      "markers": [
+        "def is_trusted",
+        "def can_readers_read_value",
+        "def get_all_readers"
+      ],
+      "missing_markers": [],
+      "passed": true
+    },
+    "workspace_policy": {
+      "markers": [
+        "class WorkspaceSecurityPolicyEngine",
+        "def send_email_policy",
+        "can_readers_read_value"
+      ],
+      "missing_markers": [],
+      "passed": true
+    }
+  },
+  "network_calls_performed": false,
+  "offline_policy_smoke": {
+    "agentdojo_import_isolation": {
+      "algorithm_change": false,
+      "reason": "CaMeL policy modules import AgentDojo environment type names; local AgentDojo version triggers circular registration during direct import.",
+      "used": true
+    },
+    "expected": {
+      "base_policy_allows_private_no_side_effect": "Allowed",
+      "base_policy_denies_private_side_effect": "Denied",
+      "network_guard_active": true,
+      "slack_allows_channel_members": "Allowed",
+      "slack_allows_trusted_direct_recipient": "Allowed",
+      "slack_denies_reader_mismatch": "Denied",
+      "trusted_user_value_is_trusted": true,
+      "untrusted_tool_value_is_not_trusted": true,
+      "workspace_allows_authorized_reader": "Allowed",
+      "workspace_allows_trusted_recipient": "Allowed",
+      "workspace_denies_reader_mismatch": "Denied"
+    },
+    "network_guard_active": true,
+    "observed": {
+      "base_policy_allows_private_no_side_effect": "Allowed",
+      "base_policy_denies_private_side_effect": "Denied",
+      "network_guard_active": true,
+      "slack_allows_channel_members": "Allowed",
+      "slack_allows_trusted_direct_recipient": "Allowed",
+      "slack_denies_reader_mismatch": "Denied",
+      "trusted_user_value_is_trusted": true,
+      "untrusted_tool_value_is_not_trusted": true,
+      "workspace_allows_authorized_reader": "Allowed",
+      "workspace_allows_trusted_recipient": "Allowed",
+      "workspace_denies_reader_mismatch": "Denied"
+    },
+    "passed": true,
+    "python_executable": "F:\\robot\\Anaconda3\\python.exe",
+    "returncode": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"base_policy_allows_private_no_side_effect\": \"Allowed\", \"base_policy_denies_private_side_effect\": \"Denied\", \"network_guard_active\": true, \"slack_allows_channel_members\": \"Allowed\", \"slack_allows_trusted_direct_recipient\": \"Allowed\", \"slack_denies_reader_mismatch\": \"Denied\", \"trusted_user_value_is_trusted\": true, \"untrusted_tool_value_is_not_trusted\": true, \"workspace_allows_authorized_reader\": \"Allowed\", \"workspace_allows_trusted_recipient\": \"Allowed\", \"workspace_denies_reader_mismatch\": \"Denied\"}\n"
+  },
+  "passed_checks": 8,
+  "preflight_path": "protocols/paper_upgrade_v1/camel_fides_ifc_adapter_preflight_v1.json",
+  "preflight_sha256": "10aff37f586c29f3c251322d3787027f69a6b3f964afbec3e4b27bc1e6eaef49",
+  "registry_path": "protocols/paper_upgrade_v1/external_strong_baselines_v1.json",
+  "registry_sha256": "e8a66158078a991a8f63466fb396663c1a351e9fbb0d994ed3bae17329c23f99",
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-camel-official-source-smoke-1.0",
+  "source_checkout": {
+    "actual_commit": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+    "expected_commit": "f083b6b396399d3b3c7f2ddaf613a5945eaf32d8",
+    "matches_expected_commit": true,
+    "path": "external/baselines/camel-prompt-injection",
+    "repository": "https://github.com/google-research/camel-prompt-injection",
+    "required_paths": {
+      "LICENSE": {
+        "exists": true,
+        "line_count": 203,
+        "path": "external/baselines/camel-prompt-injection/LICENSE",
+        "relative_path": "LICENSE",
+        "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5"
+      },
+      "README.md": {
+        "exists": true,
+        "line_count": 48,
+        "path": "external/baselines/camel-prompt-injection/README.md",
+        "relative_path": "README.md",
+        "sha256": "c597d019442e5dfcacaf87a6df41195cae0137159e58773651860465572e766a"
+      },
+      "pyproject.toml": {
+        "exists": true,
+        "line_count": 100,
+        "path": "external/baselines/camel-prompt-injection/pyproject.toml",
+        "relative_path": "pyproject.toml",
+        "sha256": "f82f4fc6f2d3b96f562dde0b4dfe3e809864ba6dcc2f2e5e72ae0f6b945ee8ff"
+      },
+      "src/camel/__init__.py": {
+        "exists": true,
+        "line_count": 16,
+        "path": "external/baselines/camel-prompt-injection/src/camel/__init__.py",
+        "relative_path": "src/camel/__init__.py",
+        "sha256": "36371bf92009a25aa52a0a08f64d54fc7f48b029f0aba241c4327fc438909f15"
+      },
+      "src/camel/capabilities/capabilities.py": {
+        "exists": true,
+        "line_count": 39,
+        "path": "external/baselines/camel-prompt-injection/src/camel/capabilities/capabilities.py",
+        "relative_path": "src/camel/capabilities/capabilities.py",
+        "sha256": "c6ca89dd921a669101ed43b670b831b90f117fd824c448c8a9ba9c3c267fe175"
+      },
+      "src/camel/capabilities/readers.py": {
+        "exists": true,
+        "line_count": 46,
+        "path": "external/baselines/camel-prompt-injection/src/camel/capabilities/readers.py",
+        "relative_path": "src/camel/capabilities/readers.py",
+        "sha256": "67b49a3ce4e6572bec3625ec994f6e52352dbaa16ef916961039216b7f92e839"
+      },
+      "src/camel/capabilities/sources.py": {
+        "exists": true,
+        "line_count": 43,
+        "path": "external/baselines/camel-prompt-injection/src/camel/capabilities/sources.py",
+        "relative_path": "src/camel/capabilities/sources.py",
+        "sha256": "fd8719293da268ffef0684bdc2dca72207381d0471e5ae0dab24e093b1e01da4"
+      },
+      "src/camel/capabilities/utils.py": {
+        "exists": true,
+        "line_count": 74,
+        "path": "external/baselines/camel-prompt-injection/src/camel/capabilities/utils.py",
+        "relative_path": "src/camel/capabilities/utils.py",
+        "sha256": "5b1f9924be7f51a217355571b0eaaa343afb84d9c11aaf2e1fafe38221e2f9e5"
+      },
+      "src/camel/interpreter/value.py": {
+        "exists": true,
+        "line_count": 1461,
+        "path": "external/baselines/camel-prompt-injection/src/camel/interpreter/value.py",
+        "relative_path": "src/camel/interpreter/value.py",
+        "sha256": "03e16c8e2a97ce01c8eea5d1e6be7f3a3282eac3803915c81c89e0d0c02ab85d"
+      },
+      "src/camel/pipeline_elements/security_policies/agentdojo_security_policies.py": {
+        "exists": true,
+        "line_count": 56,
+        "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/security_policies/agentdojo_security_policies.py",
+        "relative_path": "src/camel/pipeline_elements/security_policies/agentdojo_security_policies.py",
+        "sha256": "427260817696e2a3f4bc06814bc47d4460f4f69045990c3de380cf5bc94db1eb"
+      },
+      "src/camel/pipeline_elements/security_policies/banking.py": {
+        "exists": true,
+        "line_count": 123,
+        "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/security_policies/banking.py",
+        "relative_path": "src/camel/pipeline_elements/security_policies/banking.py",
+        "sha256": "8d1ab73e133e0f7ecba596a30139490affe0d317886e49ab71a1f997467192a4"
+      },
+      "src/camel/pipeline_elements/security_policies/slack.py": {
+        "exists": true,
+        "line_count": 100,
+        "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/security_policies/slack.py",
+        "relative_path": "src/camel/pipeline_elements/security_policies/slack.py",
+        "sha256": "3bde0eeb9cee998492011df65ce46c87715b166ac36275828b68c9ab16adf0c1"
+      },
+      "src/camel/pipeline_elements/security_policies/travel.py": {
+        "exists": true,
+        "line_count": 151,
+        "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/security_policies/travel.py",
+        "relative_path": "src/camel/pipeline_elements/security_policies/travel.py",
+        "sha256": "c5facfac0424841a24a4943634ad87376e7b3009d091a5345ca1e0b8b5097fc0"
+      },
+      "src/camel/pipeline_elements/security_policies/workspace.py": {
+        "exists": true,
+        "line_count": 271,
+        "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/security_policies/workspace.py",
+        "relative_path": "src/camel/pipeline_elements/security_policies/workspace.py",
+        "sha256": "6c2d08cb2479fca8028247a1a77fda0e3808af4d494f9a0c4ef12c7d84e114a6"
+      },
+      "src/camel/security_policy.py": {
+        "exists": true,
+        "line_count": 111,
+        "path": "external/baselines/camel-prompt-injection/src/camel/security_policy.py",
+        "relative_path": "src/camel/security_policy.py",
+        "sha256": "38cdf2d7f14362647f2b022adbca955fa0abb910e991312b7825674bccfb73b3"
+      }
+    }
+  },
+  "status": "completed_source_smoke_only",
+  "total_checks": 8
+}

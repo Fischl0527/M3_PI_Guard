@@ -1,0 +1,33 @@
+{
+  "active_manifest_generated_for_project": false,
+  "cache_accounting_complete": true,
+  "candidate_can_self_authorize": false,
+  "candidate_manifest_sha256": "6ac0601865d76f5f808952b2f58e6587d02c303ac5e9a998ae4d751fbb3dd4cc",
+  "completed_calls_with_cache_cost_evidence": 1,
+  "credentials_read": 0,
+  "formal_matrix_authorized": false,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-24T09:10:00+08:00",
+  "injected_fixture_client_creations": 1,
+  "injected_fixture_transport_calls": 1,
+  "negative_case_count": 4,
+  "negative_cases_rejected": [
+    "candidate_cannot_self_authorize",
+    "missing_active_admission",
+    "scope_identity_drift",
+    "single_use_output_exists"
+  ],
+  "network_calls_made": 0,
+  "offline_e2e_records_created_in_temporary_directory": 1,
+  "positive_offline_authorization_checks": 1,
+  "qualification_boundary": "Temporary active data is a test fixture only. The project still requires an explicit owner checkpoint and a separately frozen run-specific active manifest before any credential read or API call.",
+  "qualification_cumulative_cost_cny": 7.28e-05,
+  "rejected_path_client_creations": 0,
+  "result_admission_authorized": false,
+  "schema_version": "m3-paper-v2-formal-execution-controller-qualification-2.0",
+  "selected_case_id": "M3V2-D-003-BN",
+  "selected_condition_id": "no_defense",
+  "selected_work_key": "fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7",
+  "status": "single_pilot_controller_qualified_offline",
+  "within_abort_ceiling": true
+}

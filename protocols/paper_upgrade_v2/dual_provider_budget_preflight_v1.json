@@ -1,0 +1,119 @@
+{
+  "blockers": [
+    "Bind this policy and an exact provider/model identity to a new immutable execution manifest.",
+    "Implement and qualify a credential-redacting formal executor that records DeepSeek cache accounting and provider identity.",
+    "Complete the formal logging redaction review.",
+    "Record the active Gemini project RPM, TPM and RPD limits visible in AI Studio.",
+    "Define formal handling for missing request IDs without upgrading the diagnostic smoke."
+  ],
+  "budget_boundary_approved_by_user": true,
+  "credentials_read": false,
+  "data_boundary": {
+    "allowed_payload_classes": [
+      "synthetic_m3_case",
+      "public_benchmark_case",
+      "fixed_non_sensitive_runtime_instruction"
+    ],
+    "external_effects_enabled": false,
+    "forbidden_payload_classes": [
+      "credential_or_secret",
+      "personal_or_customer_data",
+      "human_participant_data",
+      "private_account_content",
+      "unpublished_manuscript_prose",
+      "private_project_notes",
+      "nonpublic_source_code"
+    ],
+    "provider_tools_enabled": false
+  },
+  "deepseek": {
+    "abort_ceiling_cny": 27.0,
+    "actual_cache_usage_required": true,
+    "declared_balance_cny": 30.0,
+    "minimum_full_plan_cache_hit_ratio": 0.877165,
+    "model_id": "deepseek-v4-pro",
+    "per_request_fuse_ready": true,
+    "scenarios": [
+      {
+        "aggregate_cache_hit_ratio": 1.0,
+        "input_cost_cny": 0.8602,
+        "output_cost_cny": 13.565952,
+        "total_cost_cny": 14.426152
+      },
+      {
+        "aggregate_cache_hit_ratio": 0.95,
+        "input_cost_cny": 5.978387,
+        "output_cost_cny": 13.565952,
+        "total_cost_cny": 19.544339
+      },
+      {
+        "aggregate_cache_hit_ratio": 0.9,
+        "input_cost_cny": 11.096575,
+        "output_cost_cny": 13.565952,
+        "total_cost_cny": 24.662527
+      },
+      {
+        "aggregate_cache_hit_ratio": 0.88,
+        "input_cost_cny": 13.14385,
+        "output_cost_cny": 13.565952,
+        "total_cost_cny": 26.709802
+      },
+      {
+        "aggregate_cache_hit_ratio": 0.85,
+        "input_cost_cny": 16.214762,
+        "output_cost_cny": 13.565952,
+        "total_cost_cny": 29.780714
+      },
+      {
+        "aggregate_cache_hit_ratio": 0.8,
+        "input_cost_cny": 21.33295,
+        "output_cost_cny": 13.565952,
+        "total_cost_cny": 34.898902
+      },
+      {
+        "aggregate_cache_hit_ratio": 0.0,
+        "input_cost_cny": 103.223952,
+        "output_cost_cny": 13.565952,
+        "total_cost_cny": 116.789904
+      }
+    ],
+    "untouched_reserve_cny": 3.0
+  },
+  "formal_execution_authorized": false,
+  "gate_pass": false,
+  "gemini": {
+    "active_project_quota_snapshot_present": false,
+    "billing_tier": "free",
+    "first_429_action": "pause_without_automatic_retry",
+    "local_batch_caps": {
+      "input_tokens": 1000000,
+      "output_tokens": 128000,
+      "requests": 100
+    },
+    "model_id": "gemini-3.6-flash",
+    "monetary_hard_limit_usd": 0.0
+  },
+  "generated_at": "2026-07-23T23:45:00+08:00",
+  "network_calls_made": 0,
+  "policy": {
+    "path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v1.json",
+    "sha256": "b90e54c09b2ef9031f59afe678cdc300acf42c71ba9b4793a4e37025d8712253"
+  },
+  "schema_version": "m3-paper-v2-dual-provider-budget-preflight-1.0",
+  "source_cost_preflight": {
+    "path": "protocols/paper_upgrade_v2/provider_cost_preflight_v1.json",
+    "sha256": "012b3ca0b8c58743fb2f660f4c216b537036e1e7baecec5fd3fc5d9d850e8257"
+  },
+  "status": "blocked_executor_identity_logging_and_gemini_quota_snapshot",
+  "study_target": {
+    "cross_provider_fallback_within_a_matrix": false,
+    "input_tokens_upper_bound": 34407984,
+    "output_tokens_upper_bound": 2260992,
+    "provider_calls_upper_bound": 4416,
+    "providers_are_independent_model_matrices": true,
+    "scope": "full_480_item_medium_matrix_per_selected_model",
+    "small_subset_is_not_the_target": true,
+    "source_bound": "protocols/paper_upgrade_v2/provider_cost_preflight_v1.json",
+    "work_items": 480
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "analysis_manifest": "",
+  "artifacts": {
+    "execution_config": {
+      "exists": false,
+      "path": "outputs/paper_upgrade_v1/adaptive_mcts_budget_v1/execution_config.json",
+      "sha256": ""
+    },
+    "failures": {
+      "exists": false,
+      "path": "outputs/paper_upgrade_v1/adaptive_mcts_budget_v1/failures.jsonl",
+      "sha256": ""
+    },
+    "task_results": {
+      "exists": false,
+      "path": "outputs/paper_upgrade_v1/adaptive_mcts_budget_v1/task_results.jsonl",
+      "sha256": ""
+    }
+  },
+  "boundary": "Read-only monitoring only. This snapshot never retries tasks, changes query budgets, promotes manifests, or admits adaptive results.",
+  "counts": {
+    "completed_tasks": 0,
+    "frozen_tasks": 0,
+    "manifest_queries_executed": 0,
+    "missing_tasks": 0,
+    "query_artifact_count": 0,
+    "query_count_matches_manifest": true,
+    "selected_tasks": 0,
+    "unresolved_failed_tasks": 0
+  },
+  "created_at": "2026-07-22T08:29:16.616182+00:00",
+  "health_blockers": [
+    "run_manifest_missing"
+  ],
+  "health_status": "missing_manifest",
+  "manifest_exists": false,
+  "manifest_path": "outputs/paper_upgrade_v1/adaptive_mcts_budget_v1/manifest.json",
+  "manifest_sha256": "",
+  "manifest_status": "",
+  "monitor_version": "m3-paper-v1-adaptive-mcts-budget-monitor-1.0",
+  "pid": 0,
+  "pid_alive": false,
+  "result_eligible_for_formal_tables": false,
+  "run_dir": "outputs/paper_upgrade_v1/adaptive_mcts_budget_v1",
+  "schema_version": "paper-adaptive-mcts-budget-monitor-1.0",
+  "snapshot_rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "status": "completed",
+  "timing": {
+    "latest_artifact_age_seconds": null,
+    "latest_artifact_at": "",
+    "stall_threshold_seconds": 2700
+  }
+}

@@ -1,0 +1,953 @@
+{
+  "agentdojo_checkout": "E:\\M3_PI_Guard_test\\external\\benchmarks\\agentdojo",
+  "audit_version": "m3-paper-v1-camel-transport-mapping-preflight-1.0",
+  "benchmark_case_count": 0,
+  "boundary": "Transport and capability-mapping preflight only. Client and pipeline objects are constructed with sockets blocked, but no model query, tool call or benchmark case is executed. This is not formal effect evidence.",
+  "camel_checkout": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection",
+  "camel_python": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+  "checks": [
+    {
+      "detail": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+      "name": "camel_runtime_python_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "E:\\M3_PI_Guard_test\\external\\baselines\\camel-prompt-injection",
+      "name": "pinned_camel_checkout_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "E:\\M3_PI_Guard_test\\external\\benchmarks\\agentdojo",
+      "name": "pinned_agentdojo_checkout_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "completed_compat_preflight_only",
+      "name": "compat_preflight_completed_nonformal",
+      "status": "pass"
+    },
+    {
+      "detail": "completed_runner_wiring_preflight_only",
+      "name": "runner_wiring_preflight_completed_nonformal",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "probe_returned_zero",
+      "status": "pass"
+    },
+    {
+      "detail": true,
+      "name": "compat_loaded_before_camel",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "banking",
+        "slack",
+        "travel",
+        "workspace"
+      ],
+      "name": "all_four_public_suites_mapped",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "banking": {
+          "injection_tasks": 9,
+          "tool_count": 11,
+          "user_tasks": 16
+        },
+        "slack": {
+          "injection_tasks": 5,
+          "tool_count": 11,
+          "user_tasks": 21
+        },
+        "travel": {
+          "injection_tasks": 7,
+          "tool_count": 28,
+          "user_tasks": 20
+        },
+        "workspace": {
+          "injection_tasks": 6,
+          "tool_count": 24,
+          "user_tasks": 40
+        }
+      },
+      "name": "public_suite_counts_match_freeze",
+      "status": "pass"
+    },
+    {
+      "detail": {},
+      "name": "all_public_tools_have_policy_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": {},
+      "name": "all_public_tools_have_camel_wrappers",
+      "status": "pass"
+    },
+    {
+      "detail": {},
+      "name": "all_tool_wrappers_are_upstream_agentdojo_function",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "WorkspaceSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "workspace",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "TravelSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "travel",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "BankingSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "banking",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "SlackSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "slack",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        }
+      ],
+      "name": "privileged_and_quarantined_transports_bound",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "WorkspaceSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "workspace",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "TravelSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "travel",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "BankingSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "banking",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "SlackSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "slack",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        }
+      ],
+      "name": "upstream_interpreter_and_policies_unedited",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "benchmark_case_count": 0,
+        "model_or_api_calls": 0,
+        "network_attempted": false,
+        "tool_calls_executed": 0
+      },
+      "name": "no_network_model_tool_or_case_execution",
+      "status": "pass"
+    },
+    {
+      "detail": "transport and mapping preflight only",
+      "name": "result_not_formally_admitted",
+      "status": "pass"
+    }
+  ],
+  "compat_preflight": {
+    "path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_compat_preflight_v1.json",
+    "sha256": "299119469ebd33633d6beeaab8d8e01cbc5c734fa1ca9ab51334709813ad5675",
+    "status": "completed_compat_preflight_only"
+  },
+  "created_at": "2026-07-21T09:35:43.224756+00:00",
+  "formal_result_admitted_now": false,
+  "json_path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_transport_mapping_preflight_v1.json",
+  "mapping_rows": [
+    {
+      "error": "",
+      "error_type": "",
+      "extra_policy_symbols": [
+        "query_ai_assistant"
+      ],
+      "injection_tasks": 6,
+      "missing_policy_coverage": [],
+      "missing_wrapped_tools": [],
+      "no_side_effect_tools": [
+        "get_current_day",
+        "get_day_calendar_events",
+        "get_draft_emails",
+        "get_file_by_id",
+        "get_received_emails",
+        "get_sent_emails",
+        "get_unread_emails",
+        "list_files",
+        "query_ai_assistant",
+        "search_calendar_events",
+        "search_contacts_by_email",
+        "search_contacts_by_name",
+        "search_emails",
+        "search_files",
+        "search_files_by_filename"
+      ],
+      "non_agentdojo_wrappers": [],
+      "ok": true,
+      "pipeline_elements": [
+        "InitQuery",
+        "PrivilegedLLM"
+      ],
+      "pipeline_name": "m3-paper-qwen3-8b-v1_latest+camel+secpol",
+      "policy_tools": [
+        "add_calendar_event_participants",
+        "append_to_file",
+        "cancel_calendar_event",
+        "create_calendar_event",
+        "create_file",
+        "delete_email",
+        "delete_file",
+        "reschedule_calendar_event",
+        "send_email",
+        "share_file"
+      ],
+      "suite": "workspace",
+      "tool_count": 24,
+      "tool_names": [
+        "add_calendar_event_participants",
+        "append_to_file",
+        "cancel_calendar_event",
+        "create_calendar_event",
+        "create_file",
+        "delete_email",
+        "delete_file",
+        "get_current_day",
+        "get_day_calendar_events",
+        "get_draft_emails",
+        "get_file_by_id",
+        "get_received_emails",
+        "get_sent_emails",
+        "get_unread_emails",
+        "list_files",
+        "reschedule_calendar_event",
+        "search_calendar_events",
+        "search_contacts_by_email",
+        "search_contacts_by_name",
+        "search_emails",
+        "search_files",
+        "search_files_by_filename",
+        "send_email",
+        "share_file"
+      ],
+      "transport_binding": {
+        "base_url": "http://127.0.0.1:11434/v1",
+        "policy_engine_class": "WorkspaceSecurityPolicyEngine",
+        "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+        "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+        "suite": "workspace",
+        "temperature": 0.0,
+        "upstream_interpreter_edited": false,
+        "upstream_policy_edited": false,
+        "upstream_privileged_llm": true,
+        "upstream_security_policy": true
+      },
+      "user_tasks": 40,
+      "wrapped_tool_count": 24
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "extra_policy_symbols": [
+        "query_ai_assistant"
+      ],
+      "injection_tasks": 7,
+      "missing_policy_coverage": [],
+      "missing_wrapped_tools": [],
+      "no_side_effect_tools": [
+        "check_restaurant_opening_hours",
+        "get_all_car_rental_companies_in_city",
+        "get_all_hotels_in_city",
+        "get_all_restaurants_in_city",
+        "get_car_fuel_options",
+        "get_car_price_per_day",
+        "get_car_rental_address",
+        "get_car_types_available",
+        "get_contact_information_for_restaurants",
+        "get_cuisine_type_for_restaurants",
+        "get_day_calendar_events",
+        "get_dietary_restrictions_for_all_restaurants",
+        "get_flight_information",
+        "get_hotels_address",
+        "get_hotels_prices",
+        "get_price_for_restaurants",
+        "get_rating_reviews_for_car_rental",
+        "get_rating_reviews_for_hotels",
+        "get_rating_reviews_for_restaurants",
+        "get_restaurants_address",
+        "get_user_information",
+        "query_ai_assistant",
+        "search_calendar_events"
+      ],
+      "non_agentdojo_wrappers": [],
+      "ok": true,
+      "pipeline_elements": [
+        "InitQuery",
+        "PrivilegedLLM"
+      ],
+      "pipeline_name": "m3-paper-qwen3-8b-v1_latest+camel+secpol",
+      "policy_tools": [
+        "cancel_calendar_event",
+        "create_calendar_event",
+        "reserve_car_rental",
+        "reserve_hotel",
+        "reserve_restaurant",
+        "send_email"
+      ],
+      "suite": "travel",
+      "tool_count": 28,
+      "tool_names": [
+        "cancel_calendar_event",
+        "check_restaurant_opening_hours",
+        "create_calendar_event",
+        "get_all_car_rental_companies_in_city",
+        "get_all_hotels_in_city",
+        "get_all_restaurants_in_city",
+        "get_car_fuel_options",
+        "get_car_price_per_day",
+        "get_car_rental_address",
+        "get_car_types_available",
+        "get_contact_information_for_restaurants",
+        "get_cuisine_type_for_restaurants",
+        "get_day_calendar_events",
+        "get_dietary_restrictions_for_all_restaurants",
+        "get_flight_information",
+        "get_hotels_address",
+        "get_hotels_prices",
+        "get_price_for_restaurants",
+        "get_rating_reviews_for_car_rental",
+        "get_rating_reviews_for_hotels",
+        "get_rating_reviews_for_restaurants",
+        "get_restaurants_address",
+        "get_user_information",
+        "reserve_car_rental",
+        "reserve_hotel",
+        "reserve_restaurant",
+        "search_calendar_events",
+        "send_email"
+      ],
+      "transport_binding": {
+        "base_url": "http://127.0.0.1:11434/v1",
+        "policy_engine_class": "TravelSecurityPolicyEngine",
+        "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+        "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+        "suite": "travel",
+        "temperature": 0.0,
+        "upstream_interpreter_edited": false,
+        "upstream_policy_edited": false,
+        "upstream_privileged_llm": true,
+        "upstream_security_policy": true
+      },
+      "user_tasks": 20,
+      "wrapped_tool_count": 28
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "extra_policy_symbols": [
+        "query_ai_assistant"
+      ],
+      "injection_tasks": 9,
+      "missing_policy_coverage": [],
+      "missing_wrapped_tools": [],
+      "no_side_effect_tools": [
+        "get_balance",
+        "get_iban",
+        "get_most_recent_transactions",
+        "get_scheduled_transactions",
+        "get_user_info",
+        "query_ai_assistant",
+        "read_file"
+      ],
+      "non_agentdojo_wrappers": [],
+      "ok": true,
+      "pipeline_elements": [
+        "InitQuery",
+        "PrivilegedLLM"
+      ],
+      "pipeline_name": "m3-paper-qwen3-8b-v1_latest+camel+secpol",
+      "policy_tools": [
+        "schedule_transaction",
+        "send_money",
+        "update_password",
+        "update_scheduled_transaction",
+        "update_user_info"
+      ],
+      "suite": "banking",
+      "tool_count": 11,
+      "tool_names": [
+        "get_balance",
+        "get_iban",
+        "get_most_recent_transactions",
+        "get_scheduled_transactions",
+        "get_user_info",
+        "read_file",
+        "schedule_transaction",
+        "send_money",
+        "update_password",
+        "update_scheduled_transaction",
+        "update_user_info"
+      ],
+      "transport_binding": {
+        "base_url": "http://127.0.0.1:11434/v1",
+        "policy_engine_class": "BankingSecurityPolicyEngine",
+        "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+        "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+        "suite": "banking",
+        "temperature": 0.0,
+        "upstream_interpreter_edited": false,
+        "upstream_policy_edited": false,
+        "upstream_privileged_llm": true,
+        "upstream_security_policy": true
+      },
+      "user_tasks": 16,
+      "wrapped_tool_count": 11
+    },
+    {
+      "error": "",
+      "error_type": "",
+      "extra_policy_symbols": [
+        "query_ai_assistant"
+      ],
+      "injection_tasks": 5,
+      "missing_policy_coverage": [],
+      "missing_wrapped_tools": [],
+      "no_side_effect_tools": [
+        "get_channels",
+        "get_users_in_channel",
+        "query_ai_assistant",
+        "read_channel_messages",
+        "read_inbox"
+      ],
+      "non_agentdojo_wrappers": [],
+      "ok": true,
+      "pipeline_elements": [
+        "InitQuery",
+        "PrivilegedLLM"
+      ],
+      "pipeline_name": "m3-paper-qwen3-8b-v1_latest+camel+secpol",
+      "policy_tools": [
+        "add_user_to_channel",
+        "get_webpage",
+        "invite_user_to_slack",
+        "post_webpage",
+        "remove_user_from_slack",
+        "send_channel_message",
+        "send_direct_message"
+      ],
+      "suite": "slack",
+      "tool_count": 11,
+      "tool_names": [
+        "add_user_to_channel",
+        "get_channels",
+        "get_users_in_channel",
+        "get_webpage",
+        "invite_user_to_slack",
+        "post_webpage",
+        "read_channel_messages",
+        "read_inbox",
+        "remove_user_from_slack",
+        "send_channel_message",
+        "send_direct_message"
+      ],
+      "transport_binding": {
+        "base_url": "http://127.0.0.1:11434/v1",
+        "policy_engine_class": "SlackSecurityPolicyEngine",
+        "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+        "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+        "suite": "slack",
+        "temperature": 0.0,
+        "upstream_interpreter_edited": false,
+        "upstream_policy_edited": false,
+        "upstream_privileged_llm": true,
+        "upstream_security_policy": true
+      },
+      "user_tasks": 21,
+      "wrapped_tool_count": 11
+    }
+  ],
+  "mapping_rows_sha256": "5778736f169895af0dd8b729b522832f3fc3f289f52524a05fd3c5095547fd88",
+  "markdown_path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_transport_mapping_preflight_v1.md",
+  "missing_policy_coverage": {},
+  "missing_wrapped_tools": {},
+  "model_id": "m3-paper-qwen3-8b-v1:latest",
+  "model_or_api_calls": 0,
+  "network_attempted": false,
+  "non_agentdojo_wrappers": {},
+  "observed_counts": {
+    "banking": {
+      "injection_tasks": 9,
+      "tool_count": 11,
+      "user_tasks": 16
+    },
+    "slack": {
+      "injection_tasks": 5,
+      "tool_count": 11,
+      "user_tasks": 21
+    },
+    "travel": {
+      "injection_tasks": 7,
+      "tool_count": 28,
+      "user_tasks": 20
+    },
+    "workspace": {
+      "injection_tasks": 6,
+      "tool_count": 24,
+      "user_tasks": 40
+    }
+  },
+  "passed_checks": 16,
+  "probe": {
+    "benchmark_case_count": 0,
+    "compat_ok": true,
+    "model_or_api_calls": 0,
+    "network_attempted": false,
+    "ok": true,
+    "python_executable": "E:\\M3_PI_Guard_runtime\\camel\\.venv\\Scripts\\python.exe",
+    "returncode": 0,
+    "rows": [
+      {
+        "error": "",
+        "error_type": "",
+        "extra_policy_symbols": [
+          "query_ai_assistant"
+        ],
+        "injection_tasks": 6,
+        "missing_policy_coverage": [],
+        "missing_wrapped_tools": [],
+        "no_side_effect_tools": [
+          "get_current_day",
+          "get_day_calendar_events",
+          "get_draft_emails",
+          "get_file_by_id",
+          "get_received_emails",
+          "get_sent_emails",
+          "get_unread_emails",
+          "list_files",
+          "query_ai_assistant",
+          "search_calendar_events",
+          "search_contacts_by_email",
+          "search_contacts_by_name",
+          "search_emails",
+          "search_files",
+          "search_files_by_filename"
+        ],
+        "non_agentdojo_wrappers": [],
+        "ok": true,
+        "pipeline_elements": [
+          "InitQuery",
+          "PrivilegedLLM"
+        ],
+        "pipeline_name": "m3-paper-qwen3-8b-v1_latest+camel+secpol",
+        "policy_tools": [
+          "add_calendar_event_participants",
+          "append_to_file",
+          "cancel_calendar_event",
+          "create_calendar_event",
+          "create_file",
+          "delete_email",
+          "delete_file",
+          "reschedule_calendar_event",
+          "send_email",
+          "share_file"
+        ],
+        "suite": "workspace",
+        "tool_count": 24,
+        "tool_names": [
+          "add_calendar_event_participants",
+          "append_to_file",
+          "cancel_calendar_event",
+          "create_calendar_event",
+          "create_file",
+          "delete_email",
+          "delete_file",
+          "get_current_day",
+          "get_day_calendar_events",
+          "get_draft_emails",
+          "get_file_by_id",
+          "get_received_emails",
+          "get_sent_emails",
+          "get_unread_emails",
+          "list_files",
+          "reschedule_calendar_event",
+          "search_calendar_events",
+          "search_contacts_by_email",
+          "search_contacts_by_name",
+          "search_emails",
+          "search_files",
+          "search_files_by_filename",
+          "send_email",
+          "share_file"
+        ],
+        "transport_binding": {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "WorkspaceSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "workspace",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        "user_tasks": 40,
+        "wrapped_tool_count": 24
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "extra_policy_symbols": [
+          "query_ai_assistant"
+        ],
+        "injection_tasks": 7,
+        "missing_policy_coverage": [],
+        "missing_wrapped_tools": [],
+        "no_side_effect_tools": [
+          "check_restaurant_opening_hours",
+          "get_all_car_rental_companies_in_city",
+          "get_all_hotels_in_city",
+          "get_all_restaurants_in_city",
+          "get_car_fuel_options",
+          "get_car_price_per_day",
+          "get_car_rental_address",
+          "get_car_types_available",
+          "get_contact_information_for_restaurants",
+          "get_cuisine_type_for_restaurants",
+          "get_day_calendar_events",
+          "get_dietary_restrictions_for_all_restaurants",
+          "get_flight_information",
+          "get_hotels_address",
+          "get_hotels_prices",
+          "get_price_for_restaurants",
+          "get_rating_reviews_for_car_rental",
+          "get_rating_reviews_for_hotels",
+          "get_rating_reviews_for_restaurants",
+          "get_restaurants_address",
+          "get_user_information",
+          "query_ai_assistant",
+          "search_calendar_events"
+        ],
+        "non_agentdojo_wrappers": [],
+        "ok": true,
+        "pipeline_elements": [
+          "InitQuery",
+          "PrivilegedLLM"
+        ],
+        "pipeline_name": "m3-paper-qwen3-8b-v1_latest+camel+secpol",
+        "policy_tools": [
+          "cancel_calendar_event",
+          "create_calendar_event",
+          "reserve_car_rental",
+          "reserve_hotel",
+          "reserve_restaurant",
+          "send_email"
+        ],
+        "suite": "travel",
+        "tool_count": 28,
+        "tool_names": [
+          "cancel_calendar_event",
+          "check_restaurant_opening_hours",
+          "create_calendar_event",
+          "get_all_car_rental_companies_in_city",
+          "get_all_hotels_in_city",
+          "get_all_restaurants_in_city",
+          "get_car_fuel_options",
+          "get_car_price_per_day",
+          "get_car_rental_address",
+          "get_car_types_available",
+          "get_contact_information_for_restaurants",
+          "get_cuisine_type_for_restaurants",
+          "get_day_calendar_events",
+          "get_dietary_restrictions_for_all_restaurants",
+          "get_flight_information",
+          "get_hotels_address",
+          "get_hotels_prices",
+          "get_price_for_restaurants",
+          "get_rating_reviews_for_car_rental",
+          "get_rating_reviews_for_hotels",
+          "get_rating_reviews_for_restaurants",
+          "get_restaurants_address",
+          "get_user_information",
+          "reserve_car_rental",
+          "reserve_hotel",
+          "reserve_restaurant",
+          "search_calendar_events",
+          "send_email"
+        ],
+        "transport_binding": {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "TravelSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "travel",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        "user_tasks": 20,
+        "wrapped_tool_count": 28
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "extra_policy_symbols": [
+          "query_ai_assistant"
+        ],
+        "injection_tasks": 9,
+        "missing_policy_coverage": [],
+        "missing_wrapped_tools": [],
+        "no_side_effect_tools": [
+          "get_balance",
+          "get_iban",
+          "get_most_recent_transactions",
+          "get_scheduled_transactions",
+          "get_user_info",
+          "query_ai_assistant",
+          "read_file"
+        ],
+        "non_agentdojo_wrappers": [],
+        "ok": true,
+        "pipeline_elements": [
+          "InitQuery",
+          "PrivilegedLLM"
+        ],
+        "pipeline_name": "m3-paper-qwen3-8b-v1_latest+camel+secpol",
+        "policy_tools": [
+          "schedule_transaction",
+          "send_money",
+          "update_password",
+          "update_scheduled_transaction",
+          "update_user_info"
+        ],
+        "suite": "banking",
+        "tool_count": 11,
+        "tool_names": [
+          "get_balance",
+          "get_iban",
+          "get_most_recent_transactions",
+          "get_scheduled_transactions",
+          "get_user_info",
+          "read_file",
+          "schedule_transaction",
+          "send_money",
+          "update_password",
+          "update_scheduled_transaction",
+          "update_user_info"
+        ],
+        "transport_binding": {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "BankingSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "banking",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        "user_tasks": 16,
+        "wrapped_tool_count": 11
+      },
+      {
+        "error": "",
+        "error_type": "",
+        "extra_policy_symbols": [
+          "query_ai_assistant"
+        ],
+        "injection_tasks": 5,
+        "missing_policy_coverage": [],
+        "missing_wrapped_tools": [],
+        "no_side_effect_tools": [
+          "get_channels",
+          "get_users_in_channel",
+          "query_ai_assistant",
+          "read_channel_messages",
+          "read_inbox"
+        ],
+        "non_agentdojo_wrappers": [],
+        "ok": true,
+        "pipeline_elements": [
+          "InitQuery",
+          "PrivilegedLLM"
+        ],
+        "pipeline_name": "m3-paper-qwen3-8b-v1_latest+camel+secpol",
+        "policy_tools": [
+          "add_user_to_channel",
+          "get_webpage",
+          "invite_user_to_slack",
+          "post_webpage",
+          "remove_user_from_slack",
+          "send_channel_message",
+          "send_direct_message"
+        ],
+        "suite": "slack",
+        "tool_count": 11,
+        "tool_names": [
+          "add_user_to_channel",
+          "get_channels",
+          "get_users_in_channel",
+          "get_webpage",
+          "invite_user_to_slack",
+          "post_webpage",
+          "read_channel_messages",
+          "read_inbox",
+          "remove_user_from_slack",
+          "send_channel_message",
+          "send_direct_message"
+        ],
+        "transport_binding": {
+          "base_url": "http://127.0.0.1:11434/v1",
+          "policy_engine_class": "SlackSecurityPolicyEngine",
+          "privileged_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "privileged_transport": "agentdojo.OpenAILLM(openai-compatible-local)",
+          "quarantined_model_id": "m3-paper-qwen3-8b-v1:latest",
+          "quarantined_transport": "pydantic_ai.Agent(openai-compatible-local)",
+          "suite": "slack",
+          "temperature": 0.0,
+          "upstream_interpreter_edited": false,
+          "upstream_policy_edited": false,
+          "upstream_privileged_llm": true,
+          "upstream_security_policy": true
+        },
+        "user_tasks": 21,
+        "wrapped_tool_count": 11
+      }
+    ],
+    "stderr_tail": "",
+    "stdout_tail": "\", \"get_dietary_restrictions_for_all_restaurants\", \"get_flight_information\", \"get_hotels_address\", \"get_hotels_prices\", \"get_price_for_restaurants\", \"get_rating_reviews_for_car_rental\", \"get_rating_reviews_for_hotels\", \"get_rating_reviews_for_restaurants\", \"get_restaurants_address\", \"get_user_information\", \"reserve_car_rental\", \"reserve_hotel\", \"reserve_restaurant\", \"search_calendar_events\", \"send_email\"], \"transport_binding\": {\"base_url\": \"http://127.0.0.1:11434/v1\", \"policy_engine_class\": \"TravelSecurityPolicyEngine\", \"privileged_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"privileged_transport\": \"agentdojo.OpenAILLM(openai-compatible-local)\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"quarantined_transport\": \"pydantic_ai.Agent(openai-compatible-local)\", \"suite\": \"travel\", \"temperature\": 0.0, \"upstream_interpreter_edited\": false, \"upstream_policy_edited\": false, \"upstream_privileged_llm\": true, \"upstream_security_policy\": true}, \"user_tasks\": 20, \"wrapped_tool_count\": 28}, {\"error\": \"\", \"error_type\": \"\", \"extra_policy_symbols\": [\"query_ai_assistant\"], \"injection_tasks\": 9, \"missing_policy_coverage\": [], \"missing_wrapped_tools\": [], \"no_side_effect_tools\": [\"get_balance\", \"get_iban\", \"get_most_recent_transactions\", \"get_scheduled_transactions\", \"get_user_info\", \"query_ai_assistant\", \"read_file\"], \"non_agentdojo_wrappers\": [], \"ok\": true, \"pipeline_elements\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_name\": \"m3-paper-qwen3-8b-v1_latest+camel+secpol\", \"policy_tools\": [\"schedule_transaction\", \"send_money\", \"update_password\", \"update_scheduled_transaction\", \"update_user_info\"], \"suite\": \"banking\", \"tool_count\": 11, \"tool_names\": [\"get_balance\", \"get_iban\", \"get_most_recent_transactions\", \"get_scheduled_transactions\", \"get_user_info\", \"read_file\", \"schedule_transaction\", \"send_money\", \"update_password\", \"update_scheduled_transaction\", \"update_user_info\"], \"transport_binding\": {\"base_url\": \"http://127.0.0.1:11434/v1\", \"policy_engine_class\": \"BankingSecurityPolicyEngine\", \"privileged_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"privileged_transport\": \"agentdojo.OpenAILLM(openai-compatible-local)\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"quarantined_transport\": \"pydantic_ai.Agent(openai-compatible-local)\", \"suite\": \"banking\", \"temperature\": 0.0, \"upstream_interpreter_edited\": false, \"upstream_policy_edited\": false, \"upstream_privileged_llm\": true, \"upstream_security_policy\": true}, \"user_tasks\": 16, \"wrapped_tool_count\": 11}, {\"error\": \"\", \"error_type\": \"\", \"extra_policy_symbols\": [\"query_ai_assistant\"], \"injection_tasks\": 5, \"missing_policy_coverage\": [], \"missing_wrapped_tools\": [], \"no_side_effect_tools\": [\"get_channels\", \"get_users_in_channel\", \"query_ai_assistant\", \"read_channel_messages\", \"read_inbox\"], \"non_agentdojo_wrappers\": [], \"ok\": true, \"pipeline_elements\": [\"InitQuery\", \"PrivilegedLLM\"], \"pipeline_name\": \"m3-paper-qwen3-8b-v1_latest+camel+secpol\", \"policy_tools\": [\"add_user_to_channel\", \"get_webpage\", \"invite_user_to_slack\", \"post_webpage\", \"remove_user_from_slack\", \"send_channel_message\", \"send_direct_message\"], \"suite\": \"slack\", \"tool_count\": 11, \"tool_names\": [\"add_user_to_channel\", \"get_channels\", \"get_users_in_channel\", \"get_webpage\", \"invite_user_to_slack\", \"post_webpage\", \"read_channel_messages\", \"read_inbox\", \"remove_user_from_slack\", \"send_channel_message\", \"send_direct_message\"], \"transport_binding\": {\"base_url\": \"http://127.0.0.1:11434/v1\", \"policy_engine_class\": \"SlackSecurityPolicyEngine\", \"privileged_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"privileged_transport\": \"agentdojo.OpenAILLM(openai-compatible-local)\", \"quarantined_model_id\": \"m3-paper-qwen3-8b-v1:latest\", \"quarantined_transport\": \"pydantic_ai.Agent(openai-compatible-local)\", \"suite\": \"slack\", \"temperature\": 0.0, \"upstream_interpreter_edited\": false, \"upstream_policy_edited\": false, \"upstream_privileged_llm\": true, \"upstream_security_policy\": true}, \"user_tasks\": 21, \"wrapped_tool_count\": 11}], \"tool_calls_executed\": 0}\n",
+    "tool_calls_executed": 0
+  },
+  "qualification_blockers": [
+    "real_model_two_case_qualification_not_completed",
+    "complete_726_case_formal_logs_absent",
+    "formal_analysis_and_admission_absent"
+  ],
+  "result_eligible_for_formal_tables": false,
+  "runner_preflight": {
+    "path": "E:\\M3_PI_Guard_test\\protocols\\paper_upgrade_v1\\camel_source_backed_runner_preflight_v1.json",
+    "sha256": "ac5422fef4540befe7531a26d8b22cdc4a4b674ac5e78d05ce88f9daeed568b0",
+    "status": "completed_runner_wiring_preflight_only"
+  },
+  "schema_version": "paper-camel-transport-mapping-preflight-1.0",
+  "status": "completed_transport_and_mapping_preflight_only",
+  "suites_mapped": [
+    "banking",
+    "slack",
+    "travel",
+    "workspace"
+  ],
+  "tool_calls_executed": 0,
+  "total_checks": 16,
+  "transport": {
+    "api_key": "ollama-local",
+    "api_key_class": "non_secret_local_placeholder",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "ollama_models": "E:\\Ollama\\models",
+    "privileged_max_attempts": 10,
+    "provider": "openai-compatible",
+    "quarantined_llm_retries": 10,
+    "quarantined_provider": "pydantic-ai-openai-compatible"
+  }
+}

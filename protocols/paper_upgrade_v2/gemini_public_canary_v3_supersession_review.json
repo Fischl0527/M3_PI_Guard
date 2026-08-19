@@ -1,0 +1,17 @@
+{
+  "deletion_performed": false,
+  "manifest_sha256": "d54a09288ef12051e42e165537f08bb2fe19bec30f91499d9365192680d6c65e",
+  "network_calls_made": 0,
+  "provider_calls_made": 0,
+  "reason": "single_root_canary_did_not_enforce_project_daily_rpd",
+  "replacement_schema_version": "m3-paper-v2-gemini-public-canary-candidate-4.0",
+  "schema_version": "m3-paper-v2-gemini-public-supersession-review-3.0",
+  "scientific_outcomes_read": 0,
+  "status": "v3_superseded_before_execution",
+  "v3_admission_file_sha256": "962daaaed24684472f05a3b6848cd2524c94b6c2e9a3817eca6e0056edd059f3",
+  "v3_admission_manifest_sha256": "b70ab17eb4737ac0ae3d550d46ea9e6db89d663d6f5d6f7f85825bc208955c4e",
+  "v3_candidate_file_sha256": "0a4e5866fcbf95678cd7d4c190e1369e82e25535087f67d383c0a22ac20c23f8",
+  "v3_candidate_manifest_sha256": "ec78568f93a7689bf4b166aa01b59d0e14c4c657b57d1feeffd873b1c3289044",
+  "v3_nonempty_output_files": 0,
+  "v3_run_id": "paper-v2-public-gemini-canary-v3-20260802"
+}

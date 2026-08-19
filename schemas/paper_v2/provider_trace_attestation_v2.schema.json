@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/provider_trace_attestation_v2.schema.json",
+  "title": "M3-PI Guard prospective provider trace attestation v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_level",
+    "trace_mode",
+    "client_request_id",
+    "provider_request_id",
+    "provider_response_id",
+    "provider_id",
+    "model_id",
+    "payload_sha256",
+    "commitment_sha256",
+    "started_event_sha256",
+    "activation_manifest_sha256",
+    "official_network",
+    "exact_model_identity",
+    "prompt_rewrite_declaration",
+    "request_started_before_transport",
+    "append_flush_fsync",
+    "prompt_or_response_content_stored",
+    "v1_contract_unchanged",
+    "v2_trace_eligible",
+    "retroactive_upgrade_allowed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-provider-trace-attestation-2.1"
+    },
+    "evidence_level": {
+      "const": "prospective_formal_trace_eligible_v2"
+    },
+    "trace_mode": {
+      "enum": [
+        "provider_dual_id_plus_precommitted_local",
+        "precommitted_local_plus_provider_response"
+      ]
+    },
+    "client_request_id": {
+      "type": "string",
+      "pattern": "^m3req-[0-9a-f]{32}$"
+    },
+    "provider_request_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "provider_response_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provider_id": {
+      "const": "deepseek"
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "commitment_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "started_event_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "activation_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "official_network": {
+      "const": true
+    },
+    "exact_model_identity": {
+      "const": true
+    },
+    "prompt_rewrite_declaration": {
+      "const": "none_declared"
+    },
+    "request_started_before_transport": {
+      "const": true
+    },
+    "append_flush_fsync": {
+      "const": true
+    },
+    "prompt_or_response_content_stored": {
+      "const": false
+    },
+    "v1_contract_unchanged": {
+      "const": true
+    },
+    "v2_trace_eligible": {
+      "const": true
+    },
+    "retroactive_upgrade_allowed": {
+      "const": false
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

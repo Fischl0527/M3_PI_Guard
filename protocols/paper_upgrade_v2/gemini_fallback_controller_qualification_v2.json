@@ -1,0 +1,17 @@
+{
+  "automatic_retries": 0,
+  "boundary_adapter_version": "m3-paper-v2-boundary-rejection-runtime-3.0",
+  "credentials_read": false,
+  "derived_work_items": 192,
+  "external_effects_enabled": false,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-27T01:30:00+08:00",
+  "network_calls_made": 0,
+  "offline_diagnostics": 0,
+  "offline_evidence_entries": 2,
+  "offline_records": 2,
+  "provider_tools_enabled": false,
+  "schema_version": "m3-paper-v2-gemini-fallback-controller-qualification-2.0",
+  "scientific_outcomes_read": 0,
+  "status": "gemini_policy_full_controller_qualified_offline"
+}

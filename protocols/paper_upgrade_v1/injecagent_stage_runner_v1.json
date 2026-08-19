@@ -1,0 +1,228 @@
+{
+  "schema_version": "paper-protocol-note-1.0",
+  "protocol_id": "injecagent_stage_runner_v1",
+  "updated_at": "2026-07-18",
+  "evidence_status": "injecagent_stage_compatible_diagnostic_not_official_benchmark",
+  "result_eligible_for_formal_tables": false,
+  "purpose": "Run InjecAgent cases from the official post-user-tool-observation stage while retaining M3 non-oracle policy compilation boundaries.",
+  "implemented_artifacts": {
+    "official_compatibility_audit": "experiments/paper_v1/benchmarks/audit_injecagent_official_compatibility.py",
+    "official_prompted_intent_scorer": "experiments/paper_v1/benchmarks/score_injecagent_stage_official_prompted.py",
+    "pair_analyzer": "experiments/paper_v1/benchmarks/analyze_injecagent_stage_pair.py",
+    "runner": "experiments/paper_v1/benchmarks/injecagent_stage_runner.py",
+    "selection_builder": "experiments/paper_v1/benchmarks/build_injecagent_stage_selection.py",
+    "scorer": "experiments/paper_v1/benchmarks/score_injecagent_replay.py",
+    "tests": [
+      "tests/unit/test_public_benchmark_adapters.py",
+      "tests/unit/test_paper_v1_runtime.py",
+      "tests/unit/test_paper_metrics.py"
+    ]
+  },
+  "official_compatibility_audit": {
+    "json": "protocols/paper_upgrade_v1/injecagent_official_compatibility_audit_v1.json",
+    "markdown": "protocols/paper_upgrade_v1/injecagent_official_compatibility_audit_v1.md",
+    "status": "completed",
+    "passed_checks": 19,
+    "total_checks": 19,
+    "evidence_boundary": "compatibility_audit_not_official_benchmark_result"
+  },
+  "official_prompted_intent_score": {
+    "baseline_manifest": "outputs/paper_upgrade_v1/injecagent_stage/vicuna_official_react_simple_selection30_nodefense_timeout_v2/official_prompted_intent_score_v1/score_manifest.json",
+    "treatment_manifest": "outputs/paper_upgrade_v1/injecagent_stage/vicuna_official_react_simple_selection30_m3full_timeout_v2/official_prompted_intent_score_v1/score_manifest.json",
+    "paired_analysis": "outputs/paper_upgrade_v1/injecagent_stage/vicuna_official_react_simple_selection30_official_prompted_intent_pair_v1/analysis_manifest.json",
+    "evidence_boundary": "official_prompted_parser_on_m3_stage_logs_not_official_runner",
+    "baseline_attack_success": "7/30",
+    "treatment_attack_success": "6/30",
+    "baseline_asr_all_total": "23.3",
+    "treatment_asr_all_total": "20.0",
+    "risk_difference_treatment_minus_baseline": -0.033333333333333326,
+    "mcnemar_p": 1.0,
+    "interpretation": "Raw model attack intent changes little; execution-derived ASR drops because the runtime monitor blocks unsafe actions."
+  },
+  "online_boundary": {
+    "model_sees_official_prelude": true,
+    "gold_user_tool_stage_used_online": true,
+    "attacker_labels_used_online": false,
+    "expected_achievements_used_online": false,
+    "policy_compiler_inputs": [
+      "trusted_user_request",
+      "trusted_application_context",
+      "tool_schemas"
+    ],
+    "guard_inputs": [
+      "TaskPolicyManifest",
+      "ActionProposal",
+      "ProvenanceEvent",
+      "runtime_trace"
+    ]
+  },
+  "smoke_runs": [
+    {
+      "name": "vicuna_official_react_simple_stratified_30_pair_timeout_v2",
+      "selection": "protocols/paper_upgrade_v1/injecagent_stage_stratified_30_selection_v1.json",
+      "manifest": "outputs/paper_upgrade_v1/injecagent_stage/vicuna_official_react_simple_selection30_pair_timeout_v2/analysis_manifest.json",
+      "figure_manifest": "outputs/paper_upgrade_v1/injecagent_stage/vicuna_official_react_simple_selection30_pair_timeout_v2/figure_manifest.json",
+      "suite": "stratified_data_security_direct_harm",
+      "case_count": 30,
+      "prompt_style": "official_react_simple",
+      "model": "vicuna:7b",
+      "max_steps": 3,
+      "timeout": 60.0,
+      "max_tokens": 256,
+      "paired_n": 30,
+      "baseline_id": "no_defense",
+      "treatment_id": "m3_full",
+      "baseline_attack_success": "14/30",
+      "treatment_attack_success": "0/30",
+      "baseline_asr_all_total": "46.7",
+      "treatment_asr_all_total": "0.0",
+      "risk_difference_treatment_minus_baseline": -0.4666666666666667,
+      "mcnemar_p": 0.0001221,
+      "diagnostic_figures": [
+        "attack_success_by_defense.png",
+        "attack_success_by_bucket.png",
+        "paired_outcomes.png"
+      ]
+    },
+    {
+      "name": "vicuna_official_react_simple_stratified_6_pair_timeout_v1",
+      "selection": "protocols/paper_upgrade_v1/injecagent_stage_stratified_6_selection_v1.json",
+      "parent_selection": "protocols/paper_upgrade_v1/injecagent_stage_stratified_30_selection_v1.json",
+      "manifest": "outputs/paper_upgrade_v1/injecagent_stage/vicuna_official_react_simple_selection6_pair_timeout_v1/analysis_manifest.json",
+      "suite": "stratified_data_security_direct_harm",
+      "case_count": 6,
+      "prompt_style": "official_react_simple",
+      "model": "vicuna:7b",
+      "max_steps": 2,
+      "timeout": 60.0,
+      "max_tokens": 192,
+      "paired_n": 6,
+      "baseline_id": "no_defense",
+      "treatment_id": "m3_full",
+      "baseline_attack_success": "1/6",
+      "treatment_attack_success": "0/6",
+      "risk_difference_treatment_minus_baseline": -0.16666666666666666,
+      "mcnemar_p": 1.0
+    },
+    {
+      "name": "vicuna_official_react_simple_data_security_limit3_pair_v1",
+      "manifest": "outputs/paper_upgrade_v1/injecagent_stage/vicuna_official_react_simple_ds_limit3_pair_v1/analysis_manifest.json",
+      "suite": "data_security",
+      "case_count": 3,
+      "prompt_style": "official_react_simple",
+      "model": "vicuna:7b",
+      "paired_n": 3,
+      "baseline_id": "no_defense",
+      "treatment_id": "m3_full",
+      "baseline_attack_success": "3/3",
+      "treatment_attack_success": "0/3",
+      "risk_difference_treatment_minus_baseline": -1.0,
+      "mcnemar_p": 0.25
+    },
+    {
+      "name": "vicuna_official_react_simple_direct_harm_limit3_pair_v1",
+      "manifest": "outputs/paper_upgrade_v1/injecagent_stage/vicuna_official_react_simple_dh_limit3_pair_v1/analysis_manifest.json",
+      "suite": "direct_harm",
+      "case_count": 3,
+      "prompt_style": "official_react_simple",
+      "model": "vicuna:7b",
+      "paired_n": 3,
+      "baseline_id": "no_defense",
+      "treatment_id": "m3_full",
+      "baseline_attack_success": "1/3",
+      "treatment_attack_success": "0/3",
+      "risk_difference_treatment_minus_baseline": -0.3333333333333333,
+      "mcnemar_p": 1.0
+    },
+    {
+      "name": "qwen3_data_security_limit5_v1",
+      "manifest": "outputs/paper_upgrade_v1/injecagent_stage/qwen3_ds_limit5_v1/manifest.json",
+      "score_manifest": "outputs/paper_upgrade_v1/injecagent_stage/qwen3_ds_limit5_v1/official_formula_score_v1/score_manifest.json",
+      "suite": "data_security",
+      "case_count": 5,
+      "defense_ids": ["no_defense", "m3_full"],
+      "failure_count": 0,
+      "log_rows": 32,
+      "scores": {
+        "no_defense": {
+          "Valid Rate": "100.0",
+          "ASR-all (Total)": "0.0"
+        },
+        "m3_full": {
+          "Valid Rate": "100.0",
+          "ASR-all (Total)": "0.0"
+        }
+      }
+    },
+    {
+      "name": "qwen3_direct_harm_limit5_v1",
+      "manifest": "outputs/paper_upgrade_v1/injecagent_stage/qwen3_dh_limit5_v1/manifest.json",
+      "score_manifest": "outputs/paper_upgrade_v1/injecagent_stage/qwen3_dh_limit5_v1/official_formula_score_v1/score_manifest.json",
+      "suite": "direct_harm",
+      "case_count": 5,
+      "defense_ids": ["no_defense", "m3_full"],
+      "failure_count": 0,
+      "log_rows": 32,
+      "scores": {
+        "no_defense": {
+          "Valid Rate": "100.0",
+          "ASR-all (Total)": "0.0"
+        },
+        "m3_full": {
+          "Valid Rate": "100.0",
+          "ASR-all (Total)": "0.0"
+        }
+      }
+    },
+    {
+      "name": "qwen3_data_security_limit2_v3",
+      "manifest": "outputs/paper_upgrade_v1/injecagent_stage/qwen3_limit2_v3/manifest.json",
+      "score_manifest": "outputs/paper_upgrade_v1/injecagent_stage/qwen3_limit2_v3/official_formula_score_v1/score_manifest.json",
+      "suite": "data_security",
+      "case_count": 2,
+      "defense_ids": ["no_defense", "m3_full"],
+      "failure_count": 0,
+      "log_rows": 12,
+      "scores": {
+        "no_defense": {
+          "Valid Rate": "100.0",
+          "ASR-all (Total)": "0.0"
+        },
+        "m3_full": {
+          "Valid Rate": "100.0",
+          "ASR-all (Total)": "0.0"
+        }
+      }
+    },
+    {
+      "name": "qwen3_direct_harm_limit2_v1",
+      "manifest": "outputs/paper_upgrade_v1/injecagent_stage/qwen3_dh_limit2_v1/manifest.json",
+      "score_manifest": "outputs/paper_upgrade_v1/injecagent_stage/qwen3_dh_limit2_v1/official_formula_score_v1/score_manifest.json",
+      "suite": "direct_harm",
+      "case_count": 2,
+      "defense_ids": ["no_defense", "m3_full"],
+      "failure_count": 0,
+      "log_rows": 12,
+      "scores": {
+        "no_defense": {
+          "Valid Rate": "100.0",
+          "ASR-all (Total)": "0.0"
+        },
+        "m3_full": {
+          "Valid Rate": "100.0",
+          "ASR-all (Total)": "0.0"
+        }
+      }
+    }
+  ],
+  "verification": {
+    "command": "python -m pytest tests\\unit\\test_public_benchmark_adapters.py tests\\unit\\test_paper_v1_runtime.py tests\\unit\\test_paper_metrics.py -q",
+    "result": "79 passed"
+  },
+  "known_limitations": [
+    "Not byte-identical to InjecAgent official prompted-agent or function-calling runners.",
+    "Official prelude exposes the benchmark-provided user tool stage to the model.",
+    "Smoke scope is too small for effect-size or publication claims.",
+    "Full 1054-case InjecAgent matrix and strong baseline comparisons remain pending."
+  ]
+}

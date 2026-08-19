@@ -1,0 +1,19 @@
+{
+  "artifact": "AgentDojo",
+  "audit_id": "A04-agentdojo-case-loader",
+  "commit_date": "2026-06-02T11:59:58+02:00",
+  "default_branch_head_at_discovery": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+  "expected_commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+  "license": {
+    "path": "external/benchmarks/agentdojo/LICENSE",
+    "sha256": "a090c871ff2aa6abb58a0eda1b6262dca39a7610de3df3411497fba7aa6fad09",
+    "status": "present"
+  },
+  "observed_commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/benchmarks/agentdojo",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/ethz-spylab/agentdojo.git"
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "m3-paper-v2-evidence-80-roadmap-2.0",
+  "created_at": "2026-07-27T09:53:09+08:00",
+  "status": "planning_frozen_pending_owner_confirmation",
+  "experiment_execution_authorized": false,
+  "network_calls_made_during_planning": 0,
+  "formal_results_created_during_planning": 0,
+  "baseline": {
+    "scorecard_path": "docs/research/paper_v2/manuscript/completion_scorecard_v1.json",
+    "scorecard_sha256": "9103bfc6f5d160585f3a6da77458baf323d2f265181f4793feee7d32c26f64f2",
+    "scientific_points": 730,
+    "scientific_points_maximum": 1200,
+    "scientific_percent_reported": 61
+  },
+  "target": {
+    "scientific_points": 960,
+    "scientific_points_maximum": 1200,
+    "scientific_percent": 80,
+    "required_increment_points": 230
+  },
+  "score_route": [
+    {
+      "workstream": "formal_public_benchmarks",
+      "current": 10,
+      "target": 100,
+      "increment": 90,
+      "admission_rule": "all_6873_terminal_itt_identity_safety_result_gate_and_analysis_rebuild"
+    },
+    {
+      "workstream": "adaptive_attack",
+      "current": 0,
+      "target": 100,
+      "increment": 100,
+      "admission_rule": "complete_primary_40_second_20_and_hardest_20_panel_with_independent_admission"
+    },
+    {
+      "workstream": "manuscript",
+      "current": 30,
+      "target": 70,
+      "increment": 40,
+      "admission_rule": "admitted_results_discussion_abstract_main_figures_and_integrity_review"
+    }
+  ],
+  "locked_inputs": {
+    "public_freeze": {
+      "path": "protocols/paper_upgrade_v2/public_benchmark_freeze_v1.json",
+      "sha256": "9c5437b750e96771fcd6db736996c2c1f56fb504a7c74664e64ef81a6c316020",
+      "expected_case_condition_records": 6873
+    },
+    "adaptive_freeze": {
+      "path": "protocols/paper_upgrade_v2/adaptive_attack_freeze_v1.json",
+      "sha256": "dda58e33aca9d596f23de661fc4fb601d9b4b7046922e177e7515b8010a5582c",
+      "maximum_query_budget": 75000
+    }
+  },
+  "model_roles": {
+    "primary": {
+      "provider": "deepseek",
+      "model_id": "deepseek-v4-pro",
+      "official_base_url": "https://api.deepseek.com"
+    },
+    "throughput_second_model": {
+      "provider": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "official_base_url": "https://api.deepseek.com",
+      "claim_boundary": "cross_model_not_cross_provider"
+    },
+    "optional_cross_provider": {
+      "provider": "gemini",
+      "model_id": "gemini-3.6-flash",
+      "required_for_80_percent": false,
+      "local_rpd_cap": 18,
+      "reserved_rpd": 2,
+      "minimum_provider_days_for_192_calls": 11
+    }
+  },
+  "public_stage": {
+    "primary_records": 5082,
+    "second_model_records": 1791,
+    "total_records": 6873,
+    "primary_canary_records": 24,
+    "second_model_canary_records": 12,
+    "estimated_provider_calls": 15828,
+    "center_cost_estimate_cny": 12.03,
+    "incremental_hard_fuse_cny": 25,
+    "automatic_retry": false,
+    "canary_concurrency": 1,
+    "maximum_full_concurrency_after_race_qualification": 4,
+    "score_before_independent_admission": 10,
+    "score_after_complete_admission": 100
+  },
+  "adaptive_stage": {
+    "primary_tasks": 40,
+    "primary_budgets": [
+      50,
+      200,
+      500
+    ],
+    "hardest_subset_tasks": 20,
+    "hardest_subset_budget": 2000,
+    "second_model_tasks": 20,
+    "second_model_budgets": [
+      50,
+      200
+    ],
+    "cost_canary": {
+      "tasks": 8,
+      "budget_per_task": 50,
+      "maximum_queries": 400,
+      "model_id": "deepseek-v4-pro",
+      "incremental_hard_fuse_cny": 5,
+      "outcome_blind_technical_review": true,
+      "queries_reused_as_formal_prefix_if_admitted": true
+    },
+    "formal_cost_checkpoint": {
+      "required_after_canary": true,
+      "pause_if_projected_cost_above_cny": 180,
+      "separate_owner_admission_required": true
+    },
+    "score_before_complete_admission": 0,
+    "score_after_complete_admission": 100
+  },
+  "hard_stops": [
+    "provider_http_429",
+    "provider_credit_or_quota_error",
+    "returned_model_identity_mismatch",
+    "request_or_response_chain_incomplete_for_deepseek",
+    "append_only_chain_failure",
+    "unknown_runner_failure",
+    "provider_tool_or_external_effect_attempt",
+    "cost_fuse_reached"
+  ],
+  "immutable_boundaries": [
+    "paper_v1",
+    "deepseek_medium_v1_through_v9",
+    "gemini_v1",
+    "gemini_v2",
+    "public_benchmark_freeze_v1",
+    "adaptive_attack_freeze_v1",
+    "historical_e0_through_e17"
+  ],
+  "claim_route": {
+    "mechanism_paper_candidate": false,
+    "empirical_fallback_active": true,
+    "first_only_sota_claims_allowed": false,
+    "independent_blind_required_for_80_percent": false,
+    "independent_blind_required_before_strong_external_validity_claim": true
+  },
+  "next_action_after_owner_confirmation": "implement_stage_a_offline_only",
+  "no_false_completion_rule": "No score changes until the named workstream has complete admitted results and an independent analysis rebuild."
+}

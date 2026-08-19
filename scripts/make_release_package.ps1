@@ -1,7 +1,6 @@
 $ErrorActionPreference = "Stop"
 
-# Release package configuration. The package excludes local models, secrets,
-# runtime mailboxes, previous release bundles, and day-by-day process notes.
+# 发布包配置。发布包排除本地模型、密钥、运行时邮箱、旧发布包和逐日过程记录。
 $ScriptDir = if ($PSScriptRoot) { $PSScriptRoot } elseif ($MyInvocation.MyCommand.Path) { Split-Path -Parent $MyInvocation.MyCommand.Path } else { "" }
 $RepoRoot = if ($ScriptDir) { (Resolve-Path (Join-Path $ScriptDir "..")).Path } else { (Get-Location).Path }
 $ReleaseDir = "release/Redteam_LLM_Security_v1.0"
@@ -92,13 +91,13 @@ $ReportDir = Join-Path $ResolvedRelease "docs/report"
 $PresentationDir = Join-Path $ResolvedRelease "docs/presentation"
 $HasFinalReport = (Test-Path $ReportDir) -and ((Get-ChildItem -LiteralPath $ReportDir -Filter "*.docx" -ErrorAction SilentlyContinue | Measure-Object).Count -ge 2)
 $HasPresentationPpt = (Test-Path $PresentationDir) -and ((Get-ChildItem -LiteralPath $PresentationDir -Filter "*.pptx" -ErrorAction SilentlyContinue | Measure-Object).Count -ge 1)
-$RunbookPath = Join-Path $ResolvedRelease "docs/RUNBOOK.md"
-$EvidencePath = Join-Path $ResolvedRelease "docs/SUBMISSION_EVIDENCE_INDEX.md"
-$ReleaseChecklistPath = Join-Path $ResolvedRelease "docs/RELEASE_CHECKLIST.md"
-$DatasetCardPath = Join-Path $ResolvedRelease "docs/DATASET_CARD.md"
-$ArchitecturePath = Join-Path $ResolvedRelease "docs/SYSTEM_ARCHITECTURE.md"
+$RunbookPath = Join-Path $ResolvedRelease "docs/运行手册.md"
+$EvidencePath = Join-Path $ResolvedRelease "docs/证据索引.md"
+$ReleaseChecklistPath = Join-Path $ResolvedRelease "docs/移交与论文检查清单.md"
+$DatasetCardPath = Join-Path $ResolvedRelease "docs/数据集说明.md"
+$ArchitecturePath = Join-Path $ResolvedRelease "docs/系统架构.md"
 $Checklist = @(
-  "# DAY6 Release Checklist",
+  "# DAY6 发布检查清单",
   "",
   "- release_dir: $ReleaseDir",
   "- generated_at: $(Get-Date -Format s)",

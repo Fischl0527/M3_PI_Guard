@@ -1,0 +1,130 @@
+{
+  "audit_version": "m3-paper-v1-progent-source-backed-import-preflight-1.0",
+  "benchmark_cases_executed": 0,
+  "boundary": "Import/build qualification only. It proves in a network-blocked fresh subprocess that the pinned official Progent policy source can be bound to the common current AgentDojo lifecycle. It does not generate a policy, probe Ollama, execute a benchmark case, or produce formal effect evidence.",
+  "checks": [
+    {
+      "detail": "completed_frozen_formal_protocol",
+      "name": "freeze_completed",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "README.md": "595863cfeea5eb20586ddf45919427403b93ad12955a35b4a34d57cc0b921323",
+        "agentdojo/README.md": "6d5e9163fb74ff848f3be19cde96db029e1396ae2bae5b5bf5b8d55e31c4af69",
+        "agentdojo/run.sh": "965749d132a64dea063348bfdf55ca413a170eefbcc8badd7a64b572d41e1a50",
+        "agentdojo/src/agentdojo/agent_pipeline/basic_elements.py": "e7d4d322d81327fe15b17041510593488f04a7206fb43c671f855b41e89b4ebf",
+        "agentdojo/src/agentdojo/agent_pipeline/tool_execution.py": "3e9cc4c48fd9e485580bf4857991fdc1929ec0f92a0f4fb467ad86283418ed40",
+        "agentdojo/src/agentdojo/default_suites/v1/banking/task_suite.py": "0e21bb4884909af7f6c74886a0c6034d1206b0959b840d307f9c5c7825550729",
+        "agentdojo/src/agentdojo/default_suites/v1/slack/task_suite.py": "5ff77bbbc7e6c5215c1ac92c8ad531f29dfb12524c0e75aebd350f33df873cdb",
+        "agentdojo/src/agentdojo/default_suites/v1/travel/task_suite.py": "71d7f6eedccd877827073b26ee5f267f04a5c0502ed3e32e9563c00f65bf3299",
+        "agentdojo/src/agentdojo/default_suites/v1/workspace/task_suite.py": "d425cfb8b6402af6ffe632d73b08377875035f78c7e870dfee827a0f37debc8d",
+        "secagent/__init__.py": "4ffaaabcf976262ef1010943db76ca645808e178674b335af30b5806ae8bdd14",
+        "secagent/policy_analysis.py": "24a70a519a7db2967f932b1dfa026656b24702e6050de718179f2e1dce074e2e",
+        "secagent/tool.py": "c0d4caf85dae95e4db309a3153aef1d3005080babcf7a1277e67b6481e63800e",
+        "secagent/utils.py": "37309da56bf25a097c379b706be2ee981091ac90eb679674e1a3638318a37125"
+      },
+      "name": "progent_source_hashes_match",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "src/agentdojo/agent_pipeline/agent_pipeline.py": "0de07a163216b996b42da3db2032236ba15065a5a781ff2cdde206fbf8306ad9",
+        "src/agentdojo/agent_pipeline/basic_elements.py": "4001b0ed7ba07d47723cacf2fa270178dd297aa792965b25693223e893424521",
+        "src/agentdojo/agent_pipeline/llms/openai_llm.py": "487493a70b4d1cb5f580c4b0fab5b8d47e43b514c1409e9151e6f5d6414285a1",
+        "src/agentdojo/agent_pipeline/tool_execution.py": "102f83e431f9757c2f16dfe934bd27412d504f15705bccb26507d154fd7fbffa",
+        "src/agentdojo/benchmark.py": "d238a9e8db56d1cfbf49b0b0b0f6c213a2dd456ada2631e7da22758b39826c63",
+        "src/agentdojo/task_suite/task_suite.py": "5a989815b0d66d87a0f1b802b1753c6a37d181d02b3dbc5933a330f2eb85fef1"
+      },
+      "name": "agentdojo_source_hashes_match",
+      "status": "pass"
+    },
+    {
+      "detail": "0a495b4841beb85f669fcc1dc2507b362ca58a85f5b5b147fc47c79c1856e1e9",
+      "name": "adapter_source_hash_matches",
+      "status": "pass"
+    },
+    {
+      "detail": "m3-paper-qwen3-8b-v1-latest-progent-source-backed",
+      "name": "adapter_builds_without_model_call",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "init_query": 1,
+        "tools_executor": 1
+      },
+      "name": "exact_pipeline_elements_replaced",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "secagent": "external/baselines/progent/secagent/__init__.py",
+        "tool": "external/baselines/progent/secagent/tool.py"
+      },
+      "name": "official_secagent_source_loaded",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "base_url": "http://127.0.0.1:11434/v1",
+        "binding": "official_secagent_api_request_to_frozen_openai_compatible_model",
+        "model_id": "m3-paper-qwen3-8b-v1:latest",
+        "policy_enforcement_changed": false,
+        "prompt_templates_changed": false,
+        "upstream_prompt_format_branch": "Qwen/"
+      },
+      "name": "transport_binding_does_not_change_prompts_or_enforcement",
+      "status": "pass"
+    },
+    {
+      "detail": true,
+      "name": "network_guard_active",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "analyzer": "fba32cf3d0fe6084687ff050193ef7dc0cc2c76377b1159021db58641262f828",
+        "protocol": "bd2dfff4bacd7e71ef5f7cbf2fb5c7161b8df48b64757e57297534a8d77232a2",
+        "runner": "78859efe7493bfc8fa0a0349d84ae97c0b8c139d696f501c0d7f12dc5384bb74",
+        "runtime": "0a495b4841beb85f669fcc1dc2507b362ca58a85f5b5b147fc47c79c1856e1e9",
+        "shared_identity": "a785085cbf0aa904ddbf7a924926dae1834e40795755c547640f0892abe48432"
+      },
+      "name": "local_adapter_hashes_match_freeze",
+      "status": "pass"
+    }
+  ],
+  "child_build": {
+    "binding": {
+      "base_url": "http://127.0.0.1:11434/v1",
+      "binding": "official_secagent_api_request_to_frozen_openai_compatible_model",
+      "model_id": "m3-paper-qwen3-8b-v1:latest",
+      "policy_enforcement_changed": false,
+      "prompt_templates_changed": false,
+      "upstream_prompt_format_branch": "Qwen/"
+    },
+    "local_adapter_hashes_valid": true,
+    "network_guard_active": true,
+    "pipeline_name": "m3-paper-qwen3-8b-v1-latest-progent-source-backed",
+    "replacements": {
+      "init_query": 1,
+      "tools_executor": 1
+    },
+    "secagent_path": "external/baselines/progent/secagent/__init__.py",
+    "secagent_tool_path": "external/baselines/progent/secagent/tool.py",
+    "trace_class": "ProgentRuntimeTrace"
+  },
+  "created_at": "2026-07-22T08:20:33.855836+00:00",
+  "failed_checks": [],
+  "freeze_path": "protocols/paper_upgrade_v1/progent_source_backed_formal_freeze_v1.json",
+  "freeze_sha256": "046bd926fe9a96b1eb89b45f7223381d1fa83b79fa6c431b7b174150cb26afa1",
+  "network_calls_performed": false,
+  "ollama_probe_performed": false,
+  "passed_checks": 10,
+  "pipeline_name": "m3-paper-qwen3-8b-v1-latest-progent-source-backed",
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-progent-source-backed-import-preflight-1.0",
+  "source_hashes_sha256": "1b21a74e60efbe772cf362f0d46e7d384bb9e4de2ca7b3f121daec12c246af28",
+  "status": "completed_import_preflight_only",
+  "total_checks": 10
+}

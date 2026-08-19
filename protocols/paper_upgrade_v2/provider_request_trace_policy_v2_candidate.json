@@ -1,0 +1,40 @@
+{
+  "activation_requires_explicit_user_confirmation": true,
+  "activation_requires_new_experiment_record_schema": true,
+  "automatic_retry": false,
+  "cross_provider_fallback": false,
+  "external_effects": false,
+  "formal_execution_authorized": false,
+  "official_sources": [
+    "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion/",
+    "https://ai.google.dev/gemini-api/docs/openai"
+  ],
+  "prompt_or_response_content_stored": false,
+  "provider_managed_tools": false,
+  "provider_request_header_id": "stored_when_available_not_required",
+  "provider_response_id": "required",
+  "purpose": "Prospective request trace for official APIs that return a provider response ID but no documented request-ID header.",
+  "required_bindings": [
+    "execution_identity",
+    "work_key",
+    "call_index",
+    "attempt_id",
+    "provider_id",
+    "model_id",
+    "payload_sha256",
+    "client_request_id",
+    "started_event_sha256",
+    "provider_response_id"
+  ],
+  "required_order": [
+    "build content-free payload commitment",
+    "append and fsync started event",
+    "perform exactly one official transport attempt",
+    "validate exact returned model and provider response ID",
+    "append and fsync terminal event"
+  ],
+  "schema_version": "m3-paper-v2-provider-trace-policy-2.0-candidate",
+  "status": "qualified_candidate_not_activated",
+  "v1_artifacts_retroactively_eligible": false,
+  "v1_contract_unchanged": true
+}

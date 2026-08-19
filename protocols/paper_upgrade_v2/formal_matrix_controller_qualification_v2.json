@@ -1,0 +1,17 @@
+{
+  "automatic_retries": 0,
+  "credentials_read": 0,
+  "cross_provider_fallback": false,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-24T16:34:00+08:00",
+  "network_calls_made": 0,
+  "nonthinking_payloads_observed": 2,
+  "operational_failure_delegate_calls": 0,
+  "operational_failure_retained_for_itt": true,
+  "provider_calls_completed": 2,
+  "result_admission_authorized": false,
+  "schema_version": "m3-paper-v2-formal-matrix-controller-qualification-2.0",
+  "status": "matrix_controller_v2_qualified_offline",
+  "v1_run_resumed": false,
+  "work_items_executed": 2
+}

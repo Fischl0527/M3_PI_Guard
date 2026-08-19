@@ -1,0 +1,36 @@
+{
+  "artifact_role": "remainder_shard_execution_authorization",
+  "authorization": {
+    "candidate_manifest_sha256": "7b006ab62f8f2c6f696373949a27c1db4b11dfae006456fadaef30a2d7a7c4b5",
+    "candidate_only": false,
+    "owner_approval": {
+      "approval_kind": "delegated_safe_api_iteration",
+      "approval_scope": "deepseek_v9_pending_only_remainder_shard",
+      "approved_at": "2026-07-26T17:15:00+08:00",
+      "approved_by_role": "project_owner",
+      "statement_sha256": "2194cd7fd6734d220f7b38cd64fd717df8717270f0034dcaebece42185269ef2"
+    },
+    "remainder_shard_execution_authorized": true,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "scientific_outcomes_reviewed": false,
+    "source_v8_mutated": false,
+    "terminal_source_item_retried": false
+  },
+  "generated_at": "2026-07-26T17:15:00+08:00",
+  "manifest_sha256": "2932c2d35903fd470a8a09156916e564f70cfbc24ff511abf87a4f6265aba2a3",
+  "next_gate": "Execute only never-started v8 work items. A diagnostic pauses the process; a manual pending-only segment may continue without retrying terminal items. Combined gate v6 remains separate.",
+  "schema_version": "m3-paper-v2-formal-matrix-remainder-admission-9.0",
+  "scope": {
+    "candidate_scope_sha256": "4e9ff0cb03cc3204c5fe5671cab8eaacb0d015a4b4f753836e9d63e27df5baab",
+    "pending_work_keys_sha256": "59643af2b546c6938e69104e2b50b09846e9751fda30ebb5e19fc406e92a99fb",
+    "run_id": "paper-v2-deepseek-medium-v9-remainder-20260726"
+  },
+  "scope_sha256": "0e6d005a5a4a357a73efa22c330c3dfbea59ddf5d4b6bb5caa25de01f5e9e76b",
+  "status": "activated_for_pending_only_remainder_shard"
+}

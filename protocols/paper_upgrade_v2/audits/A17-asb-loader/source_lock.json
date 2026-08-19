@@ -1,0 +1,19 @@
+{
+  "artifact": "Agent Security Bench",
+  "audit_id": "A17-asb-loader",
+  "commit_date": "2026-04-16T15:53:34-05:00",
+  "default_branch_head_at_discovery": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+  "expected_commit": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+  "license": {
+    "path": "external/paper_v2_audits/asb/LICENSE",
+    "sha256": "33115c3c142a0517f6dafa61438a3037480bfe9d3bdc967ebe3f1a98c72cedbc",
+    "status": "present"
+  },
+  "observed_commit": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/paper_v2_audits/asb",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/agiresearch/ASB.git"
+}

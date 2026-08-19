@@ -1,0 +1,19 @@
+{
+  "audit_id": "A11-struq-runtime",
+  "limitations": "This test validates the source-audited boundary projection. It is not a full upstream model/API execution.",
+  "offline_fields": [
+    "reference_output",
+    "evaluation_label",
+    "attack_success"
+  ],
+  "online_fields": [
+    "instruction",
+    "untrusted_input",
+    "prompt_format",
+    "defense_mode"
+  ],
+  "passed": true,
+  "schema_version": "m3-paper-v2-projection-test-result-1.0",
+  "scope": "declared_online_boundary_projection",
+  "sentinel_visible": false
+}

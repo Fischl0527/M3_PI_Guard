@@ -1,0 +1,17 @@
+{
+  "schema_version": "m3-paper-v2-superseded-result-gate-candidate-review-1.0",
+  "status": "superseded_before_scientific_outcome_access",
+  "superseded_candidate": {
+    "path": "protocols/paper_upgrade_v2/deepseek_medium_result_gate_candidate_v1.json",
+    "manifest_sha256": "135a5c1d4feb314b1cc7eba39abaef8f5eb1c3d27311ecb6435880c65fee98fd",
+    "locked_source_sha256": "e04c9b390cd713f586199ce71770fd466de6446c10e034c855d78296f1221e30"
+  },
+  "reason": "The prospective gate compared provider trace bundle_status to complete, while the frozen bundle schema and builder require completed.",
+  "discovery_method": "offline_schema_source_review",
+  "scientific_outcomes_reviewed": false,
+  "network_calls_made": 0,
+  "result_admission_authorized": false,
+  "analysis_authorized": false,
+  "execution_ledgers_mutated": false,
+  "remediation": "Correct the enum before use, rerun zero-network qualification and tests, and replace the never-activated candidate with a new hash."
+}

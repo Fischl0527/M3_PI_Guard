@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/gemini_fallback_admission_v1.schema.json",
+  "title": "Paper-v2 Gemini empirical fallback execution manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "status",
+    "artifact_role",
+    "scope",
+    "scope_sha256",
+    "authorization",
+    "evidence_boundary",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-gemini-fallback-admission-1.0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "candidate_frozen_non_executable",
+        "activated_for_three_condition_canary",
+        "activated_for_continuation"
+      ]
+    },
+    "artifact_role": {
+      "enum": [
+        "owner_review_candidate",
+        "three_condition_canary_authorization",
+        "continuation_execution_authorization"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "minProperties": 10
+    },
+    "scope_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_only",
+        "canary_execution_authorized",
+        "continuation_execution_authorized",
+        "result_admission_authorized",
+        "candidate_manifest_sha256",
+        "canary_review_sha256",
+        "owner_approval"
+      ],
+      "properties": {
+        "candidate_only": {"type": "boolean"},
+        "canary_execution_authorized": {"type": "boolean"},
+        "continuation_execution_authorized": {"type": "boolean"},
+        "result_admission_authorized": {"const": false},
+        "candidate_manifest_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "canary_review_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "owner_approval": {
+          "type": ["object", "null"]
+        }
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentials_read_while_building",
+        "network_calls_while_building",
+        "scientific_outcomes_read_while_building",
+        "formal_results_created"
+      ],
+      "properties": {
+        "credentials_read_while_building": {"const": false},
+        "network_calls_while_building": {"const": 0},
+        "scientific_outcomes_read_while_building": {"const": 0},
+        "formal_results_created": {"const": 0}
+      }
+    },
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

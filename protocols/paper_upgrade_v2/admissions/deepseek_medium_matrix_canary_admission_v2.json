@@ -1,0 +1,35 @@
+{
+  "artifact_role": "six_condition_canary_execution_authorization",
+  "authorization": {
+    "canary_execution_authorized": true,
+    "canary_review_sha256": null,
+    "candidate_manifest_sha256": "58112dabdd7615956126db5e5da13a360c9d873ca041ad60af81cbd57a060e5f",
+    "candidate_only": false,
+    "matrix_continuation_authorized": false,
+    "owner_approval": {
+      "approval_kind": "delegated_safe_api_iteration",
+      "approval_scope": "deepseek_v2_six_condition_canary",
+      "approved_at": "2026-07-24T16:40:00+08:00",
+      "approved_by_role": "project_owner",
+      "statement_sha256": "2194cd7fd6734d220f7b38cd64fd717df8717270f0034dcaebece42185269ef2"
+    },
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "v1_run_resumed": false
+  },
+  "generated_at": "2026-07-24T16:40:00+08:00",
+  "manifest_sha256": "16df897bb8def1b74d2df9b43f2e5fabfe9da78ef854df0b29e93217a720305e",
+  "next_gate": "Execute exactly the first six paired conditions once. Continuation remains unauthorized until a passing operational-only canary review is frozen and separately bound.",
+  "schema_version": "m3-paper-v2-formal-matrix-admission-2.0",
+  "scope": {
+    "candidate_scope_sha256": "ee92999af13bcbc07113f9168efe41ca366592faffa586aac5fdd38340bdc032",
+    "run_id": "paper-v2-deepseek-medium-v2-20260724"
+  },
+  "scope_sha256": "83d2e36ef597eefaa18588d674345b4db27892515e56e76522a8887ba084ada4",
+  "status": "activated_for_six_condition_canary"
+}

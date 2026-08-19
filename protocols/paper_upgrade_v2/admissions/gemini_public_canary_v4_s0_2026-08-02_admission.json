@@ -1,0 +1,28 @@
+{
+  "approved_at": "2026-08-03T11:59:02.7008631+08:00",
+  "artifact_role": "one_exact_gemini_quota_day_segment_authorization",
+  "authorization": {
+    "automatic_retries": 0,
+    "external_effects_enabled": false,
+    "paid_ceiling_usd": 0.0,
+    "provider_tools_enabled": false,
+    "result_admission_authorized": false,
+    "same_day_other_formal_gemini_work_authorized": false,
+    "segment_execution_authorized": true
+  },
+  "candidate_manifest_sha256": "c28603732cf87b2bbd4a4f19b8aa7bc97a1e44841a8edf588c48614893b104e6",
+  "declared_other_project_requests": 0,
+  "exact_command": "F:\\robot\\Anaconda3\\python.exe -m experiments.paper_v2.gemini_public_controller_v4 --execute-segment --segment-index 0 --quota-day 2026-08-02 --admission protocols\\paper_upgrade_v2\\admissions\\gemini_public_canary_v4_s0_2026-08-02_admission.json --config config\\project.local.env",
+  "exact_command_sha256": "b6b6e5196c8aa65421eacde04f153b3e6d821e39e62a01fdc875c9d771d41aa6",
+  "execution_identity": "ab5ec080f3b268d77f1dbe41db03601a49281cfc1bc602bcbce0395bdda530c5",
+  "manifest_sha256": "e32d51597982f85236cada16ea72e96f41a5d7902ab59bf8196333db9c422d58",
+  "maximum_provider_requests": 16,
+  "owner_statement_sha256": "21ac86c68556d3c034dad03f2e369fbd5e7027214f519ff8dda4429fdd47da7a",
+  "quota_day": "2026-08-02",
+  "quota_timezone": "America/Los_Angeles",
+  "run_id": "paper-v2-public-gemini-canary-v4-s0",
+  "schema_version": "m3-paper-v2-gemini-public-canary-segment-admission-4.0",
+  "segment_index": 0,
+  "status": "activated_for_one_exact_free_tier_quota_day",
+  "work_key_sequence_sha256": "cdf88bf7a790561fbfc3a9e13e773f81df2e36a91d5533400a3583c61139184b"
+}

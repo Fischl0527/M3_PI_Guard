@@ -1,0 +1,20 @@
+{
+  "audit_id": "A14-piarena-runtime",
+  "limitations": "This test validates the source-audited boundary projection. It is not a full upstream model/API execution.",
+  "offline_fields": [
+    "ground_truth",
+    "target_task_answer",
+    "injected_task_answer",
+    "success_label"
+  ],
+  "online_fields": [
+    "target_instruction",
+    "untrusted_context",
+    "system_prompt",
+    "defense_output"
+  ],
+  "passed": true,
+  "schema_version": "m3-paper-v2-projection-test-result-1.0",
+  "scope": "declared_online_boundary_projection",
+  "sentinel_visible": false
+}

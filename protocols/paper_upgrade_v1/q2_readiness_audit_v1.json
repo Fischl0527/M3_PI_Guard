@@ -1,0 +1,461 @@
+{
+  "audit_version": "m3-paper-v1-q2-readiness-audit-1.0",
+  "boundary": "Readiness audit only.  It is not a manuscript acceptance predictor and cannot turn partial, diagnostic, smoke, or running results into formal paper evidence.  Scores should move upward only when the underlying frozen artifacts and formal manifests are actually present.",
+  "capped_score": 60.0,
+  "caps": [
+    {
+      "cap": 75.0,
+      "gate_missing": true,
+      "name": "public_benchmark_gate",
+      "reason": "formal public-benchmark matrix is incomplete",
+      "score_limited": false
+    },
+    {
+      "cap": 70.0,
+      "gate_missing": true,
+      "name": "strong_baseline_gate",
+      "reason": "fewer than five strong baselines are formal-ready",
+      "score_limited": false
+    },
+    {
+      "cap": 65.0,
+      "gate_missing": true,
+      "name": "independent_blind_gate",
+      "reason": "new independent confirmatory blind evidence is missing",
+      "score_limited": true
+    },
+    {
+      "cap": 60.0,
+      "gate_missing": true,
+      "name": "frontier_api_model_gate",
+      "reason": "two frontier API vendor slots are missing",
+      "score_limited": true
+    },
+    {
+      "cap": 60.0,
+      "gate_missing": true,
+      "name": "adaptive_budget_gate",
+      "reason": "formal adaptive query-budget evidence is missing",
+      "score_limited": true
+    }
+  ],
+  "created_at": "2026-07-23T02:05:37.267024+00:00",
+  "criteria": [
+    {
+      "blockers": [],
+      "earned": 12.0,
+      "evidence": {
+        "charts_declared": true,
+        "e0_e17_registry_declared": true,
+        "final_manifest_completed": true,
+        "large_input_ledger_declared": true,
+        "portable_report_validated": true,
+        "statistical_validation_passed": true
+      },
+      "id": "historical_e0_e17_evidence",
+      "status": "complete",
+      "title": "Historical E0-E17 engineering evidence",
+      "weight": 12.0
+    },
+    {
+      "blockers": [],
+      "earned": 10.0,
+      "evidence": {
+        "formal_security_properties_present": true,
+        "no_leakage_test_file_present": true,
+        "required_files_present": 5,
+        "required_files_total": 5
+      },
+      "id": "mechanism_no_label_leakage",
+      "status": "complete",
+      "title": "Non-oracle runtime mechanism and formalization",
+      "weight": 10.0
+    },
+    {
+      "blockers": [
+        "new independent M3-v2 blind split is not admitted, frozen and run",
+        "independent blind admission audit has not admitted a candidate dataset",
+        "post-hoc/historical blind evidence cannot serve as confirmatory Q2 evidence",
+        "blind_manifest_reference_present",
+        "blind_manifest_resolved",
+        "blind_manifest_candidate_audit_admitted",
+        "blind_manifest_manifest_status_formal",
+        "blind_manifest_manifest_result_eligible",
+        "blind_manifest_manifest_case_count_600",
+        "blind_manifest_manifest_candidate_sha_matches_admission",
+        "blind_manifest_manifest_scope_independent_blind"
+      ],
+      "earned": 2.0,
+      "evidence": {
+        "historical_e17_policy": "two_human_stratified_sample_300_representative_plus_60_diagnostic_no_pooling",
+        "independent_blind_admission_status": "blocked_missing_candidate",
+        "independent_blind_candidate_admitted": false,
+        "independent_blind_candidate_path": "m3_attacks/cases/paper_v1/m3_v2_independent_blind_candidate.jsonl",
+        "independent_blind_manifest_gate": {
+          "accepted": false,
+          "blockers": [
+            "blind_manifest_reference_present",
+            "blind_manifest_resolved",
+            "candidate_audit_admitted",
+            "manifest_status_formal",
+            "manifest_result_eligible",
+            "manifest_case_count_600",
+            "manifest_candidate_sha_matches_admission",
+            "manifest_scope_independent_blind"
+          ],
+          "candidate_sha256": "",
+          "case_count": 0,
+          "checks": [
+            {
+              "detail": "missing",
+              "name": "blind_manifest_reference_present",
+              "status": "fail"
+            },
+            {
+              "detail": "",
+              "name": "blind_manifest_resolved",
+              "status": "fail"
+            },
+            {
+              "detail": "blocked_missing_candidate",
+              "name": "candidate_audit_admitted",
+              "status": "fail"
+            },
+            {
+              "detail": "",
+              "name": "manifest_status_formal",
+              "status": "fail"
+            },
+            {
+              "detail": false,
+              "name": "manifest_result_eligible",
+              "status": "fail"
+            },
+            {
+              "detail": 0,
+              "name": "manifest_case_count_600",
+              "status": "fail"
+            },
+            {
+              "detail": {
+                "expected": "",
+                "observed": ""
+              },
+              "name": "manifest_candidate_sha_matches_admission",
+              "status": "fail"
+            },
+            {
+              "detail": {
+                "evidence_level": "",
+                "evidence_status": "",
+                "split": ""
+              },
+              "name": "manifest_scope_independent_blind",
+              "status": "fail"
+            },
+            {
+              "detail": false,
+              "name": "manifest_not_posthoc",
+              "status": "pass"
+            }
+          ],
+          "evidence_level": "",
+          "evidence_status": "",
+          "exists": false,
+          "expected_candidate_sha256": "",
+          "path": "",
+          "reference_kind": "missing",
+          "sha256": "",
+          "split": "",
+          "status": ""
+        },
+        "new_blind_manifest_declared": false
+      },
+      "id": "confirmatory_new_blind",
+      "status": "blocked",
+      "title": "Independent confirmatory blind evidence",
+      "weight": 15.0
+    },
+    {
+      "blockers": [
+        "public benchmark formal matrix is not complete",
+        "AgentDojo official transformers_pi_detector full cell is not admitted"
+      ],
+      "earned": 3.0,
+      "evidence": {
+        "complete_case_runs": 0,
+        "expected_case_runs": 74760,
+        "freeze_status": "completed",
+        "matrix_fraction": 0.0,
+        "result_gate": "not_satisfied",
+        "tool_filter_formal_result_admitted_now": true,
+        "tool_filter_manifest_status": "completed_formal",
+        "tool_filter_monitor_completed": 726,
+        "tool_filter_monitor_failed": 0,
+        "tool_filter_monitor_health": "completed_formal_admitted",
+        "tool_filter_monitor_missing": 0,
+        "transformers_detector_manifest_status": "running",
+        "transformers_detector_monitor_completed": 75,
+        "transformers_detector_monitor_failed": 1,
+        "transformers_detector_monitor_health": "running_with_failures_requires_attention",
+        "transformers_detector_monitor_matches_selected_run": true,
+        "transformers_detector_monitor_missing": 650,
+        "transformers_detector_monitor_pid_alive": false,
+        "transformers_detector_scored_status": "not_admitted_or_not_progressing"
+      },
+      "id": "public_benchmark_formal_results",
+      "status": "blocked",
+      "title": "AgentDojo/InjecAgent public benchmark formal results",
+      "weight": 15.0
+    },
+    {
+      "blockers": [
+        "fewer than five source-backed strong baselines are formal-ready"
+      ],
+      "earned": 6.0,
+      "evidence": {
+        "formal_ready": [
+          "agentdojo_tool_filter",
+          "promptguard"
+        ],
+        "formal_ready_count": 2,
+        "minimum": 5,
+        "pending": [
+          "agentdojo_transformers_pi_detector",
+          "camel_or_fides",
+          "ipiguard",
+          "progent",
+          "task_shield"
+        ],
+        "registry_audit_status": "completed"
+      },
+      "id": "source_backed_strong_baselines",
+      "status": "blocked",
+      "title": "Source-backed strong baselines",
+      "weight": 15.0
+    },
+    {
+      "blockers": [
+        "two frontier API vendor model slots are still missing",
+        "frontier API local configuration is not ready for explicit network smoke"
+      ],
+      "earned": 6.0,
+      "evidence": {
+        "frontier_api_admission_status": "blocked_missing_or_unsafe_local_config",
+        "frontier_api_configured_vendor_count": 0,
+        "frontier_api_explicit_network_smoke_consent": false,
+        "frontier_api_model_registry_selection": {
+          "base_model_registry_path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+          "registry_admission_path": "protocols/paper_upgrade_v1/frontier_api_model_slot_registry_admission_v1.json",
+          "registry_admission_sha256": "a57bd34f8c7cf086b143187eea6c421303ae29d877fbafcae426097609aac307",
+          "registry_admission_status": "blocked_smoke_not_qualified",
+          "selected_model_registry_path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+          "selection_reason": "base_registry_no_admitted_frontier_candidate"
+        },
+        "frontier_api_network_calls_performed": false,
+        "frontier_api_registered_vendor_count": 0,
+        "frontier_api_selected_model_registry_path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+        "frontier_api_vendor_slots": 0,
+        "local_model_slots": 7,
+        "modern_open_7b_14b_slots": 2,
+        "q2_model_gate": ""
+      },
+      "id": "model_coverage",
+      "status": "partial",
+      "title": "Model coverage",
+      "weight": 10.0
+    },
+    {
+      "blockers": [
+        "80-task adaptive query-budget attack is not complete",
+        "MCTS/black-box budget curves are still missing as formal evidence"
+      ],
+      "earned": 4.0,
+      "evidence": {
+        "historical_e16_present": true,
+        "query_budget_freeze_case_count": 80,
+        "query_budget_freeze_manifest": "protocols/paper_upgrade_v1/adaptive_mcts_budget_freeze_v1.json",
+        "query_budget_freeze_status": "completed_frozen_protocol",
+        "query_budget_manifest": "outputs/paper_upgrade_v1/adaptive_mcts_budget_v1/manifest.json",
+        "query_budget_status": "",
+        "runner_preflight_analysis_manifest": "outputs/paper_upgrade_v1/adaptive_mcts_budget_runner_stub_preflight_v1/analysis/analysis_manifest.json",
+        "runner_preflight_analysis_status": "completed_diagnostic_analysis",
+        "runner_preflight_formal_result_eligible": false,
+        "runner_preflight_manifest": "outputs/paper_upgrade_v1/adaptive_mcts_budget_runner_stub_preflight_v1/manifest.json",
+        "runner_preflight_status": "completed_qualification_only"
+      },
+      "id": "adaptive_query_budget_attacks",
+      "status": "blocked",
+      "title": "Adaptive query-budget attacks",
+      "weight": 10.0
+    },
+    {
+      "blockers": [],
+      "earned": 8.0,
+      "evidence": {
+        "chart_count_at_least_ten": true,
+        "human_review_policy_declared": true,
+        "portable_report_validation_passed": true,
+        "statistical_validation_passed": true
+      },
+      "id": "statistics_review_and_figures",
+      "status": "complete",
+      "title": "Statistics, human review, and figures",
+      "weight": 8.0
+    },
+    {
+      "blockers": [],
+      "earned": 8.0,
+      "evidence": {
+        "baseline_registry_audit_completed": true,
+        "confirmatory_preregistration_frozen": true,
+        "public_freeze_completed": true,
+        "strong_baseline_audit_completed": true,
+        "tool_filter_freeze_completed": true
+      },
+      "id": "reproducibility_and_freezes",
+      "status": "complete",
+      "title": "Reproducibility, freezes, and exclusion gates",
+      "weight": 8.0
+    },
+    {
+      "blockers": [],
+      "earned": 7.0,
+      "evidence": {
+        "final_analysis_png_count": 13,
+        "implementation_status_present": true,
+        "paper_storyline_present": true
+      },
+      "id": "manuscript_package",
+      "status": "complete",
+      "title": "Manuscript package and paper narrative",
+      "weight": 7.0
+    }
+  ],
+  "criteria_sha256": "de4a402e5806e76c36c23ad43fcce436263f63246a4d174222d7624acaef7007",
+  "goal_80_met": false,
+  "goal_90_met": false,
+  "raw_score": 66.0,
+  "readiness_band": "paper_upgrade_in_progress",
+  "schema_version": "paper-q2-readiness-audit-1.0",
+  "sources": {
+    "baseline_registry_audit": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/baseline_registry_audit_v1.json",
+      "sha256": "ff20a2b3b3a2fcb392029c9c0f150999f3bb9551f71dfacfb1649450cffeb222"
+    },
+    "confirmatory_preregistration": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/paper_v1_confirmatory_preregistration_freeze_v1.json",
+      "sha256": "421361728dff56e7f9fa1a0e414d14704d616f7d0d7dbbef223d51c5e9b936d6"
+    },
+    "final_manifest": {
+      "exists": true,
+      "path": "outputs/experiments/final_analysis/manifest.json",
+      "sha256": "2e79f7592e67afda201b5d905be11cf52633f37a7680fdc17947c3c57f93270e"
+    },
+    "formal_run_monitor": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/monitors/transformers_pi_detector_formal_v2/agentdojo_official_formal_run_monitor_v1.json",
+      "sha256": "edf4e7bc33c821eabccaf4809dd24bbd6ebb73a1102e8b245fa8ce0ddb96ae28"
+    },
+    "formal_run_monitor_generic": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/agentdojo_official_formal_run_monitor_v1.json",
+      "sha256": "f1af64ff2282ecf69242c3b6b1ff602a94a698c02ea12473e9b10400ebd0db79"
+    },
+    "formal_run_monitor_selected": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/monitors/transformers_pi_detector_formal_v2/agentdojo_official_formal_run_monitor_v1.json",
+      "sha256": "edf4e7bc33c821eabccaf4809dd24bbd6ebb73a1102e8b245fa8ce0ddb96ae28"
+    },
+    "frontier_api_audit": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/frontier_api_model_slot_admission_audit_v1.json",
+      "sha256": "ee264d83ad5ccb7f462488ae456f37bac61930dcac8fef0b8a4f147cc7ed9e7d"
+    },
+    "independent_blind_audit": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/m3_v2_independent_blind_admission_audit_v2.json",
+      "sha256": "f890b23042f9b83b9aa704ea21fbfe2047dd5d4200d9e4321183ca24bcfd1e34"
+    },
+    "model_registry": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/model_registry_v2.json",
+      "sha256": "e630ef170add91510d50a594dae7afb216988694fe3a1f685c96ce622cbf5bdd"
+    },
+    "paper_evidence_index": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/paper_v1_evidence_index_v1.json",
+      "sha256": "3fcb5fc006f1c51e1982c49b83ec7022d1ff634cbb2262308adb3e61f977d655"
+    },
+    "public_completeness": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/public_benchmark_result_completeness_audit_v2.json",
+      "sha256": "260c4165e5392efbc2bb1451326665884a59e1ecdc813b511f22562b8d1ed577"
+    },
+    "public_freeze": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/public_benchmark_formal_freeze_v2.json",
+      "sha256": "383ef61c697b2a3978cd21d3f46bb5728189fe4f00f2dda4850f0d52be4d2749"
+    },
+    "report_verification": {
+      "exists": true,
+      "path": "outputs/experiments/final_analysis/report/verification.json",
+      "sha256": "c903e3f2333b6328d16f993614f205f280487eb58888966f09d38301d0271d8f"
+    },
+    "stat_validation": {
+      "exists": true,
+      "path": "outputs/experiments/final_analysis/statistical_validation.json",
+      "sha256": "21521a5b5e32dfc9c2da984c872d1eba28bce255fd2a63dbbbbe2802ec6ab282"
+    },
+    "strong_baseline_audit": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/strong_baseline_formal_readiness_audit_v1.json",
+      "sha256": "5e4fe72e2ae6eca308acc5a8d144e1f568fa1124044bc17362b7af949622e263"
+    },
+    "tool_filter_freeze": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/agentdojo_tool_filter_formal_freeze_v1.json",
+      "sha256": "801f9a690aedd67ad93442a4f46f2d217f409f2a4d050005a8f1a67ee9473f1f"
+    },
+    "tool_filter_run_monitor": {
+      "exists": true,
+      "path": "protocols/paper_upgrade_v1/monitors/tool_filter_formal_v1/agentdojo_official_formal_run_monitor_v1.json",
+      "sha256": "b86d57f83d556c20729d5ee094ea032a2b6e243bbebd67d261dc6fb4294572b0"
+    },
+    "transformers_run": {
+      "exists": true,
+      "path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector/run_manifest.json",
+      "sha256": "61edceb6a7c82120fc0e3790e2cce672714f9ee28f2d11f0d84433c9f54dd087"
+    },
+    "transformers_run_primary": {
+      "exists": true,
+      "path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector/run_manifest.json",
+      "sha256": "61edceb6a7c82120fc0e3790e2cce672714f9ee28f2d11f0d84433c9f54dd087"
+    },
+    "transformers_run_recovery": {
+      "exists": false,
+      "path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_resource_isolated_formal_v1/run_manifest.json",
+      "sha256": ""
+    }
+  },
+  "sources_sha256": "09ccbf8da877458108bb16e853f64ead4d8b5a809b211df6127c165d861d15ef",
+  "status": "completed",
+  "transformers_monitor_selection": {
+    "generic_monitor_matches_selected_run": false,
+    "generic_monitor_path": "protocols/paper_upgrade_v1/agentdojo_official_formal_run_monitor_v1.json",
+    "selected_monitor_path": "protocols/paper_upgrade_v1/monitors/transformers_pi_detector_formal_v2/agentdojo_official_formal_run_monitor_v1.json",
+    "selected_run_monitor_matches_selected_run": true,
+    "selected_run_monitor_path": "protocols/paper_upgrade_v1/monitors/transformers_pi_detector_formal_v2/agentdojo_official_formal_run_monitor_v1.json",
+    "selection_reason": "selected_run_monitor_matches_selected_run"
+  },
+  "transformers_run_selection": {
+    "primary_path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector/run_manifest.json",
+    "primary_status": "running",
+    "recovery_path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_resource_isolated_formal_v1/run_manifest.json",
+    "recovery_status": "",
+    "selected_path": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector/run_manifest.json",
+    "selection_reason": "recovery_manifest_missing_use_primary"
+  }
+}

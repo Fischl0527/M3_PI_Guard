@@ -1,59 +1,101 @@
-# M3-PI Guard Experiment Harness Architecture
+# M3-PI Guard 实验 Harness 架构
 
-## Purpose
+## 目的
 
-本仓库在同一版本库内维护两个边界清楚的区域：根目录的 M3 PI Guard 本地安全靶场/实验源码，以及 `harness/` 下的 AI Agent Harness 工程。Harness 记录需求、状态、决策、失败和验收；项目运行代码产生带 manifest 的实验证据，两者通过固定接口协作但不混放源码。
+本仓库在同一版本库内维护两个边界清楚的区域：根目录的 M3-PI Guard 本地安全靶场/实验源码，以及 `harness/` 下的 AI 智能体 Harness 工程。Harness 记录需求、状态、决策、失败和验收；项目运行代码产生带 manifest 的实验证据，两者通过固定接口协作但不混放源码。
 
-## Runtime Flow
+## 运行流程
 
 ```text
-AttackCase JSONL
+攻击样本 AttackCase JSONL
       |
       v
-Experiment Suite / Matrix Runner
+实验套件 / 矩阵运行器
       |
       +--> prompt_profile: standard | hardened
       +--> backend: stub | local Ollama
       +--> guard_mode/module ablation
       v
-Agent Runner --> Guard --> local mock tools
+智能体运行器 --> Guard --> 本地模拟工具
       |
       v
-RunLog + Manifest + Failure Record
+RunLog + Manifest + 失败记录
       |
       v
-Metrics / Statistics / Figures / Dashboard
+指标 / 统计 / 图表 / 仪表盘
 ```
 
-## Module Boundaries
+## 模块边界
 
-- `m3_attacks` owns source cases, expansion, split metadata and dataset integrity.
-- `m3_core` owns model interaction, prompt construction, tool-call parsing and run metadata.
-- `m3_guard` owns behavior decisions and module-level ablation; it does not know test answers.
-- `m3_eval` owns metric definitions and statistical summaries; it never mutates raw logs.
-- `experiments` owns E0-E17 registry, suites, resume rules and completion validation.
-- `outputs/experiments` is generated evidence and must remain traceable to source/config hashes.
+- `m3_attacks` 负责源案例、扩展、切分元数据和数据集完整性。
+- `m3_core` 负责模型交互、提示构造、工具调用解析和运行元数据。
+- `m3_guard` 负责行为决策和模块级消融；它不知道测试答案。
+- `m3_eval` 负责指标定义和统计汇总；它绝不修改原始日志。
+- `experiments` 负责 E0–E17 注册表、实验套件、恢复规则和完成验证。
+- `outputs/experiments` 是生成证据，必须可追溯到源码和配置哈希。
 - `harness/state`, `harness/features`, `harness/specs` and
-  `harness/workspaces/runpro` are the durable project control plane.
+  `harness/workspaces/runpro` 构成持久化项目控制平面。
 
-## State And Recovery
+## Paper-v2 正式证据路径
 
-- `experiments/registry.json` is the machine-readable experiment state.
-- Each suite writes an immutable configuration snapshot and a resumable manifest.
-- A suite is complete only when expected run count equals validated artifacts and statistics.
-- Harness state records progress and failures so another session can resume without chat history.
+```text
+冻结 work item + condition-specific online state
+      |
+      v
+六条件 OnlineExecutorContext（无 evaluator 字段）
+      |
+      v
+untrusted proposal -> Guard -> 隔离 effect backend
+      |
+      v
+sanitized runtime events + offline outcome
+      |
+      v
+experiment-record schema validation
+      |
+      v
+append-only JSONL record store（全链复验 + fsync）
+```
 
-## Safety Boundary
+- `official_provider_executor.py` 负责单次官方推理、模型/ID/usage 收据和调用账本，
+  不执行 provider tools 或外部副作用。
+- `formal_condition_executors.py` 只向在线 runtime 暴露冻结 online state 与最小
+  调度身份；evaluator 标签和结果字段留在离线边界。
+- `formal_record_store.py` 同时保存严格 experiment record 与已脱敏的逐步事件；
+  prompt/response/observation 正文只可形成摘要，重复终态、身份漂移、截断或哈希
+  漂移均拒绝。
+- prospective experiment-record 2.2 还必须持久化 credential-free provider
+  safety receipt；它把官方推理端点、隔离 effect backend、动作参数摘要、禁用
+  external connector/provider tool 的状态绑定到 record hash chain。
+- `post_pilot_evidence_review.py` 在不读取凭据的情况下交叉复验 active admission、
+  独立 trace 文件、record bundle、cache/cost、safety receipt 和 ledger tail。
+  它只能把真实 pilot 送到单独的 owner matrix review，不能自行授权矩阵或准入
+  论文结果。
+- completed/refusal 的 live 记录必须是 `formal_candidate`；无完整响应身份的
+  operational failure 可保留为 `diagnostic`，但必须进入 ITT，不能静默丢弃。
+- 当前三个模块仅完成离线工程资格；v3 preflight 仍关闭，不能据此声称模型效果。
 
-- Model inference is local through loopback Ollama.
-- Tools are mock/local only.
-- Real secrets, accounts, public endpoints and generated code execution remain out of scope.
+## 状态与恢复
 
-## Verification Layers
+- `experiments/registry.json` 是机器可读的实验状态。
+- 每个套件写入不可变配置快照和可恢复 manifest。
+- 只有预期运行数与已验证产物和统计一致时，套件才算完成。
+- Harness 状态记录进度和失败，使后续会话无需依赖聊天记录即可恢复。
 
-1. Contract/unit tests.
-2. Dataset and label audits.
-3. Stub deterministic matrix.
-4. Local-model smoke tests.
-5. Full experiment registry validation.
-6. Requirement-ledger and final-audit validation.
+## 安全边界
+
+- 模型仅通过回环地址上的 Ollama 在本地推理。
+- 工具仅为本地模拟工具。
+- 真实密钥、账号、公共端点和生成代码执行均不在范围内。
+- paper-v2 允许经用户批准的 DeepSeek/Gemini 官方推理端点，但凭据仅存在于被
+  Git 忽略的本地配置，输出只是不可信 proposal；工具副作用仍限合成 sandbox 或
+  AgentDojo 内存副本。
+
+## 验证层级
+
+1. 契约与单元测试。
+2. 数据集和标签审计。
+3. 桩后端确定性矩阵。
+4. 本地模型冒烟测试。
+5. 完整实验注册表验证。
+6. 需求台账和最终审计验证。

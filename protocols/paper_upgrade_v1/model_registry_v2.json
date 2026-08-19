@@ -1,0 +1,82 @@
+{
+  "schema_version": "paper-model-registry-2.0",
+  "registry_version": "m3-paper-v1-model-registry-2.0",
+  "created_at": "2026-07-18T14:58:00+00:00",
+  "status": "completed_local_slots_only",
+  "models": [
+    {
+      "id": "qwen3:4b-instruct",
+      "family": "local_small_open",
+      "role": "core_local_small",
+      "formal_slot_status": "declared_local"
+    },
+    {
+      "id": "phi4-mini:3.8b",
+      "family": "local_small_open",
+      "role": "core_local_small",
+      "formal_slot_status": "declared_local"
+    },
+    {
+      "id": "llama3.2:3b",
+      "family": "local_small_open",
+      "role": "core_local_small",
+      "formal_slot_status": "declared_local"
+    },
+    {
+      "id": "gemma3:4b",
+      "family": "local_small_open",
+      "role": "core_local_small",
+      "formal_slot_status": "declared_local"
+    },
+    {
+      "id": "vicuna:7b",
+      "family": "local_legacy_weak",
+      "role": "legacy_weak_baseline",
+      "formal_slot_status": "declared_local_legacy"
+    },
+    {
+      "id": "m3-paper-qwen3-8b-v1:latest",
+      "source_tag": "qwen3:8b",
+      "family": "qwen3",
+      "role": "modern_open_7b_14b",
+      "formal_slot_status": "local_smoke_qualified_pending_formal_matrix",
+      "parameter_size": "8.2B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 40960,
+      "ollama_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "manifest_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "model_blob_sha256": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+      "snapshot_evidence": "E:/Ollama/migration_evidence/qwen3_8b_paper_alias_snapshot.json",
+      "smoke_evidence": "outputs/paper_upgrade_v1/smoke_modern_open_2models_v3_isolated_paper_runtime/manifest.json",
+      "smoke_case_runs": 12,
+      "smoke_failed_case_runs": 0,
+      "result_eligible_for_formal_tables": false
+    },
+    {
+      "id": "m3-paper-llama31-8b-v1:latest",
+      "source_tag": "llama3.1:8b",
+      "family": "llama",
+      "role": "modern_open_7b_14b",
+      "formal_slot_status": "local_smoke_qualified_pending_formal_matrix",
+      "parameter_size": "8.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "ollama_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "manifest_sha256": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "model_blob_sha256": "667b0c1932bc6ffc593ed1d03f895bf2dc8dc6df21db3042284a6f4416b06a29",
+      "snapshot_evidence": "E:/Ollama/migration_evidence/llama31_8b_paper_alias_snapshot.json",
+      "smoke_evidence": "outputs/paper_upgrade_v1/smoke_modern_open_2models_v3_isolated_paper_runtime/manifest.json",
+      "smoke_case_runs": 12,
+      "smoke_failed_case_runs": 0,
+      "result_eligible_for_formal_tables": false
+    }
+  ],
+  "summary": {
+    "local_model_slots": 7,
+    "modern_open_7b_14b_slots": 2,
+    "frontier_api_vendor_slots": 0,
+    "modern_open_smoke_case_runs": 24,
+    "modern_open_smoke_failed_case_runs": 0
+  },
+  "boundary": "The two 8B aliases passed a six-case-per-model runtime qualification smoke. Smoke outputs are diagnostic qualification evidence only and are not formal paper-effect results. Frontier API slots and all formal public-benchmark cells remain pending."
+}

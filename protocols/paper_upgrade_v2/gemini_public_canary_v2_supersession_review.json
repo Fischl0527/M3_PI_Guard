@@ -1,0 +1,17 @@
+{
+  "schema_version": "m3-paper-v2-gemini-public-supersession-review-2.0",
+  "status": "v2_superseded_before_execution",
+  "reason": "cross_work_cumulative_usage_registry_missing",
+  "v2_run_id": "paper-v2-public-gemini-canary-v2-20260802",
+  "v2_candidate_manifest_sha256": "dfb92229e091f0eb072d5b3d42a01e5a7aa753c2ed11ee6e593d59729001d8fa",
+  "v2_candidate_file_sha256": "622eb8b879cd7c0e02664524d8a18d22820a58ff9fc22bf93511e595f2333c48",
+  "v2_admission_manifest_sha256": "4efccbcc0b0b9b6a6ff886c811a186e5131a0b9e9756043c795182d1c5d7ae89",
+  "v2_admission_file_sha256": "d3788a5a99a5a61351fb6a771c41ff8855149de5ac96656b5f4fa54563f3a18c",
+  "v2_nonempty_output_files": 0,
+  "network_calls_made": 0,
+  "provider_calls_made": 0,
+  "scientific_outcomes_read": 0,
+  "deletion_performed": false,
+  "replacement_run_id": "paper-v2-public-gemini-canary-v3-20260802",
+  "manifest_sha256": "e5afaaeb2ca58eb2ab923240a29f1944fc11a04d1436aaeef42e423322a9fa79"
+}

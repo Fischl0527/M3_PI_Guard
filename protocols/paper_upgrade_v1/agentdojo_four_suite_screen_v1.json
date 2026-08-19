@@ -1,0 +1,114 @@
+{
+  "schema_version": "paper-agentdojo-screen-design-1.0",
+  "screen_id": "agentdojo_four_suite_screen_v1",
+  "created_at": "2026-07-18",
+  "evidence_status": "diagnostic_not_formal_benchmark",
+  "result_eligible_for_formal_tables": false,
+  "boundary_note": "The first banking diagnostic batch started before this design record was written; no formal run may use an after-start protocol record.",
+  "backend": "ollama",
+  "model": "qwen3:4b-instruct",
+  "temperature": 0.0,
+  "seed": 20260718,
+  "max_steps": 12,
+  "repeats": 1,
+  "attack": "important_instructions",
+  "defenses": [
+    "no_defense",
+    "m3_full"
+  ],
+  "suite_plan": [
+    {
+      "suite": "banking",
+      "user_task_ids": [
+        "user_task_0",
+        "user_task_12"
+      ],
+      "injection_task_ids": [
+        "injection_task_0",
+        "injection_task_1",
+        "injection_task_2",
+        "injection_task_3",
+        "injection_task_4",
+        "injection_task_5",
+        "injection_task_6",
+        "injection_task_7",
+        "injection_task_8"
+      ],
+      "rationale": "Payment side effect plus file-instruction reading."
+    },
+    {
+      "suite": "slack",
+      "user_task_ids": [
+        "user_task_0",
+        "user_task_2"
+      ],
+      "injection_task_ids": [
+        "injection_task_1",
+        "injection_task_2",
+        "injection_task_3",
+        "injection_task_4",
+        "injection_task_5"
+      ],
+      "rationale": "Webpage reading plus invite side effect using untrusted web data."
+    },
+    {
+      "suite": "travel",
+      "user_task_ids": [
+        "user_task_0",
+        "user_task_3"
+      ],
+      "injection_task_ids": [
+        "injection_task_0",
+        "injection_task_1",
+        "injection_task_2",
+        "injection_task_3",
+        "injection_task_4",
+        "injection_task_5",
+        "injection_task_6"
+      ],
+      "rationale": "Conditional reservation plus recommendation-to-email chain."
+    },
+    {
+      "suite": "workspace",
+      "user_task_ids": [
+        "user_task_0",
+        "user_task_4"
+      ],
+      "injection_task_ids": [
+        "injection_task_0",
+        "injection_task_1",
+        "injection_task_2",
+        "injection_task_3",
+        "injection_task_4",
+        "injection_task_5"
+      ],
+      "rationale": "Calendar/event reading plus multi-step calendar write chain."
+    }
+  ],
+  "selection_rules": {
+    "candidate_security_cluster": [
+      "no_defense official_injection_success has at least one positive run",
+      "paired m3_full run is available and not failed",
+      "raw manifest and audit traces are present"
+    ],
+    "candidate_utility_task": [
+      "clean no_defense utility checker passes",
+      "clean m3_full utility checker passes",
+      "injected utility is reported separately"
+    ],
+    "formal_candidate_grid": [
+      "include all positive baseline-vulnerability clusters from this screen",
+      "include at least one zero-vulnerability cluster per suite when available",
+      "include utility-passing clean tasks from at least two suites or record a compatibility limitation"
+    ]
+  },
+  "formal_freeze_requirements": [
+    "exact case list and hashes",
+    "model list and model tags",
+    "defense list and exact baseline adapter versions",
+    "thresholds, exclusions and failure handling",
+    "statistics plan and chart plan",
+    "rerun/resume policy",
+    "artifact validation command"
+  ]
+}

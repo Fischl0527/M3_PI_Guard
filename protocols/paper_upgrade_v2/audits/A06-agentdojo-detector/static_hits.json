@@ -1,0 +1,53 @@
+{
+  "audit_id": "A06-agentdojo-detector",
+  "hits": [
+    {
+      "line": 44,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/pi_detector.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "the confidence score. If the detector is not probabilistic, it should return a boolean.",
+      "text_sha256": "73f2a06e0001edf6e418fb706f6d0f054136c357810d2bc4558cc1a4b50c486b"
+    },
+    {
+      "line": 99,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/pi_detector.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "score = (",
+      "text_sha256": "3e8ac7dff37b44eaa6d0cdd39705c27ccde8083d3bc1db414fa8e611a51212bc"
+    },
+    {
+      "line": 106,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/pi_detector.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "f\"aborting execution because a prompt injection was detected (score: {score}) in message: {text}\",",
+      "text_sha256": "2bc98d07f7ed0cf649b73fe756d5f356be9fbb5ff7b64297cf595fbe1fe3f154"
+    },
+    {
+      "line": 124,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/pi_detector.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "safe_label: The label that indicates a safe prompt.",
+      "text_sha256": "974f83053c65cd908bcca49843ac56ed8b372d6d4d2ed0955ccc088fffc5ec3e"
+    },
+    {
+      "line": 158,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/pi_detector.py",
+      "patterns": [
+        "\\blabels?\\b",
+        "\\bscore\\b"
+      ],
+      "preview": "safety_score: float = result[\"score\"] if result[\"label\"] == self.safe_label else 1 - result[\"score\"]",
+      "text_sha256": "8e980475b15789847985a7890be44b266e7cbf64e47ffc23c2642b23e62322d4"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

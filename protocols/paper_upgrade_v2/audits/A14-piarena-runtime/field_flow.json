@@ -1,0 +1,106 @@
+{
+  "audit_id": "A14-piarena-runtime",
+  "authorization_source": "mixed_or_unclear",
+  "missing_component": null,
+  "offline_boundaries": [
+    {
+      "end_line": 25,
+      "forbidden_identifier_hits": [
+        "ground_truth"
+      ],
+      "parameters": [
+        "response",
+        "ground_truth",
+        "task_prompt",
+        "kwargs"
+      ],
+      "path": "external/paper_v2_audits/piarena/piarena/evaluations/__init__.py",
+      "phase": "posthoc_answer_evaluation",
+      "referenced_identifiers": [
+        "ground_truth",
+        "lower",
+        "response"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "ground_truth": true,
+        "response": true
+      },
+      "sha256": "b9af8c3fb08832cc5f9d87814160786333fc5fd2ae29042110fef9ef7a04a92e",
+      "start_line": 24,
+      "symbol": "substring_match"
+    }
+  ],
+  "online_boundaries": [
+    {
+      "end_line": 51,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "target_inst",
+        "context",
+        "llm",
+        "system_prompt"
+      ],
+      "path": "external/paper_v2_audits/piarena/piarena/defenses/base.py",
+      "phase": "online_prompt_defense_and_target_query",
+      "referenced_identifiers": [
+        "_build_messages",
+        "context",
+        "dict",
+        "effective_context",
+        "execute",
+        "get",
+        "llm",
+        "messages",
+        "query",
+        "response",
+        "result",
+        "self",
+        "str",
+        "system_prompt",
+        "target_inst"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "context": true,
+        "llm.query": true,
+        "target_inst": true
+      },
+      "sha256": "cd651c3c7156ec26ba85c84988cc5a9dbacd541774f729bd040fcb3726eaad02",
+      "start_line": 41,
+      "symbol": "BaseDefense.get_response"
+    },
+    {
+      "end_line": 39,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "target_inst",
+        "context",
+        "system_prompt"
+      ],
+      "path": "external/paper_v2_audits/piarena/piarena/defenses/base.py",
+      "phase": "online_prompt_projection",
+      "referenced_identifiers": [
+        "context",
+        "dict",
+        "list",
+        "str",
+        "system_prompt",
+        "target_inst"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "context": true,
+        "system_prompt": true,
+        "target_inst": true
+      },
+      "sha256": "cd651c3c7156ec26ba85c84988cc5a9dbacd541774f729bd040fcb3726eaad02",
+      "start_line": 35,
+      "symbol": "BaseDefense._build_messages"
+    }
+  ],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

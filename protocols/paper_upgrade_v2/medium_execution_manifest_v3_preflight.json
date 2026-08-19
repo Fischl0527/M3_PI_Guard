@@ -1,0 +1,495 @@
+{
+  "agentdojo_environment_and_evaluator_qualified": true,
+  "agentdojo_qualification": {
+    "attack_name": "direct",
+    "commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+    "network_calls_made": 0,
+    "official_security_checker": true,
+    "official_utility_checker": true,
+    "path": "protocols/paper_upgrade_v2/agentdojo_live_dependency_qualification_v1.json",
+    "qualification_probes": 2,
+    "sha256": "88efabd2f00a41a797b8ef2e6c1af28785af132d2f0139247bc595056630920d",
+    "status": "official_environment_and_offline_evaluator_qualified",
+    "worktree_clean": true
+  },
+  "automatic_retries": 0,
+  "blockers": [
+    "Per-call DeepSeek v2 tracing and ITT persistence are qualified offline, but a run-specific admission manifest and pilot acceptance decision have not been frozen. Formal matrix execution remains closed."
+  ],
+  "condition_shell_qualification": {
+    "event_redaction_status": "pass",
+    "live_dependencies_qualified": false,
+    "path": "protocols/paper_upgrade_v2/formal_condition_executor_qualification_v1.json",
+    "qualified_pairs": 12,
+    "registered_conditions": 6,
+    "sha256": "a8325944f5d326fea03c0a27c6d956dfcb51e94197775783670df9bdecdb7be3",
+    "status": "offline_executor_shells_qualified_live_dependencies_pending"
+  },
+  "credentials_read": false,
+  "cross_provider_fallback": false,
+  "deepseek_live_v2_trace_qualified": true,
+  "exact_gold_ablation_monitor_qualified": true,
+  "exact_gold_qualification": {
+    "analysis_tier": "authorization_regime_probe",
+    "formal_primary_endpoint_eligible": false,
+    "network_calls_made": 0,
+    "path": "protocols/paper_upgrade_v2/exact_gold_ablation_qualification_v1.json",
+    "qualification_probes": 2,
+    "sha256": "0a9d4628f3edd1e4887f5ecdf379ac817f69d056fd1928bc73c77e31f2c63bb5",
+    "status": "explicit_oracle_ablation_monitor_qualified"
+  },
+  "execution_authorized": false,
+  "execution_identity": "1ded242dd978ef720c0cbf24508722a5675bb7d9edfd52fa421c9b92fd69b496",
+  "experiment_record_v2_schema_qualified": true,
+  "formal_condition_executors_registered": 6,
+  "formal_execution_authorized": false,
+  "formal_record_store_offline_qualified": true,
+  "formal_record_store_v2_offline_qualified": true,
+  "formal_results_created": 0,
+  "gate_pass": false,
+  "gemini_quota_gate_satisfied": true,
+  "gemini_quota_snapshot": {
+    "active_limits": {
+      "rpd": 10000,
+      "rpm": 1000,
+      "tpm": 2000000
+    },
+    "api_key_or_credential_stored": false,
+    "billing_tier": "free",
+    "captured_at": "2026-07-24T01:03:51.9003883+08:00",
+    "captured_at_semantics": "user_submission_observed_at_not_provider_console_event_time",
+    "formal_execution_authorized": false,
+    "network_calls_made": 0,
+    "paid_tier_allowed": false,
+    "path": "protocols/paper_upgrade_v2/gemini_quota_snapshot_v1.json",
+    "project_identifier_stored": false,
+    "quota_gate_satisfied": true,
+    "sha256": "378e18269e0310be664b6408b2110a45e8e84d680e90d4cf0707851e17ef455e",
+    "source_screenshot_sha256": "cc613911edc041266890fff7b2d3d4d415c9f800ba3b50df245753c2f795b597",
+    "status": "active_project_quota_captured"
+  },
+  "gemini_quota_snapshot_bound": true,
+  "generated_at": "2026-07-24T01:30:00+08:00",
+  "identity_payload": {
+    "agentdojo_qualification_sha256": "88efabd2f00a41a797b8ef2e6c1af28785af132d2f0139247bc595056630920d",
+    "condition_qualification_sha256": "a8325944f5d326fea03c0a27c6d956dfcb51e94197775783670df9bdecdb7be3",
+    "exact_gold_qualification_sha256": "0a9d4628f3edd1e4887f5ecdf379ac817f69d056fd1928bc73c77e31f2c63bb5",
+    "full_matrix_work_items_per_model": 480,
+    "gemini_quota_snapshot_sha256": "378e18269e0310be664b6408b2110a45e8e84d680e90d4cf0707851e17ef455e",
+    "live_runtime_qualification_sha256": "c7ab83ad029641580906c5fe43f0054580a24d74af39cc524ee31cb3499a78fc",
+    "locked_inputs": {
+      "experiments/paper_v2/agentdojo_live_dependency.py": {
+        "bytes": 21957,
+        "sha256": "723987f3fae882fc93eb583c9a02191ca1bbee4370684662b00dde591391d7e8"
+      },
+      "experiments/paper_v2/contracts.py": {
+        "bytes": 11400,
+        "sha256": "cc3b320a269ef91227c26cafafa976a3831583f6c6057d8dfd57bdf18e3ac2aa"
+      },
+      "experiments/paper_v2/contracts_v2.py": {
+        "bytes": 4859,
+        "sha256": "4349aef13c7a87c908ddfde2f4459e8916d88d51f1a9ae407840cd40a5a18db7"
+      },
+      "experiments/paper_v2/exact_gold_ablation.py": {
+        "bytes": 16705,
+        "sha256": "0362c0f4e8dfb20122e605dada8f654adcef7066480e21e77d9d95acf289a034"
+      },
+      "experiments/paper_v2/formal_condition_executors.py": {
+        "bytes": 32576,
+        "sha256": "dcd39222d04c0081ed66b0bc51c37a4949f187dfc83b36ca42022b7acfc6aa93"
+      },
+      "experiments/paper_v2/formal_record_store.py": {
+        "bytes": 32097,
+        "sha256": "6952810ab390b554f16cf3a9211169d6d5a4e6b54e8d2b85604c5b9c334aaf19"
+      },
+      "experiments/paper_v2/formal_record_store_v2.py": {
+        "bytes": 26839,
+        "sha256": "67075156efa12a7a447b160b8140b16002fd5bd4d24261cf37b2b21226d7b157"
+      },
+      "experiments/paper_v2/gemini_quota_snapshot.py": {
+        "bytes": 10622,
+        "sha256": "3b461d324648de9f3ad829c9c9e12fdc5de6373c0cfe1421b84970c4bcdf2609"
+      },
+      "experiments/paper_v2/live_condition_runtime.py": {
+        "bytes": 79361,
+        "sha256": "44b1eb05a87f23b46e3860a22dbdfc92b08b9aba26d9e055af85f97dc9af5f98"
+      },
+      "experiments/paper_v2/m3_offline_evaluator.py": {
+        "bytes": 18794,
+        "sha256": "fef101fb39ab8f11c6e2e4807a43a22ecc2c8524d680d889b853d8035da8f370"
+      },
+      "experiments/paper_v2/official_provider_executor.py": {
+        "bytes": 43604,
+        "sha256": "3b33057adddacc68863d14e313d975ecd8d359c18b72585a774161793801aa54"
+      },
+      "experiments/paper_v2/post_pilot_evidence_review.py": {
+        "bytes": 31075,
+        "sha256": "e0a79d1103b7e4d43b821007faa0259cd884c4da028c98047c2eddc39c33aa77"
+      },
+      "experiments/paper_v2/promptguard_live_dependency.py": {
+        "bytes": 19902,
+        "sha256": "7679944781da451e74382293ca7cb5306d39cca7605f17c702d0ac8a87b8fd31"
+      },
+      "experiments/paper_v2/provider_budget.py": {
+        "bytes": 23949,
+        "sha256": "e7b28ec63f37e8865bb20dcd58da344a809017ea34d70353cbc9d57a4fa6dc6e"
+      },
+      "experiments/paper_v2/provider_execution_gate.py": {
+        "bytes": 44719,
+        "sha256": "436e7d4d7e5b2a59da274de5b6e356c4624b7c8e095aecef018fd06594b57128"
+      },
+      "experiments/paper_v2/provider_live_qualification.py": {
+        "bytes": 13568,
+        "sha256": "c8023f10459e1ac2df4c6ef9ae5e21881464d460625a35bf6c06409f512a5762"
+      },
+      "experiments/paper_v2/provider_live_qualification_v2.py": {
+        "bytes": 22146,
+        "sha256": "872cd2e53b9fbaf6b2cb5c3af33dc66c7ff8337b0be4eb4e2572ca6c71effe6b"
+      },
+      "experiments/paper_v2/provider_request_trace_activation.py": {
+        "bytes": 10520,
+        "sha256": "babf75b6c50a4725ff2e3c9abddc56ca556df317eb29ef0a4ccf7a7f1a6ef618"
+      },
+      "experiments/paper_v2/provider_request_trace_candidate.py": {
+        "bytes": 28380,
+        "sha256": "9f7a7b024baab51d22725ad535460d2a24a52d0b50ccf3a93c231abb72653c8c"
+      },
+      "experiments/paper_v2/provider_safety.py": {
+        "bytes": 9053,
+        "sha256": "cff599d07145b5e2ec1fb1e0fc4d099173eda11b5254be90359bdc5b6e463513"
+      },
+      "experiments/paper_v2/provider_trace_bundle.py": {
+        "bytes": 27450,
+        "sha256": "c7dd83bf8ab4dad7628a54fd9f270dc41d0dc59a0118a688c4ed734c03f5e5f1"
+      },
+      "experiments/paper_v2/provider_trace_runtime_qualification.py": {
+        "bytes": 14897,
+        "sha256": "ec5ead1f604ff7715a9b60abf40551a8e82d7e950762cd9177524e05a4bc2940"
+      },
+      "experiments/paper_v2/structural_baselines.py": {
+        "bytes": 14254,
+        "sha256": "34985ec4af85f785b2ea630063e5480199182111a5fb5d8f590b4b487734cac5"
+      },
+      "experiments/paper_v2/vigil_live_dependency.py": {
+        "bytes": 14560,
+        "sha256": "32333d17a42c30f623a527cc84d863c522cf4532f81b0a083fd22dad55d166c0"
+      },
+      "protocols/paper_upgrade_v2/agentdojo_live_dependency_qualification_v1.json": {
+        "bytes": 2929,
+        "sha256": "88efabd2f00a41a797b8ef2e6c1af28785af132d2f0139247bc595056630920d"
+      },
+      "protocols/paper_upgrade_v2/dual_provider_budget_policy_v1.json": {
+        "bytes": 5407,
+        "sha256": "b90e54c09b2ef9031f59afe678cdc300acf42c71ba9b4793a4e37025d8712253"
+      },
+      "protocols/paper_upgrade_v2/dual_provider_budget_preflight_v1.json": {
+        "bytes": 4152,
+        "sha256": "536ee9c3d04637564993c138316c5d68941d9f96949cc1fb31cd044aabdd4296"
+      },
+      "protocols/paper_upgrade_v2/exact_gold_ablation_qualification_v1.json": {
+        "bytes": 1871,
+        "sha256": "0a9d4628f3edd1e4887f5ecdf379ac817f69d056fd1928bc73c77e31f2c63bb5"
+      },
+      "protocols/paper_upgrade_v2/formal_condition_executor_qualification_v1.json": {
+        "bytes": 6453,
+        "sha256": "a8325944f5d326fea03c0a27c6d956dfcb51e94197775783670df9bdecdb7be3"
+      },
+      "protocols/paper_upgrade_v2/formal_record_store_qualification_v1.json": {
+        "bytes": 3247,
+        "sha256": "41741585cf3240409b86bafd5f03fda70f7a00eb96c4cc7f11c2e40ac8540415"
+      },
+      "protocols/paper_upgrade_v2/formal_record_store_qualification_v2.json": {
+        "bytes": 864,
+        "sha256": "d7ec164d3f54e95f447ae1c2332bc2d656ec18015845ac0b266489c5b96748f4"
+      },
+      "protocols/paper_upgrade_v2/gemini_quota_snapshot_v1.json": {
+        "bytes": 1414,
+        "sha256": "378e18269e0310be664b6408b2110a45e8e84d680e90d4cf0707851e17ef455e"
+      },
+      "protocols/paper_upgrade_v2/live_condition_runtime_qualification_v1.json": {
+        "bytes": 7812,
+        "sha256": "c7ab83ad029641580906c5fe43f0054580a24d74af39cc524ee31cb3499a78fc"
+      },
+      "protocols/paper_upgrade_v2/m3_offline_evaluator_qualification_v1.json": {
+        "bytes": 2380,
+        "sha256": "c43fc2e7344166056048643e93d7132c66751dfdb3190a7dda3c91841a55420a"
+      },
+      "protocols/paper_upgrade_v2/medium_execution_manifest_v2.json": {
+        "bytes": 2870,
+        "sha256": "1aea6fafefbf1770e7e3477a8e2fedce32c93bd79f697d22885bceb595cc64b0"
+      },
+      "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl": {
+        "bytes": 4926643,
+        "sha256": "573625a9e1e56c9a8be68fe21368d3e90e268974aa7285bec926d4591f8ec254"
+      },
+      "protocols/paper_upgrade_v2/post_pilot_review_qualification_v1.json": {
+        "bytes": 1083,
+        "sha256": "c9b3e11e5c0a2ceb77aeb655c5d630d5885105f3dcb0c8b56c97aec2c41c0a47"
+      },
+      "protocols/paper_upgrade_v2/promptguard_live_dependency_qualification_v1.json": {
+        "bytes": 3035,
+        "sha256": "aa01b6fb41998e8a58e29199aea89f2897b6055276213cb62ecbe54451f653d8"
+      },
+      "protocols/paper_upgrade_v2/provider_live_qualification_v1.json": {
+        "bytes": 5052,
+        "sha256": "d9aff95d162cd34aa41c0175a38b1d84106b85d6f67495b3c0896d7c81135060"
+      },
+      "protocols/paper_upgrade_v2/provider_live_qualification_v2.json": {
+        "bytes": 2820,
+        "sha256": "32314d8fd684fa308702f995a1842e2f1515956c958956e90e08181a1111be7e"
+      },
+      "protocols/paper_upgrade_v2/provider_request_trace_activation_v2.json": {
+        "bytes": 1921,
+        "sha256": "ac15d82bc5631eb49c3e7b4344e143f753f17d40725845fa8a3507dc26de2b45"
+      },
+      "protocols/paper_upgrade_v2/provider_request_trace_policy_v2_candidate.json": {
+        "bytes": 1476,
+        "sha256": "2833c20631aa57ab96379ab49bb5128359aa79aebd7f194987cfa73cea26dc71"
+      },
+      "protocols/paper_upgrade_v2/provider_request_trace_v2_qualification.json": {
+        "bytes": 823,
+        "sha256": "6b0be60505395abf11754db8bda19a3e8c266d47867ceff766ac371e22d47648"
+      },
+      "protocols/paper_upgrade_v2/provider_safety_policy_v1.json": {
+        "bytes": 2586,
+        "sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+      },
+      "protocols/paper_upgrade_v2/provider_trace_runtime_qualification_v2.json": {
+        "bytes": 2938,
+        "sha256": "8d58963d577007eeb78720b51459cad32eb3ece2ef2561e6dbee6ceb3b002595"
+      },
+      "protocols/paper_upgrade_v2/vigil_live_dependency_qualification_v1.json": {
+        "bytes": 1628,
+        "sha256": "3629a30172f3f2d8a1896f11a4a44f9843362cd1dff5bf1d7e0fc9f7f2483511"
+      },
+      "schemas/paper_v2/experiment_record_v1.schema.json": {
+        "bytes": 10499,
+        "sha256": "6eefb47e727c342ad26ca3362524f001724c72ca2f60c1d71a80d67e99bc47bd"
+      },
+      "schemas/paper_v2/experiment_record_v2.schema.json": {
+        "bytes": 6649,
+        "sha256": "b06a444bf711268cf8282f65b847bb32fa1990a23e25adafe76d4e1223f06007"
+      },
+      "schemas/paper_v2/post_pilot_review_v1.schema.json": {
+        "bytes": 7782,
+        "sha256": "893ab761cc0c774a68eaae08bb2d43778d41e2ce20659263ddf5dd5c64bf16b0"
+      },
+      "schemas/paper_v2/provider_safety_receipt_v1.schema.json": {
+        "bytes": 1839,
+        "sha256": "3149fc852e28b1203564564f1b8097a77ccd8e5dde4e5ae3007d7e419e84a531"
+      },
+      "schemas/paper_v2/provider_trace_attestation_v2.schema.json": {
+        "bytes": 2541,
+        "sha256": "b0a2de59108f0dbcb066a5cf7070267a25528727a632bae0fc1800c7d68f419b"
+      },
+      "schemas/paper_v2/provider_trace_bundle_v2.schema.json": {
+        "bytes": 7446,
+        "sha256": "d77e1f6bdbdb1e8b5b2424b97bdc2394f8e63e2fc1b7ea2563df78a0284d8f3c"
+      }
+    },
+    "m3_evaluator_qualification_sha256": "c43fc2e7344166056048643e93d7132c66751dfdb3190a7dda3c91841a55420a",
+    "maximum_calls_per_model": 4416,
+    "post_pilot_review_qualification_sha256": "c9b3e11e5c0a2ceb77aeb655c5d630d5885105f3dcb0c8b56c97aec2c41c0a47",
+    "promptguard_qualification_sha256": "aa01b6fb41998e8a58e29199aea89f2897b6055276213cb62ecbe54451f653d8",
+    "provider_live_qualification_sha256": "d9aff95d162cd34aa41c0175a38b1d84106b85d6f67495b3c0896d7c81135060",
+    "provider_live_qualification_v2_sha256": "32314d8fd684fa308702f995a1842e2f1515956c958956e90e08181a1111be7e",
+    "provider_models": {
+      "deepseek": "deepseek-v4-pro",
+      "gemini": "gemini-3.6-flash"
+    },
+    "provider_trace_activation_sha256": "ac15d82bc5631eb49c3e7b4344e143f753f17d40725845fa8a3507dc26de2b45",
+    "provider_trace_policy_sha256": "2833c20631aa57ab96379ab49bb5128359aa79aebd7f194987cfa73cea26dc71",
+    "provider_trace_qualification_sha256": "6b0be60505395abf11754db8bda19a3e8c266d47867ceff766ac371e22d47648",
+    "provider_trace_runtime_qualification_sha256": "8d58963d577007eeb78720b51459cad32eb3ece2ef2561e6dbee6ceb3b002595",
+    "qualification_sha256": "f026327fd5b92a5d4a8d036e5d61a091f5d70eda73c154fa1bed0906e07e40db",
+    "record_store_qualification_sha256": "41741585cf3240409b86bafd5f03fda70f7a00eb96c4cc7f11c2e40ac8540415",
+    "record_store_v2_qualification_sha256": "d7ec164d3f54e95f447ae1c2332bc2d656ec18015845ac0b266489c5b96748f4",
+    "schema_version": "m3-paper-v2-provider-execution-identity-1.0",
+    "vigil_qualification_sha256": "3629a30172f3f2d8a1896f11a4a44f9843362cd1dff5bf1d7e0fc9f7f2483511"
+  },
+  "live_condition_composition_offline_qualified": true,
+  "live_condition_dependencies_qualified": true,
+  "live_formal_records_persisted": 0,
+  "live_provider_identity_qualified": true,
+  "live_runtime_per_call_v2_qualified": true,
+  "live_runtime_qualification": {
+    "call_cap_probes": {
+      "no_defense": 8,
+      "strongest_peer_reviewed_structural_baseline": 16
+    },
+    "exact_gold_integration_routes": 2,
+    "in_memory_contract_records_validated": 14,
+    "live_dependencies_fully_qualified": false,
+    "path": "protocols/paper_upgrade_v2/live_condition_runtime_qualification_v1.json",
+    "qualified_pairs": 12,
+    "sha256": "c7ab83ad029641580906c5fe43f0054580a24d74af39cc524ee31cb3499a78fc",
+    "status": "zero_network_composition_qualified_live_dependencies_partial",
+    "strict_parser_negative_cases_rejected": 5
+  },
+  "m3_evaluator_qualification": {
+    "labels_visible_online": false,
+    "network_calls_made": 0,
+    "path": "protocols/paper_upgrade_v2/m3_offline_evaluator_qualification_v1.json",
+    "qualification_probes": 3,
+    "qualified_benchmarks": [
+      "agentdojo-v1",
+      "m3-v2"
+    ],
+    "sha256": "c43fc2e7344166056048643e93d7132c66751dfdb3190a7dda3c91841a55420a",
+    "status": "m3_v2_and_composite_offline_evaluators_qualified"
+  },
+  "network_calls_made": 0,
+  "next_gate": "Freeze a run-specific admission manifest, execute one bounded DeepSeek pilot work item through the qualified v2 path, and review its cost, identity and evidence before authorizing a larger matrix.",
+  "offline_outcome_evaluators_qualified": true,
+  "offline_qualification": {
+    "formal_identity_attested": false,
+    "formal_result_created": false,
+    "path": "protocols/paper_upgrade_v2/provider_executor_qualification_v1.json",
+    "sha256": "f026327fd5b92a5d4a8d036e5d61a091f5d70eda73c154fa1bed0906e07e40db",
+    "status": "offline_transport_qualified_live_execution_pending"
+  },
+  "post_pilot_review_qualification": {
+    "experiment_record_schema_version": "m3-paper-v2-experiment-record-2.2",
+    "formal_matrix_authorized": false,
+    "negative_cases_rejected": 4,
+    "network_calls_made": 0,
+    "official_evidence_gate_passed": false,
+    "path": "protocols/paper_upgrade_v2/post_pilot_review_qualification_v1.json",
+    "provider_safety_receipt_persisted": true,
+    "ready_for_owner_matrix_review": false,
+    "sha256": "c9b3e11e5c0a2ceb77aeb655c5d630d5885105f3dcb0c8b56c97aec2c41c0a47",
+    "status": "post_pilot_reviewer_qualified_offline"
+  },
+  "promptguard_live_inference_qualified": true,
+  "promptguard_qualification": {
+    "decision_matches": 2,
+    "inference_cases": 2,
+    "input_text_persisted": false,
+    "model_id": "meta-llama/Llama-Prompt-Guard-2-86M",
+    "network_calls_made": 0,
+    "path": "protocols/paper_upgrade_v2/promptguard_live_dependency_qualification_v1.json",
+    "revision": "a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+    "sha256": "aa01b6fb41998e8a58e29199aea89f2897b6055276213cb62ecbe54451f653d8",
+    "status": "pinned_local_model_live_inference_qualified"
+  },
+  "provider_calls_upper_bound_per_model": 4416,
+  "provider_live_qualification": {
+    "credentials_stored": false,
+    "deepseek_status": "diagnostic_identity_only",
+    "formal_results_created": 0,
+    "gemini_status": "failed_single_attempt_preserved",
+    "network_call_attempts": 2,
+    "path": "protocols/paper_upgrade_v2/provider_live_qualification_v1.json",
+    "prompt_or_response_content_stored": false,
+    "qualified_provider_count": 0,
+    "sha256": "d9aff95d162cd34aa41c0175a38b1d84106b85d6f67495b3c0896d7c81135060",
+    "status": "live_identity_qualification_incomplete"
+  },
+  "provider_live_qualification_v2": {
+    "formal_matrix_authorized": false,
+    "identity_qualification_satisfied": true,
+    "network_call_attempts": 1,
+    "path": "protocols/paper_upgrade_v2/provider_live_qualification_v2.json",
+    "prompt_or_response_content_stored": false,
+    "provider_id": "deepseek",
+    "provider_receipt_persisted": false,
+    "response_exact_safe": null,
+    "result_eligible_for_effect_tables": false,
+    "sha256": "32314d8fd684fa308702f995a1842e2f1515956c958956e90e08181a1111be7e",
+    "status": "deepseek_live_v2_trace_qualified_recovered",
+    "trace_ledger": {
+      "append_flush_fsync": true,
+      "completed_requests": 1,
+      "event_count": 2,
+      "open_requests": 0,
+      "path": "outputs/paper_upgrade_v2/provider_identity/deepseek_request_trace_v2.jsonl",
+      "sha256": "3a311458957afe33bd304be35b06f7e5d5e69e7f4b1a49bc2bf9c87e3310fc1d",
+      "tail_sha256": "28070698bda0ee285be639aa8d305b53a7ab40bd3054326e95164c1019f52a7c"
+    }
+  },
+  "provider_models_are_independent_matrices": true,
+  "provider_trace_runtime_qualification": {
+    "append_flush_fsync_before_every_transport": true,
+    "automatic_retry": false,
+    "diagnostic_itt_failure_records": 2,
+    "formal_candidate_records": 2,
+    "formal_results_created": 0,
+    "network_calls_made": 0,
+    "path": "protocols/paper_upgrade_v2/provider_trace_runtime_qualification_v2.json",
+    "scenario_count": 4,
+    "sha256": "8d58963d577007eeb78720b51459cad32eb3ece2ef2561e6dbee6ceb3b002595",
+    "status": "live_per_call_v2_wiring_qualified",
+    "vigil_success_request_count": 2
+  },
+  "provider_trace_v2_activated": true,
+  "provider_trace_v2_activation": {
+    "approved_provider_ids": [
+      "deepseek"
+    ],
+    "formal_matrix_authorized": false,
+    "fresh_prospective_requests_only": true,
+    "historical_artifacts_retroactively_eligible": false,
+    "network_calls_made": 0,
+    "path": "protocols/paper_upgrade_v2/provider_request_trace_activation_v2.json",
+    "request_trace_protocol_activated": true,
+    "sha256": "ac15d82bc5631eb49c3e7b4344e143f753f17d40725845fa8a3507dc26de2b45",
+    "status": "approved_for_prospective_v2_trace",
+    "v1_contract_unchanged": true
+  },
+  "provider_trace_v2_candidate": {
+    "append_flush_fsync": true,
+    "formal_results_created": 0,
+    "negative_cases_rejected": 3,
+    "network_calls_made": 0,
+    "old_smoke_retroactive_upgrade": false,
+    "policy_path": "protocols/paper_upgrade_v2/provider_request_trace_policy_v2_candidate.json",
+    "policy_sha256": "2833c20631aa57ab96379ab49bb5128359aa79aebd7f194987cfa73cea26dc71",
+    "qualification_path": "protocols/paper_upgrade_v2/provider_request_trace_v2_qualification.json",
+    "qualification_sha256": "6b0be60505395abf11754db8bda19a3e8c266d47867ceff766ac371e22d47648",
+    "qualified_provider_count": 2,
+    "status": "qualified_candidate_not_activated",
+    "v1_contract_unchanged": true,
+    "v2_schema_activated": false
+  },
+  "provider_trace_v2_candidate_qualified": true,
+  "qualified_benchmark_condition_pairs": 12,
+  "record_store_qualification": {
+    "complete_chain_revalidated": true,
+    "live_persistence_path_qualified": false,
+    "path": "protocols/paper_upgrade_v2/formal_record_store_qualification_v1.json",
+    "project_experiment_records_persisted": 0,
+    "raw_content_markers_absent": true,
+    "sha256": "41741585cf3240409b86bafd5f03fda70f7a00eb96c4cc7f11c2e40ac8540415",
+    "status": "offline_persistence_path_qualified_live_records_pending",
+    "transient_cleanup_verified": true,
+    "transient_entries": 12
+  },
+  "record_store_v2_qualification": {
+    "append_flush_fsync": true,
+    "hash_chain_complete": true,
+    "live_runtime_v2_wiring_qualified": false,
+    "negative_cases_rejected": 2,
+    "network_calls_made": 0,
+    "path": "protocols/paper_upgrade_v2/formal_record_store_qualification_v2.json",
+    "project_experiment_records_persisted": 0,
+    "sha256": "d7ec164d3f54e95f447ae1c2332bc2d656ec18015845ac0b266489c5b96748f4",
+    "status": "offline_v2_record_store_qualified",
+    "transient_entries": 2,
+    "v1_record_contract_modified": false,
+    "v1_record_store_modified": false
+  },
+  "schema_version": "m3-paper-v2-medium-execution-manifest-3.0-preflight",
+  "status": "deepseek_v2_runtime_wiring_qualified_admission_manifest_required",
+  "transport_adapters_qualified": 2,
+  "vigil_provider_bridge_qualified": true,
+  "vigil_qualification": {
+    "commit": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+    "network_calls_made": 0,
+    "path": "protocols/paper_upgrade_v2/vigil_live_dependency_qualification_v1.json",
+    "provider_calls_consumed": 1,
+    "sha256": "3629a30172f3f2d8a1896f11a4a44f9843362cd1dff5bf1d7e0fc9f7f2483511",
+    "silent_default_fallback_accepted": false,
+    "status": "source_pinned_vigil_provider_bridge_qualified"
+  },
+  "work_items_per_provider_model": 480
+}

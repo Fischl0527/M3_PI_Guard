@@ -1,0 +1,350 @@
+{
+  "available_bucket_counts": {
+    "data_security|Financial Data": 102,
+    "data_security|Others": 255,
+    "data_security|Physical Data": 187,
+    "direct_harm|Data Security Harm": 187,
+    "direct_harm|Financial Harm": 153,
+    "direct_harm|Physical Harm": 170
+  },
+  "benchmark": "injecagent",
+  "benchmark_version": "official-release-2024",
+  "compatible_candidate_count": 1054,
+  "created_at": "2026-07-18T10:12:06.368312+00:00",
+  "evidence_status": "diagnostic_selection_not_formal_evidence",
+  "result_blind": true,
+  "runner_hint": {
+    "argument": "--selection",
+    "module": "experiments.paper_v1.benchmarks.injecagent_stage_runner",
+    "recommended_defenses": [
+      "no_defense",
+      "m3_full"
+    ],
+    "recommended_prompt_style": "official_react_simple",
+    "result_eligible_for_formal_tables": false
+  },
+  "schema_version": "paper-injecagent-stage-selection-1.0",
+  "seed": "m3-paper-v1-injecagent-stage-stratified-30-v1",
+  "selected_bucket_counts": {
+    "data_security|Financial Data": 5,
+    "data_security|Others": 5,
+    "data_security|Physical Data": 5,
+    "direct_harm|Data Security Harm": 5,
+    "direct_harm|Financial Harm": 5,
+    "direct_harm|Physical Harm": 5
+  },
+  "selected_cases": [
+    {
+      "attack_type": "Financial Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0145",
+      "expected_user_tool": "GoogleCalendarReadEvents",
+      "exposed_tool_count": 3,
+      "stable_key": "0211caf0e96194b64d3eb661f41b7c531395a73dd0effc91cb1cad0cf301eef5",
+      "stable_rank": 1,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Others",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0226",
+      "expected_user_tool": "GitHubSearchRepositories",
+      "exposed_tool_count": 3,
+      "stable_key": "001894df6e97c3291e886b6f1ed0eddf984b5cd563f33f5e1a4fa23334310a8f",
+      "stable_rank": 2,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Physical Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0194",
+      "expected_user_tool": "GmailSearchEmails",
+      "exposed_tool_count": 3,
+      "stable_key": "01b2dce814454dcb5432c77a9a084833d15484d9a5ff3f6f7247d4ba670a5858",
+      "stable_rank": 3,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Data Security Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0365",
+      "expected_user_tool": "GoogleCalendarGetEventsFromSharedCalendar",
+      "exposed_tool_count": 2,
+      "stable_key": "00a3a58cd1b17e9ce79c88e3f9ff53667545ea81623a51c443ff3b803ff18d1a",
+      "stable_rank": 4,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0278",
+      "expected_user_tool": "GmailReadEmail",
+      "exposed_tool_count": 2,
+      "stable_key": "00ed2a54ce63afceb7c95a1238ce3328c471ec2c421d423144123ea8093031be",
+      "stable_rank": 5,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Physical Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0322",
+      "expected_user_tool": "TwitterManagerSearchTweets",
+      "exposed_tool_count": 2,
+      "stable_key": "006bd7e86ee73c6496c701cfc30c004ebeb0a1cc4ed08ac225b8eefbd8aaa918",
+      "stable_rank": 6,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0403",
+      "expected_user_tool": "TodoistSearchTasks",
+      "exposed_tool_count": 3,
+      "stable_key": "0250b6a2557f0b965aaaa16b31fd808cebb9233a607ab9361c72d16344100dee",
+      "stable_rank": 7,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Others",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0276",
+      "expected_user_tool": "GitHubGetUserDetails",
+      "exposed_tool_count": 2,
+      "stable_key": "01169571c54b84e56d8712aa2ca8691d538b9b267b5896c8af2ac2ee8b3dd1d3",
+      "stable_rank": 8,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Physical Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0482",
+      "expected_user_tool": "GmailReadEmail",
+      "exposed_tool_count": 3,
+      "stable_key": "075ff632cf2033f9f4ecb34e964711e80f3cdaef4822d6a5afac523abae7a853",
+      "stable_rank": 9,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Data Security Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0403",
+      "expected_user_tool": "TodoistSearchTasks",
+      "exposed_tool_count": 2,
+      "stable_key": "03a650d76bf9b5dc6ed7a755aa57705e839c1ef3ef367cf8eff825e21a03235d",
+      "stable_rank": 10,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0130",
+      "expected_user_tool": "TeladocViewReviews",
+      "exposed_tool_count": 2,
+      "stable_key": "01df4dfba05ec553965009a7addcd3aeae9912c7b0212f9a912b503bed585db8",
+      "stable_rank": 11,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Physical Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0492",
+      "expected_user_tool": "TwitterManagerSearchTweets",
+      "exposed_tool_count": 2,
+      "stable_key": "0145dcc39774ea840e3738bfa01062d0b1d6d92b65ec2a84c68ec739c18646d0",
+      "stable_rank": 12,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0065",
+      "expected_user_tool": "TwitterManagerGetUserProfile",
+      "exposed_tool_count": 3,
+      "stable_key": "0321d5f2a46ce2c3826bd8a97dfad5030b95c53a25f60641d34146a566b205e5",
+      "stable_rank": 13,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Others",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0071",
+      "expected_user_tool": "GitHubGetRepositoryDetails",
+      "exposed_tool_count": 3,
+      "stable_key": "0116a326e34ac60557cb007d37b593fa85051e5a9ae94e73ee875b49f7ca7267",
+      "stable_rank": 14,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Physical Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0416",
+      "expected_user_tool": "GoogleCalendarGetEventsFromSharedCalendar",
+      "exposed_tool_count": 3,
+      "stable_key": "0788a6dceb2c6ec438c20e7b5c5b5b393563706e3fbb9b0dffc713f60a46e51d",
+      "stable_rank": 15,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Data Security Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0401",
+      "expected_user_tool": "ShopifyGetProductDetails",
+      "exposed_tool_count": 2,
+      "stable_key": "07ef4ab76aa81db8ccf16dc444d01ffb5d887dcb22e3dc0df30e88dc97ab7905",
+      "stable_rank": 16,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0150",
+      "expected_user_tool": "TwitterManagerGetUserProfile",
+      "exposed_tool_count": 2,
+      "stable_key": "063440d46b0b0c4a5c7375fd4ea280cfaadfeb484d27507b3a5c50f9c721d2f9",
+      "stable_rank": 17,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Physical Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0468",
+      "expected_user_tool": "GoogleCalendarReadEvents",
+      "exposed_tool_count": 2,
+      "stable_key": "0337399a3ee027e9f6ad41a7f82e407ce4d78031287e156394a197ca616b207b",
+      "stable_rank": 18,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0027",
+      "expected_user_tool": "ShopifyGetProductDetails",
+      "exposed_tool_count": 3,
+      "stable_key": "05ae0575a81f53e7e0893dbe0802b067c1968daec421127f3853dea189f85103",
+      "stable_rank": 19,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Others",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0043",
+      "expected_user_tool": "GoogleCalendarReadEvents",
+      "exposed_tool_count": 3,
+      "stable_key": "01bad7f927fc978778437781c0bb67f6114a1236c94d5224eb98e81f862a1f6f",
+      "stable_rank": 20,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Physical Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0440",
+      "expected_user_tool": "TwitterManagerReadTweet",
+      "exposed_tool_count": 3,
+      "stable_key": "079c9c2b9bf2e4e93adb439b882a2c20a7c20bf5695e59d52247e2bb9f84c0d2",
+      "stable_rank": 21,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Data Security Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0381",
+      "expected_user_tool": "GmailSearchEmails",
+      "exposed_tool_count": 2,
+      "stable_key": "097dee9887828f70ab02e692cc1a1c8c484347650343d3ec1c9e17623c233849",
+      "stable_rank": 22,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0094",
+      "expected_user_tool": "GoogleCalendarReadEvents",
+      "exposed_tool_count": 2,
+      "stable_key": "06457fbe19bf6a55ba4720862db8cbdf0af152a6db8f320423b9768a87a97b75",
+      "stable_rank": 23,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Physical Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0011",
+      "expected_user_tool": "TeladocViewReviews",
+      "exposed_tool_count": 2,
+      "stable_key": "0356bc87769a3cf8d605b6590361f91c6cddf6313dc338ea2735a6dcccdda58e",
+      "stable_rank": 24,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0151",
+      "expected_user_tool": "TwitterManagerReadTweet",
+      "exposed_tool_count": 3,
+      "stable_key": "09968a90fbcc99b814a5fab04202545fe54fb79a5341154083b0c0b78fa46cef",
+      "stable_rank": 25,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Others",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0234",
+      "expected_user_tool": "TwilioGetReceivedSmsMessages",
+      "exposed_tool_count": 3,
+      "stable_key": "035d84768dd76a4a6ee1fab01bba98797664931c4f499c50f90865c789f12e12",
+      "stable_rank": 26,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Physical Data",
+      "attacker_tool_count": 2,
+      "case_id": "injecagent:data_security:0122",
+      "expected_user_tool": "GitHubGetRepositoryDetails",
+      "exposed_tool_count": 3,
+      "stable_key": "07d84d79b1c2ec23139058e0f10e145fde5c299e6d6392d2cfa9b8f26be708df",
+      "stable_rank": 27,
+      "suite": "data_security"
+    },
+    {
+      "attack_type": "Data Security Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0211",
+      "expected_user_tool": "GmailSearchEmails",
+      "exposed_tool_count": 2,
+      "stable_key": "0d0d2cdaada67275838cc01b435dac799ca86806344843c21ac548191d146d20",
+      "stable_rank": 28,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Financial Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0125",
+      "expected_user_tool": "GmailReadEmail",
+      "exposed_tool_count": 2,
+      "stable_key": "06d40456d0b895f29e8f8fc5529413afca1a5b4bebcd7ad24f61fc702825e441",
+      "stable_rank": 29,
+      "suite": "direct_harm"
+    },
+    {
+      "attack_type": "Physical Harm",
+      "attacker_tool_count": 1,
+      "case_id": "injecagent:direct_harm:0034",
+      "expected_user_tool": "WebBrowserNavigateTo",
+      "exposed_tool_count": 2,
+      "stable_key": "046d5d097a1e7ff60ea3ba952477b0d5310cb9c1157e176a63beaeb81c881d0e",
+      "stable_rank": 30,
+      "suite": "direct_harm"
+    }
+  ],
+  "selected_cases_sha256": "e8cb178e6d512c96855c107459d4d4326560e437b90ecd2456d91327c7b4a516",
+  "selected_count": 30,
+  "selection_id": "injecagent-stage-stratified-30",
+  "selection_rule": "Compatible cases only; group by suite and official attack_type; stable SHA-256 rank within each bucket; round-robin buckets until target_size is reached.",
+  "source_case_count": 1054,
+  "source_rows_sha256": "db5f8cbf7682111b19ad47eb6032b17b133eb1b9a873b9361d4cff6a3f15395a",
+  "target_size": 30,
+  "uses_attacker_instruction_text": false,
+  "uses_expected_achievement_text": false,
+  "uses_guard_outputs": false,
+  "uses_model_outputs": false,
+  "uses_tool_response_text": false
+}

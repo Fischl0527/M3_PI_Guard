@@ -1,0 +1,11 @@
+SUPERSEDED — DO NOT USE
+
+This zero-content generated toolkit was superseded before custodian handoff.
+Its copied CLI help contained a checkout-specific working-directory example.
+
+Use the sibling directory:
+M3_PI_Guard_Blind_Custodian_Toolkit_v2_final
+
+The additional marker deliberately makes the obsolete toolkit's immutable-file
+verification fail closed. No authored pair, private label, credential, or
+scientific result was ever placed in this obsolete directory.

@@ -1,0 +1,8 @@
+{
+  "audit_id": "A03-drift-runtime",
+  "base_digest": "a21c2ef52af3709b360f8c0783560a41635d43aaee0d568459d57a30d0ea553f",
+  "mutated_digest": "a21c2ef52af3709b360f8c0783560a41635d43aaee0d568459d57a30d0ea553f",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

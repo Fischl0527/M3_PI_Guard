@@ -1,5 +1,7 @@
 # E17 frozen source index
 
+> This document describes the historical E17 source-index contract; it does not turn sampled review evidence into a new confirmatory blind result.
+
 E17 is a read-only, human-in-the-loop review over completed evidence. It does not start a model and it does not create reviewer or adjudicator decisions. The formal command accepts one frozen, hash-pinned source index and writes directly to `outputs/experiments/E17`:
 
 ```powershell

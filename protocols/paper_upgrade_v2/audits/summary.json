@@ -1,0 +1,18 @@
+{
+  "audit_units": 22,
+  "claim_ready": 0,
+  "conclusions": {
+    "inconclusive": 2,
+    "mixed_or_path_dependent": 1,
+    "no_online_gold_observed": 9,
+    "not_a_runtime_guard": 10
+  },
+  "disclosed_reproduction_units": 1,
+  "distinct_artifacts": 16,
+  "domain_claim_reason": "All completed units still require independent second review; several findings are inconclusive or outside runtime authorization.",
+  "domain_oracle_problem_claim_allowed": false,
+  "official_source_code_units": 20,
+  "official_source_unavailable_units": 2,
+  "schema_version": "m3-paper-v2-source-audit-summary-1.0",
+  "status": "pass"
+}

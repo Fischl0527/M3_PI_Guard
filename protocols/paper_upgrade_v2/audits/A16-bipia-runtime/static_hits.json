@@ -1,0 +1,34 @@
+{
+  "audit_id": "A16-bipia-runtime",
+  "hits": [
+    {
+      "line": 451,
+      "path": "external/paper_v2_audits/bipia/examples/run.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "labels = []",
+      "text_sha256": "ef730a714f4b8c0bb7f55790dc2e4c374802a0bc27586c2bec8b5efb0f02a3d7"
+    },
+    {
+      "line": 454,
+      "path": "external/paper_v2_audits/bipia/examples/run.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "labels.append(example[\"target\"])",
+      "text_sha256": "2552a1eb34d0fce2615d928336090453338102c5bcbd30b154e8aeea45ae55bd"
+    },
+    {
+      "line": 457,
+      "path": "external/paper_v2_audits/bipia/examples/run.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "predictions=preds, references=labels, use_aggregator=False",
+      "text_sha256": "f528eba24e32745638ab9f7b8e9e3804db6f938c1de2973a38abde3902199097"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

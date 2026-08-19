@@ -1,0 +1,24 @@
+{
+  "artifact": "Task Shield",
+  "audit_id": "A22-task-shield-runtime",
+  "commit_date": "2026-07-16T15:07:59+08:00",
+  "default_branch_head_at_discovery": null,
+  "expected_commit": "d74cef2739551591a49c722c5c6273bac6edf91e",
+  "license": {
+    "path": null,
+    "sha256": null,
+    "status": "not_found_at_repository_root"
+  },
+  "observed_commit": "d74cef2739551591a49c722c5c6273bac6edf91e",
+  "official_source_available": false,
+  "paper_artifact": {
+    "bytes": 1491650,
+    "path": "external/baselines/task-shield-paper/2025.acl-long.1435.pdf",
+    "sha256": "057ff02152c0bb61892b08abdc80f7af22416c03819e526878091ee87d3bf1e6",
+    "source_url": "https://aclanthology.org/2025.acl-long.1435.pdf"
+  },
+  "repository_path": ".",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "disclosed_local_reproduction",
+  "source_url": "https://aclanthology.org/2025.acl-long.1435/"
+}

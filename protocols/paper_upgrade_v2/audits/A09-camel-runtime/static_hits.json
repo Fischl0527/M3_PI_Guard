@@ -1,0 +1,197 @@
+{
+  "audit_id": "A09-camel-runtime",
+  "hits": [
+    {
+      "line": 132,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_id: str,",
+      "text_sha256": "9b874ee397a109a8b2de09affcf4af76de0c476f1d803b4e4870590b8f2cac9d"
+    },
+    {
+      "line": 133,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id: str | None,",
+      "text_sha256": "c2fd769b79bd0b91f7388ae6e371009520b50d120ed5d33332a060417236ecbd"
+    },
+    {
+      "line": 143,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "/ user_task_id",
+      "text_sha256": "6c7aebf2229e41e714b4263fafe2a6707ff42fbcfacc450a2af2f8610094e6f5"
+    },
+    {
+      "line": 145,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "/ f\"{(injection_task_id or 'none')}.json\"",
+      "text_sha256": "53578e71e330883c3592f4346a17f17a80d3951a96c699caeff5c3cc7360a22d"
+    },
+    {
+      "line": 266,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id = injection_task.ID if injection_task is not None else None",
+      "text_sha256": "ada8f949728cb568402e62da41d35826cb60eca54a56d01f937e70475d376359"
+    },
+    {
+      "line": 267,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "extra_args[\"user_task_id\"] = user_task.ID",
+      "text_sha256": "e4461a8fc84fe5da479c7225d0e101a71eb3c9fb9a1446907a2e42a4b92e6831"
+    },
+    {
+      "line": 268,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "extra_args[\"injection_task_id\"] = injection_task_id",
+      "text_sha256": "05ec177df18946763a81882e9c59f5ee896653558d97c04b061da0967310df54"
+    },
+    {
+      "line": 296,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "\"user_task_id\" not in extra_args",
+      "text_sha256": "55c80a52ecbe41a917cfe336dc259410d9c8aef9076d1dde79a8cc1a3dd2b96e"
+    },
+    {
+      "line": 297,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "or \"injection_task_id\" not in extra_args",
+      "text_sha256": "db5574360790fb0a0cc66fcf07ae6824161a1fe632a1b3836cd5c996adadde18"
+    },
+    {
+      "line": 304,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "attack_name = self._attack_name if extra_args[\"injection_task_id\"] is not None else None",
+      "text_sha256": "919463f794b29d34cdd7721c106245662267b0e587bc160b52b764d8dd3f1568"
+    },
+    {
+      "line": 308,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "extra_args[\"user_task_id\"],",
+      "text_sha256": "b418e066dc4b765a0dd851ad62f6c0033f960cd28d3a2b5c138db4a88162027b"
+    },
+    {
+      "line": 309,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "extra_args[\"injection_task_id\"],",
+      "text_sha256": "64a5c3bfa876d4552b7a4ad4f9da7a0a84e3d0604636f6752a7374355f31c1d9"
+    },
+    {
+      "line": 319,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "pipeline_name: str, suite_name: str, user_task_id: str, attack_name: str | None, eval_args: interpreter.EvalArgs",
+      "text_sha256": "19defe8e35068f99f711fa63553a7629d5e8f8cf8dceca4834ff4d3854fdec6b"
+    },
+    {
+      "line": 321,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "path = Path(\"logs\") / pipeline_name / suite_name / user_task_id / (attack_name or \"none\")",
+      "text_sha256": "a94d305ba8c7eceba5e384be6c0082cd4e900f78aae39499f5b48593ebde466b"
+    },
+    {
+      "line": 327,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task_id = task_id_path.stem",
+      "text_sha256": "66538dd6de9df4d532d8d3ab4ad327606cb7db3b824b5b552bd5c8aa096ed6df"
+    },
+    {
+      "line": 329,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "assert injection_task_id is not None",
+      "text_sha256": "e47220f8bbd67e7660f4bbb74aa838cf3b541fb727e28e374f9a141a03e837c6"
+    },
+    {
+      "line": 331,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task = suite.get_user_task_by_id(user_task_id)",
+      "text_sha256": "b1ab6f6f43d3734ca4d54df90ab52eaf446581bf0d499761b3d3cb4a84edf951"
+    },
+    {
+      "line": 332,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id"
+      ],
+      "preview": "injection_task = suite.get_injection_task_by_id(injection_task_id)",
+      "text_sha256": "3f39d314d4f8361b575e5dac3f2b8838fb615b9e580aa1f0ce79e45c3ca771d1"
+    },
+    {
+      "line": 337,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "injection_task_id",
+        "user_task_id"
+      ],
+      "preview": "replay_task(pipeline_name, suite_name, user_task_id, injection_task_id, attack_name, eval_args, env, runtime)",
+      "text_sha256": "3921ecd5e04f255095375e0b369fb8f463e9ae1f408c237c0cf4ee880e345599"
+    },
+    {
+      "line": 343,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "user_task_id = user_task_path.stem",
+      "text_sha256": "5fd444cb54e90910009ba760c40ee3a69d340961e49fa5de4f18137a07cb5dfa"
+    },
+    {
+      "line": 344,
+      "path": "external/baselines/camel-prompt-injection/src/camel/pipeline_elements/replay_privileged_llm.py",
+      "patterns": [
+        "user_task_id"
+      ],
+      "preview": "replay_user_task(pipeline_name, suite_name, user_task_id, attack_name, eval_args)",
+      "text_sha256": "da79907cf184c96bfe2f401bd1cee4cac1862bb4f7f713eeba4b1056b23f5dc5"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

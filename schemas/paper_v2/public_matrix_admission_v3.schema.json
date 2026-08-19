@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3.local/schemas/paper_v2/public_matrix_admission_v3.schema.json",
+  "title": "M3 paper-v2 public canary admission v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_role",
+    "approved_at",
+    "status",
+    "scope",
+    "authorization",
+    "evidence_boundary",
+    "scope_sha256",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-public-matrix-admission-3.0"
+    },
+    "artifact_role": {
+      "const": "technical_canary_execution_authorization"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "const": "activated_for_one_model_role_technical_canary"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "model_role",
+        "run_id",
+        "execution_identity",
+        "model_id",
+        "canary_records",
+        "canary_work_key_sequence_sha256",
+        "output_root",
+        "exact_command",
+        "exact_command_sha256"
+      ]
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_manifest_sha256",
+        "candidate_scope_sha256",
+        "owner_statement_sha256",
+        "canary_execution_authorized",
+        "matrix_continuation_authorized",
+        "result_admission_authorized"
+      ],
+      "properties": {
+        "candidate_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "candidate_scope_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "owner_statement_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "canary_execution_authorized": {"const": true},
+        "matrix_continuation_authorized": {"const": false},
+        "result_admission_authorized": {"const": false}
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "technical_gate_only",
+        "scientific_outcomes_may_be_reviewed",
+        "provider_tools_enabled",
+        "external_effects_enabled",
+        "automatic_retries"
+      ],
+      "properties": {
+        "technical_gate_only": {"const": true},
+        "scientific_outcomes_may_be_reviewed": {"const": false},
+        "provider_tools_enabled": {"const": false},
+        "external_effects_enabled": {"const": false},
+        "automatic_retries": {"const": 0}
+      }
+    },
+    "scope_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

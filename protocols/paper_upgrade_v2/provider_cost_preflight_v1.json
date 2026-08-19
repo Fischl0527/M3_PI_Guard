@@ -1,0 +1,77 @@
+{
+  "abort_at_fraction": 0.9,
+  "blockers": [
+    "A real smoke response has not yet attested the exact upstream model.",
+    "Request-ID availability has not been attested.",
+    "Response-ID availability has not been attested.",
+    "The formal logging redaction review is pending.",
+    "The user has not approved this provider/cost decision.",
+    "No hard USD spend limit has been approved."
+  ],
+  "cost_estimate": {
+    "calls_by_condition": {
+      "m3_full": 576,
+      "m3_policy_only": 576,
+      "no_defense": 576,
+      "probe:m3_full": 192,
+      "probe:m3_policy_only": 192,
+      "promptguard_detector_only": 576,
+      "safe_prompt_or_spotlighting": 576,
+      "strongest_peer_reviewed_structural_baseline": 1152
+    },
+    "case_count": 72,
+    "conservative_assumptions": [
+      "Each UTF-8 source byte is counted as at most one input token.",
+      "Every work item consumes its condition-specific maximum call count.",
+      "Every provider call consumes max_output_tokens.",
+      "Cached-input and batch discounts are ignored."
+    ],
+    "estimation_method": "utf8_source_bytes_plus_fixed_allowance_as_token_upper_bound",
+    "input_cost_upper_bound_usd": 86.01996,
+    "input_tokens_upper_bound": 34407984,
+    "output_cost_upper_bound_usd": 33.91488,
+    "output_tokens_upper_bound": 2260992,
+    "provider_calls_upper_bound": 4416,
+    "source_record_bytes": {
+      "maximum": 12402,
+      "median": 1504,
+      "minimum": 1144,
+      "total_unique_cases": 262838
+    },
+    "total_cost_upper_bound_usd": 119.93484,
+    "work_items": 480
+  },
+  "credentials_read": false,
+  "decision_path": "protocols/paper_upgrade_v2/provider_cost_decision_candidate_v1.json",
+  "decision_sha256": "a21eab97693ecac3ec12f72596c7d27475046b0a73b7f3ce677572f9751ee287",
+  "gate_pass": false,
+  "generated_at": "2026-07-23T20:00:00+08:00",
+  "hard_spend_limit_usd": null,
+  "medium_case_index": {
+    "path": "protocols/paper_upgrade_v2/medium_case_index_v1.jsonl",
+    "sha256": "1d649122630e1aa6aa683efa744d2c225903d3d2f982b572136173a80db40ba7"
+  },
+  "medium_case_manifest": {
+    "path": "protocols/paper_upgrade_v2/medium_case_manifest_v1.json",
+    "sha256": "1ea8e5a2b2d99224e7817cd5366c1540727a2df1440a9856fc84b78b39d7a94f"
+  },
+  "network_calls_made": 0,
+  "provider_attestation": {
+    "api_surface": "Responses API",
+    "base_url": "https://api.openai.com/v1",
+    "endpoint_type": "official_api",
+    "identity_evidence": "official_documentation_plus_pending_runtime_response",
+    "identity_verified": false,
+    "model_id": "gpt-5.6-terra",
+    "model_revision": "provider_managed",
+    "pricing_source_url": "https://developers.openai.com/api/docs/models/compare",
+    "pricing_verified_at": "2026-07-23",
+    "prompt_rewrite_declaration": "none_declared",
+    "provider_name": "OpenAI",
+    "request_id_available": false,
+    "response_id_available": false,
+    "upstream_provider": "OpenAI"
+  },
+  "schema_version": "m3-paper-v2-provider-cost-preflight-1.0",
+  "status": "blocked_runtime_attestation_and_user_approval"
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "m3-paper-v2-provider-budget-authorization-3.0",
+  "status": "owner_authorized_cost_monitored_execution",
+  "approved_by_role": "project_owner",
+  "approved_at": "2026-07-24T20:22:00+08:00",
+  "scope": {
+    "providers": [
+      "deepseek",
+      "gemini"
+    ],
+    "research_calls_authorized": true,
+    "fixed_project_spend_ceiling_required": false,
+    "formal_and_diagnostic_runs_authorized": true
+  },
+  "controls_retained": {
+    "cost_and_token_accounting": "append_only_per_official_response",
+    "automatic_retries": 0,
+    "provider_concurrency": 1,
+    "cross_provider_fallback_within_a_matrix": false,
+    "provider_managed_tools_enabled": false,
+    "external_effects_enabled": false,
+    "model_output_is_untrusted_proposal_only": true,
+    "dangerous_or_real_world_actions": "forbidden",
+    "credentials_in_logs": false,
+    "prompt_or_response_content_in_trace_logs": false
+  },
+  "pause_conditions": [
+    "provider rejects a request because of quota, credit, authentication, or rate limit",
+    "request identity or append-only trace integrity cannot be established",
+    "unexpected external-effect capability becomes enabled",
+    "the configured model identity differs from the frozen matrix identity"
+  ],
+  "non_pause_conditions": [
+    "a worst-case full-plan cost projection exceeds a historical balance estimate",
+    "the historical CNY 27 or CNY 30 project threshold is approached",
+    "the observed cache-hit ratio differs from the preflight estimate"
+  ],
+  "supersedes_for_future_execution_policy": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v2.json",
+  "active_v5_note": "The v5 canary was executed under policy v2. Its measured cost is far below the historical threshold. The existing v5 matrix may continue without a new run identity while that threshold is non-binding; this authorization permits a prospective policy supersession without further owner approval if it would otherwise bind.",
+  "scientific_outcomes_reviewed_while_recording": false
+}

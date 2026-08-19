@@ -1,0 +1,142 @@
+{
+  "audit_id": "A22-task-shield-runtime",
+  "authorization_source": "auto_compiled_non_gold",
+  "missing_component": null,
+  "offline_boundaries": [],
+  "online_boundaries": [
+    {
+      "end_line": 210,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "query"
+      ],
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "phase": "local_reproduction_user_task_initialization",
+      "referenced_identifiers": [
+        "TaskShieldVerifierError",
+        "content",
+        "extract",
+        "query",
+        "reset",
+        "self",
+        "source",
+        "str",
+        "tasks",
+        "trace",
+        "user_tasks"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "self.extract": true,
+        "self.trace.reset": true,
+        "trusted_user": true
+      },
+      "sha256": "ceaa231f909bf2b2755f2ff42fe90bfa3e84034f2ea33a5312d748e6ae4dcfa2",
+      "start_line": 205,
+      "symbol": "TaskShieldPaperVerifier.initialize"
+    },
+    {
+      "end_line": 285,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "call_id",
+        "tool",
+        "arguments",
+        "history"
+      ],
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "phase": "local_reproduction_tool_alignment_check",
+      "referenced_identifiers": [
+        "Any",
+        "Mapping",
+        "Sequence",
+        "_scores",
+        "append",
+        "arguments",
+        "call_id",
+        "copy",
+        "deepcopy",
+        "dict",
+        "dumps",
+        "ensure_ascii",
+        "epsilon",
+        "history",
+        "json",
+        "proposal",
+        "row",
+        "scores",
+        "self",
+        "sort_keys",
+        "source",
+        "str",
+        "tool",
+        "tool_calls",
+        "total",
+        "trace"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "arguments": true,
+        "self._scores": true,
+        "tool": true
+      },
+      "sha256": "ceaa231f909bf2b2755f2ff42fe90bfa3e84034f2ea33a5312d748e6ae4dcfa2",
+      "start_line": 257,
+      "symbol": "TaskShieldPaperVerifier.check_tool_call"
+    },
+    {
+      "end_line": 317,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "content",
+        "source",
+        "history"
+      ],
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "phase": "local_reproduction_message_alignment_check",
+      "referenced_identifiers": [
+        "Any",
+        "Mapping",
+        "Sequence",
+        "_scores",
+        "append",
+        "check",
+        "checks",
+        "content",
+        "content_checks",
+        "dict",
+        "epsilon",
+        "extract",
+        "history",
+        "instruction",
+        "instructions",
+        "proposal",
+        "row",
+        "scores",
+        "self",
+        "source",
+        "str",
+        "strip",
+        "total",
+        "trace"
+      ],
+      "referenced_string_keys": [
+        "aligned",
+        "instruction"
+      ],
+      "required_token_checks": {
+        "history": true,
+        "self._scores": true,
+        "self.extract": true
+      },
+      "sha256": "ceaa231f909bf2b2755f2ff42fe90bfa3e84034f2ea33a5312d748e6ae4dcfa2",
+      "start_line": 287,
+      "symbol": "TaskShieldPaperVerifier.check_content"
+    }
+  ],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

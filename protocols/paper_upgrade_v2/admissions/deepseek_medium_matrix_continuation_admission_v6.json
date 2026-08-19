@@ -1,0 +1,35 @@
+{
+  "artifact_role": "medium_matrix_continuation_authorization",
+  "authorization": {
+    "canary_execution_authorized": false,
+    "canary_review_sha256": "91dc3d93d9fa144fdbc5f8270f4cecbaf8a05b9a5ded734c8dac5b2739367db0",
+    "candidate_manifest_sha256": "9017e65c40e797f2b367aedd7a6eb07aa2e458a92f82c5edd3a317ba95f1825f",
+    "candidate_only": false,
+    "matrix_continuation_authorized": true,
+    "owner_approval": {
+      "approval_kind": "delegated_safe_api_iteration",
+      "approval_scope": "deepseek_v6_medium_matrix_continuation",
+      "approved_at": "2026-07-24T21:20:00+08:00",
+      "approved_by_role": "project_owner",
+      "statement_sha256": "2194cd7fd6734d220f7b38cd64fd717df8717270f0034dcaebece42185269ef2"
+    },
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "prior_runs_resumed": false
+  },
+  "generated_at": "2026-07-24T21:20:00+08:00",
+  "manifest_sha256": "f2b0a9b28a0c4cdef2d7489d1d3896e4cc8d402d96b4fda27c1a546d1f41665e",
+  "next_gate": "Execute the remaining frozen v6 matrix once; result admission remains a separate technical gate.",
+  "schema_version": "m3-paper-v2-formal-matrix-admission-6.0",
+  "scope": {
+    "candidate_scope_sha256": "7d8f87ea84c86051b26422f786fa5a82c138b1c0e556fd534d8aba7652e17da3",
+    "run_id": "paper-v2-deepseek-medium-v6-20260724"
+  },
+  "scope_sha256": "e68deec124ecbaaf6076d8ee5ca90e8fbd0398feb99b648cbbcc09432831bccf",
+  "status": "activated_for_matrix_continuation"
+}

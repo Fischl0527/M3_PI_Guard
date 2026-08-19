@@ -1,0 +1,35 @@
+{
+  "artifact_role": "six_condition_canary_execution_authorization",
+  "authorization": {
+    "canary_execution_authorized": true,
+    "canary_review_sha256": null,
+    "candidate_manifest_sha256": "0788bc670d2a024dc0aa713d5856de0726a31ffaafb81e75afee97e93ddd738b",
+    "candidate_only": false,
+    "matrix_continuation_authorized": false,
+    "owner_approval": {
+      "approval_kind": "delegated_safe_api_iteration",
+      "approval_scope": "deepseek_v3_six_condition_canary",
+      "approved_at": "2026-07-24T17:15:00+08:00",
+      "approved_by_role": "project_owner",
+      "statement_sha256": "2194cd7fd6734d220f7b38cd64fd717df8717270f0034dcaebece42185269ef2"
+    },
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "prior_runs_resumed": false
+  },
+  "generated_at": "2026-07-24T17:15:00+08:00",
+  "manifest_sha256": "8e081a759edc132dbc5578d1303c58d7f4610259828c93e7211deddd11c8fa65",
+  "next_gate": "Execute exactly the first six conditions once. Matrix continuation and result admission remain unauthorized.",
+  "schema_version": "m3-paper-v2-formal-matrix-admission-3.0",
+  "scope": {
+    "candidate_scope_sha256": "b7f408a2eae1a50676f7161da7019e6df494cb6b09d60946e169389935ac67f1",
+    "run_id": "paper-v2-deepseek-medium-v3-20260724"
+  },
+  "scope_sha256": "392271677691f98da2ee4055f8cf8c3e4f63675f86fd1890f94753aa7079f6c8",
+  "status": "activated_for_six_condition_canary"
+}

@@ -1,0 +1,47 @@
+{
+  "artifact_role": "analysis_amendment_qualification",
+  "diagnostic_count": 1,
+  "diagnostic_identity_checks": {
+    "evidence_level_is_diagnostic_only": true,
+    "identity_evidence_is_unverified": true,
+    "identity_is_unverified": true,
+    "response_id_is_null": true
+  },
+  "evidence_boundary": {
+    "aggregate_statistics_computed": 0,
+    "execution_ledgers_mutated": false,
+    "network_calls_made": 0,
+    "provider_calls_made": 0,
+    "v7_analysis_artifact_created": false
+  },
+  "field_preservation_checks": {
+    "authorization_regime": true,
+    "case_id": true,
+    "condition_id": true,
+    "effective_decision": true,
+    "evaluation_case_type": true,
+    "included_in_intention_to_treat": true,
+    "initial_guard_decision": true,
+    "latency_ms": true,
+    "operational_status": true,
+    "task_completion": true,
+    "token_usage": true,
+    "unsafe_effect": true,
+    "unsafe_effect_itt": true
+  },
+  "formal_candidate_count": 479,
+  "manifest_sha256": "d494aba442ea422097b4f81b45b0648fc1d276d218cf0d9a3f650fb5f5ca4600",
+  "negative_rejection_count": 2,
+  "positive_schema_validation_count": 1,
+  "post_access_disclosure": {
+    "aggregate_results_seen_before_freeze": false,
+    "amendment_is_post_admission": true,
+    "diagnostic_fields_inspected_for_debugging": true,
+    "failed_v6_and_v7_aggregate_artifacts_created": 0,
+    "method_change": "schema-valid diagnostic-only identity projection and report-level no-response disclosure"
+  },
+  "record_count": 480,
+  "run_id": "paper-v2-deepseek-medium-v8-v9-analysis-amendment-v8-20260726",
+  "schema_version": "m3-paper-v2-formal-analysis-amendment-8.0",
+  "status": "schema_valid_diagnostic_itt_projection_qualified"
+}

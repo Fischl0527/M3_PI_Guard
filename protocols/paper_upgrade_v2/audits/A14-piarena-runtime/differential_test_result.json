@@ -1,0 +1,8 @@
+{
+  "audit_id": "A14-piarena-runtime",
+  "base_digest": "f2a6aad2ce99bdc7da3ba0b3d4fc6431c371253759a2dd5b71b971fb8f28d5b4",
+  "mutated_digest": "f2a6aad2ce99bdc7da3ba0b3d4fc6431c371253759a2dd5b71b971fb8f28d5b4",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

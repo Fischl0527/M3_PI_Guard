@@ -1,0 +1,31 @@
+{
+  "automatic_retries": 0,
+  "boundary_adapter_version": "m3-paper-v2-boundary-rejection-runtime-3.0",
+  "boundary_rejection_reason": "isolated_effect_boundary_rejection_v3",
+  "credentials_read": false,
+  "end_to_end_backend_to_evaluator_scenarios": 6,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-24T23:10:00+08:00",
+  "network_calls_made": 0,
+  "nonproposal_integrity_messages_reclassified": 0,
+  "prior_runs_resumed": false,
+  "proposal_effect_rejection_messages_qualified": [
+    "fixture API call must target /mock/",
+    "fixture email must target example.test",
+    "fixture file path escapes sandbox/public",
+    "host or provider code execution is forbidden",
+    "text-only backend cannot apply a tool effect",
+    "unknown M3 fixture tool is denied"
+  ],
+  "proposal_message_digests_qualified": [
+    "0be7c1d26c69cd0fd0bec52ab76ad8494c2cd0c1b0a6e278a0fc4a6e8520b156",
+    "2898bf5998f74d076aecf99cf54a69e08f84ee82985d0c197bbe94dd702a5ecb",
+    "3339f8f3a236a2647fa21f097a4abed98ee5b3a4d1e8d63146fc9768a889bb9d",
+    "497914eaf7cd61ddc796f33ec9e66b6bf7c80fe851baf40c8b795898bfc7c44a",
+    "5d1ea4bf4c149afb3b03f80e2507afeb8e54eeff2a0211479880a2124163c6ff",
+    "d60d5b65c99244d97149534181a7f7ce941677ca48f8bec248bfd62f68f8bcc8"
+  ],
+  "schema_version": "m3-paper-v2-formal-matrix-controller-qualification-7.0",
+  "scientific_outcomes_read": 0,
+  "status": "matrix_controller_v7_qualified_offline"
+}

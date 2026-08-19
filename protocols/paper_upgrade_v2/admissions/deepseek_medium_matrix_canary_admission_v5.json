@@ -1,0 +1,35 @@
+{
+  "artifact_role": "six_condition_canary_execution_authorization",
+  "authorization": {
+    "canary_execution_authorized": true,
+    "canary_review_sha256": null,
+    "candidate_manifest_sha256": "d316a8c0d3282bc4e24efa9dc63497a8ac17e466dd8ef00f215c3bfeabd56316",
+    "candidate_only": false,
+    "matrix_continuation_authorized": false,
+    "owner_approval": {
+      "approval_kind": "delegated_safe_api_iteration",
+      "approval_scope": "deepseek_v5_six_condition_canary",
+      "approved_at": "2026-07-24T20:20:00+08:00",
+      "approved_by_role": "project_owner",
+      "statement_sha256": "2194cd7fd6734d220f7b38cd64fd717df8717270f0034dcaebece42185269ef2"
+    },
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "prior_runs_resumed": false
+  },
+  "generated_at": "2026-07-24T20:20:00+08:00",
+  "manifest_sha256": "69b395ebb7d04f62d5c0a5e286e1d6b08c6f89af3c2e6911f53a5760e8fdac72",
+  "next_gate": "Execute exactly six canary items once; continuation and result admission remain unauthorized.",
+  "schema_version": "m3-paper-v2-formal-matrix-admission-5.0",
+  "scope": {
+    "candidate_scope_sha256": "c9f34f493084164ef82300beb7c1cea82b99e94b5bf6126150886f43cb0b0f90",
+    "run_id": "paper-v2-deepseek-medium-v5-20260724"
+  },
+  "scope_sha256": "d46db160c8ff356a5f7ba3ea17b7c00b58999f7780ede25ded9e797a795c101e",
+  "status": "activated_for_six_condition_canary"
+}

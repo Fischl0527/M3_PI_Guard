@@ -1,0 +1,69 @@
+{
+  "complete_chain_revalidated_after_each_append": true,
+  "credentials_read": false,
+  "formal_results_created": 0,
+  "fsync_after_each_append": true,
+  "generated_at": "2026-07-23T23:20:00+08:00",
+  "interpretation": {
+    "not_supported": [
+      "Any live provider or baseline dependency execution.",
+      "Any formal experiment record, effect estimate or model-quality conclusion.",
+      "Formal medium-matrix execution authorization."
+    ],
+    "supported": [
+      "The append-only disk path revalidates the complete ledger before every append and after recovery.",
+      "Twelve benchmark-condition stub entries survive disk round-trip without raw response or observation content.",
+      "No transient qualification file remains after the qualification scope exits."
+    ]
+  },
+  "ledger_sha256": "89231e4ebcf7b4c9e345c2d46ac8cfa8a15b12f90e48e5dccd4462cc8bccba1d",
+  "live_persistence_path_qualified": false,
+  "model_calls_made": 0,
+  "network_calls_made": 0,
+  "persistence_contract": {
+    "corrupt_or_truncated_json": "reject",
+    "duplicate_terminal_work": "reject",
+    "format": "append_only_jsonl",
+    "identity_or_run_drift": "reject",
+    "operational_failure_tiers": [
+      "diagnostic",
+      "formal_candidate"
+    ],
+    "raw_content_or_credential_pattern": "reject",
+    "runtime_events": "sanitized_action_decision_and_hash_evidence",
+    "stub_policy": "explicit_qualification_mode_only",
+    "successful_live_result_tier": "formal_candidate_only"
+  },
+  "project_experiment_records_persisted": 0,
+  "qualified_benchmark_condition_pairs": 12,
+  "raw_content_markers_absent": true,
+  "record_set_sha256": "6c30a2ba3e62d7a7be190fd1de963ca01aee9582d175a7be19b1778848f2bf6a",
+  "recovery_summary": {
+    "entry_count": 12,
+    "operational_status_counts": {
+      "completed": 12
+    },
+    "qualification_mode": true,
+    "remaining_work_items": 468,
+    "terminal_work_keys": [
+      "22c59bf65469c17556e7371a53ff6100ad8ce880808855e5a0f0f38dc237b214",
+      "32283983e49ae196ca6b57c671f25e4678df492dac8a818cfcad5a67014acce9",
+      "4c532376d090323a25e647df7616c0b8ac881e20362ad364677ad02433e192d0",
+      "58c611e2d2884396e9fb3250256de198d33c7cb1154bdc7eacec823cad67f432",
+      "5a0ac31877f93ace5526117f517aca099325f8ea6ab1ecb05f7da5d43b57400d",
+      "7ba9f5b98cd73f823970daf15c0ca4ba91ebca0c4c7d9e816d2aa6033a53073f",
+      "98bb3162ef88fb94ff218c7e1ba9c5f71d232a82196f5659c64b98e0267aaa0f",
+      "a24e93e995d1accca80d579ed21a69ad7148e269b21e34f79b10abb2a709c0d4",
+      "a420f596aeba7fc893857114e811b46f93e4dc4b24004a23154be2967f67c4cd",
+      "b31539bc57ede17cea780875328bb61789a7d7a3305304414e37efa5797856a2",
+      "c1a7479e1d351282e53a1487d6e8527faf3c95c9225899108cc43d803f63f113",
+      "c1e59ede27ed7cbd05622ad8d522a6a1fc83c340b26ee1af4670c070823a6e63"
+    ]
+  },
+  "remaining_full_plan_work_items": 468,
+  "runtime_event_set_sha256": "6a0d4069b1b9a5bc113066248ce557a8b54952f81eff4ea12c4b71b7dbdcc51a",
+  "schema_version": "m3-paper-v2-formal-record-store-qualification-1.0",
+  "status": "offline_persistence_path_qualified_live_records_pending",
+  "transient_cleanup_verified": true,
+  "transient_qualification_entries_written": 12
+}

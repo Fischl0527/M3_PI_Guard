@@ -1,0 +1,90 @@
+{
+  "automatic_retries": 0,
+  "credential_values_persisted": false,
+  "credentials_read": false,
+  "formal_identity_attested": false,
+  "formal_result_created": false,
+  "generated_at": "2026-07-24T00:30:00+08:00",
+  "interpretation": {
+    "not_supported": [
+      "Live exact-model/response-ID identity evidence; fixture IDs do not attest a provider.",
+      "Complete request tracing when an official API omits an HTTP request ID.",
+      "Any benchmark, condition, safety-effect or model-quality result.",
+      "Formal execution authorization."
+    ],
+    "supported": [
+      "Both official endpoint builders, exact-model checks, request/response ID extraction, usage parsers and budget hooks pass with injected responses.",
+      "Persisted receipts contain hashes, IDs, usage and budget state but no prompt, response text, headers or credential values.",
+      "Every client call has one transport attempt and declares no provider-managed tools."
+    ]
+  },
+  "network_calls_made": 0,
+  "providers": {
+    "deepseek": {
+      "authorization_header_used_transiently": true,
+      "budget_status": "continue",
+      "configured_model": "deepseek-v4-pro",
+      "experiment_record_evidence_level": "local_qualification",
+      "formal_record_eligible": false,
+      "identity_verified_for_fixture": true,
+      "model_identity_exact_match": true,
+      "payload_keys": [
+        "max_tokens",
+        "messages",
+        "model",
+        "stream",
+        "temperature"
+      ],
+      "payload_sha256": "641ba32cd21479c095d0f87a88fd5f6ccd49556c47f6f7c4b40ff05380b754ff",
+      "prompt_or_response_content_persisted": false,
+      "provider_attempts": 1,
+      "provider_tools_declared": false,
+      "request_headers_persisted": false,
+      "request_id_present": true,
+      "response_id_present": true,
+      "returned_model": "deepseek-v4-pro",
+      "stable_receipt_evidence_sha256": "14792cc8403d47f80d7ae38373010351cc4a80a35c1f377d190f548b20b5d474",
+      "status": "offline_injected_transport_pass",
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_cache_hit_tokens": 90,
+        "prompt_cache_miss_tokens": 10,
+        "prompt_tokens": 100,
+        "total_tokens": 110
+      }
+    },
+    "gemini": {
+      "authorization_header_used_transiently": true,
+      "budget_status": "continue",
+      "configured_model": "gemini-3.6-flash",
+      "experiment_record_evidence_level": "local_qualification",
+      "formal_record_eligible": false,
+      "identity_verified_for_fixture": true,
+      "model_identity_exact_match": true,
+      "payload_keys": [
+        "max_tokens",
+        "messages",
+        "model",
+        "stream",
+        "temperature"
+      ],
+      "payload_sha256": "1e76e0d26b56af2587393a94b829d0f0e816b4b94d1530f8a5a76147d59f9abc",
+      "prompt_or_response_content_persisted": false,
+      "provider_attempts": 1,
+      "provider_tools_declared": false,
+      "request_headers_persisted": false,
+      "request_id_present": true,
+      "response_id_present": true,
+      "returned_model": "gemini-3.6-flash",
+      "stable_receipt_evidence_sha256": "6d2c0426da67690ca315b300e40ac3b026e7e56813776627239f4df820930f33",
+      "status": "offline_injected_transport_pass",
+      "usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 100,
+        "total_tokens": 110
+      }
+    }
+  },
+  "schema_version": "m3-paper-v2-provider-executor-qualification-1.0",
+  "status": "offline_transport_qualified_live_execution_pending"
+}

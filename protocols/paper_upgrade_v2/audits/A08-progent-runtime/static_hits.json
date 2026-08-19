@@ -1,0 +1,6 @@
+{
+  "audit_id": "A08-progent-runtime",
+  "hits": [],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

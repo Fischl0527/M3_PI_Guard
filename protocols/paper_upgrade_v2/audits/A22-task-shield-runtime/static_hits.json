@@ -1,0 +1,88 @@
+{
+  "audit_id": "A22-task-shield-runtime",
+  "hits": [
+    {
+      "line": 5,
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "extract user tasks, score every assistant/tool instruction and proposed tool",
+      "text_sha256": "119bf0fe87e7c915ae54623c7f5df856ed44c6a747ffbb54f02acb5041965dd5"
+    },
+    {
+      "line": 239,
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "raw_score = row.get(\"contribution_score\", row.get(\"ContributeTo score\"))",
+      "text_sha256": "6b94799300a75ef70b0c77633a7e41f4d48b7a8f7fa8c672afc215bb636c0c96"
+    },
+    {
+      "line": 241,
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "score = float(raw_score)",
+      "text_sha256": "84dad821371070f150d63b59516197321701a8c82305d290fa0365b0da560cd2"
+    },
+    {
+      "line": 243,
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "raise TaskShieldVerifierError(\"contribution score must be numeric\") from exc",
+      "text_sha256": "1274ad49550ed4a23a36874bbb29fde253feda85886b705a399bc115a5799b8d"
+    },
+    {
+      "line": 244,
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "if not 0.0 <= score <= 1.0:",
+      "text_sha256": "1e5f8afac31fbb84f322ed48101154316a917962689af591f6e084b3c7bfb890"
+    },
+    {
+      "line": 245,
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "raise TaskShieldVerifierError(\"contribution score must be in [0, 1]\")",
+      "text_sha256": "62fc1efe7e31719d6a5752fa352b14a3848c5a192851cad8a06c7292efe92d2f"
+    },
+    {
+      "line": 249,
+      "path": "experiments/paper_v1/benchmarks/taskshield_paper_runtime.py",
+      "patterns": [
+        "\\bscore\\b"
+      ],
+      "preview": "\"contribution_score\": score,",
+      "text_sha256": "622529d97a55908388d1e96781499ed10ac6684a63f0475705220b3fcae67036"
+    },
+    {
+      "line": 26,
+      "path": "protocols/paper_upgrade_v1/taskshield_paper_formal_protocol_v1.md",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "untrusted. The verifier never receives attack labels, target actions, expected",
+      "text_sha256": "e22c1f22cdff3bcc73682445ca1ab50624cdde11d1d0381f7f97c183926f1059"
+    },
+    {
+      "line": 41,
+      "path": "protocols/paper_upgrade_v1/taskshield_paper_formal_protocol_v1.md",
+      "patterns": [
+        "attack[_ -]?success"
+      ],
+      "preview": "outcome and trace hashes before computing utility, attack success, Wilson",
+      "text_sha256": "7fef0c82d8d537e9387ebffa4635b6ad720ada1f2d910532f82133b01340c377"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

@@ -1,0 +1,8 @@
+{
+  "audit_id": "A10-ipiguard-runtime",
+  "base_digest": "bfd9e2ca0508cc28fe7889294b6b62d92b3efc9995af80aaaa63643b4f9893bc",
+  "mutated_digest": "bfd9e2ca0508cc28fe7889294b6b62d92b3efc9995af80aaaa63643b4f9893bc",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

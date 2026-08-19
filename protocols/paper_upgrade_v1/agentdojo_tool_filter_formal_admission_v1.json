@@ -1,0 +1,42 @@
+{
+  "actions": [
+    "monitor_refreshed",
+    "formal_analysis_refreshed",
+    "registry_updated"
+  ],
+  "admission_version": "m3-paper-v1-agentdojo-tool-filter-formal-admission-1.0",
+  "analysis_manifest_path": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/analysis/analysis_manifest.json",
+  "blockers": [],
+  "boundary": "Admission bridge only. Running or partial roots remain blocked. Registry updates require completed_formal run evidence, monitor agreement, formal analysis and explicit --write-registry.",
+  "created_at": "2026-07-22T06:19:40.882272+00:00",
+  "monitor_counts": {
+    "case_manifest_count": 726,
+    "completed_cases": 726,
+    "expected_cases": 726,
+    "failed_cases": 0,
+    "missing_cases": 0,
+    "observed_outcomes": 726,
+    "outcome_case_kind_counts": {
+      "security": 629,
+      "utility": 97
+    },
+    "outcome_status_counts": {
+      "completed": 726
+    },
+    "progress_events": 1936,
+    "progress_status_counts": {
+      "completed": 726,
+      "resumed_completed": 483,
+      "running": 727
+    }
+  },
+  "monitor_health_status": "completed_formal_admitted",
+  "monitor_path": "protocols/paper_upgrade_v1/monitors/tool_filter_formal_v1/agentdojo_official_formal_run_monitor_v1.json",
+  "registry_output_path": "protocols/paper_upgrade_v1/baseline_registry.json",
+  "registry_path": "protocols/paper_upgrade_v1/baseline_registry.json",
+  "result_eligible_for_formal_tables": true,
+  "run_dir": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1",
+  "schema_version": "paper-agentdojo-tool-filter-formal-admission-1.0",
+  "status": "admitted_registry_updated",
+  "write_registry": true
+}

@@ -1,0 +1,16 @@
+{
+  "automatic_retries": 0,
+  "credentials_read": 0,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-24T16:30:00+08:00",
+  "network_calls_made": 0,
+  "payload_sha256": "fd554452c26830959743a0cdb8a9102942b866777bcc48c33beec9440e77991f",
+  "provider_attempts": 1,
+  "provider_tools_enabled": false,
+  "schema_version": "m3-paper-v2-deepseek-nonthinking-client-qualification-1.0",
+  "status": "deepseek_nonthinking_client_qualified_offline",
+  "thinking_mode_persisted": "disabled",
+  "thinking_payload": {
+    "type": "disabled"
+  }
+}

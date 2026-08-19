@@ -1,0 +1,41 @@
+{
+  "artifact_role": "analysis_amendment_qualification",
+  "diagnostic_count": 1,
+  "evidence_boundary": {
+    "aggregate_statistics_computed": 0,
+    "execution_ledgers_mutated": false,
+    "network_calls_made": 0,
+    "provider_calls_made": 0,
+    "v6_analysis_artifact_created": false
+  },
+  "field_preservation_checks": {
+    "authorization_regime": true,
+    "case_id": true,
+    "condition_id": true,
+    "effective_decision": true,
+    "evaluation_case_type": true,
+    "included_in_intention_to_treat": true,
+    "initial_guard_decision": true,
+    "latency_ms": true,
+    "operational_status": true,
+    "task_completion": true,
+    "token_usage": true,
+    "unsafe_effect": true,
+    "unsafe_effect_itt": true
+  },
+  "formal_candidate_count": 479,
+  "manifest_sha256": "1b9b2db822988e2d3d73eb9b398cf2c0b7172f50a4b090e03b38ab06f6a53353",
+  "negative_rejection_count": 3,
+  "positive_projection_count": 1,
+  "post_access_disclosure": {
+    "aggregate_results_seen_before_freeze": false,
+    "amendment_is_post_admission": true,
+    "analysis_method_scope": "evidence-envelope projection only; outcome fields remain verbatim",
+    "diagnostic_fields_inspected_for_debugging": true,
+    "trigger": "v6 projector rejected the admitted closed diagnostic before aggregate statistics"
+  },
+  "record_count": 480,
+  "run_id": "paper-v2-deepseek-medium-v8-v9-analysis-amendment-v7-20260726",
+  "schema_version": "m3-paper-v2-formal-analysis-amendment-7.0",
+  "status": "diagnostic_itt_projection_qualified"
+}

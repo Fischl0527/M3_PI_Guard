@@ -1,0 +1,145 @@
+{
+  "artifact_locks": [
+    {
+      "bytes": 25361,
+      "path": "experiments/paper_v2/public_live_controller_v4.py",
+      "sha256": "e803d09093a8cd1ee2cb9352fd198a1bb5def7cd1bc94b891ddbcb0334abda34"
+    },
+    {
+      "bytes": 6550,
+      "path": "experiments/paper_v2/public_m3_live_dependency_v4.py",
+      "sha256": "baa417e2fb0aaf3944cf0daaced8c74308d701f1c83efb2eee28a62b44688a2a"
+    },
+    {
+      "bytes": 32365,
+      "path": "experiments/paper_v2/public_sharded_continuation_v1.py",
+      "sha256": "e8f53f4fdcedc8010f70ccb69749b03c83d7865c381ded11454fa882222fffe8"
+    },
+    {
+      "bytes": 1435,
+      "path": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v4-primary-4b717417fec675c3540d186e4b6d6af403bb03c208ebc91e1b1e84b1e7e83e30/technical_canary_review_v4.json",
+      "sha256": "8d20c5d9175ec5ef25b162291de8d3cd0ce70e938ee19b2c1f35190655df402c"
+    },
+    {
+      "bytes": 2003,
+      "path": "protocols/paper_upgrade_v2/admissions/deepseek_public_primary_canary_admission_v4.json",
+      "sha256": "59b7f1a86da012dbb0d695a7efe7e6581ab28b493672f18e92af69172572daa7"
+    },
+    {
+      "bytes": 4132,
+      "path": "protocols/paper_upgrade_v2/public_budget_policy_v1.json",
+      "sha256": "4b924f3d3974d90ddd51311d5c28e2d3717fb40e67b37acaf5d792b4c24c818a"
+    },
+    {
+      "bytes": 4691,
+      "path": "protocols/paper_upgrade_v2/public_execution_manifest_v1.json",
+      "sha256": "92b957182c49c971bc9512ede1224f2b950adeb433c78a9be9554fdc0c1102b2"
+    },
+    {
+      "bytes": 9707359,
+      "path": "protocols/paper_upgrade_v2/public_execution_plan_v1.jsonl",
+      "sha256": "034232257dd666c80bbf4de1e7f7df645de587eb84387337739bee55b8a5633f"
+    },
+    {
+      "bytes": 8361,
+      "path": "protocols/paper_upgrade_v2/public_matrix_candidate_v4.json",
+      "sha256": "9cd4bcccc6c12ce8c6bda71a0c5bf5f121afdcea42ed81c3beed61947d9383c0"
+    },
+    {
+      "bytes": 2465,
+      "path": "schemas/paper_v2/public_sharded_continuation_admission_v1.schema.json",
+      "sha256": "bef627f326ba329a19b5de24f9bf223f6c600d53be3d7a5950e3148f684af0d6"
+    },
+    {
+      "bytes": 2590,
+      "path": "schemas/paper_v2/public_sharded_continuation_candidate_v1.schema.json",
+      "sha256": "be6d7eb43fce5ee2bc2805235e8b314ec61b694eae0a1a36ab2b48bc5c8ccbd2"
+    }
+  ],
+  "artifact_role": "owner_review_candidate",
+  "authorization": {
+    "candidate_only": true,
+    "result_admission_authorized": false,
+    "shard_execution_authorized": false
+  },
+  "evidence_boundary": {
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "scientific_outcomes_accessed": false
+  },
+  "generated_at": "2026-07-29T06:00:00+08:00",
+  "manifest_sha256": "e6217b6bc224b9925eee157378cb42f61a4b3bbb9dee54cee48fbce331ffb906",
+  "schema_version": "m3-paper-v2-public-sharded-continuation-candidate-1.0",
+  "scope": {
+    "budget": {
+      "all_shards_hard_limit_cny": 19.6,
+      "automatic_retries": 0,
+      "global_public_policy_sha256": "4b924f3d3974d90ddd51311d5c28e2d3717fb40e67b37acaf5d792b4c24c818a",
+      "per_shard_hard_limit_cny": 4.9,
+      "source_canary_cost_cny": 0.0521812
+    },
+    "continuation_records": 5058,
+    "execution": {
+      "external_effects_enabled": false,
+      "maximum_parallel_shards": 4,
+      "provider_tools_enabled": false,
+      "result_admission_is_separate": true
+    },
+    "model_id": "deepseek-v4-pro",
+    "model_role": "primary",
+    "partition": {
+      "complete": true,
+      "disjoint": true,
+      "rule": "remaining_plan_order_round_robin",
+      "terminal_canary_rows_excluded": true
+    },
+    "role_records": 5082,
+    "shard_count": 4,
+    "shards": [
+      {
+        "execution_identity": "3521559e01a6772051b0c821c0c1259e429605a506e6aaaabfc07f8a1b245984",
+        "hard_spend_limit_cny": 4.9,
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-primary-continuation-s0-v1-3521559e01a6772051b0c821c0c1259e429605a506e6aaaabfc07f8a1b245984",
+        "records": 1265,
+        "run_id": "paper-v2-public-primary-continuation-s0-v1",
+        "shard_index": 0,
+        "work_key_sequence_sha256": "729d6acccbb86f1d82fee3838b6eccef9eb7a86d317fb9fceefd734c7ee706e9"
+      },
+      {
+        "execution_identity": "d8754a6851cd268d869ac32eea7b7a1f12a93f70623c601f0c9a305c031b77c4",
+        "hard_spend_limit_cny": 4.9,
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-primary-continuation-s1-v1-d8754a6851cd268d869ac32eea7b7a1f12a93f70623c601f0c9a305c031b77c4",
+        "records": 1265,
+        "run_id": "paper-v2-public-primary-continuation-s1-v1",
+        "shard_index": 1,
+        "work_key_sequence_sha256": "29f35e7a4bcc683eac5db48166509f747095ae0f5692509ea6bd5a63a727e7b7"
+      },
+      {
+        "execution_identity": "960d77d5af9b26f4c35e125525819bc171c4f3919ee96339753442bdad1e5b90",
+        "hard_spend_limit_cny": 4.9,
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-primary-continuation-s2-v1-960d77d5af9b26f4c35e125525819bc171c4f3919ee96339753442bdad1e5b90",
+        "records": 1264,
+        "run_id": "paper-v2-public-primary-continuation-s2-v1",
+        "shard_index": 2,
+        "work_key_sequence_sha256": "52e2f77569498f22a59386f1fc59123bb6388277bf9303d09e6a5c0e2e4c2915"
+      },
+      {
+        "execution_identity": "c19d7f8ac2e45fe3a1f1251f68c5d15e4f01a5d3048baea27b5893e434e66a05",
+        "hard_spend_limit_cny": 4.9,
+        "output_root": "outputs/paper_upgrade_v2/formal_public/deepseek/public-primary-continuation-s3-v1-c19d7f8ac2e45fe3a1f1251f68c5d15e4f01a5d3048baea27b5893e434e66a05",
+        "records": 1264,
+        "run_id": "paper-v2-public-primary-continuation-s3-v1",
+        "shard_index": 3,
+        "work_key_sequence_sha256": "122ee225b74001d58684830730022578543c6763a656c5545dc8713d30c2ef2e"
+      }
+    ],
+    "source_canary_admission_manifest_sha256": "f0159ecd058f72b5e847a89563a29e2654678f26c4a66d72908c4fb35e83f6fd",
+    "source_canary_cost_cny": 0.0521812,
+    "source_canary_records": 24,
+    "source_canary_technical_review_sha256": "8d20c5d9175ec5ef25b162291de8d3cd0ce70e938ee19b2c1f35190655df402c",
+    "source_candidate_manifest_sha256": "042c561e227e99e84bdea9caf098f1589f1a1f5e3faecfbb6c78639009565ffb"
+  },
+  "scope_sha256": "c1784d830636e6c4304648340e510f8f2ab8d7c435d9f77fd03a617aa6ab83f9",
+  "status": "candidate_pending_exact_command_shard_approvals"
+}

@@ -1,0 +1,28 @@
+{
+  "admission_version": "m3-paper-v1-external-strong-baseline-admission-1.0",
+  "baseline_registry_path": "protocols/paper_upgrade_v1/baseline_registry.json",
+  "blockers": [
+    "run_manifest_missing",
+    "outcomes_missing",
+    "progress_missing",
+    "analysis_manifest_missing"
+  ],
+  "boundary": "Evidence admission only. Missing, partial, failed, diagnostic, stale, or hash-mismatched runs remain ineligible and never modify either registry.",
+  "condition_id": "ipiguard",
+  "created_at": "2026-07-22T03:38:51.044094+00:00",
+  "evidence": {
+    "required_paths": {
+      "analysis_manifest_missing": "outputs/paper_upgrade_v1/baselines/ipiguard_source_backed_formal_v1/analysis/analysis_manifest.json",
+      "outcomes_missing": "outputs/paper_upgrade_v1/baselines/ipiguard_source_backed_formal_v1/outcomes.jsonl",
+      "progress_missing": "outputs/paper_upgrade_v1/baselines/ipiguard_source_backed_formal_v1/progress.jsonl",
+      "run_manifest_missing": "outputs/paper_upgrade_v1/baselines/ipiguard_source_backed_formal_v1/run_manifest.json"
+    }
+  },
+  "external_registry_path": "protocols/paper_upgrade_v1/external_strong_baselines_v1.json",
+  "registries_written": false,
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-external-strong-baseline-admission-1.0",
+  "selected_external_entry": "ipiguard_github_emnlp2025",
+  "status": "blocked_not_formally_admitted",
+  "write_registries_requested": false
+}

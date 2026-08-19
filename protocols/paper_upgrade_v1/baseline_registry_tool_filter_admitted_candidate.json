@@ -1,0 +1,445 @@
+{
+  "conditions": [
+    {
+      "family": "local_reproducible",
+      "guard_modules": [],
+      "id": "no_defense",
+      "implementation_status": "ready",
+      "monitor_mode": "off",
+      "prompt_profile": "normal"
+    },
+    {
+      "family": "local_reproducible",
+      "guard_modules": [],
+      "id": "safe_prompt",
+      "implementation_status": "ready",
+      "monitor_mode": "off",
+      "prompt_profile": "safe_prompt"
+    },
+    {
+      "family": "local_reproducible",
+      "guard_modules": [],
+      "id": "spotlighting",
+      "implementation_status": "ready",
+      "monitor_mode": "off",
+      "prompt_profile": "spotlighting",
+      "scope_note": "Protocol-level spotlighting prompt, not a claim of byte-identical upstream code."
+    },
+    {
+      "family": "local_reproducible",
+      "guard_modules": [],
+      "id": "prompt_sandwich",
+      "implementation_status": "ready",
+      "monitor_mode": "off",
+      "prompt_profile": "prompt_sandwich"
+    },
+    {
+      "family": "agentdojo_official_prompt_baseline",
+      "guard_modules": [],
+      "id": "agentdojo_repeat_user_prompt",
+      "implementation_status": "ready_diagnostic_adapter",
+      "monitor_mode": "off",
+      "prompt_profile": "normal",
+      "result_eligible": false,
+      "scope_note": "Replicates the pinned AgentDojo behavior by appending the raw initial user query after tool observations in the local M3AgentDojoPipeline message loop. Eligible for formal tables only after a frozen protocol records exact compatibility.",
+      "upstream_defense": "repeat_user_prompt",
+      "upstream_source": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py"
+    },
+    {
+      "family": "agentdojo_official_prompt_baseline",
+      "guard_modules": [],
+      "id": "agentdojo_spotlighting_with_delimiting",
+      "implementation_status": "ready_diagnostic_adapter",
+      "monitor_mode": "off",
+      "prompt_profile": "normal",
+      "result_eligible": false,
+      "scope_note": "Replicates the pinned AgentDojo system instruction and <<...>> tool-output delimiting in the local M3AgentDojoPipeline message loop. Eligible for formal tables only after a frozen protocol records exact compatibility.",
+      "upstream_defense": "spotlighting_with_delimiting",
+      "upstream_source": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py"
+    },
+    {
+      "family": "m3",
+      "guard_modules": [
+        "policy"
+      ],
+      "id": "m3_policy_only",
+      "implementation_status": "ready",
+      "monitor_mode": "enforce",
+      "prompt_profile": "normal"
+    },
+    {
+      "family": "m3",
+      "guard_modules": [
+        "policy",
+        "confirmation"
+      ],
+      "id": "m3_policy_confirmation",
+      "implementation_status": "ready",
+      "monitor_mode": "enforce",
+      "prompt_profile": "normal"
+    },
+    {
+      "family": "m3",
+      "guard_modules": [
+        "policy",
+        "provenance",
+        "temporal",
+        "dataflow",
+        "confirmation"
+      ],
+      "id": "m3_full_normal_prompt",
+      "implementation_status": "ready",
+      "monitor_mode": "enforce",
+      "prompt_profile": "normal",
+      "scope_note": "Isolates runtime-monitor effect from safe-prompt effect."
+    },
+    {
+      "family": "m3",
+      "guard_modules": [
+        "policy",
+        "provenance",
+        "temporal",
+        "dataflow",
+        "confirmation"
+      ],
+      "id": "m3_full",
+      "implementation_status": "ready",
+      "monitor_mode": "enforce",
+      "prompt_profile": "safe_prompt"
+    },
+    {
+      "family": "m3_ablation",
+      "guard_modules": [
+        "policy",
+        "temporal",
+        "dataflow",
+        "confirmation"
+      ],
+      "id": "m3_no_provenance",
+      "implementation_status": "ready",
+      "monitor_mode": "enforce",
+      "prompt_profile": "safe_prompt"
+    },
+    {
+      "family": "m3_ablation",
+      "guard_modules": [
+        "policy",
+        "provenance",
+        "dataflow",
+        "confirmation"
+      ],
+      "id": "m3_no_temporal",
+      "implementation_status": "ready",
+      "monitor_mode": "enforce",
+      "prompt_profile": "safe_prompt"
+    },
+    {
+      "family": "m3_ablation",
+      "guard_modules": [
+        "policy",
+        "provenance",
+        "temporal",
+        "confirmation"
+      ],
+      "id": "m3_no_dataflow",
+      "implementation_status": "ready",
+      "monitor_mode": "enforce",
+      "prompt_profile": "safe_prompt"
+    },
+    {
+      "family": "m3_ablation",
+      "guard_modules": [
+        "policy",
+        "provenance",
+        "temporal",
+        "dataflow"
+      ],
+      "id": "m3_no_confirmation",
+      "implementation_status": "ready",
+      "monitor_mode": "enforce",
+      "prompt_profile": "safe_prompt"
+    },
+    {
+      "analyzer": "experiments/paper_v1/benchmarks/analyze_agentdojo_official_tool_filter_formal.py",
+      "compatibility_plan": [
+        "Use the same official AgentDojo pipeline and disclosed OpenAI-compatible tool-filter model-binding shim for any subsequent formal run.",
+        "Run the frozen 726-case formal matrix with all failures retained in the denominator and analyze it only after exact coverage is verified.",
+        "Keep any further non-identical local-compatible tool-filter clone under a separate adapter label and out of official-baseline claims."
+      ],
+      "complete_logs": [
+        "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/run_manifest.json",
+        "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/outcomes.jsonl",
+        "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/progress.jsonl",
+        "protocols/paper_upgrade_v1/monitors/tool_filter_formal_v1/agentdojo_official_formal_run_monitor_v1.json"
+      ],
+      "current_blockers": [],
+      "current_runner_status": "completed_formal_analyzed",
+      "display_name": "AgentDojo tool_filter",
+      "family": "agentdojo_official_strong_baseline",
+      "formal_admission_evidence": {
+        "admission_version": "m3-paper-v1-agentdojo-tool-filter-formal-admission-1.0",
+        "analysis_manifest_sha256": "dffb8c5702f9f8a6c7da4e9fa2b37c3d2ed03be392eeba71e872e8bffb0f67c7",
+        "monitor_snapshot_sha256": "933f7da692a8bc2bcbc7b9a8ab5f83dd53d0d478b303134ffb99d76fa0fe114a",
+        "outcomes_sha256": "d168b6741ea3d80d1e7cba4244e7f32f7661ed1b264e28bfa20f0f5e52c3dd5a",
+        "progress_sha256": "e544602ee87bf8c8ece8dbfc16a117a4368f2d1ef9542c1055de93a018fbd796",
+        "run_manifest_sha256": "8f014192c9309b7f32129fe2dd39e9cf0f94b5976031c4352b3706facefb0225"
+      },
+      "formal_analysis_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/analysis/analysis_manifest.json",
+      "formal_exclusion_rule": "Admitted only for the exact declared formal_manifest and complete_logs; any rerun, configuration drift, failed case, missing case or non-identical adapter must be admitted under a new manifest.",
+      "formal_freeze": "protocols/paper_upgrade_v1/agentdojo_tool_filter_formal_freeze_v1.json",
+      "formal_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_formal_v1/analysis/analysis_manifest.json",
+      "formal_protocol": "protocols/paper_upgrade_v1/agentdojo_tool_filter_formal_protocol_v1.md",
+      "id": "agentdojo_tool_filter",
+      "implementation_status": "ready",
+      "qualification_analysis_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_qualification_v1/analysis/analysis_manifest.json",
+      "qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_qualification_v1/run_manifest.json",
+      "result_eligible": true,
+      "runner": "experiments/paper_v1/benchmarks/run_agentdojo_official_tool_filter_formal.py",
+      "security_qualification_analysis_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_security_qualification_v1/analysis/analysis_manifest.json",
+      "security_qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_security_qualification_v1/run_manifest.json",
+      "upstream_defense": "tool_filter",
+      "upstream_source": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py"
+    },
+    {
+      "compatibility_plan": [
+        "Do not start another exact official 726-case transformers_pi_detector run on this host unless the resource hypothesis changes and a new preflight proves the preserved long output can be processed without truncation.",
+        "For paper comparisons, either disclose this official AgentDojo detector as exact-source but resource-incompatible for the full frozen universe, or create a separate non-identical bounded-input adapter label with tokenizer-aware truncation/windowing and explicit exclusion from exact-official claims.",
+        "Keep ProtectAI model revision 90c9989b1a342275dd0d1a95aad283c04e075671, SAFE label and threshold 0.5 frozen for any future disclosed adapter.",
+        "Keep v1 CUDA, v2 CPU retry and long-output direct smoke as diagnostic evidence only; never merge them into denominators or formal tables."
+      ],
+      "current_blockers": [
+        "The dedicated E-drive detector smoke and a two-case official pipeline qualification are complete, but exact official full-run execution is resource blocked on the preserved 27,697-character AgentDojo workspace tool output. The v1 CUDA attempt was invalidated; the v2 CPU retry reproduced the same 2,185,056,432-byte CPU allocation failure on workspace/user_task_25; a direct long-output smoke that unloads Ollama before calling the pinned official detector also failed with the same allocation request. No rows from these roots may enter formal tables."
+      ],
+      "display_name": "AgentDojo transformers_pi_detector",
+      "failed_cpu_formal_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v2_cpu_detector/run_manifest.json",
+      "family": "agentdojo_official_strong_baseline",
+      "formal_exclusion_rule": "Exclude from exact-official formal tables until the preserved long-output direct smoke and full 726-case run both complete with exact input, complete official logs, exact coverage and zero unexplained failures.",
+      "formal_freeze": "protocols/paper_upgrade_v1/agentdojo_transformers_pi_detector_formal_freeze_v1.json",
+      "formal_protocol": "protocols/paper_upgrade_v1/agentdojo_transformers_pi_detector_formal_protocol_v1.md",
+      "id": "agentdojo_transformers_pi_detector",
+      "implementation_status": "source_backed_official_detector_resource_blocked_exact_formal",
+      "invalidated_formal_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_formal_v1/run_manifest.json",
+      "long_output_direct_smoke": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_long_output_direct_smoke_v1/smoke_manifest.json",
+      "qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_qualification_v2/run_manifest.json",
+      "resource_isolated_freeze": "protocols/paper_upgrade_v1/agentdojo_transformers_pi_detector_resource_isolated_freeze_v1.json",
+      "resource_isolated_pending_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_official_resource_isolated_formal_v1/run_manifest.json",
+      "result_eligible": false,
+      "upstream_defense": "transformers_pi_detector",
+      "upstream_source": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py"
+    },
+    {
+      "adapter_preflight": "protocols/paper_upgrade_v1/promptguard_detector_adapter_preflight_v1.json",
+      "compatibility_plan": [
+        "Completed source-backed detector-only formal run over 3,280 frozen M3-v2, AgentDojo and InjecAgent inputs.",
+        "Use only for detector-performance tables; do not count as end-to-end agent ASR, TCR or tool-utility evidence.",
+        "Retain threshold 0.5, tokenizer-aware 512-token non-overlap windows and max-malicious-score aggregation in downstream reports."
+      ],
+      "complete_logs": [
+        "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/raw_predictions.jsonl",
+        "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/progress.jsonl",
+        "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/failures.jsonl"
+      ],
+      "current_blockers": [],
+      "display_name": "PromptGuard or equivalent input detector",
+      "eligible_table_scope": [
+        "detector_performance"
+      ],
+      "family": "external_strong_baseline",
+      "figures_manifest": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/analysis/figure_manifest.json",
+      "formal_freeze": "protocols/paper_upgrade_v1/promptguard_detector_formal_freeze_v1.json",
+      "formal_manifest": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/analysis/analysis_manifest.json",
+      "formal_protocol": "protocols/paper_upgrade_v1/promptguard_detector_formal_protocol_v1.md",
+      "id": "promptguard",
+      "implementation_status": "ready_detector_only_formal",
+      "ineligible_table_scope": [
+        "end_to_end_agent_asr",
+        "agent_tcr",
+        "tool_execution_utility"
+      ],
+      "result_eligible": true,
+      "run_manifest": "outputs/paper_upgrade_v1/baselines/promptguard_detector_formal_v1/run_manifest.json",
+      "scope_note": "Formal-ready only for detector-performance tables. The run used the pinned Prompt Guard 2 86M revision, separated labels from inference, retained all failures in the denominator and produced complete logs plus figures.",
+      "source_registry_entry": "promptguard_llama_prompt_guard_2",
+      "target_scope": [
+        "M3-v2",
+        "AgentDojo",
+        "InjecAgent"
+      ]
+    },
+    {
+      "adapter_preflight": "protocols/paper_upgrade_v1/taskshield_alignment_adapter_preflight_v1.json",
+      "analyzer": "experiments/paper_v1/benchmarks/analyze_taskshield_paper_formal.py",
+      "compatibility_plan": [
+        "Keep the ACL paper PDF hash, zero contribution threshold, strict JSON parsing, local Qwen3 8B verifier and concise non-identical prompt wording frozen",
+        "Keep local adapter file hashes and pre-model resume identity checks frozen; changing runtime, import preflight, runner, analyzer, protocol or identity helper requires a new freeze/output root",
+        "Run a two-case utility/security qualification after the active AgentDojo tool_filter job releases Ollama",
+        "If qualification passes, execute all 726 common frozen cases with complete verifier and official traces",
+        "Keep failures in the denominator and never relabel the condition as official-source Task Shield"
+      ],
+      "current_blockers": [
+        "No public official Task Shield repository is pinned. The v1.2 13/13 ACL-paper reproduction freeze and 9/9 network-free import preflight are complete, with local adapter hashes covering runtime, import preflight, runner, analyzer, protocol and resume-identity helper. Real-model qualification, complete 726-case logs and admitted analysis still do not exist. The condition must always be labelled a disclosed paper reproduction, not official source."
+      ],
+      "current_runner_status": "v1_2_hash_bound_runner_analyzer_implemented_qualification_pending",
+      "display_name": "Task Shield",
+      "family": "external_strong_baseline",
+      "formal_exclusion_rule": "Exclude until the disclosed paper reproduction passes real-model qualification, exact 726-case execution, zero unexplained failures and analyzer admission; never describe it as an official-source reproduction.",
+      "formal_freeze": "protocols/paper_upgrade_v1/taskshield_paper_formal_freeze_v1.json",
+      "formal_protocol": "protocols/paper_upgrade_v1/taskshield_paper_formal_freeze_v1.md",
+      "id": "task_shield",
+      "implementation_status": "disclosed_paper_reproduction_v1_2_hash_bound_formal_protocol_import_preflight_completed_qualification_pending",
+      "paper_import_preflight": "protocols/paper_upgrade_v1/taskshield_paper_import_preflight_v1.json",
+      "result_eligible": false,
+      "runner": "experiments/paper_v1/benchmarks/run_taskshield_paper_formal.py",
+      "source_registry_entry": "task_shield_acl2025",
+      "target_scope": [
+        "AgentDojo",
+        "InjecAgent",
+        "M3-v2"
+      ]
+    },
+    {
+      "adapter_preflight": "protocols/paper_upgrade_v1/ipiguard_tdg_adapter_preflight_v1.json",
+      "analyzer": "experiments/paper_v1/benchmarks/analyze_ipiguard_source_backed_formal.py",
+      "compatibility_plan": [
+        "Preserve the original failed qualification root as diagnostic evidence",
+        "Use a new output root for the 9/9 v1.1 freeze after the active ToolFilter job releases Ollama/GPU",
+        "Inspect the captured raw construct JSON before deciding whether a separate disclosed prompt/schema compatibility configuration is scientifically defensible",
+        "Do not auto-repair missing DAG fields or reuse stale output rows",
+        "Only after 2/2 non-empty DAG qualification with zero failures execute all 726 frozen cases with explicit formal admission"
+      ],
+      "construct_output_capture": {
+        "changes_prompt": false,
+        "changes_upstream_parser": false,
+        "enabled": true,
+        "freeze_version": "m3-paper-v1-ipiguard-source-backed-freeze-1.1"
+      },
+      "current_blockers": [
+        "The first two-case runtime qualification remains retained at 1/2 completed: the failed case raised KeyError('function_name') inside upstream IPIGuard DAG construction and the completed case produced an empty DAG. The new 9/9 v1.1 freeze only adds hash-bound raw construct-output capture and does not repair keys, change the prompt, retry a completion, or alter upstream graph construction. A fresh v1.1 two-case qualification and complete 726-case formal logs are still absent."
+      ],
+      "current_runner_status": "two_case_v1_qualification_failed_v1_1_raw_capture_requalification_pending",
+      "display_name": "IPIGuard",
+      "family": "external_strong_baseline",
+      "formal_exclusion_rule": "Exclude until the source-backed qualification and exact 726-case formal run complete with frozen DAG traces, zero unexplained failures and admitted analysis.",
+      "formal_freeze": "protocols/paper_upgrade_v1/ipiguard_source_backed_formal_freeze_v1.json",
+      "formal_protocol": "protocols/paper_upgrade_v1/ipiguard_source_backed_formal_protocol_v1.md",
+      "id": "ipiguard",
+      "implementation_status": "source_backed_adapter_runtime_qualification_failed_model_dag_schema",
+      "qualification_analysis_manifest": "outputs/paper_upgrade_v1/baselines/ipiguard_source_backed_qualification_v1/analysis/analysis_manifest.json",
+      "qualification_manifest": "outputs/paper_upgrade_v1/baselines/ipiguard_source_backed_qualification_v1/run_manifest.json",
+      "result_eligible": false,
+      "runner": "experiments/paper_v1/benchmarks/run_ipiguard_source_backed_formal.py",
+      "source_registry_entry": "ipiguard_github_emnlp2025",
+      "source_smoke": "protocols/paper_upgrade_v1/ipiguard_official_source_smoke_v1.json",
+      "target_scope": [
+        "AgentDojo",
+        "InjecAgent",
+        "M3-v2"
+      ]
+    },
+    {
+      "adapter_preflight": "protocols/paper_upgrade_v1/progent_policy_adapter_preflight_v1.json",
+      "analyzer": "experiments/paper_v1/benchmarks/analyze_progent_source_backed_formal.py",
+      "compatibility_plan": [
+        "Keep official source commit 8a8eb894b9d568a32b4e58252fea85b47f789c77 and AgentDojo commit 089ed468cf3ed0322acc66b0211f26d9d90dbf60 immutable",
+        "Retain the frozen Qwen3 8B agent/policy-model binding, automatic update behavior, automatic expansion behavior and fallback semantics",
+        "Reject any stale output root whose freeze, runner, model, condition or selected-case hash differs before probing Ollama",
+        "Retain all generation, parsing, solver and tool failures in the denominator",
+        "Run paired utility/security qualification only after the active tool_filter job releases Ollama",
+        "Report the Slack injection-task-5 official trace checker and the pre-registered execution-grounded correction separately."
+      ],
+      "current_blockers": [
+        "The official Progent policy engine is pinned and ported to the common 726-case AgentDojo universe with a 13/13 v1.1 freeze, 10/10 network-blocked import preflight, hash-bound local adapter files, resumable runner and dual-checker analyzer, but model qualification, complete 726-case logs and admitted formal analysis do not exist yet.",
+        "The official repository bundles only 686 v1 cases; the disclosed current-AgentDojo lifecycle port is required for the common comparison and must not be described as an upstream CLI byte-for-byte reproduction.",
+        "The upstream repository has no top-level license file, so redistribution terms still require clarification."
+      ],
+      "current_runner_status": "v1_1_hash_bound_resume_gate_implemented_qualification_pending",
+      "display_name": "Progent",
+      "family": "external_strong_baseline",
+      "formal_exclusion_rule": "Exclude until the pinned official implementation has a frozen AgentDojo adapter, trusted-input-only policy-generation audit, complete logs and admitted formal analysis.",
+      "formal_freeze": "protocols/paper_upgrade_v1/progent_source_backed_formal_freeze_v1.json",
+      "formal_protocol": "protocols/paper_upgrade_v1/progent_source_backed_formal_protocol_v1.md",
+      "id": "progent",
+      "implementation_status": "source_backed_v1_1_hash_bound_formal_protocol_import_preflight_completed_qualification_pending",
+      "official_source_checkout": "external/baselines/progent",
+      "official_source_commit": "8a8eb894b9d568a32b4e58252fea85b47f789c77",
+      "official_source_smoke": "protocols/paper_upgrade_v1/progent_official_source_smoke_v1.json",
+      "result_eligible": false,
+      "runner": "experiments/paper_v1/benchmarks/run_progent_source_backed_formal.py",
+      "source_backed_adapter": "experiments/paper_v1/benchmarks/progent_source_backed_runtime.py",
+      "source_backed_import_preflight": "protocols/paper_upgrade_v1/progent_source_backed_import_preflight_v1.json",
+      "source_registry_entry": "progent_arxiv2025",
+      "target_scope": [
+        "AgentDojo",
+        "InjecAgent",
+        "M3-v2"
+      ]
+    },
+    {
+      "adapter_preflight": "protocols/paper_upgrade_v1/camel_fides_ifc_adapter_preflight_v1.json",
+      "analyzer": "experiments/paper_v1/benchmarks/analyze_camel_source_backed_formal.py",
+      "compatibility_plan": [
+        "CaMeL is selected as the current information-flow/capability baseline candidate",
+        "Keep the exact observed source commit, source-smoke hash, uv.lock hash, plain import-preflight hash, compatibility-preflight hash, runner-wiring hash, transport/mapping hash and v1.2 local-adapter hash binding pinned",
+        "Use the disclosed source-backed AgentDojo compatibility layer at the start of the runner process without changing CaMeL's security algorithm",
+        "Reject any stale output root whose freeze, runner, model, condition or selected-case hash differs before probing Ollama",
+        "Run the frozen source-backed qualification with the isolated CaMeL runtime only after the active tool_filter job releases Ollama",
+        "Keep API/local-model cost policy and label/capability assumptions frozen before qualification",
+        "Record incompatible benchmark features if the baseline cannot run on a task family."
+      ],
+      "current_blockers": [
+        "CaMeL is selected and has an 8/8 official-source smoke, a 12/12 plain import preflight documenting the pinned AgentDojo circular-import failure, an 8/8 source-backed compatibility preflight resolving that cycle without editing external source, a 14/14 runner-wiring preflight, a 16/16 transport/capability mapping preflight, a v1.2 17/17 hash-bound formal freeze with local_adapter hashes, a resume identity gate before model probing, a frozen loopback privileged/quarantined transport, and a source-backed runner/analyzer. The two-case real-model qualification, complete 726-case logs and admitted formal analysis are still absent."
+      ],
+      "display_name": "CaMeL or Fides information-flow/capability baseline",
+      "family": "external_strong_baseline",
+      "formal_exclusion_rule": "Exclude until two-case qualification, exact 726-case execution, complete trace/log audit and formal analysis admission are complete.",
+      "formal_freeze": "protocols/paper_upgrade_v1/camel_source_backed_formal_freeze_v1.json",
+      "formal_protocol": "protocols/paper_upgrade_v1/camel_source_backed_formal_protocol_v1.md",
+      "id": "camel_or_fides",
+      "implementation_status": "source_smoke_completed_transport_mapping_hash_bound_formal_runner_ready_qualification_pending",
+      "result_eligible": false,
+      "runner": "experiments/paper_v1/benchmarks/run_camel_source_backed_formal.py",
+      "source_backed_compat_preflight": "protocols/paper_upgrade_v1/camel_source_backed_compat_preflight_v1.json",
+      "source_backed_import_preflight": "protocols/paper_upgrade_v1/camel_source_backed_import_preflight_v1.json",
+      "source_backed_runner_preflight": "protocols/paper_upgrade_v1/camel_source_backed_runner_preflight_v1.json",
+      "source_registry_entries": [
+        "camel_google_research",
+        "fides_microsoft"
+      ],
+      "target_scope": [
+        "AgentDojo",
+        "InjecAgent",
+        "M3-v2"
+      ],
+      "transport_mapping_preflight": "protocols/paper_upgrade_v1/camel_transport_mapping_preflight_v1.json"
+    }
+  ],
+  "evidence_boundary": "Only conditions with implementation_status=ready and formal run manifests may enter result tables. Diagnostic adapters and blocked external baselines must remain outside formal effect-size claims.",
+  "formal_table_rules": {
+    "blocked_or_pending_result_eligible": false,
+    "diagnostic_adapter_result_eligible": false,
+    "ready_status": "ready",
+    "requires_formal_manifest": true,
+    "requires_frozen_protocol": true
+  },
+  "q2_gate_minimum_strong_baselines": {
+    "current_gate_status": "not_satisfied",
+    "formal_ready_count": 2,
+    "formal_ready_strong_baselines": [
+      "agentdojo_tool_filter",
+      "promptguard"
+    ],
+    "minimum_exact_or_disclosed_exclusion_count": 5,
+    "required_named_methods": [
+      "PromptGuard",
+      "Task Shield",
+      "IPIGuard",
+      "Progent",
+      "CaMeL_or_Fides"
+    ],
+    "required_public_benchmark_official_defenses": [
+      "AgentDojo tool_filter",
+      "AgentDojo transformers_pi_detector"
+    ]
+  },
+  "schema_version": "m3-paper-baselines-1.1"
+}

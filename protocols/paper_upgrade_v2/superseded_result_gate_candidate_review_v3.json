@@ -1,0 +1,17 @@
+{
+  "schema_version": "m3-paper-v2-superseded-result-gate-candidate-review-1.0",
+  "status": "superseded_before_scientific_outcome_access",
+  "superseded_candidate": {
+    "path": "protocols/paper_upgrade_v2/deepseek_medium_result_gate_candidate_v1.json",
+    "manifest_sha256": "8b7dc737c58af072f8eef9e73ef5f63496087fde228f127bb029dde66464302b",
+    "locked_analysis_sha256": "e08b48e0fd9f0e2e8695b038804262dc36ba78254df285f8ca1258138cbe26bd"
+  },
+  "reason": "The frozen execution plan contains 12 records in each of exact_gold, broad, underspecified, and conflicting regimes. The first expanded analyzer only emitted paired exact_gold summaries.",
+  "discovery_method": "frozen_execution_plan_distribution_review",
+  "scientific_outcomes_reviewed": false,
+  "network_calls_made": 0,
+  "result_admission_authorized": false,
+  "analysis_authorized": false,
+  "execution_ledgers_mutated": false,
+  "remediation": "Pair every observed non-primary regime with its auto_compiled record for the same case and condition, test all four regimes, then freeze a replacement candidate before result access."
+}

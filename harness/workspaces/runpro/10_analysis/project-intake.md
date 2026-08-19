@@ -6,7 +6,7 @@ M3-PI Guard 晋级阶段全量实验与 AI Agent Harness
 
 ## Project Goal
 
-补齐 `E:\M3_PI_Guard_test` 的 Harness，将 Day7 原型升级为可信、可恢复、可审计的全量实验工程，并持续执行直至 E0-E17、统计、图表、Dashboard、最终审计和本地提交全部完成。
+补齐本仓库的 Harness，将 Day7 原型升级为可信、可恢复、可审计的全量实验工程，并持续执行直至 E0-E17、统计、图表、Dashboard、最终审计和本地提交全部完成。
 
 ## Final Deliverable
 

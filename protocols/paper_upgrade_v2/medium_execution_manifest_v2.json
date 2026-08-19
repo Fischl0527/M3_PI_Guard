@@ -1,0 +1,58 @@
+{
+  "agentdojo_source": {
+    "commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+    "path": "external/benchmarks/agentdojo",
+    "worktree_clean": true
+  },
+  "credentials_read": false,
+  "execution_authorized": false,
+  "execution_identity": "d7b8fe9ddb0ca74cd46d8e4e2dd0a9e7f3215ac37055da70c6944f07db689aab",
+  "formal_executors_registered": 0,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-23T22:00:00+08:00",
+  "network_calls_made": 0,
+  "online_state_contract": {
+    "exact_gold_primary_endpoint_eligible": false,
+    "exact_gold_source_class": "evaluator_derived_authorization",
+    "final_record_digest": "initial online state plus all runtime visibility events",
+    "initial_online_visible_field_digest": "agent inputs plus condition control and authorization state",
+    "source_projection_digest": "case-level agent inputs only"
+  },
+  "plan_bytes": 4926643,
+  "plan_path": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl",
+  "plan_sha256": "573625a9e1e56c9a8be68fe21368d3e90e268974aa7285bec926d4591f8ec254",
+  "provider_safety": {
+    "formal_executor_without_safety_receipt": "reject",
+    "path": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+    "sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+  },
+  "runtime_identity": {
+    "agentdojo_commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+    "case_index_sha256": "1d649122630e1aa6aa683efa744d2c225903d3d2f982b572136173a80db40ba7",
+    "generated_at": "2026-07-23T22:00:00+08:00",
+    "provider_safety_policy_sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894",
+    "runtime_module_sha256": "a44e98f78eca1906fc2be825dd2dcf31d97b22550ae48b691f1b9c5c5a5e831c",
+    "schema_version": "m3-paper-v2-medium-runtime-identity-2.0",
+    "v1_execution_identity": "45f931d02ccd1eaaa614c48f76f4017e13893cf2913754aa53cdc470e65845c9",
+    "v1_plan_sha256": "d3281b8468e101925acd86b6620276ed9fab33f2d09f18f40956c777c0161694"
+  },
+  "schema_version": "m3-paper-v2-medium-execution-manifest-2.0",
+  "status": "interface_ready_provider_and_formal_executors_pending",
+  "stub_validation": {
+    "eligible_for_scientific_analysis": false,
+    "mode": "in_memory_only",
+    "records_persisted": 0
+  },
+  "supersedes": {
+    "reason": "v1 recorded a case-level projection digest; v2 records the condition-specific initial online state before any real run",
+    "v1_execution_identity": "45f931d02ccd1eaaa614c48f76f4017e13893cf2913754aa53cdc470e65845c9",
+    "v1_plan": "protocols/paper_upgrade_v2/medium_execution_plan_v1.jsonl",
+    "v1_plan_sha256": "d3281b8468e101925acd86b6620276ed9fab33f2d09f18f40956c777c0161694",
+    "v1_results_created": 0
+  },
+  "work_item_counts": {
+    "authorization_regime_probe": 48,
+    "primary": 432
+  },
+  "work_items_validated": 480
+}

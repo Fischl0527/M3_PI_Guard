@@ -1,0 +1,40 @@
+{
+  "approved_at": "2026-07-30T01:55:21+08:00",
+  "artifact_role": "adaptive_cost_canary_execution_authorization",
+  "authorization": {
+    "canary_execution_authorized": true,
+    "candidate_manifest_sha256": "52fe67b05409d0a041464b52819de30e657c13b5f6713d4aea51e5b4fa2bbc1f",
+    "candidate_scope_sha256": "0c1384a2b5264f9a8325bf973d9061b4ecf62a8374d8899986e1a223a58d6c3b",
+    "formal_continuation_authorized": false,
+    "owner_statement_sha256": "cbcd94f46048feee121eaa3cc5216b60856c9da03572f2a223f5ae0229415d99",
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "automatic_retries": 0,
+    "external_effects_enabled": false,
+    "prompt_or_response_content_stored_in_provider_trace": false,
+    "provider_tools_enabled": false,
+    "scientific_outcomes_may_be_reviewed": false,
+    "technical_cost_gate_only": true
+  },
+  "manifest_sha256": "89c375e139b9a2db2751bfb4216858a3926fe1b4cf5c171460f6548c9fd2aed6",
+  "schema_version": "m3-paper-v2-adaptive-cost-canary-admission-1.0",
+  "scope": {
+    "endpoint_type": "official_api",
+    "exact_command": "F:\\robot\\Anaconda3\\python.exe -m experiments.paper_v2.adaptive_cost_canary_controller_v1 --execute-canary --admission protocols\\paper_upgrade_v2\\admissions\\adaptive_cost_canary_admission_v1.json --config config\\project.local.env",
+    "exact_command_sha256": "6596ae912e667cdda4aac121bb8b61af670506e40173e7b16b335f4f8ffcceab",
+    "execution_identity": "7de74ef6225b78d8d909444a45427b2a7786b2a089a39fb79ace447beca3d87e",
+    "hard_limit_cny": 5.0,
+    "maximum_provider_calls": 3200,
+    "maximum_queries": 400,
+    "model_id": "deepseek-v4-pro",
+    "model_role": "primary",
+    "output_root": "outputs/paper_upgrade_v2/adaptive_cost_canary_v1/primary",
+    "provider_id": "deepseek",
+    "query_budget_per_task": 50,
+    "run_id": "adaptive-cost-canary-primary-v1",
+    "task_count": 8
+  },
+  "scope_sha256": "82ffece4857bc4b7bd824bcbc614a5276962a1233b1101fec4c24a6f51c48049",
+  "status": "activated_for_adaptive_cost_canary_only"
+}

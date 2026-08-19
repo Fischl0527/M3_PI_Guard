@@ -1,0 +1,19 @@
+{
+  "artifact": "VIGIL",
+  "audit_id": "A01-vigil-runtime",
+  "commit_date": "2026-04-18T21:15:03+08:00",
+  "default_branch_head_at_discovery": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+  "expected_commit": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+  "license": {
+    "path": null,
+    "sha256": null,
+    "status": "not_found_at_repository_root"
+  },
+  "observed_commit": "af8eb9c70d32f8a3cc07b308e823c813b2285772",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/paper_v2_audits/vigil",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/Touring-686/vigil.git"
+}

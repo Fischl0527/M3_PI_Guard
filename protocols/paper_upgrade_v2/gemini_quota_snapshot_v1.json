@@ -1,0 +1,38 @@
+{
+  "active_limits": {
+    "rpd": 10000,
+    "rpm": 1000,
+    "tpm": 2000000
+  },
+  "api_key_or_credential_stored": false,
+  "billing_tier": "free",
+  "billing_tier_source": "project_owner_declaration",
+  "capture_method": "manual_transcription_by_project_owner",
+  "captured_at": "2026-07-24T01:03:51.9003883+08:00",
+  "captured_at_semantics": "user_submission_observed_at_not_provider_console_event_time",
+  "chargeable_features_enabled": false,
+  "execution_must_recheck_age_hours": 24,
+  "formal_execution_authorized": false,
+  "formal_results_created": 0,
+  "limit_values_source": "user_submitted_ai_studio_screenshot",
+  "local_batch_caps": {
+    "input_tokens": 1000000,
+    "output_tokens": 128000,
+    "requests": 100
+  },
+  "model_id": "gemini-3.6-flash",
+  "monetary_hard_limit_usd": 0.0,
+  "network_calls_made": 0,
+  "paid_tier_allowed": false,
+  "project_identifier_stored": false,
+  "provider_id": "gemini",
+  "provider_name": "Google",
+  "quota_gate_satisfied": true,
+  "schema_version": "m3-paper-v2-gemini-quota-snapshot-1.0",
+  "source_screenshot_sha256": "cc613911edc041266890fff7b2d3d4d415c9f800ba3b50df245753c2f795b597",
+  "source_screenshot_stored_in_repository": false,
+  "source_type": "ai_studio_active_project_rate_limits",
+  "source_url": "https://ai.dev/usage?tab=rate-limit",
+  "status": "active_project_quota_captured",
+  "user_attested": true
+}

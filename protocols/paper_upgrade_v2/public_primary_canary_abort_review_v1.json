@@ -1,0 +1,62 @@
+{
+  "admission_manifest_sha256": "ba1534387f8310679e265f6adfca40c6e4afbcc9d40318fa1c68238c6909f5a6",
+  "artifact_locks": [
+    {
+      "bytes": 2011,
+      "path": "protocols/paper_upgrade_v2/admissions/deepseek_public_primary_canary_admission_v1.json",
+      "sha256": "8adc5ac96b0e829809c306ca00bd930402b57afad87aa2a8fc108a6dfeea552b"
+    },
+    {
+      "bytes": 1634,
+      "path": "outputs/paper_v2/verification/public_v1_primary_canary_live/canary_20260728_081451.stderr.log",
+      "sha256": "a2d34a64f1bf5cf2520d64cc10e3bd4b986c250c08002b6ec9187aed1ac68ec5"
+    },
+    {
+      "bytes": 3,
+      "path": "outputs/paper_v2/verification/public_v1_primary_canary_live/canary_20260728_081451.exit.txt",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "bytes": 4116,
+      "path": "outputs/paper_v2/verification/public_v1_primary_canary_live/canary_20260728_081841.stderr.log",
+      "sha256": "e57c3325da2794a0b373f28ea72295e726be7852c2a9d8514e519cf772ba9f44"
+    },
+    {
+      "bytes": 3,
+      "path": "outputs/paper_v2/verification/public_v1_primary_canary_live/canary_20260728_081841.exit.txt",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "bytes": 556,
+      "path": "outputs/paper_upgrade_v2/formal_public/deepseek/public-v1-primary-e19149d307d58463cf3fba2a1db1b49caa907e653b3b0d79b219f94092bef27a/attempt_events.jsonl",
+      "sha256": "cf8f6c6cd21dd4ca40f793622b8756206e87821934ffb244b5a6abc7f3b882f5"
+    }
+  ],
+  "attempt_status": {
+    "event_count": 1,
+    "open_attempt_count": 1,
+    "tail_sha256": "93f2297b03ca0caabcc9262307eed1d31a1cbfa0466285b74f10883562daee59",
+    "terminal_attempt_count": 0
+  },
+  "evidence": {
+    "api_cost_cny": 0.0,
+    "automatic_retries": 0,
+    "budget_ledger": true,
+    "formal_results_created": 0,
+    "provider_requests": 0,
+    "provider_traces": true,
+    "record_ledger": true,
+    "run_resumable": false,
+    "scientific_outcomes_accessed": false
+  },
+  "execution_identity": "e19149d307d58463cf3fba2a1db1b49caa907e653b3b0d79b219f94092bef27a",
+  "failure_classification": [
+    "missing_local_promptguard_dependencies_pre_attempt",
+    "public_agentdojo_work_key_not_in_medium_resolver"
+  ],
+  "generated_at": "2026-07-28T08:30:00+08:00",
+  "manifest_sha256": "55fa7b285109269c05ac69e54f339007488c2ca357c6cb3a7a4a52ccdb6261f7",
+  "run_id": "paper-v2-public-v1-primary-20260728",
+  "schema_version": "m3-paper-v2-public-canary-abort-review-1.0",
+  "status": "aborted_before_first_provider_request"
+}

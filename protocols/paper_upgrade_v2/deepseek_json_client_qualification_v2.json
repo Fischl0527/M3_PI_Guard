@@ -1,0 +1,20 @@
+{
+  "automatic_retries": 0,
+  "commitment_payload_sha256": "9b4240fb4ef9afab2e8bae9c8e11aa76fc528fefa4bd9018d8aabde293185a92",
+  "credentials_read": 0,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-24T17:45:00+08:00",
+  "network_calls_made": 0,
+  "payload_and_commitment_match": true,
+  "payload_sha256": "9b4240fb4ef9afab2e8bae9c8e11aa76fc528fefa4bd9018d8aabde293185a92",
+  "provider_attempts": 1,
+  "provider_tools_enabled": false,
+  "response_format_payload": {
+    "type": "json_object"
+  },
+  "schema_version": "m3-paper-v2-deepseek-json-client-qualification-2.0",
+  "status": "deepseek_json_client_qualified_offline",
+  "thinking_payload": {
+    "type": "disabled"
+  }
+}

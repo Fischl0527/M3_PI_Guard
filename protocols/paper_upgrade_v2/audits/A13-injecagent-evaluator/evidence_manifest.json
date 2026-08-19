@@ -1,0 +1,54 @@
+{
+  "audit_id": "A13-injecagent-evaluator",
+  "auditor": "Codex primary agent",
+  "claim_ready": false,
+  "command": "python -m experiments.paper_v2.source_audit --spec protocols/paper_upgrade_v2/online_state_audit_specs_v1.json --unit A13-injecagent-evaluator",
+  "conclusion": "not_a_runtime_guard",
+  "exit_code": 0,
+  "files": [
+    {
+      "bytes": 347,
+      "path": "protocols/paper_upgrade_v2/audits/A13-injecagent-evaluator/differential_test_result.json",
+      "sha256": "d0f43ee6b4bfff92c9145b6dff610871ebfb0f2095787947c324c6bc5b58cd1f"
+    },
+    {
+      "bytes": 576,
+      "path": "protocols/paper_upgrade_v2/audits/A13-injecagent-evaluator/entrypoints.md",
+      "sha256": "ecd39112e7cc9c404e6eea30bb7042234832a2c33f76af8bcc39b88593847b8b"
+    },
+    {
+      "bytes": 3022,
+      "path": "protocols/paper_upgrade_v2/audits/A13-injecagent-evaluator/field_flow.json",
+      "sha256": "8490365b72911e41a67a922aa99c84ae9e80c11809b5cfd3f8ba949f06f1e080"
+    },
+    {
+      "bytes": 696,
+      "path": "protocols/paper_upgrade_v2/audits/A13-injecagent-evaluator/finding.md",
+      "sha256": "3a664e5530d05e8bce2b5b087fd4113041067c964d0b523332124ff8a9ae05be"
+    },
+    {
+      "bytes": 516,
+      "path": "protocols/paper_upgrade_v2/audits/A13-injecagent-evaluator/projection_test.py",
+      "sha256": "3e256d5f2065ddd1b95b3656a3f2e52d572da16c0b8f4d3033474ce1d4dadb8c"
+    },
+    {
+      "bytes": 474,
+      "path": "protocols/paper_upgrade_v2/audits/A13-injecagent-evaluator/projection_test_result.json",
+      "sha256": "b05d70a53fb2a48b195458e62aea447e44974e961819f2b9b6dd26c158b79385"
+    },
+    {
+      "bytes": 813,
+      "path": "protocols/paper_upgrade_v2/audits/A13-injecagent-evaluator/source_lock.json",
+      "sha256": "816ec564a6ecb2a6c236265c2c8b892194812c5105eaa58aaeeeb3e6477ad17d"
+    },
+    {
+      "bytes": 1603,
+      "path": "protocols/paper_upgrade_v2/audits/A13-injecagent-evaluator/static_hits.json",
+      "sha256": "86a203374b751bc56314e722ab3e1b55f9ac078e34526ce4e1e43a7c470b2c35"
+    }
+  ],
+  "generated_at": "2026-07-23T19:00:00+08:00",
+  "review_status": "single_reviewer_complete",
+  "schema_version": "m3-paper-v2-source-audit-evidence-manifest-1.0",
+  "status": "completed"
+}

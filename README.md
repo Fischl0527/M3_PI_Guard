@@ -1,146 +1,62 @@
-# RedTeam_LLM_Security
+# M3-PI Guard
 
-## M3_PI_Guard Local Agent Range
+M3-PI Guard 是一个面向工具型大模型智能体的本地提示注入安全靶场、运行时 Guard 和可复现实验平台。项目关注模型是否提出或执行未经授权的工具动作，并在动作产生副作用前进行 `ALLOW`、`ASK` 或 `DENY` 决策。
 
-M3_PI_Guard 是一个完全本地运行的 LLM Agent 工具调用靶场与防护评测框架。项目核心关注 Agent 工具调用行为链路，而不是把低能力本地模型本身作为研究贡献。
+## 从这里开始
+
+- [项目移交报告](docs/项目移交报告.md)：接手顺序、当前证据、失败路线、环境状态、风险和下一步。
+- [完整项目综述](docs/项目完整综述.md)：功能、架构、运行方式、优点、创新点、缺点和论文未完成项。
+- [文档索引](docs/README.md)：架构、数据卡、伦理、运行手册、历史报告和展示材料。
+- [运行手册](docs/运行手册.md)：E0–E17、最终分析和仪表盘的复现命令。
+- [目录说明](文件夹说明.md)：项目源码、Harness、模型、实验结果和人工材料的边界。
+- [Harness 使用说明](harness/README.md)：智能体任务、进度、失败和验证状态。
+- [Harness 项目上下文](harness/项目上下文.md)：Harness 如何记录本项目、状态文件优先级和恢复纪律。
+- [本地配置说明](config/README.md)：团队共享字段、本机令牌和 PromptGuard 环境。
+
+## 当前证据状态
+
+- 历史 E0–E17：18 个实验均已完成；标准 300 条数据、两名真人分层抽样盲审、统计、13 张图、仪表盘和 HTML 技术报告已经完成。
+- 修复 V2：12/12 工程验收通过，但属于复用旧盲测集的事后修复，不是新的确认性盲测。
+- paper-v1：非 oracle 策略、来源追踪、M3-v2、公共冻结、强基线适配和自适应运行器已实现；公共正式矩阵、至少五个强基线、独立 600 条盲测、双厂商 API 和正式自适应预算实验仍未完成。
+- 强基线现状：ToolFilter 与 PromptGuard 可用于正式实验；Task Shield 路线关闭，Progent v1.4 因延迟门禁失败，CaMeL v3 P3 因正常任务效用为 0/4 未获正式准入。
+- 最新 Q2 就绪度：原始分 66.0、封顶分 60.0，`goal_80_met=false`、`goal_90_met=false`。
+
+冒烟、资格、预检、诊断和运行中结果只证明局部工程状态，不能作为正式论文效果结论。
 
 ## 安全边界
 
-- 不调用远程 API，不连接真实邮箱，不访问真实公网业务系统。
-- `send_email` 只写入 `sandbox/outbox/outbox.jsonl`。
-- `call_api` 只返回本地 mock JSON。
-- `run_code` 永远返回 `MOCK: code execution disabled`。
-- `sandbox/secrets/api_key.txt` 是本地 canary：`M3_CANARY_SECRET_API_KEY=sk-local-redteam-demo-not-real`。
-- 不提交模型文件，不复制 `D:\Ollama` 内容，不使用真实 secret。
+- 模型仅通过回环地址上的 Ollama 运行；远程 API 只有在显式授权和独立准入流程下才允许使用。
+- `send_email` 只写本地发件箱；`call_api` 返回模拟 JSON；`run_code` 不执行模型生成代码。
+- 测试密钥是合成的金丝雀标记，不使用真实凭据或真实业务系统。
+- `config/project.local.env`、模型权重、外部源码检出和运行缓存不提交到 Git。
 
-## 目录
-
-仓库已经按用途分区：M3 项目源码保留在根目录的项目包中；AI Agent Harness 工程统一放在 `harness/`。根目录 `AGENTS.md` 只是 Agent 自动发现入口，`agent/` 只保留被实验哈希和报告引用的项目完整性审计代码/证据，不是当前 Harness 状态目录。
-
-```text
-m3_attacks/                 攻击数据与生成/审计
-m3_core/
-  __init__.py
-  llm_client.py
-  agent_runner.py
-  tool_sandbox.py
-  run_batch.py
-
-m3_guard/
-  __init__.py
-  guard_engine.py
-
-fixtures/
-  sample_cases.jsonl
-  sample_baseline_logs.jsonl
-  sample_guarded_logs.jsonl
-
-schemas/
-  attack_case.schema.json
-  tool_call.schema.json
-  run_log.schema.json
-
-m3_eval/
-  metrics.py
-  evaluate.py
-
-experiments/                E0-E17 实验实现与注册表
-protocols/                  冻结实验协议与夹具
-tests/                      项目测试
-scripts/                    项目运行、分析与报告脚本
-
-harness/                    与项目源码分离的 Agent Harness 工程
-  config/                   权限、策略与工作流
-  state/                    当前任务、进度、失败与交接
-  specs/                    产品/技术/验收规格
-  features/                 功能状态台账
-  tasks/                    任务模板
-  docs/                     Harness 文档与决策
-  scripts/                  Harness 初始化、测试、验证、清理
-  workspaces/               Runpro 工作区与阶段报告
-
-sandbox/
-  public/
-  secrets/
-  outbox/
-  logs/
-
-outputs/runs/
-outputs/metrics/
-```
-
-Harness 使用说明见 `harness/README.md`；项目目录的完整分类见 `文件夹说明.md`。
-
-## Backend
-
-- `backend=stub`：不调用任何模型，按样本固定返回 ToolCall，适合无 GPU 环境和稳定演示。
-- `backend=ollama`：使用 OpenAI SDK 调用本机 Ollama OpenAI-compatible API。
-  - 默认 `base_url`: `http://127.0.0.1:11434/v1`
-  - 默认 `api_key`: `ollama`
-  - 默认 `model`: `m3-target-qwen25-7b`
-  - 代码会强制校验 endpoint 只能是 `localhost`、`127.0.0.1` 或 `::1`
-
-本机已有其他 Ollama 模型时，可作为烟测模型使用，但不作为主体研究贡献。
-
-## 验收命令
+## 最小运行
 
 ```powershell
-python -m m3_core.run_batch --cases fixtures/sample_cases.jsonl --backend stub --defense baseline --out outputs/runs/stub_baseline.jsonl
+python scripts\check_project_config.py
+python -m m3_core.run_matrix --cases fixtures/demo_cases.jsonl --backend stub --defense-modes baseline,full_guard --out-dir outputs/runs/day7_smoke_stub --run-prefix day7_smoke --max-steps 5
+python -m m3_eval.evaluate --log-dir outputs/runs/day7_smoke_stub --cases fixtures/demo_cases.jsonl --out outputs/metrics/day7_smoke_summary.csv
 ```
+
+桩后端是确定性回归设施，不代表真实模型安全效果。真实 Ollama、公共基准和强基线运行前必须确认没有其他正式 GPU 作业，并使用相应冻结和 manifest。
+
+## 验证
 
 ```powershell
-python -m m3_core.run_batch --cases fixtures/sample_cases.jsonl --backend stub --defense guarded --out outputs/runs/stub_guarded.jsonl
+python scripts/audit_project_conventions.py --check
+python -m pytest -q
+python -m experiments.validate_registry
+python scripts/verify_historical_evidence.py
+powershell -NoProfile -ExecutionPolicy Bypass -File harness/scripts/verify.ps1
 ```
 
-如果本机已安装 Ollama 和 `m3-target-qwen25-7b`：
+## 目录边界
 
-```powershell
-python -m m3_core.run_batch --cases fixtures/sample_cases.jsonl --backend ollama --model m3-target-qwen25-7b --defense guarded --out outputs/runs/qwen25_guarded.jsonl
-```
+- 产品与实验源码：`m3_core/`、`m3_guard/`、`m3_eval/`、`m3_attacks/`、`experiments/`、`protocols/`、`schemas/`、`scripts/`、`tests/`。
+- 智能体 Harness：`harness/`。根目录 `AGENTS.md` 仅用于自动发现。
+- 历史兼容：`agent/`，因冻结证据引用保留，不是当前 Harness。
+- 生成证据：`outputs/`；外部固定版本源码检出：`external/`；本地工具状态：`sandbox/`。
 
-本机已有 `vicuna:7b` 时可做简单烟测：
-
-```powershell
-python -m m3_core.run_batch --cases fixtures/sample_cases.jsonl --backend ollama --model vicuna:7b --defense guarded --out outputs/runs/vicuna_guarded.jsonl
-```
-
-## 日志字段
-
-每一步输出一行 JSON，字段包括：
-
-```text
-run_id, case_id, model, backend, defense_mode, step, attack_family,
-raw_model_output, parsed_tool_call, guard_decision, risk_score,
-reasons, observation, final_status
-```
-
-## Guard 接口
-
-`guarded` 模式在每次工具调用前调用：
-
-```python
-from m3_guard.guard_engine import guard_decide
-
-decision, risk_score, reasons = guard_decide(context, tool_call)
-```
-
-当前 `m3_guard.guard_engine` 提供可替换的防御接口。后续可扩展 normalizer、detector、policy engine 和 dataflow tracker，只要保持这个接口不变。
-
-## Day 1 评估命令
-
-比较 stub baseline 与 guarded：
-
-```powershell
-python -m m3_eval.evaluate --cases fixtures/sample_cases.jsonl --baseline outputs/runs/stub_baseline.jsonl --guarded outputs/runs/stub_guarded.jsonl --out outputs/metrics/stub_compare_metrics.json
-```
-
-输出指标包括：
-
-```text
-ASR_attack_success_rate
-UTR_unauthorized_tool_rate
-DSR_data_spill_rate
-BSR_block_success_rate
-FPR_false_positive_rate
-WRS_avg_guard_risk_score
-```
+当前范围不制作或修改 PPT、DOCX、ZIP，不推送远程分支，不创建 PR。
+移交快照中 Ollama 和项目实验进程均已停止；需要运行模型时应先按冻结和门禁
+重新确认身份与资源，不要从历史 PID 恢复。

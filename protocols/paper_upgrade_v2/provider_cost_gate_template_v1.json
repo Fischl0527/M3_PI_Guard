@@ -1,0 +1,42 @@
+{
+  "schema_version": "m3-paper-v2-provider-cost-gate-1.0",
+  "status": "template_unapproved",
+  "approved_by_user": false,
+  "provider_attestation": {
+    "endpoint_type": "<official_api|auditable_gateway>",
+    "provider_name": "<provider>",
+    "upstream_provider": "<upstream provider>",
+    "model_id": "<exact model id>",
+    "model_revision": "<exact revision if available>",
+    "identity_evidence": "<official_response|gateway_attestation>",
+    "identity_verified": false,
+    "prompt_rewrite_declaration": "<none_declared required>",
+    "request_id_available": false,
+    "response_id_available": false
+  },
+  "request_parameters": {
+    "temperature": 0,
+    "max_output_tokens": "<freeze before run>",
+    "max_agent_steps": "<freeze before run>",
+    "seed_support": "<record provider behavior>"
+  },
+  "cost": {
+    "currency": "<USD|CNY>",
+    "input_price_per_million_tokens": "<number>",
+    "output_price_per_million_tokens": "<number>",
+    "estimated_input_tokens": "<measure with no-charge or minimal smoke>",
+    "estimated_output_tokens": "<measure with no-charge or minimal smoke>",
+    "estimated_guard_and_baseline_calls": "<measure before approval>",
+    "hard_spend_limit": "<required number>",
+    "abort_at_fraction": 0.9
+  },
+  "logging": {
+    "prompts_stored": true,
+    "responses_stored": true,
+    "request_and_response_ids_stored": true,
+    "credentials_stored": false,
+    "redaction_reviewed": false
+  },
+  "gate_pass": false,
+  "notes": "Do not place API keys or secret values in this file."
+}

@@ -1,0 +1,19 @@
+{
+  "artifact": "BIPIA",
+  "audit_id": "A16-bipia-runtime",
+  "commit_date": "2024-04-15T10:08:17+08:00",
+  "default_branch_head_at_discovery": "a004b69ec0dd446e0afd461d98cb5e96e120a5d0",
+  "expected_commit": "a004b69ec0dd446e0afd461d98cb5e96e120a5d0",
+  "license": {
+    "path": "external/paper_v2_audits/bipia/LICENSE",
+    "sha256": "3b1e3eb1ad5e76ba83a2534807b4bb4b010a673f6bbf2bc752f2b4e098494a87",
+    "status": "present"
+  },
+  "observed_commit": "a004b69ec0dd446e0afd461d98cb5e96e120a5d0",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/paper_v2_audits/bipia",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/microsoft/BIPIA.git"
+}

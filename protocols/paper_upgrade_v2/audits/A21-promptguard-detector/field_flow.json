@@ -1,0 +1,9 @@
+{
+  "audit_id": "A21-promptguard-detector",
+  "authorization_source": "broad_default",
+  "missing_component": null,
+  "offline_boundaries": [],
+  "online_boundaries": [],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v1/agentdojo_official_outcome_v2.schema.json",
+  "title": "M3-PI Guard AgentDojo official outcome v2",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "metric_semantics_version",
+    "source_label",
+    "benchmark_case_id",
+    "case_kind",
+    "sample_type",
+    "status",
+    "utility_success",
+    "official_injection_success",
+    "attack_success",
+    "security_preserved",
+    "legacy_attack_success",
+    "metric_source",
+    "source_outcome_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "paper-agentdojo-official-outcome-v2-1.0"
+    },
+    "metric_semantics_version": {
+      "const": "agentdojo_official_v2"
+    },
+    "source_label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_kind": {
+      "enum": ["utility", "security"]
+    },
+    "sample_type": {
+      "enum": ["utility", "attack"]
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "utility_success": {
+      "type": "boolean"
+    },
+    "official_injection_success": {
+      "type": ["boolean", "null"]
+    },
+    "attack_success": {
+      "type": ["boolean", "null"]
+    },
+    "security_preserved": {
+      "type": ["boolean", "null"]
+    },
+    "legacy_attack_success": {
+      "type": ["boolean", "null"]
+    },
+    "metric_source": {
+      "type": ["object", "null"],
+      "properties": {
+        "path": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "declared_sha256_matches": {"type": "boolean"}
+      },
+      "required": ["path", "sha256", "declared_sha256_matches"]
+    },
+    "source_outcome_path": {
+      "type": "string"
+    },
+    "source_outcome_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "legacy_is_complement_of_official": {
+      "type": ["boolean", "null"]
+    },
+    "metric_mapping_agreement": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"sample_type": {"const": "attack"}}
+      },
+      "then": {
+        "properties": {
+          "case_kind": {"const": "security"},
+          "official_injection_success": {"type": "boolean"},
+          "attack_success": {"type": "boolean"},
+          "security_preserved": {"type": "boolean"},
+          "metric_source": {"type": "object"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"sample_type": {"const": "utility"}}
+      },
+      "then": {
+        "properties": {
+          "case_kind": {"const": "utility"},
+          "official_injection_success": {"type": "null"},
+          "attack_success": {"type": "null"},
+          "security_preserved": {"type": "null"}
+        }
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,72 @@
+{
+  "audit_id": "A15-piarena-defense-registry",
+  "authorization_source": "mixed_or_unclear",
+  "missing_component": null,
+  "offline_boundaries": [],
+  "online_boundaries": [
+    {
+      "end_line": 26,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "name",
+        "config"
+      ],
+      "path": "external/paper_v2_audits/piarena/piarena/defenses/__init__.py",
+      "phase": "defense_construction",
+      "referenced_identifiers": [
+        "BaseDefense",
+        "DEFENSE_REGISTRY",
+        "ValueError",
+        "cls",
+        "config",
+        "dict",
+        "get",
+        "name",
+        "sorted",
+        "str"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "DEFENSE_REGISTRY": true,
+        "config": true
+      },
+      "sha256": "d0248650d163f112e9c426890e267fc4030b5b86a258e31d61a3514555a7e250",
+      "start_line": 21,
+      "symbol": "get_defense"
+    },
+    {
+      "end_line": 29,
+      "forbidden_identifier_hits": [],
+      "parameters": [
+        "self",
+        "target_insts",
+        "contexts"
+      ],
+      "path": "external/paper_v2_audits/piarena/piarena/defenses/base.py",
+      "phase": "online_batch_projection",
+      "referenced_identifiers": [
+        "List",
+        "_validate_batch_inputs",
+        "context",
+        "contexts",
+        "dict",
+        "execute",
+        "self",
+        "str",
+        "target_inst",
+        "target_insts",
+        "zip"
+      ],
+      "referenced_string_keys": [],
+      "required_token_checks": {
+        "contexts": true,
+        "target_insts": true
+      },
+      "sha256": "cd651c3c7156ec26ba85c84988cc5a9dbacd541774f729bd040fcb3726eaad02",
+      "start_line": 23,
+      "symbol": "BaseDefense.execute_batch"
+    }
+  ],
+  "online_forbidden_identifier_hits": [],
+  "schema_version": "m3-paper-v2-field-flow-1.0"
+}

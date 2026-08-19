@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/provider_safety_receipt_v1.schema.json",
+  "title": "M3-PI Guard provider safety receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "credentials_stored",
+    "evidence",
+    "evidence_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-provider-safety-receipt-1.0"
+    },
+    "credentials_stored": {
+      "const": false
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_id",
+        "endpoint_origin_and_path",
+        "effect_backend",
+        "tool",
+        "arguments_sha256",
+        "external_connectors_enabled",
+        "provider_managed_tools_enabled",
+        "decision"
+      ],
+      "properties": {
+        "provider_id": {
+          "enum": ["deepseek", "gemini"]
+        },
+        "endpoint_origin_and_path": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "effect_backend": {
+          "enum": [
+            "no_effect",
+            "m3_sandbox_fixture",
+            "agentdojo_in_memory_copy"
+          ]
+        },
+        "tool": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "arguments_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "external_connectors_enabled": {
+          "const": false
+        },
+        "provider_managed_tools_enabled": {
+          "const": false
+        },
+        "decision": {
+          "const": "ALLOW_ISOLATED_SIMULATION_ONLY"
+        }
+      }
+    },
+    "evidence_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

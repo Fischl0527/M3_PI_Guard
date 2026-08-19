@@ -1,0 +1,510 @@
+{
+  "artifact_role": "owner_review_candidate",
+  "authorization": {
+    "canary_execution_authorized": false,
+    "canary_review_sha256": null,
+    "candidate_manifest_sha256": null,
+    "candidate_only": true,
+    "matrix_continuation_authorized": false,
+    "owner_approval": null,
+    "result_admission_authorized": false
+  },
+  "evidence_boundary": {
+    "candidate_is_executable": false,
+    "credentials_read_while_building": false,
+    "formal_results_created": 0,
+    "network_calls_while_building": 0,
+    "prior_runs_resumed": false
+  },
+  "generated_at": "2026-07-24T20:15:00+08:00",
+  "manifest_sha256": "d316a8c0d3282bc4e24efa9dc63497a8ac17e466dd8ef00f215c3bfeabd56316",
+  "next_gate": "Execute exactly one separately admitted v5 six-condition canary. No continuation or result admission is implied.",
+  "schema_version": "m3-paper-v2-formal-matrix-admission-5.0",
+  "scope": {
+    "boundary_rejection_semantics": {
+      "adapter_version": "m3-paper-v2-boundary-rejection-runtime-1.0",
+      "applies_only_after_online_allow": true,
+      "execution_attempted": true,
+      "execution_succeeded": false,
+      "online_guard_decision_preserved": true,
+      "provider_safety_policy_modified": false,
+      "qualification_path": "protocols/paper_upgrade_v2/formal_matrix_controller_qualification_v5.json",
+      "qualification_sha256": "270c9914385e9e91008343999101ceacc964abf26ccc585233dbd976ae74e9e1",
+      "reason_code": "isolated_effect_boundary_rejection",
+      "rejected_effect_executed": false,
+      "safety_receipt_effect_backend": "no_effect",
+      "task_completion": false,
+      "unexpected_safety_error_reclassified": false,
+      "unsafe_effect_itt": true
+    },
+    "budget": {
+      "abort_ceiling_cny": 27.0,
+      "check_before_every_provider_call": true,
+      "hard_spend_limit_cny": 30.0,
+      "policy_path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v2.json",
+      "policy_sha256": "55ceeea5335ddd05f2eff9c5b1be8a858e055a8d8a56c6482ebe8fe006e3b7b7",
+      "prior_aborted_matrix_usage": {
+        "completion_tokens": 50589,
+        "prompt_cache_hit_tokens": 356352,
+        "prompt_cache_miss_tokens": 144030,
+        "prompt_tokens": 500382
+      },
+      "prior_official_pilot_cost_cny": 0.00165,
+      "prior_official_pilot_usage": {
+        "completion_tokens": 136,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 278,
+        "prompt_tokens": 278
+      },
+      "prior_project_cost_cny": 0.7445328,
+      "prior_project_usage": {
+        "completion_tokens": 50589,
+        "prompt_cache_hit_tokens": 356352,
+        "prompt_cache_miss_tokens": 144030,
+        "prompt_tokens": 500382
+      },
+      "usage_ledger_fsync_after_every_completed_call": true
+    },
+    "budget_recalibration": {
+      "abort_ceiling_cny": 27.0,
+      "actual_usage_is_primary_spend_ledger": true,
+      "hard_spend_limit_cny": 30.0,
+      "next_request_all_cache_miss_fuse": true,
+      "old_policy_mutated": false,
+      "policy_path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v2.json",
+      "policy_sha256": "55ceeea5335ddd05f2eff9c5b1be8a858e055a8d8a56c6482ebe8fe006e3b7b7",
+      "scientific_outcomes_reviewed": false,
+      "source_review_manifest_sha256": "77525087685daea4b6644eb2e3b284b1b20f74d36c5f94d083088154066dc7b2",
+      "untouched_reserve_cny": 3.0
+    },
+    "canary": {
+      "automatic_continuation": false,
+      "conditions": [
+        "no_defense",
+        "safe_prompt_or_spotlighting",
+        "promptguard_detector_only",
+        "strongest_peer_reviewed_structural_baseline",
+        "m3_policy_only",
+        "m3_full"
+      ],
+      "required_before_continuation": true,
+      "review_filename": "six_condition_canary_review_v5.json",
+      "work_items": 6,
+      "work_key_sequence_sha256": "20a345cf56bdde889c208835f3469d6b6d283ec14f93398046bcddcceb40c205"
+    },
+    "failure_persistence": {
+      "adapter_version": "m3-paper-v2-boundary-rejection-runtime-1.0",
+      "pre_response_exception_policy": "abort_new_version_required",
+      "proposal_boundary_rejection_terminal_status": "completed",
+      "response_content_persisted": false,
+      "unexpected_post_response_exception_terminal_status": "runner_failure"
+    },
+    "json_output": {
+      "qualification_path": "protocols/paper_upgrade_v2/deepseek_json_client_qualification_v2.json",
+      "qualification_sha256": "046480d77355cb3d5b4d125fd0a506895535808971237747efb9907bc2131e13",
+      "request_payload_committed": true,
+      "response_format": {
+        "type": "json_object"
+      },
+      "response_repair_allowed": false,
+      "strict_parser_unchanged": true
+    },
+    "locked_inputs": [
+      {
+        "bytes": 4926643,
+        "path": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl",
+        "sha256": "573625a9e1e56c9a8be68fe21368d3e90e268974aa7285bec926d4591f8ec254"
+      },
+      {
+        "bytes": 2870,
+        "path": "protocols/paper_upgrade_v2/medium_execution_manifest_v2.json",
+        "sha256": "1aea6fafefbf1770e7e3477a8e2fedce32c93bd79f697d22885bceb595cc64b0"
+      },
+      {
+        "bytes": 24083,
+        "path": "protocols/paper_upgrade_v2/medium_execution_manifest_v3_preflight.json",
+        "sha256": "e2dd2db7baa48d0bc636f4aa942451f48b08173ba1fee0aa9156c22b3b120c15"
+      },
+      {
+        "bytes": 5407,
+        "path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v1.json",
+        "sha256": "b90e54c09b2ef9031f59afe678cdc300acf42c71ba9b4793a4e37025d8712253"
+      },
+      {
+        "bytes": 2586,
+        "path": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+        "sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+      },
+      {
+        "bytes": 1921,
+        "path": "protocols/paper_upgrade_v2/provider_request_trace_activation_v2.json",
+        "sha256": "ac15d82bc5631eb49c3e7b4344e143f753f17d40725845fa8a3507dc26de2b45"
+      },
+      {
+        "bytes": 8147,
+        "path": "protocols/paper_upgrade_v2/admissions/deepseek_pilot_admission_v2.json",
+        "sha256": "3456e4c3957025017c3cfceab4530dda7e4076891129328f9e3e177cd30abe76"
+      },
+      {
+        "bytes": 4252,
+        "path": "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/post_pilot_review_v1.json",
+        "sha256": "95d4cf52cc71388d30c2cc75609f8e551b5a65d9fce99209228ac0121d2eb5a8"
+      },
+      {
+        "bytes": 65346,
+        "path": "experiments/paper_v2/formal_matrix_controller_v1.py",
+        "sha256": "54447182e32ea81de4f7d3e1a9b44472931cdc5b0afae2793fbaed5ef3fcc1be"
+      },
+      {
+        "bytes": 12310,
+        "path": "schemas/paper_v2/formal_matrix_admission_v1.schema.json",
+        "sha256": "9da7778dfb996b83ec3af4621f0e0795d70d2a0d0b01fa1e11b72b2fe90b6963"
+      },
+      {
+        "bytes": 79361,
+        "path": "experiments/paper_v2/live_condition_runtime.py",
+        "sha256": "44b1eb05a87f23b46e3860a22dbdfc92b08b9aba26d9e055af85f97dc9af5f98"
+      },
+      {
+        "bytes": 32576,
+        "path": "experiments/paper_v2/formal_condition_executors.py",
+        "sha256": "dcd39222d04c0081ed66b0bc51c37a4949f187dfc83b36ca42022b7acfc6aa93"
+      },
+      {
+        "bytes": 26839,
+        "path": "experiments/paper_v2/formal_record_store_v2.py",
+        "sha256": "67075156efa12a7a447b160b8140b16002fd5bd4d24261cf37b2b21226d7b157"
+      },
+      {
+        "bytes": 4859,
+        "path": "experiments/paper_v2/contracts_v2.py",
+        "sha256": "4349aef13c7a87c908ddfde2f4459e8916d88d51f1a9ae407840cd40a5a18db7"
+      },
+      {
+        "bytes": 27450,
+        "path": "experiments/paper_v2/provider_trace_bundle.py",
+        "sha256": "c7dd83bf8ab4dad7628a54fd9f270dc41d0dc59a0118a688c4ed734c03f5e5f1"
+      },
+      {
+        "bytes": 28380,
+        "path": "experiments/paper_v2/provider_request_trace_candidate.py",
+        "sha256": "9f7a7b024baab51d22725ad535460d2a24a52d0b50ccf3a93c231abb72653c8c"
+      },
+      {
+        "bytes": 10520,
+        "path": "experiments/paper_v2/provider_request_trace_activation.py",
+        "sha256": "babf75b6c50a4725ff2e3c9abddc56ca556df317eb29ef0a4ccf7a7f1a6ef618"
+      },
+      {
+        "bytes": 43604,
+        "path": "experiments/paper_v2/official_provider_executor.py",
+        "sha256": "3b33057adddacc68863d14e313d975ecd8d359c18b72585a774161793801aa54"
+      },
+      {
+        "bytes": 23949,
+        "path": "experiments/paper_v2/provider_budget.py",
+        "sha256": "e7b28ec63f37e8865bb20dcd58da344a809017ea34d70353cbc9d57a4fa6dc6e"
+      },
+      {
+        "bytes": 9053,
+        "path": "experiments/paper_v2/provider_safety.py",
+        "sha256": "cff599d07145b5e2ec1fb1e0fc4d099173eda11b5254be90359bdc5b6e463513"
+      },
+      {
+        "bytes": 19902,
+        "path": "experiments/paper_v2/promptguard_live_dependency.py",
+        "sha256": "7679944781da451e74382293ca7cb5306d39cca7605f17c702d0ac8a87b8fd31"
+      },
+      {
+        "bytes": 21957,
+        "path": "experiments/paper_v2/agentdojo_live_dependency.py",
+        "sha256": "723987f3fae882fc93eb583c9a02191ca1bbee4370684662b00dde591391d7e8"
+      },
+      {
+        "bytes": 18794,
+        "path": "experiments/paper_v2/m3_offline_evaluator.py",
+        "sha256": "fef101fb39ab8f11c6e2e4807a43a22ecc2c8524d680d889b853d8035da8f370"
+      },
+      {
+        "bytes": 14560,
+        "path": "experiments/paper_v2/vigil_live_dependency.py",
+        "sha256": "32333d17a42c30f623a527cc84d863c522cf4532f81b0a083fd22dad55d166c0"
+      },
+      {
+        "bytes": 6649,
+        "path": "schemas/paper_v2/experiment_record_v2.schema.json",
+        "sha256": "b06a444bf711268cf8282f65b847bb32fa1990a23e25adafe76d4e1223f06007"
+      },
+      {
+        "bytes": 7446,
+        "path": "schemas/paper_v2/provider_trace_bundle_v2.schema.json",
+        "sha256": "d77e1f6bdbdb1e8b5b2424b97bdc2394f8e63e2fc1b7ea2563df78a0284d8f3c"
+      },
+      {
+        "bytes": 1839,
+        "path": "schemas/paper_v2/provider_safety_receipt_v1.schema.json",
+        "sha256": "3149fc852e28b1203564564f1b8097a77ccd8e5dde4e5ae3007d7e419e84a531"
+      },
+      {
+        "bytes": 3035,
+        "path": "protocols/paper_upgrade_v2/promptguard_live_dependency_qualification_v1.json",
+        "sha256": "aa01b6fb41998e8a58e29199aea89f2897b6055276213cb62ecbe54451f653d8"
+      },
+      {
+        "bytes": 2929,
+        "path": "protocols/paper_upgrade_v2/agentdojo_live_dependency_qualification_v1.json",
+        "sha256": "88efabd2f00a41a797b8ef2e6c1af28785af132d2f0139247bc595056630920d"
+      },
+      {
+        "bytes": 1628,
+        "path": "protocols/paper_upgrade_v2/vigil_live_dependency_qualification_v1.json",
+        "sha256": "3629a30172f3f2d8a1896f11a4a44f9843362cd1dff5bf1d7e0fc9f7f2483511"
+      },
+      {
+        "bytes": 772,
+        "path": "protocols/paper_upgrade_v2/formal_matrix_controller_qualification_v1.json",
+        "sha256": "0f7c72fd72dc4eed0a1b8bb752ad77969c39c267279c03bfba2362e46eb42988"
+      },
+      {
+        "bytes": 11197,
+        "path": "protocols/paper_upgrade_v2/deepseek_medium_matrix_candidate_v1.json",
+        "sha256": "993d19da8ac3c73d481e9bccaa00a32e7712b4d25d49a8de5ec09655108af125"
+      },
+      {
+        "bytes": 11306,
+        "path": "protocols/paper_upgrade_v2/admissions/deepseek_medium_matrix_admission_v1.json",
+        "sha256": "e77104f871f1b0c4d5ef39dc62f7adc14f87d8694800e98bf606c7d2f4faf2c8"
+      },
+      {
+        "bytes": 5706,
+        "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/c4e6a8eddd73b8ab8fab735cd2720653a909d3dd3040c6acdebee6ec996cbd4d/aborted_run_review_v1.json",
+        "sha256": "c98916768714275af08c4e9035b91b544eea62c46ba6942ff75736a1b0b4dc54"
+      },
+      {
+        "bytes": 20670,
+        "path": "experiments/paper_v2/deepseek_nonthinking_client_v1.py",
+        "sha256": "dab62707e778c5acc0e12093f0598ad8066098b97974d48e70e274121867a266"
+      },
+      {
+        "bytes": 559,
+        "path": "protocols/paper_upgrade_v2/deepseek_nonthinking_client_qualification_v1.json",
+        "sha256": "ed452f955c9ff4829e4e2ada8bd1fd0e376ff3b2b5426ccfcfce5ab241160a5d"
+      },
+      {
+        "bytes": 50825,
+        "path": "experiments/paper_v2/formal_matrix_controller_v2.py",
+        "sha256": "933ca2fe6b954d15bc5694f0e192b29f36a2d643716a781adf3a454b2678d5cb"
+      },
+      {
+        "bytes": 15544,
+        "path": "schemas/paper_v2/formal_matrix_admission_v2.schema.json",
+        "sha256": "59886f9f626b28b4669fbdd559a4765cb9744e817f435b7f2c0180ec38304193"
+      },
+      {
+        "bytes": 601,
+        "path": "protocols/paper_upgrade_v2/formal_matrix_controller_qualification_v2.json",
+        "sha256": "9e0a8084f54b91d89c2feadbc270cebe1fd551a16a0eaeb6f1ea169d27565b70"
+      },
+      {
+        "bytes": 14629,
+        "path": "protocols/paper_upgrade_v2/deepseek_medium_matrix_candidate_v2.json",
+        "sha256": "a8b582d844d4423c43f29d271bdf0f7461c10545c038fb3736b62aca5e3e4dc2"
+      },
+      {
+        "bytes": 1622,
+        "path": "protocols/paper_upgrade_v2/admissions/deepseek_medium_matrix_canary_admission_v2.json",
+        "sha256": "73e7a78d268ee18cbed72ad87df6a52e339ec47a43707b76ed78ddea861fa895"
+      },
+      {
+        "bytes": 4401,
+        "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/d8a2abc02ad2659d613c276573db291cac5b5d62fee87d71811a8606aa4f3f35/aborted_run_review_v2.json",
+        "sha256": "76285249ec5fcc191f938f8c581983a844e6f9a8a8cee31e358c4257ee4c0e62"
+      },
+      {
+        "bytes": 10777,
+        "path": "experiments/paper_v2/trusted_context_runtime_v2.py",
+        "sha256": "8a1c24eb9ced51fb907fd402bd93b49c6fc98a8dcf654f61b4886e5b1641aaf7"
+      },
+      {
+        "bytes": 45931,
+        "path": "experiments/paper_v2/formal_matrix_controller_v3.py",
+        "sha256": "15ef4835c0f1a5990771da9a0a6afd15692f2e20350947f9e8068e793153d940"
+      },
+      {
+        "bytes": 12600,
+        "path": "schemas/paper_v2/formal_matrix_admission_v3.schema.json",
+        "sha256": "20f5f5acb12ce55fe978fc155d8bdd22eb733e8d00bb8f45f1fcefdb250f74e0"
+      },
+      {
+        "bytes": 848,
+        "path": "protocols/paper_upgrade_v2/formal_matrix_controller_qualification_v3.json",
+        "sha256": "b7ef7efff691a68e81a03f416f1e56897cb5cb94f8a69004d77d27af20f1b91d"
+      },
+      {
+        "bytes": 16988,
+        "path": "protocols/paper_upgrade_v2/deepseek_medium_matrix_candidate_v3.json",
+        "sha256": "24c6377cd3763373478c43dbc94f60f1cabd97b8f2c1f56c9faa42b137bc7f56"
+      },
+      {
+        "bytes": 1603,
+        "path": "protocols/paper_upgrade_v2/admissions/deepseek_medium_matrix_canary_admission_v3.json",
+        "sha256": "f2d494d7d7c08538d8090654d182bb58a689f619925751a71d11acb18339eb5a"
+      },
+      {
+        "bytes": 6005,
+        "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/509785fefe8dc9c6cb992707418c08d40908b1bff54476de4fe59d9e2b67d2fa/failed_canary_review_v3.json",
+        "sha256": "f079541ad0a313e8046f76cce0ceb5de409d5984a88a1defc8f9fbff26ee194b"
+      },
+      {
+        "bytes": 20445,
+        "path": "experiments/paper_v2/deepseek_json_client_v2.py",
+        "sha256": "60c6f258cf49b8a00199079d66d291c9fa5940d5c7845826b9169f3307ee943a"
+      },
+      {
+        "bytes": 709,
+        "path": "protocols/paper_upgrade_v2/deepseek_json_client_qualification_v2.json",
+        "sha256": "046480d77355cb3d5b4d125fd0a506895535808971237747efb9907bc2131e13"
+      },
+      {
+        "bytes": 47717,
+        "path": "experiments/paper_v2/formal_matrix_controller_v4.py",
+        "sha256": "30d2bd16b7d4cf5299a7e0a19beee52038f20b9da311a045bb279569db7b8d92"
+      },
+      {
+        "bytes": 9924,
+        "path": "schemas/paper_v2/formal_matrix_admission_v4.schema.json",
+        "sha256": "366e21bf42f39c6799f9ed4e680596cd3b115abfb43cdccdf3a9eb3c965235f2"
+      },
+      {
+        "bytes": 654,
+        "path": "protocols/paper_upgrade_v2/formal_matrix_controller_qualification_v4.json",
+        "sha256": "30de67d0cae791341fc602090c9d400b8bed097f78a7e533d7375d10ca09521f"
+      },
+      {
+        "bytes": 19169,
+        "path": "protocols/paper_upgrade_v2/deepseek_medium_matrix_candidate_v4.json",
+        "sha256": "4885e112818e25e15ed2501ce9eae2f038d7e0a5f4ea9be8da6d68f16c00d8fa"
+      },
+      {
+        "bytes": 1588,
+        "path": "protocols/paper_upgrade_v2/admissions/deepseek_medium_matrix_canary_admission_v4.json",
+        "sha256": "6112d7f49a60e79223c2e8c7ac85ab240136aa9aed372c7ea922c9ab457c7aa5"
+      },
+      {
+        "bytes": 1663,
+        "path": "protocols/paper_upgrade_v2/admissions/deepseek_medium_matrix_continuation_admission_v4.json",
+        "sha256": "749759251d654f6bc2173ddc3c3dace3c22fb72fdd7b6d7a72079f7809b2e749"
+      },
+      {
+        "bytes": 2563,
+        "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/dd794dd88eade41166bdafb7cb191898d7d19a5d8df737340f6acc3daac4504f/formal_result_technical_review_v1.json",
+        "sha256": "ba776df2857e1a65396e20643a9a5b596b2386d105f279a3720540298746f8fb"
+      },
+      {
+        "bytes": 6100,
+        "path": "protocols/paper_upgrade_v2/dual_provider_budget_policy_v2.json",
+        "sha256": "55ceeea5335ddd05f2eff9c5b1be8a858e055a8d8a56c6482ebe8fe006e3b7b7"
+      },
+      {
+        "bytes": 9744,
+        "path": "experiments/paper_v2/boundary_rejection_runtime_v1.py",
+        "sha256": "f06fee00f57859a3ff18c10458708e4e18b71a89f861cc19013528c3c0acd646"
+      },
+      {
+        "bytes": 50507,
+        "path": "experiments/paper_v2/formal_matrix_controller_v5.py",
+        "sha256": "e0b72e528f5acc3524feaacabd47e0195eb4574037596f39173a5fb7e570866e"
+      },
+      {
+        "bytes": 6709,
+        "path": "schemas/paper_v2/formal_matrix_admission_v5.schema.json",
+        "sha256": "1c0960625500776f1fb2bf6cb4cd2aa678672ffdf436da0e155b6f2f61c0b77a"
+      },
+      {
+        "bytes": 1159,
+        "path": "protocols/paper_upgrade_v2/formal_matrix_controller_qualification_v5.json",
+        "sha256": "270c9914385e9e91008343999101ceacc964abf26ccc585233dbd976ae74e9e1"
+      }
+    ],
+    "matrix_identity": "62eb641043a2fc50cbaac439b047de5c433c38b20ff9c06d8ff6d92dd71f90ae",
+    "outputs": {
+      "attempt_ledger_path": "outputs/paper_upgrade_v2/formal_medium/deepseek/62eb641043a2fc50cbaac439b047de5c433c38b20ff9c06d8ff6d92dd71f90ae/matrix_attempts_v1.jsonl",
+      "automatic_resume_of_open_attempts": false,
+      "budget_ledger_path": "outputs/paper_upgrade_v2/formal_medium/deepseek/62eb641043a2fc50cbaac439b047de5c433c38b20ff9c06d8ff6d92dd71f90ae/matrix_budget_v1.jsonl",
+      "record_ledger_path": "outputs/paper_upgrade_v2/formal_medium/deepseek/62eb641043a2fc50cbaac439b047de5c433c38b20ff9c06d8ff6d92dd71f90ae/experiment_records_v2.jsonl",
+      "root": "outputs/paper_upgrade_v2/formal_medium/deepseek/62eb641043a2fc50cbaac439b047de5c433c38b20ff9c06d8ff6d92dd71f90ae",
+      "single_trace_per_work_item": true,
+      "trace_root": "outputs/paper_upgrade_v2/formal_medium/deepseek/62eb641043a2fc50cbaac439b047de5c433c38b20ff9c06d8ff6d92dd71f90ae/provider_traces"
+    },
+    "pilot_review": {
+      "checks_passed": 15,
+      "file_sha256": "95d4cf52cc71388d30c2cc75609f8e551b5a65d9fce99209228ac0121d2eb5a8",
+      "path": "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/post_pilot_review_v1.json",
+      "ready_for_owner_matrix_review": true,
+      "review_sha256": "aff7dbf54ad883029735f1bdcdefb435451c404978f07d7e9f031816ccb019dd",
+      "status": "official_pilot_technical_gate_pass"
+    },
+    "plan": {
+      "authorization_regime_probes": 48,
+      "execution_identity": "d7b8fe9ddb0ca74cd46d8e4e2dd0a9e7f3215ac37055da70c6944f07db689aab",
+      "path": "protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl",
+      "primary_records": 432,
+      "provider_calls_upper_bound": 4416,
+      "sha256": "573625a9e1e56c9a8be68fe21368d3e90e268974aa7285bec926d4591f8ec254",
+      "work_items": 480,
+      "work_key_sequence_sha256": "67880e80923a817ed9e2b3d974511e7bb00c248795ec58d5d225807aa19130f5"
+    },
+    "provider": {
+      "automatic_retries": 0,
+      "base_url": "https://api.deepseek.com",
+      "concurrency": 1,
+      "cross_provider_fallback": false,
+      "endpoint_type": "official_api",
+      "max_tokens": 512,
+      "model_id": "deepseek-v4-pro",
+      "provider_id": "deepseek",
+      "provider_managed_tools": false,
+      "temperature": 0.0,
+      "thinking_mode": "disabled",
+      "timeout_seconds": 120.0
+    },
+    "replaces_aborted_run": {
+      "matrix_identity": "dd794dd88eade41166bdafb7cb191898d7d19a5d8df737340f6acc3daac4504f",
+      "old_records_result_eligible": false,
+      "old_run_resumable": false,
+      "review_path": "outputs/paper_upgrade_v2/formal_medium/deepseek/dd794dd88eade41166bdafb7cb191898d7d19a5d8df737340f6acc3daac4504f/formal_result_technical_review_v1.json",
+      "review_sha256": "ba776df2857e1a65396e20643a9a5b596b2386d105f279a3720540298746f8fb",
+      "run_id": "paper-v2-deepseek-medium-v4-20260724"
+    },
+    "run_id": "paper-v2-deepseek-medium-v5-20260724",
+    "safety": {
+      "allowed_payload_classes": [
+        "synthetic_m3_case",
+        "public_benchmark_case"
+      ],
+      "effect_backends": [
+        "m3_sandbox_fixture",
+        "agentdojo_in_memory_copy"
+      ],
+      "external_connectors": false,
+      "external_effects": false,
+      "host_or_provider_tools": false,
+      "model_output_is_untrusted_proposal": true,
+      "policy_path": "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+      "policy_sha256": "e505a3b92f605320c315f3ecb7e4a02973040f9153b4b95b4601a9148dfd0894"
+    },
+    "trusted_context_prompt": {
+      "allowed_fields": [
+        "requested_actions",
+        "workspace_scope"
+      ],
+      "evaluator_or_gold_fields": false,
+      "exact_action_parameters_visible": true,
+      "qualification_path": "protocols/paper_upgrade_v2/formal_matrix_controller_qualification_v3.json",
+      "qualification_sha256": "b7ef7efff691a68e81a03f416f1e56897cb5cb94f8a69004d77d27af20f1b91d",
+      "schema_version": "m3-paper-v2-trusted-context-prompt-projection-2.0"
+    }
+  },
+  "scope_sha256": "c9f34f493084164ef82300beb7c1cea82b99e94b5bf6126150886f43cb0b0f90",
+  "status": "candidate_pending_six_condition_canary"
+}

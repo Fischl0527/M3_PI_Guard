@@ -1,0 +1,31 @@
+{
+  "checks": "<all generated custodian-private full-replay checks must be true, including verifier_distinct_from_custodian>",
+  "custodian_id": "<same registered custodian>",
+  "custodian_signature_sha256": "<SHA-256 of verified signature bytes>",
+  "evidence_boundary": {
+    "custodian_private_scoring_semantics_recomputed": false,
+    "network_calls_made": 0,
+    "offline_identity_not_cryptographically_proven": true,
+    "private_label_payload_opened": true,
+    "public_key_real_person_identity_is_offline_attestation": true,
+    "released_scoring_results_read": 3600,
+    "result_admission_authorized": false,
+    "score_case_bindings_revalidated": true,
+    "scoring_semantics_custodian_attested": true,
+    "signature_math_verified": true,
+    "verification_scope": "custodian_private_artifact_full_replay"
+  },
+  "manifest_sha256": "<canonical receipt digest>",
+  "public_key_spki_sha256": "<same registered public key fingerprint>",
+  "schema_version": "m3-paper-v2-independent-blind-scoring-attestation-verifier-receipt-2.0",
+  "scoring_attestation_manifest_sha256": "<canonical scoring attestation digest>",
+  "scoring_attestation_sha256": "<scoring attestation file SHA-256>",
+  "scoring_result_seal_sha256": "<scoring result seal file SHA-256>",
+  "signature_key_id": "ed25519-spki-sha256:<64 lowercase hex>",
+  "signature_payload_sha256": "<verified raw digest commitment>",
+  "signature_scheme": "ed25519-detached-sha256-digest-v1",
+  "status": "custodian_scoring_result_artifact_full_replay_verified",
+  "verified": true,
+  "verified_at": "<timezone-aware ISO-8601>",
+  "verifier_id": "<must differ from custodian_id>"
+}

@@ -1,0 +1,19 @@
+{
+  "automatic_retries": 0,
+  "credentials_read": 0,
+  "formal_results_created": 0,
+  "generated_at": "2026-07-24T17:50:00+08:00",
+  "json_output_payloads_observed": 4,
+  "network_calls_made": 0,
+  "nonthinking_payloads_observed": 4,
+  "open_attempts": 0,
+  "prior_runs_resumed": false,
+  "provider_calls_completed": 4,
+  "response_repair_allowed": false,
+  "result_admission_authorized": false,
+  "schema_version": "m3-paper-v2-formal-matrix-controller-qualification-4.0",
+  "status": "matrix_controller_v4_qualified_offline",
+  "strict_parser_unchanged": true,
+  "successful_work_items": 2,
+  "trusted_context_path_observed": true
+}

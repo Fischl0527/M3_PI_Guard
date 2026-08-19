@@ -1,0 +1,158 @@
+{
+  "as_of": "2026-07-24",
+  "versions": [
+    {
+      "version": "v4",
+      "records": 395,
+      "provider_calls": 773,
+      "cumulative_cost_cny": 0.7445328,
+      "status": "技术门阻断"
+    },
+    {
+      "version": "v5",
+      "records": 94,
+      "provider_calls": 157,
+      "cumulative_cost_cny": 0.8384096,
+      "status": "中止/不可恢复"
+    },
+    {
+      "version": "v6",
+      "records": 64,
+      "provider_calls": 112,
+      "cumulative_cost_cny": 0.9066668,
+      "status": "中止/不可恢复"
+    },
+    {
+      "version": "v7",
+      "records": 0,
+      "provider_calls": 0,
+      "cumulative_cost_cny": 0.9066668,
+      "status": "候选已冻结，未审计完/未运行"
+    }
+  ],
+  "operational_composition": [
+    {
+      "version": "v4",
+      "completed": 356,
+      "terminal_failures": 39,
+      "open_attempts": 0
+    },
+    {
+      "version": "v5",
+      "completed": 92,
+      "terminal_failures": 2,
+      "open_attempts": 1
+    },
+    {
+      "version": "v6",
+      "completed": 61,
+      "terminal_failures": 3,
+      "open_attempts": 1
+    }
+  ],
+  "readiness": [
+    {
+      "area": "研究问题与止损门槛",
+      "percent": 95
+    },
+    {
+      "area": "2024–2026 文献矩阵",
+      "percent": 90
+    },
+    {
+      "area": "online-state 源码审计",
+      "percent": 90
+    },
+    {
+      "area": "DeepSeek 证据链基础设施",
+      "percent": 88
+    },
+    {
+      "area": "v7 全量离线审计",
+      "percent": 55
+    },
+    {
+      "area": "正式安全—效用结果",
+      "percent": 0
+    },
+    {
+      "area": "Gemini 跨模型泛化",
+      "percent": 20
+    },
+    {
+      "area": "公共基准与自适应攻击",
+      "percent": 30
+    },
+    {
+      "area": "独立盲测",
+      "percent": 20
+    },
+    {
+      "area": "论文写作与投稿包",
+      "percent": 45
+    }
+  ],
+  "roadmap": [
+    {
+      "phase": "P0",
+      "label": "v7 离线审计与结果门 v4 冻结",
+      "start_week": 0.0,
+      "duration_weeks": 0.7
+    },
+    {
+      "phase": "P1",
+      "label": "DeepSeek canary + 480 项矩阵",
+      "start_week": 0.7,
+      "duration_weeks": 1.0
+    },
+    {
+      "phase": "P2",
+      "label": "技术准入、统计与主张门",
+      "start_week": 1.7,
+      "duration_weeks": 0.8
+    },
+    {
+      "phase": "P3",
+      "label": "Gemini 泛化 + AgentDojo/SIREN",
+      "start_week": 2.5,
+      "duration_weeks": 2.0
+    },
+    {
+      "phase": "P4",
+      "label": "自适应攻击与敏感性分析",
+      "start_week": 4.5,
+      "duration_weeks": 1.5
+    },
+    {
+      "phase": "P5",
+      "label": "独立盲测",
+      "start_week": 5.0,
+      "duration_weeks": 2.0
+    },
+    {
+      "phase": "P6",
+      "label": "论文定稿、审查与 JISA 投稿",
+      "start_week": 6.0,
+      "duration_weeks": 2.0
+    }
+  ],
+  "verification": {
+    "last_complete_harness": {
+      "tests_passed": 1049,
+      "tests_skipped": 1,
+      "warnings": 3,
+      "verification_failed": 0,
+      "scope": "pre-v6-continuation"
+    },
+    "v7_focused_tests_passed": 12,
+    "v7_full_audit_status": "paused_by_owner_for_report"
+  },
+  "evidence_counts": {
+    "literature_entries": 34,
+    "online_state_audit_units": 22,
+    "conditions": 6,
+    "formal_work_items": 480,
+    "primary_records": 432,
+    "authorization_probes": 48
+  }
+}

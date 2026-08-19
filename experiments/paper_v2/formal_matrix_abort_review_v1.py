@@ -1,0 +1,220 @@
+"""Content-free abort review for the stopped DeepSeek v5 matrix."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import json
+from collections import Counter
+from pathlib import Path
+from typing import Any, Mapping
+
+import experiments.paper_v2.formal_matrix_controller_v1 as v1
+import experiments.paper_v2.formal_matrix_controller_v5 as v5
+from experiments.paper_v2.contracts import canonical_json_bytes
+from experiments.paper_v2.formal_record_store_v2 import (
+    load_record_entries,
+    validate_record_entries,
+)
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT_ROOT = (
+    PROJECT_ROOT
+    / "outputs/paper_upgrade_v2/formal_medium/deepseek"
+    / "62eb641043a2fc50cbaac439b047de5c433c38b20ff9c06d8ff6d92dd71f90ae"
+)
+DEFAULT_REVIEW = OUTPUT_ROOT / "formal_matrix_abort_review_v1.json"
+
+
+class FormalMatrixAbortReviewError(RuntimeError):
+    """Raised when stopped-v5 technical evidence cannot be verified."""
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise FormalMatrixAbortReviewError(f"{path}: expected an object")
+    return value
+
+
+def _write_json(path: Path, value: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(canonical_json_bytes(value) + b"\n")
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _manifest_sha(value: Mapping[str, Any]) -> str:
+    return hashlib.sha256(
+        canonical_json_bytes(
+            {key: item for key, item in value.items() if key != "manifest_sha256"}
+        )
+    ).hexdigest()
+
+
+def build_abort_review() -> dict[str, Any]:
+    candidate = v5.verify_matrix_candidate()
+    admission = v5.verify_continuation_admission()
+    rows = v1._plan_rows()
+    keys = {str(row["work_key"]) for row in rows}
+    execution_identity = str(rows[0]["execution_identity"])
+    records = load_record_entries(OUTPUT_ROOT / "experiment_records_v2.jsonl")
+    record_status = validate_record_entries(
+        records,
+        work_items=rows,
+        execution_identity=execution_identity,
+        run_id=v5.RUN_ID,
+    )
+    attempts = v1._load_jsonl(OUTPUT_ROOT / "matrix_attempts_v1.jsonl")
+    attempt_status = v1.validate_attempt_events(
+        attempts,
+        run_id=v5.RUN_ID,
+        execution_identity=execution_identity,
+        known_work_keys=keys,
+    )
+    budget_events = v1._load_jsonl(OUTPUT_ROOT / "matrix_budget_v1.jsonl")
+    policy = _read_json(v5.DEFAULT_BUDGET_POLICY)
+    budget_status = v1.validate_budget_events(
+        budget_events,
+        run_id=v5.RUN_ID,
+        execution_identity=execution_identity,
+        known_work_keys=keys,
+        policy=policy,
+        prior_usage=candidate["scope"]["budget"]["prior_project_usage"],
+    )
+    terminal_keys = set(record_status["terminal_work_keys"])
+    terminal_attempts = set(attempt_status["terminal_by_work_key"])
+    open_keys = set(attempt_status["open_work_keys"])
+    if (
+        terminal_keys != terminal_attempts | open_keys
+        or len(open_keys) != 1
+        or not open_keys <= terminal_keys
+    ):
+        raise FormalMatrixAbortReviewError(
+            "stopped v5 ledger shape differs from the recorded stop"
+        )
+    v1._cross_bind_budget_and_records(
+        budget_events=budget_events,
+        record_entries=records,
+        trace_root=OUTPUT_ROOT / "provider_traces",
+    )
+    open_key = next(iter(open_keys))
+    trace_path = OUTPUT_ROOT / "provider_traces" / f"{open_key}.jsonl"
+    trace_rows = v1._trace_rows(trace_path)
+    if (
+        len(trace_rows) != 2
+        or trace_rows[-1]["event"]["event_type"] != "completed"
+    ):
+        raise FormalMatrixAbortReviewError(
+            "stopped v5 record-backed open-attempt trace is incomplete"
+        )
+    statuses = Counter(
+        str(entry["record"]["operational_status"]) for entry in records
+    )
+    tiers = Counter(str(entry["record"]["result_tier"]) for entry in records)
+    core = {
+        "schema_version": "m3-paper-v2-formal-matrix-abort-review-1.0",
+        "status": "aborted_result_ineligible_new_version_required",
+        "run_id": v5.RUN_ID,
+        "matrix_identity": candidate["scope"]["matrix_identity"],
+        "candidate_manifest_sha256": candidate["manifest_sha256"],
+        "continuation_admission_sha256": _sha256_file(
+            v5.DEFAULT_CONTINUATION_ADMISSION
+        ),
+        "stop_reason": (
+            "systemic_unclassified_post_response_safety_rejection"
+        ),
+        "operational_summary": {
+            "record_count": len(records),
+            "remaining_work_items": len(rows) - len(records),
+            "operational_status_counts": dict(sorted(statuses.items())),
+            "result_tier_counts": dict(sorted(tiers.items())),
+            "attempt_event_count": len(attempts),
+            "open_attempt_count": len(open_keys),
+            "record_backed_open_attempt_count": len(open_keys),
+            "orphaned_completed_response_count": 0,
+            "provider_calls_completed": len(budget_events),
+            "project_cumulative_cost_cny": budget_status[
+                "project_cumulative_cost_cny"
+            ],
+            "project_cumulative_usage": copy.deepcopy(
+                budget_status["project_cumulative_usage"]
+            ),
+            "budget_status": (
+                "paused" if budget_status["paused"] else "continue"
+            ),
+        },
+        "integrity_checks": {
+            "record_chain_valid": True,
+            "attempt_chain_valid": True,
+            "budget_chain_valid": True,
+            "records_equal_terminal_plus_open_attempts": True,
+            "all_budget_calls_bind_records": True,
+            "record_backed_open_attempt_has_completed_trace": True,
+            "automatic_retry_used": False,
+            "external_effects_enabled": False,
+        },
+        "evidence_locks": {
+            "record_ledger_sha256": _sha256_file(
+                OUTPUT_ROOT / "experiment_records_v2.jsonl"
+            ),
+            "attempt_ledger_sha256": _sha256_file(
+                OUTPUT_ROOT / "matrix_attempts_v1.jsonl"
+            ),
+            "budget_ledger_sha256": _sha256_file(
+                OUTPUT_ROOT / "matrix_budget_v1.jsonl"
+            ),
+            "record_backed_open_attempt_trace_sha256": _sha256_file(
+                trace_path
+            ),
+        },
+        "evidence_boundary": {
+            "scientific_outcomes_reviewed": False,
+            "result_admission_authorized": False,
+            "analysis_authorized": False,
+            "prior_run_resumable": False,
+            "open_attempt_retry_authorized": False,
+            "network_calls_made_by_review": 0,
+            "append_only_ledgers_mutated_by_review": False,
+        },
+        "supersession_requirement": (
+            "Any further execution must use a new run and matrix identity."
+        ),
+        "active_admission_manifest_sha256": admission["manifest_sha256"],
+    }
+    return {**core, "manifest_sha256": _manifest_sha(core)}
+
+
+def write_abort_review(path: Path = DEFAULT_REVIEW) -> dict[str, Any]:
+    value = build_abort_review()
+    _write_json(path, value)
+    return value
+
+
+def verify_abort_review(path: Path = DEFAULT_REVIEW) -> dict[str, Any]:
+    observed = _read_json(path)
+    expected = build_abort_review()
+    if observed != expected:
+        raise FormalMatrixAbortReviewError("v5 abort review drift")
+    return observed
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--write", action="store_true")
+    args = parser.parse_args()
+    value = write_abort_review() if args.write else verify_abort_review()
+    print(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

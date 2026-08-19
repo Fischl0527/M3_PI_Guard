@@ -1,0 +1,743 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "M3-PI Guard 阶段收口报告：Fresh Harness v7 完整通过",
+    "description": "Fresh Harness v7、Gemini Public-v5 单段、历史 medium-v7 审计及21天实验结项差距的技术报告。",
+    "generatedAt": "2026-08-06T10:40:00+08:00",
+    "sources": [
+      {
+        "id": "src_harness_v7",
+        "label": "Fresh Harness v7 receipt",
+        "path": "outputs/verification/experiment_closeout_fresh_harness_v7_20260806/receipt.json",
+        "query": {
+          "engine": "artifact_snapshot",
+          "language": "sql",
+          "description": "Selects the reviewed Harness, workstream-coverage, status, and evidence-register rows embedded in this bounded report snapshot; those rows were reconciled to the cited v7 receipt and the explicitly listed supporting manifests.",
+          "sql": "SELECT * FROM report_snapshot WHERE dataset_id IN ('headline_metrics','harness_progression','workstream_coverage','workstream_status','evidence_register') ORDER BY dataset_id, sequence, run, workstream",
+          "tables_used": [
+            "report_snapshot"
+          ],
+          "filters": [
+            "snapshot generated at 2026-08-06T10:40:00+08:00",
+            "only evidence with an existing receipt, manifest, or append-only review is counted"
+          ],
+          "metric_definitions": {
+            "harness_stages_passed": "Count of aggregate Harness stages whose authoritative v7 receipt status is PASS.",
+            "pytest_passed": "Count of pytest cases reported passed by the authoritative v7 Harness log.",
+            "elapsed_hours": "Authoritative detached-run elapsed seconds divided by 3600.",
+            "coverage_ratio": "Completed frozen units divided by target frozen units for each workstream; this is quantity coverage, not result admission or scientific performance."
+          }
+        }
+      },
+      {
+        "id": "src_harness_v6",
+        "label": "Fresh Harness v6 receipt",
+        "path": "outputs/verification/experiment_closeout_fresh_harness_v6_20260805/receipt.json"
+      },
+      {
+        "id": "src_harness_v5",
+        "label": "Fresh Harness v5 failure review",
+        "path": "protocols/paper_upgrade_v2/experiment_closeout_fresh_harness_failure_review_v5.json"
+      },
+      {
+        "id": "src_gemini_segment",
+        "label": "Gemini Public-v5 segment 0 technical review",
+        "path": "outputs/paper_upgrade_v2/formal_public/gemini/public-v5-canary-recovery-s0-885cf3a88684ca7427a29a5c0b65e0a6f97746133279fb59341bae557c4b48b2/technical_segment_review_v6.json",
+        "query": {
+          "engine": "artifact_snapshot",
+          "language": "sql",
+          "description": "Selects the reviewed Gemini Public-v5 segment-0 headline fields from the bounded report snapshot after reconciliation to the technical review.",
+          "sql": "SELECT gemini_new_records, gemini_paid_usd FROM headline_metrics LIMIT 1",
+          "tables_used": [
+            "headline_metrics"
+          ],
+          "filters": [
+            "Gemini Public-v5 segment 0 only",
+            "technical-gate fields only; scientific outcomes remain sealed"
+          ],
+          "metric_definitions": {
+            "gemini_new_records": "Count of newly completed prospective formal-candidate records in segment 0.",
+            "gemini_paid_usd": "Paid-tier spend attested for the segment; free-tier operation is represented as 0 USD."
+          }
+        }
+      },
+      {
+        "id": "src_flash_merge",
+        "label": "DeepSeek Flash second-role evidence merge",
+        "path": "protocols/paper_upgrade_v2/public_second_evidence_merge_v1.json"
+      },
+      {
+        "id": "src_medium_v7",
+        "label": "Historical medium-v7 abort review",
+        "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/a34fe5b87607cb48144b0d36da282accc25d33cd18706351eb39dd25ebe04c75/formal_matrix_abort_review_v3.json"
+      },
+      {
+        "id": "src_adaptive_pro",
+        "label": "Adaptive Pro budget-50 candidate v2",
+        "path": "protocols/paper_upgrade_v2/adaptive_formal_pro_50_candidate_v2.json"
+      },
+      {
+        "id": "src_gemini_duration",
+        "label": "Gemini free-tier duration qualification",
+        "path": "protocols/paper_upgrade_v2/gemini_free_tier_duration_qualification_v1.json"
+      },
+      {
+        "id": "src_blind_day1",
+        "label": "Independent blind Day-1 registration acceptance",
+        "path": "protocols/paper_upgrade_v2/independent_blind_day1_registration_acceptance_v1.json"
+      }
+    ],
+    "cards": [
+      {
+        "id": "card_harness",
+        "dataset": "headline_metrics",
+        "sourceId": "src_harness_v7",
+        "description": "Fresh Harness v7 聚合门禁结果。",
+        "metrics": [
+          {
+            "label": "聚合阶段通过",
+            "field": "harness_stages_passed",
+            "format": "number"
+          },
+          {
+            "label": "总阶段",
+            "field": "harness_stages_total",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "card_pytest",
+        "dataset": "headline_metrics",
+        "sourceId": "src_harness_v7",
+        "description": "完整回归；另有1项跳过和3条已知依赖警告。",
+        "metrics": [
+          {
+            "label": "pytest 通过",
+            "field": "pytest_passed",
+            "format": "number"
+          },
+          {
+            "label": "失败",
+            "field": "pytest_failed",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "card_elapsed",
+        "dataset": "headline_metrics",
+        "sourceId": "src_harness_v7",
+        "description": "从 detached helper 启动到权威 receipt 落盘的完整耗时。",
+        "metrics": [
+          {
+            "label": "运行小时",
+            "field": "elapsed_hours",
+            "format": "number"
+          },
+          {
+            "label": "终态标记",
+            "field": "terminal_zero_markers",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "card_gemini",
+        "dataset": "headline_metrics",
+        "sourceId": "src_gemini_segment",
+        "description": "本轮 Harness 前已完成的 Gemini Public-v5 免费层单段；科研结果仍封存。",
+        "metrics": [
+          {
+            "label": "新增正式候选记录",
+            "field": "gemini_new_records",
+            "format": "number"
+          },
+          {
+            "label": "付费 USD",
+            "field": "gemini_paid_usd",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "chart_harness_progression",
+        "title": "Fresh Harness v5、v6 与 v7 聚合阶段",
+        "subtitle": "v5保留3个宿主边界失败；v6与v7均在零provider/network授权下达到13/13。",
+        "showDescription": true,
+        "question": "当前工作树在修复宿主资格化并加入Gemini v5证据后，是否仍能完整重放？",
+        "rationale": "三个离散版本共享13阶段口径，分组柱图可同时展示通过与失败数量。",
+        "type": "bar",
+        "dataset": "harness_progression",
+        "sourceId": "src_harness_v7",
+        "encodings": {
+          "x": {
+            "field": "run",
+            "type": "nominal",
+            "label": "Harness 运行"
+          },
+          "y": {
+            "field": "stage_count",
+            "type": "quantitative",
+            "label": "阶段数"
+          },
+          "color": {
+            "field": "stage_status",
+            "type": "nominal",
+            "label": "阶段状态"
+          },
+          "tooltip": [
+            {
+              "field": "pytest_passed",
+              "type": "quantitative",
+              "label": "pytest通过"
+            },
+            {
+              "field": "exit_code",
+              "type": "quantitative",
+              "label": "退出码"
+            }
+          ]
+        },
+        "layout": "full",
+        "valueFormat": "number"
+      },
+      {
+        "id": "chart_workstream_coverage",
+        "title": "实验结项工作流的当前数量覆盖率",
+        "subtitle": "按各自冻结单位归一化；覆盖率不等于科研结果准入、统计结论或论文完成度。",
+        "showDescription": true,
+        "question": "本轮停止点距离21天实验结项还缺哪些实质证据？",
+        "rationale": "工作流单位不同，归一化横向柱图用于识别完成、部分完成与未启动项，精确分子分母保留在明细表。",
+        "type": "bar",
+        "dataset": "workstream_coverage",
+        "sourceId": "src_harness_v7",
+        "encodings": {
+          "x": {
+            "field": "workstream",
+            "type": "nominal",
+            "label": "工作流"
+          },
+          "y": {
+            "field": "coverage_ratio",
+            "type": "quantitative",
+            "format": "percent",
+            "label": "数量覆盖率"
+          },
+          "tooltip": [
+            {
+              "field": "completed",
+              "type": "quantitative",
+              "label": "已完成"
+            },
+            {
+              "field": "target",
+              "type": "quantitative",
+              "label": "目标"
+            },
+            {
+              "field": "unit",
+              "type": "text",
+              "label": "单位"
+            },
+            {
+              "field": "evidence_boundary",
+              "type": "text",
+              "label": "证据边界"
+            }
+          ]
+        },
+        "layout": "full",
+        "valueFormat": "percent"
+      }
+    ],
+    "tables": [
+      {
+        "id": "table_workstream_status",
+        "title": "实验结项要求与当前状态",
+        "subtitle": "截至2026年8月6日10:40；只计入可由现有manifest、receipt或append-only证据复核的单位。",
+        "dataset": "workstream_status",
+        "sourceId": "src_harness_v7",
+        "defaultSort": {
+          "field": "sequence",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "sequence",
+            "label": "顺序",
+            "type": "number"
+          },
+          {
+            "field": "workstream",
+            "label": "工作流",
+            "type": "text"
+          },
+          {
+            "field": "completed",
+            "label": "当前",
+            "type": "number"
+          },
+          {
+            "field": "target",
+            "label": "目标",
+            "type": "number"
+          },
+          {
+            "field": "unit",
+            "label": "单位",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "证据状态",
+            "type": "text"
+          },
+          {
+            "field": "next_gate",
+            "label": "下一门禁",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "table_evidence_register",
+        "title": "本轮关键证据与哈希",
+        "subtitle": "manifest SHA与文件SHA分别注明；所有scientific outcome与盲测标签仍按原边界封存。",
+        "dataset": "evidence_register",
+        "sourceId": "src_harness_v7",
+        "defaultSort": {
+          "field": "sequence",
+          "direction": "asc"
+        },
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "sequence",
+            "label": "顺序",
+            "type": "number"
+          },
+          {
+            "field": "artifact",
+            "label": "证据",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "复核结论",
+            "type": "text"
+          },
+          {
+            "field": "sha256",
+            "label": "SHA-256",
+            "type": "text"
+          },
+          {
+            "field": "boundary",
+            "label": "边界",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "layout": "full",
+        "body": "# M3-PI Guard 阶段收口报告：Fresh Harness v7 完整通过"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Executive Summary｜当前工程基线绿色，但21天实验目标尚未结项\n\n**直接结论：本轮在不启动新实验的前提下，已把手头的 Fresh Harness v7 自然运行到权威终态并完整通过。** detached helper 直接观察到子进程 exit 0，13/13聚合阶段通过，pytest为1552通过、1跳过、3条已知警告，日志只有一个终态 `Verification failed=0`，verifier/helper运行前后哈希稳定，且provider/network授权始终为false。\n\nHarness之前完成的Gemini Public-v5 segment 0也通过技术门：1条formal-candidate记录、1次官方传输、精确 `gemini-3.6-flash` 身份、官方response ID、USD 0、零重试/工具/外部效果。该结果与DeepSeek Flash公共矩阵一样仍未授权科研结果访问。历史medium-v7失败已只读审计并永久判为不可恢复。\n\n**项目不能据此宣称实验结项。** Gemini完整1791条公共矩阵、正式三模型Adaptive、600条独立盲测与3600条六条件执行、统计复算及最终哈希包均未完成；F-PAPER-002必须继续保持 `in_progress`。"
+      },
+      {
+        "id": "headline",
+        "type": "metric-strip",
+        "layout": "full",
+        "cardIds": [
+          "card_harness",
+          "card_pytest",
+          "card_elapsed",
+          "card_gemini"
+        ]
+      },
+      {
+        "id": "harness_result",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## v7证明加入Gemini v5证据后，完整Harness仍可重放\n\nv7从2026年8月6日04:45运行至10:34，共20946.429秒。receipt明确记录直接观察OS退出码、evidence gate通过、13个检查全部为true、AgentDojo固定commit匹配、global/repository Git config均未修改。stdout和stderr的计算哈希与receipt完全一致。\n\n下图采用相同的13阶段分母比较v5、v6、v7。v5的三个失败来自宿主Git所有权资格化；v6修复后达到13/13；v7在新增Gemini Public-v5 segment 0、gate v4及相应验证覆盖后仍保持13/13。**这支持工程与证据链完整性，不等同于新增科研结论。**"
+      },
+      {
+        "id": "harness_chart_block",
+        "type": "chart",
+        "layout": "full",
+        "chartId": "chart_harness_progression"
+      },
+      {
+        "id": "workstream_result",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## 真正的结项缺口集中在Gemini、Adaptive和盲测\n\nDeepSeek Flash公共矩阵已物理闭包1791/1791，但结果仍封存；Gemini目前可复核到1条历史终态记录和1条新的v5 formal-candidate记录，距离1791条正式公共矩阵仍很远。Pro Adaptive只有8/40任务的预算50探索性前缀，新的v2候选仅资格化了剩余32任务，并没有执行。Flash/Gemini Adaptive和600条独立盲测均未启动正式结果生成。\n\n下图只是数量覆盖率。不同工作流的单位不同，不能把100%的Flash物理记录覆盖直接等价为结果准入，也不能把低覆盖率解释成安全机制效果差。"
+      },
+      {
+        "id": "coverage_chart_block",
+        "type": "chart",
+        "layout": "full",
+        "chartId": "chart_workstream_coverage"
+      },
+      {
+        "id": "workstream_table_block",
+        "type": "table",
+        "layout": "full",
+        "tableId": "table_workstream_status"
+      },
+      {
+        "id": "scope_definitions",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## 口径：通过、物理闭包、正式候选与结果准入必须分开\n\n**Harness通过**表示当前代码、冻结工件、证据回放和测试在一个直接观察exit 0的完整运行中一致。**物理闭包**表示预期工作键已有终态记录且链路可复核。**formal-candidate**表示记录满足前瞻合同，但仍不能进入科研结果表。**result admission**才允许访问、聚合和比较科研结果。\n\n本报告的覆盖率分母来自用户锁定的结项计划：公共矩阵每个第二模型1791条；Pro Adaptive 40任务；Flash/Gemini Adaptive各20任务；独立盲测600案例并产生3600条六条件记录。失败、timeout、parse failure和diagnostic保留在ITT，不能为了提高结果而删除。"
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## 验证方法：以receipt、append-only链与独立哈希为准\n\n本轮先等待detached Harness自然结束，没有暂停、杀进程或重启。终态验收独立检查receipt状态、子进程退出码、13条PASS、0条FAIL、pytest摘要、唯一终态标记、stdout/stderr文件哈希、verifier/helper运行前后哈希、残留进程和secret-format命中。\n\n历史medium-v7仅运行零网络的只读审计：0条结果记录、1个开放attempt、2个已完成provider response、增量成本CNY 0.0010122；审计判定旧根不可恢复、开放attempt不可重试、任何后续执行必须使用新run和matrix identity。Gemini segment 0使用调用前本地request ID与payload hash、官方response ID、精确返回模型和append-only日志，接受provider request ID不可用的前瞻合同。"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## 限制：免费层排期与外部盲测交付仍是硬约束\n\nGemini免费层冻结为18个本地请求/配额日、每个配额日最多一个正式工作流、USD 0。已有资格化给出的前瞻最短工期为330个配额日；当前segment 0消耗了其中一个日段，但尚未生成新的剩余工期冻结。因此，原21个日历日目标在保持免费层和当前切分规则时不可实现，不能通过开启Billing、越过quota或伪造完成来收口。\n\n独立盲测Day-1登记已通过，但证据边界明确记录0个候选/标签文件；开发者不能代替第三方生成并宣称独立盲测。Harness stderr中的213条RuntimeAuditor阻断来自预期的删除安全测试，另有一条宿主WSL/NAT提示；两者均未产生traceback或聚合失败。"
+      },
+      {
+        "id": "evidence_table_block",
+        "type": "table",
+        "layout": "full",
+        "tableId": "table_evidence_register"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## 停止点后的正确恢复顺序\n\n本轮按用户要求在报告后停止，不创建gate v5、不启动Pro-50、不运行下一个Gemini日段。下次恢复时建议严格按以下顺序：\n\n1. 以v7 receipt创建新的非授权Harness gate，并把新增wrapper/admission纳入一次后置完整Harness。\n2. 在新的直接exit-0门禁后执行Pro剩余32任务到预算50，再按冻结顺序扩展200、500、hardest-20×2000。\n3. Gemini每个新配额日只执行一个未触碰segment；完成canary后重新冻结完整1791条矩阵排期。\n4. 等第三方交付600条无标签执行集、独立标签文件和custody manifest后，再导入并运行3600条六条件矩阵。\n5. 所有公共、Adaptive和盲测证据独立准入后，统一重算Wilson、exact McNemar、10000次cluster bootstrap和Holm，最后生成SHA-256结项包。"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## 仍需决定的问题\n\n- Gemini是否继续严格遵守现有18请求/日与单工作流/日切分，接受数百个配额日工期；若不接受，必须由项目所有者重新决定模型、额度或正式证据范围。\n- 第三方保管人何时能够交付600条候选、标签和签名custody；在交付前盲测路径只能保持等待。\n- DeepSeek Flash的16条diagnostic和冻结质量门失败应如何在独立结果准入中呈现；它们必须保留在ITT，不能删除或重跑。\n- 是否在全部正式证据完成前继续维持科研结果封存；当前建议维持，以避免在门禁或Adaptive选择前泄露结果。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-06T10:40:00+08:00",
+    "status": "ready",
+    "datasets": {
+      "headline_metrics": [
+        {
+          "harness_stages_passed": 13,
+          "harness_stages_total": 13,
+          "pytest_passed": 1552,
+          "pytest_failed": 0,
+          "elapsed_hours": 5.8185,
+          "terminal_zero_markers": 1,
+          "gemini_new_records": 1,
+          "gemini_paid_usd": 0.0
+        }
+      ],
+      "harness_progression": [
+        {
+          "run": "Fresh Harness v5",
+          "stage_status": "通过",
+          "stage_count": 10,
+          "pytest_passed": 1531,
+          "exit_code": 1
+        },
+        {
+          "run": "Fresh Harness v5",
+          "stage_status": "失败",
+          "stage_count": 3,
+          "pytest_passed": 1531,
+          "exit_code": 1
+        },
+        {
+          "run": "Fresh Harness v6",
+          "stage_status": "通过",
+          "stage_count": 13,
+          "pytest_passed": 1538,
+          "exit_code": 0
+        },
+        {
+          "run": "Fresh Harness v6",
+          "stage_status": "失败",
+          "stage_count": 0,
+          "pytest_passed": 1538,
+          "exit_code": 0
+        },
+        {
+          "run": "Fresh Harness v7",
+          "stage_status": "通过",
+          "stage_count": 13,
+          "pytest_passed": 1552,
+          "exit_code": 0
+        },
+        {
+          "run": "Fresh Harness v7",
+          "stage_status": "失败",
+          "stage_count": 0,
+          "pytest_passed": 1552,
+          "exit_code": 0
+        }
+      ],
+      "workstream_coverage": [
+        {
+          "workstream": "Flash公共",
+          "completed": 1791,
+          "target": 1791,
+          "unit": "记录",
+          "coverage_ratio": 1.0,
+          "evidence_boundary": "物理闭包；结果封存"
+        },
+        {
+          "workstream": "Gemini公共",
+          "completed": 2,
+          "target": 1791,
+          "unit": "记录",
+          "coverage_ratio": 0.0011166946,
+          "evidence_boundary": "1历史记录+1新候选；未准入"
+        },
+        {
+          "workstream": "Pro@50",
+          "completed": 8,
+          "target": 40,
+          "unit": "任务",
+          "coverage_ratio": 0.2,
+          "evidence_boundary": "探索性前缀"
+        },
+        {
+          "workstream": "Flash Adaptive",
+          "completed": 0,
+          "target": 20,
+          "unit": "任务@50/200",
+          "coverage_ratio": 0.0,
+          "evidence_boundary": "未执行"
+        },
+        {
+          "workstream": "Gemini Adaptive",
+          "completed": 0,
+          "target": 20,
+          "unit": "任务@50/200",
+          "coverage_ratio": 0.0,
+          "evidence_boundary": "未执行"
+        },
+        {
+          "workstream": "独立盲测",
+          "completed": 0,
+          "target": 600,
+          "unit": "案例",
+          "coverage_ratio": 0.0,
+          "evidence_boundary": "仅Day-1登记"
+        }
+      ],
+      "workstream_status": [
+        {
+          "sequence": 1,
+          "workstream": "Fresh Harness v7",
+          "completed": 13,
+          "target": 13,
+          "unit": "聚合阶段",
+          "status": "直接exit 0；evidence gate PASS",
+          "next_gate": "本轮停止，不创建新gate"
+        },
+        {
+          "sequence": 2,
+          "workstream": "历史medium-v7失败审计",
+          "completed": 1,
+          "target": 1,
+          "unit": "冻结审计",
+          "status": "0记录；1 open attempt；不可恢复",
+          "next_gate": "旧根只读保留"
+        },
+        {
+          "sequence": 3,
+          "workstream": "DeepSeek Flash公共矩阵",
+          "completed": 1791,
+          "target": 1791,
+          "unit": "记录",
+          "status": "物理闭包；16 diagnostic；结果封存",
+          "next_gate": "独立结果准入与复算"
+        },
+        {
+          "sequence": 4,
+          "workstream": "Gemini公共矩阵",
+          "completed": 2,
+          "target": 1791,
+          "unit": "物理记录",
+          "status": "1历史终态+1新formal-candidate",
+          "next_gate": "剩余canary及完整矩阵新冻结"
+        },
+        {
+          "sequence": 5,
+          "workstream": "Pro Adaptive",
+          "completed": 8,
+          "target": 40,
+          "unit": "任务@50",
+          "status": "探索性前缀；剩余32任务仅离线资格化",
+          "next_gate": "post-v7 gate+wrapper+完整Harness"
+        },
+        {
+          "sequence": 6,
+          "workstream": "Flash/Gemini Adaptive",
+          "completed": 0,
+          "target": 40,
+          "unit": "模型任务",
+          "status": "两模型正式面板均未执行",
+          "next_gate": "遵守冻结的七阶段顺序"
+        },
+        {
+          "sequence": 7,
+          "workstream": "独立盲测成集",
+          "completed": 0,
+          "target": 600,
+          "unit": "案例",
+          "status": "Day-1登记通过；0候选/标签",
+          "next_gate": "第三方签名custody交付"
+        },
+        {
+          "sequence": 8,
+          "workstream": "盲测六条件执行",
+          "completed": 0,
+          "target": 3600,
+          "unit": "记录",
+          "status": "未授权",
+          "next_gate": "仅导入无标签执行集后运行"
+        },
+        {
+          "sequence": 9,
+          "workstream": "最终统计与哈希包",
+          "completed": 0,
+          "target": 1,
+          "unit": "结项包",
+          "status": "未开始",
+          "next_gate": "公共/Adaptive/盲测全部准入"
+        }
+      ],
+      "evidence_register": [
+        {
+          "sequence": 1,
+          "artifact": "Fresh Harness v7 receipt文件",
+          "status": "exit 0；13/13；evidence gate PASS",
+          "sha256": "3f0378d30c65c4e188d878e4503abe572a305c29fb21f1f171dccff21b2de877",
+          "boundary": "零provider/network授权"
+        },
+        {
+          "sequence": 2,
+          "artifact": "v7 stdout",
+          "status": "1552/1/3；唯一Verification failed=0",
+          "sha256": "b7e3e56469b17fcb697a07a051e1e56ed657cfed4838f3a34f18bcee5fa80161",
+          "boundary": "0 FAIL；0 traceback"
+        },
+        {
+          "sequence": 3,
+          "artifact": "v7 stderr",
+          "status": "213条预期RuntimeAuditor阻断+1条WSL提示",
+          "sha256": "5d8f5bfe93ebbc238b2ca955539641f144cb44dfe02eccb4b474e43e493c1265",
+          "boundary": "0 secret-format hit"
+        },
+        {
+          "sequence": 4,
+          "artifact": "Gemini v5 segment 0 wrapper receipt",
+          "status": "1记录；1传输；USD0；技术门通过",
+          "sha256": "a881799ffd1e3f012fb11da0cb41bc5839e62d73760e1e547199c00c5b51b3de",
+          "boundary": "结果访问false"
+        },
+        {
+          "sequence": 5,
+          "artifact": "Gemini v5 segment 0 technical review",
+          "status": "16/16检查通过",
+          "sha256": "86e48d12fb1e9aad993acaa8c51e70c5922297e46313f23937fa3523b44560c2",
+          "boundary": "结果准入false"
+        },
+        {
+          "sequence": 6,
+          "artifact": "历史medium-v7 abort review",
+          "status": "旧根不可恢复；新身份方可继续",
+          "sha256": "7da6d850e7bead8f22eeeaccb5f53558aeb56e16b1825f3f1b8fc1d030e89cfb",
+          "boundary": "0科学结果读取"
+        },
+        {
+          "sequence": 7,
+          "artifact": "Adaptive Pro-50 candidate v2",
+          "status": "32个剩余任务离线资格化",
+          "sha256": "b4660cf16956cc10a42669c6b92d8ac840d578a29c6e83a937fa9504e078ae85",
+          "boundary": "本轮未执行"
+        },
+        {
+          "sequence": 8,
+          "artifact": "Independent blind Day-1 acceptance",
+          "status": "三文件登记通过",
+          "sha256": "94e5a64710dbcef941375c257e210ab8ea424a0d0b975e50e86c0509e8df745c",
+          "boundary": "0候选、0标签、0provider调用"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "src_harness_v7",
+      "label": "Fresh Harness v7 receipt",
+      "path": "outputs/verification/experiment_closeout_fresh_harness_v7_20260806/receipt.json"
+    },
+    {
+      "id": "src_harness_v6",
+      "label": "Fresh Harness v6 receipt",
+      "path": "outputs/verification/experiment_closeout_fresh_harness_v6_20260805/receipt.json"
+    },
+    {
+      "id": "src_harness_v5",
+      "label": "Fresh Harness v5 failure review",
+      "path": "protocols/paper_upgrade_v2/experiment_closeout_fresh_harness_failure_review_v5.json"
+    },
+    {
+      "id": "src_gemini_segment",
+      "label": "Gemini Public-v5 segment 0 technical review",
+      "path": "outputs/paper_upgrade_v2/formal_public/gemini/public-v5-canary-recovery-s0-885cf3a88684ca7427a29a5c0b65e0a6f97746133279fb59341bae557c4b48b2/technical_segment_review_v6.json"
+    },
+    {
+      "id": "src_flash_merge",
+      "label": "DeepSeek Flash second-role evidence merge",
+      "path": "protocols/paper_upgrade_v2/public_second_evidence_merge_v1.json"
+    },
+    {
+      "id": "src_medium_v7",
+      "label": "Historical medium-v7 abort review",
+      "path": "outputs/paper_upgrade_v2/formal_medium/deepseek/a34fe5b87607cb48144b0d36da282accc25d33cd18706351eb39dd25ebe04c75/formal_matrix_abort_review_v3.json"
+    },
+    {
+      "id": "src_adaptive_pro",
+      "label": "Adaptive Pro budget-50 candidate v2",
+      "path": "protocols/paper_upgrade_v2/adaptive_formal_pro_50_candidate_v2.json"
+    },
+    {
+      "id": "src_gemini_duration",
+      "label": "Gemini free-tier duration qualification",
+      "path": "protocols/paper_upgrade_v2/gemini_free_tier_duration_qualification_v1.json"
+    },
+    {
+      "id": "src_blind_day1",
+      "label": "Independent blind Day-1 registration acceptance",
+      "path": "protocols/paper_upgrade_v2/independent_blind_day1_registration_acceptance_v1.json"
+    }
+  ]
+}

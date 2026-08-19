@@ -1,0 +1,8 @@
+{
+  "audit_id": "A16-bipia-runtime",
+  "base_digest": "214b202b87f8709ea3cd423f0775e1d1dadfa24801c5fbc7315a533428e9c8ad",
+  "mutated_digest": "214b202b87f8709ea3cd423f0775e1d1dadfa24801c5fbc7315a533428e9c8ad",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

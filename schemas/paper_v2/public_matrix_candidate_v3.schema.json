@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3.local/schemas/paper_v2/public_matrix_candidate_v3.schema.json",
+  "title": "M3 paper-v2 public matrix candidate v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_role",
+    "generated_at",
+    "status",
+    "scope",
+    "artifact_locks",
+    "authorization",
+    "evidence_boundary",
+    "scope_sha256",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-public-matrix-candidate-3.0"
+    },
+    "artifact_role": {
+      "const": "owner_review_candidate"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "const": "candidate_pending_exact_command_canary_approval"
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "records",
+        "model_roles",
+        "canary",
+        "budget",
+        "execution_order",
+        "failure_policy"
+      ],
+      "properties": {
+        "records": {
+          "const": 6873
+        },
+        "model_roles": {
+          "type": "object",
+          "required": ["primary", "second"]
+        },
+        "canary": {
+          "type": "object",
+          "required": ["primary_records", "second_records"]
+        },
+        "budget": {
+          "type": "object",
+          "required": [
+            "incremental_hard_limit_cny",
+            "untouched_reserve_cny",
+            "automatic_retries"
+          ]
+        },
+        "execution_order": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "primary_canary"},
+            {"const": "primary_matrix"},
+            {"const": "second_canary"},
+            {"const": "second_matrix"}
+          ],
+          "items": false
+        },
+        "failure_policy": {
+          "type": "object"
+        }
+      }
+    },
+    "artifact_locks": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_only",
+        "canary_execution_authorized",
+        "matrix_continuation_authorized",
+        "result_admission_authorized",
+        "active_admission_present"
+      ],
+      "properties": {
+        "candidate_only": {"const": true},
+        "canary_execution_authorized": {"const": false},
+        "matrix_continuation_authorized": {"const": false},
+        "result_admission_authorized": {"const": false},
+        "active_admission_present": {"const": false}
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentials_read_while_building",
+        "network_calls_while_building",
+        "model_calls_while_building",
+        "formal_results_created",
+        "candidate_is_executable",
+        "scientific_outcomes_accessed"
+      ],
+      "properties": {
+        "credentials_read_while_building": {"const": false},
+        "network_calls_while_building": {"const": 0},
+        "model_calls_while_building": {"const": 0},
+        "formal_results_created": {"const": 0},
+        "candidate_is_executable": {"const": false},
+        "scientific_outcomes_accessed": {"const": false}
+      }
+    },
+    "scope_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

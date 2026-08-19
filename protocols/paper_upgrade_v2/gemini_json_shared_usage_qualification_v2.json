@@ -1,0 +1,28 @@
+{
+  "schema_version": "m3-paper-v2-gemini-shared-usage-qualification-2.0",
+  "status": "two_work_item_cumulative_usage_qualified_offline",
+  "qualified_at": "2026-08-02T00:30:00+08:00",
+  "provider_id": "gemini",
+  "model_id": "gemini-3.6-flash",
+  "work_items": 2,
+  "provider_calls": 2,
+  "summaries": [
+    {
+      "work_index": 1,
+      "bundle_status": "completed",
+      "result_tier_ceiling": "formal_candidate",
+      "cumulative_requests": 1
+    },
+    {
+      "work_index": 2,
+      "bundle_status": "completed",
+      "result_tier_ceiling": "formal_candidate",
+      "cumulative_requests": 2
+    }
+  ],
+  "network_calls": 0,
+  "credentials_read": false,
+  "automatic_retries": 0,
+  "provider_tools_declared": false,
+  "external_effects_enabled": false
+}

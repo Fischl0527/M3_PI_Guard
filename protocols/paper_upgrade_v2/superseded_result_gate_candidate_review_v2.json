@@ -1,0 +1,17 @@
+{
+  "schema_version": "m3-paper-v2-superseded-result-gate-candidate-review-1.0",
+  "status": "superseded_before_scientific_outcome_access",
+  "superseded_candidate": {
+    "path": "protocols/paper_upgrade_v2/deepseek_medium_result_gate_candidate_v1.json",
+    "manifest_sha256": "3e5c295c9fc4794001747785e09fba3cbdda95e8c0e67e696a027e0ea594e537",
+    "locked_source_sha256": "b58a238fd1f3190ff3b70963bc330ab0e7db757eeb6eabcdb6fc35f78d7f9df7"
+  },
+  "reason": "The primary analyzer was already frozen, but the paper plan also preregisters confirmation burden, authorization-regime, latency, token/cost, and heterogeneity summaries. A separately tested v2 analyzer was added before outcome access.",
+  "discovery_method": "prospective_analysis_coverage_review",
+  "scientific_outcomes_reviewed": false,
+  "network_calls_made": 0,
+  "result_admission_authorized": false,
+  "analysis_authorized": false,
+  "execution_ledgers_mutated": false,
+  "remediation": "Bind the outcome-blind result gate to medium_analysis_v2.py, rerun offline qualification and tests, and replace the never-activated candidate with a new hash."
+}

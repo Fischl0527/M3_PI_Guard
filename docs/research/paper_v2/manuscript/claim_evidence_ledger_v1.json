@@ -1,0 +1,364 @@
+{
+  "schema_version": "m3-paper-v2-claim-evidence-ledger-1.0",
+  "updated_at": "2026-07-30T10:40:00+08:00",
+  "paper_route": "authorization_leakage_uncertainty_empirical_fallback",
+  "claims": [
+    {
+      "claim_id": "C01",
+      "claim": "The paper-v2 evaluation prevents declared evaluator/gold fields from entering the online state and records a visible-field digest.",
+      "status": "verified_in_480_record_admitted_deepseek_matrix",
+      "evidence": [
+        "experiments/paper_v2/contracts.py",
+        "experiments/paper_v2/medium_runtime.py",
+        "schemas/paper_v2/experiment_record_v1.schema.json",
+        "protocols/paper_upgrade_v2/medium_execution_manifest_v2.json",
+        "tests/unit/test_paper_v2_contracts.py",
+        "tests/unit/test_paper_v2_medium_runtime.py",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/formal_result_technical_review_v6.json",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json"
+      ],
+      "unlock_condition": "Repeat the same projection checks in the second-model extension."
+    },
+    {
+      "claim_id": "C02",
+      "claim": "Twenty-two source-audit units across sixteen distinct artifacts have reproducible source locks and evidence manifests.",
+      "status": "verified_single_reviewer_coverage",
+      "evidence": [
+        "protocols/paper_upgrade_v2/online_state_audit_registry_v2.json",
+        "protocols/paper_upgrade_v2/audits/summary.json"
+      ],
+      "unlock_condition": "None for the coverage count; substantive domain inference still requires independent review."
+    },
+    {
+      "claim_id": "C03",
+      "claim": "Oracle authorization is a systematic field-wide problem.",
+      "status": "forbidden",
+      "evidence": [
+        "protocols/paper_upgrade_v2/source_audit_summary_v1.md"
+      ],
+      "unlock_condition": "Independent second review plus dynamic boundary evidence must support a domain-level inference."
+    },
+    {
+      "claim_id": "C04",
+      "claim": "The 72-case medium study was frozen without outcome-based selection or sealed-holdout use.",
+      "status": "verified_design",
+      "evidence": [
+        "protocols/paper_upgrade_v2/medium_case_manifest_v1.json",
+        "protocols/paper_upgrade_v2/medium_case_index_v1.jsonl"
+      ],
+      "unlock_condition": "None for design; outcome claims require complete records."
+    },
+    {
+      "claim_id": "C05",
+      "claim": "VIGIL and DRIFT have source-locked, zero-call qualified adapters.",
+      "status": "verified_qualification_and_vigil_medium_effect_path_drift_qualification_only",
+      "evidence": [
+        "protocols/paper_upgrade_v2/structural_baseline_registry_v1.json",
+        "tests/unit/test_paper_v2_structural_baselines.py",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json"
+      ],
+      "unlock_condition": "Do not describe DRIFT as an executed effect baseline unless its model-dependent path is separately run."
+    },
+    {
+      "claim_id": "C06",
+      "claim": "M3-full materially reduces unsafe effects relative to the strongest structural baseline.",
+      "status": "verified_for_medium_and_public_primary_with_utility_tradeoff",
+      "evidence": [
+        "protocols/paper_upgrade_v2/admissions/deepseek_medium_combined_result_admission_v6.json",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/public_primary_analysis_summary_v5.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/independent_analysis_review_v5.json"
+      ],
+      "unlock_condition": "The Public primary estimate is 38/600 versus 133/600, an absolute difference of -15.83 percentage points with a 10,000-iteration clustered-bootstrap 95% interval of [-19.50, -12.17]. This is one-model evidence and is inseparable from the utility and diagnostic-quality limitations."
+    },
+    {
+      "claim_id": "C07",
+      "claim": "M3-full is non-inferior in benign tool completion within a five-percentage-point margin.",
+      "status": "falsified_in_medium_and_public_primary",
+      "evidence": [
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/public_primary_analysis_summary_v5.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/independent_analysis_review_v5.json"
+      ],
+      "unlock_condition": "No unlock for either frozen claim. Public benign-tool completion was 49/168 for M3-full versus 103/168 for the structural baseline, a -32.14-point paired difference outside the -5 point margin."
+    },
+    {
+      "claim_id": "C08",
+      "claim": "Provenance, temporal/data-flow, and confirmation modules add value beyond policy-only.",
+      "status": "falsified_in_medium_and_public_primary",
+      "evidence": [
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/public_primary_analysis_summary_v5.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/independent_analysis_review_v5.json"
+      ],
+      "unlock_condition": "No unlock for the frozen results. In Public primary evidence, M3-full had 38/600 unsafe effects versus 13/600 for policy-only (+4.17 points), while both completed 49/168 benign tool tasks."
+    },
+    {
+      "claim_id": "C09",
+      "claim": "The main result generalizes across M3-v2, AgentDojo, and a second model.",
+      "status": "partially_verified_two_benchmarks_primary_model_second_model_pending",
+      "evidence": [
+        "protocols/paper_upgrade_v2/public_benchmark_freeze_v1.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/public_primary_analysis_summary_v5.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/independent_analysis_review_v5.json"
+      ],
+      "unlock_condition": "The M3-v2 and AgentDojo primary-model strata are admitted. Complete and admit the frozen 1,791-record second-model extension before any cross-model claim."
+    },
+    {
+      "claim_id": "C10",
+      "claim": "Defense-aware adaptive search does not overturn the main conclusion.",
+      "status": "pending",
+      "evidence": [
+        "protocols/paper_upgrade_v2/adaptive_attack_freeze_v1.json"
+      ],
+      "unlock_condition": "Complete the 40/20 task panels and the resolved hardest-20 saturation extension."
+    },
+    {
+      "claim_id": "C11",
+      "claim": "The 600-case set is independently authored and blind to developers.",
+      "status": "forbidden_pending_human_custodian",
+      "evidence": [
+        "protocols/paper_upgrade_v2/independent_blind_authoring_kit_v1/status.json"
+      ],
+      "unlock_condition": "Independent author/custodian, sealed candidate hash, and custody audit."
+    },
+    {
+      "claim_id": "C12",
+      "claim": "JISA is SCIE JCR Q2 at submission.",
+      "status": "pending_institutional_verification",
+      "evidence": [],
+      "unlock_condition": "School or Clarivate subscription check immediately before submission."
+    },
+    {
+      "claim_id": "C13",
+      "claim": "M3 is the first, only, or state-of-the-art provenance-aware agent defense.",
+      "status": "forbidden",
+      "evidence": [
+        "docs/research/paper_v2/literature_matrix.md"
+      ],
+      "unlock_condition": "No default unlock; any exceptional wording requires a new exhaustive search and independent approval."
+    },
+    {
+      "claim_id": "C14",
+      "claim": "Official DeepSeek/Gemini inference cannot directly execute dangerous or external effects in the paper-v2 runtime.",
+      "status": "verified_fail_closed_implementation_and_admitted_deepseek_matrix_receipts",
+      "evidence": [
+        "protocols/paper_upgrade_v2/provider_safety_policy_v1.json",
+        "experiments/paper_v2/provider_safety.py",
+        "experiments/paper_v2/medium_runtime.py",
+        "schemas/paper_v2/provider_safety_receipt_v1.schema.json",
+        "schemas/paper_v2/experiment_record_v2.schema.json",
+        "experiments/paper_v2/formal_record_store_v2.py",
+        "experiments/paper_v2/post_pilot_evidence_review.py",
+        "protocols/paper_upgrade_v2/admissions/deepseek_pilot_admission_v2.json",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/experiment_record_v2.jsonl",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/post_pilot_review_v1.json",
+        "tests/unit/test_paper_v2_provider_safety.py",
+        "tests/unit/test_paper_v2_medium_runtime.py",
+        "tests/unit/test_paper_v2_contracts_v2.py",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/formal_result_technical_review_v6.json"
+      ],
+      "unlock_condition": "DeepSeek medium receipts passed the combined technical gate. Gemini requires the same independent receipt review before any second-model claim."
+    },
+    {
+      "claim_id": "C15",
+      "claim": "Prospective DeepSeek provider evidence can bind a pretransport local request ID and payload hash to the official response ID, exact returned model identity, and an fsynced append-only trace without requiring a provider request-ID header.",
+      "status": "verified_for_admitted_medium_and_12808_call_public_primary_evidence",
+      "evidence": [
+        "protocols/paper_upgrade_v2/provider_request_trace_activation_v2.json",
+        "protocols/paper_upgrade_v2/provider_live_qualification_v2.json",
+        "outputs/paper_upgrade_v2/provider_identity/deepseek_request_trace_v2.jsonl",
+        "schemas/paper_v2/provider_trace_attestation_v2.schema.json",
+        "schemas/paper_v2/provider_trace_bundle_v2.schema.json",
+        "schemas/paper_v2/experiment_record_v2.schema.json",
+        "protocols/paper_upgrade_v2/formal_record_store_qualification_v2.json",
+        "protocols/paper_upgrade_v2/provider_trace_runtime_qualification_v2.json",
+        "protocols/paper_upgrade_v2/deepseek_pilot_admission_candidate_v2.json",
+        "protocols/paper_upgrade_v2/formal_execution_controller_qualification_v2.json",
+        "protocols/paper_upgrade_v2/admissions/deepseek_pilot_admission_v2.json",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/provider_trace_v2.jsonl",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/experiment_record_v2.jsonl",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/post_pilot_review_v1.json",
+        "experiments/paper_v2/provider_trace_bundle.py",
+        "experiments/paper_v2/provider_trace_runtime_qualification.py",
+        "experiments/paper_v2/formal_execution_controller_v2.py",
+        "protocols/paper_upgrade_v2/public_primary_merge_review_v2.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/independent_analysis_review_v5.json"
+      ],
+      "unlock_condition": "The Public primary merge binds 12,808 completed official calls under the same pretransport commitment design. A separate second-model identity chain is still required for cross-model claims."
+    },
+    {
+      "claim_id": "C16",
+      "claim": "The DeepSeek formal pilot path rejects missing admission, candidate self-authorization, scope drift, and reused single-use outputs before credentials are read or a provider client is created.",
+      "status": "verified_offline_controller_property_not_live_effect_evidence",
+      "evidence": [
+        "schemas/paper_v2/pilot_admission_manifest_v2.schema.json",
+        "protocols/paper_upgrade_v2/deepseek_pilot_admission_candidate_v2.json",
+        "protocols/paper_upgrade_v2/formal_execution_controller_qualification_v2.json",
+        "experiments/paper_v2/formal_execution_controller_v2.py",
+        "tests/unit/test_paper_v2_formal_execution_controller_v2.py"
+      ],
+      "unlock_condition": "No unlock is needed for the offline fail-closed property. A live pilot still requires a separate project-owner checkpoint and active manifest, and its output remains a non-admitted candidate until review."
+    },
+    {
+      "claim_id": "C17",
+      "claim": "Every completed DeepSeek work-item call can bind content-free cache-hit/cache-miss/output usage and exact CNY cost evidence to its prospective request chain and provider-receipt digest.",
+      "status": "verified_admitted_medium_and_public_primary_cost_cache_evidence",
+      "evidence": [
+        "schemas/paper_v2/provider_trace_bundle_v2.schema.json",
+        "experiments/paper_v2/provider_trace_bundle.py",
+        "experiments/paper_v2/formal_record_store_v2.py",
+        "experiments/paper_v2/provider_trace_runtime_qualification.py",
+        "experiments/paper_v2/formal_execution_controller_v2.py",
+        "protocols/paper_upgrade_v2/provider_trace_runtime_qualification_v2.json",
+        "protocols/paper_upgrade_v2/formal_execution_controller_qualification_v2.json",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/experiment_record_v2.jsonl",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/post_pilot_review_v1.json",
+        "tests/unit/test_paper_v2_provider_trace_bundle.py",
+        "tests/unit/test_paper_v2_provider_trace_runtime_qualification.py",
+        "tests/unit/test_paper_v2_formal_execution_controller_v2.py",
+        "protocols/paper_upgrade_v2/public_primary_merge_review_v2.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/analysis_manifest.json"
+      ],
+      "unlock_condition": "The Public primary merge records 12,808 calls and cumulative CNY 11.9909764. Only provider-priced DeepSeek costs may be reported as CNY; diagnostic incomplete traces remain explicitly bounded."
+    },
+    {
+      "claim_id": "C18",
+      "claim": "A prospective DeepSeek pilot can be independently reviewed from content-free archived evidence by cross-binding its active admission, trace file, provider bundle, cache/cost rows, persisted safety receipt and append-only record ledger before any matrix-expansion decision.",
+      "status": "verified_official_single_pilot_technical_review_not_result_admission",
+      "evidence": [
+        "schemas/paper_v2/provider_safety_receipt_v1.schema.json",
+        "schemas/paper_v2/experiment_record_v2.schema.json",
+        "schemas/paper_v2/post_pilot_review_v1.schema.json",
+        "experiments/paper_v2/contracts_v2.py",
+        "experiments/paper_v2/formal_record_store_v2.py",
+        "experiments/paper_v2/post_pilot_evidence_review.py",
+        "protocols/paper_upgrade_v2/post_pilot_review_qualification_v1.json",
+        "protocols/paper_upgrade_v2/deepseek_pilot_admission_candidate_v2.json",
+        "protocols/paper_upgrade_v2/admissions/deepseek_pilot_admission_v2.json",
+        "protocols/paper_upgrade_v2/medium_execution_manifest_v3_preflight.json",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/provider_trace_v2.jsonl",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/experiment_record_v2.jsonl",
+        "outputs/paper_upgrade_v2/formal_pilot/deepseek/fd89c79707414a035a9d4309c3c3125bde14f7260c0e4c9cd66088164076fbe7/post_pilot_review_v1.json",
+        "tests/unit/test_paper_v2_post_pilot_evidence_review.py",
+        "tests/unit/test_paper_v2_contracts_v2.py"
+      ],
+      "unlock_condition": "The official single-pilot review passed all 15 technical checks and is ready only for a separate owner matrix review. It does not authorize matrix execution or scientific result admission."
+    },
+    {
+      "claim_id": "C19",
+      "claim": "The DeepSeek formal medium matrix fixes non-thinking JSON Output, strict parsing, isolated effects, and the complete local request-ID/payload-hash to official response-ID/model/usage/cost chain.",
+      "status": "verified_480_record_combined_v8_v9_matrix_and_result_admission",
+      "evidence": [
+        "experiments/paper_v2/deepseek_json_client_v2.py",
+        "experiments/paper_v2/formal_matrix_controller_v4.py",
+        "protocols/paper_upgrade_v2/deepseek_json_client_qualification_v2.json",
+        "protocols/paper_upgrade_v2/formal_matrix_controller_qualification_v4.json",
+        "protocols/paper_upgrade_v2/deepseek_medium_matrix_candidate_v4.json",
+        "protocols/paper_upgrade_v2/admissions/deepseek_medium_matrix_canary_admission_v4.json",
+        "protocols/paper_upgrade_v2/admissions/deepseek_medium_matrix_continuation_admission_v4.json",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/dd794dd88eade41166bdafb7cb191898d7d19a5d8df737340f6acc3daac4504f/six_condition_canary_review_v4.json",
+        "tests/unit/test_paper_v2_formal_matrix_controller_v4.py",
+        "experiments/paper_v2/formal_matrix_controller_v8.py",
+        "experiments/paper_v2/formal_matrix_remainder_controller_v9.py",
+        "experiments/paper_v2/formal_result_gate_v6.py",
+        "protocols/paper_upgrade_v2/admissions/deepseek_medium_combined_result_admission_v6.json",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/formal_result_technical_review_v6.json"
+      ],
+      "unlock_condition": "None for the admitted DeepSeek medium matrix; cross-model and large public-benchmark claims remain separate."
+    },
+    {
+      "claim_id": "C20",
+      "claim": "Trusted application context needed by a task is projected to every condition from only requested_actions and workspace_scope, without exposing evaluator or gold fields.",
+      "status": "verified_in_admitted_480_record_deepseek_matrix",
+      "evidence": [
+        "experiments/paper_v2/trusted_context_runtime_v2.py",
+        "experiments/paper_v2/formal_matrix_controller_v4.py",
+        "tests/unit/test_paper_v2_trusted_context_runtime_v2.py",
+        "tests/unit/test_paper_v2_formal_matrix_controller_v4.py",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/formal_result_technical_review_v6.json"
+      ],
+      "unlock_condition": "The implementation claim needs no favorable outcome. Every admitted matrix record must retain a valid online visible-field digest and forbidden-field-free projection."
+    },
+    {
+      "claim_id": "C21",
+      "claim": "Scientific fields in the DeepSeek medium matrix are unavailable to analysis until a prospective technical gate verifies all 480 append-only record/attempt/budget/trace chains and writes a separate result admission.",
+      "status": "verified_complete_gate_admission_and_reproducible_analysis",
+      "evidence": [
+        "experiments/paper_v2/formal_result_gate_v1.py",
+        "experiments/paper_v2/medium_analysis_v2.py",
+        "schemas/paper_v2/formal_result_gate_v1.schema.json",
+        "protocols/paper_upgrade_v2/formal_result_gate_qualification_v1.json",
+        "protocols/paper_upgrade_v2/deepseek_medium_result_gate_candidate_v1.json",
+        "protocols/paper_upgrade_v2/superseded_result_gate_candidate_review_v1.json",
+        "protocols/paper_upgrade_v2/superseded_result_gate_candidate_review_v2.json",
+        "protocols/paper_upgrade_v2/superseded_result_gate_candidate_review_v3.json",
+        "tests/unit/test_paper_v2_formal_result_gate_v1.py",
+        "tests/unit/test_paper_v2_medium_analysis.py",
+        "experiments/paper_v2/formal_result_gate_v6.py",
+        "experiments/paper_v2/formal_analysis_amendment_v8.py",
+        "protocols/paper_upgrade_v2/deepseek_medium_combined_result_gate_candidate_v6.json",
+        "protocols/paper_upgrade_v2/admissions/deepseek_medium_combined_result_admission_v6.json",
+        "protocols/paper_upgrade_v2/deepseek_medium_analysis_amendment_candidate_v8.json",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/formal_result_technical_review_v6.json",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json"
+      ],
+      "unlock_condition": "None. The one diagnostic response remains in ITT with unverified response identity and is not promoted to formal evidence."
+    },
+    {
+      "claim_id": "C22",
+      "claim": "The preregistered mechanism-paper gate rejects the DeepSeek medium result and activates the authorization-leakage, uncertainty, and security-utility empirical fallback.",
+      "status": "verified_route_decision",
+      "evidence": [
+        "protocols/paper_upgrade_v2/medium_gate_spec_v2.json",
+        "protocols/paper_upgrade_v2/deepseek_medium_analysis_amendment_candidate_v8.json",
+        "outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json"
+      ],
+      "unlock_condition": "Do not restore a mechanism-lead or SOTA claim from the same frozen dataset. Any later mechanism claim requires a new prospective experiment and must not erase this negative result."
+    },
+    {
+      "claim_id": "C23",
+      "claim": "The 5,082-record Public primary-model matrix is complete, retains all 76 diagnostics in ITT, and has independently reproduced condition counts, Wilson intervals, four paired differences, and exact McNemar tests.",
+      "status": "verified_primary_model_only",
+      "evidence": [
+        "protocols/paper_upgrade_v2/public_primary_merge_review_v2.json",
+        "protocols/paper_upgrade_v2/admissions/public_primary_result_admission_v1.json",
+        "protocols/paper_upgrade_v2/admissions/public_primary_analysis_validation_correction_admission_v5.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/analysis_manifest.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/public_primary_analysis_summary_v5.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/public_primary_condition_summary_v5.csv",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/independent_analysis_review_v5.json"
+      ],
+      "unlock_condition": "None for primary-model counts and paired effects. Cross-model and cross-provider claims remain forbidden until the second-model extension is admitted."
+    },
+    {
+      "claim_id": "C24",
+      "claim": "Public primary evidence supports a security-utility empirical fallback but not a positive M3-full module contribution.",
+      "status": "verified_negative_module_gain_and_utility_noninferiority",
+      "evidence": [
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/public_primary_analysis_summary_v5.json",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/independent_analysis_review_v5.json"
+      ],
+      "unlock_condition": "No unlock for the frozen primary result: M3-full was safer than the structural condition but less safe than policy-only, and its benign-tool TCR was 32.14 points below structural."
+    },
+    {
+      "claim_id": "C25",
+      "claim": "Public analysis validator/projection failures were corrected without changing source records, denominators, statistical methods, provider activity, or claim boundaries.",
+      "status": "verified_auditable_correction_chain",
+      "evidence": [
+        "harness/state/failure-log.md",
+        "protocols/paper_upgrade_v2/public_primary_analysis_validation_correction_candidate_v2.json",
+        "protocols/paper_upgrade_v2/public_primary_analysis_validation_correction_candidate_v3.json",
+        "protocols/paper_upgrade_v2/public_primary_analysis_validation_correction_candidate_v4.json",
+        "protocols/paper_upgrade_v2/public_primary_analysis_validation_correction_candidate_v5.json",
+        "protocols/paper_upgrade_v2/admissions/public_primary_analysis_validation_correction_admission_v5.json",
+        "outputs/verification/public_primary_analysis_runtime_20260730/analyze.direct.stderr.log",
+        "outputs/verification/public_primary_analysis_runtime_20260730/analyze_v2.stderr.log",
+        "outputs/verification/public_primary_analysis_runtime_20260730/analyze_v3.stderr.log",
+        "outputs/verification/public_primary_analysis_runtime_20260730/analyze_v4.stderr.log",
+        "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/analysis_manifest.json"
+      ],
+      "unlock_condition": "None. The correction chain must remain disclosed in Methods and reproducibility materials."
+    }
+  ]
+}

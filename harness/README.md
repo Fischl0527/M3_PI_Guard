@@ -1,22 +1,32 @@
-# M3 PI Guard 的 AI Agent Harness 工程
+# M3-PI Guard 的 AI 智能体 Harness 工程
 
-本目录只放“让 Agent 能持续、可恢复、可验证地完成工作”的 Harness 工程文件，不放 M3 PI Guard 的模型运行时、Guard 算法、攻击数据集或实验实现。
+本目录只放“让智能体能持续、可恢复、可验证地完成工作”的 Harness 工程文件，不放 M3-PI Guard 的模型运行时、Guard 算法、攻击数据集或实验实现。
+
+当前项目事实、证据层级、失败路线、服务状态和接手顺序详见
+[`项目上下文.md`](项目上下文.md)。完整技术移交见
+[`../docs/项目移交报告.md`](../docs/项目移交报告.md)。旧进度段中的 PID 和
+“下一步”只表示当时状态，不能覆盖这两个当前入口。
+
+当前项目专用说明使用中文文件名和中文正文。`README.md`、`current-task.md`、
+`feature_list.json`、协议字段、命令和状态值等 Harness/机器契约保持稳定英文标识；
+相关自然语言说明和新代码注释优先使用中文，不翻译公开符号或历史冻结内容。
 
 ## 与项目源码的硬边界
 
 | 区域 | 负责内容 | 主要目录 |
 |---|---|---|
-| M3 项目源码 | Agent 运行时、Guard、攻击、评估、实验协议与测试 | `m3_core/`、`m3_guard/`、`m3_eval/`、`m3_attacks/`、`experiments/`、`protocols/`、`schemas/`、`fixtures/`、`tests/`、`scripts/` |
-| Harness 工程 | Agent 规则、任务状态、规格、工作流、验证入口、Runpro 工作区 | `harness/config/`、`harness/state/`、`harness/specs/`、`harness/features/`、`harness/tasks/`、`harness/docs/`、`harness/scripts/`、`harness/workspaces/` |
+| M3 项目源码 | 智能体运行时、Guard、攻击、评估、实验协议与测试 | `m3_core/`、`m3_guard/`、`m3_eval/`、`m3_attacks/`、`experiments/`、`protocols/`、`schemas/`、`fixtures/`、`tests/`、`scripts/` |
+| Harness 工程 | 智能体规则、任务状态、规格、工作流、验证入口、Runpro 工作区 | `harness/config/`、`harness/state/`、`harness/specs/`、`harness/features/`、`harness/tasks/`、`harness/docs/`、`harness/scripts/`、`harness/workspaces/` |
 | 项目生成物 | 实验日志、图表、报告中间物、盲审包 | `outputs/`、`release/`、`sandbox/`、`文档资料/`、`图表素材/` |
 
-根目录只保留一个 Harness 兼容锚点：`AGENTS.md`。这是因为 Agent 运行时从仓库根目录自动发现它。根目录 `agent/` 目前只保留已被实验清单和报告引用的项目完整性审计代码与冻结证据，不再存放当前 Harness 状态。
+根目录只保留一个 Harness 兼容锚点：`AGENTS.md`。这是因为智能体运行时从仓库根目录自动发现它。根目录 `agent/` 目前只保留已被实验清单和报告引用的项目完整性审计代码与冻结证据，不再存放当前 Harness 状态。
 
 ## Harness 目录结构
 
 ```text
 harness/
 ├─ README.md                     本入口与源码边界
+├─ 项目上下文.md                 本项目当前事实、证据边界和接手说明
 ├─ config/
 │  ├─ permissions.yaml          风险操作权限边界
 │  ├─ policies.md               Agent 行为策略
@@ -83,7 +93,7 @@ bash harness/scripts/verify.sh
 - `harness/features/feature_list.json` 中的优先级与交付状态；
 - M3 项目源码、数据集和实验设计。
 
-Agent 自动维护：
+智能体自动维护：
 
 - `harness/state/` 中的当前任务、进度、失败、历史和交接；
 - `harness/docs/decision-log.md` 中需要长期保留的决策；
@@ -96,4 +106,3 @@ Agent 自动维护：
 - 项目实验输出继续写入 `outputs/`；Harness 阶段分析写入 `harness/workspaces/`。
 - `harness/tmp/` 是临时缓存，可按 `harness/config/permissions.yaml` 和清理脚本处理；不要把唯一证据放入其中。
 - 不要移动 `agent/audits/` 或 `agent/result_integrity_audit.py`，除非同时迁移所有清单、报告引用和哈希校验。
-

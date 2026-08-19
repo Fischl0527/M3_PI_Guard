@@ -205,3 +205,32 @@ Focused E17 registrar/final-analysis tests passed 27/27. Live registrar rejectio
 ## Remaining Risk
 
 This improves recovery behavior but cannot satisfy E17. Two independent human reviews remain the sole external input gate.
+
+## Issue: Prospective Gemini paths did not close the full evidence chain
+
+## Impact
+
+Offline end-to-end execution showed that bundle attachment, formal provider
+attestation, adaptive online-state minimization, review reconstruction and
+Public-v4 continuation binding were not jointly guaranteed. Starting a formal
+canary in that state could have produced terminal records that failed later
+technical admission.
+
+## Chosen Fix
+
+Added an outer fail-closed Gemini trace/attestation adapter, reduced persisted
+adaptive online evidence to a digest plus sanitized events, corrected review
+freshness and affirmative invariants, reconciled call-ledger counts to trace
+bundles, and rebound continuation to the actual Public-v4 candidate.
+
+## Validation Result
+
+Two injected-transport end-to-end paths and their focused regression set pass
+23/23. Ruff and compilation pass. The affected zero-call candidates were
+regenerated and independently reproduced; no admission, reservation, credential
+read, API request, provider tool or external effect occurred.
+
+## Remaining Risk
+
+The fresh repository-wide Harness still needs a durable exit-0 receipt before
+any real provider canary is allowed.

@@ -5,6 +5,12 @@ __pycache__/
 .cache/
 *.log
 
+# Team-shared configuration uses config/project.env.example. Real credentials
+# and machine-local paths stay in the ignored local companion file.
+config/project.local.env
+config/project.local.env.*
+config/*.secret.env
+
 # Local task prompts and personal progress notes are not submission artifacts.
 DAY*-TASK.md
 DAY*-REPORT-A.md
@@ -26,6 +32,21 @@ ollama_models/
 *.bin
 *.pt
 *.pth
+
+# Official benchmark checkouts are reproducible caches, not vendored source.
+# The tracked lock/index files under external/benchmarks record exact commits,
+# licenses and compatibility counts.
+external/benchmarks/agentdojo/
+external/benchmarks/injecagent/
+
+# Strong-baseline source checkouts are reproducible caches. Protocol manifests
+# record exact source URLs and commits.
+external/baselines/
+external/independent_blind/
+
+# Holdout case content remains local even though independent-blind execution is
+# outside the current paper scope.
+m3_attacks/cases/paper_v1/m3_v2_sealed_holdout.jsonl
 
 # Runtime outputs. Keep only curated sample logs.
 outputs/runs/*
@@ -56,6 +77,20 @@ outputs/metrics/*
 !outputs/metrics/day6_demo_stub_summary.json
 !outputs/metrics/day6_demo_stub_summary_grouped_by_family.csv
 outputs/figures/*
+
+# Large generated research outputs and verifier workspaces stay local. The
+# paper repository tracks code, frozen plans and compact derived tables/figures,
+# not raw provider traces or recursive verification scratch trees.
+outputs/experiments/
+outputs/paper_upgrade_v1/
+outputs/paper_upgrade_v2/
+outputs/paper_v2/
+outputs/verification/
+outputs/document_qa/
+outputs/report_qa/
+
+# Historical execution captures are generated evidence, not source protocols.
+protocols/**/execution/
 
 # Sandbox runtime state. The committed canary is fake and local-only.
 sandbox/outbox/*

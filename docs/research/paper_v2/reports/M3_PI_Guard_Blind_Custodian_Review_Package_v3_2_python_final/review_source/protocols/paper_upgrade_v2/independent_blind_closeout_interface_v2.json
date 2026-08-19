@@ -1,0 +1,117 @@
+{
+  "authoring_contract": {
+    "authored_pairs_are_custodian_private": true,
+    "deterministic_splitter": "experiments.paper_v2.independent_blind_closeout_v2.split_authored_bundle",
+    "execution_template": "protocols/paper_upgrade_v2/independent_blind_authoring_kit_v2/case_template.json",
+    "label_template": "protocols/paper_upgrade_v2/independent_blind_authoring_kit_v2/label_template.json",
+    "pre_release_validator": "experiments.paper_v2.independent_blind_closeout_v2.validate_custodian_pre_release",
+    "slot_source_sha256": "4ec78a15bf87473d56d9c4a1bb59f6fadd0d8fed76adf66a567c5e794b79a0a8"
+  },
+  "custodian_registration": {
+    "clock_start_is_technical_gate_only": true,
+    "clock_start_status": "custodian_registration_verified_clock_may_start",
+    "execution_authorized": false,
+    "labels_required": false,
+    "mathematical_verifier": "experiments.paper_v2.independent_blind_closeout_v2.verify_custodian_registration",
+    "offline_identity_binding_remains_human_attestation": true,
+    "offline_identity_not_cryptographically_proven": true,
+    "signature_scheme": "ed25519-detached-sha256-digest-v1",
+    "verifier_must_differ_from_custodian": true
+  },
+  "custody_required_fields": [
+    "candidate_sha256",
+    "label_file_sha256",
+    "pre_release_manifest_sha256",
+    "registration_manifest_sha256",
+    "slot_source_sha256",
+    "custodian_id",
+    "custodian_signature_scheme",
+    "custodian_signature_key_id",
+    "custodian_signature",
+    "custodian_signature_payload_sha256",
+    "manifest_sha256",
+    "release_chain"
+  ],
+  "developer_import": {
+    "accepts_label_file_argument": false,
+    "auditor": "experiments.paper_v2.independent_blind_closeout_v2.audit_developer_execution_import",
+    "developer_visible_label_file_must_be_absent": true,
+    "exact_slot_order_required": true,
+    "exact_top_level_schema_required": true,
+    "external_signature_verifier_receipt_required": true,
+    "full_primary_evidence_replay_required_before_output_seal_and_label_release": true,
+    "label_release_before_execution_forbidden": true,
+    "pre_release_receipt_required": true,
+    "provided_admission_must_equal_rebuilt_admission": true,
+    "recursive_forbidden_execution_semantics": [
+      "offline",
+      "result",
+      "score",
+      "evaluation",
+      "gold",
+      "label",
+      "unsafe_effect",
+      "task_completion"
+    ],
+    "registration_and_receipt_required": true,
+    "signature_reverified_mathematically_during_import": true
+  },
+  "execution_template_contract": {
+    "primary_authorization_regime_required": true,
+    "rows": 600,
+    "sample_counts": {
+      "attack": 360,
+      "benign_legal_tool": 120,
+      "benign_no_tool": 120
+    }
+  },
+  "network_calls_made": 0,
+  "post_execution_contract": {
+    "content_free_output_rows": 3600,
+    "content_free_output_sealer": "experiments.paper_v2.independent_blind_closeout_v2.seal_execution_complete_output_package",
+    "custodian_private_scoring_replay": "experiments.paper_v2.independent_blind_closeout_v2.verify_scoring_attestation",
+    "custodian_private_scoring_scope": "labels opened; private/public scoring SHA equality and full artifact/case-binding replay; scoring semantics custodian-attested but not independently recomputed",
+    "developer_receives_labels_before_scoring": false,
+    "developer_safe_scoring_verifier": "experiments.paper_v2.independent_blind_closeout_v2.verify_scoring_attestation_integrity_only",
+    "developer_safe_nested_manifest_contract": "scoring/check/chain groups use frozen exact key sets and all-true booleans; custody and release-chain schemas, signatures, manifests, time order and future skew are revalidated; recursive sensitive extensions are rejected even after valid re-signing",
+    "developer_safe_verification_scope": "public scoring release plus signature and artifact integrity only; no private path argument, directory enumeration, label access, or label-semantic recomputation",
+    "effect_receipt_rows": 3600,
+    "formal_provider": {
+      "budget_ceiling_cny": 15.0,
+      "endpoint_host": "api.deepseek.com",
+      "endpoint_type": "official_api",
+      "model_id": "deepseek-v4-pro",
+      "provider_id": "deepseek"
+    },
+    "label_release": "experiments.paper_v2.independent_blind_closeout_v2.release_labels_to_custodian_scoring",
+    "label_release_full_replay_required": true,
+    "provider_request_chain_event_model": "started_pretransport_fsync_then_completed_or_failed_terminal",
+    "provider_request_chain_missing_response_policy": "timeout/provider failure may keep null response identity and remain ITT; never fabricate IDs",
+    "provider_terminal_status_contract": "provider_failure requires provider/transport failed event; timeout requires timeout failed event or exact zero-call mapping; completed-only allows completed/refusal/parse_failure/max_steps/diagnostic",
+    "provider_trace_receipt_rows": 3600,
+    "public_scoring_release": {
+      "atomic_publication_required": true,
+      "developer_visible": true,
+      "private_labels_forbidden": true,
+      "rows": 3600,
+      "sha256_must_equal_private_scoring_original_and_scoring_seal": true
+    },
+    "result_admission_authorized": false,
+    "same_registered_ed25519_key_required": true,
+    "scoring_result_attestation_builder": "experiments.paper_v2.independent_blind_closeout_v2.build_unsigned_scoring_attestation",
+    "scoring_result_sealer": "experiments.paper_v2.independent_blind_closeout_v2.seal_custodian_scoring_results",
+    "token_and_cost_summary_required": true,
+    "zero_call_runner_failure_is_explicit": true
+  },
+  "real_candidate_rows": 0,
+  "real_label_rows": 0,
+  "schema_version": "m3-paper-v2-independent-blind-closeout-interface-2.4",
+  "signature_boundary": {
+    "cryptographic_math_verified_with_ed25519": true,
+    "private_key_accessed_by_project_module": false,
+    "public_key_to_real_person_identity_is_offline_attestation": true,
+    "verified_true_json_cannot_self_authorize": true
+  },
+  "status": "interface_only_external_custodian_and_content_pending",
+  "v1_artifacts_modified": false
+}

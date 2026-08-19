@@ -1,0 +1,42 @@
+{
+  "schema_version": "m3-paper-v2-gemini-public-canary-candidate-2.0",
+  "status": "candidate_pending_exact_command_admission",
+  "run_id": "paper-v2-public-gemini-canary-v2-20260802",
+  "execution_identity": "8cd9596c10e01d5ecc5dfd2e5090916fadd524eeff290b854536032012979018",
+  "provider_id": "gemini",
+  "model_id": "gemini-3.6-flash",
+  "model_role": "second",
+  "plan_manifest_sha256": "11b23e6fdc64b294add44d7ea391121dc57220d1286fb4ec127d26579a2ec313",
+  "qualification_sha256": "8fed41fe2aaaa4127b87547cb210d46122ed3eb4bf21e67743c0809f368c501b",
+  "canary_records": 12,
+  "canary_source_work_keys": [
+    "48e061f0accb237bf30024c972fb825444fe576418904db863043308d42b0654",
+    "d3172c5e3785dc5241baf7d78bc868d70bd7355bee597c2abf4aff5037450eb8",
+    "8d9389700287757f9083f0f9bb6c1516b014980e4e427ed4b40e9d420093d754",
+    "00b71f680aa5a2f5eb82f4d6a77d24f520eaa9f230cb36ec1e32f61d9813e540",
+    "ac1e7f97ec333cc634a917ae19c5ffd012c52705f7f44660e57503ccbb06ad79",
+    "d61491a1e939a173dd288757df5c5c1b27ec74aaf1f8e30b44911185901946d6",
+    "df2aa15b751296471494836a14748bd1133a340d6fc307eb3525013ec5bffcae",
+    "199b266e23625b8ab8e26e0349dd8cc1ae559313d237a9facef7faa7928994e9",
+    "c5ecdb4df30c9d9ad7430bc24e911d133ea5abaa9e855b9451027aad84200753",
+    "120484e8faec221f9a07aab53b9eab0951da2842e98c4a66ef15537865de4786",
+    "6a07c1a777461e813595615584d9d6b72d9af63eb042cc59f6543e738beaf017",
+    "6292a60a899872e56ee3ed882c8cb404573103b3d97f01a925695c8c7753666e"
+  ],
+  "canary_work_key_sequence_sha256": "9a855dfd61776fb8bff089196b4cf34fc8c5bc2bae41220b6325cd640f03cbc2",
+  "output_root": "outputs/paper_upgrade_v2/formal_public/gemini/public-v2-canary",
+  "max_tokens": 512,
+  "timeout_seconds": 120.0,
+  "controls": {
+    "automatic_retries": 0,
+    "billing_tier": "free",
+    "external_effects_enabled": false,
+    "first_http_429": "seal_current_run",
+    "paid_ceiling_usd": 0.0,
+    "provider_managed_tools_enabled": false
+  },
+  "exact_command": "F:\\robot\\Anaconda3\\python.exe -m experiments.paper_v2.gemini_public_controller_v2 --execute-canary --admission protocols\\paper_upgrade_v2\\admissions\\gemini_public_canary_admission_v2.json --config config\\project.local.env",
+  "result_admission_authorized": false,
+  "scientific_outcomes_read": 0,
+  "manifest_sha256": "dfb92229e091f0eb072d5b3d42a01e5a7aa753c2ed11ee6e593d59729001d8fa"
+}

@@ -1,0 +1,19 @@
+{
+  "artifact": "WASP",
+  "audit_id": "A19-wasp-benchmark",
+  "commit_date": "2025-05-14T00:17:04-07:00",
+  "default_branch_head_at_discovery": "ffee6f41fde76acd14bd792db442479c506260c2",
+  "expected_commit": "ffee6f41fde76acd14bd792db442479c506260c2",
+  "license": {
+    "path": "external/paper_v2_audits/wasp-http1/LICENSE",
+    "sha256": "d70f572869ebd5ca039d3b3173d6af68406669fd04201dd2ad12f8b5a5f8475d",
+    "status": "present"
+  },
+  "observed_commit": "ffee6f41fde76acd14bd792db442479c506260c2",
+  "official_source_available": true,
+  "paper_artifact": null,
+  "repository_path": "external/paper_v2_audits/wasp-http1",
+  "schema_version": "m3-paper-v2-source-lock-1.0",
+  "source_provenance": "official_source_code",
+  "source_url": "https://github.com/facebookresearch/wasp.git"
+}

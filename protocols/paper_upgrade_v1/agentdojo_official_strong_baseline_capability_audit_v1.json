@@ -1,0 +1,585 @@
+{
+  "agentdojo_checkout": "external/benchmarks/agentdojo",
+  "audit_version": "m3-paper-v1-agentdojo-official-strong-baseline-capability-audit-1.0",
+  "baselines": {
+    "agentdojo_tool_filter": {
+      "baseline_id": "agentdojo_tool_filter",
+      "capability_status": "ready_official_tool_filter_qualification_completed_formal_run_pending",
+      "compatibility_plan": [
+        "2-case local OpenAI-compatible qualification has passed with a disclosed model-binding shim when the qualification manifest is present",
+        "run the frozen 726-case formal matrix with the same official AgentDojo pipeline, shim disclosure, provider/model labels and complete official output paths",
+        "keep any further non-identical tool-filter clone under a separate non-official adapter label"
+      ],
+      "dependency_blockers": [],
+      "m3_local_runner_mixing_rule": "Do not map this official AgentDojo defense to an M3 local runner condition unless it is separately labelled as a non-identical adapter.",
+      "official_defense": "tool_filter",
+      "official_run_command_template": "cd external\\benchmarks\\agentdojo\npython -m agentdojo.scripts.benchmark --model gpt-4o-2024-05-13 --defense tool_filter --attack tool_knowledge",
+      "result_eligible_for_formal_tables": false,
+      "result_exclusion_rule": "Exclude from formal result tables until the byte-identical official AgentDojo pipeline has a frozen run manifest, dependency snapshot, model/API label, source hashes, and complete logs.",
+      "source_files": [
+        "src/agentdojo/agent_pipeline/agent_pipeline.py",
+        "src/agentdojo/scripts/benchmark.py"
+      ]
+    },
+    "agentdojo_transformers_pi_detector": {
+      "baseline_id": "agentdojo_transformers_pi_detector",
+      "capability_status": "ready_for_official_smoke_pending_run",
+      "compatibility_plan": [
+        "use the dedicated E-drive runtime smoke environment or a separately frozen AgentDojo transformers environment",
+        "keep the ProtectAI detector model cache path/hash and threshold frozen before formal runs",
+        "run official AgentDojo logs first, then separately compare against M3 outputs"
+      ],
+      "dependency_blockers": [],
+      "m3_local_runner_mixing_rule": "Do not map this official AgentDojo defense to an M3 local runner condition unless it is separately labelled as a non-identical adapter.",
+      "official_defense": "transformers_pi_detector",
+      "official_run_command_template": "cd external\\benchmarks\\agentdojo\npython -m agentdojo.scripts.benchmark --model gpt-4o-2024-05-13 --defense transformers_pi_detector --attack tool_knowledge",
+      "result_eligible_for_formal_tables": false,
+      "result_exclusion_rule": "Exclude from formal result tables until the byte-identical official AgentDojo pipeline has a frozen run manifest, dependency snapshot, model/API label, source hashes, and complete logs.",
+      "source_files": [
+        "src/agentdojo/agent_pipeline/agent_pipeline.py",
+        "src/agentdojo/agent_pipeline/pi_detector.py",
+        "src/agentdojo/scripts/benchmark.py"
+      ]
+    }
+  },
+  "boundary": "Capability audit only. It confirms pinned official source markers and local blockers for AgentDojo's tool_filter and transformers_pi_detector. It is not a benchmark result and must not be included in formal ASR/TCR effect tables.",
+  "checks": [
+    {
+      "detail": {
+        "benchmark_script": true,
+        "pi_detector": true,
+        "pipeline": true,
+        "readme": true,
+        "results_docs": true
+      },
+      "name": "official_source_files_exist",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "official_defenses": [
+          "repeat_user_prompt",
+          "spotlighting_with_delimiting",
+          "tool_filter",
+          "transformers_pi_detector"
+        ]
+      },
+      "name": "official_defenses_list_contains_required_strong_baselines",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "defenses_constant": {
+          "marker": "DEFENSES = [",
+          "present": true
+        },
+        "defenses_tool_filter": {
+          "marker": "\"tool_filter\"",
+          "present": true
+        },
+        "defenses_transformers_pi_detector": {
+          "marker": "\"transformers_pi_detector\"",
+          "present": true
+        },
+        "tool_filter_component": {
+          "marker": "OpenAILLMToolFilter(TOOL_FILTER_PROMPT, llm.client, llm_name)",
+          "present": true
+        },
+        "tool_filter_openai_guard": {
+          "marker": "if not isinstance(llm, OpenAILLM):",
+          "present": true
+        },
+        "transformers_detector_component": {
+          "marker": "TransformersBasedPIDetector(",
+          "present": true
+        },
+        "transformers_detector_mode": {
+          "marker": "mode=\"message\"",
+          "present": true
+        },
+        "transformers_detector_model": {
+          "marker": "model_name=\"protectai/deberta-v3-base-prompt-injection-v2\"",
+          "present": true
+        },
+        "transformers_detector_safe_label": {
+          "marker": "safe_label=\"SAFE\"",
+          "present": true
+        },
+        "transformers_detector_threshold": {
+          "marker": "threshold=0.5",
+          "present": true
+        }
+      },
+      "name": "pipeline_markers_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "detector_class": {
+          "marker": "class TransformersBasedPIDetector",
+          "present": true
+        },
+        "detector_decision_rule": {
+          "marker": "safety_score < self.threshold",
+          "present": true
+        },
+        "detector_default_mode": {
+          "marker": "mode: Literal[\"message\", \"full_conversation\"] = \"message\"",
+          "present": true
+        },
+        "detector_default_model": {
+          "marker": "model_name: str = \"protectai/deberta-v3-base-prompt-injection-v2\"",
+          "present": true
+        },
+        "detector_default_safe_label": {
+          "marker": "safe_label: str = \"SAFE\"",
+          "present": true
+        },
+        "detector_default_threshold": {
+          "marker": "threshold: float = 0.5",
+          "present": true
+        },
+        "detector_install_hint": {
+          "marker": "pip install agentdojo[transformers]",
+          "present": true
+        },
+        "detector_pipeline_call": {
+          "marker": "pipeline(\"text-classification\", model=self.model_name, device=device)",
+          "present": true
+        },
+        "detector_redaction_text": {
+          "marker": "<Data omitted because a prompt injection was detected>",
+          "present": true
+        },
+        "detector_transformers_import": {
+          "marker": "from transformers import pipeline",
+          "present": true
+        }
+      },
+      "name": "pi_detector_markers_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "benchmark_module_command": {
+          "marker": "python -m agentdojo.scripts.benchmark",
+          "present": true
+        },
+        "tool_filter_example": {
+          "marker": "--defense tool_filter",
+          "present": true
+        },
+        "tool_knowledge_attack_example": {
+          "marker": "--attack tool_knowledge",
+          "present": true
+        }
+      },
+      "name": "readme_benchmark_command_markers_present",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "agentdojo_checkout_exists": true,
+        "agentdojo_defenses": [
+          "tool_filter",
+          "transformers_pi_detector",
+          "spotlighting_with_delimiting",
+          "repeat_user_prompt"
+        ],
+        "agentdojo_source_layout_present": true,
+        "hf_hub_cache": "E:\\ai_cache\\huggingface\\hub",
+        "huggingface_hub_installed": true,
+        "openai_api_key_present": false,
+        "openai_compatible_base_url_present": false,
+        "openai_package_installed": true,
+        "protectai_detector_cache_path": "E:\\ai_cache\\huggingface\\hub\\models--protectai--deberta-v3-base-prompt-injection-v2",
+        "protectai_detector_cached": true,
+        "protectai_detector_refs_main": "90c9989b1a342275dd0d1a95aad283c04e075671",
+        "python_executable": "F:\\robot\\Anaconda3\\python.exe",
+        "tool_filter_freeze": "protocols/paper_upgrade_v1/agentdojo_tool_filter_formal_freeze_v1.json",
+        "tool_filter_freeze_model_id": "m3-paper-qwen3-8b-v1:latest",
+        "tool_filter_freeze_prompt_sha256": "30f4d1f2bd19f7d867ef322ad3faa0767bbf34e5dd5052b360a48a578c68f27f",
+        "tool_filter_freeze_sha256": "801f9a690aedd67ad93442a4f46f2d217f409f2a4d050005a8f1a67ee9473f1f",
+        "tool_filter_freeze_status": "completed_frozen_formal_protocol",
+        "tool_filter_openai_compatible_binding": {
+          "algorithm_changed": false,
+          "prompt_changed": false,
+          "reason": "upstream tool_filter receives provider name as llm_name for openai-compatible local transports",
+          "rebound_elements": [
+            {
+              "class": "OpenAILLMToolFilter",
+              "element_index": 2,
+              "model_after": "m3-paper-qwen3-8b-v1:latest",
+              "model_before": "openai-compatible"
+            }
+          ],
+          "selection_rule_changed": false,
+          "shim": "openai_compatible_tool_filter_model_binding"
+        },
+        "tool_filter_qualification_cases": {
+          "attack_successes": 0,
+          "case_manifests": 2,
+          "completed_cases": 2,
+          "detector_redacted_cases": 0,
+          "expected_cases": 2,
+          "failed_cases": 0,
+          "missing_cases": 0,
+          "security_cases": 0,
+          "status_counts": {
+            "completed": 2
+          },
+          "utility_cases": 2,
+          "utility_successes": 1
+        },
+        "tool_filter_qualification_completed": true,
+        "tool_filter_qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_qualification_v1/run_manifest.json",
+        "tool_filter_qualification_sha256": "f9e40da7f4a8ab56b5325f9939042563e2a37076407f06c97625c36f463c2c12",
+        "tool_filter_qualification_status": "completed_diagnostic_partial",
+        "tool_filter_security_openai_compatible_binding": {
+          "algorithm_changed": false,
+          "prompt_changed": false,
+          "reason": "upstream tool_filter receives provider name as llm_name for openai-compatible local transports",
+          "rebound_elements": [
+            {
+              "class": "OpenAILLMToolFilter",
+              "element_index": 2,
+              "model_after": "m3-paper-qwen3-8b-v1:latest",
+              "model_before": "openai-compatible"
+            }
+          ],
+          "selection_rule_changed": false,
+          "shim": "openai_compatible_tool_filter_model_binding"
+        },
+        "tool_filter_security_qualification_cases": {
+          "attack_successes": 1,
+          "case_manifests": 2,
+          "completed_cases": 2,
+          "detector_redacted_cases": 0,
+          "expected_cases": 2,
+          "failed_cases": 0,
+          "missing_cases": 0,
+          "security_cases": 1,
+          "status_counts": {
+            "completed": 2
+          },
+          "utility_cases": 1,
+          "utility_successes": 1
+        },
+        "tool_filter_security_qualification_completed": true,
+        "tool_filter_security_qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_security_qualification_v1/run_manifest.json",
+        "tool_filter_security_qualification_sha256": "e463c2f30a1d1412f9783b43a5e97b497c82f072d84dd263192d03cab0c552d0",
+        "tool_filter_security_qualification_status": "completed_diagnostic_partial",
+        "tool_filter_transport_provider": "openai-compatible",
+        "tool_filter_transport_ready": true,
+        "torch_installed": true,
+        "transformers_installed": false,
+        "transformers_runtime_ready": true,
+        "transformers_runtime_smoke_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_smoke_v1/smoke_manifest.json",
+        "transformers_runtime_smoke_python": "E:\\M3_PI_Guard_runtime\\promptguard\\Scripts\\python.exe",
+        "transformers_runtime_smoke_required_passed": 3,
+        "transformers_runtime_smoke_required_total": 3,
+        "transformers_runtime_smoke_sha256": "e57b93751f36b8c3b50d16a981f96da84946ff3a2e9287a3f2091ff117ea34cf",
+        "transformers_runtime_smoke_status": "completed_official_detector_smoke_only"
+      },
+      "name": "dependency_probe_completed",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "agentdojo_tool_filter": false,
+        "agentdojo_transformers_pi_detector": false
+      },
+      "name": "blocked_or_pending_baselines_not_result_eligible",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "agentdojo_tool_filter": "cd external\\benchmarks\\agentdojo\npython -m agentdojo.scripts.benchmark --model gpt-4o-2024-05-13 --defense tool_filter --attack tool_knowledge",
+        "agentdojo_transformers_pi_detector": "cd external\\benchmarks\\agentdojo\npython -m agentdojo.scripts.benchmark --model gpt-4o-2024-05-13 --defense transformers_pi_detector --attack tool_knowledge"
+      },
+      "name": "official_command_templates_recorded",
+      "severity": "error",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "m3_runner_condition_ids": [
+          "agentdojo_repeat_user_prompt",
+          "agentdojo_spotlighting_with_delimiting",
+          "m3_full",
+          "m3_full_normal_prompt",
+          "m3_no_confirmation",
+          "m3_no_dataflow",
+          "m3_no_provenance",
+          "m3_no_temporal",
+          "m3_policy_confirmation",
+          "m3_policy_only",
+          "no_defense",
+          "prompt_sandwich",
+          "safe_prompt",
+          "spotlighting"
+        ],
+        "official_baseline_ids_in_m3_runner": []
+      },
+      "name": "official_strong_baselines_not_mixed_into_m3_local_runner",
+      "severity": "error",
+      "status": "pass"
+    }
+  ],
+  "checks_sha256": "1b0dd6bebe58d72d07fadd5c8c76de9d1a8f280cbb9c2fef0fe4c5e7cdf2cbf0",
+  "created_at": "2026-07-22T07:42:48.434913+00:00",
+  "dependency_probe": {
+    "agentdojo_checkout_exists": true,
+    "agentdojo_defenses": [
+      "tool_filter",
+      "transformers_pi_detector",
+      "spotlighting_with_delimiting",
+      "repeat_user_prompt"
+    ],
+    "agentdojo_source_layout_present": true,
+    "hf_hub_cache": "E:\\ai_cache\\huggingface\\hub",
+    "huggingface_hub_installed": true,
+    "openai_api_key_present": false,
+    "openai_compatible_base_url_present": false,
+    "openai_package_installed": true,
+    "protectai_detector_cache_path": "E:\\ai_cache\\huggingface\\hub\\models--protectai--deberta-v3-base-prompt-injection-v2",
+    "protectai_detector_cached": true,
+    "protectai_detector_refs_main": "90c9989b1a342275dd0d1a95aad283c04e075671",
+    "python_executable": "F:\\robot\\Anaconda3\\python.exe",
+    "tool_filter_freeze": "protocols/paper_upgrade_v1/agentdojo_tool_filter_formal_freeze_v1.json",
+    "tool_filter_freeze_model_id": "m3-paper-qwen3-8b-v1:latest",
+    "tool_filter_freeze_prompt_sha256": "30f4d1f2bd19f7d867ef322ad3faa0767bbf34e5dd5052b360a48a578c68f27f",
+    "tool_filter_freeze_sha256": "801f9a690aedd67ad93442a4f46f2d217f409f2a4d050005a8f1a67ee9473f1f",
+    "tool_filter_freeze_status": "completed_frozen_formal_protocol",
+    "tool_filter_openai_compatible_binding": {
+      "algorithm_changed": false,
+      "prompt_changed": false,
+      "reason": "upstream tool_filter receives provider name as llm_name for openai-compatible local transports",
+      "rebound_elements": [
+        {
+          "class": "OpenAILLMToolFilter",
+          "element_index": 2,
+          "model_after": "m3-paper-qwen3-8b-v1:latest",
+          "model_before": "openai-compatible"
+        }
+      ],
+      "selection_rule_changed": false,
+      "shim": "openai_compatible_tool_filter_model_binding"
+    },
+    "tool_filter_qualification_cases": {
+      "attack_successes": 0,
+      "case_manifests": 2,
+      "completed_cases": 2,
+      "detector_redacted_cases": 0,
+      "expected_cases": 2,
+      "failed_cases": 0,
+      "missing_cases": 0,
+      "security_cases": 0,
+      "status_counts": {
+        "completed": 2
+      },
+      "utility_cases": 2,
+      "utility_successes": 1
+    },
+    "tool_filter_qualification_completed": true,
+    "tool_filter_qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_qualification_v1/run_manifest.json",
+    "tool_filter_qualification_sha256": "f9e40da7f4a8ab56b5325f9939042563e2a37076407f06c97625c36f463c2c12",
+    "tool_filter_qualification_status": "completed_diagnostic_partial",
+    "tool_filter_security_openai_compatible_binding": {
+      "algorithm_changed": false,
+      "prompt_changed": false,
+      "reason": "upstream tool_filter receives provider name as llm_name for openai-compatible local transports",
+      "rebound_elements": [
+        {
+          "class": "OpenAILLMToolFilter",
+          "element_index": 2,
+          "model_after": "m3-paper-qwen3-8b-v1:latest",
+          "model_before": "openai-compatible"
+        }
+      ],
+      "selection_rule_changed": false,
+      "shim": "openai_compatible_tool_filter_model_binding"
+    },
+    "tool_filter_security_qualification_cases": {
+      "attack_successes": 1,
+      "case_manifests": 2,
+      "completed_cases": 2,
+      "detector_redacted_cases": 0,
+      "expected_cases": 2,
+      "failed_cases": 0,
+      "missing_cases": 0,
+      "security_cases": 1,
+      "status_counts": {
+        "completed": 2
+      },
+      "utility_cases": 1,
+      "utility_successes": 1
+    },
+    "tool_filter_security_qualification_completed": true,
+    "tool_filter_security_qualification_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_tool_filter_official_security_qualification_v1/run_manifest.json",
+    "tool_filter_security_qualification_sha256": "e463c2f30a1d1412f9783b43a5e97b497c82f072d84dd263192d03cab0c552d0",
+    "tool_filter_security_qualification_status": "completed_diagnostic_partial",
+    "tool_filter_transport_provider": "openai-compatible",
+    "tool_filter_transport_ready": true,
+    "torch_installed": true,
+    "transformers_installed": false,
+    "transformers_runtime_ready": true,
+    "transformers_runtime_smoke_manifest": "outputs/paper_upgrade_v1/baselines/agentdojo_transformers_pi_detector_smoke_v1/smoke_manifest.json",
+    "transformers_runtime_smoke_python": "E:\\M3_PI_Guard_runtime\\promptguard\\Scripts\\python.exe",
+    "transformers_runtime_smoke_required_passed": 3,
+    "transformers_runtime_smoke_required_total": 3,
+    "transformers_runtime_smoke_sha256": "e57b93751f36b8c3b50d16a981f96da84946ff3a2e9287a3f2091ff117ea34cf",
+    "transformers_runtime_smoke_status": "completed_official_detector_smoke_only"
+  },
+  "error_failures": [],
+  "official_defenses": [
+    "repeat_user_prompt",
+    "spotlighting_with_delimiting",
+    "tool_filter",
+    "transformers_pi_detector"
+  ],
+  "official_source_files": {
+    "benchmark_script": {
+      "exists": true,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/scripts/benchmark.py",
+      "relative_path": "src/agentdojo/scripts/benchmark.py",
+      "sha256": "9a138404c09fd99a2e197515b3c2a1ed5e75b54d2fc9e59d50976fc3c0587c0e"
+    },
+    "pi_detector": {
+      "exists": true,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/pi_detector.py",
+      "relative_path": "src/agentdojo/agent_pipeline/pi_detector.py",
+      "sha256": "96c8de3c3c2c42c18cc913e97cfedf29eaf295f5adcf199dc773f7eed69a0d19"
+    },
+    "pipeline": {
+      "exists": true,
+      "path": "external/benchmarks/agentdojo/src/agentdojo/agent_pipeline/agent_pipeline.py",
+      "relative_path": "src/agentdojo/agent_pipeline/agent_pipeline.py",
+      "sha256": "0de07a163216b996b42da3db2032236ba15065a5a781ff2cdde206fbf8306ad9"
+    },
+    "readme": {
+      "exists": true,
+      "path": "external/benchmarks/agentdojo/README.md",
+      "relative_path": "README.md",
+      "sha256": "b6616a39351841b10c68d6806741c5302ee15d8fc5517ff58fa7c7586ce24ca8"
+    },
+    "results_docs": {
+      "exists": true,
+      "path": "external/benchmarks/agentdojo/docs/results.md",
+      "relative_path": "docs/results.md",
+      "sha256": "b1bd67d643dec9e562b2512df80f543b386405d5a2ff13d453568a50bae6d961"
+    }
+  },
+  "official_source_manifest_sha256": "b1cd2a25063214de74e68235a02539411d185ef40fcc2dfd8d6627e8642c61e2",
+  "passed_checks": 9,
+  "pi_detector_markers": {
+    "detector_class": {
+      "marker": "class TransformersBasedPIDetector",
+      "present": true
+    },
+    "detector_decision_rule": {
+      "marker": "safety_score < self.threshold",
+      "present": true
+    },
+    "detector_default_mode": {
+      "marker": "mode: Literal[\"message\", \"full_conversation\"] = \"message\"",
+      "present": true
+    },
+    "detector_default_model": {
+      "marker": "model_name: str = \"protectai/deberta-v3-base-prompt-injection-v2\"",
+      "present": true
+    },
+    "detector_default_safe_label": {
+      "marker": "safe_label: str = \"SAFE\"",
+      "present": true
+    },
+    "detector_default_threshold": {
+      "marker": "threshold: float = 0.5",
+      "present": true
+    },
+    "detector_install_hint": {
+      "marker": "pip install agentdojo[transformers]",
+      "present": true
+    },
+    "detector_pipeline_call": {
+      "marker": "pipeline(\"text-classification\", model=self.model_name, device=device)",
+      "present": true
+    },
+    "detector_redaction_text": {
+      "marker": "<Data omitted because a prompt injection was detected>",
+      "present": true
+    },
+    "detector_transformers_import": {
+      "marker": "from transformers import pipeline",
+      "present": true
+    }
+  },
+  "pipeline_markers": {
+    "defenses_constant": {
+      "marker": "DEFENSES = [",
+      "present": true
+    },
+    "defenses_tool_filter": {
+      "marker": "\"tool_filter\"",
+      "present": true
+    },
+    "defenses_transformers_pi_detector": {
+      "marker": "\"transformers_pi_detector\"",
+      "present": true
+    },
+    "tool_filter_component": {
+      "marker": "OpenAILLMToolFilter(TOOL_FILTER_PROMPT, llm.client, llm_name)",
+      "present": true
+    },
+    "tool_filter_openai_guard": {
+      "marker": "if not isinstance(llm, OpenAILLM):",
+      "present": true
+    },
+    "transformers_detector_component": {
+      "marker": "TransformersBasedPIDetector(",
+      "present": true
+    },
+    "transformers_detector_mode": {
+      "marker": "mode=\"message\"",
+      "present": true
+    },
+    "transformers_detector_model": {
+      "marker": "model_name=\"protectai/deberta-v3-base-prompt-injection-v2\"",
+      "present": true
+    },
+    "transformers_detector_safe_label": {
+      "marker": "safe_label=\"SAFE\"",
+      "present": true
+    },
+    "transformers_detector_threshold": {
+      "marker": "threshold=0.5",
+      "present": true
+    }
+  },
+  "q2_strong_baseline_gate": "not_satisfied",
+  "readme_markers": {
+    "benchmark_module_command": {
+      "marker": "python -m agentdojo.scripts.benchmark",
+      "present": true
+    },
+    "tool_filter_example": {
+      "marker": "--defense tool_filter",
+      "present": true
+    },
+    "tool_knowledge_attack_example": {
+      "marker": "--attack tool_knowledge",
+      "present": true
+    }
+  },
+  "result_eligible_for_formal_tables": false,
+  "schema_version": "paper-agentdojo-official-strong-baseline-capability-audit-1.0",
+  "status": "completed",
+  "total_checks": 9
+}

@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3-pi-guard.local/schemas/paper_v2/formal_result_gate_v5.schema.json",
+  "title": "M3-PI Guard v8 formal result gate artifact",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "artifact_role",
+    "status",
+    "run_id",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-formal-result-gate-5.0"
+    },
+    "artifact_role": {
+      "enum": [
+        "prospective_result_gate_candidate",
+        "formal_result_technical_review",
+        "formal_result_analysis_admission"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "const": "paper-v2-deepseek-medium-v8-20260726"
+    },
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "artifact_role": {
+            "const": "prospective_result_gate_candidate"
+          }
+        },
+        "required": [
+          "artifact_role"
+        ]
+      },
+      "then": {
+        "required": [
+          "expected_records",
+          "locked_inputs",
+          "planned_outputs",
+          "technical_policy",
+          "evidence_boundary",
+          "canary_technical_boundary"
+        ],
+        "properties": {
+          "status": {
+            "const": "frozen_before_scientific_outcome_access"
+          },
+          "expected_records": {
+            "const": 480
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_role": {
+            "const": "formal_result_technical_review"
+          }
+        },
+        "required": [
+          "artifact_role"
+        ]
+      },
+      "then": {
+        "required": [
+          "candidate_manifest_sha256",
+          "continuation_admission_sha256",
+          "operational_gate",
+          "evidence_locks",
+          "budget_summary",
+          "evidence_boundary"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "technical_result_gate_pass",
+              "technical_result_gate_blocked"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_role": {
+            "const": "formal_result_analysis_admission"
+          }
+        },
+        "required": [
+          "artifact_role"
+        ]
+      },
+      "then": {
+        "required": [
+          "candidate_manifest_sha256",
+          "technical_review_sha256",
+          "evidence_locks",
+          "authorization",
+          "evidence_boundary"
+        ],
+        "properties": {
+          "status": {
+            "const": "activated_for_scientific_analysis"
+          }
+        }
+      }
+    }
+  ]
+}

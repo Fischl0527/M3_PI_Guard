@@ -1,0 +1,6 @@
+{
+  "audit_id": "A02-siren-loader",
+  "hits": [],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

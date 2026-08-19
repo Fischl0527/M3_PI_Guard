@@ -1,0 +1,25 @@
+{
+  "schema_version": "m3-paper-v2-gemini-json-client-qualification-1.0",
+  "status": "offline_json_payload_and_vigil_qualified",
+  "qualified_at": "2026-08-02T00:30:00+08:00",
+  "provider_id": "gemini",
+  "model_id": "gemini-3.6-flash",
+  "response_format": {
+    "type": "json_object"
+  },
+  "observed_payload_sha256": "f9c23d174d64b7e4f52b3a65ae18db45b4441c520baad7c7415a1374e26520c6",
+  "independent_commitment_payload_sha256": "d07bc18b87d97df0bb87318d6aac09c28a0150b016b2bf1ec56ca59d6007d3bc",
+  "vigil_constraint_count": 2,
+  "vigil_constraint_set_sha256": "e8df028a7fc71688bb6988fa9bf063e526db3143f8be1c9ab1814a82ea5f8c27",
+  "vigil_decisions": {
+    "read_report": "ALLOW",
+    "send_report": "ASK",
+    "delete_record": "DENY"
+  },
+  "provider_calls": 1,
+  "network_calls": 0,
+  "credentials_read": false,
+  "automatic_retries": 0,
+  "provider_tools_declared": false,
+  "external_effects_enabled": false
+}

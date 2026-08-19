@@ -1,0 +1,124 @@
+{
+  "schema_version": "m3-paper-v2-completion-scorecard-2.0",
+  "measured_at": "2026-07-30T10:40:00+08:00",
+  "interpretation": {
+    "engineering_readiness": "Implementation, frozen inputs, validators, and reproducible analysis code; excludes favorable scientific inference.",
+    "scientific_evidence_completion": "Evidence that can support the empirical-fallback paper. Missing second-model, independent-blind, and formal adaptive results remain incomplete rather than being inferred from the primary model.",
+    "eighty_percent_target": "The user requested progress toward at least 80%. The evidence-weighted score is reported without inflating incomplete external-validity work."
+  },
+  "engineering_readiness_percent": 99,
+  "scientific_evidence_completion_points": 869,
+  "scientific_evidence_completion_max_points": 1200,
+  "scientific_evidence_completion_percent": 72,
+  "scientific_evidence_completion_percent_exact": 72.4167,
+  "paper_submission_readiness_percent": 68,
+  "workstreams": [
+    {
+      "name": "frontier_literature_and_positioning",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 99,
+      "scientific_evidence_completion_percent": 99,
+      "remaining": "Submission-date publication-status and venue-scope refresh; final in-text context audit."
+    },
+    {
+      "name": "online_state_source_audit",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 65,
+      "scientific_evidence_completion_percent": 65,
+      "remaining": "Independent second review and additional dynamic path coverage; no domain-wide oracle claim is authorized."
+    },
+    {
+      "name": "paper_v2_contracts_and_invariants",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 95,
+      "scientific_evidence_completion_percent": 95,
+      "remaining": "Repeat the complete visibility, safety, request-chain, and projection contract for the second model."
+    },
+    {
+      "name": "medium_falsification",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 100,
+      "scientific_evidence_completion_percent": 100,
+      "remaining": "None. The admitted 480-record study rejected the mechanism-paper route."
+    },
+    {
+      "name": "structural_baselines",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 60,
+      "scientific_evidence_completion_percent": 60,
+      "remaining": "The admitted structural adapter ran on medium and Public primary matrices. A separate model-dependent DRIFT effect path and second-model comparison remain absent."
+    },
+    {
+      "name": "formal_public_benchmarks",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 75,
+      "scientific_evidence_completion_percent": 75,
+      "remaining": "The 5,082-record primary-model matrix on M3-v2 and AgentDojo is admitted and independently reproduced. The frozen 1,791-record second-model extension remains absent."
+    },
+    {
+      "name": "independent_blind_holdout",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 0,
+      "scientific_evidence_completion_percent": 0,
+      "remaining": "External author/custodian, sealed candidate content, and custody audit."
+    },
+    {
+      "name": "adaptive_attack",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 20,
+      "scientific_evidence_completion_percent": 20,
+      "remaining": "The admitted eight-task budget-50 canary validates the bounded search/evidence path only. Complete the 40/20 panels and hardest-20 saturation extension."
+    },
+    {
+      "name": "statistics_and_power",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 95,
+      "scientific_evidence_completion_percent": 95,
+      "remaining": "Medium and Public primary Wilson, paired McNemar, Holm, clustered-bootstrap, and diagnostic-retention results reproduce independently. Second-model and formal adaptive statistics remain."
+    },
+    {
+      "name": "manuscript",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 70,
+      "scientific_evidence_completion_percent": 70,
+      "remaining": "Medium/Public Results and Discussion are integrated. Formal adaptive results, second-model boundary, final journal prose, figure consolidation, full citation-context audit, and submission formatting remain."
+    },
+    {
+      "name": "provider_cost_and_execution_evidence",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 95,
+      "scientific_evidence_completion_percent": 95,
+      "remaining": "Public primary evidence binds 12,808 official calls and CNY 11.9909764. A second-model formal route remains absent."
+    },
+    {
+      "name": "provider_effect_safety",
+      "weight_points": 100,
+      "scientific_evidence_completion_points": 95,
+      "scientific_evidence_completion_percent": 95,
+      "remaining": "Medium and Public primary runs preserve disabled provider tools, no real effects, safety receipts, and ITT diagnostics. Repeat for the second model."
+    }
+  ],
+  "admitted_public_primary": {
+    "model_id": "deepseek-v4-pro",
+    "cases": 847,
+    "records": 5082,
+    "attack_cases": 600,
+    "benign_cases": 247,
+    "diagnostic_records": 76,
+    "diagnostic_fraction": 0.0149547422274695,
+    "provider_calls": 12808,
+    "cost_cny": 11.9909764,
+    "analysis_manifest": "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/analysis_manifest.json",
+    "independent_review": "outputs/paper_upgrade_v2/formal_public/primary_analysis_v5/independent_analysis_review_v5.json"
+  },
+  "blocking_external_inputs": [
+    "independent blind-set author/custodian",
+    "institutional Clarivate/JCR verification"
+  ],
+  "major_internal_work_remaining": [
+    "frozen second-model Public extension",
+    "formal 40/20-task adaptive panel and hardest-20 saturation extension",
+    "submission-ready manuscript consolidation and final visuals"
+  ],
+  "no_false_completion_rule": "The active project goal remains incomplete. The evidence-weighted completion is 72.4167%, below the requested 80%, because blind custody, second-model evidence, and formal adaptive evidence are not complete."
+}

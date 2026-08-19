@@ -1,0 +1,8 @@
+{
+  "audit_id": "A12-injecagent-loader",
+  "base_digest": "5d9ab14fdad3e7b188da8d58e12eed7565a83afc0e0b05e50c9eadbc7f81ef00",
+  "mutated_digest": "5d9ab14fdad3e7b188da8d58e12eed7565a83afc0e0b05e50c9eadbc7f81ef00",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}

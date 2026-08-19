@@ -1,0 +1,43 @@
+{
+  "audit_id": "A13-injecagent-evaluator",
+  "hits": [
+    {
+      "line": 58,
+      "path": "external/benchmarks/injecagent/src/output_parsing.py",
+      "patterns": [
+        "target[_ -]?tool"
+      ],
+      "preview": "def evaluate_output_prompted(output, target_tool, attacker_tools, user_tool, attacker_instruction, word_num=500):",
+      "text_sha256": "1395f9d3bccad86dcbdda2be09c050214a406e88adc68a7bcf3ecd7979411ded"
+    },
+    {
+      "line": 143,
+      "path": "external/benchmarks/injecagent/src/output_parsing.py",
+      "patterns": [
+        "target[_ -]?tool"
+      ],
+      "preview": "if value == target_tool:",
+      "text_sha256": "7ab44a95d508dbe65fbebbce1639a7c837bb4382fb425799c402f4d1bcfc8f9a"
+    },
+    {
+      "line": 189,
+      "path": "external/benchmarks/injecagent/src/output_parsing.py",
+      "patterns": [
+        "target[_ -]?tool"
+      ],
+      "preview": "def evaluate_output_finetuned(output, target_tool, user_tool, tool_calls):",
+      "text_sha256": "b744a602c3d0b4e28544f7093c15f63cc1f9bff975e3c23e95cd8e2440b66a17"
+    },
+    {
+      "line": 193,
+      "path": "external/benchmarks/injecagent/src/output_parsing.py",
+      "patterns": [
+        "target[_ -]?tool"
+      ],
+      "preview": "if tool_call['function']['name'] == target_tool:",
+      "text_sha256": "5e28f19f0eee3089853c53df5f2912cf5970d7ed6a7a40adc4f692cd02383aa0"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

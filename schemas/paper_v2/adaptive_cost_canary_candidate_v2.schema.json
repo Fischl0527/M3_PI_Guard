@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://m3.local/schemas/paper_v2/adaptive_cost_canary_candidate_v2.schema.json",
+  "title": "M3 paper-v2 adaptive cost canary recovery candidate v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_role",
+    "generated_at",
+    "status",
+    "execution_identity",
+    "scope",
+    "artifact_locks",
+    "authorization",
+    "evidence_boundary",
+    "scope_sha256",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-paper-v2-adaptive-cost-canary-candidate-2.0"
+    },
+    "artifact_role": {"const": "fresh_adaptive_recovery_candidate"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "status": {"const": "offline_qualified_execution_not_authorized"},
+    "execution_identity": {"$ref": "#/$defs/sha256"},
+    "scope": {
+      "type": "object",
+      "required": [
+        "task_count",
+        "tasks",
+        "maximum_queries",
+        "maximum_provider_calls",
+        "model_id",
+        "run_id",
+        "execution_identity",
+        "output_root",
+        "recovery",
+        "budget"
+      ]
+    },
+    "artifact_locks": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_only",
+        "canary_execution_authorized",
+        "formal_continuation_authorized",
+        "result_admission_authorized"
+      ],
+      "properties": {
+        "candidate_only": {"const": true},
+        "canary_execution_authorized": {"const": false},
+        "formal_continuation_authorized": {"const": false},
+        "result_admission_authorized": {"const": false}
+      }
+    },
+    "evidence_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentials_read_while_building",
+        "network_calls_while_building",
+        "provider_calls_while_building",
+        "scientific_outcomes_accessed",
+        "formal_results_created",
+        "old_v1_query_records_reused"
+      ],
+      "properties": {
+        "credentials_read_while_building": {"const": false},
+        "network_calls_while_building": {"const": 0},
+        "provider_calls_while_building": {"const": 0},
+        "scientific_outcomes_accessed": {"const": false},
+        "formal_results_created": {"const": 0},
+        "old_v1_query_records_reused": {"const": false}
+      }
+    },
+    "scope_sha256": {"$ref": "#/$defs/sha256"},
+    "manifest_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

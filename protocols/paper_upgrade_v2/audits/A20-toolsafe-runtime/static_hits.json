@@ -1,0 +1,225 @@
+{
+  "audit_id": "A20-toolsafe-runtime",
+  "hits": [
+    {
+      "line": 28,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "meta_data, preds, labels = [], [], []",
+      "text_sha256": "599fa75ff55b59c433ebb81e0012ed67faa6119123873e92eca3c6108b1e50c3"
+    },
+    {
+      "line": 32,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "output_save_label_path = f\"{self.output_save_dir}/labels.json\"",
+      "text_sha256": "b3917c54fb36d5f8d41fb143fc607fa0c71bc83f3f92d6d3cc256601f4fbd22d"
+    },
+    {
+      "line": 44,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "labels = json.load(f)",
+      "text_sha256": "cfedcc5ef96f4055c47ba072c6a66a20554e506869beb731af8055628519b3ee"
+    },
+    {
+      "line": 46,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "assert len(meta_data) == len(preds) == len(labels)",
+      "text_sha256": "33bdec4c17224ec2e9c5a01835a00b9ec1fa318df54ab821adcee578a5e5cc70"
+    },
+    {
+      "line": 72,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b",
+        "\\bscore\\b"
+      ],
+      "preview": "labels.append(sample['score'])",
+      "text_sha256": "54aaf724f36faf4d104f743475363d2e2b60407f5d643323ad25087e27a9787c"
+    },
+    {
+      "line": 82,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "json.dump(labels, f, ensure_ascii=False, indent=4)",
+      "text_sha256": "86098c19a3c836b48038d89b458d4afe674929cbc074c7c3a8b9b4a932503ce6"
+    },
+    {
+      "line": 84,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "return meta_data, preds, labels",
+      "text_sha256": "b072563059e332874500fa0046e82790e7d65bd504c56a8e52bfff0d9912b634"
+    },
+    {
+      "line": 94,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "meta_data, preds, labels = [], [], []",
+      "text_sha256": "599fa75ff55b59c433ebb81e0012ed67faa6119123873e92eca3c6108b1e50c3"
+    },
+    {
+      "line": 98,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "output_save_label_path = f\"{self.output_save_dir}/labels.json\"",
+      "text_sha256": "b3917c54fb36d5f8d41fb143fc607fa0c71bc83f3f92d6d3cc256601f4fbd22d"
+    },
+    {
+      "line": 110,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "labels = json.load(f)",
+      "text_sha256": "cfedcc5ef96f4055c47ba072c6a66a20554e506869beb731af8055628519b3ee"
+    },
+    {
+      "line": 112,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "assert len(meta_data) == len(preds) == len(labels)",
+      "text_sha256": "33bdec4c17224ec2e9c5a01835a00b9ec1fa318df54ab821adcee578a5e5cc70"
+    },
+    {
+      "line": 148,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b",
+        "\\bscore\\b"
+      ],
+      "preview": "labels.append(sample['score'])",
+      "text_sha256": "54aaf724f36faf4d104f743475363d2e2b60407f5d643323ad25087e27a9787c"
+    },
+    {
+      "line": 158,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "json.dump(labels, f, ensure_ascii=False, indent=4)",
+      "text_sha256": "86098c19a3c836b48038d89b458d4afe674929cbc074c7c3a8b9b4a932503ce6"
+    },
+    {
+      "line": 160,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_evaluator/agentdojo.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "return meta_data, preds, labels",
+      "text_sha256": "b072563059e332874500fa0046e82790e7d65bd504c56a8e52bfff0d9912b634"
+    },
+    {
+      "line": 65,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "meta_data, preds, labels = [], [], []",
+      "text_sha256": "599fa75ff55b59c433ebb81e0012ed67faa6119123873e92eca3c6108b1e50c3"
+    },
+    {
+      "line": 68,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "labels_path = os.path.join(output_save_dir, \"labels.json\")",
+      "text_sha256": "9dcf3846c05489d1b11db65dd3e2c427b56d1f14cab6936e6f0dbfb81c73a17f"
+    },
+    {
+      "line": 80,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "labels = json.load(f)",
+      "text_sha256": "cfedcc5ef96f4055c47ba072c6a66a20554e506869beb731af8055628519b3ee"
+    },
+    {
+      "line": 82,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "return meta_data, preds, labels",
+      "text_sha256": "b072563059e332874500fa0046e82790e7d65bd504c56a8e52bfff0d9912b634"
+    },
+    {
+      "line": 97,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "meta_data, preds, labels = processor.run()",
+      "text_sha256": "1162fb1f3e12401e6d7ad25b04851e3da10215560b6cd4dadb693e1362626dd8"
+    },
+    {
+      "line": 99,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "meta_data, preds, labels = processor.run(attack_type)",
+      "text_sha256": "8faa1dee57101908d16caec065f7f1a13a41a4a4114e3819bf1023f374daa926"
+    },
+    {
+      "line": 104,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "return meta_data, preds, labels",
+      "text_sha256": "b072563059e332874500fa0046e82790e7d65bd504c56a8e52bfff0d9912b634"
+    },
+    {
+      "line": 144,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "meta_data, preds, labels = run_task(cfg, guard_model, output_dir)",
+      "text_sha256": "ffc1f3de7bbdad8132737b820cb99e01c6ba87d8d174abe8c29a6695cf2bbaa2"
+    },
+    {
+      "line": 146,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "meta_data, preds, labels = load_cached_results(output_dir)",
+      "text_sha256": "906c8d7f0915f45f978ea211228e87e98d9ebe4fa425cf60c6dbe1491e423102"
+    },
+    {
+      "line": 149,
+      "path": "external/paper_v2_audits/toolsafe/src/guardian_experiment.py",
+      "patterns": [
+        "\\blabels?\\b"
+      ],
+      "preview": "preds, labels,",
+      "text_sha256": "766f62436143cf0389179bb0504eac2ae2512951c88d2dde383786a18857257c"
+    }
+  ],
+  "interpretation": "Lexical hits are navigation evidence only. Phase and call-boundary evidence determine the finding.",
+  "schema_version": "m3-paper-v2-static-hits-1.0"
+}

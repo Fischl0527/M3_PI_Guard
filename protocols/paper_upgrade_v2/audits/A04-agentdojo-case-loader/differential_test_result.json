@@ -1,0 +1,8 @@
+{
+  "audit_id": "A04-agentdojo-case-loader",
+  "base_digest": "dde779fd37429590d6762e6977761ade5350759ac10d39007604efbddeb7d8ae",
+  "mutated_digest": "dde779fd37429590d6762e6977761ade5350759ac10d39007604efbddeb7d8ae",
+  "online_projection_unchanged": true,
+  "passed": true,
+  "schema_version": "m3-paper-v2-differential-test-result-1.0"
+}
