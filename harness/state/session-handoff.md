@@ -15,6 +15,9 @@
   配额日，之后保留已完成子集并透明降级，不启用 Billing。
 - 运行器失败恢复、一次性授权统计和五图生成器已完成；定向验证为 16/16，Ruff、
   py_compile 通过。合成数据 PNG 已逐张视觉检查；正式图等终态统计后一次生成。
+- Active manuscript README、Introduction、Methods、Related Work 和 figure/table
+  plan 已按 lean 研究口径更新；最终 Results/Abstract 仍必须等待终态统计，禁止填充
+  尚未观察的数据。
 - 不运行 Full Harness、递归历史验证、盲测、Pro500/2000 或真实工具/effect。
   只修复并重跑无官方响应失败行，所有成功或响应后失败行保持终态。
 

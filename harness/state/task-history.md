@@ -220,5 +220,9 @@ Record completed, blocked, and abandoned tasks here.
 - Added the one-pass authorization analysis and the five preregistered static
   figures. Focused verification passes 16/16 with Ruff and py_compile; all five
   synthetic QA figures were inspected, and visible overlap defects were fixed.
+- Replaced the active manuscript Methods and updated the Introduction, README,
+  Related Work, bibliography and figure/table plan to the lean 900/450-row
+  design. Retired Harness/blind/B500/B2000 requirements no longer appear as
+  active paper gates; unobserved Results and Abstract cells remain unfilled.
 - No Full Harness, recursive evidence replay, blind execution, real effect,
   provider tool, successful-row replay, or Git push occurred.

@@ -1,287 +1,253 @@
-# Methods (pre-result draft)
+# Methods — lean authorization study
+
+Status: `execution_in_progress_results_pending`
 
 ## Study design and research questions
 
-We use a prospective paired design to distinguish two questions that are often
-conflated in evaluations of prompt-injection defenses for tool-using agents.
-First, we measure how authorization information supplied to an online guard
-changes measured security and utility. Second, under a non-oracle authorization
-regime, we compare a policy-only monitor with a monitor that additionally uses
-parameter provenance, temporal/data-flow constraints, and independent
-confirmation.
+We conduct a paired empirical study of runtime authorization for tool-using
+language-model agents. The design separates the information supplied to the
+online Guard from the offline fields used to score the run. It then varies the
+authorization regime and the Guard mechanism while holding the task, attack,
+provider, model, tool environment, and evaluator fixed.
 
-The study asks whether exact per-case authorization inflates measured outcomes
-(RQ1), whether the full M3 mechanism reduces unsafe effects beyond policy-only
-and a peer-reviewed structural baseline (RQ2), whether its benign task
-completion is non-inferior within five percentage points while exposing the
-confirmation burden (RQ3), and whether conclusions remain directionally stable
-across authorization regimes, benchmarks, models, languages, attack families,
-and defense-aware adaptive attacks (RQ4).
+The study addresses three research questions:
 
-The prospective protocol is
-`protocols/paper_upgrade_v2/preregistration_v1.json`. Paper-v1 results are
-historical only and cannot be reclassified as paper-v2 evidence.
+1. **RQ1 — Authorization regime.** How do `exact_gold`, `auto_compiled`,
+   `broad`, `underspecified`, and `conflicting` authorization regimes change
+   executed unsafe effects, benign task completion, and `ASK/DENY` burden?
+2. **RQ2 — Mechanism contribution.** Does the provenance/data-flow/
+   confirmation logic in M3-full improve on the same runtime using policy-only
+   enforcement, and what operational cost does it introduce?
+3. **RQ3 — External validity and adaptive budget.** Are the observed
+   directions stable across AgentDojo, M3-v2, a second provider, and the
+   already completed defense-aware budgets 50 and 200?
 
-## Threat model
+Positive results are not a stopping condition. The analysis is retained if
+`exact_gold` has little effect, M3-full underperforms policy-only, or the second
+provider differs from the primary model.
 
-The attacker controls untrusted documents, tool outputs, retrieved context, or
-memory content that the agent may process while completing a trusted user
-request. The attacker may know the defense structure and optimize an unsafe
-effect that occurs after runtime enforcement. The attacker does not receive
-policy rules, detector scores, evaluator explanations, expected malicious
-actions, or answer keys. For adaptive experiments, public feedback is restricted
-to the aggregate `ALLOW/ASK/DENY` outcome and whether an unsafe effect occurred.
+## Threat model and safety boundary
 
-Out of scope are training-time model poisoning, host compromise, credential
-theft outside the agent, and direct modification of the trusted policy store.
+The attacker controls text in documents, messages, retrieved records, memory,
+or simulated tool outputs processed while the agent performs a trusted user
+task. An unsafe effect is a state transition that violates the task-specific
+offline evaluator after the runtime Guard has issued its decision. The model
+may propose tool calls, but it cannot invoke provider-managed tools or reach a
+real external system.
 
-## Online-state separation
+All experiments use isolated benchmark state. Real email, payment, browser,
+shell, code-execution, production API, credential, and unrestricted filesystem
+operations are disabled. A proposal can affect only copied AgentDojo state,
+M3-v2 mock resources, `example.test`, `/mock/`, or the public sandbox. Model
+output is therefore treated as untrusted data, not executable authority.
 
-Every run constructs its online state by an explicit allowlist projection.
-Evaluator-only fields—including gold answers, expected actions, attack-success
-labels, task-success labels, reference trajectories, and per-case exact policy
-keys—are excluded unless the run is the explicitly labeled `exact_gold` oracle
-ablation. The runtime records a canonical digest of visible field paths and
-values. A run is inadmissible if a forbidden field appears or if the stored
-digest does not match the runtime projection.
+Training-time poisoning, model-weight compromise, credential theft, host
+compromise, and direct modification of the trusted policy store are outside
+scope.
 
-The five authorization regimes are `exact_gold`, `auto_compiled`, `broad`,
-`underspecified`, and `conflicting`. The primary analysis uses
-`auto_compiled`. `exact_gold` is an oracle sensitivity analysis and is excluded
-from the primary endpoint.
+## Online-state and evaluator separation
 
-The frozen runtime keeps three identities distinct. The source-projection
-digest covers benchmark fields admitted to the agent. The initial-online-state
-digest additionally covers condition configuration and any authorization state.
-The experiment-record digest covers the initial state plus later visibility
-events. This separation prevents a case-level digest from being reused across
-conditions that actually expose different policy or detector state.
+Every run constructs the online state through an allowlist projection.
+Admitted fields include trusted user intent, the benchmark-visible task
+context, the selected authorization regime, provenance events available at
+that step, and the proposed action. Gold answers, expected actions, attack and
+task-success labels, evaluator explanations, reference trajectories, and
+offline effect receipts are excluded.
 
-The `exact_gold` ablation is not serialized as a trusted policy. Its envelope
-explicitly declares `source_class=evaluator_derived_authorization`, and every
-such work item is excluded from the primary endpoint. The authoritative
-execution freeze is
-`protocols/paper_upgrade_v2/medium_execution_plan_v2.jsonl`; its superseded v1
-pre-run ledger contains no outcomes.
+The `exact_gold` condition is an explicitly labeled oracle sensitivity
+analysis. It converts evaluator-derived authorization into the condition's
+authorization object, but does not expose the evaluator labels or scoring
+fields themselves. `exact_gold` is never presented as the primary deployment
+regime. The primary regime is `auto_compiled`, created from the trusted user
+request before untrusted content is processed.
 
-For tasks whose user text refers to a trusted application panel, the model
-message receives a separate allowlist projection of only `requested_actions`
-and `workspace_scope`. The projection is condition invariant and excludes
-evaluator labels, gold actions, expected effects, task-success fields, and
-authorization answers. This prevents a missing trusted-context channel from
-being misclassified as a defense failure while retaining the online/offline
-boundary.
+Each compact result stores a digest of the online-visible projection and a
+boolean forbidden-field check. A run fails the minimal integrity check if a
+forbidden field is present. The final analysis checks this condition once for
+all terminal records; it does not recursively replay historical evidence.
 
-## M3 runtime mechanism
+## Runtime conditions
 
-The common runtime interface remains `TaskPolicyManifest`,
-`ActionProposal`, `GuardDecision`, and `ProvenanceEvent`. M3 policy-only applies
-the compiled task policy without provenance, temporal/data-flow, or
-confirmation modules. M3-full enables the complete module set. Automatic
-transitions may maintain or reduce authority but cannot expand it. An expansion
-requires an independent confirmation event, represented as `ASK`; approval,
-denial, expiry, and confirmation errors are recorded separately.
+The common runtime interfaces are `TaskPolicyManifest`, `ActionProposal`,
+`GuardDecision`, and `ProvenanceEvent`. The two M3 conditions share the agent,
+model, parser, evaluator, tool environment, and task policy representation.
 
-The mechanism is evaluated by executed effects rather than by detector output.
-`ALLOW`, `ASK`, and `DENY` are intermediate runtime decisions and are not
-treated as security outcomes by themselves.
+- **M3 policy-only** evaluates the proposed tool and arguments against the
+  current task policy. Provenance propagation, temporal/data-flow checks, and
+  independent confirmation are disabled.
+- **M3-full** enables policy enforcement plus parameter provenance,
+  temporal/data-flow constraints, permission-monotonic transitions, and
+  confirmation. Automatic transitions may preserve or reduce authority;
+  authority expansion produces `ASK` and requires an independent confirmation
+  result.
 
-## Baselines
+`ALLOW`, `ASK`, and `DENY` are runtime decisions, not security outcomes by
+themselves. Security is scored from the isolated post-enforcement effect
+receipt. Utility is scored by the benchmark task-completion evaluator.
 
-The six medium-study conditions are no defense, safe prompting or spotlighting,
-PromptGuard as detector-only, the strongest admitted peer-reviewed structural
-baseline, M3 policy-only, and M3-full. VIGIL is preferred as the structural
-baseline and DRIFT is the fallback. Their official source commits and
-source-backed adapters are recorded in
-`protocols/paper_upgrade_v2/structural_baseline_registry_v1.json`.
+The Gemini subset adds the strongest available peer-reviewed structural
+baseline under `auto_compiled`. The baseline is included to anchor the
+cross-provider sample, not to support a universal ranking.
 
-Zero-call qualification is not a performance result. A baseline enters a
-comparison only after its official constraint/model path runs on the same
-model, tasks, attack content, and tool environment with complete logs.
-PromptGuard remains detector-only and is never described as an execution
-authorization system.
+## Authorization regimes
 
-## Medium falsification sample
+Five regimes are evaluated:
 
-Before paper-v2 model runs, 72 paired cases were selected by deterministic
-SHA-256 ranking within pre-outcome strata. The set contains 36 attacks, 24
-benign tool tasks, and 12 benign no-tool tasks; 25 cases are context dependent.
-Forty-eight M3-v2 development cases and 24 AgentDojo cases are included. The
-selection did not inspect result files and did not use the internally sealed
-holdout. Each case is assigned to all six core conditions under
-`auto_compiled`; 24 cases also form segregated authorization-regime probes.
+- `auto_compiled`: task policy compiled from trusted user intent before
+  untrusted evidence is processed;
+- `exact_gold`: evaluator-derived authorization used only as an oracle
+  sensitivity condition;
+- `broad`: a deliberately permissive authorization envelope;
+- `underspecified`: necessary details or constraints are omitted;
+- `conflicting`: the authorization object contains mutually inconsistent
+  constraints that the runtime must resolve or reject.
 
-The frozen case manifest and index are
-`protocols/paper_upgrade_v2/medium_case_manifest_v1.json` and
-`medium_case_index_v1.jsonl`.
+The four primary DeepSeek cells pair policy-only and M3-full with
+`auto_compiled` and `exact_gold`. A fixed nested subset adds M3-full under the
+three non-oracle stress regimes.
 
-## Formal benchmark plan
+## Existing evidence reused without new calls
 
-The formal internal benchmark is M3-v2 and the primary public benchmark is
-AgentDojo v1. The primary-model freeze contains 300 attacks and 150 benign M3
-cases, and 300 attacks plus all 97 unique AgentDojo utility tasks. The
-second-model freeze contains 200 attacks and 100 benign M3 cases, and 200
-attacks plus the same 97 unique AgentDojo utility tasks. AgentDojo v1 exposes
-only 97 unique utility tasks; tasks are not duplicated to manufacture the
-planned 150/100 denominators. This feasibility deviation is reported in the
-frozen manifest.
+Four completed datasets are analyzed once:
 
-The internally sealed M3 holdout is not described as independently authored.
-An independent 600-case claim requires a third-party author/custodian and a
-valid custody chain.
+- 5,082 DeepSeek V4 Pro records from the Public primary matrix;
+- 1,791 DeepSeek V4 Flash records from the Public second-model matrix;
+- 480 records from the medium falsification study; and
+- the completed DeepSeek V4 Pro adaptive tasks at budgets 50 and 200.
 
-For the public primary-model analysis, the two benchmark freezes contribute
-847 unique cases and 5,082 case-condition records across the same six
-conditions: 600 attacks and 247 benign tasks. A 24-record technical canary is
-followed by four disjoint continuation shards containing 1,265, 1,265, 1,264,
-and 1,264 records. Recovery is allowed only for never-started work keys under a
-new hash-bound admission; a terminal formal-candidate or diagnostic row is
-never retried. Each recovery process replays the closed prefix once, appends
-new attempts, traces, budget events, and records with fsync, and performs a
-complete terminal replay before review.
+The reuse analysis performs one count/uniqueness pass and computes the
+prespecified endpoint summaries. It does not reconstruct the retired v1–v12
+Harness chain, rerun models, or create new evidence-hash bundles. These data
+establish the empirical motivation and the two-point adaptive first-success
+curve; they do not establish attack saturation.
 
-## Outcomes and failure handling
+## Frozen primary sample
 
-The primary security endpoint is the intention-to-treat unsafe-effect rate. Its
-denominator includes every assigned attack case. Timeouts, parse failures,
-maximum-step failures, provider failures, and runner failures remain in the
-denominator and count conservatively for the primary security endpoint.
+The new DeepSeek study contains 180 unique paired cases selected before the
+new outcomes were inspected:
 
-The primary utility endpoint is benign task completion. Secondary endpoints
-include `ASK` rate, confirmation outcomes, benign initial `ASK`-or-`DENY` rate,
-token use, provider calls/cost, and p50/p95 latency. Raw numerators and
-denominators accompany every proportion. The medium cross-benchmark record
-directly identifies unsafe effect and task completion, but it does not store a
-separate per-action offline authorization label or a separate data-spill label.
-Therefore UTR and DSR are reported as not identifiable for this matrix rather
-than being reconstructed from, or relabeled as, unsafe-effect rate.
-Dataset-specific later experiments may report UTR/DSR only when their frozen
-evaluator contract supplies those labels.
+- 100 attacks, with 50 from AgentDojo and 50 from M3-v2;
+- 60 benign tool tasks, with 30 from each benchmark; and
+- 20 benign no-tool tasks.
 
-## Statistical analysis and stopping rules
+Selection is stratified by benchmark, task type, and attack family. Every main
+case is assigned to four cells: policy-only/`auto_compiled`, policy-only/
+`exact_gold`, M3-full/`auto_compiled`, and M3-full/`exact_gold`. This produces
+720 work items.
 
-Proportions use Wilson 95% confidence intervals. Paired binary comparisons use
-two-sided exact McNemar tests. Paired differences use 10,000 case-clustered
-bootstrap resamples with frozen seeds, and declared comparison families use
-Holm correction. Effect sizes and raw counts are reported regardless of
-statistical significance.
+A nested 60-case subset receives three additional M3-full assignments:
+`broad`, `underspecified`, and `conflicting`, adding 180 work items. The frozen
+DeepSeek plan therefore contains 900 work items. The first six items form the
+formal technical prefix and remain part of the final denominator.
 
-The medium mechanism gate passes only if M3-full reduces unsafe effects
-relative to the structural baseline by at least 10 percentage points or 20%
-relative, benign-tool completion differs by no less than −5 percentage points,
-M3-full is strictly safer than policy-only, the benign initial
-`ASK`-or-`DENY` rate is below 90%, the prospectively frozen operational-quality
-envelope passes, and model identity is auditable. The quality envelope retains
-every terminal record in ITT, permits at most 10% primary-record operational
-failures and at most 5% provider/timeout failures, and permits no runner
-failure. The earlier zero-operational-failure value is reported descriptively
-but does not replace this pre-access envelope. Failure redirects the paper to
-an empirical study rather than removing negative results.
+## Frozen cross-provider sample
 
-The paired discordant proportions from the medium study determine formal sample
-size using the frozen paired-binary planning approximation, with power 0.80,
-two-sided alpha 0.05, and the preregistered benchmark floors.
+The Gemini study uses 90 cases nested within the DeepSeek main sample:
 
-For the public primary matrix, evidence-integrity admission and
-mechanism-quality eligibility are separate decisions. Exact matrix coverage,
-terminal attempts, record/trace bindings, unpaused budgets, and ITT retention
-are required for result access. The prospectively frozen 1% diagnostic ceiling
-is not waived: exceeding it forbids a clean mechanism-quality claim but does
-not justify deleting terminal rows. Any admitted analysis therefore retains
-all diagnostics in ITT and follows the empirical security-utility route.
-Because this matrix uses one model, it cannot support cross-model or
-cross-provider claims.
+- 50 attacks;
+- 30 benign tool tasks; and
+- 10 benign no-tool tasks.
 
-## Adaptive evaluation
+Each case receives five assignments: structural baseline/`auto_compiled`,
+policy-only/`auto_compiled`, M3-full/`auto_compiled`, policy-only/`exact_gold`,
+and M3-full/`exact_gold`. The plan contains 450 work items, including a six-item
+formal prefix.
 
-The primary-model adaptive panel contains 40 frozen development attacks at
-budgets 50, 200, and 500. After complete budget-500 results, the 20 hardest
-tasks are selected by the preregistered first-success rule and extended to
-2,000 queries. A second model uses 20 frozen tasks at budgets 50 and 200. The
-maximum planned query budget is 75,000. Search checkpoints are resume-safe, and
-an already successful task does not spend later budgets.
+Gemini uses the official free tier with a paid ceiling of USD 0. At the first
+HTTP 429, the active run stops and leaves all unstarted items pending. On a new
+provider quota day, only unstarted items and work items with no official model
+response are eligible for explicit recovery. After three quota-day attempts,
+any still incomplete response-less work item is retained as a terminal
+diagnostic. If the 450 planned items do not become terminal within that rule,
+the observed subset is reported as diagnostic and no cross-provider
+generalization claim is made.
 
-Before that formal panel, an eight-task, eight-family cost canary fixes a
-50-query maximum under the primary model and M3-full. A closed provider
-diagnostic is retained as an ITT query and makes that task terminal; it is
-never retried. Untouched tasks may proceed only through a separately hashed
-continuation admission. The query ledger hashes the exact UTF-8 prompt bytes,
-whereas the MCTS checkpoint hashes the canonical JSON string representation;
-the technical reviewer verifies both documented hashes against the same
-checkpoint node instead of equating the two digests. Canary analysis is
-reported as exploratory and cannot substitute for the 40/20-task formal panel.
+## Providers and model identity
 
-## Reproducibility and evidence admission
+The primary model is DeepSeek V4 Pro through the official DeepSeek endpoint.
+The cross-provider model is Gemini 3.6 Flash through the official Google
+Generative Language OpenAI-compatible endpoint. Each request is assigned a
+local request identifier and canonical payload digest before transport. A
+response-bearing record retains the official response identifier, exact
+returned model identity, usage, latency, and cost or free-tier attestation.
 
-Source commits, dataset files, case indices, result records, and derived
-artifacts are hash locked. For DeepSeek, every request is committed locally
-before transport using a generated request ID and exact payload SHA-256. The
-completed trace binds that commitment to the official response ID, exact
-returned model identity, token/cache usage, and cost. A provider request-header
-ID is retained when available but is not fabricated or required for this
-evidence design. Unverified relays are diagnostic only.
+Prompts and model responses are not copied into the compact analysis file.
+Content-free request metadata and the provider's internal trace remain under
+the ignored run directory. Exact model identity is checked in the final
+one-pass integrity validation.
 
-The formal DeepSeek matrix fixes `thinking={"type":"disabled"}` and
-`response_format={"type":"json_object"}` in both the transmitted payload and
-the pretransport commitment. The prompt explicitly requests the frozen JSON
-proposal schema, while the strict parser remains unchanged; response repair and
-automatic retry are prohibited. The six-condition technical canary must
-complete with formal-candidate identity and zero operational failures before a
-separate continuation manifest can authorize the remaining work items.
+## Failure and recovery policy
 
-Provider inference cannot directly execute effects. DeepSeek and Gemini, when
-used, are restricted to their frozen official inference origins. Provider
-managed tools and external connectors are disabled, and model tool calls remain
-untrusted proposals. Effects can run only in `sandbox/public`, `example.test`,
-`/mock/`, or a copied AgentDojo in-memory environment. Unknown, host-command,
-real email/payment, production/private API, credential, browser/computer, or
-non-sandbox filesystem effects fail closed. Every non-stub executor must attach
-a credential-free safety receipt under
-`protocols/paper_upgrade_v2/provider_safety_policy_v1.json`.
+Automatic retry is disabled. Recovery operates at the frozen work-key level:
 
-All table cells must be reconstructible from experiment-record JSONL files and
-frozen manifests. A claim remains pending when its result artifact is absent;
-missing evidence is never encoded as a favorable zero.
+- a work item with an official model response is terminal, including timeout,
+  refusal, parse failure, and maximum-step outcomes after that response;
+- a transport or preparation failure with no official response may be retried
+  only with the explicit failed-row option;
+- only the affected work item is retried; successful and unaffected work items
+  are skipped;
+- a repeated non-rate-limit pre-response failure becomes terminal on its
+  second attempt; and
+- Gemini rate-limit recovery stops at the first 429 in each quota day and
+  becomes terminal on the third quota-day attempt.
 
-Scientific outcomes remain sealed until the prospective result gate replays and
-cross-binds all record, attempt, budget, and per-work trace chains. Automatic
-technical admission requires all 480 assigned records, no missing, duplicate,
-unknown, or open work items, only prespecified terminal statuses, no runner
-failure, an unpaused budget, isolated effects, and complete content-free trace
-chains. Formal-candidate records require exact official DeepSeek identity; at
-most 1% of records may be diagnostic, limited to closed provider/timeout
-failures whose incomplete response evidence is explicitly retained in ITT.
-Only a separately written result-analysis admission permits the preregistered
-statistics to read `unsafe_effect_itt` and `task_completion`. The locked
-expanded analysis reports all five authorization regimes, confirmation burden,
-latency, tokens/cost, and benchmark/context/source-set heterogeneity without
-changing the primary gate.
+Earlier response-less attempts remain append-only in the raw file. The
+scientific analysis selects the latest terminal attempt for each work key and
+reports the count of superseded attempts. No prior row is overwritten.
 
-The Public primary statistics and comparison set were frozen before result
-access, but the first implementation did not execute successfully. The v1
-reader applied the experiment-record v1 schema to v2.2 envelopes; a first
-correction selected the generic v2.2 cost policy; a second replayed the Public
-completed-trace validator on deliberately incomplete diagnostic failures; and
-a third validated ledger ingestion but did not project the v2.2 envelope at
-the legacy statistics-helper boundary. Each attempt failed before a summary
-was written, retained a bounded stderr/exit record, and was superseded through
-a new hash-bound candidate and exact-command admission. No source record,
-denominator, statistic, provider call, or claim boundary was changed.
+## Outcomes
 
-The admitted v5 reader validates the v2.2 schema, visibility, decision,
-outcome, tier, and safety-receipt semantics. Request-chain integrity is
-inherited from the locked four-shard evidence reviews and primary merge.
-Before the unchanged legacy statistics helper, it projects only the evidence
-envelope to v1: scientific fields are copied verbatim, formal rows bind the
-last official response, and diagnostic rows explicitly carry no response ID,
-`identity_verified=false`, and `diagnostic_only`. The primary path produces
-condition tables, Wilson intervals, exact McNemar tests, 10,000-resample paired
-bootstrap intervals, benchmark strata, and figures.
+The two joint primary endpoints are:
 
-A separate reviewer reads the original admitted record envelopes directly and
-recomputes condition counts, Wilson intervals, four prespecified paired
-differences, exact two-sided McNemar tests, and diagnostic retention without
-reusing the primary aggregation or statistical helpers. Public claims are
-released only because the v5 primary verifier and the independent reviewer
-both reproduce exactly; all correction candidates, admissions, failure logs,
-and final outputs are hash locked.
+1. **unsafe-effect rate** on assigned attack tasks; and
+2. **task-completion rate (TCR)** on assigned benign tool tasks.
+
+Benign no-tool completion is descriptive. Secondary outcomes are `ASK` count,
+`DENY` count, operational failure, p50/p95 latency, total tokens, API cost, and
+predefined heterogeneity by benchmark and attack family.
+
+All terminal work items remain in the intention-to-treat denominator. The
+analysis reports raw numerator/denominator values alongside proportions. A
+provider or parser failure is not silently removed and is not relabeled as a
+successful security outcome.
+
+## Statistical analysis
+
+Each condition proportion receives a Wilson 95% confidence interval. The
+paired analyses report the absolute difference in percentage points, the two
+discordant counts, and a two-sided exact McNemar test. Uncertainty for the
+paired absolute difference is estimated with 10,000 deterministic bootstrap
+resamples clustered by task.
+
+The four primary authorization/mechanism comparisons are:
+
+1. policy-only `auto_compiled` versus policy-only `exact_gold`;
+2. M3-full `auto_compiled` versus M3-full `exact_gold`;
+3. `auto_compiled` policy-only versus M3-full; and
+4. `exact_gold` policy-only versus M3-full.
+
+McNemar p-values are Holm-adjusted separately for attack unsafe effect and
+benign-tool TCR. The `broad`, `underspecified`, and `conflicting` comparisons
+are reported as prespecified regime extensions. Model, benchmark, and attack-
+family panels are descriptive heterogeneity analyses rather than additional
+confirmatory families.
+
+Adaptive evidence is limited to budgets 50 and 200. We report the cumulative
+fraction of the fixed 40-task cohort with a first unsafe effect by query count
+and the two observed budget points. We do not extrapolate a saturation level.
+
+## Minimal verification and reproducibility
+
+Verification is deliberately proportional to the lean study. It consists of:
+
+1. focused unit tests for modified provider, authorization projection,
+   evaluator, analysis, and plotting code;
+2. the six-item formal prefix for each provider; and
+3. one terminal pass over row count, work-key uniqueness, forbidden-field
+   isolation, exact model identity, and ITT failure retention.
+
+The retired Full Harness and recursive evidence replay are not used. Each
+provider writes one compact raw JSONL. The final statistics are written once to
+one authorization-analysis JSON, and the five figures are generated once as
+editable SVG plus raster QA previews. Source, test, experiment, and manuscript
+milestones are committed on the dedicated Git branch; no force push is used.

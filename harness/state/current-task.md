@@ -27,6 +27,9 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
 - 新的一次性授权分析实现 Wilson CI、exact McNemar、10,000 次任务聚类
   bootstrap、Holm 校正、负担与异质性统计。五图生成器输出 PNG+SVG，不读取
   provider trace、不调用 API、不生成额外哈希包。
+- 已把 active Introduction、Methods、manuscript README、figure/table plan 和
+  Related Work 改写为精简研究口径，删除 Full Harness、盲测、B500/B2000 和
+  完整 second-model adaptive 的论文依赖；补入 2026 provenance-sensitivity 工作。
 - 定向验证当前为 pytest 16/16、Ruff 和 py_compile 通过；五张合成数据 QA 图已
   逐张查看并修复标题/标签重叠。没有运行 Full Harness。
 - 下一稳定 Git 里程碑：提交运行器恢复修复、分析/图表代码和 Harness 状态；

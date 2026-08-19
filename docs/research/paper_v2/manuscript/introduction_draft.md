@@ -1,6 +1,6 @@
 # Introduction — empirical authorization study draft
 
-Status: `medium_public_primary_and_exploratory_adaptive_evidence_admitted`
+Status: `lean_authorization_study_execution_in_progress`
 
 ## Motivation
 
@@ -18,8 +18,9 @@ This literature also makes a broad novelty claim untenable. Verify-before-
 commit, contextual policy generation, least privilege, planned dependency
 checks, and control/data-flow separation are already occupied design spaces
 [@L01; @L08; @L24; @L25; @L26]. Recent preprints go further by auditing
-context influence or comparing an authorization graph with a parameter-source
-execution graph [@L21; @L22]. The open question for this study is therefore not
+context influence, comparing an authorization graph with a parameter-source
+execution graph, or controlling source authority in next-action decisions
+[@L21; @L22; @L35]. The open question for this study is therefore not
 whether a provenance-aware guard can be built for the first time. It is
 whether authorization information, enforcement structure, and failure
 handling materially change the security and utility measured for tool-using
@@ -54,37 +55,34 @@ interface [@L27].
 
 The study asks four questions.
 
-1. **RQ1 — Security and utility.** Under non-oracle `auto_compiled`
-   authorization, does M3-full reduce executed unsafe effects relative to the
-   strongest admitted structural baseline while preserving benign tool-task
-   completion within a −5 percentage-point non-inferiority margin?
+1. **RQ1 — Authorization regime.** How do `exact_gold`, `auto_compiled`,
+   `broad`, `underspecified`, and `conflicting` authorization regimes change
+   unsafe effect, benign task completion, and `ASK/DENY` burden?
 2. **RQ2 — Module contribution.** Does provenance, temporal/data-flow
    enforcement, and confirmation add security beyond the same runtime with
-   policy-only enforcement?
-3. **RQ3 — Authorization and operational uncertainty.** How do authorization
-   regime, `ALLOW/ASK/DENY`, parser/provider/maximum-step failures, benchmark,
-   and task type change the observed security–utility frontier?
-4. **RQ4 — Adaptive robustness.** Does defense-aware search recover unsafe
-   effects as the query budget increases, and where does first success occur?
+   policy-only enforcement, and what does it cost operationally?
+3. **RQ3 — External validity and adaptive budget.** Are these directions
+   stable across AgentDojo, M3-v2, a second provider, and the completed
+   defense-aware budgets 50 and 200?
 
 ## Study design
 
 M3 uses a three-state runtime decision (`ALLOW`, `ASK`, `DENY`), a projection
 that excludes evaluator-only fields from online state, permission monotonicity
 for automatic paths, parameter-source evidence, and independent confirmation
-for privilege expansion. The evaluation pairs six conditions: no defense,
-safe prompt/spotlighting, PromptGuard detector-only, an admitted structural
-baseline, M3 policy-only, and M3-full. Every assigned row is bound to an
-append-only request/response, budget, safety, and experiment-record chain.
-Timeouts, parsing failures, refusals, maximum-step outcomes, and provider
-failures remain in the intention-to-treat denominator.
+for privilege expansion. The primary paired experiment crosses policy-only
+and M3-full with non-oracle `auto_compiled` and oracle-sensitivity
+`exact_gold`. A nested subset adds three authorization stress regimes. The
+cross-provider subset adds a peer-reviewed structural condition. Timeouts,
+parsing failures, refusals, maximum-step outcomes, and provider failures remain
+in the intention-to-treat denominator.
 
-The medium falsification study contains 72 cases and 480 condition records.
-The public primary matrix contains 600 attack and 247 benign cases from
-AgentDojo and M3-v2, producing 5,082 paired condition records. A separately
-gated adaptive protocol mutates only untrusted content, exposes only the public
-guard decision and post-enforcement effect, and prohibits provider tools or
-real external effects.
+The new primary sample contains 180 paired cases and 900 DeepSeek V4 Pro work
+items; a nested 90-case sample contributes 450 planned Gemini 3.6 Flash work
+items. The design separately reuses the completed 480-record medium study,
+5,082-record Pro Public matrix, 1,791-record Flash Public matrix, and the
+40-task adaptive evidence at budgets 50 and 200. Provider tools and real
+external effects are prohibited throughout.
 
 ## Current evidence and route decision
 
@@ -105,11 +103,15 @@ security nor utility value beyond policy-only in the admitted primary-model
 evidence. The 1.4955% retained diagnostic fraction also exceeds the frozen 1%
 clean-mechanism quality ceiling.
 
-An admitted eight-task adaptive cost canary observed 0/8 unsafe-effect
-successes at budget 50, with a Wilson 95% interval of 0–32.44%. This result
-validates the evidence and cost path but is too small to establish adaptive
-robustness. The formal multi-budget adaptive panel and independent blind
-custody remain open validity requirements.
+The completed 40-task adaptive panel observed first unsafe effect for 4/40
+tasks by budget 50 and 18/40 by budget 200. These points show substantial
+budget sensitivity but do not establish saturation. The lean paper therefore
+reports a first-success curve only through query 200 and makes no budget-500 or
+2,000 claim.
+
+The new authorization-regime experiment is prospectively frozen and remains
+in execution. No direction or statistical-significance requirement controls
+whether its results will be reported.
 
 ## Contributions
 
@@ -119,9 +121,9 @@ The current evidence supports four bounded contributions:
    explicit and prevents evaluator-only fields from entering runtime state;
 2. a paired security–utility evaluation that directly compares policy-only and
    full provenance/temporal/confirmation enforcement;
-3. an intention-to-treat evidence chain that binds official model identity,
-   request payloads, responses, budgets, isolated effects, and terminal
-   diagnostics without selective retry; and
+3. an intention-to-treat experiment that records official model identity,
+   request commitments, isolated effects, and terminal diagnostics while
+   retrying only response-less failed rows; and
 4. an empirical account of authorization regime, confirmation burden,
    benchmark/task heterogeneity, and defense-aware attack budget.
 

@@ -16,6 +16,10 @@
 - 新增五图静态生成器和 lean figure/table plan：field-isolation、Pareto、forest、
   runtime burden、adaptive budget-50/200。输出 PNG+SVG，不生成哈希清单；合成
   数据视觉 QA 后已修复标题与点标签重叠。
+- Active manuscript README、Introduction 和 Methods 已切换到 180/90/60 嵌套
+  样本、900/450 行、三项 RQ 和 focused-only verification；旧 blind、B500/2000、
+  Full Harness 与完整二模型 adaptive 不再作为论文完成门。Related Work 和 BibTeX
+  新增 2026 provenance-sensitivity measurement paper。
 - 定向 pytest 16/16、Ruff、py_compile 通过；没有 Full Harness、历史递归重放、
   盲测、真实外部 effect 或成功行重跑。
 
