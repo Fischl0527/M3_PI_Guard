@@ -33,6 +33,10 @@ not create a hash bundle or reopen provider traces.
 | Table 5 | Benchmark and attack-family heterogeneity | Predefined strata | Awaits terminal experiment |
 | Table 6 | Adaptive budget-50/200 first-success results | Existing Pro analysis | Ready; explicitly not a saturation table |
 
+The six CSV tables are exported from the frozen plan plus the two compact
+analysis JSON files. The exporter does not open raw provider traces and does
+not create an integrity/hash bundle.
+
 ## Visual integrity rules
 
 1. Never plot a favorable zero for missing evidence.

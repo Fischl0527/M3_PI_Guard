@@ -20,7 +20,9 @@
   样本、900/450 行、三项 RQ 和 focused-only verification；旧 blind、B500/2000、
   Full Harness 与完整二模型 adaptive 不再作为论文完成门。Related Work 和 BibTeX
   新增 2026 provenance-sensitivity measurement paper。
-- 定向 pytest 16/16、Ruff、py_compile 通过；没有 Full Harness、历史递归重放、
+- 六表 CSV 导出器已完成，只读取 frozen plan 与 compact analysis；不打开 raw
+  provider trace、不创建 hash bundle。定向 pytest 17/17、Ruff、py_compile 通过；
+  没有 Full Harness、历史递归重放、
   盲测、真实外部 effect 或成功行重跑。
 
 ## 2026-08-19 精简实证里程碑 1

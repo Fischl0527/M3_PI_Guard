@@ -30,7 +30,9 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
 - 已把 active Introduction、Methods、manuscript README、figure/table plan 和
   Related Work 改写为精简研究口径，删除 Full Harness、盲测、B500/B2000 和
   完整 second-model adaptive 的论文依赖；补入 2026 provenance-sensitivity 工作。
-- 定向验证当前为 pytest 16/16、Ruff 和 py_compile 通过；五张合成数据 QA 图已
+- 六表 CSV 导出器已实现，只读取 frozen plan 与两个 compact analysis 文件；
+  不打开 raw trace，也不生成 hash bundle。
+- 定向验证当前为 pytest 17/17、Ruff 和 py_compile 通过；五张合成数据 QA 图已
   逐张查看并修复标题/标签重叠。没有运行 Full Harness。
 - 下一稳定 Git 里程碑：提交运行器恢复修复、分析/图表代码和 Harness 状态；
   DeepSeek raw 只在主执行自然结束并完成失败行恢复后单独提交。

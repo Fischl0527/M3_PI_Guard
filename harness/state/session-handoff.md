@@ -13,7 +13,7 @@
 - Gemini 当日 `remaining` 已因系统性 429 停止。已有响应的 work key 不得重跑；
   下一 quota day 只运行 `--retry-failed`，新代码会在第一条 429 后停止。最多三个
   配额日，之后保留已完成子集并透明降级，不启用 Billing。
-- 运行器失败恢复、一次性授权统计和五图生成器已完成；定向验证为 16/16，Ruff、
+- 运行器失败恢复、一次性授权统计、五图生成器和六表 CSV 导出器已完成；定向验证为 17/17，Ruff、
   py_compile 通过。合成数据 PNG 已逐张视觉检查；正式图等终态统计后一次生成。
 - Active manuscript README、Introduction、Methods、Related Work 和 figure/table
   plan 已按 lean 研究口径更新；最终 Results/Abstract 仍必须等待终态统计，禁止填充

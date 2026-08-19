@@ -1,7 +1,7 @@
 # JISA submission readiness checklist
 
 Status: `venue_fit_confirmed_jcr_and_results_pending`  
-Checked: 2026-07-23
+Checked: 2026-08-20
 
 ## Venue fit
 
@@ -12,6 +12,11 @@ Checked: 2026-07-23
 - [x] The journal has hosted collections on large-language-model cybersecurity
   and security/privacy in large AI models. This supports topical fit but does
   not guarantee editorial admission.
+- [x] The official scope excludes routine application of existing AI/ML to a
+  standard security dataset. The manuscript therefore leads with the
+  authorization-regime evaluation method, executed-effect endpoint, paired
+  runtime comparison, and security–utility/operational trade-off—not with
+  off-the-shelf model benchmarking.
 - [x] The submission target remains the regular Journal of Information Security
   and Applications track unless an open, applicable collection is confirmed at
   submission.
@@ -33,12 +38,16 @@ Official sources:
 - [x] The 480-record medium falsification study is complete and admitted.
 - [x] The mechanism route or empirical-study redirect is selected by the frozen
   gate, without removing unfavorable results.
-- [ ] Public-benchmark results are complete on at least two external/internal
-  benchmark families and at least one auditable official provider.
-- [ ] Defense-aware adaptive results are complete.
-- [ ] Any independent-blind claim has a real external custodian and custody
-  evidence; otherwise the manuscript says “internally sealed.”
-- [ ] Every numeric claim is rebuilt from frozen records and manifests.
+- [x] Existing Public Pro 5,082, Public Flash 1,791, medium 480 and Adaptive
+  budget-50/200 evidence has received one compact reuse analysis.
+- [ ] The frozen 900-row DeepSeek authorization study is terminal, including
+  explicit failed-row disposition.
+- [ ] The 450-row Gemini diagnostic cross-provider study is terminal, or has
+  transparently downgraded after the three-quota-day free-tier rule.
+- [x] The blind study, budget 500/2,000 and full second-model adaptive panel are
+  out of scope and are not prerequisites or manuscript claims.
+- [ ] Every numeric claim is rebuilt once from the compact raw records and
+  frozen lean plan.
 - [ ] Every citation has complete authors, title, venue, year, DOI or stable URL,
   and publication-status verification.
 
@@ -65,8 +74,8 @@ Official sources:
 
 ## Current prohibition
 
-The present manuscript workspace is not submission-ready. The admitted
-DeepSeek medium matrix supports only the empirical fallback and its reported
-medium-scale comparisons. No abstract, conclusion, cover letter, or completed
-result table may imply that the pending public or adaptive experiments have
-been admitted.
+The manuscript is not submission-ready until the 900-row DeepSeek study and
+the Gemini completion/downgrade rule are closed. No abstract, conclusion,
+cover letter, or completed result table may fill unobserved lean-study cells.
+JCR Q2/SCIE status must still be checked through the institution on the actual
+submission date.

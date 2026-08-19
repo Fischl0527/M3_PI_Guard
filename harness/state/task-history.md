@@ -217,8 +217,8 @@ Record completed, blocked, and abandoned tasks here.
 - Corrected failed-row classification and first-429 pause behavior without
   rewriting raw history. Recovery continues to require explicit
   `--retry-failed` and never selects a work item with an official response.
-- Added the one-pass authorization analysis and the five preregistered static
-  figures. Focused verification passes 16/16 with Ruff and py_compile; all five
+- Added the one-pass authorization analysis, five preregistered static figures,
+  and a six-table CSV exporter. Focused verification passes 17/17 with Ruff and py_compile; all five
   synthetic QA figures were inspected, and visible overlap defects were fixed.
 - Replaced the active manuscript Methods and updated the Introduction, README,
   Related Work, bibliography and figure/table plan to the lean 900/450-row
