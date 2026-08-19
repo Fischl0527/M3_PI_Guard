@@ -178,3 +178,48 @@ def test_deepseek_config_binds_exact_lean_model() -> None:
     values["FRONTIER_DEEPSEEK_MODEL_ID"] = "deepseek-v4-flash"
     with pytest.raises(runner.LeanEmpiricalRunnerError):
         runner._deepseek_api_key(values, policy)
+
+
+def test_gemini_retry_uses_a_separate_internal_call_ledger(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _output_patch(monkeypatch, tmp_path / "lean")
+    canary = runner._select_stage(runner._load_plan("gemini"), "canary")
+    failed_key = str(canary[0]["work_key"])
+    runner.run_provider(
+        "gemini",
+        stage="canary",
+        credential_loader=lambda: {},
+        dispatcher_factory=_factory(_Dispatcher(fail_once={failed_key})),
+    )
+    captured: list[runner.LeanPermit] = []
+
+    def factory(permit: runner.LeanPermit, provider_id: str) -> _Dispatcher:
+        assert provider_id == "gemini"
+        captured.append(permit)
+        return _Dispatcher()
+
+    summary = runner.run_provider(
+        "gemini",
+        stage="canary",
+        retry_failed=True,
+        credential_loader=lambda: {},
+        dispatcher_factory=factory,
+    )
+    assert summary["executed"] == summary["completed"] == 1
+    assert captured[0].call_path.name == "gemini_call_events.recovery2.jsonl"
+    assert captured[0].attempt_by_work_key == {failed_key: 2}
+
+
+def test_second_pre_response_failure_is_terminal_in_itt(tmp_path: Path) -> None:
+    work_item = runner._select_stage(runner._load_plan("gemini"), "canary")[0]
+    record = runner._failure_record(
+        work_item,
+        RuntimeError("synthetic repeated no-response failure"),
+        attempt=2,
+        trace_path=tmp_path / "absent-trace.jsonl",
+    )
+    assert record["operational_status"] == "repeated_pre_response_failure"
+    assert record["response_obtained"] is False
+    assert record["retry_eligible"] is False
+    assert record["included_in_primary_itt"] is True

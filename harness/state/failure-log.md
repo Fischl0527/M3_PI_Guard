@@ -1,5 +1,31 @@
 # Failure Log
 
+## 2026-08-19 — Gemini VIGIL recovery repeated the same no-response failure
+
+- Recovery attempt: after separating attempt-2 trace/call state, ran only the
+  one retry-eligible VIGIL work key. The other five prefix rows were skipped.
+- Result: attempt 2 again ended as `VigilLiveDependencyError` with a started/
+  failed chain and no official response ID. Repeating unchanged requests is no
+  longer justified.
+- Recovery policy: retain both raw attempts; classify attempt 2 as a repeated
+  pre-response operational failure in ITT, set retry-eligible false, and cap
+  this workflow at one explicit recovery. Do not issue attempt 3. This negative
+  compatibility result is acceptable evidence under the lean plan.
+
+## 2026-08-19 — One Gemini VIGIL prefix row ended without an official response
+
+- Initial attempt: executed the six-row Gemini formal prefix once.
+- Result: five rows obtained official responses. The structural-baseline row
+  ended as `VigilLiveDependencyError`; both its provider trace and call ledger
+  contain only started/failed evidence and no response ID. The original compact
+  row is retained as pre-response/retry-eligible. The other five rows are final
+  and must not be rerun.
+- Changed hypothesis/fix: treat this as the plan's explicit pre-response
+  recovery case, not as a response-bearing parse failure. Put attempt 2 in a
+  separate internal call ledger and trace while preserving the original raw
+  row and prior free-tier usage, then run only that work key with
+  `--retry-failed`.
+
 ## 2026-08-19 — DeepSeek lean canary stopped before transport on validator mismatch
 
 - Initial attempt: started the six-row DeepSeek formal prefix after the focused

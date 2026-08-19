@@ -384,6 +384,19 @@ def _gemini_budget_state(
     return gemini_fallback._budget_state_from_calls(call_events, policy)
 
 
+def _gemini_prior_call_events(permit: LeanPermit) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
+    parent = permit.call_path.parent
+    if not parent.exists():
+        return events
+    for path in sorted(parent.glob("gemini_call_events*.jsonl")):
+        if path == permit.call_path:
+            continue
+        events.extend(load_call_events(path))
+    events.extend(load_call_events(permit.call_path))
+    return events
+
+
 def _gemini_dispatcher(
     permit: LeanPermit,
     *,
@@ -402,7 +415,7 @@ def _gemini_dispatcher(
         execution_identity=permit.execution_identity,
         model_id="gemini-3.6-flash",
     )
-    budget_state = _gemini_budget_state(load_call_events(permit.call_path), policy)
+    budget_state = _gemini_budget_state(_gemini_prior_call_events(permit), policy)
     usage_registry = GeminiUsageRegistry()
     traced_factory = functools.partial(
         GeminiJsonTracedProviderClient,
@@ -616,7 +629,8 @@ def _failure_record(
 ) -> dict[str, Any]:
     requests = _trace_requests(trace_path)
     response_obtained = any(item.get("provider_response_id") for item in requests)
-    retry_eligible = not response_obtained
+    repeated_pre_response_failure = not response_obtained and attempt >= 2
+    retry_eligible = not response_obtained and not repeated_pre_response_failure
     return {
         "schema_version": "m3-paper-v2-lean-raw-record-1.0",
         "study_id": work_item["study_id"],
@@ -642,7 +656,11 @@ def _failure_record(
         "operational_status": (
             "post_response_runner_failure"
             if response_obtained
-            else "pre_response_transport_failure"
+            else (
+                "repeated_pre_response_failure"
+                if repeated_pre_response_failure
+                else "pre_response_transport_failure"
+            )
         ),
         "error_type": type(exc).__name__,
         "ask_count": 0,
@@ -656,7 +674,9 @@ def _failure_record(
         ),
         "online_visible_field_digest_sha256": None,
         "online_forbidden_fields_present": False,
-        "included_in_primary_itt": response_obtained,
+        "included_in_primary_itt": (
+            response_obtained or repeated_pre_response_failure
+        ),
         "retry_eligible": retry_eligible,
         "provider_tools_enabled": False,
         "external_effects_enabled": False,
@@ -726,6 +746,15 @@ def run_provider(
         permit,
         attempt_by_work_key={str(row["work_key"]): attempt for row, attempt in pending},
     )
+    if provider_id == "gemini" and any(attempt > 1 for _, attempt in pending):
+        recovery = max(attempt for _, attempt in pending)
+        permit = replace(
+            permit,
+            call_path=(
+                permit.call_path.parent
+                / f"gemini_call_events.recovery{recovery}.jsonl"
+            ),
+        )
 
     values = (
         credential_loader()

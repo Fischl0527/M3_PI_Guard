@@ -192,3 +192,15 @@ Record completed, blocked, and abandoned tasks here.
 - Five rows completed and one reached max-steps; the latter remains in ITT and
   is not retried. Online forbidden fields, tools, external effects, automatic
   retries and retry-eligible failures are all zero.
+
+# 2026-08-19 — M3-PAPER-002 Gemini lean formal prefix complete
+
+- Ran six untouched Gemini work keys. Five obtained official exact-model
+  responses; one VIGIL preparation failed before an evidenced response.
+- Used the plan's sole explicit failed-row recovery on only that VIGIL key. It
+  repeated the same no-response error, so attempt 2 was terminalized in ITT and
+  attempt 3 is forbidden. The other five keys were never rerun.
+- Final work-key status is 3 completed, 2 parse-failure and 1 repeated
+  pre-response failure; all six are in ITT, five are response-bearing, USD cost
+  is zero, and forbidden fields/tools/effects/retry-eligible rows are zero.
+- Focused verification passes 11/11 plus Ruff and py_compile.

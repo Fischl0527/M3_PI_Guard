@@ -42,6 +42,12 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
   后者留在 ITT。成本 CNY 0.0157848，在线 forbidden 字段、provider tools、
   外部 effect、自动重试和 retry-eligible 失败均为 0。下一步为 Gemini 6 行
   formal prefix。
+- Gemini formal prefix 已把 6 个 work key 全部归入 ITT：5 个有官方响应，
+  返回模型为 `gemini-3.6-flash`；3 completed、2 parse_failure、1 个 VIGIL
+  repeated_pre_response_failure。该 VIGIL 行仅显式恢复一次，尝试 1/2 均保留，
+  不再发起 attempt 3。Gemini 成本 USD 0，在线 forbidden 字段、tools、外部
+  effects 和剩余 retry-eligible 行均为 0。两家技术 canary 已收口，可进入
+  pending-only 主执行。
 
 ### 2026-08-19 精简实证路线正式启用
 

@@ -37,6 +37,18 @@
 - 终态为 completed 5、max_steps 1；max_steps 保留在 ITT，不重跑。在线
   forbidden 字段、tools、external effects、automatic retry 和 retry-eligible 失败均为 0。
 
+## 2026-08-19 Gemini 授权制度 formal prefix
+
+- 首次 6 行中 5 行有官方响应，1 个 VIGIL 行无响应；根据冻结恢复规则
+  只对该行进行一次显式 attempt 2，其余 5 行未重跑。
+- attempt 2 仍为相同 VIGIL 无响应失败，因此停止继续重试，将第二次失败
+  归为 ITT operational failure。原始 7 行（6 work keys + 1 recovery）都保留。
+- 最终 6-work-key 口径：3 completed、2 parse_failure、1 repeated pre-response
+  failure；5 个 response-bearing，精确 `gemini-3.6-flash`，USD 0。全部 6 行在
+  ITT，无剩余 retry-eligible 行。
+- 定向验证 11/11，Ruff/py_compile 通过；online forbidden fields、provider
+  tools 和 external effects 均为 0。
+
 ## 2026-08-06 04:40 Gemini Public-v5 最小 recovery 日段完成并停止
 
 - fresh Harness gate v4 重放 v6 与当前六项前置证据通过，manifest

@@ -24,6 +24,10 @@
 - DeepSeek prefix 已成为终态，不得重跑：6/6 行、14 calls、CNY 0.0157848，
   5 completed + 1 max_steps；6 行全部有官方 response ID 和精确 Pro 模型身份，
   tools/effects/retry 为 0。恢复时应直接运行 `gemini --stage canary`。
+- Gemini prefix 也已终态：6 work keys 全部进 ITT，3 completed、2 parse_failure、
+  1 repeated VIGIL pre-response failure；5 行有官方响应，USD 0。两次 VIGIL
+  失败原始行都保留，不得再重试。恢复时进入 DeepSeek/Gemini
+  `--stage remaining`，运行器会跳过所有 canary 终态。
 - 禁止 Full Harness、历史递归重放、盲测、Pro500/2000、真实工具/effect
   和未经单独授权的 push。F-PAPER-002 仍为 `in_progress`。
 
