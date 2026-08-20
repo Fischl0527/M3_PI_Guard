@@ -3614,3 +3614,10 @@ The older provider-gate text is superseded by this checkpoint.
   is generated from whether Gemini actually appears in the inferential endpoint
   table, preventing stale “planned” wording after a complete cohort. Focused
   manuscript/DOCX checks pass 10/10.
+
+- The single planned Devil's Advocate review now targets the current empirical
+  manuscript rather than the retired pre-result program. It accepts the
+  negative mechanism result, identifies the one-event/400-record attack floor
+  as the main inferential limit, and keeps Gemini, JCR, author declarations and
+  visual rendering as explicit open gates. The limitation is now stated in the
+  Discussion; focused manuscript/DOCX checks pass 10/10.

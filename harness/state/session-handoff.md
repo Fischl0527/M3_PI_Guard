@@ -3018,3 +3018,9 @@ Next gated action:
   rows make no external-validity contribution, while a 450/450 cohort causes
   the generated provider note to switch automatically. Focused manuscript and
   DOCX tests pass 10/10 plus Ruff and `py_compile`.
+
+- `devils_advocate_review.md` now reviews the current lean manuscript. Its main
+  required correction—the 1/400 attack-endpoint floor—has been added to
+  Discussion. Other high-risk claims (mechanism superiority, cross-provider,
+  saturation, production, blind, first/only/SOTA) remain explicitly closed.
+  Rebuilt Word structure is 283 paragraphs, 13 tables and five figures.

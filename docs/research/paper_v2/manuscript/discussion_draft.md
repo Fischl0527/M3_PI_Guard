@@ -136,20 +136,27 @@ may change the effects. The smaller Gemini subset was designed to probe this
 dependence, but it contributes no cross-provider evidence unless all 450 work
 items reach terminal status.
 
-Second, `auto_compiled` is one policy compiler, not a complete model of human
+Second, the new authorization experiment has a strong attack-endpoint floor:
+only one unsafe effect occurred across the 400 primary attack records. It can
+therefore estimate utility and operational burden more informatively than
+small security differences between its four primary cells. Security-direction
+evidence comes mainly from the larger Public matrices and must not be inferred
+from these near-zero cells alone.
+
+Third, `auto_compiled` is one policy compiler, not a complete model of human
 authorization. The stress regimes approximate common policy errors but do not
 measure their prevalence in deployed systems. `exact_gold` is intentionally
 artificial and should not be read as a recommended configuration.
 
-Third, the effect environment is isolated. This is necessary to prevent real
+Fourth, the effect environment is isolated. This is necessary to prevent real
 email, payment, browser, code, or production actions, but it may omit latency,
 state, and recovery behavior found in live applications.
 
-Fourth, the adaptive panel reports budgets only through 200 and does not prove
+Fifth, the adaptive panel reports budgets only through 200 and does not prove
 saturation. Attack search is still one family of defense-aware optimization;
 another optimizer may find different failures.
 
-Fifth, failure handling is conservative but not interpretation-free. All
+Sixth, failure handling is conservative but not interpretation-free. All
 response-bearing failures are terminal in ITT, whereas response-less transport
 failures can receive bounded explicit recovery. We report raw failures and
 superseded attempts so readers can assess that choice.

@@ -1,105 +1,122 @@
-# Devil’s Advocate review — pre-result
+# Devil’s Advocate review — lean empirical manuscript
 
-## Highest-risk rejection arguments
+Status: post-DeepSeek review; Gemini stopping rule pending
 
-1. **The novelty may be incremental.** ARGUS and AuthGraph overlap directly
-   with provenance-aware authorization, while VIGIL, DRIFT, Progent, CaMeL, and
-   IPIGuard cover adjacent verification, privilege, and data-flow mechanisms.
-   The paper cannot rely on “parameter provenance is new.” Its defensible
-   contribution must be the joint evaluation boundary, permission monotonicity,
-   confirmation semantics, and paired module evidence.
+## Overall verdict
 
-2. **The original answer-key narrative is not supported.** Twenty source-audit
-   units found nine covered paths without observed online gold, nine components
-   that are not runtime guards, one path-dependent case, and one inconclusive
-   case. With no independent second review, a domain-wide leakage claim would
-   overstate the evidence. The neutral context/provenance-uncertainty title is
-   currently the only defensible title.
+The manuscript is viable as a bounded empirical security study, not as a new
+leading-defense paper. Its strongest contribution is the paired demonstration
+that authorization construction changes benign utility, blocking, failure,
+and latency even when the attack endpoint is near zero. The negative result
+that M3-full does not reliably improve on policy-only is publishable if it
+remains central rather than being softened in the final revision.
 
-3. **Zero-call baseline qualification is not reproduction.** The VIGIL
-   symbolic auditor and DRIFT pipeline construction pass source-backed smoke
-   tests, but their model-dependent policy generation and validation have not
-   run on the paired study. A paper that compares M3 against stubs or manually
-   supplied VIGIL constraints would be rejected.
+The current draft would merit major revision rather than immediate rejection.
+Most rejection risks are already addressed, but four gates remain external to
+the scientific text: the Gemini stopping rule, institutional confirmation of
+JISA's submission-time SCIE/JCR quartile, author-owned declarations, and visual
+inspection of the final Word/PDF rendering.
 
-4. **The public-benchmark scale has a preregistration conflict.** AgentDojo v1
-   exposes 97 unique utility tasks, below the planned 150/100 benign counts.
-   Duplicating tasks would create a false denominator. The deviation must be
-   reported and power interpreted at the unique-task level.
+## Highest-risk rejection arguments and current disposition
 
-5. **Independent blind evaluation is currently absent.** A content-free kit is
-   not a blind dataset. Unless an external custodian supplies a sealed
-   candidate, the paper must use “internally sealed” and narrow its external
-   validity claim.
+1. **“The proposed mechanism is not novel.” — Addressed by repositioning.**
+   VIGIL, DRIFT, Task Shield, IPIGuard, Progent, CaMeL, ARGUS, AuthGraph, FAVA,
+   and provenance-sensitivity auditing already occupy adjacent mechanism and
+   evaluation space. The paper no longer claims a first provenance tracker or
+   a leading defense. Its novelty is the paired authorization-regime evaluation
+   with executed effects, utility, burden, and ITT failures.
 
-6. **Adaptive evaluation may be financially infeasible.** The frozen maximum
-   is 75,000 attacker queries before counting multi-step agent calls and guard
-   model calls. A provider/cost estimate and hard spend cap are required before
-   execution.
+2. **“The new attack endpoint is uninformative because of a floor effect.” —
+   Material limitation.** Only one unsafe effect appears across the 400 primary
+   attack records in the 900-work-item authorization experiment. That experiment
+   supports utility and burden conclusions much more strongly than security
+   differences. The larger Public matrices must carry the security-direction
+   evidence. A new limitation now states this explicitly.
 
-7. **Confirmation can hide deny-all behavior.** A low unsafe-effect rate is not
-   useful if benign actions are routinely denied or pushed to users. The paper
-   must foreground tool TCR, initial ASK-or-DENY rate, confirmation outcomes,
-   and actual confirmation burden.
+3. **“The paper calls an implementation-specific exact policy an oracle
+   effect.” — Controlled but still easy to overstate.** `exact_gold` is an
+   intentionally artificial sensitivity condition. In this implementation it
+   became more restrictive, not more useful. The text correctly reports this as
+   authorization sensitivity in the tested compiler and never as proof that
+   gold-derived policy generally inflates security or utility.
 
-8. **Operational failures can masquerade as safety.** Provider failures,
-   parser failures, and max-step exits must stay in the ITT security denominator
-   and remain visible by condition. Any imbalance requires root-cause analysis,
-   not result exclusion.
+4. **“M3-full is worse than its ablation, so the defense contribution fails.”
+   — Accepted negative result.** Public V4 Pro and Flash both show more unsafe
+   effects under full than policy-only, and the new paired experiment shows no
+   stable full-module advantage. The title, abstract, Discussion, Conclusion,
+   and cover letter consistently present an evaluation contribution instead of
+   a mechanism-superiority claim.
 
-9. **SIREN cannot currently support an implementation claim.** The fixed VIGIL
-   repository contains no identifiable SIREN loader/evaluator, so SIREN is an
-   external-validity target only after official code or a fixed data artifact is
-   available.
+5. **“Failure imbalance can masquerade as safety.” — Disclosed, not eliminated.**
+   Public diagnostics are uneven by condition, and exact authorization raises
+   failure to roughly 24%. Failures remain in ITT and are reported next to
+   unsafe effects and completion. The paper must retain raw failure counts in
+   every final table and avoid interpreting a failed execution as positive
+   evidence of a useful defense.
 
-10. **Venue fit and quartile are not frozen facts.** JISA appears
-    scope-compatible, but SCIE/JCR Q2 must be confirmed through an institutional
-    source at submission. The paper should not optimize its claims around a
-    third-party quartile page.
+6. **“Bootstrap intervals exclude zero but corrected tests do not.” — Correctly
+   bounded.** The exact-policy utility contrasts have clustered-bootstrap
+   intervals excluding zero, while Holm-adjusted McNemar p-values exceed 0.05.
+   The manuscript reports both and describes the result through direction and
+   effect size rather than claiming conventional significance.
 
-11. **The medium matrix is a falsification gate, not the final sample.** It has
-    36 attack and 36 benign cases. Even a large point difference cannot by
-    itself support the planned formal-scale or cross-model claim. The achieved
-    discordance must drive power analysis, and the paper must not present
-    canary or partial rows as confirmatory evidence.
+7. **“The structural baseline is not part of the new DeepSeek factorial.” —
+   Transparent design choice.** The new primary experiment isolates policy-only
+   versus full and auto versus exact. Structural comparisons come from the
+   completed Public and medium matrices; Gemini adds a structural cell only if
+   its entire 450-item cohort becomes inferentially eligible. The paper must not
+   imply a six-condition DeepSeek authorization factorial.
 
-12. **A provider-managed model alias limits exact reproducibility.** The
-    request chain proves that the official endpoint returned
-    `deepseek-v4-pro`; it does not freeze hidden weights or a provider revision.
-    Temporal replication and a second auditable model remain necessary.
+8. **“Partial Gemini data are being used opportunistically.” — Prevented by
+   analysis and prose.** Partial response-less rows are operational accounting
+   only. Cross-provider comparisons, Tables 2–5, and external-validity prose
+   require 450/450 terminal work items. After three provider quota days, an
+   incomplete observed subset is diagnostic and unstarted items are explicitly
+   unavailable.
 
-13. **JSON Output is part of the experimental transport.** v4 fixes
-    `response_format=json_object` for all six conditions after v3 exposed a
-    parse failure under text output. This is a prospective, condition-invariant
-    reliability control, but the manuscript must disclose the failed versions
-    and must not compare their records to v4 effects.
+9. **“The adaptive evidence is too shallow.” — Accepted scope limit.** Budgets
+   50 and 200 show material budget sensitivity but cannot establish saturation,
+   hardest-task robustness, or an asymptotic attack rate. The curve and text
+   consistently stop at 200.
 
-14. **UTR and DSR are not separately identifiable in the medium record.** The
-    frozen common contract contains unsafe effect and task completion, not a
-    per-action authorization label or a distinct spill label. Reporting
-    unsafe-effect rate under either legacy name would be a metric-semantics
-    error. Dataset-specific later results need explicit denominators.
+10. **“Official model aliases are not immutable model revisions.” — Open
+    reproducibility limitation.** Official response identifiers and returned
+    model names make requests auditable, but provider-managed aliases do not
+    freeze hidden weights. Release dates and execution dates should remain in
+    the final reproducibility statement.
 
-15. **Repeated pre-result gate revisions need a transparent audit trail.**
-    Several never-activated candidates were superseded after schema and
-    analysis-coverage review. This is defensible only because outcomes remained
-    sealed, each old manifest identity is retained, and the final candidate was
-    frozen before result admission.
+11. **“The isolated effect environment is not deployment evidence.” — Accepted
+    safety trade-off.** Isolation prevents real email, payment, browser, code,
+    or production effects. It also omits live-system state and recovery. The
+    paper claims executed benchmark effects, not production incident rates.
 
-## Pre-submission rejection checklist
+12. **“No independent blind set weakens external validity.” — Disclosed.** The
+    active paper does not claim independent blind evaluation. This absence is a
+    limitation, not a hidden unfinished experiment and not a submission blocker
+    for the bounded empirical claim.
 
-- Reject the mechanism route if any of the security, utility, or module gates
-  fails.
-- Reject any table with a missing numerator/denominator or a silently removed
-  operational failure.
-- Reject performance claims for a baseline whose official model path did not
-  run.
-- Reject “independent blind” unless custody evidence is complete.
-- Reject first/only/SOTA wording unless the claim ledger is explicitly amended
-  after a new search.
-- Reject the manuscript if result tables cannot be regenerated from frozen
-  records and manifests.
-- Reject any UTR/DSR table that lacks a frozen, directly labeled denominator.
-- Reject use of v1–v3 failed matrix records in a v4 comparison.
-- Reject a claim that the official model alias fixes an immutable weight
-  revision.
+13. **“The manuscript is too process-heavy.” — Substantially addressed.** Main
+    prose excludes Harness versions, hashes, admissions, run directories, and
+    historical recovery narratives. Reproducibility is described through the
+    frozen design, append-only rows, bounded retry rule, and compact release
+    assets.
+
+14. **“The venue or quartile is asserted without authoritative evidence.” —
+    Open submission gate.** JISA scope is compatible, but current SCIE/JCR Q2
+    status must be confirmed through the institution at submission. No claim in
+    the manuscript should depend on a third-party quartile site.
+
+## Required final checks
+
+- Keep the one-event attack floor explicit in Results and Limitations.
+- Preserve every unfavorable M3-full versus policy-only comparison.
+- Keep numerator/denominator, Wilson interval, paired effect, corrected test,
+  and failure count together wherever a headline result appears.
+- Include Gemini in inference only if all 450 frozen work items are terminal;
+  otherwise report the stopping-rule outcome without a cross-provider claim.
+- Do not add first, only, SOTA, saturation, causal-provenance, production, or
+  independent-blind language.
+- Obtain author confirmation for identities, affiliations, funding, competing
+  interests, CRediT roles, ethics/institutional review, and final AI-use text.
+- Confirm JISA's current indexing/quartile through the institutional source and
+  visually inspect the final editable source/PDF before submission.

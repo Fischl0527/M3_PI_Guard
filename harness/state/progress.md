@@ -2939,3 +2939,11 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   and the design-table note switches to completed-provider wording only when
   Gemini is present in the inferential endpoint table. Focused checks pass
   10/10 plus Ruff and `py_compile`.
+
+- Completed the one planned Devil's Advocate review against the current lean
+  manuscript. The review supports the empirical route but requires the new
+  authorization experiment's one-event attack floor to remain explicit. The
+  Discussion now states that 1 unsafe effect across 400 primary attack records
+  makes utility/burden inference stronger than security-cell contrasts. The
+  rebuilt draft has 9,886 words, 283 paragraphs, 13 tables and five figures;
+  focused checks pass 10/10 plus Ruff.

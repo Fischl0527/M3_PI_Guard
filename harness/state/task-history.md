@@ -282,3 +282,13 @@ Record completed, blocked, and abandoned tasks here.
 - Made the Table 1 note conditional on Gemini's presence in the inferential
   endpoint table. Current DeepSeek-only wording is unchanged; a future complete
   cohort cannot retain the stale planned-only note. Focused checks pass 10/10.
+
+# 2026-08-20 — Post-result Devil's Advocate review
+
+- Replaced the obsolete pre-result rejection memo with a review of the current
+  lean empirical manuscript. The viable route is an authorization-evaluation
+  paper with negative mechanism evidence, not a leading-defense paper.
+- Added the review's one required scientific correction to Discussion: only one
+  unsafe effect occurred in 400 primary attack records, so the new experiment's
+  small security contrasts are floor-limited. Gemini/JCR/author/visual gates
+  remain open. Focused manuscript and DOCX checks pass 10/10.
