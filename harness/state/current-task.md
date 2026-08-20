@@ -3594,3 +3594,17 @@ The older provider-gate text is superseded by this checkpoint.
 - Visual DOCX rendering is not claimed because the current host has no
   LibreOffice, Word or WPS renderer. The Word file remains a review draft, not
   the final submission package, and author/funding/data statements remain open.
+
+### Partial-Gemini analysis and table-identity checkpoint
+
+- Partial Gemini continuation is now fail-safe: observed nonterminal rows are
+  counted for operational accounting but excluded from scientific estimates;
+  paired and cross-provider inference remains disabled until all 450 frozen
+  work items are terminal.
+- Main Tables 2–5 now include an explicit Provider column. Diagnostic partial
+  Gemini rows cannot enter these inferential tables; a complete Gemini cohort
+  can enter them without becoming visually indistinguishable from DeepSeek.
+- Focused verification passes 20/20 with Ruff and `py_compile`. The regenerated
+  manuscript contains 9,813 words, five Provider table headers, 13 Word tables
+  and five figures. F-PAPER-002 remains `in_progress` while the scheduled
+  pending-only Gemini quota-day run waits to start naturally.

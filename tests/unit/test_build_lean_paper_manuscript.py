@@ -54,6 +54,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "### Figures" not in manuscript
     assert "22/60 (36.7%)" in manuscript
     assert "CNY 0.3374" in manuscript
+    assert manuscript.count("| Provider |") >= 5
 
 
 def test_abstract_stays_within_jisa_limit() -> None:

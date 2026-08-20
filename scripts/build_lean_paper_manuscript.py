@@ -279,9 +279,23 @@ def _endpoint_table() -> str:
             f'{row["completed_n"]}/{row["benign_tool_n"]} ({_percentage(row["tcr"])}) '
             f'[{_percentage(row["tcr_ci_low"])}, {_percentage(row["tcr_ci_high"])}]'
         )
-        rows.append((_label(row["condition"]), _label(row["authorization_regime"]), unsafe, tcr))
+        rows.append(
+            (
+                _label(row["provider"]),
+                _label(row["condition"]),
+                _label(row["authorization_regime"]),
+                unsafe,
+                tcr,
+            )
+        )
     return _markdown_table(
-        ("Condition", "Authorization", "Unsafe effect, n/N (95% CI)", "Benign-tool TCR, n/N (95% CI)"),
+        (
+            "Provider",
+            "Condition",
+            "Authorization",
+            "Unsafe effect, n/N (95% CI)",
+            "Benign-tool TCR, n/N (95% CI)",
+        ),
         rows,
     )
 
@@ -295,6 +309,7 @@ def _paired_table() -> str:
         )
         rows.append(
             (
+                _label(row["provider"]),
                 _label(row["endpoint"]),
                 _label(row["comparison"]),
                 row["paired_cases"],
@@ -306,7 +321,17 @@ def _paired_table() -> str:
             )
         )
     return _markdown_table(
-        ("Endpoint", "Comparison", "Paired n", "Difference (pp)", "Bootstrap 95% CI (pp)", "Discordant first/second", "McNemar p", "Holm p"),
+        (
+            "Provider",
+            "Endpoint",
+            "Comparison",
+            "Paired n",
+            "Difference (pp)",
+            "Bootstrap 95% CI (pp)",
+            "Discordant first/second",
+            "McNemar p",
+            "Holm p",
+        ),
         rows,
     )
 
@@ -316,6 +341,7 @@ def _burden_table() -> str:
     for row in _read_table("table_4_runtime_burden.csv"):
         rows.append(
             (
+                _label(row["provider"]),
                 _label(row["condition"]),
                 _label(row["authorization_regime"]),
                 f'{row["ask_count"]} / {row["ask_record_count"]} ({_percentage(row["ask_record_rate"])})',
@@ -327,7 +353,17 @@ def _burden_table() -> str:
             )
         )
     return _markdown_table(
-        ("Condition", "Authorization", "ASK events/records", "DENY events/records", "Failures", "Latency p50/p95 (s)", "Tokens", "Cost"),
+        (
+            "Provider",
+            "Condition",
+            "Authorization",
+            "ASK events/records",
+            "DENY events/records",
+            "Failures",
+            "Latency p50/p95 (s)",
+            "Tokens",
+            "Cost",
+        ),
         rows,
     )
 
@@ -338,6 +374,7 @@ def _heterogeneity_table() -> str:
         family = "pooled/no family label" if row["attack_family"] == "not_attack" else _label(row["attack_family"])
         rows.append(
             (
+                _label(row["provider"]),
                 _label(row["benchmark"]),
                 family,
                 row["records"],
@@ -347,7 +384,15 @@ def _heterogeneity_table() -> str:
             )
         )
     return _markdown_table(
-        ("Benchmark", "Attack family/stratum", "Records", "Attack records", "Unsafe effects", "Operational failures"),
+        (
+            "Provider",
+            "Benchmark",
+            "Attack family/stratum",
+            "Records",
+            "Attack records",
+            "Unsafe effects",
+            "Operational failures",
+        ),
         rows,
     )
 

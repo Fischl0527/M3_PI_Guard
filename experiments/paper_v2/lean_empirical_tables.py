@@ -67,9 +67,18 @@ def _table_1(plan_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     ]
 
 
+def _included_providers(analysis: Mapping[str, Any]) -> tuple[str, ...]:
+    """Return providers eligible for the manuscript's inferential tables."""
+
+    providers = ["deepseek"]
+    if analysis.get("gemini", {}).get("cross_vendor_claim_eligible") is True:
+        providers.append("gemini")
+    return tuple(providers)
+
+
 def _table_2(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for provider in ("deepseek", "gemini"):
+    for provider in _included_providers(analysis):
         for item in analysis[provider]["condition_metrics"].values():
             attack = item["attack_unsafe_effect"]
             utility = item["benign_tool_tcr"]
@@ -95,7 +104,7 @@ def _table_2(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
 
 def _table_3(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for provider in ("deepseek", "gemini"):
+    for provider in _included_providers(analysis):
         for endpoint, comparisons in analysis[provider]["comparisons"].items():
             for name, item in comparisons.items():
                 rows.append(
@@ -139,7 +148,7 @@ def _table_3(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
 
 def _table_4(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for provider in ("deepseek", "gemini"):
+    for provider in _included_providers(analysis):
         for cell, item in analysis[provider]["burden"].items():
             condition, regime = cell.split("__", 1)
             rows.append(
@@ -155,7 +164,7 @@ def _table_4(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
 
 def _table_5(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for provider in ("deepseek", "gemini"):
+    for provider in _included_providers(analysis):
         for stratum, item in analysis[provider]["heterogeneity"].items():
             benchmark, family = stratum.split("__", 1)
             rows.append(

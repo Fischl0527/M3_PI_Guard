@@ -261,3 +261,15 @@ Record completed, blocked, and abandoned tasks here.
   budget-50/200 evidence; Gemini remains a pending external-validity probe.
 - Marked all declarations requiring author or institutional confirmation and
   corrected the Introduction to enumerate three, not four, research questions.
+
+# 2026-08-20 — Partial-Gemini analysis and provider-labeled tables
+
+- Fixed the two pre-continuation analysis defects: partial response-less
+  Gemini rows no longer fail validation or enter inference, and completed
+  Gemini rows cannot be confused with DeepSeek in the four core result tables.
+- Added focused partial/complete-provider and table-filtering tests. Verification
+  passes 20/20 plus Ruff and `py_compile`.
+- Regenerated the DeepSeek tables, 9,813-word Markdown and editable Word draft.
+  The initial table command used an absent generic filename; the corrected
+  provider-specific invocation succeeded without an API call or experiment
+  replay and the failed assumption is recorded in `failure-log.md`.

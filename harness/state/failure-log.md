@@ -5275,3 +5275,15 @@ credential, changed a historical ledger, or enabled an external effect.
   citation-token paragraphs and emitted no References heading. The DOCX was
   rejected. The builder now uses the Markdown citations extension so citeproc
   can render author-year citations and the cited bibliography.
+
+## 2026-08-20 — Lean table exporter invoked without provider-specific paths
+
+- Attempt: rebuild the current DeepSeek publication tables before refreshing
+  the Markdown and Word working drafts.
+- Failure: the exporter's generic default pointed to the intentionally absent
+  `authorization_results_v1.json`; the completed analysis is stored as
+  `authorization_results_deepseek_v1.json` and its tables belong in
+  `tables_deepseek_v1/`.
+- Changed hypothesis: invoke the existing exporter once with those two explicit
+  provider-specific paths. No API call, experiment replay, or result mutation
+  occurred.

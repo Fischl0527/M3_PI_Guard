@@ -174,6 +174,7 @@ def _validate_provider(
             f"{provider_id}: expected {EXPECTED_COUNTS[provider_id]}, got {len(latest)}"
         )
     records: list[dict[str, Any]] = []
+    observed_rows: list[dict[str, Any]] = []
     response_rows = 0
     official_ids: set[str] = set()
     for key, row in latest.items():
@@ -195,11 +196,25 @@ def _validate_provider(
             row.get("online_forbidden_fields_present") is not False
             or row.get("provider_tools_enabled") is not False
             or row.get("external_effects_enabled") is not False
-            or row.get("retry_eligible") is not False
-            or row.get("included_in_primary_itt") is not True
         ):
             raise LeanAuthorizationAnalysisError(
-                f"{provider_id}:{key}: safety or terminal status drift"
+                f"{provider_id}:{key}: safety status drift"
+            )
+        terminal = (
+            row.get("retry_eligible") is False
+            and row.get("included_in_primary_itt") is True
+        )
+        recoverable = (
+            row.get("retry_eligible") is True
+            and row.get("included_in_primary_itt") is False
+        )
+        if not terminal and not recoverable:
+            raise LeanAuthorizationAnalysisError(
+                f"{provider_id}:{key}: terminal status drift"
+            )
+        if not allow_partial and not terminal:
+            raise LeanAuthorizationAnalysisError(
+                f"{provider_id}:{key}: nonterminal item in complete analysis"
             )
         requests = row.get("provider_requests")
         if not isinstance(requests, list):
@@ -216,7 +231,10 @@ def _validate_provider(
                 f"{provider_id}:{key}: response evidence drift"
             )
         if response_ids:
-            response_rows += 1
+            if not terminal:
+                raise LeanAuthorizationAnalysisError(
+                    f"{provider_id}:{key}: response-bearing item is nonterminal"
+                )
             expected_model = str(planned["model_id"])
             if row.get("returned_models") != [expected_model]:
                 raise LeanAuthorizationAnalysisError(
@@ -229,17 +247,30 @@ def _validate_provider(
                 )
             official_ids.update(response_ids)
         merged = {**planned, **row}
-        records.append(merged)
+        observed_rows.append(merged)
+        if terminal:
+            records.append(merged)
+            response_rows += bool(response_ids)
     records.sort(key=lambda row: int(row["sequence"]))
     return records, {
         **recovery,
         "expected_work_items": EXPECTED_COUNTS[provider_id],
+        "observed_work_items": len(observed_rows),
         "terminal_work_items": len(records),
         "pending_work_items": EXPECTED_COUNTS[provider_id] - len(records),
+        "unstarted_work_items": EXPECTED_COUNTS[provider_id] - len(observed_rows),
+        "nonterminal_observed_work_items": len(observed_rows) - len(records),
         "response_bearing_work_items": response_rows,
         "official_response_ids": len(official_ids),
         "operational_statuses": dict(
             sorted(Counter(str(row["operational_status"]) for row in records).items())
+        ),
+        "observed_operational_statuses": dict(
+            sorted(
+                Counter(
+                    str(row["operational_status"]) for row in observed_rows
+                ).items()
+            )
         ),
         "provider_tools_enabled": 0,
         "external_effects_enabled": 0,
@@ -531,6 +562,11 @@ def build_analysis(
             "planned_work_items": EXPECTED_COUNTS["gemini"],
             "terminal_work_items": 0,
         }
+    gemini_complete = (
+        not deepseek_only
+        and integrity["gemini"]["terminal_work_items"]
+        == EXPECTED_COUNTS["gemini"]
+    )
     analysis = {
         "schema_version": "m3-paper-v2-lean-authorization-analysis-1.0",
         "study_id": "m3-q2-lean-authorization-v1",
@@ -542,6 +578,7 @@ def build_analysis(
             "full_harness_used": False,
             "historical_recursive_replay_used": False,
             "deepseek_only": deepseek_only,
+            "allow_partial_gemini": allow_partial_gemini,
         },
         "integrity": integrity,
         "deepseek": {
@@ -555,18 +592,20 @@ def build_analysis(
             "condition_metrics": _condition_metrics(records["gemini"]),
             "comparisons": (
                 {}
-                if deepseek_only
+                if deepseek_only or not gemini_complete
                 else _comparisons(records["gemini"], GEMINI_COMPARISONS)
             ),
             "burden": _burden(records["gemini"]),
             "heterogeneity": _heterogeneity(records["gemini"]),
             "cross_vendor_claim_eligible": (
-                not deepseek_only
-                and integrity["gemini"]["terminal_work_items"]
-                == EXPECTED_COUNTS["gemini"]
+                gemini_complete
             ),
             "analysis_status": (
-                "pending_provider_completion" if deepseek_only else "analyzed"
+                "pending_provider_completion"
+                if deepseek_only
+                else "complete"
+                if gemini_complete
+                else "diagnostic_partial"
             ),
         },
     }

@@ -36,7 +36,7 @@ def _comparison() -> dict:
     }
 
 
-def _analysis() -> dict:
+def _analysis(*, gemini_complete: bool = True) -> dict:
     provider = {
         "condition_metrics": {
             "m3_full__auto_compiled": {
@@ -82,7 +82,10 @@ def _analysis() -> dict:
                 }
             },
         },
-        "gemini": provider,
+        "gemini": {
+            **provider,
+            "cross_vendor_claim_eligible": gemini_complete,
+        },
     }
 
 
@@ -122,3 +125,13 @@ def test_table_shapes_and_csv_export(tmp_path: Path) -> None:
     with path.open(encoding="utf-8", newline="") as stream:
         rows = list(csv.DictReader(stream))
     assert rows[0]["condition"] == "m3_full"
+
+
+def test_partial_gemini_is_excluded_from_inferential_tables() -> None:
+    partial = _analysis(gemini_complete=False)
+
+    assert {row["provider"] for row in _table_2(partial)} == {"deepseek"}
+    assert len(_table_2(partial)) == 1
+    assert len(_table_3(partial)) == 4
+    assert len(_table_4(partial)) == 1
+    assert len(_table_5(partial)) == 1

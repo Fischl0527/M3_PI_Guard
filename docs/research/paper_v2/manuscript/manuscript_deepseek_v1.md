@@ -1065,68 +1065,68 @@ Providers, benchmarks, conditions, authorization regimes and frozen work-item co
 
 Unsafe effects among attack tasks and completions among benign tool tasks. Brackets contain Wilson 95% confidence intervals.
 
-| Condition | Authorization | Unsafe effect, n/N (95% CI) | Benign-tool TCR, n/N (95% CI) |
-|---|---|---|---|
-| M3-full | auto compiled | 0/100 (0.0%) [0.0%, 3.7%] | 16/60 (26.7%) [17.1%, 39.0%] |
-| M3-full | broad | 0/30 (0.0%) [0.0%, 11.4%] | 2/20 (10.0%) [2.8%, 30.1%] |
-| M3-full | conflicting | 0/30 (0.0%) [0.0%, 11.4%] | 1/20 (5.0%) [0.9%, 23.6%] |
-| M3-full | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 7/60 (11.7%) [5.8%, 22.2%] |
-| M3-full | underspecified | 0/30 (0.0%) [0.0%, 11.4%] | 2/20 (10.0%) [2.8%, 30.1%] |
-| Policy-only | auto compiled | 1/100 (1.0%) [0.2%, 5.4%] | 22/60 (36.7%) [25.6%, 49.3%] |
-| Policy-only | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 9/60 (15.0%) [8.1%, 26.1%] |
+| Provider | Condition | Authorization | Unsafe effect, n/N (95% CI) | Benign-tool TCR, n/N (95% CI) |
+|---|---|---|---|---|
+| DeepSeek | M3-full | auto compiled | 0/100 (0.0%) [0.0%, 3.7%] | 16/60 (26.7%) [17.1%, 39.0%] |
+| DeepSeek | M3-full | broad | 0/30 (0.0%) [0.0%, 11.4%] | 2/20 (10.0%) [2.8%, 30.1%] |
+| DeepSeek | M3-full | conflicting | 0/30 (0.0%) [0.0%, 11.4%] | 1/20 (5.0%) [0.9%, 23.6%] |
+| DeepSeek | M3-full | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 7/60 (11.7%) [5.8%, 22.2%] |
+| DeepSeek | M3-full | underspecified | 0/30 (0.0%) [0.0%, 11.4%] | 2/20 (10.0%) [2.8%, 30.1%] |
+| DeepSeek | Policy-only | auto compiled | 1/100 (1.0%) [0.2%, 5.4%] | 22/60 (36.7%) [25.6%, 49.3%] |
+| DeepSeek | Policy-only | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 9/60 (15.0%) [8.1%, 26.1%] |
 
 ### Table 3. Paired authorization and mechanism effects
 
 Absolute percentage-point differences use the second condition minus the first. Stress-regime extensions are outside the primary Holm family.
 
-| Endpoint | Comparison | Paired n | Difference (pp) | Bootstrap 95% CI (pp) | Discordant first/second | McNemar p | Holm p |
-|---|---|---|---|---|---|---|---|
-| Benign-tool TCR | Policy-only auto to M3-full auto | 60 | -10.0 | [-18.3, -3.3] | 6/0 | 0.031 | 0.094 |
-| Benign-tool TCR | Policy-only exact to M3-full exact | 60 | -3.3 | [-8.3, +0.0] | 2/0 | 0.500 | 0.500 |
-| Benign-tool TCR | M3-full auto to exact | 60 | -15.0 | [-28.3, -1.7] | 13/4 | 0.049 | 0.098 |
-| Benign-tool TCR | Policy-only auto to exact | 60 | -21.7 | [-36.7, -5.0] | 19/6 | 0.015 | 0.059 |
-| Unsafe effect | Policy-only auto to M3-full auto | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
-| Unsafe effect | Policy-only exact to M3-full exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
-| Unsafe effect | M3-full auto to exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
-| Unsafe effect | Policy-only auto to exact | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
-| Benign-tool TCR | M3-full auto to broad | 20 | -25.0 | [-45.0, -5.0] | 5/0 | 0.062 | — |
-| Unsafe effect | M3-full auto to broad | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
-| Benign-tool TCR | M3-full auto to conflicting | 20 | -30.0 | [-50.0, -10.0] | 6/0 | 0.031 | — |
-| Unsafe effect | M3-full auto to conflicting | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
-| Benign-tool TCR | M3-full auto to underspecified | 20 | -25.0 | [-50.0, +0.0] | 6/1 | 0.125 | — |
-| Unsafe effect | M3-full auto to underspecified | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+| Provider | Endpoint | Comparison | Paired n | Difference (pp) | Bootstrap 95% CI (pp) | Discordant first/second | McNemar p | Holm p |
+|---|---|---|---|---|---|---|---|---|
+| DeepSeek | Benign-tool TCR | Policy-only auto to M3-full auto | 60 | -10.0 | [-18.3, -3.3] | 6/0 | 0.031 | 0.094 |
+| DeepSeek | Benign-tool TCR | Policy-only exact to M3-full exact | 60 | -3.3 | [-8.3, +0.0] | 2/0 | 0.500 | 0.500 |
+| DeepSeek | Benign-tool TCR | M3-full auto to exact | 60 | -15.0 | [-28.3, -1.7] | 13/4 | 0.049 | 0.098 |
+| DeepSeek | Benign-tool TCR | Policy-only auto to exact | 60 | -21.7 | [-36.7, -5.0] | 19/6 | 0.015 | 0.059 |
+| DeepSeek | Unsafe effect | Policy-only auto to M3-full auto | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
+| DeepSeek | Unsafe effect | Policy-only exact to M3-full exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
+| DeepSeek | Unsafe effect | M3-full auto to exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
+| DeepSeek | Unsafe effect | Policy-only auto to exact | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
+| DeepSeek | Benign-tool TCR | M3-full auto to broad | 20 | -25.0 | [-45.0, -5.0] | 5/0 | 0.062 | — |
+| DeepSeek | Unsafe effect | M3-full auto to broad | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+| DeepSeek | Benign-tool TCR | M3-full auto to conflicting | 20 | -30.0 | [-50.0, -10.0] | 6/0 | 0.031 | — |
+| DeepSeek | Unsafe effect | M3-full auto to conflicting | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+| DeepSeek | Benign-tool TCR | M3-full auto to underspecified | 20 | -25.0 | [-50.0, +0.0] | 6/1 | 0.125 | — |
+| DeepSeek | Unsafe effect | M3-full auto to underspecified | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
 
 ### Table 4. Runtime burden
 
 ASK and DENY cells report event totals, record incidence and the share of records affected. Failures remain in the ITT denominator.
 
-| Condition | Authorization | ASK events/records | DENY events/records | Failures | Latency p50/p95 (s) | Tokens | Cost |
-|---|---|---|---|---|---|---|---|
-| M3-full | auto compiled | 58 / 58 (32.2%) | 20 / 20 (11.1%) | 17 (9.4%) | 2.90 / 9.18 | 279,687 | CNY 0.2522 |
-| M3-full | broad | 23 / 23 (38.3%) | 7 / 7 (11.7%) | 6 (10.0%) | 2.84 / 9.38 | 82,975 | CNY 0.0769 |
-| M3-full | conflicting | 26 / 26 (43.3%) | 6 / 6 (10.0%) | 5 (8.3%) | 2.79 / 7.89 | 67,404 | CNY 0.0412 |
-| M3-full | exact gold | 0 / 0 (0.0%) | 187 / 81 (45.0%) | 44 (24.4%) | 3.94 / 19.62 | 454,627 | CNY 0.2995 |
-| M3-full | underspecified | 30 / 30 (50.0%) | 4 / 4 (6.7%) | 4 (6.7%) | 2.78 / 10.65 | 82,731 | CNY 0.0875 |
-| Policy-only | auto compiled | 62 / 62 (34.4%) | 13 / 13 (7.2%) | 13 (7.2%) | 3.16 / 10.63 | 307,544 | CNY 0.2940 |
-| Policy-only | exact gold | 0 / 0 (0.0%) | 227 / 88 (48.9%) | 43 (23.9%) | 5.06 / 19.42 | 473,478 | CNY 0.3374 |
+| Provider | Condition | Authorization | ASK events/records | DENY events/records | Failures | Latency p50/p95 (s) | Tokens | Cost |
+|---|---|---|---|---|---|---|---|---|
+| DeepSeek | M3-full | auto compiled | 58 / 58 (32.2%) | 20 / 20 (11.1%) | 17 (9.4%) | 2.90 / 9.18 | 279,687 | CNY 0.2522 |
+| DeepSeek | M3-full | broad | 23 / 23 (38.3%) | 7 / 7 (11.7%) | 6 (10.0%) | 2.84 / 9.38 | 82,975 | CNY 0.0769 |
+| DeepSeek | M3-full | conflicting | 26 / 26 (43.3%) | 6 / 6 (10.0%) | 5 (8.3%) | 2.79 / 7.89 | 67,404 | CNY 0.0412 |
+| DeepSeek | M3-full | exact gold | 0 / 0 (0.0%) | 187 / 81 (45.0%) | 44 (24.4%) | 3.94 / 19.62 | 454,627 | CNY 0.2995 |
+| DeepSeek | M3-full | underspecified | 30 / 30 (50.0%) | 4 / 4 (6.7%) | 4 (6.7%) | 2.78 / 10.65 | 82,731 | CNY 0.0875 |
+| DeepSeek | Policy-only | auto compiled | 62 / 62 (34.4%) | 13 / 13 (7.2%) | 13 (7.2%) | 3.16 / 10.63 | 307,544 | CNY 0.2940 |
+| DeepSeek | Policy-only | exact gold | 0 / 0 (0.0%) | 227 / 88 (48.9%) | 43 (23.9%) | 5.06 / 19.42 | 473,478 | CNY 0.3374 |
 
 ### Table 5. Prespecified heterogeneity
 
 Endpoint counts by benchmark and attack family. These prespecified strata are descriptive rather than additional confirmatory families.
 
-| Benchmark | Attack family/stratum | Records | Attack records | Unsafe effects | Operational failures |
-|---|---|---|---|---|---|
-| AgentDojo | pooled/no family label | 395 | 245 | 1 | 93 |
-| M3-v2 | benign clean | 260 | 0 | 0 | 24 |
-| M3-v2 | cross tool attack chain | 20 | 20 | 0 | 0 |
-| M3-v2 | direct jailbreak | 16 | 16 | 0 | 0 |
-| M3-v2 | environment context pollution | 29 | 29 | 0 | 0 |
-| M3-v2 | json rpc | 31 | 31 | 0 | 0 |
-| M3-v2 | memory poisoning | 19 | 19 | 0 | 0 |
-| M3-v2 | multilingual t2l | 28 | 28 | 0 | 0 |
-| M3-v2 | obfuscation evasion | 42 | 42 | 0 | 0 |
-| M3-v2 | rag indirect | 19 | 19 | 0 | 4 |
-| M3-v2 | tool output injection | 41 | 41 | 0 | 11 |
+| Provider | Benchmark | Attack family/stratum | Records | Attack records | Unsafe effects | Operational failures |
+|---|---|---|---|---|---|---|
+| DeepSeek | AgentDojo | pooled/no family label | 395 | 245 | 1 | 93 |
+| DeepSeek | M3-v2 | benign clean | 260 | 0 | 0 | 24 |
+| DeepSeek | M3-v2 | cross tool attack chain | 20 | 20 | 0 | 0 |
+| DeepSeek | M3-v2 | direct jailbreak | 16 | 16 | 0 | 0 |
+| DeepSeek | M3-v2 | environment context pollution | 29 | 29 | 0 | 0 |
+| DeepSeek | M3-v2 | json rpc | 31 | 31 | 0 | 0 |
+| DeepSeek | M3-v2 | memory poisoning | 19 | 19 | 0 | 0 |
+| DeepSeek | M3-v2 | multilingual t2l | 28 | 28 | 0 | 0 |
+| DeepSeek | M3-v2 | obfuscation evasion | 42 | 42 | 0 | 0 |
+| DeepSeek | M3-v2 | rag indirect | 19 | 19 | 0 | 4 |
+| DeepSeek | M3-v2 | tool output injection | 41 | 41 | 0 | 11 |
 
 ### Table 6. Adaptive evidence at budgets 50 and 200
 

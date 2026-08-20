@@ -2996,3 +2996,20 @@ Next gated action:
 - Visual rendering is pending because this host exposes no LibreOffice, Word or
   WPS executable. Do not call the review draft visually verified, final, or
   submission-ready. Gemini and author-owned declarations remain open.
+
+# 2026-08-20 — Current handoff: Gemini-safe analysis checkpoint
+
+- `lean_authorization_analysis.py` now separates terminal ITT rows from
+  response-less recoverable rows during partial Gemini analysis. Partial rows
+  receive operational accounting only; paired/cross-provider inference stays
+  closed until 450 terminal work items exist.
+- `lean_empirical_tables.py` includes Gemini in Tables 2–5 only when
+  `cross_vendor_claim_eligible=true`; the manuscript renderer labels Provider
+  in each of those tables.
+- Focused verification: 20/20 pytest, Ruff and `py_compile` pass. Rebuilt output:
+  9,813-word Markdown and a 683,271-byte Word draft with 282 paragraphs,
+  13 tables and five figures. Visual pagination remains unverified.
+- PID 7676 is the sole hidden pending-only Gemini quota-day process. At the last
+  check it was alive and still waiting for 2026-08-20 15:02 +08:00; do not
+  interrupt it or launch a second runner. No successful response-bearing key is
+  eligible for replay.

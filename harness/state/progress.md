@@ -2919,3 +2919,17 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   pending; the file is a review draft, not a visually verified final package.
 - F-PAPER-002 remains `in_progress` for Gemini's stopping rule, author-owned
   declarations/data release and the mandatory integrity review.
+
+# 2026-08-20 — Partial-Gemini inference boundary hardened
+
+- Corrected the compact analyzer so `--allow-partial-gemini` accepts only the
+  two valid record states: terminal ITT rows or response-less recoverable rows.
+  Only terminal rows enter scientific summaries; observed, unstarted and
+  nonterminal counts remain explicit.
+- Gemini comparisons and cross-provider eligibility now require 450/450
+  terminal work items. Publication Tables 2–5 exclude a diagnostic partial
+  Gemini cohort and include an explicit Provider column for any complete
+  multi-provider result.
+- Focused pytest passes 20/20; Ruff and `py_compile` pass. The rebuilt working
+  draft is 9,813 words, 282 paragraphs, 13 tables and five figures. No Full
+  Harness, historical replay, API call or successful-row rerun occurred.

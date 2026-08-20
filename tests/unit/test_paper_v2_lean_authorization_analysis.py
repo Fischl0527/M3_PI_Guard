@@ -14,6 +14,54 @@ def _row(case_id: str, condition: str, regime: str, value: bool) -> dict:
     }
 
 
+def _provider_plan_row(work_key: str, sequence: int) -> dict:
+    return {
+        "work_key": work_key,
+        "case_id": f"case-{sequence}",
+        "benchmark": "agentdojo-v1",
+        "condition_id": "m3_full",
+        "authorization_regime": "auto_compiled",
+        "provider_id": "gemini",
+        "model_id": "gemini-3.6-flash",
+        "sequence": sequence,
+    }
+
+
+def _provider_raw_row(
+    planned: dict,
+    *,
+    terminal: bool,
+    response_id: str | None,
+    status: str,
+) -> dict:
+    return {
+        **{
+            field: planned[field]
+            for field in (
+                "work_key",
+                "case_id",
+                "benchmark",
+                "condition_id",
+                "authorization_regime",
+                "provider_id",
+            )
+        },
+        "configured_model": planned["model_id"],
+        "attempt": 1,
+        "online_forbidden_fields_present": False,
+        "provider_tools_enabled": False,
+        "external_effects_enabled": False,
+        "retry_eligible": not terminal,
+        "included_in_primary_itt": terminal,
+        "provider_requests": (
+            [{"provider_response_id": response_id}] if response_id else []
+        ),
+        "response_obtained": response_id is not None,
+        "returned_models": [planned["model_id"]] if response_id else [],
+        "operational_status": status,
+    }
+
+
 def test_latest_attempts_keep_raw_recovery_but_select_latest_terminal() -> None:
     rows = [
         {"work_key": "a", "attempt": 1, "response_obtained": False},
@@ -104,6 +152,115 @@ def test_deepseek_only_defers_gemini_without_cross_vendor_claim(monkeypatch) -> 
     )
     assert result["gemini"]["condition_metrics"] == {}
     assert result["gemini"]["cross_vendor_claim_eligible"] is False
+
+
+def test_partial_provider_keeps_only_terminal_rows_for_analysis() -> None:
+    terminal_plan = _provider_plan_row("g-terminal", 1)
+    recoverable_plan = _provider_plan_row("g-recoverable", 2)
+    records, integrity = analysis._validate_provider(
+        "gemini",
+        [terminal_plan, recoverable_plan],
+        [
+            _provider_raw_row(
+                terminal_plan,
+                terminal=True,
+                response_id="response-1",
+                status="completed",
+            ),
+            _provider_raw_row(
+                recoverable_plan,
+                terminal=False,
+                response_id=None,
+                status="pre_response_rate_limited",
+            ),
+        ],
+        allow_partial=True,
+    )
+
+    assert [row["work_key"] for row in records] == ["g-terminal"]
+    assert integrity["expected_work_items"] == 450
+    assert integrity["observed_work_items"] == 2
+    assert integrity["terminal_work_items"] == 1
+    assert integrity["pending_work_items"] == 449
+    assert integrity["unstarted_work_items"] == 448
+    assert integrity["nonterminal_observed_work_items"] == 1
+    assert integrity["response_bearing_work_items"] == 1
+    assert integrity["operational_statuses"] == {"completed": 1}
+    assert integrity["observed_operational_statuses"] == {
+        "completed": 1,
+        "pre_response_rate_limited": 1,
+    }
+
+
+def test_partial_gemini_defers_paired_inference(monkeypatch) -> None:
+    plan_rows = [
+        {"provider_id": "deepseek", "work_key": "d"},
+        {"provider_id": "gemini", "work_key": "g"},
+    ]
+    deepseek_records = [_row("deepseek", "m3_full", "auto_compiled", False)]
+    gemini_records = [_row("gemini", "m3_full", "auto_compiled", False)]
+    monkeypatch.setattr(analysis, "_read_jsonl", lambda path: plan_rows)
+
+    def validate(provider, plan, raw, allow_partial):
+        if provider == "deepseek":
+            return deepseek_records, {"terminal_work_items": 900}
+        return gemini_records, {"terminal_work_items": 1}
+
+    monkeypatch.setattr(analysis, "_validate_provider", validate)
+    monkeypatch.setattr(analysis, "_condition_metrics", lambda rows: {})
+
+    def comparisons(rows, definitions):
+        if definitions is analysis.GEMINI_COMPARISONS:
+            raise AssertionError("partial Gemini comparisons must not run")
+        return {}
+
+    monkeypatch.setattr(analysis, "_comparisons", comparisons)
+    monkeypatch.setattr(analysis, "_regime_extension", lambda rows: {})
+    monkeypatch.setattr(analysis, "_burden", lambda rows: {})
+    monkeypatch.setattr(analysis, "_heterogeneity", lambda rows: {})
+
+    result = analysis.build_analysis(allow_partial_gemini=True)
+
+    assert result["gemini"]["analysis_status"] == "diagnostic_partial"
+    assert result["gemini"]["cross_vendor_claim_eligible"] is False
+    assert result["gemini"]["comparisons"] == {}
+
+
+def test_complete_gemini_enables_cross_vendor_comparisons(monkeypatch) -> None:
+    plan_rows = [
+        {"provider_id": "deepseek", "work_key": "d"},
+        {"provider_id": "gemini", "work_key": "g"},
+    ]
+    monkeypatch.setattr(analysis, "_read_jsonl", lambda path: plan_rows)
+
+    def validate(provider, plan, raw, allow_partial):
+        terminal = analysis.EXPECTED_COUNTS[provider]
+        return [_row(provider, "m3_full", "auto_compiled", False)], {
+            "terminal_work_items": terminal
+        }
+
+    monkeypatch.setattr(analysis, "_validate_provider", validate)
+    monkeypatch.setattr(analysis, "_condition_metrics", lambda rows: {})
+    monkeypatch.setattr(
+        analysis,
+        "_comparisons",
+        lambda rows, definitions: {
+            "provider": (
+                "gemini"
+                if definitions is analysis.GEMINI_COMPARISONS
+                else "deepseek"
+            )
+        },
+    )
+    monkeypatch.setattr(analysis, "_regime_extension", lambda rows: {})
+    monkeypatch.setattr(analysis, "_burden", lambda rows: {})
+    monkeypatch.setattr(analysis, "_heterogeneity", lambda rows: {})
+
+    result = analysis.build_analysis(allow_partial_gemini=True)
+
+    assert result["gemini"]["analysis_status"] == "complete"
+    assert result["gemini"]["cross_vendor_claim_eligible"] is True
+    assert result["gemini"]["comparisons"] == {"provider": "gemini"}
 
 
 def test_burden_distinguishes_event_counts_from_record_incidence() -> None:
