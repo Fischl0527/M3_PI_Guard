@@ -2879,3 +2879,10 @@ Next gated action:
   85 characters. These match the official JISA guide checked on 2026-08-20.
 - Before submission, replace only the Gemini boundary sentence if its stopping
   rule permits; do not weaken or remove the unfavorable DeepSeek results.
+
+- `conclusion_draft.md`, `figure_table_captions_v1.md`, and
+  `declarations_draft.md` now complete the provisional manuscript sections.
+  Declarations remain author-confirmation material, not final factual claims.
+- The next data-bearing action remains the Gemini pending-only recovery after
+  Pacific midnight; no additional DeepSeek execution or local evidence replay
+  is required.

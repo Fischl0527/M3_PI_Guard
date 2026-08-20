@@ -39,6 +39,12 @@ Files:
   the DeepSeek authorization experiment, and adaptive budgets 50/200.
 - `discussion_draft.md`: active interpretation of the DeepSeek authorization
   findings, with the cross-provider section still pending Gemini.
+- `conclusion_draft.md`: provisional conclusions bounded to completed DeepSeek
+  and budget-50/200 evidence.
+- `figure_table_captions_v1.md`: publication-facing captions with denominators,
+  endpoint semantics and claim boundaries.
+- `declarations_draft.md`: provisional competing-interest, funding,
+  availability, AI-use, safety and CRediT language requiring author approval.
 - `abstract_shell.md`: provisional DeepSeek-results abstract; the final
   cross-provider sentence remains contingent on Gemini's stopping rule.
 - `highlights_v1.md`: five JISA-length highlights summarizing the current

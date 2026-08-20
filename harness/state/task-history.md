@@ -251,3 +251,12 @@ Record completed, blocked, and abandoned tasks here.
 - Added five JISA highlights, each within the official 85-character maximum.
 - Aligned Introduction, Methods, figure/table plan and submission checklist
   with the completed DeepSeek stage and pending Gemini stopping rule.
+
+# 2026-08-20 — M3-PAPER-002 manuscript sections completed provisionally
+
+- Drafted the Conclusion, five figure captions, six table captions and the
+  submission declarations required for the current JISA package.
+- Limited every conclusion to completed DeepSeek, two-benchmark and adaptive
+  budget-50/200 evidence; Gemini remains a pending external-validity probe.
+- Marked all declarations requiring author or institutional confirmation and
+  corrected the Introduction to enumerate three, not four, research questions.

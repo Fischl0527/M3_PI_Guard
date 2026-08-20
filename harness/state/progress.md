@@ -2790,3 +2790,14 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
 - Updated Introduction, Methods, figure/table status and the submission
   checklist. The official JISA guide was used for current format limits;
   institutional JCR verification and Gemini's stopping rule remain pending.
+
+# 2026-08-20 — Conclusion, captions and declarations drafted
+
+- Added a bounded Conclusion using only completed DeepSeek and adaptive
+  budget-50/200 evidence; no cross-provider or saturation claim was introduced.
+- Added full captions for five figures and six tables with denominators,
+  endpoint direction, ITT handling and the no-saturation boundary.
+- Added a provisional declarations file. Funding, author order/CRediT,
+  competing interests, institutional ethics requirements and final AI-use
+  language remain explicit author-confirmation gates.
+- Fixed the Introduction's RQ count from four to three.

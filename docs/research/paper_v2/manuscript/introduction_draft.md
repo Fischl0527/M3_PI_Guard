@@ -54,7 +54,7 @@ interface [@L27].
 
 ## Research questions
 
-The study asks four questions.
+The study asks three questions.
 
 1. **RQ1 — Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change

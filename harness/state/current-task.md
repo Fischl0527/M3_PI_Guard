@@ -3480,3 +3480,15 @@ The older provider-gate text is superseded by this checkpoint.
 - JISA format requirements were checked against the official Guide for Authors
   on 2026-08-20: abstract at most 250 words, 1–7 English keywords and 3–5
   recommended highlights. Final venue/JCR and Gemini gates remain open.
+
+### Manuscript-section checkpoint
+
+- Added a provisional Conclusion that answers the three RQs using completed
+  DeepSeek and budget-50/200 evidence while keeping Gemini and saturation
+  claims out of scope.
+- Added publication-facing captions for five figures and six tables, including
+  exact denominators, ITT semantics and the ASK/DENY incidence correction.
+- Added provisional submission declarations for competing interests, funding,
+  data/code availability, generative-AI use, safety and CRediT authorship. Every
+  item that needs author or institutional confirmation is explicitly marked.
+- Corrected the Introduction from “four questions” to the actual three RQs.
