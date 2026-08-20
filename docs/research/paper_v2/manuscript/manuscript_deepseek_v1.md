@@ -537,9 +537,9 @@ Verification is deliberately proportional to the lean study. It consists of:
 
 Each provider writes one append-only compact raw JSONL. The final statistics
 are written once to one authorization-analysis JSON, and figures are exported
-as editable SVG plus raster QA previews. Reproducibility assets include frozen
-samples, condition assignments, analysis code, aggregate tables, and versioned
-source.
+as submission-ready vector PDF, editable SVG, and raster PNG previews for
+manuscript/QA use. Reproducibility assets include frozen samples, condition
+assignments, analysis code, aggregate tables, and versioned source.
 
 ## 4. Results
 
@@ -553,26 +553,26 @@ missed the utility point non-inferiority criterion and showed no security gain
 over M3 policy-only. Both the favorable security comparison and the
 unfavorable utility and module comparisons are reported.
 
-Detailed values are reported in Supplementary Table S1.
+Supplementary Table S1 reports the online-state source audit.
 
 This audit supports only covered-path statements. It does not establish a
 domain-wide oracle-authorization problem.
 
-Detailed values are reported in Supplementary Table S2.
+Supplementary Table S2 reports the completed medium security and utility outcomes.
 
 The medium sample therefore shows a security–utility trade-off, not an
 incremental mechanism benefit. Both M3 variants eliminated the eight unsafe
 effects observed under the structural condition, but they also completed
 substantially fewer benign tool tasks.
 
-Detailed values are reported in Supplementary Table S3.
+Supplementary Table S3 reports the prespecified paired comparisons.
 
 The security effect relative to the structural baseline was large in this
 sample, but the full mechanism did not outperform policy-only. Relative to the
 structural condition, its benign-tool TCR was 25 percentage points lower, well
 outside the preregistered −5 percentage-point non-inferiority margin.
 
-Detailed values are reported in Supplementary Table S4.
+Supplementary Table S4 reports the runtime burden and operational quality.
 
 Across the 432 primary records, 411 completed and 21 retained terminal failures
 comprised six `max_steps`, six parse failures, and nine provider failures. The
@@ -636,7 +636,7 @@ Benign tool completion under M3-full was 49/168 (29.17%, 22.82–36.44), versus
 M3-full and policy-only both completed 49/168, with a paired difference of
 0.00 points. All six conditions completed 79/79 benign no-tool tasks.
 
-Detailed values are reported in Supplementary Table S5.
+Supplementary Table S5 reports the public-primary benchmark strata.
 
 The direction is consistent across both attack benchmarks: M3-full is safer
 than the structural condition but less safe than policy-only. Utility is
@@ -769,7 +769,7 @@ the 18 observed successes therefore appeared only after query 50. The evidence
 supports a budget-sensitivity claim through 200, but it does not establish
 saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 
-Detailed values are reported in Supplementary Table S6.
+Supplementary Table S6 reports the defense-aware adaptive attack.
 
 ### 4.9 Remaining evidence boundary
 

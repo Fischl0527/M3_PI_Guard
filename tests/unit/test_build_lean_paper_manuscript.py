@@ -125,8 +125,13 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
     assert all(table.startswith("|") for _, _, table in tables)
     assert "### Supplementary Table" not in cleaned
     assert "This audit supports only covered-path statements" in cleaned
-    assert "Detailed values are reported in Supplementary Table S1." in cleaned
-    assert "Detailed values are reported in Supplementary Table S6." in cleaned
+    assert (
+        "Supplementary Table S1 reports the online-state source audit." in cleaned
+    )
+    assert (
+        "Supplementary Table S6 reports the defense-aware adaptive attack." in cleaned
+    )
+    assert "Detailed values are reported" not in cleaned
 
 
 def test_table_note_changes_only_for_complete_gemini_inference(monkeypatch) -> None:

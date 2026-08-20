@@ -3118,3 +3118,12 @@ Next gated action:
   Author identities, affiliations, CRediT, funding, conflicts, ethics wording,
   biographies, photographs and release commitments remain owner-supplied.
 - Do not add secrets, `.env` contents or raw provider traces to either form.
+# 2026-08-20 — Main-manuscript copy-edit handoff
+
+- `scripts/build_lean_paper_manuscript.py` now emits table-specific references
+  when extracting Supplementary Tables S1-S6; corresponding tests cover S1,
+  S6 and removal of the old generic wording.
+- `methods_draft.md`, generated Markdown and the Word working draft now describe
+  PDF/SVG/PNG artwork consistently. Scientific content is unchanged.
+- Verification: manuscript/DOCX/supplement pytest 13/13, Ruff and `py_compile`.
+  Do not claim visual pagination QA on this host.

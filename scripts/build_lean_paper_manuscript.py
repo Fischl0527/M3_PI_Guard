@@ -95,8 +95,9 @@ def _split_supplementary_tables(
             table_lines.append(lines[index])
             index += 1
         tables.append((number, title, "\n".join(table_lines)))
+        reference_title = title[0].lower() + title[1:]
         cleaned.extend(
-            [f"Detailed values are reported in Supplementary Table S{number}.", ""]
+            [f"Supplementary Table S{number} reports the {reference_title}.", ""]
         )
         while index < len(lines) and not lines[index].strip():
             index += 1

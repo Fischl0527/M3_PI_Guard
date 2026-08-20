@@ -261,6 +261,6 @@ Verification is deliberately proportional to the lean study. It consists of:
 
 Each provider writes one append-only compact raw JSONL. The final statistics
 are written once to one authorization-analysis JSON, and figures are exported
-as editable SVG plus raster QA previews. Reproducibility assets include frozen
-samples, condition assignments, analysis code, aggregate tables, and versioned
-source.
+as submission-ready vector PDF, editable SVG, and raster PNG previews for
+manuscript/QA use. Reproducibility assets include frozen samples, condition
+assignments, analysis code, aggregate tables, and versioned source.

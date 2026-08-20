@@ -3063,3 +3063,14 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   was inferred and no unofficial source replaced the previously checked guide.
 - F-PAPER-002 remains `in_progress`; the sole Gemini process still controls the
   next scientific update.
+# 2026-08-20 — Supplement references and artwork wording copy-edited
+
+- Replaced six repeated generic supplementary-table notices with table-specific
+  references generated from the frozen table titles. No table content,
+  estimate, denominator or interpretation changed.
+- Updated reproducibility wording to describe the actual PDF/SVG/PNG figure
+  triplets and rebuilt the Markdown and editable Word manuscript.
+- The rebuilt main draft has 9,590 builder words, 283 paragraphs, seven tables
+  and five figures. Focused pytest passes 13/13; Ruff and `py_compile` pass.
+- Visual pagination remains unclaimed because LibreOffice/Word rendering is
+  unavailable. F-PAPER-002 remains `in_progress` for Gemini and final review.
