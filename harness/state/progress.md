@@ -1,5 +1,21 @@
 # 进展记录
 
+## 2026-08-20 — Submission-language cleanup before Gemini quota reset
+
+- Replaced process-facing manuscript language with scientific reporting while
+  preserving every result and claim boundary. Internal paths/hashes and paper-
+  route terminology are no longer present in the reader-facing Results source.
+- Corrected the Gemini stopping-rule description to match pending-only
+  execution: a rate-limited item terminates on attempt three, while a plan
+  unavailable after three provider quota days is reported as a diagnostic
+  subset with unstarted items counted as unavailable.
+- Rebuilt Markdown and DOCX. Focused manuscript/DOCX tests pass 9/9, Ruff and
+  `py_compile` pass, and the DOCX contains 282 paragraphs, 13 tables and five
+  figures. LibreOffice remains unavailable, so visual pagination is not
+  claimed.
+- The scheduled Gemini process remains idle until 15:02 local time. No API call
+  occurred at this checkpoint; no Full Harness or historical replay ran.
+
 ## 2026-08-20 — Lean claim–evidence ledger activated
 
 - Added a 13-claim active ledger covering the completed DeepSeek findings,

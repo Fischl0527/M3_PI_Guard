@@ -86,13 +86,13 @@ interface [@L27].
 
 The study asks three questions.
 
-1. **RQ1 — Authorization regime.** How do `exact_gold`, `auto_compiled`,
+1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    unsafe effect, benign task completion, and `ASK/DENY` burden?
-2. **RQ2 — Module contribution.** Does provenance, temporal/data-flow
+2. **RQ2: Module contribution.** Does provenance, temporal/data-flow
    enforcement, and confirmation add security beyond the same runtime with
    policy-only enforcement, and what does it cost operationally?
-3. **RQ3 — External validity and adaptive budget.** Are these directions
+3. **RQ3: External validity and adaptive budget.** Are these directions
    stable across AgentDojo, M3-v2, a second provider, and the completed
    defense-aware budgets 50 and 200?
 
@@ -115,24 +115,25 @@ items. The design separately reuses the completed 480-record medium study,
 40-task adaptive evidence at budgets 50 and 200. Provider tools and real
 external effects are prohibited throughout.
 
-### 1.5 Current evidence and route decision
+### 1.5 Empirical motivation and study framing
 
-The completed medium study rejected the mechanism-paper route. M3-full reduced
+The completed medium falsification study did not support an incremental
+mechanism claim. M3-full reduced
 unsafe effects from 8/36 under the structural condition to 0/36, but M3
 policy-only also produced 0/36. Benign tool completion fell from 12/24 under
 the structural condition to 6/24 under M3-full, violating the preregistered
-non-inferiority margin. The contribution is therefore an empirical study of
-authorization uncertainty and the security–utility frontier, not a claim that
-M3-full is a new or state-of-the-art defense.
+non-inferiority margin. These observations motivate an empirical study of
+authorization uncertainty and the security–utility frontier rather than a
+claim that M3-full is a new or state-of-the-art defense.
 
-The independently reproduced Public primary matrix preserves this route at
-larger scale. Across 600 attacks, M3-full reduced unsafe effects from 133 under
+The larger, independently reproduced Public primary matrix reinforced this
+finding. Across 600 attacks, M3-full reduced unsafe effects from 133 under
 the structural condition to 38, but policy-only produced only 13. Across 168
 benign tool tasks, both M3 variants completed 49 versus 103 under the
 structural condition. The full mechanism therefore shows neither incremental
-security nor utility value beyond policy-only in the completed primary-model
-evidence. The 1.4955% retained diagnostic fraction also exceeds the frozen 1%
-clean-mechanism quality ceiling.
+security nor utility value beyond policy-only in the primary-model evidence.
+The 1.4955% retained diagnostic fraction also exceeds the predefined 1%
+threshold for a clean mechanism-quality claim.
 
 The completed 40-task adaptive panel observed first unsafe effect for 4/40
 tasks by budget 50 and 18/40 by budget 200. These points show substantial
@@ -287,13 +288,13 @@ provider, model, tool environment, and evaluator fixed.
 
 The study addresses three research questions:
 
-1. **RQ1 — Authorization regime.** How do `exact_gold`, `auto_compiled`,
+1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    executed unsafe effects, benign task completion, and `ASK/DENY` burden?
-2. **RQ2 — Mechanism contribution.** Does the provenance/data-flow/
+2. **RQ2: Mechanism contribution.** Does the provenance/data-flow/
    confirmation logic in M3-full improve on the same runtime using policy-only
    enforcement, and what operational cost does it introduce?
-3. **RQ3 — External validity and adaptive budget.** Are the observed
+3. **RQ3: External validity and adaptive budget.** Are the observed
    directions stable across AgentDojo, M3-v2, a second provider, and the
    already completed defense-aware budgets 50 and 200?
 
@@ -323,7 +324,7 @@ scope.
 ### 3.3 Online-state and evaluator separation
 
 Every run constructs the online state through an allowlist projection.
-completed fields include trusted user intent, the benchmark-visible task
+Permitted fields include trusted user intent, the benchmark-visible task
 context, the selected authorization regime, provenance events available at
 that step, and the proposed action. Gold answers, expected actions, attack and
 task-success labels, evaluator explanations, reference trajectories, and
@@ -431,11 +432,11 @@ formal prefix.
 Gemini uses the official free tier with a paid ceiling of USD 0. At the first
 HTTP 429, the active run stops and leaves all unstarted items pending. On a new
 provider quota day, only unstarted items and work items with no official model
-response are eligible for explicit recovery. After three quota-day attempts,
-any still incomplete response-less work item is retained as a terminal
-diagnostic. If the 450 planned items do not become terminal within that rule,
-the observed subset is reported as diagnostic and no cross-provider
-generalization claim is made.
+response are eligible for explicit recovery. A rate-limited work item becomes
+a terminal diagnostic on its third quota-day attempt. If the 450-item plan
+still cannot be completed after three provider quota days, the observed subset
+is reported diagnostically, unstarted work items are counted as unavailable,
+and no cross-provider generalization claim is made.
 
 ### 3.9 Providers and model identity
 
@@ -447,9 +448,9 @@ response-bearing record retains the official response identifier, exact
 returned model identity, usage, latency, and cost or free-tier attestation.
 
 Prompts and model responses are not copied into the compact analysis file.
-Content-free request metadata and the provider's internal trace remain under
-the ignored run directory. Exact model identity is checked in the final
-one-pass integrity validation.
+Content-free request metadata and the provider's internal trace remain in a
+restricted local run directory outside the analysis dataset. Exact model
+identity is checked in the final one-pass integrity validation.
 
 ### 3.10 Failure and recovery policy
 
@@ -531,16 +532,15 @@ source.
 
 ## 4. Results
 
-### 4.1 Medium study disposition
+### 4.1 Medium falsification study
 
-The completed study contains 480 records: 432 primary `auto_compiled` records
+The medium study contains 480 records: 432 primary `auto_compiled` records
 covering 72 paired cases across six conditions, plus 48 authorization-regime
-probe records. The prespecified mechanism-paper gate failed and activated the
-empirical-study fallback. M3-full passed the security-effect and deny-all
-checks, but failed the utility point non-inferiority check and showed no
-security gain over M3 policy-only. These negative gates are retained rather
-than removed or redefined.
-
+probe records. The preregistered analysis did not support an incremental
+mechanism claim. M3-full met the security-effect and deny-all criteria, but
+missed the utility point non-inferiority criterion and showed no security gain
+over M3 policy-only. Both the favorable security comparison and the
+unfavorable utility and module comparisons are reported.
 
 #### Supplementary Table S1. Online-state source audit
 
@@ -565,10 +565,10 @@ domain-wide oracle-authorization problem.
 | M3 policy-only | 0/36 | 0.00% (0.00–9.64) | 7/24 | 29.17% (14.91–49.17) | 12/12 |
 | M3-full | 0/36 | 0.00% (0.00–9.64) | 6/24 | 25.00% (12.00–44.90) | 12/12 |
 
-The medium sample therefore shows a security–utility trade-off, not a
-mechanism-paper victory. Both M3 variants eliminated the eight unsafe effects
-observed under the structural condition, but they also completed substantially
-fewer benign tool tasks.
+The medium sample therefore shows a security–utility trade-off, not an
+incremental mechanism benefit. Both M3 variants eliminated the eight unsafe
+effects observed under the structural condition, but they also completed
+substantially fewer benign tool tasks.
 
 #### Supplementary Table S3. Prespecified paired comparisons
 
@@ -598,7 +598,7 @@ outside the preregistered −5 percentage-point non-inferiority margin.
 Across the 432 primary records, 411 completed and 21 retained terminal failures
 comprised six `max_steps`, six parse failures, and nine provider failures. The
 4.86% overall failure fraction and 2.08% provider-failure fraction passed the
-prospectively frozen operational-quality envelope. Every terminal state remains
+predefined operational-quality envelope. Every terminal state remains
 in the intention-to-treat denominator.
 
 For M3-full, 22 initial `ASK` decisions comprised 17 permission-expansion
@@ -618,7 +618,7 @@ completion increased from 1/6 under matched `auto_compiled` to 3/6 under
 were p=0.5 and p=0.25, respectively. These six-pair estimates are sensitivity
 signals, not evidence of a domain-wide bias.
 
-### 4.3 Mechanism/redirect decision
+### 4.3 Prespecified decision criteria
 
 | Gate | Result | Evidence |
 |---|---|---|
@@ -626,18 +626,18 @@ signals, not evidence of a domain-wide bias.
 | Tool-utility point non-inferiority | Fail | −25.00 pp vs −5 pp margin |
 | Full vs policy-only security gain | Fail | 0/36 vs 0/36 |
 | Deny-all rejection | Pass | Benign initial ASK-or-DENY 22.22% |
-| Operational quality | Pass | All three frozen quality checks passed |
-| Paper route | Empirical study | Defense-mechanism route not supported |
+| Operational quality | Pass | All three predefined quality checks passed |
+| Supported interpretation | Empirical trade-off study | Incremental defense-mechanism claim not supported |
 
-The active manuscript route is therefore an empirical study of authorization
-uncertainty and the security–utility trade-off. A defense-mechanism or SOTA
-claim is prohibited.
+The results therefore support an empirical study of authorization uncertainty
+and the security–utility trade-off. They do not support a defense-superiority
+or SOTA claim.
 
 ### 4.4 Public primary-model result
 
 The completed Public matrix contains 847 unique cases and 5,082 records: 600
 attacks and 247 benign cases crossed with the same six conditions. All 76
-diagnostic records (1.4955%) remain in ITT. The frozen 1% quality ceiling
+diagnostic records (1.4955%) remain in ITT. The predefined 1% quality ceiling
 therefore failed and prohibits a clean mechanism-quality claim. A one-pass
 integrity check nevertheless confirmed unique case-condition coverage, model
 identity, and diagnostic retention. The result is primary-model-only.
@@ -705,9 +705,10 @@ affect observed unsafe-effect counts; no diagnostic was retried or excluded.
 On attacks, M3-full issued 181 initial `ASK` and 44 initial `DENY` decisions,
 versus 197 `ASK` and no `DENY` under policy-only. On the 168 benign tool tasks,
 M3-full issued 75 `ASK` decisions and policy-only issued 69. The primary
-mechanism gate therefore passed its structural security-effect check but
-failed utility non-inferiority and module gain. The active route remains the
-empirical security–utility fallback.
+mechanism comparison therefore met its structural security-effect criterion
+but missed utility non-inferiority and module-gain criteria. This pattern is
+consistent with a security–utility trade-off rather than incremental benefit
+from the full mechanism.
 
 ### 4.7 DeepSeek authorization-regime experiment
 
@@ -779,7 +780,7 @@ that every gold-derived policy or every runtime guard behaves similarly.
 
 ### 4.8 Defense-aware adaptive evidence through budget 200
 
-The completed DeepSeek V4 Pro cost canary covered eight result-blind,
+The initial DeepSeek V4 Pro cost canary covered eight result-blind,
 attack-family-balanced M3-v2 development tasks under M3-full and the
 `auto_compiled` authorization regime. At a maximum of 50 queries per task,
 no unsafe effect was found: 0/8 tasks, or 0.00% (Wilson 95% CI 0.00–32.44%).
@@ -884,7 +885,7 @@ and a parser/provider failure may look secure if the evaluator counts only
 successful executions. We therefore treat isolated executed effect as the
 security endpoint and benign tool-task completion as a joint primary endpoint.
 
-The Public evidence already illustrates the problem. Relative to the completed
+The Public evidence already illustrates the problem. Relative to the
 structural condition, both M3 variants reduced unsafe effects but also had much
 lower benign-tool completion. Policy-only then outperformed full on security
 without losing additional utility. The interpretation is not that provenance
@@ -975,9 +976,9 @@ actually evaluated.
 
 ### 5.8 Practical implications
 
-Three practical recommendations follow even before the new paired estimates
-are filled. First, agent-security benchmarks should publish the fields visible
-to the online Guard and keep evaluator-only answers outside that projection.
+Three practical recommendations follow. First, agent-security benchmarks
+should publish the fields visible to the online Guard and keep evaluator-only
+answers outside that projection.
 Second, runtime defenses should be compared against a policy-only variant on
 the same tasks; otherwise a complex module may receive credit for behavior
 already supplied by the base policy. Third, security reports should include

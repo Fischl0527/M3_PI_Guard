@@ -1,5 +1,21 @@
 # 会话移交
 
+## 2026-08-20 — Submission-language and scheduled-Gemini checkpoint
+
+- The current working Markdown and DOCX were rebuilt after a focused prose
+  cleanup. Verification passes 9/9 plus Ruff and `py_compile`; LibreOffice is
+  absent, so visual page QA remains open.
+- A hidden PowerShell process with PID 7676 is waiting until
+  `2026-08-20 15:02:00 +08:00`, then runs exactly one Gemini
+  `remaining --retry-failed` command using the ignored local config. Do not
+  start a second runner or interrupt it before natural completion.
+- The run skips all five response-bearing work keys, may select only 109
+  response-less recovery-eligible and 335 untouched items, stops at the first
+  429, uses the official free tier with USD 0, and keeps tools/effects disabled.
+- After the process exits, inspect aggregate counts only. If complete, run the
+  compact analysis/tables/figures once and update the manuscript. If 429 recurs,
+  retain the new row and wait for the next quota day; do not retry the same day.
+
 ## 2026-08-20 — Lean claim-ledger checkpoint
 
 - Use `docs/research/paper_v2/manuscript/claim_evidence_ledger_lean_v1.json`

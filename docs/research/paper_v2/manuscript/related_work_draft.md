@@ -74,7 +74,7 @@ security and utility; enforce a runtime projection that excludes evaluator
 fields; compare policy-only and full provenance/temporal/confirmation variants
 in paired conditions; and quantify `ASK` burden, operational failures, and
 executed effects under a common evidence contract. These are study-design
-claims and must stand on M3's own admitted experiments.
+claims and must stand on M3's own completed experiments.
 
 ## Prompt-level defenses and execution-level outcomes
 

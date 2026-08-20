@@ -22,7 +22,7 @@ and adaptive attack budget.
 Across completed public experiments with DeepSeek V4 Pro and V4 Flash, the
 full provenance-aware runtime reduced unsafe effects relative to a structural
 baseline but did not outperform a policy-only ablation. A prospectively frozen
-900-record authorization study further showed that evaluator-derived exact
+900-work-item authorization study further showed that evaluator-derived exact
 authorization could leave attack outcomes near the observed floor while
 reducing benign-tool completion by 21.67 percentage points under policy-only
 and 15.00 points under the full runtime. Exact authorization also replaced
@@ -44,4 +44,3 @@ Thank you for considering the manuscript.
 Sincerely,
 
 The authors
-

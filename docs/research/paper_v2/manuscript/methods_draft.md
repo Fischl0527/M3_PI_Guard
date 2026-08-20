@@ -12,13 +12,13 @@ provider, model, tool environment, and evaluator fixed.
 
 The study addresses three research questions:
 
-1. **RQ1 — Authorization regime.** How do `exact_gold`, `auto_compiled`,
+1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    executed unsafe effects, benign task completion, and `ASK/DENY` burden?
-2. **RQ2 — Mechanism contribution.** Does the provenance/data-flow/
+2. **RQ2: Mechanism contribution.** Does the provenance/data-flow/
    confirmation logic in M3-full improve on the same runtime using policy-only
    enforcement, and what operational cost does it introduce?
-3. **RQ3 — External validity and adaptive budget.** Are the observed
+3. **RQ3: External validity and adaptive budget.** Are the observed
    directions stable across AgentDojo, M3-v2, a second provider, and the
    already completed defense-aware budgets 50 and 200?
 
@@ -48,7 +48,7 @@ scope.
 ## Online-state and evaluator separation
 
 Every run constructs the online state through an allowlist projection.
-Admitted fields include trusted user intent, the benchmark-visible task
+Permitted fields include trusted user intent, the benchmark-visible task
 context, the selected authorization regime, provenance events available at
 that step, and the proposed action. Gold answers, expected actions, attack and
 task-success labels, evaluator explanations, reference trajectories, and
@@ -156,11 +156,11 @@ formal prefix.
 Gemini uses the official free tier with a paid ceiling of USD 0. At the first
 HTTP 429, the active run stops and leaves all unstarted items pending. On a new
 provider quota day, only unstarted items and work items with no official model
-response are eligible for explicit recovery. After three quota-day attempts,
-any still incomplete response-less work item is retained as a terminal
-diagnostic. If the 450 planned items do not become terminal within that rule,
-the observed subset is reported as diagnostic and no cross-provider
-generalization claim is made.
+response are eligible for explicit recovery. A rate-limited work item becomes
+a terminal diagnostic on its third quota-day attempt. If the 450-item plan
+still cannot be completed after three provider quota days, the observed subset
+is reported diagnostically, unstarted work items are counted as unavailable,
+and no cross-provider generalization claim is made.
 
 ## Providers and model identity
 
@@ -172,9 +172,9 @@ response-bearing record retains the official response identifier, exact
 returned model identity, usage, latency, and cost or free-tier attestation.
 
 Prompts and model responses are not copied into the compact analysis file.
-Content-free request metadata and the provider's internal trace remain under
-the ignored run directory. Exact model identity is checked in the final
-one-pass integrity validation.
+Content-free request metadata and the provider's internal trace remain in a
+restricted local run directory outside the analysis dataset. Exact model
+identity is checked in the final one-pass integrity validation.
 
 ## Failure and recovery policy
 

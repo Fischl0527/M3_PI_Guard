@@ -69,7 +69,7 @@ and a parser/provider failure may look secure if the evaluator counts only
 successful executions. We therefore treat isolated executed effect as the
 security endpoint and benign tool-task completion as a joint primary endpoint.
 
-The Public evidence already illustrates the problem. Relative to the admitted
+The Public evidence already illustrates the problem. Relative to the
 structural condition, both M3 variants reduced unsafe effects but also had much
 lower benign-tool completion. Policy-only then outperformed full on security
 without losing additional utility. The interpretation is not that provenance
@@ -160,9 +160,9 @@ actually evaluated.
 
 ## Practical implications
 
-Three practical recommendations follow even before the new paired estimates
-are filled. First, agent-security benchmarks should publish the fields visible
-to the online Guard and keep evaluator-only answers outside that projection.
+Three practical recommendations follow. First, agent-security benchmarks
+should publish the fields visible to the online Guard and keep evaluator-only
+answers outside that projection.
 Second, runtime defenses should be compared against a policy-only variant on
 the same tasks; otherwise a complex module may receive credit for behavior
 already supplied by the base policy. Third, security reports should include

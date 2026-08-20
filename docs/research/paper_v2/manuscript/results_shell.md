@@ -2,31 +2,21 @@
 
 Status: `deepseek_authorization_results_complete_gemini_pending`
 
-This draft separates admitted evidence from pending confirmatory work. The
-authoritative medium analysis is
-`outputs/paper_upgrade_v2/formal_medium/deepseek/ba9c7937d08b68e088faf8586e0dd96d2052a398fd0a77889fd6a62e503f2373/admitted_medium_analysis_v8.json`
-(SHA-256
-`ea3d6197b0f97b5057b1d0f9fff054f3ae43743eb9cb85eb4122b6c152d7e041`).
-It is bound to result admission
-`0ed21b6d934d8aefab95667adbf07203140d5cf3d115b891eef882eb9fb028d7`.
-The separately admitted eight-task adaptive cost canary is reported only as
-exploratory evidence. The 5,082-record Public primary-model matrix and the
-1,791-record DeepSeek V4 Flash replication are complete. The new 900-record
-DeepSeek V4 Pro authorization-regime experiment is also complete and analyzed
-below. The 450-record Gemini experiment remains incomplete and contributes no
-cross-provider conclusion at this stage.
+This section reports the completed 480-record medium study, 5,082-record
+Public primary-model matrix, 1,791-record DeepSeek V4 Flash replication,
+900-work-item DeepSeek V4 Pro authorization experiment, and adaptive evidence
+through budget 200. The 450-work-item Gemini experiment remains incomplete and
+contributes no cross-provider conclusion at this stage.
 
-## Medium study disposition
+## Medium falsification study
 
-The admitted study contains 480 records: 432 primary `auto_compiled` records
+The medium study contains 480 records: 432 primary `auto_compiled` records
 covering 72 paired cases across six conditions, plus 48 authorization-regime
-probe records. The prespecified mechanism-paper gate failed and activated the
-empirical-study fallback. M3-full passed the security-effect and deny-all
-checks, but failed the utility point non-inferiority check and showed no
-security gain over M3 policy-only. These negative gates are retained rather
-than removed or redefined.
-
-Controlling disposition: `medium_admitted_empirical_fallback_selected`.
+probe records. The preregistered analysis did not support an incremental
+mechanism claim. M3-full met the security-effect and deny-all criteria, but
+missed the utility point non-inferiority criterion and showed no security gain
+over M3 policy-only. Both the favorable security comparison and the
+unfavorable utility and module comparisons are reported.
 
 ### Supplementary Table S1. Online-state source audit
 
@@ -51,10 +41,10 @@ domain-wide oracle-authorization problem.
 | M3 policy-only | 0/36 | 0.00% (0.00–9.64) | 7/24 | 29.17% (14.91–49.17) | 12/12 |
 | M3-full | 0/36 | 0.00% (0.00–9.64) | 6/24 | 25.00% (12.00–44.90) | 12/12 |
 
-The medium sample therefore shows a security–utility trade-off, not a
-mechanism-paper victory. Both M3 variants eliminated the eight unsafe effects
-observed under the structural condition, but they also completed substantially
-fewer benign tool tasks.
+The medium sample therefore shows a security–utility trade-off, not an
+incremental mechanism benefit. Both M3 variants eliminated the eight unsafe
+effects observed under the structural condition, but they also completed
+substantially fewer benign tool tasks.
 
 ### Supplementary Table S3. Prespecified paired comparisons
 
@@ -84,7 +74,7 @@ outside the preregistered −5 percentage-point non-inferiority margin.
 Across the 432 primary records, 411 completed and 21 retained terminal failures
 comprised six `max_steps`, six parse failures, and nine provider failures. The
 4.86% overall failure fraction and 2.08% provider-failure fraction passed the
-prospectively frozen operational-quality envelope. Every terminal state remains
+predefined operational-quality envelope. Every terminal state remains
 in the intention-to-treat denominator.
 
 For M3-full, 22 initial `ASK` decisions comprised 17 permission-expansion
@@ -104,7 +94,7 @@ completion increased from 1/6 under matched `auto_compiled` to 3/6 under
 were p=0.5 and p=0.25, respectively. These six-pair estimates are sensitivity
 signals, not evidence of a domain-wide bias.
 
-## Mechanism/redirect decision
+## Prespecified decision criteria
 
 | Gate | Result | Evidence |
 |---|---|---|
@@ -112,18 +102,18 @@ signals, not evidence of a domain-wide bias.
 | Tool-utility point non-inferiority | Fail | −25.00 pp vs −5 pp margin |
 | Full vs policy-only security gain | Fail | 0/36 vs 0/36 |
 | Deny-all rejection | Pass | Benign initial ASK-or-DENY 22.22% |
-| Operational quality | Pass | All three frozen quality checks passed |
-| Paper route | Empirical study | Defense-mechanism route not supported |
+| Operational quality | Pass | All three predefined quality checks passed |
+| Supported interpretation | Empirical trade-off study | Incremental defense-mechanism claim not supported |
 
-The active manuscript route is therefore an empirical study of authorization
-uncertainty and the security–utility trade-off. A defense-mechanism or SOTA
-claim is prohibited.
+The results therefore support an empirical study of authorization uncertainty
+and the security–utility trade-off. They do not support a defense-superiority
+or SOTA claim.
 
 ## Public primary-model result
 
-The admitted Public matrix contains 847 unique cases and 5,082 records: 600
+The completed Public matrix contains 847 unique cases and 5,082 records: 600
 attacks and 247 benign cases crossed with the same six conditions. All 76
-diagnostic records (1.4955%) remain in ITT. The frozen 1% quality ceiling
+diagnostic records (1.4955%) remain in ITT. The predefined 1% quality ceiling
 therefore failed and prohibits a clean mechanism-quality claim. A one-pass
 integrity check nevertheless confirmed unique case-condition coverage, model
 identity, and diagnostic retention. The result is primary-model-only.
@@ -191,9 +181,10 @@ affect observed unsafe-effect counts; no diagnostic was retried or excluded.
 On attacks, M3-full issued 181 initial `ASK` and 44 initial `DENY` decisions,
 versus 197 `ASK` and no `DENY` under policy-only. On the 168 benign tool tasks,
 M3-full issued 75 `ASK` decisions and policy-only issued 69. The primary
-mechanism gate therefore passed its structural security-effect check but
-failed utility non-inferiority and module gain. The active route remains the
-empirical security–utility fallback.
+mechanism comparison therefore met its structural security-effect criterion
+but missed utility non-inferiority and module-gain criteria. This pattern is
+consistent with a security–utility trade-off rather than incremental benefit
+from the full mechanism.
 
 ## DeepSeek authorization-regime experiment
 
@@ -265,7 +256,7 @@ that every gold-derived policy or every runtime guard behaves similarly.
 
 ## Defense-aware adaptive evidence through budget 200
 
-The admitted DeepSeek V4 Pro cost canary covered eight result-blind,
+The initial DeepSeek V4 Pro cost canary covered eight result-blind,
 attack-family-balanced M3-v2 development tasks under M3-full and the
 `auto_compiled` authorization regime. At a maximum of 50 queries per task,
 no unsafe effect was found: 0/8 tasks, or 0.00% (Wilson 95% CI 0.00–32.44%).

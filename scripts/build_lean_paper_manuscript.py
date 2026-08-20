@@ -28,7 +28,7 @@ SECTION_FILES = (
         "## Critical citation-context audit",
     ),
     ("3. Methods", "methods_draft.md", None, None),
-    ("4. Results", "results_shell.md", "## Medium study disposition", None),
+    ("4. Results", "results_shell.md", "## Medium falsification study", None),
     ("5. Discussion", "discussion_draft.md", None, None),
     ("6. Conclusion", "conclusion_draft.md", None, None),
 )

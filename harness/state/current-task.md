@@ -1,5 +1,18 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 11：投稿语言清理与配额前检查点
+
+- 对统一英文稿逐节执行了投稿语言检查，只修正不依赖 Gemini 的确定性问题：
+  RQ 标点、Results 中内部路径/哈希/路线切换措辞、`admitted/fallback` 工程术语、
+  Gemini 三配额日停止规则表述，以及 cover letter 的 900 work-item 口径。
+- Markdown 与 Word 已重建；工作稿包含 282 段、13 表、5 图。定向 pytest 9/9、
+  Ruff 和 `py_compile` 通过。LibreOffice 仍不存在，因此不宣称完成分页视觉验收。
+- Gemini 定时 pending-only 进程计划于本地 15:02（Pacific 新配额日）执行；截至
+  本检查点日志为 0 字节、API 调用为 0。它只恢复无响应/未触及项，已有官方响应
+  的 5 个 work key 永不重跑，首个 429 即停止，真实工具和外部 effect 保持禁用。
+- F-PAPER-002 保持 `in_progress`；本里程碑完成后进行独立 Git commit/push，随后
+  等待 Gemini 自然终态，不启动 Full Harness 或历史证据复算。
+
 ### 2026-08-20 精简实证里程碑 10：lean claim–evidence ledger
 
 - 旧 `claim_evidence_ledger_v1.json` 仍包含已废止的 blind、B500/B2000、完整

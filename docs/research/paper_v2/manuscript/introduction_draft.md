@@ -56,13 +56,13 @@ interface [@L27].
 
 The study asks three questions.
 
-1. **RQ1 — Authorization regime.** How do `exact_gold`, `auto_compiled`,
+1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    unsafe effect, benign task completion, and `ASK/DENY` burden?
-2. **RQ2 — Module contribution.** Does provenance, temporal/data-flow
+2. **RQ2: Module contribution.** Does provenance, temporal/data-flow
    enforcement, and confirmation add security beyond the same runtime with
    policy-only enforcement, and what does it cost operationally?
-3. **RQ3 — External validity and adaptive budget.** Are these directions
+3. **RQ3: External validity and adaptive budget.** Are these directions
    stable across AgentDojo, M3-v2, a second provider, and the completed
    defense-aware budgets 50 and 200?
 
@@ -85,24 +85,25 @@ items. The design separately reuses the completed 480-record medium study,
 40-task adaptive evidence at budgets 50 and 200. Provider tools and real
 external effects are prohibited throughout.
 
-## Current evidence and route decision
+## Empirical motivation and study framing
 
-The admitted medium study rejected the mechanism-paper route. M3-full reduced
+The completed medium falsification study did not support an incremental
+mechanism claim. M3-full reduced
 unsafe effects from 8/36 under the structural condition to 0/36, but M3
 policy-only also produced 0/36. Benign tool completion fell from 12/24 under
 the structural condition to 6/24 under M3-full, violating the preregistered
-non-inferiority margin. The contribution is therefore an empirical study of
-authorization uncertainty and the security–utility frontier, not a claim that
-M3-full is a new or state-of-the-art defense.
+non-inferiority margin. These observations motivate an empirical study of
+authorization uncertainty and the security–utility frontier rather than a
+claim that M3-full is a new or state-of-the-art defense.
 
-The independently reproduced Public primary matrix preserves this route at
-larger scale. Across 600 attacks, M3-full reduced unsafe effects from 133 under
+The larger, independently reproduced Public primary matrix reinforced this
+finding. Across 600 attacks, M3-full reduced unsafe effects from 133 under
 the structural condition to 38, but policy-only produced only 13. Across 168
 benign tool tasks, both M3 variants completed 49 versus 103 under the
 structural condition. The full mechanism therefore shows neither incremental
-security nor utility value beyond policy-only in the admitted primary-model
-evidence. The 1.4955% retained diagnostic fraction also exceeds the frozen 1%
-clean-mechanism quality ceiling.
+security nor utility value beyond policy-only in the primary-model evidence.
+The 1.4955% retained diagnostic fraction also exceeds the predefined 1%
+threshold for a clean mechanism-quality claim.
 
 The completed 40-task adaptive panel observed first unsafe effect for 4/40
 tasks by budget 50 and 18/40 by budget 200. These points show substantial
