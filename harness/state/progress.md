@@ -1,5 +1,16 @@
 # 进展记录
 
+## 2026-08-20 — Active citation compliance complete
+
+- Reviewed only the 21 references actually cited by the unified manuscript;
+  all in-text keys resolve and citeproc renders no uncited bibliography item.
+- Publisher/proceedings/arXiv records support 11 formal publications and 10
+  preprints. DRIFT was corrected to NeurIPS 2025 with its official DOI;
+  AgentSpec's unregistered DOI and unverified pages were removed in favour of
+  the official ICSE 2026 Research Track page.
+- Rebuilt Markdown and DOCX; focused manuscript/DOCX tests pass 9/9 plus Ruff
+  and `py_compile`. No provider call, Full Harness or historical replay ran.
+
 ## 2026-08-20 — Provisional JISA cover letter drafted
 
 - Added a 293-word cover letter bounded to completed DeepSeek and Adaptive

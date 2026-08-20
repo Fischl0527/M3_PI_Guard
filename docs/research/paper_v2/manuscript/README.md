@@ -65,6 +65,8 @@ Files:
   It follows Elsevier's current general cover-letter guidance, excludes
   funding/declarations/reviewer suggestions, and remains contingent only on
   final author details and Gemini's prespecified stopping rule.
+- `citation_compliance_active_v1.md`: submission-focused metadata and claim-fit
+  review for the 21 references actually cited in the manuscript.
 - `abstract_shell.md`: provisional DeepSeek-results abstract; the final
   cross-provider sentence remains contingent on Gemini's stopping rule.
 - `highlights_v1.md`: five JISA-length highlights summarizing the current

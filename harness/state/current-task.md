@@ -1,5 +1,17 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 8：active citation compliance
+
+- 只核验统一稿实际引用的 21 个 BibTeX key；未被引用的 15 条候选文献不进入本轮
+  投稿核验，避免无效全库重算。
+- 21/21 引用键均可解析；其中 11 篇有正式会议/Workshop 发表记录，10 篇保持
+  preprint 身份。引用用途与正文论述匹配，不支持 first/only/SOTA 主张。
+- 修正两处确定性元数据缺陷：DRIFT 改为官方 NeurIPS 2025 年份并补 DOI；
+  AgentSpec 删除 DOI 系统无法解析的旧 DOI 与未经核实页码，改用 ICSE 2026
+  Research Track 官方页面。
+- Markdown/Word 已重建；定向 pytest 9/9、Ruff 和 `py_compile` 通过。Gemini
+  仍等待新 Pacific 配额日，不提前调用。F-PAPER-002 保持 `in_progress`。
+
 ### 2026-08-20 精简实证里程碑 7：JISA cover letter draft
 
 - 在等待 Gemini 新配额日时新增 293-word JISA cover letter 草稿，只使用已完成的
@@ -38,7 +50,8 @@ M3-PAPER-002
 DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro 授权
 制度实验和 450 条 Gemini 精简跨厂商验证。停止 Full Harness、递归历史证据重放、
 独立盲测、Pro-500、hardest-20×2000 和完整 Gemini 1791 矩阵。不读取或输出秘密，
-不执行真实工具/effect，不 push、创建 PR 或部署。
+不执行真实工具/effect；按 Owner 授权在稳定阶段 commit 并 push 到 `m3-guard`，
+不创建 PR、不部署、不 force-push。
 
 ## 当前阶段
 
