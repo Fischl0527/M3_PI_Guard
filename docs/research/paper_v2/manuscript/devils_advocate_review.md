@@ -79,11 +79,11 @@ inspection of the final Word/PDF rendering.
    hardest-task robustness, or an asymptotic attack rate. The curve and text
    consistently stop at 200.
 
-10. **“Official model aliases are not immutable model revisions.” — Open
-    reproducibility limitation.** Official response identifiers and returned
-    model names make requests auditable, but provider-managed aliases do not
-    freeze hidden weights. Release dates and execution dates should remain in
-    the final reproducibility statement.
+10. **“Official model aliases are not immutable model revisions.” — Disclosed
+    reproducibility limitation.** The Methods now reports the July–August 2026
+    execution window and states that official response identifiers and returned
+    model names identify the served model at request time without freezing its
+    hidden weights.
 
 11. **“The isolated effect environment is not deployment evidence.” — Accepted
     safety trade-off.** Isolation prevents real email, payment, browser, code,

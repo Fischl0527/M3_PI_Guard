@@ -1,5 +1,17 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 13：模型别名可复现性边界
+
+- Methods 新增 2026 年 7–8 月 provider 调用时间窗，并明确官方返回模型名是
+  请求时身份而不是隐藏权重快照；Limitations 同步披露 provider-managed alias
+  不可保证底层权重不变。
+- Devil's Advocate 中该项从 open 改为 disclosed。没有修改任何结果、估计或主张
+  方向；统一稿重建为 10,055 词、283 段、13 表、5 图。
+- Markdown/Word 定向 pytest 10/10、Ruff、`py_compile` 通过；未运行 Full Harness、
+  历史重放或任何 provider 调用。Gemini 唯一定时进程仍等待 15:02。
+- F-PAPER-002 保持 `in_progress`，等待 Gemini 三配额日停止规则闭合后再进入强制
+  Stage 2.5 integrity gate。
+
 ### 2026-08-20 精简实证里程碑 12：工作稿口径同步与 Gemini 配额日前状态
 
 - 当前 Markdown/Word 工作稿为 9,999 词、283 段、13 表、5 图；主文正文仍在

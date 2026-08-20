@@ -1,5 +1,16 @@
 # 会话移交
 
+## 2026-08-20 — Provider-alias reproducibility checkpoint
+
+- The current generated manuscript is 10,055 words, 283 paragraphs, 13 tables
+  and five figures. Methods reports the July–August 2026 execution window and
+  distinguishes request-time returned aliases from immutable model weights.
+- Focused manuscript/DOCX tests pass 10/10 plus Ruff and `py_compile`. No
+  provider call or scientific estimate changed at this checkpoint.
+- PID 7676 remains the only scheduled Gemini process; let it run naturally at
+  15:02 and do not launch another runner. Stage 2.5 integrity review remains
+  deferred until Gemini completes or reaches the three-quota-day downgrade.
+
 ## 2026-08-20 — Current working-draft and Gemini wait state
 
 - The current working draft is 9,999 words, 283 paragraphs, 13 tables and five

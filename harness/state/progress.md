@@ -1,5 +1,18 @@
 # 进展记录
 
+## 2026-08-20 — Provider-alias reproducibility limitation closed
+
+- Methods now records the July–August 2026 provider-call window and explains
+  that returned model names identify the served provider alias at request time
+  without freezing hidden weights. Limitations and the Devil's Advocate review
+  now use the same boundary.
+- Rebuilt Markdown/Word output contains 10,055 words, 283 paragraphs, 13 tables
+  and five figures. Focused manuscript/DOCX tests pass 10/10; Ruff and
+  `py_compile` pass.
+- No estimate, experiment record or claim direction changed. No provider call,
+  Full Harness or historical replay occurred; Gemini remains scheduled for
+  15:02.
+
 ## 2026-08-20 — Working-draft status synchronized before Gemini
 
 - Synchronized collaborator-facing documentation with the current 9,999-word,

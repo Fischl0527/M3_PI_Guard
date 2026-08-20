@@ -446,6 +446,9 @@ Generative Language OpenAI-compatible endpoint. Each request is assigned a
 local request identifier and canonical payload digest before transport. A
 response-bearing record retains the official response identifier, exact
 returned model identity, usage, latency, and cost or free-tier attestation.
+Provider calls for the evidence reported here were made during July and August
+2026. The returned names are provider-managed model aliases and therefore
+identify the served model at request time without freezing its hidden weights.
 
 Prompts and model responses are not copied into the compact analysis file.
 Content-free request metadata and the provider's internal trace remain in a
@@ -959,7 +962,9 @@ First, the new primary experiment uses one proprietary model and two benchmark
 families. Model updates, tool schemas, system prompts, and application context
 may change the effects. The smaller Gemini subset was designed to probe this
 dependence, but it contributes no cross-provider evidence unless all 450 work
-items reach terminal status.
+items reach terminal status. Although execution dates, official response
+identifiers, and returned model names are retained, provider-managed aliases do
+not make the underlying weights immutable.
 
 Second, the new authorization experiment has a strong attack-endpoint floor:
 only one unsafe effect occurred across the 400 primary attack records. It can

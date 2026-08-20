@@ -170,6 +170,9 @@ Generative Language OpenAI-compatible endpoint. Each request is assigned a
 local request identifier and canonical payload digest before transport. A
 response-bearing record retains the official response identifier, exact
 returned model identity, usage, latency, and cost or free-tier attestation.
+Provider calls for the evidence reported here were made during July and August
+2026. The returned names are provider-managed model aliases and therefore
+identify the served model at request time without freezing its hidden weights.
 
 Prompts and model responses are not copied into the compact analysis file.
 Content-free request metadata and the provider's internal trace remain in a
