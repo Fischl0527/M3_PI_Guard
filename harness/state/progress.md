@@ -1,5 +1,15 @@
 # 进展记录
 
+## 2026-08-20 — JISA author-package inputs prepared
+
+- Added a no-inference author-input template for title-page metadata,
+  corresponding-author contacts, full affiliations, CRediT, declarations,
+  acknowledgements, institutional review, release identifiers, biographies and
+  photographs.
+- Added the separate field-specific glossary requested by the current JISA
+  guide and updated the submission checklist. Author-owned facts remain open;
+  no placeholder was inserted into the reader-facing manuscript.
+
 ## 2026-08-20 — Active citation compliance complete
 
 - Reviewed only the 21 references actually cited by the unified manuscript;

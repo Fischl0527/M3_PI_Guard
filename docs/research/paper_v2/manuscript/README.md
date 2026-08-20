@@ -67,6 +67,11 @@ Files:
   final author details and Gemini's prespecified stopping rule.
 - `citation_compliance_active_v1.md`: submission-focused metadata and claim-fit
   review for the 21 references actually cited in the manuscript.
+- `author_metadata_and_submission_inputs.md`: author-owned title-page,
+  declaration, CRediT, biography and release fields that must be completed by
+  the author team rather than inferred from the repository.
+- `glossary_v1.md`: separate definitions for the field-specific terms used in
+  the manuscript, prepared for the JISA submission package.
 - `abstract_shell.md`: provisional DeepSeek-results abstract; the final
   cross-provider sentence remains contingent on Gemini's stopping rule.
 - `highlights_v1.md`: five JISA-length highlights summarizing the current

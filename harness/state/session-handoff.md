@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-08-20 — JISA author-input checkpoint
+
+- Complete `docs/research/paper_v2/manuscript/author_metadata_and_submission_inputs.md`
+  only with author-supplied facts before producing the final title page.
+- `glossary_v1.md` contains the separate terminology list requested by the
+  current JISA guide. Biographies (maximum 100 words each) and separate author
+  photographs remain author-side submission inputs.
+- The scheduled Gemini process remains the next data-bearing operation; these
+  package files make no scientific or cross-provider claim.
+
 ## 2026-08-20 — Active-citation checkpoint
 
 - The current 21-key citation set is reviewed in

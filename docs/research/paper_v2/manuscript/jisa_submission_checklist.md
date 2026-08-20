@@ -44,7 +44,11 @@ Current official format requirements checked on 2026-08-20:
   policy calls for repository deposit or an explanation of non-availability;
   and
 - any required generative-AI declaration appears in its own section before the
-  references.
+  references;
+- the title page supplies author names/order, full affiliations, corresponding
+  author contact details and any present/permanent address; and
+- a separate glossary plus an editable biography (100 words maximum) and
+  passport-type photograph for each author are requested.
 
 The provisional abstract and five-highlight file satisfy these bounds. Their
 scientific wording remains subject to Gemini's prespecified stopping rule.
@@ -80,6 +84,13 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
   no-specific-funding statement.
 - [ ] Finalize author order and obtain every author’s approval before
   submission.
+- [x] Prepare a structured title-page/author-input template covering names,
+  full affiliations, corresponding-author details, CRediT, declarations and
+  release metadata; author-owned values remain unfilled.
+- [x] Prepare a separate glossary of the field-specific terms used in the
+  manuscript.
+- [ ] Supply a biography of at most 100 words and a separate passport-type
+  photograph for every author.
 - [x] Add a provisional research-data/code-availability statement and repository
   link; replace the private-review wording with the archival DOI or immutable
   public release identifier before publication.

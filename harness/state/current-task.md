@@ -1,5 +1,16 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 9：JISA author-package inputs
+
+- 根据 JISA 官方 Guide for Authors 补齐投稿包缺口：title page 需要姓名顺序、完整
+  affiliation、通信作者联系方式及必要的 present/permanent address；每位作者还需
+  不超过 100 词 biography 和单独照片。
+- 新增 author-owned input 模板，覆盖 title page、CRediT、利益冲突、资助、
+  acknowledgement、机构审查及 data/code release。所有未知事实保持待作者填写，
+  不从仓库推断。
+- 新增独立 glossary，定义授权制度、ASK/DENY、unsafe effect、TCR、ITT、
+  provenance 和实验条件。JISA checklist 已同步；Gemini 仍按 15:02 调度等待。
+
 ### 2026-08-20 精简实证里程碑 8：active citation compliance
 
 - 只核验统一稿实际引用的 21 个 BibTeX key；未被引用的 15 条候选文献不进入本轮
