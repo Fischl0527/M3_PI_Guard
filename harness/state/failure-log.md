@@ -5394,3 +5394,15 @@ credential, changed a historical ledger, or enabled an external effect.
   inside the figure generator, add the property to its focused test, regenerate
   the figures once, and restage the exact checkpoint. No visual geometry,
   statistic, experiment row, or manuscript claim changes.
+
+## 2026-08-20 — Chinese DOCX verification environment fallback
+
+- Attempt: use the bundled document Python for both DOCX generation and focused
+  pytest, then render the completed Word file with the standard renderer.
+- Failure: the bundled document Python does not include pytest, and the renderer
+  cannot find LibreOffice/soffice on this host.
+- Changed hypothesis: keep the bundled Python for document generation and
+  structural audits, use the existing LFischl Python 3.13.5 environment for the
+  focused test/Ruff/compile suite, and stop after one failed render attempt.
+  Structural, geometry, image and accessibility checks replace the unavailable
+  page render; visual pagination is explicitly left unclaimed.

@@ -588,7 +588,8 @@
         "The five paper figures now have separate PNG/SVG/PDF outputs: five vector PDFs are valid single-page files without date metadata, SVGs have no external references, and focused tests plus Ruff/compile pass. The JISA checklist designates PDF for upload, SVG as editable source and PNG for Word/QA; no provider call or scientific result changed.",
         "A Chinese direct-fill companion now collects all author-owned submission facts without inferring them from the repository or exposing secrets; it is explicitly outside manuscript and experimental state.",
         "The main manuscript now uses table-specific references for Supplementary Tables S1-S6 and describes the submission PDF/editable SVG/QA PNG artwork consistently; the rebuilt Markdown/Word package passes 13 focused tests plus Ruff/compile without changing scientific values.",
-        "All five figure previews received visual QA: Figure 2 now exposes coincident conditions with a documented slash-linked marker, Figure 3 moves its legend outside the confidence-interval panel, and synchronized PNG/SVG/PDF plus Word outputs pass 14 focused tests without changing data."
+        "All five figure previews received visual QA: Figure 2 now exposes coincident conditions with a documented slash-linked marker, Figure 3 moves its legend outside the confidence-interval panel, and synchronized PNG/SVG/PDF plus Word outputs pass 14 focused tests without changing data.",
+        "A complete Simplified Chinese comparison manuscript now mirrors the six scientific sections, six numbered main tables, inline decision table, five figures, 21-source citation corpus, DeepSeek statistics and Gemini-pending claim boundary. The editable Word copy has 249 paragraphs, seven tables and five figures; focused verification passes 17/17 plus Ruff/compile, DOCX geometry/image/a11y audits pass, and page-render QA remains explicitly unclaimed because LibreOffice/soffice is unavailable."
       ]
     },
     {

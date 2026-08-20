@@ -44,6 +44,15 @@ Files:
   `python scripts/build_lean_paper_docx.py` using a Python environment with
   `python-docx` and Pandoc. Structural and accessibility checks pass; visual
   page rendering remains pending on a host with LibreOffice, Word or WPS.
+- `manuscript_zh_v1.md` and
+  `M3_PI_Guard_JISA_chinese_comparison.docx`: Simplified Chinese comparison
+  versions of the current English working manuscript. They preserve the same
+  six-section scientific structure, 21-source citation corpus, six numbered
+  main tables, one inline decision table, five figures, numerical results and
+  Gemini-pending claim boundary. The Chinese files are for author review and
+  team communication rather than JISA submission. Rebuild the Word copy with
+  `python -m scripts.build_lean_paper_chinese_docx` in an environment with
+  `python-docx` and Pandoc.
 - `supplementary_tables_v1.md` and
   `M3_PI_Guard_JISA_supplementary_tables.docx`: the six detailed tables S1-S6
   referenced from Results. Rebuild both with

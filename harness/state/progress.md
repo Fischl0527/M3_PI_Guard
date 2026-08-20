@@ -1,5 +1,20 @@
 # 进展记录
 
+## 2026-08-20 — Simplified Chinese comparison manuscript added
+
+- Added a full Simplified Chinese counterpart to the current English working
+  manuscript for author review and team communication. It mirrors the six
+  scientific sections, five figures, six numbered main tables, inline decision
+  table, 21-reference corpus and the Gemini-pending claim boundary.
+- Every numeric token in Main Tables 1–6 matches the English manuscript. The
+  editable Word comparison has 249 paragraphs, seven tables, five figures and
+  21 citeproc-rendered references, with SimSun body and Microsoft YaHei heading
+  fonts alongside Times New Roman Latin text.
+- Focused verification passes 17/17 plus Ruff and `py_compile`; Letter geometry,
+  one-inch margins, 9,360-DXA table grids, images and accessibility pass with
+  0 high/0 medium findings. LibreOffice/soffice is absent, so page-render visual
+  QA is not claimed. No provider call or scientific result changed.
+
 ## 2026-08-20 — Elsevier-ready vector figure files added
 
 - The five-figure generator now writes PNG for manuscript/QA use, editable SVG,

@@ -331,3 +331,16 @@ Record completed, blocked, and abandoned tasks here.
 - Updated and visually inspected Figure 1. Made all SVG serialization
   deterministic and removed generation dates so future figure changes remain
   reviewable. Focused tests pass 11/11 plus Ruff; abstract/highlight limits pass.
+
+# 2026-08-20 — M3-PAPER-002 Chinese comparison manuscript
+
+- Created a complete Simplified Chinese comparison manuscript without changing
+  the English submission draft or any scientific result. The Chinese version
+  mirrors all six scientific sections, five figures, six numbered main tables,
+  one inline decision table, 21 citations and the submission statements.
+- Added a deterministic Word builder that reuses the English review layout,
+  applies explicit Simplified Chinese fonts, renders the same bibliography and
+  preserves the Gemini-pending/no-cross-provider limitation.
+- Focused verification passed 17/17 with Ruff and `py_compile`; DOCX section,
+  table, image and accessibility audits passed. The standard renderer could not
+  run because LibreOffice/soffice is absent, so no page-render claim is made.

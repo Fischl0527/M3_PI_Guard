@@ -1,5 +1,19 @@
 # 会话移交
 
+## 2026-08-20 — Chinese comparison manuscript checkpoint
+
+- Chinese source: `docs/research/paper_v2/manuscript/manuscript_zh_v1.md`.
+  Editable Word output:
+  `docs/research/paper_v2/manuscript/M3_PI_Guard_JISA_chinese_comparison.docx`.
+- Rebuild with `F:\robot\Anaconda3\python.exe -B -m
+  scripts.build_lean_paper_chinese_docx`. The comparison draft preserves the
+  English paper's key statistics, six main tables, five figures, 21 references,
+  negative mechanism result and Gemini-pending/no-cross-provider boundary.
+- Focused tests pass 17/17 plus Ruff/compile. Structural, table, image and a11y
+  checks pass; page-level visual QA remains open because LibreOffice/soffice is
+  unavailable. Treat this file as an internal comparison copy, not the JISA
+  submission manuscript. F-PAPER-002 remains `in_progress`.
+
 ## 2026-08-20 — Vector figure submission checkpoint
 
 - Upload the five `figures_deepseek_v1/figure_*.pdf` files separately at
