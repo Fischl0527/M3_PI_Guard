@@ -2947,3 +2947,10 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   makes utility/burden inference stronger than security-cell contrasts. The
   rebuilt draft has 9,886 words, 283 paragraphs, 13 tables and five figures;
   focused checks pass 10/10 plus Ruff.
+
+- Completed the one planned methodology review without changing any estimate.
+  Pairing, Wilson intervals, exact McNemar, within-endpoint Holm adjustment,
+  10,000 paired-case bootstrap, ITT, stress extensions, partial Gemini exclusion
+  and adaptive 50/200 scope all match the implementation. Methods now clarifies
+  failure interpretation and the bootstrap unit. The 9,950-word rebuilt draft
+  passes 21 focused tests plus Ruff.

@@ -292,3 +292,12 @@ Record completed, blocked, and abandoned tasks here.
   unsafe effect occurred in 400 primary attack records, so the new experiment's
   small security contrasts are floor-limited. Gemini/JCR/author/visual gates
   remain open. Focused manuscript and DOCX checks pass 10/10.
+
+# 2026-08-20 — Methodology review
+
+- Compared the current Methods/Results language with the compact statistical
+  implementation. No numerical or algorithmic correction was required.
+- Clarified that deterministic bootstrap draws paired case identifiers with
+  both condition outcomes together, and that ITT failures remain failures even
+  when no unsafe effect is observed. Added `methodology_review_v1.md` as the one
+  method-review record. Focused checks pass 21/21 plus Ruff.

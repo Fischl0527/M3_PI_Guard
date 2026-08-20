@@ -5287,3 +5287,14 @@ credential, changed a historical ledger, or enabled an external effect.
 - Changed hypothesis: invoke the existing exporter once with those two explicit
   provider-specific paths. No API call, experiment replay, or result mutation
   occurred.
+
+## 2026-08-20 — Orphaned Git index lock before method-review checkpoint
+
+- Attempt: stage the exact method-review checkpoint files.
+- Failure: Git refused to create `.git/index.lock` because a zero-byte lock from
+  12:15:25 +08:00 already existed.
+- Safety check: a read-only process query found zero Git or Git-helper processes,
+  so the lock was not held by an active repository operation.
+- Changed hypothesis: remove only the verified repository-local zero-byte
+  orphan lock, then stage the same explicit file list. No index, worktree,
+  commit history, experiment output, or provider process is reset.

@@ -3621,3 +3621,9 @@ The older provider-gate text is superseded by this checkpoint.
   as the main inferential limit, and keeps Gemini, JCR, author declarations and
   visual rendering as explicit open gates. The limitation is now stated in the
   Discussion; focused manuscript/DOCX checks pass 10/10.
+
+- The single planned methodology review found the statistical implementation
+  aligned with the paper. Methods now states that paired `case_id` is the
+  cluster/bootstrap unit and that a failed row without an observed unsafe
+  effect is not clean defense success or task completion. The rebuilt draft is
+  9,950 words/283 paragraphs; 21 focused checks and Ruff pass.

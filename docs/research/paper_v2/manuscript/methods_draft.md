@@ -211,7 +211,11 @@ predefined heterogeneity by benchmark and attack family.
 All terminal work items remain in the intention-to-treat denominator. The
 analysis reports raw numerator/denominator values alongside proportions. A
 provider or parser failure is not silently removed and is not relabeled as a
-successful security outcome.
+successful security outcome. Its unsafe-effect indicator records whether an
+isolated unsafe effect was observed, while its operational failure remains a
+separate reported outcome and it cannot count as task completion. Latency and
+burden summaries likewise include all terminal work items, not only completed
+ones.
 
 ## Statistical analysis
 
@@ -219,7 +223,9 @@ Each condition proportion receives a Wilson 95% confidence interval. The
 paired analyses report the absolute difference in percentage points, the two
 discordant counts, and a two-sided exact McNemar test. Uncertainty for the
 paired absolute difference is estimated with 10,000 deterministic bootstrap
-resamples clustered by task.
+resamples. Each resample draws paired case identifiers with replacement and
+keeps both condition outcomes for the selected case together; the case is the
+cluster and inferential unit.
 
 The four primary authorization/mechanism comparisons are:
 

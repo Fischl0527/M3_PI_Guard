@@ -3024,3 +3024,8 @@ Next gated action:
   Discussion. Other high-risk claims (mechanism superiority, cross-provider,
   saturation, production, blind, first/only/SOTA) remain explicitly closed.
   Rebuilt Word structure is 283 paragraphs, 13 tables and five figures.
+
+- `methodology_review_v1.md` records the completed method review. It found no
+  estimate requiring correction. Methods now defines paired case resampling and
+  separates absence of an observed unsafe effect from operational success on
+  failed ITT rows. Focused analysis/manuscript/DOCX checks pass 21/21 plus Ruff.
