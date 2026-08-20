@@ -19,8 +19,9 @@ failed-row rule.
 | Figure 4 | What ASK, DENY, failure and latency burden is incurred? | Four horizontal-bar small multiples | Compact per-condition burden summary | DeepSeek generated and visually checked; ASK/DENY record incidence clarified |
 | Figure 5 | How does first unsafe effect accumulate by query budget? | Cumulative first-success step curve | Existing Pro budget-50/200 analysis | Generator and data ready; no saturation claim |
 
-Each figure is exported once as editable SVG and QA PNG. The generator does
-not create a hash bundle or reopen provider traces.
+Each figure is exported once as editable SVG, submission-oriented vector PDF,
+and QA PNG. The generator does not create a hash bundle or reopen provider
+traces.
 
 ## Main tables
 

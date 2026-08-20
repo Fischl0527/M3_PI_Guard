@@ -119,7 +119,7 @@ Files:
 
 Current DeepSeek analysis products are under
 `docs/research/paper_v2/lean_empirical/`: the compact analysis JSON is
-`authorization_results_deepseek_v1.json`, the five PNG/SVG figure pairs are in
+`authorization_results_deepseek_v1.json`, the five PNG/SVG/PDF figure triplets are in
 `figures_deepseek_v1/`, and the six CSV tables are in
 `tables_deepseek_v1/`. These are single-model products; their metadata
 explicitly disables a cross-provider claim while Gemini remains pending.

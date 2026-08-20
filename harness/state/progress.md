@@ -1,5 +1,15 @@
 # 进展记录
 
+## 2026-08-20 — Elsevier-ready vector figure files added
+
+- The five-figure generator now writes PNG for manuscript/QA use, editable SVG,
+  and a separate vector PDF suitable for Elsevier artwork upload.
+- All five PDFs are valid single-page files without creation/modification-date
+  metadata; all SVGs are self-contained without external URL/file references.
+- Focused figure/manuscript tests pass 9/9 and the renderer-metadata rerun passes
+  1/1, with Ruff and `py_compile` green. No provider call, raw-result read or
+  scientific change occurred.
+
 ## 2026-08-20 — JISA review mode and AI-section title aligned
 
 - The official JISA guide specifies single-anonymized review; no separate

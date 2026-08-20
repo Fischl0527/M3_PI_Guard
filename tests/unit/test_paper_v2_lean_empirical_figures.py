@@ -98,7 +98,7 @@ def _existing_fixture() -> dict:
     }
 
 
-def test_builds_five_png_and_svg_figures(tmp_path: Path) -> None:
+def test_builds_five_png_svg_and_pdf_figures(tmp_path: Path) -> None:
     authorization = tmp_path / "authorization.json"
     existing = tmp_path / "existing.json"
     authorization.write_text(json.dumps(_authorization_fixture()), encoding="utf-8")
@@ -112,11 +112,18 @@ def test_builds_five_png_and_svg_figures(tmp_path: Path) -> None:
     )
 
     assert len(result["chart_contracts"]) == 5
+    assert result["renderer"] == "matplotlib-static-png-svg-pdf"
     assert "derived authorization" in result["chart_contracts"][0]["takeaway"]
     assert len(result["outputs"]) == 5
     paths = [Path(path) for values in result["outputs"].values() for path in values]
-    assert len(paths) == 10
+    assert len(paths) == 15
     assert all(path.exists() and path.stat().st_size > 1_000 for path in paths)
+    assert {path.suffix for path in paths} == {".png", ".svg", ".pdf"}
+    assert all(
+        path.read_bytes().startswith(b"%PDF")
+        for path in paths
+        if path.suffix == ".pdf"
+    )
 
     second_dir = tmp_path / "figures-second"
     build_figures(

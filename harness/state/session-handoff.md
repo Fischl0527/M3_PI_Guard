@@ -1,5 +1,12 @@
 # 会话移交
 
+## 2026-08-20 — Vector figure submission checkpoint
+
+- Upload the five `figures_deepseek_v1/figure_*.pdf` files separately at
+  submission. SVG remains editable source; PNG remains the Word/QA preview.
+- Each PDF is valid and single-page with no date metadata. Focused tests and
+  lint/compile pass; scientific values are unchanged.
+
 ## 2026-08-20 — JISA single-anonymized checkpoint
 
 - Do not create a separate blinded manuscript: the checked official JISA guide

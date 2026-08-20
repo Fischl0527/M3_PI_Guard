@@ -81,6 +81,8 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
   first/only/SOTA wording.
 - [ ] Upload the manuscript, the separate editable supplementary-tables file,
   and all other required editable source files.
+- [x] Prepare each of the five figures as a separate vector PDF for submission;
+  retain SVG as editable source and PNG only as the manuscript/QA preview.
 - [ ] Prepare the competing-interests declaration in the format requested by
   the submission system.
 - [ ] Record funding sources and sponsor roles, or the journal’s recommended

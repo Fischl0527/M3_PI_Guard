@@ -111,12 +111,17 @@ def _style() -> None:
 def _save(fig: plt.Figure, output_dir: Path, stem: str) -> list[str]:
     output_dir.mkdir(parents=True, exist_ok=True)
     paths: list[str] = []
-    for suffix in ("png", "svg"):
+    for suffix in ("png", "svg", "pdf"):
         path = output_dir / f"{stem}.{suffix}"
+        metadata = None
+        if suffix == "svg":
+            metadata = {"Date": None}
+        elif suffix == "pdf":
+            metadata = {"CreationDate": None, "ModDate": None}
         fig.savefig(
             path,
             dpi=220 if suffix == "png" else None,
-            metadata={"Date": None} if suffix == "svg" else None,
+            metadata=metadata,
         )
         if suffix == "svg":
             svg = path.read_text(encoding="utf-8")
@@ -408,7 +413,7 @@ def build_figures(
     return {
         "chart_contracts": list(CHART_CONTRACTS),
         "outputs": outputs,
-        "renderer": "matplotlib-static-png-svg",
+        "renderer": "matplotlib-static-png-svg-pdf",
     }
 
 

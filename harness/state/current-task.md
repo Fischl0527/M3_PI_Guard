@@ -1,5 +1,15 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 18：Elsevier 可提交矢量图件
+
+- 五图生成器现同时输出 PNG（Word/QA）、SVG（可编辑源）和 PDF（投稿矢量图）；
+  不读取 provider trace、不调用 API，也不新增哈希包。
+- 5/5 PDF 均为单页、有效 `%PDF`、无 CreationDate/ModDate 元数据；页面尺寸和文件
+  大小均非空，SVG 无外部 URL/file 引用。Word 继续使用已有 PNG，科研内容不变。
+- 图件/主稿定向 pytest 9/9，后续 renderer 元数据定向测试 1/1，Ruff、
+  `py_compile` 通过。JISA checklist 已要求单独上传五个 PDF。
+- F-PAPER-002 保持 `in_progress`，Gemini 唯一进程仍等待 15:02。
+
 ### 2026-08-20 精简实证里程碑 17：JISA review mode 与 AI 节标题对齐
 
 - JISA 官方 Guide for Authors 明确使用 single-anonymized review；投稿包无需额外制作
