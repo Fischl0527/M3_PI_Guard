@@ -587,7 +587,8 @@
         "The official JISA guide confirms single-anonymized review, so no separate author-blinded manuscript is required; the AI-use declaration now uses the guide's manuscript-preparation-process section title. The rebuilt 9578-word/283-paragraph/7-table/5-figure main draft passes 13/13 focused tests plus Ruff and py_compile without changing results.",
         "The five paper figures now have separate PNG/SVG/PDF outputs: five vector PDFs are valid single-page files without date metadata, SVGs have no external references, and focused tests plus Ruff/compile pass. The JISA checklist designates PDF for upload, SVG as editable source and PNG for Word/QA; no provider call or scientific result changed.",
         "A Chinese direct-fill companion now collects all author-owned submission facts without inferring them from the repository or exposing secrets; it is explicitly outside manuscript and experimental state.",
-        "The main manuscript now uses table-specific references for Supplementary Tables S1-S6 and describes the submission PDF/editable SVG/QA PNG artwork consistently; the rebuilt Markdown/Word package passes 13 focused tests plus Ruff/compile without changing scientific values."
+        "The main manuscript now uses table-specific references for Supplementary Tables S1-S6 and describes the submission PDF/editable SVG/QA PNG artwork consistently; the rebuilt Markdown/Word package passes 13 focused tests plus Ruff/compile without changing scientific values.",
+        "All five figure previews received visual QA: Figure 2 now exposes coincident conditions with a documented slash-linked marker, Figure 3 moves its legend outside the confidence-interval panel, and synchronized PNG/SVG/PDF plus Word outputs pass 14 focused tests without changing data."
       ]
     },
     {

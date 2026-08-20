@@ -1128,8 +1128,9 @@ DeepSeek V4 Pro point reports benign-tool completion on the horizontal axis and
 one minus attack unsafe-effect rate on the vertical axis. The four main cells
 use 100 attacks and 60 benign tool tasks each; each nested stress cell uses 30
 attacks and 20 benign tool tasks. All terminal failures remain in the
-intention-to-treat denominators. Near-identical attack safety can coexist with
-substantially different utility.
+intention-to-treat denominators. Numbered markers map to the condition key; a
+slash joins conditions with exactly coincident coordinates. Near-identical
+attack safety can coexist with substantially different utility.
 
 **Figure 3. Paired effects of authorization regime and Guard configuration.**
 Points are absolute percentage-point differences for the second condition

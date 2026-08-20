@@ -3074,3 +3074,14 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   and five figures. Focused pytest passes 13/13; Ruff and `py_compile` pass.
 - Visual pagination remains unclaimed because LibreOffice/Word rendering is
   unavailable. F-PAPER-002 remains `in_progress` for Gemini and final review.
+# 2026-08-20 — All five paper figures visually inspected
+
+- Inspected all five PNG previews at readable size. Figure 2 hid one of two
+  exactly coincident conditions; it now displays a slash-linked `2/5` marker
+  and the caption explains the notation.
+- Figure 3's legend overlapped the lowest confidence interval; it now sits
+  outside the estimate panel. Figures 1, 4 and 5 required no visual change.
+- Regenerated PNG/SVG/PDF triplets and rebuilt the Word manuscript. All five
+  PDFs remain valid single-page files; 14 focused tests, Ruff and `py_compile`
+  pass. No estimate, axis meaning or scientific conclusion changed.
+- F-PAPER-002 remains `in_progress` for Gemini and final integrity review.

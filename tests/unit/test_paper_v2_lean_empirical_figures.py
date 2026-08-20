@@ -32,8 +32,16 @@ def _authorization_fixture() -> dict:
             "condition_id": condition,
             "authorization_regime": regime,
             "records": 180 if index < 4 else 60,
-            "attack_unsafe_effect": {"successes": 5 + index, "total": 100, "rate": 0.05 + index * 0.01},
-            "benign_tool_tcr": {"successes": 45 + index, "total": 60, "rate": 0.75 + index * 0.01},
+            "attack_unsafe_effect": {
+                "successes": 5 + index,
+                "total": 100,
+                "rate": 0.05 + index * 0.01,
+            },
+            "benign_tool_tcr": {
+                "successes": 45 + index,
+                "total": 60,
+                "rate": 0.75 + index * 0.01,
+            },
             "benign_no_tool_tcr": {"successes": 18, "total": 20, "rate": 0.9},
         }
         burden[key] = {
@@ -72,6 +80,12 @@ def _authorization_fixture() -> dict:
         }
         for regime in ("broad", "underspecified", "conflicting")
     }
+    metrics["m3_full__underspecified"]["attack_unsafe_effect"] = dict(
+        metrics["m3_full__broad"]["attack_unsafe_effect"]
+    )
+    metrics["m3_full__underspecified"]["benign_tool_tcr"] = dict(
+        metrics["m3_full__broad"]["benign_tool_tcr"]
+    )
     return {
         "deepseek": {
             "condition_metrics": metrics,
@@ -90,7 +104,26 @@ def _existing_fixture() -> dict:
             "first_success_queries": {
                 f"case-{index:02d}": value
                 for index, value in enumerate(
-                    (24, 26, 32, 47, 52, 57, 64, 67, 80, 83, 97, 105, 107, 124, 125, 144, 144, 184),
+                    (
+                        24,
+                        26,
+                        32,
+                        47,
+                        52,
+                        57,
+                        64,
+                        67,
+                        80,
+                        83,
+                        97,
+                        105,
+                        107,
+                        124,
+                        125,
+                        144,
+                        144,
+                        184,
+                    ),
                     start=1,
                 )
             },
@@ -120,10 +153,12 @@ def test_builds_five_png_svg_and_pdf_figures(tmp_path: Path) -> None:
     assert all(path.exists() and path.stat().st_size > 1_000 for path in paths)
     assert {path.suffix for path in paths} == {".png", ".svg", ".pdf"}
     assert all(
-        path.read_bytes().startswith(b"%PDF")
-        for path in paths
-        if path.suffix == ".pdf"
+        path.read_bytes().startswith(b"%PDF") for path in paths if path.suffix == ".pdf"
     )
+    pareto_svg = (output_dir / "figure_2_safety_utility_pareto.svg").read_text(
+        encoding="utf-8"
+    )
+    assert "<!-- 5/6 -->" in pareto_svg
 
     second_dir = tmp_path / "figures-second"
     build_figures(

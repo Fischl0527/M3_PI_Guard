@@ -29,6 +29,25 @@
 - Fix: count line prefixes with `line.startswith('## ')`; do not change the
   valid document to satisfy the faulty smoke check.
 
+## 2026-08-20 — Figure-caption smoke check ignored Markdown line wrapping
+
+- Attempt: assert one literal caption phrase after rebuilding the manuscript.
+- Failure: the builder wrapped `a` and `slash` across adjacent Markdown lines,
+  so the exact-space assertion failed after the 14 focused tests had passed.
+- Fix: match the phrase across whitespace with a regular expression; the
+  caption and generated Word document were not changed to satisfy the check.
+
+## 2026-08-20 — Figure milestone staging encountered a stale Git index lock
+
+- Attempt: stage the visually corrected figures, manuscript and state files.
+- Failure: Git found a zero-byte `.git/index.lock` created at 13:04:30 and
+  staged nothing. No Git/SSH/askpass process was active, the repository index
+  predated the lock, and the remote branch remained at `f4b6ab0`.
+- Recovery: the exact stale lock was verified and removed with the controlled
+  patch tool. A direct PowerShell removal attempt was rejected by host policy
+  and changed nothing. The retry checks each Git exit code and stages only the
+  explicit paper-figure paths; successful history is not rewritten.
+
 ## 2026-08-20 — Supplement splitter initially matched the source heading depth only
 
 - Command: `F:\robot\Anaconda3\python.exe -B scripts\build_lean_paper_manuscript.py`

@@ -3127,3 +3127,12 @@ Next gated action:
   PDF/SVG/PNG artwork consistently. Scientific content is unchanged.
 - Verification: manuscript/DOCX/supplement pytest 13/13, Ruff and `py_compile`.
   Do not claim visual pagination QA on this host.
+# 2026-08-20 — Figure visual-QA handoff
+
+- All five DeepSeek figure previews were inspected. Figure 2 groups exact
+  display-coordinate overlaps and Figure 3 places its legend outside the data
+  region; the generator test includes an overlap fixture.
+- Figure 2's caption defines slash-linked condition numbers. The current Word
+  draft embeds the regenerated PNGs; vector PDFs and SVGs are synchronized.
+- Verification: 14 focused figure/manuscript/DOCX/supplement tests, Ruff,
+  `py_compile`, 5/5 single-page PDFs. No provider call or result change.

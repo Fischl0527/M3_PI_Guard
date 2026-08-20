@@ -14,8 +14,8 @@ failed-row rule.
 | ID | Analytical question | Geometry | Authoritative data | Status |
 |---|---|---|---|---|
 | Figure 1 | Which fields are visible to the online Guard? | Online/offline flow schematic | Runtime projection contract | Generated and visually checked; raw evaluator/gold-answer fields stay offline, while `exact_gold` exposes only a derived authorization object |
-| Figure 2 | How do authorization regimes trade attack safety for benign utility? | Labeled safety–utility scatter | `authorization_results_deepseek_v1.json` condition summaries | DeepSeek generated and visually checked; Gemini pending |
-| Figure 3 | How large are the paired authorization and mechanism effects? | Forest plot of absolute pp difference with task-cluster bootstrap CI | Paired comparison objects | DeepSeek generated and visually checked; Gemini pending |
+| Figure 2 | How do authorization regimes trade attack safety for benign utility? | Labeled safety–utility scatter | `authorization_results_deepseek_v1.json` condition summaries | DeepSeek visually checked; coincident points use a slash-linked marker; Gemini pending |
+| Figure 3 | How large are the paired authorization and mechanism effects? | Forest plot of absolute pp difference with task-cluster bootstrap CI | Paired comparison objects | DeepSeek visually checked; legend is outside the estimate panel; Gemini pending |
 | Figure 4 | What ASK, DENY, failure and latency burden is incurred? | Four horizontal-bar small multiples | Compact per-condition burden summary | DeepSeek generated and visually checked; ASK/DENY record incidence clarified |
 | Figure 5 | How does first unsafe effect accumulate by query budget? | Cumulative first-success step curve | Existing Pro budget-50/200 analysis | Generator and data ready; no saturation claim |
 

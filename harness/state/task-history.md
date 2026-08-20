@@ -4,6 +4,7 @@ Record completed, blocked, and abandoned tasks here.
 
 | Date | Task ID | Related Feature | Status | Verification | Summary |
 | --- | --- | --- | --- | --- | --- |
+| 2026-08-20 | M3-PAPER-002-FIGURE-VISUAL-QA | F-PAPER-002 | verified_substage_project_in_progress | 5/5 PNG visual checks; 5/5 single-page PDFs; overlap fixture; focused 14/14; Ruff/py_compile; provider calls 0. | Figure 2 now exposes coincident conditions and Figure 3 legend no longer covers an interval; data and claims unchanged. |
 | 2026-08-20 | M3-PAPER-002-COPYEDIT-SUPP-REFS | F-PAPER-002 | verified_substage_project_in_progress | Markdown/DOCX rebuilt; 9,590 builder words; 283 paragraphs/7 tables/5 figures; focused 13/13; Ruff/py_compile; provider calls 0. | Replaced generic repeated supplement notices with table-specific references and aligned PDF/SVG/PNG wording; no scientific value changed. |
 | 2026-08-20 | M3-PAPER-002-AUTHOR-INPUT-ZH | F-PAPER-002 | verified_substage_project_in_progress | Chinese author-input form added; README/checklist linked; no provider call or scientific result change. | Author-owned facts remain unfilled and outside experimental state. |
 | 2026-08-20 | M3-PAPER-002-VECTOR-FIGURES | F-PAPER-002 | verified_substage_project_in_progress | Five PDF/SVG/PNG triplets; PDFs 5/5 valid single-page without date metadata; SVG external refs 0; focused 9/9 plus metadata 1/1; Ruff/py_compile; provider calls 0. | Added separate vector PDFs for Elsevier submission while retaining SVG editable sources and PNG manuscript previews; no scientific content changed. |
