@@ -1,5 +1,17 @@
 # 会话移交
 
+## 2026-08-20 — Separate supplementary-tables checkpoint
+
+- Main deliverable: `M3_PI_Guard_JISA_working_draft.docx`, now 7 tables and
+  five figures. Supplement: `M3_PI_Guard_JISA_supplementary_tables.docx`, six
+  tables. Their Markdown sources are generated deterministically from the same
+  Results source.
+- Main Abstract–Conclusion word count is 7,858; supplement is 592 words.
+  Focused tests 13/13, Ruff/compile and structural/a11y checks pass. Visual page
+  QA remains unavailable because LibreOffice is absent.
+- No table values or result claims changed. PID 7676 remains the only scheduled
+  Gemini runner and must be allowed to end naturally.
+
 ## 2026-08-20 — AI-use disclosure checkpoint
 
 - The current manuscript discloses Codex assistance and the owner-supplied

@@ -1,5 +1,17 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 16：补充表从主文无损拆分
+
+- Results 中原先内嵌的 Supplementary Tables S1–S6 已由构建器确定性拆出；主文
+  保留六处明确引用和全部解释段落，不改变任何表值、分母或统计结论。
+- 新增独立 `supplementary_tables_v1.md` 与可编辑 Word 补充材料。主稿现为 7 张表
+  （6 张编号主表＋1 张正文决策表）和 5 图；补充材料为 6 表。
+- 主文总计 9,577 词，Abstract–Conclusion 为 7,858 词；补充材料 592 词。
+  构建/定向 pytest 13/13、Ruff、`py_compile` 通过。
+- Word 结构检查通过：Letter、1 英寸页边距、表格 9,360 DXA；主稿 a11y 为
+  0 high/0 medium/21 low（参考文献原始 URL），补充材料 0/0/0。LibreOffice
+  仍不存在，因此不宣称分页视觉验收。F-PAPER-002 保持 `in_progress`。
+
 ### 2026-08-20 精简实证里程碑 15：AI-use 披露与 Cover Letter 对齐
 
 - AI-use 声明现如实记录 OpenAI Codex 的软件/统计脚本/图表/语言辅助，并披露

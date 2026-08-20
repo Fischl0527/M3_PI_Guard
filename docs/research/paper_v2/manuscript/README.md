@@ -39,10 +39,17 @@ Files:
   removal of workflow-only metadata.
 - `M3_PI_Guard_JISA_working_draft.docx`: editable, single-column Word review
   copy with citeproc-rendered author-year citations, 21 cited references,
-  13 fixed-width tables and five figures. Rebuild it with
+  six numbered main tables, one inline decision table, and five figures.
+  Rebuild it with
   `python scripts/build_lean_paper_docx.py` using a Python environment with
   `python-docx` and Pandoc. Structural and accessibility checks pass; visual
   page rendering remains pending on a host with LibreOffice, Word or WPS.
+- `supplementary_tables_v1.md` and
+  `M3_PI_Guard_JISA_supplementary_tables.docx`: the six detailed tables S1-S6
+  referenced from Results. Rebuild both with
+  `python -m scripts.build_lean_paper_supplement`; the main manuscript retains
+  every interpretation and denominator while the editable supplement carries
+  the full tables.
 - `introduction_draft.md`: source-status-aware motivation, RQs, bounded
   contributions, admitted medium route decision and exploratory adaptive
   boundary.

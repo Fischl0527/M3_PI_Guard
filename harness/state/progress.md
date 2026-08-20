@@ -1,5 +1,19 @@
 # 进展记录
 
+## 2026-08-20 — Supplementary tables separated from the main manuscript
+
+- The manuscript builder now removes Supplementary Tables S1-S6 from the main
+  Results while preserving six explicit references and all interpretation.
+  A separate Markdown and editable Word supplement carries the unchanged tables.
+- The main draft now contains six numbered main tables, one inline decision
+  table and five figures. It has 9,577 total words and 7,858 words from Abstract
+  through Conclusion; the 592-word supplement contains six tables.
+- Focused tests pass 13/13 plus Ruff and `py_compile`. Structural DOCX checks
+  confirm Letter pages, one-inch margins and 9,360-DXA table grids. Accessibility
+  is 0 high/0 medium for both files; the main file retains 21 low raw-URL notes.
+- LibreOffice remains unavailable, so visual pagination is not claimed. No
+  provider call or scientific result changed.
+
 ## 2026-08-20 — AI-use disclosure and cover-letter boundary aligned
 
 - The AI-use statement now discloses both OpenAI Codex assistance and the

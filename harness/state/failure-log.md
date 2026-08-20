@@ -1,5 +1,17 @@
 # Failure Log
 
+## 2026-08-20 — Supplement splitter initially matched the source heading depth only
+
+- Command: `F:\robot\Anaconda3\python.exe -B scripts\build_lean_paper_manuscript.py`
+- Failure: `Expected Supplementary Tables S1-S6, found []` before any downstream
+  DOCX, supplement, test, lint or compile command ran.
+- Cause: `_drop_wrapper` promotes source `### Supplementary Table` headings to
+  `####` in the build body, while the new splitter initially accepted only
+  `###`.
+- Fix: accept both source-depth `###` and build-depth `####`, then rerun only
+  the failed focused build/verification sequence. No experiment or provider
+  operation is involved.
+
 ## 2026-08-20 — Word working-draft render remains unavailable
 
 - Attempt: render the rebuilt JISA Word working draft with the bundled

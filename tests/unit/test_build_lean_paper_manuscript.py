@@ -50,7 +50,11 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     )
     assert manuscript.count("![Figure ") == 5
     assert len(re.findall(r"^### Table [1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
-    assert len(re.findall(r"^#### Supplementary Table S[1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
+    assert "Supplementary Table S1" in manuscript
+    assert "Supplementary Table S6" in manuscript
+    assert not re.search(
+        r"^#### Supplementary Table S[1-6]\. ", manuscript, flags=re.MULTILINE
+    )
     assert "### Figures" not in manuscript
     assert "22/60 (36.7%)" in manuscript
     assert "CNY 0.3374" in manuscript
@@ -107,6 +111,22 @@ def test_generated_headings_are_numbered_once() -> None:
 def test_nested_heading_without_parent_fails_closed() -> None:
     with pytest.raises(builder.ManuscriptBuildError, match="lacks a parent"):
         builder._number_subsections("#### Orphan", section_number=3)
+
+
+def test_supplementary_tables_are_split_without_losing_results_narrative() -> None:
+    results = builder._drop_wrapper(
+        builder._read("results_shell.md"),
+        start_heading="## Medium falsification study",
+    )
+
+    cleaned, tables = builder._split_supplementary_tables(results)
+
+    assert [number for number, _, _ in tables] == [1, 2, 3, 4, 5, 6]
+    assert all(table.startswith("|") for _, _, table in tables)
+    assert "### Supplementary Table" not in cleaned
+    assert "This audit supports only covered-path statements" in cleaned
+    assert "Detailed values are reported in Supplementary Table S1." in cleaned
+    assert "Detailed values are reported in Supplementary Table S6." in cleaned
 
 
 def test_table_note_changes_only_for_complete_gemini_inference(monkeypatch) -> None:

@@ -62,6 +62,53 @@ class ManuscriptBuildError(ValueError):
     """Raised when a source component cannot produce a defensible manuscript."""
 
 
+def _split_supplementary_tables(
+    body: str,
+) -> tuple[str, list[tuple[int, str, str]]]:
+    """Remove S1-S6 tables from Results while retaining their narrative context."""
+
+    lines = body.splitlines()
+    cleaned: list[str] = []
+    tables: list[tuple[int, str, str]] = []
+    index = 0
+    pattern = re.compile(r"^#{3,4} Supplementary Table S(\d+)\. (.+)$")
+
+    while index < len(lines):
+        match = pattern.match(lines[index])
+        if match is None:
+            cleaned.append(lines[index])
+            index += 1
+            continue
+
+        number = int(match.group(1))
+        title = match.group(2)
+        index += 1
+        while index < len(lines) and not lines[index].strip():
+            index += 1
+        if index >= len(lines) or not lines[index].startswith("|"):
+            raise ManuscriptBuildError(
+                f"Supplementary Table S{number} lacks a Markdown table"
+            )
+
+        table_lines: list[str] = []
+        while index < len(lines) and lines[index].startswith("|"):
+            table_lines.append(lines[index])
+            index += 1
+        tables.append((number, title, "\n".join(table_lines)))
+        cleaned.extend(
+            [f"Detailed values are reported in Supplementary Table S{number}.", ""]
+        )
+        while index < len(lines) and not lines[index].strip():
+            index += 1
+
+    numbers = [number for number, _, _ in tables]
+    if numbers != list(range(1, 7)):
+        raise ManuscriptBuildError(
+            f"Expected Supplementary Tables S1-S6, found {numbers}"
+        )
+    return "\n".join(cleaned).strip(), tables
+
+
 def _read(name: str) -> str:
     path = MANUSCRIPT_DIR / name
     if not path.is_file():
@@ -467,6 +514,8 @@ def build_manuscript() -> str:
             start_heading=start_heading,
             end_heading=end_heading,
         )
+        if filename == "results_shell.md":
+            body, _ = _split_supplementary_tables(body)
         body = _number_subsections(body, section_number=int(heading.split(".", 1)[0]))
         parts.append(f"## {heading}\n\n{body}")
 

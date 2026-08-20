@@ -77,7 +77,8 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
 - [x] Number sections and subsections; do not number the abstract.
 - [x] Provisional title, abstract, keywords and highlights contain no unsupported
   first/only/SOTA wording.
-- [ ] Upload the manuscript and all required editable source files.
+- [ ] Upload the manuscript, the separate editable supplementary-tables file,
+  and all other required editable source files.
 - [ ] Prepare the competing-interests declaration in the format requested by
   the submission system.
 - [ ] Record funding sources and sponsor roles, or the journal’s recommended
