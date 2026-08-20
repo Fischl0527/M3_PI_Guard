@@ -9,7 +9,8 @@
   AgentSpec's unregistered DOI and unverified pages were removed in favour of
   the official ICSE 2026 Research Track page.
 - Rebuilt Markdown and DOCX; focused manuscript/DOCX tests pass 9/9 plus Ruff
-  and `py_compile`. No provider call, Full Harness or historical replay ran.
+  and `py_compile`. Related Work and the JISA checklist now close the active
+  citation gate. No provider call, Full Harness or historical replay ran.
 
 ## 2026-08-20 — Provisional JISA cover letter drafted
 

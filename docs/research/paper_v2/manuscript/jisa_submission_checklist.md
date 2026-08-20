@@ -64,8 +64,9 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
   out of scope and are not prerequisites or manuscript claims.
 - [x] Every current DeepSeek numeric claim is rebuilt once from the compact raw records and
   frozen lean plan.
-- [ ] Every citation has complete authors, title, venue, year, DOI or stable URL,
-  and publication-status verification.
+- [x] All 21 active citations have complete authors, title, year, DOI or stable
+  URL, publication-status verification, and a reviewed claim context. The 15
+  unused BibTeX candidates do not render and require review only if activated.
 
 ## Journal package
 

@@ -7,7 +7,8 @@
 - `references_v1.bib` now uses NeurIPS 2025 plus DOI for DRIFT and the official
   ICSE 2026 programme URL for AgentSpec; the invalid AgentSpec DOI is absent.
 - Markdown/DOCX rebuild and focused verification pass 9/9 plus Ruff and
-  `py_compile`. The next data-bearing action remains Gemini pending/no-response
+  `py_compile`; Related Work and the JISA checklist mark the active citation
+  gate complete. The next data-bearing action remains Gemini pending/no-response
   recovery after the next Pacific quota reset, with first-429 stop semantics.
 
 ## 2026-08-20 — JISA cover-letter checkpoint

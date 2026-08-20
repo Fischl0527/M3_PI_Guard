@@ -1,7 +1,7 @@
 # Related Work — source-status-aware draft
 
-Status: `critical_contexts_drafted_bibliography_export_complete`  
-Context audit date: 2026-07-30  
+Status: `active_citations_verified`  
+Context audit date: 2026-08-20  
 Scope: the ten closest innovation-boundary papers plus the benchmark and
 adaptive-evaluation works needed to position the study.
 
@@ -133,14 +133,18 @@ the measured security–utility frontier.
 | Trusted control/data flow and capabilities | L26 | Preprint | Information-flow boundary |
 | Defense-aware adaptive attacks | L27 | Preprint | Protocol motivation, not peer-reviewed fact |
 
-## Bibliography export and remaining context gate
+## Bibliography export and submission-date gate
 
 The 36-entry bibliography in `references_v1.bib` is assembled from ACL
 Anthology, official proceedings pages, arXiv records and DOI/Crossref metadata.
 It distinguishes peer-reviewed work from preprints and requires author, title,
 year, URL, and venue or explicit preprint metadata.
 
-The remaining citation task is narrower: bind the final Introduction and
-Discussion sentences to these sources, verify every claim-context relation,
-and repeat the publication-status/JCR check on the submission date. The active
-lean study does not create another bibliography hash bundle.
+The 21 references currently used by the unified manuscript have been checked
+against their publisher, proceedings, conference, or arXiv landing pages, and
+their claim contexts have been reviewed. The 15 unused entries remain a
+candidate corpus and are not rendered in the working paper. If the final draft
+adds a source, only the newly active citation and its claim context need review.
+Publication status and the institutional JCR check must still be refreshed on
+the submission date; the active lean study does not create a bibliography hash
+bundle.
