@@ -2,10 +2,11 @@
 
 Status: `deepseek_authorization_results_complete_gemini_pending`
 
-This directory is deliberately not a completed paper. It contains the active
-lean Methods and Introduction, existing Pro/Flash/medium/adaptive results, a
-frozen 900-row DeepSeek authorization experiment, a 450-row Gemini diagnostic
-cross-provider experiment, a figure/table plan, and bounded review material.
+This directory is a complete working-paper workspace, but not yet a
+submission-ready package. It contains the active manuscript, existing
+Pro/Flash/medium/adaptive results, a frozen 900-row DeepSeek authorization
+experiment, a planned 450-row Gemini free-tier cross-provider validation, a
+figure/table plan, and bounded review material.
 
 Current working title:
 
@@ -90,9 +91,7 @@ Files:
 - The admitted Public-primary result path includes a second computation
   implementation that independently reproduces condition counts, Wilson
   intervals, four critical paired differences, exact McNemar tests, and ITT
-  diagnostic retention. The v5 analysis also retains a hash-locked audit trail
-  of four pre-summary validator/projection failures and their prospective
-  corrections.
+  diagnostic retention.
 - `related_work_draft.md`: source-status-aware positioning, audited contexts
   for the closest innovation-boundary papers, and the completed bibliography
   binding; submission-date refresh remains pending.

@@ -13,7 +13,7 @@ failed-row rule.
 
 | ID | Analytical question | Geometry | Authoritative data | Status |
 |---|---|---|---|---|
-| Figure 1 | Which fields are visible to the online Guard? | Online/offline flow schematic | Runtime projection contract | Generator and QA preview ready |
+| Figure 1 | Which fields are visible to the online Guard? | Online/offline flow schematic | Runtime projection contract | Generated and visually checked; raw evaluator/gold-answer fields stay offline, while `exact_gold` exposes only a derived authorization object |
 | Figure 2 | How do authorization regimes trade attack safety for benign utility? | Labeled safety–utility scatter | `authorization_results_deepseek_v1.json` condition summaries | DeepSeek generated and visually checked; Gemini pending |
 | Figure 3 | How large are the paired authorization and mechanism effects? | Forest plot of absolute pp difference with task-cluster bootstrap CI | Paired comparison objects | DeepSeek generated and visually checked; Gemini pending |
 | Figure 4 | What ASK, DENY, failure and latency burden is incurred? | Four horizontal-bar small multiples | Compact per-condition burden summary | DeepSeek generated and visually checked; ASK/DENY record incidence clarified |
@@ -45,7 +45,8 @@ not create an integrity/hash bundle.
 3. Keep security and utility as separate axes; do not invent a composite score.
 4. Include policy-only and M3-full in all mechanism-contribution comparisons.
 5. Label `exact_gold` as an oracle sensitivity condition, not the primary
-   authorization regime.
+   authorization regime; never describe the derived online authorization object
+   as direct visibility of raw evaluator labels or gold answers.
 6. Show failures and confirmation/blocking burden in the main paper.
 7. Use color plus shape, ordering, labels or faceting; do not rely on color
    alone.

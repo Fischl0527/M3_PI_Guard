@@ -1,5 +1,19 @@
 # 会话移交
 
+## 2026-08-20 — Current working-draft and Gemini wait state
+
+- The current working draft is 9,999 words, 283 paragraphs, 13 tables and five
+  figures. Its main article remains within the planned 7,500–8,500-word range.
+- Figure 1 and the manuscript now use the same boundary: raw evaluator, label
+  and gold-answer fields remain offline; `exact_gold` exposes only a derived
+  authorization object.
+- Local HEAD and `m3-guard/codex/q2-empirical-study` are both `6da0836` before
+  this documentation-only checkpoint. PID 7676 remains the only scheduled
+  Gemini process and waits until 15:02; do not start a second runner.
+- After natural exit, inspect compact counts only. Analyze Gemini scientifically
+  only at 450/450 terminal items; otherwise follow the three-quota-day diagnostic
+  downgrade rule without replaying response-bearing rows.
+
 ## 2026-08-20 — Submission-language and scheduled-Gemini checkpoint
 
 - The current working Markdown and DOCX were rebuilt after a focused prose

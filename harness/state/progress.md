@@ -1,5 +1,16 @@
 # 进展记录
 
+## 2026-08-20 — Working-draft status synchronized before Gemini
+
+- Synchronized collaborator-facing documentation with the current 9,999-word,
+  283-paragraph, 13-table, five-figure working draft; the 7,500–8,500-word main
+  article target remains satisfied.
+- Clarified that raw evaluator/label/gold-answer fields stay offline and that
+  `exact_gold` exposes only a derived authorization object to the online Guard.
+- The local branch and GitHub remote remain aligned at `6da0836`. The sole
+  scheduled Gemini pending-only process is still waiting for 15:02; no API call,
+  Full Harness, historical replay or successful-row rerun occurred here.
+
 ## 2026-08-20 — Submission-language cleanup before Gemini quota reset
 
 - Replaced process-facing manuscript language with scientific reporting while
