@@ -3013,3 +3013,8 @@ Next gated action:
   check it was alive and still waiting for 2026-08-20 15:02 +08:00; do not
   interrupt it or launch a second runner. No successful response-bearing key is
   eligible for replay.
+
+- Discussion and the design-table note are now outcome-safe: incomplete Gemini
+  rows make no external-validity contribution, while a 450/450 cohort causes
+  the generated provider note to switch automatically. Focused manuscript and
+  DOCX tests pass 10/10 plus Ruff and `py_compile`.

@@ -2933,3 +2933,9 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
 - Focused pytest passes 20/20; Ruff and `py_compile` pass. The rebuilt working
   draft is 9,813 words, 282 paragraphs, 13 tables and five figures. No Full
   Harness, historical replay, API call or successful-row rerun occurred.
+
+- Corrected two prospective cross-provider presentation risks: Discussion no
+  longer describes incomplete Gemini data as a partial external-validity probe,
+  and the design-table note switches to completed-provider wording only when
+  Gemini is present in the inferential endpoint table. Focused checks pass
+  10/10 plus Ruff and `py_compile`.

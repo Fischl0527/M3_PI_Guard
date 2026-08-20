@@ -101,3 +101,19 @@ def test_generated_headings_are_numbered_once() -> None:
 def test_nested_heading_without_parent_fails_closed() -> None:
     with pytest.raises(builder.ManuscriptBuildError, match="lacks a parent"):
         builder._number_subsections("#### Orphan", section_number=3)
+
+
+def test_table_note_changes_only_for_complete_gemini_inference(monkeypatch) -> None:
+    monkeypatch.setattr(
+        builder,
+        "_read_table",
+        lambda name: [{"provider": "deepseek"}],
+    )
+    assert "Gemini counts are planned" in builder._table_notes()[0]
+
+    monkeypatch.setattr(
+        builder,
+        "_read_table",
+        lambda name: [{"provider": "deepseek"}, {"provider": "gemini"}],
+    )
+    assert "Both provider cohorts reached" in builder._table_notes()[0]

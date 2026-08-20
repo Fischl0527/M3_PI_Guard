@@ -3608,3 +3608,9 @@ The older provider-gate text is superseded by this checkpoint.
   manuscript contains 9,813 words, five Provider table headers, 13 Word tables
   and five figures. F-PAPER-002 remains `in_progress` while the scheduled
   pending-only Gemini quota-day run waits to start naturally.
+
+- Reviewer-facing external-validity language now states that an incomplete
+  Gemini subset supplies no cross-provider evidence. Table 1's provider note
+  is generated from whether Gemini actually appears in the inferential endpoint
+  table, preventing stale “planned” wording after a complete cohort. Focused
+  manuscript/DOCX checks pass 10/10.

@@ -273,3 +273,12 @@ Record completed, blocked, and abandoned tasks here.
   The initial table command used an absent generic filename; the corrected
   provider-specific invocation succeeded without an API call or experiment
   replay and the failed assumption is recorded in `failure-log.md`.
+
+# 2026-08-20 — Cross-provider prose and table note made outcome-safe
+
+- Replaced two Discussion sentences that could imply incomplete Gemini rows
+  already supplied evidence. The manuscript now requires all 450 terminal work
+  items for a cross-provider comparison.
+- Made the Table 1 note conditional on Gemini's presence in the inferential
+  endpoint table. Current DeepSeek-only wording is unchanged; a future complete
+  cohort cannot retain the stale planned-only note. Focused checks pass 10/10.

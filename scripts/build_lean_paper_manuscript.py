@@ -193,6 +193,21 @@ def _read_table(name: str) -> list[dict[str, str]]:
         return list(csv.DictReader(stream))
 
 
+def _table_notes() -> tuple[str, ...]:
+    notes = list(TABLE_NOTES)
+    gemini_in_inference = any(
+        row.get("provider") == "gemini"
+        for row in _read_table("table_2_endpoints.csv")
+    )
+    if gemini_in_inference:
+        notes[0] = (
+            "Providers, benchmarks, conditions, authorization regimes and frozen "
+            "work-item counts for the lean empirical study. Both provider cohorts "
+            "reached the prespecified terminal-analysis boundary."
+        )
+    return tuple(notes)
+
+
 def _label(value: str) -> str:
     special = {
         "deepseek": "DeepSeek",
@@ -426,7 +441,7 @@ def _table_block() -> str:
         (6, "Adaptive evidence at budgets 50 and 200", _adaptive_table()),
     )
     parts = ["## Tables"]
-    for (number, title, table), note in zip(tables, TABLE_NOTES, strict=True):
+    for (number, title, table), note in zip(tables, _table_notes(), strict=True):
         parts.append(f"### Table {number}. {title}\n\n{note}\n\n{table}")
     return "\n\n".join(parts)
 

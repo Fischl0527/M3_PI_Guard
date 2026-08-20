@@ -948,8 +948,9 @@ DeepSeek V4 Pro and V4 Flash, and no cross-provider conclusion is made.
 
 First, the new primary experiment uses one proprietary model and two benchmark
 families. Model updates, tool schemas, system prompts, and application context
-may change the effects. The smaller Gemini subset partially probes but does not
-eliminate this dependence.
+may change the effects. The smaller Gemini subset was designed to probe this
+dependence, but it contributes no cross-provider evidence unless all 450 work
+items reach terminal status.
 
 Second, `auto_compiled` is one policy compiler, not a complete model of human
 authorization. The stress regimes approximate common policy errors but do not
@@ -988,9 +989,9 @@ budget alongside unsafe-effect rate.
 The DeepSeek authorization-regime results now tie these recommendations to
 observed effects: exact and stressed policies materially changed completion,
 blocking, failure, and latency while observed unsafe effects remained near
-zero. Gemini will determine whether the direction is visible across providers;
-it cannot remove the unfavorable DeepSeek findings or broaden them beyond the
-tested settings.
+zero. The prespecified Gemini stopping rule determines whether a complete
+cross-provider comparison is available; an incomplete subset remains
+diagnostic and cannot alter or broaden the DeepSeek findings.
 
 ## 6. Conclusion
 
