@@ -1,5 +1,14 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 10：lean claim–evidence ledger
+
+- 旧 `claim_evidence_ledger_v1.json` 仍包含已废止的 blind、B500/B2000、完整
+  second-model 与 Full Harness 门槛，因此保留为历史文件但不再作为当前论文依据。
+- 新增 lean ledger，只保留 13 条当前稿件主张：DeepSeek 已验证结果、Gemini/JCR
+  未解锁门、first/only/SOTA 禁止项、引用状态与安全边界。
+- 13 条主张引用 26 个现存证据路径，缺失路径为 0；不新增哈希、admission 或
+  历史重放。Gemini 定时进程仍等待 15:02。
+
 ### 2026-08-20 精简实证里程碑 9：JISA author-package inputs
 
 - 根据 JISA 官方 Guide for Authors 补齐投稿包缺口：title page 需要姓名顺序、完整

@@ -1,5 +1,15 @@
 # 进展记录
 
+## 2026-08-20 — Lean claim–evidence ledger activated
+
+- Added a 13-claim active ledger covering the completed DeepSeek findings,
+  authorization burden, within-provider replication, budget-50/200 adaptive
+  boundary, provider safety, citation status and the still-closed Gemini/JCR
+  gates.
+- All 26 referenced evidence paths exist. The old ledger is retained only as
+  historical paper-v2 state because its blind, B500/B2000 and Full-Harness
+  gates were superseded by the owner-approved lean plan.
+
 ## 2026-08-20 — JISA author-package inputs prepared
 
 - Added a no-inference author-input template for title-page metadata,

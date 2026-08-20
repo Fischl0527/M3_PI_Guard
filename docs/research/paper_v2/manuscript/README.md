@@ -96,8 +96,12 @@ Files:
 - `related_work_draft.md`: source-status-aware positioning, audited contexts
   for the closest innovation-boundary papers, and the completed bibliography
   binding; submission-date refresh remains pending.
-- `claim_evidence_ledger_v1.json`: every intended claim, present evidence, and
-  unlock condition.
+- `claim_evidence_ledger_lean_v1.json`: active 13-claim ledger for the lean
+  empirical manuscript, including completed DeepSeek claims, Gemini and JCR
+  gates, and explicit forbidden claims.
+- `claim_evidence_ledger_v1.json`: retained historical paper-v2 ledger; it is
+  not the active source for the lean manuscript because it includes superseded
+  blind, large-adaptive and full-Harness gates.
 - `devils_advocate_review.md`: novelty, validity, reproducibility, and venue
   risks that must be answered before submission.
 - `completion_scorecard_v1.json`: historical pre-Public readiness baseline.

@@ -1,5 +1,13 @@
 # 会话移交
 
+## 2026-08-20 — Lean claim-ledger checkpoint
+
+- Use `docs/research/paper_v2/manuscript/claim_evidence_ledger_lean_v1.json`
+  for the current manuscript. It contains 13 claims and 26 existing evidence
+  paths; Gemini cross-provider and institutional JCR statements remain locked.
+- Keep `claim_evidence_ledger_v1.json` as historical context only. Do not
+  restore its superseded blind, B500/B2000 or Full-Harness completion gates.
+
 ## 2026-08-20 — JISA author-input checkpoint
 
 - Complete `docs/research/paper_v2/manuscript/author_metadata_and_submission_inputs.md`

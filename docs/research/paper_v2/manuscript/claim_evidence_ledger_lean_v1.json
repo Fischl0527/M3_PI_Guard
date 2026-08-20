@@ -1,0 +1,150 @@
+{
+  "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.0",
+  "updated_at": "2026-08-20T11:45:00+08:00",
+  "paper_route": "authorization_regime_and_security_utility_empirical_study",
+  "scope": {
+    "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
+    "deepseek_authorization_work_items": 900,
+    "gemini_planned_work_items": 450,
+    "blind_study_in_scope": false,
+    "adaptive_budgets_reported": [50, 200],
+    "full_harness_required": false
+  },
+  "claims": [
+    {
+      "claim_id": "LC01",
+      "claim": "Evaluator and gold-answer fields are excluded from the online Guard projection used by the lean experiment.",
+      "status": "verified_deepseek",
+      "evidence": [
+        "protocols/paper_upgrade_v2/lean_empirical_execution_manifest_v1.json",
+        "experiments/paper_v2/lean_empirical_runner.py",
+        "docs/research/paper_v2/lean_empirical/authorization_results_deepseek_v1.json",
+        "tests/unit/test_paper_v2_lean_empirical_runner.py"
+      ],
+      "boundary": "This is an implementation and experiment-contract claim, not evidence that other published systems leak evaluator fields."
+    },
+    {
+      "claim_id": "LC02",
+      "claim": "Unsafe effects in the four main DeepSeek authorization cells remained at or near the observed floor.",
+      "status": "verified_deepseek",
+      "evidence": [
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_2_endpoints.csv",
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_3_paired_effects.csv"
+      ],
+      "observed": "Three cells were 0/100 and policy-only plus auto_compiled was 1/100; all paired unsafe-effect Holm-adjusted p values were 1.0.",
+      "boundary": "A near-floor endpoint does not prove universal robustness and limits power to distinguish mechanisms."
+    },
+    {
+      "claim_id": "LC03",
+      "claim": "Changing from auto_compiled to exact_gold reduced benign-tool task completion under both Guard variants.",
+      "status": "verified_deepseek",
+      "evidence": [
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_2_endpoints.csv",
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_3_paired_effects.csv"
+      ],
+      "observed": "Policy-only changed from 22/60 to 9/60 (-21.67 percentage points); M3-full changed from 16/60 to 7/60 (-15.00 points).",
+      "boundary": "The exact_gold condition is an oracle-sensitivity treatment, not a recommended deployment policy."
+    },
+    {
+      "claim_id": "LC04",
+      "claim": "Exact authorization changed runtime burden by removing ASK while increasing DENY incidence, failures and tail latency.",
+      "status": "verified_deepseek",
+      "evidence": [
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_4_runtime_burden.csv"
+      ],
+      "observed": "ASK incidence fell to 0; DENY incidence was 48.89% for policy-only and 45.00% for M3-full; failure incidence was 23.89% and 24.44%; p95 latency was 19.42 and 19.62 seconds.",
+      "boundary": "ASK and DENY are record-incidence measures; event totals are reported separately."
+    },
+    {
+      "claim_id": "LC05",
+      "claim": "The evaluated provenance, temporal/data-flow and confirmation extensions did not show a stable independent benefit over policy-only.",
+      "status": "verified_negative_result",
+      "evidence": [
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_2_endpoints.csv",
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_3_paired_effects.csv",
+        "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json"
+      ],
+      "observed": "Under auto_compiled, M3-full had 0/100 versus 1/100 unsafe effects but completed 16/60 versus 22/60 benign tool tasks; Public Pro and Flash both placed M3-full above policy-only in unsafe effects.",
+      "boundary": "The result is limited to the tested implementation, policies, benchmarks and DeepSeek models; it is not proof that provenance is generally ineffective."
+    },
+    {
+      "claim_id": "LC06",
+      "claim": "The unfavorable M3-full versus policy-only security direction is observed in both DeepSeek V4 Pro and V4 Flash Public matrices.",
+      "status": "verified_within_provider_models",
+      "evidence": [
+        "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json",
+        "docs/research/paper_v2/manuscript/results_shell.md"
+      ],
+      "observed": "Public Pro recorded 38/600 versus 13/600 unsafe effects; Public Flash recorded 24/400 versus 12/400.",
+      "boundary": "This supports a within-provider model replication only and does not establish cross-provider generalization."
+    },
+    {
+      "claim_id": "LC07",
+      "claim": "Authorization-regime outcomes are reported separately for AgentDojo and M3-v2 and by prespecified M3-v2 attack family.",
+      "status": "verified_deepseek_descriptive",
+      "evidence": [
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_5_heterogeneity.csv"
+      ],
+      "boundary": "These strata are descriptive heterogeneity analyses; they are not independently powered confirmatory tests."
+    },
+    {
+      "claim_id": "LC08",
+      "claim": "Defense-aware adaptive search found additional first unsafe effects between budgets 50 and 200.",
+      "status": "verified_deepseek_budget_50_200",
+      "evidence": [
+        "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json",
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_6_adaptive_50_200.csv"
+      ],
+      "observed": "First unsafe effects were found for 4/40 tasks by query 50 and 18/40 by query 200.",
+      "boundary": "Two budget points do not establish saturation and no budget-500 or budget-2000 claim is allowed."
+    },
+    {
+      "claim_id": "LC09",
+      "claim": "The lean DeepSeek experiment retains official returned-model identity, response IDs when obtained, ITT failures, token/cost accounting and isolated-effect execution without provider tools or real external actions.",
+      "status": "verified_deepseek",
+      "evidence": [
+        "outputs/experiments/lean_empirical/deepseek/raw_records_v1.jsonl",
+        "experiments/paper_v2/lean_empirical_runner.py",
+        "docs/research/paper_v2/lean_empirical/authorization_results_deepseek_v1.json"
+      ],
+      "boundary": "Provider model aliases do not identify an immutable hidden-weight revision."
+    },
+    {
+      "claim_id": "LC10",
+      "claim": "The authorization findings generalize across DeepSeek and Gemini providers.",
+      "status": "forbidden_while_gemini_pending",
+      "evidence": [
+        "protocols/paper_upgrade_v2/lean_empirical_execution_manifest_v1.json",
+        "outputs/experiments/lean_empirical/gemini/raw_records_v1.jsonl"
+      ],
+      "unlock_condition": "All planned Gemini work items become terminal, or the prespecified three-Pacific-quota-day rule closes and the completed subset is reported as diagnostic without a cross-provider claim."
+    },
+    {
+      "claim_id": "LC11",
+      "claim": "M3 is the first, only, state-of-the-art or universally superior provenance-aware runtime defense.",
+      "status": "forbidden",
+      "evidence": [
+        "docs/research/paper_v2/manuscript/citation_compliance_active_v1.md",
+        "docs/research/paper_v2/manuscript/related_work_draft.md"
+      ],
+      "boundary": "VIGIL, DRIFT, Task Shield, Progent, IPIGuard, CaMeL, ARGUS, AuthGraph, FAVA and provenance-sensitivity auditing occupy overlapping mechanism and evaluation space."
+    },
+    {
+      "claim_id": "LC12",
+      "claim": "JISA is SCIE and JCR Q2 on the submission date.",
+      "status": "pending_authorized_institutional_verification",
+      "evidence": [],
+      "unlock_condition": "An authorized institutional user must verify current SCIE coverage and JCR quartile immediately before submission."
+    },
+    {
+      "claim_id": "LC13",
+      "claim": "The 21 references currently cited by the manuscript have verified metadata, stable landing pages, publication status and reviewed claim contexts.",
+      "status": "verified_current_active_set",
+      "evidence": [
+        "docs/research/paper_v2/manuscript/citation_compliance_active_v1.md",
+        "docs/research/paper_v2/manuscript/references_v1.bib"
+      ],
+      "boundary": "Review any newly activated citation and repeat publication-status checks at submission."
+    }
+  ]
+}
