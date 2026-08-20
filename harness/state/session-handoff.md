@@ -1,5 +1,20 @@
 # 会话移交
 
+## 2026-08-20 — Gemini final-quota-day handoff
+
+- The 2026-08-20 pending-only run ended naturally after 23 attempts and its
+  first 429. Current normalized state is 23/450 terminal ITT, 92 recoverable,
+  335 untouched and five response-bearing work items; cross-provider inference
+  remains disabled.
+- PID 2176 is the only scheduled Gemini process. It waits until
+  `2026-08-21 15:02:00 +08:00`, then runs one `remaining --retry-failed`
+  command from the ignored local config. Do not launch a duplicate or replay
+  successful/terminal items.
+- This is quota day 3 of 3. After it ends, do not schedule another Gemini run.
+  At 450/450 terminal, build the complete statistics/tables/figures once and
+  update both manuscripts. Otherwise retain the partial cohort as diagnostic,
+  keep the no-cross-vendor boundary and finalize the DeepSeek-based paper.
+
 ## 2026-08-20 — Chinese comparison manuscript checkpoint
 
 - Chinese source: `docs/research/paper_v2/manuscript/manuscript_zh_v1.md`.

@@ -1,5 +1,20 @@
 # 进展记录
 
+## 2026-08-20 — Gemini quota-day 2 stopped; final day scheduled
+
+- The sole pending-only Gemini run ended naturally after 23 attempted work
+  items and stopped at the first 429. No response-bearing or terminal item was
+  replayed. Compact latest-state accounting is 23/450 terminal ITT, 92
+  response-less recoverable, 335 untouched and five official responses.
+- Provider quota days 2026-08-19 and 2026-08-20 are now consumed. One hidden
+  process (PID 2176) is waiting until 2026-08-21 15:02 +08:00 for the third and
+  final pending-only run. Gemini remains official-free-tier only at USD 0;
+  tools and external effects remain disabled.
+- After that run, the paper proceeds to one-pass final analysis regardless of
+  outcome: complete 450/450 data may support the preregistered cross-vendor
+  comparison; an incomplete cohort is diagnostic only and unlocks no such
+  claim. F-PAPER-002 remains `in_progress`.
+
 ## 2026-08-20 — Simplified Chinese comparison manuscript added
 
 - Added a full Simplified Chinese counterpart to the current English working
