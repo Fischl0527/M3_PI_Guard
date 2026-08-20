@@ -30,10 +30,12 @@ Repository: https://github.com/Fischl0527/M3_PI_Guard
 
 During preparation of this work, the authors used OpenAI Codex to assist with
 software editing, statistical-script review, figure-generation support, and
-language revision. The authors reviewed and revised all generated material and
-take full responsibility for the analysis, interpretation, citations, and
-manuscript content. DeepSeek and Gemini are evaluated research systems in this
-study and are described in the Methods.
+language revision. An earlier DeepSeek-generated project-planning note supplied
+by the project owner was consulted during study scoping. The authors reviewed
+and revised all generated material and take full responsibility for the
+analysis, interpretation, citations, and manuscript content. DeepSeek and
+Gemini API outputs reported in the experiments are evaluated research data;
+they were not used to generate outcome labels or statistical conclusions.
 
 Author action: verify this wording against the journal's policy and the actual
 tools used by every coauthor at submission time.

@@ -1,5 +1,16 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 15：AI-use 披露与 Cover Letter 对齐
+
+- AI-use 声明现如实记录 OpenAI Codex 的软件/统计脚本/图表/语言辅助，并披露
+  研究规划阶段参考过用户提供的 DeepSeek 生成规划笔记。
+- 同时明确正式 DeepSeek/Gemini API 输出是实验数据，没有用于生成 outcome 标签
+  或统计结论；Cover Letter 的 online-state 描述也同步为原始字段离线、派生授权在线。
+- 重建稿为 10,080 词、283 段、13 表、5 图；Cover Letter 正文 302 词，Highlights
+  字符数为 67/77/73/70/71。定向 pytest 10/10、Ruff、`py_compile` 通过。
+- 未调用 provider 或改变任何结果。F-PAPER-002 保持 `in_progress`，Gemini 仍等待
+  15:02 的唯一 pending-only 进程。
+
 ### 2026-08-20 精简实证里程碑 14：active claim ledger 语义修正
 
 - LC01 与正文同步为“原始 evaluator/label/gold-answer 字段离线，`exact_gold`

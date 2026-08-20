@@ -1,5 +1,14 @@
 # 会话移交
 
+## 2026-08-20 — AI-use disclosure checkpoint
+
+- The current manuscript discloses Codex assistance and the owner-supplied
+  DeepSeek-generated planning note. It distinguishes those preparation uses
+  from DeepSeek/Gemini API outputs evaluated as research data.
+- Current generated output: 10,080 words, 283 paragraphs, 13 tables and five
+  figures; focused tests 10/10 plus Ruff/compile. Cover letter body: 302 words.
+- No result changed. PID 7676 remains the only scheduled Gemini process.
+
 ## 2026-08-20 — Active claim-ledger boundary checkpoint
 
 - Use the corrected `claim_evidence_ledger_lean_v1.json`: LC01 distinguishes

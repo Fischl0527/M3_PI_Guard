@@ -14,10 +14,11 @@ Applications*.
 Tool-using language-model agents can convert untrusted content into externally
 meaningful actions, yet prompt-injection evaluations often treat authorization
 as fixed infrastructure. Our study instead evaluates runtime authorization as
-an experimental treatment. It separates evaluator-only information from the
-online guard state and jointly measures executed unsafe effects, benign-tool
-completion, confirmation and blocking burden, operational failures, latency,
-and adaptive attack budget.
+an experimental treatment. Raw evaluator, scoring, and gold-answer fields
+remain offline, while a derived exact-authorization object is tested only as a
+sensitivity condition. The study jointly measures executed unsafe effects,
+benign-tool completion, confirmation and blocking burden, operational failures,
+latency, and adaptive attack budget.
 
 Across completed public experiments with DeepSeek V4 Pro and V4 Flash, the
 full provenance-aware runtime reduced unsafe effects relative to a structural

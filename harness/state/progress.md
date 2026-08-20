@@ -1,5 +1,18 @@
 # 进展记录
 
+## 2026-08-20 — AI-use disclosure and cover-letter boundary aligned
+
+- The AI-use statement now discloses both OpenAI Codex assistance and the
+  DeepSeek-generated planning note supplied by the project owner during study
+  scoping. Experimental DeepSeek/Gemini API output is identified as research
+  data, not a source of outcome labels or statistical conclusions.
+- The cover letter now mirrors the raw-fields-offline/derived-authorization-
+  online boundary. Its body is 302 words; highlight lengths remain
+  67/77/73/70/71 characters.
+- Rebuilt output has 10,080 words, 283 paragraphs, 13 tables and five figures.
+  Focused tests pass 10/10 plus Ruff and `py_compile`; no provider call or
+  scientific result changed.
+
 ## 2026-08-20 — Active claim-ledger semantics corrected
 
 - LC01 now matches the manuscript's exact online-state boundary: raw evaluator,
