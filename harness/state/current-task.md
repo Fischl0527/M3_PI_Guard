@@ -1,5 +1,15 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 17：JISA review mode 与 AI 节标题对齐
+
+- JISA 官方 Guide for Authors 明确使用 single-anonymized review；投稿包无需额外制作
+  author-blinded 主稿，作者信息按 title-page 要求补齐即可。
+- AI 声明节标题改为官方示例的 “Declaration of generative AI and AI-assisted
+  technologies in the manuscript preparation process”，正文披露内容不变。
+- 重建主稿为 9,578 词、283 段、7 表、5 图；定向 pytest 13/13、Ruff、
+  `py_compile` 通过。未调用 provider 或修改任何科研结果。
+- F-PAPER-002 保持 `in_progress`，继续等待 15:02 的唯一 Gemini 任务。
+
 ### 2026-08-20 精简实证里程碑 16：补充表从主文无损拆分
 
 - Results 中原先内嵌的 Supplementary Tables S1–S6 已由构建器确定性拆出；主文

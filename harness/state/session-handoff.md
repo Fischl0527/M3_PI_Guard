@@ -1,5 +1,13 @@
 # 会话移交
 
+## 2026-08-20 — JISA single-anonymized checkpoint
+
+- Do not create a separate blinded manuscript: the checked official JISA guide
+  specifies single-anonymized review. Complete the author-owned title-page
+  fields in the existing template before submission.
+- The manuscript AI declaration now uses the official manuscript-preparation-
+  process heading. Focused tests pass 13/13; no result changed.
+
 ## 2026-08-20 — Separate supplementary-tables checkpoint
 
 - Main deliverable: `M3_PI_Guard_JISA_working_draft.docx`, now 7 tables and

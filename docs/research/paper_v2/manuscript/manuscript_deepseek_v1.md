@@ -1174,7 +1174,7 @@ identifier will be deposited before publication. Credentials and secrets are
 excluded from the release. Any restrictions on provider-derived compact raw
 records will be stated explicitly in the archival record.
 
-### Declaration of generative AI and AI-assisted technologies in the writing process
+### Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
 
 During preparation of this work, the authors used OpenAI Codex for software
 editing, statistical-script review, figure-generation support, and language

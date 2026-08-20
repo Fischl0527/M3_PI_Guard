@@ -1,5 +1,15 @@
 # 进展记录
 
+## 2026-08-20 — JISA review mode and AI-section title aligned
+
+- The official JISA guide specifies single-anonymized review; no separate
+  author-blinded manuscript variant is required. The submission checklist now
+  records this boundary.
+- The generative-AI declaration uses the guide's exact manuscript-preparation-
+  process section title. Disclosure content and scientific results are unchanged.
+- Rebuilt main output has 9,578 words, 283 paragraphs, seven tables and five
+  figures. Focused tests pass 13/13 plus Ruff and `py_compile`; provider calls 0.
+
 ## 2026-08-20 — Supplementary tables separated from the main manuscript
 
 - The manuscript builder now removes Supplementary Tables S1-S6 from the main

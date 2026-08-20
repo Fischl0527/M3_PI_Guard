@@ -42,7 +42,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "## Submission statements" in manuscript
     assert "### Data and code availability" in manuscript
     assert (
-        "### Declaration of generative AI and AI-assisted technologies in the writing process"
+        "### Declaration of generative AI and AI-assisted technologies in the manuscript preparation process"
         in manuscript
     )
     assert manuscript.index("## Submission statements") < manuscript.index(

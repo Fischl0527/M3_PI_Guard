@@ -35,6 +35,8 @@ Official sources:
 
 Current official format requirements checked on 2026-08-20:
 
+- JISA uses single-anonymized review, so the submission does not require a
+  separate author-blinded manuscript variant;
 - the abstract must not exceed 250 words;
 - 1–7 English keywords are required; and
 - 3–5 highlights are recommended, each no longer than 85 characters;
@@ -95,7 +97,8 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
 - [x] Add a provisional research-data/code-availability statement and repository
   link; replace the private-review wording with the archival DOI or immutable
   public release identifier before publication.
-- [x] Add the required generative-AI-use declaration before the references.
+- [x] Add the required generative-AI-use declaration before the references
+  using the guide's manuscript-preparation-process section title.
   Human authors retain full responsibility for literature verification,
   analysis, interpretation and manuscript content; all authors must confirm
   the wording before submission.
