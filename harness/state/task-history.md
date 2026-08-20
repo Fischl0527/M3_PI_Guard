@@ -301,3 +301,13 @@ Record completed, blocked, and abandoned tasks here.
   both condition outcomes together, and that ITT failures remain failures even
   when no unsafe effect is observed. Added `methodology_review_v1.md` as the one
   method-review record. Focused checks pass 21/21 plus Ruff.
+
+# 2026-08-20 — Real partial-Gemini state normalization
+
+- Ran the partial analyzer in memory against the actual compact Gemini data;
+  no result file was written and no provider call occurred.
+- Corrected analysis to reuse the runner's normalized latest-state logic and
+  content-free pause events. Actual accounting changed from an incorrect 94
+  terminal to 6 terminal, 109 nonterminal and 335 unstarted; no partial row
+  enters inference. Focused checks pass 33/33 plus Ruff/compile, followed by
+  20/20 post-build checks.

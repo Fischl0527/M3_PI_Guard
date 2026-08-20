@@ -3029,3 +3029,9 @@ Next gated action:
   estimate requiring correction. Methods now defines paired case resampling and
   separates absence of an observed unsafe effect from operational success on
   failed ITT rows. Focused analysis/manuscript/DOCX checks pass 21/21 plus Ruff.
+
+- Real Gemini partial analysis is now compatible with the runner's state model.
+  It consults the content-free pause ledger and normalizes old response-less
+  attempt-1 provider failures before deciding terminal eligibility. Current
+  in-memory counts are 6 terminal, 109 nonterminal, 335 unstarted and 444
+  pending; `cross_vendor_claim_eligible=false`. No analysis artifact was written.

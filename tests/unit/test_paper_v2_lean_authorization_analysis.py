@@ -123,7 +123,7 @@ def test_deepseek_only_defers_gemini_without_cross_vendor_claim(monkeypatch) -> 
     monkeypatch.setattr(
         analysis,
         "_validate_provider",
-        lambda provider, plan, raw, allow_partial: (
+        lambda provider, plan, raw, allow_partial, paused_work_keys: (
             deepseek_records,
             {"terminal_work_items": analysis.EXPECTED_COUNTS["deepseek"]},
         ),
@@ -192,6 +192,32 @@ def test_partial_provider_keeps_only_terminal_rows_for_analysis() -> None:
     }
 
 
+def test_partial_provider_reuses_runner_pause_normalization() -> None:
+    planned = _provider_plan_row("g-paused", 1)
+    physical = _provider_raw_row(
+        planned,
+        terminal=True,
+        response_id=None,
+        status="repeated_pre_response_failure",
+    )
+    physical["attempt"] = 2
+
+    records, integrity = analysis._validate_provider(
+        "gemini",
+        [planned],
+        [physical],
+        allow_partial=True,
+        paused_work_keys={"g-paused"},
+    )
+
+    assert records == []
+    assert integrity["terminal_work_items"] == 0
+    assert integrity["nonterminal_observed_work_items"] == 1
+    assert integrity["observed_operational_statuses"] == {
+        "pre_response_rate_limited": 1
+    }
+
+
 def test_partial_gemini_defers_paired_inference(monkeypatch) -> None:
     plan_rows = [
         {"provider_id": "deepseek", "work_key": "d"},
@@ -201,7 +227,7 @@ def test_partial_gemini_defers_paired_inference(monkeypatch) -> None:
     gemini_records = [_row("gemini", "m3_full", "auto_compiled", False)]
     monkeypatch.setattr(analysis, "_read_jsonl", lambda path: plan_rows)
 
-    def validate(provider, plan, raw, allow_partial):
+    def validate(provider, plan, raw, allow_partial, paused_work_keys):
         if provider == "deepseek":
             return deepseek_records, {"terminal_work_items": 900}
         return gemini_records, {"terminal_work_items": 1}
@@ -233,7 +259,7 @@ def test_complete_gemini_enables_cross_vendor_comparisons(monkeypatch) -> None:
     ]
     monkeypatch.setattr(analysis, "_read_jsonl", lambda path: plan_rows)
 
-    def validate(provider, plan, raw, allow_partial):
+    def validate(provider, plan, raw, allow_partial, paused_work_keys):
         terminal = analysis.EXPECTED_COUNTS[provider]
         return [_row(provider, "m3_full", "auto_compiled", False)], {
             "terminal_work_items": terminal

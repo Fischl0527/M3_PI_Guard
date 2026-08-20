@@ -2954,3 +2954,11 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   and adaptive 50/200 scope all match the implementation. Methods now clarifies
   failure interpretation and the bootstrap unit. The 9,950-word rebuilt draft
   passes 21 focused tests plus Ruff.
+
+- Real Gemini partial-data preflight exposed and fixed a state-classification
+  mismatch: the analysis had treated 88 legacy response-less attempt-1
+  `provider_failure` rows as terminal although the runner correctly makes them
+  recoverable. Analysis now applies the runner's normalized latest state and
+  pause-event ledger. Actual in-memory accounting is 6 terminal / 109
+  nonterminal / 335 unstarted; cross-provider eligibility remains false.
+  Focused runner/analysis checks pass 33/33 and post-build checks pass 20/20.

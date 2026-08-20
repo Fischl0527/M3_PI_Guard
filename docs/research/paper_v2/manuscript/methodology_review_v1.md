@@ -31,7 +31,7 @@ rather than individual condition rows.
 | Stress regimes | Broad, underspecified, and conflicting comparisons are prespecified extensions outside the primary Holm family | Pass |
 | Heterogeneity | Benchmark and attack-family panels are descriptive and not promoted to confirmatory families | Pass |
 | Operational burden | ASK/DENY event totals and record incidence are distinct; failure and latency use all terminal records | Pass |
-| Partial Gemini | A partial cohort receives operational accounting only; paired inference requires 450/450 terminal work items | Pass |
+| Partial Gemini | A partial cohort receives operational accounting only; the same content-free pause-event normalization used by the runner is applied, and paired inference requires 450/450 terminal work items | Pass |
 | Adaptive analysis | First-success evidence stops at budgets 50 and 200 and makes no saturation claim | Pass |
 
 ## Interpretation constraints

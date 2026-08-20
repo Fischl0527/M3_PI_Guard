@@ -194,8 +194,10 @@ experiment-item level:
 
 Earlier response-less attempts remain append-only in the raw file. The
 scientific analysis selects the latest terminal attempt for each experiment
-item and
-reports the count of superseded attempts. No prior row is overwritten.
+item and reports the count of superseded attempts. For Gemini, it applies the
+same retry-state normalization as the runner using the content-free pause-event
+ledger, so a quota pause cannot be mistaken for a scientific terminal. No prior
+row is overwritten.
 
 ## Outcomes
 

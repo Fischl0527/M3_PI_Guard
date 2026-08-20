@@ -3,8 +3,9 @@
 The input is the frozen 1,350-row plan plus one compact raw JSONL per provider.
 For a recovered work item, only its latest terminal attempt contributes to the
 scientific denominator; earlier no-response attempts remain in the raw file and
-are counted in the recovery audit.  No provider, trace, or historical evidence
-replay is performed here.
+are counted in the recovery audit. Gemini retry state also consults the
+content-free pause-event ledger used by the runner. No provider, response trace,
+or historical evidence replay is performed here.
 """
 
 from __future__ import annotations
@@ -21,6 +22,8 @@ from experiments.paper_v2.lean_empirical_runner import (
     EXPECTED_COUNTS,
     PLAN_PATH,
     PROVIDER_OUTPUTS,
+    _gemini_paused_work_keys,
+    _latest_by_work_key as _runner_latest_by_work_key,
     _read_jsonl,
 )
 
@@ -164,9 +167,14 @@ def _validate_provider(
     raw_rows: Sequence[Mapping[str, Any]],
     *,
     allow_partial: bool,
+    paused_work_keys: set[str] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     plan = {str(row["work_key"]): dict(row) for row in plan_rows}
-    latest, recovery = _latest_attempts(raw_rows)
+    _, recovery = _latest_attempts(raw_rows)
+    latest = _runner_latest_by_work_key(
+        raw_rows,
+        paused_work_keys=paused_work_keys,
+    )
     if not set(latest).issubset(plan):
         raise LeanAuthorizationAnalysisError(f"{provider_id}: unknown work key")
     if not allow_partial and len(latest) != EXPECTED_COUNTS[provider_id]:
@@ -554,6 +562,11 @@ def build_analysis(
             by_provider[provider],
             _read_jsonl(PROVIDER_OUTPUTS[provider]),
             allow_partial=(provider == "gemini" and allow_partial_gemini),
+            paused_work_keys=(
+                _gemini_paused_work_keys(PROVIDER_OUTPUTS[provider].parent)
+                if provider == "gemini"
+                else set()
+            ),
         )
     if deepseek_only:
         records["gemini"] = []

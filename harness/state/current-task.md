@@ -3627,3 +3627,10 @@ The older provider-gate text is superseded by this checkpoint.
   cluster/bootstrap unit and that a failed row without an observed unsafe
   effect is not clean defense success or task completion. The rebuilt draft is
   9,950 words/283 paragraphs; 21 focused checks and Ruff pass.
+
+- A read-only precheck on the real partial Gemini JSONL found that 88 legacy
+  no-response attempt-1 rows were physically labeled terminal but are normalized
+  as recoverable by the runner. The analyzer now reuses the identical runner
+  normalization, including content-free pause events. The real precheck is now
+  6 terminal, 109 nonterminal, 335 unstarted, with cross-provider inference
+  false. Runner/analysis tests pass 33/33; rebuilt-paper checks pass 20/20.
