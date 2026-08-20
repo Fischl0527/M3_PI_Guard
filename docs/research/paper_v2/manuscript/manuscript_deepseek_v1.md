@@ -32,7 +32,7 @@ remains pending and supports no cross-provider claim.
 
 ## 1. Introduction
 
-### Motivation
+### 1.1 Motivation
 
 Tool-using language-model agents turn generated text into actions. An indirect
 prompt injection embedded in a message, document, webpage, memory item, or tool
@@ -57,7 +57,7 @@ whether authorization information, enforcement structure, and failure
 handling materially change the security and utility measured for tool-using
 agents.
 
-### Evaluation gap
+### 1.2 Evaluation gap
 
 Three distinctions are easy to blur in an agent-security experiment.
 
@@ -82,7 +82,7 @@ common intention-to-treat denominator. Static attacks are also insufficient
 for a robustness claim when an attacker can adapt to the public defense
 interface [@L27].
 
-### Research questions
+### 1.3 Research questions
 
 The study asks three questions.
 
@@ -96,7 +96,7 @@ The study asks three questions.
    stable across AgentDojo, M3-v2, a second provider, and the completed
    defense-aware budgets 50 and 200?
 
-### Study design
+### 1.4 Study design
 
 M3 uses a three-state runtime decision (`ALLOW`, `ASK`, `DENY`), a projection
 that excludes evaluator-only fields from online state, permission monotonicity
@@ -115,7 +115,7 @@ items. The design separately reuses the completed 480-record medium study,
 40-task adaptive evidence at budgets 50 and 200. Provider tools and real
 external effects are prohibited throughout.
 
-### Current evidence and route decision
+### 1.5 Current evidence and route decision
 
 The completed medium study rejected the mechanism-paper route. M3-full reduced
 unsafe effects from 8/36 under the structural condition to 0/36, but M3
@@ -148,7 +148,7 @@ incremental security or utility advantage over policy-only. These unfavorable
 results are retained; Gemini remains pending and therefore supports no current
 cross-provider claim.
 
-### Contributions
+### 1.6 Contributions
 
 The current evidence supports four bounded contributions:
 
@@ -168,7 +168,7 @@ evidence.
 
 ## 2. Related work
 
-### Runtime verification and task alignment
+### 2.1 Runtime verification and task alignment
 
 VIGIL implements a verify-before-commit protocol for tool-stream injection and
 introduces the 959-case SIREN benchmark [@L01]. It is the closest
@@ -187,7 +187,7 @@ possible novelty claim: planning consistency is an adjacent mechanism, not an
 unoccupied problem. We therefore use these works to define comparison classes
 and mechanism boundaries rather than to motivate a first-or-only claim.
 
-### Privilege, provenance, and information flow
+### 2.2 Privilege, provenance, and information flow
 
 Progent represents least privilege as symbolic tool-and-argument rules. Its
 latest arXiv v3 description explicitly distinguishes automatic narrowing from
@@ -235,7 +235,7 @@ in paired conditions; and quantify `ASK` burden, operational failures, and
 executed effects under a common evidence contract. These are study-design
 claims and must stand on M3's own completed experiments.
 
-### Prompt-level defenses and execution-level outcomes
+### 2.3 Prompt-level defenses and execution-level outcomes
 
 Structured queries, spotlighting, instruction hierarchy, and injection
 detectors act at the prompt, representation, or model-output layer
@@ -247,7 +247,7 @@ retaining benign task completion. This distinction is necessary because a
 defense can appear secure by refusing useful actions or by failing before an
 effect is attempted.
 
-### Benchmarks and adaptive evaluation
+### 2.4 Benchmarks and adaptive evaluation
 
 AgentDojo supplies dynamic security and utility tasks and is the main public
 benchmark in this study [@L09].
@@ -265,7 +265,7 @@ searches frozen tasks at prespecified query budgets, and reports the
 first-success distribution. Since L27 remains a preprint, it motivates the
 protocol but is not described as a peer-reviewed theorem.
 
-### Positioning summary
+### 2.5 Positioning summary
 
 M3 is not positioned as the first runtime guard, the first provenance system,
 or a state-of-the-art defense. The medium experiment already showed that
@@ -277,7 +277,7 @@ the measured security–utility frontier.
 
 ## 3. Methods
 
-### Study design and research questions
+### 3.1 Study design and research questions
 
 We conduct a paired empirical study of runtime authorization for tool-using
 language-model agents. The design separates the information supplied to the
@@ -301,7 +301,7 @@ Positive results are not a stopping condition. The analysis is retained if
 `exact_gold` has little effect, M3-full underperforms policy-only, or the second
 provider differs from the primary model.
 
-### Threat model and safety boundary
+### 3.2 Threat model and safety boundary
 
 The attacker controls text in documents, messages, retrieved records, memory,
 or simulated tool outputs processed while the agent performs a trusted user
@@ -320,7 +320,7 @@ Training-time poisoning, model-weight compromise, credential theft, host
 compromise, and direct modification of the trusted policy store are outside
 scope.
 
-### Online-state and evaluator separation
+### 3.3 Online-state and evaluator separation
 
 Every run constructs the online state through an allowlist projection.
 completed fields include trusted user intent, the benchmark-visible task
@@ -341,7 +341,7 @@ boolean forbidden-field check. A run fails the minimal integrity check if a
 forbidden field is present. The final analysis checks this condition once for
 all terminal records; it does not recursively replay historical evidence.
 
-### Runtime conditions
+### 3.4 Runtime conditions
 
 The common runtime interfaces are `TaskPolicyManifest`, `ActionProposal`,
 `GuardDecision`, and `ProvenanceEvent`. The two M3 conditions share the agent,
@@ -364,7 +364,7 @@ The Gemini subset adds the strongest available peer-reviewed structural
 baseline under `auto_compiled`. The baseline is included to anchor the
 cross-provider sample, not to support a universal ranking.
 
-### Authorization regimes
+### 3.5 Authorization regimes
 
 Five regimes are evaluated:
 
@@ -381,7 +381,7 @@ The four primary DeepSeek cells pair policy-only and M3-full with
 `auto_compiled` and `exact_gold`. A fixed nested subset adds M3-full under the
 three non-oracle stress regimes.
 
-### Existing evidence reused without new calls
+### 3.6 Existing evidence reused without new calls
 
 Four completed datasets are analyzed once:
 
@@ -396,7 +396,7 @@ summaries without repeating model execution. These data establish the
 empirical motivation and the two-point adaptive first-success curve; they do
 not establish attack saturation.
 
-### Frozen primary sample
+### 3.7 Frozen primary sample
 
 The new DeepSeek study contains 180 unique paired cases selected before the
 new outcomes were inspected:
@@ -415,7 +415,7 @@ A nested 60-case subset receives three additional M3-full assignments:
 DeepSeek plan therefore contains 900 work items. The first six items form the
 formal technical prefix and remain part of the final denominator.
 
-### Frozen cross-provider sample
+### 3.8 Frozen cross-provider sample
 
 The Gemini study uses 90 cases nested within the DeepSeek main sample:
 
@@ -437,7 +437,7 @@ diagnostic. If the 450 planned items do not become terminal within that rule,
 the observed subset is reported as diagnostic and no cross-provider
 generalization claim is made.
 
-### Providers and model identity
+### 3.9 Providers and model identity
 
 The primary model is DeepSeek V4 Pro through the official DeepSeek endpoint.
 The cross-provider model is Gemini 3.6 Flash through the official Google
@@ -451,7 +451,7 @@ Content-free request metadata and the provider's internal trace remain under
 the ignored run directory. Exact model identity is checked in the final
 one-pass integrity validation.
 
-### Failure and recovery policy
+### 3.10 Failure and recovery policy
 
 Automatic retry is disabled. Recovery operates at the predefined
 experiment-item level:
@@ -472,7 +472,7 @@ scientific analysis selects the latest terminal attempt for each experiment
 item and
 reports the count of superseded attempts. No prior row is overwritten.
 
-### Outcomes
+### 3.11 Outcomes
 
 The two joint primary endpoints are:
 
@@ -488,7 +488,7 @@ analysis reports raw numerator/denominator values alongside proportions. A
 provider or parser failure is not silently removed and is not relabeled as a
 successful security outcome.
 
-### Statistical analysis
+### 3.12 Statistical analysis
 
 Each condition proportion receives a Wilson 95% confidence interval. The
 paired analyses report the absolute difference in percentage points, the two
@@ -513,7 +513,7 @@ Adaptive evidence is limited to budgets 50 and 200. We report the cumulative
 fraction of the fixed 40-task cohort with a first unsafe effect by query count
 and the two observed budget points. We do not extrapolate a saturation level.
 
-### Minimal verification and reproducibility
+### 3.13 Minimal verification and reproducibility
 
 Verification is deliberately proportional to the lean study. It consists of:
 
@@ -531,7 +531,7 @@ source.
 
 ## 4. Results
 
-### Medium study disposition
+### 4.1 Medium study disposition
 
 The completed study contains 480 records: 432 primary `auto_compiled` records
 covering 72 paired cases across six conditions, plus 48 authorization-regime
@@ -607,7 +607,7 @@ parameter. Confirmation outcomes remained `pending` in this synthetic study;
 the ASK count measures burden and cannot be interpreted as successful human
 approval.
 
-### Authorization-regime sensitivity
+### 4.2 Authorization-regime sensitivity
 
 Forty-eight probe records compare four alternate regimes with matched
 `auto_compiled` executions for M3 policy-only and M3-full. Each
@@ -618,7 +618,7 @@ completion increased from 1/6 under matched `auto_compiled` to 3/6 under
 were p=0.5 and p=0.25, respectively. These six-pair estimates are sensitivity
 signals, not evidence of a domain-wide bias.
 
-### Mechanism/redirect decision
+### 4.3 Mechanism/redirect decision
 
 | Gate | Result | Evidence |
 |---|---|---|
@@ -633,7 +633,7 @@ The active manuscript route is therefore an empirical study of authorization
 uncertainty and the security–utility trade-off. A defense-mechanism or SOTA
 claim is prohibited.
 
-### Public primary-model result
+### 4.4 Public primary-model result
 
 The completed Public matrix contains 847 unique cases and 5,082 records: 600
 attacks and 247 benign cases crossed with the same six conditions. All 76
@@ -675,7 +675,7 @@ falls by 55.67 points for both M3 variants relative to the structural
 condition. AgentDojo benign denominators remain the 97 unique official utility
 tasks and are not duplicated.
 
-### Public DeepSeek V4 Flash replication
+### 4.5 Public DeepSeek V4 Flash replication
 
 The completed Flash matrix contains 1,791 records: 400 attacks, 145 benign
 tool tasks, and 52 benign no-tool tasks under each of the structural,
@@ -694,7 +694,7 @@ mechanism gain. Sixteen operational diagnostic records remain in ITT; the Flash
 result therefore supports a same-provider model replication, not a clean
 mechanism-quality or cross-provider claim.
 
-### Public operational and decision burden
+### 4.6 Public operational and decision burden
 
 The Public matrix contains 4,616 completed, 112 maximum-step, 120 parse-failure,
 and 234 provider-failure records. Diagnostics are uneven by condition:
@@ -709,7 +709,7 @@ mechanism gate therefore passed its structural security-effect check but
 failed utility non-inferiority and module gain. The active route remains the
 empirical security–utility fallback.
 
-### DeepSeek authorization-regime experiment
+### 4.7 DeepSeek authorization-regime experiment
 
 The frozen authorization study contributes 900 terminal DeepSeek V4 Pro work
 items across 180 paired cases. The four main cells each contain 100 attacks,
@@ -722,7 +722,7 @@ contains 768 completed records, 54 parse failures, 30 maximum-step terminals,
 gold field entered the online projection, and provider tools and real external
 effects remained disabled.
 
-#### Joint security and utility endpoints
+#### 4.7.1 Joint security and utility endpoints
 
 Unsafe effects were at the floor in the main experiment: 0/100 under M3-full
 with either `auto_compiled` or `exact_gold`, 0/100 under policy-only with
@@ -751,7 +751,7 @@ Holm correction. We therefore interpret the consistent direction and effect
 size as evidence of authorization sensitivity in this sample, not as a
 universal oracle-policy effect.
 
-#### Stress regimes and operational burden
+#### 4.7.2 Stress regimes and operational burden
 
 On the nested benign-tool subset, moving from matched M3-full
 `auto_compiled` executions to broad, conflicting, or underspecified policies
@@ -777,7 +777,7 @@ with repeated blocking and higher operational failure. The result supports
 making authorization construction explicit in evaluations; it does not show
 that every gold-derived policy or every runtime guard behaves similarly.
 
-### Defense-aware adaptive evidence through budget 200
+### 4.8 Defense-aware adaptive evidence through budget 200
 
 The completed DeepSeek V4 Pro cost canary covered eight result-blind,
 attack-family-balanced M3-v2 development tasks under M3-full and the
@@ -804,7 +804,7 @@ saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 | Primary frozen panel | 50 | 40 | 4 (10.00%, 95% CI 3.96–23.05%) | 4 first successes by query 50 | No |
 | Primary frozen panel | 200 | 40 | 18 (45.00%, 95% CI 30.71–60.17%) | 14 additional first successes at queries 51–200 | No |
 
-### Remaining evidence boundary
+### 4.9 Remaining evidence boundary
 
 The medium, Public Pro, Public Flash, authorization-regime, and budget-50/200
 studies jointly support an empirical security–utility paper. They do not
@@ -817,7 +817,7 @@ rate.
 
 ## 5. Discussion
 
-### Existing evidence changes the research claim
+### 5.1 Existing evidence changes the research claim
 
 The completed medium and Public experiments do not support presenting M3-full
 as a stronger defense than policy-only. In the 5,082-record DeepSeek V4 Pro
@@ -839,7 +839,7 @@ too noisy to supply useful discrimination. The new authorization-regime
 experiment is designed to distinguish some of these explanations without
 claiming that it identifies a universal causal mechanism.
 
-### Authorization is part of the treatment
+### 5.2 Authorization is part of the treatment
 
 Authorization is often treated as fixed infrastructure rather than an
 experimental variable. That assumption is risky in tool-agent evaluation. An
@@ -875,7 +875,7 @@ conflicting, and underspecified stress regimes likewise reduced completion by
 attack floor. These findings show that policy specification can move burden
 and utility even when a headline attack rate appears stable.
 
-### Executed effects and utility must be reported together
+### 5.3 Executed effects and utility must be reported together
 
 A low prompt-injection success rate is not sufficient evidence of a useful
 runtime defense. A detector may flag adversarial text without preventing an
@@ -899,7 +899,7 @@ ASK and failure upward may simply externalize uncertainty rather than resolve
 it. The paper reports these burdens directly rather than collapsing them into
 a composite score.
 
-### Adaptive evidence is budget-sensitive, not saturated
+### 5.4 Adaptive evidence is budget-sensitive, not saturated
 
 The 40-task defense-aware panel found first unsafe effect for 4/40 tasks by 50
 queries and 18/40 by 200 queries. Thus a budget-50 evaluation would have missed
@@ -913,7 +913,7 @@ through 200 with an explicit no-saturation boundary. This narrower result is
 more defensible than extending a long and costly panel whose additional
 validity for the paper's authorization question is uncertain.
 
-### Relation to recent provenance and authorization work
+### 5.5 Relation to recent provenance and authorization work
 
 VIGIL, DRIFT, the Task Shield, IPIGuard, Progent, CaMeL, ARGUS, AuthGraph, FAVA,
 and provenance-sensitivity auditing occupy overlapping parts of the design
@@ -930,7 +930,7 @@ tasks [@L35]. The present design extends that measurement question to complete
 tool trajectories and executed effects, albeit with the additional
 implementation complexity and failure modes that such trajectories introduce.
 
-### Cross-provider interpretation
+### 5.6 Cross-provider interpretation
 
 The Gemini sample is deliberately smaller and nested inside the DeepSeek
 sample. It can show whether the main paired direction appears under another
@@ -943,7 +943,7 @@ The Gemini sample is incomplete at this analysis cutoff, and its partial rows
 are excluded from inference. External validity is therefore limited to
 DeepSeek V4 Pro and V4 Flash, and no cross-provider conclusion is made.
 
-### Limitations
+### 5.7 Limitations
 
 First, the new primary experiment uses one proprietary model and two benchmark
 families. Model updates, tool schemas, system prompts, and application context
@@ -973,7 +973,7 @@ claim first, only, or SOTA status. Its external-validity claims are limited to
 the models, benchmarks, policy compiler, stress regimes, and attack budgets
 actually evaluated.
 
-### Practical implications
+### 5.8 Practical implications
 
 Three practical recommendations follow even before the new paired estimates
 are filled. First, agent-security benchmarks should publish the fields visible

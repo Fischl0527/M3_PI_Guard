@@ -3498,9 +3498,9 @@ The older provider-gate text is superseded by this checkpoint.
 - Added a deterministic manuscript builder and a reader-facing unified English
   draft at `docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md`.
 - The current draft has six numbered IMRaD sections, five embedded figures and
-  an 8,029-word body. Internal citation-audit tables, historical Harness prose,
+  an 8,117-word body. Internal citation-audit tables, historical Harness prose,
   Git workflow notes and conditional result placeholders are excluded.
-- Focused verification passes 5/5, with Ruff, `py_compile`, citation-key,
+- Focused verification passes 6/6, with Ruff, `py_compile`, citation-key,
   abstract-length, section-order, figure-existence and workflow-metadata checks.
 - Gemini remains pending under the three-Pacific-quota-day rule, so the paper
   remains in Stage 2 writing and makes no cross-provider claim.
@@ -3511,3 +3511,6 @@ The older provider-gate text is superseded by this checkpoint.
 - All 21 cited bibliography keys now use citation-processor syntax in the
   reader-facing draft. Internal literature hyperlinks and implementation-only
   result flags no longer enter the manuscript.
+- Scientific subsections are generated with JISA-compatible hierarchical
+  numbering; the abstract, figures, main tables and supplementary table labels
+  remain outside that numbering sequence.

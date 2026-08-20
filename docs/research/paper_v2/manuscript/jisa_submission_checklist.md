@@ -37,7 +37,14 @@ Current official format requirements checked on 2026-08-20:
 
 - the abstract must not exceed 250 words;
 - 1–7 English keywords are required; and
-- 3–5 highlights are recommended, each no longer than 85 characters.
+- 3–5 highlights are recommended, each no longer than 85 characters;
+- sections and subsections use 1, 1.1 and 1.1.1 numbering;
+- Word source is editable, single-column `.doc`/`.docx` (or editable LaTeX);
+- a data-availability statement is required and the journal's Option C data
+  policy calls for repository deposit or an explanation of non-availability;
+  and
+- any required generative-AI declaration appears in its own section before the
+  references.
 
 The provisional abstract and five-highlight file satisfy these bounds. Their
 scientific wording remains subject to Gemini's prespecified stopping rule.
@@ -62,7 +69,7 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
 
 ## Journal package
 
-- [ ] Number sections and subsections; do not number the abstract.
+- [x] Number sections and subsections; do not number the abstract.
 - [x] Provisional title, abstract, keywords and highlights contain no unsupported
   first/only/SOTA wording.
 - [ ] Upload the manuscript and all required editable source files.

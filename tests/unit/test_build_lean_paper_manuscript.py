@@ -74,3 +74,19 @@ def test_generated_headings_are_numbered_once() -> None:
     manuscript = builder.build_manuscript()
     numbered = re.findall(r"^## ([1-6])\. ", manuscript, flags=re.MULTILINE)
     assert numbered == ["1", "2", "3", "4", "5", "6"]
+
+    body = manuscript.split("## Figures", 1)[0]
+    subsection_titles = re.findall(r"^### (.+)$", body, flags=re.MULTILINE)
+    assert subsection_titles
+    assert all(re.match(r"[1-6]\.\d+ ", title) for title in subsection_titles)
+    nested_titles = re.findall(r"^#### (.+)$", body, flags=re.MULTILINE)
+    assert all(
+        title.startswith("Supplementary Table ")
+        or re.match(r"[1-6]\.\d+\.\d+ ", title)
+        for title in nested_titles
+    )
+
+
+def test_nested_heading_without_parent_fails_closed() -> None:
+    with pytest.raises(builder.ManuscriptBuildError, match="lacks a parent"):
+        builder._number_subsections("#### Orphan", section_number=3)

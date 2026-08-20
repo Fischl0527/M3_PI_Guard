@@ -129,6 +129,35 @@ def _abstract_and_keywords() -> tuple[str, str]:
     return abstract, keywords
 
 
+def _number_subsections(body: str, *, section_number: int) -> str:
+    counters = [0, 0, 0]
+    numbered: list[str] = []
+    for line in body.splitlines():
+        heading = re.match(r"^(#{3,5})\s+(.+)$", line)
+        if not heading:
+            numbered.append(line)
+            continue
+
+        marks, title = heading.groups()
+        if title.startswith(("Table ", "Supplementary Table ", "Figure ")):
+            numbered.append(line)
+            continue
+
+        depth = len(marks) - 3
+        if depth > 0 and counters[depth - 1] == 0:
+            raise ManuscriptBuildError(
+                f"Nested heading lacks a parent in section {section_number}: {title}"
+            )
+        counters[depth] += 1
+        for index in range(depth + 1, len(counters)):
+            counters[index] = 0
+        prefix = ".".join(
+            str(value) for value in (section_number, *counters[: depth + 1])
+        )
+        numbered.append(f"{marks} {prefix} {title}")
+    return "\n".join(numbered)
+
+
 def _word_count(text: str) -> int:
     return len(re.findall(r"[A-Za-z0-9][A-Za-z0-9'`-]*", text))
 
@@ -373,6 +402,7 @@ def build_manuscript() -> str:
             start_heading=start_heading,
             end_heading=end_heading,
         )
+        body = _number_subsections(body, section_number=int(heading.split(".", 1)[0]))
         parts.append(f"## {heading}\n\n{body}")
 
     caption_body = _drop_wrapper(

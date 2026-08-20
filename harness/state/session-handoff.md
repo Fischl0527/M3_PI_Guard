@@ -2893,8 +2893,8 @@ Next gated action:
   `docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md`.
 - Rebuild command:
   `F:\robot\Anaconda3\python.exe -B scripts/build_lean_paper_manuscript.py`.
-- The main body is 8,029 words, contains six numbered sections and embeds all
-  five generated figures. Focused manuscript tests pass 5/5 plus Ruff and
+- The main body is 8,117 words, contains six numbered sections and embeds all
+  five generated figures. Focused manuscript tests pass 6/6 plus Ruff and
   `py_compile`; do not substitute a Full Harness or historical replay.
 - The draft explicitly excludes incomplete Gemini rows and makes no
   cross-provider claim. After a new Pacific quota day, the only eligible
@@ -2906,3 +2906,6 @@ Next gated action:
 - Citation syntax is normalized to the 36-entry BibTeX file; the current draft
   cites 21 unique keys in 52 citation occurrences. Raw internal literature IDs
   and implementation-only result flags are rejected by the builder.
+- All scientific subsections now use hierarchical JISA numbering. Final Word or
+  LaTeX packaging should remain single-column/editable and place any required
+  generative-AI declaration before the reference list.
