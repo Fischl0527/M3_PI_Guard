@@ -405,6 +405,10 @@ def build_manuscript() -> str:
         "Full Harness",
         "evidence-hash",
         "Git branch",
+        "([L",
+        "mechanism_paper_candidate",
+        "exact_gold_*",
+        "shard evidence reviews",
     )
     present = [token for token in forbidden if token in manuscript]
     if present:

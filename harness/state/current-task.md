@@ -3498,7 +3498,7 @@ The older provider-gate text is superseded by this checkpoint.
 - Added a deterministic manuscript builder and a reader-facing unified English
   draft at `docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md`.
 - The current draft has six numbered IMRaD sections, five embedded figures and
-  an 8,198-word body. Internal citation-audit tables, historical Harness prose,
+  an 8,029-word body. Internal citation-audit tables, historical Harness prose,
   Git workflow notes and conditional result placeholders are excluded.
 - Focused verification passes 5/5, with Ruff, `py_compile`, citation-key,
   abstract-length, section-order, figure-existence and workflow-metadata checks.
@@ -3508,3 +3508,6 @@ The older provider-gate text is superseded by this checkpoint.
   completed CSV outputs with compact labels and fixed numerical formatting.
   Six earlier detail tables remain available as Supplementary Tables S1–S6,
   avoiding duplicate Table 1–6 numbering.
+- All 21 cited bibliography keys now use citation-processor syntax in the
+  reader-facing draft. Internal literature hyperlinks and implementation-only
+  result flags no longer enter the manuscript.

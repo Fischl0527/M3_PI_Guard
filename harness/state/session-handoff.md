@@ -2893,7 +2893,7 @@ Next gated action:
   `docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md`.
 - Rebuild command:
   `F:\robot\Anaconda3\python.exe -B scripts/build_lean_paper_manuscript.py`.
-- The main body is 8,198 words, contains six numbered sections and embeds all
+- The main body is 8,029 words, contains six numbered sections and embeds all
   five generated figures. Focused manuscript tests pass 5/5 plus Ruff and
   `py_compile`; do not substitute a Full Harness or historical replay.
 - The draft explicitly excludes incomplete Gemini rows and makes no
@@ -2903,3 +2903,6 @@ Next gated action:
 - The builder now reads the six existing result CSVs without modifying them and
   emits publication-facing Tables 1–6. Earlier source-audit, medium, Public and
   adaptive detail tables are retained as Supplementary Tables S1–S6.
+- Citation syntax is normalized to the 36-entry BibTeX file; the current draft
+  cites 21 unique keys in 52 citation occurrences. Raw internal literature IDs
+  and implementation-only result flags are rejected by the builder.

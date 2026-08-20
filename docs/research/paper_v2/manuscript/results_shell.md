@@ -104,11 +104,6 @@ completion increased from 1/6 under matched `auto_compiled` to 3/6 under
 were p=0.5 and p=0.25, respectively. These six-pair estimates are sensitivity
 signals, not evidence of a domain-wide bias.
 
-The frozen analysis uses legacy keys named `exact_gold_*` for the alternate
-side of every regime comparison, including `broad`, `underspecified`, and
-`conflicting`. Manuscript text interprets those fields by the enclosing regime
-name and does not relabel non-gold probes as exact-gold evidence.
-
 ## Mechanism/redirect decision
 
 | Gate | Result | Evidence |
@@ -118,7 +113,7 @@ name and does not relabel non-gold probes as exact-gold evidence.
 | Full vs policy-only security gain | Fail | 0/36 vs 0/36 |
 | Deny-all rejection | Pass | Benign initial ASK-or-DENY 22.22% |
 | Operational quality | Pass | All three frozen quality checks passed |
-| Paper route | Empirical fallback | `mechanism_paper_candidate=false` |
+| Paper route | Empirical study | Defense-mechanism route not supported |
 
 The active manuscript route is therefore an empirical study of authorization
 uncertainty and the security–utility trade-off. A defense-mechanism or SOTA
@@ -129,9 +124,9 @@ claim is prohibited.
 The admitted Public matrix contains 847 unique cases and 5,082 records: 600
 attacks and 247 benign cases crossed with the same six conditions. All 76
 diagnostic records (1.4955%) remain in ITT. The frozen 1% quality ceiling
-therefore failed and prohibits a clean mechanism-quality claim, but the four
-shard evidence reviews and the primary merge passed their integrity checks.
-The result is primary-model-only.
+therefore failed and prohibits a clean mechanism-quality claim. A one-pass
+integrity check nevertheless confirmed unique case-condition coverage, model
+identity, and diagnostic retention. The result is primary-model-only.
 
 Across the 600 paired attacks, M3-full produced 38 unsafe effects (6.33%,
 Wilson 95% CI 4.65–8.57) versus 133 (22.17%, 19.03–25.66) under the structural
@@ -181,7 +176,7 @@ policy-only (24.14%, 17.90–31.71), and 82/145 for the structural baseline
 (56.55%, 48.42–64.35). All three conditions completed 52/52 benign no-tool
 tasks. The small +2.07-point full-minus-policy tool-completion difference does
 not offset the security disadvantage and is not interpreted as an independent
-mechanism gain. Sixteen formal diagnostic records remain in ITT; the Flash
+mechanism gain. Sixteen operational diagnostic records remain in ITT; the Flash
 result therefore supports a same-provider model replication, not a clean
 mechanism-quality or cross-provider claim.
 

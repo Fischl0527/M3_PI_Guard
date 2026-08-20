@@ -12,22 +12,18 @@ reported effect sizes unless the surrounding argument needs that number.
 ## Runtime verification and task alignment
 
 VIGIL implements a verify-before-commit protocol for tool-stream injection and
-introduces the 959-case SIREN benchmark
-([L01](https://aclanthology.org/2026.acl-long.443/)). It is the closest
+introduces the 959-case SIREN benchmark [@L01]. It is the closest
 peer-reviewed structural comparator to M3 because both systems interpose before
 an effect is committed. DRIFT instead combines dynamic rules with control- and
-data-level constraints and memory-stream isolation
-([L02](https://proceedings.neurips.cc/paper_files/paper/2025/hash/77f3b26c7907aa27b207df9b9d43f29a-Abstract-Conference.html)).
+data-level constraints and memory-stream isolation [@L02].
 The Task Shield verifies whether instructions and tool calls contribute to the
-user's declared objective
-([L03](https://aclanthology.org/2025.acl-long.1435/)). Together, these
+user's declared objective [@L03]. Together, these
 peer-reviewed systems prevent us from claiming that M3 introduced
 verify-before-commit, dynamic information-flow checks, or task-alignment
 verification.
 
 PlanGuard is a related preprint that isolates planning from untrusted context
-and applies hierarchical tool and parameter consistency checks
-([L23](https://arxiv.org/abs/2604.10134)). Its presence further narrows the
+and applies hierarchical tool and parameter consistency checks [@L23]. Its presence further narrows the
 possible novelty claim: planning consistency is an adjacent mechanism, not an
 unoccupied problem. We therefore use these works to define comparison classes
 and mechanism boundaries rather than to motivate a first-or-only claim.
@@ -36,20 +32,18 @@ and mechanism boundaries rather than to motivate a first-or-only claim.
 
 Progent represents least privilege as symbolic tool-and-argument rules. Its
 latest arXiv v3 description explicitly distinguishes automatic narrowing from
-expansion that requires approval
-([L24](https://arxiv.org/abs/2504.11703)). This overlaps directly with M3's
+expansion that requires approval [@L24]. This overlaps directly with M3's
 permission-monotonicity and confirmation design. IPIGuard, published at EMNLP
-2025, constrains execution through a planned tool-dependency graph
-([L25](https://aclanthology.org/2025.emnlp-main.53/)). CaMeL separates trusted
-control and data flow and uses capabilities to prevent unauthorized flows
-([L26](https://arxiv.org/abs/2503.18813)). These systems occupy the privilege,
+2025, constrains execution through a planned tool-dependency graph [@L25].
+CaMeL separates trusted control and data flow and uses capabilities to prevent
+unauthorized flows [@L26]. These systems occupy the privilege,
 dependency, and information-flow design space that a provenance-aware runtime
 must acknowledge.
 
 FAVA is a July 2026 preprint that translates natural-language tasks into a
 permission intermediate representation, lowers it to an evidence-backed
-permission graph, and uses an SMT authorizer before effectful execution
-([L36](https://arxiv.org/abs/2607.27267)). It further narrows any mechanism
+permission graph, and uses an SMT authorizer before effectful execution [@L36].
+It further narrows any mechanism
 novelty claim around structured authorization and data-flow-aware permission
 graphs. Our study differs by treating the authorization regime itself as the
 paired experimental factor and by jointly measuring executed unsafe effects,
@@ -57,11 +51,9 @@ benign utility, confirmation/blocking burden, and operational failure.
 
 Two 2026 preprints overlap even more closely with provenance-aware
 authorization. ARGUS constructs an influence-provenance graph for
-context-dependent decisions
-([L21](https://arxiv.org/abs/2605.03378)), while AuthGraph compares an
+context-dependent decisions [@L21], while AuthGraph compares an
 authorization graph derived in an isolated context against a parameter-source
-execution graph
-([L22](https://arxiv.org/abs/2605.26497)). Their existence rules out a claim
+execution graph [@L22]. Their existence rules out a claim
 that M3 is the first parameter-source or provenance-aware authorization
 defense. Because neither work is treated here as peer reviewed, their reported
 effects define the contemporary claim boundary but are not used as settled
@@ -70,7 +62,7 @@ comparative facts.
 *Auditing Provenance Sensitivity in LLM Agent Action Selection* supplies an
 especially close 2026 measurement counterpart: it holds task content and
 policy fixed while changing source authority, then measures whether action
-selection changes ([L35](https://arxiv.org/abs/2607.20827)). Its
+selection changes [@L35]. Its
 controlled next-action design is narrower than M3's executed-effect study, but
 it reinforces the need to separate evidence relevance from authorization. Our
 experiment extends that question to full tool trajectories, paired runtime
@@ -88,10 +80,7 @@ claims and must stand on M3's own admitted experiments.
 
 Structured queries, spotlighting, instruction hierarchy, and injection
 detectors act at the prompt, representation, or model-output layer
-([L07](https://www.usenix.org/conference/usenixsecurity25/presentation/chen-sizhe),
-[L30](https://arxiv.org/abs/2403.14720),
-[L31](https://arxiv.org/abs/2404.13208),
-[L32](https://aclanthology.org/2025.acl-long.890/)). They are relevant
+[@L07; @L30; @L31; @L32]. They are relevant
 baselines, but detector scores and model compliance are not equivalent to an
 executed-effect endpoint. Our evaluation therefore records whether a proposed
 action crossed the runtime boundary and changed the sandbox state, while also
@@ -102,20 +91,16 @@ effect is attempted.
 ## Benchmarks and adaptive evaluation
 
 AgentDojo supplies dynamic security and utility tasks and is the main public
-benchmark in this study
-([L09](https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html)).
+benchmark in this study [@L09].
 InjecAgent provides a complementary collection of indirect prompt injections
-for tool-integrated agents
-([L10](https://aclanthology.org/2024.findings-acl.624/)). ASB broadens the
-scenario and defense taxonomy
-([L34](https://proceedings.iclr.cc/paper_files/paper/2025/hash/5750f91d8fb9d5c02bd8ad2c3b44456b-Abstract-Conference.html)).
+for tool-integrated agents [@L10]. ASB broadens the scenario and defense
+taxonomy [@L34].
 The public expansion retains the benchmarks' unique task identities instead of
 duplicating benign cases to manufacture a denominator.
 
 Static attacks are insufficient for a robustness claim. *The Attacker Moves
 Second* argues that a defense-aware attacker should optimize against the
-defense design rather than replay a fixed attack set
-([L27](https://arxiv.org/abs/2510.09023)). The adaptive panel therefore exposes
+defense design rather than replay a fixed attack set [@L27]. The adaptive panel therefore exposes
 only public `ALLOW/ASK/DENY` and post-enforcement unsafe-effect feedback,
 searches frozen tasks at prespecified query budgets, and reports the
 first-success distribution. Since L27 remains a preprint, it motivates the

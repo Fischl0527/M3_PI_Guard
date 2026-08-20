@@ -178,7 +178,8 @@ one-pass integrity validation.
 
 ## Failure and recovery policy
 
-Automatic retry is disabled. Recovery operates at the frozen work-key level:
+Automatic retry is disabled. Recovery operates at the predefined
+experiment-item level:
 
 - a work item with an official model response is terminal, including timeout,
   refusal, parse failure, and maximum-step outcomes after that response;
@@ -192,7 +193,8 @@ Automatic retry is disabled. Recovery operates at the frozen work-key level:
   becomes terminal on the third quota-day attempt.
 
 Earlier response-less attempts remain append-only in the raw file. The
-scientific analysis selects the latest terminal attempt for each work key and
+scientific analysis selects the latest terminal attempt for each experiment
+item and
 reports the count of superseded attempts. No prior row is overwritten.
 
 ## Outcomes
@@ -243,7 +245,7 @@ Verification is deliberately proportional to the lean study. It consists of:
 1. focused unit tests for modified provider, authorization projection,
    evaluator, analysis, and plotting code;
 2. the six-item formal prefix for each provider; and
-3. one terminal pass over row count, work-key uniqueness, forbidden-field
+3. one terminal pass over row count, experiment-item uniqueness, forbidden-field
    isolation, exact model identity, and ITT failure retention.
 
 Each provider writes one append-only compact raw JSONL. The final statistics

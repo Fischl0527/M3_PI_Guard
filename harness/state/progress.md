@@ -2807,7 +2807,7 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
 - Added `scripts/build_lean_paper_manuscript.py` and a focused five-test suite
   to assemble the reviewed section files into one reader-facing English draft.
 - The generated manuscript contains six numbered sections, five figures and an
-  8,198-word main body. The full generated file contains 9,592 words after
+  8,029-word main body. The full generated file contains 9,417 words after
   adding the six formatted main tables, captions and reference packaging.
 - Removed the remaining conditional Gemini placeholder and publication-facing
   references to internal citation-audit tables, old Harness chains, evidence
@@ -2819,3 +2819,7 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
 - Main Tables 1–6 now cover design, joint endpoints, paired effects, burden,
   heterogeneity and adaptive budgets. Historical detail tables are explicitly
   Supplementary Tables S1–S6, so no table number is duplicated.
+- Related Work citations now use the same `[@Lxx]` processor syntax as the rest
+  of the manuscript. Raw literature hyperlinks, legacy analysis keys,
+  shard/merge process prose and Boolean route flags were removed from the
+  reader-facing text without changing any result.

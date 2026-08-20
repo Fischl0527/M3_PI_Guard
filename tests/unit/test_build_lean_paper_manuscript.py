@@ -34,6 +34,10 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "evidence-hash" not in manuscript
     assert "Git branch" not in manuscript
     assert "Critical citation-context audit" not in manuscript
+    assert "([L" not in manuscript
+    assert "mechanism_paper_candidate" not in manuscript
+    assert "exact_gold_*" not in manuscript
+    assert "shard evidence reviews" not in manuscript
     assert manuscript.count("![Figure ") == 5
     assert len(re.findall(r"^### Table [1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
     assert len(re.findall(r"^#### Supplementary Table S[1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
