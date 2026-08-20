@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.0",
-  "updated_at": "2026-08-20T11:45:00+08:00",
+  "updated_at": "2026-08-20T12:39:00+08:00",
   "paper_route": "authorization_regime_and_security_utility_empirical_study",
   "scope": {
     "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
@@ -13,7 +13,7 @@
   "claims": [
     {
       "claim_id": "LC01",
-      "claim": "Evaluator and gold-answer fields are excluded from the online Guard projection used by the lean experiment.",
+      "claim": "Raw evaluator, label and gold-answer fields are excluded from the online Guard projection; exact_gold exposes only a derived authorization object.",
       "status": "verified_deepseek",
       "evidence": [
         "protocols/paper_upgrade_v2/lean_empirical_execution_manifest_v1.json",
@@ -112,12 +112,12 @@
     {
       "claim_id": "LC10",
       "claim": "The authorization findings generalize across DeepSeek and Gemini providers.",
-      "status": "forbidden_while_gemini_pending",
+      "status": "forbidden_while_gemini_incomplete",
       "evidence": [
         "protocols/paper_upgrade_v2/lean_empirical_execution_manifest_v1.json",
         "outputs/experiments/lean_empirical/gemini/raw_records_v1.jsonl"
       ],
-      "unlock_condition": "All planned Gemini work items become terminal, or the prespecified three-Pacific-quota-day rule closes and the completed subset is reported as diagnostic without a cross-provider claim."
+      "unlock_condition": "Only a 450/450 terminal Gemini cohort followed by the prespecified analysis can unlock this claim. If the three-Pacific-quota-day rule closes with an incomplete cohort, the subset remains diagnostic and this claim remains forbidden."
     },
     {
       "claim_id": "LC11",

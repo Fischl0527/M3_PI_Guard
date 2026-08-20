@@ -1,5 +1,16 @@
 # 进展记录
 
+## 2026-08-20 — Active claim-ledger semantics corrected
+
+- LC01 now matches the manuscript's exact online-state boundary: raw evaluator,
+  label and gold-answer fields remain offline, while `exact_gold` exposes only
+  a derived authorization object.
+- LC10 now permits a cross-provider claim only after 450/450 Gemini terminal
+  work items and the prespecified analysis. A three-quota-day incomplete cohort
+  remains diagnostic and cannot unlock that claim.
+- The 13-claim/26-path structure is unchanged. No provider call, historical
+  replay or scientific-result modification occurred.
+
 ## 2026-08-20 — Provider-alias reproducibility limitation closed
 
 - Methods now records the July–August 2026 provider-call window and explains

@@ -1,5 +1,14 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 14：active claim ledger 语义修正
+
+- LC01 与正文同步为“原始 evaluator/label/gold-answer 字段离线，`exact_gold`
+  仅暴露派生授权对象”，避免把派生对象误写为完全无 gold-derived 输入。
+- LC10 现在明确：只有 Gemini 450/450 terminal 并完成预设分析才能解锁跨厂商主张；
+  三配额日后若不完整，只能 diagnostic，跨厂商主张继续禁止。
+- 13 条 active claims 和 26 个证据路径原有结构不变；没有调用 provider、重算历史
+  证据或修改科研结果。F-PAPER-002 保持 `in_progress`。
+
 ### 2026-08-20 精简实证里程碑 13：模型别名可复现性边界
 
 - Methods 新增 2026 年 7–8 月 provider 调用时间窗，并明确官方返回模型名是

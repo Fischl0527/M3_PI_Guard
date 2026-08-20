@@ -1,5 +1,13 @@
 # 会话移交
 
+## 2026-08-20 — Active claim-ledger boundary checkpoint
+
+- Use the corrected `claim_evidence_ledger_lean_v1.json`: LC01 distinguishes
+  raw offline fields from the derived `exact_gold` authorization object, and
+  LC10 stays forbidden after any incomplete three-quota-day Gemini downgrade.
+- Cross-provider inference may be considered only at 450/450 terminal Gemini
+  work items. The scheduled PID 7676 remains the sole permitted runner.
+
 ## 2026-08-20 — Provider-alias reproducibility checkpoint
 
 - The current generated manuscript is 10,055 words, 283 paragraphs, 13 tables
