@@ -3492,3 +3492,15 @@ The older provider-gate text is superseded by this checkpoint.
   data/code availability, generative-AI use, safety and CRediT authorship. Every
   item that needs author or institutional confirmation is explicitly marked.
 - Corrected the Introduction from “four questions” to the actual three RQs.
+
+### Unified-manuscript checkpoint
+
+- Added a deterministic manuscript builder and a reader-facing unified English
+  draft at `docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md`.
+- The current draft has six numbered IMRaD sections, five embedded figures and
+  an 8,198-word body. Internal citation-audit tables, historical Harness prose,
+  Git workflow notes and conditional result placeholders are excluded.
+- Focused verification passes 5/5, with Ruff, `py_compile`, citation-key,
+  abstract-length, section-order, figure-existence and workflow-metadata checks.
+- Gemini remains pending under the three-Pacific-quota-day rule, so the paper
+  remains in Stage 2 writing and makes no cross-provider claim.

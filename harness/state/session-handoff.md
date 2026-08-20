@@ -2886,3 +2886,17 @@ Next gated action:
 - The next data-bearing action remains the Gemini pending-only recovery after
   Pacific midnight; no additional DeepSeek execution or local evidence replay
   is required.
+
+# 2026-08-20 — Current handoff: unified manuscript checkpoint
+
+- Reader-facing working manuscript:
+  `docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md`.
+- Rebuild command:
+  `F:\robot\Anaconda3\python.exe -B scripts/build_lean_paper_manuscript.py`.
+- The main body is 8,198 words, contains six numbered sections and embeds all
+  five generated figures. Focused manuscript tests pass 5/5 plus Ruff and
+  `py_compile`; do not substitute a Full Harness or historical replay.
+- The draft explicitly excludes incomplete Gemini rows and makes no
+  cross-provider claim. After a new Pacific quota day, the only eligible
+  data-bearing action is the pending/no-response-only Gemini command already
+  recorded above.

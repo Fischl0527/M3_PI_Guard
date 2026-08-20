@@ -124,10 +124,9 @@ tier also introduces an availability constraint. The protocol stops at the
 first 429, resumes only response-less or untouched work on a later quota day,
 and downgrades transparently after three quota-day attempts.
 
-`[If all 450 work items are terminal, compare the prespecified Gemini paired
-directions with DeepSeek and discuss discrepancies. If not, state the observed
-terminal fraction and treat all Gemini estimates as diagnostic; do not use
-them as a cross-provider conclusion.]`
+The Gemini sample is incomplete at this analysis cutoff, and its partial rows
+are excluded from inference. External validity is therefore limited to
+DeepSeek V4 Pro and V4 Flash, and no cross-provider conclusion is made.
 
 ## Limitations
 

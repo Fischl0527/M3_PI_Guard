@@ -115,11 +115,11 @@ Four completed datasets are analyzed once:
 - 480 records from the medium falsification study; and
 - the completed DeepSeek V4 Pro adaptive tasks at budgets 50 and 200.
 
-The reuse analysis performs one count/uniqueness pass and computes the
-prespecified endpoint summaries. It does not reconstruct the retired v1–v12
-Harness chain, rerun models, or create new evidence-hash bundles. These data
-establish the empirical motivation and the two-point adaptive first-success
-curve; they do not establish attack saturation.
+The reuse analysis performs one count/uniqueness pass, retains all terminal
+failures in the ITT population, and computes the prespecified endpoint
+summaries without repeating model execution. These data establish the
+empirical motivation and the two-point adaptive first-success curve; they do
+not establish attack saturation.
 
 ## Frozen primary sample
 
@@ -246,8 +246,8 @@ Verification is deliberately proportional to the lean study. It consists of:
 3. one terminal pass over row count, work-key uniqueness, forbidden-field
    isolation, exact model identity, and ITT failure retention.
 
-The retired Full Harness and recursive evidence replay are not used. Each
-provider writes one compact raw JSONL. The final statistics are written once to
-one authorization-analysis JSON, and the five figures are generated once as
-editable SVG plus raster QA previews. Source, test, experiment, and manuscript
-milestones are committed on the dedicated Git branch; no force push is used.
+Each provider writes one append-only compact raw JSONL. The final statistics
+are written once to one authorization-analysis JSON, and figures are exported
+as editable SVG plus raster QA previews. Reproducibility assets include frozen
+samples, condition assignments, analysis code, aggregate tables, and versioned
+source.

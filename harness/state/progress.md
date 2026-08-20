@@ -2801,3 +2801,18 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   competing interests, institutional ethics requirements and final AI-use
   language remain explicit author-confirmation gates.
 - Fixed the Introduction's RQ count from four to three.
+
+# 2026-08-20 — Unified DeepSeek manuscript generated
+
+- Added `scripts/build_lean_paper_manuscript.py` and a focused five-test suite
+  to assemble the reviewed section files into one reader-facing English draft.
+- The generated manuscript contains six numbered sections, five figures and an
+  8,198-word main body. The full generated file contains 8,767 words including
+  figure/caption/reference packaging.
+- Removed the remaining conditional Gemini placeholder and publication-facing
+  references to internal citation-audit tables, old Harness chains, evidence
+  bundles and Git workflow.
+- Focused pytest 5/5, Ruff, `py_compile`, abstract limit, citation coverage,
+  section order, figure availability and workflow-metadata scans pass.
+- F-PAPER-002 remains `in_progress`: Gemini is incomplete and its partial rows
+  remain excluded from inference; no cross-provider claim is made.
