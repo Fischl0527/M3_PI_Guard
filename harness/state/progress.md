@@ -3051,3 +3051,15 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   dashed derivation path and passes visual inspection. All SVGs now omit dates
   and use deterministic element IDs. Focused checks pass 11/11 plus Ruff;
   abstract and five highlight length limits pass.
+# 2026-08-20 — Chinese author-input companion prepared
+
+- Added a Chinese direct-fill companion for all author-owned JISA submission
+  facts without inferring identities, funding, conflicts, ethics decisions or
+  release commitments from the repository.
+- The form covers title-page metadata, CRediT, declarations, biographies,
+  photographs and data/code release, and explicitly excludes secrets and raw
+  provider traces.
+- A live ScienceDirect refresh returned an edge error, so no new requirement
+  was inferred and no unofficial source replaced the previously checked guide.
+- F-PAPER-002 remains `in_progress`; the sole Gemini process still controls the
+  next scientific update.

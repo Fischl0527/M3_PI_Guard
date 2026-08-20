@@ -3110,3 +3110,11 @@ Next gated action:
   shows this path and was visually checked. SVGs are date-free and deterministic;
   figure/manuscript/DOCX checks pass 11/11 plus Ruff. Current generated draft is
   9,999 words, 283 paragraphs, 13 tables and five figures.
+# 2026-08-20 — Author-owned submission input handoff
+
+- `docs/research/paper_v2/manuscript/author_metadata_and_submission_inputs_zh.md`
+  is the Chinese direct-fill companion to the English author-input form.
+- It is not manuscript content and must not be treated as experimental input.
+  Author identities, affiliations, CRediT, funding, conflicts, ethics wording,
+  biographies, photographs and release commitments remain owner-supplied.
+- Do not add secrets, `.env` contents or raw provider traces to either form.

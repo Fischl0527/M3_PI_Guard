@@ -91,7 +91,8 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
   submission.
 - [x] Prepare a structured title-page/author-input template covering names,
   full affiliations, corresponding-author details, CRediT, declarations and
-  release metadata; author-owned values remain unfilled.
+  release metadata; an equivalent Chinese direct-fill companion is provided,
+  while author-owned values remain unfilled.
 - [x] Prepare a separate glossary of the field-specific terms used in the
   manuscript.
 - [ ] Supply a biography of at most 100 words and a separate passport-type

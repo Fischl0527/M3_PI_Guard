@@ -1,5 +1,34 @@
 # Failure Log
 
+## 2026-08-20 — JISA Guide live refresh blocked by ScienceDirect edge page
+
+- Attempt: refresh the official JISA Guide for Authors while checking whether
+  any additional mandatory submission attachment had appeared.
+- Failure: ScienceDirect returned its Cloudflare error page (reference
+  `a2ded011f93f2ec6`) instead of the guide content.
+- Disposition: no third-party rule was substituted and no repeated refresh was
+  attempted. The package continues to use the official requirements already
+  verified earlier on 2026-08-20; final live fields will be checked in the
+  submission system.
+
+## 2026-08-20 — Author-input companion patch context mismatch
+
+- Attempt: add the Chinese author-input companion and link it from the active
+  package documents.
+- Failure: the first atomic patch expected stale README wording and therefore
+  applied no changes.
+- Fix: inspect the current README/checklist/state anchors and reapply once
+  against the actual text. No experiment or provider action was involved.
+
+## 2026-08-20 — Author-input heading smoke check over-counted a level-3 heading
+
+- Attempt: require exactly ten level-2 sections with `text.count('## ')`.
+- Failure: the substring count also matched the second character of the one
+  `###` author-biography heading, producing an assertion failure even though
+  the file has exactly ten level-2 sections.
+- Fix: count line prefixes with `line.startswith('## ')`; do not change the
+  valid document to satisfy the faulty smoke check.
+
 ## 2026-08-20 — Supplement splitter initially matched the source heading depth only
 
 - Command: `F:\robot\Anaconda3\python.exe -B scripts\build_lean_paper_manuscript.py`

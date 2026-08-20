@@ -78,6 +78,8 @@ Files:
 - `author_metadata_and_submission_inputs.md`: author-owned title-page,
   declaration, CRediT, biography and release fields that must be completed by
   the author team rather than inferred from the repository.
+- `author_metadata_and_submission_inputs_zh.md`: Chinese direct-fill companion
+  for the same author-owned submission facts; it is not manuscript content.
 - `glossary_v1.md`: separate definitions for the field-specific terms used in
   the manuscript, prepared for the JISA submission package.
 - `abstract_shell.md`: provisional DeepSeek-results abstract; the final
