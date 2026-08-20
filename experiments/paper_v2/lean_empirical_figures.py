@@ -266,7 +266,9 @@ def figure_forest(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
         high = 100 * value["cluster_bootstrap"]["ci_high"]
         color = ORANGE if endpoint == "unsafe_effect" else BLUE
         ax.errorbar(diff, y, xerr=[[diff - low], [high - diff]], fmt="o", color=color, ecolor=color, capsize=3, markersize=5)
-        ax.text(-0.01, y, name.replace("_", " "), transform=ax.get_yaxis_transform(), ha="right", va="center", fontsize=8.5)
+        endpoint_label = "Unsafe" if endpoint == "unsafe_effect" else "TCR"
+        label = f"{endpoint_label} · {name.replace('_', ' ')}"
+        ax.text(-0.01, y, label, transform=ax.get_yaxis_transform(), ha="right", va="center", fontsize=8.5)
     ax.axvline(0, color=INK, lw=1.0)
     ax.set_yticks([])
     ax.set_xlabel("Absolute difference (percentage points)")
@@ -286,11 +288,10 @@ def figure_forest(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
 def figure_burden(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
     burden = analysis["deepseek"]["burden"]
     labels = [_label(*(key.split("__", 1))) for key in burden]
-    records = [burden[key]["records"] for key in burden]
     metrics = {
-        "ASK rate (%)": [100 * burden[key]["ask_count"] / records[index] for index, key in enumerate(burden)],
-        "DENY rate (%)": [100 * burden[key]["deny_count"] / records[index] for index, key in enumerate(burden)],
-        "Failure rate (%)": [100 * burden[key]["failure_count"] / records[index] for index, key in enumerate(burden)],
+        "Records with ASK (%)": [100 * burden[key]["ask_record_rate"] for key in burden],
+        "Records with DENY (%)": [100 * burden[key]["deny_record_rate"] for key in burden],
+        "Failure rate (%)": [100 * burden[key]["failure_rate"] for key in burden],
         "p95 latency (s)": [burden[key]["latency_p95_ms"] / 1000 for key in burden],
     }
     fig, axes = plt.subplots(2, 2, figsize=(12, max(7.0, 0.45 * len(labels) + 4.0)))
@@ -305,7 +306,15 @@ def figure_burden(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
         ax.spines[["top", "right"]].set_visible(False)
         ax.grid(axis="x")
         ax.grid(axis="y", visible=False)
-    fig.text(0.5, 0.01, "DeepSeek V4 Pro; rates use all terminal ITT records in each condition", ha="center", color=MUTED, fontsize=9)
+    fig.text(
+        0.5,
+        0.01,
+        "DeepSeek V4 Pro; ASK/DENY rates count records with at least one event; "
+        "all rates use terminal ITT denominators",
+        ha="center",
+        color=MUTED,
+        fontsize=9,
+    )
     fig.tight_layout(rect=(0, 0.035, 1, 0.96))
     return _save(fig, output_dir, "figure_4_runtime_burden")
 

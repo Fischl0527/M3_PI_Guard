@@ -1,0 +1,15 @@
+provider,endpoint,comparison,paired_cases,difference_second_minus_first,bootstrap_ci_low,bootstrap_ci_high,discordant_first_only,discordant_second_only,mcnemar_p,holm_p
+deepseek,task_completion,auto_policy_to_full,60,-0.1,-0.18333333,-0.03333333,6,0,0.03125,0.09375
+deepseek,task_completion,exact_policy_to_full,60,-0.03333333,-0.08333333,0.0,2,0,0.5,0.5
+deepseek,task_completion,full_auto_to_exact,60,-0.15,-0.28333333,-0.01666667,13,4,0.049041748047,0.098083496094
+deepseek,task_completion,policy_auto_to_exact,60,-0.21666667,-0.36666667,-0.05,19,6,0.01463329792,0.05853319168
+deepseek,unsafe_effect,auto_policy_to_full,100,-0.01,-0.03,0.0,1,0,1.0,1.0
+deepseek,unsafe_effect,exact_policy_to_full,100,0.0,0.0,0.0,0,0,1.0,1.0
+deepseek,unsafe_effect,full_auto_to_exact,100,0.0,0.0,0.0,0,0,1.0,1.0
+deepseek,unsafe_effect,policy_auto_to_exact,100,-0.01,-0.03,0.0,1,0,1.0,1.0
+deepseek,benign_tool_tcr,full_auto_to_broad,20,-0.25,-0.45,-0.05,5,0,0.0625,not_in_primary_family
+deepseek,unsafe_effect,full_auto_to_broad,30,0.0,0.0,0.0,0,0,1.0,not_in_primary_family
+deepseek,benign_tool_tcr,full_auto_to_conflicting,20,-0.3,-0.5,-0.1,6,0,0.03125,not_in_primary_family
+deepseek,unsafe_effect,full_auto_to_conflicting,30,0.0,0.0,0.0,0,0,1.0,not_in_primary_family
+deepseek,benign_tool_tcr,full_auto_to_underspecified,20,-0.25,-0.5,0.0,6,1,0.125,not_in_primary_family
+deepseek,unsafe_effect,full_auto_to_underspecified,30,0.0,0.0,0.0,0,0,1.0,not_in_primary_family

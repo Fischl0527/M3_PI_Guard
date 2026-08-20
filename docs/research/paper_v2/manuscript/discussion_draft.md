@@ -1,6 +1,6 @@
 # Discussion — lean empirical study draft
 
-Status: `authorization_regime_results_pending`
+Status: `deepseek_authorization_results_complete_gemini_pending`
 
 ## Existing evidence changes the research claim
 
@@ -42,10 +42,23 @@ condition, not a preferred policy source. The `broad`, `underspecified`, and
 in showing whether a headline security number is stable to plausible policy
 construction errors.
 
-`[After terminal analysis, insert the direction and size of the paired
-auto-to-exact and auto-to-stress effects for unsafe effect, benign-tool TCR,
-ASK/DENY, failure, and latency. Discuss effect sizes and intervals before
-p-values.]`
+The DeepSeek paired experiment did not reveal an unsafe-effect advantage for
+`exact_gold`: three of four primary cells had 0/100 unsafe effects, while the
+remaining policy-only `auto_compiled` cell had 1/100. The meaningful movement
+was instead in utility and runtime burden. Moving from `auto_compiled` to
+`exact_gold` reduced benign-tool completion by 21.67 points for policy-only and
+15.00 points for full. The task-cluster bootstrap intervals excluded zero,
+although the corresponding McNemar comparisons did not remain below 0.05 after
+Holm correction.
+
+The operational shift was substantial. Exact policies eliminated ASK in both
+M3 variants but increased the share of records with DENY from 7.22% to 48.89%
+for policy-only and from 11.11% to 45.00% for full. Failure rose to roughly 24%
+and p95 latency to roughly 19.5 seconds in both exact cells. The broad,
+conflicting, and underspecified stress regimes likewise reduced completion by
+25–30 points on their nested benign-tool subset without changing the observed
+attack floor. These findings show that policy specification can move burden
+and utility even when a headline attack rate appears stable.
 
 ## Executed effects and utility must be reported together
 
@@ -157,6 +170,9 @@ already supplied by the base policy. Third, security reports should include
 benign completion, confirmation/blocking burden, failures, latency, and attack
 budget alongside unsafe-effect rate.
 
-The terminal authorization-regime results will determine how strongly these
-recommendations can be tied to M3's observed effects. They will not change the
-bounded contribution or remove unfavorable findings.
+The DeepSeek authorization-regime results now tie these recommendations to
+observed effects: exact and stressed policies materially changed completion,
+blocking, failure, and latency while observed unsafe effects remained near
+zero. Gemini will determine whether the direction is visible across providers;
+it cannot remove the unfavorable DeepSeek findings or broaden them beyond the
+tested settings.

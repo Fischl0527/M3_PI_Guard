@@ -228,3 +228,18 @@ Record completed, blocked, and abandoned tasks here.
   active paper gates; unobserved Results and Abstract cells remain unfilled.
 - No Full Harness, recursive evidence replay, blind execution, real effect,
   provider tool, successful-row replay, or Git push occurred.
+
+# 2026-08-20 — M3-PAPER-002 DeepSeek authorization analysis and paper update
+
+- Closed the 900-work-item DeepSeek substage with 867 response-bearing latest
+  rows and 33 terminal repeated pre-response failures retained in ITT.
+- Added a DeepSeek-only analysis mode so incomplete Gemini data cannot enter
+  provider comparisons or enable a cross-provider claim.
+- Generated five visually reviewed paper figures and six tables. Fixed an
+  ASK/DENY labeling error by separating record incidence from event totals and
+  clarified endpoint labels in the paired forest plot.
+- Filled the active Results and Discussion drafts with DeepSeek authorization,
+  Public Flash replication and Adaptive budget-50/200 findings. The draft
+  preserves negative results and explicitly leaves Gemini pending.
+- Focused verification passed 6/6 with Ruff and `py_compile`; no Full Harness,
+  recursive evidence replay or additional provider call was used for analysis.

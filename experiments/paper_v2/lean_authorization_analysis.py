@@ -27,8 +27,7 @@ from experiments.paper_v2.lean_empirical_runner import (
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT = (
-    PROJECT_ROOT
-    / "docs/research/paper_v2/lean_empirical/authorization_results_v1.json"
+    PROJECT_ROOT / "docs/research/paper_v2/lean_empirical/authorization_results_v1.json"
 )
 BOOTSTRAP_REPLICATES = 10_000
 BOOTSTRAP_SEED = "m3-q2-lean-analysis-2026-08-20-v1"
@@ -83,9 +82,7 @@ def _exact_mcnemar(discordant_a_only: int, discordant_b_only: int) -> float:
     if total == 0:
         return 1.0
     tail = min(discordant_a_only, discordant_b_only)
-    probability = sum(math.comb(total, value) for value in range(tail + 1)) / (
-        2**total
-    )
+    probability = sum(math.comb(total, value) for value in range(tail + 1)) / (2**total)
     return round(min(1.0, 2 * probability), 12)
 
 
@@ -289,8 +286,12 @@ def _paired_stats(
         )
     first_success = sum(value for value, _ in pairs)
     second_success = sum(value for _, value in pairs)
-    first_only = sum(first_value and not second_value for first_value, second_value in pairs)
-    second_only = sum(second_value and not first_value for first_value, second_value in pairs)
+    first_only = sum(
+        first_value and not second_value for first_value, second_value in pairs
+    )
+    second_only = sum(
+        second_value and not first_value for first_value, second_value in pairs
+    )
     return {
         "first": {"condition_id": first[0], "authorization_regime": first[1]},
         "second": {"condition_id": second[0], "authorization_regime": second[1]},
@@ -318,15 +319,28 @@ def _burden(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         latencies = sorted(
             float(row.get("latency_ms", {}).get("total", 0.0)) for row in values
         )
+        records = len(values)
+        ask_count = sum(int(row.get("ask_count", 0)) for row in values)
+        deny_count = sum(int(row.get("deny_count", 0)) for row in values)
+        ask_record_count = sum(int(row.get("ask_count", 0)) > 0 for row in values)
+        deny_record_count = sum(int(row.get("deny_count", 0)) > 0 for row in values)
+        failure_count = sum(
+            str(row["operational_status"]) in FAILURE_STATUSES for row in values
+        )
         tokens = sum(int(row.get("token_usage", {}).get("total", 0)) for row in values)
         amount = sum(float(row.get("cost", {}).get("amount", 0.0)) for row in values)
         output[f"{cell[0]}__{cell[1]}"] = {
-            "records": len(values),
-            "ask_count": sum(int(row.get("ask_count", 0)) for row in values),
-            "deny_count": sum(int(row.get("deny_count", 0)) for row in values),
-            "failure_count": sum(
-                str(row["operational_status"]) in FAILURE_STATUSES for row in values
-            ),
+            "records": records,
+            "ask_count": ask_count,
+            "deny_count": deny_count,
+            "ask_record_count": ask_record_count,
+            "deny_record_count": deny_record_count,
+            "ask_record_rate": round(ask_record_count / records, 8),
+            "deny_record_rate": round(deny_record_count / records, 8),
+            "mean_ask_events_per_record": round(ask_count / records, 8),
+            "mean_deny_events_per_record": round(deny_count / records, 8),
+            "failure_count": failure_count,
+            "failure_rate": round(failure_count / records, 8),
             "latency_p50_ms": round(_percentile(latencies, 0.5), 6),
             "latency_p95_ms": round(_percentile(latencies, 0.95), 6),
             "tokens": tokens,
@@ -472,12 +486,16 @@ def _heterogeneity(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     output: dict[str, Any] = {}
     groups: dict[tuple[str, str], list[Mapping[str, Any]]] = defaultdict(list)
     for row in rows:
-        family = str(row.get("selection_stratum", {}).get("attack_family", "not_attack"))
+        family = str(
+            row.get("selection_stratum", {}).get("attack_family", "not_attack")
+        )
         groups[(str(row["benchmark"]), family)].append(row)
     for (benchmark, family), values in sorted(groups.items()):
         output[f"{benchmark}__{family}"] = {
             "records": len(values),
-            "attack_records": sum(row["evaluation_case_type"] == "attack" for row in values),
+            "attack_records": sum(
+                row["evaluation_case_type"] == "attack" for row in values
+            ),
             "unsafe_effects": sum(bool(row["unsafe_effect"]) for row in values),
             "operational_failures": sum(
                 str(row["operational_status"]) in FAILURE_STATUSES for row in values
@@ -486,7 +504,11 @@ def _heterogeneity(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     return output
 
 
-def build_analysis(*, allow_partial_gemini: bool = False) -> dict[str, Any]:
+def build_analysis(
+    *,
+    allow_partial_gemini: bool = False,
+    deepseek_only: bool = False,
+) -> dict[str, Any]:
     plan_rows = _read_jsonl(PLAN_PATH)
     by_provider = {
         provider: [row for row in plan_rows if row["provider_id"] == provider]
@@ -494,13 +516,21 @@ def build_analysis(*, allow_partial_gemini: bool = False) -> dict[str, Any]:
     }
     records: dict[str, list[dict[str, Any]]] = {}
     integrity: dict[str, Any] = {}
-    for provider in ("deepseek", "gemini"):
+    providers = ("deepseek",) if deepseek_only else ("deepseek", "gemini")
+    for provider in providers:
         records[provider], integrity[provider] = _validate_provider(
             provider,
             by_provider[provider],
             _read_jsonl(PROVIDER_OUTPUTS[provider]),
             allow_partial=(provider == "gemini" and allow_partial_gemini),
         )
+    if deepseek_only:
+        records["gemini"] = []
+        integrity["gemini"] = {
+            "status": "not_analyzed_pending_provider_completion",
+            "planned_work_items": EXPECTED_COUNTS["gemini"],
+            "terminal_work_items": 0,
+        }
     analysis = {
         "schema_version": "m3-paper-v2-lean-authorization-analysis-1.0",
         "study_id": "m3-q2-lean-authorization-v1",
@@ -511,6 +541,7 @@ def build_analysis(*, allow_partial_gemini: bool = False) -> dict[str, Any]:
             "bootstrap_replicates": BOOTSTRAP_REPLICATES,
             "full_harness_used": False,
             "historical_recursive_replay_used": False,
+            "deepseek_only": deepseek_only,
         },
         "integrity": integrity,
         "deepseek": {
@@ -522,12 +553,20 @@ def build_analysis(*, allow_partial_gemini: bool = False) -> dict[str, Any]:
         },
         "gemini": {
             "condition_metrics": _condition_metrics(records["gemini"]),
-            "comparisons": _comparisons(records["gemini"], GEMINI_COMPARISONS),
+            "comparisons": (
+                {}
+                if deepseek_only
+                else _comparisons(records["gemini"], GEMINI_COMPARISONS)
+            ),
             "burden": _burden(records["gemini"]),
             "heterogeneity": _heterogeneity(records["gemini"]),
             "cross_vendor_claim_eligible": (
-                integrity["gemini"]["terminal_work_items"]
+                not deepseek_only
+                and integrity["gemini"]["terminal_work_items"]
                 == EXPECTED_COUNTS["gemini"]
+            ),
+            "analysis_status": (
+                "pending_provider_completion" if deepseek_only else "analyzed"
             ),
         },
     }
@@ -538,8 +577,12 @@ def write_analysis(
     *,
     output: Path = DEFAULT_OUTPUT,
     allow_partial_gemini: bool = False,
+    deepseek_only: bool = False,
 ) -> dict[str, Any]:
-    analysis = build_analysis(allow_partial_gemini=allow_partial_gemini)
+    analysis = build_analysis(
+        allow_partial_gemini=allow_partial_gemini,
+        deepseek_only=deepseek_only,
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         json.dumps(analysis, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
@@ -551,11 +594,14 @@ def write_analysis(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--allow-partial-gemini", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--allow-partial-gemini", action="store_true")
+    mode.add_argument("--deepseek-only", action="store_true")
     args = parser.parse_args()
     analysis = write_analysis(
         output=args.output,
         allow_partial_gemini=args.allow_partial_gemini,
+        deepseek_only=args.deepseek_only,
     )
     print(
         json.dumps(

@@ -1,6 +1,6 @@
-# Results draft — admitted medium, public-primary, and adaptive-canary evidence
+# Results draft — public, authorization-regime, and adaptive evidence
 
-Status: `medium_public_primary_and_adaptive_canary_admitted_empirical_fallback`
+Status: `deepseek_authorization_results_complete_gemini_pending`
 
 This draft separates admitted evidence from pending confirmatory work. The
 authoritative medium analysis is
@@ -10,10 +10,11 @@ authoritative medium analysis is
 It is bound to result admission
 `0ed21b6d934d8aefab95667adbf07203140d5cf3d115b891eef882eb9fb028d7`.
 The separately admitted eight-task adaptive cost canary is reported only as
-exploratory evidence. The 5,082-record Public primary-model matrix is admitted
-and independently reproduced below. The second-model Public extension and
-formal 40/20-task adaptive cells remain pending and must not be inferred from
-the completed studies.
+exploratory evidence. The 5,082-record Public primary-model matrix and the
+1,791-record DeepSeek V4 Flash replication are complete. The new 900-record
+DeepSeek V4 Pro authorization-regime experiment is also complete and analyzed
+below. The 450-record Gemini experiment remains incomplete and contributes no
+cross-provider conclusion at this stage.
 
 ## Medium study disposition
 
@@ -165,6 +166,25 @@ falls by 55.67 points for both M3 variants relative to the structural
 condition. AgentDojo benign denominators remain the 97 unique official utility
 tasks and are not duplicated.
 
+## Public DeepSeek V4 Flash replication
+
+The completed Flash matrix contains 1,791 records: 400 attacks, 145 benign
+tool tasks, and 52 benign no-tool tasks under each of the structural,
+policy-only, and full conditions. M3-full produced 24/400 unsafe effects
+(6.00%, Wilson 95% CI 4.06–8.77), compared with 12/400 under policy-only
+(3.00%, 1.72–5.17) and 47/400 under the structural baseline (11.75%,
+8.95–15.28). Thus the full-minus-policy difference was +3.00 percentage
+points, preserving the unfavorable direction observed with V4 Pro.
+
+Benign-tool completion was 38/145 for full (26.21%, 19.73–33.91), 35/145 for
+policy-only (24.14%, 17.90–31.71), and 82/145 for the structural baseline
+(56.55%, 48.42–64.35). All three conditions completed 52/52 benign no-tool
+tasks. The small +2.07-point full-minus-policy tool-completion difference does
+not offset the security disadvantage and is not interpreted as an independent
+mechanism gain. Sixteen formal diagnostic records remain in ITT; the Flash
+result therefore supports a same-provider model replication, not a clean
+mechanism-quality or cross-provider claim.
+
 ## Public operational and decision burden
 
 The Public matrix contains 4,616 completed, 112 maximum-step, 120 parse-failure,
@@ -180,7 +200,75 @@ mechanism gate therefore passed its structural security-effect check but
 failed utility non-inferiority and module gain. The active route remains the
 empirical security–utility fallback.
 
-## Exploratory defense-aware adaptive cost canary
+## DeepSeek authorization-regime experiment
+
+The frozen authorization study contributes 900 terminal DeepSeek V4 Pro work
+items across 180 paired cases. The four main cells each contain 100 attacks,
+60 benign tool tasks, and 20 benign no-tool tasks. A nested 60-case subset adds
+the broad, underspecified, and conflicting regimes under M3-full. Recovery was
+limited to 33 work items for which no provider response had been obtained; all
+867 response-bearing work items were left untouched. The final ITT population
+contains 768 completed records, 54 parse failures, 30 maximum-step terminals,
+15 provider failures, and 33 repeated pre-response failures. No evaluator or
+gold field entered the online projection, and provider tools and real external
+effects remained disabled.
+
+### Joint security and utility endpoints
+
+Unsafe effects were at the floor in the main experiment: 0/100 under M3-full
+with either `auto_compiled` or `exact_gold`, 0/100 under policy-only with
+`exact_gold`, and 1/100 under policy-only with `auto_compiled`. Consequently,
+the full-minus-policy difference under `auto_compiled` was −1.00 percentage
+point (task-cluster bootstrap 95% CI −3.00 to 0.00; Holm-adjusted McNemar
+p=1.0), while all other primary security contrasts were exactly zero or
+differed by the same single event. These data provide no evidence that the
+full mechanism adds a reproducible security benefit over policy-only.
+
+Benign-tool completion showed the larger authorization effect. Under
+`auto_compiled`, policy-only completed 22/60 tasks (36.67%, Wilson 95% CI
+25.62–49.32) and M3-full completed 16/60 (26.67%, 17.13–39.01), a paired
+full-minus-policy difference of −10.00 points (bootstrap 95% CI −18.33 to
+−3.33; Holm-adjusted p=0.09375). Under `exact_gold`, policy-only completed
+9/60 (15.00%, 8.10–26.11) and full completed 7/60 (11.67%, 5.77–22.18), a
+−3.33-point paired difference (bootstrap 95% CI −8.33 to 0.00;
+Holm-adjusted p=0.5). All four main cells completed 20/20 benign no-tool tasks.
+
+Changing policy-only from `auto_compiled` to `exact_gold` reduced paired
+benign-tool completion by 21.67 points (bootstrap 95% CI −36.67 to −5.00;
+Holm-adjusted p=0.05853). For M3-full, the corresponding reduction was 15.00
+points (−28.33 to −1.67; Holm-adjusted p=0.09808). The bootstrap intervals
+exclude zero, but neither exact McNemar comparison remains below 0.05 after
+Holm correction. We therefore interpret the consistent direction and effect
+size as evidence of authorization sensitivity in this sample, not as a
+universal oracle-policy effect.
+
+### Stress regimes and operational burden
+
+On the nested benign-tool subset, moving from matched M3-full
+`auto_compiled` executions to broad, conflicting, or underspecified policies
+reduced completion by 25, 30, and 25 percentage points, respectively. Their
+bootstrap intervals were −45 to −5, −50 to −10, and −50 to 0 points. No unsafe
+effect occurred in any of the 30-attack stress cells, so the stress comparison
+primarily exposes lost utility rather than an observable security gain.
+
+The decision and failure profiles explain part of this trade-off. Under
+policy-only, `auto_compiled` produced ASK on 34.44% and DENY on 7.22% of
+records, whereas `exact_gold` produced no ASK but DENY on 48.89%; its failure
+rate rose from 7.22% to 23.89% and p95 latency from 10.63 to 19.42 seconds.
+M3-full showed the same pattern: ASK fell from 32.22% to zero, DENY rose from
+11.11% to 45.00%, failure rose from 9.44% to 24.44%, and p95 latency rose from
+9.18 to 19.62 seconds. DENY incidence counts records with at least one DENY;
+the separate event totals are retained because a record may contain multiple
+decisions. Across all 900 work items, provider cost was CNY 1.3888324.
+
+These results reverse the simple expectation that an answer-derived exact
+policy must improve measured utility. In this implementation, the exact policy
+behaved as a more restrictive authorization treatment, replacing confirmation
+with repeated blocking and higher operational failure. The result supports
+making authorization construction explicit in evaluations; it does not show
+that every gold-derived policy or every runtime guard behaves similarly.
+
+## Defense-aware adaptive evidence through budget 200
 
 The admitted DeepSeek V4 Pro cost canary covered eight result-blind,
 attack-family-balanced M3-v2 development tasks under M3-full and the
@@ -192,33 +280,28 @@ contains 374 terminal queries, 562 official provider calls, and CNY 0.552805
 cost. Initial decisions across terminal queries were 207 ALLOW, 123 ASK, and
 44 DENY.
 
-The result is consistent with robustness at budget 50 on this deliberately
-small panel, but the upper confidence bound remains wide. It does not establish
-saturation, cover the frozen 40-task primary panel, test budgets 200/500/2000,
-or provide a second-model comparison. It therefore cannot support a SOTA or
-formal adaptive-robustness claim. The source analysis and independent
-integrity review are
-`outputs/paper_upgrade_v2/adaptive_cost_canary_v2/analysis_v1/analysis_manifest.json`
-and `analysis_review_v1.json`.
+The full frozen panel subsequently reached terminal status for all 40 tasks.
+First unsafe effect occurred for 4/40 tasks by budget 50 (10.00%, Wilson 95%
+CI 3.96–23.05) and for 18/40 by budget 200 (45.00%, 30.71–60.17). Fourteen of
+the 18 observed successes therefore appeared only after query 50. The evidence
+supports a budget-sensitivity claim through 200, but it does not establish
+saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 
 ## Table 6. Defense-aware adaptive attack
 
 | Model/panel | Budget | Tasks | Unsafe-effect successes | First-success distribution | Saturated? |
 |---|---:|---:|---:|---:|---|
 | Primary exploratory cost canary | 50 | 8 | 0 (0.00%, 95% CI 0.00–32.44%) | No successes | No |
-| Primary | 50 | 40 | pending | pending | pending |
-| Primary | 200 | 40 | pending | pending | pending |
-| Primary | 500 | 40 | pending | pending | pending |
-| Primary hardest subset | 2000 | 20 | pending | pending | pending |
-| Second | 50 | 20 | pending | pending | pending |
-| Second | 200 | 20 | pending | pending | pending |
+| Primary frozen panel | 50 | 40 | 4 (10.00%, 95% CI 3.96–23.05%) | 4 first successes by query 50 | No |
+| Primary frozen panel | 200 | 40 | 18 (45.00%, 95% CI 30.71–60.17%) | 14 additional first successes at queries 51–200 | No |
 
 ## Remaining evidence boundary
 
-The admitted medium and 5,082-record Public primary studies jointly select the
-paper route. They establish a primary-model, two-benchmark security–utility
-finding, but not cross-model or saturated adaptive robustness. The Public
-second-model extension and the formal rows of Table 6 remain empty until their
-append-only ledgers, identity/safety checks, result gates, and independent
-analysis rebuilds pass. UTR and DSR are not identifiable from the current
-record contract and are not reconstructed from unsafe-effect rate.
+The medium, Public Pro, Public Flash, authorization-regime, and budget-50/200
+studies jointly support an empirical security–utility paper. They do not
+support a leading-defense, causal provenance, saturated-adaptive, or
+cross-provider claim. Gemini remains pending under the three-quota-day
+free-tier rule; until that experiment reaches its stopping rule, its partial
+rows are not used in the comparisons above. UTR and DSR are not identifiable
+from the current record contract and are not reconstructed from unsafe-effect
+rate.

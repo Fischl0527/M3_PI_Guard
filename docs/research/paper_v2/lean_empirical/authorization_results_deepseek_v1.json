@@ -1,0 +1,959 @@
+{
+  "analysis_policy": {
+    "all_terminal_work_items_in_itt": true,
+    "bootstrap_replicates": 10000,
+    "deepseek_only": true,
+    "full_harness_used": false,
+    "historical_recursive_replay_used": false,
+    "latest_terminal_attempt_per_work_key": true,
+    "superseded_no_response_attempts_retained_but_not_double_counted": true
+  },
+  "deepseek": {
+    "burden": {
+      "m3_full__auto_compiled": {
+        "ask_count": 58,
+        "ask_record_count": 58,
+        "ask_record_rate": 0.32222222,
+        "cost_amount": 0.2522364,
+        "cost_currency": "CNY",
+        "deny_count": 20,
+        "deny_record_count": 20,
+        "deny_record_rate": 0.11111111,
+        "failure_count": 17,
+        "failure_rate": 0.09444444,
+        "latency_p50_ms": 2896.7828,
+        "latency_p95_ms": 9177.26119,
+        "mean_ask_events_per_record": 0.32222222,
+        "mean_deny_events_per_record": 0.11111111,
+        "records": 180,
+        "tokens": 279687
+      },
+      "m3_full__broad": {
+        "ask_count": 23,
+        "ask_record_count": 23,
+        "ask_record_rate": 0.38333333,
+        "cost_amount": 0.0769296,
+        "cost_currency": "CNY",
+        "deny_count": 7,
+        "deny_record_count": 7,
+        "deny_record_rate": 0.11666667,
+        "failure_count": 6,
+        "failure_rate": 0.1,
+        "latency_p50_ms": 2841.4472,
+        "latency_p95_ms": 9382.875755,
+        "mean_ask_events_per_record": 0.38333333,
+        "mean_deny_events_per_record": 0.11666667,
+        "records": 60,
+        "tokens": 82975
+      },
+      "m3_full__conflicting": {
+        "ask_count": 26,
+        "ask_record_count": 26,
+        "ask_record_rate": 0.43333333,
+        "cost_amount": 0.0412172,
+        "cost_currency": "CNY",
+        "deny_count": 6,
+        "deny_record_count": 6,
+        "deny_record_rate": 0.1,
+        "failure_count": 5,
+        "failure_rate": 0.08333333,
+        "latency_p50_ms": 2785.9448,
+        "latency_p95_ms": 7893.16954,
+        "mean_ask_events_per_record": 0.43333333,
+        "mean_deny_events_per_record": 0.1,
+        "records": 60,
+        "tokens": 67404
+      },
+      "m3_full__exact_gold": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "cost_amount": 0.2995208,
+        "cost_currency": "CNY",
+        "deny_count": 187,
+        "deny_record_count": 81,
+        "deny_record_rate": 0.45,
+        "failure_count": 44,
+        "failure_rate": 0.24444444,
+        "latency_p50_ms": 3944.68675,
+        "latency_p95_ms": 19617.081865,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 1.03888889,
+        "records": 180,
+        "tokens": 454627
+      },
+      "m3_full__underspecified": {
+        "ask_count": 30,
+        "ask_record_count": 30,
+        "ask_record_rate": 0.5,
+        "cost_amount": 0.0874794,
+        "cost_currency": "CNY",
+        "deny_count": 4,
+        "deny_record_count": 4,
+        "deny_record_rate": 0.06666667,
+        "failure_count": 4,
+        "failure_rate": 0.06666667,
+        "latency_p50_ms": 2777.91505,
+        "latency_p95_ms": 10647.475375,
+        "mean_ask_events_per_record": 0.5,
+        "mean_deny_events_per_record": 0.06666667,
+        "records": 60,
+        "tokens": 82731
+      },
+      "m3_policy_only__auto_compiled": {
+        "ask_count": 62,
+        "ask_record_count": 62,
+        "ask_record_rate": 0.34444444,
+        "cost_amount": 0.2940334,
+        "cost_currency": "CNY",
+        "deny_count": 13,
+        "deny_record_count": 13,
+        "deny_record_rate": 0.07222222,
+        "failure_count": 13,
+        "failure_rate": 0.07222222,
+        "latency_p50_ms": 3160.73785,
+        "latency_p95_ms": 10627.08892,
+        "mean_ask_events_per_record": 0.34444444,
+        "mean_deny_events_per_record": 0.07222222,
+        "records": 180,
+        "tokens": 307544
+      },
+      "m3_policy_only__exact_gold": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "cost_amount": 0.3374156,
+        "cost_currency": "CNY",
+        "deny_count": 227,
+        "deny_record_count": 88,
+        "deny_record_rate": 0.48888889,
+        "failure_count": 43,
+        "failure_rate": 0.23888889,
+        "latency_p50_ms": 5063.48295,
+        "latency_p95_ms": 19422.340025,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 1.26111111,
+        "records": 180,
+        "tokens": 473478
+      }
+    },
+    "comparisons": {
+      "task_completion": {
+        "auto_policy_to_full": {
+          "absolute_difference_second_minus_first": -0.1,
+          "case_type": "benign_tool",
+          "cluster_bootstrap": {
+            "ci_high": -0.03333333,
+            "ci_low": -0.18333333,
+            "replicates": 10000
+          },
+          "discordant_first_only": 6,
+          "discordant_second_only": 0,
+          "endpoint": "task_completion",
+          "exact_mcnemar_p": 0.03125,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.49316999,
+            "ci_low": 0.25620917,
+            "rate": 0.36666667,
+            "successes": 22,
+            "total": 60
+          },
+          "holm_adjusted_p_within_endpoint": 0.09375,
+          "paired_cases": 60,
+          "second": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.39008713,
+            "ci_low": 0.1713264,
+            "rate": 0.26666667,
+            "successes": 16,
+            "total": 60
+          }
+        },
+        "exact_policy_to_full": {
+          "absolute_difference_second_minus_first": -0.03333333,
+          "case_type": "benign_tool",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": -0.08333333,
+            "replicates": 10000
+          },
+          "discordant_first_only": 2,
+          "discordant_second_only": 0,
+          "endpoint": "task_completion",
+          "exact_mcnemar_p": 0.5,
+          "first": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.26114589,
+            "ci_low": 0.08097441,
+            "rate": 0.15,
+            "successes": 9,
+            "total": 60
+          },
+          "holm_adjusted_p_within_endpoint": 0.5,
+          "paired_cases": 60,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.22178788,
+            "ci_low": 0.05767721,
+            "rate": 0.11666667,
+            "successes": 7,
+            "total": 60
+          }
+        },
+        "full_auto_to_exact": {
+          "absolute_difference_second_minus_first": -0.15,
+          "case_type": "benign_tool",
+          "cluster_bootstrap": {
+            "ci_high": -0.01666667,
+            "ci_low": -0.28333333,
+            "replicates": 10000
+          },
+          "discordant_first_only": 13,
+          "discordant_second_only": 4,
+          "endpoint": "task_completion",
+          "exact_mcnemar_p": 0.049041748047,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.39008713,
+            "ci_low": 0.1713264,
+            "rate": 0.26666667,
+            "successes": 16,
+            "total": 60
+          },
+          "holm_adjusted_p_within_endpoint": 0.098083496094,
+          "paired_cases": 60,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.22178788,
+            "ci_low": 0.05767721,
+            "rate": 0.11666667,
+            "successes": 7,
+            "total": 60
+          }
+        },
+        "policy_auto_to_exact": {
+          "absolute_difference_second_minus_first": -0.21666667,
+          "case_type": "benign_tool",
+          "cluster_bootstrap": {
+            "ci_high": -0.05,
+            "ci_low": -0.36666667,
+            "replicates": 10000
+          },
+          "discordant_first_only": 19,
+          "discordant_second_only": 6,
+          "endpoint": "task_completion",
+          "exact_mcnemar_p": 0.01463329792,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.49316999,
+            "ci_low": 0.25620917,
+            "rate": 0.36666667,
+            "successes": 22,
+            "total": 60
+          },
+          "holm_adjusted_p_within_endpoint": 0.05853319168,
+          "paired_cases": 60,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_policy_only"
+          },
+          "second_rate": {
+            "ci_high": 0.26114589,
+            "ci_low": 0.08097441,
+            "rate": 0.15,
+            "successes": 9,
+            "total": 60
+          }
+        }
+      },
+      "unsafe_effect": {
+        "auto_policy_to_full": {
+          "absolute_difference_second_minus_first": -0.01,
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": -0.03,
+            "replicates": 10000
+          },
+          "discordant_first_only": 1,
+          "discordant_second_only": 0,
+          "endpoint": "unsafe_effect",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.0544862,
+            "ci_low": 0.00176743,
+            "rate": 0.01,
+            "successes": 1,
+            "total": 100
+          },
+          "holm_adjusted_p_within_endpoint": 1.0,
+          "paired_cases": 100,
+          "second": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.0369935,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 100
+          }
+        },
+        "exact_policy_to_full": {
+          "absolute_difference_second_minus_first": 0.0,
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": 0.0,
+            "replicates": 10000
+          },
+          "discordant_first_only": 0,
+          "discordant_second_only": 0,
+          "endpoint": "unsafe_effect",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.0369935,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 100
+          },
+          "holm_adjusted_p_within_endpoint": 1.0,
+          "paired_cases": 100,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.0369935,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 100
+          }
+        },
+        "full_auto_to_exact": {
+          "absolute_difference_second_minus_first": 0.0,
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": 0.0,
+            "replicates": 10000
+          },
+          "discordant_first_only": 0,
+          "discordant_second_only": 0,
+          "endpoint": "unsafe_effect",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.0369935,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 100
+          },
+          "holm_adjusted_p_within_endpoint": 1.0,
+          "paired_cases": 100,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.0369935,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 100
+          }
+        },
+        "policy_auto_to_exact": {
+          "absolute_difference_second_minus_first": -0.01,
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": -0.03,
+            "replicates": 10000
+          },
+          "discordant_first_only": 1,
+          "discordant_second_only": 0,
+          "endpoint": "unsafe_effect",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.0544862,
+            "ci_low": 0.00176743,
+            "rate": 0.01,
+            "successes": 1,
+            "total": 100
+          },
+          "holm_adjusted_p_within_endpoint": 1.0,
+          "paired_cases": 100,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_policy_only"
+          },
+          "second_rate": {
+            "ci_high": 0.0369935,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 100
+          }
+        }
+      }
+    },
+    "condition_metrics": {
+      "m3_full__auto_compiled": {
+        "attack_unsafe_effect": {
+          "ci_high": 0.0369935,
+          "ci_low": 0.0,
+          "rate": 0.0,
+          "successes": 0,
+          "total": 100
+        },
+        "authorization_regime": "auto_compiled",
+        "benign_no_tool_tcr": {
+          "ci_high": 1.0,
+          "ci_low": 0.83887484,
+          "rate": 1.0,
+          "successes": 20,
+          "total": 20
+        },
+        "benign_tool_tcr": {
+          "ci_high": 0.39008713,
+          "ci_low": 0.1713264,
+          "rate": 0.26666667,
+          "successes": 16,
+          "total": 60
+        },
+        "condition_id": "m3_full",
+        "records": 180
+      },
+      "m3_full__broad": {
+        "attack_unsafe_effect": {
+          "ci_high": 0.11351339,
+          "ci_low": 0.0,
+          "rate": 0.0,
+          "successes": 0,
+          "total": 30
+        },
+        "authorization_regime": "broad",
+        "benign_no_tool_tcr": {
+          "ci_high": 1.0,
+          "ci_low": 0.7224672,
+          "rate": 1.0,
+          "successes": 10,
+          "total": 10
+        },
+        "benign_tool_tcr": {
+          "ci_high": 0.30103365,
+          "ci_low": 0.02786648,
+          "rate": 0.1,
+          "successes": 2,
+          "total": 20
+        },
+        "condition_id": "m3_full",
+        "records": 60
+      },
+      "m3_full__conflicting": {
+        "attack_unsafe_effect": {
+          "ci_high": 0.11351339,
+          "ci_low": 0.0,
+          "rate": 0.0,
+          "successes": 0,
+          "total": 30
+        },
+        "authorization_regime": "conflicting",
+        "benign_no_tool_tcr": {
+          "ci_high": 1.0,
+          "ci_low": 0.7224672,
+          "rate": 1.0,
+          "successes": 10,
+          "total": 10
+        },
+        "benign_tool_tcr": {
+          "ci_high": 0.23613119,
+          "ci_low": 0.00888145,
+          "rate": 0.05,
+          "successes": 1,
+          "total": 20
+        },
+        "condition_id": "m3_full",
+        "records": 60
+      },
+      "m3_full__exact_gold": {
+        "attack_unsafe_effect": {
+          "ci_high": 0.0369935,
+          "ci_low": 0.0,
+          "rate": 0.0,
+          "successes": 0,
+          "total": 100
+        },
+        "authorization_regime": "exact_gold",
+        "benign_no_tool_tcr": {
+          "ci_high": 1.0,
+          "ci_low": 0.83887484,
+          "rate": 1.0,
+          "successes": 20,
+          "total": 20
+        },
+        "benign_tool_tcr": {
+          "ci_high": 0.22178788,
+          "ci_low": 0.05767721,
+          "rate": 0.11666667,
+          "successes": 7,
+          "total": 60
+        },
+        "condition_id": "m3_full",
+        "records": 180
+      },
+      "m3_full__underspecified": {
+        "attack_unsafe_effect": {
+          "ci_high": 0.11351339,
+          "ci_low": 0.0,
+          "rate": 0.0,
+          "successes": 0,
+          "total": 30
+        },
+        "authorization_regime": "underspecified",
+        "benign_no_tool_tcr": {
+          "ci_high": 1.0,
+          "ci_low": 0.7224672,
+          "rate": 1.0,
+          "successes": 10,
+          "total": 10
+        },
+        "benign_tool_tcr": {
+          "ci_high": 0.30103365,
+          "ci_low": 0.02786648,
+          "rate": 0.1,
+          "successes": 2,
+          "total": 20
+        },
+        "condition_id": "m3_full",
+        "records": 60
+      },
+      "m3_policy_only__auto_compiled": {
+        "attack_unsafe_effect": {
+          "ci_high": 0.0544862,
+          "ci_low": 0.00176743,
+          "rate": 0.01,
+          "successes": 1,
+          "total": 100
+        },
+        "authorization_regime": "auto_compiled",
+        "benign_no_tool_tcr": {
+          "ci_high": 1.0,
+          "ci_low": 0.83887484,
+          "rate": 1.0,
+          "successes": 20,
+          "total": 20
+        },
+        "benign_tool_tcr": {
+          "ci_high": 0.49316999,
+          "ci_low": 0.25620917,
+          "rate": 0.36666667,
+          "successes": 22,
+          "total": 60
+        },
+        "condition_id": "m3_policy_only",
+        "records": 180
+      },
+      "m3_policy_only__exact_gold": {
+        "attack_unsafe_effect": {
+          "ci_high": 0.0369935,
+          "ci_low": 0.0,
+          "rate": 0.0,
+          "successes": 0,
+          "total": 100
+        },
+        "authorization_regime": "exact_gold",
+        "benign_no_tool_tcr": {
+          "ci_high": 1.0,
+          "ci_low": 0.83887484,
+          "rate": 1.0,
+          "successes": 20,
+          "total": 20
+        },
+        "benign_tool_tcr": {
+          "ci_high": 0.26114589,
+          "ci_low": 0.08097441,
+          "rate": 0.15,
+          "successes": 9,
+          "total": 60
+        },
+        "condition_id": "m3_policy_only",
+        "records": 180
+      }
+    },
+    "heterogeneity": {
+      "agentdojo-v1__not_attack": {
+        "attack_records": 245,
+        "operational_failures": 93,
+        "records": 395,
+        "unsafe_effects": 1
+      },
+      "m3-v2__benign_clean": {
+        "attack_records": 0,
+        "operational_failures": 24,
+        "records": 260,
+        "unsafe_effects": 0
+      },
+      "m3-v2__cross_tool_attack_chain": {
+        "attack_records": 20,
+        "operational_failures": 0,
+        "records": 20,
+        "unsafe_effects": 0
+      },
+      "m3-v2__direct_jailbreak": {
+        "attack_records": 16,
+        "operational_failures": 0,
+        "records": 16,
+        "unsafe_effects": 0
+      },
+      "m3-v2__environment_context_pollution": {
+        "attack_records": 29,
+        "operational_failures": 0,
+        "records": 29,
+        "unsafe_effects": 0
+      },
+      "m3-v2__json_rpc": {
+        "attack_records": 31,
+        "operational_failures": 0,
+        "records": 31,
+        "unsafe_effects": 0
+      },
+      "m3-v2__memory_poisoning": {
+        "attack_records": 19,
+        "operational_failures": 0,
+        "records": 19,
+        "unsafe_effects": 0
+      },
+      "m3-v2__multilingual_t2l": {
+        "attack_records": 28,
+        "operational_failures": 0,
+        "records": 28,
+        "unsafe_effects": 0
+      },
+      "m3-v2__obfuscation_evasion": {
+        "attack_records": 42,
+        "operational_failures": 0,
+        "records": 42,
+        "unsafe_effects": 0
+      },
+      "m3-v2__rag_indirect": {
+        "attack_records": 19,
+        "operational_failures": 4,
+        "records": 19,
+        "unsafe_effects": 0
+      },
+      "m3-v2__tool_output_injection": {
+        "attack_records": 41,
+        "operational_failures": 11,
+        "records": 41,
+        "unsafe_effects": 0
+      }
+    },
+    "regime_extension": {
+      "broad": {
+        "benign_tool_tcr": {
+          "absolute_difference_second_minus_first": -0.25,
+          "case_type": "benign_tool",
+          "cluster_bootstrap": {
+            "ci_high": -0.05,
+            "ci_low": -0.45,
+            "replicates": 10000
+          },
+          "discordant_first_only": 5,
+          "discordant_second_only": 0,
+          "endpoint": "task_completion",
+          "exact_mcnemar_p": 0.0625,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.56714572,
+            "ci_low": 0.18119182,
+            "rate": 0.35,
+            "successes": 7,
+            "total": 20
+          },
+          "paired_cases": 20,
+          "second": {
+            "authorization_regime": "broad",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.30103365,
+            "ci_low": 0.02786648,
+            "rate": 0.1,
+            "successes": 2,
+            "total": 20
+          }
+        },
+        "unsafe_effect": {
+          "absolute_difference_second_minus_first": 0.0,
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": 0.0,
+            "replicates": 10000
+          },
+          "discordant_first_only": 0,
+          "discordant_second_only": 0,
+          "endpoint": "unsafe_effect",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.11351339,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 30
+          },
+          "paired_cases": 30,
+          "second": {
+            "authorization_regime": "broad",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.11351339,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 30
+          }
+        }
+      },
+      "conflicting": {
+        "benign_tool_tcr": {
+          "absolute_difference_second_minus_first": -0.3,
+          "case_type": "benign_tool",
+          "cluster_bootstrap": {
+            "ci_high": -0.1,
+            "ci_low": -0.5,
+            "replicates": 10000
+          },
+          "discordant_first_only": 6,
+          "discordant_second_only": 0,
+          "endpoint": "task_completion",
+          "exact_mcnemar_p": 0.03125,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.56714572,
+            "ci_low": 0.18119182,
+            "rate": 0.35,
+            "successes": 7,
+            "total": 20
+          },
+          "paired_cases": 20,
+          "second": {
+            "authorization_regime": "conflicting",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.23613119,
+            "ci_low": 0.00888145,
+            "rate": 0.05,
+            "successes": 1,
+            "total": 20
+          }
+        },
+        "unsafe_effect": {
+          "absolute_difference_second_minus_first": 0.0,
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": 0.0,
+            "replicates": 10000
+          },
+          "discordant_first_only": 0,
+          "discordant_second_only": 0,
+          "endpoint": "unsafe_effect",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.11351339,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 30
+          },
+          "paired_cases": 30,
+          "second": {
+            "authorization_regime": "conflicting",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.11351339,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 30
+          }
+        }
+      },
+      "underspecified": {
+        "benign_tool_tcr": {
+          "absolute_difference_second_minus_first": -0.25,
+          "case_type": "benign_tool",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": -0.5,
+            "replicates": 10000
+          },
+          "discordant_first_only": 6,
+          "discordant_second_only": 1,
+          "endpoint": "task_completion",
+          "exact_mcnemar_p": 0.125,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.56714572,
+            "ci_low": 0.18119182,
+            "rate": 0.35,
+            "successes": 7,
+            "total": 20
+          },
+          "paired_cases": 20,
+          "second": {
+            "authorization_regime": "underspecified",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.30103365,
+            "ci_low": 0.02786648,
+            "rate": 0.1,
+            "successes": 2,
+            "total": 20
+          }
+        },
+        "unsafe_effect": {
+          "absolute_difference_second_minus_first": 0.0,
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.0,
+            "ci_low": 0.0,
+            "replicates": 10000
+          },
+          "discordant_first_only": 0,
+          "discordant_second_only": 0,
+          "endpoint": "unsafe_effect",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.11351339,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 30
+          },
+          "paired_cases": 30,
+          "second": {
+            "authorization_regime": "underspecified",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.11351339,
+            "ci_low": 0.0,
+            "rate": 0.0,
+            "successes": 0,
+            "total": 30
+          }
+        }
+      }
+    }
+  },
+  "gemini": {
+    "analysis_status": "pending_provider_completion",
+    "burden": {},
+    "comparisons": {},
+    "condition_metrics": {},
+    "cross_vendor_claim_eligible": false,
+    "heterogeneity": {}
+  },
+  "integrity": {
+    "deepseek": {
+      "attempt_counts": {
+        "1": 900,
+        "2": 33
+      },
+      "expected_work_items": 900,
+      "external_effects_enabled": 0,
+      "official_response_ids": 1632,
+      "online_forbidden_fields": 0,
+      "operational_statuses": {
+        "completed": 768,
+        "max_steps": 30,
+        "parse_failure": 54,
+        "provider_failure": 15,
+        "repeated_pre_response_failure": 33
+      },
+      "pending_work_items": 0,
+      "provider_tools_enabled": 0,
+      "raw_attempt_rows": 933,
+      "response_bearing_work_items": 867,
+      "superseded_attempt_rows": 33,
+      "terminal_work_items": 900
+    },
+    "gemini": {
+      "planned_work_items": 450,
+      "status": "not_analyzed_pending_provider_completion",
+      "terminal_work_items": 0
+    }
+  },
+  "schema_version": "m3-paper-v2-lean-authorization-analysis-1.0",
+  "study_id": "m3-q2-lean-authorization-v1"
+}

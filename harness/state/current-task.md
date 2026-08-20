@@ -3442,3 +3442,29 @@ The older provider-gate text is superseded by this checkpoint.
 - 该顺序调整不授权开发者代替第三方生成盲测内容，也不允许把“暂缓”写成“完成”。
 - GitHub 目标仓库记录为 `https://github.com/Fischl0527/M3_PI_Guard.git`；当前
   `origin` 仍指向旧仓库，本阶段不擅自改 remote 或 push。
+
+## 2026-08-20 — DeepSeek authorization analysis complete; Gemini pending
+
+- The owner-approved lean paper scope supersedes the earlier 21-day sequence.
+  Blind evaluation, Pro-500/2000 and Full Harness are not active paper gates.
+- DeepSeek V4 Pro reached 900/900 terminal work keys. One explicit failed-only
+  recovery touched 33 no-response keys and skipped all 867 response-bearing
+  keys; no further DeepSeek retry is eligible.
+- The single-pass DeepSeek analysis is complete. It retains all 900 ITT rows,
+  confirms zero online forbidden-field, provider-tool and external-effect
+  records, and produces five PNG/SVG figures plus six CSV tables.
+- Figure burden semantics were corrected prospectively: ASK/DENY percentages
+  now count records with at least one event, while event totals remain in the
+  table. Focused verification passes 6/6 with Ruff and `py_compile`; no Full
+  Harness or historical replay was run.
+- Results and Discussion now report the DeepSeek findings. The main attack
+  endpoint is at floor (0/100 in three primary cells, 1/100 in the fourth),
+  while exact authorization reduces benign-tool completion and increases
+  DENY, failure and latency. These findings do not support an independent
+  M3-full mechanism advantage.
+- Gemini remains pending on the same Pacific quota day after an official
+  free-tier 429. Its partial rows are excluded from cross-provider analysis;
+  only no-response and untouched keys may resume after the next quota reset.
+- Active branch is `codex/q2-empirical-study`. The DeepSeek recovery milestone
+  is already pushed to `m3-guard`; the analysis/manuscript milestone is the
+  next exact-file commit. F-PAPER-002 remains `in_progress`.

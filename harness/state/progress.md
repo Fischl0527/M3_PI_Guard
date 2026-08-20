@@ -2757,3 +2757,26 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   `https://github.com/Fischl0527/M3_PI_Guard.git`; no push occurred.
 - Next: implement one-pass existing-result analysis and freeze the 180/90/60
   lean experiment selections. F-PAPER-002 remains `in_progress`.
+
+# 2026-08-20 — DeepSeek lean authorization result milestone
+
+- DeepSeek V4 Pro is technically closed at 900/900 terminal work keys. The one
+  explicit recovery executed only 33 no-response keys and never replayed the
+  867 response-bearing keys.
+- Final status counts are 768 completed, 54 parse failures, 30 max-steps, 15
+  provider failures and 33 repeated pre-response failures. All remain in the
+  ITT denominator. Total provider cost is CNY 1.3888324.
+- The one-pass analysis generated a compact DeepSeek-only JSON, five paper
+  figures in PNG/SVG and six CSV tables. Gemini is marked pending and
+  `cross_vendor_claim_eligible=false`.
+- Corrected the runtime-burden plot to distinguish event totals from the share
+  of records containing ASK/DENY. Forest labels now identify unsafe-effect and
+  benign-tool TCR endpoints explicitly.
+- Updated Results and Discussion with the observed endpoint, paired,
+  operational and adaptive budget-50/200 findings. No leading-defense,
+  saturation or cross-provider claim is made.
+- Focused verification: 6/6 tests passed; Ruff and `py_compile` passed. No Full
+  Harness, recursive history replay, blind run, real external effect or
+  successful-row replay occurred.
+- Next: commit and push this exact analysis milestone, then resume only pending
+  and response-less Gemini rows after the next Pacific quota reset.

@@ -1,0 +1,8 @@
+provider,condition,authorization_regime,ask_count,ask_record_count,ask_record_rate,cost_amount,cost_currency,deny_count,deny_record_count,deny_record_rate,failure_count,failure_rate,latency_p50_ms,latency_p95_ms,mean_ask_events_per_record,mean_deny_events_per_record,records,tokens
+deepseek,m3_full,auto_compiled,58,58,0.32222222,0.2522364,CNY,20,20,0.11111111,17,0.09444444,2896.7828,9177.26119,0.32222222,0.11111111,180,279687
+deepseek,m3_full,broad,23,23,0.38333333,0.0769296,CNY,7,7,0.11666667,6,0.1,2841.4472,9382.875755,0.38333333,0.11666667,60,82975
+deepseek,m3_full,conflicting,26,26,0.43333333,0.0412172,CNY,6,6,0.1,5,0.08333333,2785.9448,7893.16954,0.43333333,0.1,60,67404
+deepseek,m3_full,exact_gold,0,0,0.0,0.2995208,CNY,187,81,0.45,44,0.24444444,3944.68675,19617.081865,0.0,1.03888889,180,454627
+deepseek,m3_full,underspecified,30,30,0.5,0.0874794,CNY,4,4,0.06666667,4,0.06666667,2777.91505,10647.475375,0.5,0.06666667,60,82731
+deepseek,m3_policy_only,auto_compiled,62,62,0.34444444,0.2940334,CNY,13,13,0.07222222,13,0.07222222,3160.73785,10627.08892,0.34444444,0.07222222,180,307544
+deepseek,m3_policy_only,exact_gold,0,0,0.0,0.3374156,CNY,227,88,0.48888889,43,0.23888889,5063.48295,19422.340025,0.0,1.26111111,180,473478

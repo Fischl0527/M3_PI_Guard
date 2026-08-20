@@ -2852,3 +2852,24 @@ Next gated action:
   transport-vs-post-response ITT rule in `harness/tasks/m3-paper-v2.md`.
 - F-PAPER-002 remains `in_progress`; next action is the one-pass analyzer and
   deterministic 180/90/60 selection implementation.
+
+# 2026-08-20 — Current handoff: DeepSeek results complete, Gemini pending
+
+- Branch `codex/q2-empirical-study` is tracked on the `m3-guard` GitHub remote.
+  The DeepSeek recovery closeout is pushed at commit `c7b7953`.
+- DeepSeek authorization execution and analysis are complete: 900/900 latest
+  ITT rows, 867 response-bearing, 33 repeated pre-response failures, zero
+  retry-eligible keys, CNY 1.3888324, and zero forbidden-field/tool/effect rows.
+- Analysis output:
+  `docs/research/paper_v2/lean_empirical/authorization_results_deepseek_v1.json`.
+  Figures and tables are in sibling `figures_deepseek_v1/` and
+  `tables_deepseek_v1/` directories. Results/Discussion have been updated.
+- Focused checks pass 6/6 plus Ruff and `py_compile`. Do not run a Full Harness
+  or recursively verify historical evidence for this lean paper.
+- Gemini has 5 response-bearing keys and is paused after free-tier 429 on the
+  current Pacific quota day. After the next Pacific midnight, resume with:
+  `F:\robot\Anaconda3\python.exe -B -m experiments.paper_v2.lean_empirical_runner --provider gemini --stage remaining --config config/project.local.env --retry-failed`.
+  This command skips response-bearing keys, attempts only response-less or
+  untouched work and stops on the first new 429.
+- If Gemini remains unavailable across three quota days, retain partial rows as
+  diagnostic and finish the paper without a cross-provider claim.

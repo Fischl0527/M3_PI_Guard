@@ -63,3 +63,81 @@ def test_paired_stats_report_direction_and_discordance(monkeypatch) -> None:
 def test_holm_adjustment_is_monotone_in_sorted_p_values() -> None:
     adjusted = analysis._holm({"a": 0.01, "b": 0.03, "c": 0.2, "d": 0.8})
     assert adjusted == {"a": 0.04, "b": 0.09, "c": 0.4, "d": 0.8}
+
+
+def test_deepseek_only_defers_gemini_without_cross_vendor_claim(monkeypatch) -> None:
+    plan_rows = [
+        {"provider_id": "deepseek", "work_key": "d"},
+        {"provider_id": "gemini", "work_key": "g"},
+    ]
+    deepseek_records = [_row("case", "m3_full", "auto_compiled", False)]
+    monkeypatch.setattr(analysis, "_read_jsonl", lambda path: plan_rows)
+    monkeypatch.setattr(
+        analysis,
+        "_validate_provider",
+        lambda provider, plan, raw, allow_partial: (
+            deepseek_records,
+            {"terminal_work_items": analysis.EXPECTED_COUNTS["deepseek"]},
+        ),
+    )
+    monkeypatch.setattr(analysis, "_condition_metrics", lambda rows: {})
+    monkeypatch.setattr(
+        analysis,
+        "_comparisons",
+        lambda rows, comparisons: (
+            {}
+            if rows
+            else (_ for _ in ()).throw(
+                AssertionError("pending Gemini comparisons must not run")
+            )
+        ),
+    )
+    monkeypatch.setattr(analysis, "_regime_extension", lambda rows: {})
+    monkeypatch.setattr(analysis, "_burden", lambda rows: {})
+    monkeypatch.setattr(analysis, "_heterogeneity", lambda rows: {})
+
+    result = analysis.build_analysis(deepseek_only=True)
+
+    assert result["analysis_policy"]["deepseek_only"] is True
+    assert result["integrity"]["gemini"]["status"] == (
+        "not_analyzed_pending_provider_completion"
+    )
+    assert result["gemini"]["condition_metrics"] == {}
+    assert result["gemini"]["cross_vendor_claim_eligible"] is False
+
+
+def test_burden_distinguishes_event_counts_from_record_incidence() -> None:
+    rows = [
+        {
+            "condition_id": "m3_full",
+            "authorization_regime": "exact_gold",
+            "ask_count": 0,
+            "deny_count": 3,
+            "operational_status": "completed",
+            "latency_ms": {"total": 10},
+            "token_usage": {"total": 20},
+            "cost": {"amount": 0.1, "currency": "CNY"},
+        },
+        {
+            "condition_id": "m3_full",
+            "authorization_regime": "exact_gold",
+            "ask_count": 2,
+            "deny_count": 0,
+            "operational_status": "parse_failure",
+            "latency_ms": {"total": 20},
+            "token_usage": {"total": 30},
+            "cost": {"amount": 0.2, "currency": "CNY"},
+        },
+    ]
+
+    result = analysis._burden(rows)["m3_full__exact_gold"]
+
+    assert result["ask_count"] == 2
+    assert result["deny_count"] == 3
+    assert result["ask_record_count"] == 1
+    assert result["deny_record_count"] == 1
+    assert result["ask_record_rate"] == 0.5
+    assert result["deny_record_rate"] == 0.5
+    assert result["mean_ask_events_per_record"] == 1.0
+    assert result["mean_deny_events_per_record"] == 1.5
+    assert result["failure_rate"] == 0.5

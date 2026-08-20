@@ -1,6 +1,6 @@
 # paper-v2 lean empirical manuscript workspace
 
-Status: `lean_authorization_study_execution_in_progress`
+Status: `deepseek_authorization_results_complete_gemini_pending`
 
 This directory is deliberately not a completed paper. It contains the active
 lean Methods and Introduction, existing Pro/Flash/medium/adaptive results, a
@@ -22,9 +22,11 @@ the defense-mechanism route because M3-full did not improve on policy-only and
 missed the preregistered benign-tool non-inferiority criterion. The active route
 is an empirical authorization-uncertainty and security–utility trade-off paper.
 The 5,082-record Public primary result is complete and independently
-reproduced. The active experiment now tests authorization regimes directly;
-Gemini supports a cross-provider claim only if all 450 planned work items reach
-terminal status under the three-quota-day rule.
+reproduced, the 1,791-record DeepSeek Flash replication is complete, and the
+900-record DeepSeek authorization-regime experiment now has terminal analysis,
+five paper figures, and six tables. Gemini supports a cross-provider claim only
+if all 450 planned work items reach terminal status under the three-quota-day
+rule.
 
 Files:
 
@@ -33,10 +35,10 @@ Files:
   boundary.
 - `methods_draft.md`: active lean Methods, failed-row recovery rule and
   focused-only verification contract.
-- `results_shell.md`: historical medium/Public shell; it must be replaced from
-  the compact lean analysis after terminal experiment completion.
-- `discussion_draft.md`: historical interpretation to be revised after the
-  authorization-regime results are available.
+- `results_shell.md`: active Results draft covering medium, Public Pro/Flash,
+  the DeepSeek authorization experiment, and adaptive budgets 50/200.
+- `discussion_draft.md`: active interpretation of the DeepSeek authorization
+  findings, with the cross-provider section still pending Gemini.
 - `abstract_shell.md`: intentionally incomplete; no new numeric claim is added
   before the terminal analysis.
 - `figure_table_plan.md`: lean data-source map for five main figures and six
@@ -69,6 +71,13 @@ Files:
   owner-approved lean plan and are not active acceptance gates.
 - `jisa_submission_checklist.md`: official-scope, journal-package and
   result-dependent submission gates.
+
+Current DeepSeek analysis products are under
+`docs/research/paper_v2/lean_empirical/`: the compact analysis JSON is
+`authorization_results_deepseek_v1.json`, the five PNG/SVG figure pairs are in
+`figures_deepseek_v1/`, and the six CSV tables are in
+`tables_deepseek_v1/`. These are single-model products; their metadata
+explicitly disables a cross-provider claim while Gemini remains pending.
 
 The active execution freeze is
 `protocols/paper_upgrade_v2/lean_empirical_execution_plan_v1.jsonl`; the active
