@@ -1,5 +1,16 @@
 # 进展记录
 
+## 2026-08-20 — Final Gemini offline post-processing scheduled
+
+- PID 29256 now waits on the sole provider wrapper PID 2176. After the final
+  quota-day run ends naturally, it performs exactly one compact partial-safe
+  analysis without provider, trace, credential or external-effect access.
+- Complete-only tables and figures are generated only at 450/450 terminal
+  work items. An incomplete three-day cohort produces diagnostic analysis only
+  and cannot unlock cross-vendor inference or manuscript wording.
+- The scientific manuscripts are intentionally unchanged until the actual
+  disposition exists. F-PAPER-002 remains `in_progress`.
+
 ## 2026-08-20 — Gemini quota-day 2 stopped; final day scheduled
 
 - The sole pending-only Gemini run ended naturally after 23 attempted work

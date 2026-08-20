@@ -1,5 +1,17 @@
 # 会话移交
 
+## 2026-08-20 — Automatic post-run analysis handoff
+
+- Keep PID 2176 (final Gemini quota-day wrapper) and PID 29256 (offline
+  post-processor) running. Do not start duplicates or interrupt either.
+- PID 29256 waits for PID 2176, then writes
+  `docs/research/paper_v2/lean_empirical/authorization_results_v1.json` once.
+  It emits `tables_final_v1` and `figures_final_v1` only if the analysis reports
+  450/450 terminal and `cross_vendor_claim_eligible=true`.
+- If incomplete, its stdout ends with
+  `GEMINI_FINAL_DISPOSITION=diagnostic_partial`; update both manuscripts to the
+  three-quota-day downgrade and keep all cross-provider claims disabled.
+
 ## 2026-08-20 — Gemini final-quota-day handoff
 
 - The 2026-08-20 pending-only run ended naturally after 23 attempts and its

@@ -1,5 +1,14 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 24：最终 Gemini 离线后处理已预约
+
+- 唯一 provider runner（PID 2176）仍等待 8 月 21 日 15:02；日志为空，尚未调用 API。
+- 新增唯一离线后处理进程（PID 29256），只等待 PID 2176 自然结束；随后运行一次
+  `lean_authorization_analysis --allow-partial-gemini`，不读取 provider trace、不调用 API。
+- 只有达到 450/450 terminal 时才生成 `tables_final_v1` 和 `figures_final_v1`；否则只
+  写入 diagnostic-partial 分析并保持跨厂商主张关闭。稿件正文仍等真实终态后更新。
+- F-PAPER-002 保持 `in_progress`，不启动重复 runner 或额外配额日。
+
 ### 2026-08-20 精简实证里程碑 23：Gemini 第二配额日结束并预约最终配额日
 
 - 8 月 20 日的唯一 Gemini pending-only runner 已自然结束，未留下运行进程；本次
