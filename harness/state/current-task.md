@@ -15,6 +15,20 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
 
 ## 当前阶段
 
+### 2026-08-20 精简实证里程碑 4：DeepSeek 主执行自然结束
+
+- DeepSeek 授权制度主执行已自然结束，当前无遗留 runner；原始文件包含
+  900 行、900 个唯一 work key，覆盖冻结的全部 DeepSeek 计划项。
+- 867 行获得官方响应，33 行未获得响应；870 行按预定规则进入当前
+  ITT，30 行仍是可恢复的传输前失败。按 Owner 最新指令，本次不启动
+  `--retry-failed`，也不启动 Gemini 或新的分析实验。
+- 技术计数为 1,635 次 provider calls、CNY 1.3888324，返回模型均为
+  `deepseek-v4-pro`。在线 forbidden 字段、provider tools 和外部 effect 记录均为 0。
+- 本阶段只做了内容无关的行数、唯一性、模型身份、失败分母和安全边界检查；
+  没有重跑 Full Harness、历史证据链或已成功实验行。
+- F-PAPER-002 仍为 `in_progress`：DeepSeek 900 项的物理执行已完成，但失败行恢复、
+  Gemini 精简验证、正式统计和论文收口均未完成。当前按 Owner 指令停止。
+
 ### 2026-08-20 精简实证里程碑 3：主执行与分析图表工具
 
 - DeepSeek `remaining` 主执行已启动并持续追加尚未触碰的 work key；formal

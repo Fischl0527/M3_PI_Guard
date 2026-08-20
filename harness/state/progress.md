@@ -1,5 +1,16 @@
 # 进展记录
 
+## 2026-08-20 精简实证里程碑 4：DeepSeek 主执行结束并停止
+
+- 唯一 DeepSeek pending-only runner 已自然结束，当前无匹配进程。原始文件为
+  900 行 / 900 个唯一 work key，所有冻结 DeepSeek 计划项均已留下一条记录。
+- 最小技术计数：867 行有官方响应，33 行无响应，870 行进入当前 ITT，
+  30 行为可恢复的传输前失败；1,635 次 provider calls，CNY 1.3888324。
+- 返回模型全部为 `deepseek-v4-pro`；online forbidden 字段、provider tools
+  和 external effects 记录均为 0。
+- 按 Owner 指令，未启动失败行恢复、Gemini 续跑、正式分析或任何新实验。
+  F-PAPER-002 保持 `in_progress`。
+
 ## 2026-08-20 精简实证里程碑 3：主执行、限流恢复与论文图表工具
 
 - DeepSeek 900 行计划已进入 pending-only `remaining` 顺序执行，6 行 formal

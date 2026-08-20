@@ -20,7 +20,8 @@ checks, and control/data-flow separation are already occupied design spaces
 [@L01; @L08; @L24; @L25; @L26]. Recent preprints go further by auditing
 context influence, comparing an authorization graph with a parameter-source
 execution graph, or controlling source authority in next-action decisions
-[@L21; @L22; @L35]. The open question for this study is therefore not
+[@L21; @L22; @L35]. Evidence-backed permission graphs with formal runtime
+authorization further narrow the mechanism claim boundary [@L36]. The open question for this study is therefore not
 whether a provenance-aware guard can be built for the first time. It is
 whether authorization information, enforcement structure, and failure
 handling materially change the security and utility measured for tool-using

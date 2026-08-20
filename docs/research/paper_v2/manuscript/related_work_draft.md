@@ -46,6 +46,15 @@ control and data flow and uses capabilities to prevent unauthorized flows
 dependency, and information-flow design space that a provenance-aware runtime
 must acknowledge.
 
+FAVA is a July 2026 preprint that translates natural-language tasks into a
+permission intermediate representation, lowers it to an evidence-backed
+permission graph, and uses an SMT authorizer before effectful execution
+([L36](https://arxiv.org/abs/2607.27267)). It further narrows any mechanism
+novelty claim around structured authorization and data-flow-aware permission
+graphs. Our study differs by treating the authorization regime itself as the
+paired experimental factor and by jointly measuring executed unsafe effects,
+benign utility, confirmation/blocking burden, and operational failure.
+
 Two 2026 preprints overlap even more closely with provenance-aware
 authorization. ARGUS constructs an influence-provenance graph for
 context-dependent decisions
@@ -132,6 +141,7 @@ the measured security–utility frontier.
 | Context-dependent provenance auditing | L21 | Preprint | Novelty boundary; reported effects not treated as settled |
 | Authorization/execution dual graph and parameter source | L22 | Preprint | Prohibits first parameter-source claim |
 | Controlled provenance-sensitivity audit | L35 | Preprint | Closest measurement boundary; motivates paired source-authority analysis |
+| Evidence-backed permission graph and SMT authorization | L36 | Preprint | Further prohibits broad structured-authorization novelty claims |
 | Isolated planning and hierarchical consistency | L23 | Preprint | Adjacent mechanism, not formal baseline without code admission |
 | Symbolic least privilege and approval-gated expansion | L24 | Preprint, arXiv v3 | Direct monotonic-permission overlap |
 | Tool-dependency-graph enforcement | L25 | Peer reviewed, EMNLP 2025 | Privilege/data-flow comparator |
@@ -140,7 +150,7 @@ the measured security–utility frontier.
 
 ## Bibliography export and remaining context gate
 
-The 35-entry bibliography in `references_v1.bib` is assembled from ACL
+The 36-entry bibliography in `references_v1.bib` is assembled from ACL
 Anthology, official proceedings pages, arXiv records and DOI/Crossref metadata.
 It distinguishes peer-reviewed work from preprints and requires author, title,
 year, URL, and venue or explicit preprint metadata.

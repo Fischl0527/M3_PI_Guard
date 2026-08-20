@@ -48,7 +48,7 @@ Files:
   audit of the ten papers that define the closest innovation boundary.
 - `full_citation_refresh_v1.md`: historical 34-source audit; the active
   bibliography now adds the 2026 provenance-sensitivity measurement paper.
-- `references_v1.bib`: 35-entry bibliography that explicitly distinguishes
+- `references_v1.bib`: 36-entry bibliography that explicitly distinguishes
   peer-reviewed work from preprints.
 - The admitted Public-primary result path includes a second computation
   implementation that independently reproduces condition counts, Wilson

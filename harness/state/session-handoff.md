@@ -4,12 +4,19 @@
 
 2026-08-20 +08:00
 
-## 当前权威检查点——精简主执行正在进行
+## 当前权威检查点——DeepSeek 主执行完成后停止
 
 - 分支 `codex/q2-empirical-study`；`m3-guard` 远程已配置，仍未 push。
-- DeepSeek `remaining` runner 正在自然执行。不要终止、重启或并发启动同 provider
-  runner；正在追加的 `outputs/experiments/lean_empirical/deepseek/raw_records_v1.jsonl`
-  只能在进程结束并完成失败行恢复后提交。
+- DeepSeek `remaining` runner 已自然结束，目前无匹配进程。原始文件已达
+  900 行 / 900 个唯一 work key。
+- 最小技术计数为 867 行有响应、33 行无响应、870 行当前 ITT、30 行
+  retry-eligible、1,635 calls、CNY 1.3888324；精确返回模型为
+  `deepseek-v4-pro`，forbidden 字段/tools/external effects 为 0。
+- Owner 要求在当前运行结束后停止。不要自动启动 `--retry-failed`、Gemini、
+  正式统计或新实验；只有新的 Owner 指令才能恢复。
+- 不得由 900/900 物理记录推断整个论文任务完成。Gemini 仍因免费层 429
+  暂停，30 条 DeepSeek 传输前失败未恢复，新结果的正式统计与论文收口未完成。
+  F-PAPER-002 保持 `in_progress`。
 - Gemini 当日 `remaining` 已因系统性 429 停止。已有响应的 work key 不得重跑；
   下一 quota day 只运行 `--retry-failed`，新代码会在第一条 429 后停止。最多三个
   配额日，之后保留已完成子集并透明降级，不启用 Billing。
