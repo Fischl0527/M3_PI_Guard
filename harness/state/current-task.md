@@ -3514,3 +3514,10 @@ The older provider-gate text is superseded by this checkpoint.
 - Scientific subsections are generated with JISA-compatible hierarchical
   numbering; the abstract, figures, main tables and supplementary table labels
   remain outside that numbering sequence.
+- Added an editable single-column Word working draft with five figures, 13
+  tables and 21 citeproc-rendered references. Focused DOCX tests pass 3/3 plus
+  Ruff and `py_compile`; section, table geometry, image, citation-token,
+  metadata and accessibility checks pass.
+- Visual DOCX rendering is not claimed because the current host has no
+  LibreOffice, Word or WPS renderer. The Word file remains a review draft, not
+  the final submission package, and author/funding/data statements remain open.

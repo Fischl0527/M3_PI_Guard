@@ -2909,3 +2909,18 @@ Next gated action:
 - All scientific subsections now use hierarchical JISA numbering. Final Word or
   LaTeX packaging should remain single-column/editable and place any required
   generative-AI declaration before the reference list.
+
+# 2026-08-20 — Current handoff: editable Word review draft
+
+- Word draft:
+  `docs/research/paper_v2/manuscript/M3_PI_Guard_JISA_working_draft.docx`.
+- Builder: `scripts/build_lean_paper_docx.py`; focused tests 3/3, Ruff and
+  `py_compile` pass. It uses Pandoc citeproc and then applies explicit
+  single-column academic styles and fixed-DXA table geometry.
+- Structural result: 269 paragraphs, 13 tables, five figures, 21 rendered
+  references, zero raw citation tokens and zero replacement characters.
+  Accessibility is 0 high/0 medium/21 low, with all low findings being
+  reference DOI/URL display text.
+- Visual rendering is pending because this host exposes no LibreOffice, Word or
+  WPS executable. Do not call the review draft visually verified, final, or
+  submission-ready. Gemini and author-owned declarations remain open.

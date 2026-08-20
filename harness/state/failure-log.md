@@ -5242,3 +5242,26 @@ credential, changed a historical ledger, or enabled an external effect.
   six authorization-study tables remain the only main Table 1–6 set. Each main
   table carries its note directly, while the separate caption section is
   limited to figures.
+
+## 2026-08-20 — Initial DOCX build encountered Pandoc table-grid variance
+
+- Attempt: build the single-column Word review draft with the bundled document
+  Python and Pandoc citeproc.
+- Environment finding: the bundled document Python contains `python-docx` but
+  not pytest/Ruff. Focused tests and lint therefore use the LFischl environment;
+  artifact generation continues to use the required bundled document Python.
+- Build failure: Pandoc emitted valid table rows and cells without an initial
+  `w:tblGrid`, so `python-docx` reported zero `table.columns` even though each
+  header row contained 3–8 cells. The style pass stopped before acceptance.
+- Fix: derive the column count from the first row, then create the required
+  fixed-DXA grid. The provisional failed output is overwritten by the next
+  successful build and is not treated as a deliverable.
+- Follow-up: the next build exposed two template-independent assumptions. The
+  width test overconstrained the order of two equally short columns after DXA
+  rounding, and Pandoc's base DOCX did not define a `Table Grid` style. The
+  test now checks only the material width properties; the builder writes its
+  own restrained single-grid borders instead of depending on a named style.
+- Structural inspection then found that Pandoc's `gfm` reader preserved 16 raw
+  citation-token paragraphs and emitted no References heading. The DOCX was
+  rejected. The builder now uses the Markdown citations extension so citeproc
+  can render author-year citations and the cited bibliography.

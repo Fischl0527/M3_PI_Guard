@@ -2827,3 +2827,21 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   excluding abstract and table/figure labels. The official JISA checklist also
   records editable single-column source, data-statement and pre-reference AI
   declaration requirements checked on 2026-08-20.
+
+# 2026-08-20 — Editable JISA Word review draft
+
+- Added a Pandoc/citeproc plus `python-docx` builder and generated
+  `M3_PI_Guard_JISA_working_draft.docx` as a single-column Letter manuscript.
+- The accepted structure contains 269 paragraphs, 13 fixed-DXA tables, five
+  inline figures, one References heading and 21 cited bibliography entries;
+  raw citation tokens, Unicode replacement characters and placeholder
+  reference prose are zero.
+- Focused DOCX tests pass 3/3 with Ruff and `py_compile`. Page geometry,
+  table geometry, image sizing, blank author metadata and citation conversion
+  pass. Accessibility findings are 0 high, 0 medium and 21 low; every low item
+  is a visible DOI or stable reference URL.
+- The standard renderer cannot run because LibreOffice is absent, and no WPS or
+  Word executable is available. Visual page QA is therefore explicitly
+  pending; the file is a review draft, not a visually verified final package.
+- F-PAPER-002 remains `in_progress` for Gemini's stopping rule, author-owned
+  declarations/data release and the mandatory integrity review.

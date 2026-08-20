@@ -36,6 +36,12 @@ Files:
   the builder enforces section order, the JISA abstract limit, bibliography
   coverage, figure/table availability, main-versus-supplementary numbering, and
   removal of workflow-only metadata.
+- `M3_PI_Guard_JISA_working_draft.docx`: editable, single-column Word review
+  copy with citeproc-rendered author-year citations, 21 cited references,
+  13 fixed-width tables and five figures. Rebuild it with
+  `python scripts/build_lean_paper_docx.py` using a Python environment with
+  `python-docx` and Pandoc. Structural and accessibility checks pass; visual
+  page rendering remains pending on a host with LibreOffice, Word or WPS.
 - `introduction_draft.md`: source-status-aware motivation, RQs, bounded
   contributions, admitted medium route decision and exploratory adaptive
   boundary.
