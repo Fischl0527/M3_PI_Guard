@@ -55,6 +55,12 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "22/60 (36.7%)" in manuscript
     assert "CNY 0.3374" in manuscript
     assert manuscript.count("| Provider |") >= 5
+    assert "excluding evaluator and gold fields" not in manuscript
+    assert "explicitly gold-derived sensitivity condition" in manuscript
+    assert re.search(
+        r"`exact_gold`\s+exposed only its derived authorization object",
+        manuscript,
+    )
 
 
 def test_abstract_stays_within_jisa_limit() -> None:

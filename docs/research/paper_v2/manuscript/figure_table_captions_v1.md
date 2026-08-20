@@ -6,10 +6,11 @@ Status: `deepseek_complete_gemini_pending`
 
 **Figure 1. Online authorization projection and offline evaluation boundary.**
 Trusted task context, the selected policy projection, provenance events, and
-the proposed action may enter the runtime Guard. Gold answers, evaluator
+the proposed action may enter the runtime Guard. Raw gold answers, evaluator
 labels, reference trajectories, and effect-scoring metadata remain offline.
-Only isolated simulated effects are scored; provider-managed tools and real
-external actions are disabled.
+The `exact_gold` sensitivity condition exposes only a derived authorization
+object to the policy projection. Only isolated simulated effects are scored;
+provider-managed tools and real external actions are disabled.
 
 **Figure 2. Security–utility trade-off by authorization condition.** Each
 DeepSeek V4 Pro point reports benign-tool completion on the horizontal axis and

@@ -3634,3 +3634,10 @@ The older provider-gate text is superseded by this checkpoint.
   normalization, including content-free pause events. The real precheck is now
   6 terminal, 109 nonterminal, 335 unstarted, with cross-provider inference
   false. Runner/analysis tests pass 33/33; rebuilt-paper checks pass 20/20.
+
+- Abstract, Highlight 1, Results and Figure 1 now distinguish raw evaluator/
+  scoring fields from the derived authorization object intentionally exposed by
+  `exact_gold`. Figure 1 shows the derived-only path and was visually inspected.
+  SVG output is deterministic and omits generation dates, preventing unrelated
+  figure churn. Eleven focused figure/manuscript/DOCX checks and Ruff pass;
+  abstract/highlight limits remain satisfied.

@@ -40,7 +40,12 @@ def _authorization_fixture() -> dict:
             "records": metrics[key]["records"],
             "ask_count": 3 + index,
             "deny_count": 4 + index,
+            "ask_record_count": 3 + index,
+            "deny_record_count": 4 + index,
+            "ask_record_rate": (3 + index) / metrics[key]["records"],
+            "deny_record_rate": (4 + index) / metrics[key]["records"],
             "failure_count": index,
+            "failure_rate": index / metrics[key]["records"],
             "latency_p50_ms": 1000 + index * 10,
             "latency_p95_ms": 2000 + index * 100,
             "tokens": 1000,
@@ -107,7 +112,22 @@ def test_builds_five_png_and_svg_figures(tmp_path: Path) -> None:
     )
 
     assert len(result["chart_contracts"]) == 5
+    assert "derived authorization" in result["chart_contracts"][0]["takeaway"]
     assert len(result["outputs"]) == 5
     paths = [Path(path) for values in result["outputs"].values() for path in values]
     assert len(paths) == 10
     assert all(path.exists() and path.stat().st_size > 1_000 for path in paths)
+
+    second_dir = tmp_path / "figures-second"
+    build_figures(
+        authorization_analysis=authorization,
+        existing_analysis=existing,
+        output_dir=second_dir,
+    )
+    for path in paths:
+        if path.suffix == ".svg":
+            second = second_dir / path.name
+            svg = path.read_text(encoding="utf-8")
+            assert "<dc:date>" not in svg
+            assert all(line == line.rstrip() for line in svg.splitlines())
+            assert path.read_bytes() == second.read_bytes()

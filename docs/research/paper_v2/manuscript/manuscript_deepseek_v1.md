@@ -2,11 +2,11 @@
 
 ## Abstract
 
-Tool-using large language model agents can turn prompt injection into external
-actions, but measured security depends on both the runtime mechanism and its
-authorization information. We use an online-state projection excluding
-evaluator and gold fields, paired policy-only and provenance-aware enforcement,
-and joint security, utility, burden, failure, latency, and cost measurements.
+Tool-using LLM agents can turn prompt injection into external actions, but
+measured security depends on runtime authorization. We exclude raw evaluator
+and scoring fields from online state, vary authorization—including an
+explicitly gold-derived sensitivity condition—and jointly measure unsafe
+effects, task completion, burden, failure, latency, and cost.
 
 We reanalyze 7,353 DeepSeek records and 40 defense-aware adaptive
 tasks. In a 5,082-record V4 Pro Public matrix, M3-full produced 38/600 unsafe
@@ -727,8 +727,9 @@ the broad, underspecified, and conflicting regimes under M3-full. Recovery was
 limited to 33 work items for which no provider response had been obtained; all
 867 response-bearing work items were left untouched. The final ITT population
 contains 768 completed records, 54 parse failures, 30 maximum-step terminals,
-15 provider failures, and 33 repeated pre-response failures. No evaluator or
-gold field entered the online projection, and provider tools and real external
+15 provider failures, and 33 repeated pre-response failures. No raw evaluator,
+label, or gold-answer field entered the online projection; `exact_gold`
+exposed only its derived authorization object. Provider tools and real external
 effects remained disabled.
 
 #### 4.7.1 Joint security and utility endpoints
@@ -1157,10 +1158,11 @@ Cumulative tasks with at least one unsafe effect through budgets 50 and 200. The
 
 **Figure 1. Online authorization projection and offline evaluation boundary.**
 Trusted task context, the selected policy projection, provenance events, and
-the proposed action may enter the runtime Guard. Gold answers, evaluator
+the proposed action may enter the runtime Guard. Raw gold answers, evaluator
 labels, reference trajectories, and effect-scoring metadata remain offline.
-Only isolated simulated effects are scored; provider-managed tools and real
-external actions are disabled.
+The `exact_gold` sensitivity condition exposes only a derived authorization
+object to the policy projection. Only isolated simulated effects are scored;
+provider-managed tools and real external actions are disabled.
 
 **Figure 2. Security–utility trade-off by authorization condition.** Each
 DeepSeek V4 Pro point reports benign-tool completion on the horizontal axis and

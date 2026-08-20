@@ -2,11 +2,11 @@
 
 Status: `deepseek_results_filled_gemini_pending`
 
-Tool-using large language model agents can turn prompt injection into external
-actions, but measured security depends on both the runtime mechanism and its
-authorization information. We use an online-state projection excluding
-evaluator and gold fields, paired policy-only and provenance-aware enforcement,
-and joint security, utility, burden, failure, latency, and cost measurements.
+Tool-using LLM agents can turn prompt injection into external actions, but
+measured security depends on runtime authorization. We exclude raw evaluator
+and scoring fields from online state, vary authorization—including an
+explicitly gold-derived sensitivity condition—and jointly measure unsafe
+effects, task completion, burden, failure, latency, and cost.
 
 We reanalyze 7,353 DeepSeek records and 40 defense-aware adaptive
 tasks. In a 5,082-record V4 Pro Public matrix, M3-full produced 38/600 unsafe

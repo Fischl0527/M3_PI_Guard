@@ -2962,3 +2962,10 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   pause-event ledger. Actual in-memory accounting is 6 terminal / 109
   nonterminal / 335 unstarted; cross-provider eligibility remains false.
   Focused runner/analysis checks pass 33/33 and post-build checks pass 20/20.
+
+- Corrected the paper's most important online-state wording: raw evaluator,
+  label and gold-answer fields remain offline, while `exact_gold` deliberately
+  exposes only a derived authorization object. The revised Figure 1 depicts this
+  dashed derivation path and passes visual inspection. All SVGs now omit dates
+  and use deterministic element IDs. Focused checks pass 11/11 plus Ruff;
+  abstract and five highlight length limits pass.

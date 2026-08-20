@@ -45,7 +45,10 @@ CHART_CONTRACTS: tuple[dict[str, str], ...] = (
     {
         "id": "figure_1_online_field_isolation",
         "question": "Which fields are visible online and which remain offline?",
-        "takeaway": "Guard inputs exclude evaluator and gold labels by construction.",
+        "takeaway": (
+            "Raw evaluator/scoring fields stay offline; exact_gold exposes only "
+            "derived authorization."
+        ),
         "family": "flow schematic",
     },
     {
@@ -92,6 +95,7 @@ def _style() -> None:
             "ytick.color": MUTED,
             "font.family": "DejaVu Sans",
             "font.size": 10,
+            "svg.hashsalt": "m3-paper-v2-lean-figures-v1",
             "axes.titlesize": 13,
             "axes.titleweight": "bold",
             "axes.grid": True,
@@ -109,7 +113,15 @@ def _save(fig: plt.Figure, output_dir: Path, stem: str) -> list[str]:
     paths: list[str] = []
     for suffix in ("png", "svg"):
         path = output_dir / f"{stem}.{suffix}"
-        fig.savefig(path, dpi=220 if suffix == "png" else None)
+        fig.savefig(
+            path,
+            dpi=220 if suffix == "png" else None,
+            metadata={"Date": None} if suffix == "svg" else None,
+        )
+        if suffix == "svg":
+            svg = path.read_text(encoding="utf-8")
+            normalized = "\n".join(line.rstrip() for line in svg.splitlines()) + "\n"
+            path.write_text(normalized, encoding="utf-8", newline="\n")
         paths.append(str(path))
     plt.close(fig)
     return paths
@@ -155,7 +167,7 @@ def figure_field_isolation(output_dir: Path) -> list[str]:
     ax.text(
         0.5,
         0.93,
-        "Only task context, policy projection, provenance, and action proposal enter the Guard",
+        "Raw scoring fields stay offline; exact_gold exposes only a derived authorization object",
         ha="center",
         color=MUTED,
         fontsize=9.5,
@@ -169,9 +181,32 @@ def figure_field_isolation(output_dir: Path) -> list[str]:
     _box(ax, (0.29, 0.15), 0.21, 0.20, "Gold answer / labels\nEvaluator metadata", edge=ORANGE, fill="#FFF4E6")
     _box(ax, (0.63, 0.15), 0.25, 0.20, "Offline scoring only\nunsafe effect + completion", edge=ORANGE, fill="#FFF4E6")
     ax.annotate("", xy=(0.63, 0.25), xytext=(0.50, 0.25), arrowprops={"arrowstyle": "->", "color": ORANGE, "lw": 1.3})
+    ax.annotate(
+        "",
+        xy=(0.395, 0.56),
+        xytext=(0.395, 0.35),
+        arrowprops={"arrowstyle": "->", "color": ORANGE, "lw": 1.1, "ls": "--"},
+    )
+    ax.text(
+        0.415,
+        0.455,
+        "derived policy\nexact_gold only",
+        ha="left",
+        va="center",
+        color=ORANGE,
+        fontsize=8,
+    )
     ax.plot([0.05, 0.95], [0.46, 0.46], color=NEUTRAL, lw=1.1, ls="--")
     ax.text(0.95, 0.475, "online / offline boundary", ha="right", va="bottom", color=MUTED, fontsize=8.5)
-    ax.annotate("not visible online", xy=(0.61, 0.48), xytext=(0.45, 0.38), ha="center", color=ORANGE, fontsize=8.5, arrowprops={"arrowstyle": "-[", "color": ORANGE})
+    ax.text(
+        0.06,
+        0.43,
+        "raw evaluator/scoring fields do not cross unchanged",
+        ha="left",
+        va="top",
+        color=ORANGE,
+        fontsize=8.5,
+    )
     return _save(fig, output_dir, "figure_1_online_field_isolation")
 
 

@@ -311,3 +311,13 @@ Record completed, blocked, and abandoned tasks here.
   terminal to 6 terminal, 109 nonterminal and 335 unstarted; no partial row
   enters inference. Focused checks pass 33/33 plus Ruff/compile, followed by
   20/20 post-build checks.
+
+# 2026-08-20 — Raw-field and derived-authorization boundary corrected
+
+- Replaced ambiguous statements that could imply gold information never
+  influences `exact_gold`. The manuscript now states the precise contract: raw
+  evaluator/scoring fields remain offline; the sensitivity condition supplies
+  only a derived authorization object.
+- Updated and visually inspected Figure 1. Made all SVG serialization
+  deterministic and removed generation dates so future figure changes remain
+  reviewable. Focused tests pass 11/11 plus Ruff; abstract/highlight limits pass.

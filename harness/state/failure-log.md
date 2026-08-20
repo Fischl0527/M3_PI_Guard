@@ -5298,3 +5298,39 @@ credential, changed a historical ledger, or enabled an external effect.
 - Changed hypothesis: remove only the verified repository-local zero-byte
   orphan lock, then stage the same explicit file list. No index, worktree,
   commit history, experiment output, or provider process is reset.
+- Recurrence: a second zero-byte lock created at 12:25:44 +08:00 blocked the
+  later figure-boundary checkpoint. A fresh process query again found zero Git
+  processes. The same narrow orphan-lock removal is used; no broader Git cleanup
+  or repository reset is authorized.
+
+## 2026-08-20 — Figure test fixture lacked record-incidence fields
+
+- Attempt: run the figure, manuscript and DOCX focused suite after clarifying
+  the raw-gold/derived-authorization boundary in Figure 1.
+- Failure: the production figures generated successfully, but the synthetic
+  figure fixture still supplied only ASK/DENY event totals and omitted the
+  record-incidence/failure-rate fields required by the current burden chart.
+- Changed hypothesis: add the already-defined compact-analysis fields to the
+  synthetic fixture and rerun only the failed focused suite. No production
+  result, experiment row, endpoint, or figure statistic is changed.
+
+## 2026-08-20 — Gold-boundary wording assertion assumed one physical line
+
+- Attempt: add a regression assertion for the sentence explaining that
+  `exact_gold` exposes only a derived authorization object.
+- Failure: the sentence is present but the Markdown source wraps immediately
+  after the inline code token, so a literal single-line substring did not match.
+- Changed hypothesis: assert the same wording with a whitespace-tolerant regular
+  expression and rerun only the failed manuscript test. No manuscript wording,
+  figure, result, or experiment row is changed by this test-only fix.
+
+## 2026-08-20 — Generated SVG path data failed Git whitespace check
+
+- Attempt: stage the visually accepted gold-boundary figure and deterministic
+  SVG outputs.
+- Failure: `git diff --cached --check` found Matplotlib's customary trailing
+  spaces in multiline SVG path data.
+- Changed hypothesis: normalize SVG line endings and strip trailing whitespace
+  inside the figure generator, add the property to its focused test, regenerate
+  the figures once, and restage the exact checkpoint. No visual geometry,
+  statistic, experiment row, or manuscript claim changes.

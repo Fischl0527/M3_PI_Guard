@@ -3035,3 +3035,9 @@ Next gated action:
   attempt-1 provider failures before deciding terminal eligibility. Current
   in-memory counts are 6 terminal, 109 nonterminal, 335 unstarted and 444
   pending; `cross_vendor_claim_eligible=false`. No analysis artifact was written.
+
+- Reader-facing online-state language is now precise: raw evaluator/scoring
+  fields are offline, but `exact_gold` exposes a derived policy object. Figure 1
+  shows this path and was visually checked. SVGs are date-free and deterministic;
+  figure/manuscript/DOCX checks pass 11/11 plus Ruff. Current generated draft is
+  9,999 words, 283 paragraphs, 13 tables and five figures.

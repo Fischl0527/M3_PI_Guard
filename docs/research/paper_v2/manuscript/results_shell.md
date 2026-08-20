@@ -195,8 +195,9 @@ the broad, underspecified, and conflicting regimes under M3-full. Recovery was
 limited to 33 work items for which no provider response had been obtained; all
 867 response-bearing work items were left untouched. The final ITT population
 contains 768 completed records, 54 parse failures, 30 maximum-step terminals,
-15 provider failures, and 33 repeated pre-response failures. No evaluator or
-gold field entered the online projection, and provider tools and real external
+15 provider failures, and 33 repeated pre-response failures. No raw evaluator,
+label, or gold-answer field entered the online projection; `exact_gold`
+exposed only its derived authorization object. Provider tools and real external
 effects remained disabled.
 
 ### Joint security and utility endpoints
