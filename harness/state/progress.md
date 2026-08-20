@@ -2807,8 +2807,8 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
 - Added `scripts/build_lean_paper_manuscript.py` and a focused five-test suite
   to assemble the reviewed section files into one reader-facing English draft.
 - The generated manuscript contains six numbered sections, five figures and an
-  8,198-word main body. The full generated file contains 8,767 words including
-  figure/caption/reference packaging.
+  8,198-word main body. The full generated file contains 9,592 words after
+  adding the six formatted main tables, captions and reference packaging.
 - Removed the remaining conditional Gemini placeholder and publication-facing
   references to internal citation-audit tables, old Harness chains, evidence
   bundles and Git workflow.
@@ -2816,3 +2816,6 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   section order, figure availability and workflow-metadata scans pass.
 - F-PAPER-002 remains `in_progress`: Gemini is incomplete and its partial rows
   remain excluded from inference; no cross-provider claim is made.
+- Main Tables 1–6 now cover design, joint endpoints, paired effects, burden,
+  heterogeneity and adaptive budgets. Historical detail tables are explicitly
+  Supplementary Tables S1–S6, so no table number is duplicated.

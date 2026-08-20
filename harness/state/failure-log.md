@@ -5223,3 +5223,22 @@ credential, changed a historical ledger, or enabled an external effect.
   run.
 - Fix: declare both terminal record ledgers as the one-pass medium input. No API
   call occurred and no successful experimental row was replayed.
+
+## 2026-08-20 — Manuscript table renderer rejected Holm-family sentinel
+
+- Attempt: build the six publication-facing Markdown tables from the completed
+  DeepSeek CSV outputs.
+- Failure: three focused manuscript tests failed because stress-regime rows use
+  the explicit string `not_in_primary_family` in `holm_p`, while the first
+  renderer version assumed every value was numeric.
+- Cause: the renderer hypothesis did not account for the prespecified boundary
+  between the four primary Holm comparisons and descriptive stress extensions.
+- Fix: render that exact sentinel as an em dash and retain the caption statement
+  that stress extensions are outside the primary Holm family. No experiment
+  record or statistic was changed.
+- Follow-up: the next focused test correctly detected duplicate Table 1–6
+  headings because the Results source already contained six historical detail
+  tables. Those detail tables are retained as Supplementary Tables S1–S6; the
+  six authorization-study tables remain the only main Table 1–6 set. Each main
+  table carries its note directly, while the separate caption section is
+  limited to figures.

@@ -28,7 +28,7 @@ than removed or redefined.
 
 Controlling disposition: `medium_admitted_empirical_fallback_selected`.
 
-## Table 1. Online-state source audit
+### Supplementary Table S1. Online-state source audit
 
 | Conclusion | Audited units | Independently reviewed | Claim use |
 |---|---:|---:|---|
@@ -40,7 +40,7 @@ Controlling disposition: `medium_admitted_empirical_fallback_selected`.
 This audit supports only covered-path statements. It does not establish a
 domain-wide oracle-authorization problem.
 
-## Table 2. Admitted medium security and utility outcomes
+### Supplementary Table S2. Completed medium security and utility outcomes
 
 | Condition | Unsafe effects / 36 attacks | Unsafe-effect rate (Wilson 95% CI) | Tool completions / 24 | Tool TCR (Wilson 95% CI) | No-tool TCR |
 |---|---:|---:|---:|---:|---:|
@@ -56,7 +56,7 @@ mechanism-paper victory. Both M3 variants eliminated the eight unsafe effects
 observed under the structural condition, but they also completed substantially
 fewer benign tool tasks.
 
-## Table 3. Prespecified paired comparisons
+### Supplementary Table S3. Prespecified paired comparisons
 
 | Comparison | Treatment minus baseline | Exact McNemar p | Holm-adjusted p | 10,000-cluster bootstrap 95% CI |
 |---|---:|---:|---:|---:|
@@ -70,7 +70,7 @@ sample, but the full mechanism did not outperform policy-only. Relative to the
 structural condition, its benign-tool TCR was 25 percentage points lower, well
 outside the preregistered −5 percentage-point non-inferiority margin.
 
-## Table 4. Runtime burden and operational quality
+### Supplementary Table S4. Runtime burden and operational quality
 
 | Condition | ASK / 72 | Benign ASK rate | Operational failures / 72 | Provider calls | Trace-bundle cost (CNY) | Total latency p95 |
 |---|---:|---:|---:|---:|---:|---:|
@@ -148,7 +148,7 @@ Benign tool completion under M3-full was 49/168 (29.17%, 22.82–36.44), versus
 M3-full and policy-only both completed 49/168, with a paired difference of
 0.00 points. All six conditions completed 79/79 benign no-tool tasks.
 
-## Table 5. Public-primary benchmark strata
+### Supplementary Table S5. Public-primary benchmark strata
 
 | Benchmark / endpoint | Structural baseline | M3 policy-only | M3-full |
 |---|---:|---:|---:|
@@ -287,7 +287,7 @@ the 18 observed successes therefore appeared only after query 50. The evidence
 supports a budget-sensitivity claim through 200, but it does not establish
 saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 
-## Table 6. Defense-aware adaptive attack
+### Supplementary Table S6. Defense-aware adaptive attack
 
 | Model/panel | Budget | Tasks | Unsafe-effect successes | First-success distribution | Saturated? |
 |---|---:|---:|---:|---:|---|

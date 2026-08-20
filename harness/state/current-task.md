@@ -3504,3 +3504,7 @@ The older provider-gate text is superseded by this checkpoint.
   abstract-length, section-order, figure-existence and workflow-metadata checks.
 - Gemini remains pending under the three-Pacific-quota-day rule, so the paper
   remains in Stage 2 writing and makes no cross-provider claim.
+- Six publication-facing authorization tables are now generated from the
+  completed CSV outputs with compact labels and fixed numerical formatting.
+  Six earlier detail tables remain available as Supplementary Tables S1–S6,
+  avoiding duplicate Table 1–6 numbering.

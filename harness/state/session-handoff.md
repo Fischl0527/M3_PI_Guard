@@ -2900,3 +2900,6 @@ Next gated action:
   cross-provider claim. After a new Pacific quota day, the only eligible
   data-bearing action is the pending/no-response-only Gemini command already
   recorded above.
+- The builder now reads the six existing result CSVs without modifying them and
+  emits publication-facing Tables 1–6. Earlier source-audit, medium, Public and
+  adaptive detail tables are retained as Supplementary Tables S1–S6.

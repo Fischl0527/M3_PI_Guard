@@ -555,7 +555,7 @@ security gain over M3 policy-only. These negative gates are retained rather
 than removed or redefined.
 
 
-### Table 1. Online-state source audit
+#### Supplementary Table S1. Online-state source audit
 
 | Conclusion | Audited units | Independently reviewed | Claim use |
 |---|---:|---:|---|
@@ -567,7 +567,7 @@ than removed or redefined.
 This audit supports only covered-path statements. It does not establish a
 domain-wide oracle-authorization problem.
 
-### Table 2. completed medium security and utility outcomes
+#### Supplementary Table S2. Completed medium security and utility outcomes
 
 | Condition | Unsafe effects / 36 attacks | Unsafe-effect rate (Wilson 95% CI) | Tool completions / 24 | Tool TCR (Wilson 95% CI) | No-tool TCR |
 |---|---:|---:|---:|---:|---:|
@@ -583,7 +583,7 @@ mechanism-paper victory. Both M3 variants eliminated the eight unsafe effects
 observed under the structural condition, but they also completed substantially
 fewer benign tool tasks.
 
-### Table 3. Prespecified paired comparisons
+#### Supplementary Table S3. Prespecified paired comparisons
 
 | Comparison | Treatment minus baseline | Exact McNemar p | Holm-adjusted p | 10,000-cluster bootstrap 95% CI |
 |---|---:|---:|---:|---:|
@@ -597,7 +597,7 @@ sample, but the full mechanism did not outperform policy-only. Relative to the
 structural condition, its benign-tool TCR was 25 percentage points lower, well
 outside the preregistered −5 percentage-point non-inferiority margin.
 
-### Table 4. Runtime burden and operational quality
+#### Supplementary Table S4. Runtime burden and operational quality
 
 | Condition | ASK / 72 | Benign ASK rate | Operational failures / 72 | Provider calls | Trace-bundle cost (CNY) | Total latency p95 |
 |---|---:|---:|---:|---:|---:|---:|
@@ -675,7 +675,7 @@ Benign tool completion under M3-full was 49/168 (29.17%, 22.82–36.44), versus
 M3-full and policy-only both completed 49/168, with a paired difference of
 0.00 points. All six conditions completed 79/79 benign no-tool tasks.
 
-### Table 5. Public-primary benchmark strata
+#### Supplementary Table S5. Public-primary benchmark strata
 
 | Benchmark / endpoint | Structural baseline | M3 policy-only | M3-full |
 |---|---:|---:|---:|
@@ -814,7 +814,7 @@ the 18 observed successes therefore appeared only after query 50. The evidence
 supports a budget-sensitivity claim through 200, but it does not establish
 saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 
-### Table 6. Defense-aware adaptive attack
+#### Supplementary Table S6. Defense-aware adaptive attack
 
 | Model/panel | Budget | Tasks | Unsafe-effect successes | First-success distribution | Saturated? |
 |---|---:|---:|---:|---:|---|
@@ -1059,9 +1059,102 @@ completed DeepSeek findings.
 
 ![Figure 5. Adaptive first-success curve through query budget 200.](../lean_empirical/figures_deepseek_v1/figure_5_adaptive_first_success.png)
 
-## Figure and table captions
+## Tables
 
-### Figures
+### Table 1. Experimental design
+
+Providers, benchmarks, conditions, authorization regimes and frozen work-item counts for the lean empirical study. Gemini counts are planned; its incomplete rows are excluded from inference.
+
+| Provider | Benchmark | Condition | Authorization regimes | Planned n |
+|---|---|---|---|---|
+| DeepSeek | AgentDojo | M3-full | auto compiled, broad, conflicting, exact gold, underspecified | 235 |
+| DeepSeek | AgentDojo | Policy-only | auto compiled, exact gold | 160 |
+| DeepSeek | M3-v2 | M3-full | auto compiled, broad, conflicting, exact gold, underspecified | 305 |
+| DeepSeek | M3-v2 | Policy-only | auto compiled, exact gold | 200 |
+| Gemini | AgentDojo | M3-full | auto compiled, exact gold | 80 |
+| Gemini | AgentDojo | Policy-only | auto compiled, exact gold | 80 |
+| Gemini | AgentDojo | Structural baseline | auto compiled | 40 |
+| Gemini | M3-v2 | M3-full | auto compiled, exact gold | 100 |
+| Gemini | M3-v2 | Policy-only | auto compiled, exact gold | 100 |
+| Gemini | M3-v2 | Structural baseline | auto compiled | 50 |
+
+### Table 2. Joint primary endpoints
+
+Unsafe effects among attack tasks and completions among benign tool tasks. Brackets contain Wilson 95% confidence intervals.
+
+| Condition | Authorization | Unsafe effect, n/N (95% CI) | Benign-tool TCR, n/N (95% CI) |
+|---|---|---|---|
+| M3-full | auto compiled | 0/100 (0.0%) [0.0%, 3.7%] | 16/60 (26.7%) [17.1%, 39.0%] |
+| M3-full | broad | 0/30 (0.0%) [0.0%, 11.4%] | 2/20 (10.0%) [2.8%, 30.1%] |
+| M3-full | conflicting | 0/30 (0.0%) [0.0%, 11.4%] | 1/20 (5.0%) [0.9%, 23.6%] |
+| M3-full | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 7/60 (11.7%) [5.8%, 22.2%] |
+| M3-full | underspecified | 0/30 (0.0%) [0.0%, 11.4%] | 2/20 (10.0%) [2.8%, 30.1%] |
+| Policy-only | auto compiled | 1/100 (1.0%) [0.2%, 5.4%] | 22/60 (36.7%) [25.6%, 49.3%] |
+| Policy-only | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 9/60 (15.0%) [8.1%, 26.1%] |
+
+### Table 3. Paired authorization and mechanism effects
+
+Absolute percentage-point differences use the second condition minus the first. Stress-regime extensions are outside the primary Holm family.
+
+| Endpoint | Comparison | Paired n | Difference (pp) | Bootstrap 95% CI (pp) | Discordant first/second | McNemar p | Holm p |
+|---|---|---|---|---|---|---|---|
+| Benign-tool TCR | Policy-only auto to M3-full auto | 60 | -10.0 | [-18.3, -3.3] | 6/0 | 0.031 | 0.094 |
+| Benign-tool TCR | Policy-only exact to M3-full exact | 60 | -3.3 | [-8.3, +0.0] | 2/0 | 0.500 | 0.500 |
+| Benign-tool TCR | M3-full auto to exact | 60 | -15.0 | [-28.3, -1.7] | 13/4 | 0.049 | 0.098 |
+| Benign-tool TCR | Policy-only auto to exact | 60 | -21.7 | [-36.7, -5.0] | 19/6 | 0.015 | 0.059 |
+| Unsafe effect | Policy-only auto to M3-full auto | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
+| Unsafe effect | Policy-only exact to M3-full exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
+| Unsafe effect | M3-full auto to exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
+| Unsafe effect | Policy-only auto to exact | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
+| Benign-tool TCR | M3-full auto to broad | 20 | -25.0 | [-45.0, -5.0] | 5/0 | 0.062 | — |
+| Unsafe effect | M3-full auto to broad | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+| Benign-tool TCR | M3-full auto to conflicting | 20 | -30.0 | [-50.0, -10.0] | 6/0 | 0.031 | — |
+| Unsafe effect | M3-full auto to conflicting | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+| Benign-tool TCR | M3-full auto to underspecified | 20 | -25.0 | [-50.0, +0.0] | 6/1 | 0.125 | — |
+| Unsafe effect | M3-full auto to underspecified | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+
+### Table 4. Runtime burden
+
+ASK and DENY cells report event totals, record incidence and the share of records affected. Failures remain in the ITT denominator.
+
+| Condition | Authorization | ASK events/records | DENY events/records | Failures | Latency p50/p95 (s) | Tokens | Cost |
+|---|---|---|---|---|---|---|---|
+| M3-full | auto compiled | 58 / 58 (32.2%) | 20 / 20 (11.1%) | 17 (9.4%) | 2.90 / 9.18 | 279,687 | CNY 0.2522 |
+| M3-full | broad | 23 / 23 (38.3%) | 7 / 7 (11.7%) | 6 (10.0%) | 2.84 / 9.38 | 82,975 | CNY 0.0769 |
+| M3-full | conflicting | 26 / 26 (43.3%) | 6 / 6 (10.0%) | 5 (8.3%) | 2.79 / 7.89 | 67,404 | CNY 0.0412 |
+| M3-full | exact gold | 0 / 0 (0.0%) | 187 / 81 (45.0%) | 44 (24.4%) | 3.94 / 19.62 | 454,627 | CNY 0.2995 |
+| M3-full | underspecified | 30 / 30 (50.0%) | 4 / 4 (6.7%) | 4 (6.7%) | 2.78 / 10.65 | 82,731 | CNY 0.0875 |
+| Policy-only | auto compiled | 62 / 62 (34.4%) | 13 / 13 (7.2%) | 13 (7.2%) | 3.16 / 10.63 | 307,544 | CNY 0.2940 |
+| Policy-only | exact gold | 0 / 0 (0.0%) | 227 / 88 (48.9%) | 43 (23.9%) | 5.06 / 19.42 | 473,478 | CNY 0.3374 |
+
+### Table 5. Prespecified heterogeneity
+
+Endpoint counts by benchmark and attack family. These prespecified strata are descriptive rather than additional confirmatory families.
+
+| Benchmark | Attack family/stratum | Records | Attack records | Unsafe effects | Operational failures |
+|---|---|---|---|---|---|
+| AgentDojo | pooled/no family label | 395 | 245 | 1 | 93 |
+| M3-v2 | benign clean | 260 | 0 | 0 | 24 |
+| M3-v2 | cross tool attack chain | 20 | 20 | 0 | 0 |
+| M3-v2 | direct jailbreak | 16 | 16 | 0 | 0 |
+| M3-v2 | environment context pollution | 29 | 29 | 0 | 0 |
+| M3-v2 | json rpc | 31 | 31 | 0 | 0 |
+| M3-v2 | memory poisoning | 19 | 19 | 0 | 0 |
+| M3-v2 | multilingual t2l | 28 | 28 | 0 | 0 |
+| M3-v2 | obfuscation evasion | 42 | 42 | 0 | 0 |
+| M3-v2 | rag indirect | 19 | 19 | 0 | 4 |
+| M3-v2 | tool output injection | 41 | 41 | 0 | 11 |
+
+### Table 6. Adaptive evidence at budgets 50 and 200
+
+Cumulative tasks with at least one unsafe effect through budgets 50 and 200. These two points do not establish attack saturation.
+
+| Model | Budget | Successes | Rate | Wilson 95% CI | Claim boundary |
+|---|---|---|---|---|---|
+| deepseek-v4-pro | 50 | 4/40 | 10.0% | [4.0%, 23.1%] | Budgets 50 and 200 only; no saturation claim |
+| deepseek-v4-pro | 200 | 18/40 | 45.0% | [30.7%, 60.2%] | Budgets 50 and 200 only; no saturation claim |
+
+## Figure captions
 
 **Figure 1. Online authorization projection and offline evaluation boundary.**
 Trusted task context, the selected policy projection, provenance events, and
@@ -1097,32 +1190,6 @@ set; latency is condition-level p95 wall time.
 successful task. Four tasks had succeeded by query 50 and 18 by query 200.
 The curve is descriptive only through 200 and must not be interpreted as an
 estimate of attack saturation.
-
-### Tables
-
-**Table 1. Experimental design.** Providers, models, benchmarks, case types,
-authorization regimes, Guard conditions, and frozen work-item counts for the
-lean empirical study.
-
-**Table 2. Joint primary endpoints.** Unsafe effects among attack tasks and
-task completions among benign tool tasks, with raw numerators, denominators,
-rates, and Wilson 95% confidence intervals.
-
-**Table 3. Paired authorization and mechanism effects.** Absolute differences,
-task-cluster bootstrap intervals, discordant counts, exact McNemar p-values,
-and Holm-adjusted p-values for the prespecified primary families. Stress-regime
-extensions are reported outside the primary Holm family.
-
-**Table 4. Runtime burden.** ASK/DENY event totals and record incidence,
-operational failures, p50/p95 latency, tokens, and provider cost by condition.
-
-**Table 5. Prespecified heterogeneity.** Endpoint counts by benchmark and
-attack family. These strata are descriptive and are not additional
-confirmatory testing families.
-
-**Table 6. Adaptive evidence at budgets 50 and 200.** Cumulative tasks with at
-least one unsafe effect, Wilson intervals, and the explicit no-saturation claim
-boundary.
 
 ## References
 

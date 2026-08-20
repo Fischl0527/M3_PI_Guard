@@ -19,7 +19,8 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
         "## 5. Discussion",
         "## 6. Conclusion",
         "## Figures",
-        "## Figure and table captions",
+        "## Tables",
+        "## Figure captions",
         "## References",
     ]
     positions = [manuscript.index(heading) for heading in expected]
@@ -34,6 +35,11 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "Git branch" not in manuscript
     assert "Critical citation-context audit" not in manuscript
     assert manuscript.count("![Figure ") == 5
+    assert len(re.findall(r"^### Table [1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
+    assert len(re.findall(r"^#### Supplementary Table S[1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
+    assert "### Figures" not in manuscript
+    assert "22/60 (36.7%)" in manuscript
+    assert "CNY 0.3374" in manuscript
 
 
 def test_abstract_stays_within_jisa_limit() -> None:

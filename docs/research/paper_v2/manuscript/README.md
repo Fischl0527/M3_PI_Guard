@@ -34,7 +34,8 @@ Files:
   assembled from the reviewed sections. Rebuild it with
   `F:\robot\Anaconda3\python.exe -B scripts/build_lean_paper_manuscript.py`;
   the builder enforces section order, the JISA abstract limit, bibliography
-  coverage, figure availability, and removal of workflow-only metadata.
+  coverage, figure/table availability, main-versus-supplementary numbering, and
+  removal of workflow-only metadata.
 - `introduction_draft.md`: source-status-aware motivation, RQs, bounded
   contributions, admitted medium route decision and exploratory adaptive
   boundary.
