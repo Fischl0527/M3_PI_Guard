@@ -1,5 +1,17 @@
 # 会话移交
 
+## 2026-08-20 — JISA cover-letter checkpoint
+
+- Provisional cover letter:
+  `docs/research/paper_v2/manuscript/cover_letter_draft.md`.
+- Its 293-word body uses only completed DeepSeek and Adaptive 50/200 evidence,
+  contains no funding/declaration/reviewer-suggestion text, and makes no
+  cross-provider or SOTA claim.
+- Before submission, add corresponding-author details and update the letter
+  only if Gemini's stopping rule supplies a defensible result. The next
+  data-bearing action remains the pending/no-response-only Gemini run after
+  Pacific midnight.
+
 ## 2026-08-20 — Submission-statements checkpoint
 
 - The working Markdown and DOCX now include a `Submission statements` block

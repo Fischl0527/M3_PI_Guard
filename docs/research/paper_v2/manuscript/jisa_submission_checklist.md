@@ -86,8 +86,10 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
   Human authors retain full responsibility for literature verification,
   analysis, interpretation and manuscript content; all authors must confirm
   the wording before submission.
-- [ ] Prepare a cover letter focused on the security problem, verified
-  contribution, benchmark breadth, and reproducibility package.
+- [x] Prepare a provisional cover letter focused on the security problem,
+  verified contribution, benchmark breadth and practical relevance. Add the
+  corresponding-author details and update only result-dependent wording before
+  submission.
 - [ ] Run the final claim–evidence, citation/DOI, figure/table, data-leakage and
   anonymization audits.
 

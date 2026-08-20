@@ -61,6 +61,10 @@ Files:
   the working manuscript. It records the known data/code, AI-use and safety
   facts while leaving competing interests, funding, institutional review and
   CRediT as explicit author-confirmation gates.
+- `cover_letter_draft.md`: a concise, results-bounded JISA cover letter draft.
+  It follows Elsevier's current general cover-letter guidance, excludes
+  funding/declarations/reviewer suggestions, and remains contingent only on
+  final author details and Gemini's prespecified stopping rule.
 - `abstract_shell.md`: provisional DeepSeek-results abstract; the final
   cross-provider sentence remains contingent on Gemini's stopping rule.
 - `highlights_v1.md`: five JISA-length highlights summarizing the current

@@ -1,5 +1,17 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 7：JISA cover letter draft
+
+- 在等待 Gemini 新配额日时新增 293-word JISA cover letter 草稿，只使用已完成的
+  DeepSeek Pro/Flash、900-record authorization 和 Adaptive 50/200 结果。
+- 信件明确把贡献限定为评估方法与安全—效用实证，不宣称 first/only/SOTA，也不
+  写入未完成的 Gemini 跨厂商结论。
+- 按 Elsevier 2026-05-18 官方通用指导，正文保持少于一页，说明研究目标、主要
+  发现、JISA scope fit 与实践意义；funding、author declarations 和 reviewer
+  suggestions 均未写入信件正文。
+- 作者姓名、通信信息、投稿日期及 Gemini 结果依赖措辞仍在提交前更新清单中。
+  F-PAPER-002 保持 `in_progress`。
+
 ### 2026-08-20 精简实证里程碑 6：JISA submission statements
 
 - 在 Gemini 新 Pacific 配额日之前，没有提前调用 API。当前冻结 Gemini 计划为

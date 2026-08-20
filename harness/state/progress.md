@@ -1,5 +1,17 @@
 # 进展记录
 
+## 2026-08-20 — Provisional JISA cover letter drafted
+
+- Added a 293-word cover letter bounded to completed DeepSeek and Adaptive
+  50/200 evidence. It states the empirical-method contribution, unfavorable
+  full-versus-policy result, authorization-regime utility cost and JISA scope
+  fit without a cross-provider or leading-defense claim.
+- The letter follows Elsevier's general cover-letter guidance checked on
+  2026-08-20: concise, under one page, focused on aim/findings/scope/impact, and
+  free of funding, author declarations and reviewer suggestions.
+- Corresponding-author details and any Gemini-dependent wording remain final
+  author/submission-time tasks. No API call or experiment replay occurred.
+
 ## 2026-08-20 — JISA submission statements added
 
 - Added a reader-facing submission-statements source and included it before the
