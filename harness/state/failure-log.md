@@ -1,5 +1,15 @@
 # Failure Log
 
+## 2026-08-20 — Word working-draft render remains unavailable
+
+- Attempt: render the rebuilt JISA Word working draft with the bundled
+  `render_docx.py` after adding submission statements.
+- Failure: the renderer again exited with `FileNotFoundError` because no
+  LibreOffice executable is installed on this host.
+- Decision: do not repeat the same render attempt. Structural generation,
+  focused tests and the accessibility audit pass; visual pagination remains an
+  explicit limitation until Word, WPS or LibreOffice is available.
+
 ## 2026-08-20 — Active Gemini continuation did not stop on runtime-returned 429
 
 - Observation: the Gemini continuation accumulated 70 call-ledger paused events

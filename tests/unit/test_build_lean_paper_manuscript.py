@@ -21,6 +21,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
         "## Figures",
         "## Tables",
         "## Figure captions",
+        "## Submission statements",
         "## References",
     ]
     positions = [manuscript.index(heading) for heading in expected]
@@ -38,6 +39,15 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "mechanism_paper_candidate" not in manuscript
     assert "exact_gold_*" not in manuscript
     assert "shard evidence reviews" not in manuscript
+    assert "## Submission statements" in manuscript
+    assert "### Data and code availability" in manuscript
+    assert (
+        "### Declaration of generative AI and AI-assisted technologies in the writing process"
+        in manuscript
+    )
+    assert manuscript.index("## Submission statements") < manuscript.index(
+        "## References"
+    )
     assert manuscript.count("![Figure ") == 5
     assert len(re.findall(r"^### Table [1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
     assert len(re.findall(r"^#### Supplementary Table S[1-6]\. ", manuscript, flags=re.MULTILINE)) == 6

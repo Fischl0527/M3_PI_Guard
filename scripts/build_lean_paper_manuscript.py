@@ -386,6 +386,11 @@ def _table_block() -> str:
     return "\n\n".join(parts)
 
 
+def _submission_statements() -> str:
+    body = _drop_wrapper(_read("submission_statements_draft.md"))
+    return "## Submission statements\n\n" + body
+
+
 def build_manuscript() -> str:
     abstract, keywords = _abstract_and_keywords()
     if _word_count(abstract) > 250:
@@ -416,6 +421,7 @@ def build_manuscript() -> str:
             _figure_block(),
             _table_block(),
             "## Figure captions\n\n" + caption_body,
+            _submission_statements(),
             "## References\n\n"
             "References are supplied in `references_v1.bib` and rendered with "
             "the manuscript citation processor.",
@@ -439,6 +445,7 @@ def build_manuscript() -> str:
         "mechanism_paper_candidate",
         "exact_gold_*",
         "shard evidence reviews",
+        "Author action:",
     )
     present = [token for token in forbidden if token in manuscript]
     if present:

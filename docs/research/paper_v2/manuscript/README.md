@@ -57,6 +57,10 @@ Files:
   endpoint semantics and claim boundaries.
 - `declarations_draft.md`: provisional competing-interest, funding,
   availability, AI-use, safety and CRediT language requiring author approval.
+- `submission_statements_draft.md`: reader-facing statement block included in
+  the working manuscript. It records the known data/code, AI-use and safety
+  facts while leaving competing interests, funding, institutional review and
+  CRediT as explicit author-confirmation gates.
 - `abstract_shell.md`: provisional DeepSeek-results abstract; the final
   cross-provider sentence remains contingent on Gemini's stopping rule.
 - `highlights_v1.md`: five JISA-length highlights summarizing the current

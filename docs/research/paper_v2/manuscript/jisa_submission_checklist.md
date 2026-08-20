@@ -79,10 +79,13 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
   no-specific-funding statement.
 - [ ] Finalize author order and obtain every author’s approval before
   submission.
-- [ ] Add a research-data/code-availability statement and repository links.
-- [ ] Add the required generative-AI-use declaration. Human authors retain full
-  responsibility for literature verification, analysis, interpretation and
-  manuscript content.
+- [x] Add a provisional research-data/code-availability statement and repository
+  link; replace the private-review wording with the archival DOI or immutable
+  public release identifier before publication.
+- [x] Add the required generative-AI-use declaration before the references.
+  Human authors retain full responsibility for literature verification,
+  analysis, interpretation and manuscript content; all authors must confirm
+  the wording before submission.
 - [ ] Prepare a cover letter focused on the security problem, verified
   contribution, benchmark breadth, and reproducibility package.
 - [ ] Run the final claim–evidence, citation/DOI, figure/table, data-leakage and

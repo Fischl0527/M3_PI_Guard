@@ -1,5 +1,19 @@
 # 进展记录
 
+## 2026-08-20 — JISA submission statements added
+
+- Added a reader-facing submission-statements source and included it before the
+  bibliography in both the Markdown and editable Word working drafts.
+- Known data/code, AI-use and safety facts are stated directly. Competing
+  interests, funding, institutional review and CRediT remain explicit
+  author-confirmation gates and were not inferred.
+- Focused verification passes 9/9 plus Ruff and `py_compile`; the rebuilt DOCX
+  contains 282 paragraphs, 13 tables, five figures and 21 rendered references.
+  Accessibility remains 0 high/0 medium/21 low (raw DOI/URL display text only).
+- Standard page rendering remains unavailable because LibreOffice is absent;
+  no repeated render attempt or Full Harness was run. Gemini remains pending
+  until the next Pacific quota day.
+
 ## 2026-08-20 精简实证里程碑 5：DeepSeek 失败行定向恢复完成
 
 - 显式 `--retry-failed` 只选中 33 个无官方响应的 work key；867 个已有

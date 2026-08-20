@@ -1,5 +1,20 @@
 # 会话移交
 
+## 2026-08-20 — Submission-statements checkpoint
+
+- The working Markdown and DOCX now include a `Submission statements` block
+  before References. Source: `docs/research/paper_v2/manuscript/submission_statements_draft.md`.
+- Rebuilds and focused verification pass: manuscript/DOCX pytest 9/9, Ruff,
+  `py_compile`, DOCX generation and accessibility audit. The DOCX now has 282
+  paragraphs, 13 tables, five figures and 21 rendered references.
+- LibreOffice remains unavailable, so visual page rendering is still pending;
+  do not call the Word file visually verified or submission-ready.
+- Gemini remains the next data-bearing step. At this checkpoint the plan has
+  5 response-bearing keys, 109 response-less recovery-eligible keys and 335
+  untouched remaining-stage keys. After the next Pacific midnight, run only
+  the recorded `--retry-failed` command; response-bearing keys remain skipped
+  and the first new 429 stops the run.
+
 ## 最后更新
 
 2026-08-20 +08:00

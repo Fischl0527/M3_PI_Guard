@@ -1,5 +1,20 @@
 # 当前任务
 
+### 2026-08-20 精简实证里程碑 6：JISA submission statements
+
+- 在 Gemini 新 Pacific 配额日之前，没有提前调用 API。当前冻结 Gemini 计划为
+  450 项；5 项已有官方响应并永久跳过，下一次 pending-only 命令最多处理 109 个
+  无响应可恢复项和 335 个未触碰项。
+- 新增 reader-facing submission statements，工作稿现在在 References 之前包含
+  competing interests、funding、data/code availability、generative-AI use、
+  ethics/safety 和 author contributions 的明确位置。已知事实直接陈述，作者专属
+  内容保持为提交前确认事项，不推断作者、资助或利益冲突信息。
+- Markdown 和 Word 工作稿已重建。定向 pytest 9/9、Ruff、`py_compile`、DOCX
+  结构生成和可访问性检查通过；可访问性仍为 0 high / 0 medium / 21 low，低级项
+  全部是参考文献 DOI/URL 的显示文本。
+- 标准 DOCX renderer 仍因本机没有 LibreOffice 退出；这是已知环境限制，未继续
+  重试，也不宣称完成视觉分页验收。F-PAPER-002 保持 `in_progress`。
+
 ## 任务编号
 
 M3-PAPER-002
