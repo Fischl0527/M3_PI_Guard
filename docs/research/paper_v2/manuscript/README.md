@@ -39,8 +39,10 @@ Files:
   the DeepSeek authorization experiment, and adaptive budgets 50/200.
 - `discussion_draft.md`: active interpretation of the DeepSeek authorization
   findings, with the cross-provider section still pending Gemini.
-- `abstract_shell.md`: intentionally incomplete; no new numeric claim is added
-  before the terminal analysis.
+- `abstract_shell.md`: provisional DeepSeek-results abstract; the final
+  cross-provider sentence remains contingent on Gemini's stopping rule.
+- `highlights_v1.md`: five JISA-length highlights summarizing the current
+  method and DeepSeek results.
 - `figure_table_plan.md`: lean data-source map for five main figures and six
   tables; no hash bundle or recursive evidence replay is required.
 - `pre_result_integrity_audit_v1.md`: scoped data/method/failure-mode audit of

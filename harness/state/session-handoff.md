@@ -2873,3 +2873,9 @@ Next gated action:
   untouched work and stops on the first new 429.
 - If Gemini remains unavailable across three quota days, retain partial rows as
   diagnostic and finish the paper without a cross-provider claim.
+
+- The provisional abstract is now 246 words with five keywords. Five highlights
+  are stored in `docs/research/paper_v2/manuscript/highlights_v1.md`, each below
+  85 characters. These match the official JISA guide checked on 2026-08-20.
+- Before submission, replace only the Gemini boundary sentence if its stopping
+  rule permits; do not weaken or remove the unfavorable DeepSeek results.

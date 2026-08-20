@@ -2780,3 +2780,13 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   successful-row replay occurred.
 - Next: commit and push this exact analysis milestone, then resume only pending
   and response-less Gemini rows after the next Pacific quota reset.
+
+# 2026-08-20 — Provisional abstract and JISA format alignment
+
+- Filled the abstract with the completed DeepSeek Public, authorization and
+  adaptive findings while explicitly withholding a cross-provider claim.
+- Reduced the abstract to 246 words, added five keywords and created five
+  highlights, each 70–77 characters.
+- Updated Introduction, Methods, figure/table status and the submission
+  checklist. The official JISA guide was used for current format limits;
+  institutional JCR verification and Gemini's stopping rule remain pending.

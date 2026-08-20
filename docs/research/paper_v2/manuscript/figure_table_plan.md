@@ -1,6 +1,6 @@
 # Figure and table plan — lean authorization study
 
-Status: `lean_study_execution_in_progress`
+Status: `deepseek_figures_and_tables_complete_gemini_pending`
 
 The paper uses the frozen 180/90/60 nested samples, the compact authorization
 analysis, and the already completed Pro/Flash/medium/adaptive analyses. No
@@ -14,9 +14,9 @@ failed-row rule.
 | ID | Analytical question | Geometry | Authoritative data | Status |
 |---|---|---|---|---|
 | Figure 1 | Which fields are visible to the online Guard? | Online/offline flow schematic | Runtime projection contract | Generator and QA preview ready |
-| Figure 2 | How do authorization regimes trade attack safety for benign utility? | Labeled safety–utility scatter | `authorization_results_v1.json` condition summaries | Generator ready; awaits terminal experiment |
-| Figure 3 | How large are the paired authorization and mechanism effects? | Forest plot of absolute pp difference with task-cluster bootstrap CI | Paired comparison objects | Generator ready; awaits terminal experiment |
-| Figure 4 | What ASK, DENY, failure and latency burden is incurred? | Four horizontal-bar small multiples | Compact per-condition burden summary | Generator ready; awaits terminal experiment |
+| Figure 2 | How do authorization regimes trade attack safety for benign utility? | Labeled safety–utility scatter | `authorization_results_deepseek_v1.json` condition summaries | DeepSeek generated and visually checked; Gemini pending |
+| Figure 3 | How large are the paired authorization and mechanism effects? | Forest plot of absolute pp difference with task-cluster bootstrap CI | Paired comparison objects | DeepSeek generated and visually checked; Gemini pending |
+| Figure 4 | What ASK, DENY, failure and latency burden is incurred? | Four horizontal-bar small multiples | Compact per-condition burden summary | DeepSeek generated and visually checked; ASK/DENY record incidence clarified |
 | Figure 5 | How does first unsafe effect accumulate by query budget? | Cumulative first-success step curve | Existing Pro budget-50/200 analysis | Generator and data ready; no saturation claim |
 
 Each figure is exported once as editable SVG and QA PNG. The generator does
@@ -27,10 +27,10 @@ not create a hash bundle or reopen provider traces.
 | ID | Content | Source | Status |
 |---|---|---|---|
 | Table 1 | Models, datasets, nested samples, conditions and authorization regimes | Frozen lean execution plan | Ready |
-| Table 2 | Unsafe-effect and benign-tool TCR counts with Wilson 95% CI | Condition summaries | Awaits terminal experiment |
-| Table 3 | Paired absolute effects, McNemar, Holm and clustered-bootstrap CI | Paired comparisons | Awaits terminal experiment |
-| Table 4 | ASK, DENY, failures, p50/p95 latency, tokens and API cost | Burden summaries | Awaits terminal experiment |
-| Table 5 | Benchmark and attack-family heterogeneity | Predefined strata | Awaits terminal experiment |
+| Table 2 | Unsafe-effect and benign-tool TCR counts with Wilson 95% CI | Condition summaries | DeepSeek exported; Gemini pending |
+| Table 3 | Paired absolute effects, McNemar, Holm and clustered-bootstrap CI | Paired comparisons | DeepSeek exported; Gemini pending |
+| Table 4 | ASK, DENY, failures, p50/p95 latency, tokens and API cost | Burden summaries | DeepSeek exported; event totals and record incidence both retained |
+| Table 5 | Benchmark and attack-family heterogeneity | Predefined strata | DeepSeek exported; Gemini pending |
 | Table 6 | Adaptive budget-50/200 first-success results | Existing Pro analysis | Ready; explicitly not a saturation table |
 
 The six CSV tables are exported from the frozen plan plus the two compact

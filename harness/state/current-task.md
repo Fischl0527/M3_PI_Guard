@@ -3468,3 +3468,15 @@ The older provider-gate text is superseded by this checkpoint.
 - Active branch is `codex/q2-empirical-study`. The DeepSeek recovery milestone
   is already pushed to `m3-guard`; the analysis/manuscript milestone is the
   next exact-file commit. F-PAPER-002 remains `in_progress`.
+
+### Manuscript-format checkpoint
+
+- Introduction and Methods statuses now match the completed DeepSeek analysis;
+  the figure/table plan marks all DeepSeek artifacts generated and Gemini
+  pending.
+- The provisional abstract contains 246 words, five keywords and no citation.
+  A separate five-item highlights file keeps every bullet below the official
+  JISA 85-character limit.
+- JISA format requirements were checked against the official Guide for Authors
+  on 2026-08-20: abstract at most 250 words, 1–7 English keywords and 3–5
+  recommended highlights. Final venue/JCR and Gemini gates remain open.

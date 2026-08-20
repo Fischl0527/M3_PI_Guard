@@ -243,3 +243,11 @@ Record completed, blocked, and abandoned tasks here.
   preserves negative results and explicitly leaves Gemini pending.
 - Focused verification passed 6/6 with Ruff and `py_compile`; no Full Harness,
   recursive evidence replay or additional provider call was used for analysis.
+
+# 2026-08-20 — M3-PAPER-002 provisional abstract and highlights
+
+- Converted the result-pending abstract into a 246-word DeepSeek-results
+  abstract with five keywords and an explicit no-cross-provider boundary.
+- Added five JISA highlights, each within the official 85-character maximum.
+- Aligned Introduction, Methods, figure/table plan and submission checklist
+  with the completed DeepSeek stage and pending Gemini stopping rule.

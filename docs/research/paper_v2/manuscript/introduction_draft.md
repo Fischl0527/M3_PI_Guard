@@ -1,6 +1,6 @@
 # Introduction — empirical authorization study draft
 
-Status: `lean_authorization_study_execution_in_progress`
+Status: `deepseek_authorization_results_complete_gemini_pending`
 
 ## Motivation
 
@@ -110,9 +110,13 @@ budget sensitivity but do not establish saturation. The lean paper therefore
 reports a first-success curve only through query 200 and makes no budget-500 or
 2,000 claim.
 
-The new authorization-regime experiment is prospectively frozen and remains
-in execution. No direction or statistical-significance requirement controls
-whether its results will be reported.
+The prospectively frozen authorization-regime experiment is now complete for
+DeepSeek. Unsafe effects remained at or near zero across all four main cells,
+but exact authorization reduced benign-tool completion, replaced ASK with much
+more frequent DENY, and increased failure and latency. M3-full showed no stable
+incremental security or utility advantage over policy-only. These unfavorable
+results are retained; Gemini remains pending and therefore supports no current
+cross-provider claim.
 
 ## Contributions
 

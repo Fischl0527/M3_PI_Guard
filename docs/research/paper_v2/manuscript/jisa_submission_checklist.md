@@ -33,6 +33,15 @@ Official sources:
 - Article collections:
   https://www.sciencedirect.com/journal/journal-of-information-security-and-applications/special-issues
 
+Current official format requirements checked on 2026-08-20:
+
+- the abstract must not exceed 250 words;
+- 1–7 English keywords are required; and
+- 3–5 highlights are recommended, each no longer than 85 characters.
+
+The provisional abstract and five-highlight file satisfy these bounds. Their
+scientific wording remains subject to Gemini's prespecified stopping rule.
+
 ## Scientific gates before manuscript completion
 
 - [x] The 480-record medium falsification study is complete and admitted.
@@ -40,13 +49,13 @@ Official sources:
   gate, without removing unfavorable results.
 - [x] Existing Public Pro 5,082, Public Flash 1,791, medium 480 and Adaptive
   budget-50/200 evidence has received one compact reuse analysis.
-- [ ] The frozen 900-row DeepSeek authorization study is terminal, including
+- [x] The frozen 900-row DeepSeek authorization study is terminal, including
   explicit failed-row disposition.
 - [ ] The 450-row Gemini diagnostic cross-provider study is terminal, or has
   transparently downgraded after the three-quota-day free-tier rule.
 - [x] The blind study, budget 500/2,000 and full second-model adaptive panel are
   out of scope and are not prerequisites or manuscript claims.
-- [ ] Every numeric claim is rebuilt once from the compact raw records and
+- [x] Every current DeepSeek numeric claim is rebuilt once from the compact raw records and
   frozen lean plan.
 - [ ] Every citation has complete authors, title, venue, year, DOI or stable URL,
   and publication-status verification.
@@ -54,7 +63,7 @@ Official sources:
 ## Journal package
 
 - [ ] Number sections and subsections; do not number the abstract.
-- [ ] Final title, abstract, keywords and highlights contain no unsupported
+- [x] Provisional title, abstract, keywords and highlights contain no unsupported
   first/only/SOTA wording.
 - [ ] Upload the manuscript and all required editable source files.
 - [ ] Prepare the competing-interests declaration in the format requested by
@@ -74,8 +83,7 @@ Official sources:
 
 ## Current prohibition
 
-The manuscript is not submission-ready until the 900-row DeepSeek study and
-the Gemini completion/downgrade rule are closed. No abstract, conclusion,
-cover letter, or completed result table may fill unobserved lean-study cells.
-JCR Q2/SCIE status must still be checked through the institution on the actual
-submission date.
+The manuscript is not submission-ready until the Gemini completion/downgrade
+rule is closed. No cross-provider abstract, conclusion, cover-letter or result
+claim may fill unobserved Gemini cells. JCR Q2/SCIE status must still be checked
+through the institution on the actual submission date.
