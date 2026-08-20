@@ -15,6 +15,20 @@ DeepSeek Pro/Flash 与 Adaptive 50/200 数据，只新增 900 条 DeepSeek Pro �
 
 ## 当前阶段
 
+### 2026-08-20 精简实证里程碑 5：DeepSeek 失败行恢复收口
+
+- Owner 恢复任务后，仅对没有官方响应的 DeepSeek 行执行了一次显式
+  `--retry-failed`；已有响应的 867 个 work key 未重跑。
+- 恢复逆序执行 33 项，全部作为 attempt 2 追加保留。最终原始文件为
+  933 条物理记录 / 900 个唯一 work key；最新状态为 768 completed、54
+  parse failure、30 max steps、15 provider failure 和 33 repeated pre-response failure。
+- 900/900 工作项现均进入 ITT，`retry_eligible=0`。全部尝试累计 1,638 次
+  provider calls，CNY 1.3888324；精确返回模型仍为 `deepseek-v4-pro`。
+- online forbidden 字段、provider tools 和外部 effect 记录均为 0，相关 runner
+  进程为 0。DeepSeek 新授权制度实验已按预定失败规则完成技术收口。
+- F-PAPER-002 仍为 `in_progress`；下一子阶段是 Gemini 免费层未完成项恢复，
+  已获得官方响应的 Gemini 行不得重跑。
+
 ### 2026-08-20 精简实证里程碑 4：DeepSeek 主执行自然结束
 
 - DeepSeek 授权制度主执行已自然结束，当前无遗留 runner；原始文件包含

@@ -1,5 +1,16 @@
 # 进展记录
 
+## 2026-08-20 精简实证里程碑 5：DeepSeek 失败行定向恢复完成
+
+- 显式 `--retry-failed` 只选中 33 个无官方响应的 work key；867 个已有
+  response ID 的 work key 全部跳过。
+- 当前为 933 条物理记录 / 900 个唯一 work key，最新状态全部进入 ITT；
+  33 个 attempt-2 响应前失败终态保留，`retry_eligible=0`。
+- 累计 1,638 provider calls、CNY 1.3888324；返回模型均为
+  `deepseek-v4-pro`，forbidden 字段、provider tools 和 external effects 均为 0。
+- DeepSeek 新授权制度阶段技术收口完成；F-PAPER-002 保持 `in_progress`，
+  下一工作是 Gemini 免费层的未完成/无响应项。
+
 ## 2026-08-20 精简实证里程碑 4：DeepSeek 主执行结束并停止
 
 - 唯一 DeepSeek pending-only runner 已自然结束，当前无匹配进程。原始文件为

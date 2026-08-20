@@ -4,19 +4,17 @@
 
 2026-08-20 +08:00
 
-## 当前权威检查点——DeepSeek 主执行完成后停止
+## 当前权威检查点——DeepSeek 失败行恢复收口
 
 - 分支 `codex/q2-empirical-study`；`m3-guard` 远程已配置，仍未 push。
-- DeepSeek `remaining` runner 已自然结束，目前无匹配进程。原始文件已达
-  900 行 / 900 个唯一 work key。
-- 最小技术计数为 867 行有响应、33 行无响应、870 行当前 ITT、30 行
-  retry-eligible、1,635 calls、CNY 1.3888324；精确返回模型为
-  `deepseek-v4-pro`，forbidden 字段/tools/external effects 为 0。
-- Owner 要求在当前运行结束后停止。不要自动启动 `--retry-failed`、Gemini、
-  正式统计或新实验；只有新的 Owner 指令才能恢复。
-- 不得由 900/900 物理记录推断整个论文任务完成。Gemini 仍因免费层 429
-  暂停，30 条 DeepSeek 传输前失败未恢复，新结果的正式统计与论文收口未完成。
-  F-PAPER-002 保持 `in_progress`。
+- DeepSeek 已完成唯一一次显式失败行恢复。只执行 33 个无官方响应的
+  work key，867 个已有响应项均未重跑。
+- 最终为 933 条物理记录 / 900 个唯一 work key；900 项均进入 ITT，
+  33 项为 repeated pre-response failure，`retry_eligible=0`。
+- 全部尝试累计 1,638 provider calls、CNY 1.3888324；返回模型精确为
+  `deepseek-v4-pro`，forbidden 字段/tools/external effects 均为 0，runner 为 0。
+- DeepSeek 子阶段已技术收口。下一步只恢复 Gemini 免费层中无响应或尚未触及的行；
+  已有官方响应的 Gemini 行不得重跑。F-PAPER-002 保持 `in_progress`。
 - Gemini 当日 `remaining` 已因系统性 429 停止。已有响应的 work key 不得重跑；
   下一 quota day 只运行 `--retry-failed`，新代码会在第一条 429 后停止。最多三个
   配额日，之后保留已完成子集并透明降级，不启用 Billing。
