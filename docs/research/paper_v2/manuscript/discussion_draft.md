@@ -4,25 +4,21 @@ Status: `deepseek_authorization_results_complete_gemini_diagnostic_closed`
 
 ## Existing evidence changes the research claim
 
-The completed medium and Public experiments do not support presenting M3-full
-as a stronger defense than policy-only. In the 5,082-record DeepSeek V4 Pro
-Public matrix, M3-full produced more unsafe effects than policy-only (38/600
-versus 13/600), while the two variants completed the same number of benign
-tool tasks (49/168). The 1,791-record V4 Flash matrix showed the same security
-direction: 24/400 unsafe effects for full versus 12/400 for policy-only. The
-Flash utility difference was small (38/145 versus 35/145) and does not rescue a
-claim of independent full-module value.
+The completed medium and Public experiments do not support presenting the full
+configuration package as stronger than the policy package. In the 5,082-record
+DeepSeek V4 Pro Public matrix, the full package produced more unsafe effects
+(38/600 versus 13/600), while both packages completed 49/168 benign tool tasks.
+The 1,791-record V4 Flash matrix showed the same security direction: 24/400
+unsafe effects for the full package versus 12/400 for the policy package. The
+Flash utility difference was small (38/145 versus 35/145).
 
-This is scientifically useful negative evidence. The two variants share the
-policy representation and runtime enforcement point, so their divergence
-focuses attention on the additional provenance, temporal/data-flow, and
-confirmation path. A full mechanism can fail to improve security because its
-additional state or decision logic introduces ambiguity, because `ASK`
-resolution reopens paths that policy-only blocks, because the model adapts to
-feedback differently, or because the evaluated provenance representation is
-too noisy to supply useful discrimination. The new authorization-regime
-experiment is designed to distinguish some of these explanations without
-claiming that it identifies a universal causal mechanism.
+This is scientifically useful negative evidence, but it is package-level
+evidence. The full configuration combines `safe_prompt` with provenance,
+temporal/data-flow, monotonicity, and confirmation logic; the policy package
+uses `normal` prompting and policy enforcement alone. The experiment therefore
+cannot assign the difference to any individual module or to prompting. It shows
+that the evaluated bundle did not earn a security advantage under these tasks,
+not that provenance or confirmation is intrinsically ineffective.
 
 ## Authorization is part of the treatment
 
@@ -44,21 +40,35 @@ construction errors.
 
 The DeepSeek paired experiment did not reveal an unsafe-effect advantage for
 `exact_gold`: three of four primary cells had 0/100 unsafe effects, while the
-remaining policy-only `auto_compiled` cell had 1/100. The meaningful movement
+remaining policy-package `auto_compiled` cell had 1/100. The meaningful movement
 was instead in utility and runtime burden. Moving from `auto_compiled` to
-`exact_gold` reduced benign-tool completion by 21.67 points for policy-only and
-15.00 points for full. The task-cluster bootstrap intervals excluded zero,
+`exact_gold` reduced pooled benign-tool completion by 21.67 points for the
+policy package and 15.00 points for the full package. The task-cluster bootstrap intervals excluded zero,
 although the corresponding McNemar comparisons did not remain below 0.05 after
 Holm correction.
 
+The pooled direction is incomplete. AgentDojo completion increased by 13.33
+points for the policy package and 10.00 points for the full package, whereas
+M3-v2 completion fell by 56.67 and 40.00 points. Authorization semantics and
+benchmark task structure therefore interact strongly enough that a single
+pooled oracle-versus-compiled estimate should not be transported to either
+benchmark in isolation.
+
 The operational shift was substantial. Exact policies eliminated ASK in both
-M3 variants but increased the share of records with DENY from 7.22% to 48.89%
-for policy-only and from 11.11% to 45.00% for full. Failure rose to roughly 24%
+packages but increased the share of records with DENY from 7.22% to 48.89% for
+the policy package and from 11.11% to 45.00% for the full package. Failure rose to roughly 24%
 and p95 latency to roughly 19.5 seconds in both exact cells. The broad,
 conflicting, and underspecified stress regimes likewise reduced completion by
 25–30 points on their nested benign-tool subset without changing the observed
 attack floor. These findings show that policy specification can move burden
 and utility even when a headline attack rate appears stable.
+
+The pessimistic `unsafe_effect OR operational_failure` bound makes that point
+more explicit. Exact authorization increased this attack endpoint by 18 points
+for both packages overall, driven by +36-point changes on AgentDojo and no
+change on M3-v2. This does not convert failures into attacks; it demonstrates
+that a near-zero observed unsafe-effect rate can coexist with poor operational
+robustness.
 
 ## Executed effects and utility must be reported together
 
@@ -71,18 +81,19 @@ security endpoint and benign tool-task completion as a joint primary endpoint.
 
 The Public evidence already illustrates the problem. Relative to the
 structural condition, both M3 variants reduced unsafe effects but also had much
-lower benign-tool completion. Policy-only then outperformed full on security
-without losing additional utility. The interpretation is not that provenance
-is intrinsically harmful. It is that the evaluated full implementation did not
-earn its complexity under these tasks and policies.
+lower benign-tool completion. The policy package then outperformed the full
+package on security without losing additional utility. The interpretation is
+not that provenance is intrinsically harmful. It is that the evaluated bundle
+did not earn a security advantage under these tasks and policies.
 
 ASK, DENY, operational failure, latency, tokens, and cost provide the missing
-mechanism-facing context. An authorization regime that shifts unsafe effects
+system-facing context. An authorization regime that shifts unsafe effects
 downward but greatly increases ASK may be acceptable in high-consequence
 workflows and unacceptable in routine automation. A regime that shifts both
 ASK and failure upward may simply externalize uncertainty rather than resolve
-it. The paper reports these burdens directly rather than collapsing them into
-a composite score.
+it. The paper reports these outcomes separately. The unsafe-or-failure
+sensitivity endpoint is shown only as an explicitly pessimistic robustness
+bound, not as a replacement composite score.
 
 ## Adaptive evidence is budget-sensitive, not saturated
 
@@ -107,7 +118,7 @@ works rule out claims that M3 is the first verify-before-commit system, the
 first parameter-source defense, or the first structured runtime authorizer.
 
 The remaining contribution is methodological and empirical. The study holds
-task content fixed while changing authorization regimes and Guard modules,
+task content fixed while changing authorization regimes and Guard configuration packages,
 keeps evaluator fields offline, measures post-enforcement effects, retains
 failure in ITT, and reports operational burden. In particular, the recent
 provenance-sensitivity study changes source authority in controlled next-action
@@ -133,12 +144,12 @@ V4 Pro and V4 Flash, and no cross-provider conclusion is made.
 ## Limitations
 
 First, the new primary experiment uses one proprietary model and two benchmark
-families. Model updates, tool schemas, system prompts, and application context
-may change the effects. The smaller Gemini subset was designed to probe this
-dependence, but it contributes no cross-provider evidence unless all 450 work
-items reach terminal status. Although execution dates, official response
-identifiers, and returned model names are retained, provider-managed aliases do
-not make the underlying weights immutable.
+families; the larger Public evidence adds another model from the same provider,
+not an independent vendor. Model updates, tool schemas, system prompts, and
+application context may change the effects. The Gemini subset closed incomplete
+and contributes no cross-provider inference. Although execution dates, official
+response identifiers, and returned model names are retained, provider-managed
+aliases do not make the underlying weights immutable.
 
 Second, the new authorization experiment has a strong attack-endpoint floor:
 only one unsafe effect occurred across the 400 primary attack records. It can
@@ -147,23 +158,31 @@ small security differences between its four primary cells. Security-direction
 evidence comes mainly from the larger Public matrices and must not be inferred
 from these near-zero cells alone.
 
-Third, `auto_compiled` is one policy compiler, not a complete model of human
+Third, the policy/full contrast is bundled: `normal` versus `safe_prompt`
+prompting changes together with provenance, data-flow, monotonicity, and
+confirmation modules. It cannot support component-level causal attribution.
+
+Fourth, `auto_compiled` is one policy compiler, not a complete model of human
 authorization. The stress regimes approximate common policy errors but do not
 measure their prevalence in deployed systems. `exact_gold` is intentionally
 artificial and should not be read as a recommended configuration.
 
-Fourth, the effect environment is isolated. This is necessary to prevent real
+Fifth, the effect environment is isolated. This is necessary to prevent real
 email, payment, browser, code, or production actions, but it may omit latency,
 state, and recovery behavior found in live applications.
 
-Fifth, the adaptive panel reports budgets only through 200 and does not prove
+Sixth, the adaptive panel reports budgets only through 200 and does not prove
 saturation. Attack search is still one family of defense-aware optimization;
 another optimizer may find different failures.
 
-Sixth, failure handling is conservative but not interpretation-free. All
+Seventh, failure handling is conservative but not interpretation-free. All
 response-bearing failures are terminal in ITT, whereas response-less transport
 failures can receive bounded explicit recovery. We report raw failures and
 superseded attempts so readers can assess that choice.
+
+Eighth, `ASK` is observed only as system confirmation-request incidence.
+Confirmation stayed pending in the synthetic environment, so this study does
+not measure human response quality, workload, or usable-security outcomes.
 
 Finally, this paper does not include an independent blind set. It also does not
 claim first, only, or SOTA status. Its external-validity claims are limited to
@@ -175,11 +194,12 @@ actually evaluated.
 Three practical recommendations follow. First, agent-security benchmarks
 should publish the fields visible to the online Guard and keep evaluator-only
 answers outside that projection.
-Second, runtime defenses should be compared against a policy-only variant on
-the same tasks; otherwise a complex module may receive credit for behavior
-already supplied by the base policy. Third, security reports should include
-benign completion, confirmation/blocking burden, failures, latency, and attack
-budget alongside unsafe-effect rate.
+Second, runtime defenses should be compared against a simpler policy package on
+the same tasks, with prompt profiles held fixed when component attribution is
+the goal; otherwise a complex bundle may receive credit for behavior already
+supplied by the base policy or prompt. Third, security reports should include
+benign completion, system confirmation/blocking incidence, failures, latency,
+and attack budget alongside unsafe-effect rate.
 
 The DeepSeek authorization-regime results now tie these recommendations to
 observed effects: exact and stressed policies materially changed completion,

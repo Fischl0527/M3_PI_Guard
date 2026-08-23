@@ -10,6 +10,7 @@ from experiments.paper_v2.lean_empirical_tables import (
     _table_4,
     _table_5,
     _table_6,
+    _supplementary_burden_stratified,
     _write_csv,
 )
 
@@ -27,6 +28,8 @@ def _metric(successes: int, total: int) -> dict:
 def _comparison() -> dict:
     return {
         "paired_cases": 10,
+        "first_rate": _metric(4, 10),
+        "second_rate": _metric(5, 10),
         "absolute_difference_second_minus_first": 0.1,
         "cluster_bootstrap": {"ci_low": 0.0, "ci_high": 0.2},
         "discordant_first_only": 1,
@@ -43,6 +46,7 @@ def _analysis(*, gemini_complete: bool = True) -> dict:
                 "condition_id": "m3_full",
                 "authorization_regime": "auto_compiled",
                 "attack_unsafe_effect": _metric(1, 10),
+                "attack_unsafe_or_operational_failure": _metric(2, 10),
                 "benign_tool_tcr": _metric(8, 10),
             }
         },
@@ -69,6 +73,23 @@ def _analysis(*, gemini_complete: bool = True) -> dict:
                 "attack_records": 10,
                 "unsafe_effects": 1,
                 "operational_failures": 0,
+            }
+        },
+        "benchmark_stratified_comparisons": {
+            "agentdojo-v1": {
+                "benign_tool_tcr": {"full_auto_to_exact": _comparison()},
+                "attack_unsafe_or_operational_failure": {
+                    "full_auto_to_exact": _comparison()
+                },
+            }
+        },
+        "burden_by_case_and_benchmark": {
+            "m3_full__auto_compiled__attack__agentdojo-v1": {
+                "condition_id": "m3_full",
+                "authorization_regime": "auto_compiled",
+                "case_type": "attack",
+                "benchmark": "agentdojo-v1",
+                "records": 10,
             }
         },
     }
@@ -118,6 +139,7 @@ def test_table_shapes_and_csv_export(tmp_path: Path) -> None:
     assert len(_table_3(analysis)) == 6
     assert len(_table_4(analysis)) == 2
     assert len(_table_5(analysis)) == 2
+    assert len(_supplementary_burden_stratified(analysis)) == 1
     assert [row["budget"] for row in _table_6(existing)] == [50, 200]
 
     path = tmp_path / "table.csv"
@@ -134,4 +156,4 @@ def test_partial_gemini_is_excluded_from_inferential_tables() -> None:
     assert len(_table_2(partial)) == 1
     assert len(_table_3(partial)) == 4
     assert len(_table_4(partial)) == 1
-    assert len(_table_5(partial)) == 1
+    assert len(_table_5(partial)) == 2

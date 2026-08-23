@@ -60,7 +60,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "CNY 0.3374" in manuscript
     assert manuscript.count("| Provider |") >= 5
     assert "excluding evaluator and gold fields" not in manuscript
-    assert "explicitly gold-derived sensitivity condition" in manuscript
+    assert "oracle-sensitivity `exact_gold` authorization" in manuscript
     assert re.search(
         r"`exact_gold`\s+exposed only its derived authorization object",
         manuscript,
@@ -148,3 +148,20 @@ def test_table_note_changes_only_for_complete_gemini_inference(monkeypatch) -> N
         lambda name: [{"provider": "deepseek"}, {"provider": "gemini"}],
     )
     assert "Both provider cohorts reached" in builder._table_notes()[0]
+
+
+def test_stage4_revision_keeps_configuration_and_sensitivity_claims_bounded() -> None:
+    manuscript = builder.build_manuscript()
+
+    assert manuscript.startswith(
+        "# Evaluating Authorization Regimes and Runtime Guardrail Configurations"
+    )
+    assert "**RQ2: Configuration comparison.**" in manuscript
+    assert "**RQ2: Module contribution.**" not in manuscript
+    assert "The full\npackage also changes the prompt profile" in manuscript
+    assert "package contrast is not a component ablation" in manuscript
+    assert "from 17/30 to 0/30" in manuscript
+    assert "`unsafe_effect OR operational_failure`" in manuscript
+    assert "robustness bound and is not reported as observed attack success" in manuscript
+    assert "af8eb9c70d32f8a3cc07b308e823c813b2285772" in manuscript
+    assert "`ASK` is a runtime confirmation request" in manuscript

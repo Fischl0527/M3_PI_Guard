@@ -3,30 +3,30 @@
 Status: `deepseek_results_filled_gemini_diagnostic_closed`
 
 Tool-using LLM agents can turn prompt injection into external actions, but
-measured security depends on runtime authorization. We exclude raw evaluator
-and scoring fields from online state, vary authorization—including an
-explicitly gold-derived sensitivity condition—and jointly measure unsafe
-effects, task completion, burden, failure, latency, and cost.
+measured security depends on the runtime authorization supplied to the Guard.
+We keep evaluator fields offline, vary five controlled authorization
+transformations, and jointly report unsafe effects, benign completion, system
+decision incidence, failure, and latency.
 
-We reanalyze 7,353 DeepSeek records and 40 defense-aware adaptive
-tasks. In a 5,082-record V4 Pro Public matrix, M3-full produced 38/600 unsafe
-effects versus 13/600 for policy-only, while both completed 49/168 benign tool
-tasks. A 1,791-record V4 Flash matrix showed the same security
-direction (24/400 versus 12/400). Adaptive search found first unsafe effects
-for 4/40 tasks by query 50 and 18/40 by query 200.
+We reanalyze 7,353 condition-level DeepSeek records covering 902 distinct cases
+across overlapping cohorts, plus a 40-task defense-aware panel. In Public
+matrices, the full package produced more unsafe effects than the policy package
+on V4 Pro (38/600 versus 13/600) and V4 Flash (24/400 versus 12/400). Adaptive
+search found first unsafe effects for 4/40 tasks by query 50 and 18/40 by 200.
 
-A frozen 900-work-item V4 Pro experiment crossed two Guard variants with
-non-oracle `auto_compiled` and oracle-sensitivity `exact_gold` authorization on
-180 paired AgentDojo and M3-v2 cases. Three of four main cells had 0/100 unsafe
-effects and the fourth had 1/100. Changing from `auto_compiled` to `exact_gold`
-reduced benign-tool completion by 21.67 percentage points for policy-only and
-15.00 for M3-full. It eliminated `ASK` but increased records with `DENY` to
-45.00–48.89%, failures to about 24%, and p95 latency to about 19.5 seconds.
+A frozen 900-work-item V4 Pro experiment crossed both packages with non-oracle
+`auto_compiled` and oracle-sensitivity `exact_gold` authorization on 180 paired
+AgentDojo and M3-v2 cases. Three attack cells had 0/100 unsafe effects and one
+had 1/100. Exact-minus-auto benign completion reversed by benchmark: AgentDojo
+changed by +13.33/+10.00 points for policy/full packages, whereas M3-v2 changed
+by −56.67/−40.00. A pessimistic unsafe-or-operational-failure endpoint increased
+by 18 points for both packages, driven by +36-point AgentDojo differences.
 
-Authorization construction can therefore alter security–utility measurements
-even when attack rates appear stable. The evaluated provenance-aware
-extensions showed no stable gain over policy-only. Gemini free-tier execution
-closed at 32/450 terminal items, so no cross-provider inference was made.
+Authorization construction and benchmark semantics can change measured
+security–utility conclusions even near the observed attack floor. Because
+prompt profile and runtime modules differ together, the package contrast is not
+a component ablation. Incomplete Gemini execution supports no cross-provider
+inference.
 
 Keywords: prompt injection; LLM agents; runtime authorization; provenance;
 security–utility trade-off

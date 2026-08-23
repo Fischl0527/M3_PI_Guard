@@ -52,20 +52,25 @@ CHART_CONTRACTS: tuple[dict[str, str], ...] = (
     },
     {
         "id": "figure_2_safety_utility_pareto",
-        "question": "How do authorization regimes trade attack safety for benign utility?",
-        "takeaway": "Each condition is compared on the same paired task population.",
+        "question": "How do authorization regimes trade direct attack risk for benign utility?",
+        "takeaway": (
+            "Observed unsafe effects and the pessimistic unsafe-or-failure bound "
+            "are kept distinct on the same paired task population."
+        ),
         "family": "relationship scatter",
     },
     {
         "id": "figure_3_authorization_forest",
-        "question": "How large are the paired authorization and mechanism effects?",
+        "question": "How large are paired authorization and configuration-package effects?",
         "takeaway": "Absolute effects and task-cluster uncertainty are shown together.",
         "family": "uncertainty forest",
     },
     {
         "id": "figure_4_runtime_burden",
         "question": "What confirmation, blocking, failure, and latency burden is incurred?",
-        "takeaway": "Operational burden is reported alongside security and utility.",
+        "takeaway": (
+            "System decision incidence and latency are separated by task type and benchmark."
+        ),
         "family": "faceted comparison",
     },
     {
@@ -284,8 +289,8 @@ def figure_field_isolation(output_dir: Path) -> list[str]:
 
 def _label(condition: str, regime: str) -> str:
     condition_labels = {
-        "m3_policy_only": "Policy-only",
-        "m3_full": "M3-full",
+        "m3_policy_only": "Policy package",
+        "m3_full": "Full package",
         "strongest_peer_reviewed_structural_baseline": "Structural baseline",
     }
     regime_labels = {
@@ -301,7 +306,7 @@ def _label(condition: str, regime: str) -> str:
 def figure_pareto(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
     fig, ax = plt.subplots(figsize=(10.2, 6.2))
     fig.suptitle(
-        "Security–utility trade-off by authorization condition",
+        "Direct attack risk versus benign utility",
         y=0.98,
         fontsize=14,
         fontweight="bold",
@@ -309,25 +314,29 @@ def figure_pareto(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
     fig.text(
         0.11,
         0.925,
-        "DeepSeek V4 Pro; x = benign-tool completion, y = 1 − attack unsafe-effect rate",
+        "DeepSeek V4 Pro; filled marker = observed unsafe effect; triangle = unsafe-or-failure bound",
         color=MUTED,
         fontsize=9,
     )
     metrics = analysis["deepseek"]["condition_metrics"]
     key_lines: list[tuple[str, str]] = []
     point_groups: dict[tuple[float, float, str, str], list[str]] = {}
+    sensitivity_points: list[tuple[float, float, float, str]] = []
     for index, item in enumerate(metrics.values()):
         unsafe = item["attack_unsafe_effect"]
         utility = item["benign_tool_tcr"]
         if unsafe["total"] == 0 or utility["total"] == 0:
             continue
         x = 100 * utility["rate"]
-        y = 100 * (1 - unsafe["rate"])
+        y = 100 * unsafe["rate"]
+        sensitivity = item["attack_unsafe_or_operational_failure"]
+        sensitivity_y = 100 * sensitivity["rate"]
         is_full = item["condition_id"] == "m3_full"
         color = BLUE if is_full else ORANGE
         marker = "o" if item["authorization_regime"] == "auto_compiled" else "s"
         group_key = (round(x, 8), round(y, 8), color, marker)
         point_groups.setdefault(group_key, []).append(str(index + 1))
+        sensitivity_points.append((x, y, sensitivity_y, color))
         key_lines.append(
             (str(index + 1), _label(item["condition_id"], item["authorization_regime"]))
         )
@@ -353,10 +362,30 @@ def figure_pareto(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
             fontsize=6.2 if len(numbers) > 1 else 7,
             fontweight="bold",
         )
+    for x, observed_y, sensitivity_y, color in sensitivity_points:
+        ax.plot(
+            [x, x],
+            [observed_y, sensitivity_y],
+            color=color,
+            alpha=0.45,
+            linewidth=1.0,
+            zorder=1,
+        )
+        ax.scatter(
+            x,
+            sensitivity_y,
+            s=45,
+            facecolor="white",
+            edgecolor=color,
+            marker="^",
+            linewidth=1.1,
+            zorder=2,
+        )
     ax.set_xlabel("Benign-tool task completion rate (%) →")
-    ax.set_ylabel("Attack safety: 1 − unsafe-effect rate (%) →")
+    ax.set_ylabel("Attack risk or pessimistic bound (%) ← lower is better")
     ax.set_xlim(0, 100)
-    ax.set_ylim(0, 102)
+    max_sensitivity = max((value[2] for value in sensitivity_points), default=1.0)
+    ax.set_ylim(-0.5, max(2.0, 1.18 * max_sensitivity))
     ax.spines[["top", "right"]].set_visible(False)
     for row, (number, label) in enumerate(key_lines):
         ax.text(
@@ -377,6 +406,30 @@ def figure_pareto(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
         va="top",
         fontsize=9,
         fontweight="bold",
+    )
+    ax.legend(
+        handles=[
+            Line2D(
+                [0],
+                [0],
+                marker="o",
+                color="none",
+                markerfacecolor=INK,
+                markeredgecolor=INK,
+                label="Observed unsafe effect",
+            ),
+            Line2D(
+                [0],
+                [0],
+                marker="^",
+                color="none",
+                markerfacecolor="white",
+                markeredgecolor=INK,
+                label="Unsafe or operational failure",
+            ),
+        ],
+        frameon=False,
+        loc="upper left",
     )
     fig.subplots_adjust(top=0.87, right=0.75)
     return _save(fig, output_dir, "figure_2_safety_utility_pareto")
@@ -403,7 +456,7 @@ def figure_forest(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
     rows = _forest_rows(analysis)
     fig, ax = plt.subplots(figsize=(10.4, max(6.0, 0.43 * len(rows) + 1.8)))
     fig.suptitle(
-        "Paired effects of authorization regime and Guard configuration",
+        "Paired effects of authorization regime and Guard configuration packages",
         y=0.985,
         fontsize=14,
         fontweight="bold",
@@ -431,7 +484,13 @@ def figure_forest(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
             markersize=5,
         )
         endpoint_label = "Unsafe" if endpoint == "unsafe_effect" else "TCR"
-        label = f"{endpoint_label} · {name.replace('_', ' ')}"
+        comparison_labels = {
+            "policy_auto_to_exact": "Policy package: auto → exact",
+            "full_auto_to_exact": "Full package: auto → exact",
+            "auto_policy_to_full": "Auto: policy → full package",
+            "exact_policy_to_full": "Exact: policy → full package",
+        }
+        label = f"{endpoint_label} · {comparison_labels.get(name, name.replace('_', ' '))}"
         ax.text(
             -0.01,
             y,
@@ -459,19 +518,40 @@ def figure_forest(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
 
 
 def figure_burden(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
-    burden = analysis["deepseek"]["burden"]
-    labels = [_label(*(key.split("__", 1))) for key in burden]
+    burden = analysis["deepseek"]["burden_by_case_and_benchmark"]
+    primary = [
+        item
+        for item in burden.values()
+        if item["authorization_regime"] in {"auto_compiled", "exact_gold"}
+        and item["case_type"] in {"attack", "benign_tool"}
+    ]
+    primary.sort(
+        key=lambda item: (
+            item["condition_id"],
+            item["authorization_regime"],
+            item["case_type"],
+            item["benchmark"],
+        )
+    )
+    labels = [
+        f"{_label(item['condition_id'], item['authorization_regime'])} · "
+        f"{'attack' if item['case_type'] == 'attack' else 'benign'} · "
+        f"{'AgentDojo' if item['benchmark'] == 'agentdojo-v1' else 'M3-v2'}"
+        for item in primary
+    ]
     metrics = {
-        "Records with ASK (%)": [
-            100 * burden[key]["ask_record_rate"] for key in burden
+        "Records with system ASK (%)": [
+            100 * item["ask_record_rate"] for item in primary
         ],
-        "Records with DENY (%)": [
-            100 * burden[key]["deny_record_rate"] for key in burden
+        "Records with DENY (%)": [100 * item["deny_record_rate"] for item in primary],
+        "Operational failure rate (%)": [
+            100 * item["failure_rate"] for item in primary
         ],
-        "Failure rate (%)": [100 * burden[key]["failure_rate"] for key in burden],
-        "p95 latency (s)": [burden[key]["latency_p95_ms"] / 1000 for key in burden],
+        "p95 end-to-end latency (s)": [
+            item["latency_p95_ms"] / 1000 for item in primary
+        ],
     }
-    fig, axes = plt.subplots(2, 2, figsize=(12, max(7.0, 0.45 * len(labels) + 4.0)))
+    fig, axes = plt.subplots(2, 2, figsize=(14, max(9.0, 0.36 * len(labels) + 4.0)))
     fig.suptitle(
         "Runtime confirmation, blocking, failure, and latency burden",
         fontsize=14,
@@ -479,7 +559,10 @@ def figure_burden(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
     )
     for ax, (title, values) in zip(axes.flat, metrics.items(), strict=True):
         positions = list(range(len(labels)))
-        colors = [BLUE if label.startswith("M3-full") else ORANGE for label in labels]
+        colors = [
+            BLUE if item["condition_id"] == "m3_full" else ORANGE
+            for item in primary
+        ]
         ax.barh(positions, values, color=colors, edgecolor=INK, linewidth=0.5)
         ax.set_title(title, loc="left")
         ax.set_yticks(
@@ -494,8 +577,8 @@ def figure_burden(analysis: Mapping[str, Any], output_dir: Path) -> list[str]:
     fig.text(
         0.5,
         0.01,
-        "DeepSeek V4 Pro; ASK/DENY rates count records with at least one event; "
-        "all rates use terminal ITT denominators",
+        "DeepSeek V4 Pro; ASK is a system confirmation-request incidence, not a human-burden measure; "
+        "all panels use terminal ITT denominators",
         ha="center",
         color=MUTED,
         fontsize=9,

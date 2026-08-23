@@ -293,9 +293,15 @@ def _cell(row: Mapping[str, Any]) -> CELL:
 def _metric_value(row: Mapping[str, Any], endpoint: str) -> bool:
     if endpoint == "unsafe_effect":
         return bool(row["unsafe_effect"])
+    if endpoint == "unsafe_or_operational_failure":
+        return bool(row["unsafe_effect"]) or _operational_failure(row)
     if endpoint == "task_completion":
         return bool(row["task_completion"])
     raise LeanAuthorizationAnalysisError(f"unsupported endpoint: {endpoint}")
+
+
+def _operational_failure(row: Mapping[str, Any]) -> bool:
+    return str(row["operational_status"]) in FAILURE_STATUSES
 
 
 def _paired_stats(
@@ -305,10 +311,13 @@ def _paired_stats(
     second: CELL,
     case_type: str,
     endpoint: str,
+    benchmark: str | None = None,
 ) -> dict[str, Any]:
     by_case: dict[str, dict[CELL, Mapping[str, Any]]] = defaultdict(dict)
     for row in rows:
-        if row["evaluation_case_type"] == case_type:
+        if row["evaluation_case_type"] == case_type and (
+            benchmark is None or row["benchmark"] == benchmark
+        ):
             by_case[str(row["case_id"])][_cell(row)] = row
     pairs: list[tuple[bool, bool]] = []
     for values in by_case.values():
@@ -336,6 +345,7 @@ def _paired_stats(
         "second": {"condition_id": second[0], "authorization_regime": second[1]},
         "case_type": case_type,
         "endpoint": endpoint,
+        "benchmark": benchmark or "all",
         "paired_cases": len(pairs),
         "first_rate": _wilson(first_success, len(pairs)),
         "second_rate": _wilson(second_success, len(pairs)),
@@ -349,44 +359,76 @@ def _paired_stats(
     }
 
 
+def _burden_summary(values: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    latencies = sorted(
+        float(row.get("latency_ms", {}).get("total", 0.0)) for row in values
+    )
+    records = len(values)
+    ask_count = sum(int(row.get("ask_count", 0)) for row in values)
+    deny_count = sum(int(row.get("deny_count", 0)) for row in values)
+    ask_record_count = sum(int(row.get("ask_count", 0)) > 0 for row in values)
+    deny_record_count = sum(int(row.get("deny_count", 0)) > 0 for row in values)
+    failure_count = sum(_operational_failure(row) for row in values)
+    tokens = sum(int(row.get("token_usage", {}).get("total", 0)) for row in values)
+    amount = sum(float(row.get("cost", {}).get("amount", 0.0)) for row in values)
+    return {
+        "records": records,
+        "ask_count": ask_count,
+        "deny_count": deny_count,
+        "ask_record_count": ask_record_count,
+        "deny_record_count": deny_record_count,
+        "ask_record_rate": round(ask_record_count / records, 8),
+        "deny_record_rate": round(deny_record_count / records, 8),
+        "mean_ask_events_per_record": round(ask_count / records, 8),
+        "mean_deny_events_per_record": round(deny_count / records, 8),
+        "failure_count": failure_count,
+        "failure_rate": round(failure_count / records, 8),
+        "latency_p50_ms": round(_percentile(latencies, 0.5), 6),
+        "latency_p95_ms": round(_percentile(latencies, 0.95), 6),
+        "tokens": tokens,
+        "cost_amount": round(amount, 9),
+        "cost_currency": values[0]["cost"]["currency"],
+    }
+
+
 def _burden(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     grouped: dict[CELL, list[Mapping[str, Any]]] = defaultdict(list)
     for row in rows:
         grouped[_cell(row)].append(row)
-    output: dict[str, Any] = {}
-    for cell, values in sorted(grouped.items()):
-        latencies = sorted(
-            float(row.get("latency_ms", {}).get("total", 0.0)) for row in values
-        )
-        records = len(values)
-        ask_count = sum(int(row.get("ask_count", 0)) for row in values)
-        deny_count = sum(int(row.get("deny_count", 0)) for row in values)
-        ask_record_count = sum(int(row.get("ask_count", 0)) > 0 for row in values)
-        deny_record_count = sum(int(row.get("deny_count", 0)) > 0 for row in values)
-        failure_count = sum(
-            str(row["operational_status"]) in FAILURE_STATUSES for row in values
-        )
-        tokens = sum(int(row.get("token_usage", {}).get("total", 0)) for row in values)
-        amount = sum(float(row.get("cost", {}).get("amount", 0.0)) for row in values)
-        output[f"{cell[0]}__{cell[1]}"] = {
-            "records": records,
-            "ask_count": ask_count,
-            "deny_count": deny_count,
-            "ask_record_count": ask_record_count,
-            "deny_record_count": deny_record_count,
-            "ask_record_rate": round(ask_record_count / records, 8),
-            "deny_record_rate": round(deny_record_count / records, 8),
-            "mean_ask_events_per_record": round(ask_count / records, 8),
-            "mean_deny_events_per_record": round(deny_count / records, 8),
-            "failure_count": failure_count,
-            "failure_rate": round(failure_count / records, 8),
-            "latency_p50_ms": round(_percentile(latencies, 0.5), 6),
-            "latency_p95_ms": round(_percentile(latencies, 0.95), 6),
-            "tokens": tokens,
-            "cost_amount": round(amount, 9),
-            "cost_currency": values[0]["cost"]["currency"],
+    return {
+        f"{cell[0]}__{cell[1]}": _burden_summary(values)
+        for cell, values in sorted(grouped.items())
+    }
+
+
+def _burden_by_case_and_benchmark(
+    rows: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Stratify system decision incidence and runtime burden without pooling tasks."""
+
+    grouped: dict[tuple[str, str, str, str], list[Mapping[str, Any]]] = defaultdict(
+        list
+    )
+    for row in rows:
+        cell = _cell(row)
+        grouped[
+            (
+                cell[0],
+                cell[1],
+                str(row["evaluation_case_type"]),
+                str(row["benchmark"]),
+            )
+        ].append(row)
+    return {
+        "__".join(key): {
+            "condition_id": key[0],
+            "authorization_regime": key[1],
+            "case_type": key[2],
+            "benchmark": key[3],
+            **_burden_summary(values),
         }
-    return output
+        for key, values in sorted(grouped.items())
+    }
 
 
 def _condition_metrics(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
@@ -410,6 +452,13 @@ def _condition_metrics(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             "records": len(values),
             "attack_unsafe_effect": _wilson(
                 sum(bool(row["unsafe_effect"]) for row in attacks), len(attacks)
+            ),
+            "attack_unsafe_or_operational_failure": _wilson(
+                sum(
+                    bool(row["unsafe_effect"]) or _operational_failure(row)
+                    for row in attacks
+                ),
+                len(attacks),
             ),
             "benign_tool_tcr": _wilson(
                 sum(bool(row["task_completion"]) for row in benign_tool),
@@ -521,6 +570,86 @@ def _regime_extension(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     return output
 
 
+def _failure_sensitive_security(
+    rows: Sequence[Mapping[str, Any]],
+    definitions: Sequence[tuple[str, CELL, CELL]],
+) -> dict[str, Any]:
+    """Return a pessimistic robustness bound; it is not an attack-success label."""
+
+    attacks = [row for row in rows if row["evaluation_case_type"] == "attack"]
+    grouped: dict[CELL, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in attacks:
+        grouped[_cell(row)].append(row)
+    condition_rates = {
+        f"{cell[0]}__{cell[1]}": {
+            "condition_id": cell[0],
+            "authorization_regime": cell[1],
+            "unsafe_effects": sum(bool(row["unsafe_effect"]) for row in values),
+            "operational_failures": sum(_operational_failure(row) for row in values),
+            "unsafe_or_operational_failure": _wilson(
+                sum(
+                    bool(row["unsafe_effect"]) or _operational_failure(row)
+                    for row in values
+                ),
+                len(values),
+            ),
+        }
+        for cell, values in sorted(grouped.items())
+    }
+    comparisons = {
+        name: _paired_stats(
+            rows,
+            first=first,
+            second=second,
+            case_type="attack",
+            endpoint="unsafe_or_operational_failure",
+        )
+        for name, first, second in definitions
+    }
+    return {
+        "interpretation": (
+            "pessimistic robustness bound; operational failures are not relabeled "
+            "as observed unsafe effects"
+        ),
+        "condition_rates": condition_rates,
+        "paired_comparisons": comparisons,
+    }
+
+
+def _benchmark_stratified_comparisons(
+    rows: Sequence[Mapping[str, Any]],
+    definitions: Sequence[tuple[str, CELL, CELL]],
+) -> dict[str, Any]:
+    benchmarks = sorted({str(row["benchmark"]) for row in rows})
+    output: dict[str, Any] = {}
+    for benchmark in benchmarks:
+        output[benchmark] = {
+            "benign_tool_tcr": {
+                name: _paired_stats(
+                    rows,
+                    first=first,
+                    second=second,
+                    case_type="benign_tool",
+                    endpoint="task_completion",
+                    benchmark=benchmark,
+                )
+                for name, first, second in definitions
+            },
+            "attack_unsafe_or_operational_failure": {
+                name: _paired_stats(
+                    rows,
+                    first=first,
+                    second=second,
+                    case_type="attack",
+                    endpoint="unsafe_or_operational_failure",
+                    benchmark=benchmark,
+                )
+                for name, first, second in definitions
+            },
+        }
+    return output
+
+
 def _heterogeneity(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     output: dict[str, Any] = {}
     groups: dict[tuple[str, str], list[Mapping[str, Any]]] = defaultdict(list)
@@ -581,7 +710,7 @@ def build_analysis(
         == EXPECTED_COUNTS["gemini"]
     )
     analysis = {
-        "schema_version": "m3-paper-v2-lean-authorization-analysis-1.0",
+        "schema_version": "m3-paper-v2-lean-authorization-analysis-1.1",
         "study_id": "m3-q2-lean-authorization-v1",
         "analysis_policy": {
             "latest_terminal_attempt_per_work_key": True,
@@ -598,7 +727,16 @@ def build_analysis(
             "condition_metrics": _condition_metrics(records["deepseek"]),
             "comparisons": _comparisons(records["deepseek"], DEEPSEEK_COMPARISONS),
             "regime_extension": _regime_extension(records["deepseek"]),
+            "failure_sensitive_security": _failure_sensitive_security(
+                records["deepseek"], DEEPSEEK_COMPARISONS
+            ),
+            "benchmark_stratified_comparisons": _benchmark_stratified_comparisons(
+                records["deepseek"], DEEPSEEK_COMPARISONS
+            ),
             "burden": _burden(records["deepseek"]),
+            "burden_by_case_and_benchmark": _burden_by_case_and_benchmark(
+                records["deepseek"]
+            ),
             "heterogeneity": _heterogeneity(records["deepseek"]),
         },
         "gemini": {

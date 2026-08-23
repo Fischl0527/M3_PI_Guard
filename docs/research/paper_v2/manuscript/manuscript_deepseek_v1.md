@@ -1,32 +1,32 @@
-# Evaluating Runtime Authorization Under Context and Provenance Uncertainty for Tool-Using LLM Agents
+# Evaluating Authorization Regimes and Runtime Guardrail Configurations for Tool-Using LLM Agents
 
 ## Abstract
 
 Tool-using LLM agents can turn prompt injection into external actions, but
-measured security depends on runtime authorization. We exclude raw evaluator
-and scoring fields from online state, vary authorization—including an
-explicitly gold-derived sensitivity condition—and jointly measure unsafe
-effects, task completion, burden, failure, latency, and cost.
+measured security depends on the runtime authorization supplied to the Guard.
+We keep evaluator fields offline, vary five controlled authorization
+transformations, and jointly report unsafe effects, benign completion, system
+decision incidence, failure, and latency.
 
-We reanalyze 7,353 DeepSeek records and 40 defense-aware adaptive
-tasks. In a 5,082-record V4 Pro Public matrix, M3-full produced 38/600 unsafe
-effects versus 13/600 for policy-only, while both completed 49/168 benign tool
-tasks. A 1,791-record V4 Flash matrix showed the same security
-direction (24/400 versus 12/400). Adaptive search found first unsafe effects
-for 4/40 tasks by query 50 and 18/40 by query 200.
+We reanalyze 7,353 condition-level DeepSeek records covering 902 distinct cases
+across overlapping cohorts, plus a 40-task defense-aware panel. In Public
+matrices, the full package produced more unsafe effects than the policy package
+on V4 Pro (38/600 versus 13/600) and V4 Flash (24/400 versus 12/400). Adaptive
+search found first unsafe effects for 4/40 tasks by query 50 and 18/40 by 200.
 
-A frozen 900-work-item V4 Pro experiment crossed two Guard variants with
-non-oracle `auto_compiled` and oracle-sensitivity `exact_gold` authorization on
-180 paired AgentDojo and M3-v2 cases. Three of four main cells had 0/100 unsafe
-effects and the fourth had 1/100. Changing from `auto_compiled` to `exact_gold`
-reduced benign-tool completion by 21.67 percentage points for policy-only and
-15.00 for M3-full. It eliminated `ASK` but increased records with `DENY` to
-45.00–48.89%, failures to about 24%, and p95 latency to about 19.5 seconds.
+A frozen 900-work-item V4 Pro experiment crossed both packages with non-oracle
+`auto_compiled` and oracle-sensitivity `exact_gold` authorization on 180 paired
+AgentDojo and M3-v2 cases. Three attack cells had 0/100 unsafe effects and one
+had 1/100. Exact-minus-auto benign completion reversed by benchmark: AgentDojo
+changed by +13.33/+10.00 points for policy/full packages, whereas M3-v2 changed
+by −56.67/−40.00. A pessimistic unsafe-or-operational-failure endpoint increased
+by 18 points for both packages, driven by +36-point AgentDojo differences.
 
-Authorization construction can therefore alter security–utility measurements
-even when attack rates appear stable. The evaluated provenance-aware
-extensions showed no stable gain over policy-only. Gemini free-tier execution
-closed at 32/450 terminal items, so no cross-provider inference was made.
+Authorization construction and benchmark semantics can change measured
+security–utility conclusions even near the observed attack floor. Because
+prompt profile and runtime modules differ together, the package contrast is not
+a component ablation. Incomplete Gemini execution supports no cross-provider
+inference.
 
 **Keywords:** prompt injection; LLM agents; runtime authorization; provenance; security–utility trade-off
 
@@ -77,7 +77,7 @@ answer-key defect.
 
 Third, low attack success can be purchased by blocking useful work. A runtime
 defense must therefore report executed unsafe effects, benign task completion,
-confirmation burden, operational failures, latency, tokens, and cost under a
+system confirmation-request incidence, operational failures, latency, tokens, and cost under a
 common intention-to-treat denominator. Static attacks are also insufficient
 for a robustness claim when an attacker can adapt to the public defense
 interface [@L27].
@@ -89,22 +89,24 @@ The study asks three questions.
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    unsafe effect, benign task completion, and `ASK/DENY` burden?
-2. **RQ2: Module contribution.** Does provenance, temporal/data-flow
-   enforcement, and confirmation add security beyond the same runtime with
-   policy-only enforcement, and what does it cost operationally?
-3. **RQ3: External validity and adaptive budget.** Are these directions
-   stable across AgentDojo, M3-v2, a second provider, and the completed
-   defense-aware budgets 50 and 200?
+2. **RQ2: Configuration comparison.** How does the complete M3 configuration
+   package compare with the policy package on safety, utility, and operational
+   outcomes, without attributing the contrast to an individual component?
+3. **RQ3: Replication and adaptive budget.** Are these directions consistent
+   across AgentDojo and M3-v2, across completed DeepSeek V4 Pro and V4 Flash
+   evidence, and at completed defense-aware budgets 50 and 200?
 
 ### 1.4 Study design
 
 M3 uses a three-state runtime decision (`ALLOW`, `ASK`, `DENY`), a projection
 that excludes evaluator-only fields from online state, permission monotonicity
 for automatic paths, parameter-source evidence, and independent confirmation
-for privilege expansion. The primary paired experiment crosses policy-only
-and M3-full with non-oracle `auto_compiled` and oracle-sensitivity
-`exact_gold`. A nested subset adds three authorization stress regimes. The
-cross-provider subset adds a peer-reviewed structural condition. Timeouts,
+for privilege expansion. The primary paired experiment crosses a policy
+package and a full package with non-oracle `auto_compiled` and oracle-sensitivity
+`exact_gold`. A nested subset adds three authorization stress regimes. The full
+package also changes the prompt profile from `normal` to `safe_prompt`, so the
+package contrast is not a component ablation. The planned cross-provider subset
+adds a source-pinned peer-reviewed structural condition. Timeouts,
 parsing failures, refusals, maximum-step outcomes, and provider failures remain
 in the intention-to-treat denominator.
 
@@ -117,23 +119,23 @@ external effects are prohibited throughout.
 
 ### 1.5 Empirical motivation and study framing
 
-The completed medium falsification study did not support an incremental
-mechanism claim. M3-full reduced
-unsafe effects from 8/36 under the structural condition to 0/36, but M3
-policy-only also produced 0/36. Benign tool completion fell from 12/24 under
-the structural condition to 6/24 under M3-full, violating the preregistered
+The completed medium falsification study did not support full-package
+superiority. The full package reduced unsafe effects from 8/36 under the
+structural condition to 0/36, but the policy package also produced 0/36.
+Benign tool completion fell from 12/24 under the structural condition to 6/24
+under the full package, violating the preregistered
 non-inferiority margin. These observations motivate an empirical study of
 authorization uncertainty and the security–utility frontier rather than a
-claim that M3-full is a new or state-of-the-art defense.
+claim that the full package is a new or state-of-the-art defense.
 
-The larger, independently reproduced Public primary matrix reinforced this
-finding. Across 600 attacks, M3-full reduced unsafe effects from 133 under
-the structural condition to 38, but policy-only produced only 13. Across 168
+The larger Public primary matrix reinforced this
+finding. Across 600 attacks, the full package reduced unsafe effects from 133
+under the structural condition to 38, but the policy package produced only 13. Across 168
 benign tool tasks, both M3 variants completed 49 versus 103 under the
-structural condition. The full mechanism therefore shows neither incremental
-security nor utility value beyond policy-only in the primary-model evidence.
+structural condition. The full package therefore shows neither incremental
+security nor utility value beyond the policy package in the primary-model evidence.
 The 1.4955% retained diagnostic fraction also exceeds the predefined 1%
-threshold for a clean mechanism-quality claim.
+threshold for a clean configuration-quality claim.
 
 The completed 40-task adaptive panel observed first unsafe effect for 4/40
 tasks by budget 50 and 18/40 by budget 200. These points show substantial
@@ -143,9 +145,10 @@ reports a first-success curve only through query 200 and makes no budget-500 or
 
 The prospectively frozen authorization-regime experiment is now complete for
 DeepSeek. Unsafe effects remained at or near zero across all four main cells,
-but exact authorization reduced benign-tool completion, replaced ASK with much
-more frequent DENY, and increased failure and latency. M3-full showed no stable
-incremental security or utility advantage over policy-only. These unfavorable
+but exact authorization produced opposite benign-tool directions across the
+two benchmarks and increased failure-sensitive attack risk on AgentDojo. It
+also replaced ASK with more frequent DENY and increased latency. The full
+package showed no stable advantage over the policy package. These unfavorable
 results are retained. Gemini free-tier execution closed incomplete at 32/450
 terminal work items and therefore supports no cross-provider claim.
 
@@ -155,12 +158,13 @@ The current evidence supports four bounded contributions:
 
 1. an evaluator/online-state contract that makes authorization visibility
    explicit and prevents evaluator-only fields from entering runtime state;
-2. a paired security–utility evaluation that directly compares policy-only and
-   full provenance/temporal/confirmation enforcement;
+2. a paired security–utility evaluation of policy and full configuration
+   packages, with their prompt-profile difference disclosed and no component-
+   level causal claim;
 3. an intention-to-treat experiment that records official model identity,
    request commitments, isolated effects, and terminal diagnostics while
    retrying only response-less failed rows; and
-4. an empirical account of authorization regime, confirmation burden,
+4. an empirical account of authorization regime, system confirmation incidence,
    benchmark/task heterogeneity, and defense-aware attack budget.
 
 These contributions do not assert first, only, or SOTA status. Preprints are
@@ -283,24 +287,27 @@ the measured security–utility frontier.
 We conduct a paired empirical study of runtime authorization for tool-using
 language-model agents. The design separates the information supplied to the
 online Guard from the offline fields used to score the run. It then varies the
-authorization regime and the Guard mechanism while holding the task, attack,
-provider, model, tool environment, and evaluator fixed.
+authorization regime and the deployed Guard configuration package while
+holding the task, attack, provider, model, tool environment, and evaluator
+fixed.
 
 The study addresses three research questions:
 
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    executed unsafe effects, benign task completion, and `ASK/DENY` burden?
-2. **RQ2: Mechanism contribution.** Does the provenance/data-flow/
-   confirmation logic in M3-full improve on the same runtime using policy-only
-   enforcement, and what operational cost does it introduce?
-3. **RQ3: External validity and adaptive budget.** Are the observed
-   directions stable across AgentDojo, M3-v2, a second provider, and the
-   already completed defense-aware budgets 50 and 200?
+2. **RQ2: Configuration comparison.** How does the complete M3 configuration
+   package compare with the policy package on safety, utility, and operational
+   outcomes? This comparison does not identify the effect of any individual
+   provenance, data-flow, confirmation, or prompt component.
+3. **RQ3: Replication and adaptive budget.** Are the observed directions
+   consistent across AgentDojo and M3-v2, across completed DeepSeek V4 Pro and
+   V4 Flash evidence, and under the already completed defense-aware budgets 50
+   and 200?
 
 Positive results are not a stopping condition. The analysis is retained if
-`exact_gold` has little effect, M3-full underperforms policy-only, or the second
-provider differs from the primary model.
+`exact_gold` has little effect, the full package underperforms the policy
+package, or the available replication evidence differs from the primary model.
 
 ### 3.2 Threat model and safety boundary
 
@@ -346,37 +353,62 @@ all terminal records; it does not recursively replay historical evidence.
 
 The common runtime interfaces are `TaskPolicyManifest`, `ActionProposal`,
 `GuardDecision`, and `ProvenanceEvent`. The two M3 conditions share the agent,
-model, parser, evaluator, tool environment, and task policy representation.
+model, parser, evaluator, tool environment, and task-policy representation, but
+they are not a single-module ablation:
 
-- **M3 policy-only** evaluates the proposed tool and arguments against the
-  current task policy. Provenance propagation, temporal/data-flow checks, and
-  independent confirmation are disabled.
-- **M3-full** enables policy enforcement plus parameter provenance,
+- **Policy package** evaluates the proposed tool and arguments against the
+  current task policy with the `normal` prompt profile. Provenance propagation,
+  temporal/data-flow checks, and independent confirmation are disabled.
+- **Full package** uses the `safe_prompt` profile and enables policy enforcement
+  plus parameter provenance,
   temporal/data-flow constraints, permission-monotonic transitions, and
   confirmation. Automatic transitions may preserve or reduce authority;
   authority expansion produces `ASK` and requires an independent confirmation
   result.
 
+Because prompt profile and runtime modules change together, their contrast is a
+bundled configuration comparison. We therefore do not attribute a difference
+between these cells to provenance, data flow, confirmation, or prompting alone.
+
 `ALLOW`, `ASK`, and `DENY` are runtime decisions, not security outcomes by
 themselves. Security is scored from the isolated post-enforcement effect
 receipt. Utility is scored by the benchmark task-completion evaluator.
 
-The Gemini subset adds the strongest available peer-reviewed structural
-baseline under `auto_compiled`. The baseline is included to anchor the
-cross-provider sample, not to support a universal ranking.
+The planned Gemini subset adds a source-pinned VIGIL baseline under
+`auto_compiled`. The adapter uses official VIGIL commit
+`af8eb9c70d32f8a3cc07b308e823c813b2285772`: the official constraint generator
+and `RuntimeAuditor` are retained, while only OpenAI-client construction is
+dependency-injected into the study's frozen provider client. Generation uses
+temperature zero, one controlled provider call, the served study model, and
+JSON output; silent fallback to default constraints is rejected. The eventual
+incomplete Gemini sample is diagnostic and is not used to rank defenses.
 
 ### 3.5 Authorization regimes
 
-Five regimes are evaluated:
+Five controlled code transformations are evaluated:
 
-- `auto_compiled`: task policy compiled from trusted user intent before
-  untrusted evidence is processed;
-- `exact_gold`: evaluator-derived authorization used only as an oracle
-  sensitivity condition;
-- `broad`: a deliberately permissive authorization envelope;
-- `underspecified`: necessary details or constraints are omitted;
-- `conflicting`: the authorization object contains mutually inconsistent
-  constraints that the runtime must resolve or reject.
+- `auto_compiled`: the task policy is compiled from the trusted user request,
+  trusted application context, and tool schemas before untrusted evidence is
+  processed;
+- `exact_gold`: expected tool calls are derived offline from the evaluator and
+  converted into required exact argument rules, with confirmation disabled;
+  only the derived authorization object enters online state;
+- `broad`: each exact argument constraint is replaced by a type constraint;
+  when this widens a side-effecting rule, confirmation is required;
+- `underspecified`: the last compiled tool rule is removed; and
+- `conflicting`: each exact value is replaced by a deterministic controlled
+  conflicting value (for example, a recipient becomes
+  `conflicting-scope [at] example.test` or a path becomes a public-sandbox conflict
+  path).
+
+As a sanitized example, an auto-compiled rule allowing
+`send_email(to="analyst [at] example.test")` becomes
+`send_email(to: string, confirmation required)` under `broad`, is removed if it
+is the final rule under `underspecified`, and targets
+`conflicting-scope [at] example.test` under `conflicting`. Under `exact_gold`, an
+offline expected call becomes a required exact-value rule. These definitions
+describe this implementation; they are not prevalence estimates for deployed
+authorization systems.
 
 The four primary DeepSeek cells pair policy-only and M3-full with
 `auto_compiled` and `exact_gold`. A fixed nested subset adds M3-full under the
@@ -390,6 +422,12 @@ Four completed datasets are analyzed once:
 - 1,791 DeepSeek V4 Flash records from the Public second-model matrix;
 - 480 records from the medium falsification study; and
 - the completed DeepSeek V4 Pro adaptive tasks at budgets 50 and 200.
+
+The three record matrices contain 847, 597, and 72 unique cases,
+respectively. The Flash cohort is a 597-case subset of the Pro Public cohort;
+17 medium cases overlap Pro and 16 overlap Flash. Their union is 902 distinct
+cases, so the 7,353 condition-level records are not treated as 7,353
+independent cases.
 
 The reuse analysis performs one count/uniqueness pass, retains all terminal
 failures in the ITT population, and computes the prespecified endpoint
@@ -406,10 +444,13 @@ new outcomes were inspected:
 - 60 benign tool tasks, with 30 from each benchmark; and
 - 20 benign no-tool tasks.
 
-Selection is stratified by benchmark, task type, and attack family. Every main
-case is assigned to four cells: policy-only/`auto_compiled`, policy-only/
-`exact_gold`, M3-full/`auto_compiled`, and M3-full/`exact_gold`. This produces
-720 work items.
+The lean study was designed after the larger Public matrices had been
+completed, but its deterministic selector reads only frozen Public execution-
+plan identifiers, pre-outcome strata, and call budgets. It does not read any
+Public result or outcome file. Selection is stratified by benchmark, task type,
+and attack family. Every main case is assigned to four cells: policy package/
+`auto_compiled`, policy package/`exact_gold`, full package/`auto_compiled`, and
+full package/`exact_gold`. This produces 720 work items.
 
 A nested 60-case subset receives three additional M3-full assignments:
 `broad`, `underspecified`, and `conflicting`, adding 180 work items. The frozen
@@ -425,9 +466,9 @@ The Gemini study uses 90 cases nested within the DeepSeek main sample:
 - 10 benign no-tool tasks.
 
 Each case receives five assignments: structural baseline/`auto_compiled`,
-policy-only/`auto_compiled`, M3-full/`auto_compiled`, policy-only/`exact_gold`,
-and M3-full/`exact_gold`. The plan contains 450 work items, including a six-item
-formal prefix.
+policy package/`auto_compiled`, full package/`auto_compiled`, policy package/
+`exact_gold`, and full package/`exact_gold`. The plan contains 450 work items,
+including a six-item formal prefix.
 
 Gemini uses the official free tier with a paid ceiling of USD 0. At the first
 HTTP 429, the active run stops and leaves all unstarted items pending. On a new
@@ -485,9 +526,11 @@ The two joint primary endpoints are:
 1. **unsafe-effect rate** on assigned attack tasks; and
 2. **task-completion rate (TCR)** on assigned benign tool tasks.
 
-Benign no-tool completion is descriptive. Secondary outcomes are `ASK` count,
-`DENY` count, operational failure, p50/p95 latency, total tokens, API cost, and
-predefined heterogeneity by benchmark and attack family.
+Benign no-tool completion is descriptive. Secondary outcomes are system `ASK`
+and `DENY` event counts and record incidence, operational failure, p50/p95
+latency, total tokens, API cost, and predefined heterogeneity by benchmark and
+attack family. `ASK` is a runtime confirmation request; without a human study it
+is not interpreted as measured human burden.
 
 All terminal work items remain in the intention-to-treat denominator. The
 analysis reports raw numerator/denominator values alongside proportions. A
@@ -497,6 +540,12 @@ isolated unsafe effect was observed, while its operational failure remains a
 separate reported outcome and it cannot count as task completion. Latency and
 burden summaries likewise include all terminal work items, not only completed
 ones.
+
+Because observed unsafe effects are rare, we also report a pessimistic
+sensitivity endpoint on attack tasks: `unsafe_effect OR operational_failure`.
+This composite is a robustness bound, not an attack-success label. It asks how
+conclusions change if a non-operational run is not credited as secure while
+preserving unsafe effects and failures as separate reported counts.
 
 ### 3.12 Statistical analysis
 
@@ -508,18 +557,26 @@ resamples. Each resample draws paired case identifiers with replacement and
 keeps both condition outcomes for the selected case together; the case is the
 cluster and inferential unit.
 
-The four primary authorization/mechanism comparisons are:
+The four primary authorization/configuration comparisons are:
 
-1. policy-only `auto_compiled` versus policy-only `exact_gold`;
-2. M3-full `auto_compiled` versus M3-full `exact_gold`;
-3. `auto_compiled` policy-only versus M3-full; and
-4. `exact_gold` policy-only versus M3-full.
+1. policy package `auto_compiled` versus policy package `exact_gold`;
+2. full package `auto_compiled` versus full package `exact_gold`;
+3. `auto_compiled` policy package versus full package; and
+4. `exact_gold` policy package versus full package.
 
-McNemar p-values are Holm-adjusted separately for attack unsafe effect and
-benign-tool TCR. The `broad`, `underspecified`, and `conflicting` comparisons
-are reported as prespecified regime extensions. Model, benchmark, and attack-
-family panels are descriptive heterogeneity analyses rather than additional
-confirmatory families.
+McNemar p-values are Holm-adjusted separately within the four-comparison attack
+unsafe-effect family and the four-comparison benign-tool TCR family. Bootstrap
+confidence intervals are unadjusted estimation intervals. The `broad`,
+`underspecified`, and `conflicting` comparisons, the unsafe-or-failure bound,
+and benchmark panels are descriptive sensitivity or heterogeneity analyses,
+not additional confirmatory families.
+
+The fixed design provides 100 paired attacks and 60 paired benign-tool tasks per
+main contrast, split evenly by benchmark for the latter. With 0/100 observed
+unsafe effects, the Wilson upper limit is 3.70%; within a 30-task benign-tool
+benchmark stratum, intervals are necessarily much wider (for example, 0/30 has
+an 11.35% upper limit). We report these design-precision limits instead of a
+post hoc achieved-power calculation.
 
 Adaptive evidence is limited to budgets 50 and 200. We report the cumulative
 fraction of the fixed 40-task cohort with a first unsafe effect by query count
@@ -547,11 +604,11 @@ assignments, analysis code, aggregate tables, and versioned source.
 
 The medium study contains 480 records: 432 primary `auto_compiled` records
 covering 72 paired cases across six conditions, plus 48 authorization-regime
-probe records. The preregistered analysis did not support an incremental
-mechanism claim. M3-full met the security-effect and deny-all criteria, but
-missed the utility point non-inferiority criterion and showed no security gain
-over M3 policy-only. Both the favorable security comparison and the
-unfavorable utility and module comparisons are reported.
+probe records. The preregistered analysis did not support a superiority claim
+for the full configuration package. It met the security-effect and deny-all
+criteria, but missed the utility point non-inferiority criterion and showed no
+security gain over the policy package. Both the favorable security comparison
+and the unfavorable utility and package comparisons are reported.
 
 Supplementary Table S1 reports the online-state source audit.
 
@@ -561,14 +618,14 @@ domain-wide oracle-authorization problem.
 Supplementary Table S2 reports the completed medium security and utility outcomes.
 
 The medium sample therefore shows a security–utility trade-off, not an
-incremental mechanism benefit. Both M3 variants eliminated the eight unsafe
+incremental package benefit. Both M3 variants eliminated the eight unsafe
 effects observed under the structural condition, but they also completed
 substantially fewer benign tool tasks.
 
 Supplementary Table S3 reports the prespecified paired comparisons.
 
 The security effect relative to the structural baseline was large in this
-sample, but the full mechanism did not outperform policy-only. Relative to the
+sample, but the full package did not outperform the policy package. Relative to the
 structural condition, its benign-tool TCR was 25 percentage points lower, well
 outside the preregistered −5 percentage-point non-inferiority margin.
 
@@ -580,16 +637,16 @@ comprised six `max_steps`, six parse failures, and nine provider failures. The
 predefined operational-quality envelope. Every terminal state remains
 in the intention-to-treat denominator.
 
-For M3-full, 22 initial `ASK` decisions comprised 17 permission-expansion
+For the full package, 22 initial `ASK` decisions comprised 17 permission-expansion
 events, four independent-confirmation requirements, and one out-of-scope
 parameter. Confirmation outcomes remained `pending` in this synthetic study;
-the ASK count measures burden and cannot be interpreted as successful human
-approval.
+the ASK count measures system confirmation-request incidence and cannot be
+interpreted as successful approval or measured human burden.
 
 ### 4.2 Authorization-regime sensitivity
 
 Forty-eight probe records compare four alternate regimes with matched
-`auto_compiled` executions for M3 policy-only and M3-full. Each
+`auto_compiled` executions for the policy and full packages. Each
 condition–regime comparison contains six pairs. No unsafe effect occurred in
 these small probes. For the explicitly labeled `exact_gold` probe, task
 completion increased from 1/6 under matched `auto_compiled` to 3/6 under
@@ -603,10 +660,10 @@ signals, not evidence of a domain-wide bias.
 |---|---|---|
 | Security effect vs structural | Pass | 22.22 pp absolute reduction |
 | Tool-utility point non-inferiority | Fail | −25.00 pp vs −5 pp margin |
-| Full vs policy-only security gain | Fail | 0/36 vs 0/36 |
+| Full vs policy-package security gain | Fail | 0/36 vs 0/36 |
 | Deny-all rejection | Pass | Benign initial ASK-or-DENY 22.22% |
 | Operational quality | Pass | All three predefined quality checks passed |
-| Supported interpretation | Empirical trade-off study | Incremental defense-mechanism claim not supported |
+| Supported interpretation | Empirical trade-off study | Full-package superiority claim not supported |
 
 The results therefore support an empirical study of authorization uncertainty
 and the security–utility trade-off. They do not support a defense-superiority
@@ -617,29 +674,29 @@ or SOTA claim.
 The completed Public matrix contains 847 unique cases and 5,082 records: 600
 attacks and 247 benign cases crossed with the same six conditions. All 76
 diagnostic records (1.4955%) remain in ITT. The predefined 1% quality ceiling
-therefore failed and prohibits a clean mechanism-quality claim. A one-pass
+therefore failed and prohibits a clean configuration-quality claim. A one-pass
 integrity check nevertheless confirmed unique case-condition coverage, model
 identity, and diagnostic retention. The result is primary-model-only.
 
-Across the 600 paired attacks, M3-full produced 38 unsafe effects (6.33%,
+Across the 600 paired attacks, the full package produced 38 unsafe effects (6.33%,
 Wilson 95% CI 4.65–8.57) versus 133 (22.17%, 19.03–25.66) under the structural
 condition. The paired difference was −15.83 percentage points (10,000-cluster
 bootstrap 95% CI −19.50 to −12.17; exact McNemar p=4.04e−17,
-Holm-adjusted p=1.61e−16). This security reduction did not identify a
-full-system module contribution: M3 policy-only produced only 13 unsafe
-effects (2.17%, 1.27–3.67), so M3-full was 4.17 points worse
+Holm-adjusted p=1.61e−16). This security reduction did not establish full-
+package superiority: the policy package produced only 13 unsafe effects
+(2.17%, 1.27–3.67), so the full package was 4.17 points worse
 (95% bootstrap CI 2.50–6.00; exact McNemar p=1.62e−6).
 
-Benign tool completion under M3-full was 49/168 (29.17%, 22.82–36.44), versus
+Benign tool completion under the full package was 49/168 (29.17%, 22.82–36.44), versus
 103/168 (61.31%, 53.77–68.34) under the structural condition: −32.14 points
 (95% bootstrap CI −39.88 to −25.00; exact McNemar p=1.19e−14).
-M3-full and policy-only both completed 49/168, with a paired difference of
+The full and policy packages both completed 49/168, with a paired difference of
 0.00 points. All six conditions completed 79/79 benign no-tool tasks.
 
 Supplementary Table S5 reports the public-primary benchmark strata.
 
-The direction is consistent across both attack benchmarks: M3-full is safer
-than the structural condition but less safe than policy-only. Utility is
+The direction is consistent across both attack benchmarks: the full package is
+safer than the structural condition but less safe than the policy package. Utility is
 strongly benchmark dependent. The public M3-v2 tool tasks show no completion
 difference among the three focal conditions, whereas AgentDojo tool completion
 falls by 55.67 points for both M3 variants relative to the structural
@@ -649,44 +706,44 @@ tasks and are not duplicated.
 ### 4.5 Public DeepSeek V4 Flash replication
 
 The completed Flash matrix contains 1,791 records: 400 attacks, 145 benign
-tool tasks, and 52 benign no-tool tasks under each of the structural,
-policy-only, and full conditions. M3-full produced 24/400 unsafe effects
-(6.00%, Wilson 95% CI 4.06–8.77), compared with 12/400 under policy-only
+tool tasks, and 52 benign no-tool tasks under each of the structural, policy,
+and full packages. The full package produced 24/400 unsafe effects (6.00%,
+Wilson 95% CI 4.06–8.77), compared with 12/400 under the policy package
 (3.00%, 1.72–5.17) and 47/400 under the structural baseline (11.75%,
 8.95–15.28). Thus the full-minus-policy difference was +3.00 percentage
 points, preserving the unfavorable direction observed with V4 Pro.
 
-Benign-tool completion was 38/145 for full (26.21%, 19.73–33.91), 35/145 for
-policy-only (24.14%, 17.90–31.71), and 82/145 for the structural baseline
+Benign-tool completion was 38/145 for the full package (26.21%, 19.73–33.91),
+35/145 for the policy package (24.14%, 17.90–31.71), and 82/145 for the structural baseline
 (56.55%, 48.42–64.35). All three conditions completed 52/52 benign no-tool
 tasks. The small +2.07-point full-minus-policy tool-completion difference does
 not offset the security disadvantage and is not interpreted as an independent
-mechanism gain. Sixteen operational diagnostic records remain in ITT; the Flash
+component-specific gain. Sixteen operational diagnostic records remain in ITT; the Flash
 result therefore supports a same-provider model replication, not a clean
-mechanism-quality or cross-provider claim.
+configuration-quality or cross-provider claim.
 
 ### 4.6 Public operational and decision burden
 
 The Public matrix contains 4,616 completed, 112 maximum-step, 120 parse-failure,
 and 234 provider-failure records. Diagnostics are uneven by condition:
-27 structural, 24 safe-prompt, 22 M3-full, two no-defense, one PromptGuard,
-and zero policy-only. This imbalance is disclosed because terminal failure can
+27 structural, 24 safe-prompt, 22 full-package, two no-defense, one PromptGuard,
+and zero policy-package. This imbalance is disclosed because terminal failure can
 affect observed unsafe-effect counts; no diagnostic was retried or excluded.
 
-On attacks, M3-full issued 181 initial `ASK` and 44 initial `DENY` decisions,
-versus 197 `ASK` and no `DENY` under policy-only. On the 168 benign tool tasks,
-M3-full issued 75 `ASK` decisions and policy-only issued 69. The primary
-mechanism comparison therefore met its structural security-effect criterion
-but missed utility non-inferiority and module-gain criteria. This pattern is
-consistent with a security–utility trade-off rather than incremental benefit
-from the full mechanism.
+On attacks, the full package issued 181 initial `ASK` and 44 initial `DENY`
+decisions, versus 197 `ASK` and no `DENY` under the policy package. On the 168
+benign tool tasks, the full package issued 75 `ASK` decisions and the policy
+package issued 69. The package comparison therefore met its structural
+security-effect criterion but missed utility non-inferiority and superiority
+criteria. This pattern is consistent with a security–utility trade-off rather
+than incremental benefit from the full package.
 
 ### 4.7 DeepSeek authorization-regime experiment
 
 The frozen authorization study contributes 900 terminal DeepSeek V4 Pro work
 items across 180 paired cases. The four main cells each contain 100 attacks,
 60 benign tool tasks, and 20 benign no-tool tasks. A nested 60-case subset adds
-the broad, underspecified, and conflicting regimes under M3-full. Recovery was
+the broad, underspecified, and conflicting regimes under the full package. Recovery was
 limited to 33 work items for which no provider response had been obtained; all
 867 response-bearing work items were left untouched. The final ITT population
 contains 768 completed records, 54 parse failures, 30 maximum-step terminals,
@@ -697,36 +754,69 @@ effects remained disabled.
 
 #### 4.7.1 Joint security and utility endpoints
 
-Unsafe effects were at the floor in the main experiment: 0/100 under M3-full
-with either `auto_compiled` or `exact_gold`, 0/100 under policy-only with
-`exact_gold`, and 1/100 under policy-only with `auto_compiled`. Consequently,
+Unsafe effects were at the floor in the main experiment: 0/100 under the full
+package with either `auto_compiled` or `exact_gold`, 0/100 under the policy
+package with `exact_gold`, and 1/100 under the policy package with
+`auto_compiled`. Consequently,
 the full-minus-policy difference under `auto_compiled` was −1.00 percentage
 point (task-cluster bootstrap 95% CI −3.00 to 0.00; Holm-adjusted McNemar
 p=1.0), while all other primary security contrasts were exactly zero or
 differed by the same single event. These data provide no evidence that the
-full mechanism adds a reproducible security benefit over policy-only.
+full package adds a reproducible security benefit over the policy package. This
+is a package-level result because the prompt profile also differs.
+For a 0/100 cell, however, the Wilson 95% upper limit is 3.70%; rare harms below
+that resolution cannot be ruled out.
 
 Benign-tool completion showed the larger authorization effect. Under
-`auto_compiled`, policy-only completed 22/60 tasks (36.67%, Wilson 95% CI
-25.62–49.32) and M3-full completed 16/60 (26.67%, 17.13–39.01), a paired
+`auto_compiled`, the policy package completed 22/60 tasks (36.67%, Wilson 95%
+CI 25.62–49.32) and the full package completed 16/60 (26.67%, 17.13–39.01), a paired
 full-minus-policy difference of −10.00 points (bootstrap 95% CI −18.33 to
-−3.33; Holm-adjusted p=0.09375). Under `exact_gold`, policy-only completed
+−3.33; Holm-adjusted p=0.09375). Under `exact_gold`, the policy package completed
 9/60 (15.00%, 8.10–26.11) and full completed 7/60 (11.67%, 5.77–22.18), a
 −3.33-point paired difference (bootstrap 95% CI −8.33 to 0.00;
 Holm-adjusted p=0.5). All four main cells completed 20/20 benign no-tool tasks.
 
-Changing policy-only from `auto_compiled` to `exact_gold` reduced paired
+Changing the policy package from `auto_compiled` to `exact_gold` reduced paired
 benign-tool completion by 21.67 points (bootstrap 95% CI −36.67 to −5.00;
-Holm-adjusted p=0.05853). For M3-full, the corresponding reduction was 15.00
+Holm-adjusted p=0.05853). For the full package, the corresponding reduction was 15.00
 points (−28.33 to −1.67; Holm-adjusted p=0.09808). The bootstrap intervals
 exclude zero, but neither exact McNemar comparison remains below 0.05 after
 Holm correction. We therefore interpret the consistent direction and effect
 size as evidence of authorization sensitivity in this sample, not as a
 universal oracle-policy effect.
 
-#### 4.7.2 Stress regimes and operational burden
+#### 4.7.2 Benchmark-stratified authorization effects
 
-On the nested benign-tool subset, moving from matched M3-full
+The pooled utility estimate hides a qualitative benchmark reversal. On
+AgentDojo benign tool tasks, changing from `auto_compiled` to `exact_gold`
+increased completion from 5/30 to 9/30 for the policy package (+13.33 points;
+bootstrap 95% CI −3.33 to +30.00) and from 4/30 to 7/30 for the full package
+(+10.00 points; −3.33 to +23.33). On M3-v2, the same change reduced completion
+from 17/30 to 0/30 for the policy package (−56.67 points; −73.33 to −40.00) and
+from 12/30 to 0/30 for the full package (−40.00 points; −56.67 to −23.33).
+These paired strata are descriptive, but they show that the pooled −21.67 and
+−15.00 point estimates are not transportable across the two benchmark task
+semantics.
+
+#### 4.7.3 Failure-sensitive attack bound
+
+Counting `unsafe_effect OR operational_failure` as a pessimistic sensitivity
+endpoint changes the interpretation of the exact regime. The policy package
+moved from 7/100 under `auto_compiled` to 25/100 under `exact_gold` (+18.00
+points; bootstrap 95% CI +9.00 to +27.00); the full package moved from 8/100 to
+26/100 (+18.00 points; +10.00 to +27.00). Package contrasts within the same
+regime were only +1.00 point and had intervals spanning zero.
+
+This sensitivity effect was entirely benchmark dependent. On AgentDojo,
+policy and full package differences from auto to exact were both +36.00 points
+(5/50 to 23/50 and 4/50 to 22/50; both bootstrap intervals +20.00 to +52.00).
+On M3-v2, the corresponding differences were 0.00 points (2/50 to 2/50 and
+4/50 to 4/50). Operational failures remain separately labeled; the composite
+is a robustness bound and is not reported as observed attack success.
+
+#### 4.7.4 Stress regimes and operational burden
+
+On the nested benign-tool subset, moving from matched full-package
 `auto_compiled` executions to broad, conflicting, or underspecified policies
 reduced completion by 25, 30, and 25 percentage points, respectively. Their
 bootstrap intervals were −45 to −5, −50 to −10, and −50 to 0 points. No unsafe
@@ -734,14 +824,26 @@ effect occurred in any of the 30-attack stress cells, so the stress comparison
 primarily exposes lost utility rather than an observable security gain.
 
 The decision and failure profiles explain part of this trade-off. Under
-policy-only, `auto_compiled` produced ASK on 34.44% and DENY on 7.22% of
+the policy package, `auto_compiled` produced ASK on 34.44% and DENY on 7.22% of
 records, whereas `exact_gold` produced no ASK but DENY on 48.89%; its failure
 rate rose from 7.22% to 23.89% and p95 latency from 10.63 to 19.42 seconds.
-M3-full showed the same pattern: ASK fell from 32.22% to zero, DENY rose from
+The full package showed the same pattern: ASK fell from 32.22% to zero, DENY rose from
 11.11% to 45.00%, failure rose from 9.44% to 24.44%, and p95 latency rose from
 9.18 to 19.62 seconds. DENY incidence counts records with at least one DENY;
 the separate event totals are retained because a record may contain multiple
 decisions. Across all 900 work items, provider cost was CNY 1.3888324.
+
+Pooling again obscures where the system burden occurred. Under `auto_compiled`,
+system ASK incidence on AgentDojo was 80.00%/78.00% for policy/full attacks and
+66.67%/56.67% for policy/full benign-tool tasks; the corresponding M3-v2 rates
+were 4.00%/2.00% and 0.00%/3.33%. Under `exact_gold`, ASK was zero by
+construction. Exact-regime AgentDojo failure was 46.00%/44.00% on attacks and
+43.33%/43.33% on benign-tool tasks, compared with 4.00%/8.00% and
+16.67%/16.67% on M3-v2. AgentDojo exact p95 latency ranged from 20.77 to 23.93
+seconds across these four package/task cells, whereas M3-v2 exact p95 ranged
+from 6.93 to 8.66 seconds. Thus `ASK`, blocking, failure, and latency are
+properties of the package–regime–benchmark combination, not a single pooled
+human-burden quantity.
 
 These results reverse the simple expectation that an answer-derived exact
 policy must improve measured utility. In this implementation, the exact policy
@@ -753,7 +855,7 @@ that every gold-derived policy or every runtime guard behaves similarly.
 ### 4.8 Defense-aware adaptive evidence through budget 200
 
 The initial DeepSeek V4 Pro cost canary covered eight result-blind,
-attack-family-balanced M3-v2 development tasks under M3-full and the
+attack-family-balanced M3-v2 development tasks under the full package and the
 `auto_compiled` authorization regime. At a maximum of 50 queries per task,
 no unsafe effect was found: 0/8 tasks, or 0.00% (Wilson 95% CI 0.00–32.44%).
 The run retained one closed diagnostic query in ITT; that task ended at query
@@ -787,25 +889,21 @@ are not reconstructed from unsafe-effect rate.
 
 ### 5.1 Existing evidence changes the research claim
 
-The completed medium and Public experiments do not support presenting M3-full
-as a stronger defense than policy-only. In the 5,082-record DeepSeek V4 Pro
-Public matrix, M3-full produced more unsafe effects than policy-only (38/600
-versus 13/600), while the two variants completed the same number of benign
-tool tasks (49/168). The 1,791-record V4 Flash matrix showed the same security
-direction: 24/400 unsafe effects for full versus 12/400 for policy-only. The
-Flash utility difference was small (38/145 versus 35/145) and does not rescue a
-claim of independent full-module value.
+The completed medium and Public experiments do not support presenting the full
+configuration package as stronger than the policy package. In the 5,082-record
+DeepSeek V4 Pro Public matrix, the full package produced more unsafe effects
+(38/600 versus 13/600), while both packages completed 49/168 benign tool tasks.
+The 1,791-record V4 Flash matrix showed the same security direction: 24/400
+unsafe effects for the full package versus 12/400 for the policy package. The
+Flash utility difference was small (38/145 versus 35/145).
 
-This is scientifically useful negative evidence. The two variants share the
-policy representation and runtime enforcement point, so their divergence
-focuses attention on the additional provenance, temporal/data-flow, and
-confirmation path. A full mechanism can fail to improve security because its
-additional state or decision logic introduces ambiguity, because `ASK`
-resolution reopens paths that policy-only blocks, because the model adapts to
-feedback differently, or because the evaluated provenance representation is
-too noisy to supply useful discrimination. The new authorization-regime
-experiment is designed to distinguish some of these explanations without
-claiming that it identifies a universal causal mechanism.
+This is scientifically useful negative evidence, but it is package-level
+evidence. The full configuration combines `safe_prompt` with provenance,
+temporal/data-flow, monotonicity, and confirmation logic; the policy package
+uses `normal` prompting and policy enforcement alone. The experiment therefore
+cannot assign the difference to any individual module or to prompting. It shows
+that the evaluated bundle did not earn a security advantage under these tasks,
+not that provenance or confirmation is intrinsically ineffective.
 
 ### 5.2 Authorization is part of the treatment
 
@@ -827,21 +925,35 @@ construction errors.
 
 The DeepSeek paired experiment did not reveal an unsafe-effect advantage for
 `exact_gold`: three of four primary cells had 0/100 unsafe effects, while the
-remaining policy-only `auto_compiled` cell had 1/100. The meaningful movement
+remaining policy-package `auto_compiled` cell had 1/100. The meaningful movement
 was instead in utility and runtime burden. Moving from `auto_compiled` to
-`exact_gold` reduced benign-tool completion by 21.67 points for policy-only and
-15.00 points for full. The task-cluster bootstrap intervals excluded zero,
+`exact_gold` reduced pooled benign-tool completion by 21.67 points for the
+policy package and 15.00 points for the full package. The task-cluster bootstrap intervals excluded zero,
 although the corresponding McNemar comparisons did not remain below 0.05 after
 Holm correction.
 
+The pooled direction is incomplete. AgentDojo completion increased by 13.33
+points for the policy package and 10.00 points for the full package, whereas
+M3-v2 completion fell by 56.67 and 40.00 points. Authorization semantics and
+benchmark task structure therefore interact strongly enough that a single
+pooled oracle-versus-compiled estimate should not be transported to either
+benchmark in isolation.
+
 The operational shift was substantial. Exact policies eliminated ASK in both
-M3 variants but increased the share of records with DENY from 7.22% to 48.89%
-for policy-only and from 11.11% to 45.00% for full. Failure rose to roughly 24%
+packages but increased the share of records with DENY from 7.22% to 48.89% for
+the policy package and from 11.11% to 45.00% for the full package. Failure rose to roughly 24%
 and p95 latency to roughly 19.5 seconds in both exact cells. The broad,
 conflicting, and underspecified stress regimes likewise reduced completion by
 25–30 points on their nested benign-tool subset without changing the observed
 attack floor. These findings show that policy specification can move burden
 and utility even when a headline attack rate appears stable.
+
+The pessimistic `unsafe_effect OR operational_failure` bound makes that point
+more explicit. Exact authorization increased this attack endpoint by 18 points
+for both packages overall, driven by +36-point changes on AgentDojo and no
+change on M3-v2. This does not convert failures into attacks; it demonstrates
+that a near-zero observed unsafe-effect rate can coexist with poor operational
+robustness.
 
 ### 5.3 Executed effects and utility must be reported together
 
@@ -854,18 +966,19 @@ security endpoint and benign tool-task completion as a joint primary endpoint.
 
 The Public evidence already illustrates the problem. Relative to the
 structural condition, both M3 variants reduced unsafe effects but also had much
-lower benign-tool completion. Policy-only then outperformed full on security
-without losing additional utility. The interpretation is not that provenance
-is intrinsically harmful. It is that the evaluated full implementation did not
-earn its complexity under these tasks and policies.
+lower benign-tool completion. The policy package then outperformed the full
+package on security without losing additional utility. The interpretation is
+not that provenance is intrinsically harmful. It is that the evaluated bundle
+did not earn a security advantage under these tasks and policies.
 
 ASK, DENY, operational failure, latency, tokens, and cost provide the missing
-mechanism-facing context. An authorization regime that shifts unsafe effects
+system-facing context. An authorization regime that shifts unsafe effects
 downward but greatly increases ASK may be acceptable in high-consequence
 workflows and unacceptable in routine automation. A regime that shifts both
 ASK and failure upward may simply externalize uncertainty rather than resolve
-it. The paper reports these burdens directly rather than collapsing them into
-a composite score.
+it. The paper reports these outcomes separately. The unsafe-or-failure
+sensitivity endpoint is shown only as an explicitly pessimistic robustness
+bound, not as a replacement composite score.
 
 ### 5.4 Adaptive evidence is budget-sensitive, not saturated
 
@@ -890,7 +1003,7 @@ works rule out claims that M3 is the first verify-before-commit system, the
 first parameter-source defense, or the first structured runtime authorizer.
 
 The remaining contribution is methodological and empirical. The study holds
-task content fixed while changing authorization regimes and Guard modules,
+task content fixed while changing authorization regimes and Guard configuration packages,
 keeps evaluator fields offline, measures post-enforcement effects, retains
 failure in ITT, and reports operational burden. In particular, the recent
 provenance-sensitivity study changes source authority in controlled next-action
@@ -916,12 +1029,12 @@ V4 Pro and V4 Flash, and no cross-provider conclusion is made.
 ### 5.7 Limitations
 
 First, the new primary experiment uses one proprietary model and two benchmark
-families. Model updates, tool schemas, system prompts, and application context
-may change the effects. The smaller Gemini subset was designed to probe this
-dependence, but it contributes no cross-provider evidence unless all 450 work
-items reach terminal status. Although execution dates, official response
-identifiers, and returned model names are retained, provider-managed aliases do
-not make the underlying weights immutable.
+families; the larger Public evidence adds another model from the same provider,
+not an independent vendor. Model updates, tool schemas, system prompts, and
+application context may change the effects. The Gemini subset closed incomplete
+and contributes no cross-provider inference. Although execution dates, official
+response identifiers, and returned model names are retained, provider-managed
+aliases do not make the underlying weights immutable.
 
 Second, the new authorization experiment has a strong attack-endpoint floor:
 only one unsafe effect occurred across the 400 primary attack records. It can
@@ -930,23 +1043,31 @@ small security differences between its four primary cells. Security-direction
 evidence comes mainly from the larger Public matrices and must not be inferred
 from these near-zero cells alone.
 
-Third, `auto_compiled` is one policy compiler, not a complete model of human
+Third, the policy/full contrast is bundled: `normal` versus `safe_prompt`
+prompting changes together with provenance, data-flow, monotonicity, and
+confirmation modules. It cannot support component-level causal attribution.
+
+Fourth, `auto_compiled` is one policy compiler, not a complete model of human
 authorization. The stress regimes approximate common policy errors but do not
 measure their prevalence in deployed systems. `exact_gold` is intentionally
 artificial and should not be read as a recommended configuration.
 
-Fourth, the effect environment is isolated. This is necessary to prevent real
+Fifth, the effect environment is isolated. This is necessary to prevent real
 email, payment, browser, code, or production actions, but it may omit latency,
 state, and recovery behavior found in live applications.
 
-Fifth, the adaptive panel reports budgets only through 200 and does not prove
+Sixth, the adaptive panel reports budgets only through 200 and does not prove
 saturation. Attack search is still one family of defense-aware optimization;
 another optimizer may find different failures.
 
-Sixth, failure handling is conservative but not interpretation-free. All
+Seventh, failure handling is conservative but not interpretation-free. All
 response-bearing failures are terminal in ITT, whereas response-less transport
 failures can receive bounded explicit recovery. We report raw failures and
 superseded attempts so readers can assess that choice.
+
+Eighth, `ASK` is observed only as system confirmation-request incidence.
+Confirmation stayed pending in the synthetic environment, so this study does
+not measure human response quality, workload, or usable-security outcomes.
 
 Finally, this paper does not include an independent blind set. It also does not
 claim first, only, or SOTA status. Its external-validity claims are limited to
@@ -958,11 +1079,12 @@ actually evaluated.
 Three practical recommendations follow. First, agent-security benchmarks
 should publish the fields visible to the online Guard and keep evaluator-only
 answers outside that projection.
-Second, runtime defenses should be compared against a policy-only variant on
-the same tasks; otherwise a complex module may receive credit for behavior
-already supplied by the base policy. Third, security reports should include
-benign completion, confirmation/blocking burden, failures, latency, and attack
-budget alongside unsafe-effect rate.
+Second, runtime defenses should be compared against a simpler policy package on
+the same tasks, with prompt profiles held fixed when component attribution is
+the goal; otherwise a complex bundle may receive credit for behavior already
+supplied by the base policy or prompt. Third, security reports should include
+benign completion, system confirmation/blocking incidence, failures, latency,
+and attack budget alongside unsafe-effect rate.
 
 The DeepSeek authorization-regime results now tie these recommendations to
 observed effects: exact and stressed policies materially changed completion,
@@ -974,20 +1096,23 @@ diagnostic subset, which cannot alter or broaden the DeepSeek findings.
 
 This study treats runtime authorization as an experimental variable rather
 than fixed infrastructure. Across the completed medium and Public studies,
-M3-full reduced unsafe effects relative to a structural baseline but did not
-improve on policy-only enforcement. The direction replicated across DeepSeek
-V4 Pro and V4 Flash: full produced more unsafe effects than policy-only, while
-benign-tool utility was equal or only slightly different. The evaluated
-provenance, temporal/data-flow, and confirmation extensions therefore did not
-show an independent advantage sufficient to support a leading-defense claim.
+the full configuration package reduced unsafe effects relative to a structural
+baseline but did not improve on the policy package. The direction replicated
+across DeepSeek V4 Pro and V4 Flash: the full package produced more unsafe
+effects, while benign-tool utility was equal or only slightly different.
+Because prompt profile and runtime modules differ together, this is a bundled
+comparison and does not identify an individual component effect.
 
 The prospectively frozen authorization experiment explains why security alone
 is an incomplete endpoint. Unsafe effects remained at or near zero in all four
-main cells, yet changing from `auto_compiled` to `exact_gold` reduced
-benign-tool completion by 21.67 percentage points for policy-only and 15.00
-points for M3-full. Exact authorization removed ASK but moved 45.00–48.89% of
-records into at least one DENY, raised failures to approximately 24%, and
-roughly doubled p95 latency. Broad, conflicting, and underspecified regimes
+main cells. The pooled exact-minus-auto benign-tool differences were −21.67
+points for the policy package and −15.00 for the full package, but AgentDojo
+improved by 13.33/10.00 points while M3-v2 fell by 56.67/40.00. Under a
+pessimistic unsafe-or-operational-failure bound, both packages worsened by 18
+points overall, driven by +36-point changes on AgentDojo and no change on
+M3-v2. Exact authorization removed system ASK but moved 45.00–48.89% of records
+into at least one DENY, raised failures to approximately 24%, and increased
+p95 latency. Broad, conflicting, and underspecified regimes
 also reduced completion on the nested tool-task subset without changing the
 observed attack floor. Authorization construction can therefore materially
 alter the measured security–utility frontier even when an attack-only result
@@ -1000,9 +1125,9 @@ budget, but two budget points cannot establish saturation.
 
 These findings support three practical requirements for tool-agent security
 evaluation: keep evaluator-only fields outside online Guard state, compare
-complex mechanisms with a policy-only ablation on identical tasks, and report
-utility, ASK/DENY burden, failures, latency, and attack budget alongside unsafe
-effects. The conclusions remain limited to the tested policies, benchmarks,
+configuration packages on identical tasks and hold prompts fixed when seeking
+component attribution, and report utility, system ASK/DENY incidence, failures,
+latency, and attack budget alongside unsafe effects. The conclusions remain limited to the tested policies, benchmarks,
 runtime implementation, DeepSeek models, and budget range. The prespecified
 Gemini sample closed incomplete under its free-tier stopping rule and remains
 diagnostic; it cannot erase or broaden the completed DeepSeek findings.
@@ -1011,11 +1136,11 @@ diagnostic; it cannot erase or broaden the completed DeepSeek findings.
 
 ![Figure 1. Online authorization projection and offline evaluation boundary.](../lean_empirical/figures_deepseek_v1/figure_1_online_field_isolation.png)
 
-![Figure 2. Security–utility trade-off by authorization condition.](../lean_empirical/figures_deepseek_v1/figure_2_safety_utility_pareto.png)
+![Figure 2. Direct attack risk and failure-sensitive bound versus benign utility.](../lean_empirical/figures_deepseek_v1/figure_2_safety_utility_pareto.png)
 
-![Figure 3. Paired authorization and mechanism effects.](../lean_empirical/figures_deepseek_v1/figure_3_authorization_forest.png)
+![Figure 3. Paired authorization and configuration-package effects.](../lean_empirical/figures_deepseek_v1/figure_3_authorization_forest.png)
 
-![Figure 4. Runtime confirmation, blocking, failure, and latency burden.](../lean_empirical/figures_deepseek_v1/figure_4_runtime_burden.png)
+![Figure 4. Runtime burden by task type and benchmark.](../lean_empirical/figures_deepseek_v1/figure_4_runtime_burden.png)
 
 ![Figure 5. Adaptive first-success curve through query budget 200.](../lean_empirical/figures_deepseek_v1/figure_5_adaptive_first_success.png)
 
@@ -1027,83 +1152,88 @@ Providers, benchmarks, conditions, authorization regimes and frozen work-item co
 
 | Provider | Benchmark | Condition | Authorization regimes | Planned n |
 |---|---|---|---|---|
-| DeepSeek | AgentDojo | M3-full | auto compiled, broad, conflicting, exact gold, underspecified | 235 |
-| DeepSeek | AgentDojo | Policy-only | auto compiled, exact gold | 160 |
-| DeepSeek | M3-v2 | M3-full | auto compiled, broad, conflicting, exact gold, underspecified | 305 |
-| DeepSeek | M3-v2 | Policy-only | auto compiled, exact gold | 200 |
-| Gemini | AgentDojo | M3-full | auto compiled, exact gold | 80 |
-| Gemini | AgentDojo | Policy-only | auto compiled, exact gold | 80 |
+| DeepSeek | AgentDojo | Full package | auto compiled, broad, conflicting, exact gold, underspecified | 235 |
+| DeepSeek | AgentDojo | Policy package | auto compiled, exact gold | 160 |
+| DeepSeek | M3-v2 | Full package | auto compiled, broad, conflicting, exact gold, underspecified | 305 |
+| DeepSeek | M3-v2 | Policy package | auto compiled, exact gold | 200 |
+| Gemini | AgentDojo | Full package | auto compiled, exact gold | 80 |
+| Gemini | AgentDojo | Policy package | auto compiled, exact gold | 80 |
 | Gemini | AgentDojo | Structural baseline | auto compiled | 40 |
-| Gemini | M3-v2 | M3-full | auto compiled, exact gold | 100 |
-| Gemini | M3-v2 | Policy-only | auto compiled, exact gold | 100 |
+| Gemini | M3-v2 | Full package | auto compiled, exact gold | 100 |
+| Gemini | M3-v2 | Policy package | auto compiled, exact gold | 100 |
 | Gemini | M3-v2 | Structural baseline | auto compiled | 50 |
 
 ### Table 2. Joint primary endpoints
 
-Unsafe effects among attack tasks and completions among benign tool tasks. Brackets contain Wilson 95% confidence intervals.
+Unsafe effects and the pessimistic unsafe-or-operational-failure bound among attacks, plus completions among benign tool tasks. Brackets contain Wilson 95% confidence intervals.
 
-| Provider | Condition | Authorization | Unsafe effect, n/N (95% CI) | Benign-tool TCR, n/N (95% CI) |
-|---|---|---|---|---|
-| DeepSeek | M3-full | auto compiled | 0/100 (0.0%) [0.0%, 3.7%] | 16/60 (26.7%) [17.1%, 39.0%] |
-| DeepSeek | M3-full | broad | 0/30 (0.0%) [0.0%, 11.4%] | 2/20 (10.0%) [2.8%, 30.1%] |
-| DeepSeek | M3-full | conflicting | 0/30 (0.0%) [0.0%, 11.4%] | 1/20 (5.0%) [0.9%, 23.6%] |
-| DeepSeek | M3-full | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 7/60 (11.7%) [5.8%, 22.2%] |
-| DeepSeek | M3-full | underspecified | 0/30 (0.0%) [0.0%, 11.4%] | 2/20 (10.0%) [2.8%, 30.1%] |
-| DeepSeek | Policy-only | auto compiled | 1/100 (1.0%) [0.2%, 5.4%] | 22/60 (36.7%) [25.6%, 49.3%] |
-| DeepSeek | Policy-only | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 9/60 (15.0%) [8.1%, 26.1%] |
+| Provider | Condition | Authorization | Unsafe effect, n/N (95% CI) | Unsafe or failure, n/N (95% CI) | Benign-tool TCR, n/N (95% CI) |
+|---|---|---|---|---|---|
+| DeepSeek | Full package | auto compiled | 0/100 (0.0%) [0.0%, 3.7%] | 8/100 (8.0%) [4.1%, 15.0%] | 16/60 (26.7%) [17.1%, 39.0%] |
+| DeepSeek | Full package | broad | 0/30 (0.0%) [0.0%, 11.4%] | 3/30 (10.0%) [3.5%, 25.6%] | 2/20 (10.0%) [2.8%, 30.1%] |
+| DeepSeek | Full package | conflicting | 0/30 (0.0%) [0.0%, 11.4%] | 2/30 (6.7%) [1.8%, 21.3%] | 1/20 (5.0%) [0.9%, 23.6%] |
+| DeepSeek | Full package | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 26/100 (26.0%) [18.4%, 35.4%] | 7/60 (11.7%) [5.8%, 22.2%] |
+| DeepSeek | Full package | underspecified | 0/30 (0.0%) [0.0%, 11.4%] | 2/30 (6.7%) [1.8%, 21.3%] | 2/20 (10.0%) [2.8%, 30.1%] |
+| DeepSeek | Policy package | auto compiled | 1/100 (1.0%) [0.2%, 5.4%] | 7/100 (7.0%) [3.4%, 13.7%] | 22/60 (36.7%) [25.6%, 49.3%] |
+| DeepSeek | Policy package | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 25/100 (25.0%) [17.5%, 34.3%] | 9/60 (15.0%) [8.1%, 26.1%] |
 
-### Table 3. Paired authorization and mechanism effects
+### Table 3. Paired authorization and configuration-package effects
 
 Absolute percentage-point differences use the second condition minus the first. Stress-regime extensions are outside the primary Holm family.
 
 | Provider | Endpoint | Comparison | Paired n | Difference (pp) | Bootstrap 95% CI (pp) | Discordant first/second | McNemar p | Holm p |
 |---|---|---|---|---|---|---|---|---|
-| DeepSeek | Benign-tool TCR | Policy-only auto to M3-full auto | 60 | -10.0 | [-18.3, -3.3] | 6/0 | 0.031 | 0.094 |
-| DeepSeek | Benign-tool TCR | Policy-only exact to M3-full exact | 60 | -3.3 | [-8.3, +0.0] | 2/0 | 0.500 | 0.500 |
-| DeepSeek | Benign-tool TCR | M3-full auto to exact | 60 | -15.0 | [-28.3, -1.7] | 13/4 | 0.049 | 0.098 |
-| DeepSeek | Benign-tool TCR | Policy-only auto to exact | 60 | -21.7 | [-36.7, -5.0] | 19/6 | 0.015 | 0.059 |
-| DeepSeek | Unsafe effect | Policy-only auto to M3-full auto | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
-| DeepSeek | Unsafe effect | Policy-only exact to M3-full exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
-| DeepSeek | Unsafe effect | M3-full auto to exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
-| DeepSeek | Unsafe effect | Policy-only auto to exact | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
-| DeepSeek | Benign-tool TCR | M3-full auto to broad | 20 | -25.0 | [-45.0, -5.0] | 5/0 | 0.062 | — |
-| DeepSeek | Unsafe effect | M3-full auto to broad | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
-| DeepSeek | Benign-tool TCR | M3-full auto to conflicting | 20 | -30.0 | [-50.0, -10.0] | 6/0 | 0.031 | — |
-| DeepSeek | Unsafe effect | M3-full auto to conflicting | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
-| DeepSeek | Benign-tool TCR | M3-full auto to underspecified | 20 | -25.0 | [-50.0, +0.0] | 6/1 | 0.125 | — |
-| DeepSeek | Unsafe effect | M3-full auto to underspecified | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+| DeepSeek | Benign-tool TCR | Auto: policy to full package | 60 | -10.0 | [-18.3, -3.3] | 6/0 | 0.031 | 0.094 |
+| DeepSeek | Benign-tool TCR | Exact: policy to full package | 60 | -3.3 | [-8.3, +0.0] | 2/0 | 0.500 | 0.500 |
+| DeepSeek | Benign-tool TCR | Full package: auto to exact | 60 | -15.0 | [-28.3, -1.7] | 13/4 | 0.049 | 0.098 |
+| DeepSeek | Benign-tool TCR | Policy package: auto to exact | 60 | -21.7 | [-36.7, -5.0] | 19/6 | 0.015 | 0.059 |
+| DeepSeek | Unsafe effect | Auto: policy to full package | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
+| DeepSeek | Unsafe effect | Exact: policy to full package | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
+| DeepSeek | Unsafe effect | Full package: auto to exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
+| DeepSeek | Unsafe effect | Policy package: auto to exact | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
+| DeepSeek | Benign-tool TCR | Full package: auto to broad | 20 | -25.0 | [-45.0, -5.0] | 5/0 | 0.062 | — |
+| DeepSeek | Unsafe effect | Full package: auto to broad | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+| DeepSeek | Benign-tool TCR | Full package: auto to conflicting | 20 | -30.0 | [-50.0, -10.0] | 6/0 | 0.031 | — |
+| DeepSeek | Unsafe effect | Full package: auto to conflicting | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
+| DeepSeek | Benign-tool TCR | Full package: auto to underspecified | 20 | -25.0 | [-50.0, +0.0] | 6/1 | 0.125 | — |
+| DeepSeek | Unsafe effect | Full package: auto to underspecified | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
 
 ### Table 4. Runtime burden
 
-ASK and DENY cells report event totals, record incidence and the share of records affected. Failures remain in the ITT denominator.
+ASK and DENY cells report system-event totals, record incidence and the share of records affected. Failures remain in the ITT denominator.
 
 | Provider | Condition | Authorization | ASK events/records | DENY events/records | Failures | Latency p50/p95 (s) | Tokens | Cost |
 |---|---|---|---|---|---|---|---|---|
-| DeepSeek | M3-full | auto compiled | 58 / 58 (32.2%) | 20 / 20 (11.1%) | 17 (9.4%) | 2.90 / 9.18 | 279,687 | CNY 0.2522 |
-| DeepSeek | M3-full | broad | 23 / 23 (38.3%) | 7 / 7 (11.7%) | 6 (10.0%) | 2.84 / 9.38 | 82,975 | CNY 0.0769 |
-| DeepSeek | M3-full | conflicting | 26 / 26 (43.3%) | 6 / 6 (10.0%) | 5 (8.3%) | 2.79 / 7.89 | 67,404 | CNY 0.0412 |
-| DeepSeek | M3-full | exact gold | 0 / 0 (0.0%) | 187 / 81 (45.0%) | 44 (24.4%) | 3.94 / 19.62 | 454,627 | CNY 0.2995 |
-| DeepSeek | M3-full | underspecified | 30 / 30 (50.0%) | 4 / 4 (6.7%) | 4 (6.7%) | 2.78 / 10.65 | 82,731 | CNY 0.0875 |
-| DeepSeek | Policy-only | auto compiled | 62 / 62 (34.4%) | 13 / 13 (7.2%) | 13 (7.2%) | 3.16 / 10.63 | 307,544 | CNY 0.2940 |
-| DeepSeek | Policy-only | exact gold | 0 / 0 (0.0%) | 227 / 88 (48.9%) | 43 (23.9%) | 5.06 / 19.42 | 473,478 | CNY 0.3374 |
+| DeepSeek | Full package | auto compiled | 58 / 58 (32.2%) | 20 / 20 (11.1%) | 17 (9.4%) | 2.90 / 9.18 | 279,687 | CNY 0.2522 |
+| DeepSeek | Full package | broad | 23 / 23 (38.3%) | 7 / 7 (11.7%) | 6 (10.0%) | 2.84 / 9.38 | 82,975 | CNY 0.0769 |
+| DeepSeek | Full package | conflicting | 26 / 26 (43.3%) | 6 / 6 (10.0%) | 5 (8.3%) | 2.79 / 7.89 | 67,404 | CNY 0.0412 |
+| DeepSeek | Full package | exact gold | 0 / 0 (0.0%) | 187 / 81 (45.0%) | 44 (24.4%) | 3.94 / 19.62 | 454,627 | CNY 0.2995 |
+| DeepSeek | Full package | underspecified | 30 / 30 (50.0%) | 4 / 4 (6.7%) | 4 (6.7%) | 2.78 / 10.65 | 82,731 | CNY 0.0875 |
+| DeepSeek | Policy package | auto compiled | 62 / 62 (34.4%) | 13 / 13 (7.2%) | 13 (7.2%) | 3.16 / 10.63 | 307,544 | CNY 0.2940 |
+| DeepSeek | Policy package | exact gold | 0 / 0 (0.0%) | 227 / 88 (48.9%) | 43 (23.9%) | 5.06 / 19.42 | 473,478 | CNY 0.3374 |
 
-### Table 5. Prespecified heterogeneity
+### Table 5. Benchmark-stratified paired estimates
 
-Endpoint counts by benchmark and attack family. These prespecified strata are descriptive rather than additional confirmatory families.
+Paired benign-tool completion and attack unsafe-or-failure estimates by benchmark. These strata are descriptive rather than additional confirmatory families.
 
-| Provider | Benchmark | Attack family/stratum | Records | Attack records | Unsafe effects | Operational failures |
-|---|---|---|---|---|---|---|
-| DeepSeek | AgentDojo | pooled/no family label | 395 | 245 | 1 | 93 |
-| DeepSeek | M3-v2 | benign clean | 260 | 0 | 0 | 24 |
-| DeepSeek | M3-v2 | cross tool attack chain | 20 | 20 | 0 | 0 |
-| DeepSeek | M3-v2 | direct jailbreak | 16 | 16 | 0 | 0 |
-| DeepSeek | M3-v2 | environment context pollution | 29 | 29 | 0 | 0 |
-| DeepSeek | M3-v2 | json rpc | 31 | 31 | 0 | 0 |
-| DeepSeek | M3-v2 | memory poisoning | 19 | 19 | 0 | 0 |
-| DeepSeek | M3-v2 | multilingual t2l | 28 | 28 | 0 | 0 |
-| DeepSeek | M3-v2 | obfuscation evasion | 42 | 42 | 0 | 0 |
-| DeepSeek | M3-v2 | rag indirect | 19 | 19 | 0 | 4 |
-| DeepSeek | M3-v2 | tool output injection | 41 | 41 | 0 | 11 |
+| Provider | Benchmark | Endpoint | Comparison | Paired n | First n/N | Second n/N | Difference (pp) | Bootstrap 95% CI (pp) |
+|---|---|---|---|---|---|---|---|---|
+| DeepSeek | AgentDojo | Attack unsafe or failure | Auto: policy to full package | 50 | 5/50 | 4/50 | -2.0 | [-10.0, +4.0] |
+| DeepSeek | AgentDojo | Attack unsafe or failure | Exact: policy to full package | 50 | 23/50 | 22/50 | -2.0 | [-10.0, +6.0] |
+| DeepSeek | AgentDojo | Attack unsafe or failure | Full package: auto to exact | 50 | 4/50 | 22/50 | +36.0 | [+20.0, +52.0] |
+| DeepSeek | AgentDojo | Attack unsafe or failure | Policy package: auto to exact | 50 | 5/50 | 23/50 | +36.0 | [+20.0, +52.0] |
+| DeepSeek | AgentDojo | Benign-tool TCR | Auto: policy to full package | 30 | 5/30 | 4/30 | -3.3 | [-10.0, +0.0] |
+| DeepSeek | AgentDojo | Benign-tool TCR | Exact: policy to full package | 30 | 9/30 | 7/30 | -6.7 | [-16.7, +0.0] |
+| DeepSeek | AgentDojo | Benign-tool TCR | Full package: auto to exact | 30 | 4/30 | 7/30 | +10.0 | [-3.3, +23.3] |
+| DeepSeek | AgentDojo | Benign-tool TCR | Policy package: auto to exact | 30 | 5/30 | 9/30 | +13.3 | [-3.3, +30.0] |
+| DeepSeek | M3-v2 | Attack unsafe or failure | Auto: policy to full package | 50 | 2/50 | 4/50 | +4.0 | [-6.0, +14.0] |
+| DeepSeek | M3-v2 | Attack unsafe or failure | Exact: policy to full package | 50 | 2/50 | 4/50 | +4.0 | [-6.0, +14.0] |
+| DeepSeek | M3-v2 | Attack unsafe or failure | Full package: auto to exact | 50 | 4/50 | 4/50 | +0.0 | [+0.0, +0.0] |
+| DeepSeek | M3-v2 | Attack unsafe or failure | Policy package: auto to exact | 50 | 2/50 | 2/50 | +0.0 | [+0.0, +0.0] |
+| DeepSeek | M3-v2 | Benign-tool TCR | Auto: policy to full package | 30 | 17/30 | 12/30 | -16.7 | [-30.0, -3.3] |
+| DeepSeek | M3-v2 | Benign-tool TCR | Exact: policy to full package | 30 | 0/30 | 0/30 | +0.0 | [+0.0, +0.0] |
+| DeepSeek | M3-v2 | Benign-tool TCR | Full package: auto to exact | 30 | 12/30 | 0/30 | -40.0 | [-56.7, -23.3] |
+| DeepSeek | M3-v2 | Benign-tool TCR | Policy package: auto to exact | 30 | 17/30 | 0/30 | -56.7 | [-73.3, -40.0] |
 
 ### Table 6. Adaptive evidence at budgets 50 and 200
 

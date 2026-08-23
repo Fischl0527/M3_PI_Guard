@@ -81,6 +81,7 @@ def _table_2(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
     for provider in _included_providers(analysis):
         for item in analysis[provider]["condition_metrics"].values():
             attack = item["attack_unsafe_effect"]
+            sensitivity = item["attack_unsafe_or_operational_failure"]
             utility = item["benign_tool_tcr"]
             rows.append(
                 {
@@ -92,6 +93,10 @@ def _table_2(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
                     "unsafe_rate": attack["rate"],
                     "unsafe_ci_low": attack["ci_low"],
                     "unsafe_ci_high": attack["ci_high"],
+                    "unsafe_or_failure_n": sensitivity["successes"],
+                    "unsafe_or_failure_rate": sensitivity["rate"],
+                    "unsafe_or_failure_ci_low": sensitivity["ci_low"],
+                    "unsafe_or_failure_ci_high": sensitivity["ci_high"],
                     "completed_n": utility["successes"],
                     "benign_tool_n": utility["total"],
                     "tcr": utility["rate"],
@@ -163,19 +168,40 @@ def _table_4(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
 
 
 def _table_5(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Return benchmark-stratified paired estimates for the two key endpoints."""
+
     rows: list[dict[str, Any]] = []
-    for provider in _included_providers(analysis):
-        for stratum, item in analysis[provider]["heterogeneity"].items():
-            benchmark, family = stratum.split("__", 1)
-            rows.append(
-                {
-                    "provider": provider,
-                    "benchmark": benchmark,
-                    "attack_family": family,
-                    **item,
-                }
-            )
+    for benchmark, endpoints in analysis["deepseek"][
+        "benchmark_stratified_comparisons"
+    ].items():
+        for endpoint, comparisons in endpoints.items():
+            for comparison, item in comparisons.items():
+                rows.append(
+                    {
+                        "provider": "deepseek",
+                        "benchmark": benchmark,
+                        "endpoint": endpoint,
+                        "comparison": comparison,
+                        "paired_cases": item["paired_cases"],
+                        "first_successes": item["first_rate"]["successes"],
+                        "first_total": item["first_rate"]["total"],
+                        "second_successes": item["second_rate"]["successes"],
+                        "second_total": item["second_rate"]["total"],
+                        "difference_second_minus_first": item[
+                            "absolute_difference_second_minus_first"
+                        ],
+                        "bootstrap_ci_low": item["cluster_bootstrap"]["ci_low"],
+                        "bootstrap_ci_high": item["cluster_bootstrap"]["ci_high"],
+                        "mcnemar_p_descriptive": item["exact_mcnemar_p"],
+                    }
+                )
     return rows
+
+
+def _supplementary_burden_stratified(
+    analysis: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    return list(analysis["deepseek"]["burden_by_case_and_benchmark"].values())
 
 
 def _table_6(existing: Mapping[str, Any]) -> list[dict[str, Any]]:
@@ -205,8 +231,11 @@ def build_tables(
         "table_2_endpoints.csv": _table_2(authorization),
         "table_3_paired_effects.csv": _table_3(authorization),
         "table_4_runtime_burden.csv": _table_4(authorization),
-        "table_5_heterogeneity.csv": _table_5(authorization),
+        "table_5_benchmark_stratified.csv": _table_5(authorization),
         "table_6_adaptive_50_200.csv": _table_6(existing),
+        "supplementary_burden_stratified.csv": _supplementary_burden_stratified(
+            authorization
+        ),
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     counts = {

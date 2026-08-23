@@ -15,7 +15,7 @@ TABLE_DIR = PROJECT_ROOT / "docs/research/paper_v2/lean_empirical/tables_deepsee
 OUTPUT_PATH = MANUSCRIPT_DIR / "manuscript_deepseek_v1.md"
 
 TITLE = (
-    "Evaluating Runtime Authorization Under Context and Provenance Uncertainty "
+    "Evaluating Authorization Regimes and Runtime Guardrail Configurations "
     "for Tool-Using LLM Agents"
 )
 
@@ -35,9 +35,9 @@ SECTION_FILES = (
 
 FIGURES = (
     (1, "figure_1_online_field_isolation.png", "Online authorization projection and offline evaluation boundary."),
-    (2, "figure_2_safety_utility_pareto.png", "Security–utility trade-off by authorization condition."),
-    (3, "figure_3_authorization_forest.png", "Paired authorization and mechanism effects."),
-    (4, "figure_4_runtime_burden.png", "Runtime confirmation, blocking, failure, and latency burden."),
+    (2, "figure_2_safety_utility_pareto.png", "Direct attack risk and failure-sensitive bound versus benign utility."),
+    (3, "figure_3_authorization_forest.png", "Paired authorization and configuration-package effects."),
+    (4, "figure_4_runtime_burden.png", "Runtime burden by task type and benchmark."),
     (5, "figure_5_adaptive_first_success.png", "Adaptive first-success curve through query budget 200."),
 )
 
@@ -45,14 +45,16 @@ TABLE_NOTES = (
     "Providers, benchmarks, conditions, authorization regimes and frozen "
     "work-item counts for the lean empirical study. Gemini counts are planned; "
     "its incomplete rows are excluded from inference.",
-    "Unsafe effects among attack tasks and completions among benign tool "
-    "tasks. Brackets contain Wilson 95% confidence intervals.",
+    "Unsafe effects and the pessimistic unsafe-or-operational-failure bound "
+    "among attacks, plus completions among benign tool tasks. Brackets contain "
+    "Wilson 95% confidence intervals.",
     "Absolute percentage-point differences use the second condition minus "
     "the first. Stress-regime extensions are outside the primary Holm family.",
-    "ASK and DENY cells report event totals, record incidence and the share "
-    "of records affected. Failures remain in the ITT denominator.",
-    "Endpoint counts by benchmark and attack family. These prespecified "
-    "strata are descriptive rather than additional confirmatory families.",
+    "ASK and DENY cells report system-event totals, record incidence and the "
+    "share of records affected. Failures remain in the ITT denominator.",
+    "Paired benign-tool completion and attack unsafe-or-failure estimates by "
+    "benchmark. These strata are descriptive rather than additional "
+    "confirmatory families.",
     "Cumulative tasks with at least one unsafe effect through budgets 50 and "
     "200. These two points do not establish attack saturation.",
 )
@@ -262,19 +264,20 @@ def _label(value: str) -> str:
         "gemini": "Gemini",
         "agentdojo-v1": "AgentDojo",
         "m3-v2": "M3-v2",
-        "m3_full": "M3-full",
-        "m3_policy_only": "Policy-only",
+        "m3_full": "Full package",
+        "m3_policy_only": "Policy package",
         "strongest_peer_reviewed_structural_baseline": "Structural baseline",
-        "auto_policy_to_full": "Policy-only auto to M3-full auto",
-        "exact_policy_to_full": "Policy-only exact to M3-full exact",
-        "full_auto_to_exact": "M3-full auto to exact",
-        "policy_auto_to_exact": "Policy-only auto to exact",
-        "full_auto_to_broad": "M3-full auto to broad",
-        "full_auto_to_conflicting": "M3-full auto to conflicting",
-        "full_auto_to_underspecified": "M3-full auto to underspecified",
+        "auto_policy_to_full": "Auto: policy to full package",
+        "exact_policy_to_full": "Exact: policy to full package",
+        "full_auto_to_exact": "Full package: auto to exact",
+        "policy_auto_to_exact": "Policy package: auto to exact",
+        "full_auto_to_broad": "Full package: auto to broad",
+        "full_auto_to_conflicting": "Full package: auto to conflicting",
+        "full_auto_to_underspecified": "Full package: auto to underspecified",
         "task_completion": "Benign-tool TCR",
         "benign_tool_tcr": "Benign-tool TCR",
         "unsafe_effect": "Unsafe effect",
+        "attack_unsafe_or_operational_failure": "Attack unsafe or failure",
     }
     return special.get(value, value.replace("_", " "))
 
@@ -342,12 +345,19 @@ def _endpoint_table() -> str:
             f'{row["completed_n"]}/{row["benign_tool_n"]} ({_percentage(row["tcr"])}) '
             f'[{_percentage(row["tcr_ci_low"])}, {_percentage(row["tcr_ci_high"])}]'
         )
+        sensitivity = (
+            f'{row["unsafe_or_failure_n"]}/{row["attack_n"]} '
+            f'({_percentage(row["unsafe_or_failure_rate"])}) '
+            f'[{_percentage(row["unsafe_or_failure_ci_low"])}, '
+            f'{_percentage(row["unsafe_or_failure_ci_high"])}]'
+        )
         rows.append(
             (
                 _label(row["provider"]),
                 _label(row["condition"]),
                 _label(row["authorization_regime"]),
                 unsafe,
+                sensitivity,
                 tcr,
             )
         )
@@ -357,6 +367,7 @@ def _endpoint_table() -> str:
             "Condition",
             "Authorization",
             "Unsafe effect, n/N (95% CI)",
+            "Unsafe or failure, n/N (95% CI)",
             "Benign-tool TCR, n/N (95% CI)",
         ),
         rows,
@@ -431,30 +442,39 @@ def _burden_table() -> str:
     )
 
 
-def _heterogeneity_table() -> str:
+def _benchmark_stratified_table() -> str:
     rows = []
-    for row in _read_table("table_5_heterogeneity.csv"):
-        family = "pooled/no family label" if row["attack_family"] == "not_attack" else _label(row["attack_family"])
+    for row in _read_table("table_5_benchmark_stratified.csv"):
+        first = f'{row["first_successes"]}/{row["first_total"]}'
+        second = f'{row["second_successes"]}/{row["second_total"]}'
+        interval = (
+            f'{_percentage(row["bootstrap_ci_low"], signed=True)}, '
+            f'{_percentage(row["bootstrap_ci_high"], signed=True)}'
+        )
         rows.append(
             (
                 _label(row["provider"]),
                 _label(row["benchmark"]),
-                family,
-                row["records"],
-                row["attack_records"],
-                row["unsafe_effects"],
-                row["operational_failures"],
+                _label(row["endpoint"]),
+                _label(row["comparison"]),
+                row["paired_cases"],
+                first,
+                second,
+                _percentage(row["difference_second_minus_first"], signed=True),
+                f"[{interval}]",
             )
         )
     return _markdown_table(
         (
             "Provider",
             "Benchmark",
-            "Attack family/stratum",
-            "Records",
-            "Attack records",
-            "Unsafe effects",
-            "Operational failures",
+            "Endpoint",
+            "Comparison",
+            "Paired n",
+            "First n/N",
+            "Second n/N",
+            "Difference (pp)",
+            "Bootstrap 95% CI (pp)",
         ),
         rows,
     )
@@ -483,9 +503,9 @@ def _table_block() -> str:
     tables = (
         (1, "Experimental design", _design_table()),
         (2, "Joint primary endpoints", _endpoint_table()),
-        (3, "Paired authorization and mechanism effects", _paired_table()),
+        (3, "Paired authorization and configuration-package effects", _paired_table()),
         (4, "Runtime burden", _burden_table()),
-        (5, "Prespecified heterogeneity", _heterogeneity_table()),
+        (5, "Benchmark-stratified paired estimates", _benchmark_stratified_table()),
         (6, "Adaptive evidence at budgets 50 and 200", _adaptive_table()),
     )
     parts = ["## Tables"]

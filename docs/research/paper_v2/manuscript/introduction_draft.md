@@ -47,7 +47,7 @@ answer-key defect.
 
 Third, low attack success can be purchased by blocking useful work. A runtime
 defense must therefore report executed unsafe effects, benign task completion,
-confirmation burden, operational failures, latency, tokens, and cost under a
+system confirmation-request incidence, operational failures, latency, tokens, and cost under a
 common intention-to-treat denominator. Static attacks are also insufficient
 for a robustness claim when an attacker can adapt to the public defense
 interface [@L27].
@@ -59,22 +59,24 @@ The study asks three questions.
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    unsafe effect, benign task completion, and `ASK/DENY` burden?
-2. **RQ2: Module contribution.** Does provenance, temporal/data-flow
-   enforcement, and confirmation add security beyond the same runtime with
-   policy-only enforcement, and what does it cost operationally?
-3. **RQ3: External validity and adaptive budget.** Are these directions
-   stable across AgentDojo, M3-v2, a second provider, and the completed
-   defense-aware budgets 50 and 200?
+2. **RQ2: Configuration comparison.** How does the complete M3 configuration
+   package compare with the policy package on safety, utility, and operational
+   outcomes, without attributing the contrast to an individual component?
+3. **RQ3: Replication and adaptive budget.** Are these directions consistent
+   across AgentDojo and M3-v2, across completed DeepSeek V4 Pro and V4 Flash
+   evidence, and at completed defense-aware budgets 50 and 200?
 
 ## Study design
 
 M3 uses a three-state runtime decision (`ALLOW`, `ASK`, `DENY`), a projection
 that excludes evaluator-only fields from online state, permission monotonicity
 for automatic paths, parameter-source evidence, and independent confirmation
-for privilege expansion. The primary paired experiment crosses policy-only
-and M3-full with non-oracle `auto_compiled` and oracle-sensitivity
-`exact_gold`. A nested subset adds three authorization stress regimes. The
-cross-provider subset adds a peer-reviewed structural condition. Timeouts,
+for privilege expansion. The primary paired experiment crosses a policy
+package and a full package with non-oracle `auto_compiled` and oracle-sensitivity
+`exact_gold`. A nested subset adds three authorization stress regimes. The full
+package also changes the prompt profile from `normal` to `safe_prompt`, so the
+package contrast is not a component ablation. The planned cross-provider subset
+adds a source-pinned peer-reviewed structural condition. Timeouts,
 parsing failures, refusals, maximum-step outcomes, and provider failures remain
 in the intention-to-treat denominator.
 
@@ -87,23 +89,23 @@ external effects are prohibited throughout.
 
 ## Empirical motivation and study framing
 
-The completed medium falsification study did not support an incremental
-mechanism claim. M3-full reduced
-unsafe effects from 8/36 under the structural condition to 0/36, but M3
-policy-only also produced 0/36. Benign tool completion fell from 12/24 under
-the structural condition to 6/24 under M3-full, violating the preregistered
+The completed medium falsification study did not support full-package
+superiority. The full package reduced unsafe effects from 8/36 under the
+structural condition to 0/36, but the policy package also produced 0/36.
+Benign tool completion fell from 12/24 under the structural condition to 6/24
+under the full package, violating the preregistered
 non-inferiority margin. These observations motivate an empirical study of
 authorization uncertainty and the security–utility frontier rather than a
-claim that M3-full is a new or state-of-the-art defense.
+claim that the full package is a new or state-of-the-art defense.
 
-The larger, independently reproduced Public primary matrix reinforced this
-finding. Across 600 attacks, M3-full reduced unsafe effects from 133 under
-the structural condition to 38, but policy-only produced only 13. Across 168
+The larger Public primary matrix reinforced this
+finding. Across 600 attacks, the full package reduced unsafe effects from 133
+under the structural condition to 38, but the policy package produced only 13. Across 168
 benign tool tasks, both M3 variants completed 49 versus 103 under the
-structural condition. The full mechanism therefore shows neither incremental
-security nor utility value beyond policy-only in the primary-model evidence.
+structural condition. The full package therefore shows neither incremental
+security nor utility value beyond the policy package in the primary-model evidence.
 The 1.4955% retained diagnostic fraction also exceeds the predefined 1%
-threshold for a clean mechanism-quality claim.
+threshold for a clean configuration-quality claim.
 
 The completed 40-task adaptive panel observed first unsafe effect for 4/40
 tasks by budget 50 and 18/40 by budget 200. These points show substantial
@@ -113,9 +115,10 @@ reports a first-success curve only through query 200 and makes no budget-500 or
 
 The prospectively frozen authorization-regime experiment is now complete for
 DeepSeek. Unsafe effects remained at or near zero across all four main cells,
-but exact authorization reduced benign-tool completion, replaced ASK with much
-more frequent DENY, and increased failure and latency. M3-full showed no stable
-incremental security or utility advantage over policy-only. These unfavorable
+but exact authorization produced opposite benign-tool directions across the
+two benchmarks and increased failure-sensitive attack risk on AgentDojo. It
+also replaced ASK with more frequent DENY and increased latency. The full
+package showed no stable advantage over the policy package. These unfavorable
 results are retained. Gemini free-tier execution closed incomplete at 32/450
 terminal work items and therefore supports no cross-provider claim.
 
@@ -125,12 +128,13 @@ The current evidence supports four bounded contributions:
 
 1. an evaluator/online-state contract that makes authorization visibility
    explicit and prevents evaluator-only fields from entering runtime state;
-2. a paired security–utility evaluation that directly compares policy-only and
-   full provenance/temporal/confirmation enforcement;
+2. a paired security–utility evaluation of policy and full configuration
+   packages, with their prompt-profile difference disclosed and no component-
+   level causal claim;
 3. an intention-to-treat experiment that records official model identity,
    request commitments, isolated effects, and terminal diagnostics while
    retrying only response-less failed rows; and
-4. an empirical account of authorization regime, confirmation burden,
+4. an empirical account of authorization regime, system confirmation incidence,
    benchmark/task heterogeneity, and defense-aware attack budget.
 
 These contributions do not assert first, only, or SOTA status. Preprints are

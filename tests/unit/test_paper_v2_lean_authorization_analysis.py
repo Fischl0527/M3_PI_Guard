@@ -3,14 +3,24 @@ from __future__ import annotations
 import experiments.paper_v2.lean_authorization_analysis as analysis
 
 
-def _row(case_id: str, condition: str, regime: str, value: bool) -> dict:
+def _row(
+    case_id: str,
+    condition: str,
+    regime: str,
+    value: bool,
+    *,
+    benchmark: str = "agentdojo-v1",
+    status: str = "completed",
+) -> dict:
     return {
         "case_id": case_id,
         "condition_id": condition,
         "authorization_regime": regime,
+        "benchmark": benchmark,
         "evaluation_case_type": "attack",
         "unsafe_effect": value,
         "task_completion": False,
+        "operational_status": status,
     }
 
 
@@ -141,7 +151,12 @@ def test_deepseek_only_defers_gemini_without_cross_vendor_claim(monkeypatch) -> 
         ),
     )
     monkeypatch.setattr(analysis, "_regime_extension", lambda rows: {})
+    monkeypatch.setattr(analysis, "_failure_sensitive_security", lambda *args: {})
+    monkeypatch.setattr(
+        analysis, "_benchmark_stratified_comparisons", lambda *args: {}
+    )
     monkeypatch.setattr(analysis, "_burden", lambda rows: {})
+    monkeypatch.setattr(analysis, "_burden_by_case_and_benchmark", lambda rows: {})
     monkeypatch.setattr(analysis, "_heterogeneity", lambda rows: {})
 
     result = analysis.build_analysis(deepseek_only=True)
@@ -242,7 +257,12 @@ def test_partial_gemini_defers_paired_inference(monkeypatch) -> None:
 
     monkeypatch.setattr(analysis, "_comparisons", comparisons)
     monkeypatch.setattr(analysis, "_regime_extension", lambda rows: {})
+    monkeypatch.setattr(analysis, "_failure_sensitive_security", lambda *args: {})
+    monkeypatch.setattr(
+        analysis, "_benchmark_stratified_comparisons", lambda *args: {}
+    )
     monkeypatch.setattr(analysis, "_burden", lambda rows: {})
+    monkeypatch.setattr(analysis, "_burden_by_case_and_benchmark", lambda rows: {})
     monkeypatch.setattr(analysis, "_heterogeneity", lambda rows: {})
 
     result = analysis.build_analysis(allow_partial_gemini=True)
@@ -279,7 +299,12 @@ def test_complete_gemini_enables_cross_vendor_comparisons(monkeypatch) -> None:
         },
     )
     monkeypatch.setattr(analysis, "_regime_extension", lambda rows: {})
+    monkeypatch.setattr(analysis, "_failure_sensitive_security", lambda *args: {})
+    monkeypatch.setattr(
+        analysis, "_benchmark_stratified_comparisons", lambda *args: {}
+    )
     monkeypatch.setattr(analysis, "_burden", lambda rows: {})
+    monkeypatch.setattr(analysis, "_burden_by_case_and_benchmark", lambda rows: {})
     monkeypatch.setattr(analysis, "_heterogeneity", lambda rows: {})
 
     result = analysis.build_analysis(allow_partial_gemini=True)
@@ -324,3 +349,113 @@ def test_burden_distinguishes_event_counts_from_record_incidence() -> None:
     assert result["mean_ask_events_per_record"] == 1.0
     assert result["mean_deny_events_per_record"] == 1.5
     assert result["failure_rate"] == 0.5
+
+
+def test_failure_sensitive_endpoint_keeps_failure_distinct_from_unsafe() -> None:
+    first = ("m3_policy_only", "auto_compiled")
+    second = ("m3_policy_only", "exact_gold")
+    rows = [
+        _row("a", *first, False),
+        _row("a", *second, False, status="parse_failure"),
+        _row("b", *first, True),
+        _row("b", *second, False),
+    ]
+
+    result = analysis._failure_sensitive_security(
+        rows, (("policy_auto_to_exact", first, second),)
+    )
+
+    first_rate = result["condition_rates"]["m3_policy_only__auto_compiled"]
+    second_rate = result["condition_rates"]["m3_policy_only__exact_gold"]
+    paired = result["paired_comparisons"]["policy_auto_to_exact"]
+    assert first_rate["unsafe_effects"] == 1
+    assert first_rate["operational_failures"] == 0
+    assert second_rate["unsafe_effects"] == 0
+    assert second_rate["operational_failures"] == 1
+    assert paired["absolute_difference_second_minus_first"] == 0.0
+    assert "not relabeled" in result["interpretation"]
+
+
+def test_benchmark_stratification_preserves_direction_reversal() -> None:
+    first = ("m3_policy_only", "auto_compiled")
+    second = ("m3_policy_only", "exact_gold")
+    rows = []
+    for benchmark, first_value, second_value in (
+        ("agentdojo-v1", False, True),
+        ("m3-v2", True, False),
+    ):
+        for case_id in ("a", "b"):
+            first_row = _row(
+                f"{benchmark}-{case_id}", *first, False, benchmark=benchmark
+            )
+            second_row = _row(
+                f"{benchmark}-{case_id}", *second, False, benchmark=benchmark
+            )
+            first_row["evaluation_case_type"] = "benign_tool"
+            second_row["evaluation_case_type"] = "benign_tool"
+            first_row["task_completion"] = first_value
+            second_row["task_completion"] = second_value
+            rows.extend((first_row, second_row))
+        for case_id in ("attack-a", "attack-b"):
+            rows.extend(
+                (
+                    _row(
+                        f"{benchmark}-{case_id}",
+                        *first,
+                        False,
+                        benchmark=benchmark,
+                    ),
+                    _row(
+                        f"{benchmark}-{case_id}",
+                        *second,
+                        False,
+                        benchmark=benchmark,
+                    ),
+                )
+            )
+
+    result = analysis._benchmark_stratified_comparisons(
+        rows, (("policy_auto_to_exact", first, second),)
+    )
+
+    assert (
+        result["agentdojo-v1"]["benign_tool_tcr"]["policy_auto_to_exact"][
+            "absolute_difference_second_minus_first"
+        ]
+        == 1.0
+    )
+    assert (
+        result["m3-v2"]["benign_tool_tcr"]["policy_auto_to_exact"][
+            "absolute_difference_second_minus_first"
+        ]
+        == -1.0
+    )
+
+
+def test_burden_stratification_keeps_case_type_and_benchmark() -> None:
+    rows = []
+    for case_type, benchmark in (
+        ("attack", "agentdojo-v1"),
+        ("benign_tool", "m3-v2"),
+    ):
+        rows.append(
+            {
+                "condition_id": "m3_full",
+                "authorization_regime": "auto_compiled",
+                "evaluation_case_type": case_type,
+                "benchmark": benchmark,
+                "ask_count": 1,
+                "deny_count": 0,
+                "operational_status": "completed",
+                "latency_ms": {"total": 10},
+                "token_usage": {"total": 20},
+                "cost": {"amount": 0.1, "currency": "CNY"},
+            }
+        )
+
+    result = analysis._burden_by_case_and_benchmark(rows)
+
+    assert len(result) == 2
+    assert {
+        (item["case_type"], item["benchmark"]) for item in result.values()
+    } == {("attack", "agentdojo-v1"), ("benign_tool", "m3-v2")}

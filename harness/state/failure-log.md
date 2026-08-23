@@ -5431,3 +5431,93 @@ credential, changed a historical ledger, or enabled an external effect.
 - Changed hypothesis: do not retry WPS and do not terminate any WPS process.
   Use DOCX structural/content/font/geometry tests for this bibliography-only
   rebuild and explicitly leave visual pagination unclaimed.
+# 2026-08-23 — Stage 4 manuscript search command used unsupported PowerShell syntax
+
+- Attempt: use a Bash-style brace-expanded Markdown file list in a PowerShell `rg` command.
+- Result: PowerShell parser stopped before execution with `Missing argument in parameter list`.
+- Cause: brace expansion is not PowerShell syntax.
+- Recovery: use `rg` on the manuscript directory with explicit `-g` filename filters; no file or experiment state was changed.
+
+# 2026-08-23 — Stage 4 plan preview used a guessed path
+
+- Attempt: preview the lean execution plan from a guessed documentation path while also reading adjacent tests.
+- Result: that one `Get-Content` target did not exist; the raw-record preview and test reads completed.
+- Cause: the canonical `PLAN_PATH` is declared by `lean_empirical_runner.py` under the protocol/freeze location, not the derived-analysis directory.
+- Recovery: read the declared constant before accessing the plan; no file or experiment state was changed.
+
+# 2026-08-23 — Stage 4 analysis-test patch context was too broad
+
+- Attempt: apply one large test patch containing three repeated mock blocks.
+- Result: `apply_patch` rejected the patch because one expected repeated context did not exactly match the file.
+- Cause: the existing test file uses slightly different line wrapping between the three blocks.
+- Recovery: split the update into small, line-specific patches after inspecting actual locations; the rejected patch made no changes.
+
+# 2026-08-23 — Stage 4 runtime inspection guessed a nonexistent module name
+
+- Attempt: inspect `experiments/paper_v2/lean_empirical_runtime.py` while tracing configuration-package and authorization transforms.
+- Result: `rg` and `Get-Content` reported that the guessed module did not exist; matches in the plan and runner were still returned.
+- Cause: lean execution composes existing runtime helpers from other modules instead of defining that filename.
+- Recovery: trace imports and call sites from `lean_empirical_runner.py`; no code or experiment record was changed.
+
+# 2026-08-23 — Stage 4 Methods revision patch used mismatched wrapped context
+
+- Attempt: apply the complete Methods major-revision edits as one patch.
+- Result: `apply_patch` rejected it at a paragraph whose source line wrap differed from the patch context.
+- Cause: the large patch mixed exact and reconstructed line wrapping.
+- Recovery: apply section-local patches using exact source text; the rejected patch made no manuscript change.
+
+# 2026-08-23 — Stage 4 Discussion patch joined non-adjacent paragraphs
+
+- Attempt: revise the pooled authorization paragraph and later operational paragraph in one patch.
+- Result: `apply_patch` rejected the later context because the source includes an intervening paragraph opener.
+- Cause: the patch context omitted exact surrounding text.
+- Recovery: split the two discussion edits into independent exact-context patches; the rejected patch made no change.
+
+# 2026-08-23 — Stage 4 Introduction revision used reconstructed wrapping
+
+- Attempt: apply all RQ, design, result-framing and contribution edits in one patch.
+- Result: `apply_patch` rejected the first paragraph because its source wraps after a different word.
+- Cause: exact Markdown wrapping was not preserved in the large context.
+- Recovery: use compact phrase-level and section-level patches against exact text; the rejected patch made no change.
+
+# 2026-08-23 — Stage 4 manuscript build rejected an overlength abstract
+
+- Attempt: rebuild the English manuscript and run focused manuscript/table/figure checks after the scientific revision.
+- Result: the builder and four manuscript tests rejected a 289-word abstract against the 250-word JISA limit; the other seven tests, Ruff, and `py_compile` passed.
+- Cause: adding benchmark-reversal and failure-sensitive results made the abstract too detailed.
+- Recovery: compress the abstract while retaining purpose, completed evidence, two central stratified findings, package-confounding boundary, and Gemini limitation; rerun only the failed manuscript tests plus the builder.
+
+# 2026-08-23 — Sanitized email example collided with citation-key validation
+
+- Attempt: rebuild after reducing the abstract below 250 words.
+- Result: abstract-length checks passed, but the manuscript citation scanner parsed `@example` inside a sanitized email address as a missing citation; three dependent manuscript tests failed and five passed.
+- Cause: the builder's citation syntax and the illustrative email both use `@` tokens.
+- Recovery: express the sanitized recipient as `name [at] example.test` without changing the described transform, then rerun only the three failed manuscript checks and builder.
+
+# 2026-08-23 — One manuscript test retained superseded abstract wording
+
+- Attempt: rebuild and rerun the focused manuscript tests after removing the email/citation collision.
+- Result: the manuscript built successfully at 11,267 builder words; seven tests passed and one expected the old phrase `explicitly gold-derived sensitivity condition`.
+- Cause: Stage 4 compressed the abstract to the more precise `oracle-sensitivity exact_gold authorization` wording, but the structural test fixture was not updated.
+- Recovery: update only that assertion to the new bounded terminology and rerun the single failed test.
+
+# 2026-08-23 — Stage 4 manuscript regression-test insertion used stale anchors
+
+- Attempt: insert the new claim-boundary regression test after two guessed existing assertions.
+- Result: `apply_patch` rejected the insertion because those exact assertions are not adjacent in the current test file.
+- Cause: the patch anchor came from an earlier test layout.
+- Recovery: append the independent test after the actual final function; the rejected patch made no change.
+
+# 2026-08-23 — Focused paper test command named a nonexistent file
+
+- Attempt: run the Stage 4 manuscript, analysis, table, and figure test set.
+- Result: pytest stopped before collection because `test_paper_v2_lean_paper_figures.py` does not exist.
+- Cause: the command used a guessed duplicate figure-test filename instead of the repository-listed path.
+- Recovery: list matching test files with `rg --files`, rerun only the four existing focused files, and confirm 25/25 passed.
+
+# 2026-08-23 — PowerShell rejected Unix-style path expansion during a manuscript scan
+
+- Attempt: scan a brace-expanded list and then a shell-expanded `*.md` path with `rg`.
+- Result: PowerShell rejected the brace syntax and Windows passed the wildcard literally.
+- Cause: the command assumed Unix shell expansion semantics.
+- Recovery: use `rg -g '*.md' PATTERN DIRECTORY`; the corrected read-only scan completed.

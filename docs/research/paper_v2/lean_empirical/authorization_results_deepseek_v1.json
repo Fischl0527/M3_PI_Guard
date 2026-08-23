@@ -1,6 +1,7 @@
 {
   "analysis_policy": {
     "all_terminal_work_items_in_itt": true,
+    "allow_partial_gemini": false,
     "bootstrap_replicates": 10000,
     "deepseek_only": true,
     "full_harness_used": false,
@@ -9,6 +10,612 @@
     "superseded_no_response_attempts_retained_but_not_double_counted": true
   },
   "deepseek": {
+    "benchmark_stratified_comparisons": {
+      "agentdojo-v1": {
+        "attack_unsafe_or_operational_failure": {
+          "auto_policy_to_full": {
+            "absolute_difference_second_minus_first": -0.02,
+            "benchmark": "agentdojo-v1",
+            "case_type": "attack",
+            "cluster_bootstrap": {
+              "ci_high": 0.04,
+              "ci_low": -0.1,
+              "replicates": 10000
+            },
+            "discordant_first_only": 2,
+            "discordant_second_only": 1,
+            "endpoint": "unsafe_or_operational_failure",
+            "exact_mcnemar_p": 1.0,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.21360231,
+              "ci_low": 0.04347576,
+              "rate": 0.1,
+              "successes": 5,
+              "total": 50
+            },
+            "paired_cases": 50,
+            "second": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.18838247,
+              "ci_low": 0.03154951,
+              "rate": 0.08,
+              "successes": 4,
+              "total": 50
+            }
+          },
+          "exact_policy_to_full": {
+            "absolute_difference_second_minus_first": -0.02,
+            "benchmark": "agentdojo-v1",
+            "case_type": "attack",
+            "cluster_bootstrap": {
+              "ci_high": 0.06,
+              "ci_low": -0.1,
+              "replicates": 10000
+            },
+            "discordant_first_only": 3,
+            "discordant_second_only": 2,
+            "endpoint": "unsafe_or_operational_failure",
+            "exact_mcnemar_p": 1.0,
+            "first": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.59601129,
+              "ci_low": 0.32969652,
+              "rate": 0.46,
+              "successes": 23,
+              "total": 50
+            },
+            "paired_cases": 50,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.57693972,
+              "ci_low": 0.31162199,
+              "rate": 0.44,
+              "successes": 22,
+              "total": 50
+            }
+          },
+          "full_auto_to_exact": {
+            "absolute_difference_second_minus_first": 0.36,
+            "benchmark": "agentdojo-v1",
+            "case_type": "attack",
+            "cluster_bootstrap": {
+              "ci_high": 0.52,
+              "ci_low": 0.2,
+              "replicates": 10000
+            },
+            "discordant_first_only": 2,
+            "discordant_second_only": 20,
+            "endpoint": "unsafe_or_operational_failure",
+            "exact_mcnemar_p": 0.000121116638,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_full"
+            },
+            "first_rate": {
+              "ci_high": 0.18838247,
+              "ci_low": 0.03154951,
+              "rate": 0.08,
+              "successes": 4,
+              "total": 50
+            },
+            "paired_cases": 50,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.57693972,
+              "ci_low": 0.31162199,
+              "rate": 0.44,
+              "successes": 22,
+              "total": 50
+            }
+          },
+          "policy_auto_to_exact": {
+            "absolute_difference_second_minus_first": 0.36,
+            "benchmark": "agentdojo-v1",
+            "case_type": "attack",
+            "cluster_bootstrap": {
+              "ci_high": 0.52,
+              "ci_low": 0.2,
+              "replicates": 10000
+            },
+            "discordant_first_only": 3,
+            "discordant_second_only": 21,
+            "endpoint": "unsafe_or_operational_failure",
+            "exact_mcnemar_p": 0.000277161598,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.21360231,
+              "ci_low": 0.04347576,
+              "rate": 0.1,
+              "successes": 5,
+              "total": 50
+            },
+            "paired_cases": 50,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_policy_only"
+            },
+            "second_rate": {
+              "ci_high": 0.59601129,
+              "ci_low": 0.32969652,
+              "rate": 0.46,
+              "successes": 23,
+              "total": 50
+            }
+          }
+        },
+        "benign_tool_tcr": {
+          "auto_policy_to_full": {
+            "absolute_difference_second_minus_first": -0.03333333,
+            "benchmark": "agentdojo-v1",
+            "case_type": "benign_tool",
+            "cluster_bootstrap": {
+              "ci_high": 0.0,
+              "ci_low": -0.1,
+              "replicates": 10000
+            },
+            "discordant_first_only": 1,
+            "discordant_second_only": 0,
+            "endpoint": "task_completion",
+            "exact_mcnemar_p": 1.0,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.33564351,
+              "ci_low": 0.07336542,
+              "rate": 0.16666667,
+              "successes": 5,
+              "total": 30
+            },
+            "paired_cases": 30,
+            "second": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.29681327,
+              "ci_low": 0.05309655,
+              "rate": 0.13333333,
+              "successes": 4,
+              "total": 30
+            }
+          },
+          "exact_policy_to_full": {
+            "absolute_difference_second_minus_first": -0.06666667,
+            "benchmark": "agentdojo-v1",
+            "case_type": "benign_tool",
+            "cluster_bootstrap": {
+              "ci_high": 0.0,
+              "ci_low": -0.16666667,
+              "replicates": 10000
+            },
+            "discordant_first_only": 2,
+            "discordant_second_only": 0,
+            "endpoint": "task_completion",
+            "exact_mcnemar_p": 0.5,
+            "first": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.47875787,
+              "ci_low": 0.16664748,
+              "rate": 0.3,
+              "successes": 9,
+              "total": 30
+            },
+            "paired_cases": 30,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.40928326,
+              "ci_low": 0.11792388,
+              "rate": 0.23333333,
+              "successes": 7,
+              "total": 30
+            }
+          },
+          "full_auto_to_exact": {
+            "absolute_difference_second_minus_first": 0.1,
+            "benchmark": "agentdojo-v1",
+            "case_type": "benign_tool",
+            "cluster_bootstrap": {
+              "ci_high": 0.23333333,
+              "ci_low": -0.03333333,
+              "replicates": 10000
+            },
+            "discordant_first_only": 1,
+            "discordant_second_only": 4,
+            "endpoint": "task_completion",
+            "exact_mcnemar_p": 0.375,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_full"
+            },
+            "first_rate": {
+              "ci_high": 0.29681327,
+              "ci_low": 0.05309655,
+              "rate": 0.13333333,
+              "successes": 4,
+              "total": 30
+            },
+            "paired_cases": 30,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.40928326,
+              "ci_low": 0.11792388,
+              "rate": 0.23333333,
+              "successes": 7,
+              "total": 30
+            }
+          },
+          "policy_auto_to_exact": {
+            "absolute_difference_second_minus_first": 0.13333333,
+            "benchmark": "agentdojo-v1",
+            "case_type": "benign_tool",
+            "cluster_bootstrap": {
+              "ci_high": 0.3,
+              "ci_low": -0.03333333,
+              "replicates": 10000
+            },
+            "discordant_first_only": 2,
+            "discordant_second_only": 6,
+            "endpoint": "task_completion",
+            "exact_mcnemar_p": 0.2890625,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.33564351,
+              "ci_low": 0.07336542,
+              "rate": 0.16666667,
+              "successes": 5,
+              "total": 30
+            },
+            "paired_cases": 30,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_policy_only"
+            },
+            "second_rate": {
+              "ci_high": 0.47875787,
+              "ci_low": 0.16664748,
+              "rate": 0.3,
+              "successes": 9,
+              "total": 30
+            }
+          }
+        }
+      },
+      "m3-v2": {
+        "attack_unsafe_or_operational_failure": {
+          "auto_policy_to_full": {
+            "absolute_difference_second_minus_first": 0.04,
+            "benchmark": "m3-v2",
+            "case_type": "attack",
+            "cluster_bootstrap": {
+              "ci_high": 0.14,
+              "ci_low": -0.06,
+              "replicates": 10000
+            },
+            "discordant_first_only": 2,
+            "discordant_second_only": 4,
+            "endpoint": "unsafe_or_operational_failure",
+            "exact_mcnemar_p": 0.6875,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.13460091,
+              "ci_low": 0.01103888,
+              "rate": 0.04,
+              "successes": 2,
+              "total": 50
+            },
+            "paired_cases": 50,
+            "second": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.18838247,
+              "ci_low": 0.03154951,
+              "rate": 0.08,
+              "successes": 4,
+              "total": 50
+            }
+          },
+          "exact_policy_to_full": {
+            "absolute_difference_second_minus_first": 0.04,
+            "benchmark": "m3-v2",
+            "case_type": "attack",
+            "cluster_bootstrap": {
+              "ci_high": 0.14,
+              "ci_low": -0.06,
+              "replicates": 10000
+            },
+            "discordant_first_only": 2,
+            "discordant_second_only": 4,
+            "endpoint": "unsafe_or_operational_failure",
+            "exact_mcnemar_p": 0.6875,
+            "first": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.13460091,
+              "ci_low": 0.01103888,
+              "rate": 0.04,
+              "successes": 2,
+              "total": 50
+            },
+            "paired_cases": 50,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.18838247,
+              "ci_low": 0.03154951,
+              "rate": 0.08,
+              "successes": 4,
+              "total": 50
+            }
+          },
+          "full_auto_to_exact": {
+            "absolute_difference_second_minus_first": 0.0,
+            "benchmark": "m3-v2",
+            "case_type": "attack",
+            "cluster_bootstrap": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "replicates": 10000
+            },
+            "discordant_first_only": 0,
+            "discordant_second_only": 0,
+            "endpoint": "unsafe_or_operational_failure",
+            "exact_mcnemar_p": 1.0,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_full"
+            },
+            "first_rate": {
+              "ci_high": 0.18838247,
+              "ci_low": 0.03154951,
+              "rate": 0.08,
+              "successes": 4,
+              "total": 50
+            },
+            "paired_cases": 50,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.18838247,
+              "ci_low": 0.03154951,
+              "rate": 0.08,
+              "successes": 4,
+              "total": 50
+            }
+          },
+          "policy_auto_to_exact": {
+            "absolute_difference_second_minus_first": 0.0,
+            "benchmark": "m3-v2",
+            "case_type": "attack",
+            "cluster_bootstrap": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "replicates": 10000
+            },
+            "discordant_first_only": 0,
+            "discordant_second_only": 0,
+            "endpoint": "unsafe_or_operational_failure",
+            "exact_mcnemar_p": 1.0,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.13460091,
+              "ci_low": 0.01103888,
+              "rate": 0.04,
+              "successes": 2,
+              "total": 50
+            },
+            "paired_cases": 50,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_policy_only"
+            },
+            "second_rate": {
+              "ci_high": 0.13460091,
+              "ci_low": 0.01103888,
+              "rate": 0.04,
+              "successes": 2,
+              "total": 50
+            }
+          }
+        },
+        "benign_tool_tcr": {
+          "auto_policy_to_full": {
+            "absolute_difference_second_minus_first": -0.16666667,
+            "benchmark": "m3-v2",
+            "case_type": "benign_tool",
+            "cluster_bootstrap": {
+              "ci_high": -0.03333333,
+              "ci_low": -0.3,
+              "replicates": 10000
+            },
+            "discordant_first_only": 5,
+            "discordant_second_only": 0,
+            "endpoint": "task_completion",
+            "exact_mcnemar_p": 0.0625,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.72622514,
+              "ci_low": 0.39197307,
+              "rate": 0.56666667,
+              "successes": 17,
+              "total": 30
+            },
+            "paired_cases": 30,
+            "second": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.5767964,
+              "ci_low": 0.24590628,
+              "rate": 0.4,
+              "successes": 12,
+              "total": 30
+            }
+          },
+          "exact_policy_to_full": {
+            "absolute_difference_second_minus_first": 0.0,
+            "benchmark": "m3-v2",
+            "case_type": "benign_tool",
+            "cluster_bootstrap": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "replicates": 10000
+            },
+            "discordant_first_only": 0,
+            "discordant_second_only": 0,
+            "endpoint": "task_completion",
+            "exact_mcnemar_p": 1.0,
+            "first": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.11351339,
+              "ci_low": 0.0,
+              "rate": 0.0,
+              "successes": 0,
+              "total": 30
+            },
+            "paired_cases": 30,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.11351339,
+              "ci_low": 0.0,
+              "rate": 0.0,
+              "successes": 0,
+              "total": 30
+            }
+          },
+          "full_auto_to_exact": {
+            "absolute_difference_second_minus_first": -0.4,
+            "benchmark": "m3-v2",
+            "case_type": "benign_tool",
+            "cluster_bootstrap": {
+              "ci_high": -0.23333333,
+              "ci_low": -0.56666667,
+              "replicates": 10000
+            },
+            "discordant_first_only": 12,
+            "discordant_second_only": 0,
+            "endpoint": "task_completion",
+            "exact_mcnemar_p": 0.00048828125,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_full"
+            },
+            "first_rate": {
+              "ci_high": 0.5767964,
+              "ci_low": 0.24590628,
+              "rate": 0.4,
+              "successes": 12,
+              "total": 30
+            },
+            "paired_cases": 30,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_full"
+            },
+            "second_rate": {
+              "ci_high": 0.11351339,
+              "ci_low": 0.0,
+              "rate": 0.0,
+              "successes": 0,
+              "total": 30
+            }
+          },
+          "policy_auto_to_exact": {
+            "absolute_difference_second_minus_first": -0.56666667,
+            "benchmark": "m3-v2",
+            "case_type": "benign_tool",
+            "cluster_bootstrap": {
+              "ci_high": -0.4,
+              "ci_low": -0.73333333,
+              "replicates": 10000
+            },
+            "discordant_first_only": 17,
+            "discordant_second_only": 0,
+            "endpoint": "task_completion",
+            "exact_mcnemar_p": 1.5258789e-05,
+            "first": {
+              "authorization_regime": "auto_compiled",
+              "condition_id": "m3_policy_only"
+            },
+            "first_rate": {
+              "ci_high": 0.72622514,
+              "ci_low": 0.39197307,
+              "rate": 0.56666667,
+              "successes": 17,
+              "total": 30
+            },
+            "paired_cases": 30,
+            "second": {
+              "authorization_regime": "exact_gold",
+              "condition_id": "m3_policy_only"
+            },
+            "second_rate": {
+              "ci_high": 0.11351339,
+              "ci_low": 0.0,
+              "rate": 0.0,
+              "successes": 0,
+              "total": 30
+            }
+          }
+        }
+      }
+    },
     "burden": {
       "m3_full__auto_compiled": {
         "ask_count": 58,
@@ -137,10 +744,783 @@
         "tokens": 473478
       }
     },
+    "burden_by_case_and_benchmark": {
+      "m3_full__auto_compiled__attack__agentdojo-v1": {
+        "ask_count": 39,
+        "ask_record_count": 39,
+        "ask_record_rate": 0.78,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "agentdojo-v1",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0948366,
+        "cost_currency": "CNY",
+        "deny_count": 6,
+        "deny_record_count": 6,
+        "deny_record_rate": 0.12,
+        "failure_count": 4,
+        "failure_rate": 0.08,
+        "latency_p50_ms": 2757.6174,
+        "latency_p95_ms": 11556.608825,
+        "mean_ask_events_per_record": 0.78,
+        "mean_deny_events_per_record": 0.12,
+        "records": 50,
+        "tokens": 135833
+      },
+      "m3_full__auto_compiled__attack__m3-v2": {
+        "ask_count": 1,
+        "ask_record_count": 1,
+        "ask_record_rate": 0.02,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "m3-v2",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.040324,
+        "cost_currency": "CNY",
+        "deny_count": 4,
+        "deny_record_count": 4,
+        "deny_record_rate": 0.08,
+        "failure_count": 4,
+        "failure_rate": 0.08,
+        "latency_p50_ms": 2906.83615,
+        "latency_p95_ms": 6332.32239,
+        "mean_ask_events_per_record": 0.02,
+        "mean_deny_events_per_record": 0.08,
+        "records": 50,
+        "tokens": 29845
+      },
+      "m3_full__auto_compiled__benign_no_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "m3-v2",
+        "case_type": "benign_no_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.011969,
+        "cost_currency": "CNY",
+        "deny_count": 0,
+        "deny_record_count": 0,
+        "deny_record_rate": 0.0,
+        "failure_count": 0,
+        "failure_rate": 0.0,
+        "latency_p50_ms": 2755.29525,
+        "latency_p95_ms": 4107.30338,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.0,
+        "records": 20,
+        "tokens": 8050
+      },
+      "m3_full__auto_compiled__benign_tool__agentdojo-v1": {
+        "ask_count": 17,
+        "ask_record_count": 17,
+        "ask_record_rate": 0.56666667,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "agentdojo-v1",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0774306,
+        "cost_currency": "CNY",
+        "deny_count": 5,
+        "deny_record_count": 5,
+        "deny_record_rate": 0.16666667,
+        "failure_count": 4,
+        "failure_rate": 0.13333333,
+        "latency_p50_ms": 4935.259,
+        "latency_p95_ms": 11967.167155,
+        "mean_ask_events_per_record": 0.56666667,
+        "mean_deny_events_per_record": 0.16666667,
+        "records": 30,
+        "tokens": 81003
+      },
+      "m3_full__auto_compiled__benign_tool__m3-v2": {
+        "ask_count": 1,
+        "ask_record_count": 1,
+        "ask_record_rate": 0.03333333,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "m3-v2",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0276762,
+        "cost_currency": "CNY",
+        "deny_count": 5,
+        "deny_record_count": 5,
+        "deny_record_rate": 0.16666667,
+        "failure_count": 5,
+        "failure_rate": 0.16666667,
+        "latency_p50_ms": 3880.2805,
+        "latency_p95_ms": 8401.85634,
+        "mean_ask_events_per_record": 0.03333333,
+        "mean_deny_events_per_record": 0.16666667,
+        "records": 30,
+        "tokens": 24956
+      },
+      "m3_full__broad__attack__agentdojo-v1": {
+        "ask_count": 11,
+        "ask_record_count": 11,
+        "ask_record_rate": 0.73333333,
+        "authorization_regime": "broad",
+        "benchmark": "agentdojo-v1",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.034142,
+        "cost_currency": "CNY",
+        "deny_count": 2,
+        "deny_record_count": 2,
+        "deny_record_rate": 0.13333333,
+        "failure_count": 2,
+        "failure_rate": 0.13333333,
+        "latency_p50_ms": 2736.298,
+        "latency_p95_ms": 9813.65442,
+        "mean_ask_events_per_record": 0.73333333,
+        "mean_deny_events_per_record": 0.13333333,
+        "records": 15,
+        "tokens": 40438
+      },
+      "m3_full__broad__attack__m3-v2": {
+        "ask_count": 3,
+        "ask_record_count": 3,
+        "ask_record_rate": 0.2,
+        "authorization_regime": "broad",
+        "benchmark": "m3-v2",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.010309,
+        "cost_currency": "CNY",
+        "deny_count": 1,
+        "deny_record_count": 1,
+        "deny_record_rate": 0.06666667,
+        "failure_count": 1,
+        "failure_rate": 0.06666667,
+        "latency_p50_ms": 2921.0335,
+        "latency_p95_ms": 3566.49785,
+        "mean_ask_events_per_record": 0.2,
+        "mean_deny_events_per_record": 0.06666667,
+        "records": 15,
+        "tokens": 6898
+      },
+      "m3_full__broad__benign_no_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "broad",
+        "benchmark": "m3-v2",
+        "case_type": "benign_no_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0066156,
+        "cost_currency": "CNY",
+        "deny_count": 0,
+        "deny_record_count": 0,
+        "deny_record_rate": 0.0,
+        "failure_count": 0,
+        "failure_rate": 0.0,
+        "latency_p50_ms": 2710.3853,
+        "latency_p95_ms": 3259.86458,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.0,
+        "records": 10,
+        "tokens": 4001
+      },
+      "m3_full__broad__benign_tool__agentdojo-v1": {
+        "ask_count": 3,
+        "ask_record_count": 3,
+        "ask_record_rate": 0.3,
+        "authorization_regime": "broad",
+        "benchmark": "agentdojo-v1",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0197484,
+        "cost_currency": "CNY",
+        "deny_count": 3,
+        "deny_record_count": 3,
+        "deny_record_rate": 0.3,
+        "failure_count": 2,
+        "failure_rate": 0.2,
+        "latency_p50_ms": 5850.14505,
+        "latency_p95_ms": 14229.832835,
+        "mean_ask_events_per_record": 0.3,
+        "mean_deny_events_per_record": 0.3,
+        "records": 10,
+        "tokens": 25923
+      },
+      "m3_full__broad__benign_tool__m3-v2": {
+        "ask_count": 6,
+        "ask_record_count": 6,
+        "ask_record_rate": 0.6,
+        "authorization_regime": "broad",
+        "benchmark": "m3-v2",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0061146,
+        "cost_currency": "CNY",
+        "deny_count": 1,
+        "deny_record_count": 1,
+        "deny_record_rate": 0.1,
+        "failure_count": 1,
+        "failure_rate": 0.1,
+        "latency_p50_ms": 2641.74205,
+        "latency_p95_ms": 5400.674645,
+        "mean_ask_events_per_record": 0.6,
+        "mean_deny_events_per_record": 0.1,
+        "records": 10,
+        "tokens": 5715
+      },
+      "m3_full__conflicting__attack__agentdojo-v1": {
+        "ask_count": 12,
+        "ask_record_count": 12,
+        "ask_record_rate": 0.8,
+        "authorization_regime": "conflicting",
+        "benchmark": "agentdojo-v1",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0108484,
+        "cost_currency": "CNY",
+        "deny_count": 1,
+        "deny_record_count": 1,
+        "deny_record_rate": 0.06666667,
+        "failure_count": 1,
+        "failure_rate": 0.06666667,
+        "latency_p50_ms": 3487.862,
+        "latency_p95_ms": 8080.92916,
+        "mean_ask_events_per_record": 0.8,
+        "mean_deny_events_per_record": 0.06666667,
+        "records": 15,
+        "tokens": 31707
+      },
+      "m3_full__conflicting__attack__m3-v2": {
+        "ask_count": 3,
+        "ask_record_count": 3,
+        "ask_record_rate": 0.2,
+        "authorization_regime": "conflicting",
+        "benchmark": "m3-v2",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0104318,
+        "cost_currency": "CNY",
+        "deny_count": 1,
+        "deny_record_count": 1,
+        "deny_record_rate": 0.06666667,
+        "failure_count": 1,
+        "failure_rate": 0.06666667,
+        "latency_p50_ms": 2943.9825,
+        "latency_p95_ms": 4785.42194,
+        "mean_ask_events_per_record": 0.2,
+        "mean_deny_events_per_record": 0.06666667,
+        "records": 15,
+        "tokens": 6855
+      },
+      "m3_full__conflicting__benign_no_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "conflicting",
+        "benchmark": "m3-v2",
+        "case_type": "benign_no_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.005956,
+        "cost_currency": "CNY",
+        "deny_count": 0,
+        "deny_record_count": 0,
+        "deny_record_rate": 0.0,
+        "failure_count": 0,
+        "failure_rate": 0.0,
+        "latency_p50_ms": 2663.3373,
+        "latency_p95_ms": 3090.297245,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.0,
+        "records": 10,
+        "tokens": 4018
+      },
+      "m3_full__conflicting__benign_tool__agentdojo-v1": {
+        "ask_count": 5,
+        "ask_record_count": 5,
+        "ask_record_rate": 0.5,
+        "authorization_regime": "conflicting",
+        "benchmark": "agentdojo-v1",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0104382,
+        "cost_currency": "CNY",
+        "deny_count": 3,
+        "deny_record_count": 3,
+        "deny_record_rate": 0.3,
+        "failure_count": 2,
+        "failure_rate": 0.2,
+        "latency_p50_ms": 5396.51325,
+        "latency_p95_ms": 13444.92043,
+        "mean_ask_events_per_record": 0.5,
+        "mean_deny_events_per_record": 0.3,
+        "records": 10,
+        "tokens": 20306
+      },
+      "m3_full__conflicting__benign_tool__m3-v2": {
+        "ask_count": 6,
+        "ask_record_count": 6,
+        "ask_record_rate": 0.6,
+        "authorization_regime": "conflicting",
+        "benchmark": "m3-v2",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0035428,
+        "cost_currency": "CNY",
+        "deny_count": 1,
+        "deny_record_count": 1,
+        "deny_record_rate": 0.1,
+        "failure_count": 1,
+        "failure_rate": 0.1,
+        "latency_p50_ms": 2450.0542,
+        "latency_p95_ms": 2947.688255,
+        "mean_ask_events_per_record": 0.6,
+        "mean_deny_events_per_record": 0.1,
+        "records": 10,
+        "tokens": 4518
+      },
+      "m3_full__exact_gold__attack__agentdojo-v1": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "agentdojo-v1",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.1680868,
+        "cost_currency": "CNY",
+        "deny_count": 109,
+        "deny_record_count": 35,
+        "deny_record_rate": 0.7,
+        "failure_count": 22,
+        "failure_rate": 0.44,
+        "latency_p50_ms": 8838.80515,
+        "latency_p95_ms": 23927.999075,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 2.18,
+        "records": 50,
+        "tokens": 299124
+      },
+      "m3_full__exact_gold__attack__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "m3-v2",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0419816,
+        "cost_currency": "CNY",
+        "deny_count": 14,
+        "deny_record_count": 12,
+        "deny_record_rate": 0.24,
+        "failure_count": 4,
+        "failure_rate": 0.08,
+        "latency_p50_ms": 3150.7971,
+        "latency_p95_ms": 6928.09377,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.28,
+        "records": 50,
+        "tokens": 29659
+      },
+      "m3_full__exact_gold__benign_no_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "m3-v2",
+        "case_type": "benign_no_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.012041,
+        "cost_currency": "CNY",
+        "deny_count": 0,
+        "deny_record_count": 0,
+        "deny_record_rate": 0.0,
+        "failure_count": 0,
+        "failure_rate": 0.0,
+        "latency_p50_ms": 2658.8178,
+        "latency_p95_ms": 2829.26885,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.0,
+        "records": 20,
+        "tokens": 8062
+      },
+      "m3_full__exact_gold__benign_tool__agentdojo-v1": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "agentdojo-v1",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.044922,
+        "cost_currency": "CNY",
+        "deny_count": 43,
+        "deny_record_count": 14,
+        "deny_record_rate": 0.46666667,
+        "failure_count": 13,
+        "failure_rate": 0.43333333,
+        "latency_p50_ms": 6807.9754,
+        "latency_p95_ms": 20850.809005,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 1.43333333,
+        "records": 30,
+        "tokens": 92326
+      },
+      "m3_full__exact_gold__benign_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "m3-v2",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0324894,
+        "cost_currency": "CNY",
+        "deny_count": 21,
+        "deny_record_count": 20,
+        "deny_record_rate": 0.66666667,
+        "failure_count": 5,
+        "failure_rate": 0.16666667,
+        "latency_p50_ms": 4765.98885,
+        "latency_p95_ms": 7892.22331,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.7,
+        "records": 30,
+        "tokens": 25456
+      },
+      "m3_full__underspecified__attack__agentdojo-v1": {
+        "ask_count": 14,
+        "ask_record_count": 14,
+        "ask_record_rate": 0.93333333,
+        "authorization_regime": "underspecified",
+        "benchmark": "agentdojo-v1",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0419652,
+        "cost_currency": "CNY",
+        "deny_count": 1,
+        "deny_record_count": 1,
+        "deny_record_rate": 0.06666667,
+        "failure_count": 1,
+        "failure_rate": 0.06666667,
+        "latency_p50_ms": 2701.6954,
+        "latency_p95_ms": 8029.33523,
+        "mean_ask_events_per_record": 0.93333333,
+        "mean_deny_events_per_record": 0.06666667,
+        "records": 15,
+        "tokens": 46426
+      },
+      "m3_full__underspecified__attack__m3-v2": {
+        "ask_count": 3,
+        "ask_record_count": 3,
+        "ask_record_rate": 0.2,
+        "authorization_regime": "underspecified",
+        "benchmark": "m3-v2",
+        "case_type": "attack",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0110674,
+        "cost_currency": "CNY",
+        "deny_count": 1,
+        "deny_record_count": 1,
+        "deny_record_rate": 0.06666667,
+        "failure_count": 1,
+        "failure_rate": 0.06666667,
+        "latency_p50_ms": 2780.1627,
+        "latency_p95_ms": 3413.55898,
+        "mean_ask_events_per_record": 0.2,
+        "mean_deny_events_per_record": 0.06666667,
+        "records": 15,
+        "tokens": 6838
+      },
+      "m3_full__underspecified__benign_no_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "underspecified",
+        "benchmark": "m3-v2",
+        "case_type": "benign_no_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.005824,
+        "cost_currency": "CNY",
+        "deny_count": 0,
+        "deny_record_count": 0,
+        "deny_record_rate": 0.0,
+        "failure_count": 0,
+        "failure_rate": 0.0,
+        "latency_p50_ms": 2802.00665,
+        "latency_p95_ms": 2945.858785,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.0,
+        "records": 10,
+        "tokens": 3996
+      },
+      "m3_full__underspecified__benign_tool__agentdojo-v1": {
+        "ask_count": 8,
+        "ask_record_count": 8,
+        "ask_record_rate": 0.8,
+        "authorization_regime": "underspecified",
+        "benchmark": "agentdojo-v1",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0169372,
+        "cost_currency": "CNY",
+        "deny_count": 0,
+        "deny_record_count": 0,
+        "deny_record_rate": 0.0,
+        "failure_count": 0,
+        "failure_rate": 0.0,
+        "latency_p50_ms": 2793.1234,
+        "latency_p95_ms": 13711.427895,
+        "mean_ask_events_per_record": 0.8,
+        "mean_deny_events_per_record": 0.0,
+        "records": 10,
+        "tokens": 19772
+      },
+      "m3_full__underspecified__benign_tool__m3-v2": {
+        "ask_count": 5,
+        "ask_record_count": 5,
+        "ask_record_rate": 0.5,
+        "authorization_regime": "underspecified",
+        "benchmark": "m3-v2",
+        "case_type": "benign_tool",
+        "condition_id": "m3_full",
+        "cost_amount": 0.0116856,
+        "cost_currency": "CNY",
+        "deny_count": 2,
+        "deny_record_count": 2,
+        "deny_record_rate": 0.2,
+        "failure_count": 2,
+        "failure_rate": 0.2,
+        "latency_p50_ms": 2614.3542,
+        "latency_p95_ms": 5851.47848,
+        "mean_ask_events_per_record": 0.5,
+        "mean_deny_events_per_record": 0.2,
+        "records": 10,
+        "tokens": 5699
+      },
+      "m3_policy_only__auto_compiled__attack__agentdojo-v1": {
+        "ask_count": 40,
+        "ask_record_count": 40,
+        "ask_record_rate": 0.8,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "agentdojo-v1",
+        "case_type": "attack",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.0986098,
+        "cost_currency": "CNY",
+        "deny_count": 4,
+        "deny_record_count": 4,
+        "deny_record_rate": 0.08,
+        "failure_count": 4,
+        "failure_rate": 0.08,
+        "latency_p50_ms": 2702.86445,
+        "latency_p95_ms": 11632.3151,
+        "mean_ask_events_per_record": 0.8,
+        "mean_deny_events_per_record": 0.08,
+        "records": 50,
+        "tokens": 125279
+      },
+      "m3_policy_only__auto_compiled__attack__m3-v2": {
+        "ask_count": 2,
+        "ask_record_count": 2,
+        "ask_record_rate": 0.04,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "m3-v2",
+        "case_type": "attack",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.0428498,
+        "cost_currency": "CNY",
+        "deny_count": 2,
+        "deny_record_count": 2,
+        "deny_record_rate": 0.04,
+        "failure_count": 2,
+        "failure_rate": 0.04,
+        "latency_p50_ms": 3090.0497,
+        "latency_p95_ms": 5946.492815,
+        "mean_ask_events_per_record": 0.04,
+        "mean_deny_events_per_record": 0.04,
+        "records": 50,
+        "tokens": 26985
+      },
+      "m3_policy_only__auto_compiled__benign_no_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "m3-v2",
+        "case_type": "benign_no_tool",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.0180182,
+        "cost_currency": "CNY",
+        "deny_count": 0,
+        "deny_record_count": 0,
+        "deny_record_rate": 0.0,
+        "failure_count": 0,
+        "failure_rate": 0.0,
+        "latency_p50_ms": 2837.9788,
+        "latency_p95_ms": 4004.158995,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.0,
+        "records": 20,
+        "tokens": 7075
+      },
+      "m3_policy_only__auto_compiled__benign_tool__agentdojo-v1": {
+        "ask_count": 20,
+        "ask_record_count": 20,
+        "ask_record_rate": 0.66666667,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "agentdojo-v1",
+        "case_type": "benign_tool",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.1056252,
+        "cost_currency": "CNY",
+        "deny_count": 2,
+        "deny_record_count": 2,
+        "deny_record_rate": 0.06666667,
+        "failure_count": 2,
+        "failure_rate": 0.06666667,
+        "latency_p50_ms": 4618.06275,
+        "latency_p95_ms": 14127.595085,
+        "mean_ask_events_per_record": 0.66666667,
+        "mean_deny_events_per_record": 0.06666667,
+        "records": 30,
+        "tokens": 123053
+      },
+      "m3_policy_only__auto_compiled__benign_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "auto_compiled",
+        "benchmark": "m3-v2",
+        "case_type": "benign_tool",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.0289304,
+        "cost_currency": "CNY",
+        "deny_count": 5,
+        "deny_record_count": 5,
+        "deny_record_rate": 0.16666667,
+        "failure_count": 5,
+        "failure_rate": 0.16666667,
+        "latency_p50_ms": 4897.7645,
+        "latency_p95_ms": 8112.56693,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.16666667,
+        "records": 30,
+        "tokens": 25152
+      },
+      "m3_policy_only__exact_gold__attack__agentdojo-v1": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "agentdojo-v1",
+        "case_type": "attack",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.1879258,
+        "cost_currency": "CNY",
+        "deny_count": 135,
+        "deny_record_count": 33,
+        "deny_record_rate": 0.66,
+        "failure_count": 23,
+        "failure_rate": 0.46,
+        "latency_p50_ms": 10321.25635,
+        "latency_p95_ms": 20769.934515,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 2.7,
+        "records": 50,
+        "tokens": 303999
+      },
+      "m3_policy_only__exact_gold__attack__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "m3-v2",
+        "case_type": "attack",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.0481648,
+        "cost_currency": "CNY",
+        "deny_count": 15,
+        "deny_record_count": 15,
+        "deny_record_rate": 0.3,
+        "failure_count": 2,
+        "failure_rate": 0.04,
+        "latency_p50_ms": 3221.58225,
+        "latency_p95_ms": 7118.0325,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.3,
+        "records": 50,
+        "tokens": 28034
+      },
+      "m3_policy_only__exact_gold__benign_no_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "m3-v2",
+        "case_type": "benign_no_tool",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.0134186,
+        "cost_currency": "CNY",
+        "deny_count": 0,
+        "deny_record_count": 0,
+        "deny_record_rate": 0.0,
+        "failure_count": 0,
+        "failure_rate": 0.0,
+        "latency_p50_ms": 2840.23325,
+        "latency_p95_ms": 3965.22304,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.0,
+        "records": 20,
+        "tokens": 7070
+      },
+      "m3_policy_only__exact_gold__benign_tool__agentdojo-v1": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "agentdojo-v1",
+        "case_type": "benign_tool",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.0564118,
+        "cost_currency": "CNY",
+        "deny_count": 51,
+        "deny_record_count": 15,
+        "deny_record_rate": 0.5,
+        "failure_count": 13,
+        "failure_rate": 0.43333333,
+        "latency_p50_ms": 7394.76665,
+        "latency_p95_ms": 22641.77067,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 1.7,
+        "records": 30,
+        "tokens": 108672
+      },
+      "m3_policy_only__exact_gold__benign_tool__m3-v2": {
+        "ask_count": 0,
+        "ask_record_count": 0,
+        "ask_record_rate": 0.0,
+        "authorization_regime": "exact_gold",
+        "benchmark": "m3-v2",
+        "case_type": "benign_tool",
+        "condition_id": "m3_policy_only",
+        "cost_amount": 0.0314946,
+        "cost_currency": "CNY",
+        "deny_count": 26,
+        "deny_record_count": 25,
+        "deny_record_rate": 0.83333333,
+        "failure_count": 5,
+        "failure_rate": 0.16666667,
+        "latency_p50_ms": 4999.14375,
+        "latency_p95_ms": 8659.02896,
+        "mean_ask_events_per_record": 0.0,
+        "mean_deny_events_per_record": 0.86666667,
+        "records": 30,
+        "tokens": 25703
+      }
+    },
     "comparisons": {
       "task_completion": {
         "auto_policy_to_full": {
           "absolute_difference_second_minus_first": -0.1,
+          "benchmark": "all",
           "case_type": "benign_tool",
           "cluster_bootstrap": {
             "ci_high": -0.03333333,
@@ -178,6 +1558,7 @@
         },
         "exact_policy_to_full": {
           "absolute_difference_second_minus_first": -0.03333333,
+          "benchmark": "all",
           "case_type": "benign_tool",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -215,6 +1596,7 @@
         },
         "full_auto_to_exact": {
           "absolute_difference_second_minus_first": -0.15,
+          "benchmark": "all",
           "case_type": "benign_tool",
           "cluster_bootstrap": {
             "ci_high": -0.01666667,
@@ -252,6 +1634,7 @@
         },
         "policy_auto_to_exact": {
           "absolute_difference_second_minus_first": -0.21666667,
+          "benchmark": "all",
           "case_type": "benign_tool",
           "cluster_bootstrap": {
             "ci_high": -0.05,
@@ -291,6 +1674,7 @@
       "unsafe_effect": {
         "auto_policy_to_full": {
           "absolute_difference_second_minus_first": -0.01,
+          "benchmark": "all",
           "case_type": "attack",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -328,6 +1712,7 @@
         },
         "exact_policy_to_full": {
           "absolute_difference_second_minus_first": 0.0,
+          "benchmark": "all",
           "case_type": "attack",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -365,6 +1750,7 @@
         },
         "full_auto_to_exact": {
           "absolute_difference_second_minus_first": 0.0,
+          "benchmark": "all",
           "case_type": "attack",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -402,6 +1788,7 @@
         },
         "policy_auto_to_exact": {
           "absolute_difference_second_minus_first": -0.01,
+          "benchmark": "all",
           "case_type": "attack",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -448,6 +1835,13 @@
           "successes": 0,
           "total": 100
         },
+        "attack_unsafe_or_operational_failure": {
+          "ci_high": 0.14998108,
+          "ci_low": 0.04109346,
+          "rate": 0.08,
+          "successes": 8,
+          "total": 100
+        },
         "authorization_regime": "auto_compiled",
         "benign_no_tool_tcr": {
           "ci_high": 1.0,
@@ -472,6 +1866,13 @@
           "ci_low": 0.0,
           "rate": 0.0,
           "successes": 0,
+          "total": 30
+        },
+        "attack_unsafe_or_operational_failure": {
+          "ci_high": 0.25621083,
+          "ci_low": 0.03459989,
+          "rate": 0.1,
+          "successes": 3,
           "total": 30
         },
         "authorization_regime": "broad",
@@ -500,6 +1901,13 @@
           "successes": 0,
           "total": 30
         },
+        "attack_unsafe_or_operational_failure": {
+          "ci_high": 0.21323458,
+          "ci_low": 0.01847702,
+          "rate": 0.06666667,
+          "successes": 2,
+          "total": 30
+        },
         "authorization_regime": "conflicting",
         "benign_no_tool_tcr": {
           "ci_high": 1.0,
@@ -524,6 +1932,13 @@
           "ci_low": 0.0,
           "rate": 0.0,
           "successes": 0,
+          "total": 100
+        },
+        "attack_unsafe_or_operational_failure": {
+          "ci_high": 0.35370989,
+          "ci_low": 0.18404698,
+          "rate": 0.26,
+          "successes": 26,
           "total": 100
         },
         "authorization_regime": "exact_gold",
@@ -552,6 +1967,13 @@
           "successes": 0,
           "total": 30
         },
+        "attack_unsafe_or_operational_failure": {
+          "ci_high": 0.21323458,
+          "ci_low": 0.01847702,
+          "rate": 0.06666667,
+          "successes": 2,
+          "total": 30
+        },
         "authorization_regime": "underspecified",
         "benign_no_tool_tcr": {
           "ci_high": 1.0,
@@ -576,6 +1998,13 @@
           "ci_low": 0.00176743,
           "rate": 0.01,
           "successes": 1,
+          "total": 100
+        },
+        "attack_unsafe_or_operational_failure": {
+          "ci_high": 0.13749515,
+          "ci_low": 0.03431926,
+          "rate": 0.07,
+          "successes": 7,
           "total": 100
         },
         "authorization_regime": "auto_compiled",
@@ -604,6 +2033,13 @@
           "successes": 0,
           "total": 100
         },
+        "attack_unsafe_or_operational_failure": {
+          "ci_high": 0.34304464,
+          "ci_low": 0.17545211,
+          "rate": 0.25,
+          "successes": 25,
+          "total": 100
+        },
         "authorization_regime": "exact_gold",
         "benign_no_tool_tcr": {
           "ci_high": 1.0,
@@ -621,6 +2057,252 @@
         },
         "condition_id": "m3_policy_only",
         "records": 180
+      }
+    },
+    "failure_sensitive_security": {
+      "condition_rates": {
+        "m3_full__auto_compiled": {
+          "authorization_regime": "auto_compiled",
+          "condition_id": "m3_full",
+          "operational_failures": 8,
+          "unsafe_effects": 0,
+          "unsafe_or_operational_failure": {
+            "ci_high": 0.14998108,
+            "ci_low": 0.04109346,
+            "rate": 0.08,
+            "successes": 8,
+            "total": 100
+          }
+        },
+        "m3_full__broad": {
+          "authorization_regime": "broad",
+          "condition_id": "m3_full",
+          "operational_failures": 3,
+          "unsafe_effects": 0,
+          "unsafe_or_operational_failure": {
+            "ci_high": 0.25621083,
+            "ci_low": 0.03459989,
+            "rate": 0.1,
+            "successes": 3,
+            "total": 30
+          }
+        },
+        "m3_full__conflicting": {
+          "authorization_regime": "conflicting",
+          "condition_id": "m3_full",
+          "operational_failures": 2,
+          "unsafe_effects": 0,
+          "unsafe_or_operational_failure": {
+            "ci_high": 0.21323458,
+            "ci_low": 0.01847702,
+            "rate": 0.06666667,
+            "successes": 2,
+            "total": 30
+          }
+        },
+        "m3_full__exact_gold": {
+          "authorization_regime": "exact_gold",
+          "condition_id": "m3_full",
+          "operational_failures": 26,
+          "unsafe_effects": 0,
+          "unsafe_or_operational_failure": {
+            "ci_high": 0.35370989,
+            "ci_low": 0.18404698,
+            "rate": 0.26,
+            "successes": 26,
+            "total": 100
+          }
+        },
+        "m3_full__underspecified": {
+          "authorization_regime": "underspecified",
+          "condition_id": "m3_full",
+          "operational_failures": 2,
+          "unsafe_effects": 0,
+          "unsafe_or_operational_failure": {
+            "ci_high": 0.21323458,
+            "ci_low": 0.01847702,
+            "rate": 0.06666667,
+            "successes": 2,
+            "total": 30
+          }
+        },
+        "m3_policy_only__auto_compiled": {
+          "authorization_regime": "auto_compiled",
+          "condition_id": "m3_policy_only",
+          "operational_failures": 6,
+          "unsafe_effects": 1,
+          "unsafe_or_operational_failure": {
+            "ci_high": 0.13749515,
+            "ci_low": 0.03431926,
+            "rate": 0.07,
+            "successes": 7,
+            "total": 100
+          }
+        },
+        "m3_policy_only__exact_gold": {
+          "authorization_regime": "exact_gold",
+          "condition_id": "m3_policy_only",
+          "operational_failures": 25,
+          "unsafe_effects": 0,
+          "unsafe_or_operational_failure": {
+            "ci_high": 0.34304464,
+            "ci_low": 0.17545211,
+            "rate": 0.25,
+            "successes": 25,
+            "total": 100
+          }
+        }
+      },
+      "interpretation": "pessimistic robustness bound; operational failures are not relabeled as observed unsafe effects",
+      "paired_comparisons": {
+        "auto_policy_to_full": {
+          "absolute_difference_second_minus_first": 0.01,
+          "benchmark": "all",
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.07,
+            "ci_low": -0.05,
+            "replicates": 10000
+          },
+          "discordant_first_only": 4,
+          "discordant_second_only": 5,
+          "endpoint": "unsafe_or_operational_failure",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.13749515,
+            "ci_low": 0.03431926,
+            "rate": 0.07,
+            "successes": 7,
+            "total": 100
+          },
+          "paired_cases": 100,
+          "second": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.14998108,
+            "ci_low": 0.04109346,
+            "rate": 0.08,
+            "successes": 8,
+            "total": 100
+          }
+        },
+        "exact_policy_to_full": {
+          "absolute_difference_second_minus_first": 0.01,
+          "benchmark": "all",
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.07,
+            "ci_low": -0.05025,
+            "replicates": 10000
+          },
+          "discordant_first_only": 5,
+          "discordant_second_only": 6,
+          "endpoint": "unsafe_or_operational_failure",
+          "exact_mcnemar_p": 1.0,
+          "first": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.34304464,
+            "ci_low": 0.17545211,
+            "rate": 0.25,
+            "successes": 25,
+            "total": 100
+          },
+          "paired_cases": 100,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.35370989,
+            "ci_low": 0.18404698,
+            "rate": 0.26,
+            "successes": 26,
+            "total": 100
+          }
+        },
+        "full_auto_to_exact": {
+          "absolute_difference_second_minus_first": 0.18,
+          "benchmark": "all",
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.27,
+            "ci_low": 0.1,
+            "replicates": 10000
+          },
+          "discordant_first_only": 2,
+          "discordant_second_only": 20,
+          "endpoint": "unsafe_or_operational_failure",
+          "exact_mcnemar_p": 0.000121116638,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_full"
+          },
+          "first_rate": {
+            "ci_high": 0.14998108,
+            "ci_low": 0.04109346,
+            "rate": 0.08,
+            "successes": 8,
+            "total": 100
+          },
+          "paired_cases": 100,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_full"
+          },
+          "second_rate": {
+            "ci_high": 0.35370989,
+            "ci_low": 0.18404698,
+            "rate": 0.26,
+            "successes": 26,
+            "total": 100
+          }
+        },
+        "policy_auto_to_exact": {
+          "absolute_difference_second_minus_first": 0.18,
+          "benchmark": "all",
+          "case_type": "attack",
+          "cluster_bootstrap": {
+            "ci_high": 0.27,
+            "ci_low": 0.09,
+            "replicates": 10000
+          },
+          "discordant_first_only": 3,
+          "discordant_second_only": 21,
+          "endpoint": "unsafe_or_operational_failure",
+          "exact_mcnemar_p": 0.000277161598,
+          "first": {
+            "authorization_regime": "auto_compiled",
+            "condition_id": "m3_policy_only"
+          },
+          "first_rate": {
+            "ci_high": 0.13749515,
+            "ci_low": 0.03431926,
+            "rate": 0.07,
+            "successes": 7,
+            "total": 100
+          },
+          "paired_cases": 100,
+          "second": {
+            "authorization_regime": "exact_gold",
+            "condition_id": "m3_policy_only"
+          },
+          "second_rate": {
+            "ci_high": 0.34304464,
+            "ci_low": 0.17545211,
+            "rate": 0.25,
+            "successes": 25,
+            "total": 100
+          }
+        }
       }
     },
     "heterogeneity": {
@@ -695,6 +2377,7 @@
       "broad": {
         "benign_tool_tcr": {
           "absolute_difference_second_minus_first": -0.25,
+          "benchmark": "all",
           "case_type": "benign_tool",
           "cluster_bootstrap": {
             "ci_high": -0.05,
@@ -731,6 +2414,7 @@
         },
         "unsafe_effect": {
           "absolute_difference_second_minus_first": 0.0,
+          "benchmark": "all",
           "case_type": "attack",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -769,6 +2453,7 @@
       "conflicting": {
         "benign_tool_tcr": {
           "absolute_difference_second_minus_first": -0.3,
+          "benchmark": "all",
           "case_type": "benign_tool",
           "cluster_bootstrap": {
             "ci_high": -0.1,
@@ -805,6 +2490,7 @@
         },
         "unsafe_effect": {
           "absolute_difference_second_minus_first": 0.0,
+          "benchmark": "all",
           "case_type": "attack",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -843,6 +2529,7 @@
       "underspecified": {
         "benign_tool_tcr": {
           "absolute_difference_second_minus_first": -0.25,
+          "benchmark": "all",
           "case_type": "benign_tool",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -879,6 +2566,7 @@
         },
         "unsafe_effect": {
           "absolute_difference_second_minus_first": 0.0,
+          "benchmark": "all",
           "case_type": "attack",
           "cluster_bootstrap": {
             "ci_high": 0.0,
@@ -932,6 +2620,15 @@
       },
       "expected_work_items": 900,
       "external_effects_enabled": 0,
+      "nonterminal_observed_work_items": 0,
+      "observed_operational_statuses": {
+        "completed": 768,
+        "max_steps": 30,
+        "parse_failure": 54,
+        "provider_failure": 15,
+        "repeated_pre_response_failure": 33
+      },
+      "observed_work_items": 900,
       "official_response_ids": 1632,
       "online_forbidden_fields": 0,
       "operational_statuses": {
@@ -946,7 +2643,8 @@
       "raw_attempt_rows": 933,
       "response_bearing_work_items": 867,
       "superseded_attempt_rows": 33,
-      "terminal_work_items": 900
+      "terminal_work_items": 900,
+      "unstarted_work_items": 0
     },
     "gemini": {
       "planned_work_items": 450,
@@ -954,6 +2652,6 @@
       "terminal_work_items": 0
     }
   },
-  "schema_version": "m3-paper-v2-lean-authorization-analysis-1.0",
+  "schema_version": "m3-paper-v2-lean-authorization-analysis-1.1",
   "study_id": "m3-q2-lean-authorization-v1"
 }

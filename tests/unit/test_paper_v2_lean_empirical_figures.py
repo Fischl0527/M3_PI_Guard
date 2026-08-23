@@ -16,6 +16,7 @@ def _comparison(diff: float) -> dict:
 def _authorization_fixture() -> dict:
     metrics = {}
     burden = {}
+    burden_stratified = {}
     for index, (condition, regime) in enumerate(
         (
             ("m3_policy_only", "auto_compiled"),
@@ -36,6 +37,11 @@ def _authorization_fixture() -> dict:
                 "successes": 5 + index,
                 "total": 100,
                 "rate": 0.05 + index * 0.01,
+            },
+            "attack_unsafe_or_operational_failure": {
+                "successes": 8 + index,
+                "total": 100,
+                "rate": 0.08 + index * 0.01,
             },
             "benign_tool_tcr": {
                 "successes": 45 + index,
@@ -60,6 +66,17 @@ def _authorization_fixture() -> dict:
             "cost_amount": 0.1,
             "cost_currency": "CNY",
         }
+        if index < 4:
+            for case_type in ("attack", "benign_tool"):
+                for benchmark in ("agentdojo-v1", "m3-v2"):
+                    stratum_key = f"{key}__{case_type}__{benchmark}"
+                    burden_stratified[stratum_key] = {
+                        "condition_id": condition,
+                        "authorization_regime": regime,
+                        "case_type": case_type,
+                        "benchmark": benchmark,
+                        **burden[key],
+                    }
     comparison_names = (
         "policy_auto_to_exact",
         "full_auto_to_exact",
@@ -92,6 +109,7 @@ def _authorization_fixture() -> dict:
             "comparisons": comparisons,
             "regime_extension": extension,
             "burden": burden,
+            "burden_by_case_and_benchmark": burden_stratified,
         }
     }
 

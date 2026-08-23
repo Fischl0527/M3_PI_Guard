@@ -1,5 +1,20 @@
 # 当前任务
 
+### 2026-08-23 精简实证里程碑 28：Stage 4 大修进行中
+
+- 目标：落实 Stage 3 Major Revision 的 P0/P1 项，只对既有 900 条授权实验及既有
+  Public/Adaptive 结果做离线再分析，并同步修订中英文稿与 Word。
+- 允许修改：`experiments/paper_v2/` 的精简分析/表图代码、对应定向测试、
+  `docs/research/paper_v2/manuscript/` 稿件与审稿响应、`scripts/build_lean_paper_*`，
+  以及本任务所需 Harness 状态文件。
+- 禁止修改或执行：任何 provider 原始成功记录、DeepSeek/Gemini API、Full Harness、
+  历史递归验证、盲测、Pro-500/2000、无关工作树文件和凭据。
+- 验收：full/policy-only 改写为配置包比较；补齐按基准分层 benign-tool 结果、
+  attack `unsafe_effect OR operational_failure` 悲观敏感性、按案例/基准的系统负担；
+  明确五种授权变换；完成聚焦 Stage 3' 复审并保留可恢复的 Git 检查点。
+- 验证：只运行受影响的分析、表图、Markdown/Word 构建定向测试、Ruff、
+  `py_compile` 和一次性行数/字段/统计检查；不运行全量 Harness。
+
 ### 2026-08-23 精简实证里程碑 27：Stage 3 科学同行审查完成
 
 - 以 Git 检查点 `119b1b1c0d158c41de485b969830c370ca951b1a` 为冻结稿，
