@@ -3299,3 +3299,23 @@ Next gated action:
 - Next scientific step is the final manuscript integrity gate. Remaining
   owner/institution gates are author metadata/declarations/data-release choices
   and submission-date JCR Q2/SCIE confirmation. F-PAPER-002 remains in progress.
+
+# 2026-08-23 — Stage 5 visual-QA handoff
+
+- Author metadata remains deliberately blank at the owner's request. Do not
+  infer or populate names, affiliations, correspondence, CRediT, funding,
+  conflicts, ethics wording or release commitments.
+- The English main manuscript passed WPS page inspection at 30/30 pages. The
+  supplement passed 2/2, and Highlights, Cover Letter and glossary each passed
+  1/1. Read-only temporary copies were used; QA render files are not repository
+  deliverables.
+- `scripts/build_lean_paper_docx.py` now forces left-aligned headings and marks
+  all Word table rows with `w:cantSplit`. The rebuilt manuscript has no observed
+  stretched headings, clipped content or split rows.
+- Verification: focused pytest 10/10, Ruff pass, `py_compile` pass, main-DOCX
+  accessibility 0 high/0 medium/21 low raw-URL findings. No API, Full Harness,
+  historical replay or additional evidence package ran.
+- Next action is owner completion of the blank submission fields, followed by
+  one final author-side check and submission-date institutional JCR/SCIE
+  confirmation. F-PAPER-002 remains `in_progress` until those external inputs
+  are supplied.

@@ -3897,3 +3897,24 @@ The older provider-gate text is superseded by this checkpoint.
   SVG output is deterministic and omits generation dates, preventing unrelated
   figure churn. Eleven focused figure/manuscript/DOCX checks and Ruff pass;
   abstract/highlight limits remain satisfied.
+
+## 2026-08-23 — Stage 5 WPS visual-QA checkpoint
+
+- The owner will supply all author identities and related submission metadata;
+  those fields remain intentionally blank in the manuscript and submission
+  templates.
+- A read-only WPS rendering pass covered all 30 pages of the English main
+  manuscript, both pages of the supplement, and the single-page Highlights,
+  Cover Letter and glossary. No source document was opened in an interactive
+  user window.
+- Two formatting-only defects were corrected: direct paragraph alignment now
+  prevents stretched title/heading text, and Word table rows are marked not to
+  split across pages. Scientific text, estimates, denominators, figures and
+  references were unchanged.
+- Focused pytest passes 10/10; Ruff and `py_compile` pass. The main DOCX
+  accessibility audit reports 0 high, 0 medium and 21 low findings, all caused
+  by visible DOI or stable reference URLs.
+- No provider/API execution, Full Harness, historical replay or new hash package
+  was run. F-PAPER-002 remains `in_progress` only for author-owned identity,
+  declarations and release choices plus submission-date institutional JCR/SCIE
+  confirmation.

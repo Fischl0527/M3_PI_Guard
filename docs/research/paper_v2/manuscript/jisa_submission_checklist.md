@@ -116,9 +116,10 @@ prespecified stopping rule is closed without a cross-provider claim.
   contexts and reconciled all submission-facing numerical claim families.
 - [ ] Complete the author-owned similarity/self-plagiarism check after author
   identities and publication lists are available.
-- [ ] Perform the final page-by-page Word/WPS visual inspection. The current
-  environment has no LibreOffice/`soffice`; structural and accessibility checks
-  pass, but the render gate is not claimed.
+- [x] Perform the final page-by-page Word/WPS visual inspection for the upload
+  package. The main manuscript passed 30/30 pages, the supplementary file 2/2,
+  and the highlights, cover letter and glossary 1/1 each. Author-owned fields
+  remain intentionally unfilled and require a final author check after entry.
 
 ## Current prohibition
 

@@ -152,6 +152,12 @@ def _repeat_table_header(row) -> None:
     tr_pr.append(header)
 
 
+def _prevent_table_row_split(row) -> None:
+    tr_pr = row._tr.get_or_add_trPr()
+    if tr_pr.find(qn("w:cantSplit")) is None:
+        tr_pr.append(OxmlElement("w:cantSplit"))
+
+
 def _format_table(table) -> None:
     widths = _column_widths(table)
     table.autofit = False
@@ -181,6 +187,7 @@ def _format_table(table) -> None:
 
     table_font_size = 7.5 if len(widths) >= 7 else 8.5
     for row_index, row in enumerate(table.rows):
+        _prevent_table_row_split(row)
         if row_index == 0:
             _repeat_table_header(row)
         for column_index, cell in enumerate(row.cells):
@@ -279,8 +286,10 @@ def _apply_academic_style(path: Path) -> None:
     for paragraph in document.paragraphs:
         if paragraph.style.name.startswith("Heading"):
             paragraph.paragraph_format.keep_with_next = True
+            paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
         if paragraph.style.name == "Title":
             paragraph.paragraph_format.page_break_before = False
+            paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     for table in document.tables:
         _format_table(table)

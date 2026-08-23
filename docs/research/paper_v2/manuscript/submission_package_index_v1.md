@@ -1,6 +1,6 @@
 # JISA submission package index
 
-Status: `scientific_content_closed_author_completion_required`
+Status: `visual_qa_complete_author_completion_required`
 
 This is the single handoff index for the Word-based submission route to the
 *Journal of Information Security and Applications* (JISA). It does not create
@@ -11,7 +11,7 @@ current controlled files in the repository.
 
 | Upload role | Controlled file | State at this checkpoint | Final action |
 |---|---|---|---|
-| Main manuscript | `M3_PI_Guard_JISA_working_draft.docx` | Scientific text, 7 tables and 5 inline review figures are closed | Add the approved author/title-page information and complete the Word/WPS page review |
+| Main manuscript | `M3_PI_Guard_JISA_working_draft.docx` | Scientific text, 7 tables and 5 inline review figures are closed; 30/30 rendered pages passed visual review | Add the approved author/title-page information |
 | Supplementary tables | `M3_PI_Guard_JISA_supplementary_tables.docx` | Editable supplementary tables are prepared | Confirm the final supplementary-material label in Editorial Manager |
 | Highlights | `M3_PI_Guard_JISA_highlights.docx` | Five editable highlights; every item is at most 85 characters | Upload as the separate Highlights file |
 | Cover letter | `M3_PI_Guard_JISA_cover_letter.docx` | Scientific wording is closed and contains no cross-provider or SOTA claim | Fill the submission date and corresponding-author signature block |
@@ -58,11 +58,13 @@ Do not upload these files with unresolved placeholders:
 
 - The Stage 4.5 scientific integrity gate passed with only non-blocking author
   and institutional warnings.
-- The four new Word attachments pass focused structure, page-geometry and
-  accessibility checks (0 high, 0 medium and 0 low findings for each file).
-- LibreOffice/`soffice` and Poppler are unavailable on this machine. Therefore
-  the package does not claim automated page-render QA; Step 5 above remains a
-  required author action.
+- The main manuscript (30 pages), supplementary tables (2 pages), highlights
+  (1 page), cover letter (1 page), and glossary (1 page) were rendered from
+  read-only temporary copies with WPS and inspected page by page. The title
+  alignment and one split table row were corrected before the final pass.
+- Author names, affiliations, corresponding-author details and CRediT roles
+  remain intentionally unfilled for the owner to complete. The internal author
+  form and Chinese comparison copy are not upload-ready submission files.
 - No provider API, new experiment, Full Harness, historical replay, blind test,
   or additional evidence/hash package is required for this handoff.
 

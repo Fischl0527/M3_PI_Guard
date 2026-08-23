@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import pytest
 from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
 
 from scripts import build_lean_paper_docx as builder
 
@@ -68,3 +70,24 @@ def test_generated_english_docx_preserves_scientific_content_and_references() ->
     assert sum(
         paragraph.style.name == "Bibliography" for paragraph in document.paragraphs
     ) == 21
+
+
+def test_generated_english_docx_keeps_headings_left_and_table_rows_together() -> None:
+    document = Document(builder.OUTPUT_PATH)
+
+    title = document.paragraphs[0]
+    headings = [
+        paragraph
+        for paragraph in document.paragraphs
+        if paragraph.style.name.startswith("Heading")
+    ]
+
+    assert title.style.name == "Heading 1"
+    assert title.alignment == WD_ALIGN_PARAGRAPH.LEFT
+    assert headings
+    assert all(paragraph.alignment == WD_ALIGN_PARAGRAPH.LEFT for paragraph in headings)
+    assert all(
+        row._tr.get_or_add_trPr().find(qn("w:cantSplit")) is not None
+        for table in document.tables
+        for row in table.rows
+    )

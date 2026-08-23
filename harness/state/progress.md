@@ -3252,3 +3252,18 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   Ruff and `py_compile` pass. No Full Harness or historical replay was run.
 - F-PAPER-002 remains `in_progress` for the final integrity gate, author-owned
   submission metadata and submission-date institutional JCR/SCIE confirmation.
+
+# 2026-08-23 — JISA Word package visual QA complete
+
+- Kept every author, affiliation, correspondence and CRediT field intentionally
+  blank for owner completion.
+- Rendered read-only copies through WPS and inspected 35 upload-facing pages:
+  main manuscript 30/30, supplement 2/2, Highlights 1/1, Cover Letter 1/1 and
+  glossary 1/1.
+- Corrected only two layout defects: stretched direct paragraph alignment and a
+  table row split across pages. No research claim, result or citation changed.
+- Focused pytest passes 10/10; Ruff and `py_compile` pass. Accessibility is
+  0 high/0 medium/21 low for the main DOCX, with all low findings being visible
+  reference URLs.
+- No API, experiment, Full Harness, historical replay or redundant hash bundle
+  was created. F-PAPER-002 remains `in_progress` at the author/institution gate.
