@@ -1,5 +1,25 @@
 # 当前任务
 
+### 2026-08-23 精简实证里程碑 31：Stage 5 最小 JISA 投稿包已完成
+
+- 目标：以 Stage 4.5 通过的中英文稿和现有证据为唯一内容基线，
+  完成 JISA Word 路线的最小投稿包、上传索引和作者待填清单。
+- 允许修改：`docs/research/paper_v2/manuscript/` 下的格式化投稿附件、
+  必要的 Word 构建脚本与本任务 Harness 状态文件。
+- 禁止修改或执行：已审查通过的科学内容、任何 provider/API、新实验、
+  Full Harness、历史递归验证、盲测或额外哈希包。
+- 作者专属边界：姓名/顺序、单位、通信作者、CRediT、资助、利益冲突、
+  简历/照片、公开发布标识、作者查重、Word/WPS 逐页验收和投稿日 JCR/SCIE
+  核验不得代填，只能在结项包中明确标记。
+- 验收：投稿索引能唯一映射主稿、补充表、5 幅独立图、Highlights、
+  Cover Letter 和作者输入；新 Word 附件通过结构/a11y 检查。本机若仍
+  无 LibreOffice，必须显式保留视觉 QA 警告。
+- 结果：新增 4 份可编辑 Word 附件和 1 份唯一投稿索引；11/11 必需路径
+  存在，四份 DOCX a11y 均为 0/0/0，终端引用标记为 0。定向测试首次
+  4 通过/1 预期数量失败，修正该预期后仅重跑失败项并 1/1 通过；Ruff 通过。
+- 当前停点：Stage 5 可自动部分完成，F-PAPER-002 仍为 `in_progress`，只等
+  作者/机构输入和 Word/WPS 视觉验收；不需要新 API 实验或额外 Harness。
+
 ### 2026-08-23 精简实证里程碑 30：Stage 4.5 最终完整性审查完成
 
 - 结论：`PASS with non-blocking author and institutional warnings`。21/21 活跃

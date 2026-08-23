@@ -1,5 +1,29 @@
 # 会话移交
 
+## 2026-08-23 — Stage 5 minimal submission-package handoff
+
+- Resume from
+  `docs/research/paper_v2/manuscript/submission_package_index_v1.md`. It maps the
+  existing main manuscript, supplement and five vector figures plus the new
+  Highlights, Cover Letter and glossary Word attachments; do not duplicate or
+  rebuild scientific files unless content actually changes.
+- The internal editable completion form is
+  `M3_PI_Guard_JISA_author_input_form.docx`. It intentionally retains visible
+  placeholders and must not be uploaded before the author fills and approves
+  identity/order, affiliations, corresponding-author details, CRediT, funding,
+  conflicts, acknowledgements, ethics, release information and biographies.
+- Verification: four focused DOCX tests initially passed and one expectation
+  failed; after correcting only the expectation, the failed test passed 1/1.
+  Ruff passes, all four a11y audits are 0/0/0, all 11 package files exist and
+  the manuscript contains zero terminal citation-provenance markers.
+- Automated render QA is still unavailable because LibreOffice/`soffice` and
+  Poppler are absent. The author must perform Word/WPS page-by-page review,
+  similarity review and the submission-date institutional JISA SCIE/JCR Q2
+  check. Do not infer or fill those facts.
+- No more experiment/API, Full Harness, history replay, blind work or hash
+  packaging is needed for this handoff. F-PAPER-002 remains `in_progress` only
+  for the author/institutional submission gates.
+
 ## 2026-08-23 — Stage 4.5 final integrity handoff
 
 - Stage 4.5 passes with non-blocking author/institutional warnings. Resume from

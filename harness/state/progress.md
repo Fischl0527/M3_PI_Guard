@@ -1,5 +1,27 @@
 # 进展记录
 
+## 2026-08-23 — Stage 5 minimal JISA submission package prepared
+
+- Kept the accepted English manuscript, supplementary tables and five vector
+  figure PDFs as the single scientific source of truth; no manuscript or
+  experimental result was rewritten.
+- Added separate editable Word files for five <=85-character Highlights, the
+  bounded Cover Letter, the 15-term glossary and an internal author-completion
+  form. Added one submission-package index that maps every upload role to its
+  controlled file without duplicating the main package.
+- Focused Word tests produced four initial passes and one expectation failure;
+  the expectation was corrected and only that failed test was rerun, passing
+  1/1. Ruff passes. All four new DOCX files report 0 high/0 medium/0 low a11y
+  findings; 11 required package files exist and terminal citation markers are 0.
+- LibreOffice/`soffice` and Poppler remain unavailable, so automated page-render
+  QA is not claimed. Author identity/order, affiliations, corresponding author,
+  CRediT, declarations, biographies/photos, release identifier, similarity
+  review, Word/WPS page review and submission-date institutional JCR/SCIE check
+  remain author-owned.
+- No provider/API, new experiment, Full Harness, historical replay, blind work
+  or evidence/hash package ran. F-PAPER-002 remains `in_progress` until the
+  author-owned submission gates are closed.
+
 ## 2026-08-23 — Stage 4.5 final integrity gate passed with author warnings
 
 - Freshly verified all 21 active references and all 21 citation contexts against

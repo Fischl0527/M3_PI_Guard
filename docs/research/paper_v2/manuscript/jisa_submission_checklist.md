@@ -79,6 +79,8 @@ prespecified stopping rule is closed without a cross-provider claim.
 - [x] Number sections and subsections; do not number the abstract.
 - [x] Provisional title, abstract, keywords and highlights contain no unsupported
   first/only/SOTA wording.
+- [x] Prepare the five highlights as a separate editable Word file; each item is
+  at most 85 characters.
 - [ ] Upload the manuscript, the separate editable supplementary-tables file,
   and all other required editable source files.
 - [x] Prepare each of the five figures as a separate vector PDF for submission;
@@ -94,7 +96,7 @@ prespecified stopping rule is closed without a cross-provider claim.
   release metadata; an equivalent Chinese direct-fill companion is provided,
   while author-owned values remain unfilled.
 - [x] Prepare a separate glossary of the field-specific terms used in the
-  manuscript.
+  manuscript, including a separate editable Word copy for upload if requested.
 - [ ] Supply a biography of at most 100 words and a separate passport-type
   photograph for every author.
 - [x] Add a provisional research-data/code-availability statement and repository
@@ -107,8 +109,8 @@ prespecified stopping rule is closed without a cross-provider claim.
   the wording before submission.
 - [x] Prepare a provisional cover letter focused on the security problem,
   verified contribution, benchmark breadth and practical relevance. Add the
-  corresponding-author details and update only result-dependent wording before
-  submission.
+  corresponding-author details and submission date to the separate editable
+  Word copy before submission.
 - [x] Run the final claim–evidence, active citation/metadata, figure/table and
   online-field-isolation audits. Stage 4.5 checked all 21 active citation
   contexts and reconciled all submission-facing numerical claim families.
