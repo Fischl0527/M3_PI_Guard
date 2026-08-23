@@ -346,3 +346,15 @@ Record completed, blocked, and abandoned tasks here.
 - Focused verification passed 17/17 with Ruff and `py_compile`; DOCX section,
   table, image and accessibility audits passed. The standard renderer could not
   run because LibreOffice/soffice is absent, so no page-render claim is made.
+
+# 2026-08-23 — M3-PAPER-002 Gemini diagnostic closeout
+
+- Resumed the existing Gemini pending-only runner after owner authorization.
+  It stopped at the first 429 after 25 attempted work items and did not replay
+  any item carrying an official response.
+- Closed the free-tier stopping rule at 32/450 terminal work items and kept the
+  incomplete cohort out of inference. Updated the compact analysis, English
+  and Chinese manuscripts, Word drafts, checklist, reviews and claim boundary.
+- Verification was limited to the affected runner/analysis/manuscript modules:
+  40 tests passed initially; one bilingual table-note test failed and passed
+  after a minimal wording fix. Ruff and `py_compile` pass.

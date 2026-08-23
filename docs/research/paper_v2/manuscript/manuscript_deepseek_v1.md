@@ -25,8 +25,8 @@ reduced benign-tool completion by 21.67 percentage points for policy-only and
 
 Authorization construction can therefore alter security–utility measurements
 even when attack rates appear stable. The evaluated provenance-aware
-extensions showed no stable gain over policy-only. A Gemini sample
-remains pending and supports no cross-provider claim.
+extensions showed no stable gain over policy-only. Gemini free-tier execution
+closed at 32/450 terminal items, so no cross-provider inference was made.
 
 **Keywords:** prompt injection; LLM agents; runtime authorization; provenance; security–utility trade-off
 
@@ -146,8 +146,8 @@ DeepSeek. Unsafe effects remained at or near zero across all four main cells,
 but exact authorization reduced benign-tool completion, replaced ASK with much
 more frequent DENY, and increased failure and latency. M3-full showed no stable
 incremental security or utility advantage over policy-only. These unfavorable
-results are retained; Gemini remains pending and therefore supports no current
-cross-provider claim.
+results are retained. Gemini free-tier execution closed incomplete at 32/450
+terminal work items and therefore supports no cross-provider claim.
 
 ### 1.6 Contributions
 
@@ -776,11 +776,12 @@ Supplementary Table S6 reports the defense-aware adaptive attack.
 The medium, Public Pro, Public Flash, authorization-regime, and budget-50/200
 studies jointly support an empirical security–utility paper. They do not
 support a leading-defense, causal provenance, saturated-adaptive, or
-cross-provider claim. Gemini remains pending under the three-quota-day
-free-tier rule; until that experiment reaches its stopping rule, its partial
-rows are not used in the comparisons above. UTR and DSR are not identifiable
-from the current record contract and are not reconstructed from unsafe-effect
-rate.
+cross-provider claim. Gemini reached the three-quota-day free-tier stopping
+rule with 32/450 terminal work items: five response-bearing items, 83 observed
+but nonterminal items, and 335 unstarted items. The incomplete cohort is
+retained only for operational accounting and is excluded from the comparisons
+above. UTR and DSR are not identifiable from the current record contract and
+are not reconstructed from unsafe-effect rate.
 
 ## 5. Discussion
 
@@ -906,9 +907,11 @@ tier also introduces an availability constraint. The protocol stops at the
 first 429, resumes only response-less or untouched work on a later quota day,
 and downgrades transparently after three quota-day attempts.
 
-The Gemini sample is incomplete at this analysis cutoff, and its partial rows
-are excluded from inference. External validity is therefore limited to
-DeepSeek V4 Pro and V4 Flash, and no cross-provider conclusion is made.
+The stopping rule closed with 32/450 terminal work items, including five with
+official model responses; 83 observed items remained nonterminal and 335 were
+unstarted. These rows are retained for operational accounting but excluded
+from scientific inference. External validity is therefore limited to DeepSeek
+V4 Pro and V4 Flash, and no cross-provider conclusion is made.
 
 ### 5.7 Limitations
 
@@ -964,9 +967,8 @@ budget alongside unsafe-effect rate.
 The DeepSeek authorization-regime results now tie these recommendations to
 observed effects: exact and stressed policies materially changed completion,
 blocking, failure, and latency while observed unsafe effects remained near
-zero. The prespecified Gemini stopping rule determines whether a complete
-cross-provider comparison is available; an incomplete subset remains
-diagnostic and cannot alter or broaden the DeepSeek findings.
+zero. The prespecified Gemini stopping rule closed with an incomplete
+diagnostic subset, which cannot alter or broaden the DeepSeek findings.
 
 ## 6. Conclusion
 
@@ -1002,9 +1004,8 @@ complex mechanisms with a policy-only ablation on identical tasks, and report
 utility, ASK/DENY burden, failures, latency, and attack budget alongside unsafe
 effects. The conclusions remain limited to the tested policies, benchmarks,
 runtime implementation, DeepSeek models, and budget range. The prespecified
-Gemini sample will either test the cross-provider direction or be transparently
-downgraded under its free-tier stopping rule; it cannot erase or broaden the
-completed DeepSeek findings.
+Gemini sample closed incomplete under its free-tier stopping rule and remains
+diagnostic; it cannot erase or broaden the completed DeepSeek findings.
 
 ## Figures
 

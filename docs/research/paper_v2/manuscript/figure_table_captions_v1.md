@@ -1,6 +1,6 @@
 # Figure and table captions
 
-Status: `deepseek_complete_gemini_pending`
+Status: `deepseek_complete_gemini_diagnostic_closed`
 
 ## Figures
 

@@ -3126,3 +3126,21 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   PDFs remain valid single-page files; 14 focused tests, Ruff and `py_compile`
   pass. No estimate, axis meaning or scientific conclusion changed.
 - F-PAPER-002 remains `in_progress` for Gemini and final integrity review.
+
+# 2026-08-23 — Gemini diagnostic stopping rule closed
+
+- Resumed only Gemini work items that were untouched or had no official
+  response. The runner executed 25 items, completed 22, recorded three
+  pre-response failures, and stopped at the first 429 without replaying any
+  response-bearing item.
+- The prespecified three-quota-day rule closed at 32/450 terminal work items:
+  five response-bearing, 83 observed nonterminal and 335 unstarted. The cohort
+  is diagnostic only; cross-provider inference remains disabled. Free-tier
+  cost, provider tools, external effects and forbidden online fields are zero.
+- Ran the partial analysis once and rebuilt the English Markdown/Word and
+  Chinese Markdown/Word manuscripts. DeepSeek estimates, tables and figures
+  are unchanged. Focused tests produced 40 passes and one bilingual table-note
+  failure; after correcting the duplicate numeric token, the failed test passed.
+  Ruff and `py_compile` pass. No Full Harness or historical replay was run.
+- F-PAPER-002 remains `in_progress` for the final integrity gate, author-owned
+  submission metadata and submission-date institutional JCR/SCIE confirmation.

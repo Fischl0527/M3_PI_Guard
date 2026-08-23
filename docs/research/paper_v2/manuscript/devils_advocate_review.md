@@ -1,6 +1,6 @@
 # Devil’s Advocate review — lean empirical manuscript
 
-Status: post-DeepSeek review; Gemini stopping rule pending
+Status: post-result review; Gemini stopping rule closed incomplete
 
 ## Overall verdict
 

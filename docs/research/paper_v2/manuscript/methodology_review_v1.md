@@ -1,6 +1,6 @@
 # Methodology review — lean empirical manuscript
 
-Status: completed on the post-DeepSeek draft; Gemini stopping rule pending
+Status: completed; Gemini stopping rule closed incomplete without inference
 
 ## Scope and verdict
 
@@ -56,8 +56,8 @@ is neither task completion nor clean evidence of defense success.
 
 ## Submission boundary
 
-No additional statistical method is required before the Gemini stopping rule.
-After that rule closes, the same analysis may be run once on the terminal
-cohort. Any incomplete Gemini subset remains diagnostic. The final manuscript
+No additional statistical method is required for the Gemini stopping rule.
+The same analysis was run once after the rule closed; the incomplete cohort
+remains diagnostic. The final manuscript
 must preserve raw counts, paired direction, intervals, corrected p-values,
 failure counts, the attack-floor limitation, and the no-saturation boundary.

@@ -1,6 +1,6 @@
 # Introduction — empirical authorization study draft
 
-Status: `deepseek_authorization_results_complete_gemini_pending`
+Status: `deepseek_authorization_results_complete_gemini_diagnostic_closed`
 
 ## Motivation
 
@@ -116,8 +116,8 @@ DeepSeek. Unsafe effects remained at or near zero across all four main cells,
 but exact authorization reduced benign-tool completion, replaced ASK with much
 more frequent DENY, and increased failure and latency. M3-full showed no stable
 incremental security or utility advantage over policy-only. These unfavorable
-results are retained; Gemini remains pending and therefore supports no current
-cross-provider claim.
+results are retained. Gemini free-tier execution closed incomplete at 32/450
+terminal work items and therefore supports no cross-provider claim.
 
 ## Contributions
 

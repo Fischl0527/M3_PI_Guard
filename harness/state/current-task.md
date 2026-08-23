@@ -1,5 +1,19 @@
 # 当前任务
 
+### 2026-08-23 精简实证里程碑 25：Gemini 停止规则与双语稿闭合
+
+- Gemini `remaining --retry-failed` 在本配额日执行 25 项：22 项完成、3 项响应前
+  失败，并在首个 429 后自然停止；已有官方响应的 work key 未重跑。
+- 三个实际配额日的停止规则已关闭。最终为 32/450 terminal、5 个 response-bearing、
+  83 个已观察非终态和 335 个未触及；USD 成本、provider tools、外部 effect 与在线
+  禁用字段均为 0。该样本只作运行诊断，跨厂商推断保持关闭，不再追加 Gemini 调用。
+- 一次性 partial 分析、英文 Markdown/Word 和中文 Markdown/Word 已更新；DeepSeek
+  统计、表格、五图和结论未改变。定向测试先 40 pass/1 fail，修复双语表说明数字
+  不一致后仅重跑失败项并通过；Ruff 与 `py_compile` 通过。
+- 不运行 Full Harness、历史递归验证、盲测、Pro-500/2000 或额外大矩阵。
+  F-PAPER-002 仍为 `in_progress`，剩余阻断为最终 integrity gate、作者投稿信息和
+  投稿时的机构 JCR Q2/SCIE 核验。
+
 ### 2026-08-20 精简实证里程碑 24：最终 Gemini 离线后处理已预约
 
 - 唯一 provider runner（PID 2176）仍等待 8 月 21 日 15:02；日志为空，尚未调用 API。

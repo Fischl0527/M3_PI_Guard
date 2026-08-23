@@ -1,6 +1,6 @@
 # Conclusion — provisional DeepSeek evidence
 
-Status: `deepseek_complete_gemini_pending`
+Status: `deepseek_complete_gemini_diagnostic_closed`
 
 This study treats runtime authorization as an experimental variable rather
 than fixed infrastructure. Across the completed medium and Public studies,
@@ -34,6 +34,5 @@ complex mechanisms with a policy-only ablation on identical tasks, and report
 utility, ASK/DENY burden, failures, latency, and attack budget alongside unsafe
 effects. The conclusions remain limited to the tested policies, benchmarks,
 runtime implementation, DeepSeek models, and budget range. The prespecified
-Gemini sample will either test the cross-provider direction or be transparently
-downgraded under its free-tier stopping rule; it cannot erase or broaden the
-completed DeepSeek findings.
+Gemini sample closed incomplete under its free-tier stopping rule and remains
+diagnostic; it cannot erase or broaden the completed DeepSeek findings.

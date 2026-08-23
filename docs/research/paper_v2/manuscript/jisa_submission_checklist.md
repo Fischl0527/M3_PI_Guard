@@ -1,6 +1,6 @@
 # JISA submission readiness checklist
 
-Status: `venue_fit_confirmed_jcr_and_results_pending`  
+Status: `venue_fit_confirmed_results_closed_jcr_and_author_inputs_pending`
 Checked: 2026-08-20
 
 ## Venue fit
@@ -52,8 +52,8 @@ Current official format requirements checked on 2026-08-20:
 - a separate glossary plus an editable biography (100 words maximum) and
   passport-type photograph for each author are requested.
 
-The provisional abstract and five-highlight file satisfy these bounds. Their
-scientific wording remains subject to Gemini's prespecified stopping rule.
+The abstract and five-highlight file satisfy these bounds. Gemini's
+prespecified stopping rule is closed without a cross-provider claim.
 
 ## Scientific gates before manuscript completion
 
@@ -64,7 +64,7 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
   budget-50/200 evidence has received one compact reuse analysis.
 - [x] The frozen 900-row DeepSeek authorization study is terminal, including
   explicit failed-row disposition.
-- [ ] The 450-row Gemini diagnostic cross-provider study is terminal, or has
+- [x] The 450-row Gemini diagnostic cross-provider study is terminal, or has
   transparently downgraded after the three-quota-day free-tier rule.
 - [x] The blind study, budget 500/2,000 and full second-model adaptive panel are
   out of scope and are not prerequisites or manuscript claims.
@@ -114,7 +114,8 @@ scientific wording remains subject to Gemini's prespecified stopping rule.
 
 ## Current prohibition
 
-The manuscript is not submission-ready until the Gemini completion/downgrade
-rule is closed. No cross-provider abstract, conclusion, cover-letter or result
-claim may fill unobserved Gemini cells. JCR Q2/SCIE status must still be checked
-through the institution on the actual submission date.
+The Gemini completion/downgrade rule is closed at 32/450 terminal work items;
+no cross-provider abstract, conclusion, cover-letter or result claim may fill
+unobserved Gemini cells. JCR Q2/SCIE status must still be checked through the
+institution on the actual submission date, and author-owned submission fields
+remain incomplete.

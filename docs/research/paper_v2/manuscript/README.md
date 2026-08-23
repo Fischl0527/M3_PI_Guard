@@ -1,11 +1,11 @@
 # paper-v2 lean empirical manuscript workspace
 
-Status: `deepseek_authorization_results_complete_gemini_pending`
+Status: `deepseek_authorization_results_complete_gemini_diagnostic_closed`
 
 This directory is a complete working-paper workspace, but not yet a
 submission-ready package. It contains the active manuscript, existing
 Pro/Flash/medium/adaptive results, a frozen 900-row DeepSeek authorization
-experiment, a planned 450-row Gemini free-tier cross-provider validation, a
+experiment, a closed incomplete 450-row Gemini free-tier diagnostic study, a
 figure/table plan, and bounded review material.
 
 Current working title:
@@ -25,9 +25,8 @@ is an empirical authorization-uncertainty and security–utility trade-off paper
 The 5,082-record Public primary result is complete and independently
 reproduced, the 1,791-record DeepSeek Flash replication is complete, and the
 900-record DeepSeek authorization-regime experiment now has terminal analysis,
-five paper figures, and six tables. Gemini supports a cross-provider claim only
-if all 450 planned work items reach terminal status under the three-quota-day
-rule.
+five paper figures, and six tables. Gemini closed at 32/450 terminal work items
+under the three-quota-day rule and therefore supports no cross-provider claim.
 
 Files:
 
@@ -49,7 +48,7 @@ Files:
   versions of the current English working manuscript. They preserve the same
   six-section scientific structure, 21-source citation corpus, six numbered
   main tables, one inline decision table, five figures, numerical results and
-  Gemini-pending claim boundary. The Chinese files are for author review and
+  the closed Gemini diagnostic boundary. The Chinese files are for author review and
   team communication rather than JISA submission. Rebuild the Word copy with
   `python -m scripts.build_lean_paper_chinese_docx` in an environment with
   `python-docx` and Pandoc.
@@ -67,7 +66,7 @@ Files:
 - `results_shell.md`: active Results draft covering medium, Public Pro/Flash,
   the DeepSeek authorization experiment, and adaptive budgets 50/200.
 - `discussion_draft.md`: active interpretation of the DeepSeek authorization
-  findings, with the cross-provider section still pending Gemini.
+  findings and the closed incomplete Gemini diagnostic sample.
 - `conclusion_draft.md`: provisional conclusions bounded to completed DeepSeek
   and budget-50/200 evidence.
 - `figure_table_captions_v1.md`: publication-facing captions with denominators,
@@ -81,7 +80,7 @@ Files:
 - `cover_letter_draft.md`: a concise, results-bounded JISA cover letter draft.
   It follows Elsevier's current general cover-letter guidance, excludes
   funding/declarations/reviewer suggestions, and remains contingent only on
-  final author details and Gemini's prespecified stopping rule.
+  final author details.
 - `citation_compliance_active_v1.md`: submission-focused metadata and claim-fit
   review for the 21 references actually cited in the manuscript.
 - `author_metadata_and_submission_inputs.md`: author-owned title-page,
@@ -91,8 +90,8 @@ Files:
   for the same author-owned submission facts; it is not manuscript content.
 - `glossary_v1.md`: separate definitions for the field-specific terms used in
   the manuscript, prepared for the JISA submission package.
-- `abstract_shell.md`: provisional DeepSeek-results abstract; the final
-  cross-provider sentence remains contingent on Gemini's stopping rule.
+- `abstract_shell.md`: DeepSeek-results abstract with the closed Gemini
+  diagnostic boundary and no cross-provider inference.
 - `highlights_v1.md`: five JISA-length highlights summarizing the current
   method and DeepSeek results.
 - `figure_table_plan.md`: lean data-source map for five main figures and six
@@ -114,7 +113,7 @@ Files:
   for the closest innovation-boundary papers, and the completed bibliography
   binding; submission-date refresh remains pending.
 - `claim_evidence_ledger_lean_v1.json`: active 13-claim ledger for the lean
-  empirical manuscript, including completed DeepSeek claims, Gemini and JCR
+  empirical manuscript, including completed DeepSeek claims, the closed Gemini diagnostic and JCR
   gates, and explicit forbidden claims.
 - `claim_evidence_ledger_v1.json`: retained historical paper-v2 ledger; it is
   not the active source for the lean manuscript because it includes superseded
@@ -133,7 +132,7 @@ Current DeepSeek analysis products are under
 `authorization_results_deepseek_v1.json`, the five PNG/SVG/PDF figure triplets are in
 `figures_deepseek_v1/`, and the six CSV tables are in
 `tables_deepseek_v1/`. These are single-model products; their metadata
-explicitly disables a cross-provider claim while Gemini remains pending.
+explicitly disables a cross-provider claim because Gemini closed incomplete.
 
 The active execution freeze is
 `protocols/paper_upgrade_v2/lean_empirical_execution_plan_v1.jsonl`; the active

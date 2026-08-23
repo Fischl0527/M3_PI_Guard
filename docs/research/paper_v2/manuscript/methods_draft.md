@@ -1,6 +1,6 @@
 # Methods — lean authorization study
 
-Status: `deepseek_results_complete_gemini_pending`
+Status: `deepseek_results_complete_gemini_diagnostic_closed`
 
 ## Study design and research questions
 

@@ -51,7 +51,7 @@ def test_chinese_markdown_mirrors_scientific_structure_and_boundaries() -> None:
     assert "45.00%–48.89%" in text
     assert "CNY 1.3888324" in text
     assert "4/40" in text and "18/40" in text
-    assert "Gemini 样本仍处于待完成状态" in text
+    assert "Gemini 免费层执行在 32/450 个终态工作项时关闭" in text
     assert "不作跨厂商泛化主张" in text
     assert "本文首次提出" not in text
     assert "M3 是最先进防御" not in text
@@ -120,7 +120,7 @@ def test_generated_chinese_docx_preserves_layout_content_and_cjk_fonts() -> None
     assert round(section.left_margin.inches, 3) == 1.0
     assert "上下文与来源不确定性下工具型大语言模型智能体的运行时授权评估" in text
     assert "38/600" in text and "13/600" in text
-    assert "Gemini 样本仍处于待完成状态" in text
+    assert "Gemini 免费层执行在 32/450 个终态工作项时关闭" in text
     assert "[@" not in text
     assert "�" not in text
     assert document.core_properties.subject == "JISA 中文内部对照稿"

@@ -1,12 +1,12 @@
 # Results draft — public, authorization-regime, and adaptive evidence
 
-Status: `deepseek_authorization_results_complete_gemini_pending`
+Status: `deepseek_authorization_results_complete_gemini_diagnostic_closed`
 
 This section reports the completed 480-record medium study, 5,082-record
 Public primary-model matrix, 1,791-record DeepSeek V4 Flash replication,
 900-work-item DeepSeek V4 Pro authorization experiment, and adaptive evidence
-through budget 200. The 450-work-item Gemini experiment remains incomplete and
-contributes no cross-provider conclusion at this stage.
+through budget 200. The 450-work-item Gemini experiment closed incomplete under
+its free-tier stopping rule and contributes no cross-provider conclusion.
 
 ## Medium falsification study
 
@@ -287,8 +287,9 @@ saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 The medium, Public Pro, Public Flash, authorization-regime, and budget-50/200
 studies jointly support an empirical security–utility paper. They do not
 support a leading-defense, causal provenance, saturated-adaptive, or
-cross-provider claim. Gemini remains pending under the three-quota-day
-free-tier rule; until that experiment reaches its stopping rule, its partial
-rows are not used in the comparisons above. UTR and DSR are not identifiable
-from the current record contract and are not reconstructed from unsafe-effect
-rate.
+cross-provider claim. Gemini reached the three-quota-day free-tier stopping
+rule with 32/450 terminal work items: five response-bearing items, 83 observed
+but nonterminal items, and 335 unstarted items. The incomplete cohort is
+retained only for operational accounting and is excluded from the comparisons
+above. UTR and DSR are not identifiable from the current record contract and
+are not reconstructed from unsafe-effect rate.

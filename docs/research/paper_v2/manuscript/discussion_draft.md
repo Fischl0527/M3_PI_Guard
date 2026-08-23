@@ -1,6 +1,6 @@
 # Discussion — lean empirical study draft
 
-Status: `deepseek_authorization_results_complete_gemini_pending`
+Status: `deepseek_authorization_results_complete_gemini_diagnostic_closed`
 
 ## Existing evidence changes the research claim
 
@@ -124,9 +124,11 @@ tier also introduces an availability constraint. The protocol stops at the
 first 429, resumes only response-less or untouched work on a later quota day,
 and downgrades transparently after three quota-day attempts.
 
-The Gemini sample is incomplete at this analysis cutoff, and its partial rows
-are excluded from inference. External validity is therefore limited to
-DeepSeek V4 Pro and V4 Flash, and no cross-provider conclusion is made.
+The stopping rule closed with 32/450 terminal work items, including five with
+official model responses; 83 observed items remained nonterminal and 335 were
+unstarted. These rows are retained for operational accounting but excluded
+from scientific inference. External validity is therefore limited to DeepSeek
+V4 Pro and V4 Flash, and no cross-provider conclusion is made.
 
 ## Limitations
 
@@ -182,6 +184,5 @@ budget alongside unsafe-effect rate.
 The DeepSeek authorization-regime results now tie these recommendations to
 observed effects: exact and stressed policies materially changed completion,
 blocking, failure, and latency while observed unsafe effects remained near
-zero. The prespecified Gemini stopping rule determines whether a complete
-cross-provider comparison is available; an incomplete subset remains
-diagnostic and cannot alter or broaden the DeepSeek findings.
+zero. The prespecified Gemini stopping rule closed with an incomplete
+diagnostic subset, which cannot alter or broaden the DeepSeek findings.

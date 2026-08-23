@@ -1,8 +1,7 @@
 # Cover letter draft
 
-Status: provisional; update only if the prespecified Gemini stopping rule adds
-a defensible cross-provider result. Corresponding-author details and the
-submission date remain author-owned fields.
+Status: scientific wording closed without a cross-provider claim;
+corresponding-author details and the submission date remain author-owned fields.
 
 Dear Editors of the *Journal of Information Security and Applications*,
 

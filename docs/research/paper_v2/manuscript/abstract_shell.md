@@ -1,6 +1,6 @@
 # Abstract — lean empirical study
 
-Status: `deepseek_results_filled_gemini_pending`
+Status: `deepseek_results_filled_gemini_diagnostic_closed`
 
 Tool-using LLM agents can turn prompt injection into external actions, but
 measured security depends on runtime authorization. We exclude raw evaluator
@@ -25,8 +25,8 @@ reduced benign-tool completion by 21.67 percentage points for policy-only and
 
 Authorization construction can therefore alter security–utility measurements
 even when attack rates appear stable. The evaluated provenance-aware
-extensions showed no stable gain over policy-only. A Gemini sample
-remains pending and supports no cross-provider claim.
+extensions showed no stable gain over policy-only. Gemini free-tier execution
+closed at 32/450 terminal items, so no cross-provider inference was made.
 
 Keywords: prompt injection; LLM agents; runtime authorization; provenance;
 security–utility trade-off

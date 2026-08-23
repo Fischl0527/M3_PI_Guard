@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.0",
-  "updated_at": "2026-08-20T12:39:00+08:00",
+  "updated_at": "2026-08-23T19:30:00+08:00",
   "paper_route": "authorization_regime_and_security_utility_empirical_study",
   "scope": {
     "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
@@ -112,12 +112,13 @@
     {
       "claim_id": "LC10",
       "claim": "The authorization findings generalize across DeepSeek and Gemini providers.",
-      "status": "forbidden_while_gemini_incomplete",
+      "status": "forbidden_after_incomplete_gemini_stopping_rule",
       "evidence": [
         "protocols/paper_upgrade_v2/lean_empirical_execution_manifest_v1.json",
-        "outputs/experiments/lean_empirical/gemini/raw_records_v1.jsonl"
+        "outputs/experiments/lean_empirical/gemini/raw_records_v1.jsonl",
+        "docs/research/paper_v2/lean_empirical/authorization_results_v1.json"
       ],
-      "unlock_condition": "Only a 450/450 terminal Gemini cohort followed by the prespecified analysis can unlock this claim. If the three-Pacific-quota-day rule closes with an incomplete cohort, the subset remains diagnostic and this claim remains forbidden."
+      "boundary": "The three-Pacific-quota-day rule closed at 32/450 terminal work items. The incomplete subset remains diagnostic and cannot support cross-provider generalization."
     },
     {
       "claim_id": "LC11",

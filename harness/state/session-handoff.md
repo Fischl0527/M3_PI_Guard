@@ -3177,3 +3177,20 @@ Next gated action:
   draft embeds the regenerated PNGs; vector PDFs and SVGs are synchronized.
 - Verification: 14 focused figure/manuscript/DOCX/supplement tests, Ruff,
   `py_compile`, 5/5 single-page PDFs. No provider call or result change.
+
+# 2026-08-23 — Gemini stopping-rule handoff
+
+- Gemini free-tier execution is closed; do not schedule another provider run.
+  Final accounting is 32/450 terminal, five response-bearing, 83 observed
+  nonterminal and 335 unstarted. The partial cohort is diagnostic only and
+  `cross_vendor_claim_eligible=false`.
+- Active compact analysis is
+  `docs/research/paper_v2/lean_empirical/authorization_results_v1.json`.
+  English and Chinese Markdown/Word manuscripts now state that the stopping
+  rule closed incomplete; DeepSeek tables, figures and estimates are unchanged.
+- Focused validation: 40 tests passed in the initial affected suite; the one
+  failed bilingual numeric-parity test passed after a minimal wording fix.
+  Ruff and `py_compile` pass. Full Harness and historical replay were not run.
+- Next scientific step is the final manuscript integrity gate. Remaining
+  owner/institution gates are author metadata/declarations/data-release choices
+  and submission-date JCR Q2/SCIE confirmation. F-PAPER-002 remains in progress.
