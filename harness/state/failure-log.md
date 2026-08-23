@@ -5521,3 +5521,24 @@ credential, changed a historical ledger, or enabled an external effect.
 - Result: PowerShell rejected the brace syntax and Windows passed the wildcard literally.
 - Cause: the command assumed Unix shell expansion semantics.
 - Recovery: use `rg -g '*.md' PATTERN DIRECTORY`; the corrected read-only scan completed.
+
+# 2026-08-23 — Bundled document Python does not include pytest
+
+- Attempt: run Chinese manuscript parity tests with the bundled document Python runtime.
+- Result: the interpreter reported `No module named pytest` before collection.
+- Cause: the bundled runtime contains `python-docx` and document dependencies but not the repository test runner.
+- Recovery: keep the bundled runtime for DOCX authoring/render helpers and use the project Python 3.13 environment for repository tests; no package was installed or environment variable persisted.
+
+# 2026-08-23 — First bilingual parity check exposed superseded text and sign formatting
+
+- Attempt: run the English/Chinese DOCX and table-parity tests after the Stage 4 Chinese synchronization.
+- Result: eight tests passed and two failed: one assertion expected the superseded pooled DENY phrase, and Table 5 omitted explicit plus signs on nonnegative confidence limits.
+- Cause: the scientific revision replaced the old headline and the translated table normalized positive interval endpoints differently from the English table.
+- Recovery: assert the new 7/100-to-25/100 and 8/100-to-26/100 bounds, restore explicit plus signs, rebuild both Word drafts, and rerun only the focused document tests.
+
+# 2026-08-23 — Standard DOCX renderer unavailable without LibreOffice
+
+- Attempt: render both rebuilt Word drafts with the bundled `render_docx.py` workflow.
+- Result: both conversions stopped before rasterization with `FileNotFoundError`; zero page PNGs were created.
+- Cause: no LibreOffice/`soffice` executable is available in the bundled or system command paths.
+- Recovery: follow the document skill's explicit fallback: retain the successfully built DOCX files, run structural/content/font/table/figure tests, disclose that page-render QA is unavailable, and do not claim the visual render gate passed.

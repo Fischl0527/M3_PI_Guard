@@ -8,8 +8,8 @@
 
 ## 1. 稿件基本信息
 
-- 暂定英文题目：*Evaluating Runtime Authorization Under Context and
-  Provenance Uncertainty for Tool-Using LLM Agents*
+- 暂定英文题目：*Evaluating Authorization Regimes and Runtime Guardrail
+  Configurations for Tool-Using LLM Agents*
 - 投稿文章类型：〔请在 Editorial Manager 中确认〕
 - 计划投稿日期：〔YYYY-MM-DD〕
 

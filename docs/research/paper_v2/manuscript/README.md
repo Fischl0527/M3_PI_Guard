@@ -10,7 +10,7 @@ figure/table plan, and bounded review material.
 
 Current working title:
 
-> Evaluating Runtime Authorization Under Context and Provenance Uncertainty for
+> Evaluating Authorization Regimes and Runtime Guardrail Configurations for
 > Tool-Using LLM Agents
 
 The former “Beyond Answer-Key Authorization” title is suspended because the

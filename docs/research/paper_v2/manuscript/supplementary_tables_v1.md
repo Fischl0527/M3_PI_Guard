@@ -1,6 +1,6 @@
 # Supplementary material
 
-**Article:** Evaluating Runtime Authorization Under Context and Provenance Uncertainty for Tool-Using LLM Agents
+**Article:** Evaluating Authorization Regimes and Runtime Guardrail Configurations for Tool-Using LLM Agents
 
 These six tables provide detailed results referenced by the main manuscript. They introduce no additional hypothesis family or claim beyond the analyses reported in the article.
 

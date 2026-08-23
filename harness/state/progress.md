@@ -1,5 +1,28 @@
 # 进展记录
 
+## 2026-08-23 — Stage 4 scientific major revision accepted internally
+
+- Reframed the full-versus-policy estimand as a bundled configuration-package
+  comparison because prompt profile changes with the runtime modules; removed
+  component-causal attribution across the title, RQs, prose, tables and figures.
+- Added benchmark-stratified benign-tool estimates, the separate pessimistic
+  unsafe-or-operational-failure bound, and task/benchmark-stratified ASK, DENY,
+  failure and latency summaries from existing terminal records only.
+- Documented the five deterministic authorization transformations, outcome-
+  blind sample-selection inputs, 902-case cross-cohort union, and the pinned
+  VIGIL adapter boundary.
+- Synchronized English and Chinese manuscripts, two Word drafts, Tables 2/5,
+  Figures 2--4, highlights, cover letter and author-input titles. The Stage 4
+  response, 11/11 fallacy scan and focused re-review are under
+  `docs/research/paper_v2/manuscript/review_stage4_v1/`.
+- Focused verification passes 35 tests plus Ruff and `py_compile`. The DOCX
+  renderer cannot run because LibreOffice is absent, so structural checks pass
+  but page-level visual QA is not claimed. No provider call, Full Harness,
+  historical replay or successful-row rerun occurred.
+- F-PAPER-002 remains `in_progress` for author metadata, institutional JCR/SCIE
+  verification, author-owned similarity review, final Word/WPS visual review
+  and the submission checklist.
+
 ## 2026-08-23 — Stage 3 scientific peer review completed
 
 - Froze the review target at Git commit `119b1b1c0d158c41de485b969830c370ca951b1a`

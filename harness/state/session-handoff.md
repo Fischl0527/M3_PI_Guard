@@ -1,5 +1,25 @@
 # 会话移交
 
+## 2026-08-23 — Stage 4 scientific revision handoff
+
+- Stage 4 is internally accepted. Resume from
+  `docs/research/paper_v2/manuscript/review_stage4_v1/`; do not repeat the
+  offline analysis, fallacy scan, Stage 3 review, provider execution, Full
+  Harness, historical replay or successful-row work.
+- Current English/Chinese manuscripts and Word drafts contain the configuration-
+  package estimand, benchmark reversal, failure-sensitive bound, regime
+  transformations, VIGIL fidelity and stratified system-burden results.
+- Focused verification is 35/35 plus Ruff/compile. LibreOffice is absent, so
+  structural Word checks pass but pagination/visual QA must be done manually in
+  Word/WPS or on a host with LibreOffice; do not terminate user-owned WPS.
+- Git checkpoint `2018821` already contains the English/statistical Stage 4
+  core. Commit and push the bilingual/Word/re-review/state closeout as the next
+  milestone while preserving unrelated dirty files.
+- F-PAPER-002 stays `in_progress`. The only remaining route is author metadata/
+  CRediT/declarations, institutional submission-date JISA SCIE/JCR confirmation,
+  author-side similarity review, final visual document review and submission
+  checklist.
+
 ## 2026-08-23 — Stage 3 scientific review handoff
 
 - The complete Stage 3 review package is in

@@ -1731,3 +1731,17 @@ Consequences:
 - Consequence: retain the empirical/negative-result framing. The next gate is
   only provider-specific focused tests plus six formal-prefix rows per provider;
   no Full Harness or recursive historical proof is required.
+
+## 2026-08-23 — Treat full versus policy as a bundled configuration estimand
+
+- Decision: report M3-full and policy-only as the full and policy configuration
+  packages, not as a component ablation or isolated provenance/data-flow/
+  confirmation effect.
+- Reason: the implementation changes `safe_prompt` versus `normal` at the same
+  time as provenance, temporal/data-flow, permission-monotonicity and
+  confirmation modules. Existing records cannot identify an individual cause.
+- Evidence consequence: the paper keeps the observed package comparison,
+  benchmark-specific utility reversal and failure-sensitive security bound,
+  while component causation and cross-provider generalization remain forbidden.
+- Verification consequence: use only focused analysis/manuscript/Word tests;
+  no new API, Full Harness, historical replay or successful-row rerun is needed.

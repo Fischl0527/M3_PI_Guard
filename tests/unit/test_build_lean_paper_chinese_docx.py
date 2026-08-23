@@ -48,11 +48,20 @@ def test_chinese_markdown_mirrors_scientific_structure_and_boundaries() -> None:
     assert "12/400" in text
     assert "21.67 个百分点" in text
     assert "15.00 个百分点" in text
-    assert "45.00%–48.89%" in text
+    assert "由 7/100 升至 25/100" in text
+    assert "由 8/100 升至 26/100" in text
     assert "CNY 1.3888324" in text
     assert "4/40" in text and "18/40" in text
     assert "Gemini 免费层执行在 32/450 个终态工作项时关闭" in text
     assert "不作跨厂商泛化主张" in text
+    assert "**RQ2：配置比较。**" in text
+    assert "**RQ2：模块贡献。**" not in text
+    assert "该比较不是组件消融" in text
+    assert "不安全效应或运行失败" in text
+    assert "由 17/30 降至 0/30" in text
+    assert "不能识别单个运行时模块的贡献" in text
+    assert "ASK 不是测得的人类负担" in text
+    assert "af8eb9c70d32f8a3cc07b308e823c813b2285772" in text
     assert "本文首次提出" not in text
     assert "M3 是最先进防御" not in text
     assert "M3 不能被描述为首个" in text
@@ -118,7 +127,7 @@ def test_generated_chinese_docx_preserves_layout_content_and_cjk_fonts() -> None
     assert round(section.right_margin.inches, 3) == 1.0
     assert round(section.bottom_margin.inches, 3) == 1.0
     assert round(section.left_margin.inches, 3) == 1.0
-    assert "上下文与来源不确定性下工具型大语言模型智能体的运行时授权评估" in text
+    assert "工具型大语言模型智能体的授权制度与运行时 Guard 配置评估" in text
     assert "38/600" in text and "13/600" in text
     assert "Gemini 免费层执行在 32/450 个终态工作项时关闭" in text
     assert "[@" not in text

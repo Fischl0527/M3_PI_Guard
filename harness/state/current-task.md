@@ -1,5 +1,20 @@
 # 当前任务
 
+### 2026-08-23 精简实证里程碑 29：Stage 4 科学大修通过，投稿准备仍进行中
+
+- 已完成 Stage 3 的 P0-1 至 P1-5：把 full/policy 改为配置包比较；补齐基准
+  方向反转、`unsafe_effect OR operational_failure` 悲观界限、按任务/基准的
+  ASK/DENY/失败/时延；细化五种授权变换和 VIGIL 适配边界。
+- 已同步英文主稿、中文对照稿、表 2/5、图 2--4、Cover Letter、Highlights、
+  投稿题目和中英文 Word。Stage 4 聚焦复审对五个角色的 D1--D3 均判为 pass。
+- 定向验证：35 项分析/稿件/图表/Word 测试通过，Ruff 与 `py_compile` 通过；
+  中英文主表数值 token 完全一致。无 API、Full Harness、历史重放或成功行重跑。
+- Word 标准渲染因本机缺少 LibreOffice/soffice 未执行；两个 DOCX 均已通过结构、
+  表格、图片、字体和引用占位检查，但不宣称分页视觉验收。
+- F-PAPER-002 保持 `in_progress`。下一步只做作者侧投稿准备：填写作者/机构/
+  CRediT/声明，机构核验投稿日 JISA SCIE/JCR Q2，作者自查重，在 Word/WPS 做
+  最终分页视觉检查并完成一次提交清单。
+
 ### 2026-08-23 精简实证里程碑 28：Stage 4 大修进行中
 
 - 目标：落实 Stage 3 Major Revision 的 P0/P1 项，只对既有 900 条授权实验及既有

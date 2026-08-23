@@ -9,8 +9,8 @@ file.
 
 ## Article identity
 
-- Article title: *Evaluating Runtime Authorization Under Context and
-  Provenance Uncertainty for Tool-Using LLM Agents*
+- Article title: *Evaluating Authorization Regimes and Runtime Guardrail
+  Configurations for Tool-Using LLM Agents*
 - Article type: [confirm in Editorial Manager]
 - Submission date: [YYYY-MM-DD]
 
