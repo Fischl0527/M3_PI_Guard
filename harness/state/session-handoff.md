@@ -1,5 +1,26 @@
 # 会话移交
 
+## 2026-08-23 — Stage 3 scientific review handoff
+
+- The complete Stage 3 review package is in
+  `docs/research/paper_v2/manuscript/review_stage3_v1/`. Its mechanical decision
+  is Major Revision; the English/Chinese manuscripts were intentionally not
+  edited during review.
+- Resume Stage 4 only on the existing-record route. Do not call DeepSeek or
+  Gemini, run Full Harness, replay historical evidence, restart blind work, or
+  extend adaptive budgets.
+- P0 revision order: (1) redefine full versus policy-only as a bundled
+  configuration comparison because prompt profiles differ; (2) add paired
+  benchmark-stratified benign-tool results; (3) add attack
+  unsafe-effect-or-operational-failure sensitivity; (4) document exact regime
+  transforms and a sanitized example.
+- Then stratify benign ASK/DENY/failure burden, identify the VIGIL adapter,
+  move incomplete Gemini accounting out of the main design spine, clarify
+  multiplicity/precision, and rebuild English then Chinese outputs once.
+- F-PAPER-002 remains `in_progress`. Author metadata/CRediT/declarations,
+  author-side similarity review, release decision and institutional submission-
+  date JISA SCIE/JCR verification remain outside the completed review substage.
+
 ## 2026-08-23 — Stage 2.5 integrity handoff
 
 - Stage 2.5 is complete and passes with non-blocking warnings. Resume from

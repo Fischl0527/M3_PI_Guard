@@ -12,6 +12,11 @@
 - 不要求 Full Harness、独立盲测、Pro-500、budget-2000、完整 Gemini 矩阵或
   递归哈希证据包；
 - 结果为负面或模型间不一致不构成失败，超出证据的论文主张才构成失败。
+- Stage 3 五角色科学审稿必须有独立报告、机械评分矩阵和编辑决定；当前结论为
+  Major Revision，不得以 Stage 2.5 通过代替科学修订。
+- Stage 4 必须把 full/policy 改为配置包比较，补充按基准分层的 benign-tool 结果、
+  attack unsafe-or-failure 敏感性与 benign burden 分层，并明确五种授权变换；这些
+  工作只读现有记录，不授权新 API 调用。
 
 ## 全局标准
 

@@ -1,5 +1,23 @@
 # 当前任务
 
+### 2026-08-23 精简实证里程碑 27：Stage 3 科学同行审查完成
+
+- 以 Git 检查点 `119b1b1c0d158c41de485b969830c370ca951b1a` 为冻结稿，
+  完成 JISA 适配、五角色 Phase-1 评分承诺、五份独立 Phase-2 审稿和机械编辑综合；
+  稿件正文在本阶段未修改。
+- 面板为 EIC、方法统计、LLM-agent 安全领域、usable-security 交叉视角和
+  Devil's Advocate。方法与 Devil's Advocate 对 D1 给出 `block`；4/5 审稿人
+  在至少两个 mandatory 维度给出 warn-or-worse，因此机械结论为 Major Revision。
+- 首要缺陷是 `M3-full` 使用 `safe_prompt`、policy-only 使用 `normal`，当前对照不能
+  单独识别 provenance/dataflow/confirmation 的模块因果贡献；Stage 4 应改为“完整
+  配置包 vs policy-only 配置”并删除模块归因，无需新 API 实验。
+- 现有记录还显示 exact vs auto 的 benign-tool 方向按基准反转，以及 exact 攻击格
+  25–26% 的 operational failure。下一步只需离线补 benchmark-stratified、
+  unsafe-or-failure sensitivity 和 benign burden 分层分析。
+- 审稿包位于 `docs/research/paper_v2/manuscript/review_stage3_v1/`。F-PAPER-002
+  保持 `in_progress`，Stage 4 修改须在作者检查点后开始；Gemini/Full Harness/盲测/
+  历史重放/新 API 均不需要。
+
 ### 2026-08-23 精简实证里程碑 26：Stage 2.5 完整性门通过
 
 - 对当前 21 条活跃引用完成 21/21 官方元数据核验和 11/21（52.4%）

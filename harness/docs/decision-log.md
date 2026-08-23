@@ -2,6 +2,22 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-23 — Reframe M3-full versus policy-only as configuration bundles
+
+- Decision: the paper will not interpret the existing M3-full/policy-only
+  contrast as an isolated provenance/data-flow/confirmation ablation. M3-full
+  uses the `safe_prompt` profile while policy-only uses `normal`, so Stage 4 must
+  disclose the prompt difference and treat the estimand as a bundled
+  configuration comparison.
+- Reason: the five-role Stage 3 review identified this as a mandatory internal-
+  validity defect. Component attribution is not identifiable without a new
+  same-prompt experiment.
+- Consequence: use the lean no-new-API route. Add only offline benchmark-
+  stratified, failure-sensitive and benign-burden analyses from existing rows;
+  narrow the title/RQs/claims, update figures and tables once, and retain
+  F-PAPER-002 as `in_progress` until Stage 4 and author-owned submission gates
+  close.
+
 ## 2026-08-04 — Preserve Flash gate failures and version any reconciliation
 
 - Decision: retain both recovery-v3 wrapper exit-1 receipts and reviews exactly as

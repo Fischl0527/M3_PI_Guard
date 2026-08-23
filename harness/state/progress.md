@@ -1,5 +1,24 @@
 # 进展记录
 
+## 2026-08-23 — Stage 3 scientific peer review completed
+
+- Froze the review target at Git commit `119b1b1c0d158c41de485b969830c370ca951b1a`
+  and completed a five-role internal author-side review: EIC, methodology,
+  LLM-agent security, usable-security perspective, and Devil's Advocate.
+- The mechanical contract yields Major Revision: two D1 blocks and four of five
+  reviewers with warn-or-worse on at least two mandatory dimensions. No reviewer
+  requires new provider calls for the narrowed empirical paper.
+- The main blocker is treatment attribution: M3-full uses `safe_prompt` while
+  policy-only uses `normal`, so the comparison identifies a configuration bundle,
+  not the isolated provenance/data-flow/confirmation increment.
+- Existing-record inspection also found a benchmark direction reversal in exact
+  versus auto benign-tool completion and sharply higher attack failures in exact
+  cells. Stage 4 must add benchmark-stratified, unsafe-or-failure sensitivity,
+  and benign-burden analyses offline.
+- The manuscript itself was not edited. The complete review package is under
+  `docs/research/paper_v2/manuscript/review_stage3_v1/`; F-PAPER-002 remains
+  `in_progress` pending the Stage 4 author decision and submission-owned gates.
+
 ## 2026-08-23 — Stage 2.5 pre-review integrity gate passed
 
 - Verified official metadata and publication status for all 21 active
