@@ -1,7 +1,7 @@
 # JISA submission readiness checklist
 
-Status: `venue_fit_confirmed_results_closed_jcr_and_author_inputs_pending`
-Checked: 2026-08-20
+Status: `stage_4_5_pass_author_and_institutional_gates_pending`
+Checked: 2026-08-23
 
 ## Venue fit
 
@@ -33,7 +33,7 @@ Official sources:
 - Article collections:
   https://www.sciencedirect.com/journal/journal-of-information-security-and-applications/special-issues
 
-Current official format requirements checked on 2026-08-20:
+Current official format requirements checked on 2026-08-23:
 
 - JISA uses single-anonymized review, so the submission does not require a
   separate author-blinded manuscript variant;
@@ -109,8 +109,14 @@ prespecified stopping rule is closed without a cross-provider claim.
   verified contribution, benchmark breadth and practical relevance. Add the
   corresponding-author details and update only result-dependent wording before
   submission.
-- [ ] Run the final claim–evidence, citation/DOI, figure/table, data-leakage and
-  anonymization audits.
+- [x] Run the final claim–evidence, active citation/metadata, figure/table and
+  online-field-isolation audits. Stage 4.5 checked all 21 active citation
+  contexts and reconciled all submission-facing numerical claim families.
+- [ ] Complete the author-owned similarity/self-plagiarism check after author
+  identities and publication lists are available.
+- [ ] Perform the final page-by-page Word/WPS visual inspection. The current
+  environment has no LibreOffice/`soffice`; structural and accessibility checks
+  pass, but the render gate is not claimed.
 
 ## Current prohibition
 

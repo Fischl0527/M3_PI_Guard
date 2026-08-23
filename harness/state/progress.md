@@ -1,5 +1,27 @@
 # 进展记录
 
+## 2026-08-23 — Stage 4.5 final integrity gate passed with author warnings
+
+- Freshly verified all 21 active references and all 21 citation contexts against
+  primary records. Corrected L27 acronym protection and aligned L34 with the
+  official ICLR proceedings BibTeX; retained the official ICSE AgentSpec page
+  instead of a currently non-resolving DOI.
+- Reconciled 24 submission-facing numerical/evidence families to current compact
+  JSON/CSV artifacts. Corrected LC05 from component attribution to a bundled
+  package result and repaired LC07's stale Table 5 evidence path.
+- Screened all 73 paragraphs changed since Stage 2.5, covering 50.7% of 144
+  eligible blocks, with zero potential exact web matches. Seven AI-research
+  failure modes are clear within scope; Schema-12 RAISE principles-only status
+  is warn solely for outstanding author-owned inputs.
+- Rebuilt English and Chinese Word drafts. Current affected tests pass 5/5 after
+  an initial 41 passes; three superseded 34-entry/history tests are retained as
+  legacy diagnostics and were not used to restore incorrect metadata. Both
+  DOCX a11y checks report 0 high/0 medium/21 low URL findings.
+- No API, new experiment, Full Harness, historical replay or successful-row
+  rerun occurred. Page-render QA remains unclaimed because LibreOffice/Poppler
+  are absent. F-PAPER-002 remains `in_progress` at the mandatory author
+  checkpoint before Stage 5.
+
 ## 2026-08-23 — Stage 4 scientific major revision accepted internally
 
 - Reframed the full-versus-policy estimand as a bundled configuration-package

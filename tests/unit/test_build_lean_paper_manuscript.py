@@ -78,6 +78,34 @@ def test_every_citation_key_exists_in_bibliography() -> None:
     builder._validate_citations(builder.build_manuscript())
 
 
+def test_active_reference_set_uses_current_primary_metadata() -> None:
+    manuscript = builder.build_manuscript()
+    bibliography = builder._read("references_v1.bib")
+    active_keys = {
+        key
+        for group in re.findall(r"\[@([^\]]+)\]", manuscript)
+        for key in re.findall(r"L\d{2}", group)
+    }
+
+    assert len(active_keys) == 21
+    assert active_keys == {
+        "L01", "L02", "L03", "L07", "L08", "L09", "L10",
+        "L20", "L21", "L22", "L23", "L24", "L25", "L26",
+        "L27", "L30", "L31", "L32", "L34", "L35", "L36",
+    }
+    agentspec = re.search(r"(?ms)^@inproceedings\{L20,\n(.*?)^\}", bibliography)
+    asb = re.search(r"(?ms)^@inproceedings\{L34,\n(.*?)^\}", bibliography)
+    attacker = re.search(r"(?ms)^@misc\{L27,\n(.*?)^\}", bibliography)
+    assert agentspec is not None
+    assert "conf.researchr.org/details/icse-2026" in agentspec.group(1)
+    assert "10.1145/3744916.3764546" not in agentspec.group(1)
+    assert asb is not None
+    assert "booktitle = {International Conference on Learning Representations}" in asb.group(1)
+    assert "pages = {35331--35366}" in asb.group(1)
+    assert attacker is not None
+    assert "Against {LLM} Jailbreaks" in attacker.group(1)
+
+
 def test_missing_citation_key_fails_closed(monkeypatch: pytest.MonkeyPatch) -> None:
     original_read = builder._read
 

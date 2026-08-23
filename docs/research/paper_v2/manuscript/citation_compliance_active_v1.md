@@ -15,7 +15,8 @@ submission-focused review.
   ten are explicitly represented as preprints.
 - Titles, author order, publication status, year, and stable landing page were
   checked against the publisher, conference, proceedings, or arXiv record.
-- Three deterministic metadata defects were corrected:
+- Five deterministic metadata defects were corrected across the pre-review and
+  final-integrity passes:
   - `L02` (DRIFT): year corrected from 2026 to the official NeurIPS 2025
     proceedings year, and DOI `10.52202/085713-2791` added.
   - `L20` (AgentSpec): the unregistered DOI and unverified page range were
@@ -24,6 +25,11 @@ submission-focused review.
   - `L08` (Contextual Agent Security): the first author's surname was corrected
     from `Bagdasarian` to `Bagdasaryan` to match the official Google Research
     record.
+  - `L27` (The Attacker Moves Second): the `LLM` acronym was protected in the
+    BibTeX title so citeproc cannot render it as `Llm`.
+  - `L34` (Agent Security Bench): the entry type, `booktitle`, editors, page
+    separator, and paper URL were aligned with the official ICLR proceedings
+    BibTeX record.
 
 ## Active-source ledger
 
@@ -61,17 +67,29 @@ used to claim that M3 is first, unique, state of the art, or universally
 superior. Preprint-only mechanisms remain distinguishable from peer-reviewed
 work through their BibTeX type and note.
 
-Eleven of the 21 active citations (52.4%) also received an explicit
-citation-context check against the official abstract or proceedings summary:
-`L01`, `L02`, `L03`, `L21`, `L22`, `L23`, `L24`, `L25`, `L26`, `L35`, and
-`L36`. This exceeds the pre-review 30% context-sampling threshold. The sample
-covers the principal verify-before-commit, control/data-flow, task-alignment,
-privilege, provenance, and provenance-sensitivity claims used by the paper.
+All 21 active citations received a fresh citation-context check against an
+official abstract, proceedings summary, conference page, or official preprint
+PDF during the Stage 4.5 review. The checked roles were:
 
-Semantic Scholar was used only as a secondary discovery-index cross-check.
-Where its preprint year differed from the official venue record (Task Shield,
-StruQ, AgentSpec, and Agent Security Bench), the publisher or proceedings page
-controlled the manuscript metadata.
+| Keys | Manuscript claim role | Context result |
+|---|---|---|
+| L01, L02, L03 | verify-before-commit, dynamic control/data constraints, and user-goal/tool-call alignment | supported by the official ACL/NeurIPS records |
+| L07, L30, L31, L32 | structured input, spotlighting, instruction hierarchy, and indirect-injection detection | supported by USENIX, ACL, or the official preprints; used only as prompt/output-layer comparisons |
+| L08, L20 | contextual policies and runtime rule enforcement | supported by the official Google Research and ICSE records |
+| L09, L10, L34 | benchmark task/security framing | supported by the official AgentDojo, InjecAgent, and ICLR records |
+| L21, L22, L23 | influence provenance, authorization/execution graphs, and isolated planning | supported by the official preprint records and kept explicitly preprint-only |
+| L24, L25, L26 | privilege narrowing/approval, tool dependencies, and trusted control/data flow | supported by the official preprint PDF and ACL record |
+| L27 | adaptive attacker motivation | supported by the official preprint and not used to claim saturation |
+| L35, L36 | controlled source-authority sensitivity and formal evidence-backed authorization | supported by the official 2026 preprints |
+
+No checked context attributes an isolated causal effect to the paper's bundled
+policy/full comparison, and no context supports a first, only, SOTA, or
+cross-provider-generalization claim.
+
+An unauthenticated Semantic Scholar secondary cross-check was attempted but was
+unavailable during the final-integrity pass. Following the review protocol, it
+was not retried repeatedly; publisher, conference, proceedings, and arXiv
+primary records controlled the decisions.
 
 ## Remaining submission gate
 

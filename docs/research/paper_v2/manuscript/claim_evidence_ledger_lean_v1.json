@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.0",
-  "updated_at": "2026-08-23T19:53:59+08:00",
+  "updated_at": "2026-08-23T21:32:44+08:00",
   "paper_route": "authorization_regime_and_security_utility_empirical_study",
   "scope": {
     "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
@@ -57,15 +57,15 @@
     },
     {
       "claim_id": "LC05",
-      "claim": "The evaluated provenance, temporal/data-flow and confirmation extensions did not show a stable independent benefit over policy-only.",
-      "status": "verified_negative_result",
+      "claim": "The evaluated full configuration package did not show a stable benefit over the policy package.",
+      "status": "verified_negative_package_result",
       "evidence": [
         "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_2_endpoints.csv",
         "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_3_paired_effects.csv",
         "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json"
       ],
       "observed": "Under auto_compiled, M3-full had 0/100 versus 1/100 unsafe effects but completed 16/60 versus 22/60 benign tool tasks; Public Pro and Flash both placed M3-full above policy-only in unsafe effects.",
-      "boundary": "The result is limited to the tested implementation, policies, benchmarks and DeepSeek models; it is not proof that provenance is generally ineffective."
+      "boundary": "Prompt profile and runtime modules differ together, so the comparison cannot identify any individual provenance, temporal/data-flow, confirmation, or prompting effect. The result is limited to the tested implementation, policies, benchmarks, and DeepSeek models."
     },
     {
       "claim_id": "LC06",
@@ -80,10 +80,11 @@
     },
     {
       "claim_id": "LC07",
-      "claim": "Authorization-regime outcomes are reported separately for AgentDojo and M3-v2 and by prespecified M3-v2 attack family.",
+      "claim": "Authorization-regime outcomes are reported separately for AgentDojo and M3-v2, with prespecified M3-v2 attack-family results retained in the structured analysis artifact.",
       "status": "verified_deepseek_descriptive",
       "evidence": [
-        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_5_heterogeneity.csv"
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_5_benchmark_stratified.csv",
+        "docs/research/paper_v2/lean_empirical/authorization_results_deepseek_v1.json"
       ],
       "boundary": "These strata are descriptive heterogeneity analyses; they are not independently powered confirmatory tests."
     },
@@ -139,13 +140,14 @@
     },
     {
       "claim_id": "LC13",
-      "claim": "The 21 references currently cited by the manuscript have verified metadata, stable landing pages and publication status; 11/21 principal citation contexts were explicitly checked against official abstracts or proceedings summaries.",
+      "claim": "The 21 references currently cited by the manuscript have verified metadata, stable landing pages and publication status; all 21/21 active citation contexts were checked against official abstracts, proceedings summaries, or the official preprint PDF.",
       "status": "verified_current_active_set",
       "evidence": [
         "docs/research/paper_v2/manuscript/citation_compliance_active_v1.md",
-        "docs/research/paper_v2/manuscript/references_v1.bib"
+        "docs/research/paper_v2/manuscript/references_v1.bib",
+        "docs/research/paper_v2/manuscript/stage_4_5_final_integrity_report_v1.md"
       ],
-      "boundary": "The context review is a 52.4% structured sample, not a claim that every sentence of every cited paper was independently reproduced. Review any newly activated citation and repeat publication-status checks at submission."
+      "boundary": "The review verifies the manuscript's active citation contexts against primary records; it does not reproduce every experiment in the cited papers. Review any newly activated citation and repeat publication-status checks at submission."
     }
   ]
 }

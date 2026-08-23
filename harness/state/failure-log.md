@@ -5542,3 +5542,10 @@ credential, changed a historical ledger, or enabled an external effect.
 - Result: both conversions stopped before rasterization with `FileNotFoundError`; zero page PNGs were created.
 - Cause: no LibreOffice/`soffice` executable is available in the bundled or system command paths.
 - Recovery: follow the document skill's explicit fallback: retain the successfully built DOCX files, run structural/content/font/table/figure tests, disclose that page-render QA is unavailable, and do not claim the visual render gate passed.
+
+# 2026-08-23 — Stage 4.5 broad citation test selection included superseded frozen contracts
+
+- Attempt: run the focused paper analysis, manuscript, DOCX, citation-integrity, and bibliography test files together after the final active-reference review.
+- Result: 41 tests passed and three failed. The failures came from the historical 34-entry bibliography/hash contract: one requires the currently non-resolving AgentSpec DOI `10.1145/3744916.3764546`, one requires exactly 34 entries although the current candidate corpus contains 36, and one requires replaying the superseded frozen citation manifest.
+- Cause: the command mixed the current 21-key submission bibliography contract with legacy v1 corpus-integrity tests. Restoring the obsolete DOI or rewriting the frozen historical manifest would contradict the fresh primary-record review and the lean no-history-replay scope.
+- Recovery: preserve the three historical tests as legacy diagnostics, add a current active-set regression test covering all 21 cited keys and the corrected AgentSpec/ASB/LLM metadata, and rerun only that new test plus the three current citation/document checks affected by the metadata edit. Do not rerun the 41 already-passing checks.

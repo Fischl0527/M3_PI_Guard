@@ -1,0 +1,44 @@
+{
+  "mode": "primary_research",
+  "stage": "4.5",
+  "generated_at": "2026-08-23T21:30:00+08:00",
+  "prisma_trAIce": null,
+  "raise": {
+    "mode": "principles_only",
+    "principles": {
+      "human_oversight": "warn",
+      "transparency": "pass",
+      "reproducibility": "pass",
+      "fit_for_purpose": "pass"
+    },
+    "principle_evidence": {
+      "human_oversight": [
+        "The manuscript states that human authors reviewed the AI-assisted preparation and retain responsibility.",
+        "Author identities, CRediT roles, declarations, and final accountable sign-off are still unfilled author-owned inputs."
+      ],
+      "transparency": [
+        "The manuscript discloses manuscript-preparation AI use, provider/model scope, the Gemini stopping rule, incomplete diagnostic status, and the no-cross-provider boundary.",
+        "The Methods section distinguishes research-model calls from manuscript-preparation assistance and reports failure handling and ITT denominators."
+      ],
+      "reproducibility": [
+        "The current manuscript is linked to frozen task selections, compact raw records, deterministic analyses, six result tables, five figures, and focused builders.",
+        "The provider alias limitation and the lack of immutable hidden-weight identifiers are disclosed."
+      ],
+      "fit_for_purpose": [
+        "The paired authorization design, policy/full package comparison, failure-sensitive bound, benchmark stratification, and budget-50/200 adaptive analysis directly answer the bounded research questions.",
+        "The paper does not use the bundled package contrast for component-level causal attribution."
+      ]
+    },
+    "block_decision": "warn"
+  },
+  "overall_decision": "warn",
+  "user_action_required": true,
+  "evidence": [
+    "docs/research/paper_v2/manuscript/stage_4_5_final_integrity_report_v1.md",
+    "docs/research/paper_v2/manuscript/stage_4_5_originality_audit_v1.md",
+    "docs/research/paper_v2/manuscript/citation_compliance_active_v1.md",
+    "docs/research/paper_v2/manuscript/claim_evidence_ledger_lean_v1.json",
+    "docs/research/paper_v2/manuscript/jisa_submission_checklist.md"
+  ],
+  "upstream_sync_status": "current"
+}

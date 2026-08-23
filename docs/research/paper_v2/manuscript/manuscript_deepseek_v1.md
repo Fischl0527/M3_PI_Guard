@@ -235,10 +235,11 @@ Guard conditions, benign utility, `ASK/DENY` burden, and operational failure.
 The remaining defensible contribution is consequently methodological and
 empirical. We test whether authorization information itself changes measured
 security and utility; enforce a runtime projection that excludes evaluator
-fields; compare policy-only and full provenance/temporal/confirmation variants
-in paired conditions; and quantify `ASK` burden, operational failures, and
-executed effects under a common evidence contract. These are study-design
-claims and must stand on M3's own completed experiments.
+fields; compare the policy and full configuration packages in paired
+conditions while disclosing their bundled prompt/runtime differences; and
+quantify `ASK` burden, operational failures, and executed effects under a
+common evidence contract. These are study-design claims and must stand on
+M3's own completed experiments.
 
 ### 2.3 Prompt-level defenses and execution-level outcomes
 

@@ -1,5 +1,25 @@
 # 会话移交
 
+## 2026-08-23 — Stage 4.5 final integrity handoff
+
+- Stage 4.5 passes with non-blocking author/institutional warnings. Resume from
+  `docs/research/paper_v2/manuscript/stage_4_5_final_integrity_report_v1.md`;
+  do not repeat the citation, numerical, originality or historical evidence
+  reviews unless an active citation, scientific claim or result value changes.
+- Current English/Chinese Markdown and Word drafts contain the bounded package
+  comparison and corrected active bibliography. The complete originality trail,
+  Schema-12 compliance report, claim ledger and JISA checklist are adjacent.
+- Verification: initial current-paper selection 41 pass; three legacy 34-entry/
+  hash-contract failures are documented and out of the active submission
+  contract; five current affected tests pass. DOCX a11y is 0 high/0 medium for
+  both files; page-render QA is open because LibreOffice/Poppler are absent.
+- Do not start Stage 5 without explicit author confirmation. Remaining inputs:
+  author/order/affiliations/corresponding author, CRediT/funding/conflicts,
+  biographies/photos, similarity review, Word/WPS visual approval, release IDs,
+  and institutional submission-date JISA SCIE/JCR Q2 verification.
+- No provider/API, Full Harness, blind work, adaptive expansion, historical
+  replay or successful-row rerun is required. F-PAPER-002 remains `in_progress`.
+
 ## 2026-08-23 — Stage 4 scientific revision handoff
 
 - Stage 4 is internally accepted. Resume from

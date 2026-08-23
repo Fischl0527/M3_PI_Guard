@@ -1,5 +1,24 @@
 # 当前任务
 
+### 2026-08-23 精简实证里程碑 30：Stage 4.5 最终完整性审查完成
+
+- 结论：`PASS with non-blocking author and institutional warnings`。21/21 活跃
+  参考文献及引用语境完成新的主记录核验；24 类投稿数字/证据主张与当前紧凑分析
+  产物一致；73/144（50.7%）合格段落且全部修订段落完成精确短语筛查，0 个潜在
+  精确命中；七类 AI 研究失败模式无未解决的严重/中等问题。
+- 修正：LC05 从“独立模块收益”收缩为配置包结果；LC07 修正已失效的 Table 5
+  路径；L27 保留 `LLM` 大写；L34 按官方 ICLR BibTeX 改为 proceedings 条目；
+  英文 Related Work 与中文对照稿同步为成套配置比较。
+- 验证：当前论文批次 41 项通过；误纳入的 3 项旧 34-entry/hash 测试被记录为
+  过期历史契约，未用错误的不可解析 AgentSpec DOI 回滚现稿；新增/受影响的 5 项
+  当前活跃引用及双语 Word 测试通过。两份 DOCX a11y 均为 0 high/0 medium/21 low。
+- 环境边界：本机无 LibreOffice/`soffice` 和 Poppler，故 Word 结构检查通过但不
+  宣称分页视觉门通过。未运行 provider/API、Full Harness、历史重放、盲测、
+  Pro-500/2000 或任何新实验。
+- 当前停点：强制作者确认点，不自动进入 Stage 5。F-PAPER-002 保持 `in_progress`；
+  下一步只能是作者姓名/机构/CRediT/声明、自查重、Word/WPS 逐页验收、公开发布
+  标识和投稿日机构 JISA SCIE/JCR Q2 核验。
+
 ### 2026-08-23 精简实证里程碑 29：Stage 4 科学大修通过，投稿准备仍进行中
 
 - 已完成 Stage 3 的 P0-1 至 P1-5：把 full/policy 改为配置包比较；补齐基准
