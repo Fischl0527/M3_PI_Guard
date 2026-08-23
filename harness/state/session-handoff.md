@@ -1,5 +1,25 @@
 # 会话移交
 
+## 2026-08-23 — Stage 2.5 integrity handoff
+
+- Stage 2.5 is complete and passes with non-blocking warnings. Resume from
+  `docs/research/paper_v2/manuscript/stage_2_5_integrity_report_v1.md`; do not
+  repeat citation, numerical, originality, Full Harness or historical-evidence
+  checks unless a cited source, result value or scientific claim changes.
+- Current English and Chinese Word drafts contain the corrected `Bagdasaryan`
+  bibliography entry. Focused pytest is 20/20, Ruff/compile pass, and both
+  accessibility audits have 0 high/0 medium findings. Visual pagination remains
+  unclaimed because LibreOffice is unavailable and active user WPS processes
+  prevent a clean fallback render; do not terminate those processes.
+- The next research action is Stage 3 scientific peer review of the current
+  manuscript. No new API experiment is needed. Keep cross-provider inference,
+  first/only/SOTA, saturation and independent-blind claims closed.
+- Author-side submission inputs remain required: author identity/affiliations,
+  CRediT, declarations, author-owned self-plagiarism check, release decision,
+  and institutional submission-date JISA SCIE/JCR verification.
+- F-PAPER-002 remains `in_progress`; after the Stage 3 checkpoint, make only
+  evidence-backed revisions and rerun the tests affected by those revisions.
+
 ## 2026-08-20 — Automatic post-run analysis handoff
 
 - Keep PID 2176 (final Gemini quota-day wrapper) and PID 29256 (offline

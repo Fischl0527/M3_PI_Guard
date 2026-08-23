@@ -1,5 +1,27 @@
 # 进展记录
 
+## 2026-08-23 — Stage 2.5 pre-review integrity gate passed
+
+- Verified official metadata and publication status for all 21 active
+  references and checked 11/21 citation contexts against official abstracts or
+  proceedings summaries. Corrected the `L08` author surname to `Bagdasaryan`.
+- Reconciled every manuscript statistic to the frozen lean plan and compact
+  DeepSeek/Public/Medium/Adaptive/Gemini artifacts. No numerical, denominator,
+  model-boundary or cross-provider-claim defect was found.
+- Originality sampling covered 37/111 eligible prose paragraphs (33.3%) with
+  no exact public-web phrase match. Ten affirmative ledger claims are verified;
+  forbidden and author-side claims remain closed.
+- The seven AI-research failure modes and RAISE principles-only checkpoint have
+  no blocking defect. The complete review is recorded in
+  `stage_2_5_integrity_report_v1.md`.
+- Rebuilt both Word drafts after the bibliography correction. Focused pytest
+  passes 20/20; Ruff and `py_compile` pass; both a11y audits report 0 high,
+  0 medium and 21 low URL-display findings. Page-level visual QA remains
+  unclaimed because LibreOffice is absent and WPS could not isolate user-owned
+  running processes. No provider call, Full Harness or historical replay ran.
+- F-PAPER-002 remains `in_progress` for Stage 3 scientific peer review and
+  author-owned submission gates.
+
 ## 2026-08-20 — Final Gemini offline post-processing scheduled
 
 - PID 29256 now waits on the sole provider wrapper PID 2176. After the final

@@ -1,5 +1,23 @@
 # 当前任务
 
+### 2026-08-23 精简实证里程碑 26：Stage 2.5 完整性门通过
+
+- 对当前 21 条活跃引用完成 21/21 官方元数据核验和 11/21（52.4%）
+  引用语境抽检；修正 `L08` 第一作者姓氏为官方记录中的 `Bagdasaryan`。
+- 对冻结设计、900 条 DeepSeek 授权实验、480 条中型结果、5,082/1,791
+  条 Public 结果、Adaptive 50/200 和 Gemini diagnostic 停止状态完成一次性
+  数字复核；稿件中的分子/分母、区间、检验、成本和失败口径均匹配。
+- 原创性抽检覆盖 37/111（33.3%）合格正文段落，未发现公共网页精确短语命中；
+  13 条 claim ledger 中 10 条正向主张有直接证据，跨厂商与 first/only/SOTA
+  继续禁止，JISA 投稿时分区仍为作者侧门槛。
+- 七类 AI 研究失败模式和 RAISE principles-only 检查无阻断项；详细记录在
+  `stage_2_5_integrity_report_v1.md`。Stage 2.5 结论为 PASS with warnings。
+- 中英文 Word 已用修正后的参考文献重建。定向 pytest 20/20、Ruff、
+  `py_compile` 通过；两稿 a11y 均为 0 high/0 medium/21 low（参考文献 URL）。
+  本机无 LibreOffice，WPS 亦无法隔离用户现有进程，因此不宣称分页视觉验收。
+- F-PAPER-002 仍为 `in_progress`。下一科学步骤是 Stage 3 peer review；提交前还需
+  作者姓名/单位/CRediT/声明、作者自查重和机构 JCR/SCIE 核验。
+
 ### 2026-08-23 精简实证里程碑 25：Gemini 停止规则与双语稿闭合
 
 - Gemini `remaining --retry-failed` 在本配额日执行 25 项：22 项完成、3 项响应前

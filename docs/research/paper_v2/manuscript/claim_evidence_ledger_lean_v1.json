@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.0",
-  "updated_at": "2026-08-23T19:30:00+08:00",
+  "updated_at": "2026-08-23T19:53:59+08:00",
   "paper_route": "authorization_regime_and_security_utility_empirical_study",
   "scope": {
     "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
@@ -139,13 +139,13 @@
     },
     {
       "claim_id": "LC13",
-      "claim": "The 21 references currently cited by the manuscript have verified metadata, stable landing pages, publication status and reviewed claim contexts.",
+      "claim": "The 21 references currently cited by the manuscript have verified metadata, stable landing pages and publication status; 11/21 principal citation contexts were explicitly checked against official abstracts or proceedings summaries.",
       "status": "verified_current_active_set",
       "evidence": [
         "docs/research/paper_v2/manuscript/citation_compliance_active_v1.md",
         "docs/research/paper_v2/manuscript/references_v1.bib"
       ],
-      "boundary": "Review any newly activated citation and repeat publication-status checks at submission."
+      "boundary": "The context review is a 52.4% structured sample, not a claim that every sentence of every cited paper was independently reproduced. Review any newly activated citation and repeat publication-status checks at submission."
     }
   ]
 }

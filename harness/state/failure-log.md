@@ -5406,3 +5406,28 @@ credential, changed a historical ledger, or enabled an external effect.
   focused test/Ruff/compile suite, and stop after one failed render attempt.
   Structural, geometry, image and accessibility checks replace the unavailable
   page render; visual pagination is explicitly left unclaimed.
+
+## 2026-08-23 — Standard DOCX renderer still lacks LibreOffice
+
+- Attempt: render the rebuilt English and Chinese Word drafts with the current
+  bundled document runtime, on the hypothesis that its override binaries might
+  now expose a supported converter.
+- Failure: the canonical renderer again raised `WinError 2` before conversion;
+  neither `soffice` nor a LibreOffice installation exists on this host.
+- Changed hypothesis: do not retry the LibreOffice path. Use the repository's
+  existing read-only WPS render helper once in an ephemeral QA directory, then
+  retain only the structural test results and manual page-review conclusion in
+  project state. No render manifest or page image is a paper deliverable.
+
+## 2026-08-23 — WPS render helper could not obtain an isolated process set
+
+- Attempt: use the repository's read-only WPS fallback for the English draft
+  after the LibreOffice failure.
+- Failure: the helper exported through WPS but rejected the run because a new
+  WPS renderer process remained after COM release. Several user-owned WPS
+  processes were already active, so terminating or reusing that process set
+  would not be a safe QA action; the staged render output was removed by the
+  helper.
+- Changed hypothesis: do not retry WPS and do not terminate any WPS process.
+  Use DOCX structural/content/font/geometry tests for this bibliography-only
+  rebuild and explicitly leave visual pagination unclaimed.

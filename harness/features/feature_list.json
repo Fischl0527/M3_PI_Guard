@@ -401,12 +401,12 @@
       "status": "in_progress",
       "priority": "critical",
       "acceptanceCriteria": [
-        "At least 30 directly relevant 2024-2026 papers are tracked with peer-review and source-verification status",
-        "At least 20 open-source defenses or benchmarks are registered for online-state authorization-leakage audit",
-        "Paper-v2 experiment records validate authorization regime, visible-field evidence, ASK reason, unsafe effect, utility, operational status and provider attestation",
-        "Paper-v1 and all historical frozen evidence remain byte-identical",
-        "A 60-80 case paired falsification gate passes before any large API or public-benchmark expansion",
-        "Formal claims use only auditable providers and retain failures in the intention-to-treat denominator"
+        "Existing DeepSeek Pro/Flash, medium and Adaptive 50/200 evidence is analyzed once without historical recursive replay",
+        "The frozen 900-item DeepSeek authorization-regime experiment is closed under intention-to-treat failure rules",
+        "Gemini follows the three-quota-day free-tier stopping rule and incomplete data cannot support cross-provider inference",
+        "Raw evaluator/gold fields remain outside online state and all provider tools and real external effects remain disabled",
+        "The English manuscript, Chinese comparison, figures, tables, claim ledger and Stage 2.5 integrity review remain synchronized",
+        "Submission readiness requires author-owned metadata/declarations, scientific peer review and institutional submission-date JCR/SCIE verification"
       ],
       "verification": [
         "Task scope and immutable-boundary decision recorded in harness/tasks/m3-paper-v2.md and harness/docs/decision-log.md",
@@ -591,7 +591,9 @@
         "All five figure previews received visual QA: Figure 2 now exposes coincident conditions with a documented slash-linked marker, Figure 3 moves its legend outside the confidence-interval panel, and synchronized PNG/SVG/PDF plus Word outputs pass 14 focused tests without changing data.",
         "A complete Simplified Chinese comparison manuscript now mirrors the six scientific sections, six numbered main tables, inline decision table, five figures, 21-source citation corpus, DeepSeek statistics and Gemini-pending claim boundary. The editable Word copy has 249 paragraphs, seven tables and five figures; focused verification passes 17/17 plus Ruff/compile, DOCX geometry/image/a11y audits pass, and page-render QA remains explicitly unclaimed because LibreOffice/soffice is unavailable.",
         "Gemini quota-day 2 ended naturally after 23 pending-only attempts and the first 429, without replaying response-bearing or terminal work. Latest accounting is 23/450 terminal ITT, 92 recoverable, 335 untouched and five official responses at USD 0. Exactly one final quota-day runner is scheduled for 2026-08-21; incomplete data after it remain diagnostic and cannot support a cross-provider claim.",
-        "A unique offline post-processor waits for the final Gemini wrapper and then performs one partial-safe compact analysis. It calls no provider and generates cross-vendor tables/figures only when all 450 work items are terminal; otherwise it records diagnostic-partial status and leaves cross-provider claims closed."
+        "A unique offline post-processor waits for the final Gemini wrapper and then performs one partial-safe compact analysis. It calls no provider and generates cross-vendor tables/figures only when all 450 work items are terminal; otherwise it records diagnostic-partial status and leaves cross-provider claims closed.",
+        "The Gemini free-tier stopping rule closed after three quota days at 32/450 terminal work items, five response-bearing items and USD 0. The incomplete cohort is diagnostic only, no cross-provider inference is enabled, and no further Gemini call is planned.",
+        "Stage 2.5 pre-review integrity passes: 21/21 active-reference metadata checks, 11/21 citation-context checks, all manuscript statistics reconciled, 37/111 prose-paragraph originality sampling, ten affirmative claims verified, seven AI-research failure modes reviewed, and RAISE principles-only checkpoint completed. The corrected English and Chinese DOCX drafts pass 20 focused tests, Ruff, py_compile and 0-high/0-medium accessibility audits; author/JCR/peer-review gates remain open."
       ]
     },
     {

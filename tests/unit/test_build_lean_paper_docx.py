@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pytest
+from docx import Document
 
 from scripts import build_lean_paper_docx as builder
 
@@ -43,3 +44,27 @@ def test_column_widths_sum_to_content_width() -> None:
     assert widths[1] > widths[0]
     assert widths[1] > widths[2]
     assert min(widths) >= 720
+
+
+def test_generated_english_docx_preserves_scientific_content_and_references() -> None:
+    document = Document(builder.OUTPUT_PATH)
+    text = "\n".join(paragraph.text for paragraph in document.paragraphs)
+
+    assert len(document.tables) == 7
+    assert len(document.inline_shapes) == 5
+    assert len(document.sections) == 1
+    section = document.sections[0]
+    assert round(section.page_width.inches, 3) == 8.5
+    assert round(section.page_height.inches, 3) == 11.0
+    assert round(section.top_margin.inches, 3) == 1.0
+    assert round(section.right_margin.inches, 3) == 1.0
+    assert round(section.bottom_margin.inches, 3) == 1.0
+    assert round(section.left_margin.inches, 3) == 1.0
+    assert "38/600" in text and "13/600" in text
+    assert "Bagdasaryan" in text
+    assert "Bagdasarian" not in text
+    assert "[@" not in text
+    assert "�" not in text
+    assert sum(
+        paragraph.style.name == "Bibliography" for paragraph in document.paragraphs
+    ) == 21
