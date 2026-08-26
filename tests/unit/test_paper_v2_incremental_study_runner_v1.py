@@ -183,6 +183,27 @@ def test_provider_failure_types_are_content_free_and_deduplicated() -> None:
     ) == ["ProviderPausedError", "ProviderTransportError"]
 
 
+def test_incremental_fields_do_not_override_failure_recovery_or_itt_state() -> None:
+    value = runner._enrich_record(
+        {
+            "response_obtained": False,
+            "retry_eligible": False,
+            "included_in_primary_itt": False,
+        },
+        {
+            "study": "factorial",
+            "condition_cell": "policy_normal",
+            "prompt_factor": "normal",
+            "module_factor": "policy",
+            "source_authority_variant": None,
+            "authority_target": None,
+            "prior_outcome_selected": False,
+        },
+    )
+    assert value["retry_eligible"] is False
+    assert value["included_in_primary_itt"] is False
+
+
 def test_only_explicit_response_less_row_is_retried(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

@@ -490,8 +490,12 @@ def _enrich_record(
         value[field] = copy.deepcopy(work_item.get(field))
     if "scenario_relation" in work_item:
         value["scenario_relation"] = str(work_item["scenario_relation"])
-    value["included_in_primary_itt"] = True
-    value["retry_eligible"] = value.get("response_obtained") is False
+    value["included_in_primary_itt"] = bool(
+        value.get("included_in_primary_itt", True)
+    )
+    value["retry_eligible"] = bool(
+        value.get("retry_eligible", value.get("response_obtained") is False)
+    )
     value["provider_tools_enabled"] = False
     value["external_effects_enabled"] = False
     return value

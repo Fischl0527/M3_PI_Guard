@@ -5605,3 +5605,20 @@ credential, changed a historical ledger, or enabled an external effect.
 - Recovery change: persist content-free provider exception class names in all
   subsequent incremental rows. Retry only the failed work key once, then run
   only the seven untouched prefix rows if recovery succeeds.
+
+# 2026-08-26 — E1 attempt 2 exposed byte-level activation drift
+
+- Attempt 2 used its own trace file but ended with
+  `ProviderRequestTraceActivationError`. The official endpoint itself had
+  already passed the separate identity diagnostic.
+- Offline `provider_request_trace_activation --verify` reproduced the error.
+  The policy and qualification hashes matched; only the attestation schema did
+  not. Its Git blob is LF and exactly matches the bound hash, while the Windows
+  working tree had converted all 108 line endings to CRLF.
+- Fix: pin that one byte-bound schema to `eol=lf`, normalize the clean working
+  copy, and verify the existing activation rather than creating a new history
+  package. Also preserve the base runner's ITT/retry flags instead of
+  overwriting them in incremental metadata enrichment.
+- Recovery boundary: attempts 1 and 2 remain append-only. After focused tests
+  and activation verification, only this work key may advance to attempt 3;
+  the other seven canary rows remain untouched.

@@ -27,3 +27,6 @@
 /outputs/experiments/E14_context_correction_v2_r3/formal_raw_runs.jsonl -text
 /outputs/experiments/final_analysis/acceptance_matrix.csv -text
 /outputs/experiments/acceptance_remediation_v2/** -text
+
+# This schema is byte-bound by the prospective provider-trace activation.
+/schemas/paper_v2/provider_trace_attestation_v2.schema.json text eol=lf
