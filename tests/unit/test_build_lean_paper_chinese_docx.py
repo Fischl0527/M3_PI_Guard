@@ -41,7 +41,7 @@ def test_chinese_markdown_mirrors_scientific_structure_and_boundaries() -> None:
     positions = [text.index(heading) for heading in expected]
     assert positions == sorted(positions)
     assert text.count("![图 ") == 5
-    assert len(re.findall(r"^### 表 [1-6]\. ", text, flags=re.MULTILINE)) == 6
+    assert len(re.findall(r"^### 表 [1-5]\. ", text, flags=re.MULTILINE)) == 5
     assert "38/600" in text
     assert "13/600" in text
     assert "24/400" in text
@@ -119,7 +119,7 @@ def test_generated_chinese_docx_preserves_layout_content_and_cjk_fonts() -> None
     document = Document(builder.OUTPUT_PATH)
     text = "\n".join(paragraph.text for paragraph in document.paragraphs)
 
-    assert len(document.tables) == 7
+    assert len(document.tables) == 6
     assert len(document.inline_shapes) == 5
     assert len(document.sections) == 1
     section = document.sections[0]

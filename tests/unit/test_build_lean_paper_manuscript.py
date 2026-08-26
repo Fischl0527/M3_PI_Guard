@@ -49,16 +49,18 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
         "## References"
     )
     assert manuscript.count("![Figure ") == 5
-    assert len(re.findall(r"^### Table [1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
+    assert len(re.findall(r"^### Table [1-5]\. ", manuscript, flags=re.MULTILINE)) == 5
     assert "Supplementary Table S1" in manuscript
     assert "Supplementary Table S6" in manuscript
+    assert "Supplementary Table S10" in manuscript
     assert not re.search(
-        r"^#### Supplementary Table S[1-6]\. ", manuscript, flags=re.MULTILINE
+        r"^#### Supplementary Table S(?:[1-9]|10)\. ", manuscript, flags=re.MULTILINE
     )
     assert "### Figures" not in manuscript
     assert "22/60 (36.7%)" in manuscript
     assert "CNY 0.3374" in manuscript
-    assert manuscript.count("| Provider |") >= 5
+    assert "| Condition cell | Prompt factor | Module factor |" in manuscript
+    assert "| Stratum | Tasks | Successes by 500 |" in manuscript
     assert "excluding evaluator and gold fields" not in manuscript
     assert "oracle-sensitivity `exact_gold` authorization" in manuscript
     assert re.search(
@@ -149,7 +151,7 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
 
     cleaned, tables = builder._split_supplementary_tables(results)
 
-    assert [number for number, _, _ in tables] == [1, 2, 3, 4, 5, 6]
+    assert [number for number, _, _ in tables] == list(range(1, 11))
     assert all(table.startswith("|") for _, _, table in tables)
     assert "### Supplementary Table" not in cleaned
     assert "This audit supports only covered-path statements" in cleaned
@@ -158,6 +160,10 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
     )
     assert (
         "Supplementary Table S6 reports the defense-aware adaptive attack." in cleaned
+    )
+    assert (
+        "Supplementary Table S10 reports the conditional adaptive-tail execution."
+        in cleaned
     )
     assert "Detailed values are reported" not in cleaned
 

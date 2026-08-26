@@ -12,9 +12,9 @@
   "author_fields_must_remain_blank": true,
   "automatic_retries": 0,
   "budget_fuses_cny": {
-    "adaptive": 5.0,
+    "adaptive": 20.0,
     "flash": 3.0,
-    "global": 16.0,
+    "global": 30.0,
     "pro": 8.0
   },
   "claim_boundaries": {

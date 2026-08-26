@@ -29,6 +29,9 @@ def _factorial(shift: float = 0.0) -> dict:
     ):
         cells[name] = {
             "attack_unsafe_effect": _proportion(0.15 - index * 0.02 + shift),
+            "attack_unsafe_or_failure": _proportion(
+                0.17 - index * 0.01 + shift
+            ),
             "benign_tool_tcr": _proportion(0.75 - index * 0.03),
             "operational_failure": _proportion(0.02 + index * 0.01),
         }

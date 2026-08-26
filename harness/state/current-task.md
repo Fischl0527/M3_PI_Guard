@@ -1,6 +1,6 @@
 # 当前任务
 
-### 2026-08-26 增量实证强化：五项实验实施中
+### 2026-08-27 增量实证强化：按 owner 指令停止
 
 - 目标：实施 owner 批准的 10--12 天增量实验计划，用同期 2×2 因子设计
   解开 prompt 与 runtime modules 混杂，并补充来源权威反事实、风险富集、
@@ -10,18 +10,23 @@
   双语稿件/图表，以及本任务 Harness 状态文件。
 - 禁止执行：Gemini 新矩阵、独立盲测、真实用户确认、生产工具/外部副作用、
   Full Harness、历史递归重放、成功实验行重跑和冗余哈希证据包。
-- 安全与失败边界：DeepSeek Pro 常规/Flash/Adaptive 硬熔断分别为 CNY
-  8/3/5，总上限 CNY 16；无自动重试或模型回退；官方响应失败留在 ITT，
+- 安全与失败边界：DeepSeek Pro 常规/Flash 硬熔断仍为 CNY 8/3；E5 按
+  898 个查询的实测成本把 Adaptive/全局上限修正为 CNY 20/30，且只改变
+  允许成本、不改变科学设计；无自动重试或模型回退；官方响应失败留在 ITT，
   无响应工程失败只在原因修复后运行受影响行；作者信息保持空白。
-- 验收：E1 720、E2 240+480 offline、E3 240、E4 360 和 E5 最多
-  3,600 queries 按各自边界闭合；新 raw JSONL 可一次性重建统计；负面结果
-  同样结项；Git 在五个计划里程碑提交并推送 `m3-guard`。
-- 当前阶段：E1--E4 已完成并一次性分析。E4 为 360/360 response-bearing
-  work items；一条 `ProviderTransportError` 仅恢复失败 key，未重跑成功行。
-  四个 Flash 攻击单元均为 0/50，TCR 为 10/30、8/30、10/30、10/30，
-  仍按安全地板解释。E5 两任务×5 查询正式前缀已通过，12 个 B200 survivor
-  正在按首次 unsafe effect 停止规则串行扩展至最多 500。F-PAPER-002 保持
-  `in_progress`；E5 完成后生成统一图表并完成双语稿与最终审查。
+- 验收状态：E1 720、E2 240+480 offline、E3 240 和 E4 360 已闭合。
+  E5 按 owner “当前进程结束后停止”指令保留为部分结果，不恢复、不自动重试、
+  不生成伪完整统计。Git 里程碑推送到
+  `origin/codex/q2-empirical-study`，即
+  `https://github.com/Fischl0527/RedTeam_LLM_Security.git`。
+- 最终停点：E5 runner 于 `M3V2-D-077-A2:q474` 出现无官方响应记录并
+  fail-closed 暂停。现有 2,380 条物理查询记录、2,379 个唯一 query key；
+  7/12 个 survivor 到达 q500，其中 0/7 观察到 unsafe effect；一项停在
+  q474，一项只有 q201--205 正式前缀，三项未开始。成本 CNY 17.9303736，
+  provider tools 和真实 external effects 为零，automatic retries 为零。
+  一次性 E5 分析因 survivor 非全部终态而按设计拒绝生成
+  `analysis_v1.json`。F-PAPER-002 保持 `in_progress`；当前无本项目运行进程，
+  未来只能在 owner 新指令后恢复。
 
 ### 2026-08-23 精简实证里程碑 31：Stage 5 最小 JISA 投稿包已完成
 

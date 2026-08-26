@@ -1,7 +1,7 @@
 # JISA submission readiness checklist
 
-Status: `stage_4_5_pass_author_and_institutional_gates_pending`
-Checked: 2026-08-23
+Status: `incremental_e5_active_final_review_pending`
+Checked: 2026-08-26
 
 ## Venue fit
 
@@ -66,10 +66,14 @@ prespecified stopping rule is closed without a cross-provider claim.
   explicit failed-row disposition.
 - [x] The 450-row Gemini diagnostic cross-provider study is terminal, or has
   transparently downgraded after the three-quota-day free-tier rule.
-- [x] The blind study, budget 500/2,000 and full second-model adaptive panel are
-  out of scope and are not prerequisites or manuscript claims.
-- [x] Every current DeepSeek numeric claim is rebuilt once from the compact raw records and
-  frozen lean plan.
+- [x] E1--E4 are complete: 720 Pro factorial rows, 240 Pro source-authority
+  rows plus 480 offline Guard decisions, 240 outcome-enriched Pro rows and 360
+  Flash replication rows.
+- [ ] E5 must finish the twelve selected B200 survivors and receive one-pass
+  conditional-tail analysis. A complete original-panel B500 curve, budget
+  2,000, blind study and full second-model adaptive panel remain out of scope.
+- [ ] Rebuild every current incremental numeric claim once from the five compact
+  analysis artifacts after E5 closes; do not rerun successful provider rows.
 - [x] All 21 active citations have complete authors, title, year, DOI or stable
   URL, publication-status verification, and a reviewed claim context. The 15
   unused BibTeX candidates do not render and require review only if activated.
@@ -83,8 +87,9 @@ prespecified stopping rule is closed without a cross-provider claim.
   at most 85 characters.
 - [ ] Upload the manuscript, the separate editable supplementary-tables file,
   and all other required editable source files.
-- [x] Prepare each of the five figures as a separate vector PDF for submission;
-  retain SVG as editable source and PNG only as the manuscript/QA preview.
+- [ ] Regenerate each of the five incremental figures as a separate vector PDF
+  after E5 closes; retain SVG as editable source and PNG as the manuscript/QA
+  preview, then inspect all five.
 - [ ] Prepare the competing-interests declaration in the format requested by
   the submission system.
 - [ ] Record funding sources and sponsor roles, or the journal’s recommended
@@ -111,15 +116,15 @@ prespecified stopping rule is closed without a cross-provider claim.
   verified contribution, benchmark breadth and practical relevance. Add the
   corresponding-author details and submission date to the separate editable
   Word copy before submission.
-- [x] Run the final claim–evidence, active citation/metadata, figure/table and
-  online-field-isolation audits. Stage 4.5 checked all 21 active citation
-  contexts and reconciled all submission-facing numerical claim families.
+- [ ] Run the final incremental claim–evidence, active citation/metadata,
+  figure/table and online-field-isolation checks. The 2026-08-23 Stage 4.5
+  report remains valid for its historical manuscript but does not cover E1--E5.
 - [ ] Complete the author-owned similarity/self-plagiarism check after author
   identities and publication lists are available.
-- [x] Perform the final page-by-page Word/WPS visual inspection for the upload
-  package. The main manuscript passed 30/30 pages, the supplementary file 2/2,
-  and the highlights, cover letter and glossary 1/1 each. Author-owned fields
-  remain intentionally unfilled and require a final author check after entry.
+- [ ] Rebuild and visually inspect the incremental Word package after E5, five
+  main tables and ten supplementary tables are integrated. The earlier 30-page
+  inspection applies only to the pre-incremental manuscript. Author-owned
+  fields remain intentionally unfilled and require a final author check.
 
 ## Current prohibition
 

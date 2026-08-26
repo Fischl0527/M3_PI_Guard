@@ -1,5 +1,26 @@
 # 进展记录
 
+## 2026-08-27 — E5 部分运行停止并封存
+
+- E5 唯一 pending-only runner 于 `M3V2-D-077-A2:q474` 产生无官方响应的
+  `provider_failure`，按 response-less fail-closed 规则自然退出为 `paused`。
+  owner 要求当前进程结束后不再启动其他任务，因此未恢复该 key，未启动
+  其余 survivor。
+- 封存状态为 2,380 条物理行、2,379 个唯一 query key、7/12 个任务到达
+  q500、0/7 终态任务观察到 unsafe effect。另有一任务到 q474，一任务仅有
+  q201--205 前缀，三任务未开始。物理行状态为 2,357 completed、19 parse
+  failure、3 provider failure 和 1 条已被 q377 成功恢复取代的 pre-response
+  transport failure。
+- 记录合计 3,370,214 input tokens、251,185 output tokens、3,621,399 total
+  tokens；已完成行的 total latency p50/p95 为 4,561.6/8,029.8 ms；4,483 次
+  provider calls，累计成本 CNY 17.9303736。provider tools、真实 external effects 和
+  automatic retries 均为零。
+- 一次性 `incremental_analysis_v1 --study adaptive-tail` 按“12 个 survivor 必须终态”
+  契约拒绝了部分数据，未生成 `analysis_v1.json`。该拒绝保护了论文分母边界；
+  当前只能把 0/7 写为终态子集的描述性结果，不能作为预定 12 任务估计量。
+- E1--E4 保持完成，E5 保持部分/暂停；F-PAPER-002 继续 `in_progress`。
+  未运行 Full Harness、历史递归验证、新图表生成、稿件构建、评审或其他 API 实验。
+
 ## 2026-08-26 — E2 provenance and E3 challenge completed
 
 - E2 端到端 240/240 全部 response-bearing，239 completed/1 provider failure，
@@ -3395,3 +3416,13 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
 - E5's two-task, ten-query formal prefix passed with all responses and no
   external effects. The same process now runs only the prespecified 12 B200
   survivors toward 500, stopping each task at first unsafe effect.
+
+# 2026-08-26 — Future GitHub target confirmed
+
+- Owner designated `https://github.com/Fischl0527/RedTeam_LLM_Security.git`
+  as the repository for subsequent milestones. Both fetch and push URLs for
+  `origin` are confirmed at that address; the active branch remains
+  `codex/q2-empirical-study`.
+- The old `M3_PI_Guard` repository remains available only through the
+  `m3-guard` compatibility remote. No history was rewritten and no force-push
+  is permitted.

@@ -1,5 +1,22 @@
 # 会话移交
 
+## 2026-08-27 — E5 暂停后 owner 指令停止
+
+- 当前没有应继续等待的项目进程。E5 runner 已以 `paused` 退出，停止点为
+  `M3V2-D-077-A2:q474` 无官方响应。不得把它记为完整 E5，也不得基于目前
+  0/7 终态任务声称 B500 攻击饱和。
+- 权威部分状态：2,380 物理行、2,379 唯一 query key、7 任务到 q500、
+  1 任务到 q474、1 任务只有 5 条前缀、3 任务未开始；CNY 17.9303736，
+  3,621,399 total tokens，provider tools/external effects/retries 为零。
+- `outputs/experiments/incremental_empirical_v1/adaptive-tail/analysis_v1.json` 不存在是预期的
+  fail-closed 状态：离线分析器拒绝非终态 survivor。不要修改分析器来绕过此门。
+- E1--E4 已闭合；E5 未闭合；F-PAPER-002 保持 `in_progress`。owner 明确要求
+  停止，所以不恢复 q474、不运行未开始 survivor、不生成图表/稿件、不运行测试或
+  Full Harness。未来只有 owner 新的明确命令才能恢复。
+- 阶段报告：`docs/research/paper_v2/incremental_empirical_v1/phase_report_v1.md`。
+  GitHub 目标为 `origin/codex/q2-empirical-study` on
+  `https://github.com/Fischl0527/RedTeam_LLM_Security.git`。
+
 ## 2026-08-26 — Pro E1--E3 result handoff
 
 - E1、E2、E3 都已终态；不要重新运行任何成功行。E2 修正后真实 source-swap

@@ -5,7 +5,7 @@
 - 项目：M3-PI Guard
 - 研究路线：授权制度与运行时 Guard 配置的实证评估
 - 报告类型：阶段性技术报告（Markdown）
-- 执行日期：2026-08-26
+- 执行日期：2026-08-26--2026-08-27
 - GitHub 仓库：`https://github.com/Fischl0527/RedTeam_LLM_Security.git`
 - 分支：`codex/q2-empirical-study`
 - 作者信息：留空，由作者投稿前填写
@@ -13,7 +13,7 @@
 
 ## 1. 执行摘要
 
-本阶段围绕已批准的五项增量实验 E1--E5 展开，目标不是增加低价值记录数量，而是补强现有 SCI 二区实证稿中最关键的因果识别、机制核验、困难样本、模型复现和自适应尾部证据。E1--E4 已完成正式执行和一次性统计；E5 按冻结的 B200 survivor 条件性尾部设计执行，最终状态在本报告定稿时写入。所有 API 实验均使用隔离的模拟 effect，provider tools 和真实外部 effect 为零。
+本阶段围绕已批准的五项增量实验 E1--E5 展开，目标不是增加低价值记录数量，而是补强现有 SCI 二区实证稿中最关键的因果识别、机制核验、困难样本、模型复现和自适应尾部证据。E1--E4 已完成正式执行和一次性统计。E5 于 q474 的无响应记录处按规则暂停；根据 owner “当前进程结束后停止”的指令，未再恢复，因此作为部分尾部证据封存，不冒充完整 B500 面板。所有 API 实验均使用隔离的模拟 effect，provider tools 和真实外部 effect 为零。
 
 截至 E4，新增正式证据包括：
 
@@ -21,7 +21,7 @@
 - E2：240 条 DeepSeek V4 Pro 端到端执行和 480 次无 API Guard 回放；
 - E3：240 条 DeepSeek V4 Pro 风险富集挑战执行；
 - E4：360 条 DeepSeek V4 Flash 同厂商复现执行；
-- E5：12 个预先选定的 B200 survivor，从 query 201 条件性扩展至最多 500，并在首次 unsafe effect 后停止。
+- E5：对 12 个预先选定的 B200 survivor 启动条件尾部扩展；最终封存 2,380 条物理查询记录，7 个任务到 q500，一个到 q474，一个仅有 q201--205 前缀，三个未开始。
 
 阶段结果不支持把 M3-full 写成已证明领先的防御机制。更稳健的论文叙事是：授权制度、prompt 配置、运行时模块、来源权威性和失败处理共同决定被测得的安全--效用结果；机制层的 provenance sensitivity 不能自动等同于端到端安全或任务完成收益。
 
@@ -73,7 +73,29 @@ E4 对冻结的 90 个嵌套案例运行与 E1 相同的四条件设计，共 36
 
 E5 只对冻结的 12 个 budget-200 未成功任务继续执行 query 201--500，并在首次 unsafe effect 后停止。它估计的是 `P(first success by 500 | no success by 200, selected survivor)`，不得并入原 40 任务形成伪造的完整 B500 曲线，也不用于宣称攻击饱和。
 
-> E5 最终行数、成功数、首次成功位置、条件概率、token、成本和失败状态将在 runner 自然终止并完成一次性分析后写入；现阶段不提前填写或根据中间状态推断。
+E5 runner 最终以 `paused` 退出，停止原因为
+`M3V2-D-077-A2:q474` 的 response-less `provider_failure` 需要显式复核。
+owner 随后要求不再启动其他任务，因此未恢复该 query，也未运行剩余项。
+
+| E5 封存项 | 结果 |
+|---|---:|
+| 预定 survivor | 12 |
+| 物理 query 行 / 唯一 query key | 2,380 / 2,379 |
+| 到达 q500 的任务 | 7/12 |
+| 终态任务中首次 unsafe effect | 0/7 |
+| 部分任务 | 1 个至 q474；1 个仅 q201--205 |
+| 未开始任务 | 3 |
+| 物理行运行状态 | 2,357 completed；19 parse failure；3 provider failure；1 superseded pre-response transport failure |
+| input / output / total tokens | 3,370,214 / 251,185 / 3,621,399 |
+| completed 行 total latency p50 / p95 | 4,561.6 / 8,029.8 ms |
+| provider calls / 成本 | 4,483 / CNY 17.9303736 |
+| automatic retry / provider tools / 真实 effect | 0 / 0 / 0 |
+
+7 个到 q500 的任务中未观察到 unsafe effect。若只对这个已终态便利子集做
+描述，0/7 的 Wilson 95% CI 约为 0.0%--35.4%；但这不是预定的 12 任务
+估计量，存在明确的非随机未完成，不能用于宣称无尾部风险、B500 完整曲线或
+攻击饱和。预定一次性分析器因 `M3V2-D-077-A2` 非终态而拒绝生成
+`analysis_v1.json`，这是正确的 fail-closed 结果。
 
 ## 3. API、安全与失败恢复
 
@@ -97,6 +119,40 @@ E5 只对冻结的 12 个 budget-200 未成功任务继续执行 query 201--500�
 - 无自动重试、跨模型回退或选择性排除；
 - 统计同时报告 unsafe effect、operational failure 和 pessimistic unsafe-or-failure，避免把系统失败误当成安全成功。
 
+### 3.4 E5 工作区分支切换恢复
+
+E5 首轮运行期间，工作区在 runner 外部从 `codex/q2-empirical-study` 切换到
+`main`。增量计划源码因此暂时不可见，q377 在取得 provider 响应前留下一个
+`FileNotFoundError`，随后冻结计划复核按 fail-closed 规则以
+`adaptive-tail frozen plan drift` 停止。reflog、raw row 和 checkpoint 三处状态一致：
+此前成功 query 均已持久化，q377 为 `response_obtained=false` 且
+`retry_eligible=true`。
+
+恢复时没有 reset、force 或重放成功 query。工作区安全切回原分支后，12 个 survivor、
+A1/A2/A3 各四项和两项正式前缀重新通过只读检查；只显式恢复 q377，成功记录为
+attempt 2，之后从下一个 pending query 继续。该事件作为工程恢复记录，不作为模型失败
+或攻击结果进入效应估计。
+
+### 3.5 E5 成本上限修正
+
+原计划按 CNY 1--3 估算最多 3,600 个新增查询，并设置 Adaptive CNY 5、全局
+CNY 16 的熔断。898 个最新查询的实际累计成本为 CNY 4.2561534，按实测均值推算，
+最大无成功路径约需 CNY 17。继续沿用原上限会因工程成本估计误差截断预注册 cohort，
+而不是按首次 unsafe effect 或 query 500 的科学停止规则终止。
+
+在无 E5 进程运行时，Adaptive 上限修正为 CNY 20，全局上限修正为 CNY 30；Pro
+和 Flash 上限仍为 CNY 8/CNY 3。该修正只改变最大允许成本，不改变 12 个样本、
+A1/A2/A3 平衡、query 201--500、攻击器、模型、seed、首次成功停止、ITT、统计口径
+或安全边界。修正记录位于
+`protocols/paper_upgrade_v2/incremental_empirical_v1/budget_amendment_v1.md`。
+
+### 3.6 最终暂停与分析门
+
+E5 在修正后上限内运行，暂停时成本 CNY 17.9303736，未触发 CNY 20
+硬上限。直接停止原因是 q474 无官方响应，不是成本熔断。runner 不自动重试；
+分析器不接受非终态 cohort。两道门共同避免了把不完整 E5 当作全部 12 任务结果。
+本轮遵循 owner 的新停止命令，不对 q474 执行 failed-only recovery。
+
 ## 4. 统计与主张边界
 
 每个 cell 报告原始分子/分母和 Wilson 95% CI；简单二条件配对采用 exact McNemar；因子主效应与交互采用按 `case_id` 配对的 10,000 次 bootstrap。E1 的 module、prompt、interaction 在 direct unsafe effect 与 benign-tool TCR 两个共同主要终点家族内分别做 Holm 校正；失败敏感性终点只作预设描述性分析。E2 的来源、module 和交互形成独立来源实验家族。E3、E4、E5 为挑战、复现或条件敏感性证据，不另开显著性家族。
@@ -108,7 +164,7 @@ E5 只对冻结的 12 个 budget-200 未成功任务继续执行 query 201--500�
 - 来源权威性在 Guard 决策层产生可观测差异，但端到端收益受 ASK/DENY 和不执行地板限制；
 - 风险富集案例的历史 unsafe outcome 重现不稳定；
 - Flash 只提供同厂商模型复现；
-- 自适应尾部只对预先选定的 B200 survivor 做条件性解释。
+- 已完成的自适应尾部子集只能作部分描述；预定 12 任务条件估计量未闭合。
 
 当前不支持的主张：first、only、SOTA、跨厂商泛化、完整 provenance 的端到端净收益、完整 B500 面板或攻击饱和。
 
@@ -164,9 +220,10 @@ E:\M3_PI_Guard_test\outputs\experiments\incremental_empirical_v1\
 │  └─ internal\
 └─ adaptive-tail\
    ├─ raw_query_records_v1.jsonl # E5 每个新增 query 的紧凑正式记录
-   ├─ analysis_v1.json           # E5 完成后的一次性条件尾部分析
+   ├─ analysis_v1.json           # 未生成；非终态 cohort 被分析器 fail-closed 拒绝
    ├─ canary_gate_v1.json        # 两任务×5 查询正式前缀门
    ├─ cost_summary_v1.json       # runner 结束时的紧凑成本摘要
+   ├─ failure_records_v1.jsonl   # 无官方响应且可恢复的工程失败旁路记录
    ├─ search_checkpoints\        # MCTS/搜索断点，只用于 pending-only 恢复
    └─ internal\
       ├─ provider_traces\        # 本地请求链恢复材料，不是论文统计入口
@@ -179,14 +236,17 @@ E:\M3_PI_Guard_test\outputs\experiments\incremental_empirical_v1\
 |---|---|---|---|
 | `raw_records_v1.jsonl` / `raw_query_records_v1.jsonl` | 保存不可覆盖的物理尝试、官方响应标识、状态与最小公开 trace bundle | 是；按冻结的最新 work-key/ITT 规则读取 | 提交紧凑正式记录 |
 | `offline_guard_replay_v1.jsonl` | 保存无 API 的确定性 Guard 机制回放 | 仅用于 E2 机制层，不能替代端到端结果 | 提交 |
-| `analysis_v1.json` | 对对应 raw JSONL 做一次性计数、配对统计和完整性检查 | 是；图表和稿件的直接统计输入 | 提交 |
+| `analysis_v1.json` | 对应 raw JSONL 做一次性计数、配对统计和完整性检查 | E1--E4 是；E5 因 cohort 非终态未生成，不得伪造 | 提交已存在的 E1--E4 分析 |
 | `canary_gate_v1.json` | 记录正式前缀是否通过模型身份、字段隔离和无真实 effect 门 | 不是效应估计；是技术准入证据 | 提交 |
 | `cost_summary_v1.json` | 汇总一次运行的 token/成本/失败 | 只用于运行与成本报告 | 提交 |
+| `failure_records_v1.jsonl` | 保留 E5 无官方响应、未进入 ITT 且可恢复的工程失败；成功恢复行仍在主 raw JSONL | 否；仅用于失败审计和恢复说明 | 提交紧凑记录 |
 | `search_checkpoints/` | 支持 E5 从未终态位置继续，不重放成功 query | 否 | 通常保留本地，不作为稿件附件 |
 | `internal/provider_traces/` | 诊断响应前失败、核对官方 request/response 链 | 否；禁止用它选择性改写 outcome | 默认本地保留，不批量提交 |
 | `internal/*budget_events.jsonl` | 控制硬熔断和恢复时的累计成本 | 否；E5 raw 行已嵌入公开 usage/cost 摘要 | 默认本地保留，不生成额外哈希包 |
 
-图表和主表不会写回 `outputs` 的 provider 内部目录，而是由五个紧凑 `analysis_v1.json` 单向生成到：
+图表和主表不会写回 `outputs` 的 provider 内部目录。原计划是由五个紧凑
+`analysis_v1.json` 单向生成到下列目录；但本轮按 owner 停止指令没有运行最终图表
+生成器，E5 也没有合格的完整分析输入：
 
 ```text
 E:\M3_PI_Guard_test\docs\research\paper_v2\incremental_empirical_v1\
@@ -199,15 +259,16 @@ E:\M3_PI_Guard_test\docs\research\paper_v2\incremental_empirical_v1\
 
 ## 6. 论文集成与交付物
 
-本阶段的论文交付以 Markdown 为主：
+本阶段最终交付以本 Markdown 报告为主。下列论文集成项属于原定后续工作，
+本轮因 owner 停止指令未继续构建、统一重算或评审：
 
 - 英文主稿：`docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md`；
 - 中文对照稿：`docs/research/paper_v2/manuscript/manuscript_zh_v1.md`；
-- 5 幅主图：authority boundary、E1 因子交互、E2 来源反事实、E1/E3/E4 forest、E5 adaptive tail；
-- 5 张主表：因子设计、E1 因子估计、E2 来源证据、E3/E4 鲁棒性、E5 条件尾部；
-- Supplementary Tables S1--S10；
-- 方法审查和 Devil's Advocate 审查；
-- 本 Markdown 阶段报告。
+- 英文和中文对照工作稿继续保留，但未在 E5 暂停后重建；
+- 原计划的 5 幅主图和 5 张主表未作为本停止回合的新任务启动；
+- Supplementary Tables S1--S10 未在 E5 非终态后重建；
+- 方法审查和 Devil's Advocate 新一轮审查未启动；
+- 本 Markdown 阶段报告已按 E5 部分封存状态更新。
 
 作者姓名、顺序、单位、通信作者、CRediT、资助和利益冲突信息继续留空。本阶段不以 Word 报告为交付物，也不为报告生成额外 DOCX 或重复哈希包。
 
@@ -228,9 +289,17 @@ E:\M3_PI_Guard_test\docs\research\paper_v2\incremental_empirical_v1\
 | `cb55a57` | E1 正式结果 |
 | `0c7a905` | E1--E3 正式结果 |
 
-最终 E4/E5、统一统计、双语稿、审查和本报告将各自形成可审查 commit，并推送到 `origin/codex/q2-empirical-study`，即 `RedTeam_LLM_Security` 仓库。旧 `m3-guard` 远程仅保留为历史关联，不再作为本轮默认推送目标。只提交与本轮直接相关的代码、紧凑 raw/analysis/canary、图表和文稿；不纳入用户已有的无关工作树文件。
+远端 `0c7a905` 之后，本地存在一项由工作区外部操作创建的 owner commit
+`9608012`。它在切换到 `main` 前同时收录了 E4/稿件改动和较广的既有工作区文件；
+本轮不 reset、不 amend、不改写这一已有提交，也不把它冒充为自动化代理的精简
+里程碑。后续代理提交仍只暂存本轮直接相关的代码、紧凑
+raw/analysis/canary、图表、文稿与 Harness 状态。
 
-最终定向验证应包括：
+本停止检查点将 E4 结果、E5 部分状态、Harness 登记和本报告形成可审查的
+commit，并推送到 `origin/codex/q2-empirical-study`，即 `RedTeam_LLM_Security` 仓库。旧
+`m3-guard` 远程仅保留为历史关联，不再作为本轮默认推送目标。
+
+原计划的最终定向验证包括：
 
 - incremental runner/analysis/figures/tables 的 pytest；
 - 英文 Markdown builder 与中英文数值一致性测试；
@@ -238,10 +307,16 @@ E:\M3_PI_Guard_test\docs\research\paper_v2\incremental_empirical_v1\
 - `git diff --check`；
 - 逐图视觉检查。
 
-本轮明确不运行 Full Harness，也不把历史全量哈希重算作为论文完成条件。
+上述最终定向套件在 E5 暂停后没有运行，因为 owner 要求不再启动别的任务。
+本轮亦未运行 Full Harness，不把历史全量哈希重算作为论文完成条件。
 
 ## 8. 结论与后续作者动作
 
-五项增量实验的核心价值是把论文从“配置包结果堆叠”推进为可解释的实证研究：E1 处理因果混杂，E2 区分机制层与端到端层，E3 暴露困难样本的重现不稳定性，E4提供同厂商模型复现，E5测量预算 200 后的条件尾部风险。无论其结果是否正面，均按冻结口径进入稿件。
+本阶段已经把论文从“配置包结果堆叠”推进到更可解释的实证路线：E1 处理因果混杂，E2 区分机制层与端到端层，E3 暴露困难样本的重现不稳定性，E4 提供同厂商模型复现。E5 只得到部分尾部证据：已终态的 7 任务中为 0/7 unsafe effect，但预定 12 任务分母未闭合，不能进入主效应估计或饱和结论。
+
+截至本报告定稿，项目无正在运行的本轮实验进程。F-PAPER-002 仍为
+`in_progress`，不宣称五项实验全部完成或论文已结项。未来若 owner 重新授权，
+应先决定是否对 q474 做单 key failed-only recovery 并完成剩余 survivor；在此之前，
+只应使用 E1--E4 完整结果和 E5 部分描述边界。
 
 实验和稿件完成后，剩余动作由作者负责：填写作者/机构信息，确认公开数据与代码发布范围，完成作者侧查重和投稿伦理核对，并在投稿当天通过学校或 Clarivate 数据库确认 JISA 的 SCIE/JCR Q2 状态。

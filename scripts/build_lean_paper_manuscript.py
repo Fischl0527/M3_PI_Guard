@@ -63,7 +63,7 @@ class ManuscriptBuildError(ValueError):
 def _split_supplementary_tables(
     body: str,
 ) -> tuple[str, list[tuple[int, str, str]]]:
-    """Remove S1-S6 tables from Results while retaining their narrative context."""
+    """Remove S1-S10 tables from Results while retaining narrative context."""
 
     lines = body.splitlines()
     cleaned: list[str] = []
@@ -100,10 +100,11 @@ def _split_supplementary_tables(
         while index < len(lines) and not lines[index].strip():
             index += 1
 
+    tables.sort(key=lambda item: item[0])
     numbers = [number for number, _, _ in tables]
-    if numbers != list(range(1, 7)):
+    if numbers != list(range(1, 11)):
         raise ManuscriptBuildError(
-            f"Expected Supplementary Tables S1-S6, found {numbers}"
+            f"Expected Supplementary Tables S1-S10, found {numbers}"
         )
     return "\n".join(cleaned).strip(), tables
 

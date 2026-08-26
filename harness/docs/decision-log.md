@@ -1792,3 +1792,31 @@ Consequences:
 - Consequence: historical costs are not restated. All E1–E5 prospective costs
   and pre-request fuses use the conservative tariff and retain the CNY 16
   global ceiling.
+
+## 2026-08-26 — Amend only the E5 execution-cost ceiling
+
+- Decision: keep the Pro and Flash regular-study fuses at CNY 8 and CNY 3,
+  while raising the E5 Adaptive fuse from CNY 5 to CNY 20 and the incremental
+  global ceiling from CNY 16 to CNY 30.
+- Reason: after 898 latest E5 query work items, the append-only budget ledger
+  recorded CNY 4.2561534. The maximum no-success path projects to roughly CNY
+  17, so the original estimate would truncate the registered cohort for an
+  engineering cost-estimation error rather than a scientific stopping rule.
+- Scientific invariants: the twelve selected survivors, family balance,
+  q201--q500 range, attacker/model/seed, first-unsafe stopping, ITT handling,
+  zero automatic retry, disabled provider tools and conditional estimand are
+  unchanged. Successful queries are not replayed.
+- Consequence: the amendment is disclosed in the protocol, Methods/report and
+  cost table. It cannot be used to construct a complete original-panel B500
+  curve or an attack-saturation claim.
+
+## 2026-08-26 — Move future GitHub milestones to RedTeam_LLM_Security
+
+- Decision: use `https://github.com/Fischl0527/RedTeam_LLM_Security.git` as
+  `origin` for all future fetches and milestone pushes on
+  `codex/q2-empirical-study`.
+- Compatibility: retain `m3-guard` as the named remote for the former
+  `M3_PI_Guard` repository; do not rewrite historical entries that accurately
+  describe the repository state at the time.
+- Safety: never force-push or include local secrets, raw provider traces,
+  temporary verification output or adaptive internal checkpoints.

@@ -15,7 +15,7 @@ funding agencies in the public, commercial, or not-for-profit sectors.
 
 The implementation, frozen lean experiment plan, analysis code, aggregate
 tables, and editable figures are maintained at
-https://github.com/Fischl0527/M3_PI_Guard. The repository is private during
+https://github.com/Fischl0527/RedTeam_LLM_Security. The repository is private during
 manuscript preparation. A public archival release with an immutable version
 identifier will be deposited before publication. Credentials and secrets are
 excluded from the release. Any restrictions on provider-derived compact raw

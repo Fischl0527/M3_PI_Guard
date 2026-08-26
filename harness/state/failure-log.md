@@ -5730,3 +5730,53 @@ credential, changed a historical ledger, or enabled an external effect.
   artifact or internal-ledger join. The runner also populates the top-level
   cost field for any later response-bearing rows. Fifteen focused adaptive
   runner/analysis tests and Ruff pass.
+### 2026-08-26 E5 在外部分支切换期间 fail-closed 停止
+
+- Failure: 正在运行的 E5 pending-only runner 于 `M3V2-D-047-A3:q377`
+  进入请求准备时，工作区被仓库外部操作从 `codex/q2-empirical-study`
+  切换到 `main`。当前分支不包含增量 runner/plan，产生一条无官方响应的
+  `FileNotFoundError` 记录；随后任务边界复核以 `adaptive-tail frozen plan drift`
+  停止。
+- Evidence: reflog 记录 2026-08-26 21:14:17 `checkout: moving from
+  codex/q2-empirical-study to main`；E5 raw 行显示 q377 `response_obtained=false`、
+  `retry_eligible=true`，此前 786 个成功查询及 checkpoint 均保留。
+- Cause: 运行期间的工作区分支切换改变了 runner 可见的冻结计划，不是模型响应、
+  攻击结果或 provider 配额问题。
+- Recovery: 安全切回原分支；`load_tail_plan()` 再次通过 12 任务、A1/A2/A3 各四个
+  及两项正式前缀检查。只显式恢复 q377，并从 checkpoint 继续未触碰查询；不重跑
+  任一成功 query。
+- Boundary: 不 reset、不 force、不改写已有查询或外部提交；恢复运行继续保持
+  provider tools/real effects disabled 与 automatic retries=0。
+
+### 2026-08-26 增量稿件收口前定向测试发现 12 项预期差异
+
+- Failure: E5 仍在运行时执行 44 项增量计划、分析、图表、表格与双语稿构建测试，
+  得到 32 passed / 12 failed。
+- Causes: 一项 adaptive 测试仍断言修订前的 CNY 5 熔断；一项图表 fixture 缺少
+  新增的 `attack_unsafe_or_failure` 字段；八项英文稿/补充材料失败均源于尚未生成的
+  E5 Supplementary Table S10；两项中文稿失败源于尚未替换的旧主表与 DOCX。
+- Recovery: 只更新过期的预算断言和图表 fixture；S10、中文五张主表和 DOCX
+  在 E5 终态统计生成后一次性补齐。没有重跑任何 API 成功行，也没有把未完成的
+  E5 伪装为测试通过。
+- Follow-up: 首次补充中文 ASK 边界时保留了 Markdown 反引号，但现有契约测试
+  检查不带反引号的可读短语，因此该单测仍失败。仅移除该术语处的反引号后再次
+  运行同一测试；科学含义和其余稿件内容不变。
+# 2026-08-27 — E5 q474 fail-closed pause and nonterminal analysis refusal
+
+- Attempt: 等待唯一正在运行的 E5 pending-only runner 自然结束，然后只运行一次
+  `python -m experiments.paper_v2.incremental_analysis_v1 --study adaptive-tail`。
+- Failure: runner 在 `M3V2-D-077-A2:q474` 获得无官方响应的
+  `provider_failure`，以 `paused` 退出。随后分析器抛出
+  `IncrementalAnalysisError: E5 survivor is not terminal: M3V2-D-077-A2`，没有生成
+  `analysis_v1.json`。
+- Cause: E5 的预定分析要求 12 个 survivor 全部终态；当前只有 7 个到 q500，
+  一个停在 q474，一个只有五条前缀，三个未开始。这是正确的 fail-closed
+  行为，不是应通过放宽分母解决的分析缺陷。
+- Recovery decision: owner 明确要求当前进程结束后不再启动其他任务。因此不恢复
+  q474，不运行其余 pending survivor，不修改分析契约。现有数据仅作部分、
+  描述性阶段证据。
+- Follow-up probe: 首个只读时延汇总误把 `latency_ms` 对象当作标量，产生转换
+  错误但未改写任何文件。更换假设后只读 `.latency_ms.total` 得到 p50/p95
+  4,561.6/8,029.8 ms；未重跑 API 或实验行。
+- Safety impact: automatic retries=0，provider tools=false，external effects=false；无密钥、
+  请求正文或响应正文输出。

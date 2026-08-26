@@ -70,8 +70,8 @@ CHALLENGE_PRIOR_CONDITIONS = frozenset(
         "m3_full",
     }
 )
-REGULAR_FUSES_CNY = {"pro": 8.0, "flash": 3.0, "adaptive": 5.0}
-GLOBAL_FUSE_CNY = 16.0
+REGULAR_FUSES_CNY = {"pro": 8.0, "flash": 3.0, "adaptive": 20.0}
+GLOBAL_FUSE_CNY = 30.0
 
 
 class IncrementalPlanError(ValueError):

@@ -248,6 +248,12 @@ query row. Its usage summary already aggregates multiple provider calls for the
 query; missing attribution fails closed. The raw-row totals are checked against
 the live append-only budget tracker during execution, and the paper analysis
 does not need to read the internal ledger or change any experimental outcome.
+The initial E5 cost estimate set CNY 5 adaptive and CNY 16 global fuses. After
+898 latest query work items cost CNY 4.2561534, the no-success maximum projected
+to approximately CNY 17. Before resuming, we prospectively raised only those
+two execution ceilings to CNY 20 and CNY 30. The selected tasks, query range,
+attacker, model, seed, first-success stopping, ITT rules, and estimand were not
+changed, and no successful query was replayed.
 Provider calls for the evidence reported here were made during July and August
 2026. The returned names are provider-managed model aliases and therefore
 identify the served model at request time without freezing its hidden weights.

@@ -154,9 +154,10 @@ stateDiagram-v2
 
 ## 精简实证阶段的 Git 检查点
 
-`F-PAPER-002` 在 `codex/q2-empirical-study` 分支工作。远程
-`m3-guard` 指向 `https://github.com/Fischl0527/M3_PI_Guard.git`，保留原
-`origin`，禁止 force-push；没有单独授权时只做本地提交，不推送。
+`F-PAPER-002` 在 `codex/q2-empirical-study` 分支工作。正式 GitHub 远程
+`origin` 指向 `https://github.com/Fischl0527/RedTeam_LLM_Security.git`；
+`m3-guard` 仅保留为旧 `M3_PI_Guard` 仓库的兼容远程。禁止 force-push，
+按已获授权将研究里程碑推送到 `origin/codex/q2-empirical-study`。
 
 按以下研究里程碑提交，避免在每条记录或每次失败后制造提交：
 

@@ -1,6 +1,6 @@
 # paper-v2 lean empirical manuscript workspace
 
-Status: `deepseek_authorization_results_complete_gemini_diagnostic_closed`
+Status: `incremental_e1_e4_complete_e5_active_gemini_diagnostic_closed`
 
 This directory is a complete working-paper workspace, but not yet a
 submission-ready package. It contains the active manuscript, existing
@@ -24,9 +24,12 @@ missed the preregistered benign-tool non-inferiority criterion. The active route
 is an empirical authorization-uncertainty and security–utility trade-off paper.
 The 5,082-record Public primary result is complete and independently
 reproduced, the 1,791-record DeepSeek Flash replication is complete, and the
-900-record DeepSeek authorization-regime experiment now has terminal analysis,
-five paper figures, and six tables. Gemini closed at 32/450 terminal work items
-under the three-quota-day rule and therefore supports no cross-provider claim.
+900-record DeepSeek authorization-regime experiment has terminal analysis. The
+incremental E1--E4 studies are complete and E5 is running under its conditional
+B200-survivor boundary; the final package is designed around five main figures,
+five main tables and ten supplementary tables. Gemini closed at 32/450 terminal
+work items under the three-quota-day rule and therefore supports no
+cross-provider claim.
 
 Files:
 
@@ -38,7 +41,7 @@ Files:
   removal of workflow-only metadata.
 - `M3_PI_Guard_JISA_working_draft.docx`: editable, single-column Word review
   copy with citeproc-rendered author-year citations, 21 cited references,
-  six numbered main tables, one inline decision table, and five figures.
+  five numbered main tables, one inline decision table, and five figures.
   Rebuild it with
   `python scripts/build_lean_paper_docx.py` using a Python environment with
   `python-docx` and Pandoc. Structural and accessibility checks pass; visual
@@ -46,14 +49,14 @@ Files:
 - `manuscript_zh_v1.md` and
   `M3_PI_Guard_JISA_chinese_comparison.docx`: Simplified Chinese comparison
   versions of the current English working manuscript. They preserve the same
-  six-section scientific structure, 21-source citation corpus, six numbered
+  six-section scientific structure, 21-source citation corpus, five numbered
   main tables, one inline decision table, five figures, numerical results and
   the closed Gemini diagnostic boundary. The Chinese files are for author review and
   team communication rather than JISA submission. Rebuild the Word copy with
   `python -m scripts.build_lean_paper_chinese_docx` in an environment with
   `python-docx` and Pandoc.
 - `supplementary_tables_v1.md` and
-  `M3_PI_Guard_JISA_supplementary_tables.docx`: the six detailed tables S1-S6
+  `M3_PI_Guard_JISA_supplementary_tables.docx`: the ten detailed tables S1-S10
   referenced from Results. Rebuild both with
   `python -m scripts.build_lean_paper_supplement`; the main manuscript retains
   every interpretation and denominator while the editable supplement carries
@@ -64,11 +67,13 @@ Files:
 - `methods_draft.md`: active lean Methods, failed-row recovery rule and
   focused-only verification contract.
 - `results_shell.md`: active Results draft covering medium, Public Pro/Flash,
-  the DeepSeek authorization experiment, and adaptive budgets 50/200.
-- `discussion_draft.md`: active interpretation of the DeepSeek authorization
-  findings and the closed incomplete Gemini diagnostic sample.
+  the DeepSeek authorization experiment, E1--E4 and adaptive budgets 50/200;
+  the E5 terminal section is filled only after its one-pass analysis.
+- `discussion_draft.md`: active interpretation of the authorization,
+  prompt×module, source-authority, challenge and replication findings, with the
+  closed incomplete Gemini diagnostic boundary.
 - `conclusion_draft.md`: provisional conclusions bounded to completed DeepSeek
-  and budget-50/200 evidence.
+  evidence and the conditional E5 estimand.
 - `figure_table_captions_v1.md`: publication-facing captions with denominators,
   endpoint semantics and claim boundaries.
 - `declarations_draft.md`: provisional competing-interest, funding,
@@ -94,8 +99,9 @@ Files:
   diagnostic boundary and no cross-provider inference.
 - `highlights_v1.md`: five JISA-length highlights summarizing the current
   method and DeepSeek results.
-- `figure_table_plan.md`: lean data-source map for five main figures and six
-  tables; no hash bundle or recursive evidence replay is required.
+- `figure_table_plan.md`: incremental data-source map for five main figures,
+  five main tables and ten supplementary tables; no hash bundle or recursive
+  evidence replay is required.
 - `pre_result_integrity_audit_v1.md`: scoped data/method/failure-mode audit of
   the admitted medium manuscript assets; explicitly not a formal Stage 2.5
   pass.
@@ -127,10 +133,10 @@ Files:
 - `jisa_submission_checklist.md`: official-scope, journal-package and
   result-dependent submission gates.
 
-Current DeepSeek analysis products are under
+Historical lean DeepSeek analysis products are under
 `docs/research/paper_v2/lean_empirical/`: the compact analysis JSON is
 `authorization_results_deepseek_v1.json`, the five PNG/SVG/PDF figure triplets are in
-`figures_deepseek_v1/`, and the six CSV tables are in
+`figures_deepseek_v1/`, and its six legacy CSV tables are in
 `tables_deepseek_v1/`. These are single-model products; their metadata
 explicitly disables a cross-provider claim because Gemini closed incomplete.
 
