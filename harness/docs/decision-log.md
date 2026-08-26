@@ -1779,3 +1779,16 @@ Consequences:
   unit tests, eight-row formal-prefix canaries (or the declared attack-only E3
   variant), one final row/key/field/identity check and one-pass statistics only.
   Successful terminal rows are never replayed.
+
+## 2026-08-26 — Account incremental calls at the current peak tariff
+
+- Decision: leave the frozen historical public-budget policy unchanged and
+  override pricing only in the new incremental runners with the official
+  2026-08-26 peak tariff.
+- Reason: the provider now lists Pro at CNY 0.30/9/27 and Flash at CNY
+  0.10/3/9 per million cache-hit input/cache-miss input/output tokens, above
+  the historical policy for some fields. Using peak prices keeps hard fuses
+  valid during both peak and discounted off-peak windows.
+- Consequence: historical costs are not restated. All E1–E5 prospective costs
+  and pre-request fuses use the conservative tariff and retain the CNY 16
+  global ceiling.

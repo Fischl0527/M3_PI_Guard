@@ -22,6 +22,22 @@ def test_tail_plan_and_runtime_candidate_preserve_the_b200_survivor_scope() -> N
     assert len(runner._known_query_keys(rows)) == 3600
 
 
+def test_adaptive_policy_uses_current_pro_peak_pricing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "incremental"
+    monkeypatch.setattr(
+        "experiments.paper_v2.incremental_study_runner_v1.OUTPUT_ROOT", root
+    )
+    policy = runner._policy()
+    pricing = policy["deepseek"]["pricing"]
+    assert policy["deepseek"]["hard_spend_limit_cny"] == 5.0
+    assert pricing["cache_hit_input_per_million_tokens"] == 0.30
+    assert pricing["cache_miss_input_per_million_tokens"] == 9.0
+    assert pricing["output_per_million_tokens"] == 27.0
+    assert pricing["verified_at"] == "2026-08-26"
+
+
 def test_checkpoint_preparation_copies_only_the_existing_b200_prefix(
     tmp_path: Path,
 ) -> None:

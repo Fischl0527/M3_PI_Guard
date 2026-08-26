@@ -114,6 +114,14 @@ Hard fuses are CNY 8 for all Pro regular studies, CNY 3 for Flash, CNY 5 for
 adaptive and CNY 16 globally.  All effects are isolated simulation; real email,
 payment, browser, code execution and production API operations remain disabled.
 
+Before the first API call, the official pricing page was rechecked on
+2026-08-26.  It listed peak rates per million tokens of CNY 0.30/9/27 for Pro
+and CNY 0.10/3/9 for Flash (cache-hit input/cache-miss input/output), with
+lower off-peak rates.  Incremental runners conservatively account every call at
+the peak tariff so the frozen CNY fuses remain valid regardless of execution
+window.  This prospective correction does not rewrite the historical public
+matrix policy or any historical cost record.
+
 ## Artifacts
 
 Machine-frozen plans live in

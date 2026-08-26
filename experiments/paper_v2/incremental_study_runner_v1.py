@@ -98,10 +98,55 @@ EXPECTED_MODELS = {
 }
 MAX_TOKENS = 512
 TIMEOUT_SECONDS = 180.0
+INCREMENTAL_PRICING_SOURCE_URL = (
+    "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+)
+INCREMENTAL_PRICING_VERIFIED_AT = "2026-08-26"
+INCREMENTAL_PEAK_PRICING_CNY_PER_MILLION = {
+    "deepseek-v4-pro": {
+        "cache_hit_input_per_million_tokens": 0.30,
+        "cache_miss_input_per_million_tokens": 9.0,
+        "output_per_million_tokens": 27.0,
+    },
+    "deepseek-v4-flash": {
+        "cache_hit_input_per_million_tokens": 0.10,
+        "cache_miss_input_per_million_tokens": 3.0,
+        "output_per_million_tokens": 9.0,
+    },
+}
 
 
 class IncrementalStudyRunnerError(RuntimeError):
     """Raised when an incremental run cannot preserve its contract."""
+
+
+def apply_incremental_peak_pricing(
+    policy: Mapping[str, Any], model_id: str
+) -> dict[str, Any]:
+    """Bind new experiment accounting to the verified peak tariff.
+
+    The historical public-matrix budget policy remains immutable.  Using the
+    peak tariff is deliberately conservative: it preserves the same fuse when
+    DeepSeek applies the lower off-peak tariff.
+    """
+
+    prices = INCREMENTAL_PEAK_PRICING_CNY_PER_MILLION.get(model_id)
+    if prices is None:
+        raise IncrementalStudyRunnerError(
+            f"missing incremental pricing for model {model_id}"
+        )
+    updated = copy.deepcopy(dict(policy))
+    deepseek = updated.get("deepseek")
+    if not isinstance(deepseek, dict) or deepseek.get("model_id") != model_id:
+        raise IncrementalStudyRunnerError("pricing/model identity drift")
+    deepseek["pricing"] = {
+        "currency": "CNY",
+        **prices,
+        "source_url": INCREMENTAL_PRICING_SOURCE_URL,
+        "verified_at": INCREMENTAL_PRICING_VERIFIED_AT,
+        "tariff_window": "peak_conservative_upper_bound",
+    }
+    return updated
 
 
 def _study_root(study: str) -> Path:
@@ -225,7 +270,9 @@ def _bounded_role_policy(study: str) -> dict[str, Any]:
     remaining = min(remaining_group, remaining_global)
     if remaining <= 0:
         raise IncrementalStudyRunnerError(f"{group}: incremental budget exhausted")
-    policy = build_role_policy(load_public_policy(), role)
+    policy = apply_incremental_peak_pricing(
+        build_role_policy(load_public_policy(), role), model_id
+    )
     policy["deepseek"]["hard_spend_limit_cny"] = remaining
     policy["deepseek"]["abort_ceiling_cny"] = remaining
     policy["deepseek"]["abort_at_fraction"] = 1.0

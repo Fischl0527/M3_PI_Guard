@@ -375,3 +375,9 @@ Record completed, blocked, and abandoned tasks here.
   conditions or running a provider.
 - Verification: 8 focused tests, Ruff, compile and frozen-plan reproduction
   pass.  Next milestone is the new profile/runtime/runner qualification.
+# 2026-08-26 — Incremental execution pricing preflight
+
+- Bound new Pro/Flash and adaptive-tail accounting to the official DeepSeek
+  peak tariff verified on 2026-08-26.
+- Preserved the frozen historical public policy and all historical records.
+- Verified with 10 focused tests plus Ruff; no API request was sent.

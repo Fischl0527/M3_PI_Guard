@@ -3358,3 +3358,16 @@ Next gated action:
   until focused tests and the study canary gate pass.
 - Prohibited: Gemini, blind work, Full Harness, recursive history replay,
   production tools/effects, successful-row replay and author-field completion.
+
+# 2026-08-26 — Incremental execution preflight handoff
+
+- Design and runner milestones are pushed. E2 offline replay is 480/480 with
+  zero API calls; regular and adaptive runners are offline-qualified.
+- Official pricing was rechecked immediately before provider execution. New
+  runners use the current peak tariff as a conservative upper bound; the
+  historical public policy remains unchanged.
+- Verification: focused pricing/runner pytest 10/10 and Ruff pass. No
+  incremental runner process is active.
+- Resume with E1 only: run the eight-row factorial formal-prefix canary, inspect
+  the outcome-blind technical gate, then run untouched pending rows if it
+  passes. Never replay a successful row.

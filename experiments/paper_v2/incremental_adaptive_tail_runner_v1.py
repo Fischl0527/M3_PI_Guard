@@ -443,14 +443,20 @@ class _TailOracle:
 
 
 def _policy() -> dict[str, Any]:
-    from experiments.paper_v2.incremental_study_runner_v1 import cumulative_spend_cny
+    from experiments.paper_v2.incremental_study_runner_v1 import (
+        apply_incremental_peak_pricing,
+        cumulative_spend_cny,
+    )
 
     spent = cumulative_spend_cny()
     remaining_global = GLOBAL_FUSE_CNY - float(spent["global"])
     limit = min(REGULAR_FUSES_CNY["adaptive"], remaining_global)
     if limit <= 0:
         raise IncrementalAdaptiveTailError("adaptive/global CNY fuse is exhausted")
-    policy = build_role_policy(load_public_policy(), "primary")
+    policy = apply_incremental_peak_pricing(
+        build_role_policy(load_public_policy(), "primary"),
+        "deepseek-v4-pro",
+    )
     policy["deepseek"]["hard_spend_limit_cny"] = limit
     policy["deepseek"]["abort_ceiling_cny"] = limit
     policy["deepseek"]["abort_at_fraction"] = 1.0

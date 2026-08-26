@@ -3941,3 +3941,14 @@ The older provider-gate text is superseded by this checkpoint.
   was run. F-PAPER-002 remains `in_progress` only for author-owned identity,
   declarations and release choices plus submission-date institutional JCR/SCIE
   confirmation.
+
+## 2026-08-26 — Incremental execution preflight
+
+- The five-study incremental design and runner are qualified; E2 deterministic
+  replay is complete at 480/480 decisions with zero provider calls.
+- The official DeepSeek tariff changed after the historical public-budget
+  policy was frozen. New incremental calls now use the 2026-08-26 peak tariff
+  as a conservative accounting upper bound without modifying historical cost
+  records.
+- Focused pricing/fuse tests pass 10/10 and Ruff passes. No incremental Python
+  process is running. The next action is the eight-row E1 formal-prefix canary.

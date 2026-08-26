@@ -91,6 +91,50 @@ def test_regular_plans_are_frozen_and_have_eight_balanced_prefix_rows() -> None:
             }
 
 
+@pytest.mark.parametrize(
+    ("study", "model_id", "expected_prices", "expected_limit"),
+    [
+        (
+            "factorial",
+            "deepseek-v4-pro",
+            (0.30, 9.0, 27.0),
+            8.0,
+        ),
+        (
+            "flash",
+            "deepseek-v4-flash",
+            (0.10, 3.0, 9.0),
+            3.0,
+        ),
+    ],
+)
+def test_incremental_policy_uses_current_peak_pricing_without_mutating_history(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    study: str,
+    model_id: str,
+    expected_prices: tuple[float, float, float],
+    expected_limit: float,
+) -> None:
+    _patch_output(monkeypatch, tmp_path / "incremental")
+    historical = runner.build_role_policy(
+        runner.load_public_policy(),
+        "second" if model_id.endswith("flash") else "primary",
+    )
+    historical_prices = dict(historical["deepseek"]["pricing"])
+    policy = runner._bounded_role_policy(study)
+    pricing = policy["deepseek"]["pricing"]
+    assert policy["deepseek"]["hard_spend_limit_cny"] == expected_limit
+    assert (
+        pricing["cache_hit_input_per_million_tokens"],
+        pricing["cache_miss_input_per_million_tokens"],
+        pricing["output_per_million_tokens"],
+    ) == expected_prices
+    assert pricing["verified_at"] == "2026-08-26"
+    assert pricing["tariff_window"] == "peak_conservative_upper_bound"
+    assert historical["deepseek"]["pricing"] == historical_prices
+
+
 def test_canary_gate_is_outcome_blind_and_success_is_never_rerun(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

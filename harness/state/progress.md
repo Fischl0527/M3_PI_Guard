@@ -3306,3 +3306,15 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   reference URLs.
 - No API, experiment, Full Harness, historical replay or redundant hash bundle
   was created. F-PAPER-002 remains `in_progress` at the author/institution gate.
+
+# 2026-08-26 — Incremental pricing preflight qualified
+
+- Rechecked the official DeepSeek pricing page before the first new provider
+  call. The new incremental runners now account conservatively at the current
+  peak rates: Pro CNY 0.30/9/27 and Flash CNY 0.10/3/9 per million
+  cache-hit input/cache-miss input/output tokens.
+- Historical public-matrix policies and historical records remain immutable.
+  The new CNY 8 Pro, CNY 3 Flash, CNY 5 adaptive and CNY 16 global fuses use
+  only the prospective incremental tariff.
+- Focused runner tests pass 10/10 and Ruff passes. No API call was made during
+  this correction; F-PAPER-002 remains `in_progress` for E1–E5 execution.
