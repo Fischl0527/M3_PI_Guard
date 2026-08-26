@@ -278,14 +278,24 @@ def test_only_explicit_response_less_row_is_retried(
         credential_loader=lambda: {},
         dispatcher_factory=lambda _permit, _rows: retry_dispatcher,
     )
-    assert retried["executed"] == 8
-    assert retried["canary_gate_passed"] is True
+    assert retried["executed"] == 1
+    assert retried["canary_gate_passed"] is False
     attempts = [
         row["attempt"]
         for row in _rows(runner._raw_path("factorial"))
         if row["work_key"] == failed_key
     ]
     assert attempts == [1, 2]
+
+    resumed = runner.run_regular_study(
+        "factorial",
+        canary_only=True,
+        config_path=None,
+        credential_loader=lambda: {},
+        dispatcher_factory=lambda *_: _Dispatcher(),
+    )
+    assert resumed["executed"] == 7
+    assert resumed["canary_gate_passed"] is True
 
     with pytest.raises(runner.IncrementalStudyRunnerError, match="cannot be retried"):
         runner.run_regular_study(

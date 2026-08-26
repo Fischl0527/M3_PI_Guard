@@ -54,9 +54,11 @@ def test_chinese_markdown_mirrors_scientific_structure_and_boundaries() -> None:
     assert "4/40" in text and "18/40" in text
     assert "Gemini 免费层执行在 32/450 个终态工作项时关闭" in text
     assert "不作跨厂商泛化主张" in text
-    assert "**RQ2：配置比较。**" in text
+    assert "**RQ2：提示词与运行时组件。**" in text
+    assert "**RQ4：来源权威性。**" in text
+    assert "**RQ5：自适应尾部风险。**" in text
     assert "**RQ2：模块贡献。**" not in text
-    assert "该比较不是组件消融" in text
+    assert "分别估计两项主效应及其交互" in text
     assert "不安全效应或运行失败" in text
     assert "由 17/30 降至 0/30" in text
     assert "不能识别单个运行时模块的贡献" in text

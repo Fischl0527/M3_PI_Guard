@@ -1,0 +1,89 @@
+{
+  "schema_version": "public-benchmark-lock-1.0",
+  "generated_at": "2026-07-18T06:38:48.726522+00:00",
+  "repositories": [
+    {
+      "name": "agentdojo",
+      "repository": "https://github.com/ethz-spylab/agentdojo.git",
+      "commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "commit_date": "2026-06-02T11:59:58+02:00",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_sha256": "a090c871ff2aa6abb58a0eda1b6262dca39a7610de3df3411497fba7aa6fad09",
+      "checkout_tracked_in_parent": false
+    },
+    {
+      "name": "injecagent",
+      "repository": "https://github.com/uiuc-kang-lab/InjecAgent.git",
+      "commit": "f19c9f2c79a41046eb13c03c51a24c567a8ffa07",
+      "commit_date": "2024-07-02T00:38:20-05:00",
+      "license": "MIT",
+      "license_file": "LICENCE",
+      "license_sha256": "2889829a6a4c3b0b340af05612d2f4fc5424693bf504a49a82dbb6e9fa73e7b9",
+      "checkout_tracked_in_parent": false
+    }
+  ],
+  "protocol": {
+    "agentdojo_version": "v1",
+    "agentdojo_utility_tasks": 97,
+    "agentdojo_security_cases": 629,
+    "injecagent_security_cases": 1054,
+    "no_favorable_case_filtering": true,
+    "gold_authorization_used_online": false
+  },
+  "compatibility": {
+    "agentdojo": {
+      "status": "indexed_native_smoke_ready_formal_full_run_pending",
+      "suite_counts": {
+        "banking": {
+          "utility_tasks": 16,
+          "injection_tasks": 9,
+          "security_cases": 144,
+          "tools": 11
+        },
+        "slack": {
+          "utility_tasks": 21,
+          "injection_tasks": 5,
+          "security_cases": 105,
+          "tools": 11
+        },
+        "travel": {
+          "utility_tasks": 20,
+          "injection_tasks": 7,
+          "security_cases": 140,
+          "tools": 28
+        },
+        "workspace": {
+          "utility_tasks": 40,
+          "injection_tasks": 6,
+          "security_cases": 240,
+          "tools": 24
+        }
+      },
+      "utility_sha256": "73193d2bf6ff61a4ae32a21ca569830cc1ad6a9a55b0d9f0a700d0a656c1d678",
+      "security_sha256": "2959396b2e002dc8397a1c773db0c3085641d7bc49bc7a184cd6aa9ee1750fd6",
+      "native_runner": "experiments.paper_v1.benchmarks.agentdojo_native_runner"
+    },
+    "injecagent": {
+      "status": "indexed_replay_runner_diagnostic_ready_official_runner_pending",
+      "tool_schema_count": 330,
+      "missing_tools": [],
+      "security_sha256": "48b226416197bcf93911d70e5cac5a6338c7c904b3dd642f7730947d14da1540",
+      "diagnostic_runner": "experiments.paper_v1.benchmarks.public_replay_runner"
+    }
+  },
+  "artifacts": {
+    "agentdojo_utility": {
+      "path": "outputs/paper_upgrade_v1/public_benchmarks/agentdojo_v1_utility_index.jsonl",
+      "sha256": "3ee4b6d5f2586c0bde1b0c417e389ceb4c24403c8162c3381a407fef4d7d6763"
+    },
+    "agentdojo_security": {
+      "path": "outputs/paper_upgrade_v1/public_benchmarks/agentdojo_v1_security_index.jsonl",
+      "sha256": "bf3434bd99dd681a87c49e9a00aa79747339d10ccd4efc54bffc277c2345c293"
+    },
+    "injecagent_security": {
+      "path": "outputs/paper_upgrade_v1/public_benchmarks/injecagent_security_index.jsonl",
+      "sha256": "66bfdca7197ee329e03c16ba02ee8e374e1595e0df31faf62774efa9f2a8554e"
+    }
+  }
+}

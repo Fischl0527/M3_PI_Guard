@@ -21,13 +21,16 @@ latency, and adaptive attack budget.
 
 Across completed public experiments with DeepSeek V4 Pro and V4 Flash, the
 full configuration package reduced unsafe effects relative to a structural
-baseline but did not outperform the policy package. The comparison is explicitly
-reported as bundled because prompt profile and runtime modules change together.
+baseline but did not outperform the policy package. A contemporaneous 2×2
+experiment subsequently separated the prompt profile from the runtime module
+bundle and found no clear positive module, prompt, or interaction contribution.
 A prospectively frozen 900-work-item authorization study further showed that
 pooled utility effects reversed by benchmark: exact authorization improved
 AgentDojo completion but reduced both M3-v2 configuration cells to 0/30. The
 pessimistic unsafe-or-failure bound also increased from 7% to 25% under the
-policy package and from 8% to 26% under the full package. In a separate
+policy package and from 8% to 26% under the full package. A controlled
+source-authority experiment showed provenance-sensitive full-Guard decisions,
+but all end-to-end actions remained blocked or pending confirmation. In a separate
 defense-aware panel, first unsafe effects increased from
 4/40 tasks by query 50 to 18/40 by query 200, demonstrating why a single low
 attack budget is an incomplete evaluation.
@@ -36,8 +39,9 @@ The manuscript fits the journal’s focus on access control, security policy,
 and practical information-security systems. Its contribution is an empirical
 evaluation method and a bounded account of security–utility trade-offs, not a
 claim of a universally leading defense. We believe the bounded configuration
-comparison, paired authorization analysis, two public benchmarks, and explicit
-accounting of failures and system confirmation requests will be useful to researchers and practitioners
+comparison, factorial analysis, source-only counterfactual, two public
+benchmarks, and explicit accounting of failures and system confirmation
+requests will be useful to researchers and practitioners
 evaluating security controls for tool-using agents.
 
 Thank you for considering the manuscript.

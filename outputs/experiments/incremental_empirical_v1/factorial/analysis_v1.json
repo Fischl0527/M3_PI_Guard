@@ -10,7 +10,7 @@
         "ci_low": -0.05,
         "clusters": 100,
         "estimate": -0.01,
-        "holm_adjusted_p": 1.0,
+        "holm_adjusted_p": null,
         "replicates": 10000
       },
       "module": {
@@ -19,7 +19,7 @@
         "ci_low": -0.055,
         "clusters": 100,
         "estimate": -0.025,
-        "holm_adjusted_p": 0.2814,
+        "holm_adjusted_p": null,
         "replicates": 10000
       },
       "prompt": {
@@ -28,11 +28,11 @@
         "ci_low": -0.03,
         "clusters": 100,
         "estimate": 0.015,
-        "holm_adjusted_p": 1.0,
+        "holm_adjusted_p": null,
         "replicates": 10000
       }
     },
-    "multiplicity_role": "prespecified_holm_family",
+    "multiplicity_role": "prespecified_secondary_sensitivity_no_holm_family",
     "paired_cases": 100,
     "simple_paired_effects": [
       {

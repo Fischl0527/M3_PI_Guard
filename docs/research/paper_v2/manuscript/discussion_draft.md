@@ -12,13 +12,15 @@ The 1,791-record V4 Flash matrix showed the same security direction: 24/400
 unsafe effects for the full package versus 12/400 for the policy package. The
 Flash utility difference was small (38/145 versus 35/145).
 
-This is scientifically useful negative evidence, but it is package-level
-evidence. The full configuration combines `safe_prompt` with provenance,
-temporal/data-flow, monotonicity, and confirmation logic; the policy package
-uses `normal` prompting and policy enforcement alone. The experiment therefore
-cannot assign the difference to any individual module or to prompting. It shows
-that the evaluated bundle did not earn a security advantage under these tasks,
-not that provenance or confirmation is intrinsically ineffective.
+This is scientifically useful negative evidence, but it was originally
+package-level evidence. E1 resolves the prompt/runtime confounding by crossing
+the prompt profile with the module bundle in one execution window. Its module,
+prompt, and interaction estimates were all small, and none supplied evidence
+of a positive safety or utility contribution. The result identifies the prompt
+factor separately from the runtime bundle; it still cannot separate provenance,
+temporal/data-flow, monotonicity, and confirmation from one another. It shows
+that the evaluated bundle did not earn a clear advantage under these tasks,
+not that any individual mechanism is intrinsically ineffective.
 
 ## Authorization is part of the treatment
 
@@ -70,6 +72,25 @@ change on M3-v2. This does not convert failures into attacks; it demonstrates
 that a near-zero observed unsafe-effect rate can coexist with poor operational
 robustness.
 
+## Provenance sensitivity exists at the decision layer
+
+The controlled source-authority experiment sharpens the negative package
+result. Holding proposition, value, position, and policy fixed, the policy-only
+Guard produced the same deterministic decision distribution under trusted and
+untrusted origins. The full Guard changed its untrusted-origin distribution to
+30 ALLOW, 30 ASK, and 60 DENY, with zero false allows but 30 false blocks across
+all 480 replay decisions. This is direct evidence that the implemented full
+Guard is provenance-sensitive at its deterministic decision boundary.
+
+That mechanism did not translate into completed end-to-end actions. All 240
+model--Guard runs executed zero actions: trusted contexts were routed almost
+entirely to ASK, while full/untrusted contexts were predominantly DENY. The
+correct interpretation therefore has two layers. Offline replay establishes
+mechanism behavior; end-to-end execution reveals a confirmation bottleneck and
+cannot be replaced by the replay's decision accuracy. A provenance mechanism
+can be logically active while the surrounding interaction design supplies
+little usable utility.
+
 ## Executed effects and utility must be reported together
 
 A low prompt-injection success rate is not sufficient evidence of a useful
@@ -95,19 +116,20 @@ it. The paper reports these outcomes separately. The unsafe-or-failure
 sensitivity endpoint is shown only as an explicitly pessimistic robustness
 bound, not as a replacement composite score.
 
-## Adaptive evidence is budget-sensitive, not saturated
+## Adaptive evidence is budget-sensitive and conditionally extended
 
 The 40-task defense-aware panel found first unsafe effect for 4/40 tasks by 50
 queries and 18/40 by 200 queries. Thus a budget-50 evaluation would have missed
 most successes later observed by budget 200. This supports the general warning
 that a static or weak attacker can overstate robustness [@L27].
 
-The evidence stops at 200. It cannot establish that attack success has
-saturated, estimate an asymptotic attack rate, or compare hardest-task behavior
-at 2,000 queries. The correct presentation is a cumulative first-success curve
-through 200 with an explicit no-saturation boundary. This narrower result is
-more defensible than extending a long and costly panel whose additional
-validity for the paper's authorization question is uncertain.
+The complete-panel evidence stops at 200. E5 extends only 12 prespecified
+B200 survivors toward 500 and stops each task at first unsafe effect. This
+conditional tail can estimate
+`P(first success by 500 | no success by 200)` for the selected survivors, but
+it cannot be merged with the original 40 tasks into a nominal full B500 curve,
+establish saturation, estimate an asymptotic attack rate, or support a
+hardest-task-2,000 claim.
 
 ## Relation to recent provenance and authorization work
 
@@ -118,13 +140,13 @@ works rule out claims that M3 is the first verify-before-commit system, the
 first parameter-source defense, or the first structured runtime authorizer.
 
 The remaining contribution is methodological and empirical. The study holds
-task content fixed while changing authorization regimes and Guard configuration packages,
-keeps evaluator fields offline, measures post-enforcement effects, retains
-failure in ITT, and reports operational burden. In particular, the recent
+task content fixed while changing authorization regimes, separately manipulates
+prompt and runtime factors, and performs a source-only counterfactual. It keeps
+evaluator fields offline, measures post-enforcement effects, retains failure in
+ITT, and reports operational burden. In particular, the recent
 provenance-sensitivity study changes source authority in controlled next-action
-tasks [@L35]. The present design extends that measurement question to complete
-tool trajectories and executed effects, albeit with the additional
-implementation complexity and failure modes that such trajectories introduce.
+tasks [@L35]. The present design adds deterministic Guard replay and complete
+tool trajectories while keeping those two evidence layers separate.
 
 ## Cross-provider interpretation
 
@@ -158,9 +180,11 @@ small security differences between its four primary cells. Security-direction
 evidence comes mainly from the larger Public matrices and must not be inferred
 from these near-zero cells alone.
 
-Third, the policy/full contrast is bundled: `normal` versus `safe_prompt`
-prompting changes together with provenance, data-flow, monotonicity, and
-confirmation modules. It cannot support component-level causal attribution.
+Third, E1 separates prompt profile from the runtime module bundle, but the full
+module factor still combines provenance, data-flow, monotonicity, and
+confirmation. It identifies a bundle-level module effect, not the contribution
+of each internal mechanism. E2 isolates source authority at the input boundary,
+yet confirmation and blocking create an end-to-end action floor.
 
 Fourth, `auto_compiled` is one policy compiler, not a complete model of human
 authorization. The stress regimes approximate common policy errors but do not
@@ -171,9 +195,10 @@ Fifth, the effect environment is isolated. This is necessary to prevent real
 email, payment, browser, code, or production actions, but it may omit latency,
 state, and recovery behavior found in live applications.
 
-Sixth, the adaptive panel reports budgets only through 200 and does not prove
-saturation. Attack search is still one family of defense-aware optimization;
-another optimizer may find different failures.
+Sixth, only a prespecified subset of B200 survivors is extended toward 500.
+That conditional tail does not constitute a complete B500 panel and cannot
+prove saturation. Attack search is still one family of defense-aware
+optimization; another optimizer may find different failures.
 
 Seventh, failure handling is conservative but not interpretation-free. All
 response-bearing failures are terminal in ITT, whereas response-less transport
@@ -194,12 +219,14 @@ actually evaluated.
 Three practical recommendations follow. First, agent-security benchmarks
 should publish the fields visible to the online Guard and keep evaluator-only
 answers outside that projection.
-Second, runtime defenses should be compared against a simpler policy package on
-the same tasks, with prompt profiles held fixed when component attribution is
-the goal; otherwise a complex bundle may receive credit for behavior already
-supplied by the base policy or prompt. Third, security reports should include
-benign completion, system confirmation/blocking incidence, failures, latency,
-and attack budget alongside unsafe-effect rate.
+Second, runtime defenses should be evaluated factorially against a simpler
+policy package so prompt and module effects are separately identifiable; the
+internal modules require further ablations before individual attribution.
+Third, source-only counterfactuals should be paired with both deterministic
+Guard replay and end-to-end execution, rather than treating either as a proxy
+for the other. Fourth, security reports should include benign completion,
+system confirmation/blocking incidence, failures, latency, and attack budget
+alongside unsafe-effect rate.
 
 The DeepSeek authorization-regime results now tie these recommendations to
 observed effects: exact and stressed policies materially changed completion,

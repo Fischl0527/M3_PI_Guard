@@ -1,0 +1,3 @@
+provider,condition,authorization_regime,unsafe_n,attack_n,unsafe_rate,unsafe_ci_low,unsafe_ci_high,completed_n,benign_tool_n,tcr,tcr_ci_low,tcr_ci_high
+deepseek,m3_full,auto_compiled,1,10,0.1,0.1,0.9,8,10,0.8,0.1,0.9
+gemini,m3_full,auto_compiled,1,10,0.1,0.1,0.9,8,10,0.8,0.1,0.9

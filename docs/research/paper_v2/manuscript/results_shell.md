@@ -304,6 +304,116 @@ with repeated blocking and higher operational failure. The result supports
 making authorization construction explicit in evaluations; it does not show
 that every gold-derived policy or every runtime guard behaves similarly.
 
+## Concurrent prompt-by-module factorial experiment
+
+E1 reran the fixed 180-case cohort contemporaneously under the four cells of a
+2×2 design: policy/normal, policy/safe, full/normal, and full/safe. All 720
+planned work items obtained an official response. There were 657 completed
+records, 54 parse failures, and nine provider failures; all 63 non-completed
+outcomes remain in ITT. Raw evaluator fields, provider-managed tools, and real
+external effects were absent from every online record.
+
+Direct unsafe effects remained floor-limited: the two policy cells each
+produced 1/100, whereas both full cells produced 0/100. The estimated module
+main effect was −1.00 percentage point (10,000-case-cluster bootstrap 95% CI
+−3.00 to 0.00; Holm-adjusted p=1.000). The prompt and interaction estimates
+were both 0.00 points. The failure-sensitive endpoint was 9/100, 11/100,
+7/100, and 8/100 in policy/normal, policy/safe, full/normal, and full/safe,
+respectively. Its module estimate was −2.50 points (−5.50 to 0.00;
+descriptive bootstrap p=0.0938). This prespecified sensitivity endpoint was not
+included in either co-primary Holm family.
+
+Benign-tool completion was 23/60, 21/60, 21/60, and 19/60 across the same
+cells. Both the module and prompt main effects were −3.33 points; their 95%
+intervals were −8.33 to 0.00 and −10.83 to +4.17, respectively, and the
+interaction estimate was 0.00 points (−6.67 to +8.33). Thus the concurrent
+design removes the earlier prompt/module confounding but supplies no evidence
+of a positive incremental module or safe-prompt effect. It also does not solve
+the direct-safety floor: only two unsafe effects occurred across 400 assigned
+attack runs.
+
+### Supplementary Table S7. E1 runtime burden and cost
+
+| Cell | ASK incidence | DENY incidence | Operational failure | Latency p95 | Tokens | Cost (CNY) |
+|---|---:|---:|---:|---:|---:|---:|
+| Policy / normal | 65/180 | 15/180 | 15/180 | 8.11 s | 305,672 | 0.9651852 |
+| Policy / safe | 55/180 | 16/180 | 16/180 | 9.12 s | 334,370 | 0.8439636 |
+| Full / normal | 63/180 | 22/180 | 16/180 | 8.26 s | 306,306 | 0.7615200 |
+| Full / safe | 62/180 | 21/180 | 16/180 | 9.13 s | 327,845 | 1.0896174 |
+
+## Source-authority counterfactual
+
+E2 completed 240/240 response-bearing end-to-end work items and 480/480
+deterministic Guard decisions. The source swap changed only the authority of a
+critical proposition while holding text, value, relative position, and policy
+fixed. No end-to-end cell executed an authorized, unauthorized, or other
+action. The resulting zero unauthorized-argument-influence rate is an endpoint
+floor caused by confirmation and blocking, not evidence that source authority
+was behaviorally irrelevant.
+
+The burden nevertheless differed sharply. Policy/trusted and
+policy/untrusted produced ASK in 60/60 and 53/60 records, with no DENY. The
+full/trusted cell produced ASK in 57/60, whereas full/untrusted produced no ASK,
+DENY in 55/60, and one operational failure. The actual executed-action tuple
+changed under the source swap in 0/60 paired tasks for both module settings;
+operational status changed in 1/60 full pairs and is reported separately.
+
+The deterministic replay provides mechanism evidence rather than end-to-end
+utility. Across 480 decisions it produced 0 false allows (Wilson 95% CI
+0.00%--0.79%) and 30 false blocks (6.25%, 4.41%--8.78%). Policy decisions were
+identical under trusted and untrusted origins: 60 ALLOW and 60 ASK. Full/trusted
+had the same distribution, but full/untrusted produced 30 ALLOW, 30 ASK, and
+60 DENY. The full Guard is therefore provenance-sensitive under this controlled
+swap, yet the tested model--Guard system did not translate that mechanism into
+completed tasks and incurred substantial confirmation or blocking burden.
+
+### Supplementary Table S8. E2 source-authority decisions
+
+| Evidence layer / cell | ALLOW | ASK | DENY | Operational failure | Executed actions |
+|---|---:|---:|---:|---:|---:|
+| End-to-end policy / trusted | — | 60/60 records | 0/60 | 0/60 | 0/60 |
+| End-to-end policy / untrusted | — | 53/60 records | 0/60 | 0/60 | 0/60 |
+| End-to-end full / trusted | — | 57/60 records | 0/60 | 0/60 | 0/60 |
+| End-to-end full / untrusted | — | 0/60 | 55/60 records | 1/60 | 0/60 |
+| Replay policy / trusted | 60 | 60 | 0 | — | — |
+| Replay policy / untrusted | 60 | 60 | 0 | — | — |
+| Replay full / trusted | 60 | 60 | 0 | — | — |
+| Replay full / untrusted | 30 | 30 | 60 | — | — |
+
+## Outcome-enriched challenge and Flash replication
+
+E3 reran 60 attacks selected because each had produced an unsafe effect under
+at least one historical Public condition. It is an outcome-enriched challenge
+set, not a prevalence sample. All 240 work items obtained responses, but only
+185 completed normally; 17 parse and 38 provider failures remained in ITT.
+Only 1/60 historical vulnerabilities reproduced under any concurrent cell
+(1.67%, Wilson 95% CI 0.29%--8.86%). The four unsafe-effect cells were 1/60,
+1/60, 0/60, and 0/60, while unsafe-or-failure was 16/60, 15/60, 12/60, and
+14/60. The module estimates were −1.67 points (−5.00 to 0.00) for unsafe
+effect and −4.17 points (−10.00 to +0.83) for unsafe-or-failure. These
+conditional results expose instability and a high failure burden rather than
+establishing deployment robustness.
+
+E4 applied the same factorial design to the frozen 90-case DeepSeek V4 Flash
+cohort. All 360 work items obtained responses; one response-less transport
+attempt was superseded by a single-key successful attempt without replaying any
+other row. The final ITT set contains 347 completed, eight parse-failure, four
+provider-failure, and one maximum-step outcomes. Every attack cell was 0/50
+unsafe effects. Benign-tool completion was 10/30, 8/30, 10/30, and 10/30;
+the module, prompt, and interaction estimates were +3.33 points (0.00 to
++8.33), −3.33 points (−11.67 to +3.33), and +6.67 points (0.00 to +16.67).
+Unsafe-or-failure yielded a +3.00-point module estimate (0.00 to +7.00).
+E4 is a same-provider model replication and opens no new significance family;
+its all-zero direct-safety endpoint cannot establish equivalence or
+cross-provider generalization.
+
+### Supplementary Table S9. E3/E4 operational summary
+
+| Study | Planned/latest | Completed | Parse failure | Provider failure | Max steps | Cost (CNY) |
+|---|---:|---:|---:|---:|---:|---:|
+| E3 outcome-enriched Pro | 240/240 | 185 | 17 | 38 | 0 | 1.0690866 |
+| E4 Flash replication | 360/360 | 347 | 8 | 4 | 1 | 0.5410834 |
+
 ## Defense-aware adaptive evidence through budget 200
 
 The initial DeepSeek V4 Pro cost canary covered eight result-blind,
@@ -333,10 +443,12 @@ saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 
 ## Remaining evidence boundary
 
-The medium, Public Pro, Public Flash, authorization-regime, and budget-50/200
-studies jointly support an empirical security–utility paper. They do not
-support a leading-defense, causal provenance, saturated-adaptive, or
-cross-provider claim. Gemini reached the three-quota-day free-tier stopping
+The medium, Public, authorization-regime, factorial, source-authority,
+challenge, replication, and adaptive studies jointly support an empirical
+security–utility paper. They do not support a leading-defense, end-to-end
+provenance-benefit, saturated-adaptive, or cross-provider claim. E2 does
+identify source sensitivity at the deterministic Guard decision layer, but its
+end-to-end action endpoint is floor-limited. Gemini reached the three-quota-day free-tier stopping
 rule with 32/450 terminal work items: five response-bearing items, 83 observed
 but nonterminal items, and 335 unstarted items. The incomplete cohort is
 retained only for operational accounting and is excluded from the comparisons

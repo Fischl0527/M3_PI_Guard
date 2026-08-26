@@ -263,6 +263,17 @@ def _request_chain(record: Mapping[str, Any]) -> list[dict[str, Any]]:
     return requests
 
 
+def _query_cost(record: Mapping[str, Any]) -> dict[str, Any]:
+    bundle = record.get("provider_trace_bundle")
+    usage = bundle.get("usage_summary") if isinstance(bundle, Mapping) else None
+    if not isinstance(usage, Mapping) or usage.get("cumulative_cost_cny") is None:
+        return {}
+    return {
+        "currency": "CNY",
+        "amount": float(usage["cumulative_cost_cny"]),
+    }
+
+
 def _raw_success_row(
     *,
     task: Mapping[str, Any],
@@ -295,7 +306,7 @@ def _raw_success_row(
         "guard_decision": str(record.get("initial_guard_decision", "ERROR")),
         "latency_ms": copy.deepcopy(record.get("latency_ms", {})),
         "token_usage": copy.deepcopy(record.get("token_usage", {})),
-        "cost": copy.deepcopy(record.get("cost", {})),
+        "cost": _query_cost(record),
         "online_forbidden_fields_present": bool(
             record.get("online_visible_field_digest", {}).get(
                 "forbidden_fields_present", True

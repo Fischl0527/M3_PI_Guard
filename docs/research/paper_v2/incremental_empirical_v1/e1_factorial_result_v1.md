@@ -26,20 +26,22 @@ Status: complete, prespecified ITT analysis
 ## Prespecified factor estimates
 
 Absolute effects are probability differences. Confidence intervals use 10,000
-case-cluster bootstrap replicates; the three factors are Holm-adjusted within
-each primary endpoint family.
+case-cluster bootstrap replicates. The three factors are Holm-adjusted within
+each co-primary endpoint family (`unsafe_effect` and benign-tool TCR). The
+prespecified `unsafe-or-failure` sensitivity endpoint is reported with its
+descriptive bootstrap p-value and is not part of a Holm family.
 
-| Endpoint | Factor | Effect | 95% bootstrap CI | Holm-adjusted p |
+| Endpoint | Factor | Effect | 95% bootstrap CI | p-value role |
 |---|---|---:|---:|---:|
-| Attack unsafe effect | modules (full − policy) | −1.00 pp | [−3.00, 0.00] pp | 1.000 |
-| Attack unsafe effect | prompt (safe − normal) | 0.00 pp | [0.00, 0.00] pp | 1.000 |
-| Attack unsafe effect | module × prompt | 0.00 pp | [0.00, 0.00] pp | 1.000 |
-| Attack unsafe-or-failure | modules | −2.50 pp | [−5.50, 0.00] pp | 0.2814 |
-| Attack unsafe-or-failure | prompt | +1.50 pp | [−3.00, +6.00] pp | 1.000 |
-| Attack unsafe-or-failure | module × prompt | −1.00 pp | [−5.00, +3.00] pp | 1.000 |
-| Benign-tool TCR | modules | −3.33 pp | [−8.33, 0.00] pp | 0.2880 |
-| Benign-tool TCR | prompt | −3.33 pp | [−10.83, +4.17] pp | 0.8992 |
-| Benign-tool TCR | module × prompt | 0.00 pp | [−6.67, +8.33] pp | 1.000 |
+| Attack unsafe effect | modules (full − policy) | −1.00 pp | [−3.00, 0.00] pp | Holm 1.000 |
+| Attack unsafe effect | prompt (safe − normal) | 0.00 pp | [0.00, 0.00] pp | Holm 1.000 |
+| Attack unsafe effect | module × prompt | 0.00 pp | [0.00, 0.00] pp | Holm 1.000 |
+| Attack unsafe-or-failure | modules | −2.50 pp | [−5.50, 0.00] pp | descriptive bootstrap 0.0938 |
+| Attack unsafe-or-failure | prompt | +1.50 pp | [−3.00, +6.00] pp | descriptive bootstrap 0.5868 |
+| Attack unsafe-or-failure | module × prompt | −1.00 pp | [−5.00, +3.00] pp | descriptive bootstrap 0.8206 |
+| Benign-tool TCR | modules | −3.33 pp | [−8.33, 0.00] pp | Holm 0.2880 |
+| Benign-tool TCR | prompt | −3.33 pp | [−10.83, +4.17] pp | Holm 0.8992 |
+| Benign-tool TCR | module × prompt | 0.00 pp | [−6.67, +8.33] pp | Holm 1.000 |
 
 ## Interpretation boundary
 

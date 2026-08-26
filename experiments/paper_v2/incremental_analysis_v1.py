@@ -415,6 +415,16 @@ def factor_analysis(
 def analyze_factorial_like(study: str) -> dict[str, Any]:
     records, audit = load_completed_regular_study(study)
     apply_holm = study == "factorial"
+    failure_bound = factor_analysis(
+        records,
+        endpoint="unsafe_or_failure",
+        case_type="attack",
+        apply_holm=False,
+    )
+    if study == "factorial":
+        failure_bound["multiplicity_role"] = (
+            "prespecified_secondary_sensitivity_no_holm_family"
+        )
     result: dict[str, Any] = {
         "schema_version": "m3-paper-v2-incremental-analysis-1.0",
         "study": study,
@@ -437,12 +447,7 @@ def analyze_factorial_like(study: str) -> dict[str, Any]:
             case_type="attack",
             apply_holm=apply_holm,
         ),
-        "attack_failure_bound_factor": factor_analysis(
-            records,
-            endpoint="unsafe_or_failure",
-            case_type="attack",
-            apply_holm=apply_holm,
-        ),
+        "attack_failure_bound_factor": failure_bound,
     }
     if any(row["evaluation_case_type"] == "benign_tool" for row in records):
         result["benign_tool_tcr_factor"] = factor_analysis(
@@ -661,6 +666,7 @@ def _adaptive_tail_analysis(
         raw_index[identity] = raw_key
     permitted_keys: set[str] = set()
     task_results: list[dict[str, Any]] = []
+    cost_sources: Counter[str] = Counter()
     official_response_ids: set[str] = set()
 
     for task in sorted(plan_rows, key=lambda row: int(row["sequence"])):
@@ -739,6 +745,26 @@ def _adaptive_tail_analysis(
         )
         if raw_first != first:
             raise IncrementalAnalysisError(f"E5 checkpoint/raw outcome drift: {case_id}")
+
+        def attributed_cost(row: Mapping[str, Any]) -> float:
+            raw_cost = row.get("cost")
+            if isinstance(raw_cost, Mapping) and raw_cost.get("amount") is not None:
+                cost_sources["query_record"] += 1
+                return float(raw_cost["amount"])
+            public_record = row.get("public_record")
+            bundle = (
+                public_record.get("provider_trace_bundle")
+                if isinstance(public_record, Mapping)
+                else None
+            )
+            usage = bundle.get("usage_summary") if isinstance(bundle, Mapping) else None
+            if isinstance(usage, Mapping) and usage.get("cumulative_cost_cny") is not None:
+                cost_sources["public_trace_bundle_usage_summary"] += 1
+                return float(usage["cumulative_cost_cny"])
+            raise IncrementalAnalysisError(
+                f"E5 raw-record cost evidence missing: {case_id}:{row['query_index']}"
+            )
+
         task_results.append(
             {
                 "case_id": case_id,
@@ -752,7 +778,7 @@ def _adaptive_tail_analysis(
                     for row in task_rows
                 ),
                 "cost_cny": round(
-                    sum(float(row.get("cost", {}).get("amount", 0.0)) for row in task_rows),
+                    sum(attributed_cost(row) for row in task_rows),
                     10,
                 ),
             }
@@ -809,6 +835,8 @@ def _adaptive_tail_analysis(
             "online_forbidden_fields": 0,
             "provider_tools_enabled": 0,
             "external_effects_enabled": 0,
+            "cost_attribution_sources": dict(sorted(cost_sources.items())),
+            "costed_query_work_items": sum(cost_sources.values()),
         },
         "p_first_success_by_500_given_no_success_by_200": proportion_result(
             success_count, len(task_results)

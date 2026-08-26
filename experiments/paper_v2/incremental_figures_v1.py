@@ -240,7 +240,7 @@ def figure_factorial_interactions(
     panels = (
         ("Attack unsafe effect", "attack_unsafe_effect"),
         ("Benign-tool completion", "benign_tool_tcr"),
-        ("Operational failure", "operational_failure"),
+        ("Attack unsafe-or-failure", "attack_unsafe_or_failure"),
     )
     fig, axes = plt.subplots(1, 3, figsize=(12.5, 4.2), sharey=False)
     summaries = factorial["cell_summary"]

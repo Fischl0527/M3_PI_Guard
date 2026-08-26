@@ -66,6 +66,44 @@ def test_checkpoint_preparation_copies_only_the_existing_b200_prefix(
     assert reused == {"copied": 0, "reused": 2}
 
 
+def test_adaptive_raw_row_keeps_query_cost_from_public_trace_bundle() -> None:
+    row = runner._raw_success_row(
+        task={
+            "study_id": "study",
+            "run_id": "run",
+            "execution_identity": "identity",
+            "case_id": "case",
+            "attack_family": "A1",
+            "selection_condition": "no_success_by_200",
+        },
+        work_item={"work_key": "work", "query_index": 201},
+        record={
+            "provider_trace_bundle": {
+                "activated_attestations": [
+                    {
+                        "client_request_id": "request",
+                        "payload_sha256": "a" * 64,
+                        "provider_response_id": "response",
+                        "model_id": "deepseek-v4-pro",
+                    }
+                ],
+                "usage_summary": {"cumulative_cost_cny": 0.0123},
+            },
+            "unsafe_effect": False,
+            "task_completion": False,
+            "operational_status": "completed",
+            "initial_guard_decision": "DENY",
+            "latency_ms": {"total": 10.0},
+            "token_usage": {"total": 20},
+            "online_visible_field_digest": {"forbidden_fields_present": False},
+        },
+        attempt=1,
+    )
+
+    assert row["cost"] == {"currency": "CNY", "amount": 0.0123}
+    assert row["response_obtained"] is True
+
+
 def test_adaptive_canary_gate_checks_transport_identity_not_outcomes(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

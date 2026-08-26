@@ -54,38 +54,48 @@ interface [@L27].
 
 ## Research questions
 
-The study asks three questions.
+The study asks five questions.
 
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    unsafe effect, benign task completion, and `ASK/DENY` burden?
-2. **RQ2: Configuration comparison.** How does the complete M3 configuration
-   package compare with the policy package on safety, utility, and operational
-   outcomes, without attributing the contrast to an individual component?
-3. **RQ3: Replication and adaptive budget.** Are these directions consistent
-   across AgentDojo and M3-v2, across completed DeepSeek V4 Pro and V4 Flash
-   evidence, and at completed defense-aware budgets 50 and 200?
+2. **RQ2: Prompt and runtime components.** What are the independent main
+   effects of the prompt profile and the runtime module bundle, and do they
+   interact?
+3. **RQ3: Conditional robustness and model replication.** Are the factorial
+   effect directions consistent in a representative sample, an outcome-
+   enriched challenge set, and a same-provider Flash replication?
+4. **RQ4: Source authority.** When proposition, value, position, and policy
+   are held fixed, how does moving a critical argument between trusted and
+   untrusted origins change model--Guard behavior?
+5. **RQ5: Adaptive tail risk.** Among attacks with no unsafe effect by budget
+   200, how often does a first unsafe effect appear by budget 500?
 
 ## Study design
 
 M3 uses a three-state runtime decision (`ALLOW`, `ASK`, `DENY`), a projection
 that excludes evaluator-only fields from online state, permission monotonicity
 for automatic paths, parameter-source evidence, and independent confirmation
-for privilege expansion. The primary paired experiment crosses a policy
-package and a full package with non-oracle `auto_compiled` and oracle-sensitivity
-`exact_gold`. A nested subset adds three authorization stress regimes. The full
-package also changes the prompt profile from `normal` to `safe_prompt`, so the
-package contrast is not a component ablation. The planned cross-provider subset
-adds a source-pinned peer-reviewed structural condition. Timeouts,
+for privilege expansion. The completed authorization experiment crosses a
+policy package and a full package with non-oracle `auto_compiled` and oracle-
+sensitivity `exact_gold`; a nested subset adds three authorization stress
+regimes. The incremental factorial experiment then holds `auto_compiled` fixed
+and crosses prompt profile (`normal`/`safe`) with runtime modules
+(`policy`/`full`). A source-authority counterfactual holds text, parameter value,
+relative position, and policy fixed while changing only provenance authority.
+Separate challenge, Flash-replication, and adaptive-tail studies test
+conditional robustness. Timeouts,
 parsing failures, refusals, maximum-step outcomes, and provider failures remain
 in the intention-to-treat denominator.
 
-The new primary sample contains 180 paired cases and 900 DeepSeek V4 Pro work
-items; a nested 90-case sample contributes 450 planned Gemini 3.6 Flash work
-items. The design separately reuses the completed 480-record medium study,
+The authorization-regime sample contains 180 paired cases and 900 DeepSeek V4
+Pro work items. The incremental design adds 720 Pro factorial runs, 240 Pro
+source-authority runs plus 480 deterministic Guard decisions, 240 Pro challenge
+runs, 360 Flash replication runs, and a conditional adaptive tail of at most
+3,600 additional queries. The design separately reuses the completed 480-record medium study,
 5,082-record Pro Public matrix, 1,791-record Flash Public matrix, and the
-40-task adaptive evidence at budgets 50 and 200. Provider tools and real
-external effects are prohibited throughout.
+40-task adaptive evidence at budgets 50 and 200. Gemini remains diagnostic
+only. Provider tools and real external effects are prohibited throughout.
 
 ## Empirical motivation and study framing
 
@@ -109,9 +119,9 @@ threshold for a clean configuration-quality claim.
 
 The completed 40-task adaptive panel observed first unsafe effect for 4/40
 tasks by budget 50 and 18/40 by budget 200. These points show substantial
-budget sensitivity but do not establish saturation. The lean paper therefore
-reports a first-success curve only through query 200 and makes no budget-500 or
-2,000 claim.
+budget sensitivity but do not establish saturation. The incremental tail
+extends only a prespecified subset of B200 survivors toward 500; it is reported
+as a conditional analysis rather than a complete B500 curve.
 
 The prospectively frozen authorization-regime experiment is now complete for
 DeepSeek. Unsafe effects remained at or near zero across all four main cells,
@@ -124,18 +134,20 @@ terminal work items and therefore supports no cross-provider claim.
 
 ## Contributions
 
-The current evidence supports four bounded contributions:
+The current evidence supports five bounded contributions:
 
 1. an evaluator/online-state contract that makes authorization visibility
    explicit and prevents evaluator-only fields from entering runtime state;
-2. a paired security–utility evaluation of policy and full configuration
-   packages, with their prompt-profile difference disclosed and no component-
-   level causal claim;
-3. an intention-to-treat experiment that records official model identity,
+2. a contemporaneous factorial evaluation that identifies prompt-profile and
+   runtime-module-bundle effects separately;
+3. a controlled source-authority counterfactual that separates deterministic
+   Guard decisions from end-to-end action and utility outcomes;
+4. an intention-to-treat experiment that records official model identity,
    request commitments, isolated effects, and terminal diagnostics while
    retrying only response-less failed rows; and
-4. an empirical account of authorization regime, system confirmation incidence,
-   benchmark/task heterogeneity, and defense-aware attack budget.
+5. an empirical account of authorization regime, confirmation/blocking burden,
+   outcome-enriched instability, same-provider replication, and conditional
+   defense-aware attack budget.
 
 These contributions do not assert first, only, or SOTA status. Preprints are
 used to define the contemporary novelty boundary, not as peer-reviewed

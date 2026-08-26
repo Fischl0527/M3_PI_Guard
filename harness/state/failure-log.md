@@ -5655,3 +5655,78 @@ credential, changed a historical ledger, or enabled an external effect.
 - Recovery boundary: attempts 1 and 2 remain append-only. After focused tests
   and activation verification, only this work key may advance to attempt 3;
   the other seven canary rows remain untouched.
+
+# 2026-08-26 — Incremental manuscript patch context mismatch
+
+- A documentation-only patch failed before changing any file because its
+  expected paragraph boundary did not match the existing line wrapping.
+- The hypothesis was changed from replacing one large block to matching the
+  exact local sentence boundaries; the smaller patch then applied cleanly.
+- No experiment process, frozen input, result record, or manuscript statistic
+  was affected.
+
+# 2026-08-26 — E4 response-less transport failure
+
+- The Flash replication stopped fail-closed after 261 response-bearing latest
+  rows when work key `bb095ecb40b50e6af05244d62d4bc4fb66888009b544fbe3e0a835b58625b073`
+  ended as `pre_response_provider_failure` with `ProviderTransportError`.
+- The failed row has zero usage and cost, is excluded from ITT, and is the only
+  retry-eligible row; the 261 response-bearing rows remain terminal.
+- A content-free DNS/TCP check then confirmed name resolution and TCP 443
+  connectivity. Treat the event as transient transport loss: retry only this
+  work key once, then resume only untouched plan rows if it obtains a response.
+- The first explicit recovery invocation omitted the CLI's required stage flag
+  and exited during argument parsing with zero provider calls. Inspection then
+  found that adding the flag would also select untouched rows. The recovery
+  selector was narrowed so a nonempty explicit retry set selects only those
+  failed keys; untouched rows require a separate resume command.
+
+# 2026-08-26 — Incremental manuscript semantic test retained an obsolete hash
+
+- The first two-test manuscript smoke produced one pass and one failure because
+  an older Stage 4 assertion still required a historical hash literal in the
+  reader-facing manuscript.
+- The five-RQ content checks themselves passed. The obsolete literal assertion
+  was removed rather than reintroducing workflow evidence into the paper; the
+  affected smoke is rerun after the edit.
+
+# 2026-08-26 — Discussion block patches mismatched local wrapping
+
+- Two documentation-only block replacements failed before writes because the
+  expected context did not match existing sentence wrapping.
+- The retry changed approach: inspect the exact local lines, then apply small
+  section-specific replacements. The intended E1/E2/E5 interpretation updates
+  applied without touching experiment inputs or outputs.
+
+# 2026-08-26 — Incremental supplementary-table insertion context mismatch
+
+- A three-location Results patch failed before writes because one insertion
+  context was copied from Discussion rather than the Results wording.
+- Exact Results boundaries were inspected and the same S7--S9 tables were then
+  inserted with local anchors. No statistic or experiment artifact changed.
+
+# 2026-08-26 — Incremental table-note smoke used the wrong phrase
+
+- The first two-test table-rendering smoke produced one pass and one failure:
+  the test expected `historical rows` in a note whose actual wording is
+  `contemporaneous cells`; the separate table-design column carries the
+  historical-row flag.
+- The assertion was corrected to the note's intended claim boundary and only
+  the failed test is rerun.
+
+# 2026-08-26 — E5 raw rows omitted per-query cost values
+
+- During the active E5 run, token and latency fields were populated but each
+  compact query row serialized `cost` as an empty object. The separate
+  append-only budget ledger continued to record request-level CNY cost, usage,
+  response ID and work key, so the spend fuse and provider execution were not
+  affected.
+- Existing successful queries are not rewritten or rerun. A subsequent field
+  inspection confirmed that every response-bearing raw row already embeds the
+  public provider trace bundle's per-query `usage_summary`; its accumulated CNY
+  cost matches the live budget ledger (apart from floating-point rounding).
+  The one-pass analyzer therefore reads cost from the same raw JSONL, fails
+  closed when that evidence is absent, and does not require a new attribution
+  artifact or internal-ledger join. The runner also populates the top-level
+  cost field for any later response-bearing rows. Fifteen focused adaptive
+  runner/analysis tests and Ruff pass.

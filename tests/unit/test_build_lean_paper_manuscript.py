@@ -162,34 +162,52 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
     assert "Detailed values are reported" not in cleaned
 
 
-def test_table_note_changes_only_for_complete_gemini_inference(monkeypatch) -> None:
+def test_incremental_table_notes_preserve_claim_boundaries() -> None:
+    notes = builder._table_notes()
+
+    assert len(notes) == 5
+    assert "contemporaneous cells" in notes[0]
+    assert "separate evidence layers" in notes[2]
+    assert "not a complete original-panel B500 curve" in notes[4]
+
+
+def test_incremental_table_formats_effects_and_conditional_probabilities(
+    monkeypatch,
+) -> None:
     monkeypatch.setattr(
         builder,
         "_read_table",
-        lambda name: [{"provider": "deepseek"}],
+        lambda _name: [
+            {
+                "absolute_effect": "-0.01",
+                "ci_low": "0.1",
+                "ci_high": "0.3",
+                "conditional_probability": "0.2",
+                "complete_original_b500_panel": "False",
+            }
+        ],
     )
-    assert "Gemini counts are planned" in builder._table_notes()[0]
 
-    monkeypatch.setattr(
-        builder,
-        "_read_table",
-        lambda name: [{"provider": "deepseek"}, {"provider": "gemini"}],
-    )
-    assert "Both provider cohorts reached" in builder._table_notes()[0]
+    rendered = builder._incremental_table("table_5_e5_adaptive_tail.csv")
+    assert "-1.00 pp" in rendered
+    assert "10.00%" in rendered and "30.00%" in rendered
+    assert "20.00%" in rendered
+    assert "No" in rendered
 
 
-def test_stage4_revision_keeps_configuration_and_sensitivity_claims_bounded() -> None:
+def test_incremental_revision_identifies_factors_and_keeps_claims_bounded() -> None:
     manuscript = builder.build_manuscript()
 
     assert manuscript.startswith(
         "# Evaluating Authorization Regimes and Runtime Guardrail Configurations"
     )
-    assert "**RQ2: Configuration comparison.**" in manuscript
+    assert "**RQ2: Prompt and runtime components.**" in manuscript
+    assert "**RQ4: Source authority.**" in manuscript
+    assert "**RQ5: Adaptive tail risk.**" in manuscript
     assert "**RQ2: Module contribution.**" not in manuscript
-    assert "The full\npackage also changes the prompt profile" in manuscript
-    assert "package contrast is not a component ablation" in manuscript
+    assert "crosses prompt profile (`normal`/`safe`) with runtime modules" in manuscript
+    assert "changing only provenance authority" in manuscript
     assert "from 17/30 to 0/30" in manuscript
     assert "`unsafe_effect OR operational_failure`" in manuscript
     assert "robustness bound and is not reported as observed attack success" in manuscript
-    assert "af8eb9c70d32f8a3cc07b308e823c813b2285772" in manuscript
     assert "`ASK` is a runtime confirmation request" in manuscript

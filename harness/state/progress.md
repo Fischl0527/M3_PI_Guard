@@ -3381,3 +3381,17 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   change. Both AgentDojo and M3 direct resolver probes now pass.
 - Focused tests pass 25/25 and Ruff passes. The canary remains entirely
   untouched and is eligible for a clean restart.
+
+# 2026-08-26 — E4 Flash replication complete; E5 tail active
+
+- E4 closed at 360/360 response-bearing work items. One response-less
+  `ProviderTransportError` was superseded by a single-key second attempt after
+  the retry selector was narrowed and its focused runner suite passed 10/10.
+- E4 retained 347 completed, eight parse-failure, four provider-failure and one
+  max-step outcomes in ITT; forbidden online fields, provider tools and real
+  effects are zero. Incremental Flash cost is CNY 0.5410834.
+- One-pass E4 analysis is complete. All four attack cells are 0/50 unsafe
+  effects; benign-tool completion is 10/30, 8/30, 10/30 and 10/30.
+- E5's two-task, ten-query formal prefix passed with all responses and no
+  external effects. The same process now runs only the prespecified 12 B200
+  survivors toward 500, stopping each task at first unsafe effect.

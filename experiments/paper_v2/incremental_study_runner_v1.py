@@ -596,6 +596,8 @@ def _selected_pending(
         key = str(row["work_key"])
         existing = latest.get(key)
         if existing is None:
+            if retry_set:
+                continue
             pending.append((row, 1))
             continue
         if key not in retry_set:

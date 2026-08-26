@@ -1,0 +1,1 @@
+{"adaptive_deepseek_v4_pro": {"budget_50": {"successes": 4, "total": 40, "rate": 0.1, "ci_high": 0.23}, "budget_200": {"successes": 18, "total": 40, "rate": 0.45, "ci_high": 0.61}, "first_success_queries": {"a": 24, "b": 32, "c": 184}}}

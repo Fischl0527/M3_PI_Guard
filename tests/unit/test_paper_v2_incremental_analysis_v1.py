@@ -60,6 +60,28 @@ def test_challenge_factor_analysis_does_not_open_a_significance_family() -> None
     )
 
 
+def test_factorial_failure_bound_is_a_secondary_sensitivity_without_holm(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    records = _rows("unsafe_effect")
+    monkeypatch.setattr(
+        analysis,
+        "load_completed_regular_study",
+        lambda _study: (records, {"terminal_work_items": len(records)}),
+    )
+
+    value = analysis.analyze_factorial_like("factorial")
+    failure_bound = value["attack_failure_bound_factor"]
+
+    assert failure_bound["multiplicity_role"] == (
+        "prespecified_secondary_sensitivity_no_holm_family"
+    )
+    assert all(
+        item["holm_adjusted_p"] is None
+        for item in failure_bound["factor_estimates"].values()
+    )
+
+
 def test_latest_attempts_keep_only_the_newest_append_only_row() -> None:
     latest, audit = analysis._latest_attempts(
         [
@@ -217,6 +239,30 @@ def test_adaptive_tail_analysis_is_conditional_and_family_balanced() -> None:
         item["success_by_500"]["numerator"] == 1
         for item in value["attack_family"].values()
     )
+    assert value["total_cost_cny"] == pytest.approx(len(raw) * 0.001)
+
+
+def test_adaptive_tail_analysis_can_attribute_cost_from_public_trace_bundle() -> None:
+    plans, checkpoints, raw = _adaptive_tail_fixture()
+    for row in raw:
+        row["cost"] = {}
+        row["public_record"] = {
+            "provider_trace_bundle": {
+                "usage_summary": {"cumulative_cost_cny": 0.002}
+            }
+        }
+
+    value = analysis._adaptive_tail_analysis(
+        plan_rows=plans,
+        checkpoint_values=checkpoints,
+        raw_rows=raw,
+    )
+
+    assert value["total_cost_cny"] == pytest.approx(len(raw) * 0.002)
+    assert value["audit"]["cost_attribution_sources"] == {
+        "public_trace_bundle_usage_summary": len(raw)
+    }
+    assert value["audit"]["costed_query_work_items"] == len(raw)
 
 
 def test_adaptive_tail_analysis_rejects_nonterminal_survivor() -> None:

@@ -10,8 +10,8 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT_DIR = PROJECT_ROOT / "docs/research/paper_v2/manuscript"
-FIGURE_DIR = PROJECT_ROOT / "docs/research/paper_v2/lean_empirical/figures_deepseek_v1"
-TABLE_DIR = PROJECT_ROOT / "docs/research/paper_v2/lean_empirical/tables_deepseek_v1"
+FIGURE_DIR = PROJECT_ROOT / "docs/research/paper_v2/incremental_empirical_v1/figures"
+TABLE_DIR = PROJECT_ROOT / "docs/research/paper_v2/incremental_empirical_v1/tables"
 OUTPUT_PATH = MANUSCRIPT_DIR / "manuscript_deepseek_v1.md"
 
 TITLE = (
@@ -34,29 +34,25 @@ SECTION_FILES = (
 )
 
 FIGURES = (
-    (1, "figure_1_online_field_isolation.png", "Online authorization projection and offline evaluation boundary."),
-    (2, "figure_2_safety_utility_pareto.png", "Direct attack risk and failure-sensitive bound versus benign utility."),
-    (3, "figure_3_authorization_forest.png", "Paired authorization and configuration-package effects."),
-    (4, "figure_4_runtime_burden.png", "Runtime burden by task type and benchmark."),
-    (5, "figure_5_adaptive_first_success.png", "Adaptive first-success curve through query budget 200."),
+    (1, "figure_1_authority_boundary.png", "Online fields and the source-authority boundary."),
+    (2, "figure_2_factorial_interactions.png", "Prompt, runtime-module, and interaction effects."),
+    (3, "figure_3_provenance_counterfactual.png", "Source-authority counterfactual decisions and action changes."),
+    (4, "figure_4_factor_effect_forest.png", "Factor effects across representative, enriched, and Flash cohorts."),
+    (5, "figure_5_adaptive_tail.png", "Complete B50/B200 evidence and the conditional B200-survivor tail."),
 )
 
 TABLE_NOTES = (
-    "Providers, benchmarks, conditions, authorization regimes and frozen "
-    "work-item counts for the lean empirical study. Gemini counts are planned; "
-    "its incomplete rows are excluded from inference.",
-    "Unsafe effects and the pessimistic unsafe-or-operational-failure bound "
-    "among attacks, plus completions among benign tool tasks. Brackets contain "
-    "Wilson 95% confidence intervals.",
-    "Absolute percentage-point differences use the second condition minus "
-    "the first. Stress-regime extensions are outside the primary Holm family.",
-    "ASK and DENY cells report system-event totals, record incidence and the "
-    "share of records affected. Failures remain in the ITT denominator.",
-    "Paired benign-tool completion and attack unsafe-or-failure estimates by "
-    "benchmark. These strata are descriptive rather than additional "
-    "confirmatory families.",
-    "Cumulative tasks with at least one unsafe effect through budgets 50 and "
-    "200. These two points do not establish attack saturation.",
+    "The four contemporaneous cells cross prompt profile with the runtime "
+    "module bundle while holding authorization at auto_compiled.",
+    "Absolute effects are probability differences; intervals use 10,000 "
+    "case-cluster bootstrap replicates. Holm values apply only to E1's "
+    "prespecified endpoint families.",
+    "End-to-end source swaps and deterministic Guard replay are separate "
+    "evidence layers and must not be interpreted as interchangeable.",
+    "E3 is outcome-enriched and E4 is a same-provider replication. Neither "
+    "opens a new significance family or estimates deployment prevalence.",
+    "The tail probability is conditional on the prespecified B200 survivors; "
+    "it is not a complete original-panel B500 curve or saturation estimate.",
 )
 
 
@@ -229,7 +225,7 @@ def _figure_block() -> str:
         path = FIGURE_DIR / filename
         if not path.is_file():
             raise ManuscriptBuildError(f"Missing paper figure: {path}")
-        relative = Path("../lean_empirical/figures_deepseek_v1") / filename
+        relative = Path("../incremental_empirical_v1/figures") / filename
         lines.append(f"![Figure {number}. {caption}]({relative.as_posix()})")
         lines.append("")
     return "\n".join(lines).strip()
@@ -244,18 +240,7 @@ def _read_table(name: str) -> list[dict[str, str]]:
 
 
 def _table_notes() -> tuple[str, ...]:
-    notes = list(TABLE_NOTES)
-    gemini_in_inference = any(
-        row.get("provider") == "gemini"
-        for row in _read_table("table_2_endpoints.csv")
-    )
-    if gemini_in_inference:
-        notes[0] = (
-            "Providers, benchmarks, conditions, authorization regimes and frozen "
-            "work-item counts for the lean empirical study. Both provider cohorts "
-            "reached the prespecified terminal-analysis boundary."
-        )
-    return tuple(notes)
+    return TABLE_NOTES
 
 
 def _label(value: str) -> str:
@@ -306,6 +291,55 @@ def _markdown_table(headers: tuple[str, ...], rows: list[tuple[str, ...]]) -> st
         "| " + " | ".join(escape(value) for value in row) + " |" for row in rows
     )
     return "\n".join(rendered)
+
+
+def _incremental_table(filename: str) -> str:
+    source = _read_table(filename)
+    if not source:
+        raise ManuscriptBuildError(f"Incremental table is empty: {filename}")
+    keys = tuple(source[0])
+    labels = {
+        "condition_cell": "Condition cell",
+        "prompt_factor": "Prompt",
+        "module_factor": "Modules",
+        "authorization_regime": "Authorization",
+        "historical_rows_reused": "Historical rows reused",
+        "study": "Study",
+        "endpoint": "Endpoint",
+        "factor": "Factor",
+        "paired_cases": "Paired cases",
+        "absolute_effect": "Effect",
+        "ci_low": "CI low",
+        "ci_high": "CI high",
+        "bootstrap_p": "Bootstrap p",
+        "holm_adjusted_p": "Holm p",
+        "bootstrap_replicates": "Bootstrap n",
+        "stratum": "Stratum",
+        "tasks": "Tasks",
+        "successes_by_500": "Successes by 500",
+        "conditional_probability": "Conditional probability",
+        "first_success_queries": "First-success queries",
+        "complete_original_b500_panel": "Complete original B500 panel",
+    }
+
+    def render(key: str, value: str) -> str:
+        if value == "":
+            return "—"
+        if key in {"ci_low", "ci_high"} and filename.startswith("table_5_"):
+            return f"{float(value) * 100:.2f}%"
+        if key in {"absolute_effect", "ci_low", "ci_high"}:
+            return f"{float(value) * 100:+.2f} pp"
+        if key == "conditional_probability":
+            return f"{float(value) * 100:.2f}%"
+        if key in {"bootstrap_p", "holm_adjusted_p"}:
+            return f"{float(value):.4f}"
+        if value in {"True", "False"}:
+            return "Yes" if value == "True" else "No"
+        return _label(value)
+
+    rows = [tuple(render(key, row.get(key, "")) for key in keys) for row in source]
+    headers = tuple(labels.get(key, key.replace("_", " ").title()) for key in keys)
+    return _markdown_table(headers, rows)
 
 
 def _design_table() -> str:
@@ -501,12 +535,11 @@ def _adaptive_table() -> str:
 
 def _table_block() -> str:
     tables = (
-        (1, "Experimental design", _design_table()),
-        (2, "Joint primary endpoints", _endpoint_table()),
-        (3, "Paired authorization and configuration-package effects", _paired_table()),
-        (4, "Runtime burden", _burden_table()),
-        (5, "Benchmark-stratified paired estimates", _benchmark_stratified_table()),
-        (6, "Adaptive evidence at budgets 50 and 200", _adaptive_table()),
+        (1, "Prompt-by-module factorial design", _incremental_table("table_1_factor_design.csv")),
+        (2, "E1 factorial estimates", _incremental_table("table_2_e1_factor_estimates.csv")),
+        (3, "E2 source-authority evidence", _incremental_table("table_3_e2_provenance.csv")),
+        (4, "E3/E4 conditional robustness", _incremental_table("table_4_e3_e4_robustness.csv")),
+        (5, "E5 conditional adaptive tail", _incremental_table("table_5_e5_adaptive_tail.csv")),
     )
     parts = ["## Tables"]
     for (number, title, table), note in zip(tables, _table_notes(), strict=True):

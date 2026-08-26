@@ -242,6 +242,12 @@ Each new request is assigned a
 local request identifier and canonical payload digest before transport. A
 response-bearing record retains the official response identifier, exact
 returned model identity, usage, latency, and cost or free-tier attestation.
+For E5, the top-level compact cost object is empty, so request-level CNY
+charges are read from the public provider trace bundle embedded in the same raw
+query row. Its usage summary already aggregates multiple provider calls for the
+query; missing attribution fails closed. The raw-row totals are checked against
+the live append-only budget tracker during execution, and the paper analysis
+does not need to read the internal ledger or change any experimental outcome.
 Provider calls for the evidence reported here were made during July and August
 2026. The returned names are provider-managed model aliases and therefore
 identify the served model at request time without freezing its hidden weights.
