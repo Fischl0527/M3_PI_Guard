@@ -5549,3 +5549,16 @@ credential, changed a historical ledger, or enabled an external effect.
 - Result: 41 tests passed and three failed. The failures came from the historical 34-entry bibliography/hash contract: one requires the currently non-resolving AgentSpec DOI `10.1145/3744916.3764546`, one requires exactly 34 entries although the current candidate corpus contains 36, and one requires replaying the superseded frozen citation manifest.
 - Cause: the command mixed the current 21-key submission bibliography contract with legacy v1 corpus-integrity tests. Restoring the obsolete DOI or rewriting the frozen historical manifest would contradict the fresh primary-record review and the lean no-history-replay scope.
 - Recovery: preserve the three historical tests as legacy diagnostics, add a current active-set regression test covering all 21 cited keys and the corrected AgentSpec/ASB/LLM metadata, and rerun only that new test plus the three current citation/document checks affected by the metadata edit. Do not rerun the 41 already-passing checks.
+# 2026-08-26 — Incremental E3 candidate-count assertion used the wrong condition universe
+
+- Attempt: generate the prospective incremental v1 plans with
+  `incremental_empirical_plan_v1 --write`.
+- Failure: the registered four-condition prior-unsafe filter produced
+  AgentDojo 117 and M3-v2 55, not the broader 127/71 audit quoted in the plan.
+- Cause: 127/71 counted unsafe effects across all six Public conditions; E3
+  eligibility intentionally names only no-defense, VIGIL, policy and full.
+- Fix: retain the narrower registered four-condition rule, bind its observed
+  117/55 counts and disclose the distinction in the protocol.  Both candidate
+  pools remain above the required 30 cases.
+- Retry boundary: rerun only the failed offline plan generation; no provider
+  request, existing experimental row or historical evidence was touched.

@@ -364,3 +364,13 @@ Record completed, blocked, and abandoned tasks here.
 - Verification was limited to the affected runner/analysis/manuscript modules:
   40 tests passed initially; one bilingual table-note test failed and passed
   after a minimal wording fix. Ruff and `py_compile` pass.
+# 2026-08-26 — Incremental empirical design freeze
+
+- Owner approved the 10--12 day empirical-strengthening plan.
+- Added the machine-readable five-study plan, controlled provenance cases,
+  risk-enriched selection and B200-survivor tail selection.
+- Corrected a design-audit universe mismatch (four-condition 117/55 versus
+  broader six-condition 127/71) without changing the registered eligibility
+  conditions or running a provider.
+- Verification: 8 focused tests, Ruff, compile and frozen-plan reproduction
+  pass.  Next milestone is the new profile/runtime/runner qualification.

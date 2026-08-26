@@ -1745,3 +1745,23 @@ Consequences:
   while component causation and cross-provider generalization remain forbidden.
 - Verification consequence: use only focused analysis/manuscript/Word tests;
   no new API, Full Harness, historical replay or successful-row rerun is needed.
+
+## 2026-08-26 — Add a prospective deconfounded incremental evidence layer
+
+- Decision: retain every historical result unchanged and add five separately
+  versioned studies: a contemporaneous prompt×module factorial, a controlled
+  source-authority counterfactual, an outcome-enriched challenge set, a nested
+  DeepSeek Flash replication and a conditional B200-survivor adaptive tail.
+- Reason: the accepted package comparison cannot identify a module effect, the
+  representative authorization sample has a one-event attack floor, and the
+  incomplete Gemini free-tier cohort cannot support cross-provider inference.
+- Consequence: two new condition profiles cross the existing prompt/module
+  factors without rewriting `m3_policy_only` or `m3_full`. Gemini, blind work,
+  Full Harness, recursive evidence replay and real external effects remain out
+  of scope. E3 is explicitly prior-outcome-selected and E5 remains a conditional
+  survivor analysis; neither may be presented as a deployment prevalence rate
+  or a complete B500 curve.
+- Verification consequence: use study-specific deterministic plans, focused
+  unit tests, eight-row formal-prefix canaries (or the declared attack-only E3
+  variant), one final row/key/field/identity check and one-pass statistics only.
+  Successful terminal rows are never replayed.

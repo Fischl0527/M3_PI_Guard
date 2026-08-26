@@ -1,5 +1,24 @@
 # 当前任务
 
+### 2026-08-26 增量实证强化：五项实验实施中
+
+- 目标：实施 owner 批准的 10--12 天增量实验计划，用同期 2×2 因子设计
+  解开 prompt 与 runtime modules 混杂，并补充来源权威反事实、风险富集、
+  DeepSeek Flash 复现和 B200 survivor→B500 尾部证据。
+- 允许修改：`experiments/paper_v2/` 的增量计划、runner、分析和定向测试，
+  `protocols/paper_upgrade_v2/incremental_empirical_v1/` 冻结协议，增量输出、
+  双语稿件/图表，以及本任务 Harness 状态文件。
+- 禁止执行：Gemini 新矩阵、独立盲测、真实用户确认、生产工具/外部副作用、
+  Full Harness、历史递归重放、成功实验行重跑和冗余哈希证据包。
+- 安全与失败边界：DeepSeek Pro 常规/Flash/Adaptive 硬熔断分别为 CNY
+  8/3/5，总上限 CNY 16；无自动重试或模型回退；官方响应失败留在 ITT，
+  无响应工程失败只在原因修复后运行受影响行；作者信息保持空白。
+- 验收：E1 720、E2 240+480 offline、E3 240、E4 360 和 E5 最多
+  3,600 queries 按各自边界闭合；新 raw JSONL 可一次性重建统计；负面结果
+  同样结项；Git 在五个计划里程碑提交并推送 `m3-guard`。
+- 当前阶段：Day 1 已完成；进入 Day 2 condition profiles、来源反事实 runtime、
+  shared runner 与定向测试。F-PAPER-002 保持 `in_progress`。
+
 ### 2026-08-23 精简实证里程碑 31：Stage 5 最小 JISA 投稿包已完成
 
 - 目标：以 Stage 4.5 通过的中英文稿和现有证据为唯一内容基线，

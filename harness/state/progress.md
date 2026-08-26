@@ -1,5 +1,22 @@
 # 进展记录
 
+## 2026-08-26 — Incremental empirical Day 1 design freeze complete
+
+- Froze five prospective studies without modifying any historical record:
+  E1 720 Pro factor rows, E2 240 Pro rows plus 480 offline Guard replays, E3
+  240 outcome-enriched Pro rows, E4 360 Flash rows and E5 12 B200-survivor
+  tasks with a 3,600-query maximum.
+- The strict E3 four-condition audit found 117 AgentDojo and 55 M3-v2 eligible
+  cases.  The earlier 127/71 count was the broader any-of-six audit; the
+  protocol discloses the distinction and retains the narrower rule.
+- Frozen budget boundaries are CNY 8/3/5 for regular Pro/Flash/adaptive and
+  CNY 16 globally.  Automatic retry, fallback, provider tools, real effects,
+  Gemini, blind work, Full Harness and recursive historical replay are false.
+- Focused verification passes 8/8 plus Ruff, `py_compile` and an independent
+  `--verify` reconstruction.  No credential was read and no provider request
+  was made.  F-PAPER-002 remains `in_progress` for implementation and results.
+
+
 ## 2026-08-23 — Stage 5 minimal JISA submission package prepared
 
 - Kept the accepted English manuscript, supplementary tables and five vector

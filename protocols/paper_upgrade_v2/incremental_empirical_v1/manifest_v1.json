@@ -1,0 +1,91 @@
+{
+  "artifact_counts": {
+    "adaptive_tail_plan_v1.jsonl": 12,
+    "challenge_cases_v1.jsonl": 60,
+    "challenge_plan_v1.jsonl": 240,
+    "factorial_plan_v1.jsonl": 720,
+    "flash_plan_v1.jsonl": 360,
+    "provenance_cases_v1.jsonl": 120,
+    "provenance_offline_replay_plan_v1.jsonl": 480,
+    "provenance_plan_v1.jsonl": 240
+  },
+  "author_fields_must_remain_blank": true,
+  "automatic_retries": 0,
+  "budget_fuses_cny": {
+    "adaptive": 5.0,
+    "flash": 3.0,
+    "global": 16.0,
+    "pro": 8.0
+  },
+  "claim_boundaries": {
+    "adaptive_tail": "b200_survivor_conditional_no_saturation_claim",
+    "challenge": "outcome_enriched_conditional_robustness_only",
+    "flash": "same_provider_cross_model_replication_only"
+  },
+  "cross_model_fallback": false,
+  "factor_cells": [
+    {
+      "condition_cell": "policy_normal",
+      "condition_id": "m3_policy_only",
+      "module_factor": "policy",
+      "prompt_factor": "normal"
+    },
+    {
+      "condition_cell": "policy_safe",
+      "condition_id": "m3_policy_safe_prompt",
+      "module_factor": "policy",
+      "prompt_factor": "safe"
+    },
+    {
+      "condition_cell": "full_normal",
+      "condition_id": "m3_full_normal_prompt",
+      "module_factor": "full",
+      "prompt_factor": "normal"
+    },
+    {
+      "condition_cell": "full_safe",
+      "condition_id": "m3_full",
+      "module_factor": "full",
+      "prompt_factor": "safe"
+    }
+  ],
+  "frozen_date": "2026-08-26",
+  "full_harness_required": false,
+  "gemini_execution_planned": false,
+  "historical_recursive_replay_required": false,
+  "independent_blind_study_planned": false,
+  "planned_counts": {
+    "adaptive_tail_max_queries": 3600,
+    "adaptive_tail_tasks": 12,
+    "challenge_api_rows": 240,
+    "factorial_api_rows": 720,
+    "flash_api_rows": 360,
+    "provenance_api_rows": 240,
+    "provenance_offline_decisions": 480,
+    "regular_api_rows_total": 1560
+  },
+  "provider_tools_enabled": false,
+  "real_external_effects_enabled": false,
+  "schema_version": "m3-paper-v2-incremental-plan-1.0",
+  "selection_seed": "m3-q2-incremental-empirical-2026-08-26-v1",
+  "statistical_families": {
+    "challenge_flash_adaptive": "descriptive_sensitivity_no_new_family",
+    "factorial_tcr": [
+      "module",
+      "prompt",
+      "interaction"
+    ],
+    "factorial_unsafe": [
+      "module",
+      "prompt",
+      "interaction"
+    ],
+    "provenance": [
+      "source",
+      "module",
+      "source_x_module"
+    ]
+  },
+  "status": "design_frozen_execution_pending",
+  "study_id": "m3-q2-incremental-empirical-v1"
+}

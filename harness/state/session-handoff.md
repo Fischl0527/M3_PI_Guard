@@ -3319,3 +3319,20 @@ Next gated action:
   one final author-side check and submission-date institutional JCR/SCIE
   confirmation. F-PAPER-002 remains `in_progress` until those external inputs
   are supplied.
+# 2026-08-26 — Incremental empirical Day 1 handoff
+
+- Active feature: F-PAPER-002 on `codex/q2-empirical-study`.
+- Design source: `protocols/paper_upgrade_v2/incremental_empirical_study_plan_v1.md`.
+- Machine plans: `protocols/paper_upgrade_v2/incremental_empirical_v1/`.
+- Plan builder: `experiments/paper_v2/incremental_empirical_plan_v1.py`;
+  focused test: `tests/unit/test_paper_v2_incremental_empirical_plan_v1.py`.
+- Verified commands: focused pytest 8/8, Ruff pass, `py_compile` pass and
+  `incremental_empirical_plan_v1 --verify` exit 0.
+- No provider process is running; API calls and credential reads in this
+  milestone are zero.  Existing unrelated dirty files remain untouched.
+- Resume at Day 2: add `m3_policy_safe_prompt` and
+  `m3_full_normal_prompt`, qualify the source-authority pair runtime/offline
+  replay, and implement the shared study runner.  Do not start API execution
+  until focused tests and the study canary gate pass.
+- Prohibited: Gemini, blind work, Full Harness, recursive history replay,
+  production tools/effects, successful-row replay and author-field completion.
