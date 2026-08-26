@@ -196,6 +196,10 @@ def _load_regular_plan(study: str) -> list[dict[str, Any]]:
             or row.get("max_provider_calls") != 8
         ):
             raise IncrementalStudyRunnerError(f"{study}: work-item contract drift")
+        if study != "provenance" and not isinstance(row.get("selection_id"), str):
+            raise IncrementalStudyRunnerError(
+                f"{study}: source resolver selection identity missing"
+            )
     return sorted(rows, key=lambda row: int(row["sequence"]))
 
 

@@ -3371,3 +3371,12 @@ Next gated action:
 - Resume with E1 only: run the eight-row factorial formal-prefix canary, inspect
   the outcome-blind technical gate, then run untouched pending rows if it
   passes. Never replay a successful row.
+
+# 2026-08-26 — E1 resolver correction handoff
+
+- First launch produced zero provider calls and zero result rows: local
+  resolver construction failed on a missing routing-only `selection_id`.
+- The deterministic plan builder now carries the original frozen selection
+  identifier into E1/E3/E4. Work keys and execution identities remain stable.
+- Verification: 25 focused tests, Ruff, and direct AgentDojo/M3 resolve probes
+  pass. The next action remains the untouched eight-row E1 canary.

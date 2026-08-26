@@ -3318,3 +3318,14 @@ Remediation V2 最终验收为 12 pass / 0 fail：A04 Recall 134/134=100%；A06 
   only the prospective incremental tariff.
 - Focused runner tests pass 10/10 and Ruff passes. No API call was made during
   this correction; F-PAPER-002 remains `in_progress` for E1–E5 execution.
+
+# 2026-08-26 — E1 pre-request routing defect corrected
+
+- The initial E1 command stopped before network I/O because factor work items
+  omitted the public resolver's routing-only `selection_id`. No raw result or
+  budget ledger was created.
+- Added the existing frozen selection identifier to E1/E3/E4 projections. Case
+  membership, order, conditions, work keys and execution identities did not
+  change. Both AgentDojo and M3 direct resolver probes now pass.
+- Focused tests pass 25/25 and Ruff passes. The canary remains entirely
+  untouched and is eligible for a clean restart.

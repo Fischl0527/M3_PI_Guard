@@ -70,6 +70,13 @@ Historical `m3_policy_only` and `m3_full` semantics and records are not changed.
   SHA-256 rank.  Attack text is not an input to selection.  This is not a full
   40-task B500 curve.
 
+The first E1 launch was stopped locally before any provider request because
+the factor/challenge/Flash plan projection omitted the benchmark resolver's
+routing-only `selection_id`.  The deterministic builder was corrected before
+execution; case membership, order, condition assignment, work keys and
+execution identities are unchanged.  Focused tests and direct AgentDojo/M3
+resolver probes pass on the corrected plan.
+
 ## Endpoints and statistics
 
 Unsafe-effect rate and benign-tool task-completion rate are co-primary for E1.

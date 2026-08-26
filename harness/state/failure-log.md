@@ -5577,3 +5577,16 @@ credential, changed a historical ledger, or enabled an external effect.
 - Resolution: retain this as a disclosed legacy diagnostic.  Verify the
   incremental dispatcher directly and keep the adjacent formal/live suites;
   do not modify the historical medium index or claim those nine tests passed.
+# 2026-08-26 — E1 canary pre-request resolver failure
+
+- Command: `incremental_study_runner_v1 --study factorial --canary-only`.
+- Observed: local construction of `PublicFrozenAgentDojoCaseResolverV2` raised
+  `KeyError: selection_id` before the first provider request.
+- Evidence boundary: no raw result file and no provider budget ledger were
+  created; API calls and successful experiment rows are zero.
+- Root cause: the Day 1 plan builder preserved case/source identity but omitted
+  the routing-only `selection_id` required by both public benchmark resolvers.
+- Changed hypothesis/fix: add the frozen selection identifier to every E1/E3/E4
+  work item, require it during plan loading, regenerate the deterministic plans,
+  and rerun the focused plan/runner tests before restarting untouched canary
+  rows.

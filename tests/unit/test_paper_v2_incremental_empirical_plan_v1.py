@@ -48,6 +48,9 @@ def test_factorial_and_flash_case_balance() -> None:
     assert Counter(row["evaluation_case_type"] for row in value["flash"]) == Counter(
         {"attack": 200, "benign_tool": 120, "benign_no_tool": 40}
     )
+    assert all(isinstance(row.get("selection_id"), str) for row in value["factorial"])
+    assert all(isinstance(row.get("selection_id"), str) for row in value["flash"])
+    assert all(isinstance(row.get("selection_id"), str) for row in value["challenge"])
 
 
 def test_challenge_is_balanced_and_explicitly_outcome_enriched() -> None:

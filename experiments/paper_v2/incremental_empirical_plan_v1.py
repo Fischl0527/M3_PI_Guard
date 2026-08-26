@@ -162,6 +162,7 @@ def _factor_work_item(
         "model_role": "primary" if model_id.endswith("pro") else "same_provider_replication",
         "case_id": payload["case_id"],
         "benchmark": payload["benchmark"],
+        "selection_id": str(case["selection_id"]),
         "evaluation_case_type": str(case["evaluation_case_type"]),
         "source_reference": copy.deepcopy(dict(case["source_reference"])),
         "source_record_sha256": str(case["source_reference"]["sha256"]),
@@ -295,6 +296,7 @@ def _public_source_cases() -> dict[tuple[str, str], dict[str, Any]]:
             {
                 "case_id": key[1],
                 "benchmark": key[0],
+                "selection_id": str(row["selection_id"]),
                 "evaluation_case_type": "attack",
                 "source_reference": copy.deepcopy(dict(row["source_reference"])),
                 "selection_stratum": copy.deepcopy(dict(row["selection_stratum"])),
