@@ -40,6 +40,8 @@ from experiments.paper_v2.medium_runtime import (
     CORE_CONDITIONS,
     DEFAULT_V2_PLAN,
     FROZEN_GENERATED_AT,
+    M3_CONDITIONS,
+    M3_POLICY_CONDITIONS,
     assemble_experiment_record,
     reconstruct_initial_online_state,
 )
@@ -172,6 +174,17 @@ class ProviderCallEventSink(Protocol):
 
 class ProviderTracePathFactory(Protocol):
     def __call__(self, context: OnlineExecutorContext) -> Path: ...
+
+
+class ResearchMessageBuilder(Protocol):
+    def __call__(
+        self,
+        context: OnlineExecutorContext,
+        view: PaperRuntimeView,
+        tool_schemas: Mapping[str, Mapping[str, Any]],
+        manifest: TaskPolicyManifest,
+        profile: ConditionProfile,
+    ) -> list[dict[str, str]]: ...
 
 
 def _now() -> str:
@@ -683,7 +696,7 @@ def _manifest_for_condition(
     view: PaperRuntimeView,
     schemas: Mapping[str, Mapping[str, Any]],
 ) -> TaskPolicyManifest:
-    if context.condition_id in {"m3_policy_only", "m3_full"}:
+    if context.condition_id in M3_CONDITIONS:
         control = context.online_state.get("runtime_control")
         authorization = (
             control.get("authorization") if isinstance(control, Mapping) else None
@@ -829,6 +842,7 @@ class LiveConditionRuntime:
         provider_trace_receipt_adapter: (
             Callable[[Mapping[str, Any]], Mapping[str, Any]] | None
         ) = None,
+        message_builder: ResearchMessageBuilder | None = None,
         recorded_at: Callable[[], str] = _now,
     ) -> None:
         self.provider_client_factory = provider_client_factory
@@ -840,6 +854,7 @@ class LiveConditionRuntime:
         self.provider_trace_receipt_adapter = (
             provider_trace_receipt_adapter
         )
+        self.message_builder = message_builder
         self.recorded_at = recorded_at
 
     def _call_event(
@@ -1008,7 +1023,7 @@ class LiveConditionRuntime:
             )
         manifest = _manifest_for_condition(context, view, schemas)
         authorization = None
-        if context.condition_id in {"m3_policy_only", "m3_full"}:
+        if context.condition_id in M3_CONDITIONS:
             control = context.online_state.get("runtime_control")
             authorization = (
                 control.get("authorization")
@@ -1027,13 +1042,13 @@ class LiveConditionRuntime:
                 manifest,
                 modules=(
                     M3_POLICY_MODULES
-                    if context.condition_id == "m3_policy_only"
+                    if context.condition_id in M3_POLICY_CONDITIONS
                     else frozenset(
                         context.online_state["runtime_control"]["guard_modules"]
                     )
                 ),
             )
-            if context.condition_id in {"m3_policy_only", "m3_full"}
+            if context.condition_id in M3_CONDITIONS
             and oracle_monitor is None
             else None
         )
@@ -1120,12 +1135,27 @@ class LiveConditionRuntime:
                         "VIGIL provider factory omitted preparation evidence"
                     )
                 vigil = prepared
-        messages = build_research_messages(
-            view,
-            tool_schemas=schemas,
-            manifest=manifest,
-            prompt_profile=_message_prompt_profile(profile, context.benchmark),
+        messages = (
+            self.message_builder(context, view, schemas, manifest, profile)
+            if self.message_builder is not None
+            else build_research_messages(
+                view,
+                tool_schemas=schemas,
+                manifest=manifest,
+                prompt_profile=_message_prompt_profile(profile, context.benchmark),
+            )
         )
+        if (
+            not isinstance(messages, list)
+            or not messages
+            or any(
+                not isinstance(message, Mapping)
+                or message.get("role") not in {"system", "user", "assistant"}
+                or not isinstance(message.get("content"), str)
+                for message in messages
+            )
+        ):
+            raise LiveConditionRuntimeError("research message builder returned invalid messages")
         backend = self.effect_backend_factory(context, schemas)
         if backend.backend_id != profile.effect_backend(context.benchmark):
             backend.close()

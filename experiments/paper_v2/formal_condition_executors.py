@@ -27,6 +27,9 @@ from experiments.paper_v2.contracts import (
 from experiments.paper_v2.medium_runtime import (
     CORE_CONDITIONS,
     DEFAULT_V2_PLAN,
+    M3_CONDITIONS,
+    M3_FULL_CONDITIONS,
+    M3_POLICY_CONDITIONS,
     ConditionDispatcher,
     assemble_experiment_record,
     reconstruct_initial_online_state,
@@ -170,6 +173,35 @@ CONDITION_PROFILES = {
         dependency="m3_full_runtime_modules",
     ),
 }
+
+INCREMENTAL_CONDITION_PROFILES = {
+    "m3_policy_safe_prompt": ConditionProfile(
+        condition_id="m3_policy_safe_prompt",
+        controller="m3_runtime_monitor",
+        max_provider_calls=8,
+        m3_prompt_profile="safe_prompt",
+        agentdojo_prompt_profile="safe_prompt",
+        dependency="m3_policy_module",
+    ),
+    "m3_full_normal_prompt": ConditionProfile(
+        condition_id="m3_full_normal_prompt",
+        controller="m3_runtime_monitor",
+        max_provider_calls=8,
+        m3_prompt_profile="normal",
+        agentdojo_prompt_profile="normal",
+        dependency="m3_full_runtime_modules",
+    ),
+}
+ALL_CONDITION_PROFILES = {
+    **CONDITION_PROFILES,
+    **INCREMENTAL_CONDITION_PROFILES,
+}
+INCREMENTAL_FACTOR_CONDITIONS = (
+    "m3_policy_only",
+    "m3_policy_safe_prompt",
+    "m3_full_normal_prompt",
+    "m3_full",
+)
 
 
 @dataclass(frozen=True)
@@ -508,24 +540,34 @@ def _validate_profile_binding(
             "guard_mode": "verify_before_commit",
             "baseline_id": "VIGIL",
         }
-    elif condition == "m3_policy_only":
+    elif condition in M3_POLICY_CONDITIONS:
         expected = {
             "guard_mode": "enforce",
-            "prompt_profile": "normal",
+            "prompt_profile": (
+                "safe_prompt"
+                if condition == "m3_policy_safe_prompt"
+                else "normal"
+            ),
             "guard_modules": ["policy"],
         }
-    else:
+    elif condition in M3_FULL_CONDITIONS:
         expected = {
             "guard_mode": "enforce",
-            "prompt_profile": "safe_prompt",
+            "prompt_profile": (
+                "normal"
+                if condition == "m3_full_normal_prompt"
+                else "safe_prompt"
+            ),
             "guard_modules": sorted(FULL_RUNTIME_MODULES),
         }
+    else:
+        raise FormalConditionExecutorError(f"unsupported condition profile: {condition}")
     for key, value in expected.items():
         if runtime_control.get(key) != value:
             raise FormalConditionExecutorError(
                 f"{condition}: runtime control {key} drift"
             )
-    if condition in {"m3_policy_only", "m3_full"}:
+    if condition in M3_CONDITIONS:
         authorization = runtime_control.get("authorization")
         if not isinstance(authorization, Mapping):
             raise FormalConditionExecutorError("M3 authorization envelope is missing")
@@ -669,6 +711,36 @@ def build_condition_dispatcher(
         if profile is None:
             raise FormalConditionExecutorError(
                 f"condition profile is missing: {condition_id}"
+            )
+        dispatcher.register(
+            condition_id,
+            ConditionExecutorShell(
+                profile=profile,
+                runtime=runtime,
+                evaluator=evaluator,
+            ),
+        )
+    dispatcher.assert_complete()
+    return dispatcher
+
+
+def build_incremental_condition_dispatcher(
+    *,
+    runtime: OnlineConditionRuntime,
+    evaluator: OfflineOutcomeEvaluator,
+) -> ConditionDispatcher:
+    """Build the four-cell prompt-by-module dispatcher.
+
+    The historical six-condition registry remains unchanged; this versioned
+    dispatcher is used only by the prospective incremental studies.
+    """
+
+    dispatcher = ConditionDispatcher(INCREMENTAL_FACTOR_CONDITIONS)
+    for condition_id in INCREMENTAL_FACTOR_CONDITIONS:
+        profile = ALL_CONDITION_PROFILES.get(condition_id)
+        if profile is None:
+            raise FormalConditionExecutorError(
+                f"incremental condition profile is missing: {condition_id}"
             )
         dispatcher.register(
             condition_id,

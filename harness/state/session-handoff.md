@@ -1,5 +1,27 @@
 # 会话移交
 
+## 2026-08-26 — Incremental empirical Day 2 handoff
+
+- Day 1 is already pushed as commit `9970913`. Day 2 adds the incremental condition
+  profiles, controlled provenance runtime, shared study CLI and lean adaptive-tail
+  continuation. Do not edit or replay historical result roots.
+- Resume from `experiments/paper_v2/incremental_study_runner_v1.py`. The regular
+  command shape is `--study factorial|provenance|challenge|flash` plus exactly one
+  of `--canary-only` or `--resume-pending-only`. E5 uses the same CLI with
+  `--study adaptive-tail`.
+- E2 offline replay is complete at
+  `outputs/experiments/incremental_empirical_v1/provenance/offline_guard_replay_v1.jsonl`:
+  480 unique decisions, 0 provider calls. Do not relabel this deterministic result
+  as end-to-end performance.
+- Focused verification: 56 passed, one known VIGIL Pydantic deprecation warning;
+  Ruff and `py_compile` pass. The nine retired medium-runtime setup errors are a
+  pre-existing hash mismatch and are outside this incremental gate.
+- No API call has been made for the new studies. Before E1, verify current official
+  DeepSeek price, confirm only that the ignored config file exists, then run the
+  eight formal-prefix factorial rows. Do not print config contents or secrets.
+- Preserve unrelated dirty files and keep F-PAPER-002 `in_progress`. After a passed
+  E1 canary, run pending-only rows without replaying the prefix.
+
 ## 2026-08-23 — Stage 5 minimal submission-package handoff
 
 - Resume from

@@ -5562,3 +5562,18 @@ credential, changed a historical ledger, or enabled an external effect.
   pools remain above the required 30 cases.
 - Retry boundary: rerun only the failed offline plan generation; no provider
   request, existing experimental row or historical evidence was touched.
+
+# 2026-08-26 — Legacy medium freeze test is outside the incremental gate
+
+- Attempt: run the new profile tests together with adjacent formal/live/medium
+  regression modules.
+- Result: 26 tests passed; nine `test_paper_v2_medium_runtime` setup cases
+  stopped before exercising the changed code because the repository's legacy
+  `medium_case_index_v1.jsonl` no longer matches its historical case-manifest
+  hash.  Ruff passed.
+- Cause boundary: the mismatch predates and is independent of the new
+  dispatcher/profile branches.  Repair would rewrite or recursively restore a
+  retired historical freeze, which the owner explicitly removed from scope.
+- Resolution: retain this as a disclosed legacy diagnostic.  Verify the
+  incremental dispatcher directly and keep the adjacent formal/live suites;
+  do not modify the historical medium index or claim those nine tests passed.

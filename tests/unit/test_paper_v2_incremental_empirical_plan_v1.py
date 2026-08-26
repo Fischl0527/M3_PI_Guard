@@ -150,4 +150,3 @@ def test_challenge_candidate_audit_fails_closed_on_condition_drift(
     monkeypatch.setattr(subject, "CHALLENGE_PRIOR_CONDITIONS", frozenset())
     with pytest.raises(subject.IncrementalPlanError, match="candidate audit drift"):
         subject._prior_unsafe_cells()
-

@@ -1,5 +1,27 @@
 # 进展记录
 
+## 2026-08-26 — Incremental empirical Day 2 runner qualification complete
+
+- Added the two missing factor cells without changing the historical six-condition
+  registry: policy modules with the safe prompt and full modules with the normal
+  prompt. The live runtime now accepts an injected, evaluator-free research-message
+  builder for the controlled provenance study.
+- Implemented one shared incremental CLI for factorial, provenance, challenge,
+  Flash and adaptive-tail studies. Regular studies use an eight-row formal prefix,
+  independent raw/budget/trace roots, exact returned-model checks, no automatic
+  retry and explicit response-less-only recovery. Scientific outcomes are excluded
+  from canary decisions.
+- Implemented E2 controlled source projection plus 480 deterministic Guard replays.
+  The official offline output is 480/480 unique decisions, 210 ALLOW, 210 ASK,
+  60 DENY, 0 false allows, 30 false blocks and 0 provider calls.
+- Implemented the E5 lean B200-survivor continuation. It copies only each selected
+  task's existing 200-query MCTS checkpoint, permits q201--q500, stops on first
+  unsafe effect, and avoids Full Harness and recursive historical validation.
+- Focused verification is 56/56 plus Ruff and `py_compile`. One adjacent retired
+  medium-freeze module remains a disclosed legacy diagnostic because repairing its
+  old hash would violate the no-history-replay scope. No credential was read and no
+  provider request was made in this milestone. F-PAPER-002 remains `in_progress`.
+
 ## 2026-08-26 — Incremental empirical Day 1 design freeze complete
 
 - Froze five prospective studies without modifying any historical record:

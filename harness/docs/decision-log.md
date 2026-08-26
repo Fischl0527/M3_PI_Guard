@@ -2,6 +2,20 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-26 — Use a lean shared runner and direct B200 checkpoint continuation
+
+- Decision: implement the four regular studies behind one study-scoped CLI and
+  implement E5 by copying only the selected no-success B200 MCTS checkpoints into
+  a new output root. Validate the source prefix once per invocation; do not replay
+  historical query/call ledgers or construct a new hierarchy of hash packages.
+- Reason: the paper needs contemporaneous factor identification and a conditional
+  tail-risk estimate, not another whole-repository integrity exercise. Existing
+  provider traces still provide the necessary local request ID, payload digest,
+  official response ID, returned model, usage and cost chain.
+- Consequence: successful rows remain immutable; only explicit response-less
+  failures may be retried after a fix. E5 reports only the selected B200-survivor
+  conditional tail and cannot be merged into a nominal complete B500 curve.
+
 ## 2026-08-23 — Reframe M3-full versus policy-only as configuration bundles
 
 - Decision: the paper will not interpret the existing M3-full/policy-only

@@ -75,7 +75,13 @@ CORE_CONDITIONS = (
     "m3_policy_only",
     "m3_full",
 )
-M3_CONDITIONS = frozenset({"m3_policy_only", "m3_full"})
+M3_POLICY_CONDITIONS = frozenset(
+    {"m3_policy_only", "m3_policy_safe_prompt"}
+)
+M3_FULL_CONDITIONS = frozenset(
+    {"m3_full", "m3_full_normal_prompt"}
+)
+M3_CONDITIONS = M3_POLICY_CONDITIONS | M3_FULL_CONDITIONS
 REGIME_TRANSFORMS = {
     "auto_compiled": "auto_compiled",
     "broad": "broad",
@@ -536,11 +542,13 @@ def build_initial_online_state(
             "condition_id": condition,
             "guard_mode": "enforce",
             "prompt_profile": (
-                "normal" if condition == "m3_policy_only" else "safe_prompt"
+                "safe_prompt"
+                if condition in {"m3_policy_safe_prompt", "m3_full"}
+                else "normal"
             ),
             "guard_modules": (
                 ["policy"]
-                if condition == "m3_policy_only"
+                if condition in M3_POLICY_CONDITIONS
                 else sorted(FULL_RUNTIME_MODULES)
             ),
             "authorization": authorization,
@@ -715,13 +723,19 @@ def reconstruct_initial_online_state(
 class ConditionDispatcher:
     """Explicit condition registry; absence is a fail-closed execution error."""
 
-    def __init__(self) -> None:
+    def __init__(
+        self, allowed_conditions: Iterable[str] = CORE_CONDITIONS
+    ) -> None:
+        allowed = tuple(dict.fromkeys(str(item) for item in allowed_conditions))
+        if not allowed:
+            raise MediumRuntimeError("condition dispatcher requires a non-empty scope")
+        self._allowed_conditions = frozenset(allowed)
         self._executors: dict[str, ConditionExecutor] = {}
 
     def register(
         self, condition_id: str, executor: ConditionExecutor
     ) -> None:
-        if condition_id not in CORE_CONDITIONS:
+        if condition_id not in self._allowed_conditions:
             raise MediumRuntimeError(f"unsupported condition: {condition_id}")
         if condition_id in self._executors:
             raise MediumRuntimeError(f"duplicate condition executor: {condition_id}")
@@ -731,7 +745,7 @@ class ConditionDispatcher:
         return tuple(sorted(self._executors))
 
     def assert_complete(self) -> None:
-        missing = sorted(set(CORE_CONDITIONS) - set(self._executors))
+        missing = sorted(self._allowed_conditions - set(self._executors))
         if missing:
             raise MediumRuntimeError(
                 "condition executors missing: " + ", ".join(missing)

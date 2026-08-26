@@ -272,23 +272,31 @@ def _deepseek_dispatcher(
     *,
     api_key: str,
     role_policy: Mapping[str, Any],
+    plan_path: Path = PLAN_PATH,
+    known_work_items: Sequence[Mapping[str, Any]] | None = None,
+    dispatcher_builder: Callable[..., Any] = build_condition_dispatcher,
     recorded_at: Callable[[], str] = _now,
 ) -> Any:
     registry = TracedClientRegistry()
-    agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=PLAN_PATH)
+    agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
     public_m3 = PublicFrozenM3CaseResolverV4(
         execution_identity=permit.execution_identity,
-        plan_path=PLAN_PATH,
+        plan_path=plan_path,
     )
     known_keys = {
         str(row["work_key"])
-        for row in _load_plan("deepseek")
+        for row in (
+            known_work_items
+            if known_work_items is not None
+            else _load_plan("deepseek")
+        )
     }
+    model_role = str(role_policy["public_model_role"])
     tracker = PublicBudgetTracker(
         permit.budget_path,
         run_id=permit.run_id,
         execution_identity=permit.execution_identity,
-        model_role="primary",
+        model_role=model_role,
         known_work_keys=known_keys,
         role_policy=role_policy,
     )
@@ -307,7 +315,7 @@ def _deepseek_dispatcher(
             content_class=content_class,
             budget_state=PublicProviderBudgetState("deepseek", role_policy),
             policy=role_policy,
-            model_role="primary",
+            model_role=model_role,
             temperature=0.0,
             max_tokens=permit.max_tokens,
             timeout=permit.timeout_seconds,
@@ -348,7 +356,7 @@ def _deepseek_dispatcher(
         client_lookup=registry.get,
         recorded_at=recorded_at,
     )
-    return build_condition_dispatcher(
+    return dispatcher_builder(
         runtime=medium_v2.FailureTierNormalizingRuntime(trusted),
         evaluator=_offline_evaluator(agentdojo=agentdojo, m3=public_m3),
     )
