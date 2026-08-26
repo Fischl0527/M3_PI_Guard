@@ -54,7 +54,11 @@ def _estimate_rows(
                     "ci_low": float(estimate["ci_low"]),
                     "ci_high": float(estimate["ci_high"]),
                     "bootstrap_p": float(estimate["bootstrap_two_sided_p"]),
-                    "holm_adjusted_p": float(estimate["holm_adjusted_p"]),
+                    "holm_adjusted_p": (
+                        ""
+                        if estimate.get("holm_adjusted_p") is None
+                        else float(estimate["holm_adjusted_p"])
+                    ),
                     "bootstrap_replicates": int(estimate["replicates"]),
                 }
             )

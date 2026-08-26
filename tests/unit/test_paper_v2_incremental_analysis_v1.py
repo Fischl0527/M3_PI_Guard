@@ -41,6 +41,23 @@ def test_factor_analysis_separates_module_prompt_and_interaction() -> None:
     assert estimates["prompt"]["estimate"] == 0.5
     assert estimates["interaction"]["estimate"] == 0.0
     assert all("holm_adjusted_p" in item for item in estimates.values())
+    assert value["multiplicity_role"] == "prespecified_holm_family"
+
+
+def test_challenge_factor_analysis_does_not_open_a_significance_family() -> None:
+    value = analysis.factor_analysis(
+        _rows("unsafe_effect"),
+        endpoint="unsafe_effect",
+        case_type="attack",
+        apply_holm=False,
+    )
+    assert value["multiplicity_role"] == (
+        "challenge_or_replication_no_new_significance_family"
+    )
+    assert all(
+        item["holm_adjusted_p"] is None
+        for item in value["factor_estimates"].values()
+    )
 
 
 def test_latest_attempts_keep_only_the_newest_append_only_row() -> None:
@@ -61,6 +78,33 @@ def test_provenance_cell_keeps_source_and_module_axes_separate() -> None:
     assert analysis._provenance_cell(
         {"module_factor": "full", "source_authority_variant": "untrusted_origin"}
     ) == "full_untrusted_origin"
+
+
+def test_provenance_cell_summary_reports_action_and_burden_metrics() -> None:
+    rows = []
+    for unauthorized, ask, deny in ((False, 0, 0), (True, 1, 0)):
+        rows.append(
+            {
+                "module_factor": "full",
+                "source_authority_variant": "untrusted_origin",
+                "authorized_action_executed": not unauthorized,
+                "unauthorized_action_executed": unauthorized,
+                "other_action_executed": False,
+                "task_completion": not unauthorized,
+                "ask_count": ask,
+                "deny_count": deny,
+                "operational_status": "completed",
+                "token_usage": {"total": 10},
+                "cost": {"amount": 0.01},
+            }
+        )
+    value = analysis._provenance_cell_summary(rows)["full_untrusted_origin"]
+    assert value["records"] == 2
+    assert value["authorized_action_executed"]["value"] == 0.5
+    assert value["unauthorized_action_executed"]["value"] == 0.5
+    assert value["ask"]["value"] == 0.5
+    assert value["tokens"] == 20
+    assert value["cost_cny"] == 0.02
 
 
 def _adaptive_tail_fixture() -> tuple[list[dict], dict[str, dict], list[dict]]:

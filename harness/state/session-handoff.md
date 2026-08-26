@@ -1,5 +1,17 @@
 # 会话移交
 
+## 2026-08-26 — E1 factorial terminal handoff
+
+- E1 已终态且一次性分析完成：720/720 response-bearing，CNY 3.6602862，
+  0 forbidden fields/tools/effects。不要再运行 factorial runner 或重算 provider
+  证据；只可复用紧凑 raw 和 `analysis_v1.json`。
+- 主要结果是安全端点地板：四 cell unsafe effect 1%、1%、0%、0%；module
+  −1pp、prompt 0、interaction 0，均无校正后证据。良性 TCR 的 module/prompt
+  点估计各 −3.33pp，区间跨零。完整口径见
+  `docs/research/paper_v2/incremental_empirical_v1/e1_factorial_result_v1.md`。
+- 下一步只启动 E2 八行正式前缀；通过 transport/identity/isolation gate 后运行
+  remaining pending-only。E3/E4/E5 仍不得提前并行启动。
+
 ## 2026-08-26 — E1 live expansion and analysis handoff
 
 - E1 canary gate 已通过，唯一 pending-only runner 正在完成剩余 712 行；不得停止、

@@ -333,6 +333,7 @@ def factor_analysis(
     ),
     cells: Sequence[str] = FACTOR_CELLS,
     contrast_kind: str = "prompt_module",
+    apply_holm: bool = True,
 ) -> dict[str, Any]:
     grouped: dict[str, dict[str, bool]] = defaultdict(dict)
     for row in rows:
@@ -385,15 +386,24 @@ def factor_analysis(
         )
         for name, contrast in contrasts.items()
     }
-    adjusted = holm_adjust(
-        [estimates[name]["bootstrap_two_sided_p"] for name in estimates]
-    )
-    for name, value in zip(estimates, adjusted, strict=True):
-        estimates[name]["holm_adjusted_p"] = value
+    if apply_holm:
+        adjusted = holm_adjust(
+            [estimates[name]["bootstrap_two_sided_p"] for name in estimates]
+        )
+        for name, value in zip(estimates, adjusted, strict=True):
+            estimates[name]["holm_adjusted_p"] = value
+    else:
+        for value in estimates.values():
+            value["holm_adjusted_p"] = None
     return {
         "endpoint": endpoint,
         "case_type": case_type,
         "paired_cases": len(grouped),
+        "multiplicity_role": (
+            "prespecified_holm_family"
+            if apply_holm
+            else "challenge_or_replication_no_new_significance_family"
+        ),
         "factor_estimates": estimates,
         "simple_paired_effects": [
             _paired_comparison(grouped, first=first, second=second)
@@ -404,6 +414,7 @@ def factor_analysis(
 
 def analyze_factorial_like(study: str) -> dict[str, Any]:
     records, audit = load_completed_regular_study(study)
+    apply_holm = study == "factorial"
     result: dict[str, Any] = {
         "schema_version": "m3-paper-v2-incremental-analysis-1.0",
         "study": study,
@@ -421,15 +432,24 @@ def analyze_factorial_like(study: str) -> dict[str, Any]:
             records, cell=lambda row: str(row["condition_cell"])
         ),
         "attack_unsafe_factor": factor_analysis(
-            records, endpoint="unsafe_effect", case_type="attack"
+            records,
+            endpoint="unsafe_effect",
+            case_type="attack",
+            apply_holm=apply_holm,
         ),
         "attack_failure_bound_factor": factor_analysis(
-            records, endpoint="unsafe_or_failure", case_type="attack"
+            records,
+            endpoint="unsafe_or_failure",
+            case_type="attack",
+            apply_holm=apply_holm,
         ),
     }
     if any(row["evaluation_case_type"] == "benign_tool" for row in records):
         result["benign_tool_tcr_factor"] = factor_analysis(
-            records, endpoint="task_completion", case_type="benign_tool"
+            records,
+            endpoint="task_completion",
+            case_type="benign_tool",
+            apply_holm=apply_holm,
         )
     if study == "challenge":
         challenge_cases = {
@@ -463,6 +483,50 @@ def analyze_factorial_like(study: str) -> dict[str, Any]:
 
 def _provenance_cell(row: Mapping[str, Any]) -> str:
     return f"{row['module_factor']}_{row['source_authority_variant']}"
+
+
+def _provenance_cell_summary(
+    records: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    grouped: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in records:
+        grouped[_provenance_cell(row)].append(row)
+    result: dict[str, Any] = {}
+    for cell, values in sorted(grouped.items()):
+        result[cell] = {
+            "records": len(values),
+            "authorized_action_executed": proportion_result(
+                sum(bool(row["authorized_action_executed"]) for row in values),
+                len(values),
+            ),
+            "unauthorized_action_executed": proportion_result(
+                sum(bool(row["unauthorized_action_executed"]) for row in values),
+                len(values),
+            ),
+            "other_action_executed": proportion_result(
+                sum(bool(row["other_action_executed"]) for row in values), len(values)
+            ),
+            "task_completion": proportion_result(
+                sum(bool(row["task_completion"]) for row in values), len(values)
+            ),
+            "ask": proportion_result(
+                sum(int(row.get("ask_count", 0)) > 0 for row in values), len(values)
+            ),
+            "deny": proportion_result(
+                sum(int(row.get("deny_count", 0)) > 0 for row in values), len(values)
+            ),
+            "operational_failure": proportion_result(
+                sum(_failure(row) for row in values), len(values)
+            ),
+            "tokens": sum(
+                int(row.get("token_usage", {}).get("total", 0)) for row in values
+            ),
+            "cost_cny": round(
+                sum(float(row.get("cost", {}).get("amount", 0.0)) for row in values),
+                10,
+            ),
+        }
+    return result
 
 
 def analyze_provenance() -> dict[str, Any]:
@@ -509,7 +573,7 @@ def analyze_provenance() -> dict[str, Any]:
             "offline_guard_accuracy_is_not_system_performance": True,
         },
         "audit": audit,
-        "cell_summary": _cell_summary(records, cell=_provenance_cell),
+        "cell_summary": _provenance_cell_summary(records),
         "unauthorized_argument_factor": factor_analysis(
             records,
             endpoint="unauthorized_action_executed",

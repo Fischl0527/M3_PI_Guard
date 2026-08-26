@@ -1,5 +1,20 @@
 # 进展记录
 
+## 2026-08-26 — E1 2×2 factorial completed and analyzed
+
+- E1 自然完成 720/720 最新终态工作项，全部 response-bearing，1,102 个官方
+  response IDs，0 最新无响应失败；722 个物理行只多出两个已被成功尝试 supersede
+  的无响应工程失败。成本 CNY 3.6602862，低于 CNY 8 熔断。
+- 一次性完整性检查确认 0 online forbidden fields、0 provider tools、0 real
+  external effects；657 completed、54 parse_failure、9 provider_failure 全部保留
+  在 ITT，不覆盖、不选择性重试。
+- 四个 policy-normal、policy-safe、full-normal、full-safe cell 的攻击 unsafe
+  effect 为 1/100、1/100、0/100、0/100；module 主效应 −1.0pp（95% CI
+  −3.0--0.0pp，Holm p=1.0），prompt 与 interaction 为 0。安全地板仍存在。
+- 良性工具 TCR 为 38.3%、35.0%、35.0%、31.7%；module 与 prompt 主效应均
+  −3.33pp，区间跨零。结果不支持独立模块领先声明，E3 仅用于困难案例上的条件
+  鲁棒性，不得解释为总体攻击率。
+
 ## 2026-08-26 — E1 canary passed; incremental analysis qualified
 
 - E1 的八行正式前缀在修复两个无响应工程问题后通过 outcome-blind canary：
