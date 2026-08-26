@@ -107,6 +107,31 @@ def test_provenance_cell_summary_reports_action_and_burden_metrics() -> None:
     assert value["cost_cny"] == 0.02
 
 
+def test_source_swap_action_metric_excludes_operational_status_labels() -> None:
+    rows = []
+    for module in ("policy", "full"):
+        for source, status in (
+            ("trusted_origin", "completed"),
+            ("untrusted_origin", "provider_failure"),
+        ):
+            rows.append(
+                {
+                    "module_factor": module,
+                    "base_task_id": "task-1",
+                    "source_authority_variant": source,
+                    "authorized_action_executed": False,
+                    "unauthorized_action_executed": False,
+                    "other_action_executed": False,
+                    "operational_status": status,
+                }
+            )
+    action, operational = analysis._source_swap_change_summary(rows)
+    assert action["policy"]["value"] == 0.0
+    assert action["full"]["value"] == 0.0
+    assert operational["policy"]["value"] == 1.0
+    assert operational["full"]["value"] == 1.0
+
+
 def _adaptive_tail_fixture() -> tuple[list[dict], dict[str, dict], list[dict]]:
     plans: list[dict] = []
     checkpoints: dict[str, dict] = {}

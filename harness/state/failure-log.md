@@ -1,5 +1,28 @@
 # Failure Log
 
+## 2026-08-26 — Methods boundary smoke used an over-specific phrase
+
+- Attempt: verify the updated five-RQ Methods and adaptive sampling boundary
+  before the E1--E3 Git milestone.
+- Failure: the smoke required the literal `complete B500 curve`, while the
+  manuscript correctly says `nominal full B500 curve`. The preceding 24 focused
+  tests, Ruff, and `py_compile` had passed.
+- Fix: check the stable semantic phrase `full B500 curve` and rerun only this
+  content smoke. No manuscript, analysis, or experiment row is changed.
+
+## 2026-08-26 — E2 source-swap action metric included an operational label
+
+- Attempt: inspect the first complete E2 one-pass analysis after 240/240
+  end-to-end work items closed.
+- Failure: `source_swap_action_change` compared the convenience string
+  `executed_action_class`; its operational-failure sentinel made one full-module
+  pair look like an action change even though neither source variant executed an
+  authorized, unauthorized, or other action.
+- Fix: define action change only from the three executed-action booleans and
+  report source-paired operational-status change separately. Preserve all raw
+  records and rerun only the affected offline E2 analysis; no provider row is
+  retried or overwritten.
+
 ## 2026-08-26 — Adaptive-tail analysis test used the wrong proportion keys
 
 - Attempt: run the new E5 conditional-tail analysis tests together with the

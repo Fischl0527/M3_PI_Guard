@@ -1,0 +1,662 @@
+{
+  "analysis_boundary": {
+    "end_to_end_and_guard_replay_reported_separately": true,
+    "offline_guard_accuracy_is_not_system_performance": true
+  },
+  "audit": {
+    "attempt_counts": {
+      "1": 240
+    },
+    "external_effects_enabled": 0,
+    "latest_work_items": 240,
+    "official_response_ids": 295,
+    "online_forbidden_fields": 0,
+    "operational_statuses": {
+      "completed": 239,
+      "provider_failure": 1
+    },
+    "planned_work_items": 240,
+    "provider_tools_enabled": 0,
+    "raw_attempt_rows": 240,
+    "response_bearing_work_items": 240,
+    "superseded_attempt_rows": 0,
+    "terminal_work_items": 240
+  },
+  "cell_summary": {
+    "full_trusted_origin": {
+      "ask": {
+        "ci_high": 0.9828504978356042,
+        "ci_low": 0.8629948352365148,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 57,
+        "value": 0.95
+      },
+      "authorized_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "cost_cny": 0.0846396,
+      "deny": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "operational_failure": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "other_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "records": 60,
+      "task_completion": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "tokens": 20054,
+      "unauthorized_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      }
+    },
+    "full_untrusted_origin": {
+      "ask": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "authorized_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "cost_cny": 0.1776564,
+      "deny": {
+        "ci_high": 0.9638795433982692,
+        "ci_low": 0.8193105798166558,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 55,
+        "value": 0.9166666666666666
+      },
+      "operational_failure": {
+        "ci_high": 0.08855129727590058,
+        "ci_low": 0.0029481597947862495,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 1,
+        "value": 0.016666666666666666
+      },
+      "other_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "records": 60,
+      "task_completion": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "tokens": 42058,
+      "unauthorized_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      }
+    },
+    "policy_trusted_origin": {
+      "ask": {
+        "ci_high": 0.9999999999999998,
+        "ci_low": 0.93982814785791,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 60,
+        "value": 1.0
+      },
+      "authorized_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "cost_cny": 0.0840726,
+      "deny": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "operational_failure": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "other_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "records": 60,
+      "task_completion": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "tokens": 20033,
+      "unauthorized_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      }
+    },
+    "policy_untrusted_origin": {
+      "ask": {
+        "ci_high": 0.9423227935994396,
+        "ci_low": 0.7782121197582914,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 53,
+        "value": 0.8833333333333333
+      },
+      "authorized_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "cost_cny": 0.079119,
+      "deny": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "operational_failure": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "other_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "records": 60,
+      "task_completion": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "tokens": 20137,
+      "unauthorized_action_executed": {
+        "ci_high": 0.06017185214208983,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 60,
+        "numerator": 0,
+        "value": 0.0
+      }
+    }
+  },
+  "offline_guard_replay": {
+    "decision_heatmap": {
+      "full_trusted_origin": {
+        "ALLOW": 60,
+        "ASK": 60
+      },
+      "full_untrusted_origin": {
+        "ALLOW": 30,
+        "ASK": 30,
+        "DENY": 60
+      },
+      "policy_trusted_origin": {
+        "ALLOW": 60,
+        "ASK": 60
+      },
+      "policy_untrusted_origin": {
+        "ALLOW": 60,
+        "ASK": 60
+      }
+    },
+    "false_allow": {
+      "ci_high": 0.007939499087277932,
+      "ci_low": 0.0,
+      "confidence": 0.95,
+      "denominator": 480,
+      "numerator": 0,
+      "value": 0.0
+    },
+    "false_block": {
+      "ci_high": 0.08782005096753212,
+      "ci_low": 0.04412701073383607,
+      "confidence": 0.95,
+      "denominator": 480,
+      "numerator": 30,
+      "value": 0.0625
+    },
+    "provider_calls": 0,
+    "records": 480
+  },
+  "schema_version": "m3-paper-v2-incremental-analysis-1.0",
+  "source_swap_action_change": {
+    "full": {
+      "ci_high": 0.06017185214208983,
+      "ci_low": 0.0,
+      "confidence": 0.95,
+      "denominator": 60,
+      "numerator": 0,
+      "value": 0.0
+    },
+    "policy": {
+      "ci_high": 0.06017185214208983,
+      "ci_low": 0.0,
+      "confidence": 0.95,
+      "denominator": 60,
+      "numerator": 0,
+      "value": 0.0
+    }
+  },
+  "source_swap_operational_status_change": {
+    "full": {
+      "ci_high": 0.08855129727590058,
+      "ci_low": 0.0029481597947862495,
+      "confidence": 0.95,
+      "denominator": 60,
+      "numerator": 1,
+      "value": 0.016666666666666666
+    },
+    "policy": {
+      "ci_high": 0.06017185214208983,
+      "ci_low": 0.0,
+      "confidence": 0.95,
+      "denominator": 60,
+      "numerator": 0,
+      "value": 0.0
+    }
+  },
+  "study": "provenance",
+  "trusted_task_completion_factor": {
+    "case_type": "controlled_tool",
+    "endpoint": "authorized_action_executed",
+    "factor_estimates": {
+      "module": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 60,
+        "estimate": 0.0,
+        "holm_adjusted_p": 1.0,
+        "replicates": 10000
+      },
+      "source": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 60,
+        "estimate": 0.0,
+        "holm_adjusted_p": 1.0,
+        "replicates": 10000
+      },
+      "source_x_module": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 60,
+        "estimate": 0,
+        "holm_adjusted_p": 1.0,
+        "replicates": 10000
+      }
+    },
+    "multiplicity_role": "prespecified_holm_family",
+    "paired_cases": 60,
+    "simple_paired_effects": [
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_trusted_origin",
+        "first_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 60,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 60,
+        "second": "policy_untrusted_origin",
+        "second_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "full_trusted_origin",
+        "first_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 60,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 60,
+        "second": "full_untrusted_origin",
+        "second_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_trusted_origin",
+        "first_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 60,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 60,
+        "second": "full_trusted_origin",
+        "second_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_untrusted_origin",
+        "first_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 60,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 60,
+        "second": "full_untrusted_origin",
+        "second_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        }
+      }
+    ]
+  },
+  "unauthorized_argument_factor": {
+    "case_type": "controlled_tool",
+    "endpoint": "unauthorized_action_executed",
+    "factor_estimates": {
+      "module": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 60,
+        "estimate": 0.0,
+        "holm_adjusted_p": 1.0,
+        "replicates": 10000
+      },
+      "source": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 60,
+        "estimate": 0.0,
+        "holm_adjusted_p": 1.0,
+        "replicates": 10000
+      },
+      "source_x_module": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 60,
+        "estimate": 0,
+        "holm_adjusted_p": 1.0,
+        "replicates": 10000
+      }
+    },
+    "multiplicity_role": "prespecified_holm_family",
+    "paired_cases": 60,
+    "simple_paired_effects": [
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_trusted_origin",
+        "first_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 60,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 60,
+        "second": "policy_untrusted_origin",
+        "second_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "full_trusted_origin",
+        "first_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 60,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 60,
+        "second": "full_untrusted_origin",
+        "second_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_trusted_origin",
+        "first_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 60,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 60,
+        "second": "full_trusted_origin",
+        "second_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_untrusted_origin",
+        "first_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 60,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 60,
+        "second": "full_untrusted_origin",
+        "second_rate": {
+          "ci_high": 0.06017185214208983,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 60,
+          "numerator": 0,
+          "value": 0.0
+        }
+      }
+    ]
+  }
+}

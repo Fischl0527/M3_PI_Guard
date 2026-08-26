@@ -16,12 +16,12 @@
 - 验收：E1 720、E2 240+480 offline、E3 240、E4 360 和 E5 最多
   3,600 queries 按各自边界闭合；新 raw JSONL 可一次性重建统计；负面结果
   同样结项；Git 在五个计划里程碑提交并推送 `m3-guard`。
-- 当前阶段：E1 已完成 720/720，全部有官方响应，CNY 3.6602862，在线禁用字段、
-  provider tools 和真实 effect 均为零；一次性 ITT 分析已生成。四个 cell 的
-  attack unsafe effect 为 1/100、1/100、0/100、0/100，未消除地板效应；模块、
-  prompt 和交互均无明确独立效应。E2 端到端动作分类和 E1--E5 分析/五图/五表
-  接口已资格化；F-PAPER-002 保持 `in_progress`，下一步为 E2 八行 canary 和
-  pending-only 扩展。
+- 当前阶段：E1、E2、E3 已完成并一次性分析。E2 的 240 个端到端项均未执行
+  动作，确认/阻断形成地板；480 次 Guard replay 为 0 false allow、30 false
+  block，并显示 full 对不可信来源产生 DENY，而 policy 不敏感。E3 的历史 unsafe
+  effect 仅复现 1/60，但 unsafe-or-failure 为 20.0%--26.7%。三项均保持 0
+  forbidden fields/tools/effects；F-PAPER-002 保持 `in_progress`，下一步为 E4
+  DeepSeek Flash 八行 canary 和 360 条同构复现。
 
 ### 2026-08-23 精简实证里程碑 31：Stage 5 最小 JISA 投稿包已完成
 

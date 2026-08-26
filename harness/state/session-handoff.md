@@ -1,5 +1,18 @@
 # 会话移交
 
+## 2026-08-26 — Pro E1--E3 result handoff
+
+- E1、E2、E3 都已终态；不要重新运行任何成功行。E2 修正后真实 source-swap
+  action change 为 policy/full 0/60，full 的 1/60 是独立 operational-status
+  change。对应报告在 `docs/research/paper_v2/incremental_empirical_v1/`。
+- E2 的机制证据是 offline replay（0/480 false allow、30/480 false block、
+  full/untrusted 有 60 DENY）；端到端系统 240 项没有执行动作，必须作为确认负担
+  地板报告，不能用 replay 正确率替代系统性能。
+- E3 历史 unsafe 复现 1/60，直接 unsafe 仍地板；55/240 operational failures
+  使 unsafe-or-failure 达 20.0%--26.7%。不得写成总体攻击率或稳定领先。
+- 下一步为 E4 Flash canary，随后 pending-only；E5 仍在 E4 之后。Full Harness、
+  Gemini、盲测、真实 effect 和成功行重跑继续禁止。
+
 ## 2026-08-26 — E1 factorial terminal handoff
 
 - E1 已终态且一次性分析完成：720/720 response-bearing，CNY 3.6602862，

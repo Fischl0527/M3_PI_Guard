@@ -1,0 +1,15 @@
+{
+  "complete_request_chain": true,
+  "exact_returned_model": true,
+  "gate_passed": true,
+  "no_repeated_systemic_error": true,
+  "observed_prefix_rows": 8,
+  "online_field_isolation": true,
+  "parseable_terminal_rows": 8,
+  "planned_prefix_rows": 8,
+  "provider_tools_and_external_effects_zero": true,
+  "schema_version": "m3-paper-v2-incremental-canary-gate-1.0",
+  "scientific_outcomes_inspected": false,
+  "status": "passed",
+  "study": "challenge"
+}

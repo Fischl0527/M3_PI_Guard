@@ -529,22 +529,26 @@ def _provenance_cell_summary(
     return result
 
 
-def analyze_provenance() -> dict[str, Any]:
-    records, audit = load_completed_regular_study("provenance")
-    cells = (
-        "policy_trusted_origin",
-        "policy_untrusted_origin",
-        "full_trusted_origin",
-        "full_untrusted_origin",
-    )
+def _source_swap_change_summary(
+    records: Sequence[Mapping[str, Any]],
+) -> tuple[dict[str, Any], dict[str, Any]]:
     action_change: dict[str, Any] = {}
+    operational_change: dict[str, Any] = {}
     for module in ("policy", "full"):
-        grouped: dict[str, dict[str, str]] = defaultdict(dict)
+        grouped: dict[str, dict[str, tuple[bool, bool, bool]]] = defaultdict(dict)
+        grouped_status: dict[str, dict[str, str]] = defaultdict(dict)
         for row in records:
             if row["module_factor"] == module:
                 grouped[str(row["base_task_id"])][
                     str(row["source_authority_variant"])
-                ] = str(row["executed_action_class"])
+                ] = (
+                    bool(row["authorized_action_executed"]),
+                    bool(row["unauthorized_action_executed"]),
+                    bool(row["other_action_executed"]),
+                )
+                grouped_status[str(row["base_task_id"])][
+                    str(row["source_authority_variant"])
+                ] = str(row["operational_status"])
         if any(
             set(values) != {"trusted_origin", "untrusted_origin"}
             for values in grouped.values()
@@ -555,6 +559,25 @@ def analyze_provenance() -> dict[str, Any]:
             for values in grouped.values()
         )
         action_change[module] = proportion_result(changed, len(grouped))
+        operational_changed = sum(
+            values["trusted_origin"] != values["untrusted_origin"]
+            for values in grouped_status.values()
+        )
+        operational_change[module] = proportion_result(
+            operational_changed, len(grouped_status)
+        )
+    return action_change, operational_change
+
+
+def analyze_provenance() -> dict[str, Any]:
+    records, audit = load_completed_regular_study("provenance")
+    cells = (
+        "policy_trusted_origin",
+        "policy_untrusted_origin",
+        "full_trusted_origin",
+        "full_untrusted_origin",
+    )
+    action_change, operational_change = _source_swap_change_summary(records)
 
     replay_path = OUTPUT_ROOT / "provenance/offline_guard_replay_v1.jsonl"
     replay = _read_jsonl(replay_path)
@@ -593,6 +616,7 @@ def analyze_provenance() -> dict[str, Any]:
             contrast_kind="source_module",
         ),
         "source_swap_action_change": action_change,
+        "source_swap_operational_status_change": operational_change,
         "offline_guard_replay": {
             "records": len(replay),
             "provider_calls": sum(int(row["provider_calls"]) for row in replay),

@@ -1,5 +1,22 @@
 # 进展记录
 
+## 2026-08-26 — E2 provenance and E3 challenge completed
+
+- E2 端到端 240/240 全部 response-bearing，239 completed/1 provider failure，
+  CNY 0.4254876；所有 cell 的 authorized/unauthorized/other executed action 均为
+  0。可信来源 policy/full 分别 100%/95% ASK，不可信 full 为 91.7% DENY，说明
+  确认与阻断先于执行，端到端动作端点出现地板。
+- E2 的 480 次确定性 Guard replay 为 0 provider calls、0 false allow、30 false
+  block。full/untrusted 分布为 30 ALLOW、30 ASK、60 DENY；policy 的 trusted/
+  untrusted 分布不变。离线机制证据与端到端效用严格分开。
+- 初次 E2 分析把一次 operational-failure sentinel 误计为 source-swap action
+  change；修复后 action tuple 变化为 policy/full 均 0/60，operational-status 变化
+  单列为 full 1/60。只重跑离线分析，没有重跑或改写 API 记录。
+- E3 240/240 全部 response-bearing，185 completed/17 parse failure/38 provider
+  failure，CNY 1.0690866。四 cell unsafe effect 为 1/60、1/60、0/60、0/60，
+  历史 unsafe 只在 1/60 案例任一新 cell 复现；unsafe-or-failure 为 26.7%、
+  25.0%、20.0%、23.3%。该结果仅解释困难集条件鲁棒性。
+
 ## 2026-08-26 — E1 2×2 factorial completed and analyzed
 
 - E1 自然完成 720/720 最新终态工作项，全部 response-bearing，1,102 个官方
