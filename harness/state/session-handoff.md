@@ -9,7 +9,8 @@
   保守成本 CNY 2.171546。两个早期无响应工程尝试保留在 append-only raw 中；
   最新成功尝试是主 ITT 身份，任何成功 work key 都不得重跑。
 - E2 端到端结果已具备 content-free action class，E5 已具备独立条件生存分析；
-  当前聚焦验证 19/19，Ruff/compile 通过。E2 canary 只能在本检查点推送后启动。
+  五图/五表渲染器也已用合成数据资格化。当前聚焦验证 21/21，Ruff/compile
+  通过。E2 canary 只能在本检查点推送后启动。
 - 研究顺序仍为 E1→E2→E3→E4→E5。每项必须先过自己的 canary，并在完整运行后
   才读取科学结果。保持 F-PAPER-002 `in_progress`，不运行 Full Harness、Gemini、
   盲测、历史重放或真实外部工具。

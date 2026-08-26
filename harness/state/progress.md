@@ -16,6 +16,9 @@
 - E2 raw 记录新增不含正文的 authorized/unauthorized/other action 分类，E5 raw
   新增 latency/token/cost 摘要。定向 pytest 19/19、Ruff 和 `py_compile` 通过；
   Full Harness、历史递归重放、Gemini、盲测和真实 effect 均未运行。
+- 五幅预注册主图和五张主表的独立渲染器已用纯合成 fixture 资格化；只消费紧凑
+  analysis JSON，不读取 provider trace 或未完成科学结果。合并后的增量聚焦套件
+  为 21/21，Ruff 与 `py_compile` 通过；正式数值输出等待 E1--E5 闭合。
 
 ## 2026-08-26 — Incremental empirical Day 2 runner qualification complete
 
