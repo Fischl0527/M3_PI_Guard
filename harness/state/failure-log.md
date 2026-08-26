@@ -1,5 +1,15 @@
 # Failure Log
 
+## 2026-08-26 — Adaptive-tail analysis test used the wrong proportion keys
+
+- Attempt: run the new E5 conditional-tail analysis tests together with the
+  focused runner suite.
+- Failure: one test expected `successes`/`trials`, while the project-standard
+  `proportion_result` contract exposes `numerator`/`denominator`. Production
+  analysis code, experiment state and provider execution were unaffected.
+- Fix: align only the test with the existing statistics contract, then rerun the
+  affected suite. Result: 19/19 pass; Ruff and `py_compile` pass.
+
 ## 2026-08-20 — JISA Guide live refresh blocked by ScienceDirect edge page
 
 - Attempt: refresh the official JISA Guide for Authors while checking whether

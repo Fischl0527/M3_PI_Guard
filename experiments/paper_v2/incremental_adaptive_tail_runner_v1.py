@@ -293,6 +293,9 @@ def _raw_success_row(
         "task_completion": bool(record.get("task_completion")),
         "operational_status": str(record.get("operational_status")),
         "guard_decision": str(record.get("initial_guard_decision", "ERROR")),
+        "latency_ms": copy.deepcopy(record.get("latency_ms", {})),
+        "token_usage": copy.deepcopy(record.get("token_usage", {})),
+        "cost": copy.deepcopy(record.get("cost", {})),
         "online_forbidden_fields_present": bool(
             record.get("online_visible_field_digest", {}).get(
                 "forbidden_fields_present", True
@@ -342,6 +345,9 @@ def _raw_failure_row(
             if response_obtained
             else "pre_response_transport_failure"
         ),
+        "latency_ms": {},
+        "token_usage": {},
+        "cost": {"currency": "CNY", "amount": 0.0},
         "error_type": type(exc).__name__,
         "retry_eligible": not response_obtained and attempt == 1,
         "included_in_itt": response_obtained or attempt >= 2,

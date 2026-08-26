@@ -1,5 +1,19 @@
 # 会话移交
 
+## 2026-08-26 — E1 live expansion and analysis handoff
+
+- E1 canary gate 已通过，唯一 pending-only runner 正在完成剩余 712 行；不得停止、
+  复制或重新启动该进程。等待其自然终态后，只运行一次
+  `python -m experiments.paper_v2.incremental_analysis_v1 --study factorial`。
+- 本检查点的 E1 最新状态为 347/720 全部 response-bearing、0 最新无响应失败、
+  保守成本 CNY 2.171546。两个早期无响应工程尝试保留在 append-only raw 中；
+  最新成功尝试是主 ITT 身份，任何成功 work key 都不得重跑。
+- E2 端到端结果已具备 content-free action class，E5 已具备独立条件生存分析；
+  当前聚焦验证 19/19，Ruff/compile 通过。E2 canary 只能在本检查点推送后启动。
+- 研究顺序仍为 E1→E2→E3→E4→E5。每项必须先过自己的 canary，并在完整运行后
+  才读取科学结果。保持 F-PAPER-002 `in_progress`，不运行 Full Harness、Gemini、
+  盲测、历史重放或真实外部工具。
+
 ## 2026-08-26 — Incremental empirical Day 2 handoff
 
 - Day 1 is already pushed as commit `9970913`. Day 2 adds the incremental condition

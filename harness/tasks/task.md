@@ -9,15 +9,17 @@ evidence-scorecard and Full-Harness closeout workflow.
 
 ## Current Scope
 
-- Reuse existing Pro/Flash Public, medium and Adaptive 50/200 results through one
-  non-recursive analysis pass.
-- Execute only the fixed 900-row DeepSeek authorization study and 450-row Gemini
-  compact validation; Gemini stays official free tier with USD 0 paid ceiling.
+- Execute the frozen E1 720-row Pro prompt-by-module factorial, E2 240-row
+  source-authority end-to-end study plus 480 deterministic Guard decisions,
+  E3 240-row outcome-enriched challenge, E4 360-row Flash replication and E5
+  twelve-task B200-survivor tail through query 500.
+- Reuse the existing Pro/Flash Public, 900-row authorization and Adaptive 50/200
+  results only through one non-recursive analysis pass.
 - Preserve all operational failures in ITT and never use provider tools or real
   external effects.
-- Write the IMRaD paper and JISA submission materials after the experiments.
-- Independent blind evaluation, Pro-500, budget-2000, full Gemini Public and
-  Full Harness are explicitly out of scope.
+- Update the bilingual IMRaD paper, figures and tables after these experiments.
+- Independent blind evaluation, Gemini expansion, budget-2000, production
+  effects and Full Harness are explicitly out of scope.
 
 Forbidden: credential inspection or disclosure, automatic whole-matrix retry,
 dangerous effects, history rewriting, force-push, PR or deployment. Provider

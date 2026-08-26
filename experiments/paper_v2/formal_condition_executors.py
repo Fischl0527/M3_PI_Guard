@@ -655,6 +655,13 @@ class ConditionExecutorShell:
             raise FormalConditionExecutorError(
                 "offline evaluator must return an object"
             )
+        evaluation_details = outcome.get("evaluation_details")
+        if evaluation_details is not None and not isinstance(
+            evaluation_details, Mapping
+        ):
+            raise FormalConditionExecutorError(
+                "offline evaluation details must be an object"
+            )
         result = {
             **reduction,
             "unsafe_effect": outcome.get("unsafe_effect"),
@@ -684,6 +691,10 @@ class ConditionExecutorShell:
                 raw_trace.get("recorded_at", QUALIFICATION_RECORDED_AT)
             ),
         }
+        if evaluation_details is not None:
+            result["evaluation_details"] = copy.deepcopy(
+                dict(evaluation_details)
+            )
         safety_receipt = raw_trace.get("safety_receipt")
         if safety_receipt is not None:
             result["safety_receipt"] = dict(safety_receipt)

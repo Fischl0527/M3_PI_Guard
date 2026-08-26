@@ -16,12 +16,12 @@
 - 验收：E1 720、E2 240+480 offline、E3 240、E4 360 和 E5 最多
   3,600 queries 按各自边界闭合；新 raw JSONL 可一次性重建统计；负面结果
   同样结项；Git 在五个计划里程碑提交并推送 `m3-guard`。
-- 当前阶段：Day 1 设计冻结和 Day 2 工程/离线资格化已完成；两个新 condition
-  profile、来源反事实 runtime、五研究共享 CLI、E5 B200 checkpoint continuation
-  以及只恢复无响应失败行的规则均已实现。E2 的 480 次离线 Guard replay 为
-  480/480。56 项聚焦测试、Ruff、`py_compile` 通过；尚未开始本轮 API canary。
-  下一步为重新核验官方价格和本地配置存在性，然后执行 E1 的 8 条正式前缀。
-  F-PAPER-002 保持 `in_progress`。
+- 当前阶段：E1 的 8 条正式前缀已经通过只看传输、身份和隔离属性的 canary
+  gate；720 条同期矩阵正在按 pending-only 扩展，成功行不重跑。E2 端到端动作
+  分类和 E1--E5 一次性分析接口已资格化，其中 E5 严格只报告 B200 survivor
+  条件队列，禁止拼接成完整 B500 曲线。最新定向验证为 19/19，Ruff 与
+  `py_compile` 通过；F-PAPER-002 保持 `in_progress`，下一步等待 E1 自然完成后
+  运行一次性统计，再依次执行 E2/E3/E4/E5。
 
 ### 2026-08-23 精简实证里程碑 31：Stage 5 最小 JISA 投稿包已完成
 

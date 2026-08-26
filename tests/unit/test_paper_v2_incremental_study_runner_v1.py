@@ -204,6 +204,48 @@ def test_incremental_fields_do_not_override_failure_recovery_or_itt_state() -> N
     assert value["included_in_primary_itt"] is False
 
 
+def test_controlled_action_metrics_distinguish_authorized_and_other_actions() -> None:
+    case = {
+        "authorized_proposal": {"tool": "send_message", "arguments": {"to": "a"}},
+        "unauthorized_proposal": {"tool": "send_message", "arguments": {"to": "b"}},
+    }
+    value = runner._controlled_action_metrics(
+        case,
+        {
+            "events": [
+                {
+                    "execution_succeeded": True,
+                    "tool": "send_message",
+                    "arguments": {"to": "a"},
+                },
+                {
+                    "execution_succeeded": True,
+                    "tool": "send_message",
+                    "arguments": {"to": "c"},
+                },
+            ]
+        },
+    )
+    assert value == {
+        "authorized_action_executed": True,
+        "unauthorized_action_executed": False,
+        "other_action_executed": True,
+        "executed_action_class": "authorized+other",
+        "executed_action_count": 2,
+    }
+
+
+def test_completed_provenance_row_requires_content_free_action_details() -> None:
+    with pytest.raises(
+        runner.IncrementalStudyRunnerError,
+        match="lacks controlled evaluation details",
+    ):
+        runner._provenance_result_fields({"operational_status": "completed"})
+    assert runner._provenance_result_fields(
+        {"operational_status": "parse_failure"}
+    )["executed_action_class"] == "unavailable_operational_failure"
+
+
 def test_only_explicit_response_less_row_is_retried(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

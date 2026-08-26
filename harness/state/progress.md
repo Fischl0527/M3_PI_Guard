@@ -1,5 +1,22 @@
 # 进展记录
 
+## 2026-08-26 — E1 canary passed; incremental analysis qualified
+
+- E1 的八行正式前缀在修复两个无响应工程问题后通过 outcome-blind canary：
+  精确返回 `deepseek-v4-pro`，本地 request ID、payload digest、官方 response ID
+  完整，在线 forbidden fields、provider tools 和外部 effect 均为零。失败的前两次
+  append-only 尝试保留且已由最新成功尝试取代，未重跑任何成功行。
+- E1 的剩余 712 行已经以唯一 pending-only 进程启动。本检查点时最新工作项为
+  347/720，347 条均有官方响应、0 条最新无响应失败，保守累计成本 CNY 2.171546；
+  科学结果在矩阵闭合前不读取。
+- 增量分析现在覆盖 E1/E3/E4 的 prompt×module 配对 bootstrap/McNemar、E2
+  source×module 与独立 Guard replay，以及 E5 的 B200-survivor 条件成功率、
+  生存阶梯、攻击族、query/token/cost/failure。E5 不与原 40 任务合并，也不允许
+  饱和声明。
+- E2 raw 记录新增不含正文的 authorized/unauthorized/other action 分类，E5 raw
+  新增 latency/token/cost 摘要。定向 pytest 19/19、Ruff 和 `py_compile` 通过；
+  Full Harness、历史递归重放、Gemini、盲测和真实 effect 均未运行。
+
 ## 2026-08-26 — Incremental empirical Day 2 runner qualification complete
 
 - Added the two missing factor cells without changing the historical six-condition
