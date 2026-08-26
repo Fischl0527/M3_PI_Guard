@@ -166,6 +166,21 @@ def test_canary_gate_is_outcome_blind_and_success_is_never_rerun(
     assert all(row["online_forbidden_fields_present"] is False for row in rows)
     assert all(row["provider_tools_enabled"] is False for row in rows)
     assert all(row["external_effects_enabled"] is False for row in rows)
+    assert all(row["provider_failure_types"] == [] for row in rows)
+
+
+def test_provider_failure_types_are_content_free_and_deduplicated() -> None:
+    assert runner._provider_failure_types(
+        {
+            "provider_trace_bundle": {
+                "failures": [
+                    {"error_type": "ProviderTransportError", "status": "provider_failure"},
+                    {"error_type": "ProviderTransportError", "status": "provider_failure"},
+                    {"error_type": "ProviderPausedError", "status": "paused"},
+                ]
+            }
+        }
+    ) == ["ProviderPausedError", "ProviderTransportError"]
 
 
 def test_only_explicit_response_less_row_is_retried(

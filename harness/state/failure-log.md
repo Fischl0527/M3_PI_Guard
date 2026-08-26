@@ -5590,3 +5590,18 @@ credential, changed a historical ledger, or enabled an external effect.
   work item, require it during plan loading, regenerate the deterministic plans,
   and rerun the focused plan/runner tests before restarting untouched canary
   rows.
+
+# 2026-08-26 — E1 first formal request returned no response
+
+- The corrected E1 canary attempted one prefix work item, obtained no official
+  response, recorded zero cost and stopped before the other seven items.
+- The row is attempt 1, `pre_response_provider_failure`, excluded from ITT for
+  now and explicitly retry-eligible. No successful experiment row was created.
+- A separate benign connectivity diagnostic then returned exact
+  `deepseek-v4-pro`, an official response ID and usage from the same official
+  endpoint. It is excluded from every scientific denominator and indicates a
+  transient provider/transport failure rather than credential, endpoint or
+  model-identity drift.
+- Recovery change: persist content-free provider exception class names in all
+  subsequent incremental rows. Retry only the failed work key once, then run
+  only the seven untouched prefix rows if recovery succeeds.

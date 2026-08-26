@@ -497,6 +497,22 @@ def _enrich_record(
     return value
 
 
+def _provider_failure_types(result: Mapping[str, Any]) -> list[str]:
+    bundle = result.get("provider_trace_bundle")
+    if not isinstance(bundle, Mapping):
+        return []
+    failures = bundle.get("failures")
+    if not isinstance(failures, list):
+        return []
+    return sorted(
+        {
+            str(item["error_type"])
+            for item in failures
+            if isinstance(item, Mapping) and item.get("error_type")
+        }
+    )
+
+
 def _selected_pending(
     study: str,
     *,
@@ -682,6 +698,7 @@ def run_regular_study(
                 attempt=attempt,
                 trace_path=trace_path,
             )
+            record["provider_failure_types"] = _provider_failure_types(result)
         except Exception as exc:
             record = _failure_record(
                 work_item,
@@ -689,6 +706,7 @@ def run_regular_study(
                 attempt=attempt,
                 trace_path=trace_path,
             )
+            record["provider_failure_types"] = [type(exc).__name__]
             stopped_after_failure = True
         record = _enrich_record(record, work_item)
         _append_jsonl(permit.raw_path, record)
