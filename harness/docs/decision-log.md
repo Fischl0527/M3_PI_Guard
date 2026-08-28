@@ -2,6 +2,22 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-28 — Add E6 cross-provider contemporaneous calibration
+
+- Decision: add a new versioned E6 rather than reinterpret the near-floor E1/E3
+  attack cells. DeepSeek V4 Pro is the 60-task primary cohort; Gemini 3.6 Flash
+  free tier is a strictly nested 30-task, non-blocking replication cohort.
+- Design: six contemporaneous conditions over three consecutive local-date
+  windows. Time replicates are plan rows, not retry attempts; outcome-blind
+  prefixes and deterministic cyclic order control technical eligibility and
+  within-window order without data-dependent stopping.
+- Evidence boundary: the historically unsafe-enriched cohort calibrates current
+  activity and repeatability only. It does not estimate deployment prevalence,
+  TCR, cross-provider universality, SOTA status, or a causal provenance benefit.
+- Engineering boundary: reuse the qualified provider/evaluator/simulated-effect
+  stack, keep E1--E5 immutable, use only focused verification, and create no
+  recursive hash or historical replay package.
+
 ## 2026-08-28 — Close E1--E5 and deliver a Markdown report before manuscript work
 
 - Context: E5 reached all 12 selected survivor terminals after explicit

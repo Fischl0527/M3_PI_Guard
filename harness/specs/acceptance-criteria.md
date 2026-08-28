@@ -1,5 +1,24 @@
 # 验收标准
 
+## F-PAPER-002 E6 同期校准增量（2026-08-28）
+
+- 冻结 60 个 DeepSeek 主队列唯一底层攻击任务和严格嵌套的 30 个 Gemini
+  免费层复现任务；不得使用 E3/E6 新结果做样本选择。
+- 计划必须包含 DeepSeek 1080、Gemini 540、总计 1620 个唯一 work key，覆盖
+  六条件、三个时间窗口和 provider 隔离身份。
+- 每 provider/window 的 12 条正式前缀只执行技术准入，不读取 unsafe outcome；
+  前缀计入正式样本且成功项不得重跑。
+- W1--W3 必须在连续三个本地日期运行，相邻开始间隔 18--30 小时；replicate
+  不得编码为 retry attempt，窗口结束后不得跨窗补写未执行项。
+- Gemini 必须保持官方免费层、USD 0、无模型/项目/付费回退；不可用时降级为
+  diagnostic，且不得阻塞 DeepSeek 主队列。
+- 所有 response-bearing failure 留在 ITT；无响应失败只能在修复后显式恢复一次；
+  evaluator/gold 原始字段、provider tools 和真实 external effect 必须为零。
+- 统计必须以底层任务为聚类单位，报告活性、三窗口重复性、预注册配对差、
+  unsafe-or-failure 和运行负担；Gemini 只有通过完整资格门才进入跨厂商分析。
+- 只运行定向测试、Ruff、`py_compile` 和一次性结果重建；不要求 Full Harness、
+  历史递归重放、盲测或冗余哈希证据包。
+
 ## F-PAPER-002 精简实证覆盖（2026-08-19）
 
 本节覆盖下方旧全项目验收标准，仅适用于当前 paper-v2：

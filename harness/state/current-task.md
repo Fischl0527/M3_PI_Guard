@@ -1,5 +1,28 @@
 # 当前任务
 
+### 2026-08-28 E6 双提供商同期攻击活性与重复性校准
+
+- 目标：实施 `m3-q2-e6-cross-provider-calibration-v1`，以 DeepSeek V4 Pro
+  60 个唯一底层攻击任务为主队列、Gemini 3.6 Flash 免费层 30 个嵌套任务为
+  非阻塞复现队列，在三个连续本地日期运行相同六条件，校准当前攻击活性、
+  跨窗口重复性和跨厂商效应方向。
+- 允许修改：`experiments/paper_v2/` 下独立 E6 计划/runner/分析与六条件 dispatcher，
+  `protocols/paper_upgrade_v2/e6_cross_provider_calibration_v1/`，对应定向测试，
+  最小 E6 输出和本任务 Harness 状态文件。
+- 禁止修改或执行：E1--E5 冻结计划与成功记录、真实邮件/支付/浏览器/文件或生产
+  effect、模型回退、永久环境变量、Full Harness、历史递归重放、盲测、冗余哈希包，
+  以及两个既存 dirty 外部审计目录。
+- 设计冻结：DeepSeek `60×6×3=1080`；Gemini 嵌套 `30×6×3=540`；
+  `replicate_window` 与 failure-recovery `attempt` 严格分离；每 provider/window 的
+  12 条 outcome-blind 正式前缀计入总样本。
+- 当前阶段：第 1--2 天实现和离线资格化。真实 W1--W3 必须在连续三个日期、
+  相邻启动 18--30 小时的窗口执行，不得在同一天伪造重复。Gemini 免费层失败
+  不阻塞 DeepSeek 主结果，跨厂商推断仅在冻结资格门满足时开放。
+- 验收：冻结 1620 个唯一 work key；定向 pytest、Ruff、`py_compile` 通过；
+  provider ledger/output 隔离；在线 forbidden fields、provider tools、真实 effect
+  为零；成功行永不重跑；F-PAPER-002 在三窗口和一次性分析完成前保持
+  `in_progress`。
+
 ### 2026-08-28 增量实证强化：E1--E5 完成，转为 Markdown 报告交付
 
 - 目标：实施 owner 批准的 10--12 天增量实验计划，用同期 2×2 因子设计
