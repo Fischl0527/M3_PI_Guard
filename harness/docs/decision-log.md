@@ -2,6 +2,24 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-28 — Preserve failed E6 prefixes through administrative closure
+
+- Context: DeepSeek W1 returned all 12 formal-prefix rows but only 3 were
+  parseable; Gemini W1 produced two response-bearing failures and exhausted the
+  one allowed recovery for a response-less prefix key. Both frozen technical
+  gates are therefore permanently false for W1.
+- Decision: do not weaken the `>=9/12` parseability or complete-chain gates and
+  do not retry response-bearing rows. Seal untouched W1 rows as
+  `technical_gate_not_extended`, distinct from Gemini quota-driven
+  `provider_window_unavailable`; retain all original attempts append-only.
+- Continuity: W2/W3 may run their independently frozen prefixes after the prior
+  window is sealed and only within the 18--30 hour schedule. A failed window
+  cannot be expanded, and a future window cannot repair W1's eligibility.
+- Claim boundary: W1 administrative rows are operational failures/technical
+  non-admission, never safe outcomes. Gemini can no longer satisfy the frozen
+  three-window cross-provider gate; even successful W2/W3 data are sensitivity
+  evidence rather than the preregistered full repeatability endpoint.
+
 ## 2026-08-28 — Add E6 cross-provider contemporaneous calibration
 
 - Decision: add a new versioned E6 rather than reinterpret the near-floor E1/E3

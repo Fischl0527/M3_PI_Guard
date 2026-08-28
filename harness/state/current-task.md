@@ -15,14 +15,16 @@
 - 设计冻结：DeepSeek `60×6×3=1080`；Gemini 嵌套 `30×6×3=540`；
   `replicate_window` 与 failure-recovery `attempt` 严格分离；每 provider/window 的
   12 条 outcome-blind 正式前缀计入总样本。
-- 当前阶段：第 1--2 天实现和离线资格化已完成，定向 pytest 60/60、Ruff、
-  `py_compile` 和差异检查通过，尚未调用 E6 provider。真实 W1--W3 必须在连续三个日期、
-  相邻启动 18--30 小时的窗口执行，不得在同一天伪造重复。Gemini 免费层失败
-  不阻塞 DeepSeek 主结果，跨厂商推断仅在冻结资格门满足时开放。
+- 当前阶段：第 1--2 天实现和 W1 已完成。W1 两 provider 技术门均失败并封存；
+  DeepSeek 为 3/12 completed，Gemini 为 2 条 response-bearing 加 1 个耗尽恢复的
+  response-less key。未扩展行均标记 `technical_gate_not_extended`，不算安全结果。
+  W2/W3 仍须在连续日期、相邻启动 18--30 小时的独立窗口执行；它们只可作为
+  敏感性证据，Gemini 正式跨厂商准入已关闭。
 - 验收：冻结 1620 个唯一 work key；定向 pytest、Ruff、`py_compile` 通过；
   provider ledger/output 隔离；在线 forbidden fields、provider tools、真实 effect
   为零；成功行永不重跑；F-PAPER-002 在三窗口和一次性分析完成前保持
-  `in_progress`。
+  `in_progress`。W1 封存后的联合定向验证为 pytest 62/62，并通过 Ruff、
+  `py_compile` 和差异检查。
 
 ### 2026-08-28 增量实证强化：E1--E5 完成，转为 Markdown 报告交付
 

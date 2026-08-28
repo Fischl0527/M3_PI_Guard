@@ -1,5 +1,42 @@
 # Failure Log
 
+## 2026-08-28 — E6 W1 formal-prefix gates did not pass
+
+### DeepSeek W1
+
+- Attempt: run the 12 outcome-blind formal-prefix rows for DeepSeek V4 Pro.
+- Result: all 12 rows are response-bearing with exact returned model, complete
+  request-chain metadata, zero online forbidden fields, zero provider tools and
+  zero real effects. Only 3/12 rows have `operational_status=completed`; the
+  other response-bearing rows are 6 provider failures and 3 parse failures.
+  The frozen `>=9/12` parseable gate therefore failed.
+- Recovery decision: do not expand W1 and do not retry any of the 12 rows,
+  because all obtained official responses and are terminal under ITT. Treat
+  this as a technical-prefix failure unless a separately approved new protocol
+  is created; do not weaken or rewrite the frozen gate after observing it.
+
+### Gemini W1
+
+- Attempt: run the 12 outcome-blind formal-prefix rows for Gemini 3.6 Flash
+  free tier in parallel with DeepSeek.
+- Result: execution stopped after 3 rows at the first response-less transport
+  failure. The two earlier rows are response-bearing terminal failures; the
+  third key is the only `retry_eligible=true` row. Internal content-free call
+  accounting shows one completed HTTP 200 call and isolated payload, VIGIL
+  dependency and transport error classes; no automatic retry or paid fallback
+  occurred.
+- Changed hypothesis/recovery: treat the response-less transport event as an
+  isolated pre-response failure, explicitly run only its frozen work key once
+  with `attempt=2`, and then continue untouched prefix rows only if that key
+  becomes terminal. Never retry the two response-bearing rows.
+- Recovery result: the named key's `attempt=2` also ended before any official
+  response. It is now an exhausted terminal operational failure and is not
+  eligible for another attempt. Because the frozen gate requires a complete
+  request chain for all 12 prefix rows, Gemini W1 can no longer pass; untouched
+  rows must be closed administratively rather than called speculatively.
+- Safety impact: no credential content, prompt/response body, provider-managed
+  tool or real external effect was read or recorded in this diagnosis.
+
 ## 2026-08-28 — E6 implementation milestone staging omitted tracked ignored output
 
 - Attempt: stage the explicit E6 implementation/Harness file list for the second

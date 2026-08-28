@@ -416,6 +416,7 @@
       "verification": [
         "Task scope and immutable-boundary decision recorded in harness/tasks/m3-paper-v2.md and harness/docs/decision-log.md",
         "E6 freezes 1080 DeepSeek plus 540 Gemini rows with 1620 unique work keys; its isolated dispatcher, window runner and one-pass analyzer pass 60 focused tests plus Ruff and py_compile, while W1--W3 provider execution remains pending",
+        "E6 W1 is sealed after outcome-blind technical-gate failures: DeepSeek has 12 response-bearing prefix rows but only 3 completed, Gemini has two response-bearing rows plus one exhausted response-less key, and 348/177 untouched rows are explicitly technical_gate_not_extended rather than counted safe; the closure fix passes 62 focused tests and Gemini formal cross-provider eligibility is closed",
         "34 directly relevant papers are recorded in docs/research/paper_v2/literature_matrix.md with peer-reviewed/preprint status and a direct-competition claim boundary",
         "All 22 online-state audit units across 16 distinct artifacts have hash-bound source, entrypoint, field-flow and projection evidence; 20 units use official source code, Task Shield is explicitly a disclosed local paper reproduction, no unit has an independent second review, and the domain-oracle claim remains forbidden",
         "Paper-v2 schema, runtime projection validator, provider attestation, ASK state machine, conservative ITT metrics and AgentDojo/M3-v2 golden semantics are implemented",

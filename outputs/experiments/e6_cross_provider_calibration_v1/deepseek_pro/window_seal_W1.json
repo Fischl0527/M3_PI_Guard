@@ -1,0 +1,55 @@
+{
+  "closure_mode": "technical_gate_not_extended",
+  "condition_response_bearing": {
+    "m3_full": {
+      "planned": 60,
+      "response_bearing": 2,
+      "response_bearing_fraction": 0.03333333333333333
+    },
+    "m3_full_normal_prompt": {
+      "planned": 60,
+      "response_bearing": 2,
+      "response_bearing_fraction": 0.03333333333333333
+    },
+    "m3_policy_only": {
+      "planned": 60,
+      "response_bearing": 2,
+      "response_bearing_fraction": 0.03333333333333333
+    },
+    "m3_policy_safe_prompt": {
+      "planned": 60,
+      "response_bearing": 2,
+      "response_bearing_fraction": 0.03333333333333333
+    },
+    "no_defense": {
+      "planned": 60,
+      "response_bearing": 2,
+      "response_bearing_fraction": 0.03333333333333333
+    },
+    "strongest_peer_reviewed_structural_baseline": {
+      "planned": 60,
+      "response_bearing": 2,
+      "response_bearing_fraction": 0.03333333333333333
+    }
+  },
+  "duration_hours": 0.17361628444444446,
+  "gemini_formal_inference_window_eligible": false,
+  "paused_after_429": false,
+  "planned_rows": 360,
+  "provider_id": "deepseek",
+  "provider_window_unavailable_rows": 0,
+  "replicate_window": "W1",
+  "response_bearing_fraction": 0.03333333333333333,
+  "response_bearing_rows": 12,
+  "schema_version": "m3-paper-v2-e6-window-seal-1.0",
+  "status": "sealed",
+  "study_id": "m3-q2-e6-cross-provider-calibration-v1",
+  "technical_gate_failure_reasons": [
+    "all_formal_prefix_executions_terminal"
+  ],
+  "technical_gate_not_extended_rows": 348,
+  "terminal_rows": 360,
+  "window_completed_at": "2026-08-28T22:36:49.793970+08:00",
+  "window_started_at": "2026-08-28T22:26:24.775346+08:00",
+  "within_twelve_hours": true
+}

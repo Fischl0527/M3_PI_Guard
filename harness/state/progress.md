@@ -1,5 +1,25 @@
 # 进展记录
 
+## 2026-08-28 — E6 W1 双 provider 技术门失败并如实封存
+
+- W1 两家 provider 于 22:26:24 +08 同期启动，满足同一两小时带。DeepSeek
+  12/12 正式前缀均获得官方响应、模型身份和请求链完整、字段隔离/tools/effects
+  合格，但只有 3 completed；其余为 3 parse failure、6 provider failure，未达到
+  冻结的 `>=9/12` 可解析门。
+- Gemini 首批产生 2 条 response-bearing 终态失败和 1 条 response-less failure；
+  该唯一 key 的显式 `attempt=2` 仍无响应，恢复机会耗尽。没有自动重试、密钥池
+  切换、模型回退或付费 Billing。
+- 为避免失败门后计划项悬空，新增并定向测试了 `technical_gate_not_extended`
+  行政封存：只有 12 条前缀均终态，或正式前缀的唯一 response-less 恢复已耗尽，
+  才能封存；不会放宽 gate、重跑已有行或执行扩展。联合定向 pytest 62/62、
+  Ruff、`py_compile`、差异检查通过。
+- W1 已封存：DeepSeek 360 个最新 key = 12 execution + 348 administrative closure；
+  Gemini 180 个最新 key = 3 execution + 177 closure，另保留同一失败 key 的两次
+  物理尝试，共 181 行。closure 不是安全结果，只进入计划完整性和失败负担。
+- W1 不能支持攻击活性、防御效应、重复性或跨厂商结论。Gemini 已无法通过冻结的
+  三窗口正式跨厂商准入；W2/W3 即使成功也仅为敏感性证据。下一窗口只能在
+  2026-08-29 16:26--2026-08-30 04:26 +08 启动，目标仍为约 22:26 +08。
+
 ## 2026-08-28 — E6 双提供商设计冻结与离线资格化完成
 
 - 已冻结 `m3-q2-e6-cross-provider-calibration-v1`：DeepSeek V4 Pro 为

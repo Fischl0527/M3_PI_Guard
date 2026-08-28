@@ -951,6 +951,62 @@ def evaluate_window_gate(provider_id: str, window: str) -> dict[str, Any]:
     return value
 
 
+def _technical_gate_failure_evidence(
+    provider_id: str,
+    window: str,
+    *,
+    latest: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Return outcome-blind evidence that a failed prefix cannot be extended.
+
+    A failed gate is administratively closable only after all twelve prefix
+    executions have reached terminal records, or after one response-less
+    prefix execution has exhausted its single recovery.  Administrative
+    closure records are deliberately excluded from both predicates so quota
+    sealing cannot be mistaken for a completed technical prefix.
+    """
+
+    gate = evaluate_window_gate(provider_id, window)
+    observed = latest if latest is not None else _latest_records(provider_id)
+    prefix = [
+        observed.get(str(row["work_key"]))
+        for row in _window_rows(provider_id, window)
+        if row["formal_prefix"] is True
+    ]
+    executions = [
+        row
+        for row in prefix
+        if isinstance(row, Mapping) and row.get("record_kind") == "execution"
+    ]
+    fully_attempted_terminal = len(executions) == PREFIX_ROWS and all(
+        _is_terminal(row) for row in executions
+    )
+    exhausted_response_less_keys = sorted(
+        str(row["work_key"])
+        for row in executions
+        if row.get("response_obtained") is False
+        and _is_terminal(row)
+        and row.get("retry_eligible") is not True
+        and int(row.get("attempt", 0)) >= 2
+    )
+    failure_determined = bool(
+        gate.get("gate_passed") is False
+        and (fully_attempted_terminal or exhausted_response_less_keys)
+    )
+    reasons: list[str] = []
+    if fully_attempted_terminal:
+        reasons.append("all_formal_prefix_executions_terminal")
+    if exhausted_response_less_keys:
+        reasons.append("response_less_formal_prefix_recovery_exhausted")
+    return {
+        "failure_determined": failure_determined,
+        "fully_attempted_terminal": fully_attempted_terminal,
+        "exhausted_response_less_work_keys": exhausted_response_less_keys,
+        "reasons": reasons,
+        "gate": gate,
+    }
+
+
 def _require_window_gate(provider_id: str, window: str) -> dict[str, Any]:
     path = _gate_path(provider_id, window)
     if not path.is_file() or _read_json(path).get("gate_passed") is not True:
@@ -1137,6 +1193,8 @@ def _closure_record(
     *,
     window_started_at: str,
     window_completed_at: str,
+    operational_status: str = "provider_window_unavailable",
+    closure_reason: str = "provider_window_unavailable_before_execution",
 ) -> dict[str, Any]:
     if existing is not None:
         value = copy.deepcopy(dict(existing))
@@ -1166,11 +1224,15 @@ def _closure_record(
             "deny_count": 0,
             "latency_ms": {},
             "token_usage": {},
-            "cost": {
-                "currency": "USD",
-                "amount": 0.0,
-                "billing_tier": "free",
-            },
+            "cost": (
+                {
+                    "currency": "USD",
+                    "amount": 0.0,
+                    "billing_tier": "free",
+                }
+                if work_item["provider_id"] == "gemini"
+                else {"currency": "CNY", "amount": 0.0}
+            ),
             "online_visible_field_digest_sha256": None,
             "online_forbidden_fields_present": False,
             "provider_tools_enabled": False,
@@ -1180,7 +1242,7 @@ def _closure_record(
             "parameter_source_summary": {
                 "available": False,
                 "source_sha256": None,
-                "reason": "provider_window_unavailable_before_execution",
+                "reason": closure_reason,
             },
             "guard_decision": None,
             "simulated_effect_receipt": None,
@@ -1205,18 +1267,23 @@ def _closure_record(
     value.update(
         {
             "record_kind": "window_closure",
-            "operational_status": "provider_window_unavailable",
+            "operational_status": operational_status,
+            "closure_reason": closure_reason,
             "included_in_primary_itt": True,
             "retry_eligible": False,
             "terminal_status": True,
             "provider_call_count": len(value.get("provider_requests", [])),
             "provider_tools_enabled": False,
             "external_effects_enabled": False,
-            "free_tier_attestation": {
-                "billing_tier": "free",
-                "cost_usd": 0.0,
-                "paid_fallback_enabled": False,
-            },
+            "free_tier_attestation": (
+                {
+                    "billing_tier": "free",
+                    "cost_usd": 0.0,
+                    "paid_fallback_enabled": False,
+                }
+                if work_item["provider_id"] == "gemini"
+                else None
+            ),
             "window_started_at": window_started_at,
             "window_completed_at": window_completed_at,
             "recorded_at": window_completed_at,
@@ -1257,21 +1324,38 @@ def seal_window(
         for row in rows
         if not _is_terminal(latest.get(str(row["work_key"]), {}))
     ]
+    technical_gate = _technical_gate_failure_evidence(
+        provider_id, window, latest=latest
+    )
+    close_for_technical_gate = bool(
+        nonterminal and technical_gate["failure_determined"]
+    )
     paused = _gemini_window_paused(provider_id, window)
-    if provider_id == "deepseek" and nonterminal:
+    if provider_id == "deepseek" and nonterminal and not close_for_technical_gate:
         raise E6CalibrationRunnerError(
             "DeepSeek window cannot seal with nonterminal work items"
         )
     if (
         provider_id == "gemini"
         and nonterminal
+        and not close_for_technical_gate
         and not paused
         and duration < timedelta(hours=12)
     ):
         raise E6CalibrationRunnerError(
             "Gemini pending rows may close only after 429 or twelve hours"
         )
-    if provider_id == "gemini":
+    if close_for_technical_gate or provider_id == "gemini":
+        operational_status = (
+            "technical_gate_not_extended"
+            if close_for_technical_gate
+            else "provider_window_unavailable"
+        )
+        closure_reason = (
+            "formal_prefix_technical_gate_failed_before_expansion"
+            if close_for_technical_gate
+            else "provider_window_unavailable_before_execution"
+        )
         for row in nonterminal:
             key = str(row["work_key"])
             closure = _closure_record(
@@ -1279,6 +1363,8 @@ def seal_window(
                 latest.get(key),
                 window_started_at=started.isoformat(),
                 window_completed_at=completed.isoformat(),
+                operational_status=operational_status,
+                closure_reason=closure_reason,
             )
             lean._append_jsonl(_raw_path(provider_id), closure)
             latest[key] = closure
@@ -1316,6 +1402,22 @@ def seal_window(
         "provider_window_unavailable_rows": sum(
             row.get("operational_status") == "provider_window_unavailable"
             for row in latest_window
+        ),
+        "technical_gate_not_extended_rows": sum(
+            row.get("operational_status") == "technical_gate_not_extended"
+            for row in latest_window
+        ),
+        "closure_mode": (
+            "technical_gate_not_extended"
+            if close_for_technical_gate
+            else (
+                "provider_window_unavailable"
+                if nonterminal
+                else "all_rows_terminal"
+            )
+        ),
+        "technical_gate_failure_reasons": (
+            technical_gate["reasons"] if close_for_technical_gate else []
         ),
         "paused_after_429": paused,
         "window_started_at": started.isoformat(),

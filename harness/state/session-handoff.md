@@ -1,5 +1,26 @@
 # 会话移交
 
+## 2026-08-28 — E6 W1 sealed after technical-gate failure
+
+- DeepSeek and Gemini W1 both started at 22:26:24 +08 and are sealed. Do not
+  run any W1 key again. DeepSeek latest state is 360/360: 3 completed, 3 parse
+  failures, 6 response-bearing provider failures and 348
+  `technical_gate_not_extended` closures.
+- Gemini latest state is 180/180 plus one superseded physical attempt: two
+  response-bearing terminal failures, one response-less key exhausted at
+  attempt 2, and 177 `technical_gate_not_extended` closures. It used no paid
+  fallback; its W1 formal inference gate is permanently false.
+- W1 supports only an operational/parse-instability result. Closure rows are
+  not safe outcomes and must not enter response-bearing effect estimates.
+  Gemini's preregistered cross-provider eligibility is now closed.
+- The seal-path fix keeps the frozen gate unchanged and passes 62 focused tests,
+  Ruff, py_compile and diff checks. It permits administrative closure only after
+  the prefix has fully determined failure and never calls a provider itself.
+- W2 may start only between 2026-08-29 16:26 and 2026-08-30 04:26 +08; target
+  approximately 22:26 +08 so W3 can use the same band on 2026-08-30. Start each
+  provider's new 12-row W2 prefix; expand only that provider/window if its own
+  gate passes. W2/W3 are sensitivity evidence and cannot repair W1.
+
 ## 2026-08-28 — E6 offline-qualified; W1 not started
 
 - E6 design and implementation are frozen on `codex/q2-empirical-study`.

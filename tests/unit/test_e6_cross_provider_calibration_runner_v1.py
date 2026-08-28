@@ -32,9 +32,11 @@ class _Dispatcher:
         *,
         fail_once: set[str] | None = None,
         returned_model: str | None = None,
+        parseable_calls: int | None = None,
     ) -> None:
         self.fail_once = fail_once or set()
         self.returned_model = returned_model
+        self.parseable_calls = parseable_calls
         self.calls: list[str] = []
 
     def execute(
@@ -49,10 +51,16 @@ class _Dispatcher:
             self.fail_once.remove(key)
             raise RuntimeError("synthetic response-less transport failure")
         model = self.returned_model or str(work_item["model_id"])
+        status = (
+            "completed"
+            if self.parseable_calls is None
+            or len(self.calls) <= self.parseable_calls
+            else "parse_failure"
+        )
         return {
             "unsafe_effect": True,
             "task_completion": False,
-            "operational_status": "completed",
+            "operational_status": status,
             "runtime_visibility_events": [
                 {
                     "step": 1,
@@ -346,6 +354,131 @@ def test_deepseek_cannot_seal_an_incomplete_window(
             "W1",
             completed_at="2026-08-28T10:00:00+08:00",
         )
+
+
+def test_failed_deepseek_prefix_closes_without_expansion_or_replay(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_output(monkeypatch, tmp_path / "e6")
+    started = "2026-08-28T09:00:00+08:00"
+    canary = _run_canary(
+        "deepseek",
+        dispatcher=_Dispatcher(parseable_calls=3),
+        started_at=started,
+    )
+    assert canary["executed"] == 12
+    assert canary["window_gate_passed"] is False
+
+    repeated = runner.run_window(
+        "deepseek",
+        "W1",
+        canary_only=True,
+        credential_loader=lambda: pytest.fail("credentials were reloaded"),
+        dispatcher_factory=lambda *_: pytest.fail("prefix row was replayed"),
+    )
+    assert repeated["executed"] == 0
+    with pytest.raises(runner.E6CalibrationRunnerError, match="did not pass"):
+        runner.run_window(
+            "deepseek",
+            "W1",
+            canary_only=False,
+            credential_loader=lambda: pytest.fail("credentials were loaded"),
+            dispatcher_factory=lambda *_: pytest.fail("expansion was executed"),
+        )
+
+    seal = runner.seal_window(
+        "deepseek",
+        "W1",
+        completed_at="2026-08-28T10:00:00+08:00",
+    )
+    latest = runner._latest_records("deepseek")
+    execution_rows = [
+        row for row in latest.values() if row["record_kind"] == "execution"
+    ]
+    closure_rows = [
+        row
+        for row in latest.values()
+        if row["operational_status"] == "technical_gate_not_extended"
+    ]
+
+    assert seal["closure_mode"] == "technical_gate_not_extended"
+    assert seal["technical_gate_not_extended_rows"] == 348
+    assert seal["provider_window_unavailable_rows"] == 0
+    assert seal["technical_gate_failure_reasons"] == [
+        "all_formal_prefix_executions_terminal"
+    ]
+    assert len(execution_rows) == 12
+    assert all(row["attempt"] == 1 for row in execution_rows)
+    assert len(closure_rows) == 348
+    assert all(row["attempt"] == 0 for row in closure_rows)
+    assert all(row["replicate_window"] == "W1" for row in closure_rows)
+
+    next_state = runner._ensure_window_started(
+        "deepseek", "W2", started_at="2026-08-29T09:00:00+08:00"
+    )
+    assert next_state["replicate_window"] == "W2"
+    assert next_state["replicate_index"] == 2
+
+
+def test_exhausted_gemini_prefix_closes_as_technical_not_quota_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_output(monkeypatch, tmp_path / "e6")
+    started = "2026-08-28T09:00:00+08:00"
+    prefix = [
+        row
+        for row in runner._window_rows("gemini", "W1")
+        if row["formal_prefix"] is True
+    ]
+    failed_key = str(prefix[0]["work_key"])
+    first = _run_canary(
+        "gemini",
+        dispatcher=_Dispatcher(fail_once={failed_key}),
+        started_at=started,
+    )
+    assert first["executed"] == 1
+    retry = runner.run_window(
+        "gemini",
+        "W1",
+        canary_only=True,
+        retry_failed_work_keys=(failed_key,),
+        credential_loader=lambda: {},
+        dispatcher_factory=lambda *_: _Dispatcher(fail_once={failed_key}),
+    )
+    assert retry["executed"] == 1
+
+    seal = runner.seal_window(
+        "gemini",
+        "W1",
+        completed_at="2026-08-28T10:00:00+08:00",
+    )
+    raw = _rows(runner._raw_path("gemini"))
+    latest = runner._latest_records("gemini")
+    failed_attempts = [
+        row["attempt"] for row in raw if row["work_key"] == failed_key
+    ]
+    closure_rows = [
+        row
+        for key, row in latest.items()
+        if key != failed_key
+        and row["operational_status"] == "technical_gate_not_extended"
+    ]
+
+    assert failed_attempts == [1, 2]
+    assert latest[failed_key]["record_kind"] == "execution"
+    assert latest[failed_key]["attempt"] == 2
+    assert seal["closure_mode"] == "technical_gate_not_extended"
+    assert seal["technical_gate_not_extended_rows"] == 179
+    assert seal["provider_window_unavailable_rows"] == 0
+    assert seal["paused_after_429"] is False
+    assert seal["duration_hours"] == 1.0
+    assert seal["technical_gate_failure_reasons"] == [
+        "response_less_formal_prefix_recovery_exhausted"
+    ]
+    assert len(closure_rows) == 179
+    assert all(row["attempt"] == 0 for row in closure_rows)
+    assert all(row["replicate_index"] == 1 for row in closure_rows)
+    assert all(row["cost"]["amount"] == 0.0 for row in closure_rows)
 
 
 def test_next_window_requires_seal_and_prespecified_timing(
