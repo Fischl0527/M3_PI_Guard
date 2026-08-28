@@ -1,5 +1,26 @@
 # 进展记录
 
+## 2026-08-28 — E6 双提供商设计冻结与离线资格化完成
+
+- 已冻结 `m3-q2-e6-cross-provider-calibration-v1`：DeepSeek V4 Pro 为
+  60 个唯一底层攻击任务、1,080 个计划项；Gemini 3.6 Flash 免费层为严格嵌套的
+  30 个任务、540 个计划项；合计 1,620 个唯一 work key。两个队列均覆盖
+  AgentDojo 与 M3-v2，六条件和三窗口结构完整。
+- 已新增独立六条件 dispatcher、双 provider/window runner 和一次性分析器；
+  E1--E5 的四条件 dispatcher、冻结计划和历史成功记录没有改写。Runner 明确区分
+  `replicate_window` 与 failure-recovery `attempt`，隔离 provider ledger/output，
+  并实现精确模型身份、Gemini 免费层/USD 0、429 窗口封存、成功行不重跑以及
+  DeepSeek/Gemini 各 12 行 outcome-blind 正式前缀。
+- 分析器保留三窗口重复测量，提供 Wilson、Newcombe 配对区间、按 benchmark 分层的
+  task-cluster bootstrap、活性门、重复性、四项同期比较、2×2 因子和有条件的
+  跨厂商分析；Gemini 未通过完整性/活性门时只作为 diagnostic。
+- 同步修正 E2 机制回放分母：false allow `0/240`（而非 `0/480`），false block
+  `30/240=12.5%`；仅重建离线分析，没有重跑任何 API 记录。
+- 最终定向验证为 pytest `60 passed`；Ruff、`py_compile` 和 `git diff --check`
+  均通过。没有运行 Full Harness、历史递归验证或真实 provider 调用。
+- 设计冻结已提交并推送为 `4e7a11b`。当前阶段为 W1 尚未开始；W1--W3 必须在
+  三个连续本地日期、相邻启动 18--30 小时的真实窗口执行，不能在同日伪造。
+
 ## 2026-08-28 — E5 与增量实验阶段完成，转为 Markdown 报告
 
 - E5 的 12 个冻结 B200 survivor 全部扩展至 q500，形成 3,605 条物理记录和

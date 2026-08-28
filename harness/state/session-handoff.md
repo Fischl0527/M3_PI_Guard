@@ -1,5 +1,26 @@
 # 会话移交
 
+## 2026-08-28 — E6 offline-qualified; W1 not started
+
+- E6 design and implementation are frozen on `codex/q2-empirical-study`.
+  DeepSeek has 60 unique underlying tasks/1,080 planned rows; Gemini has a strict
+  30-task nested subset/540 rows; all 1,620 work keys are unique.
+- The isolated E6 dispatcher, cross-provider/window runner and one-pass analyzer
+  are qualified. Focused pytest is 60/60, with Ruff, py_compile and diff checks
+  passing. No E6 provider call has been made yet.
+- The first design checkpoint is Git commit `4e7a11b`. The implementation
+  checkpoint must be pushed before W1 starts. Preserve the two unrelated dirty
+  external audit directories and do not stage them.
+- W1--W3 must be three real consecutive local dates, with adjacent starts
+  18--30 hours apart and both providers started in the same two-hour local band.
+  Run each provider's 12 formal-prefix rows first; extend only after its technical
+  gate passes. Gemini is free-only/USD 0 and cannot block DeepSeek.
+- Do not run Full Harness, historical replay, production tools/effects or any
+  successful E1--E5/E6 row again. A response-less E6 key may receive exactly one
+  explicit `attempt+1`; response-bearing failures remain ITT.
+- E2 replay denominators are now false allow 0/240 and false block 30/240. The
+  correction is analysis-only and did not touch provider records.
+
 ## 2026-08-28 — E1--E5 closed; report-only handoff
 
 - E1--E5 are complete. Do not rerun any successful API work item. E5 closed all

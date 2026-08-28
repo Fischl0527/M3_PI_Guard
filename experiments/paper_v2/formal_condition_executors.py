@@ -202,6 +202,11 @@ INCREMENTAL_FACTOR_CONDITIONS = (
     "m3_full_normal_prompt",
     "m3_full",
 )
+E6_CALIBRATION_CONDITIONS = (
+    "no_defense",
+    "strongest_peer_reviewed_structural_baseline",
+    *INCREMENTAL_FACTOR_CONDITIONS,
+)
 
 
 @dataclass(frozen=True)
@@ -752,6 +757,37 @@ def build_incremental_condition_dispatcher(
         if profile is None:
             raise FormalConditionExecutorError(
                 f"incremental condition profile is missing: {condition_id}"
+            )
+        dispatcher.register(
+            condition_id,
+            ConditionExecutorShell(
+                profile=profile,
+                runtime=runtime,
+                evaluator=evaluator,
+            ),
+        )
+    dispatcher.assert_complete()
+    return dispatcher
+
+
+def build_e6_calibration_condition_dispatcher(
+    *,
+    runtime: OnlineConditionRuntime,
+    evaluator: OfflineOutcomeEvaluator,
+) -> ConditionDispatcher:
+    """Build the isolated six-cell E6 calibration dispatcher.
+
+    E1--E5 continue to use :func:`build_incremental_condition_dispatcher`.
+    E6 adds contemporaneous no-defense and source-pinned VIGIL controls without
+    changing either historical registry.
+    """
+
+    dispatcher = ConditionDispatcher(E6_CALIBRATION_CONDITIONS)
+    for condition_id in E6_CALIBRATION_CONDITIONS:
+        profile = ALL_CONDITION_PROFILES.get(condition_id)
+        if profile is None:
+            raise FormalConditionExecutorError(
+                f"E6 condition profile is missing: {condition_id}"
             )
         dispatcher.register(
             condition_id,

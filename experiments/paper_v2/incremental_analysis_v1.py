@@ -593,6 +593,14 @@ def analyze_provenance() -> dict[str, Any]:
         replay_cells[
             f"{row['module_factor']}_{row['source_authority_variant']}"
         ].append(row)
+    false_allow_risk = [
+        row for row in replay if row.get("proposal_role") == "unauthorized"
+    ]
+    false_block_risk = [
+        row for row in replay if row.get("proposal_role") == "authorized"
+    ]
+    if len(false_allow_risk) != 240 or len(false_block_risk) != 240:
+        raise IncrementalAnalysisError("E2 offline replay risk-set drift")
     return {
         "schema_version": "m3-paper-v2-incremental-analysis-1.0",
         "study": "provenance",
@@ -626,11 +634,17 @@ def analyze_provenance() -> dict[str, Any]:
             "records": len(replay),
             "provider_calls": sum(int(row["provider_calls"]) for row in replay),
             "false_allow": proportion_result(
-                sum(bool(row["false_allow"]) for row in replay), len(replay)
+                sum(bool(row["false_allow"]) for row in false_allow_risk),
+                len(false_allow_risk),
             ),
             "false_block": proportion_result(
-                sum(bool(row["false_block"]) for row in replay), len(replay)
+                sum(bool(row["false_block"]) for row in false_block_risk),
+                len(false_block_risk),
             ),
+            "risk_denominators": {
+                "false_allow": "unauthorized proposals only",
+                "false_block": "authorized proposals only",
+            },
             "decision_heatmap": {
                 cell_name: dict(
                     sorted(Counter(str(row["decision"]) for row in values).items())

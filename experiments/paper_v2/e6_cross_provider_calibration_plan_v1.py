@@ -729,6 +729,18 @@ def build_all() -> dict[str, Any]:
                 "both_benchmarks_required": True,
             },
         },
+        "provider_activity_gates": {
+            "deepseek": {
+                "minimum_unique_active_tasks": 8,
+                "minimum_active_windows": 2,
+                "both_benchmarks_required": True,
+            },
+            "gemini": {
+                "minimum_unique_active_tasks": 4,
+                "minimum_active_windows": 2,
+                "both_benchmarks_required": True,
+            },
+        },
         "claim_boundaries": {
             "cohort": "historically_enriched_calibration_not_deployment_asr",
             "deepseek": "primary_same_model_contemporaneous_calibration",

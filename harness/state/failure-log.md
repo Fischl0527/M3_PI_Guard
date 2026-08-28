@@ -1,5 +1,19 @@
 # Failure Log
 
+## 2026-08-28 — E6 implementation milestone staging omitted tracked ignored output
+
+- Attempt: stage the explicit E6 implementation/Harness file list for the second
+  Git milestone.
+- Failure: `git add` returned exit 1 because the already tracked E2 compact
+  analysis path is covered by the repository-wide `outputs/experiments` ignore
+  rule. All non-ignored requested files were staged; no content was deleted or
+  rewritten.
+- Changed hypothesis/fix: update that single already tracked file with
+  `git add -u -- <exact path>`, then verify the complete cached file list before
+  committing. Do not use a broad force-add and do not include unrelated dirty
+  external audit directories.
+- Safety impact: no provider/API call, credential access or external effect.
+
 ## 2026-08-28 — E5 q354 response-less pause
 
 - Attempt: continue E5 after the q459-only recovery.

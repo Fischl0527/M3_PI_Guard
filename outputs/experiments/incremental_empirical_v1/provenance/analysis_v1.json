@@ -289,23 +289,27 @@
       }
     },
     "false_allow": {
-      "ci_high": 0.007939499087277932,
+      "ci_high": 0.015753919941558808,
       "ci_low": 0.0,
       "confidence": 0.95,
-      "denominator": 480,
+      "denominator": 240,
       "numerator": 0,
       "value": 0.0
     },
     "false_block": {
-      "ci_high": 0.08782005096753212,
-      "ci_low": 0.04412701073383607,
+      "ci_high": 0.17283606538960128,
+      "ci_low": 0.08897937456656785,
       "confidence": 0.95,
-      "denominator": 480,
+      "denominator": 240,
       "numerator": 30,
-      "value": 0.0625
+      "value": 0.125
     },
     "provider_calls": 0,
-    "records": 480
+    "records": 480,
+    "risk_denominators": {
+      "false_allow": "unauthorized proposals only",
+      "false_block": "authorized proposals only"
+    }
   },
   "schema_version": "m3-paper-v2-incremental-analysis-1.0",
   "source_swap_action_change": {

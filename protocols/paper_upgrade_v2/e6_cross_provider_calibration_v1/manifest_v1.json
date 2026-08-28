@@ -131,6 +131,18 @@
     "total_rows": 1620,
     "windows": 3
   },
+  "provider_activity_gates": {
+    "deepseek": {
+      "both_benchmarks_required": true,
+      "minimum_active_windows": 2,
+      "minimum_unique_active_tasks": 8
+    },
+    "gemini": {
+      "both_benchmarks_required": true,
+      "minimum_active_windows": 2,
+      "minimum_unique_active_tasks": 4
+    }
+  },
   "provider_tools_enabled": false,
   "providers": {
     "deepseek": {

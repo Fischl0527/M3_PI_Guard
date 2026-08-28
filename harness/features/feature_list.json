@@ -407,6 +407,7 @@
         "A prospective 180-case DeepSeek Pro prompt-by-module factorial identifies prompt, module and interaction estimands without reusing historical rows",
         "A 60-task source-authority counterfactual separates 240 end-to-end executions from 480 deterministic Guard replay decisions",
         "A 60-case outcome-enriched challenge study, 90-case DeepSeek Flash replication and 12-task B200-survivor adaptive tail preserve their conditional claim boundaries",
+        "E6 prospectively calibrates current attack activity and three-date repeatability on 60 DeepSeek tasks, with a strictly nested 30-task Gemini free-tier replication and conditional cross-provider inference",
         "Incremental provider execution uses study-specific canaries and zero automatic retry; Pro/Flash remain CNY 8/3 while the E5 cost-only amendment sets non-blocking Adaptive/global machine ceilings to CNY 1000/1000 without changing the scientific design",
         "Raw evaluator/gold fields remain outside online state and all provider tools and real external effects remain disabled",
         "The English manuscript, Chinese comparison, figures, tables, claim ledger and Stage 2.5 integrity review remain synchronized",
@@ -414,6 +415,7 @@
       ],
       "verification": [
         "Task scope and immutable-boundary decision recorded in harness/tasks/m3-paper-v2.md and harness/docs/decision-log.md",
+        "E6 freezes 1080 DeepSeek plus 540 Gemini rows with 1620 unique work keys; its isolated dispatcher, window runner and one-pass analyzer pass 60 focused tests plus Ruff and py_compile, while W1--W3 provider execution remains pending",
         "34 directly relevant papers are recorded in docs/research/paper_v2/literature_matrix.md with peer-reviewed/preprint status and a direct-competition claim boundary",
         "All 22 online-state audit units across 16 distinct artifacts have hash-bound source, entrypoint, field-flow and projection evidence; 20 units use official source code, Task Shield is explicitly a disclosed local paper reproduction, no unit has an independent second review, and the domain-oracle claim remains forbidden",
         "Paper-v2 schema, runtime projection validator, provider attestation, ASK state machine, conservative ITT metrics and AgentDojo/M3-v2 golden semantics are implemented",

@@ -70,6 +70,18 @@ def test_e6_selection_is_coverage_first_and_e3_is_membership_only() -> None:
 
     assert value["manifest"]["selection_uses_e3_outcomes"] is False
     assert value["manifest"]["selection_uses_e6_outcomes"] is False
+    assert value["manifest"]["provider_activity_gates"] == {
+        "deepseek": {
+            "minimum_unique_active_tasks": 8,
+            "minimum_active_windows": 2,
+            "both_benchmarks_required": True,
+        },
+        "gemini": {
+            "minimum_unique_active_tasks": 4,
+            "minimum_active_windows": 2,
+            "both_benchmarks_required": True,
+        },
+    }
     assert any(row["e3_anchor"] is True for row in value["deepseek_cases"])
     assert any(row["e3_anchor"] is False for row in value["deepseek_cases"])
 
