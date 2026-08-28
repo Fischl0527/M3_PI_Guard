@@ -159,3 +159,85 @@ def test_adaptive_canary_gate_checks_transport_identity_not_outcomes(
     assert gate["gate_passed"] is True
     assert gate["observed_query_rows"] == 10
     assert gate["scientific_outcomes_inspected"] is False
+
+
+def test_recovery_trace_root_is_fresh_across_explicit_recovery_processes(
+    tmp_path: Path,
+) -> None:
+    trace_root = tmp_path / "provider_traces"
+    (tmp_path / "provider_traces_recovery2").mkdir()
+    (tmp_path / "provider_traces_recovery3").mkdir()
+
+    assert runner._fresh_recovery_trace_root(trace_root) == (
+        tmp_path / "provider_traces_recovery4"
+    )
+
+
+def test_trace_collision_without_provider_response_allows_one_explicit_recovery(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    raw_path = tmp_path / "raw.jsonl"
+    key = "adaptive-cost-v1__case__q00459"
+    rows = [
+        {
+            "work_key": key,
+            "attempt": 1,
+            "response_obtained": False,
+            "retry_eligible": True,
+            "operational_status": "provider_failure",
+        },
+        {
+            "work_key": key,
+            "attempt": 2,
+            "response_obtained": False,
+            "retry_eligible": False,
+            "operational_status": "pre_response_transport_failure",
+            "error_type": "ProviderTraceBundleError",
+        },
+    ]
+    raw_path.write_text(
+        "".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8"
+    )
+    monkeypatch.setattr(runner, "RAW_PATH", raw_path)
+
+    assert runner._explicit_retry_allowed(key, rows[-1]) is True
+
+
+def test_response_bearing_or_unrelated_second_failure_is_never_retryable(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    raw_path = tmp_path / "raw.jsonl"
+    key = "adaptive-cost-v1__case__q00459"
+    first = {
+        "work_key": key,
+        "attempt": 1,
+        "response_obtained": False,
+        "retry_eligible": True,
+        "operational_status": "provider_failure",
+    }
+    second = {
+        "work_key": key,
+        "attempt": 2,
+        "response_obtained": False,
+        "retry_eligible": False,
+        "operational_status": "pre_response_transport_failure",
+        "error_type": "TimeoutError",
+    }
+    raw_path.write_text(
+        "".join(json.dumps(row) + "\n" for row in (first, second)),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(runner, "RAW_PATH", raw_path)
+
+    assert runner._explicit_retry_allowed(key, second) is False
+    assert (
+        runner._explicit_retry_allowed(
+            key,
+            {
+                **second,
+                "response_obtained": True,
+                "error_type": "ProviderTraceBundleError",
+            },
+        )
+        is False
+    )

@@ -1,5 +1,38 @@
 # Failure Log
 
+## 2026-08-28 — E5 q459 response-less pause
+
+- Attempt: continue the owner-resumed E5 tail after the explicit q474 recovery.
+- Failure: the runner reached `M3V2-D-043-A1:q459` and appended a
+  response-less `provider_failure`, then exited `paused` with zero automatic
+  retries. The key is
+  `adaptive-cost-v1__M3V2-D-043-A1__q00459`, attempt 1,
+  `retry_eligible=true`.
+
+### Recovery attempt 2: local trace-root collision
+
+- The explicit q459-only recovery exited before any provider request and added
+  an append-only attempt-2 row with `response_obtained=false`,
+  `error_type=ProviderTraceBundleError`, and unchanged cumulative API cost.
+- Root cause: the recovery-root selector coupled the directory suffix to the
+  work-item attempt number. Because q459 first appeared during the earlier q474
+  recovery process, its trace already existed in `provider_traces_recovery2`;
+  the next process selected that same directory and the trace client correctly
+  refused to overwrite it.
+- Changed hypothesis/fix: recovery processes must select a never-before-used
+  `provider_traces_recoveryN` directory. A narrowly scoped third attempt is
+  permitted only for this exact two-row, response-less trace-collision history;
+  any response-bearing row remains terminal.
+- Evidence: 2,966 physical rows at pause; the two older duplicate keys both
+  have response-bearing latest attempts. No successful or response-bearing
+  query was replayed, and the cost ceiling was not the stop cause.
+- Recovery decision: the owner previously directed that failed rows be fixed
+  or retried without replaying successful rows and has now explicitly resumed
+  the project. Start a new pending-only process naming exactly the q459 key;
+  no automatic retry or other failed-key expansion is allowed.
+- Safety impact: provider tools and real external effects remain disabled; no
+  request or response body, raw error, or credential was read or recorded here.
+
 ## 2026-08-26 — Methods boundary smoke used an over-specific phrase
 
 - Attempt: verify the updated five-RQ Methods and adaptive sampling boundary

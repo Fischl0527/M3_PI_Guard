@@ -244,6 +244,49 @@ def _latest_raw() -> dict[str, dict[str, Any]]:
     return latest
 
 
+def _explicit_retry_allowed(key: str, latest: Mapping[str, Any]) -> bool:
+    """Return whether an explicitly named response-less row may be retried.
+
+    A second response-less attempt is normally terminal.  The sole exception is
+    the local trace-directory collision produced by the old recovery-root
+    selector: it failed before a provider request and therefore did not consume
+    the scientific work item.  The exception is deliberately narrow and still
+    rejects every response-bearing history.
+    """
+
+    if latest.get("response_obtained") is not False:
+        return False
+    if latest.get("retry_eligible") is True:
+        return True
+    if (
+        int(latest.get("attempt", 0)) != 2
+        or latest.get("operational_status") != "pre_response_transport_failure"
+        or latest.get("error_type") != "ProviderTraceBundleError"
+    ):
+        return False
+    history = [
+        row
+        for row in _read_jsonl(RAW_PATH)
+        if str(row.get("work_key", "")) == key
+    ]
+    return (
+        [int(row.get("attempt", 0)) for row in history] == [1, 2]
+        and all(row.get("response_obtained") is False for row in history)
+        and history[0].get("retry_eligible") is True
+    )
+
+
+def _fresh_recovery_trace_root(trace_root: Path = TRACE_ROOT) -> Path:
+    """Choose a never-before-used trace root for an explicit recovery process."""
+
+    suffix = 2
+    while True:
+        candidate = trace_root.parent / f"{trace_root.name}_recovery{suffix}"
+        if not candidate.exists():
+            return candidate
+        suffix += 1
+
+
 def _request_chain(record: Mapping[str, Any]) -> list[dict[str, Any]]:
     bundle = record.get("provider_trace_bundle")
     if not isinstance(bundle, Mapping):
@@ -401,8 +444,7 @@ class _TailOracle:
         if existing is not None:
             if (
                 key not in self.retry_failed_work_keys
-                or existing.get("retry_eligible") is not True
-                or existing.get("response_obtained") is not False
+                or not _explicit_retry_allowed(key, existing)
             ):
                 raise IncrementalAdaptiveTailStop(
                     f"{key}: existing terminal row is not explicitly retryable"
@@ -594,11 +636,7 @@ def run_adaptive_tail(
         raise IncrementalAdaptiveTailError("adaptive retry key is outside E5")
     for key in retry_set:
         prior = latest.get(key)
-        if (
-            prior is None
-            or prior.get("retry_eligible") is not True
-            or prior.get("response_obtained") is not False
-        ):
+        if prior is None or not _explicit_retry_allowed(key, prior):
             raise IncrementalAdaptiveTailError("adaptive retry is not response-less")
 
     pending = []
@@ -629,15 +667,7 @@ def run_adaptive_tail(
     runtime_values = dict(values)
     runtime_values["FRONTIER_DEEPSEEK_MODEL_ID"] = "deepseek-v4-pro"
     api_key = _deepseek_api_key(runtime_values, policy)
-    attempt_suffix = 1 + max(
-        (int(latest[key]["attempt"]) for key in retry_set if key in latest),
-        default=0,
-    )
-    process_trace_root = (
-        TRACE_ROOT
-        if attempt_suffix == 1
-        else TRACE_ROOT.parent / f"provider_traces_recovery{attempt_suffix}"
-    )
+    process_trace_root = _fresh_recovery_trace_root() if retry_set else TRACE_ROOT
     permit = _permit(
         plan_rows=rows,
         candidate=candidate,
