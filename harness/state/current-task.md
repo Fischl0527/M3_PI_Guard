@@ -1,6 +1,6 @@
 # 当前任务
 
-### 2026-08-27 增量实证强化：按 owner 指令停止
+### 2026-08-28 增量实证强化：owner 已恢复执行
 
 - 目标：实施 owner 批准的 10--12 天增量实验计划，用同期 2×2 因子设计
   解开 prompt 与 runtime modules 混杂，并补充来源权威反事实、风险富集、
@@ -15,18 +15,18 @@
   允许成本、不改变科学设计；无自动重试或模型回退；官方响应失败留在 ITT，
   无响应工程失败只在原因修复后运行受影响行；作者信息保持空白。
 - 验收状态：E1 720、E2 240+480 offline、E3 240 和 E4 360 已闭合。
-  E5 按 owner “当前进程结束后停止”指令保留为部分结果，不恢复、不自动重试、
-  不生成伪完整统计。Git 里程碑推送到
+  owner 于 2026-08-28 明确要求继续项目，E5 恢复为 `in_progress`。只允许显式恢复
+  q474 无响应 key 并运行未触碰 query；不自动重试、不重跑成功行。Git 里程碑推送到
   `origin/codex/q2-empirical-study`，即
   `https://github.com/Fischl0527/RedTeam_LLM_Security.git`。
-- 最终停点：E5 runner 于 `M3V2-D-077-A2:q474` 出现无官方响应记录并
-  fail-closed 暂停。现有 2,380 条物理查询记录、2,379 个唯一 query key；
+- 恢复起点：E5 runner 于 `M3V2-D-077-A2:q474` 出现无官方响应记录并
+  fail-closed 暂停。恢复前有 2,380 条物理查询记录、2,379 个唯一 query key；
   7/12 个 survivor 到达 q500，其中 0/7 观察到 unsafe effect；一项停在
   q474，一项只有 q201--205 正式前缀，三项未开始。成本 CNY 17.9303736，
-  provider tools 和真实 external effects 为零，automatic retries 为零。
-  一次性 E5 分析因 survivor 非全部终态而按设计拒绝生成
-  `analysis_v1.json`。F-PAPER-002 保持 `in_progress`；当前无本项目运行进程，
-  未来只能在 owner 新指令后恢复。
+  provider tools 和真实 external effects 为零，automatic retries 为零。按实测剩余
+  成本且 owner 明确要求成本不得限制项目，Adaptive/Global 设为非阻断的
+  CNY 1,000/1,000 机器上限，科学设计不变，实际用量仍完整记账。
+  E5 全部终态后才能生成 `analysis_v1.json`。F-PAPER-002 保持 `in_progress`。
 
 ### 2026-08-23 精简实证里程碑 31：Stage 5 最小 JISA 投稿包已完成
 

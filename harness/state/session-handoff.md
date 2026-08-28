@@ -1,5 +1,23 @@
 # 会话移交
 
+## 2026-08-28 — Owner resumed E5
+
+- Owner explicitly said to continue the project, superseding the 2026-08-27
+  owner-stop checkpoint. E5 is again `in_progress`; E1--E4 remain immutable and
+  complete.
+- Resume starts from 2,380 physical rows and 2,379 unique query keys. Only
+  `adaptive-cost-v1__M3V2-D-077-A2__q00474` is response-less and retry eligible;
+  it must be named explicitly on the recovery command. No successful or other
+  response-bearing query may be replayed.
+- The cost-only Adaptive/Global fuses are non-blocking CNY 1,000/1,000 under
+  `budget_amendment_v2.md`; Pro/Flash remain CNY 8/3. Scientific design and all
+  zero-tool/zero-effect controls are unchanged.
+- After E5 reaches all task terminals, run the one-pass adaptive analysis, then
+  the prespecified figures/tables, bilingual manuscript synchronization,
+  methodology and Devil's Advocate reviews, focused verification and GitHub
+  milestone. Full Harness, Gemini, blind work and historical replay remain out
+  of scope.
+
 ## 2026-08-27 — E5 暂停后 owner 指令停止
 
 - 当前没有应继续等待的项目进程。E5 runner 已以 `paused` 退出，停止点为

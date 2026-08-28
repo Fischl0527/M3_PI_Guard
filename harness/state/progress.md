@@ -1,5 +1,19 @@
 # 进展记录
 
+## 2026-08-28 — Owner 恢复 E5 执行
+
+- Owner 明确要求“继续进行项目”，解除 2026-08-27 停止状态。E5 恢复起点为
+  2,380 物理行、2,379 唯一 query key，q474 唯一最新无响应失败且
+  `retry_eligible=true`，无遗留 runner 进程。
+- 显式恢复命令必须包含
+  `--retry-failed-work-key adaptive-cost-v1__M3V2-D-077-A2__q00474`；成功行和
+  其他 response-bearing 行不得重跑。
+- 按 CNY 17.9303736/2,379 的已观察均值，剩余最多 1,222 个 query 预计约
+  CNY 9.2；原 Adaptive/Global CNY 20/30 无法闭合冻结 cohort。在无 E5 进程时
+  owner 进一步明确“不要让成本限制项目”，因此将 Adaptive/Global 设为非阻断的
+  CNY 1,000/1,000 机器上限；Pro/Flash 已终态且仍为 CNY 8/3，样本、seed、
+  query 201--500、首次成功停止、ITT 和安全边界不变。
+
 ## 2026-08-27 — E5 部分运行停止并封存
 
 - E5 唯一 pending-only runner 于 `M3V2-D-077-A2:q474` 产生无官方响应的

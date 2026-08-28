@@ -142,8 +142,8 @@ def test_frozen_incremental_plan_reproduces() -> None:
     assert observed["budget_fuses_cny"] == {
         "pro": 8.0,
         "flash": 3.0,
-        "adaptive": 20.0,
-        "global": 30.0,
+        "adaptive": 1000.0,
+        "global": 1000.0,
     }
 
 

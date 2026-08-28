@@ -2,6 +2,22 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-28 — Raise only the E5 execution-cost ceiling after owner resume
+
+- Context: E5 was owner-stopped after 2,379 unique query keys and CNY
+  17.9303736. Seven tasks reached q500; the remaining maximum path is 1,222
+  queries and projects near CNY 9.2 at the observed average.
+- Decision: after the owner explicitly resumed the project and directed that
+  cost must not limit it, set the incremental Adaptive/Global fuses to
+  non-blocking CNY 1,000/1,000 machine ceilings. Keep actual token/cost
+  accounting and keep already-terminal Pro/Flash values at CNY 8/3.
+- Scientific invariants: task selection, A1/A2/A3 balance, q201--500, model,
+  attacker, seed, first-success stop, append-only ITT, explicit response-less
+  recovery, disabled provider tools and zero real effects are unchanged.
+- Recovery boundary: only
+  `adaptive-cost-v1__M3V2-D-077-A2__q00474` may receive attempt 2; every
+  response-bearing or successful query remains immutable.
+
 ## 2026-08-26 — Use a lean shared runner and direct B200 checkpoint continuation
 
 - Decision: implement the four regular studies behind one study-scoped CLI and

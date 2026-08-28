@@ -31,8 +31,8 @@ def test_adaptive_policy_uses_current_pro_peak_pricing(
     )
     policy = runner._policy()
     pricing = policy["deepseek"]["pricing"]
-    assert policy["deepseek"]["hard_spend_limit_cny"] == 20.0
-    assert runner.GLOBAL_FUSE_CNY == 30.0
+    assert policy["deepseek"]["hard_spend_limit_cny"] == 1000.0
+    assert runner.GLOBAL_FUSE_CNY == 1000.0
     assert pricing["cache_hit_input_per_million_tokens"] == 0.30
     assert pricing["cache_miss_input_per_million_tokens"] == 9.0
     assert pricing["output_per_million_tokens"] == 27.0
