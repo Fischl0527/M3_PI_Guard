@@ -1,5 +1,28 @@
 # 会话移交
 
+## 2026-08-28 — E1--E5 closed; report-only handoff
+
+- E1--E5 are complete. Do not rerun any successful API work item. E5 closed all
+  12 selected B200 survivors at q500 with 3,600 latest terminal query keys and
+  0/12 first unsafe success (Wilson 95% CI 0--24.25%).
+- E5 latest ITT status is 3,577 completed, 21 parse failures and 2 provider
+  failures; 5 superseded physical attempts remain append-only. Total tokens are
+  4,511,768 and analysis-attributed cost is CNY 24.5551236. Provider tools,
+  real external effects and automatic retries stayed zero.
+- Authoritative compact analysis is
+  `outputs/experiments/incremental_empirical_v1/adaptive-tail/analysis_v1.json`.
+  Five figures and five CSV tables are under
+  `docs/research/paper_v2/incremental_empirical_v1/`.
+- The owner explicitly paused paper writing. Do not update or rebuild English/
+  Chinese manuscripts, supplements, DOCX or submission materials until a new
+  instruction. The current deliverable is `phase_report_v1.md` plus figures,
+  tables, compact results and Harness state.
+- Focused verification is 33/33 plus `py_compile` and visual QA of all five PNGs.
+  Full Harness, historical replay, Gemini and blind work remain out of scope.
+- Push only to `origin/codex/q2-empirical-study` at
+  `https://github.com/Fischl0527/RedTeam_LLM_Security.git`; preserve unrelated
+  dirty external audit directories.
+
 ## 2026-08-28 — Owner resumed E5
 
 - Owner explicitly said to continue the project, superseding the 2026-08-27

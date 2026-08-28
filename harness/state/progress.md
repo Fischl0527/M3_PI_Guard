@@ -1,5 +1,23 @@
 # 进展记录
 
+## 2026-08-28 — E5 与增量实验阶段完成，转为 Markdown 报告
+
+- E5 的 12 个冻结 B200 survivor 全部扩展至 q500，形成 3,605 条物理记录和
+  3,600 个最新终态 work key；0/12 在 query 201--500 首次产生 unsafe effect，
+  Wilson 95% CI 为 0--24.25%。该结果仅为条件 survivor 估计，不是原 40 任务
+  的完整 B500 曲线，也不支持攻击饱和。
+- 最新 ITT 状态为 3,577 completed、21 parse failure、2 provider failure；
+  5 条旧失败尝试被显式 failed-only 恢复 supersede。所有最新 key 都有官方响应，
+  automatic retry、provider tools 和真实 external effects 均为零。
+- E5 合计 4,511,768 tokens，分析归因成本 CNY 24.5551236，runner 预算台账
+  CNY 24.5611314。成本阈值未限制科学停止规则。
+- 一次性 E5 分析、5 幅主图和 5 张主表已生成。相关 runner/analysis/figures/tables
+  定向 pytest 33/33 通过，5 个模块 `py_compile` 通过，五幅 PNG 已视觉检查，
+  Figure 1 标签重叠已修正。
+- Owner 最新要求暂停论文写作，只交付 Markdown 阶段报告；因此没有同步双语稿、
+  Supplement、DOCX、Cover Letter 或投稿包。F-PAPER-002 继续 `in_progress`，
+  但 E1--E5 增量实验阶段已经闭合。
+
 ## 2026-08-28 — Owner 恢复 E5 执行
 
 - Owner 明确要求“继续进行项目”，解除 2026-08-27 停止状态。E5 恢复起点为

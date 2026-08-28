@@ -1,32 +1,27 @@
 # 当前任务
 
-### 2026-08-28 增量实证强化：owner 已恢复执行
+### 2026-08-28 增量实证强化：E1--E5 完成，转为 Markdown 报告交付
 
 - 目标：实施 owner 批准的 10--12 天增量实验计划，用同期 2×2 因子设计
   解开 prompt 与 runtime modules 混杂，并补充来源权威反事实、风险富集、
   DeepSeek Flash 复现和 B200 survivor→B500 尾部证据。
-- 允许修改：`experiments/paper_v2/` 的增量计划、runner、分析和定向测试，
-  `protocols/paper_upgrade_v2/incremental_empirical_v1/` 冻结协议，增量输出、
-  双语稿件/图表，以及本任务 Harness 状态文件。
+- 允许修改：`experiments/paper_v2/` 的增量 runner/分析/图表与定向测试，
+  增量紧凑输出、Markdown 阶段报告、图表和本任务 Harness 状态文件。
 - 禁止执行：Gemini 新矩阵、独立盲测、真实用户确认、生产工具/外部副作用、
   Full Harness、历史递归重放、成功实验行重跑和冗余哈希证据包。
-- 安全与失败边界：DeepSeek Pro 常规/Flash 硬熔断仍为 CNY 8/3；E5 按
-  898 个查询的实测成本把 Adaptive/全局上限修正为 CNY 20/30，且只改变
-  允许成本、不改变科学设计；无自动重试或模型回退；官方响应失败留在 ITT，
-  无响应工程失败只在原因修复后运行受影响行；作者信息保持空白。
-- 验收状态：E1 720、E2 240+480 offline、E3 240 和 E4 360 已闭合。
-  owner 于 2026-08-28 明确要求继续项目，E5 恢复为 `in_progress`。只允许显式恢复
-  q474 无响应 key 并运行未触碰 query；不自动重试、不重跑成功行。Git 里程碑推送到
-  `origin/codex/q2-empirical-study`，即
+- 安全与失败边界：Adaptive/Global 为非阻断 CNY 1,000/1,000 机器保护阈值，
+  实际成本继续完整记账；无自动重试或模型回退；官方响应失败留在 ITT；
+  无响应工程失败只在原因修复后显式运行受影响 key；作者信息保持空白。
+- 验收状态：E1 720、E2 240+480 offline、E3 240、E4 360 和 E5 12×300
+  全部闭合。E5 为 3,605 物理行/3,600 最新终态 key、0/12 first success，
+  Wilson 95% CI 0--24.25%，23 个 operational failures 单列，4,511,768 tokens，
+  分析归因成本 CNY 24.5551236；provider tools、真实 external effects 和
+  automatic retries 均为零。
+- 交付范围：owner 最新要求只以 Markdown 报告记录当前成果，先不写论文。
+  已生成 5 幅主图和 5 张主表；不修改/重建双语论文、Supplement、DOCX 或投稿包。
+  `F-PAPER-002` 保持 `in_progress` 的原因是论文阶段暂停，增量实验本身已完成。
+- Git 目标：`origin/codex/q2-empirical-study`，仓库
   `https://github.com/Fischl0527/RedTeam_LLM_Security.git`。
-- 恢复起点：E5 runner 于 `M3V2-D-077-A2:q474` 出现无官方响应记录并
-  fail-closed 暂停。恢复前有 2,380 条物理查询记录、2,379 个唯一 query key；
-  7/12 个 survivor 到达 q500，其中 0/7 观察到 unsafe effect；一项停在
-  q474，一项只有 q201--205 正式前缀，三项未开始。成本 CNY 17.9303736，
-  provider tools 和真实 external effects 为零，automatic retries 为零。按实测剩余
-  成本且 owner 明确要求成本不得限制项目，Adaptive/Global 设为非阻断的
-  CNY 1,000/1,000 机器上限，科学设计不变，实际用量仍完整记账。
-  E5 全部终态后才能生成 `analysis_v1.json`。F-PAPER-002 保持 `in_progress`。
 
 ### 2026-08-23 精简实证里程碑 31：Stage 5 最小 JISA 投稿包已完成
 

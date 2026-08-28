@@ -2,6 +2,24 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-28 — Close E1--E5 and deliver a Markdown report before manuscript work
+
+- Context: E5 reached all 12 selected survivor terminals after explicit
+  failed-only recovery of response-less keys. The one-pass analysis, five
+  figures and five tables are complete. The owner then requested that current
+  results be recorded as Markdown and that paper writing wait.
+- Decision: treat E1--E5 as the closed incremental experiment stage and stop all
+  provider/API work. Deliver `phase_report_v1.md`, compact analyses, figures,
+  tables and Harness/Git state. Do not update or rebuild bilingual manuscripts,
+  supplements, DOCX or submission files without a new owner instruction.
+- Claim boundary: E5 estimates only the selected B200-survivor conditional tail
+  (0/12; Wilson 95% CI 0--24.25%). It is not the original 40-task B500 curve and
+  does not establish attack saturation or zero tail risk.
+- Recovery closure: later q459/q354 response-less events superseded the earlier
+  q474-only operational note. Each was recovered explicitly without replaying
+  successful work. Every latest E5 key is now response-bearing; automatic
+  retries, provider tools and real external effects remained zero.
+
 ## 2026-08-28 — Raise only the E5 execution-cost ceiling after owner resume
 
 - Context: E5 was owner-stopped after 2,379 unique query keys and CNY
