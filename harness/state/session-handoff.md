@@ -20,6 +20,9 @@
   approximately 22:26 +08 so W3 can use the same band on 2026-08-30. Start each
   provider's new 12-row W2 prefix; expand only that provider/window if its own
   gate passes. W2/W3 are sensitivity evidence and cannot repair W1.
+- App heartbeat `e6-nightly-provider-windows` is active at approximately 22:26
+  local daily. It must stop after W3 analysis/report or remain no-op if timing,
+  prior seal, active-process or safety checks fail.
 
 ## 2026-08-28 — E6 offline-qualified; W1 not started
 
