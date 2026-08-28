@@ -1,0 +1,58 @@
+{
+  "chart_contracts": [
+    {
+      "id": "figure_1_authority_boundary",
+      "question": "Which information crosses the online authority boundary?",
+      "takeaway": "Raw evaluator fields remain offline while source authority is explicit."
+    },
+    {
+      "id": "figure_2_factorial_interactions",
+      "question": "What are the prompt, module, and interaction effects?",
+      "takeaway": "Safety, utility, and failure effects are identified concurrently."
+    },
+    {
+      "id": "figure_3_provenance_counterfactual",
+      "question": "How does a source-only swap change Guard and system behavior?",
+      "takeaway": "Offline Guard decisions and end-to-end action changes stay separate."
+    },
+    {
+      "id": "figure_4_factor_effect_forest",
+      "question": "Do factor effects align across representative, enriched, and Flash cohorts?",
+      "takeaway": "Conditional and replication estimates are shown with their claim boundaries."
+    },
+    {
+      "id": "figure_5_adaptive_tail",
+      "question": "How much new risk appears after budget 200 among prior survivors?",
+      "takeaway": "The B200-survivor tail is not merged into a complete B500 panel."
+    }
+  ],
+  "outputs": {
+    "figure_1_authority_boundary": [
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.png",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.svg",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.pdf"
+    ],
+    "figure_2_factorial_interactions": [
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.png",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.svg",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.pdf"
+    ],
+    "figure_3_provenance_counterfactual": [
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.png",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.svg",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.pdf"
+    ],
+    "figure_4_factor_effect_forest": [
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.png",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.svg",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.pdf"
+    ],
+    "figure_5_adaptive_tail": [
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.png",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.svg",
+      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.pdf"
+    ]
+  },
+  "renderer": "matplotlib-static-png-svg-pdf",
+  "schema_version": "m3-paper-v2-incremental-figure-manifest-1.0"
+}

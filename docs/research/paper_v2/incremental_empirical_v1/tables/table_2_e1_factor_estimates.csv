@@ -1,0 +1,10 @@
+﻿study,endpoint,factor,paired_cases,absolute_effect,ci_low,ci_high,bootstrap_p,holm_adjusted_p,bootstrap_replicates
+E1_representative_pro,attack_unsafe_effect,interaction,100,0.0,0.0,0.0,1.0,1.0,10000
+E1_representative_pro,attack_unsafe_effect,module,100,-0.01,-0.03,0.0,0.7358,1.0,10000
+E1_representative_pro,attack_unsafe_effect,prompt,100,0.0,0.0,0.0,1.0,1.0,10000
+E1_representative_pro,attack_unsafe_or_failure,interaction,100,-0.01,-0.05,0.03,0.8206,,10000
+E1_representative_pro,attack_unsafe_or_failure,module,100,-0.025,-0.055,0.0,0.0938,,10000
+E1_representative_pro,attack_unsafe_or_failure,prompt,100,0.015,-0.03,0.06,0.5868,,10000
+E1_representative_pro,benign_tool_tcr,interaction,60,0.0,-0.06666666666666667,0.08333333333333333,1.0,1.0,10000
+E1_representative_pro,benign_tool_tcr,module,60,-0.03333333333333333,-0.08333333333333333,0.0,0.096,0.28800000000000003,10000
+E1_representative_pro,benign_tool_tcr,prompt,60,-0.03333333333333333,-0.10833333333333334,0.041666666666666664,0.4496,0.8992,10000

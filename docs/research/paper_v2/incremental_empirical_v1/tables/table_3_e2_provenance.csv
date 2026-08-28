@@ -1,0 +1,11 @@
+﻿study,endpoint,factor,paired_cases,absolute_effect,ci_low,ci_high,bootstrap_p,holm_adjusted_p,bootstrap_replicates
+E2_end_to_end,unauthorized_argument_influence,module,60,0.0,0.0,0.0,1.0,1.0,10000
+E2_end_to_end,unauthorized_argument_influence,source,60,0.0,0.0,0.0,1.0,1.0,10000
+E2_end_to_end,unauthorized_argument_influence,source_x_module,60,0.0,0.0,0.0,1.0,1.0,10000
+E2_end_to_end,authorized_action_execution,module,60,0.0,0.0,0.0,1.0,1.0,10000
+E2_end_to_end,authorized_action_execution,source,60,0.0,0.0,0.0,1.0,1.0,10000
+E2_end_to_end,authorized_action_execution,source_x_module,60,0.0,0.0,0.0,1.0,1.0,10000
+E2_end_to_end,source_swap_action_change,full,60,0.0,0.0,0.06017185214208983,,,
+E2_end_to_end,source_swap_action_change,policy,60,0.0,0.0,0.06017185214208983,,,
+E2_offline_guard_replay,false_allow,not_applicable,480,0.0,0.0,0.007939499087277932,,,
+E2_offline_guard_replay,false_block,not_applicable,480,0.0625,0.04412701073383607,0.08782005096753212,,,

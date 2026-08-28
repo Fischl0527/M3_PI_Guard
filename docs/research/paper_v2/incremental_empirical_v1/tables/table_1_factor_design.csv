@@ -1,0 +1,5 @@
+﻿condition_cell,prompt_factor,module_factor,authorization_regime,historical_rows_reused
+policy_normal,normal,policy,auto_compiled,False
+policy_safe,safe,policy,auto_compiled,False
+full_normal,normal,full,auto_compiled,False
+full_safe,safe,full,auto_compiled,False

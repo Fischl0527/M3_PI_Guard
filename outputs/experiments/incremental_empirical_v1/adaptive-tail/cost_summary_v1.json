@@ -1,0 +1,8 @@
+{
+  "automatic_retries": 0,
+  "cost_cny": 24.5611314,
+  "hard_limit_cny": 972.044136,
+  "provider_call_count": 5732,
+  "recorded_at": "2026-08-28T11:42:10.453474+00:00",
+  "schema_version": "m3-paper-v2-adaptive-tail-cost-summary-1.0"
+}

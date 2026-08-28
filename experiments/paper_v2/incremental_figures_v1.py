@@ -197,14 +197,19 @@ def figure_authority_boundary(output_dir: Path) -> list[str]:
         fill="#FDECEC",
     )
     ax.annotate(
-        "source-only counterfactual",
+        "",
         xy=(0.39, 0.23),
         xytext=(0.28, 0.23),
         arrowprops={"arrowstyle": "->", "color": ORANGE, "lw": 1.2},
-        ha="left",
+    )
+    ax.text(
+        0.335,
+        0.27,
+        "source-only\nswap",
+        ha="center",
         va="bottom",
         color=ORANGE,
-        fontsize=8.5,
+        fontsize=7.5,
     )
     ax.annotate(
         "",

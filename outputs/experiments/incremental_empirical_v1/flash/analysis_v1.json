@@ -1,0 +1,740 @@
+{
+  "analysis_boundary": "same_provider_cross_model_replication",
+  "attack_failure_bound_factor": {
+    "case_type": "attack",
+    "endpoint": "unsafe_or_failure",
+    "factor_estimates": {
+      "interaction": {
+        "bootstrap_two_sided_p": 0.7852,
+        "ci_high": 0.04,
+        "ci_low": -0.1,
+        "clusters": 50,
+        "estimate": -0.02,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      },
+      "module": {
+        "bootstrap_two_sided_p": 0.0864,
+        "ci_high": 0.07,
+        "ci_low": 0.0,
+        "clusters": 50,
+        "estimate": 0.03,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      },
+      "prompt": {
+        "bootstrap_two_sided_p": 0.7752,
+        "ci_high": 0.02,
+        "ci_low": -0.05,
+        "clusters": 50,
+        "estimate": -0.01,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      }
+    },
+    "multiplicity_role": "challenge_or_replication_no_new_significance_family",
+    "paired_cases": 50,
+    "simple_paired_effects": [
+      {
+        "absolute_difference_second_minus_first": 0.04,
+        "first": "policy_normal",
+        "first_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 2,
+          "method": "mcnemar_exact",
+          "p_value": 0.5,
+          "pairs": 50,
+          "treatment_only_event": 2
+        },
+        "paired_cases": 50,
+        "second": "full_normal",
+        "second_rate": {
+          "ci_high": 0.13460090687507018,
+          "ci_low": 0.011038884327619819,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 2,
+          "value": 0.04
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0.02,
+        "first": "policy_safe",
+        "first_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 1,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 50,
+          "treatment_only_event": 1
+        },
+        "paired_cases": 50,
+        "second": "full_safe",
+        "second_rate": {
+          "ci_high": 0.1049544358963781,
+          "ci_low": 0.0035392592716462293,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 1,
+          "value": 0.02
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_normal",
+        "first_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 50,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 50,
+        "second": "policy_safe",
+        "second_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": -0.02,
+        "first": "full_normal",
+        "first_rate": {
+          "ci_high": 0.13460090687507018,
+          "ci_low": 0.011038884327619819,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 2,
+          "value": 0.04
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 2,
+          "discordant_pairs": 3,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 50,
+          "treatment_only_event": 1
+        },
+        "paired_cases": 50,
+        "second": "full_safe",
+        "second_rate": {
+          "ci_high": 0.1049544358963781,
+          "ci_low": 0.0035392592716462293,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 1,
+          "value": 0.02
+        }
+      }
+    ]
+  },
+  "attack_unsafe_factor": {
+    "case_type": "attack",
+    "endpoint": "unsafe_effect",
+    "factor_estimates": {
+      "interaction": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 50,
+        "estimate": 0,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      },
+      "module": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 50,
+        "estimate": 0.0,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      },
+      "prompt": {
+        "bootstrap_two_sided_p": 1.0,
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "clusters": 50,
+        "estimate": 0.0,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      }
+    },
+    "multiplicity_role": "challenge_or_replication_no_new_significance_family",
+    "paired_cases": 50,
+    "simple_paired_effects": [
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_normal",
+        "first_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 50,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 50,
+        "second": "full_normal",
+        "second_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_safe",
+        "first_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 50,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 50,
+        "second": "full_safe",
+        "second_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "policy_normal",
+        "first_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 50,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 50,
+        "second": "policy_safe",
+        "second_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0,
+        "first": "full_normal",
+        "first_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 50,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 50,
+        "second": "full_safe",
+        "second_rate": {
+          "ci_high": 0.07134759913335868,
+          "ci_low": 0.0,
+          "confidence": 0.95,
+          "denominator": 50,
+          "numerator": 0,
+          "value": 0.0
+        }
+      }
+    ]
+  },
+  "audit": {
+    "attempt_counts": {
+      "1": 360,
+      "2": 1
+    },
+    "external_effects_enabled": 0,
+    "latest_work_items": 360,
+    "official_response_ids": 546,
+    "online_forbidden_fields": 0,
+    "operational_statuses": {
+      "completed": 347,
+      "max_steps": 1,
+      "parse_failure": 8,
+      "provider_failure": 4
+    },
+    "planned_work_items": 360,
+    "provider_tools_enabled": 0,
+    "raw_attempt_rows": 361,
+    "response_bearing_work_items": 360,
+    "superseded_attempt_rows": 1,
+    "terminal_work_items": 360
+  },
+  "benign_tool_tcr_factor": {
+    "case_type": "benign_tool",
+    "endpoint": "task_completion",
+    "factor_estimates": {
+      "interaction": {
+        "bootstrap_two_sided_p": 0.2558,
+        "ci_high": 0.16666666666666666,
+        "ci_low": 0.0,
+        "clusters": 30,
+        "estimate": 0.06666666666666667,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      },
+      "module": {
+        "bootstrap_two_sided_p": 0.2602,
+        "ci_high": 0.08333333333333333,
+        "ci_low": 0.0,
+        "clusters": 30,
+        "estimate": 0.03333333333333333,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      },
+      "prompt": {
+        "bootstrap_two_sided_p": 0.5494,
+        "ci_high": 0.03333333333333333,
+        "ci_low": -0.11666666666666667,
+        "clusters": 30,
+        "estimate": -0.03333333333333333,
+        "holm_adjusted_p": null,
+        "replicates": 10000
+      }
+    },
+    "multiplicity_role": "challenge_or_replication_no_new_significance_family",
+    "paired_cases": 30,
+    "simple_paired_effects": [
+      {
+        "absolute_difference_second_minus_first": 0.0,
+        "first": "policy_normal",
+        "first_rate": {
+          "ci_high": 0.5121994835545616,
+          "ci_low": 0.19230498083676142,
+          "confidence": 0.95,
+          "denominator": 30,
+          "numerator": 10,
+          "value": 0.3333333333333333
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 0,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 30,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 30,
+        "second": "full_normal",
+        "second_rate": {
+          "ci_high": 0.5121994835545616,
+          "ci_low": 0.19230498083676142,
+          "confidence": 0.95,
+          "denominator": 30,
+          "numerator": 10,
+          "value": 0.3333333333333333
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0.06666666666666665,
+        "first": "policy_safe",
+        "first_rate": {
+          "ci_high": 0.44447961695188887,
+          "ci_low": 0.14182663319596325,
+          "confidence": 0.95,
+          "denominator": 30,
+          "numerator": 8,
+          "value": 0.26666666666666666
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 0,
+          "discordant_pairs": 2,
+          "method": "mcnemar_exact",
+          "p_value": 0.5,
+          "pairs": 30,
+          "treatment_only_event": 2
+        },
+        "paired_cases": 30,
+        "second": "full_safe",
+        "second_rate": {
+          "ci_high": 0.5121994835545616,
+          "ci_low": 0.19230498083676142,
+          "confidence": 0.95,
+          "denominator": 30,
+          "numerator": 10,
+          "value": 0.3333333333333333
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": -0.06666666666666665,
+        "first": "policy_normal",
+        "first_rate": {
+          "ci_high": 0.5121994835545616,
+          "ci_low": 0.19230498083676142,
+          "confidence": 0.95,
+          "denominator": 30,
+          "numerator": 10,
+          "value": 0.3333333333333333
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 2,
+          "discordant_pairs": 2,
+          "method": "mcnemar_exact",
+          "p_value": 0.5,
+          "pairs": 30,
+          "treatment_only_event": 0
+        },
+        "paired_cases": 30,
+        "second": "policy_safe",
+        "second_rate": {
+          "ci_high": 0.44447961695188887,
+          "ci_low": 0.14182663319596325,
+          "confidence": 0.95,
+          "denominator": 30,
+          "numerator": 8,
+          "value": 0.26666666666666666
+        }
+      },
+      {
+        "absolute_difference_second_minus_first": 0.0,
+        "first": "full_normal",
+        "first_rate": {
+          "ci_high": 0.5121994835545616,
+          "ci_low": 0.19230498083676142,
+          "confidence": 0.95,
+          "denominator": 30,
+          "numerator": 10,
+          "value": 0.3333333333333333
+        },
+        "mcnemar_exact": {
+          "baseline_only_event": 1,
+          "discordant_pairs": 2,
+          "method": "mcnemar_exact",
+          "p_value": 1.0,
+          "pairs": 30,
+          "treatment_only_event": 1
+        },
+        "paired_cases": 30,
+        "second": "full_safe",
+        "second_rate": {
+          "ci_high": 0.5121994835545616,
+          "ci_low": 0.19230498083676142,
+          "confidence": 0.95,
+          "denominator": 30,
+          "numerator": 10,
+          "value": 0.3333333333333333
+        }
+      }
+    ]
+  },
+  "cell_summary": {
+    "full_normal": {
+      "ask": {
+        "ci_high": 0.40126510524846093,
+        "ci_low": 0.21510914497726974,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 27,
+        "value": 0.3
+      },
+      "attack_unsafe_effect": {
+        "ci_high": 0.07134759913335868,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 50,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "attack_unsafe_or_failure": {
+        "ci_high": 0.13460090687507018,
+        "ci_low": 0.011038884327619819,
+        "confidence": 0.95,
+        "denominator": 50,
+        "numerator": 2,
+        "value": 0.04
+      },
+      "benign_tool_tcr": {
+        "ci_high": 0.5121994835545616,
+        "ci_low": 0.19230498083676142,
+        "confidence": 0.95,
+        "denominator": 30,
+        "numerator": 10,
+        "value": 0.3333333333333333
+      },
+      "cost_cny": 0.1427,
+      "deny": {
+        "ci_high": 0.0934728603038987,
+        "ci_low": 0.011400390222806277,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 3,
+        "value": 0.03333333333333333
+      },
+      "latency_total_ms": {
+        "count": 90,
+        "mean": 3190.080246666667,
+        "median": 2319.6039499999997,
+        "p50": 2319.6039499999997,
+        "p95": 5840.010920000001
+      },
+      "operational_failure": {
+        "ci_high": 0.1087685503281223,
+        "ci_low": 0.01741724185270873,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 4,
+        "value": 0.044444444444444446
+      },
+      "records": 90,
+      "tokens": 142162
+    },
+    "full_safe": {
+      "ask": {
+        "ci_high": 0.3896404359799831,
+        "ci_low": 0.20542127259162146,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 26,
+        "value": 0.28888888888888886
+      },
+      "attack_unsafe_effect": {
+        "ci_high": 0.07134759913335868,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 50,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "attack_unsafe_or_failure": {
+        "ci_high": 0.1049544358963781,
+        "ci_low": 0.0035392592716462293,
+        "confidence": 0.95,
+        "denominator": 50,
+        "numerator": 1,
+        "value": 0.02
+      },
+      "benign_tool_tcr": {
+        "ci_high": 0.5121994835545616,
+        "ci_low": 0.19230498083676142,
+        "confidence": 0.95,
+        "denominator": 30,
+        "numerator": 10,
+        "value": 0.3333333333333333
+      },
+      "cost_cny": 0.1573626,
+      "deny": {
+        "ci_high": 0.0934728603038987,
+        "ci_low": 0.011400390222806277,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 3,
+        "value": 0.03333333333333333
+      },
+      "latency_total_ms": {
+        "count": 90,
+        "mean": 3218.9711322222224,
+        "median": 2235.5507500000003,
+        "p50": 2235.5507500000003,
+        "p95": 7065.5987499999965
+      },
+      "operational_failure": {
+        "ci_high": 0.0934728603038987,
+        "ci_low": 0.011400390222806277,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 3,
+        "value": 0.03333333333333333
+      },
+      "records": 90,
+      "tokens": 130093
+    },
+    "policy_normal": {
+      "ask": {
+        "ci_high": 0.4128282454097655,
+        "ci_low": 0.22485854647009126,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 28,
+        "value": 0.3111111111111111
+      },
+      "attack_unsafe_effect": {
+        "ci_high": 0.07134759913335868,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 50,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "attack_unsafe_or_failure": {
+        "ci_high": 0.07134759913335868,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 50,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "benign_tool_tcr": {
+        "ci_high": 0.5121994835545616,
+        "ci_low": 0.19230498083676142,
+        "confidence": 0.95,
+        "denominator": 30,
+        "numerator": 10,
+        "value": 0.3333333333333333
+      },
+      "cost_cny": 0.1292508,
+      "deny": {
+        "ci_high": 0.07744526688625371,
+        "ci_low": 0.006115441986325215,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 2,
+        "value": 0.022222222222222223
+      },
+      "latency_total_ms": {
+        "count": 90,
+        "mean": 3013.0636155555558,
+        "median": 2189.99575,
+        "p50": 2189.99575,
+        "p95": 5907.687414999999
+      },
+      "operational_failure": {
+        "ci_high": 0.07744526688625371,
+        "ci_low": 0.006115441986325215,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 2,
+        "value": 0.022222222222222223
+      },
+      "records": 90,
+      "tokens": 128170
+    },
+    "policy_safe": {
+      "ask": {
+        "ci_high": 0.4128282454097655,
+        "ci_low": 0.22485854647009126,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 28,
+        "value": 0.3111111111111111
+      },
+      "attack_unsafe_effect": {
+        "ci_high": 0.07134759913335868,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 50,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "attack_unsafe_or_failure": {
+        "ci_high": 0.07134759913335868,
+        "ci_low": 0.0,
+        "confidence": 0.95,
+        "denominator": 50,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "benign_tool_tcr": {
+        "ci_high": 0.44447961695188887,
+        "ci_low": 0.14182663319596325,
+        "confidence": 0.95,
+        "denominator": 30,
+        "numerator": 8,
+        "value": 0.26666666666666666
+      },
+      "cost_cny": 0.11177,
+      "deny": {
+        "ci_high": 0.1087685503281223,
+        "ci_low": 0.01741724185270873,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 4,
+        "value": 0.044444444444444446
+      },
+      "latency_total_ms": {
+        "count": 90,
+        "mean": 3017.0929855555555,
+        "median": 2124.2738499999996,
+        "p50": 2124.2738499999996,
+        "p95": 6601.848639999998
+      },
+      "operational_failure": {
+        "ci_high": 0.1087685503281223,
+        "ci_low": 0.01741724185270873,
+        "confidence": 0.95,
+        "denominator": 90,
+        "numerator": 4,
+        "value": 0.044444444444444446
+      },
+      "records": 90,
+      "tokens": 127742
+    }
+  },
+  "schema_version": "m3-paper-v2-incremental-analysis-1.0",
+  "study": "flash"
+}

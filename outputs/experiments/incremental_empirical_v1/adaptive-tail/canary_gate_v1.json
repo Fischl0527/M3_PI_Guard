@@ -1,0 +1,14 @@
+{
+  "complete_request_chain": true,
+  "exact_returned_model": true,
+  "gate_passed": true,
+  "observed_query_rows": 10,
+  "online_field_isolation": true,
+  "planned_new_queries_per_task": 5,
+  "planned_tasks": 2,
+  "provider_tools_and_external_effects_zero": true,
+  "schema_version": "m3-paper-v2-adaptive-tail-canary-gate-1.0",
+  "scientific_outcomes_inspected": false,
+  "status": "passed",
+  "study": "adaptive-tail"
+}
