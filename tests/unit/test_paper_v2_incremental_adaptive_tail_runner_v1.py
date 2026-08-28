@@ -199,6 +199,16 @@ def test_trace_collision_without_provider_response_allows_one_explicit_recovery(
         "".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8"
     )
     monkeypatch.setattr(runner, "RAW_PATH", raw_path)
+    trace_root = tmp_path / "provider_traces"
+    collision_trace = (
+        tmp_path / "provider_traces_recovery2" / f"{key}.jsonl"
+    )
+    collision_trace.parent.mkdir()
+    collision_trace.write_text(
+        json.dumps({"event": {"event_type": "started"}}) + "\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(runner, "TRACE_ROOT", trace_root)
 
     assert runner._explicit_retry_allowed(key, rows[-1]) is True
 
@@ -241,3 +251,70 @@ def test_response_bearing_or_unrelated_second_failure_is_never_retryable(
         )
         is False
     )
+
+
+def test_retry_rejects_any_response_bearing_history(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    raw_path = tmp_path / "raw.jsonl"
+    key = "adaptive-cost-v1__case__q00459"
+    rows = [
+        {
+            "work_key": key,
+            "attempt": 1,
+            "response_obtained": True,
+            "retry_eligible": False,
+        },
+        {
+            "work_key": key,
+            "attempt": 2,
+            "response_obtained": False,
+            "retry_eligible": True,
+        },
+    ]
+    raw_path.write_text(
+        "".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8"
+    )
+    monkeypatch.setattr(runner, "RAW_PATH", raw_path)
+
+    assert runner._explicit_retry_allowed(key, rows[-1]) is False
+
+
+def test_trace_collision_exception_requires_an_unfinished_collision_trace(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    raw_path = tmp_path / "raw.jsonl"
+    key = "adaptive-cost-v1__case__q00459"
+    rows = [
+        {
+            "work_key": key,
+            "attempt": 1,
+            "response_obtained": False,
+            "retry_eligible": True,
+        },
+        {
+            "work_key": key,
+            "attempt": 2,
+            "response_obtained": False,
+            "retry_eligible": False,
+            "operational_status": "pre_response_transport_failure",
+            "error_type": "ProviderTraceBundleError",
+        },
+    ]
+    raw_path.write_text(
+        "".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8"
+    )
+    monkeypatch.setattr(runner, "RAW_PATH", raw_path)
+    monkeypatch.setattr(runner, "TRACE_ROOT", tmp_path / "provider_traces")
+
+    assert runner._explicit_retry_allowed(key, rows[-1]) is False
+
+    collision_trace = (
+        tmp_path / "provider_traces_recovery2" / f"{key}.jsonl"
+    )
+    collision_trace.parent.mkdir()
+    collision_trace.write_text(
+        json.dumps({"event": {"event_type": "completed"}}) + "\n",
+        encoding="utf-8",
+    )
+    assert runner._explicit_retry_allowed(key, rows[-1]) is False

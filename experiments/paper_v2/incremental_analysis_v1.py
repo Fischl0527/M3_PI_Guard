@@ -894,6 +894,18 @@ def write_analysis(study: str) -> dict[str, Any]:
     return value
 
 
+def _terminal_unit_count(result: Mapping[str, Any]) -> int:
+    audit = result.get("audit")
+    if not isinstance(audit, Mapping):
+        raise IncrementalAnalysisError("analysis audit is missing")
+    value = audit.get("terminal_work_items")
+    if value is None:
+        value = audit.get("terminal_survivor_tasks")
+    if not isinstance(value, int):
+        raise IncrementalAnalysisError("analysis terminal unit count is missing")
+    return value
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -907,7 +919,7 @@ def main() -> int:
         json.dumps(
             {
                 "study": args.study,
-                "terminal_work_items": result["audit"]["terminal_work_items"],
+                "terminal_work_items": _terminal_unit_count(result),
                 "analysis": str(
                     (OUTPUT_ROOT / args.study / "analysis_v1.json")
                     .relative_to(PROJECT_ROOT)

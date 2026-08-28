@@ -1,5 +1,21 @@
 # Failure Log
 
+## 2026-08-28 — E5 q354 response-less pause
+
+- Attempt: continue E5 after the q459-only recovery.
+- Failure: `M3V2-D-047-A1:q354` produced one response-less
+  `provider_failure`; the runner stopped with `retry_eligible=true` and zero
+  automatic retries.
+- Evidence: its recovery-3 trace contains one `started` event and no
+  `completed` event. The cumulative recorded E5 cost was CNY 22.2599202, so
+  cost was not the stop cause. All earlier response-bearing work items remain
+  terminal and will not be replayed.
+- Changed hypothesis: treat this as an isolated no-response provider result,
+  select a fresh recovery trace root, and explicitly retry only the q354 work
+  key. Before doing so, require the complete work-key history to contain no
+  response-bearing row.
+- Safety impact: provider tools and real external effects remained disabled.
+
 ## 2026-08-28 — E5 q459 response-less pause
 
 - Attempt: continue the owner-resumed E5 tail after the explicit q474 recovery.

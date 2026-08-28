@@ -254,25 +254,38 @@ def _explicit_retry_allowed(key: str, latest: Mapping[str, Any]) -> bool:
     rejects every response-bearing history.
     """
 
-    if latest.get("response_obtained") is not False:
-        return False
-    if latest.get("retry_eligible") is True:
-        return True
-    if (
-        int(latest.get("attempt", 0)) != 2
-        or latest.get("operational_status") != "pre_response_transport_failure"
-        or latest.get("error_type") != "ProviderTraceBundleError"
-    ):
-        return False
     history = [
         row
         for row in _read_jsonl(RAW_PATH)
         if str(row.get("work_key", "")) == key
     ]
-    return (
-        [int(row.get("attempt", 0)) for row in history] == [1, 2]
-        and all(row.get("response_obtained") is False for row in history)
-        and history[0].get("retry_eligible") is True
+    attempts = [int(row.get("attempt", 0)) for row in history]
+    if (
+        not history
+        or int(latest.get("attempt", 0)) != attempts[-1]
+        or latest.get("response_obtained") is not False
+        or not all(row.get("response_obtained") is False for row in history)
+    ):
+        return False
+    if latest.get("retry_eligible") is True:
+        return attempts == [1]
+    if (
+        attempts != [1, 2]
+        or latest.get("operational_status") != "pre_response_transport_failure"
+        or latest.get("error_type") != "ProviderTraceBundleError"
+        or history[0].get("retry_eligible") is not True
+    ):
+        return False
+    collision_trace = (
+        TRACE_ROOT.parent / "provider_traces_recovery2" / f"{key}.jsonl"
+    )
+    if not collision_trace.is_file() or collision_trace.stat().st_size == 0:
+        return False
+    trace_rows = _read_jsonl(collision_trace)
+    return bool(trace_rows) and not any(
+        row.get("event", {}).get("event_type") == "completed"
+        for row in trace_rows
+        if isinstance(row.get("event"), Mapping)
     )
 
 

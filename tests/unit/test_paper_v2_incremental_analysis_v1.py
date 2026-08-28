@@ -275,3 +275,12 @@ def test_adaptive_tail_analysis_rejects_nonterminal_survivor() -> None:
             checkpoint_values=checkpoints,
             raw_rows=raw,
         )
+
+
+def test_terminal_unit_count_supports_regular_and_adaptive_audits() -> None:
+    assert analysis._terminal_unit_count(
+        {"audit": {"terminal_work_items": 720}}
+    ) == 720
+    assert analysis._terminal_unit_count(
+        {"audit": {"terminal_survivor_tasks": 12}}
+    ) == 12
