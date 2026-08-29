@@ -1,5 +1,26 @@
 # 当前任务
 
+### 2026-08-29 E6-v2 前瞻工程修复（不改写 E6-v1）
+
+- 目标：保留 E6-v1 W1/W2 的全部失败、响应和封存状态不可变，创建独立的
+  E6-v2 修订路径，修复 Gemini response-less 恢复与 provider ledger 契约冲突，
+  并补足 DeepSeek 多步调用失败的脱敏可观测性和系统性技术门识别。
+- 允许修改：`experiments/paper_v2/` 下共享 live runtime 的向后兼容诊断/attempt
+  namespace、独立 E6-v2 runner/协议及其定向测试，以及本任务 Harness 状态文件。
+- 禁止修改或执行：E6-v1 计划、raw records、gate/seal、provider stop、call ledger
+  和 trace；W1/W2 任何 work key；API/provider 调用；真实 external effect；Full
+  Harness、历史递归重放和自动重试。
+- 修复原则：默认 attempt namespace 保持 `1`，历史调用身份算法不变；只有显式、
+  唯一、无 response ID 的外层 attempt 2 使用独立 call-ledger/trace namespace。
+  response-bearing、attempt 3、身份或 payload 漂移仍 fail-closed；429 manual recovery
+  与 generic response-less recovery 保持分离。
+- 当前阶段：旧 `e6-nightly-provider-windows` heartbeat 已暂停，避免 2026-08-30
+  按 v1 runner 自动启动 W3。正在实施离线修复和定向验证，不调用 DeepSeek/Gemini。
+- 验收：真实 call-sink stub 覆盖 generic response-less attempt 1→2、attempt 3 拒绝、
+  response-bearing 不恢复、429 旧语义、v1/v2 根隔离；AgentDojo 多步失败能记录
+  脱敏 failure stage/class/call index，并被技术门识别；定向 pytest、Ruff、
+  `py_compile`、`git diff --check` 全部通过后才可讨论新的 provider canary。
+
 ### 2026-08-28 E6 双提供商同期攻击活性与重复性校准
 
 - 目标：实施 `m3-q2-e6-cross-provider-calibration-v1`，以 DeepSeek V4 Pro

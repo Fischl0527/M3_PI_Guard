@@ -2,6 +2,31 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-29 — Supersede E6-v1 execution with a prospective E6-v2 repair
+
+- Context: DeepSeek W1/W2 repeated a 3 completed / 3 strict-parse-failure /
+  6 runtime provider-failure prefix pattern, while Gemini's one permitted
+  response-less outer recovery collided with a provider-call ledger that only
+  permits paused-429 manual recovery. Gemini then failed closed before W2 made
+  any provider request.
+- Decision: preserve every E6-v1 plan, response, raw row, gate, seal, trace,
+  ledger and provider-stop marker unchanged. Pause the v1 W3 heartbeat and add
+  a separately versioned E6-v2 implementation, identity and output root.
+- Gemini repair: generic non-429 response-less outer attempt 2 receives a
+  distinct call-ledger/trace namespace and remains limited to one explicitly
+  named unresolved key with no response in its complete history. Attempt 3,
+  response-bearing recovery, success replay, identity/payload drift and hidden
+  fallback remain forbidden. Paused-429 recovery retains its narrower existing
+  authorization contract.
+- DeepSeek repair: retain strict parsing and ITT semantics, but project only
+  sanitized failure stage/class/call index/HTTP category and count repeated
+  runtime provider failures in the technical gate. Reproduce the AgentDojo
+  first-tool-to-second-call path with an offline stub before any new canary.
+- Consequence: E6-v1 remains diagnostic and cannot be made eligible after the
+  fact. No provider call is authorized by this engineering repair; new live
+  execution requires a separate owner-visible canary decision after focused
+  tests pass.
+
 ## 2026-08-28 — Preserve failed E6 prefixes through administrative closure
 
 - Context: DeepSeek W1 returned all 12 formal-prefix rows but only 3 were
