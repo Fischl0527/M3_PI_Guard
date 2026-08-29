@@ -1,5 +1,25 @@
 # 进展记录
 
+## 2026-08-29 — E6 DeepSeek W2 封存，Gemini 依既有 fatal boundary 停止
+
+- W2 DeepSeek 于 22:43:05 +08 启动，满足距 W1 启动 24 小时 16 分钟的
+  18--30 小时预注册间隔。12 条正式前缀全部获得官方响应，模型身份、请求链、
+  在线字段隔离、provider tools 和真实 effect 门均合格，但只有 3/12 completed；
+  其余为 3 parse failure、6 provider failure，冻结的 `>=9/12` 技术门再次失败。
+- DeepSeek W2 没有扩展、重试或回退；360 个最新 work key 已封存为 12 条
+  execution 加 348 条 `technical_gate_not_extended` 行。行政闭合行不是安全结果，
+  不进入 response-bearing effect estimate。
+- Gemini W2 在网络调用前被 W1 的 provider 级 fatal-stop 标记拒绝。只读诊断确认
+  该标记来自 W1 response-less 恢复路径与底层 provider ledger 恢复契约不一致所触发的
+  `ProviderLedgerError`；它是跨窗口 fail-closed，不是可删除的 stale window state。
+  因此 Gemini W2 未启动、0 API 调用、0 W2 记录，且不允许原地运行 W2/W3；其
+  E6-v1 证据保持 diagnostic-only。
+- 联合定向 pytest 为 62/62；修正一次静态检查文件名后，Ruff、`py_compile` 和
+  `git diff --check` 均通过。未运行 Full Harness、历史重放或任何真实外部 effect。
+- DeepSeek W3 可在 2026-08-30 16:43--2026-08-31 04:43 +08 启动，目标仍为约
+  22:43 +08。Gemini 若未来恢复，必须另建 prospective amendment、新 run/output
+  root，并先修复 response-less ledger recovery 契约；不得改写 E6-v1。
+
 ## 2026-08-28 — E6 W1 双 provider 技术门失败并如实封存
 
 - W1 两家 provider 于 22:26:24 +08 同期启动，满足同一两小时带。DeepSeek

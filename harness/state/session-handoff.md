@@ -1,5 +1,28 @@
 # 会话移交
 
+## 2026-08-29 — E6 W2: DeepSeek sealed, Gemini provider-stopped
+
+- DeepSeek W2 started at `2026-08-29T22:43:05+08:00` and sealed at
+  `22:45:28+08:00`. Do not run any W2 DeepSeek key again. Its 360 latest rows
+  are 12 response-bearing executions plus 348 `technical_gate_not_extended`
+  closures; only 3/12 prefix rows completed, so the frozen gate failed.
+- Gemini W2 did not start and made zero API calls. The existing provider-wide
+  `provider_stop_v1.json` was created in W1 after a `ProviderLedgerError` in the
+  explicit response-less recovery path. It intentionally blocks all later
+  windows before state creation. Do not delete, rename or weaken this marker,
+  and do not run Gemini W2/W3 under E6-v1.
+- Gemini is diagnostic-only and cross-provider inference remains closed. A
+  future recovery would require a prospective amendment with a new run,
+  execution identity and output root after the generic response-less ledger
+  recovery contract is fixed and tested; it cannot repair E6-v1.
+- DeepSeek W3 may start only between `2026-08-30 16:43` and
+  `2026-08-31 04:43 +08`, preferably near 22:43. First execute its new 12-row
+  formal prefix, expand only if the unchanged technical gate passes, then seal.
+  Never rerun W1/W2 or a response-bearing row.
+- Focused verification after W2 is pytest 62/62 plus Ruff, `py_compile` and
+  `git diff --check`. No Full Harness, historical replay, provider tools or real
+  external effects were run.
+
 ## 2026-08-28 — E6 W1 sealed after technical-gate failure
 
 - DeepSeek and Gemini W1 both started at 22:26:24 +08 and are sealed. Do not

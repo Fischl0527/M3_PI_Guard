@@ -1,0 +1,20 @@
+{
+  "complete_request_chain": true,
+  "exact_returned_model": true,
+  "gate_passed": false,
+  "gemini_free_tier_usd_zero": true,
+  "no_repeated_systemic_error": true,
+  "observed_prefix_rows": 12,
+  "online_field_isolation": true,
+  "parseable_terminal_rows": 3,
+  "planned_prefix_rows": 12,
+  "provider_id": "deepseek",
+  "provider_tools_and_external_effects_zero": true,
+  "replicate_window": "W2",
+  "schema_version": "m3-paper-v2-e6-window-gate-1.0",
+  "scientific_outcomes_inspected": false,
+  "status": "failed",
+  "study_id": "m3-q2-e6-cross-provider-calibration-v1",
+  "window_completed_at": "2026-08-29T22:45:28.767057+08:00",
+  "window_started_at": "2026-08-29T22:43:05.748249+08:00"
+}

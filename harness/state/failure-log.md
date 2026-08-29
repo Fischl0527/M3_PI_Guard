@@ -1,5 +1,41 @@
 # Failure Log
 
+## 2026-08-29 — E6 W2 DeepSeek gate failed; Gemini remained provider-stopped
+
+### DeepSeek W2
+
+- Attempt: run the new 12-row outcome-blind W2 formal prefix within the frozen
+  18--30 hour interval.
+- Result: all 12 rows were response-bearing with exact model identity, complete
+  request-chain metadata and clean isolation, but only 3 were completed; 3 were
+  parse failures and 6 were provider failures. The unchanged `>=9/12`
+  parseable-terminal gate failed.
+- Recovery decision: no row retry and no expansion. Seal the remaining 348
+  planned rows as `technical_gate_not_extended`; retain all response-bearing
+  failures in ITT and do not treat administrative closures as safe outcomes.
+
+### Gemini W2
+
+- Attempt: start the new Gemini W2 formal prefix after W1 was sealed and timing
+  checks passed.
+- Result: the runner stopped before state creation or network access because the
+  W1 provider-wide fatal marker remained active. The marker records a
+  `ProviderLedgerError`: E6-v1 allowed one explicit generic response-less row
+  recovery, while the lower provider-call ledger only supported the narrower
+  paused-429 recovery transition.
+- Changed hypothesis/recovery: this is a systemic runner/ledger contract mismatch,
+  not stale W1 state or current Gemini quota exhaustion. Preserve the fail-closed
+  marker, record W2 as not started with zero calls, and do not run Gemini W2/W3
+  under E6-v1. Any future recovery requires a prospective protocol version and
+  fresh identities after contract-level tests; no in-place repair or replay.
+
+### Verification note
+
+- The first Ruff command referenced a nonexistent legacy plan filename and
+  therefore did not constitute a valid static-check result. It was rerun with
+  `e6_cross_provider_calibration_plan_v1.py`; Ruff, `py_compile` and
+  `git diff --check` then passed. Focused pytest passed 62/62.
+
 ## 2026-08-28 — E6 W1 formal-prefix gates did not pass
 
 ### DeepSeek W1
