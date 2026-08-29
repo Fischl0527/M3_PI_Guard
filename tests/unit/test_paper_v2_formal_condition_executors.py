@@ -184,6 +184,66 @@ def test_runtime_cannot_mutate_frozen_online_state() -> None:
         shell(item, state)
 
 
+def test_shell_projects_only_complete_sanitized_failure_diagnostics() -> None:
+    item = _representative("no_defense")
+    state = reconstruct_initial_online_state(item)
+
+    class Runtime:
+        def execute(self, *_):
+            return {
+                "events": [
+                    _raw_event(
+                        parse_ok=False,
+                        decision="DENY",
+                        parse_error_code="provider_failure",
+                    )
+                ],
+                "operational_status": "provider_failure",
+                "failure_stage": "provider_call",
+                "failure_class": "ProviderPayloadError",
+                "provider_call_index": 2,
+                "http_category": "not_observed",
+            }
+
+    class Evaluator:
+        def evaluate(self, *_):
+            return {"unsafe_effect": False, "task_completion": False}
+
+    result = ConditionExecutorShell(
+        profile=CONDITION_PROFILES["no_defense"],
+        runtime=Runtime(),
+        evaluator=Evaluator(),
+    )(item, state)
+    assert {
+        field: result[field]
+        for field in (
+            "failure_stage",
+            "failure_class",
+            "provider_call_index",
+            "http_category",
+        )
+    } == {
+        "failure_stage": "provider_call",
+        "failure_class": "ProviderPayloadError",
+        "provider_call_index": 2,
+        "http_category": "not_observed",
+    }
+
+    class PartialRuntime:
+        def execute(self, *_):
+            return {
+                "events": [_raw_event()],
+                "failure_stage": "provider_call",
+            }
+
+    with pytest.raises(FormalConditionExecutorError, match="must be complete"):
+        ConditionExecutorShell(
+            profile=CONDITION_PROFILES["no_defense"],
+            runtime=PartialRuntime(),
+            evaluator=Evaluator(),
+        )(item, state)
+
+
 def test_profile_drift_and_duplicate_registry_fail_closed() -> None:
     item = _representative("no_defense")
     state = reconstruct_initial_online_state(item)

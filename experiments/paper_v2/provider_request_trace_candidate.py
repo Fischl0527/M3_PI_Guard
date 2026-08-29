@@ -208,6 +208,10 @@ def _request_payload(
         messages,
         content_class=client.content_class,
         policy=client.policy,
+        allow_pinned_synthetic_credential_labels=(
+            client.allow_pinned_synthetic_credential_labels
+        ),
+        active_api_key=client.api_key,
     )
     return {
         "model": client.model,

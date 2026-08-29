@@ -1,5 +1,75 @@
 # Failure Log
 
+## 2026-08-29 — E6-v2 offline repair findings and changed hypotheses
+
+### DeepSeek AgentDojo second-call failure
+
+- Initial hypothesis: the repeated W1/W2 `provider_failure` rows might be a
+  provider outage or an opaque second-call transport failure.
+- Reproduction: the frozen `user_task_16/injection_task_1` path completed its
+  first model response and the in-memory `get_received_emails` tool. The 9,466
+  character public synthetic observation then matched only the broad
+  `api_key/access_token/password` label regex, so the next outbound request was
+  rejected locally by `ProviderPayloadError` before transport.
+- Fix: add a default-off, case-scoped generic-label exemption only for pinned
+  `public_benchmark_case` execution. Exact active API keys, `sk-*`, `AQ.*` and
+  PEM patterns remain forbidden; M3-v2 and unknown benchmarks remain strict.
+  A two-turn frozen-case regression now verifies one transport before the
+  default rejection and two transports plus unchanged source environment after
+  the explicit AgentDojo opt-in, with no network or provider call.
+
+### Prospective recovery state and scope
+
+- Initial v2 skeleton projected all three v1 windows without reading v1
+  outputs. Review found that this could replay W1/W2 response-bearing rows and
+  violate the locked successful-row rule.
+- Changed hypothesis/fix: v2 now rejects W1/W2 before credentials, dispatcher
+  construction or output writes and permits only untouched W3 rows. Cross-
+  version W1/W2/W3 evidence is diagnostic sensitivity, not formal repeatability.
+- A second review found that response-less failures before any payload
+  commitment were marked recoverable even though attempt 2 requires that
+  commitment. Such rows now close as ITT diagnostic terminals. Generic attempt
+  2 additionally requires one unresolved key, no response evidence and exact
+  attempt-1 payload equality before transport.
+
+### Verification attempts outside the focused contract
+
+- One ad-hoc frozen-case probe first imported `_jsonable` from the wrong module
+  and failed before validation. The hypothesis was corrected to import the
+  runtime serializer; the rerun proved default rejection and explicit opt-in
+  acceptance without printing the observation.
+- A broader historical controller check reported expected source-lock drift
+  after the prospective provider source changed, plus the already-existing
+  `m3_offline_evaluator` qualification drift. Frozen historical artifacts were
+  not rewritten or recursively replayed. The current focused repair suite and
+  v1 compatibility suite pass; the stale historical snapshot is not hidden or
+  treated as a current green check.
+- Safety impact: no API/provider call, credential read, production tool or real
+  external effect occurred, and no E6-v1 plan/output/trace/ledger was modified.
+
+### Final review: missing W3 predecessor gate
+
+- Finding: the first E6-v2 runner rejected W1/W2 but a direct W3 CLI call did
+  not itself prove that the provider's W2 was sealed or that the 18--30 hour
+  start interval held.
+- Fix: add a fail-closed, read-only v1 W2 seal identity/status check and compare
+  the real prospective start with W2 `window_started_at` before any credential,
+  dispatcher or output access. DeepSeek is eligible only inside that interval;
+  Gemini has no W2 seal and therefore remains ineligible under v2.
+- Test correction: the first new negative tests placed their synthetic v1 seal
+  fixtures below the asserted v2 output root, so five assertions reported that
+  the root existed even though the runner had not written it. The fixture was
+  moved to a sibling directory and only the affected test module was rerun;
+  it passed 24/24, followed by the 106-test focused repair suite. The subsequent
+  frozen-start continuation regression raised the final focused count to 107.
+- Follow-up review: checking `_now()` on every invocation would incorrectly
+  reject a legitimate canary continuation after the wall clock crossed W2+30
+  hours. The runner now freezes W3 `window_started_at` on its first admitted
+  call, reuses it for the predecessor test, and separately rejects continuation
+  beyond the frozen 12-hour window. A new regression covers valid continuation
+  at +10 hours and rejection after +13 hours. Final independent review reported
+  no remaining P0, P1 or P2 issue under the single-provider execution contract.
+
 ## 2026-08-29 — E6 W2 DeepSeek gate failed; Gemini remained provider-stopped
 
 ### DeepSeek W2

@@ -1,0 +1,83 @@
+{
+  "schema_version": "m3-paper-v2-e6-cross-provider-repair-2.0",
+  "study_id": "m3-q2-e6-cross-provider-calibration-v2",
+  "status": "offline_qualification_only_provider_execution_not_authorized",
+  "source_design": {
+    "protocol": "protocols/paper_upgrade_v2/e6_cross_provider_calibration_v1",
+    "reuse": [
+      "case_membership",
+      "condition_order",
+      "logical_work_keys"
+    ],
+    "immutable_outputs": "outputs/experiments/e6_cross_provider_calibration_v1"
+  },
+  "new_identities": [
+    "study_id",
+    "run_id",
+    "execution_identity",
+    "output_root",
+    "trace_root",
+    "call_ledger",
+    "provider_stop"
+  ],
+  "prospective_execution_windows": [
+    "W3"
+  ],
+  "prospective_w3_plan_counts": {
+    "deepseek": 360,
+    "gemini": 180
+  },
+  "w3_execution_prerequisite": {
+    "immutable_v1_w2_seal_required": true,
+    "w2_to_w3_start_interval_hours": [
+      18,
+      30
+    ],
+    "checked_before_credentials_dispatch_and_output": true,
+    "existing_window_uses_frozen_start": true,
+    "maximum_window_duration_hours": 12,
+    "deepseek_currently_has_w2_seal": true,
+    "gemini_currently_has_w2_seal": false
+  },
+  "gemini_inference_role": "single_window_diagnostic_only",
+  "cross_version_inference_boundary": "v1_W1_W2_plus_v2_W3_is_sensitivity_not_formal_three_window_repeatability",
+  "generic_response_less_recovery": {
+    "maximum_outer_attempt": 2,
+    "requires_unique_unresolved_work_key": true,
+    "requires_all_history_response_less": true,
+    "requires_latest_attempt": 1,
+    "requires_retry_eligible": true,
+    "requires_attempt_1_payload_commitment": true,
+    "attempt_1_without_payload_commitment": "itt_diagnostic_terminal",
+    "canonical_payload_equality_checked_before_transport": true,
+    "attempt_2_is_terminal": true,
+    "independent_trace_and_call_ledger_namespace": true
+  },
+  "http_429": {
+    "generic_recovery_allowed": false,
+    "underlying_manual_429_ledger_semantics_unchanged": true,
+    "e6_v2_protocol_action": "close_as_itt_diagnostic_terminal",
+    "fatal_provider_stop": false
+  },
+  "fatal_provider_stop_error_classes": [
+    "identity",
+    "payload",
+    "safety",
+    "usage",
+    "ledger"
+  ],
+  "fatal_provider_stop_default": "fail_closed_except_ProviderTransportError_and_ProviderPausedError",
+  "source_pinned_fixture_boundary": {
+    "active_api_key_allowed": false,
+    "high_confidence_secret_patterns_allowed": false,
+    "synthetic_credential_labels_allowed_for": "public_benchmark_case_only",
+    "case_scoped_exemption_scope": "entire_public_benchmark_case_conversation"
+  },
+  "technical_gate": {
+    "runtime_provider_failure_is_systemic": true,
+    "minimum_completed_prefix_rows": 9,
+    "outcome_blind": true
+  },
+  "provider_calls_made": 0,
+  "v1_records_modified": 0
+}

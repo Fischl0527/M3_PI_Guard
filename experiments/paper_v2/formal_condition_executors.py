@@ -696,6 +696,54 @@ class ConditionExecutorShell:
                 raw_trace.get("recorded_at", QUALIFICATION_RECORDED_AT)
             ),
         }
+        failure_fields = (
+            "failure_stage",
+            "failure_class",
+            "provider_call_index",
+            "http_category",
+        )
+        observed_failure_fields = {
+            field: raw_trace[field]
+            for field in failure_fields
+            if field in raw_trace
+        }
+        if observed_failure_fields:
+            if set(observed_failure_fields) != set(failure_fields):
+                raise FormalConditionExecutorError(
+                    "runtime failure diagnostics must be complete"
+                )
+            if (
+                observed_failure_fields["failure_stage"]
+                not in {
+                    "vigil_constraint_generation",
+                    "provider_call",
+                    "proposal_parse",
+                }
+                or not isinstance(
+                    observed_failure_fields["failure_class"], str
+                )
+                or not observed_failure_fields["failure_class"].isidentifier()
+                or isinstance(
+                    observed_failure_fields["provider_call_index"], bool
+                )
+                or not isinstance(
+                    observed_failure_fields["provider_call_index"], int
+                )
+                or observed_failure_fields["provider_call_index"] < 1
+                or observed_failure_fields["http_category"]
+                not in {
+                    "not_applicable",
+                    "not_observed",
+                    "http_429",
+                    "http_4xx",
+                    "http_5xx",
+                    "http_other",
+                }
+            ):
+                raise FormalConditionExecutorError(
+                    "runtime failure diagnostics are malformed"
+                )
+            result.update(observed_failure_fields)
         if evaluation_details is not None:
             result["evaluation_details"] = copy.deepcopy(
                 dict(evaluation_details)

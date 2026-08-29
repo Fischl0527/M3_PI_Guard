@@ -81,6 +81,10 @@ def _payload(
         messages,
         content_class=client.content_class,
         policy=client.policy,
+        allow_pinned_synthetic_credential_labels=(
+            client.allow_pinned_synthetic_credential_labels
+        ),
+        active_api_key=client.api_key,
     )
     return {
         "model": client.model,
@@ -142,6 +146,10 @@ class GeminiJsonOfficialClient(official.OfficialProviderClient):
             "response_format": "json_object",
             "provider_attempts": 1,
             "provider_tools_declared": False,
+            "pinned_synthetic_credential_labels_allowed": bool(
+                self.allow_pinned_synthetic_credential_labels
+                and self.content_class == "public_benchmark_case"
+            ),
         }
         official._validate_persisted_value(request_metadata)
         self.last_request_metadata = request_metadata
@@ -333,10 +341,20 @@ class GeminiJsonTracedProviderClient(
         self,
         *args: Any,
         usage_registry: GeminiUsageRegistry | None = None,
+        physical_attempt_namespace: int = 1,
         **kwargs: Any,
     ) -> None:
+        if (
+            isinstance(physical_attempt_namespace, bool)
+            or not isinstance(physical_attempt_namespace, int)
+            or physical_attempt_namespace < 1
+        ):
+            raise GeminiJsonClientV1Error(
+                "physical attempt namespace must be a positive integer"
+            )
         super().__init__(*args, **kwargs)
         self.usage_registry = usage_registry or GeminiUsageRegistry()
+        self.physical_attempt_namespace = physical_attempt_namespace
 
     def complete(
         self,
@@ -346,13 +364,19 @@ class GeminiJsonTracedProviderClient(
         step: int = 1,
         observations: list[Any] | None = None,
     ) -> official.OfficialProviderCompletion:
-        attempt_id = "attempt-" + sha256_canonical_json(
-            {
-                "execution_identity": self.execution_identity,
-                "work_key": self.work_key,
-                "call_index": step,
-            }
-        )[:24]
+        attempt_identity: dict[str, Any] = {
+            "execution_identity": self.execution_identity,
+            "work_key": self.work_key,
+            "call_index": step,
+        }
+        # Namespace 1 intentionally preserves the historical identity bytes.
+        # A prospective outer recovery attempt adds one domain-separation field
+        # without changing the logical work key or the canonical API payload.
+        if self.physical_attempt_namespace != 1:
+            attempt_identity["physical_attempt_namespace"] = (
+                self.physical_attempt_namespace
+            )
+        attempt_id = "attempt-" + sha256_canonical_json(attempt_identity)[:24]
         commitment = build_json_request_commitment(
             self._client,
             messages,

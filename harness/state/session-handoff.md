@@ -1,5 +1,41 @@
 # 会话移交
 
+## 2026-08-29 — E6-v2 offline repair qualified; no live execution authorized
+
+- E6-v1 W1/W2, their response-bearing rows, administrative closures, traces,
+  ledgers, gates, seals and provider-stop files are immutable. Do not run or
+  rewrite any W1/W2 work key.
+- The DeepSeek six-row AgentDojo failure cluster is a local DLP false positive:
+  pinned `user_task_16` reaches `get_received_emails`, then its 9,466-character
+  public synthetic observation hits only the generic credential-label regex
+  before the second transport. The new default-off public-case exemption fixes
+  that path while exact active keys, `sk-*`, `AQ.*` and PEM remain blocked.
+- Prospective runner:
+  `experiments/paper_v2/e6_cross_provider_calibration_runner_v2.py`. It accepts
+  W3 only; W1/W2 fail before credentials/dispatcher/output. W3 itself also
+  requires the provider's immutable v1 W2 seal and an 18--30 hour W2-to-W3
+  start gap before credentials/dispatcher/output. DeepSeek currently meets the
+  seal prerequisite; Gemini does not and therefore fails closed. The first
+  admitted W3 call freezes its start; continuations reuse it and must remain
+  within the same 12-hour window. Generic attempt 2
+  requires one unresolved response-less key, a valid attempt-1 payload
+  commitment and exact payload equality, then becomes terminal. No-commitment
+  failures and 429 are ITT diagnostic terminals.
+- Scientific boundary: the 360 DeepSeek and 180 Gemini W3 projections are
+  diagnostic snapshots. They cannot be combined with v1 W1/W2 as formal
+  three-window repeatability; Gemini remains single-window diagnostic.
+- Current verification: repair suite 107 passed/1 known stale qualification
+  deselected; v1 compatibility 20/20; Ruff, py_compile, JSON and diff check pass.
+  The frozen real-case two-turn regression is network-free. Current active E6
+  process count is zero and E6-v1 output diff is zero. Final independent review
+  found no P0, P1 or P2 issue under the frozen single-provider execution rule.
+- No API call is authorized by this repair. Before any W3 canary, obtain a new
+  owner-visible instruction and re-check timing/scientific purpose. The paused
+  `e6-nightly-provider-windows` automation must not be reactivated implicitly.
+- Push only to `origin/codex/q2-empirical-study` at
+  `https://github.com/Fischl0527/RedTeam_LLM_Security.git`; preserve the two
+  unrelated dirty external audit directories.
+
 ## 2026-08-29 — E6 W2: DeepSeek sealed, Gemini provider-stopped
 
 - DeepSeek W2 started at `2026-08-29T22:43:05+08:00` and sealed at

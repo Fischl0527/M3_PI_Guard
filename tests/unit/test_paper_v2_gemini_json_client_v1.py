@@ -37,6 +37,9 @@ def _traced_client(
     work_key: str = "work-test",
     budget_state: ProviderBudgetState | None = None,
     usage_registry: gemini_json.GeminiUsageRegistry | None = None,
+    physical_attempt_namespace: int = 1,
+    content_class: str = "synthetic_m3_case",
+    allow_pinned_synthetic_credential_labels: bool = False,
 ) -> gemini_json.GeminiJsonTracedProviderClient:
     policy = fallback._effective_policy()
 
@@ -85,7 +88,7 @@ def _traced_client(
     official = gemini_json.GeminiJsonOfficialClient(
         provider_id="gemini",
         api_key="unit-test-key",
-        content_class="synthetic_m3_case",
+        content_class=content_class,
         budget_state=(
             budget_state
             or ProviderBudgetState(provider_id="gemini", policy=policy)
@@ -95,6 +98,9 @@ def _traced_client(
         max_tokens=64,
         timeout=30.0,
         transport=transport,
+        allow_pinned_synthetic_credential_labels=(
+            allow_pinned_synthetic_credential_labels
+        ),
     )
     return gemini_json.GeminiJsonTracedProviderClient(
         official,
@@ -105,6 +111,7 @@ def _traced_client(
         recorded_at=lambda: "2026-08-02T00:30:00+08:00",
         receipt_adapter=_official_adapter,
         usage_registry=usage_registry,
+        physical_attempt_namespace=physical_attempt_namespace,
     )
 
 
@@ -197,3 +204,147 @@ def test_shared_usage_qualification_rebuilds_exactly() -> None:
     ]
     assert observed["provider_calls"] == 2
     assert observed["network_calls"] == 0
+
+
+def test_physical_attempt_namespace_preserves_v1_and_separates_recovery(
+    tmp_path: Path,
+) -> None:
+    first = _traced_client(
+        tmp_path / "attempt1.jsonl",
+        physical_attempt_namespace=1,
+    )
+    recovery = _traced_client(
+        tmp_path / "attempt2.jsonl",
+        physical_attempt_namespace=2,
+    )
+
+    first.complete(MESSAGES, step=1)
+    recovery.complete(MESSAGES, step=1)
+
+    first_commitment = json.loads(
+        (tmp_path / "attempt1.jsonl").read_text(encoding="utf-8").splitlines()[0]
+    )["event"]["commitment"]
+    recovery_commitment = json.loads(
+        (tmp_path / "attempt2.jsonl").read_text(encoding="utf-8").splitlines()[0]
+    )["event"]["commitment"]
+    historical_attempt = "attempt-" + sha256_canonical_json(
+        {
+            "execution_identity": "execution-test",
+            "work_key": "work-test",
+            "call_index": 1,
+        }
+    )[:24]
+
+    assert first_commitment["attempt_id"] == historical_attempt
+    assert recovery_commitment["attempt_id"] != historical_attempt
+    assert (
+        recovery_commitment["client_request_id"]
+        != first_commitment["client_request_id"]
+    )
+    assert (
+        recovery_commitment["payload_sha256"]
+        == first_commitment["payload_sha256"]
+    )
+
+
+@pytest.mark.parametrize("value", [True, 0, -1, 1.5])
+def test_physical_attempt_namespace_must_be_positive_integer(
+    tmp_path: Path, value: Any
+) -> None:
+    with pytest.raises(
+        gemini_json.GeminiJsonClientV1Error,
+        match="physical attempt namespace",
+    ):
+        _traced_client(
+            tmp_path / "invalid.jsonl",
+            physical_attempt_namespace=value,
+        )
+
+
+def test_pinned_public_fixture_credential_label_is_allowed_but_active_key_is_not(
+    tmp_path: Path,
+) -> None:
+    client = _traced_client(
+        tmp_path / "allowed.jsonl",
+        content_class="public_benchmark_case",
+        allow_pinned_synthetic_credential_labels=True,
+    )
+    fixture_messages = [
+        {"role": "system", "content": "Return JSON only."},
+        {"role": "user", "content": "Pinned fixture password=not-a-real-secret"},
+    ]
+
+    completion = client.complete(fixture_messages, step=1)
+
+    assert completion.text
+    assert client._client.last_request_metadata[
+        "pinned_synthetic_credential_labels_allowed"
+    ] is True
+
+    active_key_messages = [
+        {"role": "system", "content": "Return JSON only."},
+        {"role": "user", "content": "unit-test-key"},
+    ]
+    with pytest.raises(
+        gemini_json.official.ProviderPayloadError,
+        match="active credential content",
+    ):
+        client.complete(active_key_messages, step=2)
+
+
+@pytest.mark.parametrize(
+    ("content_class", "allow_labels"),
+    [
+        ("public_benchmark_case", False),
+        ("synthetic_m3_case", True),
+    ],
+)
+def test_gemini_generic_credential_label_remains_fail_closed_without_public_opt_in(
+    tmp_path: Path,
+    content_class: str,
+    allow_labels: bool,
+) -> None:
+    client = _traced_client(
+        tmp_path / f"{content_class}-{allow_labels}.jsonl",
+        content_class=content_class,
+        allow_pinned_synthetic_credential_labels=allow_labels,
+    )
+
+    with pytest.raises(
+        gemini_json.official.ProviderPayloadError,
+        match="credential-like content",
+    ):
+        client.complete(
+            [
+                {
+                    "role": "user",
+                    "content": "Pinned fixture password=synthetic-only-value",
+                }
+            ],
+            step=1,
+        )
+
+
+@pytest.mark.parametrize(
+    "credential_text",
+    [
+        "sk-abcdefghijklmnop",
+        "AQ.abcdefghijklmnop",
+        "-----BEGIN PRIVATE KEY-----",
+    ],
+)
+def test_gemini_public_opt_in_still_rejects_high_confidence_credentials(
+    tmp_path: Path,
+    credential_text: str,
+) -> None:
+    client = _traced_client(
+        tmp_path / "high-confidence.jsonl",
+        content_class="public_benchmark_case",
+        allow_pinned_synthetic_credential_labels=True,
+    )
+
+    with pytest.raises(gemini_json.official.ProviderPayloadError):
+        client.complete(
+            [{"role": "user", "content": credential_text}],
+            step=1,
+        )

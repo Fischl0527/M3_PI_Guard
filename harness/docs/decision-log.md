@@ -22,10 +22,29 @@
   sanitized failure stage/class/call index/HTTP category and count repeated
   runtime provider failures in the technical gate. Reproduce the AgentDojo
   first-tool-to-second-call path with an offline stub before any new canary.
+- Root cause refinement: the pinned `user_task_16` observation is public
+  synthetic benchmark data that only matched the broad credential-label regex.
+  The prospective boundary therefore skips only that generic regex for an
+  explicitly opted-in, case-scoped `public_benchmark_case`; exact active API
+  keys and high-confidence `sk-*`, `AQ.*` and PEM forms remain forbidden.
+- Scope correction: v2 execution is code-gated to untouched W3 rows. It cannot
+  replay v1 W1/W2 response-bearing or successful rows. The projected 360
+  DeepSeek and 180 Gemini W3 rows are diagnostic/sensitivity evidence only;
+  cross-version rows cannot become formal three-window repeatability, and
+  Gemini is a single-window diagnostic.
+- Execution prerequisite: direct W3 invocation must first observe the immutable
+  same-provider E6-v1 W2 seal and a W2-to-W3 start interval of 18--30 hours,
+  before credentials, dispatcher construction or output. DeepSeek has the
+  predecessor seal; Gemini does not, so Gemini v2 remains fail-closed rather
+  than backfilling a missing historical window. The first W3 call freezes its
+  own start; later expansion/recovery validates that value and a 12-hour window
+  duration rather than treating the continuation time as a new window start.
 - Consequence: E6-v1 remains diagnostic and cannot be made eligible after the
-  fact. No provider call is authorized by this engineering repair; new live
-  execution requires a separate owner-visible canary decision after focused
-  tests pass.
+  fact. A response-less recovery is eligible only with a valid pretransport
+  payload commitment and exact payload equality; a no-commitment failure and
+  W3 429 close as ITT diagnostic terminals. No provider call is authorized by
+  this engineering repair; new live execution requires a separate
+  owner-visible canary decision after focused tests pass.
 
 ## 2026-08-28 — Preserve failed E6 prefixes through administrative closure
 

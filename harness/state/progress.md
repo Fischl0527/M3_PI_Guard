@@ -1,5 +1,33 @@
 # 进展记录
 
+## 2026-08-29 — E6-v2 前瞻工程修复离线闭合
+
+- DeepSeek 重复失败已由冻结真实案例离线定位：同一个 AgentDojo
+  `user_task_16` 在第一响应和只读工具执行后，将 9,466 字符公开模拟观测带入第二轮；
+  旧 generic credential-label DLP 误报并在 transport 前抛出
+  `ProviderPayloadError`。这不是模型/API 不可用，也没有真实 external effect。
+- 新边界默认严格关闭，只对显式 AgentDojo `public_benchmark_case` 放行整个对话中的
+  generic credential labels；当前 API key、`sk-*`、`AQ.*`、PEM、M3-v2 和未知
+  benchmark 始终拒绝。DeepSeek、Gemini payload 与 precommitment 校验语义已一致。
+- E6-v2 generic response-less attempt 2 使用新 physical namespace、trace、budget 和
+  call ledger；只接受唯一 unresolved、全历史无响应、attempt 1 有合法 payload
+  commitment 且 payload 逐调用相等的 key。无 commitment、attempt 3、429、
+  response-bearing 和成功行都不能进入 generic recovery。
+- 为遵守“成功行不重跑”，W1/W2 在凭据加载前代码级 fail-closed；v2 仅投影未触碰的
+  W3（DeepSeek 360/Gemini 180）。该快照不能与 E6-v1 拼成正式三窗口重复性，Gemini
+  保持 single-window diagnostic。旧 heartbeat 继续暂停，当前无 E6 runner。
+- 独立复审发现 direct CLI 原先只限制 W3 名称，未强制核验前窗封存和 18--30 小时
+  间隔。现已在任何凭据、dispatcher 或输出之前加入只读 W2 seal/时间门。DeepSeek
+  具有真实 W2 seal；Gemini 缺少 W2 seal，因此当前 v2 明确拒绝 Gemini W3，不能通过
+  回填历史记录获得资格。首次合法 W3 调用会冻结自身启动时间；续跑使用该冻结值
+  验证前窗间隔，并额外受 12 小时单窗口时长门限制。
+- 验证：聚焦修复 suite `107 passed, 1 deselected`，v1 兼容 suite `20 passed`；
+  Ruff、`py_compile`、JSON、`git diff --check` 通过。唯一 deselected 是已记录的旧
+  `m3_offline_evaluator` qualification 漂移；独立最终复审为 P0/P1/P2 均无；未运行
+  Full Harness、历史递归重放或 API。
+- E6-v1 plans/outputs/traces/ledgers 未修改。F-PAPER-002 保持 `in_progress`；本轮只完成
+  离线工程修复，任何 W3/provider canary 需新的 owner 明确授权。
+
 ## 2026-08-29 — E6 DeepSeek W2 封存，Gemini 依既有 fatal boundary 停止
 
 - W2 DeepSeek 于 22:43:05 +08 启动，满足距 W1 启动 24 小时 16 分钟的

@@ -10,7 +10,9 @@ import pytest
 from experiments.paper_v2.formal_condition_executors import (
     CONDITION_PROFILES,
     ConditionExecutorShell,
+    OnlineExecutorContext,
 )
+from experiments.paper_v2.contracts import sha256_canonical_json
 from experiments.paper_v2.live_condition_runtime import (
     DEFAULT_BUDGET_POLICY,
     DEFAULT_OUTPUT,
@@ -32,6 +34,7 @@ from experiments.paper_v2.official_provider_executor import (
     HTTPResponseEnvelope,
     OfficialProviderClient,
     ProviderBudgetState,
+    ProviderPayloadError,
 )
 from experiments.paper_v2.promptguard_live_dependency import (
     DEFAULT_OUTPUT as DEFAULT_PROMPTGUARD_OUTPUT,
@@ -142,13 +145,33 @@ class _Evaluator:
         }
 
 
-def _runtime(client: OfficialProviderClient, *, detector=None):
+def _runtime(
+    client: OfficialProviderClient,
+    *,
+    detector=None,
+    call_event_sink=None,
+    physical_attempt_namespace: int = 1,
+):
     return LiveConditionRuntime(
         provider_client_factory=lambda context: client,
         effect_backend_factory=_backend_factory,
         detector=detector,
         vigil_factory=_qualification_vigil_factory,
+        call_event_sink=call_event_sink,
         recorded_at=lambda: "2026-07-24T00:30:00+08:00",
+        physical_attempt_namespace=physical_attempt_namespace,
+    )
+
+
+def _context(item: Mapping[str, Any], state: Mapping[str, Any]) -> OnlineExecutorContext:
+    profile = CONDITION_PROFILES[str(item["condition_id"])]
+    return OnlineExecutorContext(
+        execution_identity=str(item["execution_identity"]),
+        work_key=str(item["work_key"]),
+        benchmark=str(item["benchmark"]),
+        condition_id=str(item["condition_id"]),
+        max_provider_calls=profile.max_provider_calls,
+        online_state=state,
     )
 
 
@@ -232,6 +255,133 @@ def test_parse_failure_is_retained_without_a_fake_parsed_proposal() -> None:
         result["runtime_visibility_events"][0]["parse_error_code"]
         == "strict_json_proposal_rejected"
     )
+
+
+def test_parse_failure_exposes_only_sanitized_failure_diagnostics() -> None:
+    item = _item("m3_full")
+    state = reconstruct_initial_online_state(item)
+    client, _ = _client(["not JSON"])
+
+    raw = _runtime(client).execute(
+        _context(item, state), CONDITION_PROFILES["m3_full"]
+    )
+
+    expected = {
+        "failure_stage": "proposal_parse",
+        "failure_class": "StrictProposalError",
+        "provider_call_index": 1,
+        "http_category": "not_applicable",
+    }
+    assert {key: raw[key] for key in expected} == expected
+    assert {key: raw["events"][0][key] for key in expected} == expected
+
+
+def test_physical_attempt_namespace_is_unique_and_default_is_compatible() -> None:
+    item = _item("no_defense")
+    state = reconstruct_initial_online_state(item)
+
+    class Sink:
+        def __init__(self) -> None:
+            self.events: list[dict[str, Any]] = []
+
+        def append(self, event) -> None:
+            self.events.append(dict(event))
+
+    default_sink = Sink()
+    default_client, _ = _client(
+        ['{"tool":"final","arguments":{"answer":"safe"}}']
+    )
+    _runtime(default_client, call_event_sink=default_sink).execute(
+        _context(item, state), CONDITION_PROFILES["no_defense"]
+    )
+    old_identity = {
+        "execution_identity": item["execution_identity"],
+        "work_key": item["work_key"],
+        "call_index": 1,
+    }
+    assert default_sink.events[0]["attempt_id"] == (
+        "attempt-" + sha256_canonical_json(old_identity)[:24]
+    )
+
+    class NamespacedClient:
+        physical_attempt_namespace = 2
+
+        def __init__(self, client) -> None:
+            self._client = client
+
+        def __getattr__(self, name):
+            return getattr(self._client, name)
+
+        def complete(self, *args, **kwargs):
+            return self._client.complete(*args, **kwargs)
+
+    second_sink = Sink()
+    second_client, _ = _client(
+        ['{"tool":"final","arguments":{"answer":"safe"}}']
+    )
+    _runtime(
+        NamespacedClient(second_client),
+        call_event_sink=second_sink,
+        physical_attempt_namespace=2,
+    ).execute(_context(item, state), CONDITION_PROFILES["no_defense"])
+    new_identity = {**old_identity, "physical_attempt_namespace": 2}
+    assert second_sink.events[0]["attempt_id"] == (
+        "attempt-" + sha256_canonical_json(new_identity)[:24]
+    )
+    assert (
+        second_sink.events[0]["attempt_id"]
+        != default_sink.events[0]["attempt_id"]
+    )
+
+
+def test_second_provider_call_failure_retains_first_tool_and_safe_diagnostics() -> None:
+    item = _item("no_defense")
+    state = reconstruct_initial_online_state(item)
+    policy = json.loads(DEFAULT_BUDGET_POLICY.read_text(encoding="utf-8"))
+    calls = 0
+
+    def transport(endpoint, headers, payload, timeout):
+        nonlocal calls
+        del endpoint, headers, timeout
+        calls += 1
+        if calls == 2:
+            raise ProviderPayloadError(
+                "sensitive validation detail must not be persisted"
+            )
+        return _response(
+            str(payload["model"]),
+            (
+                '{"tool":"read_file","arguments":'
+                '{"path":"sandbox/public/clean_report.md"}}'
+            ),
+            calls,
+        )
+
+    client = OfficialProviderClient(
+        provider_id="deepseek",
+        api_key="fixture-key-for-live-runtime-tests",
+        content_class="synthetic_m3_case",
+        budget_state=ProviderBudgetState(provider_id="deepseek", policy=policy),
+        policy=policy,
+        transport=transport,
+    )
+    raw = _runtime(client).execute(
+        _context(item, state), CONDITION_PROFILES["no_defense"]
+    )
+
+    expected = {
+        "failure_stage": "provider_call",
+        "failure_class": "ProviderPayloadError",
+        "provider_call_index": 2,
+        "http_category": "not_observed",
+    }
+    assert calls == 2
+    assert raw["operational_status"] == "provider_failure"
+    assert raw["events"][0]["parse_ok"] is True
+    assert raw["events"][0]["execution_succeeded"] is True
+    assert {key: raw[key] for key in expected} == expected
+    assert {key: raw["events"][1][key] for key in expected} == expected
+    assert "sensitive validation detail" not in json.dumps(raw)
 
 
 @pytest.mark.parametrize(

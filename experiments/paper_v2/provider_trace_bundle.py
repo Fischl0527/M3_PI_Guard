@@ -649,7 +649,16 @@ class TracedProviderClient:
             Callable[[Mapping[str, Any]], Mapping[str, Any]] | None
         ) = None,
         activation_path: Path = DEFAULT_ACTIVATION,
+        physical_attempt_namespace: int = 1,
     ) -> None:
+        if (
+            isinstance(physical_attempt_namespace, bool)
+            or not isinstance(physical_attempt_namespace, int)
+            or physical_attempt_namespace < 1
+        ):
+            raise ProviderTraceBundleError(
+                "physical attempt namespace must be a positive integer"
+            )
         if trace_path.exists() and trace_path.stat().st_size:
             raise ProviderTraceBundleError(
                 "automatic resume/retry of an existing trace is forbidden"
@@ -661,6 +670,7 @@ class TracedProviderClient:
         self.recorded_at = recorded_at
         self.receipt_adapter = receipt_adapter
         self.activation_path = activation_path
+        self.physical_attempt_namespace = physical_attempt_namespace
         self._activated: dict[str, dict[str, Any]] = {}
         self._usage_evidence: dict[str, dict[str, Any]] = {}
         self._failures: dict[str, dict[str, str]] = {}
@@ -674,6 +684,10 @@ class TracedProviderClient:
             "work_key": self.work_key,
             "call_index": call_index,
         }
+        if self.physical_attempt_namespace > 1:
+            identity["physical_attempt_namespace"] = (
+                self.physical_attempt_namespace
+            )
         return "attempt-" + sha256_canonical_json(identity)[:24]
 
     def complete(

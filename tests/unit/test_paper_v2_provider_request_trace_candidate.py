@@ -4,6 +4,7 @@ import copy
 
 import pytest
 
+from experiments.paper_v2.official_provider_executor import ProviderPayloadError
 from experiments.paper_v2.provider_request_trace_candidate import (
     FIXED_MESSAGES,
     ProviderRequestTraceError,
@@ -142,3 +143,37 @@ def test_offline_qualification_covers_both_modes_and_negatives() -> None:
     assert qualification["network_calls_made"] == 0
     assert qualification["formal_results_created"] == 0
     assert qualification["v2_schema_activated"] is False
+
+
+def test_generic_commitment_uses_the_same_synthetic_label_boundary() -> None:
+    client = _fixture_client("deepseek", include_request_id=False)
+    client.content_class = "public_benchmark_case"
+    client.allow_pinned_synthetic_credential_labels = True
+    fixture_messages = [
+        {
+            "role": "user",
+            "content": "Pinned observation password=synthetic-fixture-only",
+        }
+    ]
+
+    commitment = build_request_commitment(
+        client,
+        fixture_messages,
+        execution_identity="boundary-test",
+        work_key="boundary-work",
+        call_index=1,
+        attempt_id="boundary-attempt",
+        precommitted_at="2026-08-29T00:00:00+08:00",
+    )
+
+    assert commitment["payload_sha256"]
+    with pytest.raises(ProviderPayloadError, match="active credential"):
+        build_request_commitment(
+            client,
+            [{"role": "user", "content": client.api_key}],
+            execution_identity="boundary-test",
+            work_key="boundary-work-active-key",
+            call_index=1,
+            attempt_id="boundary-active-attempt",
+            precommitted_at="2026-08-29T00:00:00+08:00",
+        )

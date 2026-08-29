@@ -102,6 +102,10 @@ class DeepSeekNonThinkingOfficialClient(OfficialProviderClient):
             messages,
             content_class=self.content_class,
             policy=self.policy,
+            allow_pinned_synthetic_credential_labels=(
+                self.allow_pinned_synthetic_credential_labels
+            ),
+            active_api_key=self.api_key,
         )
         self.budget_state.assert_before_request()
         payload = {
@@ -136,6 +140,10 @@ class DeepSeekNonThinkingOfficialClient(OfficialProviderClient):
             "provider_attempts": 1,
             "provider_tools_declared": False,
         }
+        if self.allow_pinned_synthetic_credential_labels:
+            request_metadata[
+                "pinned_synthetic_credential_labels_allowed"
+            ] = self.content_class == "public_benchmark_case"
         _validate_persisted_value(request_metadata)
         self.last_request_metadata = request_metadata
         headers = {
@@ -315,6 +323,10 @@ def build_nonthinking_request_commitment(
         messages,
         content_class=client.content_class,
         policy=client.policy,
+        allow_pinned_synthetic_credential_labels=(
+            client.allow_pinned_synthetic_credential_labels
+        ),
+        active_api_key=client.api_key,
     )
     payload = {
         "model": client.model,

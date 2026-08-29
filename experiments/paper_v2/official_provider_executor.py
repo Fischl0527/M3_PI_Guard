@@ -52,13 +52,17 @@ REQUEST_ID_HEADERS = (
 SAFE_RESPONSE_HEADERS = frozenset(
     {*REQUEST_ID_HEADERS, "content-type", "x-ratelimit-remaining"}
 )
-SECRET_TEXT_PATTERNS = (
+HIGH_CONFIDENCE_SECRET_TEXT_PATTERNS = (
     re.compile(r"\bsk-[A-Za-z0-9_.-]{12,}\b"),
     re.compile(r"\bAQ\.[A-Za-z0-9_.-]{12,}\b"),
     re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
-    re.compile(
-        r"(?i)\b(?:api[_-]?key|access[_-]?token|password)\s*[:=]\s*\S{8,}"
-    ),
+)
+SYNTHETIC_CREDENTIAL_LABEL_PATTERN = re.compile(
+    r"(?i)\b(?:api[_-]?key|access[_-]?token|password)\s*[:=]\s*\S{8,}"
+)
+SECRET_TEXT_PATTERNS = (
+    *HIGH_CONFIDENCE_SECRET_TEXT_PATTERNS,
+    SYNTHETIC_CREDENTIAL_LABEL_PATTERN,
 )
 FORBIDDEN_PERSISTED_KEYS = frozenset(
     {
@@ -229,8 +233,23 @@ def _default_transport(
     )
 
 
-def _assert_no_secret_text(text: str, *, path: str) -> None:
+def _assert_no_secret_text(
+    text: str,
+    *,
+    path: str,
+    allow_pinned_synthetic_credential_labels: bool = False,
+    active_api_key: str | None = None,
+) -> None:
+    if active_api_key and active_api_key in text:
+        raise ProviderPayloadError(
+            f"{path}: active credential content is forbidden"
+        )
     for pattern in SECRET_TEXT_PATTERNS:
+        if (
+            pattern is SYNTHETIC_CREDENTIAL_LABEL_PATTERN
+            and allow_pinned_synthetic_credential_labels
+        ):
+            continue
         if pattern.search(text):
             raise ProviderPayloadError(
                 f"{path}: credential-like content is forbidden"
@@ -242,12 +261,27 @@ def validate_messages(
     *,
     content_class: str,
     policy: Mapping[str, Any],
+    allow_pinned_synthetic_credential_labels: bool = False,
+    active_api_key: str | None = None,
 ) -> list[dict[str, str]]:
-    """Validate one public/synthetic prompt without persisting its contents."""
+    """Validate one public/synthetic prompt without persisting its contents.
+
+    The explicit public-benchmark opt-in ignores only generic synthetic
+    credential-label assignments.  High-confidence credential shapes and the
+    active client key remain fail-closed.
+    """
 
     allowed = policy["common_controls"]["payload_classes_allowed"]
     if content_class not in allowed:
         raise ProviderPayloadError("outbound content class is not allowed")
+    if not isinstance(allow_pinned_synthetic_credential_labels, bool):
+        raise ProviderPayloadError(
+            "synthetic credential-label allowance must be boolean"
+        )
+    allow_synthetic_labels = bool(
+        allow_pinned_synthetic_credential_labels
+        and content_class == "public_benchmark_case"
+    )
     if not isinstance(messages, Sequence) or isinstance(
         messages, (str, bytes)
     ):
@@ -270,7 +304,12 @@ def validate_messages(
             raise ProviderPayloadError(
                 f"messages[{index}].content must be text"
             )
-        _assert_no_secret_text(content, path=f"messages[{index}].content")
+        _assert_no_secret_text(
+            content,
+            path=f"messages[{index}].content",
+            allow_pinned_synthetic_credential_labels=allow_synthetic_labels,
+            active_api_key=active_api_key,
+        )
         normalized.append({"role": role, "content": content})
     return normalized
 
@@ -559,6 +598,7 @@ class OfficialProviderClient:
     max_tokens: int = 512
     timeout: float = 120.0
     network_consent: bool = False
+    allow_pinned_synthetic_credential_labels: bool = False
     transport: Transport | None = field(default=None, repr=False)
     backend: str = field(default="official_api", init=False)
     last_request_metadata: dict[str, Any] = field(
@@ -581,6 +621,12 @@ class OfficialProviderClient:
             raise ProviderPayloadError("api_key is required at execution time")
         if "\r" in self.api_key or "\n" in self.api_key:
             raise ProviderPayloadError("api_key contains invalid control characters")
+        if not isinstance(
+            self.allow_pinned_synthetic_credential_labels, bool
+        ):
+            raise ProviderPayloadError(
+                "synthetic credential-label allowance must be boolean"
+            )
         if self.temperature != 0:
             raise ProviderPayloadError("formal provider temperature must be zero")
         if self.max_tokens < 1 or self.max_tokens > int(
@@ -600,6 +646,10 @@ class OfficialProviderClient:
             [{"role": "user", "content": "qualification placeholder"}],
             content_class=self.content_class,
             policy=active,
+            allow_pinned_synthetic_credential_labels=(
+                self.allow_pinned_synthetic_credential_labels
+            ),
+            active_api_key=self.api_key,
         )
 
     @property
@@ -625,6 +675,10 @@ class OfficialProviderClient:
             messages,
             content_class=self.content_class,
             policy=self.policy,
+            allow_pinned_synthetic_credential_labels=(
+                self.allow_pinned_synthetic_credential_labels
+            ),
+            active_api_key=self.api_key,
         )
         self.budget_state.assert_before_request()
         payload = {
@@ -657,6 +711,10 @@ class OfficialProviderClient:
             "provider_attempts": 1,
             "provider_tools_declared": False,
         }
+        if self.allow_pinned_synthetic_credential_labels:
+            request_metadata[
+                "pinned_synthetic_credential_labels_allowed"
+            ] = self.content_class == "public_benchmark_case"
         _validate_persisted_value(request_metadata)
         self.last_request_metadata = request_metadata
         headers = {

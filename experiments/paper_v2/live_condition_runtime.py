@@ -199,6 +199,67 @@ def _sha256_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8", errors="replace")).hexdigest()
 
 
+def _validate_physical_attempt_namespace(value: int) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+        raise LiveConditionRuntimeError(
+            "physical attempt namespace must be a positive integer"
+        )
+    return value
+
+
+def _provider_attempt_id(
+    context: OnlineExecutorContext,
+    *,
+    call_index: int,
+    physical_attempt_namespace: int,
+    purpose: str | None = None,
+) -> str:
+    """Build the historical attempt identity unless a later physical run is explicit."""
+
+    identity: dict[str, Any] = {
+        "execution_identity": context.execution_identity,
+        "work_key": context.work_key,
+        "call_index": call_index,
+    }
+    if purpose is not None:
+        identity["purpose"] = purpose
+    if physical_attempt_namespace > 1:
+        identity["physical_attempt_namespace"] = physical_attempt_namespace
+    return "attempt-" + sha256_canonical_json(identity)[:24]
+
+
+def _http_failure_category(exc: Exception) -> str:
+    """Return a coarse, public-safe HTTP category without inspecting messages."""
+
+    status = getattr(exc, "http_status", None)
+    if isinstance(status, bool) or not isinstance(status, int):
+        return "not_observed"
+    if status == 429:
+        return "http_429"
+    if 400 <= status < 500:
+        return "http_4xx"
+    if 500 <= status < 600:
+        return "http_5xx"
+    return "http_other"
+
+
+def _failure_diagnostics(
+    *,
+    stage: str,
+    failure_class: str,
+    provider_call_index: int,
+    http_category: str,
+) -> dict[str, Any]:
+    """Create an allowlisted diagnostic that never includes exception text."""
+
+    return {
+        "failure_stage": stage,
+        "failure_class": failure_class,
+        "provider_call_index": provider_call_index,
+        "http_category": http_category,
+    }
+
+
 def _reject_json_constant(value: str) -> None:
     raise StrictProposalError(f"non-finite JSON constant is forbidden: {value}")
 
@@ -844,6 +905,7 @@ class LiveConditionRuntime:
         ) = None,
         message_builder: ResearchMessageBuilder | None = None,
         recorded_at: Callable[[], str] = _now,
+        physical_attempt_namespace: int = 1,
     ) -> None:
         self.provider_client_factory = provider_client_factory
         self.effect_backend_factory = effect_backend_factory
@@ -856,6 +918,9 @@ class LiveConditionRuntime:
         )
         self.message_builder = message_builder
         self.recorded_at = recorded_at
+        self.physical_attempt_namespace = _validate_physical_attempt_namespace(
+            physical_attempt_namespace
+        )
 
     def _call_event(
         self,
@@ -931,8 +996,17 @@ class LiveConditionRuntime:
         client: TracedProviderClient,
         error_type: str,
         started_ns: int,
+        failure_stage: str,
+        provider_call_index: int,
+        http_category: str,
     ) -> dict[str, Any]:
         bundle = client.build_bundle()
+        diagnostics = _failure_diagnostics(
+            stage=failure_stage,
+            failure_class=error_type,
+            provider_call_index=provider_call_index,
+            http_category=http_category,
+        )
         failure_event = {
             "step": 1,
             "parse_ok": False,
@@ -955,6 +1029,7 @@ class LiveConditionRuntime:
                 "error_type": error_type,
             },
             "provider_receipt_sha256": None,
+            **diagnostics,
         }
         safety_receipt = build_safety_receipt(
             provider_id=client.provider_id,
@@ -988,6 +1063,7 @@ class LiveConditionRuntime:
             "vigil_constraint_generation_calls": 0,
             "offline_evaluator_input": {},
             "recorded_at": self.recorded_at(),
+            **diagnostics,
         }
 
     def execute(
@@ -1010,6 +1086,12 @@ class LiveConditionRuntime:
                 trace_path=self.provider_trace_path_factory(context),
                 recorded_at=self.recorded_at,
                 receipt_adapter=self.provider_trace_receipt_adapter,
+                physical_attempt_namespace=self.physical_attempt_namespace,
+            )
+        client_namespace = getattr(client, "physical_attempt_namespace", 1)
+        if client_namespace != self.physical_attempt_namespace:
+            raise LiveConditionRuntimeError(
+                "provider client physical attempt namespace drift"
             )
         view, schemas = _runtime_inputs(context)
         detector_findings: list[DetectorFinding] = []
@@ -1062,14 +1144,12 @@ class LiveConditionRuntime:
                     "VIGIL condition requires a prepared source-backed adapter"
                 )
             constraint_call_index = 1
-            constraint_attempt_id = "attempt-" + sha256_canonical_json(
-                {
-                    "execution_identity": context.execution_identity,
-                    "work_key": context.work_key,
-                    "call_index": constraint_call_index,
-                    "purpose": "vigil_constraint_generation",
-                }
-            )[:24]
+            constraint_attempt_id = _provider_attempt_id(
+                context,
+                call_index=constraint_call_index,
+                physical_attempt_namespace=self.physical_attempt_namespace,
+                purpose="vigil_constraint_generation",
+            )
             factory_provider_calls = int(
                 getattr(self.vigil_factory, "provider_calls_consumed", 0)
             )
@@ -1105,6 +1185,9 @@ class LiveConditionRuntime:
                         client=client,
                         error_type=type(exc).__name__,
                         started_ns=started_ns,
+                        failure_stage="vigil_constraint_generation",
+                        provider_call_index=constraint_call_index,
+                        http_category=_http_failure_category(exc),
                     )
                 raise
             if isinstance(prepared, VigilPreparation):
@@ -1184,6 +1267,7 @@ class LiveConditionRuntime:
         safety_receipt: dict[str, Any] | None = None
         offline_evaluator_input: Mapping[str, Any] = {}
         operational_status = "max_steps"
+        failure_diagnostic: dict[str, Any] | None = None
         provider_calls_consumed = len(vigil_preparation_completions)
         agent_call_cap = context.max_provider_calls - provider_calls_consumed
         if agent_call_cap < 1:
@@ -1194,13 +1278,11 @@ class LiveConditionRuntime:
         try:
             for step in range(1, agent_call_cap + 1):
                 call_index = provider_calls_consumed + step
-                attempt_id = "attempt-" + sha256_canonical_json(
-                    {
-                        "execution_identity": context.execution_identity,
-                        "work_key": context.work_key,
-                        "call_index": call_index,
-                    }
-                )[:24]
+                attempt_id = _provider_attempt_id(
+                    context,
+                    call_index=call_index,
+                    physical_attempt_namespace=self.physical_attempt_namespace,
+                )
                 self.call_event_sink.append(
                     self._call_event(
                         context=context,
@@ -1220,6 +1302,12 @@ class LiveConditionRuntime:
                     validate_provider_receipt(completion.receipt)
                 except Exception as exc:
                     paused = isinstance(exc, ProviderPausedError)
+                    failure_diagnostic = _failure_diagnostics(
+                        stage="provider_call",
+                        failure_class=type(exc).__name__,
+                        provider_call_index=call_index,
+                        http_category=_http_failure_category(exc),
+                    )
                     self.call_event_sink.append(
                         self._call_event(
                             context=context,
@@ -1254,6 +1342,7 @@ class LiveConditionRuntime:
                                 "error_type": type(exc).__name__,
                             },
                             "provider_receipt_sha256": None,
+                            **failure_diagnostic,
                         }
                     )
                     operational_status = "provider_failure"
@@ -1280,6 +1369,12 @@ class LiveConditionRuntime:
                         completion.text, tool_schemas=schemas
                     )
                 except StrictProposalError as exc:
+                    failure_diagnostic = _failure_diagnostics(
+                        stage="proposal_parse",
+                        failure_class=type(exc).__name__,
+                        provider_call_index=call_index,
+                        http_category="not_applicable",
+                    )
                     events.append(
                         {
                             "step": step,
@@ -1302,6 +1397,7 @@ class LiveConditionRuntime:
                             "response_text": completion.text,
                             "observation": {"status": "parse_failure"},
                             "provider_receipt_sha256": receipt_digest,
+                            **failure_diagnostic,
                         }
                     )
                     operational_status = "parse_failure"
@@ -1601,6 +1697,8 @@ class LiveConditionRuntime:
             bundle = client.build_bundle()
             result["provider_trace_bundle"] = bundle
             result["result_tier"] = bundle["result_tier_ceiling"]
+        if failure_diagnostic is not None:
+            result.update(failure_diagnostic)
         return result
 
 

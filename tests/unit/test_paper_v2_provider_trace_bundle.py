@@ -108,6 +108,79 @@ def test_traced_client_builds_ordered_two_call_bundle(tmp_path) -> None:
     ]
 
 
+def test_physical_attempt_namespace_preserves_default_and_isolates_later_attempts(
+    tmp_path,
+) -> None:
+    identity = {
+        "execution_identity": "execution-namespace",
+        "work_key": "work-namespace",
+        "call_index": 1,
+    }
+    default = TracedProviderClient(
+        _multi_call_client(),
+        execution_identity=identity["execution_identity"],
+        work_key=identity["work_key"],
+        trace_path=tmp_path / "default.jsonl",
+        recorded_at=lambda: RECORDED_AT,
+        receipt_adapter=_as_official_receipt,
+    )
+    second = TracedProviderClient(
+        _multi_call_client(),
+        execution_identity=identity["execution_identity"],
+        work_key=identity["work_key"],
+        trace_path=tmp_path / "second.jsonl",
+        recorded_at=lambda: RECORDED_AT,
+        receipt_adapter=_as_official_receipt,
+        physical_attempt_namespace=2,
+    )
+
+    historical = "attempt-" + sha256_canonical_json(identity)[:24]
+    namespaced = {
+        **identity,
+        "physical_attempt_namespace": 2,
+    }
+    assert default._attempt_id(1) == historical
+    assert second._attempt_id(1) == (
+        "attempt-" + sha256_canonical_json(namespaced)[:24]
+    )
+    assert second._attempt_id(1) != default._attempt_id(1)
+
+    default.complete(FIXED_MESSAGES, step=1)
+    second.complete(FIXED_MESSAGES, step=1)
+    default_commitment = default.build_bundle()["trace_rows"][0]["event"][
+        "commitment"
+    ]
+    second_commitment = second.build_bundle()["trace_rows"][0]["event"][
+        "commitment"
+    ]
+    assert default_commitment["attempt_id"] == historical
+    assert second_commitment["attempt_id"] == second._attempt_id(1)
+    assert (
+        default_commitment["client_request_id"]
+        != second_commitment["client_request_id"]
+    )
+
+
+@pytest.mark.parametrize("namespace", (0, -1, True, 1.5))
+def test_physical_attempt_namespace_rejects_invalid_values(
+    tmp_path,
+    namespace,
+) -> None:
+    with pytest.raises(
+        ProviderTraceBundleError,
+        match="physical attempt namespace",
+    ):
+        TracedProviderClient(
+            _multi_call_client(),
+            execution_identity="execution-invalid",
+            work_key="work-invalid",
+            trace_path=tmp_path / f"invalid-{namespace}.jsonl",
+            recorded_at=lambda: RECORDED_AT,
+            receipt_adapter=_as_official_receipt,
+            physical_attempt_namespace=namespace,
+        )
+
+
 def test_traced_client_keeps_paused_precommit_diagnostic(tmp_path) -> None:
     client = _fixture_client("deepseek", include_request_id=False)
 

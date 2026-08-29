@@ -14,12 +14,34 @@
   唯一、无 response ID 的外层 attempt 2 使用独立 call-ledger/trace namespace。
   response-bearing、attempt 3、身份或 payload 漂移仍 fail-closed；429 manual recovery
   与 generic response-less recovery 保持分离。
-- 当前阶段：旧 `e6-nightly-provider-windows` heartbeat 已暂停，避免 2026-08-30
-  按 v1 runner 自动启动 W3。正在实施离线修复和定向验证，不调用 DeepSeek/Gemini。
+- 根因：DeepSeek W1/W2 的六条同构 AgentDojo `provider_failure` 来自冻结的
+  `user_task_16`。`get_received_emails` 的 9,466 字符公开模拟观测只命中旧的
+  泛化 credential-label 正则，第二轮 provider 请求在本地 payload 校验阶段被
+  `ProviderPayloadError` 阻断；这不是 API、模型身份或真实工具故障。Gemini 则是
+  generic response-less attempt 2 与旧 429-only ledger 恢复契约冲突。
+- 已完成：旧 `e6-nightly-provider-windows` heartbeat 保持暂停；E6-v2 只允许尚未
+  执行的 W3，W1/W2 在凭据加载、dispatcher 和输出写入前 fail-closed。generic
+  attempt 2 需要唯一无响应 key、合法 attempt-1 payload commitment 和传输前
+  payload 等值；无 commitment、429、attempt 3、response-bearing 或成功行均不能
+  进入 generic 恢复。
+- W3 前置门：运行器会在凭据、dispatcher 和输出之前只读核验对应 provider 的
+  E6-v1 W2 seal，并要求 W2→W3 启动间隔为 18--30 小时。DeepSeek 的 W2 seal
+  存在；Gemini 没有 W2 seal，因此当前 v2 会 fail-closed，不能补造或回填历史证据。
+  首次合法调用冻结 W3 启动时间；后续扩展/显式恢复复核该冻结时间，并受同一窗口
+  最长 12 小时约束，不会因当前时钟跨过 W2+30 小时而误判为新的 W3。
+- 凭据边界：默认仍严格拒绝 credential-like 内容。只有 AgentDojo 的
+  `public_benchmark_case` 可显式启用 case-scoped generic-label exemption；当前
+  API key、`sk-*`、`AQ.*` 和 PEM 始终 fail-closed，M3-v2 与未知 benchmark 不豁免。
+- 科学边界：E6-v2 W3 为 DeepSeek 360/Gemini 180 的诊断性前瞻快照；v1 W1/W2
+  与 v2 W3 不得拼接为正式三窗口重复性或跨厂商复现。Gemini 即使 W3 完整也仅为
+  single-window diagnostic。
 - 验收：真实 call-sink stub 覆盖 generic response-less attempt 1→2、attempt 3 拒绝、
   response-bearing 不恢复、429 旧语义、v1/v2 根隔离；AgentDojo 多步失败能记录
   脱敏 failure stage/class/call index，并被技术门识别；定向 pytest、Ruff、
-  `py_compile`、`git diff --check` 全部通过后才可讨论新的 provider canary。
+  `py_compile`、JSON 和 `git diff --check` 已通过（聚焦修复 107 passed、1 个已记录
+  的旧 qualification 漂移 deselected；v1 兼容 20 passed）。冻结真实案例两轮无网络回归验证
+  默认路径在第二调用前拒绝、显式 AgentDojo 路径完成两次模拟 transport；API 调用
+  为零，E6-v1 output 未改变。任何新 provider canary 仍需另行明确授权。
 
 ### 2026-08-28 E6 双提供商同期攻击活性与重复性校准
 
