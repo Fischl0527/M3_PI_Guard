@@ -1,5 +1,25 @@
 # 当前任务
 
+### 2026-08-31 E6-v2 取消人工跨日等待（单次诊断执行块）
+
+- Owner 决策：停止把 18--30 小时跨日间隔作为继续实验的准入条件；该时间测试对
+  当前已降级为 diagnostic 的 E6 贡献不足，不再为等待本身消耗日历时间。
+- 实施边界：E6-v1 W1/W2 及其 seal、raw、trace、ledger 和失败状态继续不可变；
+  E6-v2 只投影此前未触碰的 source-W3 行，并赋予独立 `B1` 身份，解释为可立即
+  启动的 `single diagnostic execution block`，不再解释为第三个时间重复窗口。
+- 规模保持：DeepSeek 360、Gemini 180；两家仍分别先运行 12 条 outcome-blind
+  正式前缀。技术门通过才扩展；任何 live canary/API 仍需独立执行指令，本次只修改
+  前瞻协议、runner 和定向测试。
+- 取消内容：same-provider W2 seal 准入、W2→W3 18--30 小时启动间隔、依赖该间隔的
+  12 小时 temporal-window 续跑门，以及跨日期重复性主张。
+- 保留内容：独立 v2 study/run/output/trace/ledger/stop 身份、W1/W2 fail-closed、
+  成功行不重跑、最多一次 response-less attempt 2、精确 payload 绑定、模型身份、
+  forbidden-field/provider-tool/真实 effect 为零、Gemini 免费层/USD 0 和 ITT 失败规则。
+- 验收：时间或 v1 W2 seal 不再影响单块准入；W1/W2 仍在凭据和输出前拒绝；
+  所有安全/恢复负例保持通过；协议和 Harness 明确不得把该块与 v1 结果拼成
+  三窗口、跨日稳定性或正式跨厂商泛化证据；旧 temporal analyzer 明确拒绝
+  `temporal_replication_claim=false` 的 B1 行，最终报告披露实际执行起止和跨度。
+
 ### 2026-08-29 E6-v2 前瞻工程修复（不改写 E6-v1）
 
 - 目标：保留 E6-v1 W1/W2 的全部失败、响应和封存状态不可变，创建独立的

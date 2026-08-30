@@ -2,14 +2,15 @@
 
 E6-v1 records, ledgers, stops, and window artifacts are immutable.  This module
 reuses only the frozen v1 *case membership and logical work keys* while deriving
-new study, run, execution, output, trace, call-ledger, and stop identities.  It
-reads the immutable v1 W2 seal solely as a fail-closed W3 timing prerequisite;
-it never mutates any E6-v1 output path.
+new study, run, execution, output, trace, call-ledger, and stop identities.  The
+untouched source-W3 rows form one immediately runnable diagnostic execution
+block; they are not a third temporal replicate.  This module never
+reads or mutates any E6-v1 output path.
 
 The only generic recovery admitted here is one explicit outer attempt 2 for the
 single unresolved work key whose complete v2 execution history is response-less
 and contains a valid pretransport payload commitment.  HTTP 429 is never
-converted into this generic recovery and closes as a W3 diagnostic terminal.
+converted into this generic recovery and closes as a diagnostic-block terminal.
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ import functools
 import hashlib
 import json
 from collections import Counter
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
@@ -71,23 +72,18 @@ OUTPUT_ROOT = PROJECT_ROOT / "outputs/experiments/e6_cross_provider_calibration_
 SOURCE_PLAN_PATHS = copy.deepcopy(e6_v1.PLAN_PATHS)
 PROVIDER_ROOT_NAMES = copy.deepcopy(e6_v1.PROVIDER_ROOT_NAMES)
 EXPECTED_MODELS = copy.deepcopy(e6_v1.EXPECTED_MODELS)
-EXPECTED_COUNTS = copy.deepcopy(e6_v1.EXPECTED_COUNTS)
 EXPECTED_WINDOW_COUNTS = copy.deepcopy(e6_v1.EXPECTED_WINDOW_COUNTS)
-WINDOWS = e6_v1.WINDOWS
-PROSPECTIVE_EXECUTION_WINDOWS = ("W3",)
+EXPECTED_COUNTS = copy.deepcopy(EXPECTED_WINDOW_COUNTS)
+SOURCE_PLAN_WINDOW = "W3"
+EXECUTION_BLOCK_ID = "B1"
+PROSPECTIVE_EXECUTION_WINDOWS = (EXECUTION_BLOCK_ID,)
 PREFIX_ROWS = e6_v1.PREFIX_ROWS
 MAX_TOKENS = e6_v1.MAX_TOKENS
 TIMEOUT_SECONDS = e6_v1.TIMEOUT_SECONDS
 STUDY_ID = "m3-q2-e6-cross-provider-calibration-v2"
 SCHEMA_VERSION = "m3-paper-v2-e6-raw-record-2.0"
 GENERIC_RECOVERY_ATTEMPT = 2
-MIN_PREDECESSOR_START_DELTA = timedelta(hours=18)
-MAX_PREDECESSOR_START_DELTA = timedelta(hours=30)
-MAX_WINDOW_DURATION = timedelta(hours=12)
-V1_W2_SEAL_PATHS = {
-    provider_id: e6_v1._seal_path(provider_id, "W2")
-    for provider_id in EXPECTED_MODELS
-}
+EXECUTION_BLOCK_ROLE = "single_diagnostic_execution_block"
 
 
 class E6CalibrationRunnerV2Error(RuntimeError):
@@ -96,103 +92,6 @@ class E6CalibrationRunnerV2Error(RuntimeError):
 
 def _now() -> str:
     return datetime.now().astimezone().isoformat()
-
-
-def _parse_aware_timestamp(value: Any, *, field_name: str) -> datetime:
-    if not isinstance(value, str) or not value.strip():
-        raise E6CalibrationRunnerV2Error(
-            f"E6-v2 prerequisite has no valid {field_name}"
-        )
-    try:
-        parsed = datetime.fromisoformat(value)
-    except ValueError as exc:
-        raise E6CalibrationRunnerV2Error(
-            f"E6-v2 prerequisite has invalid {field_name}"
-        ) from exc
-    if parsed.tzinfo is None or parsed.utcoffset() is None:
-        raise E6CalibrationRunnerV2Error(
-            f"E6-v2 prerequisite {field_name} must be timezone-aware"
-        )
-    return parsed
-
-
-def _validate_w3_predecessor_seal(provider_id: str) -> dict[str, Any]:
-    """Require an immutable v1 W2 seal and the frozen 18--30 hour start gap."""
-
-    try:
-        seal_path = V1_W2_SEAL_PATHS[provider_id]
-    except KeyError as exc:
-        raise E6CalibrationRunnerV2Error(
-            f"unsupported E6-v2 provider: {provider_id}"
-        ) from exc
-    if not seal_path.is_file():
-        raise E6CalibrationRunnerV2Error(
-            f"{provider_id}: immutable E6-v1 W2 seal is absent; W3 is not eligible"
-        )
-    try:
-        seal = json.loads(seal_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        raise E6CalibrationRunnerV2Error(
-            f"{provider_id}: immutable E6-v1 W2 seal is unreadable"
-        ) from exc
-    if (
-        seal.get("study_id") != e6_v1.STUDY_ID
-        or seal.get("provider_id") != provider_id
-        or seal.get("replicate_window") != "W2"
-        or seal.get("status") != "sealed"
-    ):
-        raise E6CalibrationRunnerV2Error(
-            f"{provider_id}: immutable E6-v1 W2 seal identity/status mismatch"
-        )
-    predecessor_started = _parse_aware_timestamp(
-        seal.get("window_started_at"), field_name="W2 window_started_at"
-    )
-    current_time = _parse_aware_timestamp(_now(), field_name="current time")
-    state_path = _window_state_path(provider_id, "W3")
-    existing_state: dict[str, Any] | None = None
-    if state_path.is_file():
-        try:
-            existing_state = json.loads(state_path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as exc:
-            raise E6CalibrationRunnerV2Error(
-                f"{provider_id}: existing E6-v2 W3 state is unreadable"
-            ) from exc
-        if (
-            existing_state.get("study_id") != STUDY_ID
-            or existing_state.get("provider_id") != provider_id
-            or existing_state.get("replicate_window") != "W3"
-            or existing_state.get("status") != "running"
-        ):
-            raise E6CalibrationRunnerV2Error(
-                f"{provider_id}: existing E6-v2 W3 state identity/status mismatch"
-            )
-    prospective_started = _parse_aware_timestamp(
-        (
-            existing_state.get("window_started_at")
-            if existing_state is not None
-            else current_time.isoformat()
-        ),
-        field_name="prospective W3 window_started_at",
-    )
-    start_delta = prospective_started - predecessor_started
-    if not MIN_PREDECESSOR_START_DELTA <= start_delta <= MAX_PREDECESSOR_START_DELTA:
-        raise E6CalibrationRunnerV2Error(
-            f"{provider_id}: W3 start is outside the frozen 18-30 hour interval"
-        )
-    if existing_state is not None:
-        elapsed = current_time - prospective_started
-        if not timedelta(0) <= elapsed <= MAX_WINDOW_DURATION:
-            raise E6CalibrationRunnerV2Error(
-                f"{provider_id}: existing W3 state is outside the 12-hour window duration"
-            )
-    return {
-        "provider_id": provider_id,
-        "predecessor_window": "W2",
-        "predecessor_status": "sealed",
-        "prospective_window_started_at": prospective_started.isoformat(),
-        "resuming_existing_window": existing_state is not None,
-        "start_delta_seconds": start_delta.total_seconds(),
-    }
 
 
 def _write_json(path: Path, value: Mapping[str, Any]) -> None:
@@ -236,26 +135,42 @@ def _execution_identity(provider_id: str, window: str) -> str:
             "study_id": STUDY_ID,
             "provider_id": provider_id,
             "model_id": EXPECTED_MODELS[provider_id],
-            "replicate_window": window,
+            "execution_block_id": window,
             "source_design": "e6-cross-provider-calibration-v1",
-            "repair_contract": "isolated-generic-response-less-attempt-2",
+            "repair_contract": "immediate-block-isolated-response-less-attempt-2",
         }
     )
 
 
 def _project_v2_row(source: Mapping[str, Any]) -> dict[str, Any]:
     provider_id = str(source["provider_id"])
-    window = str(source["replicate_window"])
+    source_window = str(source["replicate_window"])
+    if source_window != SOURCE_PLAN_WINDOW:
+        raise E6CalibrationRunnerV2Error(
+            f"E6-v2 accepts source-{SOURCE_PLAN_WINDOW} rows only"
+        )
+    source_work_key = str(source["work_key"])
     value = copy.deepcopy(dict(source))
     value.update(
         {
             "schema_version": "m3-paper-v2-e6-work-item-2.0",
             "study_id": STUDY_ID,
-            "run_id": f"e6-v2-{provider_id}-{window}",
-            "execution_identity": _execution_identity(provider_id, window),
+            "run_id": f"e6-v2-{provider_id}-{EXECUTION_BLOCK_ID}",
+            "execution_identity": _execution_identity(
+                provider_id, EXECUTION_BLOCK_ID
+            ),
+            "work_key": f"e6-v2-immediate__{source_work_key}",
             "source_protocol_version": "e6-cross-provider-calibration-v1",
-            "source_v1_work_key": str(source["work_key"]),
+            "source_v1_work_key": source_work_key,
+            "source_replicate_window": source_window,
+            "source_replicate_index": source.get("replicate_index"),
+            "replicate_window": EXECUTION_BLOCK_ID,
+            "replicate_index": 1,
+            "sample_role": "risk_enriched_activity_diagnostic",
+            "execution_block_id": EXECUTION_BLOCK_ID,
             "repair_protocol_version": "e6-response-less-recovery-v2",
+            "execution_block_role": EXECUTION_BLOCK_ROLE,
+            "temporal_replication_claim": False,
         }
     )
     return value
@@ -267,7 +182,11 @@ def _load_plan(provider_id: str) -> list[dict[str, Any]]:
     if not MANIFEST_PATH.is_file():
         raise E6CalibrationRunnerV2Error("E6-v2 manifest is missing")
     # This reads only the frozen v1 protocol plan.  It never reads v1 outputs.
-    rows = [_project_v2_row(row) for row in e6_v1._load_plan(provider_id)]
+    rows = [
+        _project_v2_row(row)
+        for row in e6_v1._load_plan(provider_id)
+        if row.get("replicate_window") == SOURCE_PLAN_WINDOW
+    ]
     if (
         len(rows) != EXPECTED_COUNTS[provider_id]
         or len({str(row["work_key"]) for row in rows}) != len(rows)
@@ -278,8 +197,10 @@ def _load_plan(provider_id: str) -> list[dict[str, Any]]:
 
 
 def _window_rows(provider_id: str, window: str) -> list[dict[str, Any]]:
-    if window not in WINDOWS:
-        raise E6CalibrationRunnerV2Error(f"unsupported E6-v2 window: {window}")
+    if window not in PROSPECTIVE_EXECUTION_WINDOWS:
+        raise E6CalibrationRunnerV2Error(
+            f"unsupported E6-v2 execution block: {window}"
+        )
     rows = [
         row for row in _load_plan(provider_id) if row["replicate_window"] == window
     ]
@@ -372,7 +293,7 @@ def _validate_generic_recovery_history(
         raise E6CalibrationRunnerV2Error("generic recovery requires latest attempt 1")
     if _is_manual_429(latest):
         raise E6CalibrationRunnerV2Error(
-            "HTTP 429 is a W3 diagnostic terminal, not generic recovery"
+            "HTTP 429 is a diagnostic-block terminal, not generic recovery"
         )
     if _is_terminal(latest) or latest.get("retry_eligible") is not True:
         raise E6CalibrationRunnerV2Error("generic recovery is not eligible")
@@ -475,7 +396,8 @@ def _selected_pending(
             and _is_manual_429(histories[retry_keys[0]][-1])
         ):
             raise E6CalibrationRunnerV2Error(
-                "E6-v2 closes W3 HTTP 429 as diagnostic terminal; generic recovery is forbidden"
+                "E6-v2 closes diagnostic-block HTTP 429 as a diagnostic terminal; "
+                "generic recovery is forbidden"
             )
         if len(retry_keys) != 1 or unresolved != set(retry_keys):
             raise E6CalibrationRunnerV2Error(
@@ -487,7 +409,7 @@ def _selected_pending(
     if unresolved:
         if any(_is_manual_429(histories[key][-1]) for key in unresolved):
             raise E6CalibrationRunnerV2Error(
-                "HTTP 429 is closed as a W3 diagnostic terminal"
+                "HTTP 429 is closed as a diagnostic-block terminal"
             )
         raise E6CalibrationRunnerV2Error(
             "response-less row requires explicit unique-key recovery"
@@ -929,6 +851,13 @@ def _enrich_record(
             "physical_attempt_namespace": attempt,
             "source_protocol_version": "e6-cross-provider-calibration-v1",
             "repair_protocol_version": "e6-response-less-recovery-v2",
+            "source_v1_work_key": work_item["source_v1_work_key"],
+            "source_replicate_window": work_item["source_replicate_window"],
+            "source_replicate_index": work_item["source_replicate_index"],
+            "sample_role": "risk_enriched_activity_diagnostic",
+            "execution_block_role": EXECUTION_BLOCK_ROLE,
+            "execution_block_id": EXECUTION_BLOCK_ID,
+            "temporal_replication_claim": False,
             "manual_429_recovery_required": False,
             "underlying_manual_429_ledger_semantics_unchanged": paused,
         }
@@ -952,7 +881,7 @@ def _enrich_record(
                 "retry_eligible": False,
                 "included_in_primary_itt": True,
                 "terminal_status": True,
-                "protocol_terminal_reason": "w3_429_diagnostic_terminal",
+                "protocol_terminal_reason": "diagnostic_block_429_terminal",
             }
         )
     elif response_less:
@@ -1069,6 +998,9 @@ def evaluate_window_gate(provider_id: str, window: str) -> dict[str, Any]:
         "study_id": STUDY_ID,
         "provider_id": provider_id,
         "replicate_window": window,
+        "execution_block_id": EXECUTION_BLOCK_ID,
+        "execution_block_role": EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
         "status": "passed" if gate_passed else "failed",
         "gate_passed": gate_passed,
         "planned_prefix_rows": PREFIX_ROWS,
@@ -1090,9 +1022,7 @@ def evaluate_window_gate(provider_id: str, window: str) -> dict[str, Any]:
     return value
 
 
-def _ensure_window_state(
-    provider_id: str, window: str, *, window_started_at: str
-) -> dict[str, Any]:
+def _ensure_window_state(provider_id: str, window: str) -> dict[str, Any]:
     path = _window_state_path(provider_id, window)
     if path.is_file():
         value = json.loads(path.read_text(encoding="utf-8"))
@@ -1108,7 +1038,11 @@ def _ensure_window_state(
         "study_id": STUDY_ID,
         "provider_id": provider_id,
         "replicate_window": window,
-        "window_started_at": window_started_at,
+        "execution_block_id": EXECUTION_BLOCK_ID,
+        "execution_block_started_at": _now(),
+        "window_started_at": _now(),
+        "execution_block_role": EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
         "status": "running",
     }
     _write_json(path, value)
@@ -1130,9 +1064,8 @@ def run_window(
 ) -> dict[str, Any]:
     if window not in PROSPECTIVE_EXECUTION_WINDOWS:
         raise E6CalibrationRunnerV2Error(
-            "E6-v2 provider execution is prospective W3-only; W1/W2 remain immutable"
+            "E6-v2 provider execution is diagnostic-block B1 only; W1/W2 remain immutable"
         )
-    prerequisite = _validate_w3_predecessor_seal(provider_id)
     stop_path = _provider_stop_path(provider_id)
     if stop_path.is_file():
         raise E6CalibrationRunnerV2Error(
@@ -1159,11 +1092,7 @@ def run_window(
             "window_gate_passed": bool(gate["gate_passed"]),
         }
 
-    state = _ensure_window_state(
-        provider_id,
-        window,
-        window_started_at=str(prerequisite["prospective_window_started_at"]),
-    )
+    state = _ensure_window_state(provider_id, window)
     attempts = {str(row["work_key"]): attempt for row, attempt in pending}
     permit = _permit(
         provider_id,
@@ -1184,6 +1113,7 @@ def run_window(
 
     executed = 0
     stopped_after_response_less = False
+    stopped_after_fatal_boundary = False
     for work_item, attempt in pending:
         trace_path = lean._provider_trace_path(permit, str(work_item["work_key"]))
         result: dict[str, Any] | None = None
@@ -1245,6 +1175,9 @@ def run_window(
                 },
             )
         executed += 1
+        if fatal:
+            stopped_after_fatal_boundary = True
+            break
         if not _has_response_evidence(record):
             stopped_after_response_less = True
             break
@@ -1253,9 +1186,13 @@ def run_window(
     return {
         "provider_id": provider_id,
         "replicate_window": window,
+        "execution_block_id": EXECUTION_BLOCK_ID,
+        "execution_block_role": EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
         "selected": PREFIX_ROWS if canary_only else len(all_rows),
         "executed": executed,
         "stopped_after_response_less_failure": stopped_after_response_less,
+        "stopped_after_fatal_boundary": stopped_after_fatal_boundary,
         "window_gate_passed": bool(gate["gate_passed"]),
         "raw_path": str(_raw_path(provider_id)),
     }
@@ -1264,9 +1201,7 @@ def run_window(
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--provider", choices=tuple(EXPECTED_COUNTS), required=True)
-    parser.add_argument(
-        "--window", choices=PROSPECTIVE_EXECUTION_WINDOWS, required=True
-    )
+    parser.add_argument("--block", choices=PROSPECTIVE_EXECUTION_WINDOWS, required=True)
     stage = parser.add_mutually_exclusive_group(required=True)
     stage.add_argument("--canary-only", action="store_true")
     stage.add_argument("--resume-pending-only", action="store_true")
@@ -1279,7 +1214,7 @@ def main() -> int:
     args = build_parser().parse_args()
     result = run_window(
         args.provider,
-        args.window,
+        args.block,
         canary_only=args.canary_only,
         config_path=args.config,
         retry_failed_work_keys=args.retry_failed_work_key,

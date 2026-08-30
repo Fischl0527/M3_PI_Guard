@@ -1,27 +1,27 @@
-# E6-v2 prospective engineering amendment
+# E6-v2 prospective engineering amendment: immediate diagnostic block
 
 E6-v1 W1/W2 records, provider traces, call ledgers, gate/seal artifacts and
 provider-stop markers remain immutable. E6-v2 reuses only the frozen v1 case
-membership, condition order and logical work keys. It derives a new study ID,
-new per-provider/window run and execution identities, and writes exclusively to
+membership, condition order and source logical-work-key mapping. It derives a
+new work key, study ID, per-provider/block run and execution identities, and writes exclusively to
 `outputs/experiments/e6_cross_provider_calibration_v2/`.
 
-Live execution is code-gated to the previously untouched W3 rows. W1 and W2
-cannot reach credential loading, dispatcher construction or an output write.
-Before any W3 credential loading, dispatcher construction or output write, the
-runner also requires a sealed immutable E6-v1 W2 artifact for that provider and
-checks that the prospective W3 start is 18--30 hours after the recorded W2
-start. DeepSeek currently has such a W2 seal; Gemini does not, so Gemini fails
-closed unless a separately reviewed prospective protocol supplies a valid
-predecessor rather than fabricating or backfilling historical evidence.
-The first admitted W3 call freezes its start in the v2 window state. Later
-canary expansion or explicit failed-key recovery reuses that frozen start for
-the predecessor check and must still occur within the same 12-hour window.
-The prospective W3 projection contains 360 DeepSeek rows and 180 Gemini rows.
-Consequently, v1 W1/W2 plus v2 W3 are engineering/sensitivity calibration only;
-they are not presented as three interchangeable replicates from one frozen
-study implementation. Gemini has only one prospective v2 window and therefore
-remains diagnostic even if all 180 W3 rows complete.
+Live execution is code-gated to the previously untouched source-W3 rows. W1 and
+W2 cannot reach credential loading, dispatcher construction or an output write.
+On 2026-08-31 the owner removed the artificial 18--30 hour cross-date delay:
+E6-v1 W1/W2 had already failed their technical gates, so another date could not
+restore formal three-window exchangeability. The v2 source-W3 projection is now
+one immediately runnable diagnostic execution block (`B1`) containing 360
+DeepSeek rows and 180 Gemini rows. It does not read or require a v1 W2 seal and
+has no clock-based admission rule.
+
+This timing change does not turn the block into formal repeatability evidence.
+E6-v1 W1/W2 plus the v2 block cannot be pooled as three temporal replicates;
+the block may only calibrate attack activity during its observed execution span
+and within-block directional provider behavior. The report must disclose the
+actual start, end and elapsed span. Gemini remains diagnostic even if all 180
+rows complete. The E6-v1 temporal analyzer must reject rows marked
+`temporal_replication_claim=false`.
 
 The repair admits one explicit generic recovery only when exactly one work key
 is unresolved, its complete E6-v2 history contains exactly outer attempt 1,
@@ -35,7 +35,7 @@ attempt-1 failure that occurs before any valid payload commitment is written is
 closed as an ITT diagnostic terminal rather than advertised as recoverable.
 
 HTTP 429 is not generic recovery. The underlying manually authorized
-same-provider ledger semantics remain unchanged, but this prospective W3-only
+same-provider ledger semantics remain unchanged, but this prospective block
 protocol does not exercise them: a 429 closes as an ITT diagnostic terminal and
 does not create a fatal provider stop. Ordinary `ProviderTransportError` also
 does not create a provider-wide stop. Every other escaped exception fails
@@ -55,6 +55,7 @@ pinned fixture observation. High-confidence secret patterns and an exact match
 to the active API key remain forbidden. Synthetic M3 cases do not receive this
 allowance.
 
-This amendment is offline-qualified only. It does not authorize API execution,
+This amendment is offline-qualified only. Removing the artificial delay does
+not itself authorize API execution,
 does not create a replacement 1,620-row plan artifact, and does not alter the
 scientific outcomes or interpretation of E6-v1.

@@ -2,6 +2,27 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-31 — Replace E6 artificial date delay with one diagnostic execution block
+
+- Context: E6-v1 W1/W2 failed their technical gates and E6-v2 was already
+  bounded to diagnostic/sensitivity evidence. Waiting 18--30 hours for a third
+  date no longer produces formal three-window repeatability because the
+  implementations and eligibility states are not exchangeable.
+- Owner decision: remove artificial cross-date waiting. Reinterpret the untouched
+  source-W3 projection as independently identified block `B1`, one immediately
+  runnable diagnostic execution block (DeepSeek 360, Gemini 180), not as temporal
+  replicate W3.
+- Engineering consequence: remove the v1 W2-seal, 18--30-hour start interval and
+  12-hour temporal-window eligibility checks. Preserve v1 immutability, v2
+  identities, W1/W2 rejection, provider isolation, payload-bound recovery,
+  outcome-blind prefix gates, ITT and all external-effect/security boundaries.
+- Scientific consequence: E6-v2 may calibrate attack activity during its reported
+  execution span and provide a within-block directional provider diagnostic. It
+  cannot support cross-date
+  repeatability, a pooled v1+v2 three-window estimate, or general cross-provider
+  claims. The E6-v1 temporal analyzer must reject B1 rows marked non-temporal.
+  No API execution is authorized by this protocol-only change.
+
 ## 2026-08-29 — Supersede E6-v1 execution with a prospective E6-v2 repair
 
 - Context: DeepSeek W1/W2 repeated a 3 completed / 3 strict-parse-failure /

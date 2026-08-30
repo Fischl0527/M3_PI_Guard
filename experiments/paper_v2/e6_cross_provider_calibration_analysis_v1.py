@@ -167,6 +167,15 @@ def _merge_plan_and_raw(
     plan_rows: Sequence[Mapping[str, Any]],
     raw_rows: Sequence[Mapping[str, Any]],
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    if any(
+        row.get("temporal_replication_claim") is False
+        for rows in (plan_rows, raw_rows)
+        for row in rows
+    ):
+        raise E6AnalysisError(
+            "non-temporal diagnostic execution blocks cannot enter the "
+            "E6-v1 temporal-repeatability analysis"
+        )
     plan = {str(row["work_key"]): dict(row) for row in plan_rows}
     if len(plan) != len(plan_rows):
         raise E6AnalysisError("E6 plan contains duplicate work keys")

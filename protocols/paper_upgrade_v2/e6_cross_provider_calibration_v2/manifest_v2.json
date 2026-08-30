@@ -7,7 +7,7 @@
     "reuse": [
       "case_membership",
       "condition_order",
-      "logical_work_keys"
+      "source_work_key_mapping"
     ],
     "immutable_outputs": "outputs/experiments/e6_cross_provider_calibration_v1"
   },
@@ -15,32 +15,31 @@
     "study_id",
     "run_id",
     "execution_identity",
+    "work_key",
     "output_root",
     "trace_root",
     "call_ledger",
     "provider_stop"
   ],
-  "prospective_execution_windows": [
+  "source_plan_windows": [
     "W3"
   ],
-  "prospective_w3_plan_counts": {
+  "execution_block_id": "B1",
+  "prospective_execution_role": "single_diagnostic_execution_block",
+  "diagnostic_block_plan_counts": {
     "deepseek": 360,
     "gemini": 180
   },
-  "w3_execution_prerequisite": {
-    "immutable_v1_w2_seal_required": true,
-    "w2_to_w3_start_interval_hours": [
-      18,
-      30
-    ],
-    "checked_before_credentials_dispatch_and_output": true,
-    "existing_window_uses_frozen_start": true,
-    "maximum_window_duration_hours": 12,
-    "deepseek_currently_has_w2_seal": true,
-    "gemini_currently_has_w2_seal": false
+  "execution_timing_policy": {
+    "artificial_start_delay_required": false,
+    "v1_w2_seal_required": false,
+    "time_based_eligibility_required": false,
+    "temporal_replication_claim": false,
+    "report_actual_execution_start_end_and_span": true,
+    "owner_superseded_cross_date_delay_on": "2026-08-31"
   },
-  "gemini_inference_role": "single_window_diagnostic_only",
-  "cross_version_inference_boundary": "v1_W1_W2_plus_v2_W3_is_sensitivity_not_formal_three_window_repeatability",
+  "gemini_inference_role": "single_block_diagnostic_only",
+  "cross_version_inference_boundary": "v1_W1_W2_plus_v2_B1_is_diagnostic_not_temporal_repeatability",
   "generic_response_less_recovery": {
     "maximum_outer_attempt": 2,
     "requires_unique_unresolved_work_key": true,

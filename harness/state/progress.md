@@ -1,5 +1,30 @@
 # 进展记录
 
+## 2026-08-31 — E6-v2 取消人工延时，改为单次诊断执行块
+
+- Owner 明确取消 18--30 小时跨日等待；E6-v1 W1/W2 已无法支持正式三窗口
+  exchangeability，继续等待不会恢复该推断资格。
+- E6-v2 仍只投影未触碰的 source-W3 行，但使用独立 `B1`、`replicate_index=1`
+  和 `risk_enriched_activity_diagnostic`，标记为
+  `single_diagnostic_execution_block`：DeepSeek 360、Gemini 180，可在获得
+  独立 live 指令后立即执行，不再依赖 v1 W2 seal、跨日启动间隔或 temporal-window
+  时长门。
+- 每个 work item 和公开 record 新增 `execution_block_role` 与
+  `temporal_replication_claim=false`。协议明确禁止将 v1 W1/W2 与该块合并为三窗口
+  重复性、跨日期稳定性或正式跨厂商泛化证据。
+- 其余边界未变：W1/W2 在凭据/dispatcher/output 前拒绝；独立 v2 identity/root；
+  payload-bound response-less attempt 2；成功/response-bearing 行不重跑；Gemini
+  免费层/USD 0；provider tools 与真实 effect 为零；技术前缀仍 outcome-blind。
+- 旧 `e6-nightly-provider-windows` heartbeat 已核验为 `PAUSED`，不会按旧跨日规则
+  自动启动 provider 调用。
+- 独立复审指出的 response-bearing fatal 后继续循环风险已修复为首行后无条件停止；
+  v1 enrichment 对 raw `sample_role` 的重复性回写也已在 v2 最终层覆盖；旧 E6-v1
+  temporal analyzer 现会拒绝非时间 B1 数据，避免误做三窗口汇总。
+- 离线验证：E6-v2 runner 25/25；聚焦修复 suite 107 passed、1 个已记录旧
+  qualification deselected；v1 兼容 suite 20/20。API/provider 调用为零，E6-v1
+  output 差异为零；最终独立复审 P0/P1/P2 均为 0；F-PAPER-002 继续
+  `in_progress`。
+
 ## 2026-08-29 — E6-v2 前瞻工程修复离线闭合
 
 - DeepSeek 重复失败已由冻结真实案例离线定位：同一个 AgentDojo

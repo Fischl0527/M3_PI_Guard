@@ -1,5 +1,35 @@
 # 会话移交
 
+## 2026-08-31 — E6-v2 B1 diagnostic execution block; live execution not started
+
+- Owner removed artificial date waiting. The untouched source-W3 projection is
+  now the independent `B1` `single_diagnostic_execution_block`, not temporal W3
+  evidence. Its rows use `replicate_index=1` and
+  `sample_role=risk_enriched_activity_diagnostic`.
+  It has no v1 W2-seal, 18--30-hour start-gap or 12-hour temporal eligibility.
+- DeepSeek retains 360 rows and Gemini 180 rows. Each provider still needs its
+  12-row outcome-blind prefix and may expand only after its technical gate.
+- Never pool v1 W1/W2 with this block as three temporal replicates. The v1
+  temporal analyzer rejects B1 rows. Do not claim cross-date stability or formal
+  cross-provider generalization; report only activity during the disclosed
+  execution span and within-block directional provider diagnostics.
+- E6-v1 remains immutable. W1/W2 are still rejected before credentials,
+  dispatcher or output; v2 identity/root, recovery, model, free-tier, ITT and
+  no-real-effect boundaries remain unchanged.
+- The obsolete `e6-nightly-provider-windows` heartbeat is confirmed `PAUSED`;
+  it cannot launch the old delayed W2/W3 workflow.
+- Independent review findings are closed: fatal response-bearing runtime errors
+  stop after one row, v1 enrichment cannot relabel raw B1 rows as repeatability,
+  and temporal/repeatability metadata cannot leak into B1 analysis.
+- Verification: v2 runner 25/25; focused repair 107 passed plus one recorded
+  stale qualification deselected; v1 compatibility 20/20. No API call has been
+  made under the no-delay amendment. Final independent review reports
+  P0/P1/P2 = 0. A separate owner instruction is still required to start live
+  canaries.
+- Preserve the unrelated dirty `external/paper_v2_audits/drift` and
+  `external/paper_v2_audits/toolsafe` paths. Push only to
+  `origin/codex/q2-empirical-study`.
+
 ## 2026-08-29 — E6-v2 offline repair qualified; no live execution authorized
 
 - E6-v1 W1/W2, their response-bearing rows, administrative closures, traces,

@@ -1,5 +1,31 @@
 # Failure Log
 
+## 2026-08-31 — E6-v2 no-delay independent-review findings
+
+- Initial implementation removed the clock gates but retained temporal W3
+  metadata and the label `contemporaneous`; unrestricted later resume would make
+  that scientific wording too strong. Fix: project source-W3 rows into independent
+  block `B1`, reset the replicate index and sample role, require actual execution
+  span disclosure, and make the E6-v1 temporal analyzer reject explicitly
+  non-temporal rows.
+- Independent review also found that a response-bearing fatal runtime failure
+  wrote a provider stop yet could continue to another work item. Fix: stop the
+  loop unconditionally after the first fatal row and cover it with an
+  `executed == 1` regression test.
+- Final review found that the reused v1 enrichment function overwrote the v2
+  plan's diagnostic `sample_role` back to `risk_enriched_repeatability` in raw
+  records. Fix: v2 now performs the final raw-record override and preserves the
+  source-window fields separately; the regression test asserts raw, not only
+  plan, metadata.
+- The same review found protocol text still claimed direct logical-work-key
+  reuse although B1 creates independent prefixed work keys. Fix: the manifest
+  now records `source_work_key_mapping` and lists `work_key` among new
+  identities, matching the runner.
+- The first updated 429 test failed only because the new error text said
+  `diagnostic-block ... as terminal` while the assertion expected
+  `diagnostic terminal`. The wording was aligned; no runtime contract or API
+  behavior changed. The rerun passed.
+
 ## 2026-08-29 — E6-v2 offline repair findings and changed hypotheses
 
 ### DeepSeek AgentDojo second-call failure

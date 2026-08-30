@@ -6,6 +6,7 @@ from typing import Any, Mapping
 
 import pytest
 
+import experiments.paper_v2.e6_cross_provider_calibration_analysis_v1 as analysis_v1
 import experiments.paper_v2.e6_cross_provider_calibration_runner_v2 as runner
 from experiments.paper_v2.official_provider_executor import (
     ProviderIdentityError,
@@ -23,9 +24,11 @@ class _Dispatcher:
         *,
         failure: Exception | None = None,
         runtime_provider_failures: int = 0,
+        runtime_failure_class: str = "ProviderTransportError",
     ) -> None:
         self.failure = failure
         self.runtime_provider_failures = runtime_provider_failures
+        self.runtime_failure_class = runtime_failure_class
         self.calls = 0
 
     def execute(
@@ -58,7 +61,7 @@ class _Dispatcher:
                     "parse_error_code": "provider_failure",
                     "observation": {
                         "status": "provider_failure",
-                        "error_type": "ProviderTransportError",
+                        "error_type": self.runtime_failure_class,
                     },
                 }
             )
@@ -91,25 +94,6 @@ def _patch_offline(
     monkeypatch: pytest.MonkeyPatch, root: Path
 ) -> None:
     monkeypatch.setattr(runner, "OUTPUT_ROOT", root)
-    seal_root = root.parent / f"{root.name}-immutable-v1-seals"
-    seal_paths: dict[str, Path] = {}
-    for provider_id in ("deepseek", "gemini"):
-        seal_path = seal_root / provider_id / "window_seal_W2.json"
-        seal_path.parent.mkdir(parents=True, exist_ok=True)
-        seal_path.write_text(
-            json.dumps(
-                {
-                    "study_id": runner.e6_v1.STUDY_ID,
-                    "provider_id": provider_id,
-                    "replicate_window": "W2",
-                    "status": "sealed",
-                    "window_started_at": "2026-08-29T01:00:00+08:00",
-                }
-            ),
-            encoding="utf-8",
-        )
-        seal_paths[provider_id] = seal_path
-    monkeypatch.setattr(runner, "V1_W2_SEAL_PATHS", seal_paths)
     monkeypatch.setattr(runner, "_now", lambda: "2026-08-29T23:00:00+08:00")
     monkeypatch.setattr(
         runner.lean,
@@ -169,7 +153,7 @@ def _run(
 
     return runner.run_window(
         provider_id,
-        "W3",
+        runner.EXECUTION_BLOCK_ID,
         canary_only=True,
         retry_failed_work_keys=(() if retry_key is None else (retry_key,)),
         credential_loader=lambda: {},
@@ -187,16 +171,21 @@ def test_v2_projects_new_identity_without_mutating_v1_outputs(
         lambda *_: pytest.fail("v1 stop path was read"),
     )
 
-    row = runner._window_rows("gemini", "W1")[0]
+    row = runner._window_rows("gemini", runner.EXECUTION_BLOCK_ID)[0]
 
     assert row["study_id"] == runner.STUDY_ID
-    assert row["run_id"] == "e6-v2-gemini-W1"
-    assert row["execution_identity"] == runner._execution_identity("gemini", "W1")
+    assert row["run_id"] == "e6-v2-gemini-B1"
+    assert row["execution_identity"] == runner._execution_identity("gemini", "B1")
     assert row["execution_identity"] != runner.e6_v1._load_plan("gemini")[0][
         "execution_identity"
     ]
     assert runner._provider_stop_path("gemini").name == "provider_stop_v2.json"
     assert runner.OUTPUT_ROOT != runner.e6_v1.OUTPUT_ROOT
+    assert row["source_replicate_window"] == "W3"
+    assert row["replicate_window"] == "B1"
+    assert row["replicate_index"] == 1
+    assert row["sample_role"] == "risk_enriched_activity_diagnostic"
+    assert row["work_key"].startswith("e6-v2-immediate__")
 
 
 @pytest.mark.parametrize(
@@ -227,7 +216,7 @@ def test_v2_rejects_w1_w2_before_credentials_dispatch_or_output(
 
     with pytest.raises(
         runner.E6CalibrationRunnerV2Error,
-        match="prospective W3-only",
+        match="diagnostic-block B1 only",
     ):
         runner.run_window(
             "deepseek",
@@ -240,63 +229,54 @@ def test_v2_rejects_w1_w2_before_credentials_dispatch_or_output(
     assert not runner.OUTPUT_ROOT.exists()
 
 
-def test_w3_requires_sealed_v1_w2_and_frozen_start_interval_before_credentials(
+def test_immediate_block_has_no_v1_seal_or_clock_eligibility_dependency(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     _patch_offline(monkeypatch, tmp_path / "e6-v2")
-    deepseek_seal = runner.V1_W2_SEAL_PATHS["deepseek"]
-    deepseek_seal.unlink()
+    monkeypatch.setattr(
+        runner.e6_v1,
+        "_seal_path",
+        lambda *_: pytest.fail("v1 seal was read"),
+    )
+    monkeypatch.setattr(runner, "_now", lambda: "2099-01-01T00:00:00+08:00")
 
-    with pytest.raises(runner.E6CalibrationRunnerV2Error, match="W2 seal is absent"):
-        runner.run_window(
-            "deepseek",
-            "W3",
-            canary_only=True,
-            credential_loader=lambda: pytest.fail("credentials were loaded"),
-            dispatcher_factory=lambda *_: pytest.fail("dispatcher was built"),
-        )
+    value = _run("gemini", _Dispatcher())
+    rows = _raw("gemini")
 
-    assert not runner.OUTPUT_ROOT.exists()
-
-
-@pytest.mark.parametrize(
-    "current_time",
-    ["2026-08-29T18:59:59+08:00", "2026-08-30T07:00:01+08:00"],
-)
-def test_w3_rejects_start_outside_frozen_interval_before_credentials(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-    current_time: str,
-) -> None:
-    _patch_offline(monkeypatch, tmp_path / "e6-v2")
-    monkeypatch.setattr(runner, "_now", lambda: current_time)
-
-    with pytest.raises(runner.E6CalibrationRunnerV2Error, match="18-30 hour"):
-        runner.run_window(
-            "deepseek",
-            "W3",
-            canary_only=True,
-            credential_loader=lambda: pytest.fail("credentials were loaded"),
-            dispatcher_factory=lambda *_: pytest.fail("dispatcher was built"),
-        )
-
-    assert not runner.OUTPUT_ROOT.exists()
+    assert value["executed"] == 12
+    assert len(rows) == 12
+    assert all(row["execution_block_role"] == runner.EXECUTION_BLOCK_ROLE for row in rows)
+    assert all(row["execution_block_id"] == "B1" for row in rows)
+    assert all(row["replicate_window"] == "B1" for row in rows)
+    assert all(row["replicate_index"] == 1 for row in rows)
+    assert all(
+        row["sample_role"] == "risk_enriched_activity_diagnostic" for row in rows
+    )
+    assert all(row["source_replicate_window"] == "W3" for row in rows)
+    assert all(row["source_replicate_index"] == 3 for row in rows)
+    assert all(row["temporal_replication_claim"] is False for row in rows)
 
 
-def test_w3_resume_uses_frozen_window_start_and_enforces_twelve_hour_duration(
+def test_immediate_block_resume_is_not_clock_gated(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     _patch_offline(monkeypatch, tmp_path / "e6-v2")
     first = _run("deepseek", _Dispatcher())
     assert first["executed"] == 12
 
-    monkeypatch.setattr(runner, "_now", lambda: "2026-08-30T09:00:00+08:00")
+    monkeypatch.setattr(runner, "_now", lambda: "2099-01-01T00:00:00+08:00")
     resumed = _run("deepseek", _Dispatcher())
     assert resumed["executed"] == 0
 
-    monkeypatch.setattr(runner, "_now", lambda: "2026-08-30T12:00:01+08:00")
-    with pytest.raises(runner.E6CalibrationRunnerV2Error, match="12-hour"):
-        _run("deepseek", _Dispatcher())
+
+def test_v1_temporal_analyzer_rejects_non_temporal_block() -> None:
+    row = runner._window_rows("deepseek", runner.EXECUTION_BLOCK_ID)[0]
+
+    with pytest.raises(
+        analysis_v1.E6AnalysisError,
+        match="non-temporal diagnostic execution blocks",
+    ):
+        analysis_v1._merge_plan_and_raw([row], [])
 
 
 def test_generic_response_less_attempt_two_is_isolated_and_terminal(
@@ -345,7 +325,7 @@ def test_response_less_failure_without_payload_commitment_is_terminal(
 
     value = runner.run_window(
         "deepseek",
-        "W3",
+        runner.EXECUTION_BLOCK_ID,
         canary_only=True,
         credential_loader=lambda: {},
         dispatcher_factory=lambda *_: _Dispatcher(
@@ -443,8 +423,12 @@ def test_generic_recovery_requires_exactly_one_unresolved_key(
     )
     first = _raw("deepseek")[0]
     second = dict(first)
-    second["work_key"] = runner._window_rows("deepseek", "W3")[1]["work_key"]
-    second["case_id"] = runner._window_rows("deepseek", "W3")[1]["case_id"]
+    second["work_key"] = runner._window_rows(
+        "deepseek", runner.EXECUTION_BLOCK_ID
+    )[1]["work_key"]
+    second["case_id"] = runner._window_rows(
+        "deepseek", runner.EXECUTION_BLOCK_ID
+    )[1]["case_id"]
     runner.lean._append_jsonl(runner._raw_path("deepseek"), second)
 
     with pytest.raises(
@@ -469,7 +453,7 @@ def test_429_uses_manual_path_and_does_not_write_fatal_stop(
     assert row["underlying_manual_429_ledger_semantics_unchanged"] is True
     assert row["retry_eligible"] is False
     assert row["terminal_status"] is True
-    assert row["protocol_terminal_reason"] == "w3_429_diagnostic_terminal"
+    assert row["protocol_terminal_reason"] == "diagnostic_block_429_terminal"
     assert not runner._provider_stop_path("gemini").exists()
     with pytest.raises(
         runner.E6CalibrationRunnerV2Error,
@@ -515,7 +499,9 @@ def test_runtime_provider_failure_is_counted_as_systemic_gate_error(
         _Dispatcher(runtime_provider_failures=2),
     )
     gate = json.loads(
-        runner._gate_path("deepseek", "W3").read_text(encoding="utf-8")
+        runner._gate_path("deepseek", runner.EXECUTION_BLOCK_ID).read_text(
+            encoding="utf-8"
+        )
     )
 
     assert value["executed"] == 12
@@ -541,6 +527,27 @@ def test_runtime_provider_failure_is_counted_as_systemic_gate_error(
     assert gate["gate_passed"] is False
 
 
+def test_response_bearing_fatal_runtime_failure_stops_after_one_row(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+
+    value = _run(
+        "deepseek",
+        _Dispatcher(
+            runtime_provider_failures=2,
+            runtime_failure_class="ProviderIdentityError",
+        ),
+    )
+    rows = _raw("deepseek")
+
+    assert value["executed"] == 1
+    assert value["stopped_after_fatal_boundary"] is True
+    assert len(rows) == 1
+    assert rows[0]["response_obtained"] is True
+    assert runner._provider_stop_path("deepseek").is_file()
+
+
 def test_manifest_keeps_v1_immutable_and_api_execution_disabled() -> None:
     manifest = json.loads(runner.MANIFEST_PATH.read_text(encoding="utf-8"))
 
@@ -551,20 +558,25 @@ def test_manifest_keeps_v1_immutable_and_api_execution_disabled() -> None:
     assert manifest["generic_response_less_recovery"][
         "independent_trace_and_call_ledger_namespace"
     ] is True
-    assert manifest["prospective_execution_windows"] == ["W3"]
-    assert manifest["prospective_w3_plan_counts"] == {
+    assert "work_key" in manifest["new_identities"]
+    assert "source_work_key_mapping" in manifest["source_design"]["reuse"]
+    assert "logical_work_keys" not in manifest["source_design"]["reuse"]
+    assert manifest["source_plan_windows"] == ["W3"]
+    assert (
+        manifest["prospective_execution_role"]
+        == "single_diagnostic_execution_block"
+    )
+    assert manifest["diagnostic_block_plan_counts"] == {
         "deepseek": 360,
         "gemini": 180,
     }
-    assert manifest["gemini_inference_role"] == "single_window_diagnostic_only"
-    prerequisite = manifest["w3_execution_prerequisite"]
-    assert prerequisite["immutable_v1_w2_seal_required"] is True
-    assert prerequisite["w2_to_w3_start_interval_hours"] == [18, 30]
-    assert prerequisite["checked_before_credentials_dispatch_and_output"] is True
-    assert prerequisite["existing_window_uses_frozen_start"] is True
-    assert prerequisite["maximum_window_duration_hours"] == 12
-    assert prerequisite["deepseek_currently_has_w2_seal"] is True
-    assert prerequisite["gemini_currently_has_w2_seal"] is False
+    assert manifest["execution_block_id"] == "B1"
+    assert manifest["gemini_inference_role"] == "single_block_diagnostic_only"
+    timing = manifest["execution_timing_policy"]
+    assert timing["artificial_start_delay_required"] is False
+    assert timing["v1_w2_seal_required"] is False
+    assert timing["time_based_eligibility_required"] is False
+    assert timing["temporal_replication_claim"] is False
 
 
 def test_payload_binding_fails_before_delegate_transport() -> None:
