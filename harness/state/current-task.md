@@ -4,8 +4,10 @@
 
 - Owner 已授权“自行写计划、审计后执行直到完成”。执行依据为
   `protocols/paper_upgrade_v2/e6_cross_provider_calibration_v2/execution_plan_b1.md`。
-- 当前阶段：离线审计与闭环接口补齐；尚未调用 provider。B1 输出根不存在，活动
-  E6 runner 为 0，本地配置文件只核验存在性、未读取或打印内容。
+- 当前阶段：DeepSeek 正式前缀已启动，但第 1 行在 transport 前因 B1 新 work key
+  未投影到冻结 resolver 而本地失败；该行无 provider 请求、无响应、provider call
+  为 0。原 attempt 1 和 stop 不改写，双 benchmark/provider resolver 修复与唯一
+  相邻 attempt 2 已通过 87 项测试和独立复核，正等待执行该失败 key。
 - 计划规模：DeepSeek 360、Gemini 180；各 12 条 outcome-blind 正式前缀；门通过
   才扩展。失败只恢复唯一 response-less key 一次，成功/response-bearing 行不重跑。
 - 必须先补齐 B1 `--seal-block` 与单块分析器，修订旧三窗口验收语义，完成定向测试

@@ -12,6 +12,11 @@ The only generic recovery admitted here is one explicit outer attempt 2 for the
 single unresolved work key whose complete v2 execution history is response-less
 and contains a valid pretransport payload commitment.  HTTP 429 is never
 converted into this generic recovery and closes as a diagnostic-block terminal.
+One separately typed repair is admitted for the observed v2 projection defect:
+an immutable attempt-1 local resolver failure with zero provider calls may run
+one explicit failed-key attempt 2 after the source-v1 resolver is rebound to the
+active v2 work key.  No payload comparison is possible or required because the
+first attempt produced no provider payload.
 """
 
 from __future__ import annotations
@@ -87,10 +92,70 @@ PROVIDER_STOP_SCHEMA_VERSION = "m3-paper-v2-e6-provider-stop-2.0"
 BLOCK_SEAL_SCHEMA_VERSION = "m3-paper-v2-e6-block-seal-2.0"
 GENERIC_RECOVERY_ATTEMPT = 2
 EXECUTION_BLOCK_ROLE = "single_diagnostic_execution_block"
+LOCAL_PROJECTION_RECOVERY_KIND = "local_projection_contract_attempt2"
+LOCAL_PROJECTION_FAILURE_CLASSES = {
+    "agentdojo-v1": "AgentDojoLiveDependencyError",
+    "m3-v2": "M3OfflineEvaluatorError",
+}
 
 
 class E6CalibrationRunnerV2Error(RuntimeError):
     """Raised when prospective E6-v2 cannot preserve its repair contract."""
+
+
+def _is_lower_sha256(value: Any) -> bool:
+    return bool(
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
+
+
+def _is_local_projection_contract_failure(row: Mapping[str, Any]) -> bool:
+    """Recognize the one pre-provider projection defect eligible for repair.
+
+    The exception must occur after online-state projection (proved by its
+    visible-field digest) but before any provider request.  This deliberately
+    excludes every identity, payload, usage, ledger, provider, and
+    response-bearing fatal boundary.
+    """
+
+    benchmark = str(row.get("benchmark", ""))
+    expected_error = LOCAL_PROJECTION_FAILURE_CLASSES.get(benchmark)
+    requests = row.get("provider_requests")
+    return bool(
+        expected_error is not None
+        and row.get("record_kind") == "execution"
+        and row.get("attempt") == 1
+        and row.get("operational_status") == "contract_failure"
+        and row.get("error_type") == expected_error
+        and row.get("response_obtained") is False
+        and requests == []
+        and row.get("provider_call_count") == 0
+        and row.get("returned_models") == []
+        and row.get("retry_eligible") is False
+        and row.get("terminal_status") is True
+        and row.get("included_in_primary_itt") is True
+        and row.get("online_forbidden_fields_present") is False
+        and _is_lower_sha256(row.get("online_visible_field_digest_sha256"))
+        and isinstance(row.get("work_key"), str)
+        and str(row["work_key"]).startswith("e6-v2-immediate__")
+        and isinstance(row.get("source_v1_work_key"), str)
+        and row["work_key"] == f"e6-v2-immediate__{row['source_v1_work_key']}"
+    )
+
+
+def _is_local_projection_recovery_record(row: Mapping[str, Any]) -> bool:
+    return bool(
+        row.get("record_kind") == "execution"
+        and row.get("attempt") == GENERIC_RECOVERY_ATTEMPT
+        and row.get("recovery_kind") == LOCAL_PROJECTION_RECOVERY_KIND
+        and row.get("supersedes_attempt") == 1
+        and row.get("payload_bound_recovery_required") is False
+        and row.get("terminal_status") is True
+        and row.get("retry_eligible") is False
+        and row.get("included_in_primary_itt") is True
+    )
 
 
 def _now() -> str:
@@ -288,6 +353,24 @@ def _execution_history(provider_id: str) -> dict[str, list[dict[str, Any]]]:
                 raise E6CalibrationRunnerV2Error(
                     "E6-v2 attempts are not append-only"
                 )
+            if attempt == GENERIC_RECOVERY_ATTEMPT and not administrative_closure:
+                previous = history[-1]
+                previous_is_local_projection = (
+                    _is_local_projection_contract_failure(previous)
+                )
+                marked_local_projection = _is_local_projection_recovery_record(row)
+                if previous_is_local_projection is not marked_local_projection:
+                    raise E6CalibrationRunnerV2Error(
+                        "E6-v2 local projection recovery marker drift"
+                    )
+                if previous_is_local_projection and len(history) != 1:
+                    raise E6CalibrationRunnerV2Error(
+                        "local projection recovery requires exactly one prior attempt"
+                    )
+            elif _is_local_projection_recovery_record(row):
+                raise E6CalibrationRunnerV2Error(
+                    "E6-v2 local projection recovery attempt drift"
+                )
         history.append(copy.deepcopy(dict(row)))
     return histories
 
@@ -419,11 +502,23 @@ def _validate_generic_recovery_history(
         )
 
 
+def _validate_local_projection_recovery_history(
+    history: Sequence[Mapping[str, Any]],
+) -> None:
+    if len(history) != 1 or not _is_local_projection_contract_failure(history[0]):
+        raise E6CalibrationRunnerV2Error(
+            "local projection recovery requires exactly one eligible attempt-1 failure"
+        )
+
+
 def _expected_recovery_payloads(permit: lean.LeanPermit) -> dict[int, str]:
     if _physical_attempt_namespace(permit) != GENERIC_RECOVERY_ATTEMPT:
         return {}
     work_key = str(permit.work_items[0]["work_key"])
     history = _execution_history(permit.provider_id).get(work_key, [])
+    if len(history) == 1 and _is_local_projection_contract_failure(history[0]):
+        _validate_local_projection_recovery_history(history)
+        return {}
     _validate_generic_recovery_history(history)
     commitments = _payload_commitments(history[-1])
     if commitments is None:  # guarded above; retain a local fail-closed assertion
@@ -481,6 +576,7 @@ def _selected_pending(
     *,
     canary_only: bool,
     retry_failed_work_keys: Sequence[str],
+    active_provider_stop: Mapping[str, Any] | None = None,
 ) -> tuple[list[dict[str, Any]], list[tuple[dict[str, Any], int]]]:
     all_rows = _window_rows(provider_id, window)
     selected = (
@@ -502,6 +598,30 @@ def _selected_pending(
         if key in selected_by_key and not _is_terminal(history[-1])
     }
     if retry_keys:
+        local_projection_history = (
+            histories.get(retry_keys[0], []) if len(retry_keys) == 1 else []
+        )
+        if (
+            len(retry_keys) == 1
+            and len(local_projection_history) == 1
+            and _is_local_projection_contract_failure(
+                local_projection_history[0]
+            )
+        ):
+            if (
+                active_provider_stop is None
+                or active_provider_stop.get("work_key") != retry_keys[0]
+                or active_provider_stop.get("attempt") != 1
+            ):
+                raise E6CalibrationRunnerV2Error(
+                    "local projection recovery requires its active provider stop"
+                )
+            _validate_local_projection_recovery_history(
+                local_projection_history
+            )
+            return all_rows, [
+                (selected_by_key[retry_keys[0]], GENERIC_RECOVERY_ATTEMPT)
+            ]
         if (
             len(retry_keys) == 1
             and retry_keys[0] in histories
@@ -516,6 +636,10 @@ def _selected_pending(
                 "generic recovery requires the unique unresolved work key"
             )
         key = retry_keys[0]
+        if active_provider_stop is not None:
+            raise E6CalibrationRunnerV2Error(
+                "fatal provider stop permits only its local projection recovery"
+            )
         _validate_generic_recovery_history(histories[key])
         return all_rows, [(selected_by_key[key], GENERIC_RECOVERY_ATTEMPT)]
     if unresolved:
@@ -568,7 +692,13 @@ def _attempt_paths(
             "generic attempt 2 must have exactly one work key"
         )
     work_key = next(iter(attempts))
-    recovery = root / "generic_recovery_attempt2" / window / work_key
+    history = _execution_history(provider_id).get(work_key, [])
+    recovery_root = (
+        "local_projection_recovery_attempt2"
+        if len(history) == 1 and _is_local_projection_contract_failure(history[0])
+        else "generic_recovery_attempt2"
+    )
+    recovery = root / recovery_root / window / work_key
     return (
         recovery / "provider_traces",
         recovery / "budget_events.jsonl",
@@ -645,6 +775,89 @@ def _allow_pinned_synthetic_labels(benchmark: str) -> bool:
     )
 
 
+def _bind_projected_resolver_items(
+    resolver: Any,
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    benchmark: str,
+    execution_identity: str,
+) -> None:
+    """Add v2 work keys while retaining the frozen v1 case binding.
+
+    Resolver case indexes stay frozen.  Only their private work-key lookup is
+    extended in memory, after proving that the projected row names the same
+    source record, selection, and case as its source-v1 row.  The active permit
+    identity is then rebound for the M3 offline material commitment.
+    """
+
+    items = getattr(resolver, "_items", None)
+    if not isinstance(items, dict):
+        raise E6CalibrationRunnerV2Error("projected resolver item index is missing")
+    identity_fields = (
+        "benchmark",
+        "case_id",
+        "selection_id",
+        "source_record_sha256",
+        "source_reference",
+    )
+    for row in rows:
+        if row.get("benchmark") != benchmark:
+            continue
+        if row.get("execution_identity") != execution_identity:
+            raise E6CalibrationRunnerV2Error(
+                "projected resolver active execution identity drift"
+            )
+        work_key = str(row.get("work_key", ""))
+        source_key = str(row.get("source_v1_work_key", ""))
+        if not work_key or work_key != f"e6-v2-immediate__{source_key}":
+            raise E6CalibrationRunnerV2Error(
+                "projected resolver source work-key mapping drift"
+            )
+        source = items.get(source_key)
+        if not isinstance(source, Mapping):
+            raise E6CalibrationRunnerV2Error(
+                "projected resolver source-v1 work key is missing"
+            )
+        if any(source.get(field) != row.get(field) for field in identity_fields):
+            raise E6CalibrationRunnerV2Error(
+                "projected resolver source/case identity drift"
+            )
+        rebound = copy.deepcopy(dict(row))
+        rebound["execution_identity"] = execution_identity
+        existing = items.get(work_key)
+        if existing is not None and existing != rebound:
+            raise E6CalibrationRunnerV2Error(
+                "projected resolver v2 work-key binding drift"
+            )
+        items[work_key] = rebound
+
+
+def _projected_case_resolvers(
+    provider_id: str,
+    permit: lean.LeanPermit,
+    known_work_items: Sequence[Mapping[str, Any]],
+) -> tuple[PublicFrozenAgentDojoCaseResolverV2, PublicFrozenM3CaseResolverV4]:
+    plan_path = SOURCE_PLAN_PATHS[provider_id]
+    agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
+    public_m3 = PublicFrozenM3CaseResolverV4(
+        execution_identity=permit.execution_identity,
+        plan_path=plan_path,
+    )
+    _bind_projected_resolver_items(
+        agentdojo,
+        known_work_items,
+        benchmark="agentdojo-v1",
+        execution_identity=permit.execution_identity,
+    )
+    _bind_projected_resolver_items(
+        public_m3,
+        known_work_items,
+        benchmark="m3-v2",
+        execution_identity=permit.execution_identity,
+    )
+    return agentdojo, public_m3
+
+
 def _deepseek_dispatcher(
     permit: lean.LeanPermit,
     *,
@@ -656,10 +869,8 @@ def _deepseek_dispatcher(
     namespace = _physical_attempt_namespace(permit)
     expected_payloads = _expected_recovery_payloads(permit)
     registry = lean.TracedClientRegistry()
-    plan_path = SOURCE_PLAN_PATHS["deepseek"]
-    agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
-    public_m3 = PublicFrozenM3CaseResolverV4(
-        execution_identity=permit.execution_identity, plan_path=plan_path
+    agentdojo, public_m3 = _projected_case_resolvers(
+        "deepseek", permit, known_work_items
     )
     known_keys = {str(row["work_key"]) for row in known_work_items}
     model_role = str(role_policy["public_model_role"])
@@ -748,15 +959,14 @@ def _gemini_dispatcher(
     *,
     api_key: str,
     policy: Mapping[str, Any],
+    known_work_items: Sequence[Mapping[str, Any]],
     recorded_at: Callable[[], str] = _now,
 ) -> Any:
     namespace = _physical_attempt_namespace(permit)
     expected_payloads = _expected_recovery_payloads(permit)
     registry = lean.gemini_public_v1._Registry()
-    plan_path = SOURCE_PLAN_PATHS["gemini"]
-    agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
-    public_m3 = PublicFrozenM3CaseResolverV4(
-        execution_identity=permit.execution_identity, plan_path=plan_path
+    agentdojo, public_m3 = _projected_case_resolvers(
+        "gemini", permit, known_work_items
     )
     call_sink = lean.gemini_fallback.GeminiCallLedgerSink(
         permit.call_path,
@@ -871,6 +1081,7 @@ def _dispatcher(
         permit,
         api_key=str(values[key_field]),
         policy=policy,
+        known_work_items=all_rows,
     )
 
 
@@ -1025,8 +1236,9 @@ def _require_provider_stop(
         )
 
     # _execution_history first validates every raw identity and append-only
-    # attempt transition.  The direct physical projection then preserves global
-    # file order, so a stale stop cannot remain authoritative after a later row.
+    # transition.  A stop normally binds the final physical row.  The sole
+    # exception is an immutable attempt-1 local projection stop that has one
+    # explicitly marked attempt-2 repair appended after it.
     _execution_history(provider_id)
     physical = [
         row
@@ -1037,21 +1249,50 @@ def _require_provider_stop(
         raise E6CalibrationRunnerV2Error(
             "E6-v2 provider stop has no matching fatal raw record"
         )
-    latest = physical[-1]
-    raw_binding = {
-        "work_key": latest.get("work_key"),
-        "attempt": latest.get("attempt"),
-        "error_type": latest.get("error_type"),
-        "operational_status": latest.get("operational_status"),
-        "recorded_at": latest.get("recorded_at"),
-    }
-    if any(value.get(field) != expected for field, expected in raw_binding.items()):
+    stop_fields = (
+        "work_key",
+        "attempt",
+        "error_type",
+        "operational_status",
+        "recorded_at",
+    )
+    matches = [
+        (index, row)
+        for index, row in enumerate(physical)
+        if all(value.get(field) == row.get(field) for field in stop_fields)
+    ]
+    if len(matches) != 1:
         raise E6CalibrationRunnerV2Error(
             "E6-v2 provider stop does not match the latest fatal raw record"
         )
-    if not _is_fatal_physical_record(latest):
+    stop_index, stopped_row = matches[0]
+    if not _is_fatal_physical_record(stopped_row):
         raise E6CalibrationRunnerV2Error(
             "E6-v2 provider stop raw record is not a fatal boundary"
+        )
+    later_recoveries = [
+        row
+        for row in physical[stop_index + 1 :]
+        if row.get("work_key") == work_key
+        if row.get("attempt") == GENERIC_RECOVERY_ATTEMPT
+        and _is_local_projection_recovery_record(row)
+    ]
+    if later_recoveries:
+        if (
+            not _is_local_projection_contract_failure(stopped_row)
+            or value.get("attempt") != 1
+            or len(later_recoveries) != 1
+            or stop_index + 1 >= len(physical)
+            or physical[stop_index + 1] is not later_recoveries[0]
+            or _is_fatal_physical_record(later_recoveries[0])
+        ):
+            raise E6CalibrationRunnerV2Error(
+                "E6-v2 resolved provider stop recovery evidence drift"
+            )
+        return None
+    if stop_index != len(physical) - 1:
+        raise E6CalibrationRunnerV2Error(
+            "E6-v2 provider stop does not match the latest fatal raw record"
         )
     return value
 
@@ -1065,6 +1306,7 @@ def _enrich_record(
     paused: bool,
     fatal: bool,
     window_started_at: str,
+    local_projection_recovery: bool = False,
 ) -> dict[str, Any]:
     value = e6_v1._enrich_record(
         base,
@@ -1097,6 +1339,18 @@ def _enrich_record(
         diagnostic = _runtime_failure_diagnostic(result)
         if diagnostic is not None:
             value["runtime_failure_diagnostic"] = diagnostic
+    if local_projection_recovery:
+        if attempt != GENERIC_RECOVERY_ATTEMPT:
+            raise E6CalibrationRunnerV2Error(
+                "local projection recovery must use physical attempt 2"
+            )
+        value.update(
+            {
+                "recovery_kind": LOCAL_PROJECTION_RECOVERY_KIND,
+                "supersedes_attempt": 1,
+                "payload_bound_recovery_required": False,
+            }
+        )
     response_less = not _has_response_evidence(value)
     if fatal:
         value.update(
@@ -1793,14 +2047,23 @@ def run_window(
         )
     stop_path = _provider_stop_path(provider_id)
     if provider_stop is not None:
-        raise E6CalibrationRunnerV2Error(
-            f"{provider_id}: E6-v2 provider is stopped by a fatal boundary"
-        )
+        retry_keys = tuple(dict.fromkeys(retry_failed_work_keys))
+        stop_key = str(provider_stop.get("work_key", ""))
+        stop_history = _execution_history(provider_id).get(stop_key, [])
+        if (
+            retry_keys != (stop_key,)
+            or len(stop_history) != 1
+            or not _is_local_projection_contract_failure(stop_history[0])
+        ):
+            raise E6CalibrationRunnerV2Error(
+                f"{provider_id}: E6-v2 provider is stopped by a fatal boundary"
+            )
     all_rows, pending = _selected_pending(
         provider_id,
         window,
         canary_only=canary_only,
         retry_failed_work_keys=retry_failed_work_keys,
+        active_provider_stop=provider_stop,
     )
     if not canary_only:
         _require_block_gate(provider_id, window, require_passed=True)
@@ -1847,6 +2110,14 @@ def run_window(
         digest: dict[str, Any] | None = None
         paused = False
         fatal = False
+        prior_history = _execution_history(provider_id).get(
+            str(work_item["work_key"]), []
+        )
+        local_projection_recovery = bool(
+            attempt == GENERIC_RECOVERY_ATTEMPT
+            and len(prior_history) == 1
+            and _is_local_projection_contract_failure(prior_history[0])
+        )
         try:
             hydrated, online_state, digest = lean._hydrate_work_item(work_item)
             result = dict(dispatcher.execute(hydrated, online_state))
@@ -1893,6 +2164,7 @@ def run_window(
             paused=paused,
             fatal=fatal,
             window_started_at=str(state["window_started_at"]),
+            local_projection_recovery=local_projection_recovery,
         )
         lean._append_jsonl(_raw_path(provider_id), record)
         if fatal:

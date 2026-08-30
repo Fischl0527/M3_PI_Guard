@@ -123,6 +123,11 @@ FACTOR_CELLS = {
     "full_safe": "m3_full",
 }
 SUCCESS_STATUS = "completed"
+LOCAL_PROJECTION_RECOVERY_KIND = "local_projection_contract_attempt2"
+LOCAL_PROJECTION_FAILURE_CLASSES = {
+    "agentdojo-v1": "AgentDojoLiveDependencyError",
+    "m3-v2": "M3OfflineEvaluatorError",
+}
 
 
 class E6B1AnalysisError(ValueError):
@@ -272,6 +277,45 @@ def _is_administrative_closure(row: Mapping[str, Any]) -> bool:
     return row.get("record_kind") == "block_closure"
 
 
+def _is_local_projection_contract_failure(row: Mapping[str, Any]) -> bool:
+    benchmark = str(row.get("benchmark", ""))
+    expected_error = LOCAL_PROJECTION_FAILURE_CLASSES.get(benchmark)
+    requests = row.get("provider_requests")
+    return bool(
+        expected_error is not None
+        and row.get("record_kind") == "execution"
+        and row.get("attempt") == 1
+        and row.get("operational_status") == "contract_failure"
+        and row.get("error_type") == expected_error
+        and row.get("response_obtained") is False
+        and requests == []
+        and row.get("provider_call_count") == 0
+        and row.get("returned_models") == []
+        and row.get("retry_eligible") is False
+        and row.get("terminal_status") is True
+        and row.get("included_in_primary_itt") is True
+        and row.get("online_forbidden_fields_present") is False
+        and _is_sha256_hex(row.get("online_visible_field_digest_sha256"))
+        and isinstance(row.get("work_key"), str)
+        and str(row["work_key"]).startswith("e6-v2-immediate__")
+        and isinstance(row.get("source_v1_work_key"), str)
+        and row["work_key"] == f"e6-v2-immediate__{row['source_v1_work_key']}"
+    )
+
+
+def _is_local_projection_recovery_record(row: Mapping[str, Any]) -> bool:
+    return bool(
+        row.get("record_kind") == "execution"
+        and row.get("attempt") == 2
+        and row.get("recovery_kind") == LOCAL_PROJECTION_RECOVERY_KIND
+        and row.get("supersedes_attempt") == 1
+        and row.get("payload_bound_recovery_required") is False
+        and row.get("terminal_status") is True
+        and row.get("retry_eligible") is False
+        and row.get("included_in_primary_itt") is True
+    )
+
+
 def _latest_attempts(
     raw_rows: Sequence[Mapping[str, Any]],
 ) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
@@ -280,6 +324,7 @@ def _latest_attempts(
     histories: dict[str, list[dict[str, Any]]] = defaultdict(list)
     physical_attempt_rows = 0
     administrative_closure_rows = 0
+    last_physical_work_key: str | None = None
     identity_fields = (
         "run_id",
         "execution_identity",
@@ -343,14 +388,35 @@ def _latest_attempts(
                 raise E6B1AnalysisError(f"{key}: unsupported recovery history")
             if _has_response_evidence(previous):
                 raise E6B1AnalysisError(f"{key}: response-bearing attempt was replayed")
-            if previous.get("retry_eligible") is not True:
-                raise E6B1AnalysisError(f"{key}: attempt 1 was not retry eligible")
+            local_projection_recovery = bool(
+                _is_local_projection_contract_failure(previous)
+                and _is_local_projection_recovery_record(row)
+            )
+            if local_projection_recovery:
+                if last_physical_work_key != key:
+                    raise E6B1AnalysisError(
+                        f"{key}: local projection recovery was not adjacent"
+                    )
+            else:
+                if (
+                    row.get("recovery_kind") == LOCAL_PROJECTION_RECOVERY_KIND
+                    or row.get("supersedes_attempt") is not None
+                    or row.get("payload_bound_recovery_required") is False
+                ):
+                    raise E6B1AnalysisError(
+                        f"{key}: invalid local projection recovery marker"
+                    )
+                if previous.get("retry_eligible") is not True:
+                    raise E6B1AnalysisError(
+                        f"{key}: attempt 1 was not retry eligible"
+                    )
             if row.get("terminal_status") is not True:
                 raise E6B1AnalysisError(f"{key}: attempt 2 must be terminal")
         elif int(attempt) != 1:
             raise E6B1AnalysisError(f"{key}: attempt 2 has no attempt 1")
         if not administrative:
             physical_attempt_rows += 1
+            last_physical_work_key = key
         history.append(row)
         latest[key] = row
     return latest, {

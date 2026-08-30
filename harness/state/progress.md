@@ -12,11 +12,14 @@
 - 分析器只接受 B1，执行四项 Newcombe/McNemar/Holm、benchmark-stratified task
   bootstrap、2×2 因子、负担和实际执行跨度；Gemini 永久保持 diagnostic，禁止
   时间重复性和正式跨厂商主张。
-- 离线验证：B1 runner+analysis `76 passed`；相邻 v1/provider suite `45 passed,
+- 离线验证：B1 runner+analysis `87 passed`；相邻 v1/provider suite `45 passed,
   1 deselected`。唯一 deselected 为已记录的旧 offline-evaluator qualification 漂移；
   Ruff、`py_compile`、manifest JSON 和 diff check 通过。API/provider 调用为 0。
-- 下一步严格按顺序执行 DeepSeek 12 行正式前缀；技术门通过才扩展并封存。随后以
-  相同规则执行 Gemini 免费层；成功或 response-bearing 行均不得重跑。
+- DeepSeek 正式前缀第 1 行在任何 provider call 之前触发本地
+  `AgentDojoLiveDependencyError`；原 attempt 1 与 stop 保留。根因为 B1 新 work key
+  未投影到冻结 resolver。双 benchmark/provider 绑定与专用相邻 attempt 2 已完成
+  87 项离线资格化；下一步只恢复该失败 key，再执行其余 11 行。随后仅按技术门
+  扩展，并以相同规则执行 Gemini 免费层；成功或 response-bearing 行均不得重跑。
 
 ## 2026-08-31 — E6-v2 取消人工延时，改为单次诊断执行块
 

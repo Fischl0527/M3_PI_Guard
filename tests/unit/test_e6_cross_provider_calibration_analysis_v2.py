@@ -10,6 +10,9 @@ import pytest
 
 import experiments.paper_v2.e6_cross_provider_calibration_analysis_v2 as analysis
 import experiments.paper_v2.e6_cross_provider_calibration_runner_v2 as runner
+from experiments.paper_v2.agentdojo_live_dependency import (
+    AgentDojoLiveDependencyError,
+)
 
 
 def _fixture(
@@ -421,6 +424,103 @@ def test_latest_attempt_drives_endpoint_but_all_attempts_drive_resources() -> No
     assert result["burden"]["overall"]["physical_attempt_rows"] == len(raw)
     assert result["burden"]["overall"]["tokens"]["total"] == len(raw) * 120
     assert result["technical_audit"]["passed_for_observed_records"] is True
+
+
+def test_runner_local_projection_recovery_is_accepted_by_analysis(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_runner_offline(monkeypatch, tmp_path / "e6-v2")
+
+    class _ProjectionFailureDispatcher:
+        def execute(
+            self, work_item: Mapping[str, Any], state: Mapping[str, Any]
+        ) -> Mapping[str, Any]:
+            del work_item, state
+            raise AgentDojoLiveDependencyError("unknown paper-v2 work key")
+
+    _run_offline_prefix("deepseek", _ProjectionFailureDispatcher())
+    first = runner.lean._read_jsonl(runner._raw_path("deepseek"))[0]
+    key = str(first["work_key"])
+    runner.run_window(
+        "deepseek",
+        runner.EXECUTION_BLOCK_ID,
+        canary_only=True,
+        retry_failed_work_keys=(key,),
+        credential_loader=lambda: {},
+        dispatcher_factory=lambda *_: _OfflineRunnerDispatcher(),
+    )
+    raw = runner.lean._read_jsonl(runner._raw_path("deepseek"))
+
+    merged, audit = analysis.merge_plan_and_raw(
+        runner._window_rows("deepseek", runner.EXECUTION_BLOCK_ID),
+        raw,
+    )
+    recovered = next(row for row in merged if row["work_key"] == key)
+
+    assert [row["attempt"] for row in raw] == [1, 2]
+    assert raw[0]["retry_eligible"] is False
+    assert raw[0]["terminal_status"] is True
+    assert raw[0]["provider_call_count"] == 0
+    assert raw[1]["recovery_kind"] == runner.LOCAL_PROJECTION_RECOVERY_KIND
+    assert recovered["attempt"] == 2
+    assert recovered["_scientific_terminal"] is True
+    assert audit["recovered_work_items"] == 1
+
+    result, _ = analysis.analyze_provider_block(
+        "deepseek",
+        plan_rows=runner._window_rows("deepseek", runner.EXECUTION_BLOCK_ID),
+        raw_rows=raw,
+        gate=_gate("deepseek"),
+        bootstrap_replicates=5,
+    )
+    assert result["technical_audit"]["passed_for_observed_records"] is True
+    assert result["audit"]["recovered_work_items"] == 1
+
+
+def test_analysis_rejects_nonadjacent_local_projection_recovery() -> None:
+    plan, raw = _fixture("deepseek", tasks=1)
+    first = raw[0]
+    first.update(
+        {
+            "response_obtained": False,
+            "terminal_status": True,
+            "retry_eligible": False,
+            "included_in_primary_itt": True,
+            "operational_status": "contract_failure",
+            "error_type": "AgentDojoLiveDependencyError",
+            "provider_requests": [],
+            "provider_call_count": 0,
+            "returned_models": [],
+        }
+    )
+    second = {
+        **first,
+        "attempt": 2,
+        "response_obtained": True,
+        "operational_status": "completed",
+        "error_type": None,
+        "provider_requests": [
+            {
+                "local_request_id": "local-projection-attempt-2",
+                "payload_sha256": "a" * 64,
+                "provider_response_id": "local-projection-response-2",
+                "returned_model": analysis.EXPECTED_MODELS["deepseek"],
+            }
+        ],
+        "provider_call_count": 1,
+        "returned_models": [analysis.EXPECTED_MODELS["deepseek"]],
+        "returned_model_id": analysis.EXPECTED_MODELS["deepseek"],
+        "recovery_kind": analysis.LOCAL_PROJECTION_RECOVERY_KIND,
+        "supersedes_attempt": 1,
+        "payload_bound_recovery_required": False,
+    }
+    raw.insert(2, second)
+
+    with pytest.raises(
+        analysis.E6B1AnalysisError,
+        match="local projection recovery was not adjacent",
+    ):
+        analysis.merge_plan_and_raw(plan, raw)
 
 
 @pytest.mark.parametrize(

@@ -2,12 +2,17 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any, Mapping
 
 import pytest
 
 import experiments.paper_v2.e6_cross_provider_calibration_analysis_v1 as analysis_v1
 import experiments.paper_v2.e6_cross_provider_calibration_runner_v2 as runner
+from experiments.paper_v2.agentdojo_live_dependency import (
+    AgentDojoLiveDependencyError,
+)
+from experiments.paper_v2.m3_offline_evaluator import M3OfflineEvaluatorError
 from experiments.paper_v2.official_provider_executor import (
     ProviderIdentityError,
     ProviderLedgerError,
@@ -206,6 +211,74 @@ def test_source_pinned_label_allowance_rejects_unknown_benchmark() -> None:
         runner._allow_pinned_synthetic_labels("unknown-benchmark")
 
 
+@pytest.mark.parametrize("provider_id", ["deepseek", "gemini"])
+def test_provider_dispatcher_resolvers_bind_v2_keys_to_frozen_source_cases(
+    provider_id: str,
+) -> None:
+    rows = runner._window_rows(provider_id, runner.EXECUTION_BLOCK_ID)
+    agentdojo_row = next(row for row in rows if row["benchmark"] == "agentdojo-v1")
+    m3_row = next(row for row in rows if row["benchmark"] == "m3-v2")
+    permit = SimpleNamespace(execution_identity=agentdojo_row["execution_identity"])
+
+    agentdojo, m3 = runner._projected_case_resolvers(
+        provider_id,
+        permit,
+        rows,
+    )
+    agentdojo_binding = agentdojo.resolve(agentdojo_row["work_key"])
+    source_agentdojo_binding = agentdojo.resolve(
+        agentdojo_row["source_v1_work_key"]
+    )
+    m3_binding = m3.resolve(m3_row["work_key"])
+    source_m3_binding = m3.resolve(m3_row["source_v1_work_key"])
+
+    assert agentdojo_binding.work_key == agentdojo_row["work_key"]
+    assert agentdojo_binding.benchmark_case_id == agentdojo_row["case_id"]
+    assert (
+        agentdojo_binding.source_record_sha256
+        == source_agentdojo_binding.source_record_sha256
+    )
+    assert m3_binding.work_key == m3_row["work_key"]
+    assert m3_binding.case_id == m3_row["case_id"]
+    assert m3_binding.source_record_sha256 == source_m3_binding.source_record_sha256
+    assert m3_binding.execution_identity == permit.execution_identity
+
+
+@pytest.mark.parametrize(
+    ("benchmark", "error_type"),
+    [
+        ("agentdojo-v1", AgentDojoLiveDependencyError),
+        ("m3-v2", M3OfflineEvaluatorError),
+    ],
+)
+def test_local_projection_failure_classifier_is_benchmark_specific(
+    benchmark: str, error_type: type[Exception]
+) -> None:
+    source_key = "a" * 64
+    row = {
+        "record_kind": "execution",
+        "work_key": f"e6-v2-immediate__{source_key}",
+        "source_v1_work_key": source_key,
+        "benchmark": benchmark,
+        "attempt": 1,
+        "operational_status": "contract_failure",
+        "error_type": error_type.__name__,
+        "response_obtained": False,
+        "provider_requests": [],
+        "provider_call_count": 0,
+        "returned_models": [],
+        "retry_eligible": False,
+        "terminal_status": True,
+        "included_in_primary_itt": True,
+        "online_forbidden_fields_present": False,
+        "online_visible_field_digest_sha256": "b" * 64,
+    }
+
+    assert runner._is_local_projection_contract_failure(row) is True
+    row["error_type"] = "ProviderIdentityError"
+    assert runner._is_local_projection_contract_failure(row) is False
+
+
 @pytest.mark.parametrize("window", ["W1", "W2"])
 def test_v2_rejects_w1_w2_before_credentials_dispatch_or_output(
     tmp_path: Path,
@@ -373,6 +446,172 @@ def test_generic_response_less_attempt_two_is_isolated_and_terminal(
         match="unique unresolved work key",
     ):
         _run("gemini", _Dispatcher(), retry_key=key)
+
+
+def test_local_projection_stop_allows_only_explicit_failed_key_attempt_two(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    captures: list[Any] = []
+    first = _run(
+        "deepseek",
+        _Dispatcher(
+            failure=AgentDojoLiveDependencyError("unknown paper-v2 work key")
+        ),
+        captures=captures,
+    )
+    first_row = _raw("deepseek")[0]
+    key = str(first_row["work_key"])
+    stop_path = runner._provider_stop_path("deepseek")
+    stop_before = stop_path.read_bytes()
+
+    assert first["executed"] == 1
+    assert runner._is_local_projection_contract_failure(first_row) is True
+    assert first_row["terminal_status"] is True
+    assert first_row["retry_eligible"] is False
+    assert first_row["provider_requests"] == []
+    assert first_row["provider_call_count"] == 0
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="stopped by a fatal boundary",
+    ):
+        _run("deepseek", _Dispatcher())
+
+    recovered = _run(
+        "deepseek",
+        _Dispatcher(),
+        retry_key=key,
+        captures=captures,
+    )
+    records = [row for row in _raw("deepseek") if row["work_key"] == key]
+
+    assert recovered["executed"] == 1
+    assert [row["attempt"] for row in records] == [1, 2]
+    assert records[0] == first_row
+    assert records[1]["recovery_kind"] == runner.LOCAL_PROJECTION_RECOVERY_KIND
+    assert records[1]["supersedes_attempt"] == 1
+    assert records[1]["payload_bound_recovery_required"] is False
+    assert records[1]["terminal_status"] is True
+    assert stop_path.read_bytes() == stop_before
+    assert runner._require_provider_stop("deepseek", runner.EXECUTION_BLOCK_ID) is None
+    assert "local_projection_recovery_attempt2" in str(captures[1].call_path)
+
+    continued = _run("deepseek", _Dispatcher(), captures=captures)
+    all_rows = _raw("deepseek")
+    recovered_key_rows = [row for row in all_rows if row["work_key"] == key]
+
+    assert continued["executed"] == runner.PREFIX_ROWS - 1
+    assert continued["window_gate_passed"] is True
+    assert [row["attempt"] for row in recovered_key_rows] == [1, 2]
+    assert len({row["work_key"] for row in all_rows}) == runner.PREFIX_ROWS
+
+
+def test_resolved_projection_stop_rejects_an_intervening_physical_row(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run(
+        "deepseek",
+        _Dispatcher(
+            failure=AgentDojoLiveDependencyError("unknown paper-v2 work key")
+        ),
+    )
+    key = str(_raw("deepseek")[0]["work_key"])
+    _run("deepseek", _Dispatcher(), retry_key=key)
+    _run("deepseek", _Dispatcher())
+    rows = _raw("deepseek")
+    attempt1 = rows[0]
+    attempt2 = rows[1]
+    first_other = rows[2]
+    reordered = [attempt1, first_other, attempt2, *rows[3:]]
+    runner._raw_path("deepseek").write_text(
+        "".join(
+            json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n"
+            for row in reordered
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="resolved provider stop recovery evidence drift",
+    ):
+        runner._require_provider_stop("deepseek", runner.EXECUTION_BLOCK_ID)
+
+
+def test_nonprojection_fatal_stop_never_becomes_retryable(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run(
+        "deepseek",
+        _Dispatcher(failure=ProviderIdentityError("synthetic identity drift")),
+    )
+    key = str(_raw("deepseek")[0]["work_key"])
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="stopped by a fatal boundary",
+    ):
+        _run("deepseek", _Dispatcher(), retry_key=key)
+
+
+def test_projection_attempt_two_fatal_remains_an_active_nonretryable_stop(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run(
+        "deepseek",
+        _Dispatcher(
+            failure=AgentDojoLiveDependencyError("unknown paper-v2 work key")
+        ),
+    )
+    key = str(_raw("deepseek")[0]["work_key"])
+    _run(
+        "deepseek",
+        _Dispatcher(failure=ProviderIdentityError("synthetic identity drift")),
+        retry_key=key,
+    )
+    rows = [row for row in _raw("deepseek") if row["work_key"] == key]
+    active_stop = runner._require_provider_stop(
+        "deepseek", runner.EXECUTION_BLOCK_ID
+    )
+
+    assert [row["attempt"] for row in rows] == [1, 2]
+    assert rows[-1]["recovery_kind"] == runner.LOCAL_PROJECTION_RECOVERY_KIND
+    assert rows[-1]["operational_status"] == "contract_failure"
+    assert active_stop is not None
+    assert active_stop["attempt"] == 2
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="stopped by a fatal boundary",
+    ):
+        _run("deepseek", _Dispatcher(), retry_key=key)
+
+
+def test_projection_like_failure_without_online_digest_is_not_retryable(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run(
+        "deepseek",
+        _Dispatcher(
+            failure=AgentDojoLiveDependencyError("unknown paper-v2 work key")
+        ),
+    )
+    raw_path = runner._raw_path("deepseek")
+    row = _raw("deepseek")[0]
+    row["online_visible_field_digest_sha256"] = None
+    raw_path.write_text(
+        json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="stopped by a fatal boundary",
+    ):
+        _run("deepseek", _Dispatcher(), retry_key=str(row["work_key"]))
 
 
 def test_response_less_failure_without_payload_commitment_is_terminal(

@@ -1,7 +1,7 @@
 {
   "schema_version": "m3-paper-v2-e6-cross-provider-repair-2.0",
   "study_id": "m3-q2-e6-cross-provider-calibration-v2",
-  "status": "owner_authorized_b1_live_execution_ready",
+  "status": "owner_authorized_b1_live_execution_in_progress_local_attempt2_qualified",
   "source_design": {
     "protocol": "protocols/paper_upgrade_v2/e6_cross_provider_calibration_v1",
     "reuse": [
@@ -88,7 +88,7 @@
   },
   "offline_completion_gate": {
     "status": "passed",
-    "runner_and_analysis_tests": "76_passed",
+    "runner_and_analysis_tests": "87_passed",
     "adjacent_compatibility_tests": "45_passed_1_known_stale_qualification_deselected",
     "ruff": "passed",
     "py_compile": "passed",

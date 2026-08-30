@@ -8,7 +8,7 @@
 - Offline completion interfaces are ready: `--seal-block` and
   `e6_cross_provider_calibration_analysis_v2.py`. Administrative closures are
   ITT bookkeeping, never model-safe outcomes or physical attempts.
-- Verification is green for the intended scope: B1 runner+analysis 76/76;
+- Verification is green for the intended scope: B1 runner+analysis 87/87;
   adjacent compatibility 45 passed/1 recorded stale qualification deselected;
   Ruff, compile, JSON and diff checks pass. No B1 API call/output exists yet.
 - Exact next action is DeepSeek B1 `--canary-only --config

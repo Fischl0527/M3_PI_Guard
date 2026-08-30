@@ -1,5 +1,24 @@
 # Failure Log
 
+## 2026-08-31 — B1 DeepSeek formal-prefix local projection failure
+
+- The owner-authorized DeepSeek B1 prefix stopped after its first planned row.
+  The public record is `contract_failure / AgentDojoLiveDependencyError`, with
+  `response_obtained=false`, zero provider calls, an empty provider-request list,
+  no official response ID, no forbidden online field, and no external effect.
+  Therefore this was a local engineering failure before any DeepSeek transport,
+  not an API/model outcome.
+- Zero-network reproduction confirmed the cause: B1 intentionally creates a new
+  `e6-v2-immediate__...` work key, while both frozen AgentDojo and M3 resolvers
+  were still indexed only by `source_v1_work_key`. The new key did not resolve;
+  the retained source key resolved to the expected frozen case for both
+  benchmarks.
+- Changed hypothesis: do not retry the provider or loosen fatal handling. Rebind
+  both private resolvers to the exactly projected B1 rows, then permit one
+  explicit attempt 2 only for this zero-call local-projection failure. Preserve
+  attempt 1 and its provider-stop evidence; all response-bearing, successful,
+  unrelated terminal, 429 and payload-bound recovery rules remain unchanged.
+
 ## 2026-08-31 — B1 autonomous-closeout preflight audit
 
 - The first read-only plan-count probe used `benchmark_id`, which is not part of
@@ -26,7 +45,8 @@
   the focused E6 gate, and is not repaired or regenerated here to avoid changing
   frozen historical evidence. After binding provider-stop and block-seal artifacts
   to current raw evidence and recomputing closure semantics, the B1
-  runner/analysis suite passed 76/76.
+  runner/analysis suite passed 87/87 after the local projection recovery path
+  and runner-to-analysis integration were added.
 
 ## 2026-08-31 — E6-v2 no-delay independent-review findings
 
