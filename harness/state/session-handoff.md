@@ -1,5 +1,18 @@
 # 会话移交
 
+## 2026-08-31 — E6-v2 DeepSeek B1 sealed; Gemini prefix next
+
+- DeepSeek is closed at 360/360 terminal and response-bearing logical rows,
+  361 physical rows, six conditions x 60, gate passed and block sealed with no
+  administrative closures.
+- Public technical audit finds zero model drift, incomplete request chains,
+  forbidden online fields, provider tools, real effects or secret-pattern hits.
+- The immutable projection attempt 1/2 and response-bearing VIGIL ITT failure
+  remain in raw; neither work key was replayed during the 227-row continuation.
+- Next action is Gemini B1 `--canary-only --config config/project.local.env`.
+  Run expansion only if its outcome-blind gate passes; otherwise seal under the
+  recorded provider/gate evidence. Gemini stays diagnostic-only and USD 0.
+
 ## 2026-08-31 — E6-v2 DeepSeek pending-only continuation qualified
 
 - DeepSeek B1 prefix is gate-passed. Current raw state is 134 physical rows over

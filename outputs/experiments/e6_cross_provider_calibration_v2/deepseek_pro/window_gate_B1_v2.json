@@ -1,0 +1,23 @@
+{
+  "complete_request_chain": true,
+  "exact_returned_model": true,
+  "execution_block_id": "B1",
+  "execution_block_role": "single_diagnostic_execution_block",
+  "gate_passed": true,
+  "gemini_free_tier_usd_zero": true,
+  "no_repeated_systemic_error": true,
+  "observed_prefix_rows": 12,
+  "online_field_isolation": true,
+  "parseable_terminal_rows": 11,
+  "planned_prefix_rows": 12,
+  "provider_id": "deepseek",
+  "provider_tools_and_external_effects_zero": true,
+  "replicate_window": "B1",
+  "runtime_provider_failure_rows": 0,
+  "schema_version": "m3-paper-v2-e6-window-gate-2.0",
+  "scientific_outcomes_inspected": false,
+  "status": "passed",
+  "study_id": "m3-q2-e6-cross-provider-calibration-v2",
+  "systemic_failure_counts": {},
+  "temporal_replication_claim": false
+}

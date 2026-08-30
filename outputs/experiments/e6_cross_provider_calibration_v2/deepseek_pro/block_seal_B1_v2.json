@@ -1,0 +1,56 @@
+{
+  "administrative_closure_rows": 0,
+  "closure_mode": "all_rows_terminal",
+  "condition_counts": {
+    "m3_full": {
+      "administrative_closure": 0,
+      "planned": 60,
+      "response_bearing": 60
+    },
+    "m3_full_normal_prompt": {
+      "administrative_closure": 0,
+      "planned": 60,
+      "response_bearing": 60
+    },
+    "m3_policy_only": {
+      "administrative_closure": 0,
+      "planned": 60,
+      "response_bearing": 60
+    },
+    "m3_policy_safe_prompt": {
+      "administrative_closure": 0,
+      "planned": 60,
+      "response_bearing": 60
+    },
+    "no_defense": {
+      "administrative_closure": 0,
+      "planned": 60,
+      "response_bearing": 60
+    },
+    "strongest_peer_reviewed_structural_baseline": {
+      "administrative_closure": 0,
+      "planned": 60,
+      "response_bearing": 60
+    }
+  },
+  "elapsed_seconds": 4974.183451,
+  "execution_block_completed_at": "2026-08-31T02:53:34.725877+08:00",
+  "execution_block_id": "B1",
+  "execution_block_role": "single_diagnostic_execution_block",
+  "execution_block_started_at": "2026-08-31T01:30:40.542426+08:00",
+  "external_effects_enabled": false,
+  "fatal_provider_stop": false,
+  "gate_status": "passed",
+  "planned_rows": 360,
+  "provider_block_unavailable_rows": 0,
+  "provider_id": "deepseek",
+  "provider_tools_enabled": false,
+  "provider_unavailable_evidence": null,
+  "response_bearing_rows": 360,
+  "schema_version": "m3-paper-v2-e6-block-seal-2.0",
+  "status": "sealed",
+  "study_id": "m3-q2-e6-cross-provider-calibration-v2",
+  "technical_gate_not_extended_rows": 0,
+  "temporal_replication_claim": false,
+  "terminal_rows": 360
+}

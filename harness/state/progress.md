@@ -1,5 +1,18 @@
 # 进展记录
 
+## 2026-08-31 — E6-v2 DeepSeek B1 360/360 封存
+
+- DeepSeek pending-only 续跑自然 exit 0，本次完成 227/227 未触碰项；未触发新的
+  fatal 或 response-less 停止，成功和 response-bearing 行均未重跑。
+- B1 封存为 `all_rows_terminal`：360 planned、360 terminal、360 response-bearing，
+  六条件各 60，行政 closure 为 0；公开 raw 为 361 个物理行/360 个唯一 key，
+  额外物理行仅来自唯一允许的零调用投影 attempt 2。
+- outcome-blind 技术证据：gate passed、seal sealed、所有请求模型为
+  `deepseek-v4-pro`、请求链完整，forbidden fields、provider tools、真实 external
+  effects、模型漂移和公开敏感模式命中均为 0。
+- 实际 B1 DeepSeek 执行跨度为 4,974.183451 秒；时间不参与准入，也不支持跨日
+  重复性主张。下一阶段为独立 Gemini 免费层 12 行正式前缀。
+
 ## 2026-08-31 — E6-v2 DeepSeek 前缀通过，VIGIL 响应后失败续跑已资格化
 
 - DeepSeek B1 正式前缀 12/12 闭合且技术门通过：11 completed、1 parse failure，

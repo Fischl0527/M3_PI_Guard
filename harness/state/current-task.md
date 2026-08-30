@@ -4,17 +4,16 @@
 
 - Owner 已授权“自行写计划、审计后执行直到完成”。执行依据为
   `protocols/paper_upgrade_v2/e6_cross_provider_calibration_v2/execution_plan_b1.md`。
-- 当前阶段：DeepSeek 12/12 正式前缀已通过 outcome-blind 技术门；扩展运行保留
-  134 个物理记录、133 个唯一 work key。最早的零调用投影失败已由唯一相邻
-  attempt 2 闭合。随后一条已有官方响应的 VIGIL 约束生成解析失败原样保留为
-  terminal、non-retryable、ITT operational failure；严格响应链谓词只解除 provider
-  级停止，不改变该行结果。108 项定向测试和独立复核通过，当前 227 个未触碰
-  DeepSeek work key 可 pending-only 继续，两个失败 key 均不会重跑。
+- 当前阶段：DeepSeek B1 已封存，360/360 逻辑项均为终态且都有官方响应；公开
+  raw 为 361 个物理行（仅最早零调用投影失败有一次相邻 attempt 2），六条件各
+  60。既有 VIGIL 响应后失败保留为 ITT operational failure且未重跑；gate passed、
+  seal 为 `all_rows_terminal`，字段泄漏、provider tools、真实 effect、模型身份漂移
+  和公开敏感模式命中均为 0。下一步执行 Gemini 12 行免费层正式前缀。
 - 计划规模：DeepSeek 360、Gemini 180；各 12 条 outcome-blind 正式前缀；门通过
   才扩展。失败只恢复唯一 response-less key 一次，成功/response-bearing 行不重跑。
-- B1 `--seal-block`、单块分析器、投影恢复和响应后 VIGIL 失败续跑契约均已完成；
-  下一步先提交该修复检查点，再只执行 DeepSeek pending 项，随后封存并按同样
-  outcome-blind 前缀规则执行 Gemini 免费层。
+- B1 `--seal-block`、单块分析器、投影恢复、VIGIL 续跑契约和 DeepSeek 完整矩阵
+  均已完成；DeepSeek 公开最小证据提交后，按相同 outcome-blind 前缀规则执行
+  Gemini 免费层。Gemini 无论完整或降级均只作 diagnostic。
 - 最终交付：两家 gate/seal、540 个模型或行政 ITT 终态、一次性 analysis、表图、
   Markdown 报告、Harness 登记和 GitHub 推送。B1 不支持跨日期重复性或正式跨厂商
   泛化主张。
