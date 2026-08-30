@@ -95,6 +95,130 @@ class _Dispatcher:
         }
 
 
+class _PostResponseVigilDispatcher:
+    """Emit one exact response-bearing VIGIL constraint-generation failure."""
+
+    def __init__(self) -> None:
+        self.failure = None
+        self.calls = 0
+        self.failures = 0
+
+    def execute(
+        self, work_item: Mapping[str, Any], state: Mapping[str, Any]
+    ) -> Mapping[str, Any]:
+        self.calls += 1
+        result = dict(_Dispatcher().execute(work_item, state))
+        if (
+            work_item["condition_id"]
+            == "strongest_peer_reviewed_structural_baseline"
+            and self.failures == 0
+        ):
+            self.failures += 1
+            result["operational_status"] = "provider_failure"
+            result["runtime_failure_diagnostic"] = {
+                "failure_stage": runner.POST_RESPONSE_VIGIL_FAILURE_STAGE,
+                "failure_class": runner.POST_RESPONSE_VIGIL_FAILURE_CLASS,
+                "provider_call_index": 1,
+                "http_category": "not_observed",
+            }
+            result["safety_receipt"] = {
+                "evidence": {
+                    "effect_backend": "no_effect",
+                    "tool": "final",
+                    "arguments_sha256": "e" * 64,
+                    "external_connectors_enabled": False,
+                    "provider_managed_tools_enabled": False,
+                    "decision": "ALLOW_ISOLATED_SIMULATION_ONLY",
+                },
+                "evidence_sha256": "f" * 64,
+            }
+        return result
+
+
+def _allowlisted_vigil_record(provider_id: str = "deepseek") -> dict[str, Any]:
+    model = runner.EXPECTED_MODELS[provider_id]
+    row: dict[str, Any] = {
+        "record_kind": "execution",
+        "provider_id": provider_id,
+        "model_id": model,
+        "configured_model": model,
+        "condition_id": "strongest_peer_reviewed_structural_baseline",
+        "operational_status": "provider_failure",
+        "error_type": runner.POST_RESPONSE_VIGIL_FAILURE_CLASS,
+        "attempt": 1,
+        "response_obtained": True,
+        "provider_call_count": 1,
+        "max_provider_calls": 16,
+        "provider_requests": [
+            {
+                "local_request_id": "m3req-vigil-test",
+                "payload_sha256": "a" * 64,
+                "provider_response_id": "response-vigil-test",
+                "returned_model": model,
+            }
+        ],
+        "returned_models": [model],
+        "returned_model_id": model,
+        "runtime_failure_diagnostic": {
+            "failure_stage": runner.POST_RESPONSE_VIGIL_FAILURE_STAGE,
+            "failure_class": runner.POST_RESPONSE_VIGIL_FAILURE_CLASS,
+            "provider_call_index": 1,
+            "http_category": "not_observed",
+        },
+        "terminal_status": True,
+        "retry_eligible": False,
+        "included_in_primary_itt": True,
+        "online_forbidden_fields_present": False,
+        "online_visible_field_digest_sha256": "b" * 64,
+        "provider_tools_enabled": False,
+        "external_effects_enabled": False,
+        "real_effect_receipt": None,
+        "simulated_effect_receipt": {
+            "effect_backend": "no_effect",
+            "external_connectors_enabled": False,
+            "provider_managed_tools_enabled": False,
+        },
+    }
+    if provider_id == "gemini":
+        row.update(
+            {
+                "cost": {
+                    "currency": "USD",
+                    "amount": 0.0,
+                    "billing_tier": "free",
+                },
+                "free_tier_attestation": {
+                    "billing_tier": "free",
+                    "cost_usd": 0.0,
+                    "paid_fallback_enabled": False,
+                },
+            }
+        )
+    return row
+
+
+def _write_current_style_stop(provider_id: str, row: Mapping[str, Any]) -> bytes:
+    stop = {
+        "schema_version": runner.PROVIDER_STOP_SCHEMA_VERSION,
+        "study_id": runner.STUDY_ID,
+        "provider_id": provider_id,
+        "replicate_window": runner.EXECUTION_BLOCK_ID,
+        "execution_block_id": runner.EXECUTION_BLOCK_ID,
+        "execution_block_role": runner.EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
+        "work_key": row["work_key"],
+        "attempt": row["attempt"],
+        "error_type": row["error_type"],
+        "operational_status": row["operational_status"],
+        "status": "stopped_fatal_contract_boundary",
+        "fatal_boundary": True,
+        "terminal_status": True,
+        "recorded_at": row["recorded_at"],
+    }
+    runner._write_json(runner._provider_stop_path(provider_id), stop)
+    return runner._provider_stop_path(provider_id).read_bytes()
+
+
 def _patch_offline(
     monkeypatch: pytest.MonkeyPatch, root: Path
 ) -> None:
@@ -277,6 +401,76 @@ def test_local_projection_failure_classifier_is_benchmark_specific(
     assert runner._is_local_projection_contract_failure(row) is True
     row["error_type"] = "ProviderIdentityError"
     assert runner._is_local_projection_contract_failure(row) is False
+
+
+@pytest.mark.parametrize("provider_id", ["deepseek", "gemini"])
+def test_post_response_vigil_continuation_predicate_is_cross_provider_strict(
+    provider_id: str,
+) -> None:
+    assert (
+        runner._is_allowlisted_post_response_vigil_record(
+            _allowlisted_vigil_record(provider_id)
+        )
+        is True
+    )
+
+
+@pytest.mark.parametrize(
+    "drift",
+    [
+        "response",
+        "response_id",
+        "request_id",
+        "payload_digest",
+        "visible_digest",
+        "request_chain",
+        "returned_model",
+        "stage",
+        "class",
+        "field_isolation",
+        "tools",
+        "effects",
+        "effect_receipt",
+    ],
+)
+def test_post_response_vigil_continuation_rejects_evidence_drift(
+    drift: str,
+) -> None:
+    row = _allowlisted_vigil_record()
+    if drift == "response":
+        row["response_obtained"] = False
+    elif drift == "response_id":
+        row["provider_requests"][0]["provider_response_id"] = ""
+    elif drift == "request_id":
+        row["provider_requests"][0]["local_request_id"] = " "
+    elif drift == "payload_digest":
+        row["provider_requests"][0]["payload_sha256"] = "not-a-digest"
+    elif drift == "visible_digest":
+        row["online_visible_field_digest_sha256"] = "not-a-digest"
+    elif drift == "request_chain":
+        row["provider_call_count"] = 2
+    elif drift == "returned_model":
+        row["returned_model_id"] = "drifted-model"
+    elif drift == "stage":
+        row["runtime_failure_diagnostic"]["failure_stage"] = "provider_call"
+    elif drift == "class":
+        row["error_type"] = "ProviderIdentityError"
+    elif drift == "field_isolation":
+        row["online_forbidden_fields_present"] = True
+    elif drift == "tools":
+        row["provider_tools_enabled"] = True
+    elif drift == "effects":
+        row["external_effects_enabled"] = True
+    elif drift == "effect_receipt":
+        row["simulated_effect_receipt"]["effect_backend"] = "live"
+    assert runner._is_allowlisted_post_response_vigil_record(row) is False
+
+
+def test_gemini_post_response_vigil_continuation_requires_exact_free_tier() -> None:
+    row = _allowlisted_vigil_record("gemini")
+    row["free_tier_attestation"]["paid_fallback_enabled"] = True
+
+    assert runner._is_allowlisted_post_response_vigil_record(row) is False
 
 
 @pytest.mark.parametrize("window", ["W1", "W2"])
@@ -537,6 +731,106 @@ def test_resolved_projection_stop_rejects_an_intervening_physical_row(
         match="resolved provider stop recovery evidence drift",
     ):
         runner._require_provider_stop("deepseek", runner.EXECUTION_BLOCK_ID)
+
+
+def test_future_post_response_vigil_failure_is_terminal_itt_but_does_not_stop(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    dispatcher = _PostResponseVigilDispatcher()
+
+    first = _run("deepseek", dispatcher)
+    rows = _raw("deepseek")
+    failed = [
+        row
+        for row in rows
+        if row.get("error_type") == runner.POST_RESPONSE_VIGIL_FAILURE_CLASS
+    ]
+
+    assert first["executed"] == runner.PREFIX_ROWS
+    assert first["stopped_after_fatal_boundary"] is False
+    assert first["window_gate_passed"] is True
+    assert len(failed) == 1
+    assert failed[0]["terminal_status"] is True
+    assert failed[0]["retry_eligible"] is False
+    assert failed[0]["included_in_primary_itt"] is True
+    assert (
+        failed[0]["provider_continuation_kind"]
+        == runner.POST_RESPONSE_VIGIL_CONTINUATION_KIND
+    )
+    assert not runner._provider_stop_path("deepseek").exists()
+
+    resumed = _run("deepseek", _Dispatcher())
+    assert resumed["executed"] == 0
+    assert sum(row["work_key"] == failed[0]["work_key"] for row in _raw("deepseek")) == 1
+
+
+def test_existing_post_response_vigil_stop_resolves_without_replay(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run("deepseek", _PostResponseVigilDispatcher())
+    rows = _raw("deepseek")
+    failed_index = next(
+        index
+        for index, row in enumerate(rows)
+        if row.get("error_type") == runner.POST_RESPONSE_VIGIL_FAILURE_CLASS
+    )
+    stopped_rows = rows[: failed_index + 1]
+    failed = stopped_rows[-1]
+    failed.pop("provider_continuation_kind")
+    runner._raw_path("deepseek").write_text(
+        "".join(
+            json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n"
+            for row in stopped_rows
+        ),
+        encoding="utf-8",
+    )
+    stop_before = _write_current_style_stop("deepseek", failed)
+
+    assert runner._require_provider_stop("deepseek", runner.EXECUTION_BLOCK_ID) is None
+    continued = _run("deepseek", _Dispatcher())
+    final_rows = _raw("deepseek")
+
+    assert continued["executed"] == runner.PREFIX_ROWS - len(stopped_rows)
+    assert continued["window_gate_passed"] is True
+    assert runner._provider_stop_path("deepseek").read_bytes() == stop_before
+    assert sum(row["work_key"] == failed["work_key"] for row in final_rows) == 1
+    assert next(row for row in final_rows if row["work_key"] == failed["work_key"]) == failed
+    assert runner._require_provider_stop("deepseek", runner.EXECUTION_BLOCK_ID) is None
+
+
+def test_allowlisted_vigil_stop_rejects_raw_evidence_drift(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run("deepseek", _PostResponseVigilDispatcher())
+    rows = _raw("deepseek")
+    failed_index = next(
+        index
+        for index, row in enumerate(rows)
+        if row.get("error_type") == runner.POST_RESPONSE_VIGIL_FAILURE_CLASS
+    )
+    stopped_rows = rows[: failed_index + 1]
+    failed = stopped_rows[-1]
+    failed.pop("provider_continuation_kind")
+    failed["online_forbidden_fields_present"] = True
+    runner._raw_path("deepseek").write_text(
+        "".join(
+            json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n"
+            for row in stopped_rows
+        ),
+        encoding="utf-8",
+    )
+    _write_current_style_stop("deepseek", failed)
+
+    active = runner._require_provider_stop("deepseek", runner.EXECUTION_BLOCK_ID)
+    assert active is not None
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="stopped by a fatal boundary",
+    ):
+        _run("deepseek", _Dispatcher())
 
 
 def test_nonprojection_fatal_stop_never_becomes_retryable(
@@ -1245,7 +1539,10 @@ def test_manifest_keeps_v1_immutable_and_api_execution_disabled() -> None:
     assert manifest["study_id"] == runner.STUDY_ID
     assert manifest["provider_calls_made"] == 0
     assert manifest["v1_records_modified"] == 0
-    assert manifest["status"] == "owner_authorized_b1_live_execution_ready"
+    assert manifest["status"] in {
+        "owner_authorized_b1_live_execution_ready",
+        "owner_authorized_b1_live_execution_in_progress_local_attempt2_qualified",
+    }
     assert manifest["owner_authorization"][
         "requires_offline_completion_gate_before_provider_calls"
     ] is True

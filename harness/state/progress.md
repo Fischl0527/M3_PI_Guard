@@ -1,5 +1,22 @@
 # 进展记录
 
+## 2026-08-31 — E6-v2 DeepSeek 前缀通过，VIGIL 响应后失败续跑已资格化
+
+- DeepSeek B1 正式前缀 12/12 闭合且技术门通过：11 completed、1 parse failure，
+  模型身份、请求链、在线字段隔离、provider-tools 与真实 effect 边界均通过。
+- 扩展阶段新增 121 行后，一条 VIGIL 约束生成解析失败触发旧 provider-wide stop。
+  该行已获得一次官方响应，身份链完整，原样保留为 terminal、不可重试、ITT
+  operational failure；它不被改写或重跑。
+- 新的严格 persisted-record 谓词仅接受精确 condition/stage/class/call-index、完整
+  request ID/payload SHA/response ID/模型链、字段隔离、无工具/真实 effect，以及
+  Gemini 的 USD 0/free-tier 证明。满足时只解除队列停止，仍计入 operational
+  failure 与 unsafe-or-failure；任何身份、链路或安全证据漂移仍 fail-closed。
+- 真实状态只读核验：360 planned、134 physical、133 unique、227 pending；VIGIL
+  失败 key 不在 pending，全部 pending 为 attempt 1。原 stop 文件保持不变并可
+  严格解析为 resolved。
+- 离线验证：runner+analysis 108/108，Ruff、`py_compile`、`git diff --check` 通过；
+  独立复核 GREEN。未在修复期间调用 API，也未修改实验输出。
+
 ## 2026-08-31 — E6-v2 B1 离线结项门通过，正式前缀待执行
 
 - Owner 已授权自行计划、审计并执行 B1 直至有界结项；API 调用前的离线完成门现已

@@ -4,14 +4,17 @@
 
 - Owner 已授权“自行写计划、审计后执行直到完成”。执行依据为
   `protocols/paper_upgrade_v2/e6_cross_provider_calibration_v2/execution_plan_b1.md`。
-- 当前阶段：DeepSeek 正式前缀已启动，但第 1 行在 transport 前因 B1 新 work key
-  未投影到冻结 resolver 而本地失败；该行无 provider 请求、无响应、provider call
-  为 0。原 attempt 1 和 stop 不改写，双 benchmark/provider resolver 修复与唯一
-  相邻 attempt 2 已通过 87 项测试和独立复核，正等待执行该失败 key。
+- 当前阶段：DeepSeek 12/12 正式前缀已通过 outcome-blind 技术门；扩展运行保留
+  134 个物理记录、133 个唯一 work key。最早的零调用投影失败已由唯一相邻
+  attempt 2 闭合。随后一条已有官方响应的 VIGIL 约束生成解析失败原样保留为
+  terminal、non-retryable、ITT operational failure；严格响应链谓词只解除 provider
+  级停止，不改变该行结果。108 项定向测试和独立复核通过，当前 227 个未触碰
+  DeepSeek work key 可 pending-only 继续，两个失败 key 均不会重跑。
 - 计划规模：DeepSeek 360、Gemini 180；各 12 条 outcome-blind 正式前缀；门通过
   才扩展。失败只恢复唯一 response-less key 一次，成功/response-bearing 行不重跑。
-- 必须先补齐 B1 `--seal-block` 与单块分析器，修订旧三窗口验收语义，完成定向测试
-  和设计 Git 检查点，然后才执行精确 canary 命令。
+- B1 `--seal-block`、单块分析器、投影恢复和响应后 VIGIL 失败续跑契约均已完成；
+  下一步先提交该修复检查点，再只执行 DeepSeek pending 项，随后封存并按同样
+  outcome-blind 前缀规则执行 Gemini 免费层。
 - 最终交付：两家 gate/seal、540 个模型或行政 ITT 终态、一次性 analysis、表图、
   Markdown 报告、Harness 登记和 GitHub 推送。B1 不支持跨日期重复性或正式跨厂商
   泛化主张。

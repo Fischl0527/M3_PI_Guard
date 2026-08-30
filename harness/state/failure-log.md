@@ -1,5 +1,25 @@
 # Failure Log
 
+## 2026-08-31 — B1 DeepSeek response-bearing VIGIL runtime failure
+
+- After the repaired 12-row prefix passed its outcome-blind technical gate,
+  DeepSeek expansion appended 121 additional terminal rows and stopped on one
+  `provider_failure / VigilLiveDependencyError` at
+  `vigil_constraint_generation`. The affected row has one completed official
+  provider request, exact returned model identity, no forbidden online field,
+  no provider tool, and no external effect. It is immutable ITT evidence and
+  is not eligible for replay.
+- This failure class/stage is already treated by the repository's frozen Gemini
+  public v5 technical review as an allowlisted post-response runtime failure
+  that remains in ITT while permitting later matrix continuation. The E6-v2
+  runner instead classified every non-transport runtime failure as a provider-
+  wide fatal boundary.
+- Changed hypothesis: preserve the row and its stop, strictly reclassify only a
+  response-bearing, request-chain-complete `VigilLiveDependencyError` from the
+  VIGIL constraint-generation stage as terminal-but-nonfatal, and continue only
+  untouched pending keys. All identity, payload, usage, ledger, transport,
+  response-less and other runtime failures remain fail-closed.
+
 ## 2026-08-31 — B1 DeepSeek formal-prefix local projection failure
 
 - The owner-authorized DeepSeek B1 prefix stopped after its first planned row.

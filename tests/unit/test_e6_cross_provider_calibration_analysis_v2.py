@@ -477,6 +477,86 @@ def test_runner_local_projection_recovery_is_accepted_by_analysis(
     assert result["audit"]["recovered_work_items"] == 1
 
 
+def test_post_response_vigil_continuation_remains_terminal_itt_in_analysis() -> None:
+    plan, raw = _fixture("deepseek", tasks=2)
+    vigils = [
+        row
+        for row in raw
+        if row["condition_id"]
+        == "strongest_peer_reviewed_structural_baseline"
+    ]
+    for vigil in vigils:
+        vigil.update(
+            {
+                "operational_status": "provider_failure",
+                "error_type": analysis.POST_RESPONSE_VIGIL_FAILURE_CLASS,
+                "max_provider_calls": 16,
+                "runtime_failure_diagnostic": {
+                    "failure_stage": analysis.POST_RESPONSE_VIGIL_FAILURE_STAGE,
+                    "failure_class": analysis.POST_RESPONSE_VIGIL_FAILURE_CLASS,
+                    "provider_call_index": 1,
+                    "http_category": "not_observed",
+                },
+                "real_effect_receipt": None,
+                "simulated_effect_receipt": {
+                    "effect_backend": "no_effect",
+                    "external_connectors_enabled": False,
+                    "provider_managed_tools_enabled": False,
+                },
+                "provider_continuation_kind": (
+                    analysis.POST_RESPONSE_VIGIL_CONTINUATION_KIND
+                ),
+            }
+        )
+
+    merged, _ = analysis.merge_plan_and_raw(plan, raw)
+    observed = [
+        row
+        for row in merged
+        if row["work_key"] in {vigil["work_key"] for vigil in vigils}
+    ]
+    result, _ = analysis.analyze_provider_block(
+        "deepseek",
+        plan_rows=plan,
+        raw_rows=raw,
+        gate=_gate("deepseek"),
+        close=_close(plan_rows=plan, raw_rows=raw),
+        bootstrap_replicates=5,
+    )
+
+    assert len(observed) == 2
+    assert all(row["_scientific_terminal"] is True for row in observed)
+    assert all(row["included_in_primary_itt"] is True for row in observed)
+    assert all(row["retry_eligible"] is False for row in observed)
+    assert result["technical_audit"][
+        "allowlisted_post_response_vigil_failures"
+    ] == 2
+    assert result["technical_audit"]["systemic_failure_counts"] == {}
+    assert result["technical_audit"]["no_repeated_systemic_failure"] is True
+    assert result["cell_summary"][
+        "all|strongest_peer_reviewed_structural_baseline"
+    ]["operational_failure_count"] == 2
+
+
+def test_analysis_rejects_drifted_post_response_vigil_continuation_marker() -> None:
+    plan, raw = _fixture("deepseek", tasks=1)
+    vigil = next(
+        row
+        for row in raw
+        if row["condition_id"]
+        == "strongest_peer_reviewed_structural_baseline"
+    )
+    vigil["provider_continuation_kind"] = (
+        analysis.POST_RESPONSE_VIGIL_CONTINUATION_KIND
+    )
+
+    with pytest.raises(
+        analysis.E6B1AnalysisError,
+        match="VIGIL continuation marker drift",
+    ):
+        analysis.merge_plan_and_raw(plan, raw)
+
+
 def test_analysis_rejects_nonadjacent_local_projection_recovery() -> None:
     plan, raw = _fixture("deepseek", tasks=1)
     first = raw[0]

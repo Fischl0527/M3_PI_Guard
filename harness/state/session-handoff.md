@@ -1,5 +1,23 @@
 # 会话移交
 
+## 2026-08-31 — E6-v2 DeepSeek pending-only continuation qualified
+
+- DeepSeek B1 prefix is gate-passed. Current raw state is 134 physical rows over
+  133 unique work keys; 227 untouched work keys remain, all at attempt 1.
+- The zero-call projection failure is closed by its sole adjacent attempt 2.
+  A later response-bearing `VigilLiveDependencyError` at
+  `vigil_constraint_generation` remains terminal, non-retryable and in ITT.
+- A strict persisted-evidence predicate resolves only that historical
+  provider-wide stop and allows untouched keys to continue. The stopped key is
+  absent from pending and cannot be replayed. All other fatal/retry boundaries
+  remain fail-closed.
+- Focused verification is 108/108 plus Ruff, compile, diff check and independent
+  GREEN review. Next command is DeepSeek B1 `--resume-pending-only --config
+  config/project.local.env`, followed by `--seal-block`; then Gemini starts its
+  own 12-row free-tier prefix.
+- Preserve unrelated dirty external audit directories and never stage `internal/`
+  traces, budgets, config or secrets.
+
 ## 2026-08-31 — E6-v2 B1 offline gate green; owner-authorized canaries next
 
 - B1 completion protocol is

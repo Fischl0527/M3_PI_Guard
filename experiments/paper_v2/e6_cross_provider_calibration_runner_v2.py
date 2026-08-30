@@ -97,6 +97,11 @@ LOCAL_PROJECTION_FAILURE_CLASSES = {
     "agentdojo-v1": "AgentDojoLiveDependencyError",
     "m3-v2": "M3OfflineEvaluatorError",
 }
+POST_RESPONSE_VIGIL_FAILURE_CLASS = "VigilLiveDependencyError"
+POST_RESPONSE_VIGIL_FAILURE_STAGE = "vigil_constraint_generation"
+POST_RESPONSE_VIGIL_CONTINUATION_KIND = (
+    "allowlisted_post_response_vigil_constraint_failure"
+)
 
 
 class E6CalibrationRunnerV2Error(RuntimeError):
@@ -155,6 +160,82 @@ def _is_local_projection_recovery_record(row: Mapping[str, Any]) -> bool:
         and row.get("terminal_status") is True
         and row.get("retry_eligible") is False
         and row.get("included_in_primary_itt") is True
+    )
+
+
+def _is_allowlisted_post_response_vigil_record(
+    row: Mapping[str, Any],
+) -> bool:
+    """Recognize one terminal VIGIL parse failure that may not stop the queue.
+
+    This is deliberately a persisted-record predicate, rather than a broad
+    exception-class allowance.  Continuation is safe only after the official
+    response chain, exact model identity, online-field isolation, and disabled
+    tool/effect boundaries have all been materialized in the public record.
+    The failed work item remains terminal, non-retryable, and in ITT.
+    """
+
+    provider_id = row.get("provider_id")
+    expected_model = EXPECTED_MODELS.get(str(provider_id))
+    requests = row.get("provider_requests")
+    diagnostic = row.get("runtime_failure_diagnostic")
+    free_tier_ok = provider_id != "gemini" or (
+        row.get("cost")
+        == {"currency": "USD", "amount": 0.0, "billing_tier": "free"}
+        and row.get("free_tier_attestation")
+        == {
+            "billing_tier": "free",
+            "cost_usd": 0.0,
+            "paid_fallback_enabled": False,
+        }
+    )
+    return bool(
+        expected_model is not None
+        and row.get("record_kind") == "execution"
+        and row.get("condition_id")
+        == "strongest_peer_reviewed_structural_baseline"
+        and row.get("operational_status") == "provider_failure"
+        and row.get("error_type") == POST_RESPONSE_VIGIL_FAILURE_CLASS
+        and not isinstance(row.get("attempt"), bool)
+        and row.get("attempt") in {1, GENERIC_RECOVERY_ATTEMPT}
+        and row.get("response_obtained") is True
+        and row.get("provider_call_count") == 1
+        and row.get("max_provider_calls") == 16
+        and isinstance(requests, list)
+        and len(requests) == 1
+        and isinstance(requests[0], Mapping)
+        and isinstance(requests[0].get("local_request_id"), str)
+        and bool(requests[0]["local_request_id"].strip())
+        and _is_lower_sha256(requests[0].get("payload_sha256"))
+        and isinstance(requests[0].get("provider_response_id"), str)
+        and bool(requests[0]["provider_response_id"].strip())
+        and requests[0].get("returned_model") == expected_model
+        and row.get("configured_model") == expected_model
+        and row.get("model_id") == expected_model
+        and row.get("returned_models") == [expected_model]
+        and row.get("returned_model_id") == expected_model
+        and isinstance(diagnostic, Mapping)
+        and diagnostic.get("failure_stage")
+        == POST_RESPONSE_VIGIL_FAILURE_STAGE
+        and diagnostic.get("failure_class")
+        == POST_RESPONSE_VIGIL_FAILURE_CLASS
+        and diagnostic.get("provider_call_index") == 1
+        and diagnostic.get("http_category") == "not_observed"
+        and row.get("terminal_status") is True
+        and row.get("retry_eligible") is False
+        and row.get("included_in_primary_itt") is True
+        and row.get("online_forbidden_fields_present") is False
+        and _is_lower_sha256(row.get("online_visible_field_digest_sha256"))
+        and row.get("provider_tools_enabled") is False
+        and row.get("external_effects_enabled") is False
+        and row.get("real_effect_receipt") is None
+        and isinstance(row.get("simulated_effect_receipt"), Mapping)
+        and row["simulated_effect_receipt"].get("effect_backend") == "no_effect"
+        and row["simulated_effect_receipt"].get("external_connectors_enabled")
+        is False
+        and row["simulated_effect_receipt"].get("provider_managed_tools_enabled")
+        is False
+        and free_tier_ok
     )
 
 
@@ -338,6 +419,17 @@ def _execution_history(provider_id: str) -> dict[str, list[dict[str, Any]]]:
         if any(row.get(field) != value for field, value in expected_identity.items()):
             raise E6CalibrationRunnerV2Error(
                 "E6-v2 raw execution identity does not match the frozen plan"
+            )
+        if (
+            row.get("provider_continuation_kind") is not None
+            and (
+                row.get("provider_continuation_kind")
+                != POST_RESPONSE_VIGIL_CONTINUATION_KIND
+                or not _is_allowlisted_post_response_vigil_record(row)
+            )
+        ):
+            raise E6CalibrationRunnerV2Error(
+                "E6-v2 post-response VIGIL continuation marker drift"
             )
         history = histories.setdefault(key, [])
         if history:
@@ -1187,9 +1279,10 @@ def _require_provider_stop(
     """Validate a provider stop against the frozen plan and latest raw evidence.
 
     A stop file is a fail-closed control artifact, not an authority by itself.  It
-    is accepted only when it binds the B1 identity and exactly corroborates the
-    final physical raw record, which must independently satisfy the fatal-row
-    contract.
+    is accepted only when it binds the B1 identity and exactly corroborates a
+    physical raw record that independently satisfies the fatal-row contract.
+    One strict, response-bearing VIGIL record may resolve its historical stop
+    without replay; the immutable row remains terminal and in ITT.
     """
 
     path = _provider_stop_path(provider_id)
@@ -1270,6 +1363,21 @@ def _require_provider_stop(
         raise E6CalibrationRunnerV2Error(
             "E6-v2 provider stop raw record is not a fatal boundary"
         )
+    if _is_allowlisted_post_response_vigil_record(stopped_row):
+        later = physical[stop_index + 1 :]
+        if any(row.get("work_key") == work_key for row in later):
+            raise E6CalibrationRunnerV2Error(
+                "E6-v2 response-bearing VIGIL row was replayed"
+            )
+        if any(
+            _is_fatal_physical_record(row)
+            and not _is_allowlisted_post_response_vigil_record(row)
+            for row in later
+        ):
+            raise E6CalibrationRunnerV2Error(
+                "E6-v2 resolved VIGIL stop has later fatal evidence"
+            )
+        return None
     later_recoveries = [
         row
         for row in physical[stop_index + 1 :]
@@ -1395,6 +1503,8 @@ def _enrich_record(
 
 
 def _systemic_failure_key(row: Mapping[str, Any]) -> str | None:
+    if _is_allowlisted_post_response_vigil_record(row):
+        return None
     status = str(row.get("operational_status", ""))
     if status == "provider_failure":
         diagnostic = row.get("runtime_failure_diagnostic")
@@ -2166,6 +2276,17 @@ def run_window(
             window_started_at=str(state["window_started_at"]),
             local_projection_recovery=local_projection_recovery,
         )
+        allowlisted_post_response_vigil = bool(
+            fatal and _is_allowlisted_post_response_vigil_record(record)
+        )
+        if allowlisted_post_response_vigil:
+            # The row remains a terminal ITT provider failure.  Only the
+            # provider-wide stop decision changes after strict persisted
+            # evidence has been validated.  The work key is never replayed.
+            record["provider_continuation_kind"] = (
+                POST_RESPONSE_VIGIL_CONTINUATION_KIND
+            )
+            fatal = False
         lean._append_jsonl(_raw_path(provider_id), record)
         if fatal:
             _write_json(

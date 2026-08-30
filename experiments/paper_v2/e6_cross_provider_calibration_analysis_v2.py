@@ -85,6 +85,11 @@ SOURCE_WINDOW = "W3"
 BLOCK_ROLE = "single_diagnostic_execution_block"
 BOOTSTRAP_REPLICATES = 10_000
 BOOTSTRAP_SEED = "m3-e6-b1-diagnostic-analysis-v2"
+POST_RESPONSE_VIGIL_FAILURE_CLASS = "VigilLiveDependencyError"
+POST_RESPONSE_VIGIL_FAILURE_STAGE = "vigil_constraint_generation"
+POST_RESPONSE_VIGIL_CONTINUATION_KIND = (
+    "allowlisted_post_response_vigil_constraint_failure"
+)
 
 CONDITIONS = (
     "no_defense",
@@ -273,6 +278,72 @@ def _is_sha256_hex(value: Any) -> bool:
     )
 
 
+def _is_allowlisted_post_response_vigil_record(
+    row: Mapping[str, Any],
+) -> bool:
+    """Mirror the runner's exact persisted-evidence continuation predicate."""
+
+    provider = str(row.get("provider_id", ""))
+    expected_model = EXPECTED_MODELS.get(provider)
+    requests = row.get("provider_requests")
+    diagnostic = row.get("runtime_failure_diagnostic")
+    free_tier_ok = provider != "gemini" or (
+        row.get("cost")
+        == {"currency": "USD", "amount": 0.0, "billing_tier": "free"}
+        and row.get("free_tier_attestation")
+        == {
+            "billing_tier": "free",
+            "cost_usd": 0.0,
+            "paid_fallback_enabled": False,
+        }
+    )
+    return bool(
+        expected_model is not None
+        and row.get("record_kind") == "execution"
+        and row.get("condition_id") == CONDITIONS[1]
+        and row.get("operational_status") == "provider_failure"
+        and row.get("error_type") == POST_RESPONSE_VIGIL_FAILURE_CLASS
+        and not isinstance(row.get("attempt"), bool)
+        and row.get("attempt") in {1, 2}
+        and row.get("response_obtained") is True
+        and row.get("provider_call_count") == 1
+        and row.get("max_provider_calls") == 16
+        and isinstance(requests, list)
+        and len(requests) == 1
+        and isinstance(requests[0], Mapping)
+        and _nonempty_string(requests[0].get("local_request_id"))
+        and _is_sha256_hex(requests[0].get("payload_sha256"))
+        and _nonempty_string(requests[0].get("provider_response_id"))
+        and requests[0].get("returned_model") == expected_model
+        and row.get("configured_model") == expected_model
+        and row.get("model_id") == expected_model
+        and row.get("returned_models") == [expected_model]
+        and row.get("returned_model_id") == expected_model
+        and isinstance(diagnostic, Mapping)
+        and diagnostic.get("failure_stage")
+        == POST_RESPONSE_VIGIL_FAILURE_STAGE
+        and diagnostic.get("failure_class")
+        == POST_RESPONSE_VIGIL_FAILURE_CLASS
+        and diagnostic.get("provider_call_index") == 1
+        and diagnostic.get("http_category") == "not_observed"
+        and row.get("terminal_status") is True
+        and row.get("retry_eligible") is False
+        and row.get("included_in_primary_itt") is True
+        and row.get("online_forbidden_fields_present") is False
+        and _is_sha256_hex(row.get("online_visible_field_digest_sha256"))
+        and row.get("provider_tools_enabled") is False
+        and row.get("external_effects_enabled") is False
+        and row.get("real_effect_receipt") is None
+        and isinstance(row.get("simulated_effect_receipt"), Mapping)
+        and row["simulated_effect_receipt"].get("effect_backend") == "no_effect"
+        and row["simulated_effect_receipt"].get("external_connectors_enabled")
+        is False
+        and row["simulated_effect_receipt"].get("provider_managed_tools_enabled")
+        is False
+        and free_tier_ok
+    )
+
+
 def _is_administrative_closure(row: Mapping[str, Any]) -> bool:
     return row.get("record_kind") == "block_closure"
 
@@ -349,6 +420,17 @@ def _latest_attempts(
         attempt = row.get("attempt")
         if row.get("record_kind") not in {"execution", "block_closure"}:
             raise E6B1AnalysisError(f"{key or 'unknown'}: raw record kind drift")
+        if (
+            row.get("provider_continuation_kind") is not None
+            and (
+                row.get("provider_continuation_kind")
+                != POST_RESPONSE_VIGIL_CONTINUATION_KIND
+                or not _is_allowlisted_post_response_vigil_record(row)
+            )
+        ):
+            raise E6B1AnalysisError(
+                f"{key or 'unknown'}: post-response VIGIL continuation marker drift"
+            )
         administrative = _is_administrative_closure(row)
         allowed_attempts = {0, 1, 2} if administrative else {1, 2}
         if not key or isinstance(attempt, bool) or attempt not in allowed_attempts:
@@ -950,6 +1032,8 @@ def _request_iter(rows: Sequence[Mapping[str, Any]]) -> Iterable[Mapping[str, An
 
 
 def _systemic_failure_key(row: Mapping[str, Any]) -> str | None:
+    if _is_allowlisted_post_response_vigil_record(row):
+        return None
     status = str(row.get("operational_status", ""))
     if status == "provider_failure":
         diagnostic = row.get("runtime_failure_diagnostic")
@@ -1058,6 +1142,9 @@ def _technical_audit(
     systemic = {
         "|".join(key): count for key, count in sorted(failure_counts.items()) if count >= 2
     }
+    allowlisted_vigil = sum(
+        _is_allowlisted_post_response_vigil_record(row) for row in physical_rows
+    )
     gate_bound = gate is not None and (
         gate.get("schema_version") == "m3-paper-v2-e6-window-gate-2.0"
         and gate.get("study_id") == STUDY_ID
@@ -1089,6 +1176,7 @@ def _technical_audit(
         "provider_call_caps_respected": call_caps,
         "gemini_free_tier_usd_zero": free_tier,
         "gate_identity_bound": gate_bound,
+        "allowlisted_post_response_vigil_failures": allowlisted_vigil,
         "systemic_failure_counts": systemic,
         "no_repeated_systemic_failure": not systemic,
         "passed_for_observed_records": all(
