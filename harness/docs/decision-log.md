@@ -2,6 +2,21 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-31 — Close E6-v2 through one independently sealed B1 block
+
+- Owner authorization: plan, audit and execute E6-v2 autonomously until its
+  bounded experimental closeout is complete.
+- Decision: require a B1-specific administrative seal and one-pass analyzer
+  before live calls. Every planned row must end as a model terminal or an
+  explicit non-model administrative ITT terminal; a failed prefix never counts
+  an unexecuted row as safe.
+- Execution order: offline qualification and Git checkpoint, DeepSeek prefix and
+  gated expansion, Gemini prefix and gated expansion, then one analysis/report
+  pass. Providers run sequentially and never share mutable ledgers.
+- Scientific boundary: B1 measures activity and condition effects during one
+  disclosed execution span. It excludes temporal-repeatability statistics and
+  keeps Gemini/cross-provider evidence diagnostic.
+
 ## 2026-08-31 — Replace E6 artificial date delay with one diagnostic execution block
 
 - Context: E6-v1 W1/W2 failed their technical gates and E6-v2 was already

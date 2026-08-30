@@ -1,5 +1,25 @@
 # 会话移交
 
+## 2026-08-31 — E6-v2 B1 offline gate green; owner-authorized canaries next
+
+- B1 completion protocol is
+  `protocols/paper_upgrade_v2/e6_cross_provider_calibration_v2/execution_plan_b1.md`.
+  It closes 360 DeepSeek and 180 Gemini rows without artificial date waiting.
+- Offline completion interfaces are ready: `--seal-block` and
+  `e6_cross_provider_calibration_analysis_v2.py`. Administrative closures are
+  ITT bookkeeping, never model-safe outcomes or physical attempts.
+- Verification is green for the intended scope: B1 runner+analysis 76/76;
+  adjacent compatibility 45 passed/1 recorded stale qualification deselected;
+  Ruff, compile, JSON and diff checks pass. No B1 API call/output exists yet.
+- Exact next action is DeepSeek B1 `--canary-only --config
+  config/project.local.env`; if its outcome-blind technical gate passes, run
+  `--resume-pending-only`, otherwise seal. Then repeat for Gemini free tier.
+- A response-less retry may target only the unique eligible key once. A
+  provider-unavailable seal requires recorded 429 or exhausted attempt-2
+  evidence. Never rerun a successful or response-bearing row.
+- Preserve E6-v1, the two unrelated dirty external audit directories and the
+  paused old heartbeat. Push only `codex/q2-empirical-study` to `origin`.
+
 ## 2026-08-31 — E6-v2 B1 diagnostic execution block; live execution not started
 
 - Owner removed artificial date waiting. The untouched source-W3 projection is

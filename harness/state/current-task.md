@@ -1,5 +1,19 @@
 # 当前任务
 
+### 2026-08-31 E6-v2 B1 自主执行与结项
+
+- Owner 已授权“自行写计划、审计后执行直到完成”。执行依据为
+  `protocols/paper_upgrade_v2/e6_cross_provider_calibration_v2/execution_plan_b1.md`。
+- 当前阶段：离线审计与闭环接口补齐；尚未调用 provider。B1 输出根不存在，活动
+  E6 runner 为 0，本地配置文件只核验存在性、未读取或打印内容。
+- 计划规模：DeepSeek 360、Gemini 180；各 12 条 outcome-blind 正式前缀；门通过
+  才扩展。失败只恢复唯一 response-less key 一次，成功/response-bearing 行不重跑。
+- 必须先补齐 B1 `--seal-block` 与单块分析器，修订旧三窗口验收语义，完成定向测试
+  和设计 Git 检查点，然后才执行精确 canary 命令。
+- 最终交付：两家 gate/seal、540 个模型或行政 ITT 终态、一次性 analysis、表图、
+  Markdown 报告、Harness 登记和 GitHub 推送。B1 不支持跨日期重复性或正式跨厂商
+  泛化主张。
+
 ### 2026-08-31 E6-v2 取消人工跨日等待（单次诊断执行块）
 
 - Owner 决策：停止把 18--30 小时跨日间隔作为继续实验的准入条件；该时间测试对

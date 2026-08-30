@@ -269,6 +269,63 @@ def test_immediate_block_resume_is_not_clock_gated(
     assert resumed["executed"] == 0
 
 
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("gate_passed", False, "does not reproduce"),
+        ("provider_id", "gemini", "gate identity drift"),
+    ],
+)
+def test_resume_rejects_stale_or_foreign_persisted_gate_before_credentials(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    field: str,
+    value: object,
+    message: str,
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    first = _run("deepseek", _Dispatcher())
+    assert first["window_gate_passed"] is True
+    gate_path = runner._gate_path("deepseek", runner.EXECUTION_BLOCK_ID)
+    gate = json.loads(gate_path.read_text(encoding="utf-8"))
+    gate[field] = value
+    gate_path.write_text(
+        json.dumps(gate, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(runner.E6CalibrationRunnerV2Error, match=message):
+        runner.run_window(
+            "deepseek",
+            runner.EXECUTION_BLOCK_ID,
+            canary_only=False,
+            credential_loader=lambda: pytest.fail("credentials were loaded"),
+            dispatcher_factory=lambda *_: pytest.fail("dispatcher was built"),
+        )
+
+
+def test_configuration_preflight_failure_does_not_start_block(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+
+    with pytest.raises(RuntimeError, match="synthetic config failure"):
+        runner.run_window(
+            "deepseek",
+            runner.EXECUTION_BLOCK_ID,
+            canary_only=True,
+            credential_loader=lambda: (_ for _ in ()).throw(
+                RuntimeError("synthetic config failure")
+            ),
+            dispatcher_factory=lambda *_: pytest.fail("dispatcher was built"),
+        )
+
+    assert not runner._window_state_path(
+        "deepseek", runner.EXECUTION_BLOCK_ID
+    ).exists()
+    assert not runner.OUTPUT_ROOT.exists()
+
+
 def test_v1_temporal_analyzer_rejects_non_temporal_block() -> None:
     row = runner._window_rows("deepseek", runner.EXECUTION_BLOCK_ID)[0]
 
@@ -423,12 +480,18 @@ def test_generic_recovery_requires_exactly_one_unresolved_key(
     )
     first = _raw("deepseek")[0]
     second = dict(first)
-    second["work_key"] = runner._window_rows(
+    second_plan = runner._window_rows(
         "deepseek", runner.EXECUTION_BLOCK_ID
-    )[1]["work_key"]
-    second["case_id"] = runner._window_rows(
-        "deepseek", runner.EXECUTION_BLOCK_ID
-    )[1]["case_id"]
+    )[1]
+    second.update(
+        {
+            "work_key": second_plan["work_key"],
+            "case_id": second_plan["case_id"],
+            "condition_id": second_plan["condition_id"],
+            "underlying_task_id": second_plan["underlying_task_id"],
+            "source_v1_work_key": second_plan["source_v1_work_key"],
+        }
+    )
     runner.lean._append_jsonl(runner._raw_path("deepseek"), second)
 
     with pytest.raises(
@@ -436,6 +499,47 @@ def test_generic_recovery_requires_exactly_one_unresolved_key(
         match="unique unresolved work key",
     ):
         _run("deepseek", _Dispatcher(), retry_key=str(first["work_key"]))
+
+
+def test_raw_execution_identity_drift_is_rejected(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run(
+        "deepseek",
+        _Dispatcher(failure=ProviderTransportError("synthetic transport")),
+    )
+    row = _raw("deepseek")[0]
+    row["execution_identity"] = "0" * 64
+    runner._raw_path("deepseek").write_text(
+        json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="execution identity does not match",
+    ):
+        runner._execution_history("deepseek")
+
+
+def test_unknown_raw_record_kind_is_rejected(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run("deepseek", _Dispatcher())
+    row = _raw("deepseek")[0]
+    row["record_kind"] = "window_closure"
+    runner._raw_path("deepseek").write_text(
+        json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="raw record kind drift",
+    ):
+        runner._execution_history("deepseek")
 
 
 def test_429_uses_manual_path_and_does_not_write_fatal_stop(
@@ -488,6 +592,83 @@ def test_contract_error_writes_only_v2_fatal_stop(
     assert row["terminal_status"] is True
     assert runner._provider_stop_path("deepseek").is_file()
     assert runner._provider_stop_path("deepseek").name == "provider_stop_v2.json"
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("provider_id", "gemini", "provider stop identity drift"),
+        ("recorded_at", "2026-08-29T22:59:59+08:00", "latest fatal raw"),
+        ("work_key", "planned-but-not-fatal", "work key is not planned"),
+    ],
+)
+def test_run_rejects_foreign_stale_or_unplanned_provider_stop_before_credentials(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    field: str,
+    value: object,
+    message: str,
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run(
+        "deepseek",
+        _Dispatcher(failure=ProviderIdentityError("synthetic identity drift")),
+    )
+    path = runner._provider_stop_path("deepseek")
+    stop = json.loads(path.read_text(encoding="utf-8"))
+    stop[field] = value
+    path.write_text(
+        json.dumps(stop, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(runner.E6CalibrationRunnerV2Error, match=message):
+        runner.run_window(
+            "deepseek",
+            runner.EXECUTION_BLOCK_ID,
+            canary_only=True,
+            credential_loader=lambda: pytest.fail("credentials were loaded"),
+            dispatcher_factory=lambda *_: pytest.fail("dispatcher was built"),
+        )
+
+
+def test_run_rejects_provider_stop_without_matching_raw_before_credentials(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    planned = runner._window_rows("deepseek", runner.EXECUTION_BLOCK_ID)[0]
+    runner._write_json(
+        runner._provider_stop_path("deepseek"),
+        {
+            "schema_version": runner.PROVIDER_STOP_SCHEMA_VERSION,
+            "study_id": runner.STUDY_ID,
+            "provider_id": "deepseek",
+            "replicate_window": runner.EXECUTION_BLOCK_ID,
+            "execution_block_id": runner.EXECUTION_BLOCK_ID,
+            "execution_block_role": runner.EXECUTION_BLOCK_ROLE,
+            "temporal_replication_claim": False,
+            "work_key": planned["work_key"],
+            "attempt": 1,
+            "error_type": "ProviderIdentityError",
+            "operational_status": "contract_failure",
+            "status": "stopped_fatal_contract_boundary",
+            "fatal_boundary": True,
+            "terminal_status": True,
+            "recorded_at": "2026-08-29T23:00:00+08:00",
+        },
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="no matching fatal raw record",
+    ):
+        runner.run_window(
+            "deepseek",
+            runner.EXECUTION_BLOCK_ID,
+            canary_only=True,
+            credential_loader=lambda: pytest.fail("credentials were loaded"),
+            dispatcher_factory=lambda *_: pytest.fail("dispatcher was built"),
+        )
 
 
 def test_runtime_provider_failure_is_counted_as_systemic_gate_error(
@@ -548,13 +729,287 @@ def test_response_bearing_fatal_runtime_failure_stops_after_one_row(
     assert runner._provider_stop_path("deepseek").is_file()
 
 
+def test_failed_prefix_seals_remaining_rows_as_technical_gate_not_extended(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    run = _run(
+        "deepseek",
+        _Dispatcher(runtime_provider_failures=4),
+    )
+    assert run["executed"] == 12
+    assert run["window_gate_passed"] is False
+    started_state = json.loads(
+        runner._window_state_path(
+            "deepseek", runner.EXECUTION_BLOCK_ID
+        ).read_text(encoding="utf-8")
+    )
+    assert started_state["execution_block_started_at"] == started_state[
+        "window_started_at"
+    ]
+
+    seal = runner.seal_block(
+        "deepseek",
+        runner.EXECUTION_BLOCK_ID,
+        completed_at="2026-08-30T00:00:00+08:00",
+    )
+    rows = _raw("deepseek")
+    latest = runner._latest_records("deepseek")
+
+    assert seal["status"] == "sealed"
+    assert seal["closure_mode"] == "technical_gate_not_extended"
+    assert seal["planned_rows"] == 360
+    assert seal["terminal_rows"] == 360
+    assert seal["administrative_closure_rows"] == 348
+    assert seal["technical_gate_not_extended_rows"] == 348
+    assert len(rows) == 360
+    assert len(latest) == 360
+    assert all(runner._is_terminal(row) for row in latest.values())
+    assert all(
+        row["temporal_replication_claim"] is False for row in latest.values()
+    )
+    assert json.loads(
+        runner._window_state_path(
+            "deepseek", runner.EXECUTION_BLOCK_ID
+        ).read_text(encoding="utf-8")
+    )["status"] == "sealed"
+
+    with pytest.raises(runner.E6CalibrationRunnerV2Error, match="is sealed"):
+        runner.run_window(
+            "deepseek",
+            runner.EXECUTION_BLOCK_ID,
+            canary_only=True,
+            credential_loader=lambda: pytest.fail("credentials were loaded"),
+            dispatcher_factory=lambda *_: pytest.fail("dispatcher was built"),
+        )
+
+
+def test_seal_rejects_gate_that_does_not_reproduce_from_raw(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run("deepseek", _Dispatcher(runtime_provider_failures=4))
+    gate_path = runner._gate_path("deepseek", runner.EXECUTION_BLOCK_ID)
+    gate = json.loads(gate_path.read_text(encoding="utf-8"))
+    gate["observed_prefix_rows"] = 11
+    gate_path.write_text(
+        json.dumps(gate, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="does not reproduce from current raw records",
+    ):
+        runner.seal_block(
+            "deepseek",
+            runner.EXECUTION_BLOCK_ID,
+            completed_at="2026-08-30T00:00:00+08:00",
+        )
+
+
+def test_existing_seal_fast_return_rejects_summary_drift(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run("deepseek", _Dispatcher(runtime_provider_failures=4))
+    runner.seal_block(
+        "deepseek",
+        runner.EXECUTION_BLOCK_ID,
+        completed_at="2026-08-30T00:00:00+08:00",
+    )
+    seal_path = runner._block_seal_path("deepseek", runner.EXECUTION_BLOCK_ID)
+    seal = json.loads(seal_path.read_text(encoding="utf-8"))
+    seal["planned_rows"] = 359
+    seal_path.write_text(
+        json.dumps(seal, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="does not reproduce from current raw records",
+    ):
+        runner.seal_block("deepseek", runner.EXECUTION_BLOCK_ID)
+
+
+def test_existing_seal_rejects_closure_mode_tampered_with_matching_state(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run("deepseek", _Dispatcher(runtime_provider_failures=4))
+    runner.seal_block(
+        "deepseek",
+        runner.EXECUTION_BLOCK_ID,
+        completed_at="2026-08-30T00:00:00+08:00",
+    )
+    seal_path = runner._block_seal_path("deepseek", runner.EXECUTION_BLOCK_ID)
+    seal = json.loads(seal_path.read_text(encoding="utf-8"))
+    seal["closure_mode"] = "provider_unavailable"
+    seal["provider_unavailable_evidence"] = {
+        "work_key": "synthetic-stale-evidence",
+        "attempt": 1,
+        "evidence_type": "pre_response_rate_limited",
+    }
+    seal_path.write_text(
+        json.dumps(seal, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    state_path = runner._window_state_path("deepseek", runner.EXECUTION_BLOCK_ID)
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    state["closure_mode"] = "provider_unavailable"
+    state_path.write_text(
+        json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="closure semantics drift",
+    ):
+        runner.seal_block("deepseek", runner.EXECUTION_BLOCK_ID)
+
+
+def test_existing_provider_unavailable_seal_rejects_evidence_drift(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run(
+        "gemini",
+        _Dispatcher(failure=ProviderPausedError("synthetic 429")),
+    )
+    runner.seal_block(
+        "gemini",
+        runner.EXECUTION_BLOCK_ID,
+        provider_unavailable=True,
+        completed_at="2026-08-30T00:00:00+08:00",
+    )
+    seal_path = runner._block_seal_path("gemini", runner.EXECUTION_BLOCK_ID)
+    seal = json.loads(seal_path.read_text(encoding="utf-8"))
+    seal["provider_unavailable_evidence"]["attempt"] = 2
+    seal_path.write_text(
+        json.dumps(seal, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="provider-unavailable evidence drift",
+    ):
+        runner.seal_block("gemini", runner.EXECUTION_BLOCK_ID)
+
+
+def test_provider_unavailable_seal_closes_untouched_gemini_rows(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    run = _run(
+        "gemini",
+        _Dispatcher(failure=ProviderPausedError("synthetic 429")),
+    )
+    assert run["executed"] == 1
+
+    seal = runner.seal_block(
+        "gemini",
+        runner.EXECUTION_BLOCK_ID,
+        provider_unavailable=True,
+        completed_at="2026-08-30T00:00:00+08:00",
+    )
+    latest = runner._latest_records("gemini")
+
+    assert seal["closure_mode"] == "provider_unavailable"
+    assert seal["provider_unavailable_evidence"]["evidence_type"] == (
+        "pre_response_rate_limited"
+    )
+    assert seal["terminal_rows"] == 180
+    assert seal["administrative_closure_rows"] == 179
+    assert seal["provider_block_unavailable_rows"] == 179
+    assert len(latest) == 180
+    assert all(runner._is_terminal(row) for row in latest.values())
+    assert all(
+        row.get("free_tier_attestation")
+        == {
+            "billing_tier": "free",
+            "cost_usd": 0.0,
+            "paid_fallback_enabled": False,
+        }
+        for row in latest.values()
+    )
+
+
+def test_provider_unavailable_seal_requires_runtime_evidence(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    runner._ensure_window_state("gemini", runner.EXECUTION_BLOCK_ID)
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="requires a 429 terminal or exhausted response-less recovery",
+    ):
+        runner.seal_block(
+            "gemini",
+            runner.EXECUTION_BLOCK_ID,
+            provider_unavailable=True,
+            completed_at="2026-08-30T00:00:00+08:00",
+        )
+
+    assert not runner._block_seal_path(
+        "gemini", runner.EXECUTION_BLOCK_ID
+    ).exists()
+    assert not runner._raw_path("gemini").exists()
+
+
+def test_partial_seal_recovery_preserves_administrative_reason(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run("deepseek", _Dispatcher(runtime_provider_failures=4))
+    first = runner.seal_block(
+        "deepseek",
+        runner.EXECUTION_BLOCK_ID,
+        completed_at="2026-08-30T00:00:00+08:00",
+    )
+    seal_path = runner._block_seal_path("deepseek", runner.EXECUTION_BLOCK_ID)
+    seal_path.unlink()
+
+    recovered = runner.seal_block(
+        "deepseek",
+        runner.EXECUTION_BLOCK_ID,
+        completed_at="2026-08-30T00:01:00+08:00",
+    )
+
+    assert first["closure_mode"] == "technical_gate_not_extended"
+    assert recovered["closure_mode"] == "technical_gate_not_extended"
+    assert recovered["technical_gate_not_extended_rows"] == 348
+
+
+def test_retry_eligible_row_must_be_recovered_or_explicitly_closed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _patch_offline(monkeypatch, tmp_path / "e6-v2")
+    _run(
+        "deepseek",
+        _Dispatcher(failure=ProviderTransportError("synthetic transport")),
+    )
+
+    with pytest.raises(
+        runner.E6CalibrationRunnerV2Error,
+        match="retry-eligible response-less work remains",
+    ):
+        runner.seal_block("deepseek", runner.EXECUTION_BLOCK_ID)
+
+
 def test_manifest_keeps_v1_immutable_and_api_execution_disabled() -> None:
     manifest = json.loads(runner.MANIFEST_PATH.read_text(encoding="utf-8"))
 
     assert manifest["study_id"] == runner.STUDY_ID
     assert manifest["provider_calls_made"] == 0
     assert manifest["v1_records_modified"] == 0
-    assert "not_authorized" in manifest["status"]
+    assert manifest["status"] == "owner_authorized_b1_live_execution_ready"
+    assert manifest["owner_authorization"][
+        "requires_offline_completion_gate_before_provider_calls"
+    ] is True
     assert manifest["generic_response_less_recovery"][
         "independent_trace_and_call_ledger_namespace"
     ] is True

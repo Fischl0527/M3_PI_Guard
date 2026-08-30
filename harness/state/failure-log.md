@@ -1,5 +1,33 @@
 # Failure Log
 
+## 2026-08-31 — B1 autonomous-closeout preflight audit
+
+- The first read-only plan-count probe used `benchmark_id`, which is not part of
+  the frozen E6 plan row; the authoritative field is `benchmark`. The probe
+  failed before any output or provider call. The corrected probe confirmed
+  360/180 unique rows, balanced conditions and 12 prefixes per provider.
+- CLI rendering exposed stale module prose saying v2 reused logical work keys,
+  although B1 creates independent prefixed work keys and retains only a source
+  mapping. The implementation plan requires this text to be corrected before
+  the design checkpoint.
+- Completion audit found no B1-specific single-block analyzer or administrative
+  block seal. Live execution remains closed until those two interfaces and their
+  focused tests exist; E6-v1 temporal analysis remains forbidden for B1.
+- The first strict raw-identity test run failed 20/32 because normal v2 records
+  inherited a null `execution_identity` from the v1 enrichment helper. This was
+  a real evidence-chain defect, not a test-only issue. The v2 final enrichment
+  now writes its frozen `run_id` and `execution_identity` explicitly; the failed
+  run made no provider call and live execution remains closed pending a clean
+  rerun.
+- A wider v1/provider compatibility run passed 45 tests and failed only the
+  previously recorded `test_v3_preflight_binds_transport_but_keeps_execution_blocked`:
+  the frozen `m3_offline_evaluator_qualification_v1.json` no longer reproduces.
+  This pre-existing qualification drift is outside B1, is already excluded from
+  the focused E6 gate, and is not repaired or regenerated here to avoid changing
+  frozen historical evidence. After binding provider-stop and block-seal artifacts
+  to current raw evidence and recomputing closure semantics, the B1
+  runner/analysis suite passed 76/76.
+
 ## 2026-08-31 — E6-v2 no-delay independent-review findings
 
 - Initial implementation removed the clock gates but retained temporal W3

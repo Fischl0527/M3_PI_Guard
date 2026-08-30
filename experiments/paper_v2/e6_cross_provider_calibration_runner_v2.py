@@ -1,8 +1,9 @@
 """Prospective E6-v2 runner with isolated physical-attempt recovery.
 
 E6-v1 records, ledgers, stops, and window artifacts are immutable.  This module
-reuses only the frozen v1 *case membership and logical work keys* while deriving
-new study, run, execution, output, trace, call-ledger, and stop identities.  The
+reuses only the frozen v1 *case membership and source work-key mapping* while
+deriving new study, work, run, execution, output, trace, call-ledger, and stop
+identities.  The
 untouched source-W3 rows form one immediately runnable diagnostic execution
 block; they are not a third temporal replicate.  This module never
 reads or mutates any E6-v1 output path.
@@ -82,6 +83,8 @@ MAX_TOKENS = e6_v1.MAX_TOKENS
 TIMEOUT_SECONDS = e6_v1.TIMEOUT_SECONDS
 STUDY_ID = "m3-q2-e6-cross-provider-calibration-v2"
 SCHEMA_VERSION = "m3-paper-v2-e6-raw-record-2.0"
+PROVIDER_STOP_SCHEMA_VERSION = "m3-paper-v2-e6-provider-stop-2.0"
+BLOCK_SEAL_SCHEMA_VERSION = "m3-paper-v2-e6-block-seal-2.0"
 GENERIC_RECOVERY_ATTEMPT = 2
 EXECUTION_BLOCK_ROLE = "single_diagnostic_execution_block"
 
@@ -126,6 +129,10 @@ def _window_state_path(provider_id: str, window: str) -> Path:
 
 def _provider_stop_path(provider_id: str) -> Path:
     return _provider_root(provider_id) / "internal/provider_stop_v2.json"
+
+
+def _block_seal_path(provider_id: str, block: str) -> Path:
+    return _provider_root(provider_id) / f"block_seal_{block}_v2.json"
 
 
 def _execution_identity(provider_id: str, window: str) -> str:
@@ -211,22 +218,76 @@ def _window_rows(provider_id: str, window: str) -> list[dict[str, Any]]:
 
 def _execution_history(provider_id: str) -> dict[str, list[dict[str, Any]]]:
     histories: dict[str, list[dict[str, Any]]] = {}
+    plan_by_key = {
+        str(row["work_key"]): row for row in _load_plan(provider_id)
+    }
     for row in lean._read_jsonl(_raw_path(provider_id)):
         if row.get("study_id") != STUDY_ID or row.get("schema_version") != SCHEMA_VERSION:
             raise E6CalibrationRunnerV2Error("E6-v2 raw record identity drift")
         key = row.get("work_key")
         attempt = row.get("attempt")
+        record_kind = row.get("record_kind")
+        if record_kind not in {"execution", "block_closure"}:
+            raise E6CalibrationRunnerV2Error("E6-v2 raw record kind drift")
+        administrative_closure = record_kind == "block_closure"
+        if administrative_closure and (
+            row.get("closure_is_model_outcome") is not False
+            or row.get("terminal_status") is not True
+        ):
+            raise E6CalibrationRunnerV2Error(
+                "E6-v2 administrative closure contract drift"
+            )
         if (
             not isinstance(key, str)
             or not key
             or isinstance(attempt, bool)
             or not isinstance(attempt, int)
-            or attempt not in {1, GENERIC_RECOVERY_ATTEMPT}
+            or (
+                attempt not in {1, GENERIC_RECOVERY_ATTEMPT}
+                and not (attempt == 0 and administrative_closure)
+            )
         ):
             raise E6CalibrationRunnerV2Error("E6-v2 raw attempt identity drift")
+        expected = plan_by_key.get(key)
+        if expected is None:
+            raise E6CalibrationRunnerV2Error("E6-v2 raw work key is not planned")
+        expected_identity = {
+            "run_id": expected["run_id"],
+            "execution_identity": expected["execution_identity"],
+            "execution_block_id": EXECUTION_BLOCK_ID,
+            "execution_block_role": EXECUTION_BLOCK_ROLE,
+            "replicate_window": EXECUTION_BLOCK_ID,
+            "replicate_index": 1,
+            "source_v1_work_key": expected["source_v1_work_key"],
+            "source_replicate_window": expected["source_replicate_window"],
+            "source_replicate_index": expected["source_replicate_index"],
+            "provider_id": expected["provider_id"],
+            "model_id": expected["model_id"],
+            "configured_model": expected["model_id"],
+            "condition_id": expected["condition_id"],
+            "case_id": expected["case_id"],
+            "underlying_task_id": expected["underlying_task_id"],
+            "sample_role": "risk_enriched_activity_diagnostic",
+            "temporal_replication_claim": False,
+        }
+        if any(row.get(field) != value for field, value in expected_identity.items()):
+            raise E6CalibrationRunnerV2Error(
+                "E6-v2 raw execution identity does not match the frozen plan"
+            )
         history = histories.setdefault(key, [])
-        if history and attempt <= int(history[-1]["attempt"]):
-            raise E6CalibrationRunnerV2Error("E6-v2 attempts are not append-only")
+        if history:
+            previous_attempt = int(history[-1]["attempt"])
+            same_attempt_closure = (
+                attempt == previous_attempt
+                and administrative_closure
+                and history[-1].get("record_kind") != "block_closure"
+            )
+            if attempt < previous_attempt or (
+                attempt == previous_attempt and not same_attempt_closure
+            ):
+                raise E6CalibrationRunnerV2Error(
+                    "E6-v2 attempts are not append-only"
+                )
         history.append(copy.deepcopy(dict(row)))
     return histories
 
@@ -236,6 +297,19 @@ def _latest_records(provider_id: str) -> dict[str, dict[str, Any]]:
         key: copy.deepcopy(history[-1])
         for key, history in _execution_history(provider_id).items()
     }
+
+
+def _latest_execution_records(provider_id: str) -> dict[str, dict[str, Any]]:
+    """Return the latest physical execution, excluding administrative overlays."""
+
+    latest: dict[str, dict[str, Any]] = {}
+    for key, history in _execution_history(provider_id).items():
+        executions = [
+            row for row in history if row.get("record_kind") != "block_closure"
+        ]
+        if executions:
+            latest[key] = copy.deepcopy(executions[-1])
+    return latest
 
 
 def _is_terminal(row: Mapping[str, Any]) -> bool:
@@ -254,6 +328,44 @@ def _has_response_evidence(row: Mapping[str, Any]) -> bool:
         )
         for request in requests
     )
+
+
+def _provider_unavailable_evidence(
+    provider_id: str,
+) -> dict[str, Any] | None:
+    """Return minimal auditable evidence for an explicit unavailable seal.
+
+    The operator flag alone is not evidence.  A rate-limit terminal may close the
+    remaining block immediately; a generic transport failure may do so only after
+    the single payload-bound recovery attempt has also ended without a response.
+    """
+
+    for work_key, history in sorted(_execution_history(provider_id).items()):
+        executions = [
+            row for row in history if row.get("record_kind") != "block_closure"
+        ]
+        for row in reversed(executions):
+            if _has_response_evidence(row):
+                continue
+            status = row.get("operational_status")
+            attempt = row.get("attempt")
+            if status == "pre_response_rate_limited":
+                return {
+                    "work_key": work_key,
+                    "attempt": attempt,
+                    "evidence_type": "pre_response_rate_limited",
+                }
+            if (
+                status == "pre_response_transport_failure"
+                and attempt == GENERIC_RECOVERY_ATTEMPT
+                and row.get("terminal_status") is True
+            ):
+                return {
+                    "work_key": work_key,
+                    "attempt": attempt,
+                    "evidence_type": "exhausted_response_less_recovery",
+                }
+    return None
 
 
 def _is_manual_429(row: Mapping[str, Any]) -> bool:
@@ -828,6 +940,122 @@ def _runtime_failure_diagnostic(result: Mapping[str, Any]) -> dict[str, Any] | N
     return None
 
 
+def _is_fatal_physical_record(row: Mapping[str, Any]) -> bool:
+    """Return whether a persisted physical row proves a fatal provider boundary."""
+
+    if (
+        row.get("record_kind") != "execution"
+        or row.get("terminal_status") is not True
+        or row.get("retry_eligible") is not False
+        or row.get("included_in_primary_itt") is not True
+        or not isinstance(row.get("error_type"), str)
+        or not row.get("error_type")
+    ):
+        return False
+    status = row.get("operational_status")
+    if status == "contract_failure":
+        return True
+    if status != "provider_failure":
+        return False
+    diagnostic = row.get("runtime_failure_diagnostic")
+    failure_class = (
+        diagnostic.get("failure_class")
+        if isinstance(diagnostic, Mapping)
+        else row.get("error_type")
+    )
+    return failure_class not in {
+        None,
+        "ProviderTransportError",
+        "ProviderPausedError",
+    }
+
+
+def _require_provider_stop(
+    provider_id: str, block: str
+) -> dict[str, Any] | None:
+    """Validate a provider stop against the frozen plan and latest raw evidence.
+
+    A stop file is a fail-closed control artifact, not an authority by itself.  It
+    is accepted only when it binds the B1 identity and exactly corroborates the
+    final physical raw record, which must independently satisfy the fatal-row
+    contract.
+    """
+
+    path = _provider_stop_path(provider_id)
+    if not path.is_file():
+        return None
+    value = json.loads(path.read_text(encoding="utf-8"))
+    expected_identity = {
+        "schema_version": PROVIDER_STOP_SCHEMA_VERSION,
+        "study_id": STUDY_ID,
+        "provider_id": provider_id,
+        "replicate_window": block,
+        "execution_block_id": block,
+        "execution_block_role": EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
+        "status": "stopped_fatal_contract_boundary",
+        "fatal_boundary": True,
+        "terminal_status": True,
+    }
+    if any(value.get(field) != expected for field, expected in expected_identity.items()):
+        raise E6CalibrationRunnerV2Error("E6-v2 provider stop identity drift")
+
+    plan_by_key = {
+        str(row["work_key"]): row for row in _window_rows(provider_id, block)
+    }
+    work_key = value.get("work_key")
+    if not isinstance(work_key, str) or work_key not in plan_by_key:
+        raise E6CalibrationRunnerV2Error(
+            "E6-v2 provider stop work key is not planned"
+        )
+    if (
+        isinstance(value.get("attempt"), bool)
+        or value.get("attempt") not in {1, GENERIC_RECOVERY_ATTEMPT}
+        or not isinstance(value.get("error_type"), str)
+        or not value.get("error_type")
+        or value.get("operational_status") not in {
+            "contract_failure",
+            "provider_failure",
+        }
+        or not isinstance(value.get("recorded_at"), str)
+        or not value.get("recorded_at")
+    ):
+        raise E6CalibrationRunnerV2Error(
+            "E6-v2 provider stop fatal evidence drift"
+        )
+
+    # _execution_history first validates every raw identity and append-only
+    # attempt transition.  The direct physical projection then preserves global
+    # file order, so a stale stop cannot remain authoritative after a later row.
+    _execution_history(provider_id)
+    physical = [
+        row
+        for row in lean._read_jsonl(_raw_path(provider_id))
+        if row.get("record_kind") == "execution"
+    ]
+    if not physical:
+        raise E6CalibrationRunnerV2Error(
+            "E6-v2 provider stop has no matching fatal raw record"
+        )
+    latest = physical[-1]
+    raw_binding = {
+        "work_key": latest.get("work_key"),
+        "attempt": latest.get("attempt"),
+        "error_type": latest.get("error_type"),
+        "operational_status": latest.get("operational_status"),
+        "recorded_at": latest.get("recorded_at"),
+    }
+    if any(value.get(field) != expected for field, expected in raw_binding.items()):
+        raise E6CalibrationRunnerV2Error(
+            "E6-v2 provider stop does not match the latest fatal raw record"
+        )
+    if not _is_fatal_physical_record(latest):
+        raise E6CalibrationRunnerV2Error(
+            "E6-v2 provider stop raw record is not a fatal boundary"
+        )
+    return value
+
+
 def _enrich_record(
     base: Mapping[str, Any],
     work_item: Mapping[str, Any],
@@ -848,6 +1076,9 @@ def _enrich_record(
         {
             "schema_version": SCHEMA_VERSION,
             "study_id": STUDY_ID,
+            "run_id": work_item["run_id"],
+            "execution_identity": work_item["execution_identity"],
+            "model_id": work_item["model_id"],
             "physical_attempt_namespace": attempt,
             "source_protocol_version": "e6-cross-provider-calibration-v1",
             "repair_protocol_version": "e6-response-less-recovery-v2",
@@ -928,11 +1159,13 @@ def _systemic_failure_key(row: Mapping[str, Any]) -> str | None:
     return None
 
 
-def evaluate_window_gate(provider_id: str, window: str) -> dict[str, Any]:
+def evaluate_window_gate(
+    provider_id: str, window: str, *, persist: bool = True
+) -> dict[str, Any]:
     prefix = [
         row for row in _window_rows(provider_id, window) if row["formal_prefix"] is True
     ]
-    latest = _latest_records(provider_id)
+    latest = _latest_execution_records(provider_id)
     actual = [latest[str(row["work_key"])] for row in prefix if str(row["work_key"]) in latest]
     expected_model = EXPECTED_MODELS[provider_id]
     response_bearing = [row for row in actual if _has_response_evidence(row)]
@@ -1018,8 +1251,42 @@ def evaluate_window_gate(provider_id: str, window: str) -> dict[str, Any]:
         "gemini_free_tier_usd_zero": free_tier,
         "scientific_outcomes_inspected": False,
     }
-    _write_json(_gate_path(provider_id, window), value)
+    if persist:
+        _write_json(_gate_path(provider_id, window), value)
     return value
+
+
+def _require_block_gate(
+    provider_id: str,
+    window: str,
+    *,
+    require_passed: bool | None,
+) -> dict[str, Any]:
+    path = _gate_path(provider_id, window)
+    if not path.is_file():
+        raise E6CalibrationRunnerV2Error("formal E6-v2 prefix gate is missing")
+    stored = json.loads(path.read_text(encoding="utf-8"))
+    expected_identity = {
+        "schema_version": "m3-paper-v2-e6-window-gate-2.0",
+        "study_id": STUDY_ID,
+        "provider_id": provider_id,
+        "replicate_window": window,
+        "execution_block_id": EXECUTION_BLOCK_ID,
+        "execution_block_role": EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
+    }
+    if any(stored.get(field) != value for field, value in expected_identity.items()):
+        raise E6CalibrationRunnerV2Error("E6-v2 prefix gate identity drift")
+    current = evaluate_window_gate(provider_id, window, persist=False)
+    if stored != current:
+        raise E6CalibrationRunnerV2Error(
+            "E6-v2 prefix gate does not reproduce from current raw records"
+        )
+    if require_passed is True and current.get("gate_passed") is not True:
+        raise E6CalibrationRunnerV2Error("formal E6-v2 prefix gate did not pass")
+    if require_passed is False and current.get("gate_passed") is not False:
+        raise E6CalibrationRunnerV2Error("formal E6-v2 prefix gate did not fail")
+    return current
 
 
 def _ensure_window_state(provider_id: str, window: str) -> dict[str, Any]:
@@ -1033,20 +1300,466 @@ def _ensure_window_state(provider_id: str, window: str) -> dict[str, Any]:
         ):
             raise E6CalibrationRunnerV2Error("E6-v2 window-state identity drift")
         return value
+    started_at = _now()
     value = {
         "schema_version": "m3-paper-v2-e6-window-state-2.0",
         "study_id": STUDY_ID,
         "provider_id": provider_id,
         "replicate_window": window,
         "execution_block_id": EXECUTION_BLOCK_ID,
-        "execution_block_started_at": _now(),
-        "window_started_at": _now(),
+        "execution_block_started_at": started_at,
+        "window_started_at": started_at,
         "execution_block_role": EXECUTION_BLOCK_ROLE,
         "temporal_replication_claim": False,
         "status": "running",
     }
     _write_json(path, value)
     return value
+
+
+def _parse_aware_time(value: Any, *, field_name: str) -> datetime:
+    if not isinstance(value, str) or not value:
+        raise E6CalibrationRunnerV2Error(f"missing {field_name}")
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError as exc:
+        raise E6CalibrationRunnerV2Error(f"invalid {field_name}") from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise E6CalibrationRunnerV2Error(f"{field_name} must be timezone-aware")
+    return parsed
+
+
+def _block_closure_record(
+    work_item: Mapping[str, Any],
+    existing: Mapping[str, Any] | None,
+    *,
+    block_started_at: str,
+    block_completed_at: str,
+    operational_status: str,
+    closure_reason: str,
+) -> dict[str, Any]:
+    value = e6_v1._closure_record(
+        work_item,
+        existing,
+        window_started_at=block_started_at,
+        window_completed_at=block_completed_at,
+        operational_status=operational_status,
+        closure_reason=closure_reason,
+    )
+    value.update(
+        {
+            "schema_version": SCHEMA_VERSION,
+            "study_id": STUDY_ID,
+            "run_id": work_item["run_id"],
+            "execution_identity": work_item["execution_identity"],
+            "model_id": work_item["model_id"],
+            "work_key": work_item["work_key"],
+            "source_protocol_version": "e6-cross-provider-calibration-v1",
+            "source_v1_work_key": work_item["source_v1_work_key"],
+            "source_replicate_window": work_item["source_replicate_window"],
+            "source_replicate_index": work_item["source_replicate_index"],
+            "repair_protocol_version": "e6-response-less-recovery-v2",
+            "record_kind": "block_closure",
+            "sample_role": "risk_enriched_activity_diagnostic",
+            "replicate_window": EXECUTION_BLOCK_ID,
+            "replicate_index": 1,
+            "execution_block_id": EXECUTION_BLOCK_ID,
+            "execution_block_role": EXECUTION_BLOCK_ROLE,
+            "temporal_replication_claim": False,
+            "closure_is_model_outcome": False,
+            "included_in_primary_itt": True,
+            "retry_eligible": False,
+            "terminal_status": True,
+            "provider_tools_enabled": False,
+            "external_effects_enabled": False,
+        }
+    )
+    return value
+
+
+def _current_block_summary(provider_id: str, block: str) -> dict[str, Any]:
+    rows = _window_rows(provider_id, block)
+    latest = _latest_records(provider_id)
+    planned_keys = {str(row["work_key"]) for row in rows}
+    if set(latest) != planned_keys:
+        raise E6CalibrationRunnerV2Error(
+            "existing B1 block seal does not match planned raw work keys"
+        )
+    latest_rows = [latest[str(row["work_key"])] for row in rows]
+    if not all(_is_terminal(row) for row in latest_rows):
+        raise E6CalibrationRunnerV2Error(
+            "existing B1 block seal has nonterminal raw work"
+        )
+    condition_counts: dict[str, dict[str, int]] = {}
+    for condition in sorted({str(row["condition_id"]) for row in rows}):
+        values = [row for row in latest_rows if row["condition_id"] == condition]
+        condition_counts[condition] = {
+            "planned": len(values),
+            "response_bearing": sum(_has_response_evidence(row) for row in values),
+            "administrative_closure": sum(
+                row.get("record_kind") == "block_closure" for row in values
+            ),
+        }
+    return {
+        "planned_rows": len(rows),
+        "terminal_rows": len(latest_rows),
+        "response_bearing_rows": sum(
+            _has_response_evidence(row) for row in latest_rows
+        ),
+        "administrative_closure_rows": sum(
+            row.get("record_kind") == "block_closure" for row in latest_rows
+        ),
+        "technical_gate_not_extended_rows": sum(
+            row.get("operational_status") == "technical_gate_not_extended"
+            for row in latest_rows
+        ),
+        "provider_block_unavailable_rows": sum(
+            row.get("operational_status") == "provider_block_unavailable"
+            for row in latest_rows
+        ),
+        "condition_counts": condition_counts,
+    }
+
+
+def _validate_existing_block_seal(
+    provider_id: str,
+    block: str,
+    value: Mapping[str, Any],
+    *,
+    provider_stop: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    expected_identity = {
+        "schema_version": BLOCK_SEAL_SCHEMA_VERSION,
+        "study_id": STUDY_ID,
+        "provider_id": provider_id,
+        "execution_block_id": block,
+        "execution_block_role": EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
+        "status": "sealed",
+        "provider_tools_enabled": False,
+        "external_effects_enabled": False,
+    }
+    if any(value.get(field) != expected for field, expected in expected_identity.items()):
+        raise E6CalibrationRunnerV2Error("existing B1 block seal identity drift")
+    if value.get("closure_mode") not in {
+        "all_rows_terminal",
+        "technical_gate_not_extended",
+        "provider_unavailable",
+        "fatal_stop",
+    }:
+        raise E6CalibrationRunnerV2Error("existing B1 block seal closure-mode drift")
+
+    summary = _current_block_summary(provider_id, block)
+    if any(value.get(field) != expected for field, expected in summary.items()):
+        raise E6CalibrationRunnerV2Error(
+            "existing B1 block seal does not reproduce from current raw records"
+        )
+    if value.get("fatal_provider_stop") is not (provider_stop is not None):
+        raise E6CalibrationRunnerV2Error(
+            "existing B1 block seal provider-stop binding drift"
+        )
+
+    gate_path = _gate_path(provider_id, block)
+    gate_status = (
+        _require_block_gate(provider_id, block, require_passed=None)["status"]
+        if gate_path.is_file()
+        else "not_available"
+    )
+    if value.get("gate_status") != gate_status:
+        raise E6CalibrationRunnerV2Error("existing B1 block seal gate binding drift")
+
+    latest = _latest_records(provider_id)
+    administrative = [
+        row for row in latest.values() if row.get("record_kind") == "block_closure"
+    ]
+    if not administrative:
+        expected_closure_mode = "all_rows_terminal"
+        expected_unavailable_evidence = None
+    else:
+        closure_statuses = {
+            str(row.get("operational_status")) for row in administrative
+        }
+        if closure_statuses == {"technical_gate_not_extended"}:
+            if provider_stop is not None or gate_status != "failed":
+                raise E6CalibrationRunnerV2Error(
+                    "existing B1 block seal technical closure evidence drift"
+                )
+            expected_closure_mode = "technical_gate_not_extended"
+            expected_unavailable_evidence = None
+        elif closure_statuses == {"provider_block_unavailable"}:
+            if provider_stop is not None:
+                expected_closure_mode = "fatal_stop"
+                expected_unavailable_evidence = None
+            else:
+                expected_closure_mode = "provider_unavailable"
+                expected_unavailable_evidence = _provider_unavailable_evidence(
+                    provider_id
+                )
+                if expected_unavailable_evidence is None:
+                    raise E6CalibrationRunnerV2Error(
+                        "existing B1 block seal lacks provider-unavailable raw evidence"
+                    )
+        else:
+            raise E6CalibrationRunnerV2Error(
+                "existing B1 block seal administrative closure status drift"
+            )
+    if value.get("closure_mode") != expected_closure_mode:
+        raise E6CalibrationRunnerV2Error(
+            "existing B1 block seal closure semantics drift"
+        )
+    if value.get("provider_unavailable_evidence") != expected_unavailable_evidence:
+        raise E6CalibrationRunnerV2Error(
+            "existing B1 block seal provider-unavailable evidence drift"
+        )
+
+    state_path = _window_state_path(provider_id, block)
+    if not state_path.is_file():
+        raise E6CalibrationRunnerV2Error("existing B1 block seal state is missing")
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    expected_state = {
+        "schema_version": "m3-paper-v2-e6-window-state-2.0",
+        "study_id": STUDY_ID,
+        "provider_id": provider_id,
+        "replicate_window": block,
+        "execution_block_id": block,
+        "execution_block_role": EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
+        "status": "sealed",
+        "execution_block_started_at": value.get("execution_block_started_at"),
+        "execution_block_completed_at": value.get("execution_block_completed_at"),
+        "closure_mode": value.get("closure_mode"),
+    }
+    if any(state.get(field) != expected for field, expected in expected_state.items()):
+        raise E6CalibrationRunnerV2Error("existing B1 block seal state drift")
+    started = _parse_aware_time(
+        value.get("execution_block_started_at"),
+        field_name="execution_block_started_at",
+    )
+    completed = _parse_aware_time(
+        value.get("execution_block_completed_at"),
+        field_name="execution_block_completed_at",
+    )
+    if completed < started or value.get("elapsed_seconds") != (
+        completed - started
+    ).total_seconds():
+        raise E6CalibrationRunnerV2Error("existing B1 block seal timing drift")
+    if state.get("elapsed_seconds") != value.get("elapsed_seconds"):
+        raise E6CalibrationRunnerV2Error("existing B1 block seal state timing drift")
+    return copy.deepcopy(dict(value))
+
+
+def seal_block(
+    provider_id: str,
+    block: str,
+    *,
+    provider_unavailable: bool = False,
+    completed_at: str | None = None,
+) -> dict[str, Any]:
+    if block not in PROSPECTIVE_EXECUTION_WINDOWS:
+        raise E6CalibrationRunnerV2Error("E6-v2 can seal diagnostic block B1 only")
+    provider_stop = _require_provider_stop(provider_id, block)
+    seal_path = _block_seal_path(provider_id, block)
+    if seal_path.is_file():
+        value = json.loads(seal_path.read_text(encoding="utf-8"))
+        return _validate_existing_block_seal(
+            provider_id,
+            block,
+            value,
+            provider_stop=provider_stop,
+        )
+
+    state_path = _window_state_path(provider_id, block)
+    if not state_path.is_file():
+        raise E6CalibrationRunnerV2Error("B1 block has not started")
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    if (
+        state.get("study_id") != STUDY_ID
+        or state.get("provider_id") != provider_id
+        or state.get("execution_block_id") != block
+    ):
+        raise E6CalibrationRunnerV2Error("B1 block state identity drift")
+    started = _parse_aware_time(
+        state.get("execution_block_started_at", state.get("window_started_at")),
+        field_name="execution_block_started_at",
+    )
+    completed = _parse_aware_time(
+        completed_at or _now(), field_name="execution_block_completed_at"
+    )
+    if completed < started:
+        raise E6CalibrationRunnerV2Error("B1 completion precedes its start")
+
+    rows = _window_rows(provider_id, block)
+    latest = _latest_records(provider_id)
+    nonterminal = [
+        row
+        for row in rows
+        if not _is_terminal(latest.get(str(row["work_key"]), {}))
+    ]
+    retry_eligible = [
+        row
+        for row in nonterminal
+        if latest.get(str(row["work_key"]), {}).get("retry_eligible") is True
+    ]
+    gate_path = _gate_path(provider_id, block)
+    gate = (
+        _require_block_gate(provider_id, block, require_passed=None)
+        if gate_path.is_file()
+        else None
+    )
+    fatal_stop = provider_stop is not None
+    unavailable_evidence = (
+        _provider_unavailable_evidence(provider_id)
+        if provider_unavailable
+        else None
+    )
+
+    existing_closures = [
+        row
+        for row in latest.values()
+        if row.get("record_kind") == "block_closure"
+    ]
+
+    if not nonterminal and existing_closures:
+        closure_statuses = {
+            str(row.get("operational_status")) for row in existing_closures
+        }
+        if closure_statuses == {"technical_gate_not_extended"}:
+            closure_mode = "technical_gate_not_extended"
+            operational_status = "technical_gate_not_extended"
+            closure_reason = "formal_prefix_technical_gate_failed_before_expansion"
+        elif closure_statuses == {"provider_block_unavailable"}:
+            closure_mode = "fatal_stop" if fatal_stop else "provider_unavailable"
+            operational_status = "provider_block_unavailable"
+            closure_reason = (
+                "provider_fatal_boundary_before_block_completion"
+                if fatal_stop
+                else "provider_unavailable_before_block_completion"
+            )
+        else:
+            raise E6CalibrationRunnerV2Error(
+                "existing B1 administrative closure status drift"
+            )
+    elif not nonterminal:
+        closure_mode = "all_rows_terminal"
+        operational_status = "completed_without_administrative_closure"
+        closure_reason = "all_planned_rows_already_terminal"
+    elif fatal_stop:
+        closure_mode = "fatal_stop"
+        operational_status = "provider_block_unavailable"
+        closure_reason = "provider_fatal_boundary_before_block_completion"
+    elif provider_unavailable and unavailable_evidence is not None:
+        closure_mode = "provider_unavailable"
+        operational_status = "provider_block_unavailable"
+        closure_reason = "provider_unavailable_before_block_completion"
+    elif provider_unavailable:
+        raise E6CalibrationRunnerV2Error(
+            "provider-unavailable seal requires a 429 terminal or exhausted "
+            "response-less recovery evidence"
+        )
+    elif (
+        gate is not None
+        and gate.get("gate_passed") is False
+        and gate.get("observed_prefix_rows") == PREFIX_ROWS
+        and not retry_eligible
+    ):
+        closure_mode = "technical_gate_not_extended"
+        operational_status = "technical_gate_not_extended"
+        closure_reason = "formal_prefix_technical_gate_failed_before_expansion"
+    else:
+        if retry_eligible:
+            raise E6CalibrationRunnerV2Error(
+                "retry-eligible response-less work remains; recover it or explicitly "
+                "seal as provider unavailable"
+            )
+        raise E6CalibrationRunnerV2Error(
+            "B1 still has runnable pending work; resume it before sealing"
+        )
+
+    # Administrative closure semantics are deterministic.  A fatal stop is
+    # bound only through provider_stop_v2; provider-unavailable evidence is
+    # retained only for the distinct nonfatal unavailable closure mode.
+    if closure_mode == "provider_unavailable":
+        unavailable_evidence = _provider_unavailable_evidence(provider_id)
+        if unavailable_evidence is None:
+            raise E6CalibrationRunnerV2Error(
+                "provider-unavailable closure lost its response-less evidence"
+            )
+    else:
+        unavailable_evidence = None
+
+    for row in nonterminal:
+        key = str(row["work_key"])
+        closure = _block_closure_record(
+            row,
+            latest.get(key),
+            block_started_at=started.isoformat(),
+            block_completed_at=completed.isoformat(),
+            operational_status=operational_status,
+            closure_reason=closure_reason,
+        )
+        lean._append_jsonl(_raw_path(provider_id), closure)
+        latest[key] = closure
+
+    latest_rows = [latest[str(row["work_key"])] for row in rows]
+    if not all(_is_terminal(row) for row in latest_rows):
+        raise E6CalibrationRunnerV2Error("B1 seal left nonterminal work items")
+    response_bearing = sum(
+        _has_response_evidence(row) for row in latest_rows
+    )
+    condition_counts: dict[str, dict[str, int]] = {}
+    for condition in sorted({str(row["condition_id"]) for row in rows}):
+        values = [row for row in latest_rows if row["condition_id"] == condition]
+        condition_counts[condition] = {
+            "planned": len(values),
+            "response_bearing": sum(_has_response_evidence(row) for row in values),
+            "administrative_closure": sum(
+                row.get("record_kind") == "block_closure" for row in values
+            ),
+        }
+    seal = {
+        "schema_version": BLOCK_SEAL_SCHEMA_VERSION,
+        "study_id": STUDY_ID,
+        "provider_id": provider_id,
+        "execution_block_id": block,
+        "execution_block_role": EXECUTION_BLOCK_ROLE,
+        "temporal_replication_claim": False,
+        "status": "sealed",
+        "closure_mode": closure_mode,
+        "planned_rows": len(rows),
+        "terminal_rows": len(latest_rows),
+        "response_bearing_rows": response_bearing,
+        "administrative_closure_rows": sum(
+            row.get("record_kind") == "block_closure" for row in latest_rows
+        ),
+        "technical_gate_not_extended_rows": sum(
+            row.get("operational_status") == "technical_gate_not_extended"
+            for row in latest_rows
+        ),
+        "provider_block_unavailable_rows": sum(
+            row.get("operational_status") == "provider_block_unavailable"
+            for row in latest_rows
+        ),
+        "fatal_provider_stop": fatal_stop,
+        "provider_unavailable_evidence": unavailable_evidence,
+        "gate_status": gate.get("status") if gate is not None else "not_available",
+        "condition_counts": condition_counts,
+        "execution_block_started_at": started.isoformat(),
+        "execution_block_completed_at": completed.isoformat(),
+        "elapsed_seconds": (completed - started).total_seconds(),
+        "provider_tools_enabled": False,
+        "external_effects_enabled": False,
+    }
+    _write_json(seal_path, seal)
+    state.update(
+        {
+            "status": "sealed",
+            "execution_block_completed_at": completed.isoformat(),
+            "elapsed_seconds": seal["elapsed_seconds"],
+            "closure_mode": closure_mode,
+        }
+    )
+    _write_json(state_path, state)
+    return seal
 
 
 def run_window(
@@ -1066,8 +1779,20 @@ def run_window(
         raise E6CalibrationRunnerV2Error(
             "E6-v2 provider execution is diagnostic-block B1 only; W1/W2 remain immutable"
         )
+    provider_stop = _require_provider_stop(provider_id, window)
+    seal_path = _block_seal_path(provider_id, window)
+    if seal_path.is_file():
+        _validate_existing_block_seal(
+            provider_id,
+            window,
+            json.loads(seal_path.read_text(encoding="utf-8")),
+            provider_stop=provider_stop,
+        )
+        raise E6CalibrationRunnerV2Error(
+            f"{provider_id}: E6-v2 diagnostic block B1 is sealed"
+        )
     stop_path = _provider_stop_path(provider_id)
-    if stop_path.is_file():
+    if provider_stop is not None:
         raise E6CalibrationRunnerV2Error(
             f"{provider_id}: E6-v2 provider is stopped by a fatal boundary"
         )
@@ -1078,13 +1803,13 @@ def run_window(
         retry_failed_work_keys=retry_failed_work_keys,
     )
     if not canary_only:
-        gate_path = _gate_path(provider_id, window)
-        if not gate_path.is_file() or json.loads(
-            gate_path.read_text(encoding="utf-8")
-        ).get("gate_passed") is not True:
-            raise E6CalibrationRunnerV2Error("formal E6-v2 prefix gate did not pass")
+        _require_block_gate(provider_id, window, require_passed=True)
     if not pending:
-        gate = evaluate_window_gate(provider_id, window)
+        gate = (
+            evaluate_window_gate(provider_id, window)
+            if canary_only
+            else _require_block_gate(provider_id, window, require_passed=True)
+        )
         return {
             "provider_id": provider_id,
             "replicate_window": window,
@@ -1092,7 +1817,6 @@ def run_window(
             "window_gate_passed": bool(gate["gate_passed"]),
         }
 
-    state = _ensure_window_state(provider_id, window)
     attempts = {str(row["work_key"]): attempt for row, attempt in pending}
     permit = _permit(
         provider_id,
@@ -1110,6 +1834,9 @@ def run_window(
         if dispatcher_factory is not None
         else _dispatcher(provider_id, permit, values=values, all_rows=all_rows)
     )
+    # State begins only after configuration validation and dispatcher construction.
+    # A local preflight error must not create a false live-execution timestamp.
+    state = _ensure_window_state(provider_id, window)
 
     executed = 0
     stopped_after_response_less = False
@@ -1117,6 +1844,7 @@ def run_window(
     for work_item, attempt in pending:
         trace_path = lean._provider_trace_path(permit, str(work_item["work_key"]))
         result: dict[str, Any] | None = None
+        digest: dict[str, Any] | None = None
         paused = False
         fatal = False
         try:
@@ -1141,6 +1869,13 @@ def run_window(
             base = lean._failure_record(
                 work_item, exc, attempt=attempt, trace_path=trace_path
             )
+            if digest is not None:
+                base["online_visible_field_digest_sha256"] = (
+                    sha256_canonical_json(digest)
+                )
+                base["online_forbidden_fields_present"] = bool(
+                    digest["forbidden_fields_present"]
+                )
             paused = isinstance(exc, ProviderPausedError)
             fatal = _is_fatal_contract_error(exc)
             if paused:
@@ -1164,13 +1899,20 @@ def run_window(
             _write_json(
                 stop_path,
                 {
-                    "schema_version": "m3-paper-v2-e6-provider-stop-2.0",
+                    "schema_version": PROVIDER_STOP_SCHEMA_VERSION,
                     "study_id": STUDY_ID,
                     "provider_id": provider_id,
                     "replicate_window": window,
+                    "execution_block_id": window,
+                    "execution_block_role": EXECUTION_BLOCK_ROLE,
+                    "temporal_replication_claim": False,
                     "work_key": work_item["work_key"],
+                    "attempt": record.get("attempt"),
                     "error_type": record.get("error_type"),
+                    "operational_status": record.get("operational_status"),
                     "status": "stopped_fatal_contract_boundary",
+                    "fatal_boundary": True,
+                    "terminal_status": True,
                     "recorded_at": record.get("recorded_at"),
                 },
             )
@@ -1205,13 +1947,31 @@ def build_parser() -> argparse.ArgumentParser:
     stage = parser.add_mutually_exclusive_group(required=True)
     stage.add_argument("--canary-only", action="store_true")
     stage.add_argument("--resume-pending-only", action="store_true")
+    stage.add_argument("--seal-block", action="store_true")
     parser.add_argument("--config", type=Path, default=None)
     parser.add_argument("--retry-failed-work-key", action="append", default=[])
+    parser.add_argument("--provider-unavailable", action="store_true")
     return parser
 
 
 def main() -> int:
     args = build_parser().parse_args()
+    if args.seal_block:
+        if args.retry_failed_work_key:
+            raise E6CalibrationRunnerV2Error(
+                "block sealing cannot retry execution rows"
+            )
+        result = seal_block(
+            args.provider,
+            args.block,
+            provider_unavailable=args.provider_unavailable,
+        )
+        print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
+        return 0
+    if args.provider_unavailable:
+        raise E6CalibrationRunnerV2Error(
+            "--provider-unavailable is valid only with --seal-block"
+        )
     result = run_window(
         args.provider,
         args.block,

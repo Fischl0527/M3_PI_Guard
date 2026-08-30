@@ -1,5 +1,23 @@
 # 进展记录
 
+## 2026-08-31 — E6-v2 B1 离线结项门通过，正式前缀待执行
+
+- Owner 已授权自行计划、审计并执行 B1 直至有界结项；API 调用前的离线完成门现已
+  闭合，尚未产生 B1 provider 调用或输出。
+- 新增 B1 行政封存与单块分析器：行政 closure 可闭合 ITT，但不进入模型安全率、
+  配对、资源、延迟或最后模型观察时间；缺失/行政项只进入未解析计数和保守上界。
+- Runner 现在显式写入并复核 `run_id`、`execution_identity`、模型和 source identity；
+  `--provider-unavailable` 必须绑定 429 或耗尽的 response-less 恢复证据，不能仅凭
+  CLI 参数关闭可运行矩阵。封存中断恢复保留原 closure reason。
+- 分析器只接受 B1，执行四项 Newcombe/McNemar/Holm、benchmark-stratified task
+  bootstrap、2×2 因子、负担和实际执行跨度；Gemini 永久保持 diagnostic，禁止
+  时间重复性和正式跨厂商主张。
+- 离线验证：B1 runner+analysis `76 passed`；相邻 v1/provider suite `45 passed,
+  1 deselected`。唯一 deselected 为已记录的旧 offline-evaluator qualification 漂移；
+  Ruff、`py_compile`、manifest JSON 和 diff check 通过。API/provider 调用为 0。
+- 下一步严格按顺序执行 DeepSeek 12 行正式前缀；技术门通过才扩展并封存。随后以
+  相同规则执行 Gemini 免费层；成功或 response-bearing 行均不得重跑。
+
 ## 2026-08-31 — E6-v2 取消人工延时，改为单次诊断执行块
 
 - Owner 明确取消 18--30 小时跨日等待；E6-v1 W1/W2 已无法支持正式三窗口

@@ -1,5 +1,29 @@
 # 验收标准
 
+## F-PAPER-002 E6-v2 B1 无延时结项（2026-08-31，覆盖旧 E6 时间窗口条款）
+
+- B1 必须保持 DeepSeek 360、Gemini 180 个唯一 work key；两家分别为 60/30 个
+  唯一攻击任务、六条件均衡、12 条正式前缀，且所有行使用非时间诊断元数据。
+- 不再要求 v1 W2 seal、18--30 小时、连续日期、12 小时窗口或任何时间准入；实际
+  执行起止和跨度只作描述。
+- 每 provider 的正式前缀只检查身份链、至少 9/12 completed、字段隔离、系统性
+  runner 错误、工具/effect 为零及 Gemini 免费层，不检查 unsafe outcome。
+- 技术门通过才扩展；不通过或 provider 不可用时必须封存，所有未触碰项写入明确
+  的行政 ITT 终态，不能假装为模型安全结果。
+- response-bearing 行不得重跑；无响应且有 payload commitment 的唯一 key 最多
+  显式恢复一次；fatal 错误必须 provider-wide fail-closed。
+- Gemini 必须官方免费层、USD 0、无 Billing、无模型/项目/密钥池回退；其失败
+  不影响 DeepSeek 的独立结项。
+- 540 个计划项最终均须有模型终态或行政 ITT 终态；两家均须有 gate 和 block seal。
+- B1 专用分析不得调用三窗口重复性路径；必须报告 unsafe、unsafe-or-failure、
+  四个配对条件差、2×2 因子作用、运行负担、成本及嵌套 provider 方向诊断。
+- evaluator/gold 原始字段、provider tools 和真实 external effect 必须为零；完整
+  prompt/response、header、密钥和 internal provider traces 不得进入公开产物或 Git。
+- 只运行定向测试、Ruff、`py_compile`、JSON/差异检查和一次性结果重建；不运行
+  Full Harness、历史递归重放、盲测或冗余哈希包。
+- 完成必须有 Markdown 报告、表图、Harness 状态、独立复审、Git 提交及
+  `origin/codex/q2-empirical-study` 推送证据；结果方向不是通过条件。
+
 ## F-PAPER-002 E6 同期校准增量（2026-08-28）
 
 - 冻结 60 个 DeepSeek 主队列唯一底层攻击任务和严格嵌套的 30 个 Gemini

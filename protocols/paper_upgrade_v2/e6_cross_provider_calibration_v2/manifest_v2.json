@@ -1,7 +1,7 @@
 {
   "schema_version": "m3-paper-v2-e6-cross-provider-repair-2.0",
   "study_id": "m3-q2-e6-cross-provider-calibration-v2",
-  "status": "offline_qualification_only_provider_execution_not_authorized",
+  "status": "owner_authorized_b1_live_execution_ready",
   "source_design": {
     "protocol": "protocols/paper_upgrade_v2/e6_cross_provider_calibration_v1",
     "reuse": [
@@ -78,5 +78,22 @@
     "outcome_blind": true
   },
   "provider_calls_made": 0,
-  "v1_records_modified": 0
+  "v1_records_modified": 0,
+  "execution_plan": "protocols/paper_upgrade_v2/e6_cross_provider_calibration_v2/execution_plan_b1.md",
+  "owner_authorization": {
+    "authorized_on": "2026-08-31",
+    "scope": "audit_then_execute_B1_until_bounded_closeout",
+    "requires_offline_completion_gate_before_provider_calls": true,
+    "successful_or_response_bearing_replay_allowed": false
+  },
+  "offline_completion_gate": {
+    "status": "passed",
+    "runner_and_analysis_tests": "76_passed",
+    "adjacent_compatibility_tests": "45_passed_1_known_stale_qualification_deselected",
+    "ruff": "passed",
+    "py_compile": "passed",
+    "manifest_json": "passed",
+    "diff_check": "passed",
+    "provider_calls_before_gate": 0
+  }
 }
