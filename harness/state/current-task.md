@@ -1,5 +1,27 @@
 # 当前任务
 
+### 2026-08-31 E6-v2 B1 有界实验结项
+
+- 单块、无人工延时的 E6-v2 已执行并封存。DeepSeek 为 360/360 scientific
+  terminal 且 response-bearing，六条件各 60；Gemini 前缀在 6 个物理 attempt 后
+  fail-closed，其中 5 条有官方响应、1 条 VIGIL contract failure 无官方 response
+  ID，其余 174 条仅以非模型行政 closure 进入 ITT。
+- DeepSeek 主结果：no-defense 17/60 unsafe、12 failure；VIGIL 16/60 unsafe、
+  8 failure；policy-normal 2/60 unsafe、policy-safe 1/60、full-normal/full-safe
+  均 0/60。failure 与 unsafe 分开报告，同时提供保守 unsafe-or-failure 上界。
+- Gemini 正式前缀 gate failed，block 以 `fatal_stop` 封存、费用 USD 0。只有
+  1/30 terminal ITT 嵌套对，涉及 VIGIL 的最小 response-complete 对为 0/30；
+  因此所有 Gemini 配对、因子和跨 provider 效应均标为 `NE`，只能作为服务与
+  工程诊断，不能支持跨厂商泛化或 provider 排名。
+- 历史 Gemini VIGIL 无响应行保持 terminal、不可重试。前瞻 facade 只在单次
+  provider call 抛出精确 `ProviderPausedError` / `ProviderTransportError` 时保存并
+  原类型重抛，避免未来被上游 fallback 抹平；该修复不改变任何既有结果。
+- 一次性分析、三张 CSV、两张 SVG 和 Markdown 报告已由公开 raw 重建；两张图
+  完成视觉检查，不再把 n=1/30 的 Gemini 描述值画成零效应。定向验证 134/134，
+  Ruff、`py_compile`、JSON 与 diff check 通过。E6-v2 子任务闭合；论文整体
+  `F-PAPER-002` 继续 `in_progress`，后续只能进行论文整合或另行设计全新的
+  Gemini 研究，不得重启本 B1 的成功/response-bearing 行。
+
 ### 2026-08-31 E6-v2 B1 自主执行与结项
 
 - Owner 已授权“自行写计划、审计后执行直到完成”。执行依据为

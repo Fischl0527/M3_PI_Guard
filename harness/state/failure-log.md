@@ -1,5 +1,22 @@
 # Failure Log
 
+## 2026-08-31 — Gemini B1 VIGIL response-less contract ambiguity
+
+- Gemini 的 12 行正式前缀执行到第 6 个物理 attempt 时，在 VIGIL constraint
+  generation 产生 `contract_failure / VigilLiveDependencyError`。持久化记录包含一次
+  本地 precommit request ID 与 payload digest，但 `response_obtained=false` 且没有
+  官方 response ID；此前 5 条记录有完整官方响应，成本始终 USD 0。
+- 根因审计发现固定 VIGIL generator 的 catch-all 会把原始 provider exception 转成
+  fallback，外层随后只看到 generic `VigilLiveDependencyError`。因此历史证据无法
+  区分被吞没的 429 与普通传输异常；按冻结规则不得猜测原因或重试该 work key。
+- 处理：保留该行作为 terminal ITT operational failure，以 `fatal_stop` 封存
+  Gemini，并把 174 个从未触碰的计划项登记为非模型行政 closure。它们不进入模型
+  安全率、资源或延迟分母，也不被当作安全结果。
+- 前瞻修复仅捕获单次 call 抛出的精确 `ProviderPausedError` 或
+  `ProviderTransportError`，在上游 fallback 后优先原类型重抛；无自动重试，其他
+  parse/default/schema/model fallback 语义不变。修复只改善未来分类，不改写或恢复
+  当前 Gemini B1。
+
 ## 2026-08-31 — B1 DeepSeek response-bearing VIGIL runtime failure
 
 - After the repaired 12-row prefix passed its outcome-blind technical gate,

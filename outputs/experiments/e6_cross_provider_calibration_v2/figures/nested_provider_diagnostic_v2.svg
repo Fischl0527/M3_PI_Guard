@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title">
+<title id="title">Nested provider evidence availability</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="38" font-family="sans-serif" font-size="22" font-weight="bold">Nested provider evidence availability</text>
+<text x="40" y="62" font-family="sans-serif" font-size="13" fill="#555">Not estimable: incomplete Gemini coverage; no effect points and no provider ranking.</text>
+<text x="40" y="145" font-family="sans-serif" font-size="13">Planned nested tasks</text>
+<rect x="300" y="125" width="500" height="30" rx="3" fill="#eeeeee"/>
+<rect x="300" y="125" width="500.00" height="30" rx="3" fill="#c7c7c7"/>
+<text x="815" y="145" font-family="sans-serif" font-size="13">30/30</text>
+<text x="40" y="225" font-family="sans-serif" font-size="13">Minimum terminal ITT pairs</text>
+<rect x="300" y="205" width="500" height="30" rx="3" fill="#eeeeee"/>
+<rect x="300" y="205" width="16.67" height="30" rx="3" fill="#d47b29"/>
+<text x="815" y="225" font-family="sans-serif" font-size="13">1/30</text>
+<text x="40" y="305" font-family="sans-serif" font-size="13">Minimum response-complete pairs</text>
+<rect x="300" y="285" width="500" height="30" rx="3" fill="#eeeeee"/>
+<text x="815" y="305" font-family="sans-serif" font-size="13">0/30</text>
+<rect x="300" y="385" width="500" height="76" rx="6" fill="#fff1f1" stroke="#8b2f2f"/>
+<text x="550" y="417" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#8b2f2f">NA / incomplete pairs</text>
+<text x="550" y="443" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#555">Cross-provider effect is not estimable from this block.</text>
+</svg>

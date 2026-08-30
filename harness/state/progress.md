@@ -1,5 +1,27 @@
 # 进展记录
 
+## 2026-08-31 — E6-v2 B1 双 provider 诊断结项
+
+- DeepSeek block 已完整封存：360 planned/scientific terminal/response-bearing，
+  361 个物理记录、826 次 provider call、1,242,351 tokens、CNY 3.6346068；
+  gate passed、closure=`all_rows_terminal`，模型身份、请求链、在线字段隔离、
+  provider tools 与真实 effect 检查通过。
+- Gemini block 已如实失败闭合：180 planned 中 6 个 scientific terminal、5 个
+  response-bearing、1 个 response-less VIGIL contract failure、174 个行政 closure；
+  gate failed、closure=`fatal_stop`，7 calls、7,672 tokens、USD 0。旧失败未重试，
+  无付费、回退、工具或真实 effect。
+- DeepSeek observed unsafe：no-defense 17/60、VIGIL 16/60、policy-normal 2/60、
+  policy-safe 1/60、full-normal 0/60、full-safe 0/60。VIGIL−no-defense pooled
+  RD 为 -1/60，但 AgentDojo 为 +1/30、M3-v2 为 -2/30，报告明确披露方向相反。
+- 独立复核确认 DeepSeek 计数、配对 RD、McNemar/Holm、2×2 与 ITT 上下界可从
+  raw 复算；指出的三项 P1 已修复：Gemini 图不再画 0 点、活动图不再混合
+  n=60/n=1、技术审计明确限定为 5 条 response-bearing 行且 prefix gate failed。
+- 最终定向 pytest 134/134；Ruff、`py_compile`、6 个 JSON 解析、diff check 和两张
+  SVG 的 Chrome 视觉检查通过。未运行 Full Harness、历史重放或任何新增 API 行。
+- 最终独立只读终审为 GREEN：13 个公开文件全部可解析，credential/private-key、
+  internal trace、provider tools、真实 effect 和在线字段泄漏命中均为 0；DeepSeek
+  数字与异质性复算一致，Gemini 的 paired/factorial/nested 推断均为 NE。
+
 ## 2026-08-31 — E6-v2 DeepSeek B1 360/360 封存
 
 - DeepSeek pending-only 续跑自然 exit 0，本次完成 227/227 未触碰项；未触发新的

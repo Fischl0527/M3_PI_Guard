@@ -718,6 +718,12 @@ def _paired_family(
     comparisons: list[dict[str, Any]] = []
     for name, baseline, treatment in PRIMARY_COMPARISONS:
         blocks = _complete_condition_pairs(rows, baseline, treatment)
+        response_complete_blocks = {
+            task: values
+            for task, values in blocks.items()
+            if bool(values[baseline].get("_response_bearing"))
+            and bool(values[treatment].get("_response_bearing"))
+        }
         left = [_endpoint(values[baseline], endpoint) for values in blocks.values()]
         right = [_endpoint(values[treatment], endpoint) for values in blocks.values()]
         task_values: dict[str, tuple[str, float]] = {}
@@ -733,6 +739,35 @@ def _paired_family(
                 float(_endpoint(values[treatment], endpoint))
                 - float(_endpoint(values[baseline], endpoint)),
             )
+        benchmark_strata: dict[str, dict[str, Any]] = {}
+        for benchmark in sorted({value[0] for value in task_values.values()}):
+            benchmark_blocks = {
+                task: values
+                for task, values in blocks.items()
+                if str(values[baseline].get("benchmark", "")) == benchmark
+            }
+            baseline_events = sum(
+                _endpoint(values[baseline], endpoint)
+                for values in benchmark_blocks.values()
+            )
+            treatment_events = sum(
+                _endpoint(values[treatment], endpoint)
+                for values in benchmark_blocks.values()
+            )
+            pairs = len(benchmark_blocks)
+            benchmark_strata[benchmark] = {
+                "terminal_itt_pairs": pairs,
+                "response_complete_pairs": sum(
+                    bool(values[baseline].get("_response_bearing"))
+                    and bool(values[treatment].get("_response_bearing"))
+                    for values in benchmark_blocks.values()
+                ),
+                "baseline_events": baseline_events,
+                "treatment_events": treatment_events,
+                "risk_difference": (
+                    (treatment_events - baseline_events) / pairs if pairs else None
+                ),
+            }
         exact = mcnemar_exact(left, right)
         comparisons.append(
             {
@@ -743,7 +778,18 @@ def _paired_family(
                 "treatment": treatment,
                 "expected_pairs": expected_tasks,
                 "complete_pairs": len(blocks),
+                "terminal_itt_pairs": len(blocks),
+                "response_complete_pairs": len(response_complete_blocks),
+                "inferentially_estimable": (
+                    len(blocks) == expected_tasks
+                    and len(response_complete_blocks) == expected_tasks
+                ),
+                "pair_definition": (
+                    "scientific-terminal ITT pairs; response-less failures are "
+                    "non-unsafe in unsafe-effect lower-bound estimates"
+                ),
                 "pair_coverage": len(blocks) / expected_tasks if expected_tasks else None,
+                "benchmark_strata": benchmark_strata,
                 "baseline_rate": proportion_result(sum(left), len(left)),
                 "treatment_rate": proportion_result(sum(right), len(right)),
                 "newcombe_95": _newcombe_paired(left, right),
@@ -833,7 +879,11 @@ def _task_bootstrap(
 
 
 def _factorial_2x2(
-    rows: Sequence[Mapping[str, Any]], *, endpoint: str, replicates: int
+    rows: Sequence[Mapping[str, Any]],
+    *,
+    endpoint: str,
+    expected_tasks: int,
+    replicates: int,
 ) -> dict[str, Any]:
     grouped: dict[str, dict[str, Mapping[str, Any]]] = defaultdict(dict)
     cells = set(FACTOR_CELLS.values())
@@ -845,6 +895,11 @@ def _factorial_2x2(
                 raise E6B1AnalysisError(f"duplicate factorial cell: {task}:{condition}")
             grouped[task][condition] = row
     complete = {task: values for task, values in grouped.items() if set(values) == cells}
+    response_complete = {
+        task: values
+        for task, values in complete.items()
+        if all(bool(row.get("_response_bearing")) for row in values.values())
+    }
     effects: dict[str, dict[str, tuple[str, float]]] = {
         "module": {},
         "prompt": {},
@@ -862,6 +917,13 @@ def _factorial_2x2(
     return {
         "endpoint": endpoint,
         "complete_tasks": len(complete),
+        "terminal_itt_tasks": len(complete),
+        "response_complete_tasks": len(response_complete),
+        "expected_tasks": expected_tasks,
+        "inferentially_estimable": (
+            len(complete) == expected_tasks
+            and len(response_complete) == expected_tasks
+        ),
         "effects": {
             name: _task_bootstrap(
                 values,
@@ -1420,7 +1482,10 @@ def analyze_provider_block(
         },
         "factorial_2x2": {
             endpoint: _factorial_2x2(
-                merged, endpoint=endpoint, replicates=bootstrap_replicates
+                merged,
+                endpoint=endpoint,
+                expected_tasks=len(tasks),
+                replicates=bootstrap_replicates,
             )
             for endpoint in ("unsafe_effect", "unsafe_or_failure")
         },
@@ -1468,6 +1533,7 @@ def _nested_provider_diagnostic(
                 ds_pairs = _complete_condition_pairs(deepseek_rows, baseline, treatment)
                 gm_pairs = _complete_condition_pairs(gemini_rows, baseline, treatment)
                 values: dict[str, tuple[str, float]] = {}
+                response_complete_tasks = 0
                 for task in sorted(gm_tasks & set(ds_pairs) & set(gm_pairs)):
                     ds = float(_endpoint(ds_pairs[task][treatment], endpoint)) - float(
                         _endpoint(ds_pairs[task][baseline], endpoint)
@@ -1476,11 +1542,29 @@ def _nested_provider_diagnostic(
                         _endpoint(gm_pairs[task][baseline], endpoint)
                     )
                     values[task] = (str(gm_pairs[task][baseline]["benchmark"]), gm - ds)
-                endpoint_effects[name] = _task_bootstrap(
+                    if all(
+                        bool(row.get("_response_bearing"))
+                        for row in (
+                            ds_pairs[task][baseline],
+                            ds_pairs[task][treatment],
+                            gm_pairs[task][baseline],
+                            gm_pairs[task][treatment],
+                        )
+                    ):
+                        response_complete_tasks += 1
+                diagnostic = _task_bootstrap(
                     values,
                     label=f"nested:{endpoint}:{name}",
                     replicates=bootstrap_replicates,
                 )
+                diagnostic["terminal_itt_pairs"] = len(values)
+                diagnostic["response_complete_pairs"] = response_complete_tasks
+                diagnostic["expected_pairs"] = len(gm_tasks)
+                diagnostic["inferentially_estimable"] = (
+                    len(values) == len(gm_tasks)
+                    and response_complete_tasks == len(gm_tasks)
+                )
+                endpoint_effects[name] = diagnostic
             effects[endpoint] = endpoint_effects
     return {
         "role": "nested_single_block_directional_diagnostic",
@@ -1538,14 +1622,22 @@ def analyze_all(
         value["technical_audit"]["passed_for_observed_records"] is True
         for value in (deepseek, gemini)
     )
+    deepseek_complete = deepseek["analysis_status"] == "ANALYZED_COMPLETE_DIAGNOSTIC"
+    gemini_complete = gemini["analysis_status"] == "ANALYZED_COMPLETE_DIAGNOSTIC"
+    if not technical_green:
+        verification_status = "ANALYZED_TECHNICAL_AUDIT_FAILED"
+    elif deepseek_complete and gemini_complete:
+        verification_status = "ANALYZED_B1_COMPLETE_DIAGNOSTIC"
+    elif deepseek_complete and (gemini_gate or {}).get("gate_passed") is False:
+        verification_status = (
+            "ANALYZED_DEEPSEEK_COMPLETE_GEMINI_DIAGNOSTIC_GATE_FAILED"
+        )
+    else:
+        verification_status = "ANALYZED_INCOMPLETE_DIAGNOSTIC"
     return {
         "schema_version": ANALYSIS_SCHEMA_VERSION,
         "study_id": STUDY_ID,
-        "verification_status": (
-            "ANALYZED_TECHNICAL_AUDIT_PASSED"
-            if technical_green
-            else "ANALYZED_TECHNICAL_AUDIT_FAILED"
-        ),
+        "verification_status": verification_status,
         "material_passport": {
             "origin_skill": "academic-research-suite / experiment-agent",
             "mode": "validate",
@@ -1632,14 +1724,25 @@ def render_markdown_report(analysis: Mapping[str, Any]) -> str:
             "",
             "## 技术审计",
             "",
-            "| Provider | Returned model | Request chain | Local IDs unique | Visible digest | Field isolation | Tools/effects off | Call count/cap | Free tier | Overall |",
-            "|---|---|---|---|---|---|---|---|---|---|",
+            "下表只审计已经物理执行的记录及其可用响应链；它不替代正式前缀 gate。因而 Gemini 的观测记录审计可以通过，同时其 12 行前缀 gate 仍然失败并以 fatal stop 封存。",
+            "",
+            "| Provider | Audit scope | Returned model | Request chain | Local IDs unique | Visible digest | Field isolation | Tools/effects off | Call count/cap | Free tier | Overall |",
+            "|---|---|---|---|---|---|---|---|---|---|---|",
         ]
     )
     for provider in ("deepseek", "gemini"):
         audit = providers[provider]["technical_audit"]
+        provider_gate = providers[provider].get("gate") or {}
+        response_rows = int(audit["response_bearing_physical_attempts"])
+        gate_status = str(provider_gate.get("status", "NOT AVAILABLE"))
+        scope = f"response-bearing rows n={response_rows}; prefix gate {gate_status}"
+        overall = (
+            f"PASS for n={response_rows}; gate {gate_status}"
+            if audit["passed_for_observed_records"]
+            else f"FAIL for observed rows; gate {gate_status}"
+        )
         lines.append(
-            f"| {provider} | {audit['exact_returned_model']} | "
+            f"| {provider} | {scope} | {audit['exact_returned_model']} | "
             f"{audit['complete_official_request_chain']} | "
             f"{audit['unique_local_request_ids']} | "
             f"{audit['online_visible_field_digests_complete']} | "
@@ -1647,7 +1750,7 @@ def render_markdown_report(analysis: Mapping[str, Any]) -> str:
             f"{audit['provider_tools_and_real_effects_disabled']} | "
             f"{audit['provider_call_counts_match_request_chain'] and audit['provider_call_caps_respected']} | "
             f"{audit['gemini_free_tier_usd_zero']} | "
-            f"{audit['passed_for_observed_records']} |"
+            f"{overall} |"
         )
     lines.extend(
         [
@@ -1690,8 +1793,8 @@ def render_markdown_report(analysis: Mapping[str, Any]) -> str:
             "",
             "## 同块配对比较（unsafe effect）",
             "",
-            "| Provider | Comparison | Complete/expected | Risk difference | Newcombe 95% CI | Stratified bootstrap 95% CI | McNemar p | Holm p |",
-            "|---|---|---:|---:|---|---|---:|---:|",
+            "| Provider | Comparison | Terminal ITT/expected | Response-complete | Unsafe lower-bound RD | Newcombe 95% CI | Stratified bootstrap 95% CI | McNemar p | Holm p |",
+            "|---|---|---:|---:|---:|---|---|---:|---:|",
         ]
     )
     for provider in ("deepseek", "gemini"):
@@ -1707,34 +1810,80 @@ def render_markdown_report(analysis: Mapping[str, Any]) -> str:
                 if bootstrap["degenerate"]
                 else f"[{_fmt_number(bootstrap['ci_low'])}, {_fmt_number(bootstrap['ci_high'])}]"
             )
+            estimable = bool(item["inferentially_estimable"])
+            risk_text = _fmt_number(interval["estimate"]) if estimable else "NE"
+            interval_text = (
+                f"[{_fmt_number(interval['ci_low'])}, {_fmt_number(interval['ci_high'])}]"
+                if estimable
+                else "NE"
+            )
+            bootstrap_text = bootstrap_interval if estimable else "NE"
+            mcnemar_text = (
+                _fmt_number(item["mcnemar_exact"]["p_value"])
+                if estimable
+                else "NE"
+            )
+            holm_text = _fmt_number(item["holm_adjusted_p"]) if estimable else "NE"
             lines.append(
                 f"| {provider} | {name} | {item['complete_pairs']}/{item['expected_pairs']} | "
-                f"{_fmt_number(interval['estimate'])} | "
-                f"[{_fmt_number(interval['ci_low'])}, {_fmt_number(interval['ci_high'])}] | "
-                f"{bootstrap_interval} | "
-                f"{_fmt_number(item['mcnemar_exact']['p_value'])} | "
-                f"{_fmt_number(item['holm_adjusted_p'])} |"
+                f"{item['response_complete_pairs']}/{item['expected_pairs']} | "
+                f"{risk_text} | {interval_text} | {bootstrap_text} | "
+                f"{mcnemar_text} | {holm_text} |"
             )
+    ds_vigil = providers["deepseek"]["paired_comparisons"]["unsafe_effect"][
+        "comparisons"
+    ]["vigil_vs_no_defense"]
+    strata = ds_vigil["benchmark_strata"]
+    direction_values = [
+        float(value["risk_difference"])
+        for value in strata.values()
+        if value["risk_difference"] is not None
+    ]
+    directions_differ = any(value > 0 for value in direction_values) and any(
+        value < 0 for value in direction_values
+    )
+    lines.extend(
+        [
+            "",
+            "DeepSeek 的 VIGIL−no-defense 描述性风险差按 benchmark 为："
+            + "；".join(
+                f"`{benchmark}` {float(value['risk_difference']):+.3f} "
+                f"(VIGIL {value['treatment_events']}/{value['terminal_itt_pairs']}，"
+                f"no-defense {value['baseline_events']}/{value['terminal_itt_pairs']})"
+                for benchmark, value in sorted(strata.items())
+            )
+            + (
+                "。两个分层方向相反，因此 pooled VIGIL 结果不得解释为同质效应。"
+                if directions_differ
+                else "。该分层描述用于限制 pooled 结果的同质性解释。"
+            ),
+        ]
+    )
     lines.extend(
         [
             "",
             "## 2×2 因子诊断",
             "",
-            "| Provider | Endpoint | Effect | Tasks | Estimate | Bootstrap 95% CI |",
+            "| Provider | Endpoint | Effect | Terminal ITT / response-complete / expected | Estimate | Bootstrap 95% CI |",
             "|---|---|---|---:|---:|---|",
         ]
     )
     for provider in ("deepseek", "gemini"):
         for endpoint, factorial in providers[provider]["factorial_2x2"].items():
             for effect, value in factorial["effects"].items():
+                estimable = bool(factorial["inferentially_estimable"])
                 interval = (
                     "DEGENERATE / no zero-width claim"
                     if value["degenerate"]
                     else f"[{_fmt_number(value['ci_low'])}, {_fmt_number(value['ci_high'])}]"
                 )
                 lines.append(
-                    f"| {provider} | {endpoint} | {effect} | {value['tasks']} | "
-                    f"{_fmt_number(value['estimate'])} | {interval} |"
+                    f"| {provider} | {endpoint} | {effect} | "
+                    f"{factorial['terminal_itt_tasks']} / "
+                    f"{factorial['response_complete_tasks']} / "
+                    f"{factorial['expected_tasks']} | "
+                    f"{_fmt_number(value['estimate']) if estimable else 'NE'} | "
+                    f"{interval if estimable else 'NE'} |"
                 )
     lines.extend(
         [
@@ -1759,6 +1908,31 @@ def render_markdown_report(analysis: Mapping[str, Any]) -> str:
             f"{cost} | {_fmt_number(latency['p50'])}/{_fmt_number(latency['p95'])} |"
         )
     nested = analysis["nested_provider_diagnostic"]
+    gemini = providers["gemini"]
+    gemini_gate = gemini.get("gate") or {}
+    gemini_close = gemini.get("block_close") or {}
+    nested_effects = nested.get("effect_differences") or {}
+    nested_unsafe = (
+        nested_effects.get("unsafe_effect", {})
+        if isinstance(nested_effects, Mapping)
+        else {}
+    )
+    nested_terminal_pair_counts = [
+        int(value.get("terminal_itt_pairs", 0))
+        for value in nested_unsafe.values()
+        if isinstance(value, Mapping)
+    ]
+    nested_response_pair_counts = [
+        int(value.get("response_complete_pairs", 0))
+        for value in nested_unsafe.values()
+        if isinstance(value, Mapping)
+    ]
+    minimum_nested_terminal_pairs = (
+        min(nested_terminal_pair_counts) if nested_terminal_pair_counts else 0
+    )
+    minimum_nested_response_pairs = (
+        min(nested_response_pair_counts) if nested_response_pair_counts else 0
+    )
     lines.extend(
         [
             "",
@@ -1766,8 +1940,14 @@ def render_markdown_report(analysis: Mapping[str, Any]) -> str:
             "",
             f"- Gemini tasks nested in DeepSeek：`{nested['gemini_tasks_nested_in_deepseek']}`",
             f"- Payload digests matched：`{nested['analysis_payload_digests_match']}`",
+            f"- Minimum terminal ITT nested pairs：`{minimum_nested_terminal_pairs}/{nested['nested_tasks']}`",
+            f"- Minimum response-complete nested pairs：`{minimum_nested_response_pairs}/{nested['nested_tasks']}`",
             "- Cross-provider claim eligible：`false`（固定）",
-            "- 仅允许报告同一 30 个任务上的方向性诊断差，不进行 provider 排名。",
+            "- 完整配对不足时不绘制方向性差值，也不进行 provider 排名。",
+            "",
+            "## Gemini 技术停止说明",
+            "",
+            f"Gemini 前缀在 {gemini['audit']['physical_attempt_rows']} 个物理 attempt 后停止；gate=`{gemini_gate.get('status', 'NOT AVAILABLE')}`，closure=`{gemini_close.get('closure_mode', 'NOT SEALED')}`。持久化证据只保留 response-less `contract_failure:VigilLiveDependencyError`，无法事后区分被上游 VIGIL fallback 吞没的 429 与普通传输异常，因此该行没有重试，其余未触碰项仅作行政 ITT 关闭。",
             "",
             "## 时间信息",
             "",
@@ -1840,6 +2020,13 @@ def _write_tables(analysis: Mapping[str, Any], root: Path) -> None:
                         "endpoint": endpoint,
                         "comparison_id": item["comparison_id"],
                         "complete_pairs": item["complete_pairs"],
+                        "terminal_itt_pairs": item["terminal_itt_pairs"],
+                        "response_complete_pairs": item[
+                            "response_complete_pairs"
+                        ],
+                        "inferentially_estimable": item[
+                            "inferentially_estimable"
+                        ],
                         "expected_pairs": item["expected_pairs"],
                         "risk_difference": item["newcombe_95"]["estimate"],
                         "ci_low": item["newcombe_95"]["ci_low"],
@@ -1897,6 +2084,9 @@ def _write_tables(analysis: Mapping[str, Any], root: Path) -> None:
             "endpoint",
             "comparison_id",
             "complete_pairs",
+            "terminal_itt_pairs",
+            "response_complete_pairs",
+            "inferentially_estimable",
             "expected_pairs",
             "risk_difference",
             "ci_low",
@@ -1937,80 +2127,110 @@ def _svg_document(title: str, body: str, *, width: int = 960, height: int = 540)
 
 def _write_figures(analysis: Mapping[str, Any], root: Path) -> None:
     root.mkdir(parents=True, exist_ok=True)
-    colors = {"deepseek": "#2f6f9f", "gemini": "#d47b29"}
+    unsafe_color = "#2f6f9f"
+    failure_color = "#aac7db"
     body = [
-        '<text x="40" y="38" font-family="sans-serif" font-size="22" font-weight="bold">B1 unsafe-effect rates</text>',
-        '<text x="40" y="62" font-family="sans-serif" font-size="13" fill="#555">Risk-enriched single-block diagnostic; unresolved rows shown separately in tables.</text>',
+        '<text x="40" y="38" font-family="sans-serif" font-size="22" font-weight="bold">DeepSeek B1: unsafe lower bound and failures</text>',
+        '<text x="40" y="62" font-family="sans-serif" font-size="13" fill="#555">Unsafe is the observed lower bound; the lighter segment adds operational failures. Risk-enriched sample.</text>',
     ]
-    bar_width = 46
-    start_x = 80
+    bar_width = 58
+    start_x = 70
     max_height = 330
-    for provider_index, provider in enumerate(("deepseek", "gemini")):
-        for index, condition in enumerate(CONDITIONS):
-            cell = analysis["providers"][provider]["cell_summary"][f"all|{condition}"]
-            rate = cell["unsafe_terminal"]["value"] or 0.0
-            x = start_x + index * 140 + provider_index * (bar_width + 6)
-            height = rate * max_height
-            y = 430 - height
-            body.append(
-                f'<rect x="{x}" y="{y:.2f}" width="{bar_width}" height="{height:.2f}" fill="{colors[provider]}"/>'
-            )
-            body.append(
-                f'<text x="{x + bar_width / 2:.1f}" y="{max(88, y - 5):.1f}" text-anchor="middle" font-family="sans-serif" font-size="11">{cell["unsafe_count"]}/{cell["scientific_terminal_latest"]}</text>'
-            )
-            if provider_index == 0:
-                label = CONDITION_LABELS[condition].replace(" / ", "/")
-                body.append(
-                    f'<text x="{x + bar_width + 3}" y="462" text-anchor="middle" font-family="sans-serif" font-size="10" transform="rotate(-28 {x + bar_width + 3} 462)">{html.escape(label)}</text>'
-                )
+    for index, condition in enumerate(CONDITIONS):
+        cell = analysis["providers"]["deepseek"]["cell_summary"][f"all|{condition}"]
+        denominator = int(cell["scientific_terminal_latest"])
+        unsafe = int(cell["unsafe_count"])
+        failures = int(cell["operational_failure_count"])
+        unsafe_height = (unsafe / denominator * max_height) if denominator else 0.0
+        failure_height = (failures / denominator * max_height) if denominator else 0.0
+        x = start_x + index * 142
+        unsafe_y = 430 - unsafe_height
+        failure_y = unsafe_y - failure_height
+        body.append(
+            f'<rect x="{x}" y="{unsafe_y:.2f}" width="{bar_width}" height="{unsafe_height:.2f}" fill="{unsafe_color}"/>'
+        )
+        body.append(
+            f'<rect x="{x}" y="{failure_y:.2f}" width="{bar_width}" height="{failure_height:.2f}" fill="{failure_color}"/>'
+        )
+        body.append(
+            f'<text x="{x + bar_width / 2:.1f}" y="{max(164, failure_y - 6):.1f}" text-anchor="middle" font-family="sans-serif" font-size="11">U {unsafe} · F {failures} / {denominator}</text>'
+        )
+        label = CONDITION_LABELS[condition].replace(" / ", "/")
+        body.append(
+            f'<text x="{x + bar_width / 2:.1f}" y="462" text-anchor="middle" font-family="sans-serif" font-size="10" transform="rotate(-25 {x + bar_width / 2:.1f} 462)">{html.escape(label)}</text>'
+        )
     body.extend(
         [
             '<line x1="55" y1="430" x2="930" y2="430" stroke="#333"/>',
-            f'<rect x="690" y="30" width="14" height="14" fill="{colors["deepseek"]}"/><text x="710" y="42" font-family="sans-serif" font-size="12">DeepSeek</text>',
-            f'<rect x="790" y="30" width="14" height="14" fill="{colors["gemini"]}"/><text x="810" y="42" font-family="sans-serif" font-size="12">Gemini</text>',
+            f'<rect x="60" y="88" width="14" height="14" fill="{unsafe_color}"/><text x="80" y="100" font-family="sans-serif" font-size="12">unsafe observed</text>',
+            f'<rect x="200" y="88" width="14" height="14" fill="{failure_color}"/><text x="220" y="100" font-family="sans-serif" font-size="12">failure add-on</text>',
+        ]
+    )
+    gm_audit = analysis["providers"]["gemini"]["audit"]
+    gm_technical = analysis["providers"]["gemini"]["technical_audit"]
+    body.extend(
+        [
+            '<rect x="575" y="82" width="355" height="68" rx="5" fill="#f2f2f2" stroke="#999"/>',
+            '<text x="590" y="104" font-family="sans-serif" font-size="12" font-weight="bold">Gemini rate not plotted — diagnostic coverage only</text>',
+            f'<text x="590" y="125" font-family="sans-serif" font-size="11" fill="#555">{gm_technical["response_bearing_physical_attempts"]} responses; {gm_audit["scientific_terminal_latest_work_items"] - gm_technical["response_bearing_physical_attempts"]} response-less fatal; {gm_audit["administrative_closure_work_items"]} administrative closures</text>',
+            '<text x="590" y="142" font-family="sans-serif" font-size="11" fill="#555">No Gemini condition rate or cross-provider effect is estimable.</text>',
         ]
     )
     (root / "activity_conditions_v2.svg").write_text(
-        _svg_document("B1 unsafe-effect condition rates", "\n".join(body)),
+        _svg_document("DeepSeek B1 unsafe lower bounds and failures", "\n".join(body)),
         encoding="utf-8",
     )
 
     nested = analysis["nested_provider_diagnostic"]
-    body = [
-        '<text x="40" y="38" font-family="sans-serif" font-size="22" font-weight="bold">Nested provider directional diagnostic</text>',
-        '<text x="40" y="62" font-family="sans-serif" font-size="13" fill="#555">Gemini risk difference minus DeepSeek risk difference; no provider ranking.</text>',
-        '<line x1="480" y1="90" x2="480" y2="480" stroke="#777" stroke-dasharray="5 4"/>',
-    ]
     effects = nested.get("effect_differences") or {}
     unsafe = effects.get("unsafe_effect", {}) if isinstance(effects, Mapping) else {}
-    for index, (name, _, _) in enumerate(PRIMARY_COMPARISONS):
-        value = unsafe.get(name, {}) if isinstance(unsafe, Mapping) else {}
-        estimate = value.get("estimate")
-        y = 130 + index * 82
+    terminal_pair_counts = [
+        int(value.get("terminal_itt_pairs", 0))
+        for value in unsafe.values()
+        if isinstance(value, Mapping)
+    ]
+    response_pair_counts = [
+        int(value.get("response_complete_pairs", 0))
+        for value in unsafe.values()
+        if isinstance(value, Mapping)
+    ]
+    minimum_terminal_pairs = min(terminal_pair_counts) if terminal_pair_counts else 0
+    minimum_response_pairs = min(response_pair_counts) if response_pair_counts else 0
+    nested_tasks = int(nested.get("nested_tasks", 0))
+    scale = 500 / nested_tasks if nested_tasks else 0.0
+    body = [
+        '<text x="40" y="38" font-family="sans-serif" font-size="22" font-weight="bold">Nested provider evidence availability</text>',
+        '<text x="40" y="62" font-family="sans-serif" font-size="13" fill="#555">Not estimable: incomplete Gemini coverage; no effect points and no provider ranking.</text>',
+    ]
+    coverage = (
+        ("Planned nested tasks", nested_tasks, "#c7c7c7"),
+        ("Minimum terminal ITT pairs", minimum_terminal_pairs, "#d47b29"),
+        ("Minimum response-complete pairs", minimum_response_pairs, "#8b2f2f"),
+    )
+    for index, (label, count, color) in enumerate(coverage):
+        y = 125 + index * 80
         body.append(
-            f'<text x="40" y="{y + 5}" font-family="sans-serif" font-size="13">{html.escape(name)}</text>'
+            f'<text x="40" y="{y + 20}" font-family="sans-serif" font-size="13">{html.escape(label)}</text>'
         )
-        if estimate is None:
+        body.append(
+            f'<rect x="300" y="{y}" width="500" height="30" rx="3" fill="#eeeeee"/>'
+        )
+        if count:
             body.append(
-                f'<text x="520" y="{y + 5}" font-family="sans-serif" font-size="13" fill="#777">NA / incomplete pairs</text>'
+                f'<rect x="300" y="{y}" width="{count * scale:.2f}" height="30" rx="3" fill="{color}"/>'
             )
-        else:
-            x = 480 + float(estimate) * 320
-            body.append(
-                f'<circle cx="{x:.2f}" cy="{y}" r="7" fill="#5a3d8e"/>'
-            )
-            body.append(
-                f'<text x="{x + 12:.2f}" y="{y + 5}" font-family="sans-serif" font-size="12">{float(estimate):.3f}</text>'
-            )
+        body.append(
+            f'<text x="815" y="{y + 20}" font-family="sans-serif" font-size="13">{count}/{nested_tasks}</text>'
+        )
     body.extend(
         [
-            '<text x="160" y="510" font-family="sans-serif" font-size="12">−1</text>',
-            '<text x="475" y="510" font-family="sans-serif" font-size="12">0</text>',
-            '<text x="796" y="510" font-family="sans-serif" font-size="12">+1</text>',
+            '<rect x="300" y="385" width="500" height="76" rx="6" fill="#fff1f1" stroke="#8b2f2f"/>',
+            '<text x="550" y="417" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#8b2f2f">NA / incomplete pairs</text>',
+            '<text x="550" y="443" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#555">Cross-provider effect is not estimable from this block.</text>',
         ]
     )
     (root / "nested_provider_diagnostic_v2.svg").write_text(
-        _svg_document("Nested provider diagnostic effect differences", "\n".join(body)),
+        _svg_document("Nested provider evidence availability", "\n".join(body)),
         encoding="utf-8",
     )
 

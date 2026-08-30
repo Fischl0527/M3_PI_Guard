@@ -24,6 +24,8 @@ from experiments.paper_v2.official_provider_executor import (
     OfficialProviderClient,
     OfficialProviderCompletion,
     ProviderBudgetState,
+    ProviderPausedError,
+    ProviderTransportError,
     provider_receipt_to_attestation,
 )
 from experiments.paper_v2.structural_baselines import (
@@ -71,6 +73,8 @@ class _OfficialProviderOpenAIFacade:
             completions=SimpleNamespace(create=self._create)
         )
         self.completions: list[OfficialProviderCompletion] = []
+        self.provider_exception: ProviderTransportError | None = None
+        self.provider_calls_attempted = 0
 
     def _create(self, **kwargs: Any) -> Any:
         allowed = {
@@ -109,10 +113,17 @@ class _OfficialProviderOpenAIFacade:
             }
             for message in messages
         ]
-        completion = self._client.complete(
-            normalized,
-            step=len(self.completions) + 1,
-        )
+        if self.provider_calls_attempted >= 1:
+            raise VigilLiveDependencyError(
+                "VIGIL constraint generation attempted more than one "
+                "provider call"
+            )
+        self.provider_calls_attempted += 1
+        try:
+            completion = self._client.complete(normalized, step=1)
+        except (ProviderPausedError, ProviderTransportError) as exc:
+            self.provider_exception = exc
+            raise
         self.completions.append(completion)
         return SimpleNamespace(
             choices=[
@@ -169,6 +180,8 @@ class VigilOfficialConstraintFactory:
                 )
             finally:
                 client_utils.create_openai_client_for_model = original
+        if facade.provider_exception is not None:
+            raise facade.provider_exception
         metadata = constraint_set.metadata
         if (
             not isinstance(metadata, Mapping)

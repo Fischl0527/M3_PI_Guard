@@ -1,0 +1,13 @@
+provider,condition_id,physical_attempt_rows,provider_calls,tokens_total,latency_p50_ms,latency_p95_ms,cost_json
+deepseek,m3_full,60,85.0,113364.0,2503.6871,8421.265219999997,"{""CNY"":0.359934}"
+deepseek,m3_full_normal_prompt,60,92.0,128819.0,2730.9865,9162.3551,"{""CNY"":0.3822642}"
+deepseek,m3_policy_only,61,84.0,125219.0,2469.8600500000002,9592.4751,"{""CNY"":0.2126238}"
+deepseek,m3_policy_safe_prompt,60,84.0,110097.0,2468.8031499999997,8478.496325,"{""CNY"":0.3596778}"
+deepseek,no_defense,60,204.0,311506.0,5535.8686,18070.969924999998,"{""CNY"":0.7467528}"
+deepseek,strongest_peer_reviewed_structural_baseline,60,277.0,453346.0,10081.43605,31365.68669499999,"{""CNY"":1.5733542}"
+gemini,m3_full,1,1.0,1241.0,7779.9499,7779.9499,"{""USD"":0.0}"
+gemini,m3_full_normal_prompt,1,1.0,1195.0,2701.0769,2701.0769,"{""USD"":0.0}"
+gemini,m3_policy_only,1,1.0,1195.0,11823.1328,11823.1328,"{""USD"":0.0}"
+gemini,m3_policy_safe_prompt,1,1.0,1241.0,19135.4488,19135.4488,"{""USD"":0.0}"
+gemini,no_defense,1,2.0,2800.0,6654.9722,6654.9722,"{""USD"":0.0}"
+gemini,strongest_peer_reviewed_structural_baseline,1,1.0,0.0,,,"{""USD"":0.0}"

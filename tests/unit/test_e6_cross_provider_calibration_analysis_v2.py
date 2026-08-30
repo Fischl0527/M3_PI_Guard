@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import hashlib
 import inspect
 import json
@@ -777,6 +778,9 @@ def test_paired_newcombe_mcnemar_holm_and_factorial_are_computed() -> None:
     ]
 
     assert comparison["complete_pairs"] == 2
+    assert comparison["terminal_itt_pairs"] == 2
+    assert comparison["response_complete_pairs"] == 2
+    assert comparison["inferentially_estimable"] is True
     assert comparison["newcombe_95"]["estimate"] == -1.0
     assert comparison["mcnemar_exact"]["treatment_only_event"] == 0
     assert 0.0 <= comparison["holm_adjusted_p"] <= 1.0
@@ -786,6 +790,10 @@ def test_paired_newcombe_mcnemar_holm_and_factorial_are_computed() -> None:
     assert comparison["paired_task_bootstrap_95"]["tasks"] == 2
     factors = result["factorial_2x2"]["unsafe_effect"]
     assert factors["complete_tasks"] == 2
+    assert factors["terminal_itt_tasks"] == 2
+    assert factors["response_complete_tasks"] == 2
+    assert factors["expected_tasks"] == 2
+    assert factors["inferentially_estimable"] is True
     assert factors["effects"]["module"]["estimate"] == 0.5
     assert factors["effects"]["prompt"]["estimate"] == 0.5
     assert factors["effects"]["module_x_prompt"]["estimate"] == -1.0
@@ -815,6 +823,7 @@ def test_seal_time_and_gemini_diagnostic_boundary_are_preserved() -> None:
     assert value["nested_provider_diagnostic"]["cross_provider_claim_eligible"] is False
     assert value["nested_provider_diagnostic"]["gemini_permanently_diagnostic"] is True
     assert value["analysis_boundaries"]["temporal_replication_claim"] is False
+    assert value["verification_status"] == "ANALYZED_B1_COMPLETE_DIAGNOSTIC"
 
 
 def test_technical_audit_checks_free_tier_tools_and_call_caps() -> None:
@@ -914,12 +923,143 @@ def test_write_outputs_renders_json_markdown_three_csv_and_two_svg(
     assert "Cross-provider claim eligible：`false`" in report
     assert "all_rows_terminal" in report
     assert "## 技术审计" in report
+    assert "只审计已经物理执行的记录" in report
     assert len(list((tmp_path / "tables").glob("*.csv"))) == 3
     assert len(list((tmp_path / "figures").glob("*.svg"))) == 2
     assert all(
         "<svg" in path.read_text(encoding="utf-8")
         for path in (tmp_path / "figures").glob("*.svg")
     )
+
+
+def test_partial_gemini_figures_do_not_visualize_one_pair_as_equivalence(
+    tmp_path: Path,
+) -> None:
+    ds_plan, ds_raw = _fixture("deepseek", tasks=2)
+    gm_plan, gm_raw = _fixture("gemini", tasks=2)
+    retained_task = str(gm_plan[0]["underlying_task_id"])
+    partial_raw = [
+        row for row in gm_raw if str(row["underlying_task_id"]) == retained_task
+    ]
+    vigil_row = next(
+        row
+        for row in partial_raw
+        if row["condition_id"]
+        == "strongest_peer_reviewed_structural_baseline"
+    )
+    vigil_row["response_obtained"] = False
+    vigil_row["operational_status"] = "contract_failure"
+    vigil_row["provider_requests"] = [
+        {
+            "local_request_id": "gemini-vigil-response-less",
+            "payload_sha256": "f" * 64,
+        }
+    ]
+    vigil_row["returned_models"] = []
+    missing = {
+        str(row["work_key"])
+        for row in gm_plan
+        if str(row["underlying_task_id"]) != retained_task
+    }
+    for row in gm_plan:
+        if str(row["work_key"]) in missing:
+            partial_raw.append(
+                _closure(row, status="provider_block_unavailable")
+            )
+    gemini_gate = _gate("gemini")
+    gemini_gate["status"] = "failed"
+    gemini_gate["gate_passed"] = False
+    gemini_close = _close("gemini", plan_rows=gm_plan, raw_rows=partial_raw)
+    gemini_close["gate_status"] = "failed"
+    value = analysis.analyze_all(
+        deepseek_plan=ds_plan,
+        deepseek_raw=ds_raw,
+        gemini_plan=gm_plan,
+        gemini_raw=partial_raw,
+        deepseek_gate=_gate("deepseek"),
+        gemini_gate=gemini_gate,
+        deepseek_close=_close("deepseek", plan_rows=ds_plan, raw_rows=ds_raw),
+        gemini_close=gemini_close,
+        bootstrap_replicates=20,
+    )
+    assert value["verification_status"] == (
+        "ANALYZED_DEEPSEEK_COMPLETE_GEMINI_DIAGNOSTIC_GATE_FAILED"
+    )
+    analysis.write_outputs(value, output_root=tmp_path)
+    report = (tmp_path / "report_v2.md").read_text(encoding="utf-8")
+
+    activity = (tmp_path / "figures/activity_conditions_v2.svg").read_text(
+        encoding="utf-8"
+    )
+    nested = (tmp_path / "figures/nested_provider_diagnostic_v2.svg").read_text(
+        encoding="utf-8"
+    )
+    assert "Gemini rate not plotted" in activity
+    assert "response-less fatal" in activity
+    assert "administrative closures" in activity
+    assert "Not estimable" in nested
+    assert "NA / incomplete pairs" in nested
+    assert "Terminal ITT/expected" in report
+    assert "Response-complete" in report
+    assert "| gemini | unsafe_effect | module | 1 / 1 / 2 | NE | NE |" in report
+    comparison = value["providers"]["gemini"]["paired_comparisons"][
+        "unsafe_effect"
+    ]["comparisons"]
+    assert comparison["vigil_vs_no_defense"]["terminal_itt_pairs"] == 1
+    assert comparison["vigil_vs_no_defense"]["response_complete_pairs"] == 0
+    assert comparison["full_safe_vs_no_defense"]["terminal_itt_pairs"] == 1
+    assert comparison["full_safe_vs_no_defense"]["response_complete_pairs"] == 1
+    with (tmp_path / "tables/paired_effects_v2.csv").open(
+        encoding="utf-8", newline=""
+    ) as handle:
+        paired_rows = list(csv.DictReader(handle))
+    vigil_csv = next(
+        row
+        for row in paired_rows
+        if row["provider"] == "gemini"
+        and row["endpoint"] == "unsafe_effect"
+        and row["comparison_id"] == "vigil_vs_no_defense"
+    )
+    assert vigil_csv["terminal_itt_pairs"] == "1"
+    assert vigil_csv["response_complete_pairs"] == "0"
+    assert vigil_csv["inferentially_estimable"] == "False"
+
+
+def test_vigil_pooled_result_reports_opposite_benchmark_directions() -> None:
+    def unsafe(task_index: int, condition: str) -> bool:
+        target = (
+            "strongest_peer_reviewed_structural_baseline"
+            if task_index % 2 == 0
+            else "no_defense"
+        )
+        return condition == target
+
+    ds_plan, ds_raw = _fixture("deepseek", tasks=4, unsafe=unsafe)
+    gm_plan, gm_raw = _fixture("gemini", tasks=4)
+    value = analysis.analyze_all(
+        deepseek_plan=ds_plan,
+        deepseek_raw=ds_raw,
+        gemini_plan=gm_plan,
+        gemini_raw=gm_raw,
+        deepseek_gate=_gate("deepseek"),
+        gemini_gate=_gate("gemini"),
+        deepseek_close=_close("deepseek", plan_rows=ds_plan, raw_rows=ds_raw),
+        gemini_close=_close("gemini", plan_rows=gm_plan, raw_rows=gm_raw),
+        bootstrap_replicates=20,
+    )
+    comparison = value["providers"]["deepseek"]["paired_comparisons"][
+        "unsafe_effect"
+    ]["comparisons"]["vigil_vs_no_defense"]
+    agentdojo = comparison["benchmark_strata"]["agentdojo-v1"]
+    m3v2 = comparison["benchmark_strata"]["m3-v2"]
+
+    assert agentdojo["baseline_events"] == 0
+    assert agentdojo["treatment_events"] == 2
+    assert agentdojo["risk_difference"] == 1.0
+    assert m3v2["baseline_events"] == 2
+    assert m3v2["treatment_events"] == 0
+    assert m3v2["risk_difference"] == -1.0
+    assert "方向相反" in analysis.render_markdown_report(value)
 
 
 @pytest.mark.parametrize(

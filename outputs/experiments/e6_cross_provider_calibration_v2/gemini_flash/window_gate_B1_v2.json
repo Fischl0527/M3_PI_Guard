@@ -1,0 +1,25 @@
+{
+  "complete_request_chain": false,
+  "exact_returned_model": true,
+  "execution_block_id": "B1",
+  "execution_block_role": "single_diagnostic_execution_block",
+  "gate_passed": false,
+  "gemini_free_tier_usd_zero": false,
+  "no_repeated_systemic_error": true,
+  "observed_prefix_rows": 6,
+  "online_field_isolation": false,
+  "parseable_terminal_rows": 5,
+  "planned_prefix_rows": 12,
+  "provider_id": "gemini",
+  "provider_tools_and_external_effects_zero": false,
+  "replicate_window": "B1",
+  "runtime_provider_failure_rows": 0,
+  "schema_version": "m3-paper-v2-e6-window-gate-2.0",
+  "scientific_outcomes_inspected": false,
+  "status": "failed",
+  "study_id": "m3-q2-e6-cross-provider-calibration-v2",
+  "systemic_failure_counts": {
+    "contract_failure:VigilLiveDependencyError": 1
+  },
+  "temporal_replication_claim": false
+}

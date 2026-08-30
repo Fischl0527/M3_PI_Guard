@@ -1,5 +1,25 @@
 # 会话移交
 
+## 2026-08-31 — E6-v2 B1 closed; no provider continuation pending
+
+- E6-v2 is a completed single diagnostic block, not a temporal replicate.
+  DeepSeek is 360/360 response-bearing and sealed `all_rows_terminal`; Gemini is
+  sealed `fatal_stop` with 5 response-bearing rows, 1 response-less VIGIL
+  contract failure and 174 administrative ITT closures at USD 0.
+- Do not resume either provider. Successful/response-bearing rows and the
+  ambiguous Gemini fatal row are immutable. A future cross-provider study must
+  use a new versioned design and fresh work keys rather than repairing B1.
+- Public reader outputs are under
+  `outputs/experiments/e6_cross_provider_calibration_v2/`: `report_v2.md`,
+  `analysis_v2.json`, three CSV tables and two SVG figures. Gemini effects are
+  deliberately NE because minimum response-complete nested coverage is 0/30.
+- The forward-only VIGIL facade now preserves exact paused/transport exceptions;
+  it has no retry and does not alter B1 evidence. Focused verification is
+  134 passed plus Ruff/compile/JSON/diff and visual QA.
+- Preserve unrelated dirty `external/paper_v2_audits/drift` and `toolsafe` paths.
+  The next legitimate action is manuscript/claim-ledger integration; the wider
+  `F-PAPER-002` remains in progress for author and submission work.
+
 ## 2026-08-31 — E6-v2 DeepSeek B1 sealed; Gemini prefix next
 
 - DeepSeek is closed at 360/360 terminal and response-bearing logical rows,

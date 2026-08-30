@@ -1,0 +1,56 @@
+{
+  "administrative_closure_rows": 174,
+  "closure_mode": "fatal_stop",
+  "condition_counts": {
+    "m3_full": {
+      "administrative_closure": 29,
+      "planned": 30,
+      "response_bearing": 1
+    },
+    "m3_full_normal_prompt": {
+      "administrative_closure": 29,
+      "planned": 30,
+      "response_bearing": 1
+    },
+    "m3_policy_only": {
+      "administrative_closure": 29,
+      "planned": 30,
+      "response_bearing": 1
+    },
+    "m3_policy_safe_prompt": {
+      "administrative_closure": 29,
+      "planned": 30,
+      "response_bearing": 1
+    },
+    "no_defense": {
+      "administrative_closure": 29,
+      "planned": 30,
+      "response_bearing": 1
+    },
+    "strongest_peer_reviewed_structural_baseline": {
+      "administrative_closure": 29,
+      "planned": 30,
+      "response_bearing": 0
+    }
+  },
+  "elapsed_seconds": 423.887543,
+  "execution_block_completed_at": "2026-08-31T03:02:11.447547+08:00",
+  "execution_block_id": "B1",
+  "execution_block_role": "single_diagnostic_execution_block",
+  "execution_block_started_at": "2026-08-31T02:55:07.560004+08:00",
+  "external_effects_enabled": false,
+  "fatal_provider_stop": true,
+  "gate_status": "failed",
+  "planned_rows": 180,
+  "provider_block_unavailable_rows": 174,
+  "provider_id": "gemini",
+  "provider_tools_enabled": false,
+  "provider_unavailable_evidence": null,
+  "response_bearing_rows": 5,
+  "schema_version": "m3-paper-v2-e6-block-seal-2.0",
+  "status": "sealed",
+  "study_id": "m3-q2-e6-cross-provider-calibration-v2",
+  "technical_gate_not_extended_rows": 0,
+  "temporal_replication_claim": false,
+  "terminal_rows": 180
+}

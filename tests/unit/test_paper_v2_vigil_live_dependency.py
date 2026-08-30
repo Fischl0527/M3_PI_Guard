@@ -8,7 +8,9 @@ import pytest
 from experiments.paper_v2.official_provider_executor import (
     HTTPResponseEnvelope,
     OfficialProviderClient,
+    ProviderPausedError,
     ProviderBudgetState,
+    ProviderTransportError,
 )
 from experiments.paper_v2.vigil_live_dependency import (
     DEFAULT_BUDGET_POLICY,
@@ -91,6 +93,59 @@ def test_vigil_bridge_rejects_official_default_fallback() -> None:
             "Read a public report.",
             client,
         )
+
+
+@pytest.mark.parametrize(
+    ("exception_type", "message"),
+    [
+        (ProviderPausedError, "synthetic provider pause"),
+        (ProviderTransportError, "synthetic provider transport failure"),
+    ],
+)
+def test_vigil_bridge_rethrows_provider_failure_without_retry(
+    monkeypatch: pytest.MonkeyPatch,
+    exception_type: type[ProviderTransportError],
+    message: str,
+) -> None:
+    client = _client("unused")
+    calls = 0
+    root_cause = OSError("synthetic socket failure")
+
+    def fail_once(messages, *, step):
+        nonlocal calls
+        del messages
+        calls += 1
+        assert step == 1
+        try:
+            raise root_cause
+        except OSError as exc:
+            raise exception_type(message) from exc
+
+    monkeypatch.setattr(client, "complete", fail_once)
+
+    with pytest.raises(exception_type) as caught:
+        VigilOfficialConstraintFactory()(
+            None,
+            "Read a public report.",
+            client,
+        )
+
+    assert calls == 1
+    assert caught.value.args == (message,)
+    assert caught.value.__cause__ is root_cause
+
+
+def test_vigil_bridge_keeps_parse_fallback_classification() -> None:
+    client = _client("not valid JSON")
+
+    with pytest.raises(VigilLiveDependencyError, match="silently fell back") as caught:
+        VigilOfficialConstraintFactory()(
+            None,
+            "Read a public report.",
+            client,
+        )
+
+    assert not isinstance(caught.value, ProviderTransportError)
 
 
 def test_vigil_qualification_does_not_persist_query_or_raw_response() -> None:

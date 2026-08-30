@@ -2,6 +2,24 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-08-31 — Close incomplete Gemini B1 without retry or effect estimate
+
+- Evidence decision: the response-less Gemini VIGIL fatal cannot be attributed
+  to quota, transport or model behavior because the pinned upstream fallback
+  erased the original exception class. It remains terminal ITT evidence and is
+  not retried; 174 untouched rows close administratively rather than as safe.
+- Inference decision: 1/30 terminal nested pairs and 0/30 minimum response-
+  complete pairs cannot estimate a cross-provider effect. Markdown, CSV and
+  SVG reader artifacts must show NE/coverage, never a plotted zero effect or a
+  DeepSeek n=60 versus Gemini n=1 rate comparison.
+- Engineering decision: prospectively preserve only exact paused/transport
+  exceptions around the single VIGIL provider call and rethrow them before the
+  generic fallback check. This is forward-only observability, not permission to
+  replay current or historical rows.
+- Scope decision: DeepSeek B1 remains useful contemporaneous risk-enriched
+  diagnostic evidence, while E6-v2 makes no temporal-repeatability, deployment-
+  prevalence, TCR, provider-ranking or formal cross-vendor claim.
+
 ## 2026-08-31 — Close E6-v2 through one independently sealed B1 block
 
 - Owner authorization: plan, audit and execute E6-v2 autonomously until its
