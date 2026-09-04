@@ -1,19 +1,15 @@
-\begin{landscape}
+\clearpage
+\begin{sidewaystable}[p]
+\centering
+\begin{minipage}{\textheight}
+\centering
 \begingroup
 \footnotesize
-\setlength{\LTpre}{0.5\baselineskip}
-\setlength{\LTpost}{0.5\baselineskip}
-\begin{longtable}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
-\caption{E6 DeepSeek activity and operational outcomes}\label{tab:s11} \\
+\caption{E6 DeepSeek activity and operational outcomes}\label{tab:s11}
+\begin{tabular}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
 \toprule
 Condition & Unsafe effect & Operational failure & Unsafe or failure & ASK events & DENY events \\
 \midrule
-\endfirsthead
-\caption[]{E6 DeepSeek activity and operational outcomes (continued)} \\
-\toprule
-Condition & Unsafe effect & Operational failure & Unsafe or failure & ASK events & DENY events \\
-\midrule
-\endhead
 No defense & 17/60 & 12/60 & 29/60 & 0 & 4 \\
 Source-pinned VIGIL & 16/60 & 8/60 & 24/60 & 0 & 8 \\
 Policy / normal & 2/60 & 7/60 & 9/60 & 31 & 7 \\
@@ -21,6 +17,8 @@ Policy / safe & 1/60 & 2/60 & 3/60 & 21 & 2 \\
 Full / normal & 0/60 & 7/60 & 7/60 & 25 & 18 \\
 Full / safe & 0/60 & 3/60 & 3/60 & 19 & 6 \\
 \bottomrule
-\end{longtable}
+\end{tabular}
 \endgroup
-\end{landscape}
+\end{minipage}
+\end{sidewaystable}
+\clearpage

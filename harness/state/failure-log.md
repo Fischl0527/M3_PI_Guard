@@ -1,5 +1,29 @@
 # Failure Log
 
+## 2026-09-04 — Earlier visual QA missed rotated template footers
+
+- The initial LaTeX migration used `pdflscape/landscape` for six-column and wider
+  tables. Although the supplied `cumcmthesis` template itself specified A4,
+  25 mm margins and a centered footer, `pdflscape` added `/Rotate 90` to those PDF
+  pages. The footer therefore appeared vertically on the left, and the displayed
+  margins no longer matched the surrounding portrait pages.
+- The earlier page overview checked table clipping and readability but incorrectly
+  accepted the rotated page geometry. The missing acceptance tests were physical
+  page rotation and page-number coordinates, not a defect in the supplied class.
+- The generator now rotates only wide-table contents with `sidewaystable`.
+  Recovery reran only the affected generator test and three document builds.
+  PDF-level checks now require every page to have `rotation=0`, the template PDF
+  to remain A4, and visible page numbers to stay within the relevant bottom-center
+  coordinate gate; all 112 checked page numbers pass. No experimental record or
+  scientific result was touched.
+- A final read-only inventory probe first assumed a nonexistent generated
+  `references.tex`, then counted all 36 source BibTeX records and looked for figure
+  labels in section files. The hypothesis was corrected rather than repeating the
+  same command: the compiled `.bbl` contains 21 actually used entries, and the
+  generated `figure_*.tex` files contain five labels; the corrected 21-reference,
+  6-main-table, 12-supplement-table and 5-figure gate passes. No source or PDF was
+  changed by these failed probes.
+
 ## 2026-09-04 — LaTeX migration focused recovery
 
 - The first local-template compile stopped on `\citep` because the supplied

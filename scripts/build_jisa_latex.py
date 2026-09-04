@@ -64,11 +64,11 @@ PLACEMENTS = {
     },
 }
 
-# A landscape longtable always starts on a fresh page.  For E6, placing that
-# table after the two short supplementary-table pointers stranded those lines
-# on an otherwise blank portrait page.  The semantic order remains unchanged
-# if the primary result table appears first and the pointers follow it, while
-# the rendered article avoids the isolated-page artefact.
+# A rotated wide-table float always starts on a fresh page.  For E6, placing
+# that table after the two short supplementary-table pointers stranded those
+# lines on an otherwise blank page.  The semantic order remains unchanged if
+# the primary result table appears first and the pointers follow it, while the
+# rendered article avoids the isolated-page artefact.
 PLACEMENTS_BEFORE_TEXT = {
     "4. Results": {
         "Supplementary Table S11 reports the E6 DeepSeek activity and operational outcomes.": (
@@ -429,40 +429,75 @@ def _render_numbered_table(
 ) -> str:
     column_count = len(table.header)
     label_number = label_number or table.number.lower()
-    # Six-column evidence tables already contain long endpoint/interpretation
-    # labels; landscape keeps them readable without scaling text to tiny sizes.
-    landscape = column_count >= 6
-    lines: list[str] = []
-    if landscape:
-        lines.append(r"\begin{landscape}")
-    lines.extend(
-        [
-            r"\begingroup",
-            r"\scriptsize"
-            if column_count >= 7 or table.number == "S12"
-            else r"\footnotesize",
-            r"\setlength{\LTpre}{0.5\baselineskip}",
-            r"\setlength{\LTpost}{0.5\baselineskip}",
-            rf"\begin{{longtable}}{{{_longtable_column_spec(column_count)}}}",
-            rf"\caption{{{_inline(table.title)}}}\label{{tab:{label_number}}} \\",
-            r"\toprule",
-            " & ".join(_inline(cell) for cell in table.header) + r" \\",
-            r"\midrule",
-            r"\endfirsthead",
-            rf"\caption[]{{{_inline(table.title)} (continued)}} \\",
-            r"\toprule",
-            " & ".join(_inline(cell) for cell in table.header) + r" \\",
-            r"\midrule",
-            r"\endhead",
-        ]
+    # Wide evidence tables need the long edge of the sheet, but rotating the
+    # *page* with pdflscape also rotates the template footer and moves its page
+    # number to the left edge.  sidewaystable rotates only the float contents;
+    # the physical page, template geometry, and footer stay portrait.
+    wide = column_count >= 6
+    font_size = (
+        r"\scriptsize" if column_count >= 7 or table.number == "S12" else r"\footnotesize"
     )
-    lines.extend(" & ".join(_inline(cell) for cell in row) + r" \\" for row in table.rows)
-    lines.extend([r"\bottomrule", r"\end{longtable}"])
+    header = " & ".join(_inline(cell) for cell in table.header) + r" \\"
+    body = [" & ".join(_inline(cell) for cell in row) + r" \\" for row in table.rows]
+
+    if wide:
+        lines = [
+            r"\clearpage",
+            r"\begin{sidewaystable}[p]",
+            r"\centering",
+            r"\begin{minipage}{\textheight}",
+            r"\centering",
+            r"\begingroup",
+            font_size,
+            rf"\caption{{{_inline(table.title)}}}\label{{tab:{label_number}}}",
+            rf"\begin{{tabular}}{{{_longtable_column_spec(column_count)}}}",
+            r"\toprule",
+            header,
+            r"\midrule",
+            *body,
+            r"\bottomrule",
+            r"\end{tabular}",
+        ]
+        if table.note:
+            lines.extend(
+                [
+                    r"\par\vspace{0.35\baselineskip}",
+                    r"\noindent\textit{Note.} " + _inline(table.note),
+                ]
+            )
+        lines.extend(
+            [
+                r"\endgroup",
+                r"\end{minipage}",
+                r"\end{sidewaystable}",
+                r"\clearpage",
+            ]
+        )
+        return "\n".join(lines)
+
+    lines = [
+        r"\begingroup",
+        font_size,
+        r"\setlength{\LTpre}{0.5\baselineskip}",
+        r"\setlength{\LTpost}{0.5\baselineskip}",
+        rf"\begin{{longtable}}{{{_longtable_column_spec(column_count)}}}",
+        rf"\caption{{{_inline(table.title)}}}\label{{tab:{label_number}}} \\",
+        r"\toprule",
+        header,
+        r"\midrule",
+        r"\endfirsthead",
+        rf"\caption[]{{{_inline(table.title)} (continued)}} \\",
+        r"\toprule",
+        header,
+        r"\midrule",
+        r"\endhead",
+        *body,
+        r"\bottomrule",
+        r"\end{longtable}",
+    ]
     if table.note:
         lines.append(r"\noindent\textit{Note.} " + _inline(table.note))
     lines.append(r"\endgroup")
-    if landscape:
-        lines.append(r"\end{landscape}")
     return "\n".join(lines)
 
 
@@ -520,7 +555,7 @@ def _official_entry(title: str) -> str:
         rf"\input{{\ProjectRoot/{filename}}}" for filename in SECTION_FILES.values()
     )
     return rf"""\documentclass[preprint,12pt]{{elsarticle}}
-\usepackage{{booktabs,tabularx,longtable,array,graphicx,pdflscape,enumitem,microtype,ragged2e}}
+\usepackage{{booktabs,tabularx,longtable,array,graphicx,rotating,enumitem,microtype,ragged2e}}
 \usepackage[hidelinks]{{hyperref}}
 \usepackage{{xurl}}
 \newcolumntype{{L}}{{>{{\RaggedRight\arraybackslash}}X}}
@@ -558,7 +593,7 @@ def _review_entry(title: str) -> str:
     )
     return rf"""%! TEX program = xelatex
 \documentclass[withoutpreface,bwprint]{{cumcmthesis}}
-\usepackage{{pdflscape,microtype,ragged2e}}
+\usepackage{{rotating,microtype,ragged2e}}
 \usepackage{{xurl}}
 \usepackage[numbers,sort&compress]{{natbib}}
 \newcolumntype{{L}}{{>{{\RaggedRight\arraybackslash}}X}}
@@ -588,6 +623,7 @@ def _review_entry(title: str) -> str:
 \keywords{{\input{{\ProjectRoot/keywords.tex}}}}
 \end{{abstract}}
 \pagenumbering{{arabic}}
+\pagestyle{{plain}}
 
 {section_inputs}
 \input{{\ProjectRoot/declarations.tex}}
@@ -604,7 +640,7 @@ def _supplement_entry(title: str) -> str:
         for number in range(1, 13)
     )
     return rf"""\documentclass[preprint,12pt]{{elsarticle}}
-\usepackage{{booktabs,tabularx,longtable,array,pdflscape,microtype,ragged2e}}
+\usepackage{{booktabs,tabularx,longtable,array,rotating,microtype,ragged2e}}
 \usepackage[hidelinks]{{hyperref}}
 \usepackage{{xurl}}
 \newcolumntype{{L}}{{>{{\RaggedRight\arraybackslash}}X}}

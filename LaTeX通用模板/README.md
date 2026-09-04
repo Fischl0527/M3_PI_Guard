@@ -1,18 +1,23 @@
 # M3-PI Guard LaTeX 稿件
 
-本目录现在包含两种用途明确分离的 LaTeX 入口：
+本目录现在包含两种用途明确分离的 LaTeX 入口。作者审阅时优先打开
+`M3_PI_Guard_template_review.pdf`；它直接使用本目录提供的模板类，而不是 Word
+转换版：
 
 - `M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex`：正式英文投稿主稿，使用
   Elsevier `elsarticle` 类和 `elsarticle-num` 参考文献样式。
 - `M3_PI_Guard_JISA/M3_PI_Guard_JISA_supplement.tex`：独立补充材料，含
   Supplementary Tables S1--S12。
-- `M3_PI_Guard_template_review.tex`：本地排版对照稿，使用本目录原有的
-  `cumcmthesis`、字体和 `gbt7714-numerical.bst`；它不是 JISA 官方模板，
-  也不应作为正式投稿源文件。
+- `M3_PI_Guard_template_review.tex`：模板审阅母版，直接使用本目录原有的
+  `cumcmthesis`、字体和 `gbt7714-numerical.bst`。页面严格继承模板的 A4、
+  四边 25 mm 和底部居中页码；它不是 JISA 官方模板，也不应冒充正式投稿类。
 
 作者、单位和通信作者字段均有意留空，待作者本人在投稿前填写。正文、表格、
 图件和参考文献由当前 Markdown 论文源确定性生成；构建过程不会调用模型 API，
 不会修改实验原始结果。
+
+六列及以上的宽表只旋转表格内容，PDF 纸张、模板页边距与页码均保持纵向；不要
+把这些表改回 `pdflscape/landscape`，否则阅读器会把页码旋到页面左侧。
 
 ## 重新生成源文件
 

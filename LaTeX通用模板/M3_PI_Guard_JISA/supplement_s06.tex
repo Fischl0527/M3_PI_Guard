@@ -1,23 +1,21 @@
-\begin{landscape}
+\clearpage
+\begin{sidewaystable}[p]
+\centering
+\begin{minipage}{\textheight}
+\centering
 \begingroup
 \footnotesize
-\setlength{\LTpre}{0.5\baselineskip}
-\setlength{\LTpost}{0.5\baselineskip}
-\begin{longtable}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
-\caption{Defense-aware adaptive attack}\label{tab:s6} \\
+\caption{Defense-aware adaptive attack}\label{tab:s6}
+\begin{tabular}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
 \toprule
 Model/panel & Budget & Tasks & Unsafe-effect successes & First-success distribution & Saturated? \\
 \midrule
-\endfirsthead
-\caption[]{Defense-aware adaptive attack (continued)} \\
-\toprule
-Model/panel & Budget & Tasks & Unsafe-effect successes & First-success distribution & Saturated? \\
-\midrule
-\endhead
 Primary exploratory cost canary & 50 & 8 & 0 (0.00\%, 95\% CI 0.00--32.44\%) & No successes & No \\
 Primary frozen panel & 50 & 40 & 4 (10.00\%, 95\% CI 3.96--23.05\%) & 4 first successes by query 50 & No \\
 Primary frozen panel & 200 & 40 & 18 (45.00\%, 95\% CI 30.71--60.17\%) & 14 additional first successes at queries 51--200 & No \\
 \bottomrule
-\end{longtable}
+\end{tabular}
 \endgroup
-\end{landscape}
+\end{minipage}
+\end{sidewaystable}
+\clearpage

@@ -1,19 +1,15 @@
-\begin{landscape}
+\clearpage
+\begin{sidewaystable}[p]
+\centering
+\begin{minipage}{\textheight}
+\centering
 \begingroup
 \scriptsize
-\setlength{\LTpre}{0.5\baselineskip}
-\setlength{\LTpost}{0.5\baselineskip}
-\begin{longtable}{@{}*{10}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/10-2\tabcolsep\relax}}@{}}
-\caption{E2 source-authority evidence}\label{tab:3} \\
+\caption{E2 source-authority evidence}\label{tab:3}
+\begin{tabular}{@{}*{10}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/10-2\tabcolsep\relax}}@{}}
 \toprule
 Study & Endpoint & Factor & Paired cases & Effect & CI low & CI high & Bootstrap p & Holm p & Bootstrap n \\
 \midrule
-\endfirsthead
-\caption[]{E2 source-authority evidence (continued)} \\
-\toprule
-Study & Endpoint & Factor & Paired cases & Effect & CI low & CI high & Bootstrap p & Holm p & Bootstrap n \\
-\midrule
-\endhead
 E2 end to end & un\-au\-thor\-ized argument influence & module & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
 E2 end to end & un\-au\-thor\-ized argument influence & source & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
 E2 end to end & un\-au\-thor\-ized argument influence & source x module & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
@@ -25,7 +21,10 @@ E2 end to end & source swap action change & policy & 60 & +0.00 pp & +0.00 pp & 
 E2 offline guard replay & false allow & not applicable & 240 & +0.00 pp & +0.00 pp & +1.58 pp & --- & --- & --- \\
 E2 offline guard replay & false block & not applicable & 240 & +12.50 pp & +8.90 pp & +17.28 pp & --- & --- & --- \\
 \bottomrule
-\end{longtable}
+\end{tabular}
+\par\vspace{0.35\baselineskip}
 \noindent\textit{Note.} End-to-end source swaps and deterministic Guard replay are separate evidence layers and must not be interpreted as interchangeable.
 \endgroup
-\end{landscape}
+\end{minipage}
+\end{sidewaystable}
+\clearpage

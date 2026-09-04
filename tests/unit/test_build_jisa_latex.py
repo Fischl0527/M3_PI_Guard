@@ -49,6 +49,9 @@ def test_builds_shared_official_review_and_supplement_packages(tmp_path: Path) -
     assert r"\newcommand{\ProjectRoot}{.}" in official
     assert r"\newcommand{\ProjectRoot}{M3_PI_Guard_JISA}" in review
     assert r"\usepackage[numbers,sort&compress]{natbib}" in review
+    assert r"\usepackage{rotating,microtype,ragged2e}" in review
+    assert r"\pagestyle{plain}" in review
+    assert "pdflscape" not in official + review + supplement
     assert r"\providecommand{\tightlist}" in official
     assert r"\providecommand{\tightlist}" in review
     assert r"\providecommand{\tightlist}" in supplement
@@ -179,15 +182,24 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
     assert r"\label{tab:5}" in (table_dir / "table_06.tex").read_text(
         encoding="utf-8"
     )
-    assert (table_dir / "table_06.tex").read_text(encoding="utf-8").startswith(
-        r"\begin{landscape}"
-    )
-    assert (table_dir / "supplement_s12.tex").read_text(
+    wide_main = (table_dir / "table_06.tex").read_text(encoding="utf-8")
+    wide_supplement = (table_dir / "supplement_s12.tex").read_text(
         encoding="utf-8"
-    ).startswith(r"\begin{landscape}")
+    )
+    assert wide_main.startswith("\\clearpage\n\\begin{sidewaystable}[p]")
+    assert wide_supplement.startswith("\\clearpage\n\\begin{sidewaystable}[p]")
+    assert r"\begin{minipage}{\textheight}" in wide_main
+    assert r"\begin{tabular}" in wide_main
+    assert r"\begin{longtable}" not in wide_main
+    assert "landscape" not in wide_main + wide_supplement
     assert r"\scriptsize" in (table_dir / "supplement_s12.tex").read_text(
         encoding="utf-8"
     )
+
+    narrow_main = (table_dir / "table_01.tex").read_text(encoding="utf-8")
+    assert narrow_main.startswith(r"\begingroup")
+    assert r"\begin{longtable}" in narrow_main
+    assert "sidewaystable" not in narrow_main
 
 
 def test_places_artifacts_once_and_emits_no_absolute_workspace_paths(

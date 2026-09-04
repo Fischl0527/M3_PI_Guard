@@ -1,5 +1,22 @@
 # 进展记录
 
+## 2026-09-04 — 模板页边距与页码方向修复完成
+
+- 已确认用户截图问题来自生成器附加的 `pdflscape/landscape`：它把整张 PDF 页面
+  标记为 `/Rotate 90`，因此模板原本底部居中的页码随页面旋转到左侧。原
+  `cumcmthesis` 模板实际已加载，并明确提供 A4 与四边 25 mm。
+- 宽表现改用 `rotating/sidewaystable`，只旋转表格、标题和表注；模板审阅稿继续
+  直接继承 `cumcmthesis`，并显式使用普通居中页脚。正式 `elsarticle` 主稿与独立
+  Supplement 同步移除了整页旋转。
+- 重建结果为主稿 54 页、Supplement 12 页、模板审阅稿 49 页。逐页 PDF 几何检查
+  确认三份文件所有页面 `rotation=0` 且物理页面保持纵向；模板页全部为 A4，日志
+  中页边距仍是四边 25 mm。三份 PDF 共 112 个可见页码定位全部通过底部居中门。
+- 定向 pytest 4/4、Ruff、`py_compile` 和三份 XeLaTeX/BibTeX 构建通过；编译日志
+  的 fatal、undefined citation/reference 与 overfull 均为 0。Table 2--6、八张
+  补充宽表和原问题页完成视觉复核，未见裁切、越界或横置页码。
+- 本次仅修改 LaTeX 生成、排版测试、生成稿件与 Harness 记录；作者信息继续为空，
+  实验数据、统计、引用和结论未改，provider/API、Full Harness 与历史重放均为 0。
+
 ## 2026-09-04 — JISA LaTeX 主稿与补充材料迁移完成
 
 - 正式投稿排版已从 Word 切换为 Elsevier `elsarticle`：生成平铺的英文主稿、

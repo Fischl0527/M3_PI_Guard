@@ -1,5 +1,27 @@
 # 会话移交
 
+## 2026-09-04 — Template page geometry repaired; author gate remains
+
+- The user-reported left-side page number was a real generator defect, not a
+  `cumcmthesis` defect. `pdflscape` rotated the entire wide-table page. Generated
+  entries now load `rotating`; wide tables use `sidewaystable`, while narrow tables
+  retain `longtable`. Do not reintroduce `landscape` into generated table files.
+- The author-facing review artifact is
+  `LaTeX通用模板/M3_PI_Guard_template_review.pdf`: 49/49 pages are portrait A4,
+  `/Rotate=0`, with the template's four 25 mm margins and upright bottom-centered
+  pagination. The current official main/supplement PDFs are 54/12 pages and also
+  have no rotated physical pages.
+- Focused generator tests pass 4/4; Ruff, `py_compile`, and all three
+  XeLaTeX/BibTeX builds pass. Across the three PDFs, all 112 visible page-number
+  positions pass; logs contain no fatal, undefined citation/reference or overfull
+  findings. Contact sheets plus the former problem page and every wide table were
+  visually reviewed without clipping.
+- Preserve the untracked original template assets and the unrelated dirty
+  `external/paper_v2_audits/drift` and `toolsafe` paths. The paper feature stays
+  `in_progress` only for author/affiliation/declaration input, author review and
+  institutional submission-time JCR/SCIE confirmation; no API or experiment is
+  required for this layout repair.
+
 ## 2026-09-04 — JISA LaTeX substage verified; author gate remains
 
 - The submission-facing source is now the flat

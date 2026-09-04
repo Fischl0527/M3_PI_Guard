@@ -1,6 +1,6 @@
 %! TEX program = xelatex
 \documentclass[withoutpreface,bwprint]{cumcmthesis}
-\usepackage{pdflscape,microtype,ragged2e}
+\usepackage{rotating,microtype,ragged2e}
 \usepackage{xurl}
 \usepackage[numbers,sort&compress]{natbib}
 \newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
@@ -30,6 +30,7 @@
 \keywords{\input{\ProjectRoot/keywords.tex}}
 \end{abstract}
 \pagenumbering{arabic}
+\pagestyle{plain}
 
 \input{\ProjectRoot/01_introduction.tex}
 \input{\ProjectRoot/02_related_work.tex}

@@ -1,5 +1,32 @@
 # 当前任务
 
+### 2026-09-04 LaTeX 模板页边距与页码方向修复
+
+- 状态：排版修复子任务 `verified`；论文整体仍因作者信息、机构 JCR/SCIE
+  核验和作者终审保持 `in_progress`。
+- 触发：用户截图确认 `M3_PI_Guard_template_review.pdf` 的宽表页出现左侧竖排页码，
+  且页面边距观感偏离所提供模板。
+- 根因：`cumcmthesis` 已正确提供 A4、四边 25 mm 与普通居中页脚，但生成器又把
+  六列及以上表格包装为 `pdflscape/landscape`，使 PDF 页面带 `/Rotate 90`，连同
+  页码和页面方向一起旋转。
+- 目标：继续使用原 `cumcmthesis` 作为模板审阅母版；删除整页旋转，只旋转宽表
+  内容，显式保持普通页脚，使模板 PDF 每页均为 portrait A4、`rotation=0`、页码
+  位于底部中央。Elsevier 主稿与 Supplement 同步消除旋转页。
+- 允许修改：`scripts/build_jisa_latex.py`、对应定向测试、生成的 LaTeX/PDF、
+  `LaTeX通用模板/README.md` 和本任务 Harness 状态。
+- 禁止修改或执行：论文数据、统计、引用与结论，E1--E6 实验/原始证据，任何
+  provider/API，Full Harness、历史证据重放、作者信息，以及既存 dirty external
+  子模块。
+- 验收：三份 PDF 均无 `/Rotate 90` 或横向物理页；模板继续严格继承四边 25 mm；
+  印刷页码底部居中；宽表不裁切；LaTeX 无 fatal、undefined 或 overfull；关键宽表
+  逐页视觉复核；定向 pytest、Ruff 与 `py_compile` 通过后才登记完成。
+- 结果：生成器已用 `rotating/sidewaystable` 替代 `pdflscape/landscape`，只旋转
+  宽表内容。模板审阅稿 49 页全部为 A4、`rotation=0`，主稿 54 页与 Supplement
+  12 页也全部为纵向物理页；三份 PDF 共检查 112 个可见页码位置，均位于各自模板
+  的底部中央。模板日志继续确认四边 25 mm；定向 pytest 4/4、Ruff、`py_compile`
+  以及三份 XeLaTeX/BibTeX 构建均通过，日志无 fatal、undefined 或 overfull。
+  Table 2--6、全部补充宽表和原问题页已逐页视觉复核，无裁切或页码旋转。
+
 ### 2026-09-04 JISA LaTeX 主稿迁移
 
 - 状态：LaTeX 迁移与排版子任务 `verified`；论文整体仍因作者信息、机构

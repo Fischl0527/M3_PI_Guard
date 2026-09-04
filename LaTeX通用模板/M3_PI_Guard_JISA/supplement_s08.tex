@@ -1,19 +1,15 @@
-\begin{landscape}
+\clearpage
+\begin{sidewaystable}[p]
+\centering
+\begin{minipage}{\textheight}
+\centering
 \begingroup
 \footnotesize
-\setlength{\LTpre}{0.5\baselineskip}
-\setlength{\LTpost}{0.5\baselineskip}
-\begin{longtable}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
-\caption{E2 source-authority decisions}\label{tab:s8} \\
+\caption{E2 source-authority decisions}\label{tab:s8}
+\begin{tabular}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
 \toprule
 Evidence layer / cell & ALLOW & ASK & DENY & Operational failure & Executed actions \\
 \midrule
-\endfirsthead
-\caption[]{E2 source-authority decisions (continued)} \\
-\toprule
-Evidence layer / cell & ALLOW & ASK & DENY & Operational failure & Executed actions \\
-\midrule
-\endhead
 End-to-end policy / trusted & --- & 60/60 records & 0/60 & 0/60 & 0/60 \\
 End-to-end policy / untrusted & --- & 53/60 records & 0/60 & 0/60 & 0/60 \\
 End-to-end full / trusted & --- & 57/60 records & 0/60 & 0/60 & 0/60 \\
@@ -23,6 +19,8 @@ Replay policy / untrusted & 60 & 60 & 0 & --- & --- \\
 Replay full / trusted & 60 & 60 & 0 & --- & --- \\
 Replay full / untrusted & 30 & 30 & 60 & --- & --- \\
 \bottomrule
-\end{longtable}
+\end{tabular}
 \endgroup
-\end{landscape}
+\end{minipage}
+\end{sidewaystable}
+\clearpage

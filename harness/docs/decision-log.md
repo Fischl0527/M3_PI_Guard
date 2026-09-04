@@ -2,6 +2,21 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-09-04 — Rotate wide-table contents, never the supplied template page
+
+- The supplied `cumcmthesis` review entry remains the author-facing visual master:
+  its A4 paper, 25 mm margins and centered plain footer are not overridden by the
+  paper generator. The separate `elsarticle` entry remains the submission-facing
+  JISA source because the supplied class is not an Elsevier journal class.
+- Tables with six or more columns use `rotating/sidewaystable` and a
+  `\textheight`-wide minipage. This rotates the table, caption and note only;
+  every PDF page keeps portrait physical geometry and an upright bottom-centered
+  page number. Narrow tables retain `longtable`.
+- Whole-page `pdflscape/landscape` is forbidden for these generated entries
+  because it writes `/Rotate 90` and moves the template footer to the displayed
+  left edge. The decision changes layout only, not table values, prose, labels,
+  citations, experimental evidence or author metadata.
+
 ## 2026-09-04 — Use the supplied LaTeX directory without mislabeling CUMCM as JISA
 
 - The user-supplied `LaTeX通用模板` is retained as the requested workspace and
