@@ -2,6 +2,23 @@
 
 在此记录架构、策略、依赖和工作流决策。
 
+## 2026-09-04 — Use the supplied LaTeX directory without mislabeling CUMCM as JISA
+
+- The user-supplied `LaTeX通用模板` is retained as the requested workspace and
+  visual-reference source, but its `cumcmthesis` class is a Chinese mathematical-
+  modelling competition class rather than an Elsevier journal class.
+- The submission-facing source therefore uses the TeX Live `elsarticle` class and
+  numbered `elsarticle-num` bibliography style, consistent with Elsevier's current
+  official LaTeX guidance. A separate local review entry uses the supplied class
+  without changing or redistributing its class/font assets.
+- Both entries are generated from the same section, table, figure and bibliography
+  files. This prevents the template review copy from diverging scientifically from
+  the submission copy. Author metadata stays empty and all experimental evidence
+  remains immutable.
+- Build artifacts are verified with the existing TeX Live 2026 XeLaTeX/BibTeX
+  toolchain using explicit executable paths; no permanent environment variable,
+  provider call, Full Harness or recursive evidence replay is required.
+
 ## 2026-08-31 — Close incomplete Gemini B1 without retry or effect estimate
 
 - Evidence decision: the response-less Gemini VIGIL fatal cannot be attributed

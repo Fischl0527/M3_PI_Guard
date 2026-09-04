@@ -1,0 +1,22 @@
+\begingroup
+\footnotesize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{Prespecified paired comparisons}\label{tab:s3} \\
+\toprule
+Comparison & Treatment minus baseline & Exact McNemar p & Holm-adjusted p & 10,000-cluster bootstrap 95\% CI \\
+\midrule
+\endfirsthead
+\caption[]{Prespecified paired comparisons (continued)} \\
+\toprule
+Comparison & Treatment minus baseline & Exact McNemar p & Holm-adjusted p & 10,000-cluster bootstrap 95\% CI \\
+\midrule
+\endhead
+Full package vs structural, unsafe effect & \ensuremath{-}22.22 pp & 0.0078125 & 0.03125 & \ensuremath{-}36.11 to \ensuremath{-}8.33 pp \\
+Full vs policy package, unsafe effect & 0.00 pp & 1.0 & 1.0 & 0.00 to 0.00 pp \\
+Full package vs structural, tool TCR & \ensuremath{-}25.00 pp & 0.03125 & 0.09375 & \ensuremath{-}41.67 to \ensuremath{-}8.33 pp \\
+Full vs policy package, tool TCR & \ensuremath{-}4.17 pp & 1.0 & 1.0 & \ensuremath{-}12.50 to 0.00 pp \\
+\bottomrule
+\end{longtable}
+\endgroup

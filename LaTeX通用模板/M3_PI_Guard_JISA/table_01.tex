@@ -1,0 +1,23 @@
+\begingroup
+\footnotesize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{Prompt-by-module factorial design}\label{tab:1} \\
+\toprule
+Condition cell & Prompt & Modules & Authorization & Historical rows reused \\
+\midrule
+\endfirsthead
+\caption[]{Prompt-by-module factorial design (continued)} \\
+\toprule
+Condition cell & Prompt & Modules & Authorization & Historical rows reused \\
+\midrule
+\endhead
+Policy / normal & normal & policy & auto compiled & No \\
+Policy / safe & safe & policy & auto compiled & No \\
+Full / normal & normal & full & auto compiled & No \\
+Full / safe & safe & full & auto compiled & No \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Note.} The four contemporaneous cells cross prompt profile with the runtime module bundle while holding authorization at auto\_compiled.
+\endgroup

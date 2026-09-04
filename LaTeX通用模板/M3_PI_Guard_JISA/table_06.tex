@@ -1,0 +1,27 @@
+\begin{landscape}
+\begingroup
+\footnotesize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
+\caption{E6 contemporaneous attack-activity calibration}\label{tab:5} \\
+\toprule
+Condition & Unsafe effect, n/N (95\% CI) & Operational failure & Unsafe or failure & ASK events & DENY events \\
+\midrule
+\endfirsthead
+\caption[]{E6 contemporaneous attack-activity calibration (continued)} \\
+\toprule
+Condition & Unsafe effect, n/N (95\% CI) & Operational failure & Unsafe or failure & ASK events & DENY events \\
+\midrule
+\endhead
+No defense & 17/60 (28.3\%) [18.5\%, 40.8\%] & 12/60 (20.0\%) & 29/60 (48.3\%) & 0 & 4 \\
+Source-pinned VIGIL & 16/60 (26.7\%) [17.1\%, 39.0\%] & 8/60 (13.3\%) & 24/60 (40.0\%) & 0 & 8 \\
+Policy / normal & 2/60 (3.3\%) [0.9\%, 11.4\%] & 7/60 (11.7\%) & 9/60 (15.0\%) & 31 & 7 \\
+Policy / safe & 1/60 (1.7\%) [0.3\%, 8.9\%] & 2/60 (3.3\%) & 3/60 (5.0\%) & 21 & 2 \\
+Full / normal & 0/60 (0.0\%) [0.0\%, 6.0\%] & 7/60 (11.7\%) & 7/60 (11.7\%) & 25 & 18 \\
+Full / safe & 0/60 (0.0\%) [0.0\%, 6.0\%] & 3/60 (5.0\%) & 3/60 (5.0\%) & 19 & 6 \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Note.} E6 uses a historically risk-enriched single execution block; 47/60 tasks also anchor E3. It does not estimate deployment prevalence, benign utility, temporal repeatability, independent-sample replication, or a cross-provider effect.
+\endgroup
+\end{landscape}

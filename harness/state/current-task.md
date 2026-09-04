@@ -1,5 +1,27 @@
 # 当前任务
 
+### 2026-09-04 JISA LaTeX 主稿迁移
+
+- 状态：LaTeX 迁移与排版子任务 `verified`；论文整体仍因作者信息、机构
+  JCR/SCIE 核验和作者终审保持 `in_progress`。
+- 目标：以当前 E1--E6 英文稿、参考文献、六张主表、十二张补充表和五幅矢量图为
+  唯一内容源，在用户提供的 `LaTeX通用模板/` 工作区生成可编辑、可编译的 LaTeX
+  主稿与补充材料；作者、单位和通讯作者继续留空。
+- 格式决策：原 `cumcmthesis` 是 CUMCM 数模竞赛类，不冒充 JISA 官方模板。正式
+  主入口采用 Elsevier 官方推荐的 `elsarticle`；同时生成一个依赖用户原始
+  `cumcmthesis` 资产的本地视觉母版入口，供按现有模板审阅。原示例不覆盖。
+- 内容边界：不改变 E1--E6 数据、统计、结论或引用事实；不调用 provider/API，
+  不运行 Full Harness，不修改既存 dirty external 子模块。
+- 验收：XeLaTeX/BibTeX 编译主稿、补充材料与本地母版均 exit 0；正文六章、21 个
+  唯一引文键、六张主表、十二张补充表和五幅 PDF 图完整；无 undefined citation/
+  reference 或 LaTeX error；关键 E2/E5/E6 数字和 Gemini NE 边界保留；PDF 完成
+  页面级视觉复核；只提交新 LaTeX 源、必要图件及对应构建/测试/Harness 状态。
+- 结果：正式 `elsarticle` 主稿 55 页、独立 Supplement 12 页、本地
+  `cumcmthesis` 对照稿 49 页；三份 PDF 均无作者元数据、LaTeX error、undefined
+  citation/reference、overfull box、raw citation 或替换字符。原主稿孤立空白页和
+  S12 单行续页已修复，表号按出现顺序绑定；定向 pytest 4/4、Ruff 和
+  `py_compile` 通过。未调用 provider/API 或 Full Harness。
+
 ### 2026-09-04 E5/E6 论文证据整合与双语同步
 
 - 状态：本次实现、构建、最终定向验证、Harness 登记与逐页视觉复核均已完成，

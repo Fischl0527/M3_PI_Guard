@@ -1,5 +1,27 @@
 # 进展记录
 
+## 2026-09-04 — JISA LaTeX 主稿与补充材料迁移完成
+
+- 正式投稿排版已从 Word 切换为 Elsevier `elsarticle`：生成平铺的英文主稿、
+  共享章节、六张编号主表、一张正文内联表、五幅矢量 PDF 图、21 条实际引用和
+  独立的 S1--S12 补充材料。用户原 `cumcmthesis` 只作为本地对照入口，不冒充
+  JISA 官方模板；作者、机构和通信作者均保持空白。
+- 构建脚本 `scripts/build_jisa_latex.py` 从现有 Markdown/BibTeX/矢量图确定性生成
+  LaTeX 源，不接触实验原始记录。定向 pytest 4/4、Ruff 和 `py_compile` 通过；
+  主稿、Supplement 和本地对照稿的 XeLaTeX/BibTeX 构建均 exit 0。
+- 最终 PDF 分别为 55、12、49 页。自动验收确认 21 个 bibitem、5 个 figure
+  label、6 个主表 label、12 个补充表 label；三份日志的 error、undefined
+  citation/reference 与 overfull 计数均为 0，PDF 作者元数据、raw citation、`??`
+  和替换字符均为空/为 0。E2 `0/240`/`30/240`、E5 `0/12`/`24.25%`、E6
+  `17/60` 和 Gemini `not estimable` 边界均保留。
+- 页面总览与关键页 180-dpi 复核确认图表无裁切、图注不重复、横向表可读。
+  审查发现的主稿孤立空白页和 Supplement S12 单行续页已通过最小分页调整消除；
+  可见表号与 label 按出现顺序一致。
+- `LaTeX通用模板/README.md` 记录生成和编译命令，局部 `.gitignore` 排除临时
+  LaTeX 状态。Word 仅保留为历史审阅件。未调用 provider/API、未运行实验、
+  Full Harness 或历史证据重放；`F-PAPER-002` 只因作者/机构/投稿终审门保持
+  `in_progress`。
+
 ## 2026-09-04 — E5/E6 双语论文证据整合与 Word 复核完成
 
 - 已把 E5 条件性 B200-survivor→B500 尾部与 E6-v2 单块攻击活性校准同步到英文稿、

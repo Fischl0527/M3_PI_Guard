@@ -1,5 +1,30 @@
 # Failure Log
 
+## 2026-09-04 — LaTeX migration focused recovery
+
+- The first local-template compile stopped on `\citep` because the supplied
+  `cumcmthesis` class did not load `natbib`. The review entry now loads
+  `natbib` explicitly; only that affected compile/test path was rerun and it
+  passed. The official `elsarticle` entry was unaffected.
+- A focused semantic test initially failed after the renderer inserted
+  discretionary hyphenation into `unauthorized`. The generated text was
+  correct; the assertion was changed to compare the normalized semantic form,
+  and the failed test alone passed before the final complete 4/4 focused run.
+- Page-level QA found one nearly empty main-manuscript page before the E6
+  landscape table and a final Supplement page containing only one S12 row.
+  The E6 table was placed before its short supplementary pointers, and S12
+  alone uses the compact landscape font. Rebuilds reduced the outputs from
+  56 to 55 and 13 to 12 pages without changing data or prose. A related label
+  audit bound visible Table 5 (E6) and Table 6 (E5) to their actual order of
+  appearance.
+- Final main/supplement/review logs have zero blocking or overfull findings.
+  BibTeX retains one non-blocking `empty pages` warning for L20 because the
+  admitted ICSE record has no verified page range; no page data was invented.
+- Recursive deletion of the generated visual-QA directory was rejected by the
+  host safety policy. After resolving and confirming the exact source was inside
+  the repository, the 19 temporary preview files were moved intact to the user
+  Temp directory instead; no QA preview remains in the project or Git scope.
+
 ## 2026-09-04 — Post-integration independent review and failed-only test recovery
 
 - The first independent read-only review found five publication-facing issues:

@@ -1,0 +1,30 @@
+\begin{landscape}
+\begingroup
+\scriptsize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{10}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/10-2\tabcolsep\relax}}@{}}
+\caption{E1 factorial estimates}\label{tab:2} \\
+\toprule
+Study & Endpoint & Factor & Paired cases & Effect & CI low & CI high & Bootstrap p & Holm p & Bootstrap n \\
+\midrule
+\endfirsthead
+\caption[]{E1 factorial estimates (continued)} \\
+\toprule
+Study & Endpoint & Factor & Paired cases & Effect & CI low & CI high & Bootstrap p & Holm p & Bootstrap n \\
+\midrule
+\endhead
+E1 representative pro & attack unsafe effect & interaction & 100 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
+E1 representative pro & attack unsafe effect & module & 100 & -1.00 pp & -3.00 pp & +0.00 pp & 0.7358 & 1.0000 & 10000 \\
+E1 representative pro & attack unsafe effect & prompt & 100 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
+E1 representative pro & attack unsafe or failure & interaction & 100 & -1.00 pp & -5.00 pp & +3.00 pp & 0.8206 & --- & 10000 \\
+E1 representative pro & attack unsafe or failure & module & 100 & -2.50 pp & -5.50 pp & +0.00 pp & 0.0938 & --- & 10000 \\
+E1 representative pro & attack unsafe or failure & prompt & 100 & +1.50 pp & -3.00 pp & +6.00 pp & 0.5868 & --- & 10000 \\
+E1 representative pro & Benign-tool TCR & interaction & 60 & +0.00 pp & -6.67 pp & +8.33 pp & 1.0000 & 1.0000 & 10000 \\
+E1 representative pro & Benign-tool TCR & module & 60 & -3.33 pp & -8.33 pp & +0.00 pp & 0.0960 & 0.2880 & 10000 \\
+E1 representative pro & Benign-tool TCR & prompt & 60 & -3.33 pp & -10.83 pp & +4.17 pp & 0.4496 & 0.8992 & 10000 \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Note.} Absolute effects are probability differences; intervals use 10,000 case-cluster bootstrap replicates. Holm values apply only to E1's prespecified endpoint families.
+\endgroup
+\end{landscape}

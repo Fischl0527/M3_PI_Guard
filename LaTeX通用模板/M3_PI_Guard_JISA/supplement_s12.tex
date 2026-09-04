@@ -1,0 +1,26 @@
+\begin{landscape}
+\begingroup
+\scriptsize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
+\caption{E6 paired effects and Gemini inference coverage}\label{tab:s12} \\
+\toprule
+Evidence & Comparison or coverage & Estimate & Newcombe / cluster-bootstrap 95\% CI & Exact McNemar / Holm p & Interpretation \\
+\midrule
+\endfirsthead
+\caption[]{E6 paired effects and Gemini inference coverage (continued)} \\
+\toprule
+Evidence & Comparison or coverage & Estimate & Newcombe / cluster-bootstrap 95\% CI & Exact McNemar / Holm p & Interpretation \\
+\midrule
+\endhead
+DeepSeek & VIGIL minus no defense & \ensuremath{-}1.67 pp & Newcombe \ensuremath{-}10.48 to +7.12 pp; bootstrap \ensuremath{-}10.00 to +6.67 pp & 1.000000 / 1.000000 & Interval crosses zero; benchmark directions oppose \\
+DeepSeek & Policy / normal minus no defense & \ensuremath{-}25.00 pp & Newcombe \ensuremath{-}36.95 to \ensuremath{-}14.30 pp; bootstrap \ensuremath{-}36.67 to \ensuremath{-}15.00 pp & 0.000061 / 0.000122 & Risk-enriched single-block contrast \\
+DeepSeek & Full / safe minus no defense & \ensuremath{-}28.33 pp & Newcombe \ensuremath{-}40.77 to \ensuremath{-}16.81 pp; bootstrap \ensuremath{-}40.00 to \ensuremath{-}16.67 pp & 0.000015 / 0.000061 & Risk-enriched single-block contrast \\
+DeepSeek & Full / safe minus VIGIL & \ensuremath{-}26.67 pp & Newcombe \ensuremath{-}39.01 to \ensuremath{-}15.39 pp; bootstrap \ensuremath{-}38.33 to \ensuremath{-}15.00 pp & 0.000031 / 0.000092 & Risk-enriched single-block contrast \\
+Gemini & Scientific terminal / planned & 6/180 & --- & --- & Five response-bearing; one response-less failure \\
+Gemini & Minimum response-complete paired coverage & 0/30 & --- & --- & Effects not estimable \\
+\bottomrule
+\end{longtable}
+\endgroup
+\end{landscape}

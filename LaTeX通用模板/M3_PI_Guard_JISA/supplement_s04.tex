@@ -1,0 +1,26 @@
+\begin{landscape}
+\begingroup
+\scriptsize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{7}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/7-2\tabcolsep\relax}}@{}}
+\caption{Runtime burden and operational quality}\label{tab:s4} \\
+\toprule
+Condition & ASK / 72 & Benign ASK rate & Operational failures / 72 & Provider calls & Trace-bundle cost (CNY) & Total latency p95 \\
+\midrule
+\endfirsthead
+\caption[]{Runtime burden and operational quality (continued)} \\
+\toprule
+Condition & ASK / 72 & Benign ASK rate & Operational failures / 72 & Provider calls & Trace-bundle cost (CNY) & Total latency p95 \\
+\midrule
+\endhead
+No defense & 0 & 0.00\% & 4 & 181 & 0.1821176 & 16.924 s \\
+Safe prompt / spotlighting & 0 & 0.00\% & 5 & 167 & 0.1812942 & 15.971 s \\
+PromptGuard (detector-only) & 0 & 0.00\% & 5 & 180 & 0.0986064 & 18.249 s \\
+Structural baseline & 0 & 0.00\% & 4 & 249 & 0.2568822 & 21.251 s \\
+Policy package & 16 & 19.44\% & 1 & 112 & 0.0548220 & 7.897 s \\
+Full package & 22 & 22.22\% & 2 & 117 & 0.1441772 & 10.701 s \\
+\bottomrule
+\end{longtable}
+\endgroup
+\end{landscape}

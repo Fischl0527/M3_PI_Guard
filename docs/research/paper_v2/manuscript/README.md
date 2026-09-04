@@ -34,13 +34,20 @@ dataset supports estimation of a cross-provider effect.
 
 Files:
 
+- `../../../../LaTeX通用模板/M3_PI_Guard_JISA/` is the submission-facing,
+  flat Elsevier LaTeX package. Its `M3_PI_Guard_JISA.tex` entry uses
+  `elsarticle`; the independent `M3_PI_Guard_JISA_supplement.tex` entry carries
+  Tables S1--S12. The verified PDFs have 55 and 12 pages, respectively, and
+  deliberately contain no author metadata. Rebuild instructions are in
+  `LaTeX通用模板/README.md` at the repository root. This LaTeX package, rather
+  than the Word rendering, is now the formatting source of truth.
 - `manuscript_deepseek_v1.md`: reader-facing unified English working draft
   assembled from the reviewed sections. Rebuild it with
   `F:\robot\Anaconda3\python.exe -B scripts/build_lean_paper_manuscript.py`;
   the builder enforces section order, the JISA abstract limit, bibliography
   coverage, figure/table availability, main-versus-supplementary numbering, and
   removal of workflow-only metadata.
-- `M3_PI_Guard_JISA_working_draft.docx`: editable, single-column Word review
+- `M3_PI_Guard_JISA_working_draft.docx`: historical editable, single-column Word review
   copy with citeproc-rendered author-year citations, 21 cited references,
   six numbered main tables, one inline decision table, and five figures.
   Rebuild it with

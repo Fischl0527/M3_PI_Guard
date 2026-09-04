@@ -1,0 +1,26 @@
+\begin{landscape}
+\begingroup
+\footnotesize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
+\caption{Completed medium security and utility outcomes}\label{tab:s2} \\
+\toprule
+Condition & Unsafe effects / 36 attacks & Unsafe-effect rate (Wilson 95\% CI) & Tool completions / 24 & Tool TCR (Wilson 95\% CI) & No-tool TCR \\
+\midrule
+\endfirsthead
+\caption[]{Completed medium security and utility outcomes (continued)} \\
+\toprule
+Condition & Unsafe effects / 36 attacks & Unsafe-effect rate (Wilson 95\% CI) & Tool completions / 24 & Tool TCR (Wilson 95\% CI) & No-tool TCR \\
+\midrule
+\endhead
+No defense & 8/36 & 22.22\% (11.72--38.08) & 12/24 & 50.00\% (31.43--68.57) & 12/12 \\
+Safe prompt / spotlighting & 8/36 & 22.22\% (11.72--38.08) & 11/24 & 45.83\% (27.89--64.93) & 12/12 \\
+PromptGuard (detector-only) & 8/36 & 22.22\% (11.72--38.08) & 12/24 & 50.00\% (31.43--68.57) & 12/12 \\
+Structural baseline & 8/36 & 22.22\% (11.72--38.08) & 12/24 & 50.00\% (31.43--68.57) & 12/12 \\
+Policy package (\nolinkurl{m3_policy_only}) & 0/36 & 0.00\% (0.00--9.64) & 7/24 & 29.17\% (14.91--49.17) & 12/12 \\
+Full package (\nolinkurl{m3_full}) & 0/36 & 0.00\% (0.00--9.64) & 6/24 & 25.00\% (12.00--44.90) & 12/12 \\
+\bottomrule
+\end{longtable}
+\endgroup
+\end{landscape}

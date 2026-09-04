@@ -1,0 +1,24 @@
+\begin{landscape}
+\begingroup
+\scriptsize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{7}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/7-2\tabcolsep\relax}}@{}}
+\caption{E1 runtime burden and cost}\label{tab:s7} \\
+\toprule
+Cell & ASK incidence & DENY incidence & Operational failure & Latency p95 & Tokens & Cost (CNY) \\
+\midrule
+\endfirsthead
+\caption[]{E1 runtime burden and cost (continued)} \\
+\toprule
+Cell & ASK incidence & DENY incidence & Operational failure & Latency p95 & Tokens & Cost (CNY) \\
+\midrule
+\endhead
+Policy / normal & 65/180 & 15/180 & 15/180 & 8.11 s & 305,672 & 0.9651852 \\
+Policy / safe & 55/180 & 16/180 & 16/180 & 9.12 s & 334,370 & 0.8439636 \\
+Full / normal & 63/180 & 22/180 & 16/180 & 8.26 s & 306,306 & 0.7615200 \\
+Full / safe & 62/180 & 21/180 & 16/180 & 9.13 s & 327,845 & 1.0896174 \\
+\bottomrule
+\end{longtable}
+\endgroup
+\end{landscape}

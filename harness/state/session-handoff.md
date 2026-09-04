@@ -1,5 +1,31 @@
 # 会话移交
 
+## 2026-09-04 — JISA LaTeX substage verified; author gate remains
+
+- The submission-facing source is now the flat
+  `LaTeX通用模板/M3_PI_Guard_JISA/` package. Its main entry uses Elsevier
+  `elsarticle`; the independent supplement contains S1--S12. The supplied
+  `cumcmthesis` assets are used only by `M3_PI_Guard_template_review.tex` for
+  local comparison and must not be presented as the JISA class.
+- Verified PDFs are `M3_PI_Guard_JISA.pdf` (55 pages),
+  `M3_PI_Guard_JISA_supplement.pdf` (12 pages), and
+  `M3_PI_Guard_template_review.pdf` (49 pages). Author metadata is blank.
+  Compilation, citation/reference, overfull, raw-citation, replacement-glyph,
+  label-count and visual-layout gates pass. The former isolated main page and
+  S12 one-row continuation were corrected; main Table 5 is E6 and Table 6 is
+  E5 because numbering follows first appearance.
+- Rebuild from the repository root with
+  `F:\robot\Anaconda3\python.exe -B scripts\build_jisa_latex.py`, then follow
+  `LaTeX通用模板/README.md` for explicit TeX Live commands. The generator
+  overwrites only its generated sources/copies; always recompile PDFs after it.
+- Preserve the original user template assets and unrelated dirty
+  `external/paper_v2_audits/drift` and `toolsafe` paths. Do not stage the whole
+  `LaTeX通用模板` directory; use the explicit source/PDF whitelist.
+- Remaining legitimate work is author/affiliation/CRediT/declaration input,
+  author-side final editorial review, release identifier and submission-date
+  institutional JCR/SCIE confirmation. No experiment/API continuation is
+  required for this formatting substage. `F-PAPER-002` remains `in_progress`.
+
 ## 2026-09-04 — E5/E6 manuscript integration closed; author gate remains
 
 - E5 and E6 are now integrated into the English manuscript, Simplified Chinese

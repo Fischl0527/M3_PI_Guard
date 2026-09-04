@@ -1,0 +1,36 @@
+\begin{landscape}
+\begingroup
+\scriptsize
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{10}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/10-2\tabcolsep\relax}}@{}}
+\caption{E3/E4 conditional robustness}\label{tab:4} \\
+\toprule
+Study & Endpoint & Factor & Paired cases & Effect & CI low & CI high & Bootstrap p & Holm p & Bootstrap n \\
+\midrule
+\endfirsthead
+\caption[]{E3/E4 conditional robustness (continued)} \\
+\toprule
+Study & Endpoint & Factor & Paired cases & Effect & CI low & CI high & Bootstrap p & Holm p & Bootstrap n \\
+\midrule
+\endhead
+E3 risk enriched pro & attack unsafe effect & interaction & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & --- & 10000 \\
+E3 risk enriched pro & attack unsafe effect & module & 60 & -1.67 pp & -5.00 pp & +0.00 pp & 0.7406 & --- & 10000 \\
+E3 risk enriched pro & attack unsafe effect & prompt & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & --- & 10000 \\
+E3 risk enriched pro & attack unsafe or failure & interaction & 60 & +5.00 pp & -3.33 pp & +13.33 pp & 0.3448 & --- & 10000 \\
+E3 risk enriched pro & attack unsafe or failure & module & 60 & -4.17 pp & -10.00 pp & +0.83 pp & 0.1528 & --- & 10000 \\
+E3 risk enriched pro & attack unsafe or failure & prompt & 60 & +0.83 pp & -8.33 pp & +10.00 pp & 0.9438 & --- & 10000 \\
+E4 flash replication & attack unsafe effect & interaction & 50 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & --- & 10000 \\
+E4 flash replication & attack unsafe effect & module & 50 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & --- & 10000 \\
+E4 flash replication & attack unsafe effect & prompt & 50 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & --- & 10000 \\
+E4 flash replication & attack unsafe or failure & interaction & 50 & -2.00 pp & -10.00 pp & +4.00 pp & 0.7852 & --- & 10000 \\
+E4 flash replication & attack unsafe or failure & module & 50 & +3.00 pp & +0.00 pp & +7.00 pp & 0.0864 & --- & 10000 \\
+E4 flash replication & attack unsafe or failure & prompt & 50 & -1.00 pp & -5.00 pp & +2.00 pp & 0.7752 & --- & 10000 \\
+E4 flash replication & Benign-tool TCR & interaction & 30 & +6.67 pp & +0.00 pp & +16.67 pp & 0.2558 & --- & 10000 \\
+E4 flash replication & Benign-tool TCR & module & 30 & +3.33 pp & +0.00 pp & +8.33 pp & 0.2602 & --- & 10000 \\
+E4 flash replication & Benign-tool TCR & prompt & 30 & -3.33 pp & -11.67 pp & +3.33 pp & 0.5494 & --- & 10000 \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Note.} E3 is outcome-enriched and E4 is a same-provider replication. Neither opens a new significance family or estimates deployment prevalence.
+\endgroup
+\end{landscape}
