@@ -1,5 +1,35 @@
 # 当前任务
 
+### 2026-09-05 LaTeX 三稿全量视觉复核与图件可读性修复
+
+- 状态：排版子任务 `verified`；论文整体因作者信息、作者终审和投稿时机构
+  JCR/SCIE 核验继续保持 `in_progress`。
+- 目标：以 Elsevier `elsarticle` 正式稿和用户提供的 `cumcmthesis` 审阅母版为
+  各自格式基准，逐页检查页边距、页码、横表、图注、标题断页、空白页、字体嵌入
+  与图内文字可读性；只修复能够由版面证据证实的问题。
+- 已识别问题：五幅矢量图在最终主稿中的部分文字约为 3.48--6.62 pt，低于
+  Elsevier 通用 artwork sizing 对普通图中文字约 7 pt 的建议；图件仍为嵌入的
+  Type 3 字体。页面、宽表和正文尚未发现新的裁切或越界。
+- 允许修改：`experiments/paper_v2/incremental_figures_v1.py`、对应定向测试、
+  确定性重生成的五幅图与三份 LaTeX/PDF、`LaTeX通用模板/README.md`，以及本任务
+  Harness 状态。
+- 禁止修改或执行：论文数据、统计、表格数值、引用、结论、作者信息，E1--E6
+  原始证据，任何 provider/API、Full Harness、历史证据重放，以及既存 dirty
+  external 子模块和用户原始模板资产。
+- 验收：图内普通文字在两份正文 PDF 的最终尺寸下不低于约 7 pt（注释性小字
+  不低于约 6 pt），PDF 图字体以 TrueType/Type 42 方式嵌入；三份 PDF 全页重渲染
+  后无裁切、重叠、异常空白、横置页码或整页旋转；LaTeX 无 fatal、undefined 或
+  overfull；定向 pytest、Ruff、`py_compile` 及三份编译均通过。
+- 结果：按用户指定直接把 `LaTeX通用模板/数模通用模板.tex` 改为完整论文入口，
+  原 `M3_PI_Guard_template_review.tex` 仅保留为兼容包装；正式投稿入口仍使用
+  Elsevier `elsarticle`。五幅图按 7.3 英寸源宽重绘并嵌入 Arial TrueType，正式稿
+  最小图中文字 7.232 pt，模板稿为 8.442 pt。最终主稿 54 页、直接模板稿 49 页、
+  Supplement 12 页；全部页面 `rotation=0`、无空白页或内容越界，所有应显示页码
+  均位于底部中央，模板稿为 A4 并继承四边 25 mm。三稿逐页渲染和关键图表页复核
+  通过；日志无 fatal、undefined 或 overfull，字体全部嵌入。定向 pytest 5/5、
+  Ruff、`py_compile` 与四个入口编译均通过；作者信息保持空白，实验/API/Full
+  Harness/历史重放均为 0。
+
 ### 2026-09-04 LaTeX 模板页边距与页码方向修复
 
 - 状态：排版修复子任务 `verified`；论文整体仍因作者信息、机构 JCR/SCIE

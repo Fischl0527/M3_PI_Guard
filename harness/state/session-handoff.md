@@ -1,5 +1,27 @@
 # 会话移交
 
+## 2026-09-05 — Direct supplied-template entry verified; author gate remains
+
+- The canonical local-review source is now the user-named
+  `LaTeX通用模板/数模通用模板.tex`; it contains the complete paper and compiles to a
+  49-page A4 PDF with the supplied `cumcmthesis` class. The legacy
+  `M3_PI_Guard_template_review.tex` is only a compatibility wrapper. The formal
+  submission source remains `M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex` using
+  Elsevier `elsarticle`.
+- The five figures are authored at 7.3 inches with 10--10.5 pt labels and embedded
+  Arial TrueType fonts. Finished minima are 7.232 pt in the 54-page formal PDF and
+  8.442 pt in the direct template PDF; no Type 3 figure fonts remain.
+- Full-page QA covers 54 formal, 49 direct-template and 12 supplement pages. All
+  pages have rotation 0, no blank or out-of-page content, correct bottom-centred
+  visible footers and blank author metadata. High-resolution checks cover all five
+  figures and the wide-table pages; no clipping or overlap remains.
+- Focused pytest is 5/5; Ruff, py_compile, four LaTeX builds, log scans and font
+  embedding checks pass. Preserve untracked original template assets and unrelated
+  dirty `external/paper_v2_audits/drift` and `toolsafe`; do not stage the template
+  fonts. No provider/API, experiment, Full Harness or historical replay is needed.
+- `F-PAPER-002` stays `in_progress` solely for author/affiliation/declaration input,
+  author-side final review and institutional submission-time JCR/SCIE confirmation.
+
 ## 2026-09-04 — Template page geometry repaired; author gate remains
 
 - The user-reported left-side page number was a real generator defect, not a

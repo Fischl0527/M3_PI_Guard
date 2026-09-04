@@ -19,7 +19,8 @@ FIGURE_SOURCE_DIR = (
 )
 TEMPLATE_DIR = REPO_ROOT / "LaTeX通用模板"
 OUTPUT_DIR = TEMPLATE_DIR / "M3_PI_Guard_JISA"
-REVIEW_ENTRY = TEMPLATE_DIR / "M3_PI_Guard_template_review.tex"
+REVIEW_ENTRY = TEMPLATE_DIR / "数模通用模板.tex"
+LEGACY_REVIEW_ENTRY = TEMPLATE_DIR / "M3_PI_Guard_template_review.tex"
 
 MAIN_MARKDOWN = "manuscript_deepseek_v1.md"
 SUPPLEMENT_MARKDOWN = "supplementary_tables_v1.md"
@@ -682,7 +683,8 @@ def build(
     )
     template_dir = repo_root / "LaTeX通用模板"
     output_root = output_root or template_dir / "M3_PI_Guard_JISA"
-    review_entry = review_entry or template_dir / "M3_PI_Guard_template_review.tex"
+    use_canonical_template_entry = review_entry is None
+    review_entry = review_entry or template_dir / "数模通用模板.tex"
 
     manuscript = _join_hard_hyphen_wraps(_read(manuscript_dir / MAIN_MARKDOWN))
     supplementary = _join_hard_hyphen_wraps(
@@ -778,6 +780,12 @@ def build(
     _write(official_entry, _official_entry(title))
     _write(supplement_entry, _supplement_entry(title))
     _write(review_entry, _review_entry(title))
+    if use_canonical_template_entry:
+        _write(
+            template_dir / "M3_PI_Guard_template_review.tex",
+            "% Compatibility entry; the user-supplied template is canonical.\n"
+            "\\input{数模通用模板.tex}",
+        )
     return BuildPaths(
         official_entry=official_entry,
         review_entry=review_entry,

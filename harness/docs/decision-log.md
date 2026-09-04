@@ -2018,3 +2018,17 @@ Consequences:
   describe the repository state at the time.
 - Safety: never force-push or include local secrets, raw provider traces,
   temporary verification output or adaptive internal checkpoints.
+
+## 2026-09-05 — Use the supplied filename as the canonical local-review entry
+
+- Decision: generate the complete local-review paper directly into
+  `LaTeX通用模板/数模通用模板.tex`; retain `M3_PI_Guard_template_review.tex` only as a
+  compatibility wrapper.
+- Reason: the owner explicitly wants the provided template source edited directly,
+  and maintaining two independent review-entry bodies creates avoidable drift.
+- Boundary: this changes only the local visual-review route. The submission-facing
+  paper remains the flat Elsevier `elsarticle` package, and original CUMCM template
+  assets are neither rewritten nor presented as a JISA class.
+- Consequence: future deterministic builds overwrite the named template entry and
+  the thin wrapper together; author information remains blank and scientific data,
+  statistics, citations and claims are unchanged.

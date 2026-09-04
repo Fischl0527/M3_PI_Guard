@@ -39,6 +39,15 @@ RED = "#B42318"
 PALE_BLUE = "#EAF2FA"
 PALE_ORANGE = "#FFF1DE"
 
+# Figures are authored close to the final full-width manuscript size.  The
+# previous 9.8--12.5 inch canvases were reduced by LaTeX to roughly 5.4 inches,
+# which made otherwise reasonable 8--9.5 pt labels render at only 3.5--5.3 pt
+# in the submitted PDF.  A 7.3 inch source canvas plus the sizes below keeps
+# ordinary lettering near or above Elsevier's 7 pt finished-size guidance.
+FIGURE_WIDTH_IN = 7.3
+BASE_FONT_SIZE = 10.5
+SMALL_FONT_SIZE = 10.0
+
 CHART_CONTRACTS: tuple[dict[str, str], ...] = (
     {
         "id": "figure_1_authority_boundary",
@@ -86,8 +95,17 @@ def _style() -> None:
             "text.color": INK,
             "xtick.color": MUTED,
             "ytick.color": MUTED,
-            "font.family": "DejaVu Sans",
-            "font.size": 9.5,
+            "font.family": "sans-serif",
+            "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
+            "font.size": BASE_FONT_SIZE,
+            "axes.titlesize": BASE_FONT_SIZE,
+            "axes.labelsize": BASE_FONT_SIZE,
+            "xtick.labelsize": SMALL_FONT_SIZE,
+            "ytick.labelsize": SMALL_FONT_SIZE,
+            "legend.fontsize": SMALL_FONT_SIZE,
+            "legend.title_fontsize": BASE_FONT_SIZE,
+            "pdf.fonttype": 42,
+            "ps.fonttype": 42,
             "svg.hashsalt": "m3-paper-v2-incremental-figures-v1",
             "axes.grid": True,
             "grid.color": GRID,
@@ -147,25 +165,25 @@ def _box(
         label,
         ha="center",
         va="center",
-        fontsize=9,
+        fontsize=SMALL_FONT_SIZE,
     )
 
 
 def figure_authority_boundary(output_dir: Path) -> list[str]:
-    fig, ax = plt.subplots(figsize=(10.8, 4.4))
+    fig, ax = plt.subplots(figsize=(FIGURE_WIDTH_IN, 4.4))
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis("off")
     ax.set_title("Online authority boundary and controlled source swap", pad=14)
     online = (
-        (0.03, "Trusted user / app\ncontext"),
-        (0.28, "Authorization projection\n+ provenance events"),
-        (0.55, "Runtime Guard\nALLOW / ASK / DENY"),
-        (0.79, "Isolated simulated\neffect receipt"),
+        (0.025, "Trusted user /\napplication\ncontext"),
+        (0.275, "Authorization\nprojection +\nprovenance events"),
+        (0.525, "Runtime Guard\nALLOW / ASK /\nDENY"),
+        (0.775, "Isolated\nsimulated effect\nreceipt"),
     )
     for x, label in online:
-        _box(ax, (x, 0.57), (0.18, 0.22), label, edge=BLUE, fill=PALE_BLUE)
-    for start, end in ((0.21, 0.28), (0.46, 0.55), (0.73, 0.79)):
+        _box(ax, (x, 0.57), (0.20, 0.22), label, edge=BLUE, fill=PALE_BLUE)
+    for start, end in ((0.225, 0.275), (0.475, 0.525), (0.725, 0.775)):
         ax.annotate(
             "",
             xy=(end, 0.68),
@@ -174,47 +192,38 @@ def figure_authority_boundary(output_dir: Path) -> list[str]:
         )
     _box(
         ax,
-        (0.06, 0.13),
-        (0.22, 0.20),
-        "Untrusted tool output\nor memory source",
+        (0.04, 0.13),
+        (0.24, 0.20),
+        "Untrusted tool\noutput or memory\nsource",
         edge=ORANGE,
         fill=PALE_ORANGE,
     )
     _box(
         ax,
-        (0.39, 0.13),
-        (0.22, 0.20),
-        "Same proposition, value,\nposition, and policy",
+        (0.38, 0.13),
+        (0.24, 0.20),
+        "Same proposition,\nvalue, position,\nand policy",
         edge=ORANGE,
         fill=PALE_ORANGE,
     )
     _box(
         ax,
         (0.72, 0.13),
-        (0.22, 0.20),
-        "Gold / evaluator labels\noffline scoring only",
+        (0.24, 0.20),
+        "Gold / evaluator\nlabels offline\nscoring only",
         edge=RED,
         fill="#FDECEC",
     )
     ax.annotate(
         "",
-        xy=(0.39, 0.23),
+        xy=(0.38, 0.23),
         xytext=(0.28, 0.23),
         arrowprops={"arrowstyle": "->", "color": ORANGE, "lw": 1.2},
-    )
-    ax.text(
-        0.335,
-        0.27,
-        "source-only\nswap",
-        ha="center",
-        va="bottom",
-        color=ORANGE,
-        fontsize=7.5,
     )
     ax.annotate(
         "",
         xy=(0.37, 0.57),
-        xytext=(0.50, 0.33),
+        xytext=(0.505, 0.33),
         arrowprops={"arrowstyle": "->", "color": ORANGE, "lw": 1.1, "ls": "--"},
     )
     ax.text(
@@ -243,11 +252,13 @@ def figure_factorial_interactions(
     cells = ("policy_normal", "policy_safe", "full_normal", "full_safe")
     labels = ("Policy\nnormal", "Policy\nsafe", "Full\nnormal", "Full\nsafe")
     panels = (
-        ("Attack unsafe effect", "attack_unsafe_effect"),
-        ("Benign-tool completion", "benign_tool_tcr"),
-        ("Attack unsafe-or-failure", "attack_unsafe_or_failure"),
+        ("Attack\nunsafe effect", "attack_unsafe_effect"),
+        ("Benign-tool\ncompletion", "benign_tool_tcr"),
+        ("Attack\nunsafe-or-failure", "attack_unsafe_or_failure"),
     )
-    fig, axes = plt.subplots(1, 3, figsize=(12.5, 4.2), sharey=False)
+    fig, axes = plt.subplots(
+        1, 3, figsize=(FIGURE_WIDTH_IN, 4.6), sharey=False
+    )
     summaries = factorial["cell_summary"]
     colors = (BLUE, BLUE, ORANGE, ORANGE)
     for ax, (title, endpoint) in zip(axes, panels, strict=True):
@@ -258,7 +269,14 @@ def figure_factorial_interactions(
         ax.set_title(title)
         ax.set_ylabel("Proportion")
         for index, value in enumerate(values):
-            ax.text(index, value, f"{value:.1%}", ha="center", va="bottom", fontsize=8)
+            ax.text(
+                index,
+                value,
+                f"{value:.1%}",
+                ha="center",
+                va="bottom",
+                fontsize=SMALL_FONT_SIZE,
+            )
     estimates = factorial["attack_unsafe_factor"]["factor_estimates"]
     note = ", ".join(
         f"{name}={float(estimates[name]['estimate']):+.3f}"
@@ -284,7 +302,12 @@ def figure_provenance_counterfactual(
     matrix = np.asarray(
         [[int(heatmap.get(cell, {}).get(decision, 0)) for decision in decisions] for cell in cells]
     )
-    fig, axes = plt.subplots(1, 2, figsize=(11.8, 4.7), gridspec_kw={"width_ratios": [1.4, 1]})
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(FIGURE_WIDTH_IN, 4.9),
+        gridspec_kw={"width_ratios": [1.35, 1]},
+    )
     image = axes[0].imshow(matrix, cmap="Blues", aspect="auto")
     axes[0].set_xticks(range(3), decisions)
     axes[0].set_yticks(
@@ -306,7 +329,11 @@ def figure_provenance_counterfactual(
     axes[1].set_ylabel("Paired task proportion")
     for index, value in enumerate(values):
         axes[1].text(index, value, f"{value:.1%}", ha="center", va="bottom")
-    fig.suptitle("Source-authority counterfactual: mechanism and system evidence", fontsize=14, weight="bold")
+    fig.suptitle(
+        "Source-authority counterfactual:\nmechanism and system evidence",
+        fontsize=14,
+        weight="bold",
+    )
     fig.text(
         0.5,
         0.01,
@@ -332,7 +359,7 @@ def figure_factor_effect_forest(
     factors = ("module", "prompt", "interaction")
     offsets = (-0.18, 0.0, 0.18)
     colors = (BLUE, GREEN, ORANGE)
-    fig, ax = plt.subplots(figsize=(9.8, 5.0))
+    fig, ax = plt.subplots(figsize=(FIGURE_WIDTH_IN, 5.3))
     for study_index, (label, analysis) in enumerate(studies):
         for factor, offset, color in zip(factors, offsets, colors, strict=True):
             item = _factor_estimate(analysis, "attack_unsafe_factor", factor)
@@ -353,17 +380,26 @@ def figure_factor_effect_forest(
     ax.set_yticks(range(3), [item[0] for item in studies])
     ax.invert_yaxis()
     ax.set_xlabel("Absolute difference in unsafe-effect probability")
-    ax.set_title("Prompt, module, and interaction effects across prespecified cohorts")
-    ax.legend(title="Factor", frameon=False, ncol=3, loc="upper center")
-    ax.text(
+    fig.suptitle(
+        "Prompt, module, and interaction effects across prespecified cohorts",
+        y=0.985,
+    )
+    ax.legend(
+        title="Factor",
+        frameon=False,
+        ncol=3,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.0),
+        borderaxespad=0.2,
+    )
+    fig.text(
         0.5,
-        -0.16,
+        0.02,
         "Risk-enriched estimates are conditional robustness results, not deployment prevalence.",
-        transform=ax.transAxes,
         ha="center",
         color=MUTED,
     )
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.11, 1, 0.84))
     return _save(fig, output_dir, CHART_CONTRACTS[3]["id"])
 
 
@@ -375,7 +411,7 @@ def _existing_success(existing: Mapping[str, Any], budget: int) -> float:
 def figure_adaptive_tail(
     existing: Mapping[str, Any], adaptive_tail: Mapping[str, Any], output_dir: Path
 ) -> list[str]:
-    fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.4))
+    fig, axes = plt.subplots(1, 2, figsize=(FIGURE_WIDTH_IN, 4.7))
     original = [_existing_success(existing, budget) for budget in (50, 200)]
     axes[0].plot((50, 200), original, marker="o", color=BLUE, lw=2)
     axes[0].set_xticks((50, 200))
@@ -396,7 +432,11 @@ def figure_adaptive_tail(
     axes[1].set_xlabel("Query budget")
     axes[1].set_ylabel("P(no unsafe effect yet | survived B200)")
     axes[1].set_title("Selected B200-survivor tail (n=12)")
-    fig.suptitle("Defense-aware first-success evidence with separate sampling frames", fontsize=14, weight="bold")
+    fig.suptitle(
+        "Defense-aware first-success evidence\nwith separate sampling frames",
+        fontsize=14,
+        weight="bold",
+    )
     fig.text(
         0.5,
         0.01,

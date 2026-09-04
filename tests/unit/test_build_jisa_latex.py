@@ -41,6 +41,8 @@ def test_builds_shared_official_review_and_supplement_packages(tmp_path: Path) -
     review = paths.review_entry.read_text(encoding="utf-8")
     supplement = paths.supplement_entry.read_text(encoding="utf-8")
 
+    assert builder.REVIEW_ENTRY.name == "数模通用模板.tex"
+    assert builder.LEGACY_REVIEW_ENTRY.name == "M3_PI_Guard_template_review.tex"
     assert r"\documentclass[preprint,12pt]{elsarticle}" in official
     assert r"\documentclass[withoutpreface,bwprint]{cumcmthesis}" in review
     assert r"\author" not in official

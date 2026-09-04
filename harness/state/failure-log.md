@@ -6207,3 +6207,23 @@ credential, changed a historical ledger, or enabled an external effect.
   4,561.6/8,029.8 ms；未重跑 API 或实验行。
 - Safety impact: automatic retries=0，provider tools=false，external effects=false；无密钥、
   请求正文或响应正文输出。
+
+## 2026-09-05 — Non-login shell did not resolve latexmk
+
+- Attempt: compile the three final LaTeX entries by invoking `latexmk` from the
+  non-login PowerShell command path.
+- Failure: PowerShell returned `The term 'latexmk' is not recognized`; no TeX input,
+  PDF or experiment state was changed by the failed invocation.
+- Cause: TeX Live is installed under `D:\TeXLive\texlive\2026\bin\windows`, but that
+  directory is not inherited by this non-login shell.
+- Recovery: use the existing absolute `latexmk.exe` path and prepend only that TeX
+  directory to the current process PATH. Main, supplement, direct template and
+  compatibility-wrapper builds then exited 0; final logs contain no fatal,
+  undefined-citation/reference or overfull findings.
+- Follow-up: keep the explicit process-local compile commands in
+  `LaTeX通用模板/README.md`; do not install another TeX environment or create a
+  permanent environment variable.
+- Cleanup note: a final recursive removal of the generated `tmp/pdfs` QA images
+  was rejected by the host command policy before execution. The untracked temporary
+  directory remains outside the explicit Git staging whitelist and does not affect
+  any source, PDF, experiment evidence or verification result.

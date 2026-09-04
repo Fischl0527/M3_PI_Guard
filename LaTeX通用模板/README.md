@@ -1,16 +1,18 @@
 # M3-PI Guard LaTeX 稿件
 
-本目录现在包含两种用途明确分离的 LaTeX 入口。作者审阅时优先打开
-`M3_PI_Guard_template_review.pdf`；它直接使用本目录提供的模板类，而不是 Word
-转换版：
+本目录现在包含两种用途明确分离的 LaTeX 入口。作者审阅时优先打开用户原模板
+直接生成的 `数模通用模板.pdf`，其编辑入口就是 `数模通用模板.tex`，而不是 Word
+转换版或另造的页面样式：
 
 - `M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex`：正式英文投稿主稿，使用
   Elsevier `elsarticle` 类和 `elsarticle-num` 参考文献样式。
 - `M3_PI_Guard_JISA/M3_PI_Guard_JISA_supplement.tex`：独立补充材料，含
   Supplementary Tables S1--S12。
-- `M3_PI_Guard_template_review.tex`：模板审阅母版，直接使用本目录原有的
+- `数模通用模板.tex`：模板审阅母版，直接使用本目录原有的
   `cumcmthesis`、字体和 `gbt7714-numerical.bst`。页面严格继承模板的 A4、
   四边 25 mm 和底部居中页码；它不是 JISA 官方模板，也不应冒充正式投稿类。
+- `M3_PI_Guard_template_review.tex`：仅为兼容旧路径的薄包装，实际加载上述
+  `数模通用模板.tex`，不再维护第二份审阅版正文。
 
 作者、单位和通信作者字段均有意留空，待作者本人在投稿前填写。正文、表格、
 图件和参考文献由当前 Markdown 论文源确定性生成；构建过程不会调用模型 API，
@@ -51,7 +53,7 @@ Set-Location -LiteralPath 'E:\M3_PI_Guard_test\LaTeX通用模板\M3_PI_Guard_JIS
 ```powershell
 Set-Location -LiteralPath 'E:\M3_PI_Guard_test\LaTeX通用模板'
 & $latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -file-line-error `
-  '.\M3_PI_Guard_template_review.tex'
+  '.\数模通用模板.tex'
 ```
 
 正式投稿时以 `M3_PI_Guard_JISA/` 中的英文主稿和补充材料为准；Word 文件只保留

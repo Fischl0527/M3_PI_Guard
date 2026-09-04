@@ -1,9 +1,15 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
-from experiments.paper_v2.incremental_figures_v1 import build_figures
+from experiments.paper_v2.incremental_figures_v1 import (
+    BASE_FONT_SIZE,
+    FIGURE_WIDTH_IN,
+    SMALL_FONT_SIZE,
+    build_figures,
+)
 
 
 def _proportion(value: float) -> dict:
@@ -110,4 +116,17 @@ def test_incremental_renderer_builds_five_deterministic_format_triplets(
     assert all(
         path.read_bytes().startswith(b"%PDF") for path in paths if path.suffix == ".pdf"
     )
+    assert FIGURE_WIDTH_IN == 7.3
+    assert BASE_FONT_SIZE >= 10.5
+    assert SMALL_FONT_SIZE >= 10.0
+    for path in (path for path in paths if path.suffix == ".pdf"):
+        payload = path.read_bytes()
+        assert b"/Type3" not in payload
+        assert b"/FontFile2" in payload
+        media_box = re.search(
+            rb"/MediaBox\s*\[\s*0\s+0\s+([0-9.]+)\s+([0-9.]+)\s*\]",
+            payload,
+        )
+        assert media_box is not None
+        assert float(media_box.group(1)) <= 560.0
     assert (output / "figure_manifest_v1.json").is_file()
