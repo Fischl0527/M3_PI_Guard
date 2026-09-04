@@ -6227,3 +6227,16 @@ credential, changed a historical ledger, or enabled an external effect.
   was rejected by the host command policy before execution. The untracked temporary
   directory remains outside the explicit Git staging whitelist and does not affect
   any source, PDF, experiment evidence or verification result.
+
+## 2026-09-05 — Temporary PDF QA script shadowed Python stdlib `inspect`
+
+- Attempt: run the new read-only PDF/structure QA helper from
+  `tmp/pdfs/tnr_structure_qa/inspect.py`.
+- Failure: importing PyMuPDF reached Python's standard `inspect.signature`, but
+  the temporary helper's filename shadowed the standard-library module and raised
+  `AttributeError: module 'inspect' has no attribute 'signature'`.
+- Cause: the helper name collided with a Python standard-library module; the PDF,
+  LaTeX sources and experiment evidence were not changed.
+- Recovery: rename only the temporary helper to `qa_pdf.py` and rerun the same
+  read-only checks. Do not change the validation hypothesis or repeat any build or
+  experiment execution because of this naming error.

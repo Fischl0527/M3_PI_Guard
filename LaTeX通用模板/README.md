@@ -10,13 +10,19 @@
   Supplementary Tables S1--S12。
 - `数模通用模板.tex`：模板审阅母版，直接使用本目录原有的
   `cumcmthesis`、字体和 `gbt7714-numerical.bst`。页面严格继承模板的 A4、
-  四边 25 mm 和底部居中页码；它不是 JISA 官方模板，也不应冒充正式投稿类。
+  四边 25 mm 和底部居中页码；拉丁正文、标题、行内标识和图表文字统一使用
+  Times New Roman。它不是 JISA 官方模板，也不应冒充正式投稿类。
 - `M3_PI_Guard_template_review.tex`：仅为兼容旧路径的薄包装，实际加载上述
   `数模通用模板.tex`，不再维护第二份审阅版正文。
 
 作者、单位和通信作者字段均有意留空，待作者本人在投稿前填写。正文、表格、
 图件和参考文献由当前 Markdown 论文源确定性生成；构建过程不会调用模型 API，
 不会修改实验原始结果。
+
+`数模通用模板.tex` 对摘要、六章正文和声明使用字面 `\input` 路径，而不是把
+路径藏在 `\ProjectRoot` 宏中。TeXstudio 因而可以递归读取各章，并在左侧“结构”
+面板显示完整的 section、subsection 和 subsubsection。若文件已在修改前打开，
+请重新打开主文件或执行 Idefix 的“刷新结构”。
 
 六列及以上的宽表只旋转表格内容，PDF 纸张、模板页边距与页码均保持纵向；不要
 把这些表改回 `pdflscape/landscape`，否则阅读器会把页码旋到页面左侧。

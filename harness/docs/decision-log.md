@@ -2032,3 +2032,18 @@ Consequences:
 - Consequence: future deterministic builds overwrite the named template entry and
   the thin wrapper together; author information remains blank and scientific data,
   statistics, citations and claims are unchanged.
+
+## 2026-09-05 — Make review typography and editor structure explicit
+
+- Decision: the author-facing `cumcmthesis` entry explicitly overrides its Latin
+  main, sans, mono, URL and caption faces to Times New Roman, and the shared figure
+  renderer uses the same family with fallback disabled. Top-level review inputs use
+  literal relative paths; `ProjectRoot` remains only for nested generated artifacts.
+- Reason: the class's YaHei Consolas mono face made inline identifiers visibly
+  inconsistent, Arial remained inside figures, and TeXstudio could not statically
+  expand macro-based input paths to populate its left structure panel.
+- Boundary: the Elsevier class and scientific manuscript remain unchanged. CMSY
+  mathematical glyphs are allowed; author information stays blank. This decision
+  does not authorize API calls, experiments, Full Harness or historical replay.
+- Consequence: future deterministic builds preserve Times New Roman typography and
+  TeXstudio-visible chapter hierarchy instead of overwriting a manual fix.

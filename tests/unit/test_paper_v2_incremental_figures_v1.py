@@ -4,10 +4,14 @@ import json
 import re
 from pathlib import Path
 
+import pytest
+
 from experiments.paper_v2.incremental_figures_v1 import (
     BASE_FONT_SIZE,
     FIGURE_WIDTH_IN,
+    FONT_FAMILY,
     SMALL_FONT_SIZE,
+    _style,
     build_figures,
 )
 
@@ -117,12 +121,15 @@ def test_incremental_renderer_builds_five_deterministic_format_triplets(
         path.read_bytes().startswith(b"%PDF") for path in paths if path.suffix == ".pdf"
     )
     assert FIGURE_WIDTH_IN == 7.3
+    assert FONT_FAMILY == "Times New Roman"
     assert BASE_FONT_SIZE >= 10.5
     assert SMALL_FONT_SIZE >= 10.0
     for path in (path for path in paths if path.suffix == ".pdf"):
         payload = path.read_bytes()
         assert b"/Type3" not in payload
         assert b"/FontFile2" in payload
+        assert b"TimesNewRoman" in payload
+        assert b"Arial" not in payload
         media_box = re.search(
             rb"/MediaBox\s*\[\s*0\s+0\s+([0-9.]+)\s+([0-9.]+)\s*\]",
             payload,
@@ -130,3 +137,24 @@ def test_incremental_renderer_builds_five_deterministic_format_triplets(
         assert media_box is not None
         assert float(media_box.group(1)) <= 560.0
     assert (output / "figure_manifest_v1.json").is_file()
+    manifest = json.loads(
+        (output / "figure_manifest_v1.json").read_text(encoding="utf-8")
+    )
+    assert manifest["font"] == {
+        "family": "Times New Roman",
+        "fallback_allowed": False,
+    }
+
+
+def test_incremental_renderer_fails_closed_when_times_new_roman_is_missing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def missing_font(*args: object, **kwargs: object) -> str:
+        raise ValueError("font not found")
+
+    monkeypatch.setattr(
+        "experiments.paper_v2.incremental_figures_v1.font_manager.findfont",
+        missing_font,
+    )
+    with pytest.raises(RuntimeError, match="Times New Roman.*fallback is disabled"):
+        _style()

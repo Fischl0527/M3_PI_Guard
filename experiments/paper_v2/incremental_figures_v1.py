@@ -16,6 +16,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
+from matplotlib import font_manager  # noqa: E402
 from matplotlib.patches import FancyBboxPatch  # noqa: E402
 
 
@@ -47,6 +48,7 @@ PALE_ORANGE = "#FFF1DE"
 FIGURE_WIDTH_IN = 7.3
 BASE_FONT_SIZE = 10.5
 SMALL_FONT_SIZE = 10.0
+FONT_FAMILY = "Times New Roman"
 
 CHART_CONTRACTS: tuple[dict[str, str], ...] = (
     {
@@ -84,7 +86,35 @@ def _load(path: Path) -> dict[str, Any]:
     return value
 
 
+def _require_figure_font() -> None:
+    for weight in ("normal", "bold"):
+        properties = font_manager.FontProperties(
+            family=[FONT_FAMILY],
+            weight=weight,
+        )
+        try:
+            resolved_path = font_manager.findfont(
+                properties,
+                fallback_to_default=False,
+            )
+        except ValueError as exc:
+            raise RuntimeError(
+                f"Required figure font {FONT_FAMILY!r} ({weight}) is unavailable; "
+                "font fallback is disabled."
+            ) from exc
+        resolved_family = font_manager.FontProperties(fname=resolved_path).get_name()
+        if resolved_family.casefold() != FONT_FAMILY.casefold():
+            raise RuntimeError(
+                f"Required figure font {FONT_FAMILY!r} resolved to "
+                f"{resolved_family!r}; font fallback is disabled."
+            )
+
+
 def _style() -> None:
+    # The author-facing manuscript is explicitly Times New Roman.  Fail with a
+    # useful error instead of letting Matplotlib silently substitute a fallback
+    # font and reintroduce mixed typography in the exported vector figures.
+    _require_figure_font()
     plt.rcParams.update(
         {
             "figure.facecolor": "white",
@@ -95,8 +125,12 @@ def _style() -> None:
             "text.color": INK,
             "xtick.color": MUTED,
             "ytick.color": MUTED,
-            "font.family": "sans-serif",
-            "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
+            "font.family": [FONT_FAMILY],
+            "font.serif": [FONT_FAMILY],
+            "font.sans-serif": [FONT_FAMILY],
+            "font.monospace": [FONT_FAMILY],
+            "mathtext.fontset": "stix",
+            "text.usetex": False,
             "font.size": BASE_FONT_SIZE,
             "axes.titlesize": BASE_FONT_SIZE,
             "axes.labelsize": BASE_FONT_SIZE,
@@ -479,6 +513,7 @@ def build_figures(
     manifest = {
         "schema_version": "m3-paper-v2-incremental-figure-manifest-1.0",
         "renderer": "matplotlib-static-png-svg-pdf",
+        "font": {"family": FONT_FAMILY, "fallback_allowed": False},
         "chart_contracts": list(CHART_CONTRACTS),
         "outputs": outputs,
     }

@@ -1,5 +1,30 @@
 # 会话移交
 
+## 2026-09-05 — Review typography and TeXstudio outline verified
+
+- The canonical author-facing entry remains
+  `LaTeX通用模板/数模通用模板.tex`. It now explicitly uses Times New Roman for
+  main, sans, mono, URL, caption and table-caption text. The five shared vector
+  figures also use Times New Roman with fail-closed font resolution; the review
+  PDF embeds no Arial, YaHei Consolas or SimHei. CMSY remains only for mathematical
+  symbols.
+- Abstract, keywords, six body chapters and declarations use nine literal relative
+  `input` paths rather than macro-hidden top-level paths. All nine exist, and
+  TeXstudio can recursively expose 6 sections, 51 subsections and 4 subsubsections.
+  Reopen the master or use Idefix structure refresh if the GUI cache still shows
+  the former red nodes. The PDF itself contains 63 outline entries.
+- Direct and compatibility review PDFs are 49-page A4 documents with rotation 0,
+  no blank pages and blank author metadata. The 54-page formal main was rebuilt
+  with the revised figures. Contact-sheet review covered all review pages; detailed
+  inspection covered pages 1, 11, 25, 29, 46 and 49, including the originally
+  reported inline identifiers and a rotated wide table.
+- Focused pytest passes 6/6; Ruff, py_compile, affected XeLaTeX/BibTeX builds, log
+  scans and PDF font inspection pass. Preserve unrelated dirty external paths,
+  untracked original template assets and `tmp/`; do not stage them. No provider,
+  experiment, Full Harness or historical replay is required.
+- `F-PAPER-002` remains `in_progress` only for author-owned details, author review,
+  release/submission work and submission-time institutional JCR/SCIE confirmation.
+
 ## 2026-09-05 — Direct supplied-template entry verified; author gate remains
 
 - The canonical local-review source is now the user-named

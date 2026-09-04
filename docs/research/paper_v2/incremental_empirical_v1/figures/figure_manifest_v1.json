@@ -26,6 +26,10 @@
       "takeaway": "The B200-survivor tail is not merged into a complete B500 panel."
     }
   ],
+  "font": {
+    "fallback_allowed": false,
+    "family": "Times New Roman"
+  },
   "outputs": {
     "figure_1_authority_boundary": [
       "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.png",

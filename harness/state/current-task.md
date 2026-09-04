@@ -1,5 +1,39 @@
 # 当前任务
 
+### 2026-09-05 审阅模板 Times New Roman 与 TeXstudio 全文结构修复
+
+- 状态：排版子任务 `verified`；论文整体继续保持 `in_progress`。
+- 目标：将用户直接编辑的 `LaTeX通用模板/数模通用模板.tex` 及其生成 PDF
+  中的拉丁文字、标题、图表文字和行内标识统一为 Times New Roman；将摘要、
+  六章正文和声明的输入路径改为 TeXstudio 可静态解析的字面路径，使左侧“结构”
+  面板能够递归显示全文 `section/subsection/subsubsection`。
+- 根因：模板类把正文设为 Times New Roman，但把等宽族设为 YaHei Consolas，
+  而生成器又用 `\nolinkurl` 排版行内标识；五幅矢量图仍使用 Arial。主入口中的
+  `\input{\ProjectRoot/...}` 依赖宏路径，TeXstudio 无法静态解析，因此只显示红色
+  文件节点，尽管 PDF 书签本身完整。
+- 允许修改：`scripts/build_jisa_latex.py`、图件生成器及对应定向测试、确定性
+  重生成的五幅图和 LaTeX/PDF 审阅产物、`LaTeX通用模板/README.md` 与本任务
+  Harness 状态。
+- 禁止修改或执行：论文科学内容、数据、统计、引用、结论、作者信息，E1--E6
+  原始证据，任何 provider/API、Full Harness、历史证据重放，以及既存 dirty
+  external 子模块和用户未跟踪模板资产。
+- 验收：审阅入口使用 Times New Roman 且不再加载 YaHei Consolas/Arial 作为
+  可见文本字体；摘要、六章、声明均以字面路径输入，TeXstudio 可递归显示完整
+  章节层级；LaTeX 编译无 fatal、undefined、overfull；页边距、页码与宽表方向
+  不回归；定向 pytest、Ruff、`py_compile`、PDF 字体审计和逐页渲染复核通过。
+- 结果：生成器和 `数模通用模板.tex` 已显式统一 main/sans/mono、URL、图注和
+  表注为 Times New Roman；五幅矢量图同样改为 Times New Roman，并在字体缺失时
+  fail closed，不再静默回退 Arial/Helvetica/DejaVu。模板 PDF 的所有可见文本字体
+  现为 Times New Roman（另有仅用于数学符号的 CMSY）；YaHei Consolas、Arial 与
+  SimHei 均未嵌入。摘要、关键词、六章与声明共 9 个 `input` 均改为存在的字面
+  路径，TeXstudio 可递归读取 6 个 section、51 个 subsection 和 4 个
+  subsubsection；PDF 本身保留 63 项书签。直接模板稿与兼容稿均为 49 页 A4，
+  全部 `rotation=0`、0 空白页、作者元数据为空；正式稿 54 页同步采用新的
+  Times New Roman 图件。两张全页 contact sheet 及 6 个关键页面完成视觉复核，
+  截图所示行内标识已与正文统一，页码、边距和宽表无回归。定向 pytest 6/6、
+  Ruff、`py_compile` 和三次受影响 LaTeX 构建通过，日志无 fatal、undefined 或
+  overfull；provider/API、实验、Full Harness 和历史重放均为 0。
+
 ### 2026-09-05 LaTeX 三稿全量视觉复核与图件可读性修复
 
 - 状态：排版子任务 `verified`；论文整体因作者信息、作者终审和投稿时机构

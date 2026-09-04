@@ -52,6 +52,13 @@ def test_builds_shared_official_review_and_supplement_packages(tmp_path: Path) -
     assert r"\newcommand{\ProjectRoot}{M3_PI_Guard_JISA}" in review
     assert r"\usepackage[numbers,sort&compress]{natbib}" in review
     assert r"\usepackage{rotating,microtype,ragged2e}" in review
+    assert r"\setmainfont{Times New Roman}" in review
+    assert r"\setsansfont{Times New Roman}" in review
+    assert r"\setmonofont{Times New Roman}" in review
+    assert r"\urlstyle{same}" in review
+    assert r"\captionsetup[figure]{font={rm,minusfour,bf}}" in review
+    assert r"\captionsetup[table]{font={rm,minusfour,bf}}" in review
+    assert r"\rmfamily\bfseries\mcm@cap@keywordsname:" in review
     assert r"\pagestyle{plain}" in review
     assert "pdflscape" not in official + review + supplement
     assert r"\providecommand{\tightlist}" in official
@@ -74,6 +81,13 @@ def test_builds_shared_official_review_and_supplement_packages(tmp_path: Path) -
     for title, filename in builder.SECTION_FILES.items():
         rendered = (paths.output_root / filename).read_text(encoding="utf-8")
         assert rf"\section{{{builder._strip_number(title)}}}" in rendered
+        assert rf"\input{{M3_PI_Guard_JISA/{filename}}}" in review
+        assert rf"\input{{\ProjectRoot/{filename}}}" in official
+        assert rf"\input{{\ProjectRoot/{filename}}}" not in review
+
+    assert r"\input{M3_PI_Guard_JISA/abstract.tex}" in review
+    assert r"\input{M3_PI_Guard_JISA/declarations.tex}" in review
+    assert r"\bibliography{M3_PI_Guard_JISA/references}" in review
 
     assert r"\bibliographystyle{elsarticle-num}" in official
     assert r"\bibliographystyle{gbt7714-numerical}" in review

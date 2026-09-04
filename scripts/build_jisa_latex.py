@@ -589,16 +589,23 @@ def _official_entry(title: str) -> str:
 
 
 def _review_entry(title: str) -> str:
+    review_root = "M3_PI_Guard_JISA"
     section_inputs = "\n".join(
-        rf"\input{{\ProjectRoot/{filename}}}" for filename in SECTION_FILES.values()
+        rf"\input{{{review_root}/{filename}}}" for filename in SECTION_FILES.values()
     )
     return rf"""%! TEX program = xelatex
 \documentclass[withoutpreface,bwprint]{{cumcmthesis}}
 \usepackage{{rotating,microtype,ragged2e}}
 \usepackage{{xurl}}
 \usepackage[numbers,sort&compress]{{natbib}}
+\setmainfont{{Times New Roman}}
+\setsansfont{{Times New Roman}}
+\setmonofont{{Times New Roman}}
+\urlstyle{{same}}
+\captionsetup[figure]{{font={{rm,minusfour,bf}}}}
+\captionsetup[table]{{font={{rm,minusfour,bf}}}}
 \newcolumntype{{L}}{{>{{\RaggedRight\arraybackslash}}X}}
-\newcommand{{\ProjectRoot}}{{M3_PI_Guard_JISA}}
+\newcommand{{\ProjectRoot}}{{{review_root}}}
 \providecommand{{\tightlist}}{{\setlength{{\itemsep}}{{0pt}}\setlength{{\parskip}}{{0pt}}}}
 \setlength{{\emergencystretch}}{{3em}}
 \hyphenation{{un-au-thor-ized}}
@@ -611,6 +618,10 @@ def _review_entry(title: str) -> str:
 \renewcommand{{\refname}}{{References}}
 \makeatletter
 \renewcommand*{{\mcm@cap@keywordsname}}{{Keywords}}
+\renewcommand\keywords[1]{{%
+  \par\vskip1ex
+  {{\noindent\zihao{{-4}}\rmfamily\bfseries\mcm@cap@keywordsname:}}~{{#1}}%
+}}
 \makeatother
 \title{{{_inline(title)}}}
 \date{{}}
@@ -620,17 +631,17 @@ def _review_entry(title: str) -> str:
 \maketitle
 \hypersetup{{pdfauthor={{}}}}
 \begin{{abstract}}
-\input{{\ProjectRoot/abstract.tex}}
-\keywords{{\input{{\ProjectRoot/keywords.tex}}}}
+\input{{{review_root}/abstract.tex}}
+\keywords{{\input{{{review_root}/keywords.tex}}}}
 \end{{abstract}}
 \pagenumbering{{arabic}}
 \pagestyle{{plain}}
 
 {section_inputs}
-\input{{\ProjectRoot/declarations.tex}}
+\input{{{review_root}/declarations.tex}}
 
 \bibliographystyle{{gbt7714-numerical}}
-\bibliography{{\ProjectRoot/references}}
+\bibliography{{{review_root}/references}}
 \end{{document}}
 """
 

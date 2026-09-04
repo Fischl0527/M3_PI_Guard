@@ -1,5 +1,26 @@
 # 进展记录
 
+## 2026-09-05 — Times New Roman 与 TeXstudio 全文结构修复完成
+
+- `LaTeX通用模板/数模通用模板.tex` 现在显式将 main、sans、mono、URL、图注和
+  表注统一为 Times New Roman；行内 `auto_compiled`、`exact_gold`、工具名和
+  参数不再使用 YaHei Consolas。关键词标签改用 ASCII 冒号，消除了最后一个
+  SimHei 可见字形。
+- 五幅论文图由 Matplotlib 统一以 Times New Roman normal/bold 输出，渲染器会在
+  字体不可用或被替代时 fail closed。PDF 字体审计确认审阅稿不再含 Arial、
+  YaHei Consolas、SimHei 或 Type 3；除 CMSY 数学符号外，全部文本均为嵌入式
+  Times New Roman。
+- 主入口的摘要、关键词、六章与声明均使用 TeXstudio 可解析的字面相对路径，
+  9/9 输入存在；递归结构包含 6 个 section、51 个 subsection、4 个
+  subsubsection，PDF outline 为 63 项。若编辑器仍显示旧缓存，只需重新打开文件
+  或执行 Idefix“刷新结构”。
+- 直接模板稿和兼容稿均为 49 页 A4、49/49 rotation 0、0 空白页、作者元数据为空；
+  正式主稿 54 页同步采用新的 Times New Roman 图件。两张逐页总览和第 1、11、
+  25、29、46、49 页高分辨率复核通过，页边距、底部居中页码和旋转宽表无回归。
+- 定向 pytest 6/6、Ruff、`py_compile`、直接模板/兼容入口/正式主稿构建通过；
+  日志无 fatal、undefined 或 overfull。未修改科学内容或作者字段，未调用
+  provider/API、实验、Full Harness或历史证据重放。
+
 ## 2026-09-05 — 直接模板入口与三稿最终版面验收完成
 
 - `LaTeX通用模板/数模通用模板.tex` 现在直接承载完整论文，不再是示例；旧

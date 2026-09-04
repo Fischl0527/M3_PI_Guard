@@ -3,6 +3,12 @@
 \usepackage{rotating,microtype,ragged2e}
 \usepackage{xurl}
 \usepackage[numbers,sort&compress]{natbib}
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Times New Roman}
+\urlstyle{same}
+\captionsetup[figure]{font={rm,minusfour,bf}}
+\captionsetup[table]{font={rm,minusfour,bf}}
 \newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
 \newcommand{\ProjectRoot}{M3_PI_Guard_JISA}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -17,6 +23,10 @@
 \renewcommand{\refname}{References}
 \makeatletter
 \renewcommand*{\mcm@cap@keywordsname}{Keywords}
+\renewcommand\keywords[1]{%
+  \par\vskip1ex
+  {\noindent\zihao{-4}\rmfamily\bfseries\mcm@cap@keywordsname:}~{#1}%
+}
 \makeatother
 \title{Evaluating Authorization Regimes and Runtime Guardrail Configurations for Tool-Using LLM Agents}
 \date{}
@@ -26,20 +36,20 @@
 \maketitle
 \hypersetup{pdfauthor={}}
 \begin{abstract}
-\input{\ProjectRoot/abstract.tex}
-\keywords{\input{\ProjectRoot/keywords.tex}}
+\input{M3_PI_Guard_JISA/abstract.tex}
+\keywords{\input{M3_PI_Guard_JISA/keywords.tex}}
 \end{abstract}
 \pagenumbering{arabic}
 \pagestyle{plain}
 
-\input{\ProjectRoot/01_introduction.tex}
-\input{\ProjectRoot/02_related_work.tex}
-\input{\ProjectRoot/03_methods.tex}
-\input{\ProjectRoot/04_results.tex}
-\input{\ProjectRoot/05_discussion.tex}
-\input{\ProjectRoot/06_conclusion.tex}
-\input{\ProjectRoot/declarations.tex}
+\input{M3_PI_Guard_JISA/01_introduction.tex}
+\input{M3_PI_Guard_JISA/02_related_work.tex}
+\input{M3_PI_Guard_JISA/03_methods.tex}
+\input{M3_PI_Guard_JISA/04_results.tex}
+\input{M3_PI_Guard_JISA/05_discussion.tex}
+\input{M3_PI_Guard_JISA/06_conclusion.tex}
+\input{M3_PI_Guard_JISA/declarations.tex}
 
 \bibliographystyle{gbt7714-numerical}
-\bibliography{\ProjectRoot/references}
+\bibliography{M3_PI_Guard_JISA/references}
 \end{document}
