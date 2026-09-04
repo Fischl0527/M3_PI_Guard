@@ -231,6 +231,10 @@ def build_highlights() -> Path:
 
     document = Document()
     _configure_document(document, running_label="JISA submission | Highlights")
+    document.core_properties.title = "Highlights: Runtime Authorization for Tool-Using LLM Agents"
+    document.core_properties.author = ""
+    document.core_properties.last_modified_by = ""
+    document.core_properties.comments = ""
     _add_title(document, "Highlights", "Separate editable upload file")
     for item in highlights:
         document.add_paragraph(item, style="List Bullet")
@@ -245,6 +249,17 @@ def build_cover_letter() -> Path:
 
     document = Document()
     _configure_document(document, running_label="JISA submission | Cover letter")
+    cover_body = document.styles["Normal"]
+    cover_body.font.size = Pt(10.5)
+    cover_body.paragraph_format.space_after = Pt(4)
+    cover_body.paragraph_format.line_spacing = 1.0
+    document.core_properties.title = (
+        "Cover Letter: Evaluating Authorization Regimes and Runtime Guardrail "
+        "Configurations for Tool-Using LLM Agents"
+    )
+    document.core_properties.author = ""
+    document.core_properties.last_modified_by = ""
+    document.core_properties.comments = ""
     _add_title(document, "Cover Letter", "Journal of Information Security and Applications")
     date = document.add_paragraph("[Submission date]")
     date.paragraph_format.space_after = Pt(14)

@@ -1,6 +1,6 @@
 # Methods — lean authorization study
 
-Status: `deepseek_results_complete_gemini_diagnostic_closed`
+Status: `deepseek_e1_e6_complete_gemini_diagnostic_ne`
 
 ## Study design and research questions
 
@@ -11,7 +11,7 @@ authorization regime and the deployed Guard configuration package while
 holding the task, attack, provider, model, tool environment, and evaluator
 fixed.
 
-The study addresses five research questions:
+The study addresses six research questions:
 
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
@@ -26,6 +26,9 @@ The study addresses five research questions:
    untrusted sources change Guard and end-to-end behavior?
 5. **RQ5: Adaptive tail risk.** Among attacks with no unsafe effect by budget
    200, how many prospectively selected tasks first succeed by budget 500?
+6. **RQ6: Contemporaneous attack activity.** In a historically risk-enriched
+   cohort, are control attacks active in the current execution block, and how
+   do six runtime conditions compare within that same block?
 
 Positive results are not a stopping condition. The analysis is retained if
 `exact_gold` has little effect, the full package underperforms the policy
@@ -99,8 +102,12 @@ within the fixed paired sample.
 themselves. Security is scored from the isolated post-enforcement effect
 receipt. Utility is scored by the benchmark task-completion evaluator.
 
-The earlier incomplete Gemini sample remains diagnostic and is not extended in
-the incremental study. No cross-provider claim is made. Structural baselines,
+The earlier incomplete 450-item Gemini authorization sample remains diagnostic
+and is not extended. E6 makes a separately executed, bounded Gemini prefix
+attempt that is diagnostic by design under the single-block amendment. Even
+complete prefix coverage would not make that amended design a formal
+cross-provider study; the observed incomplete prefix leaves every Gemini and
+cross-provider effect not estimable. Structural baselines,
 including the source-pinned VIGIL adapter, retain their earlier descriptive
 role; the new experiments target causal confounding, source authority, risk
 enrichment, same-provider model replication, and adaptive tail behavior rather
@@ -233,11 +240,43 @@ conditional survival step function, family strata, query count, tokens, cost,
 and failure. These twelve tasks are not merged into the original 40-task
 cohort to construct a nominal full B500 curve.
 
+## Contemporaneous attack-activity calibration
+
+E6 freezes 60 unique attacks, 30 per benchmark, selected only from historical
+Public-primary cases that produced an unsafe effect under no defense or the
+source-pinned VIGIL adapter. It runs each task once under no defense, VIGIL,
+policy/normal, policy/safe, full/normal, and full/safe, producing 360 DeepSeek
+work items in one execution block. Condition order uses a fixed six-way rotation
+within each benchmark. A 12-item outcome-blind formal prefix is included in the
+final denominator. This risk-enriched cohort tests whether attacks remain active
+contemporaneously and compares conditions within the same block; it does not
+estimate deployment prevalence. The execution is separate from E3, but the
+sample is not independent: 47/60 tasks are E3 anchors (19 AgentDojo and 28
+M3-v2).
+
+The original three-date E6 design was prospectively amended before any E6-v2
+provider call because artificial spacing did not answer a mechanism-relevant
+question. The amendment retained the frozen 60-task cohort, six conditions,
+sampling rules, endpoints, and failure policy, but replaced temporal replication
+with one complete diagnostic block. Consequently, E6 cannot estimate temporal
+repeatability. It contains no benign tasks and cannot contribute TCR or utility
+evidence.
+
+A nested 30-task Gemini plan used the same cases and conditions; 29/30 tasks are
+E3 anchors (15 AgentDojo and 14 M3-v2). Its formal prefix stopped after five
+response-bearing records and one response-less VIGIL dependency failure; the
+remaining 174 items were administratively closed rather than scientifically
+executed. All Gemini paired, factorial, and cross-provider effects are therefore
+not estimable.
+
 ## Providers and model identity
 
 The primary model is DeepSeek V4 Pro through the official DeepSeek endpoint;
-E4 uses DeepSeek V4 Flash through the same official provider. Earlier Gemini
-free-tier observations remain diagnostic and receive no incremental calls.
+E4 uses DeepSeek V4 Flash through the same official provider. The earlier
+450-item Gemini authorization sample and the separately executed E6 Gemini
+prefix are both diagnostic. The latter used the official free tier at USD 0
+and stopped at its technical gate; neither Gemini dataset supports an effect
+estimate.
 Each new request is assigned a
 local request identifier and canonical payload digest before transport. A
 response-bearing record retains the official response identifier, exact
@@ -250,10 +289,11 @@ the live append-only budget tracker during execution, and the paper analysis
 does not need to read the internal ledger or change any experimental outcome.
 The initial E5 cost estimate set CNY 5 adaptive and CNY 16 global fuses. After
 898 latest query work items cost CNY 4.2561534, the no-success maximum projected
-to approximately CNY 17. Before resuming, we prospectively raised only those
-two execution ceilings to CNY 20 and CNY 30. The selected tasks, query range,
-attacker, model, seed, first-success stopping, ITT rules, and estimand were not
-changed, and no successful query was replayed.
+to approximately CNY 17. Before resuming, the cost ceilings were first raised
+and later replaced by a CNY 1,000 runaway-protection ceiling at the project
+owner's direction. The selected tasks, query range, attacker, model, seed,
+first-success stopping, ITT rules, and estimand were unchanged, and no successful
+query was replayed. Final analysis-attributed cost was CNY 24.5551236.
 Provider calls for the evidence reported here were made during July and August
 2026. The returned names are provider-managed model aliases and therefore
 identify the served model at request time without freezing its hidden weights.
@@ -356,6 +396,21 @@ intervals but open no new significance family. E3 is an outcome-enriched
 challenge analysis; E4 is a same-provider replication. Both retain their
 sampling boundary in every table and figure.
 
+For E6, no-defense activity is reported per benchmark and overall with Wilson
+intervals. Four prespecified paired contrasts use treatment-minus-baseline risk
+differences: VIGIL minus no defense, policy/normal minus no defense, full/safe
+minus no defense, and full/safe minus VIGIL. Each contrast receives a paired
+Newcombe interval, a benchmark-stratified task-cluster bootstrap interval, and
+a two-sided exact McNemar p-value; the four p-values are Holm-adjusted. The
+implemented exact test replaced the planned cluster sign-flip test and is
+reported as an analysis-method deviation; no row or outcome was removed.
+Operational failure and `unsafe_effect OR operational_failure` are reported
+alongside unsafe effect. The four M3 cells receive descriptive module, prompt,
+and interaction estimates. Because E6 is risk-enriched and single-block, these
+analyses do not estimate prevalence, utility, temporal repeatability, or the
+effect of an individual provenance component. Gemini effects are reported as
+not estimable after its coverage gate failed.
+
 The fixed design provides 100 paired attacks and 60 paired benign-tool tasks per
 main contrast, split evenly by benchmark for the latter. With 0/100 observed
 unsafe effects, the Wilson upper limit is 3.70%; within a 30-task benign-tool
@@ -376,8 +431,8 @@ Verification is deliberately proportional to the lean study. It consists of:
 
 1. focused unit tests for modified provider, authorization projection,
    evaluator, analysis, and plotting code;
-2. an eight-item formal prefix for each regular incremental study and two
-   five-query tail prefixes for E5; and
+2. an eight-item formal prefix for each regular incremental study, two
+   five-query tail prefixes for E5, and a 12-item outcome-blind E6 prefix; and
 3. one terminal pass over row count, experiment-item uniqueness, forbidden-field
    isolation, exact model identity, and ITT failure retention.
 

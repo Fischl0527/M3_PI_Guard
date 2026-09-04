@@ -19,10 +19,18 @@ def _table_widths(table) -> list[int]:
 def test_highlights_are_separate_editable_and_within_jisa_limit() -> None:
     document = Document(builder.OUTPUTS["highlights"])
     items = [paragraph.text for paragraph in document.paragraphs if paragraph.style.name == "List Bullet"]
+    expected = [
+        builder._clean_markdown(line[2:])
+        for line in (builder.MANUSCRIPT_DIR / "highlights_v1.md").read_text(encoding="utf-8").splitlines()
+        if line.startswith("- ")
+    ]
 
     assert len(items) == 5
+    assert items == expected
     assert all(len(item) <= 85 for item in items)
     assert all("[" not in item for item in items)
+    assert document.core_properties.author == ""
+    assert document.core_properties.last_modified_by == ""
 
 
 def test_cover_letter_preserves_bounded_claims_and_author_placeholders() -> None:
@@ -32,8 +40,14 @@ def test_cover_letter_preserves_bounded_claims_and_author_placeholders() -> None
     assert "Journal of Information Security and Applications" in text
     assert "did not outperform the policy package" in text
     assert "not a claim of a universally leading defense" in text
+    assert "None of 12 prespecified B200 survivors" in text
+    assert "24.25%" in text
+    assert "47/60" in text
+    assert "not estimable" in text
     assert "[Submission date]" in text
     assert "[Corresponding author name]" in text
+    assert document.core_properties.author == ""
+    assert document.core_properties.last_modified_by == ""
 
 
 def test_glossary_contains_all_reviewed_terms_without_markdown_tokens() -> None:

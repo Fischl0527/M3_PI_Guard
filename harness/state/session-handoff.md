@@ -1,5 +1,40 @@
 # 会话移交
 
+## 2026-09-04 — E5/E6 manuscript integration closed; author gate remains
+
+- E5 and E6 are now integrated into the English manuscript, Simplified Chinese
+  comparison, active claim ledger, six main CSV tables and twelve supplementary
+  tables. Do not rerun provider rows or rebuild historical evidence.
+- Scientific boundaries are frozen in prose: E5 is a conditional 12-task
+  B200-survivor tail with 0/12 new successes through 500 and an upper Wilson
+  limit of 24.25%; E6 is one DeepSeek risk-enriched execution block, not a
+  temporal replicate. Its execution is separate from E3 but its sample is not:
+  47/60 DeepSeek tasks and 29/30 Gemini nested tasks are E3 anchors. The block
+  does not satisfy or test the original multi-window activity gate. Gemini is
+  diagnostic by design and every paired/factorial/cross-provider effect is NE.
+- Current editable outputs are the English manuscript, Chinese comparison,
+  supplementary tables, Highlights and Cover Letter Word files under
+  `docs/research/paper_v2/manuscript/`. WPS read-only renders passed 35/35,
+  30/30, 4/4, 1/1 and 1/1 page inspection respectively.
+- The post-audit focused run produced 25 passes and one line-wrap-only assertion
+  failure; after correcting the assertion, only that failed node was rerun and
+  passed. Thus all 26 focused nodes have current passing evidence. The later
+  affected package suite produced 31 passes and three stale-contract failures;
+  after correcting the tests, only those three nodes were rerun and passed.
+  All five document builders, Ruff and `py_compile` pass. LibreOffice
+  was unavailable, so the repository's WPS fallback was used; no rendered
+  temporary file was added to Git. All five DOCX accessibility audits report
+  0 high/0 medium findings; the two main manuscripts contain only low-severity
+  raw-reference-URL notices.
+- The English build contains 14,669 words. E6 S12 reports the implemented exact
+  McNemar/Newcombe/cluster-bootstrap/Holm results and discloses replacement of
+  the planned sign-flip test. Core titles match the visible title, author and
+  lastModifiedBy are blank, and custom properties contain no repository path.
+- Preserve unrelated dirty `external/paper_v2_audits/drift` and `toolsafe` paths.
+  Remaining legitimate work is author metadata/declarations, author-side final
+  editorial review, release identifier and submission-date institutional
+  JCR/SCIE confirmation. `F-PAPER-002` remains `in_progress`.
+
 ## 2026-08-31 — E6-v2 B1 closed; no provider continuation pending
 
 - E6-v2 is a completed single diagnostic block, not a temporal replicate.
@@ -268,7 +303,8 @@
 - E1、E2、E3 都已终态；不要重新运行任何成功行。E2 修正后真实 source-swap
   action change 为 policy/full 0/60，full 的 1/60 是独立 operational-status
   change。对应报告在 `docs/research/paper_v2/incremental_empirical_v1/`。
-- E2 的机制证据是 offline replay（0/480 false allow、30/480 false block、
+- E2 的机制证据是 offline replay（240 个未授权提案中 0/240 false allow、
+  240 个授权提案中 30/240 false block、
   full/untrusted 有 60 DENY）；端到端系统 240 项没有执行动作，必须作为确认负担
   地板报告，不能用 replay 正确率替代系统性能。
 - E3 历史 unsafe 复现 1/60，直接 unsafe 仍地板；55/240 operational failures

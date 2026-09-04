@@ -48,7 +48,7 @@ def _prop(numerator: int, denominator: int) -> dict:
     }
 
 
-def test_incremental_table_builder_keeps_five_evidence_roles_separate(
+def test_incremental_table_builder_keeps_six_evidence_roles_separate(
     tmp_path: Path,
 ) -> None:
     factorial = tmp_path / "factorial.json"
@@ -56,6 +56,7 @@ def test_incremental_table_builder_keeps_five_evidence_roles_separate(
     challenge = tmp_path / "challenge.json"
     flash = tmp_path / "flash.json"
     adaptive = tmp_path / "adaptive.json"
+    e6 = tmp_path / "e6.json"
     factorial.write_text(json.dumps(_analysis()), encoding="utf-8")
     challenge.write_text(json.dumps(_analysis(False)), encoding="utf-8")
     flash.write_text(json.dumps(_analysis()), encoding="utf-8")
@@ -106,6 +107,28 @@ def test_incremental_table_builder_keeps_five_evidence_roles_separate(
         ),
         encoding="utf-8",
     )
+    e6_cells = {}
+    for condition, unsafe, failure, bound, ask, deny in (
+        ("no_defense", 17, 12, 29, 0, 4),
+        ("strongest_peer_reviewed_structural_baseline", 16, 8, 24, 0, 8),
+        ("m3_policy_only", 2, 7, 9, 31, 7),
+        ("m3_policy_safe_prompt", 1, 2, 3, 21, 2),
+        ("m3_full_normal_prompt", 0, 7, 7, 25, 18),
+        ("m3_full", 0, 3, 3, 19, 6),
+    ):
+        e6_cells[f"all|{condition}"] = {
+            "planned": 60,
+            "unsafe_count": unsafe,
+            "unsafe_terminal": _prop(unsafe, 60),
+            "operational_failure_count": failure,
+            "unsafe_or_failure_count": bound,
+            "ask_events": ask,
+            "deny_events": deny,
+        }
+    e6.write_text(
+        json.dumps({"providers": {"deepseek": {"cell_summary": e6_cells}}}),
+        encoding="utf-8",
+    )
     output = tmp_path / "tables"
     manifest = build_tables(
         factorial_path=factorial,
@@ -113,15 +136,17 @@ def test_incremental_table_builder_keeps_five_evidence_roles_separate(
         challenge_path=challenge,
         flash_path=flash,
         adaptive_tail_path=adaptive,
+        e6_path=e6,
         output_dir=output,
     )
-    assert len(manifest["tables"]) == 5
+    assert len(manifest["tables"]) == 6
     assert manifest["row_counts"] == {
         "table_1_factor_design": 4,
         "table_2_e1_factor_estimates": 9,
         "table_3_e2_provenance": 10,
         "table_4_e3_e4_robustness": 15,
         "table_5_e5_adaptive_tail": 4,
+        "table_6_e6_activity_calibration": 6,
     }
     assert all(Path(path).is_file() for path in manifest["tables"].values())
     assert "E2_offline_guard_replay" in (

@@ -53,6 +53,9 @@ TABLE_NOTES = (
     "opens a new significance family or estimates deployment prevalence.",
     "The tail probability is conditional on the prespecified B200 survivors; "
     "it is not a complete original-panel B500 curve or saturation estimate.",
+    "E6 uses a historically risk-enriched single execution block; 47/60 tasks "
+    "also anchor E3. It does not estimate deployment prevalence, benign utility, "
+    "temporal repeatability, independent-sample replication, or a cross-provider effect.",
 )
 
 
@@ -63,7 +66,7 @@ class ManuscriptBuildError(ValueError):
 def _split_supplementary_tables(
     body: str,
 ) -> tuple[str, list[tuple[int, str, str]]]:
-    """Remove S1-S10 tables from Results while retaining narrative context."""
+    """Remove S1-S12 tables from Results while retaining narrative context."""
 
     lines = body.splitlines()
     cleaned: list[str] = []
@@ -93,7 +96,9 @@ def _split_supplementary_tables(
             table_lines.append(lines[index])
             index += 1
         tables.append((number, title, "\n".join(table_lines)))
-        reference_title = title[0].lower() + title[1:]
+        reference_title = (
+            title if re.match(r"^[A-Z]\d", title) else title[0].lower() + title[1:]
+        )
         cleaned.extend(
             [f"Supplementary Table S{number} reports the {reference_title}.", ""]
         )
@@ -102,9 +107,9 @@ def _split_supplementary_tables(
 
     tables.sort(key=lambda item: item[0])
     numbers = [number for number, _, _ in tables]
-    if numbers != list(range(1, 11)):
+    if numbers != list(range(1, 13)):
         raise ManuscriptBuildError(
-            f"Expected Supplementary Tables S1-S10, found {numbers}"
+            f"Expected Supplementary Tables S1-S12, found {numbers}"
         )
     return "\n".join(cleaned).strip(), tables
 
@@ -236,7 +241,7 @@ def _read_table(name: str) -> list[dict[str, str]]:
     path = TABLE_DIR / name
     if not path.is_file():
         raise ManuscriptBuildError(f"Missing paper table: {path}")
-    with path.open(encoding="utf-8", newline="") as stream:
+    with path.open(encoding="utf-8-sig", newline="") as stream:
         return list(csv.DictReader(stream))
 
 
@@ -264,6 +269,12 @@ def _label(value: str) -> str:
         "benign_tool_tcr": "Benign-tool TCR",
         "unsafe_effect": "Unsafe effect",
         "attack_unsafe_or_operational_failure": "Attack unsafe or failure",
+        "no_defense": "No defense",
+        "source_pinned_vigil": "Source-pinned VIGIL",
+        "policy_normal": "Policy / normal",
+        "policy_safe": "Policy / safe",
+        "full_normal": "Full / normal",
+        "full_safe": "Full / safe",
     }
     return special.get(value, value.replace("_", " "))
 
@@ -321,6 +332,11 @@ def _incremental_table(filename: str) -> str:
         "conditional_probability": "Conditional probability",
         "first_success_queries": "First-success queries",
         "complete_original_b500_panel": "Complete original B500 panel",
+        "unsafe_effect_wilson_95_ci": "Unsafe effect, n/N (95% CI)",
+        "operational_failure": "Operational failure",
+        "unsafe_or_failure": "Unsafe or failure",
+        "ask_events": "ASK",
+        "deny_events": "DENY",
     }
 
     def render(key: str, value: str) -> str:
@@ -341,6 +357,46 @@ def _incremental_table(filename: str) -> str:
     rows = [tuple(render(key, row.get(key, "")) for key in keys) for row in source]
     headers = tuple(labels.get(key, key.replace("_", " ").title()) for key in keys)
     return _markdown_table(headers, rows)
+
+
+def _e6_activity_table() -> str:
+    labels = {
+        "no_defense": "No defense",
+        "strongest_peer_reviewed_structural_baseline": "Source-pinned VIGIL",
+        "m3_policy_only": "Policy / normal",
+        "m3_policy_safe_prompt": "Policy / safe",
+        "m3_full_normal_prompt": "Full / normal",
+        "m3_full": "Full / safe",
+    }
+    rows = []
+    for row in _read_table("table_6_e6_activity_calibration.csv"):
+        total = int(row["planned"])
+        unsafe = int(row["unsafe_n"])
+        failure = int(row["operational_failure_n"])
+        bound = int(row["unsafe_or_failure_n"])
+        rows.append(
+            (
+                labels[row["condition"]],
+                f"{unsafe}/{total} ({float(row['unsafe_rate']) * 100:.1f}%) "
+                f"[{float(row['unsafe_ci_low']) * 100:.1f}%, "
+                f"{float(row['unsafe_ci_high']) * 100:.1f}%]",
+                f"{failure}/{total} ({failure / total * 100:.1f}%)",
+                f"{bound}/{total} ({bound / total * 100:.1f}%)",
+                row["ask_events"],
+                row["deny_events"],
+            )
+        )
+    return _markdown_table(
+        (
+            "Condition",
+            "Unsafe effect, n/N (95% CI)",
+            "Operational failure",
+            "Unsafe or failure",
+            "ASK events",
+            "DENY events",
+        ),
+        rows,
+    )
 
 
 def _design_table() -> str:
@@ -541,6 +597,7 @@ def _table_block() -> str:
         (3, "E2 source-authority evidence", _incremental_table("table_3_e2_provenance.csv")),
         (4, "E3/E4 conditional robustness", _incremental_table("table_4_e3_e4_robustness.csv")),
         (5, "E5 conditional adaptive tail", _incremental_table("table_5_e5_adaptive_tail.csv")),
+        (6, "E6 contemporaneous attack-activity calibration", _e6_activity_table()),
     )
     parts = ["## Tables"]
     for (number, title, table), note in zip(tables, _table_notes(), strict=True):

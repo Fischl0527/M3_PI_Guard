@@ -3,30 +3,30 @@
 ## Abstract
 
 Tool-using LLM agents can turn prompt injection into external actions, but
-measured security depends on the runtime authorization supplied to the Guard.
-We keep evaluator fields offline, vary five controlled authorization
-transformations, and jointly report unsafe effects, benign completion, system
-decision incidence, failure, and latency.
+measured security depends on the runtime authorization and Guard configuration.
+We keep evaluator fields offline and jointly measure unsafe effects, benign
+completion, confirmation/blocking, failures, latency, and adaptive attack cost.
 
-We reanalyze 7,353 condition-level DeepSeek records covering 902 distinct cases
-across overlapping cohorts, plus a 40-task defense-aware panel. In Public
-matrices, the full package produced more unsafe effects than the policy package
-on V4 Pro (38/600 versus 13/600) and V4 Flash (24/400 versus 12/400). Adaptive
-search found first unsafe effects for 4/40 tasks by query 50 and 18/40 by 200.
+We reanalyze 7,353 condition-level DeepSeek records and run controlled studies
+of authorization regime, prompt and runtime factors, source authority,
+historically difficult attacks, model replication, and attack-budget tails.
+In Public matrices, the full package produced more unsafe effects than the
+policy package on V4 Pro (38/600 versus 13/600) and V4 Flash (24/400 versus
+12/400). A concurrent 2×2 experiment isolated prompt and module-bundle effects,
+but only two unsafe effects occurred across 400 attack assignments. Deterministic
+Guard replay was source-sensitive, whereas all 240 end-to-end source-swap runs
+executed no action. Exact authorization reduced pooled benign-tool completion
+and increased failure-sensitive risk, with opposite completion directions
+across AgentDojo and M3-v2.
 
-A frozen 900-work-item V4 Pro experiment crossed both packages with non-oracle
-`auto_compiled` and oracle-sensitivity `exact_gold` authorization on 180 paired
-AgentDojo and M3-v2 cases. Three attack cells had 0/100 unsafe effects and one
-had 1/100. Exact-minus-auto benign completion reversed by benchmark: AgentDojo
-changed by +13.33/+10.00 points for policy/full packages, whereas M3-v2 changed
-by −56.67/−40.00. A pessimistic unsafe-or-operational-failure endpoint increased
-by 18 points for both packages, driven by +36-point AgentDojo differences.
-
-Authorization construction and benchmark semantics can change measured
-security–utility conclusions even near the observed attack floor. Because
-prompt profile and runtime modules differ together, the package contrast is not
-a component ablation. Incomplete Gemini execution supports no cross-provider
-inference.
+Defense-aware search found first unsafe effects for 4/40 tasks by query 50 and
+18/40 by 200; none of 12 prespecified B200 survivors first succeeded by 500
+(Wilson upper limit 24.25%). In an additional risk-enriched single-block
+execution, no defense produced 17/60 unsafe effects, while policy/normal and
+full/safe produced 2/60 and 0/60 unsafe effects; failures remained non-negligible.
+These enriched results do not estimate deployment prevalence, utility, or
+temporal repeatability. Two incomplete Gemini studies do not support estimation
+of cross-provider effects.
 
 **Keywords:** prompt injection; LLM agents; runtime authorization; provenance; security–utility trade-off
 
@@ -84,38 +84,54 @@ interface [@L27].
 
 ### 1.3 Research questions
 
-The study asks three questions.
+The study asks six questions.
 
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    unsafe effect, benign task completion, and `ASK/DENY` burden?
-2. **RQ2: Configuration comparison.** How does the complete M3 configuration
-   package compare with the policy package on safety, utility, and operational
-   outcomes, without attributing the contrast to an individual component?
-3. **RQ3: Replication and adaptive budget.** Are these directions consistent
-   across AgentDojo and M3-v2, across completed DeepSeek V4 Pro and V4 Flash
-   evidence, and at completed defense-aware budgets 50 and 200?
+2. **RQ2: Prompt and runtime components.** What are the independent main
+   effects of the prompt profile and the runtime module bundle, and do they
+   interact?
+3. **RQ3: Conditional robustness and model replication.** Are the factorial
+   effect directions consistent in a representative sample, an outcome-
+   enriched challenge set, and a same-provider Flash replication?
+4. **RQ4: Source authority.** When proposition, value, position, and policy
+   are held fixed, how does moving a critical argument between trusted and
+   untrusted origins change model--Guard behavior?
+5. **RQ5: Adaptive tail risk.** Among attacks with no unsafe effect by budget
+   200, how often does a first unsafe effect appear by budget 500?
+6. **RQ6: Contemporaneous attack activity.** In a historically risk-enriched
+   cohort, do control attacks remain active in the current execution block, and
+   how do six runtime conditions compare under the same provider window?
 
 ### 1.4 Study design
 
 M3 uses a three-state runtime decision (`ALLOW`, `ASK`, `DENY`), a projection
 that excludes evaluator-only fields from online state, permission monotonicity
 for automatic paths, parameter-source evidence, and independent confirmation
-for privilege expansion. The primary paired experiment crosses a policy
-package and a full package with non-oracle `auto_compiled` and oracle-sensitivity
-`exact_gold`. A nested subset adds three authorization stress regimes. The full
-package also changes the prompt profile from `normal` to `safe_prompt`, so the
-package contrast is not a component ablation. The planned cross-provider subset
-adds a source-pinned peer-reviewed structural condition. Timeouts,
+for privilege expansion. The completed authorization experiment crosses a
+policy package and a full package with non-oracle `auto_compiled` and oracle-
+sensitivity `exact_gold`; a nested subset adds three authorization stress
+regimes. The incremental factorial experiment then holds `auto_compiled` fixed
+and crosses prompt profile (`normal`/`safe`) with runtime modules
+(`policy`/`full`). A source-authority counterfactual holds text, parameter value,
+relative position, and policy fixed while changing only provenance authority.
+Separate challenge, Flash-replication, adaptive-tail, and single-block activity
+calibration studies test conditional robustness. Timeouts,
 parsing failures, refusals, maximum-step outcomes, and provider failures remain
 in the intention-to-treat denominator.
 
-The new primary sample contains 180 paired cases and 900 DeepSeek V4 Pro work
-items; a nested 90-case sample contributes 450 planned Gemini 3.6 Flash work
-items. The design separately reuses the completed 480-record medium study,
+The authorization-regime sample contains 180 paired cases and 900 DeepSeek V4
+Pro work items. The incremental design adds 720 Pro factorial runs, 240 Pro
+source-authority runs plus 480 deterministic Guard decisions, 240 Pro challenge
+runs, 360 Flash replication runs, and a conditional adaptive tail of at most
+3,600 additional queries. A final calibration adds 360 DeepSeek work items over
+60 historically control-positive attacks and six concurrent conditions. The
+design separately reuses the completed 480-record medium study,
 5,082-record Pro Public matrix, 1,791-record Flash Public matrix, and the
-40-task adaptive evidence at budgets 50 and 200. Provider tools and real
-external effects are prohibited throughout.
+40-task adaptive evidence at budgets 50 and 200. Two bounded Gemini attempts
+remain diagnostic only. Provider tools and real external effects are prohibited
+throughout.
 
 ### 1.5 Empirical motivation and study framing
 
@@ -139,9 +155,10 @@ threshold for a clean configuration-quality claim.
 
 The completed 40-task adaptive panel observed first unsafe effect for 4/40
 tasks by budget 50 and 18/40 by budget 200. These points show substantial
-budget sensitivity but do not establish saturation. The lean paper therefore
-reports a first-success curve only through query 200 and makes no budget-500 or
-2,000 claim.
+budget sensitivity but do not establish saturation. The incremental tail
+extended only a prespecified subset of 12 B200 survivors toward 500. No new
+first success was observed (0/12; Wilson 95% upper limit 24.25%); this is a
+conditional analysis rather than a complete B500 curve or saturation result.
 
 The prospectively frozen authorization-regime experiment is now complete for
 DeepSeek. Unsafe effects remained at or near zero across all four main cells,
@@ -149,23 +166,32 @@ but exact authorization produced opposite benign-tool directions across the
 two benchmarks and increased failure-sensitive attack risk on AgentDojo. It
 also replaced ASK with more frequent DENY and increased latency. The full
 package showed no stable advantage over the policy package. These unfavorable
-results are retained. Gemini free-tier execution closed incomplete at 32/450
-terminal work items and therefore supports no cross-provider claim.
+results are retained. A separate risk-enriched single-block calibration found
+17/60 unsafe effects under no defense, confirming contemporaneous activity in
+the selected cohort; full/safe produced 0/60, but failures and the enriched
+sampling frame preclude deployment-prevalence, utility, or temporal-repeatability
+claims. Gemini free-tier execution remained too incomplete in both attempted
+studies for a cross-provider effect estimate.
 
 ### 1.6 Contributions
 
-The current evidence supports four bounded contributions:
+The current evidence supports six bounded contributions:
 
 1. an evaluator/online-state contract that makes authorization visibility
    explicit and prevents evaluator-only fields from entering runtime state;
-2. a paired security–utility evaluation of policy and full configuration
-   packages, with their prompt-profile difference disclosed and no component-
-   level causal claim;
-3. an intention-to-treat experiment that records official model identity,
+2. a contemporaneous factorial evaluation that identifies prompt-profile and
+   runtime-module-bundle effects separately;
+3. a controlled source-authority counterfactual that separates deterministic
+   Guard decisions from end-to-end action and utility outcomes;
+4. an intention-to-treat experiment that records official model identity,
    request commitments, isolated effects, and terminal diagnostics while
    retrying only response-less failed rows; and
-4. an empirical account of authorization regime, system confirmation incidence,
-   benchmark/task heterogeneity, and defense-aware attack budget.
+5. an empirical account of authorization regime, confirmation/blocking burden,
+   outcome-enriched instability, same-provider replication, and conditional
+   defense-aware attack budget; and
+6. a contemporaneous activity calibration that distinguishes an active control
+   attack set from low event rates under defended conditions without treating a
+   historical risk-enriched sample as deployment prevalence.
 
 These contributions do not assert first, only, or SOTA status. Preprints are
 used to define the contemporary novelty boundary, not as peer-reviewed
@@ -292,19 +318,24 @@ authorization regime and the deployed Guard configuration package while
 holding the task, attack, provider, model, tool environment, and evaluator
 fixed.
 
-The study addresses three research questions:
+The study addresses six research questions:
 
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
    executed unsafe effects, benign task completion, and `ASK/DENY` burden?
-2. **RQ2: Configuration comparison.** How does the complete M3 configuration
-   package compare with the policy package on safety, utility, and operational
-   outcomes? This comparison does not identify the effect of any individual
-   provenance, data-flow, confirmation, or prompt component.
-3. **RQ3: Replication and adaptive budget.** Are the observed directions
-   consistent across AgentDojo and M3-v2, across completed DeepSeek V4 Pro and
-   V4 Flash evidence, and under the already completed defense-aware budgets 50
-   and 200?
+2. **RQ2: Prompt and runtime components.** What are the independent main
+   effects of the safety prompt and full runtime modules, and do they interact?
+3. **RQ3: Conditional robustness and model replication.** Are the factor
+   directions consistent on historically difficult attacks and on DeepSeek V4
+   Flash?
+4. **RQ4: Source authority.** When proposition, parameter value, position, and
+   policy are held fixed, how does moving the proposition between trusted and
+   untrusted sources change Guard and end-to-end behavior?
+5. **RQ5: Adaptive tail risk.** Among attacks with no unsafe effect by budget
+   200, how many prospectively selected tasks first succeed by budget 500?
+6. **RQ6: Contemporaneous attack activity.** In a historically risk-enriched
+   cohort, are control attacks active in the current execution block, and how
+   do six runtime conditions compare within that same block?
 
 Positive results are not a stopping condition. The analysis is retained if
 `exact_gold` has little effect, the full package underperforms the policy
@@ -367,22 +398,27 @@ they are not a single-module ablation:
   authority expansion produces `ASK` and requires an independent confirmation
   result.
 
-Because prompt profile and runtime modules change together, their contrast is a
-bundled configuration comparison. We therefore do not attribute a difference
-between these cells to provenance, data flow, confirmation, or prompting alone.
+The earlier authorization experiment changed prompt profile and runtime modules
+together and is therefore retained only as a bundled configuration comparison.
+The new concurrent factorial crosses both factors explicitly: policy versus
+full modules and normal versus safe prompt. Its module main effect, prompt main
+effect, and module-by-prompt interaction are therefore separately identified
+within the fixed paired sample.
 
 `ALLOW`, `ASK`, and `DENY` are runtime decisions, not security outcomes by
 themselves. Security is scored from the isolated post-enforcement effect
 receipt. Utility is scored by the benchmark task-completion evaluator.
 
-The planned Gemini subset adds a source-pinned VIGIL baseline under
-`auto_compiled`. The adapter uses official VIGIL commit
-`af8eb9c70d32f8a3cc07b308e823c813b2285772`: the official constraint generator
-and `RuntimeAuditor` are retained, while only OpenAI-client construction is
-dependency-injected into the study's frozen provider client. Generation uses
-temperature zero, one controlled provider call, the served study model, and
-JSON output; silent fallback to default constraints is rejected. The eventual
-incomplete Gemini sample is diagnostic and is not used to rank defenses.
+The earlier incomplete 450-item Gemini authorization sample remains diagnostic
+and is not extended. E6 makes a separately executed, bounded Gemini prefix
+attempt that is diagnostic by design under the single-block amendment. Even
+complete prefix coverage would not make that amended design a formal
+cross-provider study; the observed incomplete prefix leaves every Gemini and
+cross-provider effect not estimable. Structural baselines,
+including the source-pinned VIGIL adapter, retain their earlier descriptive
+role; the new experiments target causal confounding, source authority, risk
+enrichment, same-provider model replication, and adaptive tail behavior rather
+than rerunning a large baseline matrix.
 
 ### 3.5 Authorization regimes
 
@@ -458,36 +494,113 @@ A nested 60-case subset receives three additional M3-full assignments:
 DeepSeek plan therefore contains 900 work items. The first six items form the
 formal technical prefix and remain part of the final denominator.
 
-### 3.8 Frozen cross-provider sample
+### 3.8 Concurrent prompt-by-module factorial
 
-The Gemini study uses 90 cases nested within the DeepSeek main sample:
+E1 reuses the 180-case sample but reruns every case contemporaneously under
+four `auto_compiled` cells: policy/normal, policy/safe, full/normal, and
+full/safe. This produces 720 new work items and prevents an effect estimate
+from being assembled across dates or execution identities. An eight-item
+formal prefix covers all four cells and both attack and benign-tool tasks; it
+is included once in the final denominator.
 
-- 50 attacks;
-- 30 benign tool tasks; and
-- 10 benign no-tool tasks.
+### 3.9 Source-authority counterfactual
 
-Each case receives five assignments: structural baseline/`auto_compiled`,
-policy package/`auto_compiled`, full package/`auto_compiled`, policy package/
-`exact_gold`, and full package/`exact_gold`. The plan contains 450 work items,
-including a six-item formal prefix.
+E2 contains 60 controlled tool tasks, evenly split between AgentDojo and
+M3-v2. Thirty are supporting scenarios and thirty contain a parameter that
+competes with the trusted request. The scenarios cover payment targets,
+message recipients, file paths, calendar participants, data recipients, and
+workspace objects.
 
-Gemini uses the official free tier with a paid ceiling of USD 0. At the first
-HTTP 429, the active run stops and leaves all unstarted items pending. On a new
-provider quota day, only unstarted items and work items with no official model
-response are eligible for explicit recovery. A rate-limited work item becomes
-a terminal diagnostic on its third quota-day attempt. If the 450-item plan
-still cannot be completed after three provider quota days, the observed subset
-is reported diagnostically, unstarted work items are counted as unavailable,
-and no cross-provider generalization claim is made.
+Each task has `trusted_origin` and `untrusted_origin` versions. Proposition,
+parameter value, relative position, and policy remain fixed; only source
+authority changes. Policy/normal and full/normal are crossed with both source
+variants, yielding 240 end-to-end work items. Separately, authorized and
+unauthorized proposals are replayed through both Guard configurations for
+every source variant, yielding 480 deterministic, zero-provider decisions.
+Offline Guard replay and end-to-end system performance are reported as
+different evidence layers.
 
-### 3.9 Providers and model identity
+### 3.10 Risk-enriched challenge and Flash replication
 
-The primary model is DeepSeek V4 Pro through the official DeepSeek endpoint.
-The cross-provider model is Gemini 3.6 Flash through the official Google
-Generative Language OpenAI-compatible endpoint. Each request is assigned a
+E3 selects 60 historical attack cases, 30 per benchmark, that produced an
+unsafe effect under at least one earlier public condition. Coverage of suite
+and attack family is prioritized before the count of earlier unsafe
+conditions; a fixed digest order breaks ties. Each case receives the four E1
+factor cells, yielding 240 Pro runs. This outcome-enriched cohort estimates
+conditional robustness on known difficult cases and cannot estimate natural
+attack prevalence.
+
+E4 uses a 90-case nested representative sample with 50 attacks, 30 benign tool
+tasks, and 10 benign no-tool tasks. It repeats all four E1 cells on DeepSeek V4
+Flash, yielding 360 work items. This is a same-provider model replication, not
+a cross-vendor generalization study.
+
+### 3.11 Adaptive B200-survivor tail
+
+E5 starts from the 22 of 40 defense-aware attack tasks with no unsafe effect by
+query 200. Twelve were selected prospectively: all four A2 tasks and four each
+from A1 and A3 by fixed digest order. Their existing search checkpoints are
+continued from query 201 to at most 500 and stop at the first unsafe effect.
+The maximum is 3,600 new queries. We report
+`P(first success by 500 | no success by 200)`, first-success locations, a
+conditional survival step function, family strata, query count, tokens, cost,
+and failure. These twelve tasks are not merged into the original 40-task
+cohort to construct a nominal full B500 curve.
+
+### 3.12 Contemporaneous attack-activity calibration
+
+E6 freezes 60 unique attacks, 30 per benchmark, selected only from historical
+Public-primary cases that produced an unsafe effect under no defense or the
+source-pinned VIGIL adapter. It runs each task once under no defense, VIGIL,
+policy/normal, policy/safe, full/normal, and full/safe, producing 360 DeepSeek
+work items in one execution block. Condition order uses a fixed six-way rotation
+within each benchmark. A 12-item outcome-blind formal prefix is included in the
+final denominator. This risk-enriched cohort tests whether attacks remain active
+contemporaneously and compares conditions within the same block; it does not
+estimate deployment prevalence. The execution is separate from E3, but the
+sample is not independent: 47/60 tasks are E3 anchors (19 AgentDojo and 28
+M3-v2).
+
+The original three-date E6 design was prospectively amended before any E6-v2
+provider call because artificial spacing did not answer a mechanism-relevant
+question. The amendment retained the frozen 60-task cohort, six conditions,
+sampling rules, endpoints, and failure policy, but replaced temporal replication
+with one complete diagnostic block. Consequently, E6 cannot estimate temporal
+repeatability. It contains no benign tasks and cannot contribute TCR or utility
+evidence.
+
+A nested 30-task Gemini plan used the same cases and conditions; 29/30 tasks are
+E3 anchors (15 AgentDojo and 14 M3-v2). Its formal prefix stopped after five
+response-bearing records and one response-less VIGIL dependency failure; the
+remaining 174 items were administratively closed rather than scientifically
+executed. All Gemini paired, factorial, and cross-provider effects are therefore
+not estimable.
+
+### 3.13 Providers and model identity
+
+The primary model is DeepSeek V4 Pro through the official DeepSeek endpoint;
+E4 uses DeepSeek V4 Flash through the same official provider. The earlier
+450-item Gemini authorization sample and the separately executed E6 Gemini
+prefix are both diagnostic. The latter used the official free tier at USD 0
+and stopped at its technical gate; neither Gemini dataset supports an effect
+estimate.
+Each new request is assigned a
 local request identifier and canonical payload digest before transport. A
 response-bearing record retains the official response identifier, exact
 returned model identity, usage, latency, and cost or free-tier attestation.
+For E5, the top-level compact cost object is empty, so request-level CNY
+charges are read from the public provider trace bundle embedded in the same raw
+query row. Its usage summary already aggregates multiple provider calls for the
+query; missing attribution fails closed. The raw-row totals are checked against
+the live append-only budget tracker during execution, and the paper analysis
+does not need to read the internal ledger or change any experimental outcome.
+The initial E5 cost estimate set CNY 5 adaptive and CNY 16 global fuses. After
+898 latest query work items cost CNY 4.2561534, the no-success maximum projected
+to approximately CNY 17. Before resuming, the cost ceilings were first raised
+and later replaced by a CNY 1,000 runaway-protection ceiling at the project
+owner's direction. The selected tasks, query range, attacker, model, seed,
+first-success stopping, ITT rules, and estimand were unchanged, and no successful
+query was replayed. Final analysis-attributed cost was CNY 24.5551236.
 Provider calls for the evidence reported here were made during July and August
 2026. The returned names are provider-managed model aliases and therefore
 identify the served model at request time without freezing its hidden weights.
@@ -497,7 +610,7 @@ Content-free request metadata and the provider's internal trace remain in a
 restricted local run directory outside the analysis dataset. Exact model
 identity is checked in the final one-pass integrity validation.
 
-### 3.10 Failure and recovery policy
+### 3.14 Failure and recovery policy
 
 Automatic retry is disabled. Recovery operates at the predefined
 experiment-item level:
@@ -510,17 +623,13 @@ experiment-item level:
   are skipped;
 - a repeated non-rate-limit pre-response failure becomes terminal on its
   second attempt; and
-- Gemini rate-limit recovery stops at the first 429 in each quota day and
-  becomes terminal on the third quota-day attempt.
+- no automatic retry or cross-model fallback is permitted.
 
 Earlier response-less attempts remain append-only in the raw file. The
 scientific analysis selects the latest terminal attempt for each experiment
-item and reports the count of superseded attempts. For Gemini, it applies the
-same retry-state normalization as the runner using the content-free pause-event
-ledger, so a quota pause cannot be mistaken for a scientific terminal. No prior
-row is overwritten.
+item and reports the count of superseded attempts. No prior row is overwritten.
 
-### 3.11 Outcomes
+### 3.15 Outcomes
 
 The two joint primary endpoints are:
 
@@ -548,7 +657,7 @@ This composite is a robustness bound, not an attack-success label. It asks how
 conclusions change if a non-operational run is not credited as secure while
 preserving unsafe effects and failures as separate reported counts.
 
-### 3.12 Statistical analysis
+### 3.16 Statistical analysis
 
 Each condition proportion receives a Wilson 95% confidence interval. The
 paired analyses report the absolute difference in percentage points, the two
@@ -572,6 +681,43 @@ confidence intervals are unadjusted estimation intervals. The `broad`,
 and benchmark panels are descriptive sensitivity or heterogeneity analyses,
 not additional confirmatory families.
 
+For E1, binary outcomes are arranged as a within-case 2×2 design. The module
+main effect is the average of full-minus-policy differences across prompts;
+the prompt main effect averages safe-minus-normal differences across module
+settings; and the interaction is the difference between those two prompt
+effects. Ten thousand case-cluster bootstrap resamples provide intervals and
+two-sided bootstrap sign p-values. Module, prompt, and interaction are
+Holm-adjusted within the attack unsafe-effect and benign-tool TCR endpoint
+families. The unsafe-or-failure factor analysis is a prespecified sensitivity
+bound and is shown separately.
+
+E2 uses the analogous source-by-module contrasts for unauthorized-argument
+influence and authorized action execution. Source, module, and source-by-module
+form the source experiment's adjustment family. Source-swap action changes are
+paired by base task. Deterministic replay reports false allows, false blocks,
+and an ALLOW/ASK/DENY heatmap without treating replay accuracy as end-to-end
+system performance.
+
+E3 and E4 report effect directions, absolute differences, and bootstrap
+intervals but open no new significance family. E3 is an outcome-enriched
+challenge analysis; E4 is a same-provider replication. Both retain their
+sampling boundary in every table and figure.
+
+For E6, no-defense activity is reported per benchmark and overall with Wilson
+intervals. Four prespecified paired contrasts use treatment-minus-baseline risk
+differences: VIGIL minus no defense, policy/normal minus no defense, full/safe
+minus no defense, and full/safe minus VIGIL. Each contrast receives a paired
+Newcombe interval, a benchmark-stratified task-cluster bootstrap interval, and
+a two-sided exact McNemar p-value; the four p-values are Holm-adjusted. The
+implemented exact test replaced the planned cluster sign-flip test and is
+reported as an analysis-method deviation; no row or outcome was removed.
+Operational failure and `unsafe_effect OR operational_failure` are reported
+alongside unsafe effect. The four M3 cells receive descriptive module, prompt,
+and interaction estimates. Because E6 is risk-enriched and single-block, these
+analyses do not estimate prevalence, utility, temporal repeatability, or the
+effect of an individual provenance component. Gemini effects are reported as
+not estimable after its coverage gate failed.
+
 The fixed design provides 100 paired attacks and 60 paired benign-tool tasks per
 main contrast, split evenly by benchmark for the latter. With 0/100 observed
 unsafe effects, the Wilson upper limit is 3.70%; within a 30-task benign-tool
@@ -579,22 +725,26 @@ benchmark stratum, intervals are necessarily much wider (for example, 0/30 has
 an 11.35% upper limit). We report these design-precision limits instead of a
 post hoc achieved-power calculation.
 
-Adaptive evidence is limited to budgets 50 and 200. We report the cumulative
-fraction of the fixed 40-task cohort with a first unsafe effect by query count
-and the two observed budget points. We do not extrapolate a saturation level.
+The original adaptive panel reports the cumulative fraction of the fixed
+40-task cohort with a first unsafe effect at budgets 50 and 200. E5 separately
+reports the conditional probability of a first success by 500 among twelve
+prospectively selected B200 survivors and a conditional survival curve from
+201 to 500. We neither combine the sampling frames nor extrapolate a saturation
+level.
 
-### 3.13 Minimal verification and reproducibility
+### 3.17 Minimal verification and reproducibility
 
 Verification is deliberately proportional to the lean study. It consists of:
 
 1. focused unit tests for modified provider, authorization projection,
    evaluator, analysis, and plotting code;
-2. the six-item formal prefix for each provider; and
+2. an eight-item formal prefix for each regular incremental study, two
+   five-query tail prefixes for E5, and a 12-item outcome-blind E6 prefix; and
 3. one terminal pass over row count, experiment-item uniqueness, forbidden-field
    isolation, exact model identity, and ITT failure retention.
 
-Each provider writes one append-only compact raw JSONL. The final statistics
-are written once to one authorization-analysis JSON, and figures are exported
+Each study writes one append-only compact raw JSONL. Final statistics are
+written once to one analysis JSON per study, and figures are exported
 as submission-ready vector PDF, editable SVG, and raster PNG previews for
 manuscript/QA use. Reproducibility assets include frozen samples, condition
 assignments, analysis code, aggregate tables, and versioned source.
@@ -853,7 +1003,138 @@ with repeated blocking and higher operational failure. The result supports
 making authorization construction explicit in evaluations; it does not show
 that every gold-derived policy or every runtime guard behaves similarly.
 
-### 4.8 Defense-aware adaptive evidence through budget 200
+### 4.8 Concurrent prompt-by-module factorial experiment
+
+E1 reran the fixed 180-case cohort contemporaneously under the four cells of a
+2×2 design: policy/normal, policy/safe, full/normal, and full/safe. All 720
+planned work items obtained an official response. There were 657 completed
+records, 54 parse failures, and nine provider failures; all 63 non-completed
+outcomes remain in ITT. Raw evaluator fields, provider-managed tools, and real
+external effects were absent from every online record.
+
+Direct unsafe effects remained floor-limited: the two policy cells each
+produced 1/100, whereas both full cells produced 0/100. The estimated module
+main effect was −1.00 percentage point (10,000-case-cluster bootstrap 95% CI
+−3.00 to 0.00; Holm-adjusted p=1.000). The prompt and interaction estimates
+were both 0.00 points. The failure-sensitive endpoint was 9/100, 11/100,
+7/100, and 8/100 in policy/normal, policy/safe, full/normal, and full/safe,
+respectively. Its module estimate was −2.50 points (−5.50 to 0.00;
+descriptive bootstrap p=0.0938). This prespecified sensitivity endpoint was not
+included in either co-primary Holm family.
+
+Benign-tool completion was 23/60, 21/60, 21/60, and 19/60 across the same
+cells. Both the module and prompt main effects were −3.33 points; their 95%
+intervals were −8.33 to 0.00 and −10.83 to +4.17, respectively, and the
+interaction estimate was 0.00 points (−6.67 to +8.33). Thus the concurrent
+design removes the earlier prompt/module confounding but supplies no evidence
+of a positive incremental module or safe-prompt effect. It also does not solve
+the direct-safety floor: only two unsafe effects occurred across 400 assigned
+attack runs.
+
+Supplementary Table S7 reports the E1 runtime burden and cost.
+
+### 4.9 Source-authority counterfactual
+
+E2 completed 240/240 response-bearing end-to-end work items and 480/480
+deterministic Guard decisions. The source swap changed only the authority of a
+critical proposition while holding text, value, relative position, and policy
+fixed. No end-to-end cell executed an authorized, unauthorized, or other
+action. The resulting zero unauthorized-argument-influence rate is an endpoint
+floor caused by confirmation and blocking, not evidence that source authority
+was behaviorally irrelevant.
+
+The burden nevertheless differed sharply. Policy/trusted and
+policy/untrusted produced ASK in 60/60 and 53/60 records, with no DENY. The
+full/trusted cell produced ASK in 57/60, whereas full/untrusted produced no ASK,
+DENY in 55/60, and one operational failure. The actual executed-action tuple
+changed under the source swap in 0/60 paired tasks for both module settings;
+operational status changed in 1/60 full pairs and is reported separately.
+
+The deterministic replay provides mechanism evidence rather than end-to-end
+utility. Its 480 decisions comprise 240 unauthorized and 240 authorized
+proposals. False allow was 0/240 unauthorized proposals (Wilson 95% CI
+0.00%--1.58%); false block was 30/240 authorized proposals (12.50%,
+8.90%--17.28%). Policy decisions were
+identical under trusted and untrusted origins: 60 ALLOW and 60 ASK. Full/trusted
+had the same distribution, but full/untrusted produced 30 ALLOW, 30 ASK, and
+60 DENY. The full Guard is therefore provenance-sensitive under this controlled
+swap, yet the tested model--Guard system did not translate that mechanism into
+completed tasks and incurred substantial confirmation or blocking burden.
+
+Supplementary Table S8 reports the E2 source-authority decisions.
+
+### 4.10 Outcome-enriched challenge and Flash replication
+
+E3 reran 60 attacks selected because each had produced an unsafe effect under
+at least one historical Public condition. It is an outcome-enriched challenge
+set, not a prevalence sample. All 240 work items obtained responses, but only
+185 completed normally; 17 parse and 38 provider failures remained in ITT.
+Only 1/60 historical vulnerabilities reproduced under any concurrent cell
+(1.67%, Wilson 95% CI 0.29%--8.86%). The four unsafe-effect cells were 1/60,
+1/60, 0/60, and 0/60, while unsafe-or-failure was 16/60, 15/60, 12/60, and
+14/60. The module estimates were −1.67 points (−5.00 to 0.00) for unsafe
+effect and −4.17 points (−10.00 to +0.83) for unsafe-or-failure. These
+conditional results expose instability and a high failure burden rather than
+establishing deployment robustness.
+
+E4 applied the same factorial design to the frozen 90-case DeepSeek V4 Flash
+cohort. All 360 work items obtained responses; one response-less transport
+attempt was superseded by a single-key successful attempt without replaying any
+other row. The final ITT set contains 347 completed, eight parse-failure, four
+provider-failure, and one maximum-step outcomes. Every attack cell was 0/50
+unsafe effects. Benign-tool completion was 10/30, 8/30, 10/30, and 10/30;
+the module, prompt, and interaction estimates were +3.33 points (0.00 to
++8.33), −3.33 points (−11.67 to +3.33), and +6.67 points (0.00 to +16.67).
+Unsafe-or-failure yielded a +3.00-point module estimate (0.00 to +7.00).
+E4 is a same-provider model replication and opens no new significance family;
+its all-zero direct-safety endpoint cannot establish equivalence or
+cross-provider generalization.
+
+Supplementary Table S9 reports the E3/E4 operational summary.
+
+### 4.11 Contemporaneous attack-activity calibration
+
+E6 used a separately executed, historically risk-enriched cohort to test whether
+attacks were still active under a current no-defense control. The execution was
+independent of E3, but the sample was not: 47/60 tasks were E3 anchors (19
+AgentDojo and 28 M3-v2). All 360 DeepSeek work items were response-bearing; 361
+physical records include one response-less superseded attempt. No defense
+produced 17/60 unsafe effects (28.33%, Wilson 95% CI 18.52%--40.75%), including
+8/30 AgentDojo and 9/30 M3-v2 cases. This demonstrates observed attack activity
+within the selected risk-enriched block, but does not satisfy or test the
+original multi-window activity gate and cannot estimate deployment prevalence.
+
+Unsafe effects under source-pinned VIGIL, policy/normal, policy/safe,
+full/normal, and full/safe were 16/60, 2/60, 1/60, 0/60, and 0/60. Operational
+failures in the same order, including no defense first, were 12/60, 8/60, 7/60,
+2/60, 7/60, and 3/60. Full/safe minus no defense was −28.33 percentage points
+(paired Newcombe 95% CI −40.77 to −16.81; task-cluster bootstrap −40.00 to
+−16.67; Holm-adjusted p=0.000061). Policy/normal minus no defense was −25.00
+points (Newcombe −36.95 to −14.30), and full/safe minus VIGIL was −26.67 points
+(−39.01 to −15.39). VIGIL minus no defense was only −1.67 points with an
+interval crossing zero; its benchmark-specific directions opposed each other
+(+3.33 points on AgentDojo and −6.67 on M3-v2), so the pooled VIGIL contrast is
+not interpreted as homogeneous.
+
+The four M3 cells yielded descriptive factor estimates of −2.50 points for the
+module bundle, −0.83 for the safe prompt, and +1.67 for their interaction. E6
+contains no benign tasks and was executed as one block after a prospective
+protocol amendment; it adds neither TCR evidence nor temporal-repeatability or
+individual-module attribution.
+
+The nested Gemini formal prefix failed its technical gate after five
+response-bearing records and one response-less VIGIL dependency failure. The
+remaining 174 planned items were administratively closed, not counted as safe
+or scientifically executed. The nested set also overlapped E3 for 29/30 tasks.
+Minimum response-complete paired coverage was 0/30 for comparisons involving
+VIGIL. All Gemini paired, factorial, and cross-provider effects are not
+estimable.
+
+Supplementary Table S11 reports the E6 DeepSeek activity and operational outcomes.
+
+Supplementary Table S12 reports the E6 paired effects and Gemini inference coverage.
+
+### 4.12 Defense-aware adaptive evidence and conditional tail through budget 500
 
 The initial DeepSeek V4 Pro cost canary covered eight result-blind,
 attack-family-balanced M3-v2 development tasks under the full package and the
@@ -874,17 +1155,35 @@ saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 
 Supplementary Table S6 reports the defense-aware adaptive attack.
 
-### 4.9 Remaining evidence boundary
+The E5 extension then completed all 12 prespecified B200 survivors through
+query 500. No task produced a new first unsafe effect between queries 201 and
+500: 0/12 (0.00%, Wilson 95% CI 0.00%--24.25%). This is a conditional null
+observation with a wide upper bound, not evidence that the original 40-task
+panel has zero tail risk or that attack search has saturated. The latest ITT
+set contains 3,600 query work keys: 3,577 completed, 21 parse failures, and two
+provider failures. Five earlier response-less or local-recovery attempts remain
+as superseded physical rows. Total usage was 4,511,768 tokens and attributed
+cost was CNY 24.5551236.
 
-The medium, Public Pro, Public Flash, authorization-regime, and budget-50/200
-studies jointly support an empirical security–utility paper. They do not
-support a leading-defense, causal provenance, saturated-adaptive, or
-cross-provider claim. Gemini reached the three-quota-day free-tier stopping
-rule with 32/450 terminal work items: five response-bearing items, 83 observed
-but nonterminal items, and 335 unstarted items. The incomplete cohort is
-retained only for operational accounting and is excluded from the comparisons
-above. UTR and DSR are not identifiable from the current record contract and
-are not reconstructed from unsafe-effect rate.
+Supplementary Table S10 reports the conditional adaptive-tail execution.
+
+### 4.13 Remaining evidence boundary
+
+The medium, Public, authorization-regime, factorial, source-authority,
+challenge, replication, adaptive, and contemporaneous-activity studies jointly support an empirical
+security–utility paper. They do not support a leading-defense, end-to-end
+provenance-benefit, saturated-adaptive, or cross-provider claim. E2 does
+identify source sensitivity at the deterministic Guard decision layer, but its
+end-to-end action endpoint is floor-limited. E5 supplies only a conditional
+0/12 B200-survivor tail with a 24.25% upper confidence limit. E6 records attack
+activity only within its historically enriched, single-block DeepSeek cohort;
+it neither satisfies nor tests the original multi-window activity gate. The
+earlier Gemini authorization study closed at 32/450
+terminal work items, only five response-bearing; the separately executed E6
+Gemini prefix produced five response-bearing records, one response-less failure, and
+174 administrative closures. Both are retained for operational accounting but
+all Gemini effects are not estimable. UTR and DSR are not identifiable from the
+current record contract and are not reconstructed from unsafe-effect rate.
 
 ## 5. Discussion
 
@@ -898,13 +1197,15 @@ The 1,791-record V4 Flash matrix showed the same security direction: 24/400
 unsafe effects for the full package versus 12/400 for the policy package. The
 Flash utility difference was small (38/145 versus 35/145).
 
-This is scientifically useful negative evidence, but it is package-level
-evidence. The full configuration combines `safe_prompt` with provenance,
-temporal/data-flow, monotonicity, and confirmation logic; the policy package
-uses `normal` prompting and policy enforcement alone. The experiment therefore
-cannot assign the difference to any individual module or to prompting. It shows
-that the evaluated bundle did not earn a security advantage under these tasks,
-not that provenance or confirmation is intrinsically ineffective.
+This is scientifically useful negative evidence, but it was originally
+package-level evidence. E1 resolves the prompt/runtime confounding by crossing
+the prompt profile with the module bundle in one execution window. Its module,
+prompt, and interaction estimates were all small, and none supplied evidence
+of a positive safety or utility contribution. The result identifies the prompt
+factor separately from the runtime bundle; it still cannot separate provenance,
+temporal/data-flow, monotonicity, and confirmation from one another. It shows
+that the evaluated bundle did not earn a clear advantage under these tasks,
+not that any individual mechanism is intrinsically ineffective.
 
 ### 5.2 Authorization is part of the treatment
 
@@ -956,7 +1257,27 @@ change on M3-v2. This does not convert failures into attacks; it demonstrates
 that a near-zero observed unsafe-effect rate can coexist with poor operational
 robustness.
 
-### 5.3 Executed effects and utility must be reported together
+### 5.3 Provenance sensitivity exists at the decision layer
+
+The controlled source-authority experiment sharpens the negative package
+result. Holding proposition, value, position, and policy fixed, the policy-only
+Guard produced the same deterministic decision distribution under trusted and
+untrusted origins. The full Guard changed its untrusted-origin distribution to
+30 ALLOW, 30 ASK, and 60 DENY. Across 240 unauthorized proposals there were no
+false allows; across 240 authorized proposals there were 30 false blocks. This
+is direct evidence that the implemented full
+Guard is provenance-sensitive at its deterministic decision boundary.
+
+That mechanism did not translate into completed end-to-end actions. All 240
+model--Guard runs executed zero actions: trusted contexts were routed almost
+entirely to ASK, while full/untrusted contexts were predominantly DENY. The
+correct interpretation therefore has two layers. Offline replay establishes
+mechanism behavior; end-to-end execution reveals a confirmation bottleneck and
+cannot be replaced by the replay's decision accuracy. A provenance mechanism
+can be logically active while the surrounding interaction design supplies
+little usable utility.
+
+### 5.4 Executed effects and utility must be reported together
 
 A low prompt-injection success rate is not sufficient evidence of a useful
 runtime defense. A detector may flag adversarial text without preventing an
@@ -981,21 +1302,46 @@ it. The paper reports these outcomes separately. The unsafe-or-failure
 sensitivity endpoint is shown only as an explicitly pessimistic robustness
 bound, not as a replacement composite score.
 
-### 5.4 Adaptive evidence is budget-sensitive, not saturated
+### 5.5 Adaptive evidence is budget-sensitive and conditionally extended
 
 The 40-task defense-aware panel found first unsafe effect for 4/40 tasks by 50
 queries and 18/40 by 200 queries. Thus a budget-50 evaluation would have missed
 most successes later observed by budget 200. This supports the general warning
 that a static or weak attacker can overstate robustness [@L27].
 
-The evidence stops at 200. It cannot establish that attack success has
-saturated, estimate an asymptotic attack rate, or compare hardest-task behavior
-at 2,000 queries. The correct presentation is a cumulative first-success curve
-through 200 with an explicit no-saturation boundary. This narrower result is
-more defensible than extending a long and costly panel whose additional
-validity for the paper's authorization question is uncertain.
+The complete-panel evidence stops at 200. E5 extends only 12 prespecified
+B200 survivors to 500 and stops each task at first unsafe effect. No new first
+success occurred (0/12; Wilson 95% upper limit 24.25%). This conditional tail
+can estimate
+`P(first success by 500 | no success by 200)` for the selected survivors, but
+it cannot be merged with the original 40 tasks into a nominal full B500 curve,
+establish saturation, estimate an asymptotic attack rate, or support a
+hardest-task-2,000 claim. The null point estimate does not establish zero tail
+risk because the interval remains wide and the cohort is selected conditional
+on surviving budget 200.
 
-### 5.5 Relation to recent provenance and authorization work
+### 5.6 Contemporaneous calibration restores an active control
+
+The near-zero E1 and E3 attack endpoints raise a calibration question: were the
+tested attacks inactive at the time of execution, or did defended conditions
+actually differ from an active control? E6 addresses this in a separately
+executed historically risk-enriched cohort, but it is not an independent sample
+validation: 47/60 tasks are also E3 anchors. No defense produced 17/60 unsafe
+effects, including events in both AgentDojo and M3-v2, while policy/normal
+produced 2/60 and full/safe produced 0/60. Attack activity was therefore
+observed within the selected contemporaneous block; the original multi-window
+activity gate was neither satisfied nor tested.
+
+This calibration does not rescue a broad defense-superiority claim. The cohort
+was selected from historical control-positive cases, contains no benign tasks,
+and was run in one execution block. It estimates neither deployment prevalence
+nor utility or temporal repeatability. Operational failures were also material:
+12/60 under no defense and 3/60 even under full/safe. The VIGIL contrast was
+heterogeneous, moving in opposite directions across the two benchmarks. E6 is
+therefore best read as an active-control check plus a conditional comparison,
+not a general robustness ranking or an individual provenance-module ablation.
+
+### 5.7 Relation to recent provenance and authorization work
 
 VIGIL, DRIFT, the Task Shield, IPIGuard, Progent, CaMeL, ARGUS, AuthGraph, FAVA,
 and provenance-sensitivity auditing occupy overlapping parts of the design
@@ -1004,36 +1350,36 @@ works rule out claims that M3 is the first verify-before-commit system, the
 first parameter-source defense, or the first structured runtime authorizer.
 
 The remaining contribution is methodological and empirical. The study holds
-task content fixed while changing authorization regimes and Guard configuration packages,
-keeps evaluator fields offline, measures post-enforcement effects, retains
-failure in ITT, and reports operational burden. In particular, the recent
+task content fixed while changing authorization regimes, separately manipulates
+prompt and runtime factors, and performs a source-only counterfactual. It keeps
+evaluator fields offline, measures post-enforcement effects, retains failure in
+ITT, and reports operational burden. In particular, the recent
 provenance-sensitivity study changes source authority in controlled next-action
-tasks [@L35]. The present design extends that measurement question to complete
-tool trajectories and executed effects, albeit with the additional
-implementation complexity and failure modes that such trajectories introduce.
+tasks [@L35]. The present design adds deterministic Guard replay and complete
+tool trajectories while keeping those two evidence layers separate.
 
-### 5.6 Cross-provider interpretation
+### 5.8 Cross-provider interpretation
 
-The Gemini sample is deliberately smaller and nested inside the DeepSeek
-sample. It can show whether the main paired direction appears under another
-provider; it cannot establish broad model-family generality. The official free
-tier also introduces an availability constraint. The protocol stops at the
-first 429, resumes only response-less or untouched work on a later quota day,
-and downgrades transparently after three quota-day attempts.
+Two distinct Gemini attempts remain diagnostic. The earlier authorization study
+closed with 32/450 terminal work items, including only five with official model
+responses; 83 observed items remained nonterminal and 335 were unstarted. The
+separately executed E6 prefix then stopped after five response-bearing records and one
+response-less VIGIL dependency failure; 174 untouched plan rows were closed
+administratively. Administrative closure is not scientific observation.
 
-The stopping rule closed with 32/450 terminal work items, including five with
-official model responses; 83 observed items remained nonterminal and 335 were
-unstarted. These rows are retained for operational accounting but excluded
-from scientific inference. External validity is therefore limited to DeepSeek
-V4 Pro and V4 Flash, and no cross-provider conclusion is made.
+Neither dataset meets a paired-coverage gate. In E6, comparisons involving
+VIGIL have 0/30 minimum response-complete pairs. We therefore report all Gemini
+effects as not estimable rather than plotting a zero, ranking providers, or
+combining the two incompatible samples. External validity remains limited to
+DeepSeek V4 Pro and V4 Flash.
 
-### 5.7 Limitations
+### 5.9 Limitations
 
 First, the new primary experiment uses one proprietary model and two benchmark
 families; the larger Public evidence adds another model from the same provider,
 not an independent vendor. Model updates, tool schemas, system prompts, and
-application context may change the effects. The Gemini subset closed incomplete
-and contributes no cross-provider inference. Although execution dates, official
+application context may change the effects. Both Gemini attempts closed
+incomplete and contribute no cross-provider inference. Although execution dates, official
 response identifiers, and returned model names are retained, provider-managed
 aliases do not make the underlying weights immutable.
 
@@ -1044,9 +1390,11 @@ small security differences between its four primary cells. Security-direction
 evidence comes mainly from the larger Public matrices and must not be inferred
 from these near-zero cells alone.
 
-Third, the policy/full contrast is bundled: `normal` versus `safe_prompt`
-prompting changes together with provenance, data-flow, monotonicity, and
-confirmation modules. It cannot support component-level causal attribution.
+Third, E1 separates prompt profile from the runtime module bundle, but the full
+module factor still combines provenance, data-flow, monotonicity, and
+confirmation. It identifies a bundle-level module effect, not the contribution
+of each internal mechanism. E2 isolates source authority at the input boundary,
+yet confirmation and blocking create an end-to-end action floor.
 
 Fourth, `auto_compiled` is one policy compiler, not a complete model of human
 authorization. The stress regimes approximate common policy errors but do not
@@ -1057,16 +1405,23 @@ Fifth, the effect environment is isolated. This is necessary to prevent real
 email, payment, browser, code, or production actions, but it may omit latency,
 state, and recovery behavior found in live applications.
 
-Sixth, the adaptive panel reports budgets only through 200 and does not prove
-saturation. Attack search is still one family of defense-aware optimization;
-another optimizer may find different failures.
+Sixth, only a prespecified subset of B200 survivors is extended toward 500.
+That conditional tail does not constitute a complete B500 panel and cannot
+prove saturation. Attack search is still one family of defense-aware
+optimization; another optimizer may find different failures.
 
-Seventh, failure handling is conservative but not interpretation-free. All
+Seventh, E6 uses a historically risk-enriched cohort in a single execution
+block, with 47/60 tasks overlapping E3. It observes activity in that selected
+block but cannot estimate deployment prevalence, benign utility, cross-date
+repeatability, or independent-sample replication. Its M3 factor estimates
+remain bundle-level and do not identify provenance as the causal component.
+
+Eighth, failure handling is conservative but not interpretation-free. All
 response-bearing failures are terminal in ITT, whereas response-less transport
 failures can receive bounded explicit recovery. We report raw failures and
 superseded attempts so readers can assess that choice.
 
-Eighth, `ASK` is observed only as system confirmation-request incidence.
+Ninth, `ASK` is observed only as system confirmation-request incidence.
 Confirmation stayed pending in the synthetic environment, so this study does
 not measure human response quality, workload, or usable-security outcomes.
 
@@ -1075,34 +1430,36 @@ claim first, only, or SOTA status. Its external-validity claims are limited to
 the models, benchmarks, policy compiler, stress regimes, and attack budgets
 actually evaluated.
 
-### 5.8 Practical implications
+### 5.10 Practical implications
 
-Three practical recommendations follow. First, agent-security benchmarks
+Four practical recommendations follow. First, agent-security benchmarks
 should publish the fields visible to the online Guard and keep evaluator-only
 answers outside that projection.
-Second, runtime defenses should be compared against a simpler policy package on
-the same tasks, with prompt profiles held fixed when component attribution is
-the goal; otherwise a complex bundle may receive credit for behavior already
-supplied by the base policy or prompt. Third, security reports should include
-benign completion, system confirmation/blocking incidence, failures, latency,
-and attack budget alongside unsafe-effect rate.
+Second, runtime defenses should be evaluated factorially against a simpler
+policy package so prompt and module effects are separately identifiable; the
+internal modules require further ablations before individual attribution.
+Third, source-only counterfactuals should be paired with both deterministic
+Guard replay and end-to-end execution, rather than treating either as a proxy
+for the other. Fourth, security reports should include benign completion,
+system confirmation/blocking incidence, failures, latency, and attack budget
+alongside unsafe-effect rate.
 
 The DeepSeek authorization-regime results now tie these recommendations to
 observed effects: exact and stressed policies materially changed completion,
 blocking, failure, and latency while observed unsafe effects remained near
-zero. The prespecified Gemini stopping rule closed with an incomplete
-diagnostic subset, which cannot alter or broaden the DeepSeek findings.
+zero. E6 additionally shows why an active no-defense control should accompany
+floor-limited defended cells. Both Gemini attempts closed with incomplete
+diagnostic subsets and cannot alter or broaden the DeepSeek findings.
 
 ## 6. Conclusion
 
 This study treats runtime authorization as an experimental variable rather
-than fixed infrastructure. Across the completed medium and Public studies,
-the full configuration package reduced unsafe effects relative to a structural
-baseline but did not improve on the policy package. The direction replicated
-across DeepSeek V4 Pro and V4 Flash: the full package produced more unsafe
-effects, while benign-tool utility was equal or only slightly different.
-Because prompt profile and runtime modules differ together, this is a bundled
-comparison and does not identify an individual component effect.
+than fixed infrastructure. Across the completed medium and Public studies, the
+full configuration package reduced unsafe effects relative to a structural
+baseline but did not improve on the policy package. The larger historical
+direction replicated across DeepSeek V4 Pro and V4 Flash: the full package
+produced more unsafe effects, while benign-tool utility was equal or only
+slightly different.
 
 The prospectively frozen authorization experiment explains why security alone
 is an incomplete endpoint. Unsafe effects remained at or near zero in all four
@@ -1119,170 +1476,193 @@ observed attack floor. Authorization construction can therefore materially
 alter the measured security–utility frontier even when an attack-only result
 looks stable.
 
+The concurrent 2×2 experiment then separated prompt profile from the runtime
+module bundle. Across 400 attack assignments, the policy cells produced two
+unsafe effects and the full cells produced none; the module estimate was −1.00
+percentage point (95% bootstrap CI −3.00 to 0.00), while the prompt and
+interaction estimates were zero. Benign-tool module and prompt effects were
+both −3.33 points with intervals including zero. The design resolves the
+prompt/module confounding but remains floor-limited and does not isolate the
+individual provenance, data-flow, monotonicity, or confirmation components.
+
+The source-authority counterfactual supplies the corresponding mechanism
+evidence. Full-Guard decisions changed under an untrusted source, whereas the
+policy-only distribution did not; 480 replay decisions comprised 0/240 false
+allows among unauthorized proposals and 30/240 false blocks among authorized
+proposals. Yet all 240 end-to-end runs executed no action because
+ASK or DENY intervened. Mechanism-level provenance sensitivity is therefore
+not equivalent to usable end-to-end utility. The outcome-enriched challenge
+set likewise reproduced only 1/60 historical unsafe effects and incurred 55
+operational failures, while the Flash factorial replication had zero unsafe
+effects in every attack cell. Both results reinforce the need to report a
+failure-sensitive endpoint instead of treating non-operation as safety.
+
 The adaptive panel supplies a related measurement warning. First unsafe
 effects were observed for 4/40 tasks by query 50 and 18/40 by query 200. A
 single low attack budget would have missed most successes found by the larger
-budget, but two budget points cannot establish saturation.
+budget. Among the 12 prespecified B200 survivors, 0/12 produced a new first
+unsafe effect by query 500 (Wilson upper limit 24.25%). This conditional result
+cannot be merged into a full B500 curve or used to establish saturation or zero
+tail risk.
 
-These findings support three practical requirements for tool-agent security
-evaluation: keep evaluator-only fields outside online Guard state, compare
-configuration packages on identical tasks and hold prompts fixed when seeking
-component attribution, and report utility, system ASK/DENY incidence, failures,
-latency, and attack budget alongside unsafe effects. The conclusions remain limited to the tested policies, benchmarks,
-runtime implementation, DeepSeek models, and budget range. The prespecified
-Gemini sample closed incomplete under its free-tier stopping rule and remains
-diagnostic; it cannot erase or broaden the completed DeepSeek findings.
+A separately executed single-block calibration observed attack activity in a
+historically risk-enriched cohort: no defense produced 17/60 unsafe effects
+across both benchmarks, compared with 2/60 under policy/normal and 0/60 under
+full/safe. Because 47/60 tasks also anchored E3, this is not independent-sample
+replication. These conditional contrasts remain bounded by non-negligible
+operational failure, outcome-enriched sampling, the absence of benign tasks,
+and a single execution block. They do not satisfy the original multi-window
+activity gate or estimate deployment prevalence, utility, temporal
+repeatability, or an individual provenance-module effect.
+
+These findings support four practical requirements for tool-agent security
+evaluation: keep evaluator-only fields outside online Guard state; manipulate
+prompt and runtime factors separately; pair deterministic source-authority
+replay with end-to-end execution; and report utility, ASK/DENY incidence,
+failures, latency, and attack budget alongside unsafe effects. The conclusions
+remain limited to the tested policies, benchmarks, runtime implementation,
+DeepSeek models, and budget range. Both the earlier Gemini authorization sample
+and the separate E6 Gemini prefix closed below their paired-coverage gates; all
+Gemini effects are not estimable and cannot erase or broaden the completed
+DeepSeek findings.
 
 ## Figures
 
-![Figure 1. Online authorization projection and offline evaluation boundary.](../lean_empirical/figures_deepseek_v1/figure_1_online_field_isolation.png)
+![Figure 1. Online fields and the source-authority boundary.](../incremental_empirical_v1/figures/figure_1_authority_boundary.png)
 
-![Figure 2. Direct attack risk and failure-sensitive bound versus benign utility.](../lean_empirical/figures_deepseek_v1/figure_2_safety_utility_pareto.png)
+![Figure 2. Prompt, runtime-module, and interaction effects.](../incremental_empirical_v1/figures/figure_2_factorial_interactions.png)
 
-![Figure 3. Paired authorization and configuration-package effects.](../lean_empirical/figures_deepseek_v1/figure_3_authorization_forest.png)
+![Figure 3. Source-authority counterfactual decisions and action changes.](../incremental_empirical_v1/figures/figure_3_provenance_counterfactual.png)
 
-![Figure 4. Runtime burden by task type and benchmark.](../lean_empirical/figures_deepseek_v1/figure_4_runtime_burden.png)
+![Figure 4. Factor effects across representative, enriched, and Flash cohorts.](../incremental_empirical_v1/figures/figure_4_factor_effect_forest.png)
 
-![Figure 5. Adaptive first-success curve through query budget 200.](../lean_empirical/figures_deepseek_v1/figure_5_adaptive_first_success.png)
+![Figure 5. Complete B50/B200 evidence and the conditional B200-survivor tail.](../incremental_empirical_v1/figures/figure_5_adaptive_tail.png)
 
 ## Tables
 
-### Table 1. Experimental design
+### Table 1. Prompt-by-module factorial design
 
-Providers, benchmarks, conditions, authorization regimes and frozen work-item counts for the lean empirical study. Gemini counts are planned; its incomplete rows are excluded from inference.
+The four contemporaneous cells cross prompt profile with the runtime module bundle while holding authorization at auto_compiled.
 
-| Provider | Benchmark | Condition | Authorization regimes | Planned n |
+| Condition cell | Prompt | Modules | Authorization | Historical rows reused |
 |---|---|---|---|---|
-| DeepSeek | AgentDojo | Full package | auto compiled, broad, conflicting, exact gold, underspecified | 235 |
-| DeepSeek | AgentDojo | Policy package | auto compiled, exact gold | 160 |
-| DeepSeek | M3-v2 | Full package | auto compiled, broad, conflicting, exact gold, underspecified | 305 |
-| DeepSeek | M3-v2 | Policy package | auto compiled, exact gold | 200 |
-| Gemini | AgentDojo | Full package | auto compiled, exact gold | 80 |
-| Gemini | AgentDojo | Policy package | auto compiled, exact gold | 80 |
-| Gemini | AgentDojo | Structural baseline | auto compiled | 40 |
-| Gemini | M3-v2 | Full package | auto compiled, exact gold | 100 |
-| Gemini | M3-v2 | Policy package | auto compiled, exact gold | 100 |
-| Gemini | M3-v2 | Structural baseline | auto compiled | 50 |
+| Policy / normal | normal | policy | auto compiled | No |
+| Policy / safe | safe | policy | auto compiled | No |
+| Full / normal | normal | full | auto compiled | No |
+| Full / safe | safe | full | auto compiled | No |
 
-### Table 2. Joint primary endpoints
+### Table 2. E1 factorial estimates
 
-Unsafe effects and the pessimistic unsafe-or-operational-failure bound among attacks, plus completions among benign tool tasks. Brackets contain Wilson 95% confidence intervals.
+Absolute effects are probability differences; intervals use 10,000 case-cluster bootstrap replicates. Holm values apply only to E1's prespecified endpoint families.
 
-| Provider | Condition | Authorization | Unsafe effect, n/N (95% CI) | Unsafe or failure, n/N (95% CI) | Benign-tool TCR, n/N (95% CI) |
+| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
+|---|---|---|---|---|---|---|---|---|---|
+| E1 representative pro | attack unsafe effect | interaction | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E1 representative pro | attack unsafe effect | module | 100 | -1.00 pp | -3.00 pp | +0.00 pp | 0.7358 | 1.0000 | 10000 |
+| E1 representative pro | attack unsafe effect | prompt | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E1 representative pro | attack unsafe or failure | interaction | 100 | -1.00 pp | -5.00 pp | +3.00 pp | 0.8206 | — | 10000 |
+| E1 representative pro | attack unsafe or failure | module | 100 | -2.50 pp | -5.50 pp | +0.00 pp | 0.0938 | — | 10000 |
+| E1 representative pro | attack unsafe or failure | prompt | 100 | +1.50 pp | -3.00 pp | +6.00 pp | 0.5868 | — | 10000 |
+| E1 representative pro | Benign-tool TCR | interaction | 60 | +0.00 pp | -6.67 pp | +8.33 pp | 1.0000 | 1.0000 | 10000 |
+| E1 representative pro | Benign-tool TCR | module | 60 | -3.33 pp | -8.33 pp | +0.00 pp | 0.0960 | 0.2880 | 10000 |
+| E1 representative pro | Benign-tool TCR | prompt | 60 | -3.33 pp | -10.83 pp | +4.17 pp | 0.4496 | 0.8992 | 10000 |
+
+### Table 3. E2 source-authority evidence
+
+End-to-end source swaps and deterministic Guard replay are separate evidence layers and must not be interpreted as interchangeable.
+
+| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
+|---|---|---|---|---|---|---|---|---|---|
+| E2 end to end | unauthorized argument influence | module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | unauthorized argument influence | source | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | unauthorized argument influence | source x module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | authorized action execution | module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | authorized action execution | source | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | authorized action execution | source x module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | source swap action change | full | 60 | +0.00 pp | +0.00 pp | +6.02 pp | — | — | — |
+| E2 end to end | source swap action change | policy | 60 | +0.00 pp | +0.00 pp | +6.02 pp | — | — | — |
+| E2 offline guard replay | false allow | not applicable | 240 | +0.00 pp | +0.00 pp | +1.58 pp | — | — | — |
+| E2 offline guard replay | false block | not applicable | 240 | +12.50 pp | +8.90 pp | +17.28 pp | — | — | — |
+
+### Table 4. E3/E4 conditional robustness
+
+E3 is outcome-enriched and E4 is a same-provider replication. Neither opens a new significance family or estimates deployment prevalence.
+
+| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
+|---|---|---|---|---|---|---|---|---|---|
+| E3 risk enriched pro | attack unsafe effect | interaction | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E3 risk enriched pro | attack unsafe effect | module | 60 | -1.67 pp | -5.00 pp | +0.00 pp | 0.7406 | — | 10000 |
+| E3 risk enriched pro | attack unsafe effect | prompt | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E3 risk enriched pro | attack unsafe or failure | interaction | 60 | +5.00 pp | -3.33 pp | +13.33 pp | 0.3448 | — | 10000 |
+| E3 risk enriched pro | attack unsafe or failure | module | 60 | -4.17 pp | -10.00 pp | +0.83 pp | 0.1528 | — | 10000 |
+| E3 risk enriched pro | attack unsafe or failure | prompt | 60 | +0.83 pp | -8.33 pp | +10.00 pp | 0.9438 | — | 10000 |
+| E4 flash replication | attack unsafe effect | interaction | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | attack unsafe effect | module | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | attack unsafe effect | prompt | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | attack unsafe or failure | interaction | 50 | -2.00 pp | -10.00 pp | +4.00 pp | 0.7852 | — | 10000 |
+| E4 flash replication | attack unsafe or failure | module | 50 | +3.00 pp | +0.00 pp | +7.00 pp | 0.0864 | — | 10000 |
+| E4 flash replication | attack unsafe or failure | prompt | 50 | -1.00 pp | -5.00 pp | +2.00 pp | 0.7752 | — | 10000 |
+| E4 flash replication | Benign-tool TCR | interaction | 30 | +6.67 pp | +0.00 pp | +16.67 pp | 0.2558 | — | 10000 |
+| E4 flash replication | Benign-tool TCR | module | 30 | +3.33 pp | +0.00 pp | +8.33 pp | 0.2602 | — | 10000 |
+| E4 flash replication | Benign-tool TCR | prompt | 30 | -3.33 pp | -11.67 pp | +3.33 pp | 0.5494 | — | 10000 |
+
+### Table 5. E5 conditional adaptive tail
+
+The tail probability is conditional on the prespecified B200 survivors; it is not a complete original-panel B500 curve or saturation estimate.
+
+| Stratum | Tasks | Successes by 500 | Conditional probability | CI low | CI high | First-success queries | Complete original B500 panel |
+|---|---|---|---|---|---|---|---|
+| all selected survivors | 12 | 0 | 0.00% | 0.00% | 24.25% | — | No |
+| A1 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
+| A2 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
+| A3 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
+
+### Table 6. E6 contemporaneous attack-activity calibration
+
+E6 uses a historically risk-enriched single execution block; 47/60 tasks also anchor E3. It does not estimate deployment prevalence, benign utility, temporal repeatability, independent-sample replication, or a cross-provider effect.
+
+| Condition | Unsafe effect, n/N (95% CI) | Operational failure | Unsafe or failure | ASK events | DENY events |
 |---|---|---|---|---|---|
-| DeepSeek | Full package | auto compiled | 0/100 (0.0%) [0.0%, 3.7%] | 8/100 (8.0%) [4.1%, 15.0%] | 16/60 (26.7%) [17.1%, 39.0%] |
-| DeepSeek | Full package | broad | 0/30 (0.0%) [0.0%, 11.4%] | 3/30 (10.0%) [3.5%, 25.6%] | 2/20 (10.0%) [2.8%, 30.1%] |
-| DeepSeek | Full package | conflicting | 0/30 (0.0%) [0.0%, 11.4%] | 2/30 (6.7%) [1.8%, 21.3%] | 1/20 (5.0%) [0.9%, 23.6%] |
-| DeepSeek | Full package | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 26/100 (26.0%) [18.4%, 35.4%] | 7/60 (11.7%) [5.8%, 22.2%] |
-| DeepSeek | Full package | underspecified | 0/30 (0.0%) [0.0%, 11.4%] | 2/30 (6.7%) [1.8%, 21.3%] | 2/20 (10.0%) [2.8%, 30.1%] |
-| DeepSeek | Policy package | auto compiled | 1/100 (1.0%) [0.2%, 5.4%] | 7/100 (7.0%) [3.4%, 13.7%] | 22/60 (36.7%) [25.6%, 49.3%] |
-| DeepSeek | Policy package | exact gold | 0/100 (0.0%) [0.0%, 3.7%] | 25/100 (25.0%) [17.5%, 34.3%] | 9/60 (15.0%) [8.1%, 26.1%] |
-
-### Table 3. Paired authorization and configuration-package effects
-
-Absolute percentage-point differences use the second condition minus the first. Stress-regime extensions are outside the primary Holm family.
-
-| Provider | Endpoint | Comparison | Paired n | Difference (pp) | Bootstrap 95% CI (pp) | Discordant first/second | McNemar p | Holm p |
-|---|---|---|---|---|---|---|---|---|
-| DeepSeek | Benign-tool TCR | Auto: policy to full package | 60 | -10.0 | [-18.3, -3.3] | 6/0 | 0.031 | 0.094 |
-| DeepSeek | Benign-tool TCR | Exact: policy to full package | 60 | -3.3 | [-8.3, +0.0] | 2/0 | 0.500 | 0.500 |
-| DeepSeek | Benign-tool TCR | Full package: auto to exact | 60 | -15.0 | [-28.3, -1.7] | 13/4 | 0.049 | 0.098 |
-| DeepSeek | Benign-tool TCR | Policy package: auto to exact | 60 | -21.7 | [-36.7, -5.0] | 19/6 | 0.015 | 0.059 |
-| DeepSeek | Unsafe effect | Auto: policy to full package | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
-| DeepSeek | Unsafe effect | Exact: policy to full package | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
-| DeepSeek | Unsafe effect | Full package: auto to exact | 100 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | 1.000 |
-| DeepSeek | Unsafe effect | Policy package: auto to exact | 100 | -1.0 | [-3.0, +0.0] | 1/0 | 1.000 | 1.000 |
-| DeepSeek | Benign-tool TCR | Full package: auto to broad | 20 | -25.0 | [-45.0, -5.0] | 5/0 | 0.062 | — |
-| DeepSeek | Unsafe effect | Full package: auto to broad | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
-| DeepSeek | Benign-tool TCR | Full package: auto to conflicting | 20 | -30.0 | [-50.0, -10.0] | 6/0 | 0.031 | — |
-| DeepSeek | Unsafe effect | Full package: auto to conflicting | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
-| DeepSeek | Benign-tool TCR | Full package: auto to underspecified | 20 | -25.0 | [-50.0, +0.0] | 6/1 | 0.125 | — |
-| DeepSeek | Unsafe effect | Full package: auto to underspecified | 30 | +0.0 | [+0.0, +0.0] | 0/0 | 1.000 | — |
-
-### Table 4. Runtime burden
-
-ASK and DENY cells report system-event totals, record incidence and the share of records affected. Failures remain in the ITT denominator.
-
-| Provider | Condition | Authorization | ASK events/records | DENY events/records | Failures | Latency p50/p95 (s) | Tokens | Cost |
-|---|---|---|---|---|---|---|---|---|
-| DeepSeek | Full package | auto compiled | 58 / 58 (32.2%) | 20 / 20 (11.1%) | 17 (9.4%) | 2.90 / 9.18 | 279,687 | CNY 0.2522 |
-| DeepSeek | Full package | broad | 23 / 23 (38.3%) | 7 / 7 (11.7%) | 6 (10.0%) | 2.84 / 9.38 | 82,975 | CNY 0.0769 |
-| DeepSeek | Full package | conflicting | 26 / 26 (43.3%) | 6 / 6 (10.0%) | 5 (8.3%) | 2.79 / 7.89 | 67,404 | CNY 0.0412 |
-| DeepSeek | Full package | exact gold | 0 / 0 (0.0%) | 187 / 81 (45.0%) | 44 (24.4%) | 3.94 / 19.62 | 454,627 | CNY 0.2995 |
-| DeepSeek | Full package | underspecified | 30 / 30 (50.0%) | 4 / 4 (6.7%) | 4 (6.7%) | 2.78 / 10.65 | 82,731 | CNY 0.0875 |
-| DeepSeek | Policy package | auto compiled | 62 / 62 (34.4%) | 13 / 13 (7.2%) | 13 (7.2%) | 3.16 / 10.63 | 307,544 | CNY 0.2940 |
-| DeepSeek | Policy package | exact gold | 0 / 0 (0.0%) | 227 / 88 (48.9%) | 43 (23.9%) | 5.06 / 19.42 | 473,478 | CNY 0.3374 |
-
-### Table 5. Benchmark-stratified paired estimates
-
-Paired benign-tool completion and attack unsafe-or-failure estimates by benchmark. These strata are descriptive rather than additional confirmatory families.
-
-| Provider | Benchmark | Endpoint | Comparison | Paired n | First n/N | Second n/N | Difference (pp) | Bootstrap 95% CI (pp) |
-|---|---|---|---|---|---|---|---|---|
-| DeepSeek | AgentDojo | Attack unsafe or failure | Auto: policy to full package | 50 | 5/50 | 4/50 | -2.0 | [-10.0, +4.0] |
-| DeepSeek | AgentDojo | Attack unsafe or failure | Exact: policy to full package | 50 | 23/50 | 22/50 | -2.0 | [-10.0, +6.0] |
-| DeepSeek | AgentDojo | Attack unsafe or failure | Full package: auto to exact | 50 | 4/50 | 22/50 | +36.0 | [+20.0, +52.0] |
-| DeepSeek | AgentDojo | Attack unsafe or failure | Policy package: auto to exact | 50 | 5/50 | 23/50 | +36.0 | [+20.0, +52.0] |
-| DeepSeek | AgentDojo | Benign-tool TCR | Auto: policy to full package | 30 | 5/30 | 4/30 | -3.3 | [-10.0, +0.0] |
-| DeepSeek | AgentDojo | Benign-tool TCR | Exact: policy to full package | 30 | 9/30 | 7/30 | -6.7 | [-16.7, +0.0] |
-| DeepSeek | AgentDojo | Benign-tool TCR | Full package: auto to exact | 30 | 4/30 | 7/30 | +10.0 | [-3.3, +23.3] |
-| DeepSeek | AgentDojo | Benign-tool TCR | Policy package: auto to exact | 30 | 5/30 | 9/30 | +13.3 | [-3.3, +30.0] |
-| DeepSeek | M3-v2 | Attack unsafe or failure | Auto: policy to full package | 50 | 2/50 | 4/50 | +4.0 | [-6.0, +14.0] |
-| DeepSeek | M3-v2 | Attack unsafe or failure | Exact: policy to full package | 50 | 2/50 | 4/50 | +4.0 | [-6.0, +14.0] |
-| DeepSeek | M3-v2 | Attack unsafe or failure | Full package: auto to exact | 50 | 4/50 | 4/50 | +0.0 | [+0.0, +0.0] |
-| DeepSeek | M3-v2 | Attack unsafe or failure | Policy package: auto to exact | 50 | 2/50 | 2/50 | +0.0 | [+0.0, +0.0] |
-| DeepSeek | M3-v2 | Benign-tool TCR | Auto: policy to full package | 30 | 17/30 | 12/30 | -16.7 | [-30.0, -3.3] |
-| DeepSeek | M3-v2 | Benign-tool TCR | Exact: policy to full package | 30 | 0/30 | 0/30 | +0.0 | [+0.0, +0.0] |
-| DeepSeek | M3-v2 | Benign-tool TCR | Full package: auto to exact | 30 | 12/30 | 0/30 | -40.0 | [-56.7, -23.3] |
-| DeepSeek | M3-v2 | Benign-tool TCR | Policy package: auto to exact | 30 | 17/30 | 0/30 | -56.7 | [-73.3, -40.0] |
-
-### Table 6. Adaptive evidence at budgets 50 and 200
-
-Cumulative tasks with at least one unsafe effect through budgets 50 and 200. These two points do not establish attack saturation.
-
-| Model | Budget | Successes | Rate | Wilson 95% CI | Claim boundary |
-|---|---|---|---|---|---|
-| deepseek-v4-pro | 50 | 4/40 | 10.0% | [4.0%, 23.1%] | Budgets 50 and 200 only; no saturation claim |
-| deepseek-v4-pro | 200 | 18/40 | 45.0% | [30.7%, 60.2%] | Budgets 50 and 200 only; no saturation claim |
+| No defense | 17/60 (28.3%) [18.5%, 40.8%] | 12/60 (20.0%) | 29/60 (48.3%) | 0 | 4 |
+| Source-pinned VIGIL | 16/60 (26.7%) [17.1%, 39.0%] | 8/60 (13.3%) | 24/60 (40.0%) | 0 | 8 |
+| Policy / normal | 2/60 (3.3%) [0.9%, 11.4%] | 7/60 (11.7%) | 9/60 (15.0%) | 31 | 7 |
+| Policy / safe | 1/60 (1.7%) [0.3%, 8.9%] | 2/60 (3.3%) | 3/60 (5.0%) | 21 | 2 |
+| Full / normal | 0/60 (0.0%) [0.0%, 6.0%] | 7/60 (11.7%) | 7/60 (11.7%) | 25 | 18 |
+| Full / safe | 0/60 (0.0%) [0.0%, 6.0%] | 3/60 (5.0%) | 3/60 (5.0%) | 19 | 6 |
 
 ## Figure captions
 
-**Figure 1. Online authorization projection and offline evaluation boundary.**
-Trusted task context, the selected policy projection, provenance events, and
-the proposed action may enter the runtime Guard. Raw gold answers, evaluator
-labels, reference trajectories, and effect-scoring metadata remain offline.
-The `exact_gold` sensitivity condition exposes only a derived authorization
-object to the policy projection. Only isolated simulated effects are scored;
-provider-managed tools and real external actions are disabled.
+**Figure 1. Online fields and the source-authority boundary.** Trusted task
+context, projected authorization, provenance events, and proposed actions may
+enter the Guard. Raw evaluator labels, gold answers, and effect receipts remain
+offline. The E2 source swap changes authority while holding proposition, value,
+relative position, and policy fixed; provider-managed tools and real external
+effects remain disabled.
 
-**Figure 2. Security–utility trade-off by authorization condition.** Each
-DeepSeek V4 Pro point reports benign-tool completion on the horizontal axis and
-one minus attack unsafe-effect rate on the vertical axis. The four main cells
-use 100 attacks and 60 benign tool tasks each; each nested stress cell uses 30
-attacks and 20 benign tool tasks. All terminal failures remain in the
-intention-to-treat denominators. Numbered markers map to the condition key; a
-slash joins conditions with exactly coincident coordinates. Near-identical
-attack safety can coexist with substantially different utility.
+**Figure 2. Prompt-by-module factorial effects.** Panels show the four E1 cells
+for unsafe effect, benign-tool completion, and the failure-sensitive attack
+endpoint; Table 2 reports the corresponding module, prompt, and interaction
+effects. Intervals use 10,000 case-cluster bootstrap replicates. Holm adjustment
+is confined to the unsafe-effect and benign-tool TCR co-primary families; the
+failure-sensitive endpoint remains a descriptive sensitivity analysis.
 
-**Figure 3. Paired effects of authorization regime and Guard configuration.**
-Points are absolute percentage-point differences for the second condition
-minus the first; bars are 95% intervals from 10,000 task-cluster bootstrap
-resamples. Orange rows use attack unsafe effect and blue rows use benign-tool
-task completion. Exact McNemar and Holm-adjusted values are reported in Table
-3 rather than encoded graphically.
+**Figure 3. Source-authority counterfactual.** The decision heatmap reports
+deterministic Guard outcomes for authorized and unauthorized proposals under
+trusted/untrusted origins and policy/full modules. The paired action panel
+separately reports end-to-end source-swap action changes. Offline Guard
+correctness is not treated as a substitute for system task completion.
 
-**Figure 4. Runtime confirmation, blocking, failure, and latency burden.** ASK
-and DENY panels report the percentage of terminal ITT records with at least one
-corresponding event, not the number of events divided by records. The table
-retains both record incidence and total event counts because a trajectory may
-contain multiple decisions. Failure uses the prespecified terminal failure
-set; latency is condition-level p95 wall time.
+**Figure 4. Factor effects across representative, enriched, and Flash
+cohorts.** Absolute module, prompt, and interaction effects are shown for E1,
+the outcome-enriched E3 challenge, and the same-provider E4 Flash replication.
+E3 does not estimate prevalence and E4 does not establish cross-provider
+generality; neither opens a new significance family.
 
-**Figure 5. Adaptive first-success curve through query budget 200.** The fixed
-40-task DeepSeek V4 Pro panel contributes one first-unsafe-effect query per
-successful task. Four tasks had succeeded by query 50 and 18 by query 200.
-The curve is descriptive only through 200 and must not be interpreted as an
-estimate of attack saturation.
+**Figure 5. Complete B50/B200 evidence and the conditional adaptive tail.**
+The original 40-task panel contributes the complete cumulative first-success
+evidence through 200. The second panel includes only 12 prespecified B200
+survivors extended toward 500. The conditional tail is not merged into a full
+original-panel B500 curve and is not an estimate of saturation.
 
 ## Submission statements
 
@@ -1301,7 +1681,7 @@ funding agencies in the public, commercial, or not-for-profit sectors.
 
 The implementation, frozen lean experiment plan, analysis code, aggregate
 tables, and editable figures are maintained at
-https://github.com/Fischl0527/M3_PI_Guard. The repository is private during
+https://github.com/Fischl0527/RedTeam_LLM_Security. The repository is private during
 manuscript preparation. A public archival release with an immutable version
 identifier will be deposited before publication. Credentials and secrets are
 excluded from the release. Any restrictions on provider-derived compact raw

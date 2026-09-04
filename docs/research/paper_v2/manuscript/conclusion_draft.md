@@ -1,6 +1,6 @@
 # Conclusion — provisional DeepSeek evidence
 
-Status: `deepseek_complete_gemini_diagnostic_closed`
+Status: `deepseek_e1_e6_complete_gemini_diagnostic_ne`
 
 This study treats runtime authorization as an experimental variable rather
 than fixed infrastructure. Across the completed medium and Public studies, the
@@ -36,8 +36,9 @@ individual provenance, data-flow, monotonicity, or confirmation components.
 
 The source-authority counterfactual supplies the corresponding mechanism
 evidence. Full-Guard decisions changed under an untrusted source, whereas the
-policy-only distribution did not; replay produced 0/480 false allows and
-30/480 false blocks. Yet all 240 end-to-end runs executed no action because
+policy-only distribution did not; 480 replay decisions comprised 0/240 false
+allows among unauthorized proposals and 30/240 false blocks among authorized
+proposals. Yet all 240 end-to-end runs executed no action because
 ASK or DENY intervened. Mechanism-level provenance sensitivity is therefore
 not equivalent to usable end-to-end utility. The outcome-enriched challenge
 set likewise reproduced only 1/60 historical unsafe effects and incurred 55
@@ -48,9 +49,20 @@ failure-sensitive endpoint instead of treating non-operation as safety.
 The adaptive panel supplies a related measurement warning. First unsafe
 effects were observed for 4/40 tasks by query 50 and 18/40 by query 200. A
 single low attack budget would have missed most successes found by the larger
-budget. The extension toward 500 is conditional on a prespecified subset of
-B200 survivors and cannot be merged into a full B500 curve or used to establish
-saturation.
+budget. Among the 12 prespecified B200 survivors, 0/12 produced a new first
+unsafe effect by query 500 (Wilson upper limit 24.25%). This conditional result
+cannot be merged into a full B500 curve or used to establish saturation or zero
+tail risk.
+
+A separately executed single-block calibration observed attack activity in a
+historically risk-enriched cohort: no defense produced 17/60 unsafe effects
+across both benchmarks, compared with 2/60 under policy/normal and 0/60 under
+full/safe. Because 47/60 tasks also anchored E3, this is not independent-sample
+replication. These conditional contrasts remain bounded by non-negligible
+operational failure, outcome-enriched sampling, the absence of benign tasks,
+and a single execution block. They do not satisfy the original multi-window
+activity gate or estimate deployment prevalence, utility, temporal
+repeatability, or an individual provenance-module effect.
 
 These findings support four practical requirements for tool-agent security
 evaluation: keep evaluator-only fields outside online Guard state; manipulate
@@ -58,6 +70,7 @@ prompt and runtime factors separately; pair deterministic source-authority
 replay with end-to-end execution; and report utility, ASK/DENY incidence,
 failures, latency, and attack budget alongside unsafe effects. The conclusions
 remain limited to the tested policies, benchmarks, runtime implementation,
-DeepSeek models, and budget range. The prespecified Gemini sample closed
-incomplete under its free-tier stopping rule and remains diagnostic; it cannot
-erase or broaden the completed DeepSeek findings.
+DeepSeek models, and budget range. Both the earlier Gemini authorization sample
+and the separate E6 Gemini prefix closed below their paired-coverage gates; all
+Gemini effects are not estimable and cannot erase or broaden the completed
+DeepSeek findings.

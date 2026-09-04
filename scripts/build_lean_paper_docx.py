@@ -201,6 +201,11 @@ def _format_table(table) -> None:
                 paragraph.paragraph_format.space_before = Pt(0)
                 paragraph.paragraph_format.space_after = Pt(2)
                 paragraph.paragraph_format.line_spacing = 1.0
+                if row_index == 0:
+                    # Keep a repeated header with at least the first body row;
+                    # otherwise Word/WPS may leave only the heading and header
+                    # at the bottom of a page.
+                    paragraph.paragraph_format.keep_with_next = True
                 if column_index > 1 and len(cell.text) < 28:
                     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
@@ -302,7 +307,7 @@ def _apply_academic_style(path: Path) -> None:
             shape.height = int(shape.height * ratio)
 
     document.core_properties.title = (
-        "Evaluating Runtime Authorization Under Context and Provenance Uncertainty "
+        "Evaluating Authorization Regimes and Runtime Guardrail Configurations "
         "for Tool-Using LLM Agents"
     )
     document.core_properties.subject = "JISA working manuscript"
@@ -329,7 +334,7 @@ def build_docx() -> Path:
             "--from=markdown+citations",
             "--to=docx",
             "--citeproc",
-            f"--bibliography={BIBLIOGRAPHY_PATH}",
+            "--bibliography=references_v1.bib",
             "--metadata=reference-section-title:References",
             f"--resource-path={MANUSCRIPT_DIR}",
             f"--output={OUTPUT_PATH}",

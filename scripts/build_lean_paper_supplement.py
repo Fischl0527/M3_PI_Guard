@@ -38,7 +38,7 @@ def build_supplementary_markdown() -> str:
         "# Supplementary material",
         f"**Article:** {TITLE}",
         (
-            "These ten tables provide detailed results referenced by the main "
+            "These twelve tables provide detailed results referenced by the main "
             "manuscript. They introduce no additional hypothesis family or "
             "claim beyond the analyses reported in the article."
         ),

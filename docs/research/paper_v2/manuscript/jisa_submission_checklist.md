@@ -1,7 +1,7 @@
 # JISA submission readiness checklist
 
-Status: `incremental_e5_active_final_review_pending`
-Checked: 2026-08-26
+Status: `incremental_e1_e6_integrated_final_author_review_pending`
+Checked: 2026-09-04
 
 ## Venue fit
 
@@ -69,11 +69,17 @@ prespecified stopping rule is closed without a cross-provider claim.
 - [x] E1--E4 are complete: 720 Pro factorial rows, 240 Pro source-authority
   rows plus 480 offline Guard decisions, 240 outcome-enriched Pro rows and 360
   Flash replication rows.
-- [ ] E5 must finish the twelve selected B200 survivors and receive one-pass
-  conditional-tail analysis. A complete original-panel B500 curve, budget
+- [x] E5 finished all twelve selected B200 survivors and received one-pass
+  conditional-tail analysis: 0/12 new first successes through 500, with a
+  24.25% Wilson upper limit. A complete original-panel B500 curve, budget
   2,000, blind study and full second-model adaptive panel remain out of scope.
-- [ ] Rebuild every current incremental numeric claim once from the five compact
-  analysis artifacts after E5 closes; do not rerun successful provider rows.
+- [x] E6 completed its 360-row DeepSeek risk-enriched single-block calibration;
+  no-defense activity was 17/60. This observed block activity neither satisfies
+  nor tests the original multi-window gate, and 47/60 tasks overlap E3. The
+  separately executed Gemini prefix failed its technical gate; its nested set
+  overlaps E3 for 29/30 tasks, so all Gemini effects remain not estimable.
+- [x] Rebuild every current incremental numeric claim once from the five compact
+  E1--E5 artifacts and the E6-v2 analysis; do not rerun provider rows.
 - [x] All 21 active citations have complete authors, title, year, DOI or stable
   URL, publication-status verification, and a reviewed claim context. The 15
   unused BibTeX candidates do not render and require review only if activated.
@@ -87,9 +93,9 @@ prespecified stopping rule is closed without a cross-provider claim.
   at most 85 characters.
 - [ ] Upload the manuscript, the separate editable supplementary-tables file,
   and all other required editable source files.
-- [ ] Regenerate each of the five incremental figures as a separate vector PDF
-  after E5 closes; retain SVG as editable source and PNG as the manuscript/QA
-  preview, then inspect all five.
+- [x] Retain the five completed incremental figure triplets as separate vector
+  PDF, editable SVG and PNG previews; E6 is integrated as Table 6 rather than a
+  misleading Gemini effect figure.
 - [ ] Prepare the competing-interests declaration in the format requested by
   the submission system.
 - [ ] Record funding sources and sponsor roles, or the journal’s recommended
@@ -116,20 +122,23 @@ prespecified stopping rule is closed without a cross-provider claim.
   verified contribution, benchmark breadth and practical relevance. Add the
   corresponding-author details and submission date to the separate editable
   Word copy before submission.
-- [ ] Run the final incremental claim–evidence, active citation/metadata,
-  figure/table and online-field-isolation checks. The 2026-08-23 Stage 4.5
-  report remains valid for its historical manuscript but does not cover E1--E5.
+- [x] Run the targeted E1--E6 claim–evidence, figure/table and manuscript build
+  checks. The 2026-08-23 Stage 4.5 report remains historical and is not treated
+  as E1--E6 verification.
 - [ ] Complete the author-owned similarity/self-plagiarism check after author
   identities and publication lists are available.
-- [ ] Rebuild and visually inspect the incremental Word package after E5, five
-  main tables and ten supplementary tables are integrated. The earlier 30-page
-  inspection applies only to the pre-incremental manuscript. Author-owned
-  fields remain intentionally unfilled and require a final author check.
+- [x] Rebuild and visually inspect the incremental Word package after six main
+  tables and twelve supplementary tables are integrated. Read-only WPS renders
+  passed page-by-page review for the 35-page English manuscript, 30-page Chinese
+  comparison and 4-page supplement. Author-owned fields remain intentionally
+  unfilled and require a final author check.
 
 ## Current prohibition
 
-The Gemini completion/downgrade rule is closed at 32/450 terminal work items;
-no cross-provider abstract, conclusion, cover-letter or result claim may fill
-unobserved Gemini cells. JCR Q2/SCIE status must still be checked through the
+The earlier Gemini study closed at 32/450 terminal work items with only five
+responses. The E6 Gemini prefix adds five response-bearing records, one
+response-less failure and 174 administrative closures; it does not create an
+effect estimate. No cross-provider abstract, conclusion, cover-letter or result
+claim may fill unobserved Gemini cells. JCR Q2/SCIE status must still be checked through the
 institution on the actual submission date, and author-owned submission fields
 remain incomplete.

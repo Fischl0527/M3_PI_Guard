@@ -1,6 +1,8 @@
 {
   "boundaries": {
     "adaptive_tail_not_complete_b500": true,
+    "e6_risk_enriched_single_block": true,
+    "gemini_effects_not_estimable": true,
     "offline_guard_replay_separate": true,
     "risk_enriched_not_prevalence": true
   },
@@ -9,7 +11,8 @@
     "table_2_e1_factor_estimates": 9,
     "table_3_e2_provenance": 10,
     "table_4_e3_e4_robustness": 15,
-    "table_5_e5_adaptive_tail": 4
+    "table_5_e5_adaptive_tail": 4,
+    "table_6_e6_activity_calibration": 6
   },
   "schema_version": "m3-paper-v2-incremental-table-manifest-1.0",
   "tables": {
@@ -17,6 +20,7 @@
     "table_2_e1_factor_estimates": "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\tables\\table_2_e1_factor_estimates.csv",
     "table_3_e2_provenance": "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\tables\\table_3_e2_provenance.csv",
     "table_4_e3_e4_robustness": "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\tables\\table_4_e3_e4_robustness.csv",
-    "table_5_e5_adaptive_tail": "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\tables\\table_5_e5_adaptive_tail.csv"
+    "table_5_e5_adaptive_tail": "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\tables\\table_5_e5_adaptive_tail.csv",
+    "table_6_e6_activity_calibration": "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\tables\\table_6_e6_activity_calibration.csv"
   }
 }

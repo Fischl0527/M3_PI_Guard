@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import zipfile
 from collections import Counter
 from pathlib import Path
 
@@ -41,7 +42,7 @@ def test_chinese_markdown_mirrors_scientific_structure_and_boundaries() -> None:
     positions = [text.index(heading) for heading in expected]
     assert positions == sorted(positions)
     assert text.count("![图 ") == 5
-    assert len(re.findall(r"^### 表 [1-5]\. ", text, flags=re.MULTILINE)) == 5
+    assert len(re.findall(r"^### 表 [1-6]\. ", text, flags=re.MULTILINE)) == 6
     assert "38/600" in text
     assert "13/600" in text
     assert "24/400" in text
@@ -52,17 +53,25 @@ def test_chinese_markdown_mirrors_scientific_structure_and_boundaries() -> None:
     assert "由 8/100 升至 26/100" in text
     assert "CNY 1.3888324" in text
     assert "4/40" in text and "18/40" in text
-    assert "Gemini 免费层执行在 32/450 个终态工作项时关闭" in text
+    assert "所有 Gemini 配对、因子和跨厂商效应均不可估计" in text
     assert "不作跨厂商泛化主张" in text
     assert "**RQ2：提示词与运行时组件。**" in text
     assert "**RQ4：来源权威性。**" in text
     assert "**RQ5：自适应尾部风险。**" in text
+    assert "**RQ6：同期攻击活性。**" in text
     assert "**RQ2：模块贡献。**" not in text
     assert "分别估计两项主效应及其交互" in text
-    assert "不安全效应或运行失败" in text
+    assert "不安全或失败" in text
     assert "由 17/30 降至 0/30" in text
     assert "不能识别单个运行时模块的贡献" in text
     assert "ASK 不是测得的人类负担" in text
+    assert "0/12" in text and "24.25%" in text
+    assert "17/60" in text and "30/240" in text
+    assert "47/60 个任务是 E3 锚点" in text
+    assert "29/30 个 E3 锚点" in text
+    assert "不满足也不检验原三窗口设计的活性门" in text
+    assert "双侧 exact McNemar p 值" in text
+    assert "计划中的 cluster sign-flip 检验" in text
     assert "af8eb9c70d32f8a3cc07b308e823c813b2285772" in text
     assert "本文首次提出" not in text
     assert "M3 是最先进防御" not in text
@@ -119,7 +128,7 @@ def test_generated_chinese_docx_preserves_layout_content_and_cjk_fonts() -> None
     document = Document(builder.OUTPUT_PATH)
     text = "\n".join(paragraph.text for paragraph in document.paragraphs)
 
-    assert len(document.tables) == 6
+    assert len(document.tables) == 7
     assert len(document.inline_shapes) == 5
     assert len(document.sections) == 1
     section = document.sections[0]
@@ -131,13 +140,21 @@ def test_generated_chinese_docx_preserves_layout_content_and_cjk_fonts() -> None
     assert round(section.left_margin.inches, 3) == 1.0
     assert "工具型大语言模型智能体的授权制度与运行时 Guard 配置评估" in text
     assert "38/600" in text and "13/600" in text
-    assert "Gemini 免费层执行在 32/450 个终态工作项时关闭" in text
+    assert "所有 Gemini 配对、因子和跨厂商效应均不可估计" in text
     assert "[@" not in text
     assert "�" not in text
     assert document.core_properties.subject == "JISA 中文内部对照稿"
+    assert document.core_properties.title == (
+        "工具型大语言模型智能体的授权制度与运行时 Guard 配置评估"
+    )
     assert sum(
         paragraph.style.name == "Bibliography" for paragraph in document.paragraphs
     ) == 21
+
+    with zipfile.ZipFile(builder.OUTPUT_PATH) as archive:
+        custom = archive.read("docProps/custom.xml").decode("utf-8")
+    assert str(builder.PROJECT_ROOT) not in custom
+    assert "references_v1.bib" in custom
 
     normal_style = next(style for style in document.styles if style.name == "Normal")
     heading_style = next(

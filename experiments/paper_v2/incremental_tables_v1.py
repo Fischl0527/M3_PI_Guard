@@ -1,4 +1,4 @@
-"""Build compact main tables from the five incremental analysis artifacts."""
+"""Build compact main tables from the E1--E6 analysis artifacts."""
 
 from __future__ import annotations
 
@@ -12,6 +12,10 @@ from experiments.paper_v2.incremental_figures_v1 import ANALYSIS_ROOT, PROJECT_R
 
 
 OUTPUT_ROOT = PROJECT_ROOT / "docs/research/paper_v2/incremental_empirical_v1/tables"
+E6_ANALYSIS = (
+    PROJECT_ROOT
+    / "outputs/experiments/e6_cross_provider_calibration_v2/analysis_v2.json"
+)
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -162,6 +166,36 @@ def _adaptive_rows(adaptive: Mapping[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
+def _e6_activity_rows(e6: Mapping[str, Any]) -> list[dict[str, Any]]:
+    cells = e6["providers"]["deepseek"]["cell_summary"]
+    rows: list[dict[str, Any]] = []
+    for condition in (
+        "no_defense",
+        "strongest_peer_reviewed_structural_baseline",
+        "m3_policy_only",
+        "m3_policy_safe_prompt",
+        "m3_full_normal_prompt",
+        "m3_full",
+    ):
+        value = cells[f"all|{condition}"]
+        unsafe = value["unsafe_terminal"]
+        rows.append(
+            {
+                "condition": condition,
+                "planned": int(value["planned"]),
+                "unsafe_n": int(value["unsafe_count"]),
+                "unsafe_rate": float(unsafe["value"]),
+                "unsafe_ci_low": float(unsafe["ci_low"]),
+                "unsafe_ci_high": float(unsafe["ci_high"]),
+                "operational_failure_n": int(value["operational_failure_count"]),
+                "unsafe_or_failure_n": int(value["unsafe_or_failure_count"]),
+                "ask_events": int(value["ask_events"]),
+                "deny_events": int(value["deny_events"]),
+            }
+        )
+    return rows
+
+
 def build_tables(
     *,
     factorial_path: Path = ANALYSIS_ROOT / "factorial/analysis_v1.json",
@@ -169,6 +203,7 @@ def build_tables(
     challenge_path: Path = ANALYSIS_ROOT / "challenge/analysis_v1.json",
     flash_path: Path = ANALYSIS_ROOT / "flash/analysis_v1.json",
     adaptive_tail_path: Path = ANALYSIS_ROOT / "adaptive-tail/analysis_v1.json",
+    e6_path: Path = E6_ANALYSIS,
     output_dir: Path = OUTPUT_ROOT,
 ) -> dict[str, Any]:
     factorial = _load(factorial_path)
@@ -176,6 +211,7 @@ def build_tables(
     challenge = _load(challenge_path)
     flash = _load(flash_path)
     adaptive = _load(adaptive_tail_path)
+    e6 = _load(e6_path)
     tables: dict[str, list[dict[str, Any]]] = {
         "table_1_factor_design": _factor_design_rows(),
         "table_2_e1_factor_estimates": _estimate_rows(
@@ -208,6 +244,7 @@ def build_tables(
             ),
         ],
         "table_5_e5_adaptive_tail": _adaptive_rows(adaptive),
+        "table_6_e6_activity_calibration": _e6_activity_rows(e6),
     }
     paths: dict[str, str] = {}
     for name, rows in tables.items():
@@ -222,6 +259,8 @@ def build_tables(
             "offline_guard_replay_separate": True,
             "risk_enriched_not_prevalence": True,
             "adaptive_tail_not_complete_b500": True,
+            "e6_risk_enriched_single_block": True,
+            "gemini_effects_not_estimable": True,
         },
     }
     output_dir.mkdir(parents=True, exist_ok=True)

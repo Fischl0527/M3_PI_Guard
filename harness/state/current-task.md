@@ -1,5 +1,36 @@
 # 当前任务
 
+### 2026-09-04 E5/E6 论文证据整合与双语同步
+
+- 状态：本次实现、构建、最终定向验证、Harness 登记与逐页视觉复核均已完成，
+  并由本里程碑提交推送；论文整体仍因作者信息、机构 JCR/SCIE 核验和作者侧终审
+  保持 `in_progress`。
+- 目标：在不重跑任何 API/实验的前提下，把已闭合的 E5 条件尾部和 E6-v2 B1
+  单块攻击活性校准写入英文稿、中文对照稿、补充表与 active claim ledger，并重建
+  Word 审阅件。
+- 允许修改：`docs/research/paper_v2/manuscript/`、对应 lean manuscript/supplement
+  构建脚本与定向测试，以及本任务 Harness 状态文件。
+- 禁止修改或执行：E1--E6 冻结计划、raw/analysis/provider trace、任何 provider/API
+  调用、Full Harness、历史递归重放、作者姓名/机构/CRediT 字段，以及既存 dirty
+  `external/paper_v2_audits/drift` 和 `external/paper_v2_audits/toolsafe`。
+- 验收：补回缺失的 E5 Supplementary Table S10；新增 E6 S11--S12；英文 Results
+  明确 E5 `0/12` 与 E6 DeepSeek 六条件结果，Gemini 一律为 NE/diagnostic；不产生
+  跨日期重复性、部署流行率、TCR、provider 排名或跨厂商泛化主张；中文数值与边界
+  同步；主文仍保持五幅图；定向 manuscript/supplement/DOCX 测试、Ruff、编译、
+  Markdown/Word 构建和可用的视觉检查通过后提交并推送当前分支。
+- 最终审查修正：E6 虽为另行执行，但 `47/60` 个 DeepSeek 任务、`29/30` 个 Gemini
+  嵌套任务与 E3 重叠，因此不称独立样本复现；单块活性不满足也不检验原多窗口门。
+  Gemini 在 E6-v2 中从设计上仅为 diagnostic，所有跨 provider 效应为 NE。S12 使用
+  实际实现的双侧 exact McNemar，并披露其替代计划 cluster sign-flip 的方法偏离。
+- 当前构建证据：英文 14,669 words、349 paragraphs、7 表、5 图；中文 290
+  paragraphs、7 表、5 图；补充材料 12 表；Highlights 与 Cover Letter 均为 1 页。
+  审查后定向测试先 25 pass/1 跨行文本断言失败，修正断言后仅重跑该节点并 1 pass；
+  投稿附件同步后的受影响套件为 31 pass/3 个过时测试契约失败，修正后仅重跑三个
+  失败节点并 3 pass。Ruff 与 `py_compile` 通过。五份 DOCX 的内部题名正确，作者/
+  lastModifiedBy 为空，且自定义属性不含项目绝对路径；WPS 逐页复核覆盖
+  35+30+4+1+1 页并通过。
+
+
 ### 2026-08-31 E6-v2 B1 有界实验结项
 
 - 单块、无人工延时的 E6-v2 已执行并封存。DeepSeek 为 360/360 scientific

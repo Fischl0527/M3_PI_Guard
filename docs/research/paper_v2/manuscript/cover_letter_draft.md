@@ -33,7 +33,14 @@ source-authority experiment showed provenance-sensitive full-Guard decisions,
 but all end-to-end actions remained blocked or pending confirmation. In a separate
 defense-aware panel, first unsafe effects increased from
 4/40 tasks by query 50 to 18/40 by query 200, demonstrating why a single low
-attack budget is an incomplete evaluation.
+attack budget is an incomplete evaluation. None of 12 prespecified B200
+survivors first succeeded by query 500, but the Wilson upper limit remained
+24.25%. A separately executed, historically risk-enriched single block observed
+17/60 no-defense unsafe effects, while policy/normal and full/safe produced 2/60
+and 0/60; 47/60 tasks overlapped the E3 challenge sample. This conditional result
+is not a deployment-rate, utility, temporal-repeatability, independent-sample,
+or isolated-module claim. Two incomplete Gemini attempts leave cross-provider
+effects not estimable.
 
 The manuscript fits the journal’s focus on access control, security policy,
 and practical information-security systems. Its contribution is an empirical

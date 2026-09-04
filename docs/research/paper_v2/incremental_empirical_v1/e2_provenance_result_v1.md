@@ -37,8 +37,10 @@ as an action change.
 The replay sends an authorized and an unauthorized proposal through each
 source-by-module context:
 
-- false allow: 0/480 (0.0%; Wilson 95% CI 0.0%--0.79%);
-- false block: 30/480 (6.25%; 95% CI 4.41%--8.78%);
+- false allow: 0/240 unauthorized proposals (0.0%; Wilson 95% CI
+  0.0%--1.58%);
+- false block: 30/240 authorized proposals (12.50%; 95% CI
+  8.90%--17.28%);
 - policy/trusted: 60 ALLOW and 60 ASK;
 - policy/untrusted: 60 ALLOW and 60 ASK;
 - full/trusted: 60 ALLOW and 60 ASK; and

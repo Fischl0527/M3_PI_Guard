@@ -49,20 +49,21 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
         "## References"
     )
     assert manuscript.count("![Figure ") == 5
-    assert len(re.findall(r"^### Table [1-5]\. ", manuscript, flags=re.MULTILINE)) == 5
+    assert len(re.findall(r"^### Table [1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
     assert "Supplementary Table S1" in manuscript
     assert "Supplementary Table S6" in manuscript
     assert "Supplementary Table S10" in manuscript
+    assert "Supplementary Table S12" in manuscript
     assert not re.search(
-        r"^#### Supplementary Table S(?:[1-9]|10)\. ", manuscript, flags=re.MULTILINE
+        r"^#### Supplementary Table S(?:[1-9]|1[0-2])\. ", manuscript, flags=re.MULTILINE
     )
     assert "### Figures" not in manuscript
-    assert "22/60 (36.7%)" in manuscript
-    assert "CNY 0.3374" in manuscript
-    assert "| Condition cell | Prompt factor | Module factor |" in manuscript
+    assert "22/60 tasks (36.67%" in manuscript
+    assert "CNY 24.5551236" in manuscript
+    assert "| Condition cell | Prompt | Modules | Authorization |" in manuscript
     assert "| Stratum | Tasks | Successes by 500 |" in manuscript
     assert "excluding evaluator and gold fields" not in manuscript
-    assert "oracle-sensitivity `exact_gold` authorization" in manuscript
+    assert "`exact_gold` condition is an explicitly labeled oracle sensitivity" in manuscript
     assert re.search(
         r"`exact_gold`\s+exposed only its derived authorization object",
         manuscript,
@@ -151,7 +152,7 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
 
     cleaned, tables = builder._split_supplementary_tables(results)
 
-    assert [number for number, _, _ in tables] == list(range(1, 11))
+    assert [number for number, _, _ in tables] == list(range(1, 13))
     assert all(table.startswith("|") for _, _, table in tables)
     assert "### Supplementary Table" not in cleaned
     assert "This audit supports only covered-path statements" in cleaned
@@ -165,16 +166,25 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
         "Supplementary Table S10 reports the conditional adaptive-tail execution."
         in cleaned
     )
+    assert (
+        "Supplementary Table S12 reports the E6 paired effects and Gemini inference coverage."
+        in cleaned
+    )
+    s12 = next(table for number, _, table in tables if number == 12)
+    assert "Newcombe / cluster-bootstrap 95% CI" in s12
+    assert "Exact McNemar / Holm p" in s12
+    assert "0.000061 / 0.000122" in s12
     assert "Detailed values are reported" not in cleaned
 
 
 def test_incremental_table_notes_preserve_claim_boundaries() -> None:
     notes = builder._table_notes()
 
-    assert len(notes) == 5
+    assert len(notes) == 6
     assert "contemporaneous cells" in notes[0]
     assert "separate evidence layers" in notes[2]
     assert "not a complete original-panel B500 curve" in notes[4]
+    assert "historically risk-enriched single execution block" in notes[5]
 
 
 def test_incremental_table_formats_effects_and_conditional_probabilities(
@@ -203,6 +213,7 @@ def test_incremental_table_formats_effects_and_conditional_probabilities(
 
 def test_incremental_revision_identifies_factors_and_keeps_claims_bounded() -> None:
     manuscript = builder.build_manuscript()
+    normalized = " ".join(manuscript.split())
 
     assert manuscript.startswith(
         "# Evaluating Authorization Regimes and Runtime Guardrail Configurations"
@@ -210,6 +221,7 @@ def test_incremental_revision_identifies_factors_and_keeps_claims_bounded() -> N
     assert "**RQ2: Prompt and runtime components.**" in manuscript
     assert "**RQ4: Source authority.**" in manuscript
     assert "**RQ5: Adaptive tail risk.**" in manuscript
+    assert "**RQ6: Contemporaneous attack activity.**" in manuscript
     assert "**RQ2: Module contribution.**" not in manuscript
     assert "crosses prompt profile (`normal`/`safe`) with runtime modules" in manuscript
     assert "changing only provenance authority" in manuscript
@@ -217,3 +229,15 @@ def test_incremental_revision_identifies_factors_and_keeps_claims_bounded() -> N
     assert "`unsafe_effect OR operational_failure`" in manuscript
     assert "robustness bound and is not reported as observed attack success" in manuscript
     assert "`ASK` is a runtime confirmation request" in manuscript
+    assert "0/12" in manuscript and "24.25%" in manuscript
+    assert "17/60" in manuscript and "risk-enriched single-block" in manuscript
+    assert "0/240 unauthorized proposals" in manuscript
+    assert "30/240 authorized proposals" in manuscript
+    assert "47/60 tasks were E3 anchors" in normalized
+    assert re.search(r"29/30 tasks are\s+E3 anchors", manuscript)
+    assert "does not satisfy or test the original multi-window activity gate" in normalized
+    assert "Even complete prefix coverage would not make" in normalized
+    assert "two-sided exact McNemar p-value" in normalized
+    assert "planned cluster sign-flip test" in normalized
+    assert "All Gemini paired, factorial, and cross-provider" in normalized
+    assert "effects are therefore not estimable" in normalized

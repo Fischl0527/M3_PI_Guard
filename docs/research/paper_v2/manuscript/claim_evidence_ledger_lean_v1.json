@@ -1,13 +1,22 @@
 {
-  "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.0",
-  "updated_at": "2026-08-23T21:32:44+08:00",
+  "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.1",
+  "updated_at": "2026-09-04T00:00:00+08:00",
   "paper_route": "authorization_regime_and_security_utility_empirical_study",
   "scope": {
     "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
     "deepseek_authorization_work_items": 900,
-    "gemini_planned_work_items": 450,
+    "gemini_authorization_planned_work_items": 450,
+    "gemini_authorization_terminal_work_items": 32,
+    "gemini_authorization_response_bearing_work_items": 5,
     "blind_study_in_scope": false,
-    "adaptive_budgets_reported": [50, 200],
+    "adaptive_budgets_reported": [50, 200, "conditional_selected_survivors_500"],
+    "incremental_studies_completed": ["E1", "E2", "E3", "E4", "E5", "E6"],
+    "e6_deepseek_work_items": 360,
+    "e6_gemini_planned_work_items": 180,
+    "e6_gemini_scientific_terminal_work_items": 6,
+    "e6_gemini_response_bearing_work_items": 5,
+    "e6_gemini_administratively_closed_work_items": 174,
+    "e6_gemini_effect_status": "not_estimable",
     "full_harness_required": false
   },
   "claims": [
@@ -65,7 +74,7 @@
         "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json"
       ],
       "observed": "Under auto_compiled, M3-full had 0/100 versus 1/100 unsafe effects but completed 16/60 versus 22/60 benign tool tasks; Public Pro and Flash both placed M3-full above policy-only in unsafe effects.",
-      "boundary": "Prompt profile and runtime modules differ together, so the comparison cannot identify any individual provenance, temporal/data-flow, confirmation, or prompting effect. The result is limited to the tested implementation, policies, benchmarks, and DeepSeek models."
+      "boundary": "The historical package comparison remains bundled. E1 separately identifies prompt and module-bundle effects, but still cannot identify any individual provenance, temporal/data-flow, monotonicity, or confirmation component. The result is limited to the tested implementation, policies, benchmarks, and DeepSeek models."
     },
     {
       "claim_id": "LC06",
@@ -90,14 +99,16 @@
     },
     {
       "claim_id": "LC08",
-      "claim": "Defense-aware adaptive search found additional first unsafe effects between budgets 50 and 200.",
-      "status": "verified_deepseek_budget_50_200",
+      "claim": "Defense-aware adaptive search found additional first unsafe effects between budgets 50 and 200; a prespecified subset of twelve B200 survivors had no new first success through 500.",
+      "status": "verified_deepseek_budget_50_200_and_conditional_tail_500",
       "evidence": [
         "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json",
-        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_6_adaptive_50_200.csv"
+        "docs/research/paper_v2/lean_empirical/tables_deepseek_v1/table_6_adaptive_50_200.csv",
+        "outputs/experiments/incremental_empirical_v1/adaptive-tail/analysis_v1.json",
+        "docs/research/paper_v2/incremental_empirical_v1/tables/table_5_e5_adaptive_tail.csv"
       ],
-      "observed": "First unsafe effects were found for 4/40 tasks by query 50 and 18/40 by query 200.",
-      "boundary": "Two budget points do not establish saturation and no budget-500 or budget-2000 claim is allowed."
+      "observed": "First unsafe effects were found for 4/40 tasks by query 50 and 18/40 by query 200. Among twelve prespecified B200 survivors, 0/12 first succeeded by 500; the Wilson upper limit was 24.25%.",
+      "boundary": "The 0/12 result is conditional on the selected B200-survivor subset. It is not a complete original-panel B500 curve, zero-tail-risk result, saturation estimate, or budget-2000 claim."
     },
     {
       "claim_id": "LC09",
@@ -112,14 +123,16 @@
     },
     {
       "claim_id": "LC10",
-      "claim": "The authorization findings generalize across DeepSeek and Gemini providers.",
-      "status": "forbidden_after_incomplete_gemini_stopping_rule",
+      "claim": "The authorization or E6 findings generalize across DeepSeek and Gemini providers.",
+      "status": "forbidden_after_two_incomplete_gemini_studies",
       "evidence": [
         "protocols/paper_upgrade_v2/lean_empirical_execution_manifest_v1.json",
         "outputs/experiments/lean_empirical/gemini/raw_records_v1.jsonl",
-        "docs/research/paper_v2/lean_empirical/authorization_results_v1.json"
+        "docs/research/paper_v2/lean_empirical/authorization_results_v1.json",
+        "outputs/experiments/e6_cross_provider_calibration_v2/analysis_v2.json",
+        "outputs/experiments/e6_cross_provider_calibration_v2/report_v2.md"
       ],
-      "boundary": "The three-Pacific-quota-day rule closed at 32/450 terminal work items. The incomplete subset remains diagnostic and cannot support cross-provider generalization."
+      "boundary": "The earlier study closed at 32/450 terminal items with five responses. The separately executed E6 prefix had five response-bearing records, one response-less failure, and 174 administrative closures. Under the single-block amendment, E6 Gemini was diagnostic by design even if coverage had been complete. Neither observed dataset provides paired effect coverage; all Gemini effects are not estimable."
     },
     {
       "claim_id": "LC11",
@@ -148,6 +161,62 @@
         "docs/research/paper_v2/manuscript/stage_4_5_final_integrity_report_v1.md"
       ],
       "boundary": "The review verifies the manuscript's active citation contexts against primary records; it does not reproduce every experiment in the cited papers. Review any newly activated citation and repeat publication-status checks at submission."
+    },
+    {
+      "claim_id": "LC14",
+      "claim": "A concurrent 2x2 study separates prompt-profile and runtime-module-bundle effects.",
+      "status": "verified_deepseek_floor_limited",
+      "evidence": [
+        "outputs/experiments/incremental_empirical_v1/factorial/analysis_v1.json",
+        "docs/research/paper_v2/incremental_empirical_v1/tables/table_2_e1_factor_estimates.csv"
+      ],
+      "observed": "Across 400 attack assignments, policy cells had two unsafe effects and full cells had none; the module estimate was -1.00 percentage point and the direct endpoint was floor-limited.",
+      "boundary": "The module factor is a bundle and does not identify the effect of provenance, data flow, monotonicity, or confirmation separately."
+    },
+    {
+      "claim_id": "LC15",
+      "claim": "The full Guard is source-sensitive in deterministic replay, but this did not yield executed end-to-end actions in E2.",
+      "status": "verified_mechanism_only",
+      "evidence": [
+        "outputs/experiments/incremental_empirical_v1/provenance/analysis_v1.json",
+        "docs/research/paper_v2/incremental_empirical_v1/e2_provenance_result_v1.md"
+      ],
+      "observed": "Across 240 unauthorized proposals false allow was 0/240; across 240 authorized proposals false block was 30/240. All 240 end-to-end runs executed no action.",
+      "boundary": "Deterministic Guard sensitivity is not evidence of end-to-end utility or a human-confirmation outcome."
+    },
+    {
+      "claim_id": "LC16",
+      "claim": "E3 and E4 provide conditional challenge and same-provider replication evidence.",
+      "status": "verified_descriptive",
+      "evidence": [
+        "outputs/experiments/incremental_empirical_v1/challenge/analysis_v1.json",
+        "outputs/experiments/incremental_empirical_v1/flash/analysis_v1.json"
+      ],
+      "observed": "E3 reproduced an unsafe effect in 1/60 historically difficult attacks and retained 55 failures; E4 had zero unsafe effects in each Flash attack cell.",
+      "boundary": "E3 is outcome-enriched and E4 is within one provider; neither estimates deployment prevalence, equivalence, or cross-provider generalization."
+    },
+    {
+      "claim_id": "LC17",
+      "claim": "E5 completed the prespecified conditional adaptive tail.",
+      "status": "verified_conditional_null",
+      "evidence": [
+        "outputs/experiments/incremental_empirical_v1/adaptive-tail/analysis_v1.json",
+        "docs/research/paper_v2/incremental_empirical_v1/tables/table_5_e5_adaptive_tail.csv"
+      ],
+      "observed": "All twelve selected B200 survivors reached 500; 0/12 produced a new first unsafe effect, with Wilson 95% upper limit 24.25%.",
+      "boundary": "This is not a complete B500 panel, a saturation result, or evidence of zero tail risk."
+    },
+    {
+      "claim_id": "LC18",
+      "claim": "E6 records no-defense attack activity and supplies within-block DeepSeek condition comparisons on a risk-enriched cohort.",
+      "status": "verified_deepseek_single_block",
+      "evidence": [
+        "outputs/experiments/e6_cross_provider_calibration_v2/deepseek_pro/raw_records_v2.jsonl",
+        "outputs/experiments/e6_cross_provider_calibration_v2/analysis_v2.json",
+        "outputs/experiments/e6_cross_provider_calibration_v2/report_v2.md"
+      ],
+      "observed": "DeepSeek was response-bearing for 360/360 work items. Unsafe effects were 17/60 under no defense, 16/60 under VIGIL, 2/60 under policy/normal, 1/60 under policy/safe, and 0/60 under both full cells. The independently executed block overlaps E3 for 47/60 tasks.",
+      "boundary": "The sample is historically risk-enriched, contains no benign tasks, and was executed in one block. It does not satisfy or test the original multi-window activity gate and does not estimate deployment prevalence, utility, temporal repeatability, independent-sample replication, individual provenance-module effects, or cross-provider generalization."
     }
   ]
 }

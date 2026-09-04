@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import zipfile
+
 import pytest
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -63,6 +65,13 @@ def test_generated_english_docx_preserves_scientific_content_and_references() ->
     assert round(section.bottom_margin.inches, 3) == 1.0
     assert round(section.left_margin.inches, 3) == 1.0
     assert "38/600" in text and "13/600" in text
+    assert "17/60" in text and "0/12" in text
+    assert "30/240" in text
+    assert "not estimable" in text
+    assert document.core_properties.title == (
+        "Evaluating Authorization Regimes and Runtime Guardrail Configurations "
+        "for Tool-Using LLM Agents"
+    )
     assert "Bagdasaryan" in text
     assert "Bagdasarian" not in text
     assert "[@" not in text
@@ -70,6 +79,11 @@ def test_generated_english_docx_preserves_scientific_content_and_references() ->
     assert sum(
         paragraph.style.name == "Bibliography" for paragraph in document.paragraphs
     ) == 21
+
+    with zipfile.ZipFile(builder.OUTPUT_PATH) as archive:
+        custom = archive.read("docProps/custom.xml").decode("utf-8")
+    assert str(builder.PROJECT_ROOT) not in custom
+    assert "references_v1.bib" in custom
 
 
 def test_generated_english_docx_keeps_headings_left_and_table_rows_together() -> None:
@@ -90,4 +104,10 @@ def test_generated_english_docx_keeps_headings_left_and_table_rows_together() ->
         row._tr.get_or_add_trPr().find(qn("w:cantSplit")) is not None
         for table in document.tables
         for row in table.rows
+    )
+    assert all(
+        paragraph.paragraph_format.keep_with_next
+        for table in document.tables
+        for cell in table.rows[0].cells
+        for paragraph in cell.paragraphs
     )

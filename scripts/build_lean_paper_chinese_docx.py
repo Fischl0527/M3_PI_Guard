@@ -107,7 +107,7 @@ def _apply_chinese_fonts(path: Path) -> None:
                         _set_run_fonts(run, cjk_font=BODY_CJK_FONT)
 
     document.core_properties.title = (
-        "上下文与来源不确定性下工具型大语言模型智能体的运行时授权评估"
+        "工具型大语言模型智能体的授权制度与运行时 Guard 配置评估"
     )
     document.core_properties.subject = "JISA 中文内部对照稿"
     document.core_properties.author = ""
@@ -134,7 +134,7 @@ def build_docx() -> Path:
             "--from=markdown+citations",
             "--to=docx",
             "--citeproc",
-            f"--bibliography={BIBLIOGRAPHY_PATH}",
+            "--bibliography=references_v1.bib",
             f"--reference-doc={REFERENCE_DOCX_PATH}",
             "--metadata=reference-section-title:参考文献",
             f"--resource-path={MANUSCRIPT_DIR}",

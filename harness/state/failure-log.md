@@ -1,5 +1,66 @@
 # Failure Log
 
+## 2026-09-04 — Post-integration independent review and failed-only test recovery
+
+- The first independent read-only review found five publication-facing issues:
+  the single E6 block had been described as meeting a gate that required multiple
+  windows; Gemini eligibility still reflected an obsolete formal-replication rule;
+  E3/E6 task overlap was undisclosed; Methods promised a sign-flip test although the
+  implemented analysis used exact McNemar; and the two main DOCX core titles were
+  stale. No frozen experiment record or estimate was wrong or modified.
+- Resolution: the English, Chinese, supplement, claim ledger, captions and checklist
+  now disclose 47/60 DeepSeek and 29/30 Gemini E3 overlap, state that the block does
+  not satisfy or test the original multi-window gate, keep Gemini diagnostic by
+  design with effects NE, and report Newcombe, task-cluster bootstrap, exact McNemar
+  and Holm values while explicitly recording the analysis-method deviation. The
+  DOCX builders now write the current title and a relative bibliography property;
+  author and lastModifiedBy remain blank and no repository absolute path is present.
+- The post-fix focused suite produced 25 passes and one failure. The failure was an
+  assertion that searched raw Markdown for a phrase split by a deterministic line
+  wrap; it did not indicate a manuscript-content or scientific mismatch. The test
+  was changed to use its existing whitespace-normalized manuscript value, and only
+  that failed node was rerun, passing 1/1. All 26 focused nodes therefore have
+  current passing evidence without rerunning previously successful tests.
+- A later optional Ruff invocation assumed a nonexistent executable at
+  `F:\robot\Anaconda3\Scripts\ruff.exe`; PowerShell could not resolve it. The
+  hypothesis changed to using Ruff as a module in the selected Python 3.13.5
+  environment, and `F:\robot\Anaconda3\python.exe -B -m ruff check` passed for
+  the only subsequently edited test file.
+- The final submission-package audit found that the Highlights and Cover Letter
+  DOCX files lagged behind their current Markdown sources, and the English render
+  had one isolated table header. Both attachments were rebuilt from their current
+  sources, the cover letter was fitted to one readable page, and the main-table
+  header was kept with its first row. The affected package suite then reported
+  31 passes and three failures: one wording assertion and two historical/internal
+  hash assumptions that no longer matched the reader-facing manuscript contract.
+  Those three tests were corrected without changing scientific content, and only
+  the failed nodes were rerun; all three passed. Final WPS inspection covered
+  35+30+4+1+1 pages, with no blocking pagination defect.
+
+
+## 2026-09-04 — Lean manuscript rebuild blocked by missing E5 S10
+
+- A read-only `build_manuscript()` probe failed before writing output with
+  `Expected Supplementary Tables S1-S10, found [1, 2, 3, 4, 5, 6, 7, 8, 9]`.
+- Cause: E5 completed and its main Table 5/Figure 5 were generated, but the English
+  `results_shell.md` never received the terminal E5 narrative or Supplementary Table
+  S10. The generated English/Chinese/Word manuscripts therefore predate the terminal
+  E5 result.
+- Changed hypothesis: restore E5 from its already admitted compact analysis, then add
+  E6 as S11--S12 and rebuild once. Do not weaken the table gate, reuse raw provider
+  data directly in the manuscript builder, or rerun any API work item.
+- Resolution: S10 was restored from the admitted E5 compact analysis and S11--S12
+  were added from the admitted E6-v2 analysis. A first focused test run exposed
+  seven stale text expectations rather than scientific mismatches; the expectations
+  were updated to the current frozen wording and the exact focused suite passed
+  26/26.
+- The packaged DOCX renderer then failed before rendering because LibreOffice
+  `soffice` is not installed on this host. The existing repository WPS renderer was
+  used on read-only temporary copies instead. All 35 English, 30 Chinese and 4
+  supplementary pages passed visual inspection, and no temporary render was added
+  to the repository.
+
+
 ## 2026-08-31 — Gemini B1 VIGIL response-less contract ambiguity
 
 - Gemini 的 12 行正式前缀执行到第 6 个物理 attempt 时，在 VIGIL constraint

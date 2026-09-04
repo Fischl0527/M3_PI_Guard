@@ -1,5 +1,37 @@
 # 进展记录
 
+## 2026-09-04 — E5/E6 双语论文证据整合与 Word 复核完成
+
+- 已把 E5 条件性 B200-survivor→B500 尾部与 E6-v2 单块攻击活性校准同步到英文稿、
+  中文对照稿、active claim ledger、六张主表和十二张补充表。E2 分母同时纠正为
+  240 个未授权提案与 240 个授权提案，false allow `0/240`、false block `30/240`。
+- E5 保持 `0/12`、Wilson 95% CI `0.00%--24.25%` 的条件性边界，不声称完整 B500
+  曲线或饱和；E6 只报告 DeepSeek 风险富集单块结果。Gemini 仅 5 条 response-bearing、
+  1 条 response-less fatal 与 174 条行政 closure，最小成对覆盖 0/30，所有效应为 NE。
+- 独立审查后明确：E6 的执行与 E3 分开，但 DeepSeek `47/60`、Gemini `29/30` 个
+  任务与 E3 重叠，不能称独立样本复现；单块活性不满足也不检验原多窗口门；Gemini
+  从设计上仅为 diagnostic。S12 改为实际实现的双侧 exact McNemar、Newcombe、
+  cluster bootstrap 与 Holm，并披露 exact test 替代计划 sign-flip 的方法偏离。
+- Markdown 与 Word 已重建：英文 14,669 words、349 paragraphs、7 个 Word 表格、
+  5 幅图；补充材料 12 表；中文 290 paragraphs、7 表、5 图；Highlights 与
+  Cover Letter 均为 1 页。作者字段保持空白。
+- 定向 pytest 审查后首轮 25 pass/1 跨行文本断言失败；修正后只重跑该失败节点并
+  1 pass，因此 26 个定向节点均有通过证据。Highlights/Cover Letter 同步后的
+  受影响套件首轮 31 pass/3 个过时测试契约失败；修正后只重跑三个失败节点并
+  3 pass。五个构建入口、Ruff 与 `py_compile` 均通过。打包 LibreOffice
+  渲染器因本机缺少
+  `soffice` 不可用，改用仓库 WPS 只读临时副本路径完成逐页复核：英文 35/35、
+  中文 30/30、补充 4/4、Highlights 1/1、Cover Letter 1/1，未发现截断、重叠、
+  缺图、断表或页码异常；英文孤立表头已修正。
+- DOCX 可访问性审计五份文件均为 0 high/0 medium；主稿和中文稿各有 21 条仅与参考
+  文献裸 URL 显示有关的 low 提示，其余三份为 0 low。图像审计确认两份主稿均为
+  5 个 inline 图，无浮动对象。
+- DOCX core title 与当前题名一致，作者及 lastModifiedBy 为空，自定义属性不包含
+  项目绝对路径。独立只读核心审查指出的五项 P1，以及投稿附件同步和孤立表头两项
+  后续问题，均已按最小修改原则闭合。
+- 未调用 provider/API、未重跑实验、未运行 Full Harness 或历史证据重放，也未生成
+  新的递归哈希包。`F-PAPER-002` 继续 `in_progress`，剩余为作者/机构/投稿日期工作。
+
 ## 2026-08-31 — E6-v2 B1 双 provider 诊断结项
 
 - DeepSeek block 已完整封存：360 planned/scientific terminal/response-bearing，

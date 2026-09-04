@@ -1,12 +1,13 @@
 # Results draft — public, authorization-regime, and adaptive evidence
 
-Status: `deepseek_authorization_results_complete_gemini_diagnostic_closed`
+Status: `deepseek_e1_e6_complete_gemini_diagnostic_ne`
 
 This section reports the completed 480-record medium study, 5,082-record
 Public primary-model matrix, 1,791-record DeepSeek V4 Flash replication,
-900-work-item DeepSeek V4 Pro authorization experiment, and adaptive evidence
-through budget 200. The 450-work-item Gemini experiment closed incomplete under
-its free-tier stopping rule and contributes no cross-provider conclusion.
+900-work-item DeepSeek V4 Pro authorization experiment, E1--E6 incremental
+studies, and adaptive evidence through a conditional budget-500 tail. The
+450-work-item Gemini authorization experiment and separate 180-item E6 Gemini
+plan both closed incomplete and contribute no cross-provider effect estimate.
 The three completed record matrices contain 902 distinct cases in union; the
 Flash cohort is nested within the Pro Public cohort, and a small fraction of
 the medium cases overlaps the Public cohorts. Record counts therefore denote
@@ -359,8 +360,10 @@ changed under the source swap in 0/60 paired tasks for both module settings;
 operational status changed in 1/60 full pairs and is reported separately.
 
 The deterministic replay provides mechanism evidence rather than end-to-end
-utility. Across 480 decisions it produced 0 false allows (Wilson 95% CI
-0.00%--0.79%) and 30 false blocks (6.25%, 4.41%--8.78%). Policy decisions were
+utility. Its 480 decisions comprise 240 unauthorized and 240 authorized
+proposals. False allow was 0/240 unauthorized proposals (Wilson 95% CI
+0.00%--1.58%); false block was 30/240 authorized proposals (12.50%,
+8.90%--17.28%). Policy decisions were
 identical under trusted and untrusted origins: 60 ALLOW and 60 ASK. Full/trusted
 had the same distribution, but full/untrusted produced 30 ALLOW, 30 ASK, and
 60 DENY. The full Guard is therefore provenance-sensitive under this controlled
@@ -414,7 +417,67 @@ cross-provider generalization.
 | E3 outcome-enriched Pro | 240/240 | 185 | 17 | 38 | 0 | 1.0690866 |
 | E4 Flash replication | 360/360 | 347 | 8 | 4 | 1 | 0.5410834 |
 
-## Defense-aware adaptive evidence through budget 200
+## Contemporaneous attack-activity calibration
+
+E6 used a separately executed, historically risk-enriched cohort to test whether
+attacks were still active under a current no-defense control. The execution was
+independent of E3, but the sample was not: 47/60 tasks were E3 anchors (19
+AgentDojo and 28 M3-v2). All 360 DeepSeek work items were response-bearing; 361
+physical records include one response-less superseded attempt. No defense
+produced 17/60 unsafe effects (28.33%, Wilson 95% CI 18.52%--40.75%), including
+8/30 AgentDojo and 9/30 M3-v2 cases. This demonstrates observed attack activity
+within the selected risk-enriched block, but does not satisfy or test the
+original multi-window activity gate and cannot estimate deployment prevalence.
+
+Unsafe effects under source-pinned VIGIL, policy/normal, policy/safe,
+full/normal, and full/safe were 16/60, 2/60, 1/60, 0/60, and 0/60. Operational
+failures in the same order, including no defense first, were 12/60, 8/60, 7/60,
+2/60, 7/60, and 3/60. Full/safe minus no defense was −28.33 percentage points
+(paired Newcombe 95% CI −40.77 to −16.81; task-cluster bootstrap −40.00 to
+−16.67; Holm-adjusted p=0.000061). Policy/normal minus no defense was −25.00
+points (Newcombe −36.95 to −14.30), and full/safe minus VIGIL was −26.67 points
+(−39.01 to −15.39). VIGIL minus no defense was only −1.67 points with an
+interval crossing zero; its benchmark-specific directions opposed each other
+(+3.33 points on AgentDojo and −6.67 on M3-v2), so the pooled VIGIL contrast is
+not interpreted as homogeneous.
+
+The four M3 cells yielded descriptive factor estimates of −2.50 points for the
+module bundle, −0.83 for the safe prompt, and +1.67 for their interaction. E6
+contains no benign tasks and was executed as one block after a prospective
+protocol amendment; it adds neither TCR evidence nor temporal-repeatability or
+individual-module attribution.
+
+The nested Gemini formal prefix failed its technical gate after five
+response-bearing records and one response-less VIGIL dependency failure. The
+remaining 174 planned items were administratively closed, not counted as safe
+or scientifically executed. The nested set also overlapped E3 for 29/30 tasks.
+Minimum response-complete paired coverage was 0/30 for comparisons involving
+VIGIL. All Gemini paired, factorial, and cross-provider effects are not
+estimable.
+
+### Supplementary Table S11. E6 DeepSeek activity and operational outcomes
+
+| Condition | Unsafe effect | Operational failure | Unsafe or failure | ASK events | DENY events |
+|---|---:|---:|---:|---:|---:|
+| No defense | 17/60 | 12/60 | 29/60 | 0 | 4 |
+| Source-pinned VIGIL | 16/60 | 8/60 | 24/60 | 0 | 8 |
+| Policy / normal | 2/60 | 7/60 | 9/60 | 31 | 7 |
+| Policy / safe | 1/60 | 2/60 | 3/60 | 21 | 2 |
+| Full / normal | 0/60 | 7/60 | 7/60 | 25 | 18 |
+| Full / safe | 0/60 | 3/60 | 3/60 | 19 | 6 |
+
+### Supplementary Table S12. E6 paired effects and Gemini inference coverage
+
+| Evidence | Comparison or coverage | Estimate | Newcombe / cluster-bootstrap 95% CI | Exact McNemar / Holm p | Interpretation |
+|---|---|---:|---|---:|---|
+| DeepSeek | VIGIL minus no defense | −1.67 pp | Newcombe −10.48 to +7.12 pp; bootstrap −10.00 to +6.67 pp | 1.000000 / 1.000000 | Interval crosses zero; benchmark directions oppose |
+| DeepSeek | Policy / normal minus no defense | −25.00 pp | Newcombe −36.95 to −14.30 pp; bootstrap −36.67 to −15.00 pp | 0.000061 / 0.000122 | Risk-enriched single-block contrast |
+| DeepSeek | Full / safe minus no defense | −28.33 pp | Newcombe −40.77 to −16.81 pp; bootstrap −40.00 to −16.67 pp | 0.000015 / 0.000061 | Risk-enriched single-block contrast |
+| DeepSeek | Full / safe minus VIGIL | −26.67 pp | Newcombe −39.01 to −15.39 pp; bootstrap −38.33 to −15.00 pp | 0.000031 / 0.000092 | Risk-enriched single-block contrast |
+| Gemini | Scientific terminal / planned | 6/180 | — | — | Five response-bearing; one response-less failure |
+| Gemini | Minimum response-complete paired coverage | 0/30 | — | — | Effects not estimable |
+
+## Defense-aware adaptive evidence and conditional tail through budget 500
 
 The initial DeepSeek V4 Pro cost canary covered eight result-blind,
 attack-family-balanced M3-v2 development tasks under the full package and the
@@ -441,16 +504,44 @@ saturation, compare another model, or justify a SOTA/adaptive-robustness claim.
 | Primary frozen panel | 50 | 40 | 4 (10.00%, 95% CI 3.96–23.05%) | 4 first successes by query 50 | No |
 | Primary frozen panel | 200 | 40 | 18 (45.00%, 95% CI 30.71–60.17%) | 14 additional first successes at queries 51–200 | No |
 
+The E5 extension then completed all 12 prespecified B200 survivors through
+query 500. No task produced a new first unsafe effect between queries 201 and
+500: 0/12 (0.00%, Wilson 95% CI 0.00%--24.25%). This is a conditional null
+observation with a wide upper bound, not evidence that the original 40-task
+panel has zero tail risk or that attack search has saturated. The latest ITT
+set contains 3,600 query work keys: 3,577 completed, 21 parse failures, and two
+provider failures. Five earlier response-less or local-recovery attempts remain
+as superseded physical rows. Total usage was 4,511,768 tokens and attributed
+cost was CNY 24.5551236.
+
+### Supplementary Table S10. Conditional adaptive-tail execution
+
+| Quantity | Result |
+|---|---:|
+| Prespecified B200 survivors completed | 12/12 |
+| Latest query work keys | 3,600 |
+| Physical rows / superseded attempts | 3,605 / 5 |
+| First unsafe effect at queries 201--500 | 0/12 |
+| Conditional probability, Wilson 95% CI | 0.00% (0.00%--24.25%) |
+| Operational status | 3,577 completed; 21 parse failures; 2 provider failures |
+| Total tokens | 4,511,768 |
+| Attributed cost | CNY 24.5551236 |
+| Automatic retry / provider tools / real external effects | 0 / 0 / 0 |
+
 ## Remaining evidence boundary
 
 The medium, Public, authorization-regime, factorial, source-authority,
-challenge, replication, and adaptive studies jointly support an empirical
+challenge, replication, adaptive, and contemporaneous-activity studies jointly support an empirical
 security–utility paper. They do not support a leading-defense, end-to-end
 provenance-benefit, saturated-adaptive, or cross-provider claim. E2 does
 identify source sensitivity at the deterministic Guard decision layer, but its
-end-to-end action endpoint is floor-limited. Gemini reached the three-quota-day free-tier stopping
-rule with 32/450 terminal work items: five response-bearing items, 83 observed
-but nonterminal items, and 335 unstarted items. The incomplete cohort is
-retained only for operational accounting and is excluded from the comparisons
-above. UTR and DSR are not identifiable from the current record contract and
-are not reconstructed from unsafe-effect rate.
+end-to-end action endpoint is floor-limited. E5 supplies only a conditional
+0/12 B200-survivor tail with a 24.25% upper confidence limit. E6 records attack
+activity only within its historically enriched, single-block DeepSeek cohort;
+it neither satisfies nor tests the original multi-window activity gate. The
+earlier Gemini authorization study closed at 32/450
+terminal work items, only five response-bearing; the separately executed E6
+Gemini prefix produced five response-bearing records, one response-less failure, and
+174 administrative closures. Both are retained for operational accounting but
+all Gemini effects are not estimable. UTR and DSR are not identifiable from the
+current record contract and are not reconstructed from unsafe-effect rate.

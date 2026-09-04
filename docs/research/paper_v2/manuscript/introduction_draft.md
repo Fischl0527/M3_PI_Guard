@@ -54,7 +54,7 @@ interface [@L27].
 
 ## Research questions
 
-The study asks five questions.
+The study asks six questions.
 
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
@@ -70,6 +70,9 @@ The study asks five questions.
    untrusted origins change model--Guard behavior?
 5. **RQ5: Adaptive tail risk.** Among attacks with no unsafe effect by budget
    200, how often does a first unsafe effect appear by budget 500?
+6. **RQ6: Contemporaneous attack activity.** In a historically risk-enriched
+   cohort, do control attacks remain active in the current execution block, and
+   how do six runtime conditions compare under the same provider window?
 
 ## Study design
 
@@ -83,8 +86,8 @@ regimes. The incremental factorial experiment then holds `auto_compiled` fixed
 and crosses prompt profile (`normal`/`safe`) with runtime modules
 (`policy`/`full`). A source-authority counterfactual holds text, parameter value,
 relative position, and policy fixed while changing only provenance authority.
-Separate challenge, Flash-replication, and adaptive-tail studies test
-conditional robustness. Timeouts,
+Separate challenge, Flash-replication, adaptive-tail, and single-block activity
+calibration studies test conditional robustness. Timeouts,
 parsing failures, refusals, maximum-step outcomes, and provider failures remain
 in the intention-to-treat denominator.
 
@@ -92,10 +95,13 @@ The authorization-regime sample contains 180 paired cases and 900 DeepSeek V4
 Pro work items. The incremental design adds 720 Pro factorial runs, 240 Pro
 source-authority runs plus 480 deterministic Guard decisions, 240 Pro challenge
 runs, 360 Flash replication runs, and a conditional adaptive tail of at most
-3,600 additional queries. The design separately reuses the completed 480-record medium study,
+3,600 additional queries. A final calibration adds 360 DeepSeek work items over
+60 historically control-positive attacks and six concurrent conditions. The
+design separately reuses the completed 480-record medium study,
 5,082-record Pro Public matrix, 1,791-record Flash Public matrix, and the
-40-task adaptive evidence at budgets 50 and 200. Gemini remains diagnostic
-only. Provider tools and real external effects are prohibited throughout.
+40-task adaptive evidence at budgets 50 and 200. Two bounded Gemini attempts
+remain diagnostic only. Provider tools and real external effects are prohibited
+throughout.
 
 ## Empirical motivation and study framing
 
@@ -120,8 +126,9 @@ threshold for a clean configuration-quality claim.
 The completed 40-task adaptive panel observed first unsafe effect for 4/40
 tasks by budget 50 and 18/40 by budget 200. These points show substantial
 budget sensitivity but do not establish saturation. The incremental tail
-extends only a prespecified subset of B200 survivors toward 500; it is reported
-as a conditional analysis rather than a complete B500 curve.
+extended only a prespecified subset of 12 B200 survivors toward 500. No new
+first success was observed (0/12; Wilson 95% upper limit 24.25%); this is a
+conditional analysis rather than a complete B500 curve or saturation result.
 
 The prospectively frozen authorization-regime experiment is now complete for
 DeepSeek. Unsafe effects remained at or near zero across all four main cells,
@@ -129,12 +136,16 @@ but exact authorization produced opposite benign-tool directions across the
 two benchmarks and increased failure-sensitive attack risk on AgentDojo. It
 also replaced ASK with more frequent DENY and increased latency. The full
 package showed no stable advantage over the policy package. These unfavorable
-results are retained. Gemini free-tier execution closed incomplete at 32/450
-terminal work items and therefore supports no cross-provider claim.
+results are retained. A separate risk-enriched single-block calibration found
+17/60 unsafe effects under no defense, confirming contemporaneous activity in
+the selected cohort; full/safe produced 0/60, but failures and the enriched
+sampling frame preclude deployment-prevalence, utility, or temporal-repeatability
+claims. Gemini free-tier execution remained too incomplete in both attempted
+studies for a cross-provider effect estimate.
 
 ## Contributions
 
-The current evidence supports five bounded contributions:
+The current evidence supports six bounded contributions:
 
 1. an evaluator/online-state contract that makes authorization visibility
    explicit and prevents evaluator-only fields from entering runtime state;
@@ -147,7 +158,10 @@ The current evidence supports five bounded contributions:
    retrying only response-less failed rows; and
 5. an empirical account of authorization regime, confirmation/blocking burden,
    outcome-enriched instability, same-provider replication, and conditional
-   defense-aware attack budget.
+   defense-aware attack budget; and
+6. a contemporaneous activity calibration that distinguishes an active control
+   attack set from low event rates under defended conditions without treating a
+   historical risk-enriched sample as deployment prevalence.
 
 These contributions do not assert first, only, or SOTA status. Preprints are
 used to define the contemporary novelty boundary, not as peer-reviewed

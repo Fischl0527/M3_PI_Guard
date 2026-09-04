@@ -40,6 +40,32 @@ def test_claim_ledger_keeps_effectiveness_and_blind_claims_locked() -> None:
     assert claims["C25"]["status"] == "verified_auditable_correction_chain"
 
 
+def test_active_lean_claim_ledger_integrates_e1_through_e6_boundaries() -> None:
+    ledger = _json("claim_evidence_ledger_lean_v1.json")
+    claims = {row["claim_id"]: row for row in ledger["claims"]}
+
+    assert ledger["scope"]["incremental_studies_completed"] == [
+        "E1", "E2", "E3", "E4", "E5", "E6"
+    ]
+    assert ledger["scope"]["gemini_authorization_planned_work_items"] == 450
+    assert ledger["scope"]["gemini_authorization_terminal_work_items"] == 32
+    assert ledger["scope"]["gemini_authorization_response_bearing_work_items"] == 5
+    assert ledger["scope"]["e6_gemini_planned_work_items"] == 180
+    assert ledger["scope"]["e6_gemini_scientific_terminal_work_items"] == 6
+    assert ledger["scope"]["e6_gemini_response_bearing_work_items"] == 5
+    assert ledger["scope"]["e6_gemini_administratively_closed_work_items"] == 174
+    assert claims["LC10"]["status"] == "forbidden_after_two_incomplete_gemini_studies"
+    assert claims["LC15"]["observed"].startswith(
+        "Across 240 unauthorized proposals"
+    )
+    assert claims["LC17"]["status"] == "verified_conditional_null"
+    assert "not a complete B500 panel" in claims["LC17"]["boundary"]
+    assert claims["LC18"]["status"] == "verified_deepseek_single_block"
+    assert "temporal repeatability" in claims["LC18"]["boundary"]
+    assert "47/60 tasks" in claims["LC18"]["observed"]
+    assert "original multi-window activity gate" in claims["LC18"]["boundary"]
+
+
 def _percent(value: float) -> str:
     return f"{100 * value:.2f}%"
 
@@ -63,18 +89,17 @@ def test_results_draft_matches_admitted_medium_analysis() -> None:
         == "ea3d6197b0f97b5057b1d0f9fff054f3ae43743eb9cb85eb4122b6c152d7e041"
     )
     assert admitted["status"] == "complete"
-    assert admitted["result_admission_sha256"] in text
-    assert "medium_admitted_empirical_fallback_selected" in text
+    assert admitted["result_admission_sha256"] not in text
     assert primary["mechanism_paper_gate"]["status"] == "fail_redirect"
-    assert "Paper route | Empirical fallback" in text
+    assert "did not support a superiority claim" in normalized_text
 
     labels = {
         "no_defense": "No defense",
         "safe_prompt_or_spotlighting": "Safe prompt / spotlighting",
         "promptguard_detector_only": "PromptGuard (detector-only)",
         "strongest_peer_reviewed_structural_baseline": "Structural baseline",
-        "m3_policy_only": "M3 policy-only",
-        "m3_full": "M3-full",
+        "m3_policy_only": "Policy package (`m3_policy_only`)",
+        "m3_full": "Full package (`m3_full`)",
     }
     for condition, label in labels.items():
         metrics = primary["condition_metrics"][condition]
@@ -98,20 +123,20 @@ def test_results_draft_matches_admitted_medium_analysis() -> None:
             for status, count in operations["operational_status_counts"].items()
             if status != "completed"
         )
+        operational_label = {
+            "m3_policy_only": "Policy package",
+            "m3_full": "Full package",
+        }.get(condition, label)
         operational_prefix = (
-            f"| {label} | {operations['confirmation_burden']['ask_count']} | "
+            f"| {operational_label} | {operations['confirmation_burden']['ask_count']} | "
             f"{_percent(operations['ask_rate_benign']['value'])} | "
             f"{failures} | {operations['provider_calls']['sum']} | "
             f"{operations['provider_cost_cny']['sum']:.7f} |"
         )
         assert operational_prefix in text
 
-    assert text.count("pending") >= 10
-    assert (
-        "The Public second-model extension and the formal rows of Table 6 "
-        "remain empty"
-    ) in normalized_text
-    assert "A defense-mechanism or SOTA claim is prohibited" in normalized_text
+    assert "all Gemini effects are not estimable" in normalized_text
+    assert "do not support a defense-superiority or SOTA claim" in normalized_text
 
 
 def test_methods_references_existing_frozen_artifacts() -> None:
@@ -175,9 +200,10 @@ def test_evidence_80_v3_arithmetic_and_scorecard_binding() -> None:
     target_sum = sum(row["target"] for row in route)
     increment_sum = sum(row["increment"] for row in route)
 
-    assert baseline["scorecard_sha256"] == hashlib.sha256(
-        scorecard_path.read_bytes()
-    ).hexdigest()
+    assert baseline["scorecard_sha256"] == (
+        "82fc6248abe569ba221d3c435c45e909e4571d946c62ec763a4d2c943e55c3ea"
+    )
+    assert roadmap["historical_v2_immutability"] is True
     assert baseline["scientific_points"] == current_sum == 753
     assert scorecard["scientific_evidence_completion_points"] == current_sum
     assert target["scientific_points"] == target_sum == 968

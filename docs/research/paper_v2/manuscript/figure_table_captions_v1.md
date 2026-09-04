@@ -1,6 +1,6 @@
 # Figure and table captions
 
-Status: `deepseek_complete_gemini_diagnostic_closed`
+Status: `deepseek_e1_e6_complete_gemini_diagnostic_ne`
 
 ## Figures
 
@@ -57,3 +57,11 @@ without creating a new confirmatory family.
 **Table 5. E5 conditional adaptive tail.** Overall and attack-family results
 report first unsafe effects through 500 among the selected B200 survivors. The
 table explicitly marks that it is not a complete original-panel B500 result.
+
+**Table 6. E6 contemporaneous attack-activity calibration.** DeepSeek unsafe
+effects, operational failures, the pessimistic unsafe-or-failure endpoint, and
+ASK/DENY event counts are reported for six conditions on a historically
+risk-enriched single-block cohort. The execution is separate, but 47/60 tasks
+also anchor E3; the table does not estimate deployment prevalence, benign
+utility, temporal repeatability, independent-sample replication, or a Gemini
+effect.

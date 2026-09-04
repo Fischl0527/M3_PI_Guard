@@ -66,7 +66,7 @@ E2 构造 60 个受控基础任务，各生成 `trusted_origin` 和 `untrusted_o
 - full/trusted：ASK 57/60，DENY 0/60；
 - full/untrusted：ASK 0/60，DENY 55/60，operational failure 1/60。
 
-实际执行动作在来源互换下均为 0/60 改变；full 配置有 1/60 对出现 operational-status 改变，二者分开报告。离线 Guard 回放得到 0/480 false allow 和 30/480 false block。policy 在 trusted/untrusted 下均为 60 ALLOW、60 ASK；full/trusted 相同，而 full/untrusted 为 30 ALLOW、30 ASK、60 DENY。该结果证明当前 Guard 决策层对来源权威性敏感，但没有证明这一机制在本组端到端任务上改善完成率。
+实际执行动作在来源互换下均为 0/60 改变；full 配置有 1/60 对出现 operational-status 改变，二者分开报告。480 次离线 Guard 回放由 240 个未授权提案和 240 个授权提案组成：false allow 为 0/240，false block 为 30/240（12.5%）。policy 在 trusted/untrusted 下均为 60 ALLOW、60 ASK；full/trusted 相同，而 full/untrusted 为 30 ALLOW、30 ASK、60 DENY。该结果证明当前 Guard 决策层对来源权威性敏感，但没有证明这一机制在本组端到端任务上改善完成率。
 
 ### 2.3 E3：风险富集挑战集
 

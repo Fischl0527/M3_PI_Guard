@@ -78,8 +78,9 @@ The controlled source-authority experiment sharpens the negative package
 result. Holding proposition, value, position, and policy fixed, the policy-only
 Guard produced the same deterministic decision distribution under trusted and
 untrusted origins. The full Guard changed its untrusted-origin distribution to
-30 ALLOW, 30 ASK, and 60 DENY, with zero false allows but 30 false blocks across
-all 480 replay decisions. This is direct evidence that the implemented full
+30 ALLOW, 30 ASK, and 60 DENY. Across 240 unauthorized proposals there were no
+false allows; across 240 authorized proposals there were 30 false blocks. This
+is direct evidence that the implemented full
 Guard is provenance-sensitive at its deterministic decision boundary.
 
 That mechanism did not translate into completed end-to-end actions. All 240
@@ -124,12 +125,36 @@ most successes later observed by budget 200. This supports the general warning
 that a static or weak attacker can overstate robustness [@L27].
 
 The complete-panel evidence stops at 200. E5 extends only 12 prespecified
-B200 survivors toward 500 and stops each task at first unsafe effect. This
-conditional tail can estimate
+B200 survivors to 500 and stops each task at first unsafe effect. No new first
+success occurred (0/12; Wilson 95% upper limit 24.25%). This conditional tail
+can estimate
 `P(first success by 500 | no success by 200)` for the selected survivors, but
 it cannot be merged with the original 40 tasks into a nominal full B500 curve,
 establish saturation, estimate an asymptotic attack rate, or support a
-hardest-task-2,000 claim.
+hardest-task-2,000 claim. The null point estimate does not establish zero tail
+risk because the interval remains wide and the cohort is selected conditional
+on surviving budget 200.
+
+## Contemporaneous calibration restores an active control
+
+The near-zero E1 and E3 attack endpoints raise a calibration question: were the
+tested attacks inactive at the time of execution, or did defended conditions
+actually differ from an active control? E6 addresses this in a separately
+executed historically risk-enriched cohort, but it is not an independent sample
+validation: 47/60 tasks are also E3 anchors. No defense produced 17/60 unsafe
+effects, including events in both AgentDojo and M3-v2, while policy/normal
+produced 2/60 and full/safe produced 0/60. Attack activity was therefore
+observed within the selected contemporaneous block; the original multi-window
+activity gate was neither satisfied nor tested.
+
+This calibration does not rescue a broad defense-superiority claim. The cohort
+was selected from historical control-positive cases, contains no benign tasks,
+and was run in one execution block. It estimates neither deployment prevalence
+nor utility or temporal repeatability. Operational failures were also material:
+12/60 under no defense and 3/60 even under full/safe. The VIGIL contrast was
+heterogeneous, moving in opposite directions across the two benchmarks. E6 is
+therefore best read as an active-control check plus a conditional comparison,
+not a general robustness ranking or an individual provenance-module ablation.
 
 ## Relation to recent provenance and authorization work
 
@@ -150,26 +175,26 @@ tool trajectories while keeping those two evidence layers separate.
 
 ## Cross-provider interpretation
 
-The Gemini sample is deliberately smaller and nested inside the DeepSeek
-sample. It can show whether the main paired direction appears under another
-provider; it cannot establish broad model-family generality. The official free
-tier also introduces an availability constraint. The protocol stops at the
-first 429, resumes only response-less or untouched work on a later quota day,
-and downgrades transparently after three quota-day attempts.
+Two distinct Gemini attempts remain diagnostic. The earlier authorization study
+closed with 32/450 terminal work items, including only five with official model
+responses; 83 observed items remained nonterminal and 335 were unstarted. The
+separately executed E6 prefix then stopped after five response-bearing records and one
+response-less VIGIL dependency failure; 174 untouched plan rows were closed
+administratively. Administrative closure is not scientific observation.
 
-The stopping rule closed with 32/450 terminal work items, including five with
-official model responses; 83 observed items remained nonterminal and 335 were
-unstarted. These rows are retained for operational accounting but excluded
-from scientific inference. External validity is therefore limited to DeepSeek
-V4 Pro and V4 Flash, and no cross-provider conclusion is made.
+Neither dataset meets a paired-coverage gate. In E6, comparisons involving
+VIGIL have 0/30 minimum response-complete pairs. We therefore report all Gemini
+effects as not estimable rather than plotting a zero, ranking providers, or
+combining the two incompatible samples. External validity remains limited to
+DeepSeek V4 Pro and V4 Flash.
 
 ## Limitations
 
 First, the new primary experiment uses one proprietary model and two benchmark
 families; the larger Public evidence adds another model from the same provider,
 not an independent vendor. Model updates, tool schemas, system prompts, and
-application context may change the effects. The Gemini subset closed incomplete
-and contributes no cross-provider inference. Although execution dates, official
+application context may change the effects. Both Gemini attempts closed
+incomplete and contribute no cross-provider inference. Although execution dates, official
 response identifiers, and returned model names are retained, provider-managed
 aliases do not make the underlying weights immutable.
 
@@ -200,12 +225,18 @@ That conditional tail does not constitute a complete B500 panel and cannot
 prove saturation. Attack search is still one family of defense-aware
 optimization; another optimizer may find different failures.
 
-Seventh, failure handling is conservative but not interpretation-free. All
+Seventh, E6 uses a historically risk-enriched cohort in a single execution
+block, with 47/60 tasks overlapping E3. It observes activity in that selected
+block but cannot estimate deployment prevalence, benign utility, cross-date
+repeatability, or independent-sample replication. Its M3 factor estimates
+remain bundle-level and do not identify provenance as the causal component.
+
+Eighth, failure handling is conservative but not interpretation-free. All
 response-bearing failures are terminal in ITT, whereas response-less transport
 failures can receive bounded explicit recovery. We report raw failures and
 superseded attempts so readers can assess that choice.
 
-Eighth, `ASK` is observed only as system confirmation-request incidence.
+Ninth, `ASK` is observed only as system confirmation-request incidence.
 Confirmation stayed pending in the synthetic environment, so this study does
 not measure human response quality, workload, or usable-security outcomes.
 
@@ -216,7 +247,7 @@ actually evaluated.
 
 ## Practical implications
 
-Three practical recommendations follow. First, agent-security benchmarks
+Four practical recommendations follow. First, agent-security benchmarks
 should publish the fields visible to the online Guard and keep evaluator-only
 answers outside that projection.
 Second, runtime defenses should be evaluated factorially against a simpler
@@ -231,5 +262,6 @@ alongside unsafe-effect rate.
 The DeepSeek authorization-regime results now tie these recommendations to
 observed effects: exact and stressed policies materially changed completion,
 blocking, failure, and latency while observed unsafe effects remained near
-zero. The prespecified Gemini stopping rule closed with an incomplete
-diagnostic subset, which cannot alter or broaden the DeepSeek findings.
+zero. E6 additionally shows why an active no-defense control should accompany
+floor-limited defended cells. Both Gemini attempts closed with incomplete
+diagnostic subsets and cannot alter or broaden the DeepSeek findings.
