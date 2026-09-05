@@ -1,5 +1,19 @@
 # 当前任务
 
+### 2026-09-05 文献驱动的授权可用性与动态任务强化
+
+- 状态：`in_progress`，用户已批准按最新优化建议实施。
+- 先完成 P0：一次性读取 E1/E2/E3/E4 的最小原始结果，分解完成率、ASK/DENY
+  与 operational failure；缺失历史 reason code 时明确记为不可追溯，不补造。
+- 同步完成 P2 的离线来源归因压力测试；再冻结 E7 授权粒度/确认闭环与 E8
+  AgentDyn 小规模外部动态任务设计。研究对象、结果和实现分别版本化。
+- 授权范围：新增实验、定向测试、Markdown 报告、相关文献补充、Harness 状态，
+  分阶段 Git 提交及推送到 origin/codex/q2-empirical-study。
+- 历史 E1--E6 及既有论文数值不修改、不重跑；无 Full Harness、递归证据验证、
+  盲测、真实工具或外部副作用。Gemini 不作为先决条件且付费上限 USD 0。
+- 先确认诊断和机制契约，再启动新 API 前缀；不能用新条件覆盖旧实验结论。
+- 实施计划：`harness/tasks/m3-authorization-usability-v1.md`。
+
 ### 2026-09-05 审阅模板 Times New Roman 与 TeXstudio 全文结构修复
 
 - 状态：排版子任务 `verified`；论文整体继续保持 `in_progress`。

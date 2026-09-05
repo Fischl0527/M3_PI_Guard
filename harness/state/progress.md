@@ -1,5 +1,12 @@
 # 进展记录
 
+## 2026-09-05 — 授权可用性与动态任务强化启动
+
+- 用户批准最新文献驱动的优化顺序；F-PAPER-002 重新包含增量研究工作。
+- 当前阶段：P0 旧结果分解、P2 离线来源探针、E7/E8 实施前设计。
+- E1--E6 原始记录不变；尚未启动新 API，旧 runner 无活动进程。
+- 任务记录：`harness/tasks/m3-authorization-usability-v1.md`。
+
 ## 2026-09-05 — Times New Roman 与 TeXstudio 全文结构修复完成
 
 - `LaTeX通用模板/数模通用模板.tex` 现在显式将 main、sans、mono、URL、图注和

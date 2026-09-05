@@ -37,6 +37,7 @@ ollama_models/
 # The tracked lock/index files under external/benchmarks record exact commits,
 # licenses and compatibility counts.
 external/benchmarks/agentdojo/
+external/benchmarks/agentdyn/
 external/benchmarks/injecagent/
 
 # Strong-baseline source checkouts are reproducible caches. Protocol manifests
