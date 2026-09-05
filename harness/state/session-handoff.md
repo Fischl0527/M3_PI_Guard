@@ -1,5 +1,41 @@
 # 会话移交
 
+## 2026-09-05 — Usability diagnostics and E7a complete; native E8 next
+
+- IMPORTANT final semantic correction: E7a consumed tickets but never invoked
+  an effect backend. Raw task_completion/simulated_effect/unsafe_effect fields
+  mean authorized/any/unauthorized proposal permission only. Analysis and MD
+  disclose this; do not count them as native utility or actual unsafe effects.
+  Full E7 end-to-end acceptance remains incomplete; E8 needs real in-memory
+  state transitions and independently evaluated effect receipts.
+
+- Read `docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md` first.
+- P0: 1560 historical logical rows summarized once; 512 new deterministic probes.
+  Historical per-row Guard reasons were not saved; do not fabricate a causal audit.
+- E7a: 96/96 official DeepSeek responses and parse-complete rows, no failures.
+  Formal prefix8 plus pending88; never replay these calls. Four post-proposal
+  confirmation modes produce384 paired mechanism cells, NOT384 API samples.
+- New files: authorization_usability_diagnostics_v1, confirmation_session_v1,
+  e7_confirmation_plan/runner_v1, agentdyn_native_qualification_v1 and tests.
+  New compact outputs are in explicitly named study folders, not legacy outputs/E7.
+- New confirmation wrapper is experimental: exact task/request/proposal/manifest,
+  expiry and single use. Legacy RuntimeMonitor and E1--E6 semantics are unchanged.
+- Git design ca49a28 and runner4fcbd02 pushed before API; results/report are in
+  the following final stage commit on origin/codex/q2-empirical-study.
+- Verification: 27 new targeted pytest nodes, Ruff/compile/diff. No Full Harness.
+- AgentDyn: separate ignored checkout5353cf7615b135cace8d07c8f12dac53a16b6db3;
+  loaded3 native suites; fixed18 tasks. Original encoding failures retained in
+  qualification_v1.json. With Python-X utf8, v2 has18 completed checks but only8
+  fixed GroundTruthPipeline utility successes; noop0/18. No model/provider calls.
+- NEXT: explain10 non-solving native exemplar traces, qualify positive/negative
+  native effect fixtures, build non-oracle dynamic registry adapter, then freeze
+  injection instances. See protocols/paper_upgrade_v2/e8_agentdyn_native_v1/
+  next_execution_plan.md. Do not silently drop the10 tasks or substitute gold
+  parameters into online policy. E8 model matrix not implemented/executed yet.
+- Paper addendum/claim boundary updated; final LaTeX remains unchanged until
+  research integration. Authors remain blank, Gemini NE and E6 closure unchanged.
+- Preserve dirty external submodules, tmp and untracked user LaTeX template assets.
+
 ## 2026-09-05 — Review typography and TeXstudio outline verified
 
 - The canonical author-facing entry remains

@@ -13,6 +13,16 @@
   盲测、真实工具或外部副作用。Gemini 不作为先决条件且付费上限 USD 0。
 - 先确认诊断和机制契约，再启动新 API 前缀；不能用新条件覆盖旧实验结论。
 - 实施计划：`harness/tasks/m3-authorization-usability-v1.md`。
+- 本阶段完成：P0一次性分解1560旧work items、512新离线探针、独立确认会话、
+  E7a全部96次官方API及384个提案后确认条件。无失败、无真实effect，27个定向
+  测试通过。E7a是刻意过度约束对照的单动作研究，不证明部署效用或机制领先。
+- E8进度：官方原生三套件已加载，固定18任务离线检查完成；UTF-8后无异常，
+  noop utility 0/18，示例轨迹utility仅8/18。先核对其余10条动态参数/判分，
+  再做非oracle适配和正式前缀；当前没有E8模型结果。整体继续in_progress。
+- 报告：`docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md`。
+- 最终语义复核：E7a仅消耗许可票据，未调用effect backend；raw的task_completion
+  等字段只代表合法/非授权提案获许可。报告/analysis已收缩解释，原raw未改。
+  E7完整端到端效用验收仍未满足；不能把96个API提案当作96个任务环境执行。
 
 ### 2026-09-05 审阅模板 Times New Roman 与 TeXstudio 全文结构修复
 

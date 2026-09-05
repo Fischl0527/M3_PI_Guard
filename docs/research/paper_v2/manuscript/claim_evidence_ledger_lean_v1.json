@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.1",
-  "updated_at": "2026-09-04T00:00:00+08:00",
+  "updated_at": "2026-09-05T00:00:00+08:00",
   "paper_route": "authorization_regime_and_security_utility_empirical_study",
   "scope": {
     "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
@@ -18,6 +18,23 @@
     "e6_gemini_administratively_closed_work_items": 174,
     "e6_gemini_effect_status": "not_estimable",
     "full_harness_required": false
+  },
+  "development_addendum": {
+    "status": "not_integrated_into_current_latex_manuscript",
+    "report": "docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md",
+    "e7a_official_calls": 96,
+    "e7a_response_bearing": 96,
+    "e7a_post_proposal_confirmation_cells": 384,
+    "new_deterministic_probes": 512,
+    "boundaries": [
+      "Final E7a implementation audit found no effect-backend invocation: raw task_completion/simulated_effect/unsafe_effect indicate proposal permission only, not native task utility or observed effects. Full end-to-end E7 acceptance is not satisfied.",
+      "Historical ASK terminated execution and was not a measured human-confirmation lifecycle.",
+      "Historical raw records lack per-proposal Guard reasons; source-based and perturbation findings cannot be assigned retrospectively to individual API rows.",
+      "E7a deliberately compares an over-specified exact policy with the two text alternatives already allowed by a synthetic task; it is not evidence of general utility or security improvement.",
+      "The new common confirmation wrapper changes both experimental module profiles relative to historical policy-only;384 post-proposal cells are not384 independent model executions.",
+      "Literal provenance has negated-mention and transformed-value limits; forced-proposal probes do not establish end-to-end bypass.",
+      "E8 has native fixture checks but no formal model data; its18-task sample must not be cherry-picked after10 exemplar-utility mismatches."
+    ]
   },
   "claims": [
     {

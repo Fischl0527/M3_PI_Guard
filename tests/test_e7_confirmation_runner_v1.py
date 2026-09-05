@@ -8,6 +8,7 @@ from experiments.paper_v2.e7_confirmation_plan_v1 import (
     build_plan,
     online_state,
 )
+from experiments.paper_v2.contracts import sha256_canonical_json
 from experiments.paper_v2.e7_confirmation_runner_v1 import (
     analyze,
     canary_gate,
@@ -35,6 +36,7 @@ def factory(output, *, broken=False):
         )
         last = json.loads(lines[-1])
         assert last["event"] == "request_started"  # pretransport persistence
+        assert last["payload_hash"] == sha256_canonical_json(payload)
         index = int(last["case_id"].split("-")[-1])
         case = build_cases()[index]
         text = json.dumps(

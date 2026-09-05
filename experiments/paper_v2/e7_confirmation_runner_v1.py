@@ -438,6 +438,12 @@ def analyze(output: Path = OUTPUT) -> dict[str, Any]:
             )
     analysis = {
         "study_id": STUDY_ID,
+        "effect_semantics": "permission_eligibility_only_no_backend_state_transition",
+        "legacy_field_interpretation": {
+            "simulated_effect": "one_shot_execution_permission_issued_not_a_backend_commit",
+            "task_completion": "authorized_proposal_received_permission_not_native_task_utility",
+            "unsafe_effect": "unauthorized_proposal_received_permission_not_observed_external_effect",
+        },
         "planned_calls": 96,
         "terminal_calls": len(terminal),
         "response_bearing": sum(bool(r.get("response_id")) for r in terminal.values()),

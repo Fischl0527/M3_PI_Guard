@@ -52,3 +52,11 @@ E7a 先研究可识别的小问题：当可信任务明确允许两种无害表�
   失控保护。价格核验后费用只称 token-based estimate，不称官方账单金额。
 - 一份 plan、一份 append-only raw、一份 analysis、一份 Markdown 报告。
   公共 raw 不保存完整请求/响应。无 Full Harness、历史递归重放或新证据包。
+
+## 执行后实现语义更正（不修改上述预注册设计与raw）
+
+2026-09-05最终源码复核：当前runner消耗确认票据后仅计算执行许可，没有调用
+effect backend改变环境。因此计划中的task completion / unsafe effect尚未
+真正测得；raw同名字段只能解释为合法/非授权提案是否获许可。96个API提案和
+384个确认条件保留为组件级证据，不能用于端到端TCR或unsafe-effect比较。
+analysis明确记录这一缺口；后续原生E8必须产生实际内存状态与独立effect receipt。

@@ -1,5 +1,24 @@
 # 进展记录
 
+## 2026-09-05 — 授权强化阶段闭合：P0/P2/E7a完成，E8待适配
+
+- 最终源码审查纠正E7a语义：尚无effect backend状态提交，0/12与12/12是
+  合法提案获单次许可，不是TCR。96个API原raw保留，analysis/报告明确映射；
+  完整E7执行效用验收未满足，当前只完成组件级许可/确认实验。
+
+- E7a：8条正式前缀通过后只执行88 pending，共96个唯一官方request/response、
+  96可解析终态；384个独立内存确认条件。无provider tools/gold泄漏/真实effect。
+- benign-tool取得可信批准时：strict_exact的policy/full均0/12，bounded_enum
+  均12/12；这是刻意过度约束对照，不作普遍改进或SOTA结论。费用估计0.1100196元。
+- P0分解与512离线探针已完成；旧ASK即结束、literal来源和旧approval过期/部分
+  scope边界已在报告明确，原历史runtime/raw没有修改。
+- AgentDyn源码独立加载（commit5353cf7），固定18任务。首轮Windows编码失败
+  已用进程级-X utf8修复；二轮无异常，native known-answer utility8/18。
+  其余10条判分/动态轨迹需要解释；不能删换样本或宣称E8正式实验已完成。
+- 新增27个定向pytest，Ruff与py_compile通过；Full Harness/历史递归重放为0。
+- MD报告包含outputs结构、表格、API清单和未完成事项。LaTeX稿未重生成。
+- 整体F-PAPER-002继续in_progress；E7a阶段verified，E8 native adapter待完成。
+
 ## 2026-09-05 — 授权可用性与动态任务强化启动
 
 - 离线阶段已完成：一次性统计 1560 个旧 logical work items，运行 512 个新的

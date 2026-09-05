@@ -1,0 +1,82 @@
+{
+  "native_version": "v1",
+  "sample": [
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_2"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_10"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_14"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_11"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_9"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_4"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_15"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_18"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_9"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_10"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_13"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_1"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_1"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_18"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_0"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_5"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_14"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_3"
+    }
+  ],
+  "seed": "m3-e8-agentdyn-native-2026-09-05",
+  "selection_does_not_use_model_or_utility_outcomes": true,
+  "source_commit": "5353cf7615b135cace8d07c8f12dac53a16b6db3",
+  "source_url": "https://github.com/SaFo-Lab/AgentDyn",
+  "status": "offline_qualification_sample_not_final_attack_plan"
+}

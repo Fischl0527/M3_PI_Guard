@@ -1,5 +1,29 @@
 # Failure Log
 
+## 2026-09-05 — E7a final semantic audit: permission is not execution
+
+- score_proposal consumes a confirmation ticket and derives booleans, but does
+  not invoke an effect backend or mutate a task environment. Its raw field names
+  task_completion/simulated_effect/unsafe_effect therefore overstate the measured
+  endpoint. All96 API records are retained unchanged.
+- Corrected the report and analysis interpretation to authorized/unauthorized
+  execution permission, not native utility or observed unsafe effects. No
+  retrospective fake effect receipt or API replay was added. E7a is component
+  evidence only; backend commit and independent scoring remain for E8.
+
+## 2026-09-05 — AgentDyn Windows encoding and exemplar-utility qualification
+
+- Native loading worked, but first18 fixture checks raised UnicodeDecodeError
+  while PyYAML included package data using the Windows locale default encoding.
+  Saved qualification_v1.json. Diagnosis used traceback locations, not raw data.
+- Changed only the invocation to Python-X utf8 and added a process-mode guard.
+  qualification_v2.json has18 completed checks, zero physical-effect attempts,
+  and zero noop utility. No permanent environment or upstream source edits.
+- Fixed native GroundTruthPipeline utility succeeds8/18;10 returnfalse without
+  exceptions. This remains an upstream-exemplar/dynamic-parameter interpretation
+  issue, not an observed model failure. Do not drop tasks, fake success or use
+  ground_truth in online policy to get a green E8 result.
+
 ## 2026-09-05 — Usability extension narrow lint correction
 
 - First Ruff pass found E731 in the new diagnostic helper (assigned lambda).

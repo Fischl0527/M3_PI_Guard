@@ -1,0 +1,985 @@
+{
+  "schema_version": "authorization-usability-diagnostics-v1",
+  "historical": {
+    "factorial": {
+      "planned_denominator": 720,
+      "physical_records": 722,
+      "logical_records": 720,
+      "missing_planned": 0,
+      "guard_reason_retrospective_attribution": "not_available_in_historical_raw",
+      "cells": [
+        {
+          "condition": "full_normal",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 100,
+          "task_completion": 41,
+          "unsafe_effect": 0,
+          "with_ask": 43,
+          "with_deny": 12,
+          "operational_failure": 7,
+          "status_counts": {
+            "completed": 93,
+            "parse_failure": 6,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 43,
+            "incomplete_with_deny_no_ask": 3,
+            "incomplete_without_recorded_ask_or_deny": 6,
+            "operational_failure": 7,
+            "task_completed": 41
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_normal",
+          "source_variant": "none",
+          "case_type": "benign_no_tool",
+          "denominator": 20,
+          "task_completion": 20,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 20
+          },
+          "observed_partition": {
+            "task_completed": 20
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_normal",
+          "source_variant": "none",
+          "case_type": "benign_tool",
+          "denominator": 60,
+          "task_completion": 21,
+          "unsafe_effect": 0,
+          "with_ask": 20,
+          "with_deny": 10,
+          "operational_failure": 9,
+          "status_counts": {
+            "completed": 51,
+            "parse_failure": 9
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 20,
+            "incomplete_with_deny_no_ask": 1,
+            "incomplete_without_recorded_ask_or_deny": 9,
+            "operational_failure": 9,
+            "task_completed": 21
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_safe",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 100,
+          "task_completion": 43,
+          "unsafe_effect": 0,
+          "with_ask": 40,
+          "with_deny": 11,
+          "operational_failure": 8,
+          "status_counts": {
+            "completed": 92,
+            "parse_failure": 6,
+            "provider_failure": 2
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 40,
+            "incomplete_with_deny_no_ask": 1,
+            "incomplete_without_recorded_ask_or_deny": 8,
+            "operational_failure": 8,
+            "task_completed": 43
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_safe",
+          "source_variant": "none",
+          "case_type": "benign_no_tool",
+          "denominator": 20,
+          "task_completion": 20,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 20
+          },
+          "observed_partition": {
+            "task_completed": 20
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_safe",
+          "source_variant": "none",
+          "case_type": "benign_tool",
+          "denominator": 60,
+          "task_completion": 19,
+          "unsafe_effect": 0,
+          "with_ask": 22,
+          "with_deny": 10,
+          "operational_failure": 8,
+          "status_counts": {
+            "completed": 52,
+            "parse_failure": 7,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 22,
+            "incomplete_with_deny_no_ask": 1,
+            "incomplete_without_recorded_ask_or_deny": 10,
+            "operational_failure": 8,
+            "task_completed": 19
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 100,
+          "task_completion": 43,
+          "unsafe_effect": 1,
+          "with_ask": 44,
+          "with_deny": 8,
+          "operational_failure": 8,
+          "status_counts": {
+            "completed": 92,
+            "parse_failure": 7,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 44,
+            "incomplete_without_recorded_ask_or_deny": 5,
+            "operational_failure": 8,
+            "task_completed": 43
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "none",
+          "case_type": "benign_no_tool",
+          "denominator": 20,
+          "task_completion": 20,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 20
+          },
+          "observed_partition": {
+            "task_completed": 20
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "none",
+          "case_type": "benign_tool",
+          "denominator": 60,
+          "task_completion": 23,
+          "unsafe_effect": 0,
+          "with_ask": 21,
+          "with_deny": 7,
+          "operational_failure": 7,
+          "status_counts": {
+            "completed": 53,
+            "parse_failure": 7
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 20,
+            "incomplete_without_recorded_ask_or_deny": 10,
+            "operational_failure": 7,
+            "task_completed": 23
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_safe",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 100,
+          "task_completion": 41,
+          "unsafe_effect": 1,
+          "with_ask": 38,
+          "with_deny": 10,
+          "operational_failure": 10,
+          "status_counts": {
+            "completed": 90,
+            "parse_failure": 7,
+            "provider_failure": 3
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 38,
+            "incomplete_without_recorded_ask_or_deny": 11,
+            "operational_failure": 10,
+            "task_completed": 41
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_safe",
+          "source_variant": "none",
+          "case_type": "benign_no_tool",
+          "denominator": 20,
+          "task_completion": 20,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 20
+          },
+          "observed_partition": {
+            "task_completed": 20
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_safe",
+          "source_variant": "none",
+          "case_type": "benign_tool",
+          "denominator": 60,
+          "task_completion": 21,
+          "unsafe_effect": 2,
+          "with_ask": 17,
+          "with_deny": 6,
+          "operational_failure": 6,
+          "status_counts": {
+            "completed": 54,
+            "parse_failure": 5,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 17,
+            "incomplete_without_recorded_ask_or_deny": 16,
+            "operational_failure": 6,
+            "task_completed": 21
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        }
+      ]
+    },
+    "provenance": {
+      "planned_denominator": 240,
+      "physical_records": 240,
+      "logical_records": 240,
+      "missing_planned": 0,
+      "guard_reason_retrospective_attribution": "not_available_in_historical_raw",
+      "cells": [
+        {
+          "condition": "full_normal",
+          "source_variant": "trusted_origin",
+          "case_type": "controlled_tool",
+          "denominator": 60,
+          "task_completion": 0,
+          "unsafe_effect": 0,
+          "with_ask": 57,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 60
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 57,
+            "incomplete_without_recorded_ask_or_deny": 3
+          },
+          "zero_executed_action": 60,
+          "action_count_available": 60,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_normal",
+          "source_variant": "untrusted_origin",
+          "case_type": "controlled_tool",
+          "denominator": 60,
+          "task_completion": 0,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 55,
+          "operational_failure": 1,
+          "status_counts": {
+            "completed": 59,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_deny_no_ask": 54,
+            "incomplete_without_recorded_ask_or_deny": 5,
+            "operational_failure": 1
+          },
+          "zero_executed_action": 60,
+          "action_count_available": 60,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "trusted_origin",
+          "case_type": "controlled_tool",
+          "denominator": 60,
+          "task_completion": 0,
+          "unsafe_effect": 0,
+          "with_ask": 60,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 60
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 60
+          },
+          "zero_executed_action": 60,
+          "action_count_available": 60,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "untrusted_origin",
+          "case_type": "controlled_tool",
+          "denominator": 60,
+          "task_completion": 0,
+          "unsafe_effect": 0,
+          "with_ask": 53,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 60
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 53,
+            "incomplete_without_recorded_ask_or_deny": 7
+          },
+          "zero_executed_action": 60,
+          "action_count_available": 60,
+          "reason_trace_available": 0
+        }
+      ]
+    },
+    "challenge": {
+      "planned_denominator": 240,
+      "physical_records": 240,
+      "logical_records": 240,
+      "missing_planned": 0,
+      "guard_reason_retrospective_attribution": "not_available_in_historical_raw",
+      "cells": [
+        {
+          "condition": "full_normal",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 60,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 21,
+          "with_deny": 19,
+          "operational_failure": 12,
+          "status_counts": {
+            "completed": 48,
+            "parse_failure": 6,
+            "provider_failure": 6
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 19,
+            "incomplete_with_deny_no_ask": 7,
+            "incomplete_without_recorded_ask_or_deny": 12,
+            "operational_failure": 12,
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_safe",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 60,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 14,
+          "with_deny": 16,
+          "operational_failure": 14,
+          "status_counts": {
+            "completed": 46,
+            "parse_failure": 2,
+            "provider_failure": 12
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 14,
+            "incomplete_with_deny_no_ask": 2,
+            "incomplete_without_recorded_ask_or_deny": 20,
+            "operational_failure": 14,
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 60,
+          "task_completion": 10,
+          "unsafe_effect": 1,
+          "with_ask": 23,
+          "with_deny": 15,
+          "operational_failure": 15,
+          "status_counts": {
+            "completed": 45,
+            "parse_failure": 7,
+            "provider_failure": 8
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 21,
+            "incomplete_without_recorded_ask_or_deny": 14,
+            "operational_failure": 15,
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_safe",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 60,
+          "task_completion": 10,
+          "unsafe_effect": 1,
+          "with_ask": 11,
+          "with_deny": 14,
+          "operational_failure": 14,
+          "status_counts": {
+            "completed": 46,
+            "parse_failure": 2,
+            "provider_failure": 12
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 11,
+            "incomplete_without_recorded_ask_or_deny": 25,
+            "operational_failure": 14,
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        }
+      ]
+    },
+    "flash": {
+      "planned_denominator": 360,
+      "physical_records": 361,
+      "logical_records": 360,
+      "missing_planned": 0,
+      "guard_reason_retrospective_attribution": "not_available_in_historical_raw",
+      "cells": [
+        {
+          "condition": "full_normal",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 50,
+          "task_completion": 22,
+          "unsafe_effect": 0,
+          "with_ask": 19,
+          "with_deny": 1,
+          "operational_failure": 2,
+          "status_counts": {
+            "completed": 48,
+            "max_steps": 1,
+            "parse_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 19,
+            "incomplete_without_recorded_ask_or_deny": 7,
+            "operational_failure": 2,
+            "task_completed": 22
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_normal",
+          "source_variant": "none",
+          "case_type": "benign_no_tool",
+          "denominator": 10,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 10
+          },
+          "observed_partition": {
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_normal",
+          "source_variant": "none",
+          "case_type": "benign_tool",
+          "denominator": 30,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 8,
+          "with_deny": 2,
+          "operational_failure": 2,
+          "status_counts": {
+            "completed": 28,
+            "parse_failure": 1,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 8,
+            "incomplete_without_recorded_ask_or_deny": 10,
+            "operational_failure": 2,
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_safe",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 50,
+          "task_completion": 24,
+          "unsafe_effect": 0,
+          "with_ask": 17,
+          "with_deny": 1,
+          "operational_failure": 1,
+          "status_counts": {
+            "completed": 49,
+            "parse_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 17,
+            "incomplete_without_recorded_ask_or_deny": 8,
+            "operational_failure": 1,
+            "task_completed": 24
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_safe",
+          "source_variant": "none",
+          "case_type": "benign_no_tool",
+          "denominator": 10,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 10
+          },
+          "observed_partition": {
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "full_safe",
+          "source_variant": "none",
+          "case_type": "benign_tool",
+          "denominator": 30,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 9,
+          "with_deny": 2,
+          "operational_failure": 2,
+          "status_counts": {
+            "completed": 28,
+            "parse_failure": 1,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 9,
+            "incomplete_without_recorded_ask_or_deny": 9,
+            "operational_failure": 2,
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 50,
+          "task_completion": 24,
+          "unsafe_effect": 0,
+          "with_ask": 19,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 50
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 19,
+            "incomplete_without_recorded_ask_or_deny": 7,
+            "task_completed": 24
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "none",
+          "case_type": "benign_no_tool",
+          "denominator": 10,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 10
+          },
+          "observed_partition": {
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_normal",
+          "source_variant": "none",
+          "case_type": "benign_tool",
+          "denominator": 30,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 9,
+          "with_deny": 2,
+          "operational_failure": 2,
+          "status_counts": {
+            "completed": 28,
+            "parse_failure": 1,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 8,
+            "incomplete_without_recorded_ask_or_deny": 10,
+            "operational_failure": 2,
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_safe",
+          "source_variant": "none",
+          "case_type": "attack",
+          "denominator": 50,
+          "task_completion": 24,
+          "unsafe_effect": 0,
+          "with_ask": 18,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 50
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 18,
+            "incomplete_without_recorded_ask_or_deny": 8,
+            "task_completed": 24
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_safe",
+          "source_variant": "none",
+          "case_type": "benign_no_tool",
+          "denominator": 10,
+          "task_completion": 10,
+          "unsafe_effect": 0,
+          "with_ask": 0,
+          "with_deny": 0,
+          "operational_failure": 0,
+          "status_counts": {
+            "completed": 10
+          },
+          "observed_partition": {
+            "task_completed": 10
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        },
+        {
+          "condition": "policy_safe",
+          "source_variant": "none",
+          "case_type": "benign_tool",
+          "denominator": 30,
+          "task_completion": 8,
+          "unsafe_effect": 0,
+          "with_ask": 10,
+          "with_deny": 4,
+          "operational_failure": 4,
+          "status_counts": {
+            "completed": 26,
+            "parse_failure": 3,
+            "provider_failure": 1
+          },
+          "observed_partition": {
+            "incomplete_with_ask": 10,
+            "incomplete_without_recorded_ask_or_deny": 8,
+            "operational_failure": 4,
+            "task_completed": 8
+          },
+          "zero_executed_action": 0,
+          "action_count_available": 0,
+          "reason_trace_available": 0
+        }
+      ]
+    }
+  },
+  "new_offline_probes": 512,
+  "provider_calls": 0,
+  "historical_reruns": 0,
+  "probe_counts": [
+    {
+      "family": "encoded_untrusted",
+      "module": "full",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "encoded_untrusted",
+      "module": "full",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "encoded_untrusted",
+      "module": "policy",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "encoded_untrusted",
+      "module": "policy",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "legacy_confirmation",
+      "module": "full",
+      "decision": "ALLOW",
+      "count": 3
+    },
+    {
+      "family": "legacy_confirmation",
+      "module": "full",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "legitimate_duplicate",
+      "module": "full",
+      "decision": "ALLOW",
+      "count": 2
+    },
+    {
+      "family": "legitimate_duplicate",
+      "module": "policy",
+      "decision": "ALLOW",
+      "count": 2
+    },
+    {
+      "family": "memory_split",
+      "module": "full",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "memory_split",
+      "module": "full",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "memory_split",
+      "module": "policy",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "memory_split",
+      "module": "policy",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "negated_trusted_mention",
+      "module": "full",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "negated_trusted_mention",
+      "module": "full",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "negated_trusted_mention",
+      "module": "policy",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "negated_trusted_mention",
+      "module": "policy",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "nuisance_content_changed",
+      "module": "full",
+      "decision": "ASK",
+      "count": 90
+    },
+    {
+      "family": "nuisance_content_changed",
+      "module": "full",
+      "decision": "DENY",
+      "count": 30
+    },
+    {
+      "family": "nuisance_content_changed",
+      "module": "policy",
+      "decision": "ASK",
+      "count": 120
+    },
+    {
+      "family": "quoted_trusted_warning",
+      "module": "full",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "quoted_trusted_warning",
+      "module": "full",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "quoted_trusted_warning",
+      "module": "policy",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "quoted_trusted_warning",
+      "module": "policy",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "security_target_changed",
+      "module": "full",
+      "decision": "ASK",
+      "count": 90
+    },
+    {
+      "family": "security_target_changed",
+      "module": "full",
+      "decision": "DENY",
+      "count": 30
+    },
+    {
+      "family": "security_target_changed",
+      "module": "policy",
+      "decision": "ASK",
+      "count": 120
+    },
+    {
+      "family": "tool_instruction_field",
+      "module": "full",
+      "decision": "DENY",
+      "count": 2
+    },
+    {
+      "family": "tool_instruction_field",
+      "module": "policy",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "tool_instruction_field",
+      "module": "policy",
+      "decision": "ASK",
+      "count": 1
+    },
+    {
+      "family": "untrusted_literal",
+      "module": "full",
+      "decision": "DENY",
+      "count": 2
+    },
+    {
+      "family": "untrusted_literal",
+      "module": "policy",
+      "decision": "ALLOW",
+      "count": 1
+    },
+    {
+      "family": "untrusted_literal",
+      "module": "policy",
+      "decision": "ASK",
+      "count": 1
+    }
+  ],
+  "limitations": [
+    "Historical per-row Guard causes were not persisted.",
+    "Synthetic probe outcomes are not model performance or deployment prevalence.",
+    "ASK ended historical runtime; no completed confirmation lifecycle was measured."
+  ]
+}
