@@ -1,5 +1,20 @@
 # 当前任务
 
+### 2026-09-05 授权诊断与E7a论文整合
+
+- 状态：`verified_manuscript_substage / overall_in_progress`。论文更新和版式复核完成。
+- 局部修订英文源与中文对照：P0/P2诊断、E7a许可语义、E2合成场景边界；
+  补充PIArena/AgentDyn/ASPI文献。E8仅列未完成的外部有效性限制。
+- 不改变旧E1--E6数值，不新增API/实验，不运行Full Harness或递归验证。
+- 保持数模通用模板入口、Times New Roman、A4 25mm边距、底部居中页码、
+  字面input全文结构；作者信息留空。新E7a表采用纵向窄表。
+- 17项定向测试、Ruff/编译通过；两主稿111页缩略图与关键页已复核。
+  审阅稿52页/65书签，elsarticle59页，补充材料12页未改；表7及表注同页。
+- E7a只报告许可，不是TCR/已提交effect；E8尚无模型结果；作者/JCR门仍开放。
+- 交付报告：`docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md`。
+- 本阶段Git提交并推送origin工作分支，不包含内部trace/无关模板资产。
+- 任务记录：`harness/tasks/m3-usability-manuscript-update-v1.md`。
+
 ### 2026-09-05 文献驱动的授权可用性与动态任务强化
 
 - 状态：`in_progress`，用户已批准按最新优化建议实施。

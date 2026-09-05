@@ -20,7 +20,8 @@
     "full_harness_required": false
   },
   "development_addendum": {
-    "status": "not_integrated_into_current_latex_manuscript",
+    "status": "manuscript_integrated_permission_only_not_end_to_end",
+    "manuscript_revision_report": "docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md",
     "report": "docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md",
     "e7a_official_calls": 96,
     "e7a_response_bearing": 96,
@@ -170,11 +171,12 @@
     },
     {
       "claim_id": "LC13",
-      "claim": "The 21 references currently cited by the manuscript have verified metadata, stable landing pages and publication status; all 21/21 active citation contexts were checked against official abstracts, proceedings summaries, or the official preprint PDF.",
+      "claim": "The 24 references cited by the revised manuscript comprise the 21 previously checked active contexts and three newly verified primary-source contexts (PIArena, AgentDyn, ASPI).",
       "status": "verified_current_active_set",
       "evidence": [
         "docs/research/paper_v2/manuscript/citation_compliance_active_v1.md",
         "docs/research/paper_v2/manuscript/references_v1.bib",
+        "docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md",
         "docs/research/paper_v2/manuscript/stage_4_5_final_integrity_report_v1.md"
       ],
       "boundary": "The review verifies the manuscript's active citation contexts against primary records; it does not reproduce every experiment in the cited papers. Review any newly activated citation and repeat publication-status checks at submission."
@@ -199,7 +201,7 @@
         "docs/research/paper_v2/incremental_empirical_v1/e2_provenance_result_v1.md"
       ],
       "observed": "Across 240 unauthorized proposals false allow was 0/240; across 240 authorized proposals false block was 30/240. All 240 end-to-end runs executed no action.",
-      "boundary": "Deterministic Guard sensitivity is not evidence of end-to-end utility or a human-confirmation outcome."
+      "boundary": "Deterministic Guard sensitivity is not evidence of end-to-end utility or a human-confirmation outcome. E2 is synthetic and uses the controlled M3-v2 runtime, not native AgentDojo. Historical ASK terminated the run and raw data lack per-proposal stopping reasons."
     },
     {
       "claim_id": "LC16",

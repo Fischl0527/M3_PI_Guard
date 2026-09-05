@@ -34,6 +34,8 @@ The controlled source-authority experiment sharpens the negative package result.
 
 That mechanism did not translate into completed end-to-end actions. All 240 model--Guard runs executed zero actions: trusted contexts were routed almost entirely to ASK, while full/untrusted contexts were predominantly DENY. The correct interpretation therefore has two layers. Offline replay establishes mechanism behavior; end-to-end execution reveals a confirmation bottleneck and cannot be replaced by the replay's decision accuracy. A provenance mechanism can be logically active while the surrounding interaction design supplies little usable utility.
 
+The follow-up diagnostics narrow this interpretation further. Historical ASK ended the trajectory, and E2's nuisance text was exactly constrained without being exposed as a required operation string. Their aggregate burden cannot isolate a source-specific cause. Literal source matching and permissive legacy approval matching also have component-level limits under forced proposals. E7a illustrates why approval must be separated from both policy scope and effect commitment: admitting a second already-authorized wording changed permit issuance under an intentionally mismatched control, but no backend commit or user interaction followed. Neither these permits nor the offline probes establish a provenance-driven end-to-end improvement.
+
 \subsection{Executed effects and utility must be reported together}
 
 \label{sec:discussion-executed-effects-and-utility-must-be-reported-together}
@@ -96,7 +98,9 @@ Seventh, E6 uses a historically risk-enriched cohort in a single execution block
 
 Eighth, failure handling is conservative but not interpretation-free. All response-bearing failures are terminal in ITT, whereas response-less transport failures can receive bounded explicit recovery. We report raw failures and superseded attempts so readers can assess that choice.
 
-Ninth, \nolinkurl{ASK} is observed only as system confirmation-request incidence. Confirmation stayed pending in the synthetic environment, so this study does not measure human response quality, workload, or usable-security outcomes.
+Ninth, historical \nolinkurl{ASK} measures system confirmation-request incidence and terminates the trajectory. E7a adds paired in-memory approval/denial conditions but no model clarification turn, human participant, or backend state change. Its exact-policy control deliberately disagrees with the request's permitted wording, and both modules share a new wrapper. Permit differences therefore do not identify an improvement over a correctly compiled policy, human response quality, workload, task completion, or deployed security.
+
+Native dynamic-environment validation also remains incomplete. E2 uses synthetic benchmark-domain scenarios rather than native AgentDojo execution. AgentDyn's open-ended tasks and helpful third-party instructions provide a relevant external-validity challenge \citep{L38}, but our native loader and fixture checks have not produced model-evaluation results. They are not included as an additional benchmark or robustness finding.
 
 Finally, this paper does not include an independent blind set. It also does not claim first, only, or SOTA status. Its external-validity claims are limited to the models, benchmarks, policy compiler, stress regimes, and attack budgets actually evaluated.
 

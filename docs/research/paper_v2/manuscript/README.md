@@ -1,6 +1,11 @@
 # paper-v2 lean empirical manuscript workspace
 
-Status: `incremental_e1_e6_complete_gemini_effects_not_estimable`
+Status: `e1_e6_complete_e7a_permission_diagnostic_integrated_gemini_not_estimable`
+
+2026-09-05 update: Methods/Results now include the P0/P2 diagnostics and E7a
+execution-permit study, with its permission-only, no-backend-effect boundary.
+Native E8 remains unevaluated. See `usability_manuscript_update_v1.md` for the
+revision, exact verification commands and the `outputs/` QA directory map.
 
 This directory is a complete working-paper workspace, but not yet a
 submission-ready package. It contains the active manuscript, existing
@@ -29,7 +34,7 @@ incremental E1--E6 studies are complete. E5 closed at 0/12 new first successes
 among selected B200 survivors through query 500 (Wilson upper limit 24.25%). E6
 closed as a 360-row DeepSeek, risk-enriched single-block calibration; its nested
 Gemini prefix failed the technical gate. The package uses five main figures,
-six main tables and twelve supplementary tables. Neither incomplete Gemini
+seven main tables and twelve supplementary tables. Neither incomplete Gemini
 dataset supports estimation of a cross-provider effect.
 
 Files:
@@ -37,10 +42,12 @@ Files:
 - `../../../../LaTeX通用模板/M3_PI_Guard_JISA/` is the submission-facing,
   flat Elsevier LaTeX package. Its `M3_PI_Guard_JISA.tex` entry uses
   `elsarticle`; the independent `M3_PI_Guard_JISA_supplement.tex` entry carries
-  Tables S1--S12. The verified PDFs have 55 and 12 pages, respectively, and
+  Tables S1--S12. The verified PDFs have 59 and 12 pages, respectively, and
   deliberately contain no author metadata. Rebuild instructions are in
   `LaTeX通用模板/README.md` at the repository root. This LaTeX package, rather
-  than the Word rendering, is now the formatting source of truth.
+  than the Word rendering, is now the formatting source of truth. The user's
+  `数模通用模板.tex` review entry has 52 A4 pages with Times New Roman and
+  65 PDF outline entries; the submission-facing entry retains elsarticle style.
 - `manuscript_deepseek_v1.md`: reader-facing unified English working draft
   assembled from the reviewed sections. Rebuild it with
   `F:\robot\Anaconda3\python.exe -B scripts/build_lean_paper_manuscript.py`;
@@ -54,13 +61,13 @@ Files:
   `python scripts/build_lean_paper_docx.py` using a Python environment with
   `python-docx` and Pandoc. Structural and accessibility checks pass; the
   current 35-page WPS render passed page-by-page visual review on 2026-09-04.
-- `manuscript_zh_v1.md` and
-  `M3_PI_Guard_JISA_chinese_comparison.docx`: Simplified Chinese comparison
-  versions of the current English working manuscript. They preserve the same
-  six-section scientific structure, 21-source citation corpus, six numbered
-  main tables, one inline decision table, five figures, numerical results and
-  the closed Gemini diagnostic boundary. The Chinese files are for author review and
-  team communication rather than JISA submission. Rebuild the Word copy with
+- `manuscript_zh_v1.md`: current Simplified Chinese comparison, synchronized
+  to the six-section English paper, 24 active references, seven main tables,
+  five figures, and the permission-only E7a / diagnostic Gemini boundaries.
+  `M3_PI_Guard_JISA_chinese_comparison.docx` remains a historical review copy
+  (21 references and six main tables), not updated in this LaTeX-only revision.
+  The Chinese files are for author review and team communication rather than
+  JISA submission. Historical Word rebuild command:
   `python -m scripts.build_lean_paper_chinese_docx` in an environment with
   `python-docx` and Pandoc. The current 30-page WPS render passed page-by-page
   visual review on 2026-09-04.
@@ -98,7 +105,8 @@ Files:
   author-owned submission details. Its synchronized editable Word attachment
   passed a single-page WPS visual review on 2026-09-04.
 - `citation_compliance_active_v1.md`: submission-focused metadata and claim-fit
-  review for the 21 references actually cited in the manuscript.
+  review for the 24 references actually cited in the manuscript, with the
+  incremental three-source review separated from the earlier 21-source review.
 - `author_metadata_and_submission_inputs.md`: author-owned title-page,
   declaration, CRediT, biography and release fields that must be completed by
   the author team rather than inferred from the repository.
@@ -111,9 +119,10 @@ Files:
 - `highlights_v1.md`: five JISA-length highlights summarizing the current
   E1--E6 evidence. The synchronized editable Word attachment passed a
   single-page WPS visual review on 2026-09-04.
-- `figure_table_plan.md`: incremental data-source map for five main figures,
-  six main tables and twelve supplementary tables; no hash bundle or recursive
-  evidence replay is required.
+- `figure_table_plan.md`: original E1--E6 data-source map for five main figures,
+  six main tables and twelve supplementary tables. The new Table 7 source and
+  endpoint contract are in `usability_manuscript_update_v1.md`; no hash bundle
+  or recursive evidence replay is required.
 - `pre_result_integrity_audit_v1.md`: scoped data/method/failure-mode audit of
   the admitted medium manuscript assets; explicitly not a formal Stage 2.5
   pass.
@@ -121,7 +130,7 @@ Files:
   audit of the ten papers that define the closest innovation boundary.
 - `full_citation_refresh_v1.md`: historical 34-source audit; the active
   bibliography now adds the 2026 provenance-sensitivity measurement paper.
-- `references_v1.bib`: 36-entry bibliography that explicitly distinguishes
+- `references_v1.bib`: 39-entry bibliography that explicitly distinguishes
   peer-reviewed work from preprints.
 - The admitted Public-primary result path includes a second computation
   implementation that independently reproduces condition counts, Wilson

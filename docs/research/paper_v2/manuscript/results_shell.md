@@ -349,8 +349,9 @@ deterministic Guard decisions. The source swap changed only the authority of a
 critical proposition while holding text, value, relative position, and policy
 fixed. No end-to-end cell executed an authorized, unauthorized, or other
 action. The resulting zero unauthorized-argument-influence rate is an endpoint
-floor caused by confirmation and blocking, not evidence that source authority
-was behaviorally irrelevant.
+floor accompanied by confirmation and blocking, not evidence that source
+authority was behaviorally irrelevant. The retained records do not identify
+the exact stopping cause of every zero-action run.
 
 The burden nevertheless differed sharply. Policy/trusted and
 policy/untrusted produced ASK in 60/60 and 53/60 records, with no DENY. The
@@ -527,6 +528,44 @@ cost was CNY 24.5551236.
 | Total tokens | 4,511,768 |
 | Attributed cost | CNY 24.5551236 |
 | Automatic retry / provider tools / real external effects | 0 / 0 / 0 |
+
+## Authorization diagnostics and execution permits
+
+The E1 benign-tool decomposition retains 60 tasks per cell. For policy/normal,
+policy/safe, full/normal, and full/safe respectively, completed tasks numbered
+23, 21, 21, and 19; incomplete non-failed tasks with ASK numbered 20, 17, 20,
+and 22; and operational failures numbered 7, 6, 9, and 8. The residual groups
+were 0, 0, 1, and 1 incomplete tasks with DENY but no ASK, and 10, 16, 9, and
+10 with neither. This separation avoids adding overlapping ASK and failure
+incidences and does not change the original TCR.
+
+The new forced-proposal probes identified conditional implementation limits.
+For either nuisance-text or safety-target perturbation, policy returned ASK
+in 120/120 cases; full returned ASK in 90/120 and DENY in 30/120. Among six
+unauthorized-target provenance scenarios, exact-target rules yielded no ALLOW
+under either module setting. Broad-target rules yielded 6/6 ALLOW for policy
+and 4/6 for full. Literal matching can treat negated or quoted trusted mentions
+as authority, while encoded or split values escape literal-source matching.
+Three constructed legacy approvals (expired, partial-proposal scope, and
+tool-only scope) were accepted, whereas a missing approval produced ASK.
+These probes do not show that an attacker can obtain trusted approvals or
+induce the model to emit the forced proposals.
+
+E7a obtained 96/96 official, parseable responses with no operational failure.
+Table 7 reports execution-permit issuance under trusted approval: each module
+setting had 0/12 permitted benign proposals under the deliberately strict
+control and 12/12 under bounded enumeration. Corresponding Wilson 95% intervals
+are 0.00%--24.25% and 75.75%--100.00%. Attack-condition proposals followed the
+authorized target and showed the same permit pattern. Consequently, zero
+unauthorized permits cannot establish resistance to an active attack.
+
+Across the 384 paired confirmation cells, 192 remained scope-blocked, 48
+received one-shot permits, 48 were denied by the trusted controller, and 96
+lacked valid confirmation (absent or forged). There was no policy/full
+difference in these counts. The result demonstrates a constructed
+policy--intent mismatch and a bounded permission lifecycle, not a general
+utility gain. No task-environment state transition was performed, and these
+permits are not added to TCR or unsafe-effect counts in the execution studies.
 
 ## Remaining evidence boundary
 

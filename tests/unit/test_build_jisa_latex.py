@@ -109,7 +109,7 @@ def test_preserves_citations_figures_and_scientific_boundary_text(tmp_path: Path
         for citation in re.findall(r"\\citep\{([^}]+)\}", generated_tex)
         for key in citation.split(",")
     }
-    assert len(markdown_keys) == 21
+    assert len(markdown_keys) == 24
     assert latex_keys == markdown_keys
 
     assert r"0/240 unauthorized proposals" in semantic_tex
@@ -149,6 +149,7 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
         4: (15, 10),
         5: (4, 8),
         6: (6, 6),
+        7: (4, 4),
     }
     expected_supplement_shapes = {
         1: (4, 4),
@@ -181,7 +182,7 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
         for table in supplementary_tables
     } == expected_supplement_shapes
 
-    assert len(list(table_dir.glob("table_*.tex"))) == 6
+    assert len(list(table_dir.glob("table_*.tex"))) == 7
     assert len(list(table_dir.glob("supplement_s*.tex"))) == 12
     assert r"false allow & not applicable & 240" in (
         table_dir / "table_03.tex"
@@ -217,6 +218,15 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
     assert r"\begin{longtable}" in narrow_main
     assert "sidewaystable" not in narrow_main
 
+    permit_table = (table_dir / "table_07.tex").read_text(encoding="utf-8")
+    assert "sidewaystable" not in permit_table
+    assert permit_table.startswith(r"\begin{table}[!htbp]")
+    assert permit_table.rstrip().endswith(r"\end{table}")
+    assert r"\begin{tabularx}{\linewidth}{@{}LLLL@{}}" in permit_table
+    assert r"\begin{longtable}" not in permit_table
+    assert "One-shot permits under trusted approval, not task completion" in permit_table
+    assert "Bounded enum / full & 12/12 & 12/12 & 0/12" in permit_table
+
 
 def test_places_artifacts_once_and_emits_no_absolute_workspace_paths(
     tmp_path: Path,
@@ -235,7 +245,7 @@ def test_places_artifacts_once_and_emits_no_absolute_workspace_paths(
         assert results.count(
             rf"\input{{\ProjectRoot/figure_{number:02d}.tex}}"
         ) == 1
-    for number in (2, 3, 4, 5, 6):
+    for number in (2, 3, 4, 5, 6, 7):
         assert results.count(
             rf"\input{{\ProjectRoot/table_{number:02d}.tex}}"
         ) == 1

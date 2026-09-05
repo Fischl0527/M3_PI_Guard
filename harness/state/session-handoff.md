@@ -1,5 +1,30 @@
 # 会话移交
 
+## 2026-09-05 — Manuscript integration verified; no new experiment
+
+- Read `docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md`.
+  P0/P2/E7a now appear in English and Chinese, with E7a explicitly limited to
+  permission eligibility (96 model proposals /384 paired controller cells).
+  E2 is synthetic, not native AgentDojo; E8 still has no model results.
+- Entry remains `LaTeX通用模板/数模通用模板.tex`; current review PDF52 pages,
+  TNR/A4/25mm,65 bookmarks,9 literal inputs, centered upright page numbers.
+  Official elsarticle PDF59 pages; supplement12 unchanged; wrapper PDF matches.
+- Added table7 is portrait with caption/body/note kept together. All111 main
+  PDF pages inspected as contacts, plus new-content detail pages. QA JSON has
+  no errors; no missing glyphs, unresolved references or Overfull warnings.
+- Focused commands: pytest on test_build_lean_paper_manuscript.py and
+  test_build_jisa_latex.py (17 passed); Ruff/py_compile on the two builders and
+  check_jisa_pdf_layout.py. XeLaTeX/BibTeX built three affected entries.
+  Final report contains exact commands. Do not run Full Harness to repeat this.
+- Source/bib/table7/builders/tests/three PDFs/Harness are this stage's Git scope.
+  Push to origin/codex/q2-empirical-study; no force-push. Keep dirty drift/toolsafe
+  submodules, untracked template fonts/assets and tmp untouched and unstaged.
+- Overall feature stays in_progress. Author fields remain blank. Old Word
+  files are historical and were not rebuilt. No new API or raw-result changes.
+- No further task started. Next research requires a separately scoped actual
+  isolated backend transition / independent scoring study, not relabeling
+  E7a permission as utility. Closed E6 B1 and Gemini diagnostic limits remain.
+
 ## 2026-09-05 — Usability diagnostics and E7a complete; native E8 next
 
 - IMPORTANT final semantic correction: E7a consumed tickets but never invoked

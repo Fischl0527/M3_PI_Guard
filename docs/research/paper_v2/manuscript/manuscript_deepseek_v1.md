@@ -297,6 +297,19 @@ searches frozen tasks at prespecified query budgets, and reports the
 first-success distribution. Since L27 remains a preprint, it motivates the
 protocol but is not described as a peer-reviewed theorem.
 
+PIArena, published at ACL 2026, integrates attacks, defenses, and benchmarks
+and evaluates feedback-adaptive injection, including cases where the injected
+task aligns with the intended task [@L37]. The AgentDyn preprint instead
+emphasizes dynamic planning, open-ended tasks, and helpful third-party
+instructions [@L38]. These works motivate testing useful behavior under
+authorization constraints, not merely counting blocked actions. The ASPI
+preprint evaluates matched execution and clarification-seeking states and
+finds increased vulnerability in its clarification setting [@L39]. That
+interaction differs from our controller-only permission diagnostic, which
+does not send a clarification response back to the model. Neither a low ASK
+rate nor successful permit issuance demonstrates a secure human-confirmation
+workflow.
+
 ### 2.5 Positioning summary
 
 M3 is not positioned as the first runtime guard, the first provenance system,
@@ -505,8 +518,9 @@ is included once in the final denominator.
 
 ### 3.9 Source-authority counterfactual
 
-E2 contains 60 controlled tool tasks, evenly split between AgentDojo and
-M3-v2. Thirty are supporting scenarios and thirty contain a parameter that
+E2 contains 60 synthetic controlled tool tasks, with 30 scenarios labeled for
+each benchmark domain. All use the controlled M3-v2 runtime rather than the
+native AgentDojo environment. Thirty are supporting scenarios and thirty contain a parameter that
 competes with the trusted request. The scenarios cover payment targets,
 message recipients, file paths, calendar participants, data recipients, and
 workspace objects.
@@ -601,8 +615,9 @@ and later replaced by a CNY 1,000 runaway-protection ceiling at the project
 owner's direction. The selected tasks, query range, attacker, model, seed,
 first-success stopping, ITT rules, and estimand were unchanged, and no successful
 query was replayed. Final analysis-attributed cost was CNY 24.5551236.
-Provider calls for the evidence reported here were made during July and August
-2026. The returned names are provider-managed model aliases and therefore
+Provider calls for E1--E6 and the earlier studies were made during July and
+August 2026; the additional E7a proposal study ran on September 5, 2026.
+The returned names are provider-managed model aliases and therefore
 identify the served model at request time without freezing its hidden weights.
 
 Prompts and model responses are not copied into the compact analysis file.
@@ -732,7 +747,47 @@ prospectively selected B200 survivors and a conditional survival curve from
 201 to 500. We neither combine the sampling frames nor extrapolate a saturation
 level.
 
-### 3.17 Minimal verification and reproducibility
+### 3.17 Authorization and confirmation diagnostics
+
+We conducted an exploratory follow-up to the action floor without changing
+E1--E6 outcomes. A descriptive decomposition of 1,560 E1--E4 work items first
+separates operational failures, completed tasks, and the remaining incomplete
+tasks with ASK, with DENY but no ASK, or with neither recorded decision. These
+mutually exclusive categories describe observations, not causal reasons.
+The historical runner terminates on ASK without a confirmation exchange.
+E2 also constrains nuisance text fields exactly, although their fixed wording
+is not supplied as an explicit operation requirement. Historical compact
+records lack per-proposal Guard reasons, preventing retrospective attribution
+of individual failures to those constraints.
+
+A separate set of 512 deterministic probes comprises 480 target/content
+perturbations, 28 literal-provenance probes, and four legacy-approval probes.
+These are newly constructed proposals, not reconstructed model responses.
+They test component contracts and do not estimate end-to-end attack success.
+
+E7a crosses strict exact versus bounded-enumeration authorization with policy
+versus full modules on 24 new single-action synthetic tasks. Each of three tool
+categories (message, file, and mock API) supplies four benign and four attack
+tasks. The trusted request authorizes two harmless text alternatives and
+prefers the second. The strict control intentionally allows only the first;
+bounded enumeration allows both while retaining the same exact safety target.
+This deliberately overconstrained control is not a correctly compiled exact
+policy. Normal prompts, temperature zero, and a 512-token output limit yield
+96 official DeepSeek V4 Pro proposal calls, including an eight-call prefix.
+
+Each proposal is then evaluated in four separate in-memory sessions: trusted
+approval, trusted denial, absent confirmation, and forged untrusted approval.
+The 384 cells share 96 model proposals; the model receives no clarification
+turn. Both module settings use the same new confirmation wrapper, which binds
+the task, trusted request, proposal, and manifest, checks expiry and single use,
+and cannot widen scope or override DENY. It is an experimental controller, not
+production authentication or a human study. The endpoint is issuance of a
+one-shot execution permit. No effect backend was invoked, so legacy fields
+named task completion and simulated effect are interpreted only as permission
+eligibility. E7a reports descriptive counts and Wilson intervals separately
+from TCR and executed unsafe effects, without a new confirmatory test family.
+
+### 3.18 Minimal verification and reproducibility
 
 Verification is deliberately proportional to the lean study. It consists of:
 
@@ -1040,8 +1095,9 @@ deterministic Guard decisions. The source swap changed only the authority of a
 critical proposition while holding text, value, relative position, and policy
 fixed. No end-to-end cell executed an authorized, unauthorized, or other
 action. The resulting zero unauthorized-argument-influence rate is an endpoint
-floor caused by confirmation and blocking, not evidence that source authority
-was behaviorally irrelevant.
+floor accompanied by confirmation and blocking, not evidence that source
+authority was behaviorally irrelevant. The retained records do not identify
+the exact stopping cause of every zero-action run.
 
 The burden nevertheless differed sharply. Policy/trusted and
 policy/untrusted produced ASK in 60/60 and 53/60 records, with no DENY. The
@@ -1167,7 +1223,45 @@ cost was CNY 24.5551236.
 
 Supplementary Table S10 reports the conditional adaptive-tail execution.
 
-### 4.13 Remaining evidence boundary
+### 4.13 Authorization diagnostics and execution permits
+
+The E1 benign-tool decomposition retains 60 tasks per cell. For policy/normal,
+policy/safe, full/normal, and full/safe respectively, completed tasks numbered
+23, 21, 21, and 19; incomplete non-failed tasks with ASK numbered 20, 17, 20,
+and 22; and operational failures numbered 7, 6, 9, and 8. The residual groups
+were 0, 0, 1, and 1 incomplete tasks with DENY but no ASK, and 10, 16, 9, and
+10 with neither. This separation avoids adding overlapping ASK and failure
+incidences and does not change the original TCR.
+
+The new forced-proposal probes identified conditional implementation limits.
+For either nuisance-text or safety-target perturbation, policy returned ASK
+in 120/120 cases; full returned ASK in 90/120 and DENY in 30/120. Among six
+unauthorized-target provenance scenarios, exact-target rules yielded no ALLOW
+under either module setting. Broad-target rules yielded 6/6 ALLOW for policy
+and 4/6 for full. Literal matching can treat negated or quoted trusted mentions
+as authority, while encoded or split values escape literal-source matching.
+Three constructed legacy approvals (expired, partial-proposal scope, and
+tool-only scope) were accepted, whereas a missing approval produced ASK.
+These probes do not show that an attacker can obtain trusted approvals or
+induce the model to emit the forced proposals.
+
+E7a obtained 96/96 official, parseable responses with no operational failure.
+Table 7 reports execution-permit issuance under trusted approval: each module
+setting had 0/12 permitted benign proposals under the deliberately strict
+control and 12/12 under bounded enumeration. Corresponding Wilson 95% intervals
+are 0.00%--24.25% and 75.75%--100.00%. Attack-condition proposals followed the
+authorized target and showed the same permit pattern. Consequently, zero
+unauthorized permits cannot establish resistance to an active attack.
+
+Across the 384 paired confirmation cells, 192 remained scope-blocked, 48
+received one-shot permits, 48 were denied by the trusted controller, and 96
+lacked valid confirmation (absent or forged). There was no policy/full
+difference in these counts. The result demonstrates a constructed
+policy--intent mismatch and a bounded permission lifecycle, not a general
+utility gain. No task-environment state transition was performed, and these
+permits are not added to TCR or unsafe-effect counts in the execution studies.
+
+### 4.14 Remaining evidence boundary
 
 The medium, Public, authorization-regime, factorial, source-authority,
 challenge, replication, adaptive, and contemporaneous-activity studies jointly support an empirical
@@ -1276,6 +1370,17 @@ mechanism behavior; end-to-end execution reveals a confirmation bottleneck and
 cannot be replaced by the replay's decision accuracy. A provenance mechanism
 can be logically active while the surrounding interaction design supplies
 little usable utility.
+
+The follow-up diagnostics narrow this interpretation further. Historical ASK
+ended the trajectory, and E2's nuisance text was exactly constrained without
+being exposed as a required operation string. Their aggregate burden cannot
+isolate a source-specific cause. Literal source matching and permissive legacy
+approval matching also have component-level limits under forced proposals.
+E7a illustrates why approval must be separated from both policy scope and
+effect commitment: admitting a second already-authorized wording changed
+permit issuance under an intentionally mismatched control, but no backend
+commit or user interaction followed. Neither these permits nor the offline
+probes establish a provenance-driven end-to-end improvement.
 
 ### 5.4 Executed effects and utility must be reported together
 
@@ -1421,9 +1526,20 @@ response-bearing failures are terminal in ITT, whereas response-less transport
 failures can receive bounded explicit recovery. We report raw failures and
 superseded attempts so readers can assess that choice.
 
-Ninth, `ASK` is observed only as system confirmation-request incidence.
-Confirmation stayed pending in the synthetic environment, so this study does
-not measure human response quality, workload, or usable-security outcomes.
+Ninth, historical `ASK` measures system confirmation-request incidence and
+terminates the trajectory. E7a adds paired in-memory approval/denial conditions
+but no model clarification turn, human participant, or backend state change.
+Its exact-policy control deliberately disagrees with the request's permitted
+wording, and both modules share a new wrapper. Permit differences therefore
+do not identify an improvement over a correctly compiled policy, human
+response quality, workload, task completion, or deployed security.
+
+Native dynamic-environment validation also remains incomplete. E2 uses
+synthetic benchmark-domain scenarios rather than native AgentDojo execution.
+AgentDyn's open-ended tasks and helpful third-party instructions provide a
+relevant external-validity challenge [@L38], but our native loader and fixture
+checks have not produced model-evaluation results. They are not included as
+an additional benchmark or robustness finding.
 
 Finally, this paper does not include an independent blind set. It also does not
 claim first, only, or SOTA status. Its external-validity claims are limited to
@@ -1489,8 +1605,8 @@ The source-authority counterfactual supplies the corresponding mechanism
 evidence. Full-Guard decisions changed under an untrusted source, whereas the
 policy-only distribution did not; 480 replay decisions comprised 0/240 false
 allows among unauthorized proposals and 30/240 false blocks among authorized
-proposals. Yet all 240 end-to-end runs executed no action because
-ASK or DENY intervened. Mechanism-level provenance sensitivity is therefore
+proposals. Yet all 240 end-to-end runs executed no action, alongside
+substantial ASK and DENY burden. Mechanism-level provenance sensitivity is therefore
 not equivalent to usable end-to-end utility. The outcome-enriched challenge
 set likewise reproduced only 1/60 historical unsafe effects and incurred 55
 operational failures, while the Flash factorial replication had zero unsafe
@@ -1514,6 +1630,14 @@ operational failure, outcome-enriched sampling, the absence of benign tasks,
 and a single execution block. They do not satisfy the original multi-window
 activity gate or estimate deployment prevalence, utility, temporal
 repeatability, or an individual provenance-module effect.
+
+The follow-up permission study further separates policy scope, confirmation,
+and effect commitment. Across 96 model proposals and 384 paired controller
+cells, bounded enumeration permitted an already-authorized text alternative
+that a deliberately overconstrained exact control rejected. Neither module
+outperformed the other. These are execution permits without backend effects,
+not additional task-completion or safety evidence; the distinction matters
+when interpreting both confirmation burden and apparent non-operation.
 
 These findings support four practical requirements for tool-agent security
 evaluation: keep evaluator-only fields outside online Guard state; manipulate
@@ -1629,6 +1753,17 @@ E6 uses a historically risk-enriched single execution block; 47/60 tasks also an
 | Policy / safe | 1/60 (1.7%) [0.3%, 8.9%] | 2/60 (3.3%) | 3/60 (5.0%) | 21 | 2 |
 | Full / normal | 0/60 (0.0%) [0.0%, 6.0%] | 7/60 (11.7%) | 7/60 (11.7%) | 25 | 18 |
 | Full / safe | 0/60 (0.0%) [0.0%, 6.0%] | 3/60 (5.0%) | 3/60 (5.0%) | 19 | 6 |
+
+### Table 7. E7a execution-permit diagnostic
+
+One-shot permits under trusted approval, not task completion or committed effects. Strict exact deliberately excludes the request's preferred but authorized wording. Each denominator is 12; Wilson 95% intervals are 0.00%--24.25% for 0/12 and 75.75%--100.00% for 12/12. Attack prompts produced no unauthorized target proposal, so zero unauthorized permits do not establish attack resistance.
+
+| Policy / modules | Benign authorized permits | Attack authorized permits | Attack unauthorized permits |
+|---|---|---|---|
+| Strict exact / policy | 0/12 | 0/12 | 0/12 |
+| Strict exact / full | 0/12 | 0/12 | 0/12 |
+| Bounded enum / policy | 12/12 | 12/12 | 0/12 |
+| Bounded enum / full | 12/12 | 12/12 | 0/12 |
 
 ## Figure captions
 

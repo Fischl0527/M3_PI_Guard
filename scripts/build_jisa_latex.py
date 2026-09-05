@@ -62,6 +62,7 @@ PLACEMENTS = {
             "figure_05",
             "table_05",
         ),
+        "4.13 Authorization diagnostics and execution permits": ("table_07",),
     },
 }
 
@@ -382,7 +383,7 @@ def _parse_numbered_tables(markdown: str, *, supplementary: bool) -> list[Markdo
         rf"(?m)^{re.escape(level)} {re.escape(prefix)}(\d+)\. (.+)$"
     )
     matches = list(pattern.finditer(markdown))
-    expected = 12 if supplementary else 6
+    expected = 12 if supplementary else 7
     if len(matches) != expected:
         raise LatexBuildError(f"Expected {expected} tables, found {len(matches)}.")
 
@@ -440,6 +441,23 @@ def _render_numbered_table(
     )
     header = " & ".join(_inline(cell) for cell in table.header) + r" \\"
     body = [" & ".join(_inline(cell) for cell in row) + r" \\" for row in table.rows]
+
+    if table.number == "7":
+        # This four-row diagnostic must travel with its semantic-limit note.
+        # longtable allowed the note to split over the next page in the review
+        # template; an ordinary portrait float keeps the complete unit intact.
+        lines = [
+            r"\begin{table}[!htbp]",
+            r"\centering\small",
+            rf"\caption{{{_inline(table.title)}}}\label{{tab:{label_number}}}",
+            r"\begin{tabularx}{\linewidth}{@{}LLLL@{}}",
+            r"\toprule", header, r"\midrule", *body, r"\bottomrule",
+            r"\end{tabularx}",
+            r"\par\smallskip\RaggedRight",
+            r"\textit{Note.} " + _inline(table.note),
+            r"\end{table}",
+        ]
+        return "\n".join(lines)
 
     if wide:
         lines = [

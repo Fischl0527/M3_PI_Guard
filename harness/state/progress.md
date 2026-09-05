@@ -1,5 +1,21 @@
 # 进展记录
 
+## 2026-09-05 — 论文整合及LaTeX版式复核完成
+
+- 已将P0/P2诊断、96个E7a模型提案及384个配对确认单元整合到Methods 3.17、
+  Results 4.13与表7；明确仅获许可、无backend effect，不计为TCR或安全增益。
+- 修正E2合成场景与不可追溯逐行停止原因的边界，保留旧E1--E6原始数值；
+  新增PIArena/AgentDyn/ASPI三项原始来源，24个实际引用；中文MD同步。
+- 17个定向pytest通过；两生成器和QA助手Ruff/py_compile通过。三个受影响
+  XeLaTeX/BibTeX入口构建完成；无需新API、Full Harness或历史验证。
+- 审阅稿52页、A4/TNR/65书签、9字面input；正式稿59页/64书签；补充12页不变。
+  两主稿全部111页缩略+关键页视觉复核通过，QA errors=[]；兼容稿逐页文本/大纲相同。
+- 新表7表注拆页已局部修复。无Overfull/缺字/未解析引用；保留3/4个非致命
+  Underfull与既有L20 empty-pages提示，不编造文献页码。
+- 本文稿子阶段verified；F-PAPER-002整体仍in_progress，E7实际执行效用、
+  E8原生模型结果、作者确认和投稿日期JCR未完成。本轮不启动后续实验。
+- 报告与outputs说明：`docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md`。
+
 ## 2026-09-05 — 授权强化阶段闭合：P0/P2/E7a完成，E8待适配
 
 - 最终源码审查纠正E7a语义：尚无effect backend状态提交，0/12与12/12是

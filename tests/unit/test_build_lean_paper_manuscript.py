@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import json
 
 import pytest
 
@@ -49,7 +50,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
         "## References"
     )
     assert manuscript.count("![Figure ") == 5
-    assert len(re.findall(r"^### Table [1-6]\. ", manuscript, flags=re.MULTILINE)) == 6
+    assert len(re.findall(r"^### Table [1-7]\. ", manuscript, flags=re.MULTILINE)) == 7
     assert "Supplementary Table S1" in manuscript
     assert "Supplementary Table S6" in manuscript
     assert "Supplementary Table S10" in manuscript
@@ -81,6 +82,30 @@ def test_every_citation_key_exists_in_bibliography() -> None:
     builder._validate_citations(builder.build_manuscript())
 
 
+def test_e7_reports_permission_only_and_preserves_external_validity_boundary() -> None:
+    manuscript = builder.build_manuscript()
+    normalized = " ".join(manuscript.split())
+    assert "96 official DeepSeek V4 Pro proposal calls" in normalized
+    assert "384 cells share 96 model proposals" in normalized
+    assert "No effect backend was invoked" in normalized
+    assert "not a correctly compiled exact policy" in normalized
+    assert "All use the controlled M3-v2 runtime" in normalized
+    assert "have not produced model-evaluation results" in normalized
+    table = builder._e7_permit_table()
+    assert "Strict exact / policy | 0/12 | 0/12 | 0/12" in table
+    assert "Bounded enum / full | 12/12 | 12/12 | 0/12" in table
+    assert "TCR" not in table and "completion" not in table
+
+
+def test_e7_table_rejects_missing_semantic_correction(tmp_path, monkeypatch) -> None:
+    path = tmp_path / "outputs/experiments/e7_confirmation_usability_v1/analysis_v1.json"
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps({"cells": []}), encoding="utf-8")
+    monkeypatch.setattr(builder, "PROJECT_ROOT", tmp_path)
+    with pytest.raises(builder.ManuscriptBuildError, match="permission-only semantics"):
+        builder._e7_permit_table()
+
+
 def test_active_reference_set_uses_current_primary_metadata() -> None:
     manuscript = builder.build_manuscript()
     bibliography = builder._read("references_v1.bib")
@@ -90,11 +115,12 @@ def test_active_reference_set_uses_current_primary_metadata() -> None:
         for key in re.findall(r"L\d{2}", group)
     }
 
-    assert len(active_keys) == 21
+    assert len(active_keys) == 24
     assert active_keys == {
         "L01", "L02", "L03", "L07", "L08", "L09", "L10",
         "L20", "L21", "L22", "L23", "L24", "L25", "L26",
         "L27", "L30", "L31", "L32", "L34", "L35", "L36",
+        "L37", "L38", "L39",
     }
     agentspec = re.search(r"(?ms)^@inproceedings\{L20,\n(.*?)^\}", bibliography)
     asb = re.search(r"(?ms)^@inproceedings\{L34,\n(.*?)^\}", bibliography)
@@ -180,11 +206,12 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
 def test_incremental_table_notes_preserve_claim_boundaries() -> None:
     notes = builder._table_notes()
 
-    assert len(notes) == 6
+    assert len(notes) == 7
     assert "contemporaneous cells" in notes[0]
     assert "separate evidence layers" in notes[2]
     assert "not a complete original-panel B500 curve" in notes[4]
     assert "historically risk-enriched single execution block" in notes[5]
+    assert "not task completion or committed effects" in notes[6]
 
 
 def test_incremental_table_formats_effects_and_conditional_probabilities(

@@ -1,5 +1,25 @@
 # Active citation compliance review
 
+## 2026-09-05 incremental update
+
+The current manuscript cites 24 of 39 entries: the 21 previously reviewed
+contexts below plus L37--L39. The 15 unused candidates are not printed. This
+revision checks only the three newly activated primary records and abstract
+claims; it is not a new full review of the earlier 21 sources.
+
+| Key | Primary record and status | Checked manuscript use |
+|---|---|---|
+| L37 | [PIArena, ACL 2026](https://aclanthology.org/2026.acl-long.1533/), DOI 10.18653/v1/2026.acl-long.1533, pp. 33170--33192 | Abstract: unified attacks/defenses/benchmarks and defense-feedback adaptive evaluation; no performance figure imported. |
+| L38 | [AgentDyn, arXiv v3](https://arxiv.org/abs/2602.03117v3), preprint, DOI 10.48550/arXiv.2602.03117 | Abstract: dynamic planning, open-ended tasks and helpful third-party instructions; not presented as completed M3 native evaluation. |
+| L39 | [ASPI, arXiv v1](https://arxiv.org/abs/2605.17324v1), preprint, DOI 10.48550/arXiv.2605.17324 | Abstract: matched clarification/execution states; motivates a limitation, not a result for M3's controller-only approval channel. |
+
+Titles, author lists, identifiers and publication status were checked against
+these primary records. Active render: 24 resolved references, no uncited printed
+items. The prior split becomes 12 formally published and 12 preprint sources.
+Submission-date status refresh and institutional JCR verification remain open.
+
+## Historical review of the earlier active set
+
 Review date: 2026-08-23
 
 Scope: the 21 references actually cited by `manuscript_deepseek_v1.md`. The

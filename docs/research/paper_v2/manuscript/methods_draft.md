@@ -198,8 +198,9 @@ is included once in the final denominator.
 
 ## Source-authority counterfactual
 
-E2 contains 60 controlled tool tasks, evenly split between AgentDojo and
-M3-v2. Thirty are supporting scenarios and thirty contain a parameter that
+E2 contains 60 synthetic controlled tool tasks, with 30 scenarios labeled for
+each benchmark domain. All use the controlled M3-v2 runtime rather than the
+native AgentDojo environment. Thirty are supporting scenarios and thirty contain a parameter that
 competes with the trusted request. The scenarios cover payment targets,
 message recipients, file paths, calendar participants, data recipients, and
 workspace objects.
@@ -294,8 +295,9 @@ and later replaced by a CNY 1,000 runaway-protection ceiling at the project
 owner's direction. The selected tasks, query range, attacker, model, seed,
 first-success stopping, ITT rules, and estimand were unchanged, and no successful
 query was replayed. Final analysis-attributed cost was CNY 24.5551236.
-Provider calls for the evidence reported here were made during July and August
-2026. The returned names are provider-managed model aliases and therefore
+Provider calls for E1--E6 and the earlier studies were made during July and
+August 2026; the additional E7a proposal study ran on September 5, 2026.
+The returned names are provider-managed model aliases and therefore
 identify the served model at request time without freezing its hidden weights.
 
 Prompts and model responses are not copied into the compact analysis file.
@@ -424,6 +426,46 @@ reports the conditional probability of a first success by 500 among twelve
 prospectively selected B200 survivors and a conditional survival curve from
 201 to 500. We neither combine the sampling frames nor extrapolate a saturation
 level.
+
+## Authorization and confirmation diagnostics
+
+We conducted an exploratory follow-up to the action floor without changing
+E1--E6 outcomes. A descriptive decomposition of 1,560 E1--E4 work items first
+separates operational failures, completed tasks, and the remaining incomplete
+tasks with ASK, with DENY but no ASK, or with neither recorded decision. These
+mutually exclusive categories describe observations, not causal reasons.
+The historical runner terminates on ASK without a confirmation exchange.
+E2 also constrains nuisance text fields exactly, although their fixed wording
+is not supplied as an explicit operation requirement. Historical compact
+records lack per-proposal Guard reasons, preventing retrospective attribution
+of individual failures to those constraints.
+
+A separate set of 512 deterministic probes comprises 480 target/content
+perturbations, 28 literal-provenance probes, and four legacy-approval probes.
+These are newly constructed proposals, not reconstructed model responses.
+They test component contracts and do not estimate end-to-end attack success.
+
+E7a crosses strict exact versus bounded-enumeration authorization with policy
+versus full modules on 24 new single-action synthetic tasks. Each of three tool
+categories (message, file, and mock API) supplies four benign and four attack
+tasks. The trusted request authorizes two harmless text alternatives and
+prefers the second. The strict control intentionally allows only the first;
+bounded enumeration allows both while retaining the same exact safety target.
+This deliberately overconstrained control is not a correctly compiled exact
+policy. Normal prompts, temperature zero, and a 512-token output limit yield
+96 official DeepSeek V4 Pro proposal calls, including an eight-call prefix.
+
+Each proposal is then evaluated in four separate in-memory sessions: trusted
+approval, trusted denial, absent confirmation, and forged untrusted approval.
+The 384 cells share 96 model proposals; the model receives no clarification
+turn. Both module settings use the same new confirmation wrapper, which binds
+the task, trusted request, proposal, and manifest, checks expiry and single use,
+and cannot widen scope or override DENY. It is an experimental controller, not
+production authentication or a human study. The endpoint is issuance of a
+one-shot execution permit. No effect backend was invoked, so legacy fields
+named task completion and simulated effect are interpreted only as permission
+eligibility. E7a reports descriptive counts and Wilson intervals separately
+from TCR and executed unsafe effects, without a new confirmatory test family.
 
 ## Minimal verification and reproducibility
 

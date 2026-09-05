@@ -38,8 +38,8 @@ The source-authority counterfactual supplies the corresponding mechanism
 evidence. Full-Guard decisions changed under an untrusted source, whereas the
 policy-only distribution did not; 480 replay decisions comprised 0/240 false
 allows among unauthorized proposals and 30/240 false blocks among authorized
-proposals. Yet all 240 end-to-end runs executed no action because
-ASK or DENY intervened. Mechanism-level provenance sensitivity is therefore
+proposals. Yet all 240 end-to-end runs executed no action, alongside
+substantial ASK and DENY burden. Mechanism-level provenance sensitivity is therefore
 not equivalent to usable end-to-end utility. The outcome-enriched challenge
 set likewise reproduced only 1/60 historical unsafe effects and incurred 55
 operational failures, while the Flash factorial replication had zero unsafe
@@ -63,6 +63,14 @@ operational failure, outcome-enriched sampling, the absence of benign tasks,
 and a single execution block. They do not satisfy the original multi-window
 activity gate or estimate deployment prevalence, utility, temporal
 repeatability, or an individual provenance-module effect.
+
+The follow-up permission study further separates policy scope, confirmation,
+and effect commitment. Across 96 model proposals and 384 paired controller
+cells, bounded enumeration permitted an already-authorized text alternative
+that a deliberately overconstrained exact control rejected. Neither module
+outperformed the other. These are execution permits without backend effects,
+not additional task-completion or safety evidence; the distinction matters
+when interpreting both confirmation burden and apparent non-operation.
 
 These findings support four practical requirements for tool-agent security
 evaluation: keep evaluator-only fields outside online Guard state; manipulate

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import re
 from collections import OrderedDict
 from pathlib import Path
@@ -56,6 +57,12 @@ TABLE_NOTES = (
     "E6 uses a historically risk-enriched single execution block; 47/60 tasks "
     "also anchor E3. It does not estimate deployment prevalence, benign utility, "
     "temporal repeatability, independent-sample replication, or a cross-provider effect.",
+    "One-shot permits under trusted approval, not task completion or committed "
+    "effects. Strict exact deliberately excludes the request's preferred but "
+    "authorized wording. Each denominator is 12; Wilson 95% intervals are "
+    "0.00%--24.25% for 0/12 and 75.75%--100.00% for 12/12. "
+    "Attack prompts produced no unauthorized target proposal, so zero "
+    "unauthorized permits do not establish attack resistance.",
 )
 
 
@@ -590,6 +597,36 @@ def _adaptive_table() -> str:
     )
 
 
+def _e7_permit_table() -> str:
+    path = PROJECT_ROOT / "outputs/experiments/e7_confirmation_usability_v1/analysis_v1.json"
+    analysis = json.loads(path.read_text(encoding="utf-8"))
+    if analysis.get("effect_semantics") != "permission_eligibility_only_no_backend_state_transition":
+        raise ManuscriptBuildError("E7 permission-only semantics must be explicit")
+    cells = {
+        (cell["granularity"], cell["module"], cell["case_type"]): cell
+        for cell in analysis["cells"] if cell["confirmation_mode"] == "approved"
+    }
+    if len(cells) != 8:
+        raise ManuscriptBuildError("E7 requires eight approved-channel cells")
+    rows = []
+    for granularity, label in (("strict_exact", "Strict exact"), ("bounded_enum", "Bounded enum")):
+        for module in ("policy", "full"):
+            benign = cells[granularity, module, "benign_tool"]
+            attack = cells[granularity, module, "attack"]
+            # Frozen raw labels are preserved, but their audited meaning is
+            # permission eligibility: no effect backend was invoked in E7a.
+            rows.append((
+                f"{label} / {module}",
+                f"{benign['task_completion']}/{benign['planned_n']}",
+                f"{attack['task_completion']}/{attack['planned_n']}",
+                f"{attack['unsafe_effect']}/{attack['planned_n']}",
+            ))
+    return _markdown_table(
+        ("Policy / modules", "Benign authorized permits", "Attack authorized permits", "Attack unauthorized permits"),
+        rows,
+    )
+
+
 def _table_block() -> str:
     tables = (
         (1, "Prompt-by-module factorial design", _incremental_table("table_1_factor_design.csv")),
@@ -598,6 +635,7 @@ def _table_block() -> str:
         (4, "E3/E4 conditional robustness", _incremental_table("table_4_e3_e4_robustness.csv")),
         (5, "E5 conditional adaptive tail", _incremental_table("table_5_e5_adaptive_tail.csv")),
         (6, "E6 contemporaneous attack-activity calibration", _e6_activity_table()),
+        (7, "E7a execution-permit diagnostic", _e7_permit_table()),
     )
     parts = ["## Tables"]
     for (number, title, table), note in zip(tables, _table_notes(), strict=True):

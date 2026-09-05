@@ -1,5 +1,19 @@
 # Failure Log
 
+## 2026-09-05 — manuscript E7 table note pagination
+
+- First rendered review PDF split the Table7 semantic note across pages39/40.
+  Replaced only this short four-row table's longtable with a portrait table
+  float containing caption, body and note; no global margin/rotation change.
+- First layout checker flagged elsarticle's first page for lacking a numeric
+  footer. This is a checker assumption error: the class uses its frontmatter
+  footer. Exempt only title pages; all subsequent page numbers remain checked.
+- One initial read command used Bash brace expansion in PowerShell and failed
+  parsing before execution. Corrected to explicit file arguments; no writes.
+- A subsequent read-only JSON check used Windows default GBK and failed on
+  Unicode. Reran with process-local Python -X utf8; JSON and feature status
+  were valid. No permanent environment setting or evidence rewrite.
+
 ## 2026-09-05 — E7a final semantic audit: permission is not execution
 
 - score_proposal consumes a confirmation ticket and derives booleans, but does

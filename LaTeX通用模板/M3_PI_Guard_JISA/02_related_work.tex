@@ -38,6 +38,8 @@ AgentDojo supplies dynamic security and utility tasks and is the main public ben
 
 Static attacks are insufficient for a robustness claim. \textit{The Attacker Moves Second} argues that a defense-aware attacker should optimize against the defense design rather than replay a fixed attack set \citep{L27}. The adaptive panel therefore exposes only public \nolinkurl{ALLOW/ASK/DENY} and post-enforcement unsafe-effect feedback, searches frozen tasks at prespecified query budgets, and reports the first-success distribution. Since L27 remains a preprint, it motivates the protocol but is not described as a peer-reviewed theorem.
 
+PIArena, published at ACL 2026, integrates attacks, defenses, and benchmarks and evaluates feedback-adaptive injection, including cases where the injected task aligns with the intended task \citep{L37}. The AgentDyn preprint instead emphasizes dynamic planning, open-ended tasks, and helpful third-party instructions \citep{L38}. These works motivate testing useful behavior under authorization constraints, not merely counting blocked actions. The ASPI preprint evaluates matched execution and clarification-seeking states and finds increased vulnerability in its clarification setting \citep{L39}. That interaction differs from our controller-only permission diagnostic, which does not send a clarification response back to the model. Neither a low ASK rate nor successful permit issuance demonstrates a secure human-confirmation workflow.
+
 \subsection{Positioning summary}
 
 \label{sec:related-work-positioning-summary}

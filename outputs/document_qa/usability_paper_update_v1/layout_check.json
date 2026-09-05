@@ -1,0 +1,62 @@
+{
+  "review": {
+    "pages": 52,
+    "outline_entries": 65,
+    "author": "",
+    "errors": [],
+    "fonts": [
+      "CMSY10",
+      "CMSY9",
+      "TimesNewRomanPS-BoldMT",
+      "TimesNewRomanPS-ItalicMT",
+      "TimesNewRomanPSMT"
+    ],
+    "key_pages": [
+      18,
+      39,
+      40,
+      46
+    ],
+    "page_sizes": [
+      [
+        595.28,
+        841.89
+      ]
+    ],
+    "layout_log_issues": [],
+    "underfull_count": 3
+  },
+  "official": {
+    "pages": 59,
+    "outline_entries": 64,
+    "author": "",
+    "errors": [],
+    "fonts": [
+      "CMSY10",
+      "LMMono12-Regular",
+      "LMRoman10-Italic",
+      "LMRoman10-Regular",
+      "LMRoman12-Bold",
+      "LMRoman12-Italic",
+      "LMRoman12-Regular",
+      "LMRoman17-Regular",
+      "LMRoman8-Italic",
+      "LMRoman8-Regular",
+      "TimesNewRomanPS-BoldMT",
+      "TimesNewRomanPSMT"
+    ],
+    "key_pages": [
+      43,
+      44,
+      51
+    ],
+    "page_sizes": [
+      [
+        612.0,
+        792.0
+      ]
+    ],
+    "layout_log_issues": [],
+    "underfull_count": 4
+  }
+}

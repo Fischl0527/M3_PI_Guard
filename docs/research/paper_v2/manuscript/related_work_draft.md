@@ -107,6 +107,19 @@ searches frozen tasks at prespecified query budgets, and reports the
 first-success distribution. Since L27 remains a preprint, it motivates the
 protocol but is not described as a peer-reviewed theorem.
 
+PIArena, published at ACL 2026, integrates attacks, defenses, and benchmarks
+and evaluates feedback-adaptive injection, including cases where the injected
+task aligns with the intended task [@L37]. The AgentDyn preprint instead
+emphasizes dynamic planning, open-ended tasks, and helpful third-party
+instructions [@L38]. These works motivate testing useful behavior under
+authorization constraints, not merely counting blocked actions. The ASPI
+preprint evaluates matched execution and clarification-seeking states and
+finds increased vulnerability in its clarification setting [@L39]. That
+interaction differs from our controller-only permission diagnostic, which
+does not send a clarification response back to the model. Neither a low ASK
+rate nor successful permit issuance demonstrates a secure human-confirmation
+workflow.
+
 ## Positioning summary
 
 M3 is not positioned as the first runtime guard, the first provenance system,
@@ -136,14 +149,15 @@ the measured security–utility frontier.
 
 ## Bibliography export and submission-date gate
 
-The 36-entry bibliography in `references_v1.bib` is assembled from ACL
+The 39-entry bibliography in `references_v1.bib` is assembled from ACL
 Anthology, official proceedings pages, arXiv records and DOI/Crossref metadata.
 It distinguishes peer-reviewed work from preprints and requires author, title,
 year, URL, and venue or explicit preprint metadata.
 
-The 21 references currently used by the unified manuscript have been checked
+The 24 references currently used by the unified manuscript have been checked
 against their publisher, proceedings, conference, or arXiv landing pages, and
-their claim contexts have been reviewed. The 15 unused entries remain a
+their claim contexts have been reviewed (21 earlier contexts plus three newly
+checked contexts on 2026-09-05). The 15 unused entries remain a
 candidate corpus and are not rendered in the working paper. If the final draft
 adds a source, only the newly active citation and its claim context need review.
 Publication status and the institutional JCR check must still be refreshed on
