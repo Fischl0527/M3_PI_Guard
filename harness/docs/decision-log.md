@@ -1,5 +1,16 @@
 # 决策日志
 
+## 2026-09-05 — Independent experimental confirmation boundary
+
+Keep historical E1--E6 source and result semantics unchanged. New E7a uses a
+common confirmation wrapper for both policy/full experimental profiles, so it
+must not be called the unchanged historical policy-only condition. The wrapper
+requires exact task/request/proposal/manifest binding, expiry and one-shot use;
+it rejects untrusted text and cannot widen scope or override DENY. This is an
+in-process simulation controller, not production authentication or human-study
+evidence. E7a is a 96-call single-action probe with 384 paired post-proposal
+channel cells, not an external benchmark. AgentDyn remains a separate E8 track.
+
 在此记录架构、策略、依赖和工作流决策。
 
 ## 2026-09-04 — Rotate wide-table contents, never the supplied template page

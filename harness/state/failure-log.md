@@ -1,5 +1,11 @@
 # Failure Log
 
+## 2026-09-05 — Usability extension narrow lint correction
+
+- First Ruff pass found E731 in the new diagnostic helper (assigned lambda).
+  Replaced it with a local named function; all 24 focused tests and Ruff pass.
+- Not an experiment failure; no provider calls or historical-result edits occurred.
+
 ## 2026-09-04 — Earlier visual QA missed rotated template footers
 
 - The initial LaTeX migration used `pdflscape/landscape` for six-column and wider
