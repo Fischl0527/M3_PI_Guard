@@ -1,5 +1,22 @@
 # 会话移交
 
+## 2026-09-07 — Plain-language team handover delivered
+
+- New teammate entry: root `项目组交接指南.md`. Fifteen topic sections explain
+  purpose, tools, experiments, evidence, directory/output map, code paths,
+  terminology, safe local commands and recommended next ownership.
+- Root README now identifies the earlier body as a historical snapshot;
+  old local-only/no-push/full-verification/blind instructions are not current.
+- Documentation only.47 local links resolve; Markdown fences/tables and key
+  counts/boundaries checked against existing reports/code. Python3.13.5 path
+  confirmed. No model call, statistical rerun, Full Harness or PDF build.
+- Guide preserves E7a permission-only/no-effect-backend semantics, E8 no model
+  result, closed E6 B1 and Gemini non-estimable comparisons. Overall
+  F-PAPER-002 remains in_progress; document substage is verified.
+- Stage only root guide/README and six relevant Harness documents; preserve
+  existing dirty submodules and untracked template assets/tmp. Push origin
+  codex/q2-empirical-study without force. No follow-on experiment started.
+
 ## 2026-09-05 — Manuscript integration verified; no new experiment
 
 - Read `docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md`.
