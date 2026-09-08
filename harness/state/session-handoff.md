@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-09-09 — Publish user-renamed handover
+
+- Current guide is root `LLM的千层诱惑.md`; the former `项目组交接指南.md`
+  was renamed by the user, with only its heading changed. README link updated.
+- Scope: publish this documentation rename and navigation/state notes to
+  origin/codex/q2-empirical-study. Preserve unrelated template assets, tmp and
+  dirty third-party directories. No experiments or runtime changes.
+- Verification: compared old/new guide lines; only heading differs. Check
+  staged diff and remote branch HEAD when pushing. F-PAPER-002 stays in_progress.
+
 ## 2026-09-07 — Plain-language team handover delivered
 
 - New teammate entry: root `项目组交接指南.md`. Fifteen topic sections explain
