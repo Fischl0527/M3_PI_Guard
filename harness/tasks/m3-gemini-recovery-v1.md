@@ -1,6 +1,8 @@
 # Gemini恢复：原48任务六条件开发试跑
 
-状态：本地修复已验证；在线恢复paused/diagnostics_not_passed，整体未完成。关联F-PAPER-002。
+当前处置：2026-09-20用户要求先忽略Gemini，故为deferred_by_user（用户暂缓），不再推进在线恢复。
+本地修复已验证；历史在线状态仍为paused/diagnostics_not_passed，恢复整体未完成。关联F-PAPER-002。
+以下批准计划与验证记录保留备查；没有新的用户指令时不得启动诊断、前缀或续跑。
 
 ## 已批准范围
 

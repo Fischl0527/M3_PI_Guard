@@ -1,5 +1,25 @@
 # 会话移交
 
+## 2026-09-20 — Non-Gemini scope closed; Gemini deferred by user
+
+- Latest user direction supersedes the Gemini continuation steps below: ignore Gemini for now.
+  Do not launch diagnostics, prefix recovery, pending dispatch or service polling without a new request.
+- The original non-Gemini development scope is complete: Pro288 + V4.1Flash288 terminal rows,
+  existing repairs, same-action policy/full offline checks, analysis, figures and Markdown report.
+- Read outputs/experiments/correctness_repair_v1/report.md first. Its new acceptance map identifies
+  existing tests and artifacts; no same-action replay is missing and no new experiment is needed to close this scope.
+- This turn changes documentation and existing Harness state only. Original raw, analysis, figures,
+  diagnostic run_status and all code remain unchanged; no API or test/statistics rerun.
+- Verification:17 local report links exist; feature JSON parses; existing analysis matches288+288;
+  git diff --check passes; no active correctness/recovery runner. Exact checks are in the existing task record.
+- Gemini local implementation remains verified, but online recovery is deferred and incomplete:
+  first diagnostic503,0/283 recovery rows,5 protected legacy response-bearing rows.
+- Development completion does not establish defense effectiveness: benign utility loss, no sensitive
+  labels in model runs, M3-v2 zero unsafe endpoints and incomplete Gemini remain limitations.
+- F-PAPER-002 stays in_progress. Do not start another study or edit/compile the paper automatically.
+- Deliver the scoped documentation commit to origin/codex/q2-empirical-study; preserve unrelated
+  external/template/tmp changes. Exact delivery commit is available from git log.
+
 ## 2026-09-20 — Gemini local repair verified; live recovery PAUSED
 
 - Supersedes prior no-resume instruction only for the user-approved283 Gemini keys.

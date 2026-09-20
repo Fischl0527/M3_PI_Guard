@@ -1,5 +1,19 @@
 # 当前任务
 
+### 2026-09-20 暂缓Gemini，收尾原开发批非Gemini部分
+
+- 用户明确要求先忽略Gemini；不再诊断、等待服务或调度其283项恢复，保留失败证据。
+- 范围只限correctness_repair_v1原批准批次；不启动新研究、DeepSeek重跑或论文修改。
+- 非Gemini实施/试跑/分析已经完成：Pro288、V4.1Flash288，原raw均保留。
+- 本轮收尾计划：在同一report.md补齐原计划验收映射、相同动作policy/full已有证据、
+  失败与未知的区别；同步Harness状态；只检查文档引用与变更范围，再提交推送。
+- 独立只读核对确认没有非Gemini漏跑项；不重复已有定向测试/统计/Full Harness。
+- 完成标准：报告不再误示同动作回放未做，Gemini为deferred_by_user而非已完成；
+  本开发子阶段完成与F-PAPER-002论文整体in_progress明确分开。
+- 文档收尾已完成：两份报告17个本地链接全部存在，feature JSON解析通过，
+  既存analysis确认两模型各288条；git diff --check通过，代码/raw/analysis无改动。
+  未发现活动中的correctness/Gemini恢复runner；本轮没有新增运行。
+
 ### 2026-09-20 Gemini修复完成，恢复试跑暂停
 
 - 用户批准 `gemini_recovery_v1`：2048输出上限、low思考、温度0、180秒、JSON输出。

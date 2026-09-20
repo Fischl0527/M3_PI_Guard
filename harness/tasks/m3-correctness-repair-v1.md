@@ -2,6 +2,26 @@
 
 状态：verified_development_substage。本批已结束；用户于2026-09-20批准执行；F-PAPER-002整体仍in_progress。
 
+## 2026-09-20 用户范围调整与最终交付
+
+- 用户要求先忽略Gemini，完成其他部分；本次按原开发批范围收尾，不解释为扩展论文研究授权。
+- 原计划非Gemini均已交付：正确性修复、离线检查、Pro288/Flash288、分层统计与MD报告。
+- 独立只读复核确认同动作配对已在runtime的READ/SEND/FINAL测试和policy规则同提案测试实现。
+  在原报告补验收映射，避免“后续建议”造成未实施的误解；不新建回放脚本/数据包。
+- Gemini恢复记为deferred_by_user（暂缓，不是完成），原5响应/3纯503/280not_run及新503诊断不动。
+- 本次仅文档与状态修改；不模型调用、不统计重算、不重复已通过测试、不Full Harness、不改论文。
+- 验收只查新增文档链接、数值与既存analysis一致及Git范围；提交推送origin/codex/q2-empirical-study。
+
+本轮文档验收（未重新运行模型、单元测试或统计）：
+
+- `Get-Content outputs/experiments/correctness_repair_v1/analysis.json -Raw | ConvertFrom-Json`：
+  直接读取既存汇总，Pro/Flash各288项，与报告状态数一致；不是统计重建。
+- `Get-Content harness/features/feature_list.json -Raw | ConvertFrom-Json`：有效JSON。
+- 对两份report.md的本地Markdown目标逐项`Test-Path -LiteralPath`：17个链接、0缺失。
+- `git diff --check`：退出0。`git diff --numstat -- experiments tests m3_core m3_guard m3_eval protocols outputs/experiments/correctness_repair_v1/analysis.json outputs/experiments/correctness_repair_v1/deepseek_pro/raw_records.jsonl outputs/experiments/correctness_repair_v1/deepseek_flash/raw_records.jsonl`：无变更。
+- `Get-CimInstance Win32_Process -Filter "Name = 'python.exe'"`后仅筛选correctness_runner_v1/gemini_correctness_recovery_v1：无活动匹配进程。
+- `git remote get-url origin`与`git branch --show-current`：目标为RedTeam_LLM_Security、codex/q2-empirical-study。
+
 ## 范围和验收
 
 - 显式 corrected_v1；旧默认路径、计划、原raw及论文不修改。

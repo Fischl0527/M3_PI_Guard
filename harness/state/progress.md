@@ -1,5 +1,18 @@
 # 进展记录
 
+## 2026-09-20 — 非Gemini开发批收尾，Gemini按用户要求暂缓
+
+- 最新用户范围：先忽略Gemini，完成原开发批其他部分；不追加研究或改论文。
+- 独立只读复核确认非Gemini没有漏跑：Pro288、V4.1Flash288均有终态；
+  修复、同动作policy/full离线测试、统计与图表均已有交付。
+- 在同一report.md补齐原计划验收映射、离线机制证据与模型效果的区别、失败与未知的区别。
+- Gemini当前任务处置改为deferred_by_user；历史paused/HTTP503与0/283恢复结果不改写。
+- 本轮仅文档和现有状态更新；不重新运行API、pytest、统计、Full Harness或历史验证。
+- 文档验收：17个本地链接全部存在、feature JSON有效、既存analysis数值一致、
+  git diff --check退出0；代码/原raw/analysis无变更，没有活动中的本批runner。
+- 非Gemini开发子阶段完成；F-PAPER-002整体仍in_progress。任务完成率损失、
+  敏感标签实际触发不足及跨厂商证据不足仍保留，不作为已解决的科学问题。
+
 ## 2026-09-20 — Gemini客户端修复完成，在线恢复暂停
 
 - 用户批准只续原283项，原5条响应与两份DeepSeek结果不动；不是新研究。

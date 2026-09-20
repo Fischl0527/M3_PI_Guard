@@ -1,5 +1,15 @@
 # Task History
 
+## 2026-09-20 — Close original non-Gemini development scope
+
+- User deferred Gemini and requested completion of the remainder.
+- Independent read-only review found no missing non-Gemini repair or run: Pro288/Flash288,
+  same-action policy/full unit evidence, statistics and figures were already complete.
+- Added acceptance mapping and failure/unknown interpretation to the existing report; updated
+  current task, progress, feature notes, decision, Gemini disposition and session handoff.
+- No API calls, new studies, code changes, test reruns, raw rewrites or historical recomputation.
+- Non-Gemini development substage closed; Gemini deferred_by_user, overall paper in_progress.
+
 ## 2026-09-20 — Gemini recovery implementation
 
 - User-approved2048/low profile and standalone283-key recovery implemented.

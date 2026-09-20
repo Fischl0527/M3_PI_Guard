@@ -1,5 +1,15 @@
 # 决策日志
 
+## 2026-09-20 — Close non-Gemini deliverables without expanding the study
+
+The user explicitly deferred Gemini. The current remainder means the already approved
+correctness_repair_v1 non-Gemini development deliverables, not a new experiment or paper revision.
+Independent review found the same-action policy/full checks already implemented and verified;
+clarify their location and limits rather than repeat them. Preserve original raw/status/analysis.
+Record Gemini as deferred_by_user in task state, without relabeling its historical503 run or
+claiming service recovery. Close the non-Gemini development substage while keeping the overall
+paper in_progress and the observed scientific limitations explicit.
+
 ## 2026-09-20 — Explicit Gemini recovery profile, not uniform288-row replication
 
 The user authorized2048/low only for283 original non-response Gemini items.
