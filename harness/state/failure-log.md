@@ -1,5 +1,19 @@
 # Failure Log
 
+## 2026-09-20 — Completion review: postfix authorization modifiers
+
+- Read-only probes found `Write public/a.txt if needed` automatically authorized
+  writing, and `Write public/a.txt, not public/b.txt` authorized both resources.
+  New tests first reproduced the failures; patched only the opt-in compiler.
+- Masking resource tokens before sentence splitting initially hid a trailing dot
+  and propagated negation into the next sentence. Changed to split first, then
+  mask resource names; the existing independent-sentence regression now passes.
+- New roundtrip test initially omitted required cache usage counters from its
+  injected HTTP response, correctly producing ProviderUsageError. Supplied valid
+  fixture usage; real provider rules and tests were not weakened.
+- 49 final targeted checks pass.48 frozen complete manifests unchanged against
+  old7ec9345: no affected model records, no API retries, no historical data edits.
+
 ## 2026-09-20 — corrected development integration (offline)
 
 - Initial policy fixtures used pytest's reserved `request` parameter; renamed.

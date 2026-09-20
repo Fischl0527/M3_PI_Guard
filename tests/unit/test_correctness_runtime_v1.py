@@ -328,6 +328,83 @@ def test_public_events_keep_diagnostics_but_drop_raw_argument_values():
     assert "full tool response" not in rendered
 
 
+def test_runtime_evaluation_details_survive_execute_save_and_read(tmp_path):
+    from experiments.paper_v2.correctness_plan_v1 import build_plan
+    from experiments.paper_v2.correctness_provider_v1 import (
+        DevelopmentRequestClient,
+        RequestPacer,
+    )
+    from experiments.paper_v2.correctness_runner_v1 import (
+        append_row,
+        execute_one,
+        read_jsonl,
+    )
+    from experiments.paper_v2.correctness_runtime_v1 import CorrectnessRuntime
+
+    row = next(
+        row
+        for row in build_plan()
+        if row["model_group"] == "deepseek_pro"
+        and row["benchmark"] == "m3-v2"
+        and row["condition_id"] == "m3_full"
+    )
+    plan_path = tmp_path / "plan.jsonl"
+    append_row(plan_path, row)
+    runtime = CorrectnessRuntime(
+        plan_path=plan_path, execution_identity=row["execution_identity"]
+    )
+
+    # Only the HTTP boundary is replaced; compiler, monitor, backend, evaluator
+    # and both serialization steps are the actual development implementations.
+    def transport(endpoint, headers, payload, timeout):
+        return HTTPResponseEnvelope(
+            status_code=200,
+            headers={"x-request-id": "offline-persistence"},
+            body={
+                "id": "offline-response-persistence",
+                "model": payload["model"],
+                "choices": [
+                    {
+                        "message": {"role": "assistant", "content": json.dumps(FINAL)},
+                        "finish_reason": "stop",
+                    }
+                ],
+                "usage": {
+                    "prompt_tokens": 10,
+                    "completion_tokens": 5,
+                    "total_tokens": 15,
+                    "prompt_cache_hit_tokens": 0,
+                    "prompt_cache_miss_tokens": 10,
+                },
+            },
+        )
+
+    result = execute_one(
+        row,
+        1,
+        runtime=runtime,
+        api_key="offline-persistence-fixture",
+        pacer=RequestPacer(0, threading.Event()),
+        output=tmp_path,
+        client_factory=lambda **kwargs: DevelopmentRequestClient(
+            **kwargs, transport=transport
+        ),
+    )
+    details = result["evaluation_details"]
+    assert details["execution_evidence_complete"] is True
+    assert details["simulated_unsafe_effect"] is False
+    assert details["isolation_rejected"] is False
+    assert details["unauthorized_proposal"] is False
+    assert details["guard_false_allow"] is False
+    assert details["unknown_reasons"] == []
+    assert result["operational_status"] == "completed"
+    path = tmp_path / "raw_records.jsonl"
+    append_row(path, result)
+    loaded = read_jsonl(path)
+    assert loaded == [result]
+    assert loaded[0]["evaluation_details"] == details
+
+
 def test_all_48_cases_six_conditions_resolver_runtime_evaluator_smoke(tmp_path):
     """288 injected final-only calls qualify plumbing, not task/model utility."""
     from experiments.paper_v2.correctness_plan_v1 import build_plan

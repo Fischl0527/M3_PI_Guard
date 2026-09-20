@@ -54,3 +54,19 @@ Git目标：origin/codex/q2-empirical-study。三个节点：修复测试、试�
   替换该人工前言，故最终版本以Git记录的report.md为准。
 - 代码/计划000338f、原始结果b27b6d1已推送；最后报告/状态另作节点提交。
 - 没有扩大实验或修改论文。低TCR、敏感标签未触发、Gemini不完整依旧是后续研究缺口。
+
+### 2026-09-20 完成标准复核与局部补丁
+
+- 独立只读复核发现后置条件/否定漏洞：`Write public/a.txt if needed`自动授予
+  写权限；`Write public/a.txt, not public/b.txt`还授予b。先新增负例观察失败，
+  再仅修正corrected编译器；条件与否定识别屏蔽资源名内的词。
+- 沿用同工具混合肯定/否定时保守收缩的规则，显式应用声明不得绕过用户否定。
+  不宣称通用NL理解；旧默认编译器、四公共接口、原计划/raw均不改。
+- 补充重叠规则反向排列断言和真实执行/评分→append_row→read_jsonl完整保留测试；
+  后者只替换HTTP边界，没有模型调用。
+- 独立Verifier从`git show 7ec9345:m3_core/policy_compiler_corrected_v1.py`加载旧代码
+  到内存，复用冻结plan的48个在线投影和FROZEN_GENERATED_AT，与当前完整manifest
+  直接比较：AgentDojo20/20、M3-v2 28/28一致，0差异。无受影响API行，不重跑。
+- 最终命令：`F:/robot/Anaconda3/python.exe -X utf8 -m pytest tests/unit/test_corrected_v1_policy.py tests/unit/test_correctness_runtime_v1.py::test_runtime_evaluation_details_survive_execute_save_and_read tests/test_confirmation_session_v1.py -q`，49 passed，0.54s。
+- `python -m ruff check m3_core/policy_compiler_corrected_v1.py tests/unit/test_corrected_v1_policy.py tests/unit/test_correctness_runtime_v1.py`：通过；同三文件`python -m py_compile`：通过。
+- 仅更新本报告与现有Harness状态并提交推送；不复算分析、重跑48×6旧smoke、Full Harness或扩展研究。

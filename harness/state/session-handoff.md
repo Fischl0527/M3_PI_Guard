@@ -1,5 +1,24 @@
 # 会话移交
 
+## 2026-09-20 — Completion review closed without new API execution
+
+- Final requirements review found postfix conditional/negative grants in corrected_v1.
+  Reproduced them first, then patched only the opt-in compiler and targeted tests.
+  Resource names containing if/not do not become modifiers; mixed positive/negative
+  same-tool requests still conservatively receive no automatic grant.
+- Added rule-order reversal and real runtime/evaluator -> append_row -> read_jsonl
+  roundtrip coverage. Only the HTTP boundary is substituted by the offline test.
+- Latest verification:49 focused pytest checks passed in0.54s; Ruff and py_compile
+  passed on the three changed Python files. Exact commands are in the existing task.
+- Independent old7ec9345/current compiler comparison: all48 complete manifests
+  identical (20AgentDojo+28M3). Existing model rows need no rerun or relabelling.
+- Same report.md updated; raw, analysis and figures unchanged. No new API/Full
+  Harness/history replay/paper edits. Scope is complete; do not launch another
+  matrix automatically. Broader paper F-PAPER-002 remainsin_progress.
+- Push only compiler/tests and this task's existing report/Harness files to origin
+  codex/q2-empirical-study; preserve external/template/tmp changes. Latest gitlog
+  identifies the completion-review patch, after report milestone7ec9345.
+
 ## 2026-09-20 — Corrected development batch CLOSED
 
 - No active runner remains from execsession80939; it exited0 after288Pro,288V4.1Flash

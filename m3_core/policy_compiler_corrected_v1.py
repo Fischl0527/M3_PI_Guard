@@ -38,7 +38,7 @@ _NEGATION = re.compile(
 )
 _UNCERTAIN = re.compile(
     r"\b(?:maybe|perhaps|possibly|if|unless|either|or|optional|might|whether)\b"
-    r"|可能|也许|如果|或者|是否",
+    r"|可能|也许|如果|或者|或|是否",
     re.IGNORECASE,
 )
 _TOOL = {
@@ -56,6 +56,15 @@ _RESOURCE = {
 }
 
 
+def _without_resources(text: str) -> str:
+    """Keep modifier positions, but do not parse words inside resource names."""
+    chars = list(text)
+    for pattern in (legacy._PATH_RE, legacy._EMAIL_RE, legacy._ENDPOINT_RE):
+        for match in pattern.finditer(text):
+            chars[match.start() : match.end()] = " " * (match.end() - match.start())
+    return "".join(chars)
+
+
 def _actions(request: str) -> list[tuple[str, int, int, bool]]:
     resource_spans = [
         match.span()
@@ -69,7 +78,7 @@ def _actions(request: str) -> list[tuple[str, int, int, bool]]:
         # A new clause/action resets negation. No arbitrary distance cutoff.
         prefix = request[result[-1][2] if result else 0 : match.start()]
         clauses = re.split(r"\.(?:\s+|$)|[;!?。；！？\n]|\bbut\b|但是|但", prefix)
-        prefix = clauses[-1]
+        prefix = _without_resources(clauses[-1])
         inherited_negative = bool(result and result[-1][3] and len(clauses) == 1)
         result.append(
             (
@@ -82,6 +91,45 @@ def _actions(request: str) -> list[tuple[str, int, int, bool]]:
     return result
 
 
+def _action_segment(request: str, end: int, stop: int) -> str:
+    segment = re.split(r"[;!?。；！？\n]", request[end:stop], maxsplit=1)[0]
+    # A sentence terminator is a dot followed by whitespace, not a file suffix.
+    return re.split(r"\.\s+", segment, maxsplit=1)[0]
+
+
+def _negative_tools(
+    request: str, actions: list[tuple[str, int, int, bool]]
+) -> set[str]:
+    negative = {_TOOL[kind] for kind, _, _, negated in actions if negated}
+    for index, (kind, _, end, _) in enumerate(actions):
+        stop = actions[index + 1][1] if index + 1 < len(actions) else len(request)
+        segment = _action_segment(request, end, stop)
+        for match in _NEGATION.finditer(_without_resources(segment)):
+            if (
+                index + 1 < len(actions)
+                and segment == request[end:stop]
+                and not segment[match.end() :].strip()
+            ):
+                # In "read A, do not write B", the dangling denial belongs to
+                # the next action (already handled by _actions), not the read.
+                continue
+            # The public contract has no resource-level deny rule. Keep the
+            # existing conservative policy: a mixed positive/negative action
+            # receives no automatic grant, including a shared read/write target.
+            negative.add(_TOOL[kind])
+            previous = index - 1
+            while previous >= 0 and kind in {"read", "write"}:
+                prior_kind, _, prior_end, _ = actions[previous]
+                bridge = request[prior_end : actions[previous + 1][1]].strip()
+                if prior_kind not in {"read", "write"} or not re.fullmatch(
+                    r"(?:and|及|和|并|并且)", bridge, re.IGNORECASE
+                ):
+                    break
+                negative.add(_TOOL[prior_kind])
+                previous -= 1
+    return negative
+
+
 def _resource_rules(
     request: str, schemas: Mapping[str, Mapping[str, Any]]
 ) -> list[ToolRule]:
@@ -91,15 +139,11 @@ def _resource_rules(
         if kind not in _RESOURCE:
             continue  # Code execution is never inferred as an automatic grant.
         stop = actions[index + 1][1] if index + 1 < len(actions) else len(request)
-        segment = re.split(r"[;!?。；！？\n]", request[end:stop], maxsplit=1)[0]
-        # A sentence terminator is a dot followed by whitespace, not a file suffix.
-        segment = re.split(r"\.\s+", segment, maxsplit=1)[0]
+        segment = _action_segment(request, end, stop)
         resources = list(_RESOURCE[kind].finditer(segment))
         prefix = request[actions[index - 1][2] if index else 0 : start]
         prefix = re.split(r"\.(?:\s+|$)|[;!?。；！？\n]|\bbut\b|但是|但", prefix)[-1]
-        if _UNCERTAIN.search(prefix) or re.search(
-            r"\bor\b|或者|或", segment, re.IGNORECASE
-        ):
+        if _UNCERTAIN.search(_without_resources(prefix + " " + segment)):
             continue
         group = [(kind, negated)]
         previous = index - 1
@@ -150,7 +194,7 @@ def _resource_rules(
     # A negative mention wins for the same tool/resource; there is no deny rule
     # in the public manifest contract. Conservatively suppress that tool if the
     # natural-language request mixes positive and negative grants for it.
-    negative_tools = {_TOOL[kind] for kind, _, _, negated in actions if negated}
+    negative_tools = _negative_tools(request, actions)
     return [rule for rule in result if rule.tool not in negative_tools]
 
 
@@ -158,9 +202,7 @@ def _declarations(
     context: Mapping[str, Any], request: str, schemas: Mapping[str, Mapping[str, Any]]
 ) -> tuple[ToolRule, ...]:
     rules = legacy._structured_rules(context, schemas)
-    negative_tools = {
-        _TOOL[kind] for kind, _, _, negated in _actions(request) if negated
-    }
+    negative_tools = _negative_tools(request, _actions(request))
     if any(rule.tool in negative_tools for rule in rules):
         raise ValueError(
             "trusted requested_actions conflicts with a negative user instruction"

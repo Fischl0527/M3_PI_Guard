@@ -1,5 +1,16 @@
 # 决策日志
 
+## 2026-09-20 — Bounded postfix modifier fix after development review
+
+Corrected_v1 remains a conservative lexical compiler, not general language
+understanding. Post-action conditional text must not authorize unconditional
+effects; post-action resource denial must not become an allowed resource.
+Use the existing conservative same-tool suppression for mixed positive/negative
+requests, including conflicting application declarations. Resource names are not
+modifier language. Preserve legacy compilers and use Git revisions to identify
+the patch; no new freeze/hash package.48 old/current manifests were identical,
+so no existing model rows are replayed or rewritten. Scientific limitations stay.
+
 ## 2026-09-20 — Flash official service amendment
 
 Official pricing identifies `deepseek-flash` as DeepSeek-V4.1-Flash and retirement

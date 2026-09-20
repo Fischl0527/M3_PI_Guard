@@ -150,12 +150,67 @@ def test_negative_declaration_conflict_and_evaluator_fields_rejected():
         "If needed write public/a.txt",
         "Write public/a.txt or public/b.txt",
         "可能写入public/a.txt",
+        "Write public/a.txt if needed",
+        "Write public/a.txt unless the request is cancelled",
+        "写入public/a.txt（如果需要）",
     ],
 )
 def test_ambiguous_or_conditional_target_does_not_receive_grant(trusted_request):
     assert not compile_task_policy_corrected_v1(
         trusted_user_request=trusted_request
     ).rules
+
+
+@pytest.mark.parametrize(
+    "trusted_request",
+    [
+        "Write public/a.txt, not public/b.txt",
+        "Write public/a.txt, never public/b.txt; read public/c.txt",
+        "Write public/b.txt is not allowed",
+        "Read and write public/a.txt, not public/b.txt",
+        "写入public/a.txt，不要public/b.txt",
+    ],
+)
+def test_post_action_denial_does_not_authorize_forbidden_resource(trusted_request):
+    result = compile_task_policy_corrected_v1(trusted_user_request=trusted_request)
+    assert not any(
+        rule.argument_constraints.get("path")
+        and rule.argument_constraints["path"].value == "sandbox/public/b.txt"
+        for rule in result.rules
+    )
+
+
+def test_post_action_denial_rejects_conflicting_explicit_declaration():
+    with pytest.raises(ValueError, match="conflicts"):
+        compile_task_policy_corrected_v1(
+            trusted_user_request="Write public/a.txt, not public/b.txt",
+            trusted_app_context={
+                "requested_actions": [
+                    {"tool": "write_file", "arguments": {"path": "public/b.txt"}}
+                ]
+            },
+        )
+
+
+@pytest.mark.parametrize(
+    "trusted_request,expected",
+    [
+        ("Read public/a.txt, do not write public/b.txt", {("read_file", "a.txt")}),
+        ("Write public/if-needed.txt", {("write_file", "if-needed.txt")}),
+        (
+            "Write public/not.txt then read public/b.txt",
+            {("write_file", "not.txt"), ("read_file", "b.txt")},
+        ),
+    ],
+)
+def test_modifiers_do_not_hide_other_actions_or_resource_names(
+    trusted_request, expected
+):
+    result = compile_task_policy_corrected_v1(trusted_user_request=trusted_request)
+    assert {
+        (rule.tool, rule.argument_constraints["path"].value.rsplit("/", 1)[-1])
+        for rule in result.rules
+    } == expected
 
 
 def test_coordinated_negative_does_not_grant_second_action():
@@ -220,22 +275,20 @@ def test_parameter_fragments_cannot_be_combined():
     )
 
 
-def test_overlap_never_weakens_confirmation_or_source_restrictions():
+@pytest.mark.parametrize("reverse_rules", [False, True])
+def test_overlap_never_weakens_confirmation_or_source_restrictions(reverse_rules):
     action = proposal("send_email", {"to": "a@example.test"}, request="a@example.test")
     strict = scope("z", "a@example.test", requires_confirmation=True)
     broad = ToolRule("a", "send_email", {"to": ParameterConstraint("type", "string")})
-    assert (
-        evaluate_action_corrected_v1(action, manifest(broad, strict)).decision == "ASK"
-    )
+    rules = (strict, broad) if reverse_rules else (broad, strict)
+    assert evaluate_action_corrected_v1(action, manifest(*rules)).decision == "ASK"
     source_strict = replace(
         strict,
         requires_confirmation=False,
         permitted_argument_sources=("trusted_app_context",),
     )
-    assert (
-        evaluate_action_corrected_v1(action, manifest(broad, source_strict)).decision
-        == "ASK"
-    )
+    rules = (source_strict, broad) if reverse_rules else (broad, source_strict)
+    assert evaluate_action_corrected_v1(action, manifest(*rules)).decision == "ASK"
 
 
 def test_global_dataflow_and_untrusted_target_cannot_be_bypassed():

@@ -1,5 +1,14 @@
 # Task History
 
+## 2026-09-20 — Correctness completion review and bounded compiler fix
+
+- Reproduced and fixed postfix conditional/negative automatic grants, preserving
+  legacy defaults; added resource-name, reversed-rule and persisted-detail tests.
+- 49 targeted checks plus Ruff/compile passed. Independent48-case old/new complete
+  manifest comparison had0 differences; no API replay or raw/statistical change.
+- Updated the existing correctness_repair_v1 report and task/state only. This
+  closes the approved development batch, not the broader paper evidence gaps.
+
 ## 2026-09-20 — Correctness repair development batch closed
 
 - Implemented explicit corrected_v1 compiler/monitor/provenance/confirmation wiring

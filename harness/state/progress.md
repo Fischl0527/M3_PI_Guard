@@ -1,5 +1,15 @@
 # 进展记录
 
+## 2026-09-20 — 收尾复核补丁完成
+
+- 后置条件/否定错误授权已由失败测试复现并修复；资源名中的if/not不参与限定语判定。
+  重叠规则反序与真实运行/评分结果保存—读回测试已补充。
+- 49项定向测试通过，Ruff/py_compile通过；未重跑Full Harness或历史矩阵。
+- 独立比较旧7ec9345和新编译器在冻结48任务的完整manifest：48一致、0差异。
+  已有模型行不受影响；本次0新API调用、0成功行重跑、0原raw/统计修改。
+- 开发子阶段verified；F-PAPER-002整体in_progress。统一入口仍是
+  outputs/experiments/correctness_repair_v1/report.md，保留Gemini不足和标签未触发限制。
+
 ## 2026-09-20 — 正确性修复启动
 
 - 本批已闭合：实际584条（Pro288、V4.1Flash288、Gemini8），Gemini280条未运行。
