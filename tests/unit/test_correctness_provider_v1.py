@@ -393,3 +393,137 @@ def test_echoed_active_credential_never_enters_request_log(tmp_path, field):
 def test_unapproved_cost_identity_is_not_silently_zero_billed():
     with pytest.raises(ValueError, match="exact approved"):
         subject.request_cost([], "gemini-substitute")
+
+
+def test_gemini_recovery_settings_reach_transport_and_all_receipts(tmp_path):
+    observed = []
+
+    def transport(endpoint, headers, payload, timeout):
+        del endpoint, headers
+        assert payload["max_tokens"] == 2048
+        assert payload["reasoning_effort"] == "low"
+        assert payload["temperature"] == 0 and timeout == 180
+        assert "tools" not in payload and "tool_choice" not in payload
+        started = log_rows(tmp_path / "requests.jsonl")[0]
+        assert started["max_tokens"] == 2048
+        assert started["reasoning_effort"] == "low"
+        assert started["generation_profile"] == "gemini_recovery_v1"
+        assert started["payload_sha256"] == subject.sha256_canonical_json(payload)
+        observed.append(copy.deepcopy(payload))
+        return envelope("gemini-3.6-flash")
+
+    client = make_client(
+        tmp_path,
+        model_group="gemini_flash",
+        transport=transport,
+        generation_profile="gemini_recovery_v1",
+    )
+    result = client.complete(MESSAGES)
+    assert len(observed) == 1 and result.provider_attempts == 1
+    assert client.max_tokens == 2048 and client.reasoning_effort == "low"
+    assert result.receipt["evidence"]["max_tokens"] == 2048
+    assert result.receipt["evidence"]["reasoning_effort"] == "low"
+    assert client.requests[0]["reasoning_effort"] == "low"
+    assert client.requests[0]["payload_sha256"] == result.receipt["evidence"]["payload_sha256"]
+    assert subject._gemini_policy()["deepseek"]["dynamic_fuse"]["next_request_output_tokens_upper_bound"] == 512
+
+
+def test_remaining_call_budget_is_enforced_before_new_transport(tmp_path):
+    calls = []
+    client = make_client(
+        tmp_path,
+        model_group="gemini_flash",
+        generation_profile="gemini_recovery_v1",
+        max_provider_calls=3,
+        transport=lambda *args: calls.append(1) or envelope("gemini-3.6-flash"),
+    )
+    assert client.max_provider_calls == 3
+    for step in range(1, 4):
+        client.complete(MESSAGES, step=step)
+    with pytest.raises(subject.official.ProviderPayloadError, match="cap reached"):
+        client.complete(MESSAGES, step=4)
+    assert len(calls) == len(client.requests) == 3
+
+
+def test_default_gemini_payload_is_unchanged_without_recovery_profile(tmp_path):
+    observed = []
+
+    def transport(endpoint, headers, payload, timeout):
+        del endpoint, headers, timeout
+        observed.append(payload)
+        return envelope("gemini-3.6-flash")
+
+    client = make_client(tmp_path, model_group="gemini_flash", transport=transport)
+    result = client.complete(MESSAGES)
+    assert observed == [{
+        "model": "gemini-3.6-flash",
+        "messages": MESSAGES,
+        "temperature": 0.0,
+        "max_tokens": 512,
+        "stream": False,
+        "response_format": {"type": "json_object"},
+    }]
+    assert "reasoning_effort" not in result.receipt["evidence"]
+    assert "generation_profile" not in result.receipt["evidence"]
+    assert client.requests[0]["max_tokens"] == 512
+    assert client.requests[0]["reasoning_effort"] is None
+    assert client.max_provider_calls == 8
+
+
+@pytest.mark.parametrize(
+    "model_group,profile",
+    [
+        ("deepseek_pro", "gemini_recovery_v1"),
+        ("deepseek_flash", "gemini_recovery_v1"),
+        ("gemini_flash", "unapproved_profile"),
+        ("gemini_flash", ""),
+        ("gemini_flash", True),
+    ],
+)
+def test_generation_profile_cannot_change_other_models_or_unknown_settings(
+    tmp_path, model_group, profile
+):
+    with pytest.raises(subject.official.ProviderPayloadError, match="generation profile"):
+        make_client(tmp_path, model_group=model_group, generation_profile=profile)
+    assert not (tmp_path / "requests.jsonl").exists()
+
+
+@pytest.mark.parametrize("limit", [0, -1, 9, True, 1.0, None])
+def test_remaining_call_budget_rejects_invalid_bounds(tmp_path, limit):
+    with pytest.raises(subject.official.ProviderPayloadError, match="1..8"):
+        make_client(tmp_path, max_provider_calls=limit)
+    assert not (tmp_path / "requests.jsonl").exists()
+
+
+def test_recovery_503_uses_budget_without_implicit_retry(tmp_path):
+    calls = []
+    client = make_client(
+        tmp_path,
+        model_group="gemini_flash",
+        generation_profile="gemini_recovery_v1",
+        max_provider_calls=1,
+        transport=lambda *args: calls.append(1) or envelope("gemini-3.6-flash", status=503),
+    )
+    with pytest.raises(subject.official.ProviderTransportError):
+        client.complete(MESSAGES)
+    with pytest.raises(subject.official.ProviderPayloadError, match="cap reached"):
+        client.complete(MESSAGES)
+    assert len(calls) == 1
+    assert client.requests[0]["http_status"] == 503
+    assert client.requests[0]["response_received"] is False
+    assert client.requests[0]["max_tokens"] == 2048
+
+
+@pytest.mark.parametrize("effort", ["high", "none", "", False])
+def test_gemini_client_rejects_unapproved_reasoning_effort(effort):
+    policy = subject._gemini_policy()
+    with pytest.raises(subject.official.ProviderPayloadError, match="reasoning effort"):
+        subject.gm.GeminiJsonOfficialClient(
+            provider_id="gemini",
+            api_key=OFFLINE_KEY,
+            content_class="synthetic_m3_case",
+            budget_state=subject.official.ProviderBudgetState("gemini", policy),
+            policy=policy,
+            reasoning_effort=effort,
+            transport=lambda *args: pytest.fail("invalid config must not make a request"),
+        )

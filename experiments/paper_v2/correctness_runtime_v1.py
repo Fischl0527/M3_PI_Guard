@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 from collections.abc import Mapping
+from dataclasses import replace
 from typing import Any
 
 from experiments.paper_v2.agentdojo_live_dependency import AgentDojoOfflineOutcomeEvaluator
@@ -142,10 +143,13 @@ class CorrectnessRuntime:
     def execute(self, work_item: Mapping[str, Any], client: Any) -> dict[str, Any]:
         state, digest = hydrate(work_item)
         condition = str(work_item["condition_id"])
+        remaining_calls = getattr(client, "max_provider_calls", 8)
+        if type(remaining_calls) is not int or not 1 <= remaining_calls <= 8:
+            raise ValueError("invalid remaining development request budget")
         context = OnlineExecutorContext(
             execution_identity=str(work_item["execution_identity"]),
             work_key=str(work_item["work_key"]), benchmark=str(work_item["benchmark"]),
-            condition_id=condition, max_provider_calls=8, online_state=state,
+            condition_id=condition, max_provider_calls=remaining_calls, online_state=state,
         )
 
         def backend_factory(context: Any, schemas: Any) -> Any:
@@ -168,7 +172,10 @@ class CorrectnessRuntime:
             physical_attempt_namespace=client.physical_attempt_namespace,
         )
         before = sha256_canonical_json(state)
-        raw = dict(live.execute(context, profile_for(condition)))
+        # A recovery spends only the unconsumed part of the original eight calls.
+        # Keep the immutable historical condition profile unchanged.
+        profile = replace(profile_for(condition), max_provider_calls=remaining_calls)
+        raw = dict(live.execute(context, profile))
         if before != sha256_canonical_json(state):
             raise ValueError("online state mutation")
         evaluator = self.m3_evaluator if context.benchmark == "m3-v2" else self.agentdojo_evaluator

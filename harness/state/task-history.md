@@ -1,5 +1,12 @@
 # Task History
 
+## 2026-09-20 — Gemini recovery implementation
+
+- User-approved2048/low profile and standalone283-key recovery implemented.
+- Provider72 and affected runtime/runner42 tests pass; recovery-only9 checks pass after extra boundary cases.
+- Preserve5 response-bearing512 rows, oldraw and DeepSeek. Free-only/USD0 and no real effects.
+- Offline milestone precedes six live diagnostics. Report/result checkpoint follows actual outcome.
+
 ## 2026-09-20 — Correctness completion review and bounded compiler fix
 
 - Reproduced and fixed postfix conditional/negative automatic grants, preserving

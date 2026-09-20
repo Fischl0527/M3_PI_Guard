@@ -11,6 +11,7 @@ from __future__ import annotations
 import copy
 import json
 import tempfile
+from dataclasses import dataclass
 from pathlib import Path
 from time import perf_counter_ns
 from typing import Any, Mapping, Sequence
@@ -86,7 +87,7 @@ def _payload(
         ),
         active_api_key=client.api_key,
     )
-    return {
+    payload = {
         "model": client.model,
         "messages": normalized,
         "temperature": float(client.temperature),
@@ -94,10 +95,19 @@ def _payload(
         "stream": False,
         "response_format": copy.deepcopy(JSON_OUTPUT_CONTROL),
     }
+    effort = getattr(client, "reasoning_effort", None)
+    if effort is not None:
+        if effort != "low":
+            raise official.ProviderPayloadError("unsupported Gemini reasoning effort")
+        payload["reasoning_effort"] = effort
+    return payload
 
 
+@dataclass
 class GeminiJsonOfficialClient(official.OfficialProviderClient):
     """One-attempt official Gemini client whose response is constrained to JSON."""
+
+    reasoning_effort: str | None = None
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -105,6 +115,8 @@ class GeminiJsonOfficialClient(official.OfficialProviderClient):
             raise official.ProviderPayloadError(
                 "Gemini JSON client cannot be used with another provider"
             )
+        if self.reasoning_effort not in (None, "low"):
+            raise official.ProviderPayloadError("unsupported Gemini reasoning effort")
 
     def complete(
         self,
@@ -151,6 +163,8 @@ class GeminiJsonOfficialClient(official.OfficialProviderClient):
                 and self.content_class == "public_benchmark_case"
             ),
         }
+        if self.reasoning_effort is not None:
+            request_metadata["reasoning_effort"] = self.reasoning_effort
         official._validate_persisted_value(request_metadata)
         self.last_request_metadata = request_metadata
         headers = {

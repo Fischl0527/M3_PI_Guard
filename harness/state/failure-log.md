@@ -1,5 +1,14 @@
 # Failure Log
 
+## 2026-09-20 — Gemini recovery remaining-call integration
+
+- Old512 truncation/parse failures and pure503 failures remain unchanged.
+- Red test reproduced client-only cap7 makes runtime try8 and misclassify exhaustion.
+  Setting context7 exposed profile cap consistency check. Fix: replace local
+  profile cap too; historical profile remains8. Test now ends at7 with max_steps.
+- Synthetic diagnostic test caught completion.content AttributeError before any
+  live call; corrected to public completion.text. Six-diagnostic/restart test passes.
+
 ## 2026-09-20 — Completion review: postfix authorization modifiers
 
 - Read-only probes found `Write public/a.txt if needed` automatically authorized

@@ -1,5 +1,16 @@
 # 决策日志
 
+## 2026-09-20 — Explicit Gemini recovery profile, not uniform288-row replication
+
+The user authorized2048/low only for283 original non-response Gemini items.
+Preserve5 old response-bearing512 rows separately. Use a standalone entrypoint
+and raw file, not run-all or historical plan mutation. Decrease both client and
+local runtime/profile caps by previous calls; the shared historical output-bound
+key is raised only in the recovery policy copy.503 is temporary service failure,
+not a repeated program error. Recovery scheduling is explicit and bounded.
+No claim that changed results identify a safety gain from the repair.
+No DeepSeek, paper or scientific-sample changes.
+
 ## 2026-09-20 — Bounded postfix modifier fix after development review
 
 Corrected_v1 remains a conservative lexical compiler, not general language

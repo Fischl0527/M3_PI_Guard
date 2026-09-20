@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-09-20 — Gemini recovery approved and in progress
+
+- Supersedes prior no-resume instruction only for the user-approved283 Gemini keys.
+- Read harness/tasks/m3-gemini-recovery-v1.md. Preserve5 old response-bearing rows and all DeepSeek.
+- Entry: experiments.paper_v2.gemini_correctness_recovery_v1; diagnostics then prefix then pending.
+- Output correctness_repair_v1/gemini_recovery_v1; original plan/raw read-only.
+- Offline72 provider +42 runtime/runner tests passed. Commit/push code before live execution.
+- Free-only/USD0,2048/low,concurrency1/15sec; bounded503, first429stop, no response-bearing replay.
+- No recovery API has run yet. F-PAPER-002 remainsin_progress. No paper/FullHarness/new study.
+
 ## 2026-09-20 — Completion review closed without new API execution
 
 - Final requirements review found postfix conditional/negative grants in corrected_v1.

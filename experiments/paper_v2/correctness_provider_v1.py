@@ -175,6 +175,8 @@ class DevelopmentRequestClient:
         trace_path: Path,
         pacer: RequestPacer,
         transport: Any = None,
+        generation_profile: str | None = None,
+        max_provider_calls: int = 8,
     ) -> None:
         if APPROVED_MODEL_GROUPS.get(model_group) != model:
             raise official.ProviderIdentityError(
@@ -184,6 +186,14 @@ class DevelopmentRequestClient:
             raise official.ProviderPayloadError(
                 "work key and positive attempt are required"
             )
+        if generation_profile not in (None, "gemini_recovery_v1") or (
+            generation_profile is not None and model_group != "gemini_flash"
+        ):
+            raise official.ProviderPayloadError("unapproved generation profile")
+        self.generation_profile = generation_profile
+        if type(max_provider_calls) is not int or not 1 <= max_provider_calls <= 8:
+            raise official.ProviderPayloadError("per-task request cap must be 1..8")
+        self.max_provider_calls = max_provider_calls
         self.requests: list[dict[str, Any]] = []
         self._trace_path = trace_path
         self._work_key = work_key
@@ -202,7 +212,7 @@ class DevelopmentRequestClient:
             if benchmark == "agentdojo-v1"
             else "synthetic_m3_case",
             temperature=0.0,
-            max_tokens=512,
+            max_tokens=2048 if generation_profile == "gemini_recovery_v1" else 512,
             timeout=180.0,
             network_consent=True,
             allow_pinned_synthetic_credential_labels=benchmark == "agentdojo-v1",
@@ -218,7 +228,7 @@ class DevelopmentRequestClient:
         else:
             if model != "gemini-3.6-flash":
                 raise official.ProviderPayloadError("Gemini replacement forbidden")
-            policy = _gemini_policy()
+            policy = copy.deepcopy(_gemini_policy())
             spec = policy["gemini"]
             if (
                 spec.get("billing_tier") != "free"
@@ -229,10 +239,17 @@ class DevelopmentRequestClient:
                 raise official.ProviderPayloadError(
                     "Gemini requires the fixed free-only policy"
                 )
+            if generation_profile == "gemini_recovery_v1":
+                # Historical clients share this bound even for Gemini. Change
+                # only this run-local copy; no DeepSeek or frozen policy edits.
+                policy["deepseek"]["dynamic_fuse"][
+                    "next_request_output_tokens_upper_bound"
+                ] = 2048
             self._client = gm.GeminiJsonOfficialClient(
                 **common,
                 policy=policy,
                 budget_state=official.ProviderBudgetState("gemini", policy),
+                reasoning_effort="low" if generation_profile == "gemini_recovery_v1" else None,
             )
 
     def __getattr__(self, key: str) -> Any:
@@ -354,7 +371,7 @@ class DevelopmentRequestClient:
         return envelope
 
     def complete(self, messages: list[dict[str, str]], **kwargs: Any) -> Any:
-        if len(self.requests) >= 8:
+        if len(self.requests) >= self.max_provider_calls:
             raise official.ProviderPayloadError(
                 "development per-task request cap reached"
             )
@@ -367,8 +384,12 @@ class DevelopmentRequestClient:
             "work_key": self._work_key,
             "attempt": self._attempt,
             "call_index": len(self.requests) + 1,
+            "max_provider_calls": self.max_provider_calls,
             "provider_id": self.provider_id,
             "configured_model": self.model,
+            "generation_profile": self.generation_profile,
+            "max_tokens": payload["max_tokens"],
+            "reasoning_effort": payload.get("reasoning_effort"),
             "payload_sha256": sha256_canonical_json(payload),
             "requested_at": now(),
             "provider_response_id": None,
@@ -390,6 +411,8 @@ class DevelopmentRequestClient:
             receipt["evidence"]["transport_kind"] = (
                 "injected_test_double" if self._injected else "official_network"
             )
+            if self.generation_profile is not None:
+                receipt["evidence"]["generation_profile"] = self.generation_profile
             receipt["evidence_sha256"] = sha256_canonical_json(receipt["evidence"])
             official.validate_provider_receipt(receipt)
             if (
@@ -401,6 +424,8 @@ class DevelopmentRequestClient:
             self._client.last_request_metadata["transport_kind"] = receipt["evidence"][
                 "transport_kind"
             ]
+            if self.generation_profile is not None:
+                self._client.last_request_metadata["generation_profile"] = self.generation_profile
             row["status"] = "completed"
             row["finish_reason"] = completion.finish_reason
             return replace(completion, receipt=receipt)
