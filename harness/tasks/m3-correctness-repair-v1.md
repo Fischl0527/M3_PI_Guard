@@ -1,6 +1,6 @@
 # 正确性修复与三模型开发试跑
 
-状态：in_progress。用户于2026-09-20批准执行；F-PAPER-002。
+状态：verified_development_substage。本批已结束；用户于2026-09-20批准执行；F-PAPER-002整体仍in_progress。
 
 ## 范围和验收
 
@@ -43,3 +43,14 @@ Git目标：origin/codex/q2-empirical-study。三个节点：修复测试、试�
 - 定向命令：`F:/robot/Anaconda3/python.exe -X utf8 -m pytest tests/unit/test_corrected_v1_policy.py tests/unit/test_correctness_effects_v1.py tests/unit/test_correctness_runtime_v1.py tests/unit/test_provenance_corrected_v1.py tests/unit/test_correctness_provider_v1.py tests/unit/test_correctness_analysis_v1.py -q`。
 - 回归命令：`python -m pytest tests/test_confirmation_session_v1.py tests/unit/test_paper_v1_runtime.py tests/unit/test_paper_v2_runtime_invariants.py tests/unit/test_paper_v2_boundary_rejection_runtime_v3.py tests/unit/test_paper_v2_live_condition_runtime.py -q -k 'not promptguard'`。
 - 并发runner专项检查进行中；本记录时尚未调用模型。
+
+### 收尾结果
+
+- 运行命令：`F:/robot/Anaconda3/python.exe -X utf8 -m experiments.paper_v2.correctness_runner_v1 --run-all`，退出0。
+- Pro288与新V4.1Flash288完成尝试；Gemini8尝试、5条有模型响应，重复HTTP503后280未运行。
+- 无重试；864唯一工作项，1119请求/1116HTTP200+3HTTP503，身份/在线字段/真实效果检查通过。
+- 分析命令：`python -m experiments.paper_v2.correctness_analysis_v1`；一次分析生成3CSV/2PNG/JSON/MD。
+- 两张图已目视检查；报告额外人工加入实测结论、修复说明与证据数字。重新生成通用报告会
+  替换该人工前言，故最终版本以Git记录的report.md为准。
+- 代码/计划000338f、原始结果b27b6d1已推送；最后报告/状态另作节点提交。
+- 没有扩大实验或修改论文。低TCR、敏感标签未触发、Gemini不完整依旧是后续研究缺口。

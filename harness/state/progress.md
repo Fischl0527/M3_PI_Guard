@@ -2,6 +2,15 @@
 
 ## 2026-09-20 — 正确性修复启动
 
+- 本批已闭合：实际584条（Pro288、V4.1Flash288、Gemini8），Gemini280条未运行。
+  1119请求中1116次HTTP200、3次503；没有429，未重试。进程退出0。
+- Pro265 completed/13parse/10maxsteps；Flash272completed/7parse/9maxsteps；
+  Gemini3completed/2parse/3providerfailure。completed不等于任务完成。
+- 864唯一work key、1119唯一requestID、1116唯一responseID，模型一致/字段隔离/禁工具检查通过。
+- 分析图表与详细Markdown已生成。Pro AgentDojo ND5/12、policy2/12、full0/12，
+  full-policy配对区间仍跨0；良性TCR下降；M3危险效果全零，private标签0。
+  因而开发子阶段完成，不具备机制领先/跨厂商有效性的正式证明。
+
 - 已批准 corrected_v1 与三模型开发试跑；初始工作分支 b491538，保留 dirty 第三方/模板/tmp。
 - 已读取工作约定、当前状态与相关运行路径；暂未调用API、未改历史结果。
 - 权限、标签与效果评价并行修复，根代理集成新runner；定向检查后才扩大运行。

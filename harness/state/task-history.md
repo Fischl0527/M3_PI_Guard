@@ -1,5 +1,17 @@
 # Task History
 
+## 2026-09-20 — Correctness repair development batch closed
+
+- Implemented explicit corrected_v1 compiler/monitor/provenance/confirmation wiring
+  and observed-effect separation, preserving historical defaults and raw evidence.
+- Pro288 and approved V4.1Flash288 executed; Gemini8 attempted then503 service
+  errors stopped dispatch,280 explicitly not run. No success replay or paid fallback.
+- Code/plan000338f and rawb27b6d1 pushed; analysis/report and final state are scoped
+  final milestone. 131new tests,71related regressions; later专项 tests overlap.
+- Report: outputs/experiments/correctness_repair_v1/report.md. Existing label coverage
+  is insufficient; utility loss remains. Scientific paper feature staysin_progress.
+- No Full Harness, historical hash replay, paper modification or new follow-on run.
+
 Record completed, blocked, and abandoned tasks here.
 
 | Date | Task ID | Related Feature | Status | Verification | Summary |

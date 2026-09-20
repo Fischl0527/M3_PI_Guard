@@ -13,6 +13,19 @@
   counted as interface errors; corrected before any model calls.
 - These are offline development failures; historical experiment rows untouched.
 
+## 2026-09-20 — completed development pilot failures
+
+- Gemini returned HTTP503 on3 requests across distinct tasks; stopped new dispatch
+  according to approved repeated-interface-error rule.8 logical attempts retained,
+  280explicitly not run. This is not429; provider-internal cause unknown, not blamed
+  on Billing or silently repaired with another model/key. No retry or paid fallback.
+- Pro13parse failures (last finish_reason3length/10stop),10maxsteps; Flash7parse
+  (allstop),9maxsteps; Gemini2parse (bothlength). Response-bearing rows preserved.
+  No blanket claim that token cap caused every parse error; full responses not logged.
+- No runner_failure, identity drift, online label exposure or actual external action
+  was recorded. Lack of sensitive-labelled data limits scientific validation, not
+  an excuse to report the module as empirically effective.
+
 ## 2026-09-05 — manuscript E7 table note pagination
 
 - First rendered review PDF split the Table7 semantic note across pages39/40.

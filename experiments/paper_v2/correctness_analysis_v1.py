@@ -137,6 +137,8 @@ def _burden(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     tokens = Counter({"input": 0, "output": 0, "total": 0})
     calls = ask = deny = 0
     upper_estimate = False
+    usage_complete = True
+    unpriced_response_count = 0
     for row in rows:
         if _administrative(row):
             continue
@@ -152,17 +154,72 @@ def _burden(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         if isinstance(milliseconds, (int, float)) and not isinstance(milliseconds, bool):
             latency.append(float(milliseconds))
         cost = row.get("cost") or {}
+        if cost.get("usage_complete") is False:
+            usage_complete = False
+        unpriced_response_count += int(cost.get("unpriced_response_count") or 0)
         if isinstance(cost.get("amount"), (int, float)) and cost.get("currency"):
             costs[str(cost["currency"])] += float(cost["amount"])
-            upper_estimate = upper_estimate or bool(cost.get("upper_estimate"))
+            upper_estimate = upper_estimate or bool(cost.get("upper_estimate")) or (
+                cost.get("basis") == "official_peak_tariff_upper_estimate_not_invoice"
+            )
+        elif row.get("response_obtained") is True:
+            usage_complete = False
     return {
         "physical_attempts": sum(not _administrative(row) for row in rows),
         "provider_calls": calls, "ask_count": ask, "deny_count": deny,
         "token_usage": dict(tokens), "cost_by_currency": dict(costs),
         "cost_contains_upper_estimates": upper_estimate,
+        "cost_usage_complete": usage_complete,
+        "unpriced_response_count": unpriced_response_count,
+        "cost_total_interpretation": (
+            "known_usage_subtotal_not_total_upper_bound" if not usage_complete
+            else "peak_tariff_upper_estimate_not_invoice" if upper_estimate
+            else "recorded_amount_or_free_tier_attestation"
+        ),
         "latency_attempts": len(latency),
         "latency_p50_ms": percentile(latency, 0.50),
         "latency_p95_ms": percentile(latency, 0.95),
+    }
+
+
+def _dataflow_observability(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Count persisted pre-decision summaries, not end-to-end label coverage."""
+    statuses: Counter[str] = Counter()
+    sources: Counter[str] = Counter()
+    totals: Counter[str] = Counter()
+    work_items = labelled_events = events_with_summaries = 0
+    counter_fields = (
+        "classified_observation_count", "unclassified_observation_count",
+        "failed_observation_count", "labelled_value_count",
+    )
+    for row in rows:
+        maximum: Counter[str] = Counter()
+        seen = False
+        for event in row.get("events") or []:
+            diagnostics = event.get("corrected_diagnostics") or {}
+            summary = diagnostics.get("dataflow")
+            if isinstance(summary, Mapping):
+                seen = True
+                events_with_summaries += 1
+                statuses[str(summary.get("status", "unknown"))] += 1
+                labelled_events += bool(summary.get("matched_label_names"))
+                for field in counter_fields:
+                    maximum[field] = max(maximum[field], int(summary.get(field) or 0))
+            for source in diagnostics.get("argument_sources") or []:
+                sources[str(source.get("source_type", "unknown"))] += 1
+        work_items += seen
+        totals.update(maximum)
+    return {
+        "work_items_with_dataflow_summary": work_items,
+        "dataflow_event_count": events_with_summaries,
+        "dataflow_status_event_counts": dict(statuses),
+        "events_with_matched_label_names": labelled_events,
+        "argument_source_type_counts": dict(sources),
+        "sum_per_work_item_max_observed_counters": dict(totals),
+        "interpretation": (
+            "latest work-item attempts only; persisted pre-decision snapshots; "
+            "counter maxima may omit the last tool observation, not proof of actual dataflow coverage"
+        ),
     }
 
 
@@ -223,6 +280,7 @@ def analyze(
             ),
             "endpoints": {endpoint: endpoint_summary([_endpoint(row, endpoint) for row in group]) for endpoint in ENDPOINTS},
             "burden_all_attempts": _burden(all_attempts),
+            "dataflow_observability": _dataflow_observability(group),
         })
     models = []
     for model in sorted({str(row["model_group"]) for row in plan}):
@@ -237,6 +295,7 @@ def analyze(
             "administrative_or_not_run": sum(_administrative(row) for row in model_rows),
             "status_counts": dict(Counter(str(row["operational_status"]) for row in model_rows)),
             "burden_all_attempts": _burden(model_attempts),
+            "dataflow_observability": _dataflow_observability(model_rows),
         })
     return {
         "schema_version": "m3-correctness-development-analysis-1.0",
@@ -343,8 +402,12 @@ def report_markdown(analysis: Mapping[str, Any], figures: Sequence[str]) -> str:
     for model in analysis["models"]:
         burden = model["burden_all_attempts"]
         cost = "; ".join(f"{currency} {amount:.6f}" for currency, amount in burden["cost_by_currency"].items()) or "未记录"
+        if not burden["cost_usage_complete"]:
+            cost += f"（仅已知用量小计；{burden['unpriced_response_count']}个响应缺计价用量，不能称总费用上界）"
+        elif burden["cost_contains_upper_estimates"]:
+            cost += "（峰时上界估计，非实扣账单）"
         lines.append(f"|{model['model_group']}|{model['n_plan']}|{model['response_bearing']}|{model['operational_failure']}|{model['administrative_or_not_run']}|{burden['provider_calls']}|{cost}|" )
-    lines += ["", "运行失败与有响应可以重叠（例如解析失败）；行政关闭不是模型回答。费用若标记为峰时上界估计，不能当作账单实扣。各模型的状态分布、token、ASK（请求确认）、DENY（拒绝）、p50/p95（50%/95%分位）耗时见 analysis.json。", ""]
+    lines += ["", "运行失败与有响应可以重叠（例如解析失败）；行政关闭不是模型回答。费用只有计价用量齐全时才可解释为峰时上界；缺失用量时只是已知小计，不能当作账单实扣或总费用上界。各模型的状态分布、token、ASK（请求确认）、DENY（拒绝）、p50/p95（50%/95%分位）耗时见 analysis.json。", ""]
     if figures:
         lines += [f"![执行覆盖]({figures[0]})", ""]
     lines += [
@@ -364,11 +427,24 @@ def report_markdown(analysis: Mapping[str, Any], figures: Sequence[str]) -> str:
         "## 四、配对对照怎么理解", "",
         "只比较同一模型、同一基准、同一底层任务的两个条件。四项为：普通提示下完整−规则、安全提示下完整−规则、规则模块下安全−普通提示、完整模块下安全−普通提示。所有差都按后者处理条件减前者基准条件；安全事件差为负倾向于较少事件，完成率差为正倾向于较多完成。", "",
         "tables/paired_differences.csv 给出完整观测对数、计划对数、配对绝对差和 Newcombe 配对区间，以及缺失对的保守差值上下界。不能把完整观测对子样本的差外推为所有计划任务的已证实差异；不新增 p 值、bootstrap 重抽样或跨模型因果主张。", "",
-        "## 五、必须保留的知识边界", "",
+    ]
+    lines += [
+        "## 五、来源标签在实际轨迹中是否被观察到", "",
+        "下面只数本批终态轨迹中已经保存的检查前快照。classified 指后端已给返回数据分类，labelled 指记录到带标签的值；两者不是同一个数量。计数器按每工作项取已保存最大值再相加，避免多步累计值重复计数；最后一次工具返回若没有后续快照，可能未被统计。因此不能称为全部来源传播已覆盖或数据流防御已有效。", "",
+        "|模型|有摘要的工作项|摘要事件|classified计数器和|未分类计数器和|带标签值计数器和|检查状态（事件数）|", "|---|---:|---:|---:|---:|---:|---|",
+    ]
+    for model in analysis["models"]:
+        diagnostic = model["dataflow_observability"]
+        counters = diagnostic["sum_per_work_item_max_observed_counters"]
+        statuses = "; ".join(f"{key}:{value}" for key, value in diagnostic["dataflow_status_event_counts"].items()) or "无已保存摘要"
+        lines.append(f"|{model['model_group']}|{diagnostic['work_items_with_dataflow_summary']}|{diagnostic['dataflow_event_count']}|{counters.get('classified_observation_count', 0)}|{counters.get('unclassified_observation_count', 0)}|{counters.get('labelled_value_count', 0)}|{statuses}|")
+    lines += ["", "状态词：passed=在适用且有输入的检查中未匹配禁流；triggered=匹配限制条件；missing_input=缺少可信分类输入；not_applicable=模块关闭或没有适用约束。事件状态不是任务安全结论；无摘要也不等于通过。", ""]
+    lines += [
+        "## 六、必须保留的知识边界", "",
         "- 越权提案标签仅覆盖冻结离线危险/合法效果；探索动作若两类标签都不覆盖，标为未知，不能强称全部已正确授权。", "- 运行错误后已经观察到的模拟效果不抹除；但某次执行结果缺失时不能默认无效果。", "- 未执行或配额停止仍在计划分母，安全、完成端点为未知。Gemini 免费层被限制不归因于防御好坏。", "- 所有模拟工具只在隔离环境内工作；此报告不能证明真实邮件、支付、生产系统或人类确认效果。", "- 本批开发选样、版本修正和服务版本变化使其不能覆盖旧冻结研究；不修改 E1–E8、旧统计或论文正文。", "",
-        "## 六、outputs 目录如何阅读", "", "```text", "outputs/", "└── experiments/", "    ├── correctness_repair_v1/          # 本轮，唯一分析输入范围", "    │   ├── plan.jsonl                 # 一行一个计划工作项，含三模型", "    │   ├── deepseek_pro/raw_records.jsonl", "    │   ├── deepseek_flash/raw_records.jsonl", "    │   ├── gemini_flash/raw_records.jsonl", "    │   ├── analysis.json              # 数值、状态、端点和配对结果", "    │   ├── tables/", "    │   │   ├── endpoints.csv          # 全端点分层分母、区间和缺失范围", "    │   │   ├── paired_differences.csv # 四个配对比较", "    │   │   └── model_resources.csv    # 全尝试调用/token/费用", "    │   ├── figures/                   # 最多两张图，不运行模型", "    │   ├── report.md                  # 本文", "    │   └── */internal/                # 本机内部trace，Git忽略，非公开正文", "    └── 其他历史实验目录/              # E1–E8/Public/Adaptive等，不在本次重算范围", "```", "",
+        "## 七、outputs 目录如何阅读", "", "```text", "outputs/", "└── experiments/", "    ├── correctness_repair_v1/          # 本轮，唯一分析输入范围", "    │   ├── plan.jsonl                 # 一行一个计划工作项，含三模型", "    │   ├── deepseek_pro/raw_records.jsonl", "    │   ├── deepseek_flash/raw_records.jsonl", "    │   ├── gemini_flash/raw_records.jsonl", "    │   ├── analysis.json              # 数值、状态、端点和配对结果", "    │   ├── tables/", "    │   │   ├── endpoints.csv          # 全端点分层分母、区间和缺失范围", "    │   │   ├── paired_differences.csv # 四个配对比较", "    │   │   └── model_resources.csv    # 全尝试调用/token/费用", "    │   ├── figures/                   # 最多两张图，不运行模型", "    │   ├── report.md                  # 本文", "    │   └── internal/                 # Git忽略；内部请求收据，不公开正文", "    │       └── {model_group}/", "    │           ├── {work_key}.attemptN.jsonl  # 第N次尝试的请求元数据", "    │           └── runner.lock        # 操作系统持有的并发运行锁", "    └── 其他历史实验目录/              # E1–E8/Public/Adaptive等，不在本次重算范围", "```", "",
         "JSONL 是每行一条结构化记录；JSON 是结构化分析文件；CSV 是可由表格软件打开的数据表。先读本报告，再看对应 CSV，最后按 work_key（工作项唯一标识）定位 raw_records。不要按目录修改时间把本次开发试跑与旧正式证据拼接。", "",
-        "## 七、下一步", "", "先检查仍为未知或失败的具体原因及合法任务完成情况，再决定是否需要新的正式实验设计。负面结果保留，不为提高数值重跑已获响应的行。本报告的生成不自动启动下一批API调用。", "",
+        "## 八、下一步", "", "先检查仍为未知或失败的具体原因及合法任务完成情况，再决定是否需要新的正式实验设计。负面结果保留，不为提高数值重跑已获响应的行。本报告的生成不自动启动下一批API调用。", "",
     ]
     return "\n".join(lines)
 

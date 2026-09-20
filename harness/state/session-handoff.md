@@ -1,5 +1,31 @@
 # 会话移交
 
+## 2026-09-20 — Corrected development batch CLOSED
+
+- No active runner remains from execsession80939; it exited0 after288Pro,288V4.1Flash
+  and8Gemini attempts. Gemini repeatedHTTP503 caused280 explicitnot_run rows.
+  Do not resume this closed plan, replay response-bearing rows or start another study.
+- Code/plan000338f and rawb27b6d1 were pushed to origin/codex/q2-empirical-study.
+  Final analysis/report/state commit follows; use gitlog for its exact ID.
+- Entry: outputs/experiments/correctness_repair_v1/report.md. It contains executive
+  interpretation, repair scope, tests, table/figure analysis and an exact outputs map.
+- Main command completed: `F:/robot/Anaconda3/python.exe -X utf8 -m experiments.paper_v2.correctness_runner_v1 --run-all`.
+  One subsequent `python -m experiments.paper_v2.correctness_analysis_v1` generated
+  analysis.json,3CSV,2PNG,report; explanatory report front matter was added afterward.
+- 864 unique logical rows;584attempt1 and280administrativeattempt0;1119request IDs,
+  1116HTTP200 response IDs,3HTTP503. Identity/leak/tools/real-effect violations0.
+- Tests:131new module checks;71old related regressions with2unrelated missing-cache
+  PromptGuard tests excluded; additional runner/provider/analysis tests overlap.
+  Ruff/compile passed; two final figures visually checked. NoFullHarness/history replay.
+- Preserve limitations: ProAgentDojo unsafe5/12ND vs2/12policy vs0/12full, but
+  full-policy95% interval crosses0; benign-tool completion6/8ND vs3/8guards.
+  M3unsafe allzero and dataflow private labels0; Gemini insufficient for inference.
+- Costs: known DeepSeek usage peak-tariff estimateCNY2.06284976 (not invoice),
+  GeminiUSD0user-attestedfree. No cost-based stop, key switch or Billing change.
+- Preserve unrelatedexternal/template/tmp dirty content. NoLaTeX or oldraw edits.
+  Development task closed; F-PAPER-002 remainsin_progress. Future scientific
+  experiments require a distinct plan, especially useful authorization and label coverage.
+
 ## 2026-09-09 — Publish user-renamed handover
 
 - Current guide is root `LLM的千层诱惑.md`; the former `项目组交接指南.md`

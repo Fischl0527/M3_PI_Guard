@@ -1,14 +1,19 @@
 # 当前任务
 
-### 2026-09-20 正确性修复与三模型开发试跑
+### 2026-09-20 正确性修复与三模型开发试跑（本批已结束）
 
-- 状态：in_progress；用户已批准实现、隔离 API 试跑与分阶段 GitHub 推送。
+- 状态：verified_development_substage；F-PAPER-002整体仍in_progress，未宣称论文完成。
 - 任务：`harness/tasks/m3-correctness-repair-v1.md`，关联 F-PAPER-002。
 - 保留历史默认路径与原始结果；新 corrected_v1 修复权限编译、多规则、标签传播、确认状态及效果统计。
 - 48案例×6条件×Pro/Flash各288条；Gemini免费层最多288条，429停止且不阻塞DeepSeek。
 - 定向测试通过后才调用模型；不运行Full Harness、历史递归验证、不修改论文或第三方目录。
 - 根代理负责集成、现有Harness状态、Git与运行；并行代理按独立模块修复，禁止共享源码文件编辑。
 - 验收要求正确性与诚实记录，不要求有利科研结果；完成本批后报告，不自动启动其他研究。
+- 修复/测试及计划已提交推送000338f；历史运行信息见session-handoff，当前不再运行。
+- 收尾：2026-09-20 18:08:29全部运行结束，退出0。Pro/Flash各288条；Gemini尝试8条，
+  重复HTTP503后未执行280条，均明确保留。无重试/新实验/论文修改。
+- 分析和报告：outputs/experiments/correctness_repair_v1/report.md；包括outputs结构、
+  科学边界与验证记录。原始结果已推送b27b6d1；最后分析/状态提交随后推送。
 
 ### 2026-09-07 通俗项目组交接指南
 

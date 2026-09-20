@@ -118,6 +118,56 @@ def test_response_bearing_retry_is_rejected():
         analyze(plan, [raw(plan[0]), raw(plan[0], attempt=2)])
 
 
+def test_cost_peak_estimate_and_unpriced_responses_are_not_hidden():
+    plan = plans(1)
+    first, second = raw(plan[0]), raw(plan[1])
+    first["cost"] = {
+        "currency": "CNY", "amount": 0.01, "usage_complete": True,
+        "unpriced_response_count": 0,
+        "basis": "official_peak_tariff_upper_estimate_not_invoice",
+    }
+    complete = analyze(plan, [first])["models"][0]["burden_all_attempts"]
+    assert complete["cost_contains_upper_estimates"] is True
+    assert complete["cost_usage_complete"] is True
+    second["cost"] = {
+        "currency": "CNY", "amount": 0, "usage_complete": False,
+        "unpriced_response_count": 1,
+        "basis": "known_usage_subtotal_not_total_cost_upper_bound",
+    }
+    result = analyze(plan, [first, second])
+    burden = result["models"][0]["burden_all_attempts"]
+    assert burden["cost_usage_complete"] is False
+    assert burden["unpriced_response_count"] == 1
+    assert burden["cost_total_interpretation"] == "known_usage_subtotal_not_total_upper_bound"
+    assert "仅已知用量小计" in report_markdown(result, [])
+
+
+def test_dataflow_cumulative_counters_are_not_double_counted_or_effect_claims():
+    plan = plans(1)
+    record = raw(plan[0])
+    record["events"] = [
+        {"corrected_diagnostics": {
+            "dataflow": {
+                "status": status, "classified_observation_count": count,
+                "unclassified_observation_count": 1,
+                "labelled_value_count": 1, "matched_label_names": ["private"],
+            },
+            "argument_sources": [{"source_type": "tool_output", "argument_path": "body"}],
+        }}
+        for status, count in (("missing_input", 1), ("triggered", 2))
+    ]
+    result = analyze(plan, [record])
+    diagnostic = result["models"][0]["dataflow_observability"]
+    assert diagnostic["work_items_with_dataflow_summary"] == 1
+    assert diagnostic["dataflow_event_count"] == 2
+    assert diagnostic["sum_per_work_item_max_observed_counters"]["classified_observation_count"] == 2
+    assert diagnostic["sum_per_work_item_max_observed_counters"]["labelled_value_count"] == 1
+    assert diagnostic["dataflow_status_event_counts"] == {"missing_input": 1, "triggered": 1}
+    assert diagnostic["argument_source_type_counts"] == {"tool_output": 2}
+    assert "not proof of actual dataflow coverage" in diagnostic["interpretation"]
+    assert "不能称为全部来源传播已覆盖" in report_markdown(result, [])
+
+
 def test_duplicates_and_unknown_work_keys_are_rejected():
     plan = plans(1)
     with pytest.raises(ValueError, match="duplicate planned"):
@@ -185,6 +235,9 @@ def test_report_explains_version_missingness_and_directory_boundaries():
     assert "不完整时尤其不支持正式跨厂商结论" in report
     assert "correctness_repair_v1/" in report
     assert "其他历史实验目录" in report
+    assert "{work_key}.attemptN.jsonl" in report
+    assert "runner.lock" in report
+    assert "*/internal/" not in report
     assert "NA" in report
     assert "探索动作" in report
 
