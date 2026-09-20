@@ -1,5 +1,25 @@
 # 决策日志
 
+## 2026-09-20 — Flash official service amendment
+
+Official pricing identifies `deepseek-flash` as DeepSeek-V4.1-Flash and retirement
+of historical V4 Flash. The owner expressly selected the new official alias for
+the corrected development cohort. Keep old rows unchanged; label this as a
+new-model replication. Use current tariff estimates, not claimed invoice charges;
+missing usage remains unpriced. No Gemini Billing changes or key rotation.
+
+## 2026-09-20 — Explicit corrected runtime, unchanged historical semantics
+
+The owner approved correcting authorization and measurement behavior through an
+explicit corrected_v1 configuration. Historical defaults/raw records remain
+unchanged. Runtime dependencies are injected, never globally monkey-patched.
+Proposal violations, guard allowance, isolation rejection and observed effects
+are distinct; missing evidence is unknown, not false. TraceGuard contributes
+design ideas only, with no source/result copying. The new 48-case development
+cohort uses six conditions and up to three providers; Gemini remains free-only
+and nonblocking. No full Harness, recursive hashes, new admission machinery or
+manuscript build is part of this task.
+
 ## 2026-09-05 — Independent experimental confirmation boundary
 
 Keep historical E1--E6 source and result semantics unchanged. New E7a uses a

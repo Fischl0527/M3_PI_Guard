@@ -52,12 +52,20 @@ class ConfirmationSession:
         proposal: ActionProposal,
         manifest: TaskPolicyManifest,
         modules: frozenset[str],
+        monitor: RuntimeMonitor | None = None,
     ) -> ConfirmationOutcome:
         if not task_id or not request_digest:
             raise ValueError("task and trusted request identity are mandatory")
         # Legacy approvals cannot satisfy the new independent session.
         clean = replace(manifest, approvals=(), manifest_sha256="")
-        decision = RuntimeMonitor(clean, modules=modules).decide(proposal)
+        if monitor is None:
+            decision = RuntimeMonitor(clean, modules=modules).decide(proposal)
+        else:
+            if monitor.manifest != manifest or monitor.modules != modules:
+                raise ValueError("confirmation monitor/manifest/modules binding mismatch")
+            if manifest.approvals:
+                raise ValueError("corrected confirmation does not accept legacy approvals")
+            decision = monitor.decide(proposal)
         if decision.decision == "DENY":
             return ConfirmationOutcome("denied_by_guard", decision.violated_rules)
         if decision.decision == "ASK" and decision.violated_rules != (

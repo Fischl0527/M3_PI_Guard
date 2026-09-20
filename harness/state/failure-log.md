@@ -1,5 +1,18 @@
 # Failure Log
 
+## 2026-09-20 — corrected development integration (offline)
+
+- Initial policy fixtures used pytest's reserved `request` parameter; renamed.
+  Parser sentence splitting broke filename dots; corrected and regression-tested.
+- Integration imported FULL_RUNTIME_MODULES from the wrong module; fixed to
+  runtime_monitor. All 48x6 local injected executions then passed.
+- Existing PromptGuard frozen model cache is absent. Its unrelated tests were
+  explicitly excluded; no download or claim of full old Harness verification.
+- Fixture helper keyword collisions/unused import were fixed. Review also caught
+  coordinated dispatch stop mislabelled as429 and repeated provider failures not
+  counted as interface errors; corrected before any model calls.
+- These are offline development failures; historical experiment rows untouched.
+
 ## 2026-09-05 — manuscript E7 table note pagination
 
 - First rendered review PDF split the Table7 semantic note across pages39/40.

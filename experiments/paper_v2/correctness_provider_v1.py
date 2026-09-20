@@ -1,0 +1,457 @@
+"""Single-attempt official clients with compact request-level receipts.
+
+No historical ledgers, admission files or recursive trace bundles are loaded.
+Payloads, response parsers and redaction reuse the existing official clients;
+the single-attempt HTTP observer also records responses that fail JSON decoding.
+"""
+
+from __future__ import annotations
+
+import copy
+import json
+import os
+import threading
+import time
+import uuid
+from dataclasses import replace
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Mapping
+from urllib import error as urllib_error
+from urllib import request as urllib_request
+
+from experiments.paper_v2 import deepseek_json_client_v2 as ds
+from experiments.paper_v2 import gemini_json_client_v1 as gm
+from experiments.paper_v2 import official_provider_executor as official
+from experiments.paper_v2.contracts import sha256_canonical_json
+from experiments.paper_v2.lean_empirical_runner import _gemini_policy
+from experiments.paper_v2.public_provider_budget_v1 import (
+    PublicProviderBudgetState,
+    build_role_policy,
+    load_public_policy,
+)
+
+PRICING_URL = "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+PRICING_CHECKED = "2026-09-20"
+# Official peak tariff; estimates are an upper bound (off-peak is half).
+PEAK_TARIFF = {
+    "deepseek-v4-pro": (0.30, 9.0, 27.0),
+    "deepseek-flash": (0.04, 2.0, 8.0),
+}
+APPROVED_MODEL_GROUPS = {
+    "deepseek_pro": "deepseek-v4-pro",
+    "deepseek_flash": "deepseek-flash",
+    "gemini_flash": "gemini-3.6-flash",
+}
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def append_row(path: Path, row: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8", newline="\n") as stream:
+        stream.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def deepseek_policy(model: str) -> dict[str, Any]:
+    if model not in PEAK_TARIFF:
+        raise ValueError("unapproved model; no alias fallback")
+    policy = build_role_policy(
+        load_public_policy(), "primary" if model.endswith("pro") else "second"
+    )
+    part = policy["deepseek"]
+    part["model_id"] = model
+    hit, miss, output = PEAK_TARIFF[model]
+    part["pricing"] = {
+        "currency": "CNY",
+        "source_url": PRICING_URL,
+        "verified_at": PRICING_CHECKED,
+        "cache_hit_input_per_million_tokens": hit,
+        "cache_miss_input_per_million_tokens": miss,
+        "output_per_million_tokens": output,
+    }
+    # Eight requests at the service's maximum context: a derived bound, not
+    # the unrelated historical CNY 3/8 scientific-budget stopping rule.
+    ceiling = 8 * (miss + 512 * output / 1_000_000) + 1
+    part.update(
+        hard_spend_limit_cny=ceiling, abort_ceiling_cny=ceiling, abort_at_fraction=1.0
+    )
+    part["dynamic_fuse"].update(
+        next_request_input_tokens_upper_bound=1_000_000,
+        next_request_output_tokens_upper_bound=512,
+    )
+    return policy
+
+
+class DevelopmentBudgetState(PublicProviderBudgetState):
+    """Use existing arithmetic, but bind the newly approved service names."""
+
+    def __post_init__(self) -> None:
+        if (
+            self.provider_id != "deepseek"
+            or self.policy["deepseek"]["model_id"] not in PEAK_TARIFF
+        ):
+            raise official.ProviderPayloadError("development model identity drift")
+        self.policy = copy.deepcopy(dict(self.policy))
+        self._usage = {
+            key: 0
+            for key in (
+                "prompt_tokens",
+                "prompt_cache_hit_tokens",
+                "prompt_cache_miss_tokens",
+                "completion_tokens",
+            )
+        }
+
+
+class DevelopmentDeepSeekClient(ds.DeepSeekJsonOfficialClient):
+    def __post_init__(self) -> None:
+        active = copy.deepcopy(dict(self.policy or {}))
+        if (
+            self.provider_id != "deepseek"
+            or active.get("deepseek", {}).get("model_id") not in PEAK_TARIFF
+            or active["deepseek"].get("base_url") != "https://api.deepseek.com"
+            or dict(self.budget_state.policy) != active
+        ):
+            raise official.ProviderPayloadError("development official binding drift")
+        if (
+            not isinstance(self.api_key, str)
+            or not self.api_key.strip()
+            or any(c in self.api_key for c in "\r\n")
+        ):
+            raise official.ProviderPayloadError("invalid credential configuration")
+        if self.temperature != 0 or self.max_tokens != 512 or self.timeout != 180:
+            raise official.ProviderPayloadError("development request settings drift")
+        if self.transport is None and not self.network_consent:
+            raise official.ProviderConsentError("network consent required")
+        self.policy = active
+        official._provider_endpoint(active, self.provider_id)
+        official.validate_messages(
+            [{"role": "user", "content": "qualification placeholder"}],
+            content_class=self.content_class,
+            policy=active,
+        )
+
+
+class DispatchStopped(official.ProviderTransportError):
+    """No new requests after quota failure or the DeepSeek batch closes."""
+
+
+class RequestPacer:
+    def __init__(self, interval_seconds: float, stopped: threading.Event) -> None:
+        self.interval = interval_seconds
+        self.stopped = stopped
+        self._last = 0.0
+        self._lock = threading.Lock()
+
+    def wait(self) -> None:
+        with self._lock:
+            remaining = max(0.0, self._last + self.interval - time.monotonic())
+            if self.stopped.wait(remaining):
+                raise DispatchStopped("provider dispatch stopped")
+            self._last = time.monotonic()
+
+
+class DevelopmentRequestClient:
+    """Content-free request log, including malformed response identities.
+
+    Only the raw official client receives the credential. HTTP observer data
+    never includes headers, bodies, model text or prompts.
+    """
+
+    def __init__(
+        self,
+        *,
+        model_group: str,
+        model: str,
+        api_key: str,
+        benchmark: str,
+        work_key: str,
+        attempt: int,
+        trace_path: Path,
+        pacer: RequestPacer,
+        transport: Any = None,
+    ) -> None:
+        if APPROVED_MODEL_GROUPS.get(model_group) != model:
+            raise official.ProviderIdentityError(
+                "development model group/identity mismatch"
+            )
+        if not work_key or type(attempt) is not int or attempt < 1:
+            raise official.ProviderPayloadError(
+                "work key and positive attempt are required"
+            )
+        self.requests: list[dict[str, Any]] = []
+        self._trace_path = trace_path
+        self._work_key = work_key
+        self._attempt = attempt
+        self._pacer = pacer
+        self._upstream = transport if transport is not None else self._network_transport
+        self._injected = transport is not None
+        self._active_request: dict[str, Any] | None = None
+        self.physical_attempt_namespace = attempt
+        self.provider_id = "gemini" if model_group == "gemini_flash" else "deepseek"
+        self.transport = transport  # None accurately identifies real official traffic.
+        common = dict(
+            provider_id=self.provider_id,
+            api_key=api_key,
+            content_class="public_benchmark_case"
+            if benchmark == "agentdojo-v1"
+            else "synthetic_m3_case",
+            temperature=0.0,
+            max_tokens=512,
+            timeout=180.0,
+            network_consent=True,
+            allow_pinned_synthetic_credential_labels=benchmark == "agentdojo-v1",
+            transport=self._observe_transport,
+        )
+        if self.provider_id == "deepseek":
+            policy = deepseek_policy(model)
+            self._client = DevelopmentDeepSeekClient(
+                **common,
+                policy=policy,
+                budget_state=DevelopmentBudgetState("deepseek", policy),
+            )
+        else:
+            if model != "gemini-3.6-flash":
+                raise official.ProviderPayloadError("Gemini replacement forbidden")
+            policy = _gemini_policy()
+            spec = policy["gemini"]
+            if (
+                spec.get("billing_tier") != "free"
+                or spec.get("allow_paid_tier") is not False
+                or spec.get("monetary_hard_limit_usd") != 0
+                or spec.get("model_id") != model
+            ):
+                raise official.ProviderPayloadError(
+                    "Gemini requires the fixed free-only policy"
+                )
+            self._client = gm.GeminiJsonOfficialClient(
+                **common,
+                policy=policy,
+                budget_state=official.ProviderBudgetState("gemini", policy),
+            )
+
+    def __getattr__(self, key: str) -> Any:
+        return getattr(self._client, key)
+
+    def _network_transport(
+        self, endpoint: str, headers: Any, payload: Any, timeout: float
+    ) -> Any:
+        """Observe HTTP receipt before JSON decoding; exactly one HTTP attempt.
+
+        The historical transport raises before returning malformed/429 bodies.
+        Recording only returned envelopes would misclassify those as no response.
+        Reuse its serialization and safe-header filtering, but retain receipt
+        status even when decoding fails. No response text or error body is logged.
+        """
+        request = urllib_request.Request(
+            endpoint,
+            data=official._canonical_bytes(dict(payload)),
+            headers=dict(headers),
+            method="POST",
+        )
+        try:
+            response = urllib_request.urlopen(request, timeout=timeout)
+        except urllib_error.HTTPError as exc:
+            response = exc
+        except urllib_error.URLError as exc:
+            raise official.ProviderTransportError(
+                f"official provider transport error: {type(exc.reason).__name__}"
+            ) from exc
+        with response:
+            status = int(getattr(response, "status", getattr(response, "code", 200)))
+            safe_headers = official._safe_headers(dict(response.headers.items()))
+            self._record_http_receipt(status, safe_headers)
+            raw = response.read()
+        if status < 200 or status >= 300:
+            # Preserve the HTTP outcome without parsing or persisting error text.
+            return official.HTTPResponseEnvelope(status, safe_headers, {})
+        try:
+            value = json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise official.ProviderTransportError(
+                "official response was not valid UTF-8 JSON"
+            ) from exc
+        if not isinstance(value, Mapping):
+            raise official.ProviderTransportError(
+                "official response must be a JSON object"
+            )
+        return official.HTTPResponseEnvelope(status, safe_headers, dict(value))
+
+    def _record_http_receipt(self, status: int, headers: Mapping[str, Any]) -> None:
+        request = self._active_request
+        if request is None:
+            raise official.ProviderPayloadError("response has no active request")
+        request["http_status"] = status
+        request["http_response_received"] = True
+        request["response_received"] = 200 <= status < 300
+        if status == 429:
+            self._pacer.stopped.set()
+        request["provider_request_id"] = self._safe_identifier(
+            official._request_id(official._safe_headers(headers))
+        )
+
+    def _safe_identifier(self, value: Any) -> str | None:
+        if not isinstance(value, str):
+            return None
+        if self._client.api_key in value:
+            raise official.ProviderPayloadError(
+                "provider metadata echoed active credential"
+            )
+        if len(value) > 512:
+            raise official.ProviderPayloadError(
+                "provider identifier exceeds metadata length limit"
+            )
+        return value
+
+    def _observe_transport(
+        self, endpoint: str, headers: Any, payload: Any, timeout: float
+    ) -> Any:
+        request = self._active_request
+        if request is None or request["payload_sha256"] != sha256_canonical_json(
+            payload
+        ):
+            raise official.ProviderPayloadError(
+                "payload changed after local request commitment"
+            )
+        if "tools" in payload or "tool_choice" in payload:
+            raise official.ProviderPayloadError("provider tools forbidden")
+        request["transport_started"] = True
+        try:
+            envelope = self._upstream(endpoint, headers, payload, timeout)
+        except official.ProviderPausedError as exc:
+            if exc.http_status == 429:
+                self._record_http_receipt(429, {})
+            raise
+        self._record_http_receipt(envelope.status_code, envelope.headers)
+        body = envelope.body if isinstance(envelope.body, Mapping) else {}
+        request["provider_response_id"] = self._safe_identifier(body.get("id"))
+        request["returned_model"] = self._safe_identifier(body.get("model"))
+        if isinstance(body.get("usage"), Mapping):
+            request["usage"] = {
+                key: value
+                for key, value in body["usage"].items()
+                if key
+                in {
+                    "prompt_tokens",
+                    "completion_tokens",
+                    "total_tokens",
+                    "prompt_cache_hit_tokens",
+                    "prompt_cache_miss_tokens",
+                }
+                and isinstance(value, int)
+                and not isinstance(value, bool)
+                and value >= 0
+            }
+        if not isinstance(envelope.body, Mapping):
+            raise official.ProviderTransportError(
+                "official response must be a JSON object"
+            )
+        return envelope
+
+    def complete(self, messages: list[dict[str, str]], **kwargs: Any) -> Any:
+        if len(self.requests) >= 8:
+            raise official.ProviderPayloadError(
+                "development per-task request cap reached"
+            )
+        self._pacer.wait()
+        payload = (ds._payload if self.provider_id == "deepseek" else gm._payload)(
+            self._client, messages
+        )
+        row = {
+            "local_request_id": f"m3req-{uuid.uuid4().hex}",
+            "work_key": self._work_key,
+            "attempt": self._attempt,
+            "call_index": len(self.requests) + 1,
+            "provider_id": self.provider_id,
+            "configured_model": self.model,
+            "payload_sha256": sha256_canonical_json(payload),
+            "requested_at": now(),
+            "provider_response_id": None,
+            "returned_model": None,
+            "response_received": False,
+            "http_response_received": False,
+            "transport_started": False,
+            "provider_tools_enabled": False,
+            "external_effects_enabled": False,
+        }
+        append_row(self._trace_path, {"event": "started", **row})
+        self.requests.append(row)
+        self._active_request = row
+        try:
+            completion = self._client.complete(messages, **kwargs)
+            receipt = copy.deepcopy(completion.receipt)
+            # Local HTTP observation is not a model proxy or a test double.
+            # Only an explicitly injected transport is qualification traffic.
+            receipt["evidence"]["transport_kind"] = (
+                "injected_test_double" if self._injected else "official_network"
+            )
+            receipt["evidence_sha256"] = sha256_canonical_json(receipt["evidence"])
+            official.validate_provider_receipt(receipt)
+            if (
+                not row["provider_response_id"]
+                or not row["provider_response_id"].strip()
+            ):
+                raise official.ProviderIdentityError("official response ID missing")
+            self._client.last_receipt = receipt
+            self._client.last_request_metadata["transport_kind"] = receipt["evidence"][
+                "transport_kind"
+            ]
+            row["status"] = "completed"
+            row["finish_reason"] = completion.finish_reason
+            return replace(completion, receipt=receipt)
+        except Exception as exc:
+            row["status"] = "failed"
+            row["error_type"] = type(exc).__name__
+            raise
+        finally:
+            row["completed_at"] = now()
+            append_row(self._trace_path, {"event": "terminal", **row})
+            self._active_request = None
+
+
+def request_cost(requests: list[dict[str, Any]], model: str) -> dict[str, Any]:
+    if model not in APPROVED_MODEL_GROUPS.values():
+        raise ValueError("cost estimate requires the exact approved model identity")
+    if model == "gemini-3.6-flash":
+        return {
+            "currency": "USD",
+            "amount": 0.0,
+            "basis": "user_attested_free_project_not_billing_api_verified",
+            "paid_fallback": False,
+        }
+    hit, miss, output = PEAK_TARIFF[model]
+    upper = 0.0
+    complete = True
+    unpriced_response_count = 0
+    for request in requests:
+        usage = request.get("usage", {})
+        fields = (
+            "prompt_cache_hit_tokens",
+            "prompt_cache_miss_tokens",
+            "completion_tokens",
+        )
+        if request.get("response_received") and not all(key in usage for key in fields):
+            complete = False
+            unpriced_response_count += 1
+        upper += (
+            usage.get(fields[0], 0) * hit
+            + usage.get(fields[1], 0) * miss
+            + usage.get(fields[2], 0) * output
+        ) / 1_000_000
+    return {
+        "currency": "CNY",
+        "amount": round(upper, 12),
+        "off_peak_lower_estimate": round(upper / 2, 12) if complete else None,
+        "basis": "official_peak_tariff_upper_estimate_not_invoice"
+        if complete
+        else "known_usage_subtotal_not_total_cost_upper_bound",
+        "usage_complete": complete,
+        "unpriced_response_count": unpriced_response_count,
+        "pricing_checked_at": PRICING_CHECKED,
+        "pricing_source": PRICING_URL,
+    }

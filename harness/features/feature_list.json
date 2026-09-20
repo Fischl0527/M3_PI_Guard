@@ -401,6 +401,7 @@
       "status": "in_progress",
       "priority": "critical",
       "acceptanceCriteria": [
+        "The approved 2026-09-20 corrected_v1 development study preserves legacy defaults and separates authorization/provenance correctness, confirmation state, observed effects and missing outcomes; up to 864 new executions do not become formal paper evidence automatically",
         "The approved September usability extension separates retrospective failure counts, deterministic provenance/confirmation probes and new prospective E7/E8 model experiments without relabeling or replaying E1--E6",
         "Existing DeepSeek Pro/Flash, medium and Adaptive 50/200 evidence is analyzed once without historical recursive replay",
         "The frozen 900-item DeepSeek authorization-regime experiment is closed under intention-to-treat failure rules",

@@ -906,6 +906,11 @@ class LiveConditionRuntime:
         message_builder: ResearchMessageBuilder | None = None,
         recorded_at: Callable[[], str] = _now,
         physical_attempt_namespace: int = 1,
+        policy_manifest_factory: Callable[..., TaskPolicyManifest] | None = None,
+        monitor_factory: Callable[..., Any] | None = None,
+        provenance_tracker_factory: Callable[[], Any] | None = None,
+        safety_receipt_factory: Callable[..., dict[str, Any]] | None = None,
+        capture_runtime_failures: bool = False,
     ) -> None:
         self.provider_client_factory = provider_client_factory
         self.effect_backend_factory = effect_backend_factory
@@ -921,6 +926,12 @@ class LiveConditionRuntime:
         self.physical_attempt_namespace = _validate_physical_attempt_namespace(
             physical_attempt_namespace
         )
+        # Explicit prospective injection; absent options retain historical behavior.
+        self.policy_manifest_factory = policy_manifest_factory
+        self.monitor_factory = monitor_factory
+        self.provenance_tracker_factory = provenance_tracker_factory
+        self.safety_receipt_factory = safety_receipt_factory
+        self.capture_runtime_failures = capture_runtime_failures
 
     def _call_event(
         self,
@@ -1103,7 +1114,9 @@ class LiveConditionRuntime:
             view, detector_findings = _detector_filtered_view(
                 view, self.detector
             )
-        manifest = _manifest_for_condition(context, view, schemas)
+        manifest = (self.policy_manifest_factory or _manifest_for_condition)(
+            context, view, schemas
+        )
         authorization = None
         if context.condition_id in M3_CONDITIONS:
             control = context.online_state.get("runtime_control")
@@ -1120,7 +1133,7 @@ class LiveConditionRuntime:
             else None
         )
         monitor = (
-            RuntimeMonitor(
+            (self.monitor_factory or RuntimeMonitor)(
                 manifest,
                 modules=(
                     M3_POLICY_MODULES
@@ -1244,6 +1257,13 @@ class LiveConditionRuntime:
             backend.close()
             raise LiveConditionRuntimeError("effect backend identity drift")
 
+        provenance_tracker = (
+            self.provenance_tracker_factory()
+            if self.provenance_tracker_factory is not None
+            else None
+        )
+        safety_builder = self.safety_receipt_factory or build_safety_receipt
+
         events: list[dict[str, Any]] = []
         outputs: list[Any] = []
         receipts: list[dict[str, Any]] = [
@@ -1277,6 +1297,9 @@ class LiveConditionRuntime:
             )
         try:
             for step in range(1, agent_call_cap + 1):
+                parsed = None
+                decision_name = None
+                execution_attempted = False
                 call_index = provider_calls_consumed + step
                 attempt_id = _provider_attempt_id(
                     context,
@@ -1404,7 +1427,12 @@ class LiveConditionRuntime:
                     break
 
                 proposal_id = f"{context.work_key}:step:{step}"
-                provenance = infer_argument_provenance(
+                provenance_inferer = (
+                    provenance_tracker.infer_argument_provenance
+                    if provenance_tracker is not None
+                    else infer_argument_provenance
+                )
+                provenance = provenance_inferer(
                     proposal_id=proposal_id,
                     tool=parsed.tool,
                     arguments=parsed.arguments,
@@ -1527,11 +1555,34 @@ class LiveConditionRuntime:
                     else str(decision)
                 )
 
+                corrected_diagnostics = None
+                if provenance_tracker is not None:
+                    corrected_diagnostics = {
+                        "dataflow": provenance_tracker.summarize_dataflow(
+                            tool=parsed.tool,
+                            arguments=parsed.arguments,
+                            events=provenance,
+                            constraints=manifest.dataflow_constraints,
+                            module_enabled=bool(
+                                monitor is not None and "dataflow" in monitor.modules
+                            ),
+                        ),
+                        "argument_sources": [
+                            {
+                                "argument_path": item.argument_path,
+                                "source_type": item.source_type,
+                                "trust_level": item.trust_level,
+                                "data_labels": list(item.data_labels),
+                            }
+                            for item in provenance
+                        ],
+                    }
+
                 execution_attempted = decision_name == "ALLOW"
                 observation: Any
                 execution_succeeded = False
                 if execution_attempted:
-                    safety_receipt = build_safety_receipt(
+                    safety_receipt = safety_builder(
                         provider_id=client.provider_id,
                         endpoint_url=client.endpoint,
                         effect_backend=backend.backend_id,
@@ -1546,6 +1597,19 @@ class LiveConditionRuntime:
                     execution_succeeded = _execution_succeeded(
                         parsed.tool, observation
                     )
+                    if provenance_tracker is not None:
+                        metadata_factory = getattr(
+                            backend, "trusted_observation_metadata", None
+                        )
+                        metadata = (
+                            metadata_factory(parsed.tool, parsed.arguments, observation)
+                            if callable(metadata_factory)
+                            else None
+                        )
+                        provenance_tracker.observe(
+                            parsed.tool, parsed.arguments, observation,
+                            trusted_metadata=metadata,
+                        )
                     if monitor is not None and execution_succeeded:
                         monitor.record_execution(proposal, decision)
                     if oracle_monitor is not None and execution_succeeded:
@@ -1571,6 +1635,10 @@ class LiveConditionRuntime:
                         "response_text": completion.text,
                         "observation": observation,
                         "provider_receipt_sha256": receipt_digest,
+                        **(
+                            {"corrected_diagnostics": corrected_diagnostics}
+                            if corrected_diagnostics is not None else {}
+                        ),
                     }
                 )
                 if decision_name == "ASK":
@@ -1621,6 +1689,33 @@ class LiveConditionRuntime:
                         ),
                     }
                 )
+        except Exception as exc:
+            if not self.capture_runtime_failures:
+                raise
+            # Preserve already observed effects and receipts after an execution error.
+            operational_status = "runner_failure"
+            failure_diagnostic = {
+                "failure_stage": "runtime_execution",
+                "failure_class": type(exc).__name__,
+                "provider_call_index": call_index,
+                "http_category": "not_applicable",
+            }
+            events.append({
+                "step": step,
+                "parse_ok": parsed is not None,
+                "parse_error_code": None if parsed is not None else "runtime_failure",
+                "tool": parsed.tool if parsed is not None else "final",
+                "arguments": parsed.arguments if parsed is not None else {"answer": ""},
+                "decision": decision_name or "DENY",
+                "reason_code": "runtime_failure",
+                "violated_constraints": [],
+                "execution_attempted": execution_attempted,
+                "execution_succeeded": False,
+                "response_text": "",
+                "observation": {"error": "runtime_failure", "error_type": type(exc).__name__},
+                "provider_receipt_sha256": None,
+                **failure_diagnostic,
+            })
         finally:
             try:
                 material = getattr(backend, "evaluator_material", None)
