@@ -556,6 +556,8 @@ def main():
             ),
             flush=True,
         )
+        if (args.diagnostics and not result["passed"]) or result.get("state") == "paused":
+            raise SystemExit(1)
     except Exception as exc:
         # No error message/context/credential or request content is published.
         print(

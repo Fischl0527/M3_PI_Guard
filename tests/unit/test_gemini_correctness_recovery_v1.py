@@ -5,6 +5,7 @@ from experiments.paper_v2 import gemini_correctness_recovery_v1 as recovery
 import pytest
 import json
 import threading
+import sys
 from experiments.paper_v2.correctness_provider_v1 import (
     DevelopmentRequestClient,
     RequestPacer,
@@ -257,3 +258,17 @@ def test_boolean_attempt_and_excess_cumulative_calls_rejected():
     second = dict(row, attempt=2, provider_requests=[{"http_status": 503}] * 2)
     with pytest.raises(ValueError, match="cap exceeded"):
         recovery.select_pending(plan, old, [row, second])
+
+
+def test_cli_failed_diagnostic_exits_nonzero_without_dispatch(monkeypatch, tmp_path):
+    monkeypatch.setattr(sys, "argv", ["recovery", "--diagnostics"])
+    monkeypatch.setattr(recovery, "RECOVERY_OUTPUT", tmp_path)
+    monkeypatch.setattr(recovery, "resolve_config_path", lambda path: "unused")
+    values = {"fixture": "not-a-secret"}
+    monkeypatch.setattr(recovery, "parse_env_file", lambda path: values)
+    monkeypatch.setattr(recovery, "credential", lambda v, g: "offline-fixture")
+    monkeypatch.setattr(recovery, "run_diagnostics", lambda key: {"passed": False, "records": 1})
+    with pytest.raises(SystemExit) as result:
+        recovery.main()
+    assert result.value.code == 1
+    assert values == {}

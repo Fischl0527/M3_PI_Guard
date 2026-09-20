@@ -6,6 +6,10 @@
 - Provider72 and affected runtime/runner42 tests pass; recovery-only9 checks pass after extra boundary cases.
 - Preserve5 response-bearing512 rows, oldraw and DeepSeek. Free-only/USD0 and no real effects.
 - Offline milestone precedes six live diagnostics. Report/result checkpoint follows actual outcome.
+- Code0ac8631 pushed. First diagnosticHTTP503 stopped the run; experiment0/283, no oldraw changed.
+- Recovery/analysis final33 targeted checks and Ruff pass; analysis report generated in approved nestedroot.
+- Corrected analysis default-path mistake; mistaken sibling draft remainslocal/untracked after tool blocked cleanup.
+- Local implementation verified, live recovery paused pending service/new diagnostic direction. No active runner.
 
 ## 2026-09-20 — Correctness completion review and bounded compiler fix
 

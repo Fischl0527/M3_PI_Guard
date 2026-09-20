@@ -1,6 +1,6 @@
 # Gemini恢复：原48任务六条件开发试跑
 
-状态：in_progress；用户明确批准实现与限定API执行。关联F-PAPER-002。
+状态：本地修复已验证；在线恢复paused/diagnostics_not_passed，整体未完成。关联F-PAPER-002。
 
 ## 已批准范围
 
@@ -32,10 +32,17 @@
 
 ## 验证与运行记录
 
-尚未调用恢复API。
+代码0ac8631推送后，六条诊断的首条收到HTTP503且没有模型响应，立即停止。
+剩余5条诊断及283项实验未调用。旧结果不变。不自动重试诊断、不盲目改参数。
 
 - provider新旧兼容：`python -m pytest tests/unit/test_correctness_provider_v1.py tests/unit/test_paper_v2_gemini_json_client_v1.py -q`，72 passed。
 - 恢复与原runner/runtime回归：`python -m pytest tests/unit/test_gemini_correctness_recovery_v1.py tests/unit/test_correctness_runner_v1.py tests/unit/test_correctness_runtime_v1.py -q`，42 passed；未调用模型。
 - 独立复核确认283候选/25前缀和原5保护；新增open-trace/bool-attempt/累计cap测试后，恢复专项9 passed。
 - Ruff与py_compile通过；不运行Full Harness。配置为官方固定Gemini，不静默删除low或切模型。
 - 启动命令依次为同一模块 `experiments.paper_v2.gemini_correctness_recovery_v1` 的 `--diagnostics`、`--prefix-only`、`--resume-pending-only`。诊断不通过禁止后两步。
+- 首条诊断命令当时exit0、passed=false；随后仅修复CLI为失败/暂停返回1并定向验证，未重发API。
+- 恢复专项最终10 passed；实际发送2048/low确认，但实际模型支持尚未确认（无成功响应）。
+- 分析相关39 passed，修正default path后最终恢复+分析联合33 passed；Ruff/编译通过。
+- 正确嵌套目录生成报告/4CSV/2PNG/analysis；已目视图件，效果图无点表示无观测，不是零风险。
+- 初版分析器误产出同级目录，修复并留回归测试；旧raw无修改。清理移动被工具策略拒绝，
+  同级草稿未删除也不提交Git；有效报告只在correctness_repair_v1/gemini_recovery_v1。

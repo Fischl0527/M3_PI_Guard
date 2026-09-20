@@ -2,6 +2,18 @@
 
 ## 2026-09-20 — Gemini recovery remaining-call integration
 
+- First analysis writer incorrectly used a sibling gemini_recovery_v1 directory and read
+  no diagnostic status. No old results were changed. Added default-path/approved-nested
+  writer regression tests; final analysis targets correctness_repair_v1/gemini_recovery_v1.
+  Moving this-turn mistaken generated artifacts was rejected by tool policy; no move/delete
+  happened. Sibling artifacts remain untracked local drafts, not submitted results.
+
+- Live diagnostic using2048/low returnedHTTP503 (one request, no official responseID/model).
+  This is observed service unavailability, not evidence thatlow is unsupported or thatquota429 occurred.
+  Diagnostic rule stopped further calls;283 experiment items untouched. No parameter search/fallback.
+- First CLI returnedexit0 withpassedfalse. Added red test and nonzero status for failed diagnostics
+  and paused runs; recovery10 tests pass. Did not resend the failed live request.
+
 - Old512 truncation/parse failures and pure503 failures remain unchanged.
 - Red test reproduced client-only cap7 makes runtime try8 and misclassify exhaustion.
   Setting context7 exposed profile cap consistency check. Fix: replace local
