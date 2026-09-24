@@ -1,3 +1,5 @@
+> **副本说明**：这是根目录《LLM的千层诱惑.md》的同步副本；本文件位于 `docx/`，相对链接已按该目录位置调整。
+
 # 一句话速通本项目：这个项目做了什么，接下来从哪里看
 
 适用项目：M3-PI Guard。这里把它简称为“本项目”。Guard 的意思是“守卫”，PI 是 Prompt Injection 的缩写，中文是“提示注入”；M3 是项目使用的代号，不需要先理解这个名称才能接手。
@@ -199,7 +201,7 @@ E7a 有意构造了这种过度约束对照：可信批准后，严格规则下�
 - 远程分支截至 2026-09-20 的 HEAD 仍保留旧实现；2026-09-21 的复核报告是外部诊断，尚未作为代码修复或新 admitted evidence。
 - 推荐修复方向是让 `exact_gold` 只比较 gold 实际约束的字段（subset / target-field matching），而不是要求完整参数字典完全相等；修复后只需重新运行受影响的 `exact_gold` 单元，并在论文中披露该 operationalization error。
 
-完整外部材料见 [docx/exact_gold_defect_report_2026-09-21.md](docx/exact_gold_defect_report_2026-09-21.md)；9 月 20 日的先前 Q2 审阅保留在 [docx/external_q2_review_2026-09-20.md](docx/external_q2_review_2026-09-20.md)，其中关于 `exact_gold` 的正面解释已被 9 月 21 日复核部分推翻，其他不依赖该单元的评审意见仍可单独参考。
+完整外部材料见 [docx/exact_gold_defect_report_2026-09-21.md](../docx/exact_gold_defect_report_2026-09-21.md)；9 月 20 日的先前 Q2 审阅保留在 [docx/external_q2_review_2026-09-20.md](../docx/external_q2_review_2026-09-20.md)，其中关于 `exact_gold` 的正面解释已被 9 月 21 日复核部分推翻，其他不依赖该单元的评审意见仍可单独参考。
 
 ### 6.3 有时“安全”只是因为任务没做成
 
@@ -225,12 +227,12 @@ Gemini 是另一次尝试，不是已完成的第二厂商证据。接口故障�
 
 | 想做什么 | 优先打开 | 不必先看什么 |
 |---|---|---|
-| 看当前论文 | [中文对照稿](docs/research/paper_v2/manuscript/manuscript_zh_v1.md)、[论文审阅版](LaTeX通用模板/数模通用模板.pdf) | 各个历史 Word 文件。 |
-| 看近期结果 | [授权与确认阶段报告](docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md) | 大量逐次请求记录。 |
-| 看现在还缺什么 | [当前任务](harness/state/current-task.md)最上方、[会话交接](harness/state/session-handoff.md)最上方 | 数月前计划的“待完成”列表。 |
-| 找实验入口 | [本轮实验代码目录](experiments/paper_v2/) | 名称最大的历史控制器版本。 |
-| 找权限检查 | [运行时检查器](m3_guard/runtime_monitor.py) | 先把所有统计代码读完。 |
-| 找实验依据 | [实验设计目录](protocols/paper_upgrade_v2/)、[实验输出目录](outputs/experiments/) | 旧压缩交付包、旧截图和缓存。 |
+| 看当前论文 | [中文对照稿](../docs/research/paper_v2/manuscript/manuscript_zh_v1.md)、[论文审阅版](../LaTeX通用模板/数模通用模板.pdf) | 各个历史 Word 文件。 |
+| 看近期结果 | [授权与确认阶段报告](../docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md) | 大量逐次请求记录。 |
+| 看现在还缺什么 | [当前任务](../harness/state/current-task.md)最上方、[会话交接](../harness/state/session-handoff.md)最上方 | 数月前计划的“待完成”列表。 |
+| 找实验入口 | [本轮实验代码目录](../experiments/paper_v2/) | 名称最大的历史控制器版本。 |
+| 找权限检查 | [运行时检查器](../m3_guard/runtime_monitor.py) | 先把所有统计代码读完。 |
+| 找实验依据 | [实验设计目录](../protocols/paper_upgrade_v2/)、[实验输出目录](../outputs/experiments/) | 旧压缩交付包、旧截图和缓存。 |
 
 ### 7.1 根目录地图
 
@@ -345,13 +347,13 @@ E7a 的原始文件特别容易误读：一次请求会先记录“开始”，�
 
 以 E7a 的“12/12 获许可”为例：
 
-1. 读[阶段报告第 4 节](docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md)，先明确统计的是许可，不是任务执行。
-2. 看[分析文件](outputs/experiments/e7_confirmation_usability_v1/analysis_v1.json)里的条件分组和字段解释。
-3. 必要时按工作项编号找[原始记录](outputs/experiments/e7_confirmation_usability_v1/raw_records_v1.jsonl)。
-4. 对照[运行前计划](protocols/paper_upgrade_v2/e7_confirmation_usability_v1/plan_v1.md)，确认没有临时换分母。
-5. 看[判定代码](experiments/paper_v2/e7_confirmation_runner_v1.py)里的 `score_proposal`。这个函数名意思是“为动作提案判分”；它目前没有提交后端效果。
+1. 读[阶段报告第 4 节](../docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md)，先明确统计的是许可，不是任务执行。
+2. 看[分析文件](../outputs/experiments/e7_confirmation_usability_v1/analysis_v1.json)里的条件分组和字段解释。
+3. 必要时按工作项编号找[原始记录](../outputs/experiments/e7_confirmation_usability_v1/raw_records_v1.jsonl)。
+4. 对照[运行前计划](../protocols/paper_upgrade_v2/e7_confirmation_usability_v1/plan_v1.md)，确认没有临时换分母。
+5. 看[判定代码](../experiments/paper_v2/e7_confirmation_runner_v1.py)里的 `score_proposal`。这个函数名意思是“为动作提案判分”；它目前没有提交后端效果。
 
-对于历史 Pro/Flash 大矩阵，优先看[已有结果汇总](docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json)及[论文结果源](docs/research/paper_v2/manuscript/results_shell.md)，不要从所有历史控制器中猜哪一版正在生效。
+对于历史 Pro/Flash 大矩阵，优先看[已有结果汇总](../docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json)及[论文结果源](../docs/research/paper_v2/manuscript/results_shell.md)，不要从所有历史控制器中猜哪一版正在生效。
 
 ## 9. 要读代码，按职责读，不要从第一行读到最后一行
 
@@ -372,16 +374,16 @@ E7a 的原始文件特别容易误读：一次请求会先记录“开始”，�
 
 | 位置 | 中文职责 | 什么问题看它 |
 |---|---|---|
-| [m3_core/policy_compiler.py](m3_core/policy_compiler.py) | 把可信任务材料转换成权限规则；compiler 在这里是“转换器”。 | 为什么用户要求变成这样的限制？ |
-| [m3_core/policy_regimes.py](m3_core/policy_regimes.py) | 生成不同授权设置；regime 指一种规则安排。 | 精确、宽泛、欠明确等条件具体怎么不同？ |
-| [m3_guard/task_policy.py](m3_guard/task_policy.py) | 权限清单与限制的数据结构。 | 规则能描述哪些工具和参数？ |
-| [m3_guard/runtime_monitor.py](m3_guard/runtime_monitor.py) | 做动作前的检查；runtime 是运行时，monitor 是检查器。 | 为什么这一提案被允许、要求确认或拒绝？ |
-| [m3_guard/provenance.py](m3_guard/provenance.py) | 参数来源识别。 | 为什么一个收件人被认为来自用户或外部内容？ |
-| [m3_guard/dataflow.py](m3_guard/dataflow.py) | 数据流向限制；dataflow 是数据从哪里流向哪里。 | 文件内容能否被发送到某个目的地？ |
-| [experiments/paper_v2/live_condition_runtime.py](experiments/paper_v2/live_condition_runtime.py) | 把模型、条件、检查与模拟执行接起来。 | 模型提出动作后程序怎样继续？历史 ASK 为什么结束运行？ |
-| [experiments/paper_v2/formal_condition_executors.py](experiments/paper_v2/formal_condition_executors.py) | 按实验条件选取执行方式。 | 一个条件究竟打开哪些检查？ |
-| [m3_eval/statistics.py](m3_eval/statistics.py) | 常用统计计算。 | 比例、不确定区间和配对比较怎么算？ |
-| [experiments/paper_v2/incremental_analysis_v1.py](experiments/paper_v2/incremental_analysis_v1.py) | E1—E5 的研究分析。 | 怎样把原始记录整理成论文表？ |
+| [m3_core/policy_compiler.py](../m3_core/policy_compiler.py) | 把可信任务材料转换成权限规则；compiler 在这里是“转换器”。 | 为什么用户要求变成这样的限制？ |
+| [m3_core/policy_regimes.py](../m3_core/policy_regimes.py) | 生成不同授权设置；regime 指一种规则安排。 | 精确、宽泛、欠明确等条件具体怎么不同？ |
+| [m3_guard/task_policy.py](../m3_guard/task_policy.py) | 权限清单与限制的数据结构。 | 规则能描述哪些工具和参数？ |
+| [m3_guard/runtime_monitor.py](../m3_guard/runtime_monitor.py) | 做动作前的检查；runtime 是运行时，monitor 是检查器。 | 为什么这一提案被允许、要求确认或拒绝？ |
+| [m3_guard/provenance.py](../m3_guard/provenance.py) | 参数来源识别。 | 为什么一个收件人被认为来自用户或外部内容？ |
+| [m3_guard/dataflow.py](../m3_guard/dataflow.py) | 数据流向限制；dataflow 是数据从哪里流向哪里。 | 文件内容能否被发送到某个目的地？ |
+| [experiments/paper_v2/live_condition_runtime.py](../experiments/paper_v2/live_condition_runtime.py) | 把模型、条件、检查与模拟执行接起来。 | 模型提出动作后程序怎样继续？历史 ASK 为什么结束运行？ |
+| [experiments/paper_v2/formal_condition_executors.py](../experiments/paper_v2/formal_condition_executors.py) | 按实验条件选取执行方式。 | 一个条件究竟打开哪些检查？ |
+| [m3_eval/statistics.py](../m3_eval/statistics.py) | 常用统计计算。 | 比例、不确定区间和配对比较怎么算？ |
+| [experiments/paper_v2/incremental_analysis_v1.py](../experiments/paper_v2/incremental_analysis_v1.py) | E1—E5 的研究分析。 | 怎样把原始记录整理成论文表？ |
 
 `evaluate_action` 是运行时检查器中的“评价这个动作”函数；`RuntimeMonitor` 是组织这项检查的对象。先理解它们的输入和返回值，再看内部细节。
 
@@ -389,13 +391,13 @@ E7a 的原始文件特别容易误读：一次请求会先记录“开始”，�
 
 | 研究 | 入口代码 | 提醒 |
 |---|---|---|
-| 授权制度主实验 | [lean_empirical_runner.py](experiments/paper_v2/lean_empirical_runner.py) | runner 指组织并执行实验的程序。已有结果不因为读代码就需要重跑。 |
-| E1—E4 | [incremental_study_runner_v1.py](experiments/paper_v2/incremental_study_runner_v1.py) | 通过研究名称选择不同计划，四个目录不能相互覆盖。 |
-| E5 | [incremental_adaptive_tail_runner_v1.py](experiments/paper_v2/incremental_adaptive_tail_runner_v1.py) | 只针对选定的 12 个后续任务；不是重新从第 1 次开始。 |
-| E6 最终单块版本 | [e6_cross_provider_calibration_runner_v2.py](experiments/paper_v2/e6_cross_provider_calibration_runner_v2.py) | 现有 B1 已闭合。B1 是执行块编号，不要恢复已结束项目。 |
-| 新确认会话 | [confirmation_session_v1.py](experiments/paper_v2/confirmation_session_v1.py) | session 是一次会话；票据要绑定任务/申请、未过期且只使用一次。仅供新实验，不是生产身份认证。 |
-| E7a | [e7_confirmation_runner_v1.py](experiments/paper_v2/e7_confirmation_runner_v1.py) | 新确认包装同时用于两个模块条件；结果是许可，不是后端执行。 |
-| E8 环境检查 | [agentdyn_native_qualification_v1.py](experiments/paper_v2/agentdyn_native_qualification_v1.py) | 这是环境及给定操作检查入口，不是已完成的模型实验。 |
+| 授权制度主实验 | [lean_empirical_runner.py](../experiments/paper_v2/lean_empirical_runner.py) | runner 指组织并执行实验的程序。已有结果不因为读代码就需要重跑。 |
+| E1—E4 | [incremental_study_runner_v1.py](../experiments/paper_v2/incremental_study_runner_v1.py) | 通过研究名称选择不同计划，四个目录不能相互覆盖。 |
+| E5 | [incremental_adaptive_tail_runner_v1.py](../experiments/paper_v2/incremental_adaptive_tail_runner_v1.py) | 只针对选定的 12 个后续任务；不是重新从第 1 次开始。 |
+| E6 最终单块版本 | [e6_cross_provider_calibration_runner_v2.py](../experiments/paper_v2/e6_cross_provider_calibration_runner_v2.py) | 现有 B1 已闭合。B1 是执行块编号，不要恢复已结束项目。 |
+| 新确认会话 | [confirmation_session_v1.py](../experiments/paper_v2/confirmation_session_v1.py) | session 是一次会话；票据要绑定任务/申请、未过期且只使用一次。仅供新实验，不是生产身份认证。 |
+| E7a | [e7_confirmation_runner_v1.py](../experiments/paper_v2/e7_confirmation_runner_v1.py) | 新确认包装同时用于两个模块条件；结果是许可，不是后端执行。 |
+| E8 环境检查 | [agentdyn_native_qualification_v1.py](../experiments/paper_v2/agentdyn_native_qualification_v1.py) | 这是环境及给定操作检查入口，不是已完成的模型实验。 |
 
 ## 10. 检查算法怎么理解，不需要先看公式
 
@@ -498,15 +500,15 @@ git branch --show-current
 
 这个命令会做本地测试并可能产生测试缓存，但不会调用 DeepSeek 或 Gemini。检查确认代码时，对应测试是：
 
-- [tests/test_confirmation_session_v1.py](tests/test_confirmation_session_v1.py)：确认票据边界。
-- [tests/test_e7_confirmation_runner_v1.py](tests/test_e7_confirmation_runner_v1.py)：E7a 运行与记录逻辑。
-- [tests/test_authorization_usability_diagnostics_v1.py](tests/test_authorization_usability_diagnostics_v1.py)：诊断统计及受控探针。
+- [tests/test_confirmation_session_v1.py](../tests/test_confirmation_session_v1.py)：确认票据边界。
+- [tests/test_e7_confirmation_runner_v1.py](../tests/test_e7_confirmation_runner_v1.py)：E7a 运行与记录逻辑。
+- [tests/test_authorization_usability_diagnostics_v1.py](../tests/test_authorization_usability_diagnostics_v1.py)：诊断统计及受控探针。
 
 不要为了“接手时全部变绿”运行根目录历史说明中的全量验证、历史重放或所有大型实验。**检查通过只证明相应代码通过该组小测试，不代表科学结论成立。**
 
 ### 11.3 如果只需要更新论文
 
-先修改 [manuscript 目录](docs/research/paper_v2/manuscript/)中的对应 Markdown 章节。`manuscript` 是文稿，`methods` 是方法，`results` 是结果，`discussion` 是讨论，`conclusion` 是结论。
+先修改 [manuscript 目录](../docs/research/paper_v2/manuscript/)中的对应 Markdown 章节。`manuscript` 是文稿，`methods` 是方法，`results` 是结果，`discussion` 是讨论，`conclusion` 是结论。
 
 然后在仓库根目录运行：
 
@@ -517,11 +519,11 @@ git branch --show-current
 
 这两个命令分别生成合并英文文稿和 LaTeX 章节，会改写相应生成文件，但不运行实验。`build` 在这里是生成文件，不是训练模型。
 
-最后用 TeXstudio 打开 [数模通用模板.tex](LaTeX通用模板/数模通用模板.tex)，使用 XeLaTeX 编译。XeLaTeX 是支持中文和系统字体的 LaTeX 编译程序。完整命令见[模板说明](LaTeX通用模板/README.md)。
+最后用 TeXstudio 打开 [数模通用模板.tex](../LaTeX通用模板/数模通用模板.tex)，使用 XeLaTeX 编译。XeLaTeX 是支持中文和系统字体的 LaTeX 编译程序。完整命令见[模板说明](../LaTeX通用模板/README.md)。
 
 这份审阅稿当前为 52 页，正文使用 Times New Roman，即新罗马字体；保持 A4 纸张、四边 25 毫米和底部居中页码。左侧结构来自各章的字面引用路径，别改回隐藏路径的宏而导致编辑器看不到章节。
 
-正式投稿样式的入口另在 [M3_PI_Guard_JISA.tex](LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex)，目前 59 页；JISA 是目标期刊 Journal of Information Security and Applications 的简称，即《信息安全与应用杂志》。它使用该出版体系的排版类，不等于数模审阅模板。
+正式投稿样式的入口另在 [M3_PI_Guard_JISA.tex](../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex)，目前 59 页；JISA 是目标期刊 Journal of Information Security and Applications 的简称，即《信息安全与应用杂志》。它使用该出版体系的排版类，不等于数模审阅模板。
 
 `.tex` 是 LaTeX 源文件，`.bib` 是参考文献数据，PDF 是固定版式的阅读文件。Word 是文字处理软件，项目中保留的是历史文档。不要只改生成的某个 `.tex` 章节而忘记 Markdown 源，否则下次生成会覆盖你的手工修改。也不要改旧 Word 文件后误以为当前论文会自动同步。
 
@@ -535,7 +537,7 @@ git branch --show-current
 4. 怎样判断坏动作、正常完成和运行失败？
 5. 如何只处理允许恢复的失败项，不重跑成功项？
 
-模型密钥是调用凭据，由负责人通过本机私有配置管理，位置约定见 [config/README.md](config/README.md)。`config/project.local.env` 是本机配置文件，不应上传。新人阅读、统计已有公开结果和排版不需要拿到密钥，更不要在群聊或报告里粘贴它。
+模型密钥是调用凭据，由负责人通过本机私有配置管理，位置约定见 [config/README.md](../config/README.md)。`config/project.local.env` 是本机配置文件，不应上传。新人阅读、统计已有公开结果和排版不需要拿到密钥，更不要在群聊或报告里粘贴它。
 
 本文不提供针对已结束 E6/E7a 的一键续跑命令。新实验需要独立计划；接口限额、余额及可用模型在正式启动时再核对，不能照搬旧截图。Gemini 如使用仍限官方免费层，不启用付费结算或自动更换账号。
 
@@ -642,13 +644,13 @@ E8 已能加载环境，但给定示例轨迹在固定 18 个任务中只得到 
 
 ## 15. 需要深入时再打开的材料
 
-- [Claude 2026-09-21 exact_gold 缺陷复核](docx/exact_gold_defect_report_2026-09-21.md)：当前最高优先级的已知测量缺陷；修复并重跑前不要再引用 M3-v2 `exact_gold` 效用坍塌和 benchmark 方向反转。
-- [Claude 2026-09-20 Q2 readiness review](docx/external_q2_review_2026-09-20.md)：修复缺陷前的外部投稿审阅；其中 `exact_gold` 相关解释已被次日复核修正，其余独立意见按证据来源分别参考。
-- [最近授权与确认实验报告](docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md)：P0/P2/E7a/E8 的当前证据与限制。
-- [增量实验阶段报告](docs/research/paper_v2/incremental_empirical_v1/phase_report_v1.md)：前一轮增量研究的说明。
-- [E6 最终报告](outputs/experiments/e6_cross_provider_calibration_v2/report_v2.md)：单执行块及不完整 Gemini 的解释。
-- [本次论文更新报告](docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md)：新增表格、引用及排版情况。
-- [中文论文对照](docs/research/paper_v2/manuscript/manuscript_zh_v1.md)：完整论文内容。
-- [当前研究主张与证据清单](docs/research/paper_v2/manuscript/claim_evidence_ledger_lean_v1.json)：claim 指论文主张，evidence 指证据，ledger 指逐项清单。
+- [Claude 2026-09-21 exact_gold 缺陷复核](../docx/exact_gold_defect_report_2026-09-21.md)：当前最高优先级的已知测量缺陷；修复并重跑前不要再引用 M3-v2 `exact_gold` 效用坍塌和 benchmark 方向反转。
+- [Claude 2026-09-20 Q2 readiness review](../docx/external_q2_review_2026-09-20.md)：修复缺陷前的外部投稿审阅；其中 `exact_gold` 相关解释已被次日复核修正，其余独立意见按证据来源分别参考。
+- [最近授权与确认实验报告](../docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md)：P0/P2/E7a/E8 的当前证据与限制。
+- [增量实验阶段报告](../docs/research/paper_v2/incremental_empirical_v1/phase_report_v1.md)：前一轮增量研究的说明。
+- [E6 最终报告](../outputs/experiments/e6_cross_provider_calibration_v2/report_v2.md)：单执行块及不完整 Gemini 的解释。
+- [本次论文更新报告](../docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md)：新增表格、引用及排版情况。
+- [中文论文对照](../docs/research/paper_v2/manuscript/manuscript_zh_v1.md)：完整论文内容。
+- [当前研究主张与证据清单](../docs/research/paper_v2/manuscript/claim_evidence_ledger_lean_v1.json)：claim 指论文主张，evidence 指证据，ledger 指逐项清单。
 
 **交接的重点不是让下一位同学记住所有目录，而是知道：要回答什么问题、该看哪份材料、每个结果究竟证明到了哪一步。**
