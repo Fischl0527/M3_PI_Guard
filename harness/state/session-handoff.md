@@ -8,7 +8,8 @@
 - 151项定向pytest通过、4项旧宽烟测/历史资格产物复核未跑，1条第三方弃用警告；Ruff和11源内存编译通过。30固定M3案例离线许可3/30→30/30，不是模型TCR。具体命令见任务和报告。
 - 旧exact_gold、corrected_v1默认、原raw/冻结输入/统计不改写；已有followup工具的旧缺分类负例仍保留。本轮没有API调用、研究runner、Full Harness、历史递归验证或LaTeX构建；Gemini仍deferred。
 - 实现子阶段完成，F-PAPER-002保持in_progress。新授权实测、新模型合成控制、本地模型/独立任务证据与论文同步待后续；不能宣称Claude全部科研建议已完成或投稿就绪。不要自动追加大型实验。
-- 用户稿件/模板/第三方与legacy_endpoint_recovery等无关dirty保留。仅相关编译器/runtime、必要合成控制与测试、普通报告/Harness提交。Git实际交付SHA以本轮提交与remote核对为准。
+- 用户稿件/模板/第三方与legacy_endpoint_recovery等无关dirty保留。仅相关编译器/runtime、必要合成控制与测试、普通报告/Harness提交；current-task原有16行不混入。
+- 修复提交75a96bed842d9d58a482ffbad031cb3c92fe431a（20文件）已推送origin/codex/claude-review-repairs，ls-remote与本地一致。后续仅报告/状态回执提交；最新SHA见git log，不PR/强推，不自动实验。
 
 ## 2026-10-06 — 比赛材料与重复指南归档完成
 

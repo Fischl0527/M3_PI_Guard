@@ -8,6 +8,7 @@
 -151 focused tests pass,4 old-wide/qualification/cache checks explicitly excluded,1 third-party deprecation warning retained;11-file Ruff and in-memory compilation pass. Failed-first regressions and fixture identity correction recorded without disabling validators.
 - Integrated existing related synthetic-followup source/tests; preserved unrelated manuscripts/templates/submodules. No API/full Harness/historical recursive replay/LaTeX build/Gemini recovery.
 - Report/task: docs/research/paper_v2/Claude审核修复报告_2026-10-06.md and harness/tasks/claude-review-repairs-2026-10-06.md. Implementation substage closed; F-PAPER-002 in_progress for prospective evidence and subsequent manuscript work. Scoped delivery on codex/claude-review-repairs.
+-20-path repair commit75a96bed842d9d58a482ffbad031cb3c92fe431a pushed toorigin/codex/claude-review-repairs; remote SHA matches. Unrelated16-line current-task work remains unstaged, no PR/force-push or experiment.
 
 ## 2026-10-06 — Archive old competition materials and deduplicate the handover
 

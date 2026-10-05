@@ -1,6 +1,6 @@
 # 当前任务
 
-### 2026-10-06 Claude审核实现修复（定向验证完成，待Git交付）
+### 2026-10-06 Claude审核实现修复（本子阶段完成并推送）
 
 - 用户授权修复审核指出的实现问题；以已交付整改计划P0-A/B/C/D为本轮范围。
 - 新分支codex/claude-review-repairs；精确目标授权新版本、模糊权限基础边界、缺分类保守处理及最小事件保存。
@@ -8,6 +8,7 @@
 - 任务harness/tasks/claude-review-repairs-2026-10-06.md；F-PAPER-002仍in_progress。模型新实验和论文科学完成不属于本子阶段验收。
 - 修复完成：exact_target_v2接口完整但安全目标精确、模糊目标不生成自动许可、缺可信分类时ASK且不能确认绕过、执行未知/请求摘要保存及显式版本绑定。旧默认/原raw不改。
 - 151项定向pytest通过，4项历史/广泛烟测不执行，Ruff及11源内存编译通过。30案例离线权限检查3/30→30/30不是模型TCR。报告docs/research/paper_v2/Claude审核修复报告_2026-10-06.md。
+- 修复提交75a96bed842d9d58a482ffbad031cb3c92fe431a已推送origin/codex/claude-review-repairs；ls-remote与本地一致。随后仅报告/状态回执，不自动启动新模型矩阵。
 
 ### 2026-10-06 旧比赛材料归档与交接指南去重（本次归档完成）
 

@@ -8,7 +8,8 @@
 - 公开事件区分隔离拒绝、模拟执行和未知，保存请求摘要及实际版本；旧计划不能静默套修复配置。旧exact_gold、corrected_v1默认、冻结材料/raw/统计均保留。
 - 151项定向pytest通过、4项历史资格/广泛烟测不执行，1条既有第三方Pydantic弃用警告保留；Ruff和11源内存编译通过。固定30M3良性案例离线许可3/30→30/30，不是模型任务完成率。
 - 集成既存本地followup源/测试作为必要合成控制，不执行其API批次。Gemini继续deferred；0 API/Full Harness/历史递归回放/论文构建。
-- 普通报告：docs/research/paper_v2/Claude审核修复报告_2026-10-06.md。实现子阶段完成、F-PAPER-002仍in_progress：新授权实测、模型控制、本地模型与论文同步尚未完成。范围化Git交付随后核实。
+- 普通报告：docs/research/paper_v2/Claude审核修复报告_2026-10-06.md。实现子阶段完成、F-PAPER-002仍in_progress：新授权实测、模型控制、本地模型与论文同步尚未完成。
+-20文件修复提交75a96bed842d9d58a482ffbad031cb3c92fe431a已推送origin/codex/claude-review-repairs，ls-remote与本地一致；仅补普通报告/Harness回执，不启动下一实验。原有16行current-task改动保留未提交。
 
 ## 2026-10-06 — 旧比赛材料归档与唯一交接指南
 

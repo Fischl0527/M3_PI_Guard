@@ -52,4 +52,5 @@
 - 实现子阶段验收满足；F-PAPER-002整体in_progress。新授权矩阵、16新模型控制、本地/独立任务证据和后续双语/LaTeX同步没有执行。
 -0官方API/Full Harness/历史递归回放/科研统计重算/论文构建；现有结果和作者字段不动。Gemini继续暂缓。
 - 报告docs/research/paper_v2/Claude审核修复报告_2026-10-06.md；测试临时产物仅harness/tmp，不新增正式outputs结果目录。
-- 新分支codex/claude-review-repairs，起点397a879a16f986d2db20defb73da95d0488a4161；origin=RedTeam_LLM_Security。待范围化暂存检查、提交并推送，再补实际回执。
+- 新分支codex/claude-review-repairs，起点397a879a16f986d2db20defb73da95d0488a4161；origin=RedTeam_LLM_Security。
+-20路径范围提交75a96bed842d9d58a482ffbad031cb3c92fe431a已推送；git ls-remote origin refs/heads/codex/claude-review-repairs与git rev-parse HEAD一致。cached diff --check、feature JSON解析及报告11本地链接通过，非本轮dirty仍保留。随后只补实际Git回执，不追加科研检查或实验。
