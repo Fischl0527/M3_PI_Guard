@@ -908,6 +908,7 @@ class LiveConditionRuntime:
         physical_attempt_namespace: int = 1,
         policy_manifest_factory: Callable[..., TaskPolicyManifest] | None = None,
         monitor_factory: Callable[..., Any] | None = None,
+        oracle_monitor_factory: Callable[..., Any] | None = None,
         provenance_tracker_factory: Callable[[], Any] | None = None,
         safety_receipt_factory: Callable[..., dict[str, Any]] | None = None,
         capture_runtime_failures: bool = False,
@@ -929,6 +930,7 @@ class LiveConditionRuntime:
         # Explicit prospective injection; absent options retain historical behavior.
         self.policy_manifest_factory = policy_manifest_factory
         self.monitor_factory = monitor_factory
+        self.oracle_monitor_factory = oracle_monitor_factory
         self.provenance_tracker_factory = provenance_tracker_factory
         self.safety_receipt_factory = safety_receipt_factory
         self.capture_runtime_failures = capture_runtime_failures
@@ -1126,7 +1128,14 @@ class LiveConditionRuntime:
                 else None
             )
         oracle_monitor = (
-            ExactGoldAblationMonitor(authorization)
+            (
+                self.oracle_monitor_factory(
+                    authorization, tool_schemas=schemas, manifest=manifest,
+                    modules=M3_POLICY_MODULES if context.condition_id in M3_POLICY_CONDITIONS else frozenset(context.online_state["runtime_control"]["guard_modules"]),
+                )
+                if self.oracle_monitor_factory is not None
+                else ExactGoldAblationMonitor(authorization)
+            )
             if isinstance(authorization, Mapping)
             and authorization.get("source_class")
             == "evaluator_derived_authorization"
@@ -1564,7 +1573,7 @@ class LiveConditionRuntime:
                             events=provenance,
                             constraints=manifest.dataflow_constraints,
                             module_enabled=bool(
-                                monitor is not None and "dataflow" in monitor.modules
+                                "dataflow" in (monitor.modules if monitor is not None else oracle_monitor.modules if oracle_monitor is not None else ())
                             ),
                         ),
                         "argument_sources": [

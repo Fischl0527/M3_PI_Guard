@@ -1,5 +1,16 @@
 # Failure Log
 
+## 2026-10-06 — Claude-review regressions and fixes
+
+- Public-interface repro found ambiguous generic-v2 target ALLOW in policy-only and missing_classification simulated unsafe effect in old full followup. Four initial regression nodes failed; narrow unresolved scope and later explicit V2 classification resolved them. Old negative controls remain unchanged.
+- Red tests for the new exact-target and classification components first failed because components were not yet implemented. Implemented separate opt-in modules, not monkey-patching historical ones.
+- Confirmation regression initially returnedawaiting_confirmation before checking missing classification. Changed the V2 decision path to also check classification before independent_confirmation_required ASK can be approved; the regression now blocks_scope_not_expandable.
+- Five additional negative nodes caught malformed schema TypeError, enumTrue==1, dispatched-runtime-failure False, and restrictions attached after a decision. Added bounded schema errors/strict JSON enum comparisons/unknown summaries/predecision-only restriction attachment; all five reran successfully.
+- Two new persistence fixtures used a non-SHA identity rejected by the existing resolver. Corrected the fixture to a new compliant64-character identity, not the resolver. Both passed.
+- Three version-binding negatives exposed absent plan/runtime agreement (client attribute failure occurred after configuration mismatch). Added explicit compiler/runtime/version checks before hydration/provider use; the three corrected nodes passed.
+- Final combined targeted run151passed,4deselected,0failed; one existing third-party VIGIL/Pydantic deprecation warning retained. No API retry, old result rewrite or Full Harness.
+- Scoped task staging initially passed a PowerShell comma expression togit update-index, which rejectedcacheinfo before changing that task entry. Changed to one explicitly quoted cacheinfo string; only the new task subsection staged, prior16 unrelated lines remain working-copy-only.20-path staged diff has no whitespace errors.
+
 ## 2026-10-06 — Competition archive documentation patch
 
 - Initial multi-file patch expected 文件夹说明.md heading as 文件夹说明, while actual heading is M3_PI_Guard 文件夹说明. Patch verification rejected before edits; scoped diff confirmed no changes in that attempt. Read the actual heading and reapplied the corrected patch; no file loss or experiment occurred.

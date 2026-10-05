@@ -1,5 +1,14 @@
 # Task History
 
+## 2026-10-06 — Versioned Claude-review correctness repairs
+
+- Implemented explicit exact_target_v2 control, unresolved-scope narrowing, trusted-classification ASK and event/unknown preservation; keep historical exact_gold and corrected_v1 defaults/raw unchanged.
+- New versions inject existing runtime factories and require plan/compiler/runtime/regime agreement before provider use. Preserve field-role/target/interface/order/single-use constraints, runtime restrictions and oracle/provider separation.
+- Fixed30-case permission characterization is3/30 legacy versus30/30 target-v2, not model TCR or reconstructed historical failure causes. Classified-private/unknown/public/archive scenarios reach actual in-memory execution and serialization.
+-151 focused tests pass,4 old-wide/qualification/cache checks explicitly excluded,1 third-party deprecation warning retained;11-file Ruff and in-memory compilation pass. Failed-first regressions and fixture identity correction recorded without disabling validators.
+- Integrated existing related synthetic-followup source/tests; preserved unrelated manuscripts/templates/submodules. No API/full Harness/historical recursive replay/LaTeX build/Gemini recovery.
+- Report/task: docs/research/paper_v2/Claude审核修复报告_2026-10-06.md and harness/tasks/claude-review-repairs-2026-10-06.md. Implementation substage closed; F-PAPER-002 in_progress for prospective evidence and subsequent manuscript work. Scoped delivery on codex/claude-review-repairs.
+
 ## 2026-10-06 — Archive old competition materials and deduplicate the handover
 
 - Archived16 exact roots/299 files/38,812,720 bytes outside the repository, including the unused DAY6 packaging script, preserving relative paths and matching file/directory metadata without new hash bundles. Kept current scientific code, raw evidence, references and LaTeX in place.

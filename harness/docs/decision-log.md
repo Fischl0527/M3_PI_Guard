@@ -1,5 +1,15 @@
 # 决策日志
 
+## 2026-10-06 — Prospective Claude-review repairs, no retrospective relabeling
+
+- User authorized fixing Claude's implementation findings. Bound this substage to P0 correctness and targeted offline proof; no new provider experiment or manuscript rewrite follows automatically.
+- Keep exact_gold/default corrected_v1 semantics immutable. exact_target_v2 is a separately named excluded oracle control: explicit environment-owned tool roles, typed content, exact security scope, strict interface, sequence and record binding. It composes original full-module restrictions without exposing derived gold to the provider.
+- Required unresolved security scope cannot produce a type-only automatic grant even in policy-only. Optional security scope permits omission/explicit default only; generated content is distinct. Generic parsing remains bounded and does not claim arbitrary semantic authorization.
+- Missing trusted classification at an applicable restricted sink means ASK, not ALLOW; independent confirmation cannot replace classification. Public and internal-archive controls must still execute to avoid deny-all.
+- Preserve proposal/Guard/boundary/execution/unknown separately. A dispatched action followed by an exception has unknown execution/isolation summary, not false-safe zero. Native AgentDojo labels retain native semantics.
+- Require explicit plan/compiler/runtime/regime agreement for new configs; do not silently relabel old plans or patch globals. Integrate the already local synthetic control helper/tests only because the regression suite uses it; do not run its model batch.
+-151 targeted tests, strict lint and in-memory compile are adequate for this code substage; exclude old-wide/qualification/cache rechecks. Scientific feature remains in_progress pending prospective results, not favorable-outcome gates.
+
 ## 2026-10-06 — External competition archive, one current guide and narrow verification
 
 - User authorized old competition materials to move to the external archive. Use16 explicit roots (including the unused DAY6 release builder), preserve original relative structure, reject target conflicts/reparse points, and compare names/types/sizes before/after. Do not delete contents or upload the archive.

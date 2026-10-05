@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-10-06 — Claude审核实现修复完成，科研仍需新证据
+
+- 当前分支codex/claude-review-repairs，基于397a879；origin为RedTeam_LLM_Security。任务harness/tasks/claude-review-repairs-2026-10-06.md，报告docs/research/paper_v2/Claude审核修复报告_2026-10-06.md。
+- 本轮P0实现已定向验证：exact_target_v2、generic编译v2、RuntimeMonitorCorrectedV2、strict tool contract及共享runtime注入/公开事件。不要直接把历史计划切换到新配置；新计划必须声明compiler_revision/runtime_revision/runtime_version和一致的authorization_regime，并使用新身份/输出。
+- oracle控制仅Guard看派生精确范围，模型仍使用非oracle提示。缺可信分类ASK必须补受信输入，不能人工批准绕过。成功执行记录/错误目标/额外收件人/顺序/重复/未知保存均有负例。
+- 151项定向pytest通过、4项旧宽烟测/历史资格产物复核未跑，1条第三方弃用警告；Ruff和11源内存编译通过。30固定M3案例离线许可3/30→30/30，不是模型TCR。具体命令见任务和报告。
+- 旧exact_gold、corrected_v1默认、原raw/冻结输入/统计不改写；已有followup工具的旧缺分类负例仍保留。本轮没有API调用、研究runner、Full Harness、历史递归验证或LaTeX构建；Gemini仍deferred。
+- 实现子阶段完成，F-PAPER-002保持in_progress。新授权实测、新模型合成控制、本地模型/独立任务证据与论文同步待后续；不能宣称Claude全部科研建议已完成或投稿就绪。不要自动追加大型实验。
+- 用户稿件/模板/第三方与legacy_endpoint_recovery等无关dirty保留。仅相关编译器/runtime、必要合成控制与测试、普通报告/Harness提交。Git实际交付SHA以本轮提交与remote核对为准。
+
 ## 2026-10-06 — 比赛材料与重复指南归档完成
 
 - 当前任务：harness/tasks/competition-materials-archive-2026-10-06.md；入口报告：docs/比赛材料归档说明_2026-10-06.md。当前分支codex/directory-migration-fixes、origin为RedTeam_LLM_Security。
