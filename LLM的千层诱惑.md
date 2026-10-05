@@ -199,7 +199,7 @@ E7a 有意构造了这种过度约束对照：可信批准后，严格规则下�
 - 远程分支截至 2026-09-20 的 HEAD 仍保留旧实现；2026-09-21 的复核报告是外部诊断，尚未作为代码修复或新 admitted evidence。
 - 推荐修复方向是让 `exact_gold` 只比较 gold 实际约束的字段（subset / target-field matching），而不是要求完整参数字典完全相等；修复后只需重新运行受影响的 `exact_gold` 单元，并在论文中披露该 operationalization error。
 
-完整外部材料见 [docx/exact_gold_defect_report_2026-09-21.md](docx/exact_gold_defect_report_2026-09-21.md)；9 月 20 日的先前 Q2 审阅保留在 [docx/external_q2_review_2026-09-20.md](docx/external_q2_review_2026-09-20.md)，其中关于 `exact_gold` 的正面解释已被 9 月 21 日复核部分推翻，其他不依赖该单元的评审意见仍可单独参考。
+完整外部材料见 [docs/exact_gold_defect_report_2026-09-21.md](docs/exact_gold_defect_report_2026-09-21.md)；9 月 20 日的先前 Q2 审阅保留在 [docs/external_q2_review_2026-09-20.md](docs/external_q2_review_2026-09-20.md)，其中关于 `exact_gold` 的正面解释已被 9 月 21 日复核部分推翻，其他不依赖该单元的评审意见仍可单独参考。
 
 ### 6.3 有时“安全”只是因为任务没做成
 
@@ -642,8 +642,8 @@ E8 已能加载环境，但给定示例轨迹在固定 18 个任务中只得到 
 
 ## 15. 需要深入时再打开的材料
 
-- [Claude 2026-09-21 exact_gold 缺陷复核](docx/exact_gold_defect_report_2026-09-21.md)：当前最高优先级的已知测量缺陷；修复并重跑前不要再引用 M3-v2 `exact_gold` 效用坍塌和 benchmark 方向反转。
-- [Claude 2026-09-20 Q2 readiness review](docx/external_q2_review_2026-09-20.md)：修复缺陷前的外部投稿审阅；其中 `exact_gold` 相关解释已被次日复核修正，其余独立意见按证据来源分别参考。
+- [Claude 2026-09-21 exact_gold 缺陷复核](docs/exact_gold_defect_report_2026-09-21.md)：当前最高优先级的已知测量缺陷；修复并重跑前不要再引用 M3-v2 `exact_gold` 效用坍塌和 benchmark 方向反转。
+- [Claude 2026-09-20 Q2 readiness review](docs/external_q2_review_2026-09-20.md)：修复缺陷前的外部投稿审阅；其中 `exact_gold` 相关解释已被次日复核修正，其余独立意见按证据来源分别参考。
 - [最近授权与确认实验报告](docs/research/paper_v2/authorization_usability_v1/phase_report_v1.md)：P0/P2/E7a/E8 的当前证据与限制。
 - [增量实验阶段报告](docs/research/paper_v2/incremental_empirical_v1/phase_report_v1.md)：前一轮增量研究的说明。
 - [E6 最终报告](outputs/experiments/e6_cross_provider_calibration_v2/report_v2.md)：单执行块及不完整 Gemini 的解释。

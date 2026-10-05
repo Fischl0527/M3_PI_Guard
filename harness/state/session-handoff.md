@@ -1,5 +1,13 @@
 # 会话移交
 
+## 2026-10-05 — 文档目录合并
+
+- 当前仓库的顶层文档入口统一为 `docs/`，旧 `docx/` 已删除；新增的两份外部评审报告和交接指南副本均在 `docs/`。
+- 根目录 `LLM的千层诱惑.md` 和 `docs/LLM的千层诱惑.md` 均指向新报告位置。
+- 验证：102 个本地链接、0 个断链，`git diff --check` 通过；详见 `harness/tasks/merge-docs-docx-2026-10-05.md`。
+- 2026-09-20 论文整改的未提交修改及第三方目录脏状态保留，后续需另行完成和提交。
+
+
 ## 2026-09-20 — Non-Gemini scope closed; Gemini deferred by user
 
 - Latest user direction supersedes the Gemini continuation steps below: ignore Gemini for now.

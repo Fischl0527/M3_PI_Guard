@@ -1,5 +1,12 @@
 # Task History
 
+## 2026-10-05 — Merge top-level documentation folders
+
+- Moved all three tracked Markdown files from `docx/` to `docs/`, removed the empty source directory, updated active links and documentation index.
+- Local Markdown link check: 102 checked, 0 broken; no model or historical evidence rerun.
+- Scope: F-DOC-001 documentation layout only; previous uncommitted paper and experiment work preserved.
+
+
 ## 2026-09-20 — Close original non-Gemini development scope
 
 - User deferred Gemini and requested completion of the remainder.
