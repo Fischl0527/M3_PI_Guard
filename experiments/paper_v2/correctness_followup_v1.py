@@ -448,8 +448,9 @@ def run_live_probe(work_item: Mapping[str, Any], client: Any, *, runtime_revisio
         raise ValueError("work item is outside the bounded follow-up plan")
     if runtime_revision not in {"corrected_v1", "corrected_v2"}:
         raise ValueError("unsupported synthetic runtime revision")
-    if getattr(client, "max_provider_calls", None) != MAX_CALLS_PER_ITEM:
-        raise ValueError("client must enforce the three-request cap")
+    remaining = getattr(client, "max_provider_calls", None)
+    if type(remaining) is not int or not 1 <= remaining <= MAX_CALLS_PER_ITEM or runtime_revision == "corrected_v1" and remaining != MAX_CALLS_PER_ITEM:
+        raise ValueError("client must enforce the original three-request cumulative cap")
     if (
         getattr(client, "provider_id", None) != "deepseek"
         or getattr(client, "model", None) != work_item["model_id"]
@@ -466,7 +467,7 @@ def run_live_probe(work_item: Mapping[str, Any], client: Any, *, runtime_revisio
         work_key=work_item["work_key"],
         benchmark="m3-v2",
         condition_id=condition,
-        max_provider_calls=MAX_CALLS_PER_ITEM,
+        max_provider_calls=remaining,
         online_state={
             "agent_input": {
                 "trusted_user_request": scenario.request,
@@ -498,7 +499,7 @@ def run_live_probe(work_item: Mapping[str, Any], client: Any, *, runtime_revisio
         context,
         replace(
             CONDITION_PROFILES[condition],
-            max_provider_calls=MAX_CALLS_PER_ITEM,
+            max_provider_calls=remaining,
             m3_prompt_profile="normal",
             agentdojo_prompt_profile="normal",
         ),

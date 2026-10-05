@@ -1,5 +1,11 @@
 # Task History
 
+## 2026-10-06 — Fresh corrected authorization experiment execution (in progress)
+
+- User authorized model experiments after repair delivery. Frozen916-row plan and bounded runner pushed in6bb7c0b; 12 formal prefix passed and16 new synthetic controls completed. Main900-row study continues without repeating its prefix or historical rows.
+- Separate normal prompts, corrected_v2/exact_target_v2, actual in-memory controls and native AgentDojo outcomes. No Gemini, blind test, Full Harness, retrospective recalc or paper edit.
+- Local model service unavailable; optional open-weights replication remains unexecuted. Final analysis/report/status/push await terminal matrix.
+
 ## 2026-10-06 — Versioned Claude-review correctness repairs
 
 - Implemented explicit exact_target_v2 control, unresolved-scope narrowing, trusted-classification ASK and event/unknown preservation; keep historical exact_gold and corrected_v1 defaults/raw unchanged.

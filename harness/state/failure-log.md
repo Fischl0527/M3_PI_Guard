@@ -6390,6 +6390,8 @@ credential, changed a historical ledger, or enabled an external effect.
 - Runtime联接后的PromptGuard和bootstrap解释器可启动；CaMeL报告基础Python缺失，pyvenv.cfg指向的 E:\AI_Cache\uv\python\cpython-3.10.12-windows-x86_64-none\python.exe 不存在。本轮未移动/删除该基础安装；联接不能修复基础环境缺失，不安装依赖或伪称CaMeL验证通过。
 # 2026-10-06 新实验离线资格化：混合计划解析边界
 
+- CLI首次前缀启动在凭据加载前因resolve_config_path多余project_root关键字失败，0请求/0raw。按原接口改为无参数，并增加配置入口mock测试及局部映射清理；不读取/输出凭据。
+
 - 首轮69定向测试：5failed/64passed/1deselected。合成场景混在M3基准计划时，原生resolver要求其不存在的source_reference。
 - 修正假设：合成控制不是M3-v2冻结基准行，使用synthetic-m3独立基准标记；仍通过相同内存Live循环，不放宽原生resolver。
 - 只撤回本轮刚生成、尚未调用/提交的准备计划并重新生成；不存在模型raw被删除/改写。重新测试后再执行正式前缀。

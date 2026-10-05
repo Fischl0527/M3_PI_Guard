@@ -1,0 +1,12 @@
+{
+  "part": "synthetic",
+  "planned": 16,
+  "recorded": 16,
+  "pending": 0,
+  "gate": null,
+  "stop_reason": null,
+  "statuses": {
+    "completed": 16
+  },
+  "updated_at": "2026-10-05T19:26:02.305549+00:00"
+}

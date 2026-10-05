@@ -1,5 +1,13 @@
 # 会话移交
 
+## 2026-10-06 — Claude整改后授权矩阵正在执行
+
+- 最新用户要求实际实验，任务harness/tasks/claude-revision-experiments-2026-10-06.md；900授权+16合成，不修改论文。新输出outputs/experiments/claude_revision_v1。
+- 12正式前缀passed（10completed/2max_steps）、16合成completed；主矩阵进程正在--part authorization --resume-pending-only，查活动进程/raw后再恢复，禁止并行同一study_part或重跑response-bearing行。
+- 可恢复入口python -m experiments.paper_v2.claude_revision_v1；单次HTTP重试0，官方DeepSeek，仅公开/合成任务。成功行不重跑，无响应仅显式一次恢复并扣原累计调用预算。Gemini仍deferred。
+- 本地Ollama服务不可达，未启动新模型。分析在全部终态后一次执行claude_revision_analysis_v1，报告MD及目录；技术论文整体F-PAPER-002仍in_progress。
+- 定向69passed/1deselected；分析/入口后续24passed，配置入口1passed。修正启动参数错误前0API；不读/输出密钥。原用户稿件、模板、第三方dirty保留。
+
 ## 2026-10-06 — Claude审核实现修复完成，科研仍需新证据
 
 - 当前分支codex/claude-review-repairs，基于397a879；origin为RedTeam_LLM_Security。任务harness/tasks/claude-review-repairs-2026-10-06.md，报告docs/research/paper_v2/Claude审核修复报告_2026-10-06.md。

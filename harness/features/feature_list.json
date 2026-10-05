@@ -405,6 +405,7 @@
       "status": "in_progress",
       "priority": "critical",
       "acceptanceCriteria": [
+        "The approved October post-repair study uses900 fresh fixed-cohort normal-prompt authorization rows and16 new synthetic controls, explicit corrected_v2 and exact_target_v2, a nonrepeated12-row prefix, separate native/M3 effect semantics and unknown-preserving ITT statistics; Gemini/local optional work cannot be called completed without execution",
         "Claude-review repairs use explicit corrected_v2/exact_target_v2 plans without historical relabeling; incomplete scope cannot become automatic permission, applicable missing trusted classification cannot execute, and unknown effect summaries survive serialization",
         "The approved 2026-09-20 corrected_v1 development study preserves legacy defaults and separates authorization/provenance correctness, confirmation state, observed effects and missing outcomes; up to 864 new executions do not become formal paper evidence automatically",
         "Gemini recovery uses only283 original no-response keys with2048/low, preserves5 response-bearing512 rows, caps cumulative calls at8 and attempts at2, and separates parameter strata without DeepSeek replay",

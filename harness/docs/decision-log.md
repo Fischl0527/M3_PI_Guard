@@ -1,5 +1,11 @@
 # 决策日志
 
+## 2026-10-06 — New post-repair model study, identical model-facing policy
+
+- User authorized actual experiments after the code-only substage. Freeze900 new paired authorization rows and16 synthetic controls; retain original180/60 cohort selection without new outcome selection.
+- All main cells use normal prompts. Stress scopes alter only Guard authorization; model prompt remains corrected auto-compiled policy, just as exact-target oracle data remains outside provider messages. Include oracle control explicitly, do not call it deployed non-oracle.
+- Synthetic rows use independent synthetic-m3 marker, fixed trusted ACL and real in-memory mailbox state; native resolvers stay strict. Open-weights service unavailable, no installation/startup or silent substitution.
+
 ## 2026-10-06 — Prospective Claude-review repairs, no retrospective relabeling
 
 - User authorized fixing Claude's implementation findings. Bound this substage to P0 correctness and targeted offline proof; no new provider experiment or manuscript rewrite follows automatically.

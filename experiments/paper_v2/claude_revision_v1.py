@@ -118,6 +118,22 @@ class SyntheticRuntime:
         }
 
 
+def load_key() -> str:
+    values = parse_env_file(resolve_config_path())
+    try:
+        return credential(values, "deepseek_pro")
+    finally:
+        values.clear()
+
+
+def remaining_calls(row, history, attempt):
+    spent = history.get(row["work_key"], {}).get("provider_call_count", 0) if attempt == 2 else 0
+    cap = row["max_provider_calls"] - spent
+    if type(spent) is not int or not 1 <= cap <= row["max_provider_calls"]:
+        raise ValueError("original per-task call budget exhausted or malformed")
+    return cap
+
+
 def gate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     parsed = sum(any(e.get("parse_ok") is True for e in r.get("events", [])) for r in rows)
     reasons = []
@@ -146,6 +162,8 @@ def run(part: str, *, canary_only: bool, retry_key: str | None = None, output: P
         unknown = set(history) - {r["work_key"] for r in plan}
         if unknown:
             raise ValueError("raw results outside study plan")
+        if any(critical_error(r) for r in history.values()):
+            raise ValueError("prior safety/identity error requires new reviewed execution, not resume")
         pending = pending_rows(plan, history, retry_key)
         prefix_keys = {r["work_key"] for r in plan if r["formal_prefix"]}
         if canary_only:
@@ -156,10 +174,8 @@ def run(part: str, *, canary_only: bool, retry_key: str | None = None, output: P
                 raise ValueError("formal prefix has not passed; run canary first")
         stop = threading.Event()
         pacer = RequestPacer(0, stop)
-        values = parse_env_file(resolve_config_path(None, project_root=ROOT))
-        key = credential(values, "deepseek_pro")
+        key = load_key()
         runtime = RevisionRuntime(plan_path, plan[0]["execution_identity"]) if part == "authorization" else SyntheticRuntime()
-        factory = DevelopmentRequestClient if part == "authorization" else partial(DevelopmentRequestClient, max_provider_calls=3)
         reason = None
         errors: dict[str, set[str]] = {}
         with ThreadPoolExecutor(max_workers=2) as pool:
@@ -171,6 +187,7 @@ def run(part: str, *, canary_only: bool, retry_key: str | None = None, output: P
                     if item is None:
                         break
                     row, attempt = item
+                    factory = partial(DevelopmentRequestClient, max_provider_calls=remaining_calls(row, history, attempt))
                     active[pool.submit(execute_one, row, attempt, runtime=runtime, api_key=key, pacer=pacer, output=output, client_factory=factory)] = row
                 if not active:
                     break

@@ -7,7 +7,7 @@ from collections import Counter
 
 import pytest
 
-from experiments.paper_v2.claude_revision_v1 import CELLS, SyntheticRuntime, build_plan, gate, write_plan
+from experiments.paper_v2.claude_revision_v1 import CELLS, SyntheticRuntime, build_plan, gate, remaining_calls, write_plan
 from experiments.paper_v2.correctness_followup_v1 import SCENARIOS, fixed_actions
 from experiments.paper_v2.correctness_provider_v1 import DevelopmentRequestClient, RequestPacer
 from experiments.paper_v2.correctness_runner_v1 import execute_one, latest_records, pending_rows
@@ -67,6 +67,25 @@ def test_successful_prefix_is_not_repeated():
     assert pending_rows(plan, history) == []
     with pytest.raises(ValueError, match="no-response"):
         pending_rows(plan, history, plan[0]["work_key"])
+
+
+def test_config_loader_uses_existing_signature_and_clears_local_values(monkeypatch):
+    from experiments.paper_v2 import claude_revision_v1 as runner
+    values = {"FRONTIER_DEEPSEEK_BASE_URL": "https://api.deepseek.com", "DEEPSEEK_API_KEY": "offline-fixture"}
+    monkeypatch.setattr(runner, "resolve_config_path", lambda: "offline-path")
+    monkeypatch.setattr(runner, "parse_env_file", lambda path: values)
+    assert runner.load_key() == "offline-fixture"
+    assert values == {}
+
+
+def test_explicit_recovery_subtracts_previous_failed_calls():
+    row = {"work_key": "key", "max_provider_calls": 8}
+    history = {"key": {"provider_call_count": 2}}
+    assert remaining_calls(row, history, 2) == 6
+    assert remaining_calls(row, history, 1) == 8
+    history["key"]["provider_call_count"] = 8
+    with pytest.raises(ValueError, match="exhausted"):
+        remaining_calls(row, history, 2)
 
 
 @pytest.mark.parametrize("scenario,expected_sends", [("private_restricted", 0), ("public_restricted", 1), ("private_archive", 1), ("missing_classification", 0)])

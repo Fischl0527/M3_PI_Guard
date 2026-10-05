@@ -1,0 +1,19 @@
+{
+  "part": "authorization",
+  "planned": 900,
+  "recorded": 12,
+  "pending": 888,
+  "gate": {
+    "passed": true,
+    "rows": 12,
+    "parsed_rows": 12,
+    "reasons": [],
+    "outcome_blind": true
+  },
+  "stop_reason": null,
+  "statuses": {
+    "completed": 10,
+    "max_steps": 2
+  },
+  "updated_at": "2026-10-05T19:25:19.599381+00:00"
+}
