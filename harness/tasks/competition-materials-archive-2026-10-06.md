@@ -32,3 +32,4 @@
 - `F:\robot\Anaconda3\python.exe -B -X utf8 -m ruff check scripts/audit_project_conventions.py tests/unit/test_repository_layout.py`通过。只调用check_top_level_directories和check_active_document_links，两项均通过；没有运行会递归验证冻结证据的完整审计。
 - 13份活动文档86个本地链接全部有效；feature JSON解析和scoped git diff --check通过。当前科研源码、输入、raw、统计及LaTeX未修改；无API、Full Harness、论文编译或进程终止。
 - Git仅提交本轮目录迁移、阅读入口、定向检查和状态。外部归档不上传GitHub；原有科研、模板、第三方dirty工作保留。交付分支codex/directory-migration-fixes，最终提交与远端核对结果见git log和对话回执。
+- 整理提交aceda6b716a510db1c74e6ba39fd3e53cfcfe04f已通过git push origin codex/directory-migration-fixes交付；git ls-remote确认同SHA。暂存300个移出的历史文件均在外部归档存在（299比赛材料+1根指南副本），24个其余变更全部属于本轮白名单；原current-task中的16行无关工作仍未提交。此回执仅文档补记。
