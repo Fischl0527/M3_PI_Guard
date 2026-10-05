@@ -36,7 +36,6 @@ PROJECT_DIRECTORIES = (
     "harness",
     "agent",
     "文档资料",
-    "图表素材",
 )
 
 ACTIVE_PYTHON_ROOTS = (
@@ -72,8 +71,8 @@ REQUIRED_RENAMED_FILES = {
     "docs/证据索引.md",
     "docs/移交与论文检查清单.md",
     "docs/research/Task_Shield_v1_6_失败分析.md",
-    "docs/presentation/ppt_result_notes.md",
-    "docs/archive/report_v0_3.md",
+    "docs/LLM的千层诱惑.md",
+    "docs/比赛材料归档说明_2026-10-06.md",
     "experiments/e17_source_index.md",
     "harness/项目上下文.md",
     "harness/tasks/m3-expansion-001.md",

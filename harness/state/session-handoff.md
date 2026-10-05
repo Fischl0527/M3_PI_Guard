@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-10-06 — 比赛材料与重复指南归档完成
+
+- 当前任务：harness/tasks/competition-materials-archive-2026-10-06.md；入口报告：docs/比赛材料归档说明_2026-10-06.md。当前分支codex/directory-migration-fixes、origin为RedTeam_LLM_Security。
+- 16迁移根/299文件/38,812,720字节移至E:\M3_PI_Guard_archive\competition_history\M3_PI_Guard_test，原结构和元数据一致。包括停用DAY6打包脚本。根指南旧副本保存archive/document_duplicates；活动指南仅docs/LLM的千层诱惑.md。不要再要求两份指南同步。
+- 用户已自行搬好D两备份：本轮确认源不存在/E目标存在；下方旧“尚未迁移”文字是历史记录。未读私钥/标签，未验证该备份逐文件完整性。
+- 修改范围：目录/阅读入口文档、目录检查及对应测试、Harness状态；科研源码/输入/raw/分析/LaTeX、第三方和原有未提交文件保留。
+- 验证：7个定向测试通过、1个既有历史文件名大小写断言失败；Ruff、两个轻量目录检查和86个本地链接通过，feature JSON与scoped diff检查通过。详细命令见任务。未运行Full Harness、递归证据审计、API或论文编译。
+- 归档子任务完成，F-DOC-001整体仍in_progress。命名检查的E17_SOURCE_INDEX.md/M3-EXPANSION-001.md大小写问题没有借本轮改写；论文科研整改也未完成。不要自动启动额外实验或全仓库验证。
+- 仅提交本轮并推送当前分支；外部archive不进Git。最终交付SHA以git log/对话回执为准。
+
 ## 2026-10-06 — 修复验证通过，新分支已推送
 
 - 当前分支codex/directory-migration-fixes，起点3c32923；远程origin为RedTeam_LLM_Security。任务：harness/tasks/directory-migration-fixes-2026-10-05.md；报告：docs/迁移环境与论文检查修复报告_2026-10-06.md。

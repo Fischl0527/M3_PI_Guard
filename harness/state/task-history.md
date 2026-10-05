@@ -1,5 +1,13 @@
 # Task History
 
+## 2026-10-06 — Archive old competition materials and deduplicate the handover
+
+- Archived16 exact roots/299 files/38,812,720 bytes outside the repository, including the unused DAY6 packaging script, preserving relative paths and matching file/directory metadata without new hash bundles. Kept current scientific code, raw evidence, references and LaTeX in place.
+- Compared both handover bodies after link normalization: identical content. docs/LLM的千层诱惑.md is the sole active guide; the old root copy is recoverable in the external document_duplicates directory.
+- Verified the user's D-drive backup moves by source/destination existence only; no key/label reading or backup-content integrity claim.
+- Seven focused tests passed; one pre-existing case-sensitive filename assertion failed and remains unchanged. Ruff, two lightweight directory checks and86 local links passed. Overall F-DOC-001 remains in_progress.
+- Report/task: docs/比赛材料归档说明_2026-10-06.md and harness/tasks/competition-materials-archive-2026-10-06.md. Scoped Git delivery on codex/directory-migration-fixes; preserve unrelated dirty work. No API/full Harness/manuscript build/history replay.
+
 ## 2026-10-06 — Repair migration, runtime and manuscript-build checks
 
 - Created codex/directory-migration-fixes from3c32923; user explicitly extended scope to existing environment and paper-check failures.

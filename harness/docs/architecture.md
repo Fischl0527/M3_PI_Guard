@@ -31,6 +31,8 @@ RunLog + Manifest + 失败记录
 
 `docs/`只保留文档和必要说明插图；统计JSON/CSV/实验图放在`outputs/`，论文机器状态在`harness/state/paper_v2/`，七套停用公开工具包在`release/archive/blind_custodian_toolkits/`。冻结文件内容和产品公共接口不变。外围归档在仓库外的`E:\M3_PI_Guard_archive`，旧runtime路径仅作目录联接；D盘备份尚因工具拒绝待迁移。入口为`docs/项目目录指南.md`。
 
+2026-10-06更新：用户手动迁移D备份后，源/目标位置已核对；旧比赛材料整包移至归档的`competition_history/M3_PI_Guard_test`，不纳入Git。主项目当前代码及科研证据原位保留，交接指南仅`docs/LLM的千层诱惑.md`一份。详细映射见`docs/比赛材料归档说明_2026-10-06.md`，前句D未迁移是历史状态。
+
 - `m3_attacks` 负责源案例、扩展、切分元数据和数据集完整性。
 - `m3_core` 负责模型交互、提示构造、工具调用解析和运行元数据。
 - `m3_guard` 负责行为决策和模块级消融；它不知道测试答案。

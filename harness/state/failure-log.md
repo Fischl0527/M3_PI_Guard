@@ -1,5 +1,11 @@
 # Failure Log
 
+## 2026-10-06 — Competition archive documentation patch
+
+- Initial multi-file patch expected 文件夹说明.md heading as 文件夹说明, while actual heading is M3_PI_Guard 文件夹说明. Patch verification rejected before edits; scoped diff confirmed no changes in that attempt. Read the actual heading and reapplied the corrected patch; no file loss or experiment occurred.
+- A later batch similarly found the old migration report's actual title 集中归档与文档整理报告. Read the affected headers, confirmed the batch had not applied, and used the exact title; no repeated guess or scientific-data change.
+- Targeted directory suite:7 passed,1 failed in the pre-existing exact-name check. Git and filesystem both retain experiments/E17_SOURCE_INDEX.md and harness/tasks/M3-EXPANSION-001.md, but that older check expects lowercase names. This turn moved neither file. Preserve the historical files and existing failing assertions; disclose the unrelated naming inconsistency instead of weakening checks or extending this archive task to renaming historical source/state records.
+
 ## 2026-10-06 — Migration/environment/manuscript checks repaired
 
 - Chinese text guard initially treated valid outputs image URLs as workflow prose; split prose checking from image-target existence instead of deleting valid figures.

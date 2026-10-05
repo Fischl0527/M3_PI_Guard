@@ -88,10 +88,11 @@ def test_approved_document_renames_use_exact_canonical_names() -> None:
             "伦理与适用范围.md",
             "证据索引.md",
             "移交与论文检查清单.md",
+            "LLM的千层诱惑.md",
+            "比赛材料归档说明_2026-10-06.md",
             "README.md",
         },
-        REPO_ROOT / "docs" / "presentation": {"ppt_result_notes.md"},
-        REPO_ROOT / "docs" / "archive": {"README.md", "report_v0_3.md"},
+        REPO_ROOT / "docs" / "archive": {"README.md"},
         REPO_ROOT / "experiments": {"e17_source_index.md"},
         REPO_ROOT / "harness" / "tasks": {"m3-expansion-001.md"},
     }
@@ -131,10 +132,6 @@ def test_superseded_documents_are_archived_without_breaking_current_entries() ->
         "docs/research/taskshield_v16_feasibility_plan.md",
     )
     archived_entries = (
-        "docs/archive/legacy_competition/dataset_card_legacy_69.md",
-        "docs/archive/legacy_competition/release_checklist_legacy_v1.md",
-        "docs/archive/legacy_competition/submission_evidence_index_legacy_v1.md",
-        "docs/archive/legacy_competition/report_sections/03_attack_scenarios.md",
         "docs/archive/research/progent_v13_failure_analysis.md",
         "docs/archive/research/taskshield_v15_failure_analysis.md",
         "docs/archive/research/taskshield_v16_execution_plan.md",
@@ -142,6 +139,26 @@ def test_superseded_documents_are_archived_without_breaking_current_entries() ->
     )
     assert all((REPO_ROOT / relative).is_file() for relative in current_entries)
     assert all((REPO_ROOT / relative).is_file() for relative in archived_entries)
+
+
+def test_competition_archive_and_handover_have_current_reader_entries() -> None:
+    guide = REPO_ROOT / "docs/LLM的千层诱惑.md"
+    archive_note = REPO_ROOT / "docs/比赛材料归档说明_2026-10-06.md"
+    text = archive_note.read_text(encoding="utf-8")
+    assert "competition_history" in text
+    assert "document_duplicates" in text
+    assert "唯一阅读入口" in guide.read_text(encoding="utf-8")
+    assert not (REPO_ROOT / "LLM的千层诱惑.md").exists()
+    assert "docs/LLM的千层诱惑.md" in (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    # 归档在仓库外，不要求其他开发者检出私人备份才能运行仓库路径测试。
+    for relative in (
+        "图表素材", "docs/archive/legacy_competition", "docs/archive/report_v0_3.md",
+        "docs/presentation", "docs/report", "scripts/presentation",
+        "release/M3_PI_Guard_v0.5", "release/Redteam_LLM_Security_v1.0",
+    ):
+        assert not (REPO_ROOT / relative).exists(), relative
+    assert (REPO_ROOT / "文档资料/相关参考论文").is_dir()
+    assert (REPO_ROOT / "LaTeX通用模板/数模通用模板.tex").is_file()
 
 
 def test_project_conventions_audit_passes() -> None:

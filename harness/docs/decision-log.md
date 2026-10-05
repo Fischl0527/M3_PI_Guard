@@ -1,5 +1,13 @@
 # 决策日志
 
+## 2026-10-06 — External competition archive, one current guide and narrow verification
+
+- User authorized old competition materials to move to the external archive. Use16 explicit roots (including the unused DAY6 release builder), preserve original relative structure, reject target conflicts/reparse points, and compare names/types/sizes before/after. Do not delete contents or upload the archive.
+- Keep scientific E0–E17 evidence and active source/fixtures/protocols/templates/references because current tests and research still depend on them; age alone does not make a file disposable.
+- Normalized guide contents match; retain the docs-relative-link version as the sole reader entry and preserve the root copy externally. Update current navigation, not historical frozen records/package internals.
+- User moved D backups manually. Verify only locations without secrets; do not misstate existence checks as full backup verification.
+- Keep the existing historical uppercase-file naming failure visible. Do not rename frozen records, relax assertions, or run recursive/full audits merely to turn the directory task green. Archive-specific checks suffice for this bounded subtask; overall feature remains in_progress.
+
 ## 2026-10-06 — Current publication integrity, frozen evidence and portable runtime
 
 - User authorized migration, environment and paper-check repairs together. Keep scientific runtime fixes and new experiments out of this bounded task.
