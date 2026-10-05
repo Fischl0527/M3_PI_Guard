@@ -1,5 +1,13 @@
 # Task History
 
+## 2026-10-05 — Consolidate archives and separate docs from artifacts
+
+- Moved368 existing tracked files without content changes (Git R100), including seven public historical toolkits; updated active readers/writers and manuscript image links only.
+- Archived three E-drive directories, preserved legacy Git75285ec and runtime old-path junction. PromptGuard/bootstrap start; CaMeL's configured base Python is absent, not repaired.
+- D-drive backup migration command was rejected before process launch; original folders remain intact and destinations absent. No alternate-tool bypass.
+- Directory-related tests30 passed, scoped Ruff passed, committed builder plus path changes passed temporary LaTeX smoke. Existing draft/ bibliography failures disclosed.
+- First milestonecd90bb3 pushed; guide, report and handoff added. No API/full Harness/history replay/manuscript content changes; unrelated dirty work preserved.
+
 ## 2026-10-05 — Review Claude findings and deliver a revision plan
 
 - Compared both Claude reports with current code, artifacts and manuscript; reproduced exact-argument incompatibility (27/30 M3 benign cases) and policy-only ambiguity bypass offline.

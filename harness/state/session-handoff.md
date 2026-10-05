@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-10-05 — 目录整理主体完成，外围两项未完成
+
+- 入口：docs/项目目录指南.md、docs/项目目录整理报告_2026-10-05.md；任务：harness/tasks/project-directory-organization-2026-10-05.md。
+- 内部368文件无内容变化迁移，E盘三处归档完成；旧runtime路径是联接，不是重复环境。
+- D盘两个停用备份因工具策略拒绝未搬迁，需要用户资源管理器整包迁移。不要声称D盘清空，不绕过执行拒绝。
+- 定向测试30 passed、Ruff通过；临时已提交构建器烟测通过。CaMeL基础解释器缺失、既存论文章节/BIB检查失败未解决。
+- 首提交cd90bb3已推送。此前科研修复、稿件生成器/测试、模板和第三方未提交改动保留；重叠路径仅提交本次修改。
+- 没有活动的本次模型runner，没有API调用/Full Harness/历史重算。F-DOC-001、F-PAPER-002仍in_progress。
+- 收口验证：19个源文件内存编译通过，118个本地链接0断链，feature JSON有效；最终说明/状态提交随后推送。
+
 ## 2026-10-05 — Claude审核计划交付，等待实施指令
 
 - 新入口：docs/research/paper_v2/Claude审核整改计划_2026-10-05.md；任务：harness/tasks/claude-review-revision-plan-2026-10-05.md。

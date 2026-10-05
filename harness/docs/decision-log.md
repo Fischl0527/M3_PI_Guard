@@ -2110,3 +2110,10 @@ Consequences:
   does not authorize API calls, experiments, Full Harness or historical replay.
 - Consequence: future deterministic builds preserve Times New Roman typography and
   TeXstudio-visible chapter hierarchy instead of overwriting a manual fix.
+# 2026-10-05 集中归档与文档产物分离
+
+- 用户批准最大限度迁移停用备份，无需恢复盲测/签名流程。主项目不搬，外围实际文件在仓库外归档，不上传备份。
+- docs是阅读区；统计与图表移至outputs、论文机器状态移至harness/state/paper_v2、公开历史工具包整包移至release/archive。
+- runtime使用旧路径联接兼容既有虚拟环境和冻结路径；不修改基础Python、不创建重复安装。
+- 只修改活动路径引用，旧raw、历史说明与归档内部清单保持原样；无关dirty改动不进入本次Git提交。
+- D盘迁移被执行工具拒绝，源目录未动；如实列为待迁移，不通过换工具绕过拒绝。

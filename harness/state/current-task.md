@@ -1,12 +1,16 @@
 # 当前任务
 
-### 2026-10-05 集中归档与文档整理（进行中）
+### 2026-10-05 集中归档与文档整理（主体完成，D盘待迁移）
 
 - 用户已批准备份简化版：五处外围目录迁至 E:\M3_PI_Guard_archive；主项目原位，runtime 旧路径保留兼容入口。
 - D盘两处是停用备份，整包迁移，不打开私钥/标签、不恢复盲测或签名。
 - docs 只留文档和说明插图；工具包、统计/表图和机器状态移至 release/outputs/harness。
 - 保留无关未提交修改；仅路径修正、定向验证与范围化Git提交，不API/Full Harness/论文内容修改。
 - 任务：harness/tasks/project-directory-organization-2026-10-05.md；F-DOC-001维持in_progress。
+- 内部368文件迁移为Git R100，30项定向测试、Ruff和已提交构建器临时烟测通过；首提交cd90bb3已推送。
+- E盘三处实际归档完成，runtime旧路径是Junction；PromptGuard/bootstrap启动通过，CaMeL基础Python缺失未修。
+- D盘两处命令被工具策略拒绝且未启动，仍在原位；不绕过限制。报告：docs/项目目录整理报告_2026-10-05.md。
+- 既存LaTeX章节/参考文献检查失败保留；不是论文整改完成，不API/Full Harness/历史重算。
 
 ### 2026-10-05 Claude审核核对与整改计划（规划完成，未实施）
 

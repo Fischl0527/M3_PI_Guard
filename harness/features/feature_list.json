@@ -392,7 +392,8 @@
         "活跃 ToolFilter 监控、Q2 就绪度和 Q2 执行计划产物使用相对路径保存仓库内引用；审计记录 goal_80_met，且不降低 90 分目标或任何硬上限",
         "公共基准完整性审计以相对路径保存全部 84 个单元引用，并保持 0/74760 正式结果门禁未满足",
         "2026-07-23 paper-v2 工程基础收尾后，独立及 Harness 内全量 pytest 均为 796 通过、1 跳过；E17 单测已使用离线环境快照，历史 helper/hash 漂移改为显式 fail-closed 回归；最终 Harness Verification failed=0",
-        "2026-10-05 将 docx/ 三份 Markdown 合并入 docs/ 并删除空目录；102 个本地 Markdown 链接检查通过，旧路径引用清零；本次未运行完整 Harness，F-DOC-001 仍 in_progress"
+        "2026-10-05 将 docx/ 三份 Markdown 合并入 docs/ 并删除空目录；102 个本地 Markdown 链接检查通过，旧路径引用清零；本次未运行完整 Harness，F-DOC-001 仍 in_progress",
+        "2026-10-05 集中整理：368文件R100迁移，docs无脚本/实验JSON/CSV，30项定向测试及Ruff通过；E盘三处已归档，runtime兼容联接；D盘备份迁移被工具拒绝待用户处理，CaMeL基础环境缺失和既存论文检查失败披露，F-DOC-001保持in_progress"
       ]
     },
     {
