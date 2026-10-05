@@ -46,8 +46,11 @@ permission graph, and uses an SMT authorizer before effectful execution [@L36].
 It further narrows any mechanism
 novelty claim around structured authorization and data-flow-aware permission
 graphs. Our study differs by treating the authorization regime itself as the
-paired experimental factor and by jointly measuring executed unsafe effects,
-benign utility, confirmation/blocking burden, and operational failure.
+paired experimental factor and by jointly reporting evaluator-labelled risk,
+benign utility, confirmation/blocking burden, and operational failure. The
+historical risk labels require the measurement qualifications in Methods;
+only the corrected development study separates observed simulated effects
+from proposals and boundary rejections.
 
 Two 2026 preprints overlap even more closely with provenance-aware
 authorization. ARGUS constructs an influence-provenance graph for
@@ -63,7 +66,7 @@ comparative facts.
 especially close 2026 measurement counterpart: it holds task content and
 policy fixed while changing source authority, then measures whether action
 selection changes [@L35]. Its
-controlled next-action design is narrower than M3's executed-effect study, but
+controlled next-action design differs from M3's multi-step evaluation, but
 it reinforces the need to separate evidence relevance from authorization. Our
 experiment extends that question to full tool trajectories, paired runtime
 Guard conditions, benign utility, `ASK/DENY` burden, and operational failure.
@@ -73,9 +76,10 @@ empirical. We test whether authorization information itself changes measured
 security and utility; enforce a runtime projection that excludes evaluator
 fields; compare the policy and full configuration packages in paired
 conditions while disclosing their bundled prompt/runtime differences; and
-quantify `ASK` burden, operational failures, and executed effects under a
-common evidence contract. These are study-design claims and must stand on
-M3's own completed experiments.
+quantify `ASK` burden and operational failures. Effect semantics are specific
+to the benchmark and evaluator version; the old and corrected endpoints are
+not interchangeable. These are study-design claims and must stand on M3's
+own completed experiments.
 
 ## Prompt-level defenses and execution-level outcomes
 
@@ -83,9 +87,10 @@ Structured queries, spotlighting, instruction hierarchy, and injection
 detectors act at the prompt, representation, or model-output layer
 [@L07; @L30; @L31; @L32]. They are relevant
 baselines, but detector scores and model compliance are not equivalent to an
-executed-effect endpoint. Our evaluation therefore records whether a proposed
-action crossed the runtime boundary and changed the sandbox state, while also
-retaining benign task completion. This distinction is necessary because a
+executed-effect endpoint. The corrected development evaluation therefore
+separates proposals, Guard decisions, sandbox execution receipts and outcome
+scoring. AgentDojo retains its native security checker, whereas M3-v2 uses
+observed simulated effects. This distinction is necessary because a
 defense can appear secure by refusing useful actions or by failing before an
 effect is attempted.
 
@@ -102,7 +107,7 @@ duplicating benign cases to manufacture a denominator.
 Static attacks are insufficient for a robustness claim. *The Attacker Moves
 Second* argues that a defense-aware attacker should optimize against the
 defense design rather than replay a fixed attack set [@L27]. The adaptive panel therefore exposes
-only public `ALLOW/ASK/DENY` and post-enforcement unsafe-effect feedback,
+only public `ALLOW/ASK/DENY` and legacy evaluator-labelled risk feedback,
 searches frozen tasks at prespecified query budgets, and reports the
 first-success distribution. Since L27 remains a preprint, it motivates the
 protocol but is not described as a peer-reviewed theorem.
@@ -123,9 +128,10 @@ workflow.
 ## Positioning summary
 
 M3 is not positioned as the first runtime guard, the first provenance system,
-or a state-of-the-art defense. The medium experiment already showed that
-M3-full did not improve security over M3 policy-only and failed the benign-tool
-non-inferiority criterion. The active paper instead studies how non-oracle
+or a state-of-the-art defense. In the medium experiment, M3-full did not improve
+the reported legacy risk endpoint over M3 policy-only and failed the reported
+benign-tool non-inferiority criterion. Those measurements do not establish
+effects under the repaired execution semantics. The active paper studies how non-oracle
 authorization, provenance-aware enforcement, confirmation, operational
 failure handling, benchmark choice, and adaptive attack budget jointly shape
 the measured security–utility frontier.

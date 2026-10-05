@@ -59,6 +59,7 @@ PLACEMENTS = {
             "table_05",
         ),
         "4.13 Authorization diagnostics and execution permits": ("table_07",),
+        "4.14 Corrected development study": ("table_08",),
     },
 }
 
@@ -379,7 +380,7 @@ def _parse_numbered_tables(markdown: str, *, supplementary: bool) -> list[Markdo
         rf"(?m)^{re.escape(level)} {re.escape(prefix)}(\d+)\. (.+)$"
     )
     matches = list(pattern.finditer(markdown))
-    expected = 12 if supplementary else 7
+    expected = 12 if supplementary else 8
     if len(matches) != expected:
         raise LatexBuildError(f"Expected {expected} tables, found {len(matches)}.")
 

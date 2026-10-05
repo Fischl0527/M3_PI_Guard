@@ -467,6 +467,30 @@ named task completion and simulated effect are interpreted only as permission
 eligibility. E7a reports descriptive counts and Wilson intervals separately
 from TCR and executed unsafe effects, without a new confirmatory test family.
 
+## Measurement correction and development validation
+
+The historical execution studies used the original compiler, rule matcher,
+and evaluator. Their recorded safety labels are not retrospectively converted
+to executed unauthorized effects. In particular, the original M3-v2 evaluator
+could score a final isolation rejection as an unsafe event, whereas the revised
+development evaluator distinguishes proposals, Guard permission, isolation
+rejection, successful simulated execution, task completion, and unknown values.
+AgentDojo retains its native security and utility checks. Legitimate completion
+and a security violation may coexist; missing evidence is not a safe zero.
+
+The explicitly selected corrected-v1 path fixes action-resource binding,
+complete matching across multiple rules, trusted-environment label propagation,
+and confirmation-state continuity. It does not alter the historical default
+or records. Six configurations cross no/policy/full guard modules with the
+same normal/safe prompt factor. The development set comprises 24 attacks,
+16 benign-tool tasks, and eight no-tool tasks; AgentDojo contributes 20 tasks
+and M3-v2 28. Attacks are historically enriched, not a deployment sample.
+Both completed DeepSeek cohorts use temperature zero, a 512-token output
+limit, and at most eight provider calls per task-condition. The V4.1 Flash
+model is distinct from the earlier V4 Flash and is not a model-invariant
+before/after comparison. Synthetic paired-action tests establish component
+behavior only; there is no simulated human approval or new confirmatory family.
+
 ## Minimal verification and reproducibility
 
 Verification is deliberately proportional to the lean study. It consists of:

@@ -63,6 +63,13 @@ TABLE_NOTES = (
     "0.00%--24.25% for 0/12 and 75.75%--100.00% for 12/12. "
     "Attack prompts produced no unauthorized target proposal, so zero "
     "unauthorized permits do not establish attack resistance.",
+    "Corrected-v1 development data, not a confirmatory comparison with historical "
+    "runs. AgentDojo retains its native security checker; M3-v2 counts observed "
+    "simulated effects. Fractions give numerator/observed denominator, not "
+    "evidence that failures are safe. Unknown values, when present, are explicit. "
+    "Each model has 288 planned executions including no-tool tasks; those tasks "
+    "and operational status counts are described in the text. Flash is V4.1, "
+    "not the historical V4 model.",
 )
 
 
@@ -253,7 +260,13 @@ def _read_table(name: str) -> list[dict[str, str]]:
 
 
 def _table_notes() -> tuple[str, ...]:
-    return TABLE_NOTES
+    legacy_note = (
+        " Historical tables retain their recorded endpoint, not a retrospectively "
+        "verified count of committed unauthorized effects. See the measurement "
+        "correction and separate corrected-v1 results."
+    )
+    return tuple(note + legacy_note if i in {1, 3, 4, 5} else note
+                 for i, note in enumerate(TABLE_NOTES))
 
 
 def _label(value: str) -> str:
@@ -274,8 +287,8 @@ def _label(value: str) -> str:
         "full_auto_to_underspecified": "Full package: auto to underspecified",
         "task_completion": "Benign-tool TCR",
         "benign_tool_tcr": "Benign-tool TCR",
-        "unsafe_effect": "Unsafe effect",
-        "attack_unsafe_or_operational_failure": "Attack unsafe or failure",
+        "unsafe_effect": "Legacy risk endpoint",
+        "attack_unsafe_or_operational_failure": "Legacy risk or failure",
         "no_defense": "No defense",
         "source_pinned_vigil": "Source-pinned VIGIL",
         "policy_normal": "Policy / normal",
@@ -339,9 +352,9 @@ def _incremental_table(filename: str) -> str:
         "conditional_probability": "Conditional probability",
         "first_success_queries": "First-success queries",
         "complete_original_b500_panel": "Complete original B500 panel",
-        "unsafe_effect_wilson_95_ci": "Unsafe effect, n/N (95% CI)",
+        "unsafe_effect_wilson_95_ci": "Legacy risk, n/N (95% CI)",
         "operational_failure": "Operational failure",
-        "unsafe_or_failure": "Unsafe or failure",
+        "unsafe_or_failure": "Legacy risk or failure",
         "ask_events": "ASK",
         "deny_events": "DENY",
     }
@@ -396,9 +409,9 @@ def _e6_activity_table() -> str:
     return _markdown_table(
         (
             "Condition",
-            "Unsafe effect, n/N (95% CI)",
+            "Legacy risk, n/N (95% CI)",
             "Operational failure",
-            "Unsafe or failure",
+            "Legacy risk or failure",
             "ASK events",
             "DENY events",
         ),
@@ -627,6 +640,42 @@ def _e7_permit_table() -> str:
     )
 
 
+def _corrected_development_table() -> str:
+    path = PROJECT_ROOT / "outputs/experiments/correctness_repair_v1/tables/endpoints.csv"
+    with path.open(encoding="utf-8-sig", newline="") as stream:
+        records = list(csv.DictReader(stream))
+    lookup = {}
+    for row in records:
+        key = tuple(row[name] for name in (
+            "model_group", "benchmark", "evaluation_case_type", "condition_id", "endpoint",
+        ))
+        if key in lookup:
+            raise ManuscriptBuildError("Duplicate corrected development endpoint")
+        lookup[key] = row
+
+    def fraction(model, benchmark, kind, condition, endpoint):
+        row = lookup[(model, benchmark, kind, condition, endpoint)]
+        if int(row["n_observed"]) + int(row["n_unknown"]) != int(row["n_plan"]):
+            raise ManuscriptBuildError("Inconsistent corrected endpoint denominator")
+        return f'{row["x"]}/{row["n_observed"]}' + (
+            f' ({row["n_unknown"]} unknown)' if int(row["n_unknown"]) else ""
+        )
+
+    rows = []
+    conditions = (
+        ("no_defense", "No guard / normal"), ("safe_prompt_only", "No guard / safe"),
+        ("m3_policy_only", "Policy / normal"), ("m3_policy_safe_prompt", "Policy / safe"),
+        ("m3_full_normal_prompt", "Full / normal"), ("m3_full", "Full / safe"),
+    )
+    for model, label in (("deepseek_pro", "V4 Pro"), ("deepseek_flash", "V4.1 Flash")):
+        for benchmark, benchmark_label in (("agentdojo-v1", "AgentDojo"), ("m3-v2", "M3-v2")):
+            for condition, condition_label in conditions:
+                rows.append((label, benchmark_label, condition_label,
+                    fraction(model, benchmark, "attack", condition, "unsafe_effect"),
+                    fraction(model, benchmark, "benign_tool", condition, "task_completion")))
+    return _markdown_table(("Model", "Benchmark", "Configuration", "Attack endpoint", "Benign tool completion"), rows)
+
+
 def _table_block() -> str:
     tables = (
         (1, "Prompt-by-module factorial design", _incremental_table("table_1_factor_design.csv")),
@@ -636,6 +685,7 @@ def _table_block() -> str:
         (5, "E5 conditional adaptive tail", _incremental_table("table_5_e5_adaptive_tail.csv")),
         (6, "E6 contemporaneous attack-activity calibration", _e6_activity_table()),
         (7, "E7a execution-permit diagnostic", _e7_permit_table()),
+        (8, "Corrected development study by benchmark", _corrected_development_table()),
     )
     parts = ["## Tables"]
     for (number, title, table), note in zip(tables, _table_notes(), strict=True):

@@ -272,6 +272,14 @@ E7a crosses strict exact versus bounded-enumeration authorization with policy ve
 
 Each proposal is then evaluated in four separate in-memory sessions: trusted approval, trusted denial, absent confirmation, and forged untrusted approval. The 384 cells share 96 model proposals; the model receives no clarification turn. Both module settings use the same new confirmation wrapper, which binds the task, trusted request, proposal, and manifest, checks expiry and single use, and cannot widen scope or override DENY. It is an experimental controller, not production authentication or a human study. The endpoint is issuance of a one-shot execution permit. No effect backend was invoked, so legacy fields named task completion and simulated effect are interpreted only as permission eligibility. E7a reports descriptive counts and Wilson intervals separately from TCR and executed unsafe effects, without a new confirmatory test family.
 
+\subsection{Measurement correction and development validation}
+
+\label{sec:methods-measurement-correction-and-development-validation}
+
+The historical execution studies used the original compiler, rule matcher, and evaluator. Their recorded safety labels are not retrospectively converted to executed un\-au\-thor\-ized effects. In particular, the original M3-v2 evaluator could score a final isolation rejection as an unsafe event, whereas the revised development evaluator distinguishes proposals, Guard permission, isolation rejection, successful simulated execution, task completion, and unknown values. AgentDojo retains its native security and utility checks. Legitimate completion and a security violation may coexist; missing evidence is not a safe zero.
+
+The explicitly selected corrected-v1 path fixes action-resource binding, complete matching across multiple rules, trusted-environment label propagation, and confirmation-state continuity. It does not alter the historical default or records. Six configurations cross no/policy/full guard modules with the same normal/safe prompt factor. The development set comprises 24 attacks, 16 benign-tool tasks, and eight no-tool tasks; AgentDojo contributes 20 tasks and M3-v2 28. Attacks are historically enriched, not a deployment sample. Both completed DeepSeek cohorts use temperature zero, a 512-token output limit, and at most eight provider calls per task-condition. The V4.1 Flash model is distinct from the earlier V4 Flash and is not a model-invariant before/after comparison. Synthetic paired-action tests establish component behavior only; there is no simulated human approval or new confirmatory family.
+
 \subsection{Minimal verification and reproducibility}
 
 \label{sec:methods-minimal-verification-and-reproducibility}

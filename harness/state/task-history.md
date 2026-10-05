@@ -1,5 +1,14 @@
 # Task History
 
+## 2026-10-06 — Repair migration, runtime and manuscript-build checks
+
+- Created codex/directory-migration-fixes from3c32923; user explicitly extended scope to existing environment and paper-check failures.
+- Fixed image-path classification, current39-entry bibliography integrity versus frozen34-entry export, stale24-citation/9-total-table checks, missing4.14/Table8 synchronization, and optional template-font fallback with class/BST source dependencies.
+-73 focused tests and17 post-pagination tests passed; Ruff passed. Four real LaTeX builds passed, review55pages/67bookmarks and official61pages/66bookmarks with0 layout errors. Source-only review package compiles without local private fonts.
+- Restored CaMeL basePython3.10.12 inside archived runtime; four core modules import and120 installed packages pass compatibility checks. No global environment change or model request.
+- Preserved historical raw/frozen exports and unrelated correctness/submodule/template changes. D-drive backups remain unmoved after tool-policy rejection; no bypass. Overall documentation/paper features remain in_progress.
+- Detailed report: docs/迁移环境与论文检查修复报告_2026-10-06.md. Scope-specific Git delivery receipt is recorded in the task and session handoff.
+
 ## 2026-10-05 — Consolidate archives and separate docs from artifacts
 
 - Moved368 existing tracked files without content changes (Git R100), including seven public historical toolkits; updated active readers/writers and manuscript image links only.

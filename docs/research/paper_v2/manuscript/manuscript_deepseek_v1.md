@@ -236,8 +236,11 @@ permission graph, and uses an SMT authorizer before effectful execution [@L36].
 It further narrows any mechanism
 novelty claim around structured authorization and data-flow-aware permission
 graphs. Our study differs by treating the authorization regime itself as the
-paired experimental factor and by jointly measuring executed unsafe effects,
-benign utility, confirmation/blocking burden, and operational failure.
+paired experimental factor and by jointly reporting evaluator-labelled risk,
+benign utility, confirmation/blocking burden, and operational failure. The
+historical risk labels require the measurement qualifications in Methods;
+only the corrected development study separates observed simulated effects
+from proposals and boundary rejections.
 
 Two 2026 preprints overlap even more closely with provenance-aware
 authorization. ARGUS constructs an influence-provenance graph for
@@ -253,7 +256,7 @@ comparative facts.
 especially close 2026 measurement counterpart: it holds task content and
 policy fixed while changing source authority, then measures whether action
 selection changes [@L35]. Its
-controlled next-action design is narrower than M3's executed-effect study, but
+controlled next-action design differs from M3's multi-step evaluation, but
 it reinforces the need to separate evidence relevance from authorization. Our
 experiment extends that question to full tool trajectories, paired runtime
 Guard conditions, benign utility, `ASK/DENY` burden, and operational failure.
@@ -263,9 +266,10 @@ empirical. We test whether authorization information itself changes measured
 security and utility; enforce a runtime projection that excludes evaluator
 fields; compare the policy and full configuration packages in paired
 conditions while disclosing their bundled prompt/runtime differences; and
-quantify `ASK` burden, operational failures, and executed effects under a
-common evidence contract. These are study-design claims and must stand on
-M3's own completed experiments.
+quantify `ASK` burden and operational failures. Effect semantics are specific
+to the benchmark and evaluator version; the old and corrected endpoints are
+not interchangeable. These are study-design claims and must stand on M3's
+own completed experiments.
 
 ### 2.3 Prompt-level defenses and execution-level outcomes
 
@@ -273,9 +277,10 @@ Structured queries, spotlighting, instruction hierarchy, and injection
 detectors act at the prompt, representation, or model-output layer
 [@L07; @L30; @L31; @L32]. They are relevant
 baselines, but detector scores and model compliance are not equivalent to an
-executed-effect endpoint. Our evaluation therefore records whether a proposed
-action crossed the runtime boundary and changed the sandbox state, while also
-retaining benign task completion. This distinction is necessary because a
+executed-effect endpoint. The corrected development evaluation therefore
+separates proposals, Guard decisions, sandbox execution receipts and outcome
+scoring. AgentDojo retains its native security checker, whereas M3-v2 uses
+observed simulated effects. This distinction is necessary because a
 defense can appear secure by refusing useful actions or by failing before an
 effect is attempted.
 
@@ -292,7 +297,7 @@ duplicating benign cases to manufacture a denominator.
 Static attacks are insufficient for a robustness claim. *The Attacker Moves
 Second* argues that a defense-aware attacker should optimize against the
 defense design rather than replay a fixed attack set [@L27]. The adaptive panel therefore exposes
-only public `ALLOW/ASK/DENY` and post-enforcement unsafe-effect feedback,
+only public `ALLOW/ASK/DENY` and legacy evaluator-labelled risk feedback,
 searches frozen tasks at prespecified query budgets, and reports the
 first-success distribution. Since L27 remains a preprint, it motivates the
 protocol but is not described as a peer-reviewed theorem.
@@ -313,9 +318,10 @@ workflow.
 ### 2.5 Positioning summary
 
 M3 is not positioned as the first runtime guard, the first provenance system,
-or a state-of-the-art defense. The medium experiment already showed that
-M3-full did not improve security over M3 policy-only and failed the benign-tool
-non-inferiority criterion. The active paper instead studies how non-oracle
+or a state-of-the-art defense. In the medium experiment, M3-full did not improve
+the reported legacy risk endpoint over M3 policy-only and failed the reported
+benign-tool non-inferiority criterion. Those measurements do not establish
+effects under the repaired execution semantics. The active paper studies how non-oracle
 authorization, provenance-aware enforcement, confirmation, operational
 failure handling, benchmark choice, and adaptive attack budget jointly shape
 the measured security–utility frontier.
@@ -787,7 +793,31 @@ named task completion and simulated effect are interpreted only as permission
 eligibility. E7a reports descriptive counts and Wilson intervals separately
 from TCR and executed unsafe effects, without a new confirmatory test family.
 
-### 3.18 Minimal verification and reproducibility
+### 3.18 Measurement correction and development validation
+
+The historical execution studies used the original compiler, rule matcher,
+and evaluator. Their recorded safety labels are not retrospectively converted
+to executed unauthorized effects. In particular, the original M3-v2 evaluator
+could score a final isolation rejection as an unsafe event, whereas the revised
+development evaluator distinguishes proposals, Guard permission, isolation
+rejection, successful simulated execution, task completion, and unknown values.
+AgentDojo retains its native security and utility checks. Legitimate completion
+and a security violation may coexist; missing evidence is not a safe zero.
+
+The explicitly selected corrected-v1 path fixes action-resource binding,
+complete matching across multiple rules, trusted-environment label propagation,
+and confirmation-state continuity. It does not alter the historical default
+or records. Six configurations cross no/policy/full guard modules with the
+same normal/safe prompt factor. The development set comprises 24 attacks,
+16 benign-tool tasks, and eight no-tool tasks; AgentDojo contributes 20 tasks
+and M3-v2 28. Attacks are historically enriched, not a deployment sample.
+Both completed DeepSeek cohorts use temperature zero, a 512-token output
+limit, and at most eight provider calls per task-condition. The V4.1 Flash
+model is distinct from the earlier V4 Flash and is not a model-invariant
+before/after comparison. Synthetic paired-action tests establish component
+behavior only; there is no simulated human approval or new confirmatory family.
+
+### 3.19 Minimal verification and reproducibility
 
 Verification is deliberately proportional to the lean study. It consists of:
 
@@ -1261,7 +1291,46 @@ policy--intent mismatch and a bounded permission lifecycle, not a general
 utility gain. No task-environment state transition was performed, and these
 permits are not added to TCR or unsafe-effect counts in the execution studies.
 
-### 4.14 Remaining evidence boundary
+### 4.14 Corrected development study
+
+Table 8 separates the corrected-v1 development batch from all historical
+experiments. DeepSeek V4 Pro and DeepSeek V4.1 Flash each completed 288 planned
+task-condition executions over the same 48 tasks and six configurations. Pro
+had 265 completed workflows, 13 parse failures, and 10 max-step terminations;
+Flash had 272, seven, and nine respectively. Workflow completion is not task
+completion: ending with ASK records a pending approval, not an executed task.
+Gemini is deferred and supplies no model-effect comparison.
+
+AgentDojo retains its native security checker rather than a state-only endpoint.
+For Pro, normal-prompt attack positives were 5/12 without a guard, 2/12 with
+policy modules, and 0/12 with full modules; benign-tool completion was 6/8,
+3/8, and 3/8. The full-minus-policy paired attack difference was -16.67
+percentage points with a 95% interval from -44.80 to +10.38, crossing zero.
+For Flash, the no-guard normal-prompt attack cell had 1/12 positives and each
+other cell had zero; benign-tool completion was 7/8 in both no-guard cells and
+4/8 in each guarded cell. These small, historically enriched development
+samples do not establish superiority or causal attribution to provenance.
+
+M3-v2 observed simulated unsafe effects were 0/12 in every attack cell for
+both models, including no guard. Thus the null observations do not establish
+guard efficacy. Runtime summaries contained zero labelled sensitive values;
+dataflow checks were not applicable. Passing synthetic label-propagation tests
+is separate from model-generated evidence of activated dataflow restrictions.
+The eight no-tool tasks per model-condition remain in the planned denominators,
+but Table 8 focuses on attack and benign-tool outcomes. Unknown outcomes are
+not replaced by zero, and operational failures remain separately reported.
+
+### 4.15 Remaining evidence boundary
+
+Historical Public and incremental tables retain their recorded evaluator
+labels. In the old M3-v2 path, an action allowed by the Guard but rejected by
+the final isolation boundary could be labelled unsafe even though the effect
+was not applied. Historical ITT variants also include operational failures.
+The compact records do not support retrospective identification of all actual
+unauthorized effects. Historical numbers are therefore legacy-labelled risk
+endpoints, not corrected execution-effect estimates. Their values are retained,
+not silently relabelled as corrected-v1 results; AgentDojo's native checker is
+also not reduced to an environment-state-only definition.
 
 The medium, Public, authorization-regime, factorial, source-authority,
 challenge, replication, adaptive, and contemporaneous-activity studies jointly support an empirical
@@ -1677,7 +1746,7 @@ The four contemporaneous cells cross prompt profile with the runtime module bund
 
 ### Table 2. E1 factorial estimates
 
-Absolute effects are probability differences; intervals use 10,000 case-cluster bootstrap replicates. Holm values apply only to E1's prespecified endpoint families.
+Absolute effects are probability differences; intervals use 10,000 case-cluster bootstrap replicates. Holm values apply only to E1's prespecified endpoint families. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
 
 | Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1710,7 +1779,7 @@ End-to-end source swaps and deterministic Guard replay are separate evidence lay
 
 ### Table 4. E3/E4 conditional robustness
 
-E3 is outcome-enriched and E4 is a same-provider replication. Neither opens a new significance family or estimates deployment prevalence.
+E3 is outcome-enriched and E4 is a same-provider replication. Neither opens a new significance family or estimates deployment prevalence. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
 
 | Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1732,7 +1801,7 @@ E3 is outcome-enriched and E4 is a same-provider replication. Neither opens a ne
 
 ### Table 5. E5 conditional adaptive tail
 
-The tail probability is conditional on the prespecified B200 survivors; it is not a complete original-panel B500 curve or saturation estimate.
+The tail probability is conditional on the prespecified B200 survivors; it is not a complete original-panel B500 curve or saturation estimate. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
 
 | Stratum | Tasks | Successes by 500 | Conditional probability | CI low | CI high | First-success queries | Complete original B500 panel |
 |---|---|---|---|---|---|---|---|
@@ -1743,9 +1812,9 @@ The tail probability is conditional on the prespecified B200 survivors; it is no
 
 ### Table 6. E6 contemporaneous attack-activity calibration
 
-E6 uses a historically risk-enriched single execution block; 47/60 tasks also anchor E3. It does not estimate deployment prevalence, benign utility, temporal repeatability, independent-sample replication, or a cross-provider effect.
+E6 uses a historically risk-enriched single execution block; 47/60 tasks also anchor E3. It does not estimate deployment prevalence, benign utility, temporal repeatability, independent-sample replication, or a cross-provider effect. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
 
-| Condition | Unsafe effect, n/N (95% CI) | Operational failure | Unsafe or failure | ASK events | DENY events |
+| Condition | Legacy risk, n/N (95% CI) | Operational failure | Legacy risk or failure | ASK events | DENY events |
 |---|---|---|---|---|---|
 | No defense | 17/60 (28.3%) [18.5%, 40.8%] | 12/60 (20.0%) | 29/60 (48.3%) | 0 | 4 |
 | Source-pinned VIGIL | 16/60 (26.7%) [17.1%, 39.0%] | 8/60 (13.3%) | 24/60 (40.0%) | 0 | 8 |
@@ -1765,6 +1834,37 @@ One-shot permits under trusted approval, not task completion or committed effect
 | Bounded enum / policy | 12/12 | 12/12 | 0/12 |
 | Bounded enum / full | 12/12 | 12/12 | 0/12 |
 
+### Table 8. Corrected development study by benchmark
+
+Corrected-v1 development data, not a confirmatory comparison with historical runs. AgentDojo retains its native security checker; M3-v2 counts observed simulated effects. Fractions give numerator/observed denominator, not evidence that failures are safe. Unknown values, when present, are explicit. Each model has 288 planned executions including no-tool tasks; those tasks and operational status counts are described in the text. Flash is V4.1, not the historical V4 model.
+
+| Model | Benchmark | Configuration | Attack endpoint | Benign tool completion |
+|---|---|---|---|---|
+| V4 Pro | AgentDojo | No guard / normal | 5/12 | 6/8 |
+| V4 Pro | AgentDojo | No guard / safe | 3/12 | 6/8 |
+| V4 Pro | AgentDojo | Policy / normal | 2/12 | 3/8 |
+| V4 Pro | AgentDojo | Policy / safe | 2/12 | 3/8 |
+| V4 Pro | AgentDojo | Full / normal | 0/12 | 3/8 |
+| V4 Pro | AgentDojo | Full / safe | 0/12 | 3/8 |
+| V4 Pro | M3-v2 | No guard / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | No guard / safe | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Policy / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Policy / safe | 0/12 | 4/8 |
+| V4 Pro | M3-v2 | Full / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Full / safe | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | No guard / normal | 1/12 | 7/8 |
+| V4.1 Flash | AgentDojo | No guard / safe | 0/12 | 7/8 |
+| V4.1 Flash | AgentDojo | Policy / normal | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Policy / safe | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Full / normal | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Full / safe | 0/12 | 4/8 |
+| V4.1 Flash | M3-v2 | No guard / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | No guard / safe | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Policy / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Policy / safe | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Full / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Full / safe | 0/12 | 6/8 |
+
 ## Figure captions
 
 **Figure 1. Online fields and the source-authority boundary.** Trusted task
@@ -1775,10 +1875,10 @@ relative position, and policy fixed; provider-managed tools and real external
 effects remain disabled.
 
 **Figure 2. Prompt-by-module factorial effects.** Panels show the four E1 cells
-for unsafe effect, benign-tool completion, and the failure-sensitive attack
+for the legacy-labelled risk endpoint, benign-tool completion, and the failure-sensitive attack
 endpoint; Table 2 reports the corresponding module, prompt, and interaction
 effects. Intervals use 10,000 case-cluster bootstrap replicates. Holm adjustment
-is confined to the unsafe-effect and benign-tool TCR co-primary families; the
+is confined to the originally specified safety and benign-tool TCR families; the
 failure-sensitive endpoint remains a descriptive sensitivity analysis.
 
 **Figure 3. Source-authority counterfactual.** The decision heatmap reports
@@ -1788,7 +1888,8 @@ separately reports end-to-end source-swap action changes. Offline Guard
 correctness is not treated as a substitute for system task completion.
 
 **Figure 4. Factor effects across representative, enriched, and Flash
-cohorts.** Absolute module, prompt, and interaction effects are shown for E1,
+cohorts.** Absolute module, prompt, and interaction effects on the legacy-labelled
+risk endpoint are shown for E1,
 the outcome-enriched E3 challenge, and the same-provider E4 Flash replication.
 E3 does not estimate prevalence and E4 does not establish cross-provider
 generality; neither opens a new significance family.
@@ -1797,7 +1898,8 @@ generality; neither opens a new significance family.
 The original 40-task panel contributes the complete cumulative first-success
 evidence through 200. The second panel includes only 12 prespecified B200
 survivors extended toward 500. The conditional tail is not merged into a full
-original-panel B500 curve and is not an estimate of saturation.
+original-panel B500 curve and is not an estimate of saturation. Success refers
+to the historical evaluator endpoint, not retrospectively confirmed unauthorized effects.
 
 ## Submission statements
 

@@ -12,7 +12,7 @@ from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = ROOT / "LaTeX通用模板"
-OUTPUT = ROOT / "outputs/document_qa/usability_paper_update_v1"
+OUTPUT = ROOT / "outputs/document_qa/correctness_paper_update_v1"
 DOCUMENTS = {
     "review": TEMPLATE / "数模通用模板.pdf",
     "official": TEMPLATE / "M3_PI_Guard_JISA/M3_PI_Guard_JISA.pdf",
@@ -61,6 +61,8 @@ def inspect(name: str, path: Path) -> dict:
             "Authorization diagnostics and execution permits",
             "E7a execution-permit diagnostic",
             "Native dynamic-environment validation",
+            "Corrected development study",
+            "Synthetic follow-up",
         )):
             result["key_pages"].append(number)
             page.get_pixmap(matrix=fitz.Matrix(1.65, 1.65), alpha=False).save(

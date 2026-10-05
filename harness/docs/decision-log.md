@@ -1,5 +1,14 @@
 # 决策日志
 
+## 2026-10-06 — Current publication integrity, frozen evidence and portable runtime
+
+- User authorized migration, environment and paper-check repairs together. Keep scientific runtime fixes and new experiments out of this bounded task.
+- Separate current39-entry bibliography integrity from frozen34-entry export verification; preserve historical export/manifest. Refuse the old writer before network/file work when later entries would be lost. Only AgentSpec metadata was newly verified online, not all39 references.
+- Restore the exact missing CaMeL Python3.10.12 under archived runtime, patch the environment's explicit home and use per-command E-drive uv cache. No registry/PATH or permanent environment changes.
+- Track required class/BST sources, not personal font binaries; optional font assets fall back to declared system fonts. Keep Times New Roman review body, blank authors and current template entry.
+- Synchronize existing corrected-v1 evidence into bilingual drafts/table8 while retaining historical mixed-endpoint caveats. Compilation is not defense-effectiveness or submission readiness.
+- D-drive tool-policy rejection remains binding even for inactive backups. Request manual Explorer migration; do not retry via another shell/tool.
+
 ## 2026-09-20 — Close non-Gemini deliverables without expanding the study
 
 The user explicitly deferred Gemini. The current remainder means the already approved

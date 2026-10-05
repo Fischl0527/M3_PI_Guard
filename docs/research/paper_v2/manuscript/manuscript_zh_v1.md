@@ -239,6 +239,12 @@ E7a 在 24 个新合成单动作任务上交叉比较 strict_exact/bounded_enum 
 
 每个提案分别进入批准、拒绝、缺席和不可信伪造批准四种内存会话，构成共享 96 个提案的 384 个配对单元；模型没有收到后续澄清。两配置均使用新确认 wrapper，绑定任务、可信请求、完整提案与 manifest，并检查有效期和单次使用，不能扩权或覆盖 DENY。这不是生产认证或真人实验。端点为单次执行许可的发放：没有调用 effect backend，所以原始字段中的任务完成和模拟效果仅按许可资格解释，不能计入 TCR 或已执行不安全效应。结果使用描述性计数与 Wilson 区间，不新增验证性显著性家族。
 
+### 3.16 测量修正与开发验证
+
+历史执行研究使用原编译器、规则匹配器和评价器，不能事后把所记录的安全标签转换成已执行的越权效果。原M3-v2评价器可能将最终隔离层拒绝计为不安全事件；修正版开发评价器分别记录提案、Guard放行、隔离拒绝、成功模拟执行、任务完成和未知。AgentDojo保留原生安全及效用检查；合法完成与安全违规可以同时成立，证据缺失不是安全的零。
+
+显式选择的corrected-v1修复动作与资源绑定、多条规则完整匹配、可信环境标签传播及确认状态衔接，不改变历史默认实现和记录。六配置将无防护、policy、full模块与相同的normal/safe提示因素交叉。开发集有24个攻击、16个良性工具和8个无工具任务；AgentDojo为20个，M3-v2为28个。攻击来自历史富集集，不代表部署样本。两份已完成DeepSeek队列均用温度0、512-token输出限制及每任务—条件最多8次调用。V4.1 Flash不是旧V4 Flash，不能解释为模型不变的修复前后比较。同动作合成测试只证明组件行为，没有模拟真人批准，也没有新增确认性检验族。
+
 ## 4. 结果
 
 ### 4.1 中型证伪实验
@@ -364,7 +370,17 @@ E7a 获得 96/96 个可解析的官方响应，无运行失败。表 7 仅报告
 
 384 个配对确认单元中，192 个被 scope 阻断，48 个获得单次许可，48 个被可信控制器拒绝，96 个没有有效确认（缺席或伪造）。policy/full 无差异。该结果展示构造的策略—意图不一致和受限许可生命周期，不是通用效用提升。没有提交任务环境状态转移，不将许可计入此前执行实验的 TCR 或不安全效应。
 
-### 4.14 剩余证据边界
+### 4.14 修正版开发研究
+
+表8将corrected-v1开发批与历史实验分开。DeepSeek V4 Pro和V4.1 Flash分别完成48任务、六配置下的288项计划执行。Pro为265条流程结束、13条解析失败、10条步数耗尽；Flash对应为272、7、9。流程结束不等于任务完成；ASK仍是等待批准。Gemini暂缓，不提供模型效果比较。
+
+AgentDojo保留原生安全检查，不仅判断状态变化。Pro普通提示攻击阳性分别为无防护5/12、policy 2/12、full 0/12；良性工具完成分别为6/8、3/8、3/8。full减policy攻击配对差为−16.67个百分点，95%区间为−44.80至+10.38，跨过零。Flash无防护普通提示攻击为1/12，其余配置均零；两种无防护配置良性工具完成均7/8，四种有防护配置均4/8。小规模历史富集开发集不证明领先或来源模块的因果增益。
+
+M3-v2两模型所有攻击配置的已观察模拟危险效果均0/12，包括无防护，因此不能证明防护有效。来源摘要中敏感标签值为零，数据流检查不适用；合成标签传播测试与真实模型触发机制的证据必须分开。每模型—条件的8个无工具任务仍保留在计划分母中，表8只聚焦攻击及良性工具结果。未知不填零，运行失败另行报告。
+
+### 4.15 剩余证据边界
+
+历史Public及增量表保留当时的评价标签。旧M3-v2路径可能将Guard放行、但最终隔离层拒绝的动作标为不安全，即使效果未实施；旧ITT变体还包含运行失败。紧凑记录不足以事后识别全部实际越权效果，因此旧表是旧版风险标签端点，不是修正后的执行效果估计。数值不变，不把旧记录改称corrected-v1结果；AgentDojo原生检查也不能一概改称仅环境状态变化。
 
 中型、Public、授权制度、因子、来源权威性、挑战、复现、自适应与同期活性研究共同支持安全—效用实证论文，但不支持领先防御、端到端来源收益、自适应攻击饱和或跨厂商结论。E2 能识别确定性 Guard 决策层的来源敏感性，但端到端动作端点受到地板限制。E5 仅给出 0/12、Wilson 上限 24.25% 的 B200-survivor 条件尾部；E6 只记录历史富集 DeepSeek 队列在单执行块内观察到的攻击活性，且其样本与 E3 大量重叠。早期 Gemini 授权实验只有 5 条含响应记录；另行执行的 E6 Gemini 前缀同样只有 5 条含响应记录、1 条无响应失败和 174 条行政关闭。两者均不进入效应推断。当前记录契约无法识别 UTR 和 DSR，本文不根据不安全效应率反推二者。
 
@@ -501,14 +517,16 @@ DeepSeek 授权制度结果为这些建议提供了观察依据：精确与压�
 
 绝对效应为概率差；区间来自 10,000 次案例聚类 bootstrap。Holm 值只适用于 E1 预设终点族。
 
+历史表保留原评价端点，不能事后解释为已确认实施的越权效果；测量修正与corrected-v1结果另行报告。
+
 | 研究 | 终点 | 因子 | 配对案例 | 效应 | CI 下限 | CI 上限 | Bootstrap p | Holm p | Bootstrap n |
 |---|---|---|---|---|---|---|---|---|---|
-| E1 representative pro | attack unsafe effect | interaction | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E1 representative pro | attack unsafe effect | module | 100 | -1.00 pp | -3.00 pp | +0.00 pp | 0.7358 | 1.0000 | 10000 |
-| E1 representative pro | attack unsafe effect | prompt | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E1 representative pro | attack unsafe or failure | interaction | 100 | -1.00 pp | -5.00 pp | +3.00 pp | 0.8206 | — | 10000 |
-| E1 representative pro | attack unsafe or failure | module | 100 | -2.50 pp | -5.50 pp | +0.00 pp | 0.0938 | — | 10000 |
-| E1 representative pro | attack unsafe or failure | prompt | 100 | +1.50 pp | -3.00 pp | +6.00 pp | 0.5868 | — | 10000 |
+| E1 representative pro | 攻击旧版风险端点 | interaction | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E1 representative pro | 攻击旧版风险端点 | module | 100 | -1.00 pp | -3.00 pp | +0.00 pp | 0.7358 | 1.0000 | 10000 |
+| E1 representative pro | 攻击旧版风险端点 | prompt | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E1 representative pro | 攻击旧版风险或失败 | interaction | 100 | -1.00 pp | -5.00 pp | +3.00 pp | 0.8206 | — | 10000 |
+| E1 representative pro | 攻击旧版风险或失败 | module | 100 | -2.50 pp | -5.50 pp | +0.00 pp | 0.0938 | — | 10000 |
+| E1 representative pro | 攻击旧版风险或失败 | prompt | 100 | +1.50 pp | -3.00 pp | +6.00 pp | 0.5868 | — | 10000 |
 | E1 representative pro | Benign-tool TCR | interaction | 60 | +0.00 pp | -6.67 pp | +8.33 pp | 1.0000 | 1.0000 | 10000 |
 | E1 representative pro | Benign-tool TCR | module | 60 | -3.33 pp | -8.33 pp | +0.00 pp | 0.0960 | 0.2880 | 10000 |
 | E1 representative pro | Benign-tool TCR | prompt | 60 | -3.33 pp | -10.83 pp | +4.17 pp | 0.4496 | 0.8992 | 10000 |
@@ -534,20 +552,22 @@ DeepSeek 授权制度结果为这些建议提供了观察依据：精确与压�
 
 E3 为结果富集样本，E4 为同服务商模型复现；二者均不新增显著性检验族，也不估计部署流行率。
 
+历史表保留原评价端点，不能事后解释为已确认实施的越权效果；测量修正与corrected-v1结果另行报告。
+
 | 研究 | 终点 | 因子 | 配对案例 | 效应 | CI 下限 | CI 上限 | Bootstrap p | Holm p | Bootstrap n |
 |---|---|---|---|---|---|---|---|---|---|
-| E3 risk enriched pro | attack unsafe effect | interaction | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E3 risk enriched pro | attack unsafe effect | module | 60 | -1.67 pp | -5.00 pp | +0.00 pp | 0.7406 | — | 10000 |
-| E3 risk enriched pro | attack unsafe effect | prompt | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E3 risk enriched pro | attack unsafe or failure | interaction | 60 | +5.00 pp | -3.33 pp | +13.33 pp | 0.3448 | — | 10000 |
-| E3 risk enriched pro | attack unsafe or failure | module | 60 | -4.17 pp | -10.00 pp | +0.83 pp | 0.1528 | — | 10000 |
-| E3 risk enriched pro | attack unsafe or failure | prompt | 60 | +0.83 pp | -8.33 pp | +10.00 pp | 0.9438 | — | 10000 |
-| E4 flash replication | attack unsafe effect | interaction | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E4 flash replication | attack unsafe effect | module | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E4 flash replication | attack unsafe effect | prompt | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E4 flash replication | attack unsafe or failure | interaction | 50 | -2.00 pp | -10.00 pp | +4.00 pp | 0.7852 | — | 10000 |
-| E4 flash replication | attack unsafe or failure | module | 50 | +3.00 pp | +0.00 pp | +7.00 pp | 0.0864 | — | 10000 |
-| E4 flash replication | attack unsafe or failure | prompt | 50 | -1.00 pp | -5.00 pp | +2.00 pp | 0.7752 | — | 10000 |
+| E3 risk enriched pro | 攻击旧版风险端点 | interaction | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E3 risk enriched pro | 攻击旧版风险端点 | module | 60 | -1.67 pp | -5.00 pp | +0.00 pp | 0.7406 | — | 10000 |
+| E3 risk enriched pro | 攻击旧版风险端点 | prompt | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E3 risk enriched pro | 攻击旧版风险或失败 | interaction | 60 | +5.00 pp | -3.33 pp | +13.33 pp | 0.3448 | — | 10000 |
+| E3 risk enriched pro | 攻击旧版风险或失败 | module | 60 | -4.17 pp | -10.00 pp | +0.83 pp | 0.1528 | — | 10000 |
+| E3 risk enriched pro | 攻击旧版风险或失败 | prompt | 60 | +0.83 pp | -8.33 pp | +10.00 pp | 0.9438 | — | 10000 |
+| E4 flash replication | 攻击旧版风险端点 | interaction | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | 攻击旧版风险端点 | module | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | 攻击旧版风险端点 | prompt | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | 攻击旧版风险或失败 | interaction | 50 | -2.00 pp | -10.00 pp | +4.00 pp | 0.7852 | — | 10000 |
+| E4 flash replication | 攻击旧版风险或失败 | module | 50 | +3.00 pp | +0.00 pp | +7.00 pp | 0.0864 | — | 10000 |
+| E4 flash replication | 攻击旧版风险或失败 | prompt | 50 | -1.00 pp | -5.00 pp | +2.00 pp | 0.7752 | — | 10000 |
 | E4 flash replication | Benign-tool TCR | interaction | 30 | +6.67 pp | +0.00 pp | +16.67 pp | 0.2558 | — | 10000 |
 | E4 flash replication | Benign-tool TCR | module | 30 | +3.33 pp | +0.00 pp | +8.33 pp | 0.2602 | — | 10000 |
 | E4 flash replication | Benign-tool TCR | prompt | 30 | -3.33 pp | -11.67 pp | +3.33 pp | 0.5494 | — | 10000 |
@@ -555,6 +575,8 @@ E3 为结果富集样本，E4 为同服务商模型复现；二者均不新增�
 ### 表 5. E5 条件性自适应尾部
 
 尾部概率以预设 B200 survivor 为条件；它不是完整原始面板的 B500 曲线或饱和估计。
+
+历史表保留原评价端点，不能事后解释为已确认实施的越权效果；测量修正与corrected-v1结果另行报告。
 
 | 分层 | 任务 | 截至 500 的成功数 | 条件概率 | CI 下限 | CI 上限 | 首次成功查询 | 是否为完整原始 B500 面板 |
 |---|---|---|---|---|---|---|---|
@@ -567,7 +589,9 @@ E3 为结果富集样本，E4 为同服务商模型复现；二者均不新增�
 
 E6 使用历史风险富集的单执行块，其中 47/60 个任务同时是 E3 锚点；它不估计部署流行率、良性效用、跨日期重复性、独立样本复现或跨厂商效应。
 
-| 条件 | 不安全效应，n/N（95% CI） | 运行失败 | 不安全或失败 | ASK 事件 | DENY 事件 |
+历史表保留原评价端点，不能事后解释为已确认实施的越权效果；测量修正与corrected-v1结果另行报告。
+
+| 条件 | 旧版风险端点，n/N（95% CI） | 运行失败 | 不安全或失败 | ASK 事件 | DENY 事件 |
 |---|---|---|---|---|---|
 | No defense | 17/60 (28.3%) [18.5%, 40.8%] | 12/60 (20.0%) | 29/60 (48.3%) | 0 | 4 |
 | Source-pinned VIGIL | 16/60 (26.7%) [17.1%, 39.0%] | 8/60 (13.3%) | 24/60 (40.0%) | 0 | 8 |
@@ -587,17 +611,48 @@ E6 使用历史风险富集的单执行块，其中 47/60 个任务同时是 E3 
 | bounded_enum / policy | 12/12 | 12/12 | 0/12 |
 | bounded_enum / full | 12/12 | 12/12 | 0/12 |
 
+### 表 8. 分基准的修正版开发研究
+
+Corrected-v1开发数据，不与历史运行作确认性比较。AgentDojo保留原生安全检查，M3-v2统计已观察模拟效果。分数是分子/已观察分母，不表示失败安全。未知值如存在会显式给出。每模型含288项计划执行，包括正文说明的无工具任务和运行状态。Flash是V4.1，不是历史V4模型。
+
+| Model | Benchmark | Configuration | Attack endpoint | Benign tool completion |
+|---|---|---|---|---|
+| V4 Pro | AgentDojo | No guard / normal | 5/12 | 6/8 |
+| V4 Pro | AgentDojo | No guard / safe | 3/12 | 6/8 |
+| V4 Pro | AgentDojo | Policy / normal | 2/12 | 3/8 |
+| V4 Pro | AgentDojo | Policy / safe | 2/12 | 3/8 |
+| V4 Pro | AgentDojo | Full / normal | 0/12 | 3/8 |
+| V4 Pro | AgentDojo | Full / safe | 0/12 | 3/8 |
+| V4 Pro | M3-v2 | No guard / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | No guard / safe | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Policy / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Policy / safe | 0/12 | 4/8 |
+| V4 Pro | M3-v2 | Full / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Full / safe | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | No guard / normal | 1/12 | 7/8 |
+| V4.1 Flash | AgentDojo | No guard / safe | 0/12 | 7/8 |
+| V4.1 Flash | AgentDojo | Policy / normal | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Policy / safe | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Full / normal | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Full / safe | 0/12 | 4/8 |
+| V4.1 Flash | M3-v2 | No guard / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | No guard / safe | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Policy / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Policy / safe | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Full / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Full / safe | 0/12 | 6/8 |
+
 ## 图注
 
 **图 1. 在线字段与来源权威边界。** 可信任务上下文、授权投影、来源事件和拟执行动作可以进入 Guard，原始评估标签、金标准答案和效应回执留在离线侧。E2 在命题、参数值、相对位置和策略固定时只改变来源权威性；服务商托管工具和真实外部效应均关闭。
 
-**图 2. 提示词×运行时模块因子效应。** 三个面板分别显示 E1 四个单元的攻击不安全效应、良性工具完成和失败敏感性攻击端点；对应的 module、prompt 与 interaction 估计见表 2。区间来自 10,000 次案例聚类 bootstrap；Holm 校正仅用于不安全效应和良性工具 TCR 两个共同主要终点族，失败敏感性端点只作描述性分析。
+**图 2. 提示词×运行时模块因子效应。** 三个面板分别显示 E1 四个单元的攻击旧版风险标签端点、良性工具完成和失败敏感性攻击端点；对应的 module、prompt 与 interaction 估计见表 2。区间来自 10,000 次案例聚类 bootstrap；Holm 校正仅用于不安全效应和良性工具 TCR 两个共同主要终点族，失败敏感性端点只作描述性分析。
 
 **图 3. 来源权威性反事实。** 决策热图给出 trusted/untrusted origin、policy/full modules 和授权/未授权提案的确定性 Guard 结果；配对动作面板另行报告端到端来源交换后的动作变化。离线 Guard 正确率不被视为系统任务完成的替代指标。
 
 **图 4. 代表性、风险富集与 Flash 队列的因子效应。** 图中并列 E1、结果富集 E3 挑战集和同服务商 E4 Flash 复现的绝对因子效应与区间。E3 不估计部署流行率，E4 不建立跨厂商一般性，两者均不新增显著性检验家族。
 
-**图 5. 完整 B50/B200 证据与条件性自适应尾部。** 原 40 任务面板只在 200 以内提供完整累计 first-success 证据；第二面板仅包含 12 个预设 B200 survivor。条件尾部不能并入原面板构造完整 B500 曲线，也不能解释为攻击饱和估计。
+**图 5. 完整 B50/B200 证据与条件性自适应尾部。** 原 40 任务面板只在 200 以内提供完整累计 first-success 证据；第二面板仅包含 12 个预设 B200 survivor。条件尾部不能并入原面板构造完整 B500 曲线，也不能解释为攻击饱和估计；成功指历史评价标签，不是事后确认的实际越权效果。
 
 ## 投稿声明
 

@@ -222,8 +222,22 @@ Across the 384 paired confirmation cells, 192 remained scope-blocked, 48 receive
 
 \input{\ProjectRoot/table_07.tex}
 
+\subsection{Corrected development study}
+
+\label{sec:results-corrected-development-study}
+
+Table 8 separates the corrected-v1 development batch from all historical experiments. DeepSeek V4 Pro and DeepSeek V4.1 Flash each completed 288 planned task-condition executions over the same 48 tasks and six configurations. Pro had 265 completed workflows, 13 parse failures, and 10 max-step terminations; Flash had 272, seven, and nine respectively. Workflow completion is not task completion: ending with ASK records a pending approval, not an executed task. Gemini is deferred and supplies no model-effect comparison.
+
+AgentDojo retains its native security checker rather than a state-only endpoint. For Pro, normal-prompt attack positives were 5/12 without a guard, 2/12 with policy modules, and 0/12 with full modules; benign-tool completion was 6/8, 3/8, and 3/8. The full-minus-policy paired attack difference was -16.67 percentage points with a 95\% interval from -44.80 to +10.38, crossing zero. For Flash, the no-guard normal-prompt attack cell had 1/12 positives and each other cell had zero; benign-tool completion was 7/8 in both no-guard cells and 4/8 in each guarded cell. These small, historically enriched development samples do not establish superiority or causal attribution to provenance.
+
+M3-v2 observed simulated unsafe effects were 0/12 in every attack cell for both models, including no guard. Thus the null observations do not establish guard efficacy. Runtime summaries contained zero labelled sensitive values; dataflow checks were not applicable. Passing synthetic label-propagation tests is separate from model-generated evidence of activated dataflow restrictions. The eight no-tool tasks per model-condition remain in the planned denominators, but Table 8 focuses on attack and benign-tool outcomes. Unknown outcomes are not replaced by zero, and operational failures remain separately reported.
+
+\input{\ProjectRoot/table_08.tex}
+
 \subsection{Remaining evidence boundary}
 
 \label{sec:results-remaining-evidence-boundary}
+
+Historical Public and incremental tables retain their recorded evaluator labels. In the old M3-v2 path, an action allowed by the Guard but rejected by the final isolation boundary could be labelled unsafe even though the effect was not applied. Historical ITT variants also include operational failures. The compact records do not support retrospective identification of all actual un\-au\-thor\-ized effects. Historical numbers are therefore legacy-labelled risk endpoints, not corrected execution-effect estimates. Their values are retained, not silently relabelled as corrected-v1 results; AgentDojo's native checker is also not reduced to an environment-state-only definition.
 
 The medium, Public, authorization-regime, factorial, source-authority, challenge, replication, adaptive, and contemporaneous-activity studies jointly support an empirical security--utility paper. They do not support a leading-defense, end-to-end provenance-benefit, saturated-adaptive, or cross-provider claim. E2 does identify source sensitivity at the deterministic Guard decision layer, but its end-to-end action endpoint is floor-limited. E5 supplies only a conditional 0/12 B200-survivor tail with a 24.25\% upper confidence limit. E6 records attack activity only within its historically enriched, single-block DeepSeek cohort; it neither satisfies nor tests the original multi-window activity gate. The earlier Gemini authorization study closed at 32/450 terminal work items, only five response-bearing; the separately executed E6 Gemini prefix produced five response-bearing records, one response-less failure, and 174 administrative closures. Both are retained for operational accounting but all Gemini effects are not estimable. UTR and DSR are not identifiable from the current record contract and are not reconstructed from unsafe-effect rate.

@@ -1,5 +1,16 @@
 # Failure Log
 
+## 2026-10-06 — Migration/environment/manuscript checks repaired
+
+- Chinese text guard initially treated valid outputs image URLs as workflow prose; split prose checking from image-target existence instead of deleting valid figures.
+- Stale tests expected21 references/7 tables and the saved manuscript missed generator Table8. Verified current sources, rebuilt outputs and updated constraints to24 references,8 numbered result tables and9 total DOCX tables. No scientific result was changed to pass a test.
+- The first current-BIB parser accepted only braced values; existing entries also use quoted values. Extended value parsing, retained missing-field/duplicate-key/missing-citation negative tests, and kept the old34-entry export immutable.
+- Main bibliography emitted an empty-pages warning for AgentSpec; verified primary metadata and Crossref2938-2950, added pages/DOI, rebuilt and passed17 targeted checks. This is not all-reference online revalidation.
+- CaMeL base interpreter was absent. Installed the exact3.10.12 under E archive and patched explicit venv home. First uv pip check used default C-cache against E temp and failedos17; changed hypothesis to cross-drive cache persistence, supplied E-cache and120 packages passed. No model call/retry.
+- D-drive migration remains rejected by policy before launch. Original backups are intact; no alternate command bypass and no false completion claim. User has been asked to move them with Explorer.
+- Scoped git add returned1 for the ignored outputs parent even though the explicitly named, already tracked figure files were staged. Inspected index and tracked-file list instead of force-adding the output tree; all ten intended figure paths are present. Staging continues only for missing state scope, never for internal traces or whole outputs.
+- Staged whitespace check exposed inherited whitespace in the newly tracked template class and a PowerShell stdin trailing CR on the scoped task blob. Normalize only class whitespace; switch Git blob input to explicit UTF-8/LF via process stdin, without changing the user's older task sections.
+
 ## 2026-10-05 — Scoped documentation staging
 
 - A hand-written current-task patch sent through PowerShell failed `git apply --cached --check` with a context mismatch; the failed check changed no index or working file.

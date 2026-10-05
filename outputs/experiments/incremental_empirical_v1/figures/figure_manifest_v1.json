@@ -32,29 +32,29 @@
   },
   "outputs": {
     "figure_1_authority_boundary": [
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.png",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.svg",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.pdf"
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.png",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.svg",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_1_authority_boundary.pdf"
     ],
     "figure_2_factorial_interactions": [
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.png",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.svg",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.pdf"
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.png",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.svg",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_2_factorial_interactions.pdf"
     ],
     "figure_3_provenance_counterfactual": [
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.png",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.svg",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.pdf"
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.png",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.svg",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_3_provenance_counterfactual.pdf"
     ],
     "figure_4_factor_effect_forest": [
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.png",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.svg",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.pdf"
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.png",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.svg",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_4_factor_effect_forest.pdf"
     ],
     "figure_5_adaptive_tail": [
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.png",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.svg",
-      "E:\\M3_PI_Guard_test\\docs\\research\\paper_v2\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.pdf"
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.png",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.svg",
+      "E:\\M3_PI_Guard_test\\outputs\\experiments\\incremental_empirical_v1\\figures\\figure_5_adaptive_tail.pdf"
     ]
   },
   "renderer": "matplotlib-static-png-svg-pdf",

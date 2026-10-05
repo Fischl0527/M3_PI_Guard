@@ -54,7 +54,8 @@ def test_generated_english_docx_preserves_scientific_content_and_references() ->
     document = Document(builder.OUTPUT_PATH)
     text = "\n".join(paragraph.text for paragraph in document.paragraphs)
 
-    assert len(document.tables) == 7
+    # Eight numbered result tables plus the runtime-condition table in Methods.
+    assert len(document.tables) == 9
     assert len(document.inline_shapes) == 5
     assert len(document.sections) == 1
     section = document.sections[0]
@@ -78,7 +79,7 @@ def test_generated_english_docx_preserves_scientific_content_and_references() ->
     assert "�" not in text
     assert sum(
         paragraph.style.name == "Bibliography" for paragraph in document.paragraphs
-    ) == 21
+    ) == 24
 
     with zipfile.ZipFile(builder.OUTPUT_PATH) as archive:
         custom = archive.read("docProps/custom.xml").decode("utf-8")

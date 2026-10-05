@@ -1,5 +1,18 @@
 # 会话移交
 
+## 2026-10-06 — 修复验证通过，范围化新分支交付
+
+- 当前分支codex/directory-migration-fixes，起点3c32923；远程origin为RedTeam_LLM_Security。任务：harness/tasks/directory-migration-fixes-2026-10-05.md；报告：docs/迁移环境与论文检查修复报告_2026-10-06.md。
+- 迁移图片URL、BIB当前/历史口径、24引用/8编号表/9总表、4.14正文、模板源码依赖均修复；73项定向测试、17项页码后复核与Ruff通过。
+- 四LaTeX入口实际编译通过；审阅55页67书签、正式61页66书签，作者空白，自动版式错误0。模板无私有字体文件可编译；系统Times New Roman/SimSun仍是明确依赖。Word本轮只做结构验证。
+- CaMeL基础Python3.10.12在归档runtime/python已恢复；旧E盘runtime联接启动、四模块导入、120包兼容检查通过，不设置永久环境变量。
+- 论文仅同步已有corrected-v1与历史端点边界；Claude整改中的权限/敏感数据科研缺口仍未完成，不因此宣称投稿就绪；Gemini仍deferred。
+- 未调用API、未Full Harness、未重算历史矩阵；旧raw/冻结BIB导出未改写。correctness_runtime、generic-v2、跟进实验、第三方子模块和额外模板素材dirty保留，不随本次提交。
+- D:\M3_Blind_Custodian_Python_v3、D:\M3_Signer仍原位，E归档目标未建。执行工具策略拒绝，不能绕过。用户资源管理器迁移后只验元数据，不读私钥/标签。
+- F-DOC-001、F-PAPER-002整体保持in_progress；本轮软件与构建修复可独立验收，不等于整个归档/科研完成。不要自动启动模型、新矩阵或论文扩写。
+- Git修复提交和最终远端一致性回执在本节及任务末尾补记。
+- 暂存区独立检查：80个必要输入、23项测试通过，英文稿逐字重现；10源码内存编译、3个入口本地链接、JSON和scoped diff检查通过。没有依赖未提交科研源码或字体。
+
 ## 2026-10-05 — 目录整理主体完成，外围两项未完成
 
 - 入口：docs/项目目录指南.md、docs/项目目录整理报告_2026-10-05.md；任务：harness/tasks/project-directory-organization-2026-10-05.md。

@@ -286,9 +286,9 @@ def figure_factorial_interactions(
     cells = ("policy_normal", "policy_safe", "full_normal", "full_safe")
     labels = ("Policy\nnormal", "Policy\nsafe", "Full\nnormal", "Full\nsafe")
     panels = (
-        ("Attack\nunsafe effect", "attack_unsafe_effect"),
+        ("Attack\nlegacy endpoint", "attack_unsafe_effect"),
         ("Benign-tool\ncompletion", "benign_tool_tcr"),
-        ("Attack\nunsafe-or-failure", "attack_unsafe_or_failure"),
+        ("Attack\nlegacy endpoint or failure", "attack_unsafe_or_failure"),
     )
     fig, axes = plt.subplots(
         1, 3, figsize=(FIGURE_WIDTH_IN, 4.6), sharey=False
@@ -317,7 +317,7 @@ def figure_factorial_interactions(
         for name in ("module", "prompt", "interaction")
     )
     fig.suptitle("Concurrent 2×2 prompt-by-module outcomes", fontsize=14, weight="bold")
-    fig.text(0.5, 0.01, f"Unsafe-effect factor estimates: {note}", ha="center", color=MUTED)
+    fig.text(0.5, 0.01, f"Legacy-endpoint factor estimates: {note}", ha="center", color=MUTED)
     fig.tight_layout(rect=(0, 0.05, 1, 0.92))
     return _save(fig, output_dir, CHART_CONTRACTS[1]["id"])
 
@@ -413,7 +413,7 @@ def figure_factor_effect_forest(
     ax.axvline(0, color=INK, lw=1)
     ax.set_yticks(range(3), [item[0] for item in studies])
     ax.invert_yaxis()
-    ax.set_xlabel("Absolute difference in unsafe-effect probability")
+    ax.set_xlabel("Absolute difference in legacy-labelled risk")
     fig.suptitle(
         "Prompt, module, and interaction effects across prespecified cohorts",
         y=0.985,
@@ -451,7 +451,7 @@ def figure_adaptive_tail(
     axes[0].set_xticks((50, 200))
     axes[0].set_ylim(0, 1)
     axes[0].set_xlabel("Query budget")
-    axes[0].set_ylabel("P(first unsafe effect by budget)")
+    axes[0].set_ylabel("P(first evaluator success by budget)")
     axes[0].set_title("Original 40-task panel")
     for x, value in zip((50, 200), original, strict=True):
         axes[0].text(x, value, f" {value:.1%}", va="bottom")
@@ -464,7 +464,7 @@ def figure_adaptive_tail(
     axes[1].set_xlim(200, 500)
     axes[1].set_ylim(0, 1.03)
     axes[1].set_xlabel("Query budget")
-    axes[1].set_ylabel("P(no unsafe effect yet | survived B200)")
+    axes[1].set_ylabel("P(no evaluator success | survived B200)")
     axes[1].set_title("Selected B200-survivor tail (n=12)")
     fig.suptitle(
         "Defense-aware first-success evidence\nwith separate sampling frames",

@@ -78,7 +78,11 @@ def test_chinese_markdown_mirrors_scientific_structure_and_boundaries() -> None:
     assert "M3 不能被描述为首个" in text
     assert "Full Harness" not in text
     assert "SHA-256" not in text
-    assert "outputs/" not in text
+    # 图片目标移至outputs不属于正文工程说明；目标本身另作存在性检查。
+    reader_text = re.sub(r"!\[[^\]]*\]\([^)]+\)", "", text)
+    assert "outputs/" not in reader_text
+    figure_targets = re.findall(r"!\[[^\]]*\]\(([^)]+)\)", text)
+    assert all((CHINESE_MARKDOWN.parent / target).is_file() for target in figure_targets)
     assert "[UNVERIFIED CITATION" not in text
     assert "<!--anchor:none:" not in text
 
@@ -88,7 +92,7 @@ def test_chinese_and_english_manuscripts_use_the_same_citation_corpus() -> None:
     english = ENGLISH_MARKDOWN.read_text(encoding="utf-8")
 
     assert _citation_keys(chinese) == _citation_keys(english)
-    assert len(_citation_keys(chinese)) == 21
+    assert len(_citation_keys(chinese)) == 24
 
 
 def test_chinese_main_tables_preserve_every_numeric_token() -> None:
@@ -128,7 +132,8 @@ def test_generated_chinese_docx_preserves_layout_content_and_cjk_fonts() -> None
     document = Document(builder.OUTPUT_PATH)
     text = "\n".join(paragraph.text for paragraph in document.paragraphs)
 
-    assert len(document.tables) == 7
+    # Eight numbered result tables plus the runtime-condition table in Methods.
+    assert len(document.tables) == 9
     assert len(document.inline_shapes) == 5
     assert len(document.sections) == 1
     section = document.sections[0]
@@ -149,7 +154,7 @@ def test_generated_chinese_docx_preserves_layout_content_and_cjk_fonts() -> None
     )
     assert sum(
         paragraph.style.name == "Bibliography" for paragraph in document.paragraphs
-    ) == 21
+    ) == 24
 
     with zipfile.ZipFile(builder.OUTPUT_PATH) as archive:
         custom = archive.read("docProps/custom.xml").decode("utf-8")

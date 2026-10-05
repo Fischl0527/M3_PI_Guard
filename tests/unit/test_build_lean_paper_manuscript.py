@@ -51,7 +51,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
         "## References"
     )
     assert manuscript.count("![Figure ") == 5
-    assert len(re.findall(r"^### Table [1-7]\. ", manuscript, flags=re.MULTILINE)) == 7
+    assert len(re.findall(r"^### Table [1-8]\. ", manuscript, flags=re.MULTILINE)) == 8
     assert "Supplementary Table S1" in manuscript
     assert "Supplementary Table S6" in manuscript
     assert "Supplementary Table S10" in manuscript
@@ -128,7 +128,7 @@ def test_active_reference_set_uses_current_primary_metadata() -> None:
     attacker = re.search(r"(?ms)^@misc\{L27,\n(.*?)^\}", bibliography)
     assert agentspec is not None
     assert "conf.researchr.org/details/icse-2026" in agentspec.group(1)
-    assert "10.1145/3744916.3764546" not in agentspec.group(1)
+    assert "10.1145/3744916.3764546" in agentspec.group(1)
     assert asb is not None
     assert "booktitle = {International Conference on Learning Representations}" in asb.group(1)
     assert "pages = {35331--35366}" in asb.group(1)
@@ -207,7 +207,7 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
 def test_incremental_table_notes_preserve_claim_boundaries() -> None:
     notes = builder._table_notes()
 
-    assert len(notes) == 7
+    assert len(notes) == 8
     assert "contemporaneous cells" in notes[0]
     assert "separate evidence layers" in notes[2]
     assert "not a complete original-panel B500 curve" in notes[4]

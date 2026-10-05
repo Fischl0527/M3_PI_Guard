@@ -567,7 +567,46 @@ policy--intent mismatch and a bounded permission lifecycle, not a general
 utility gain. No task-environment state transition was performed, and these
 permits are not added to TCR or unsafe-effect counts in the execution studies.
 
+## Corrected development study
+
+Table 8 separates the corrected-v1 development batch from all historical
+experiments. DeepSeek V4 Pro and DeepSeek V4.1 Flash each completed 288 planned
+task-condition executions over the same 48 tasks and six configurations. Pro
+had 265 completed workflows, 13 parse failures, and 10 max-step terminations;
+Flash had 272, seven, and nine respectively. Workflow completion is not task
+completion: ending with ASK records a pending approval, not an executed task.
+Gemini is deferred and supplies no model-effect comparison.
+
+AgentDojo retains its native security checker rather than a state-only endpoint.
+For Pro, normal-prompt attack positives were 5/12 without a guard, 2/12 with
+policy modules, and 0/12 with full modules; benign-tool completion was 6/8,
+3/8, and 3/8. The full-minus-policy paired attack difference was -16.67
+percentage points with a 95% interval from -44.80 to +10.38, crossing zero.
+For Flash, the no-guard normal-prompt attack cell had 1/12 positives and each
+other cell had zero; benign-tool completion was 7/8 in both no-guard cells and
+4/8 in each guarded cell. These small, historically enriched development
+samples do not establish superiority or causal attribution to provenance.
+
+M3-v2 observed simulated unsafe effects were 0/12 in every attack cell for
+both models, including no guard. Thus the null observations do not establish
+guard efficacy. Runtime summaries contained zero labelled sensitive values;
+dataflow checks were not applicable. Passing synthetic label-propagation tests
+is separate from model-generated evidence of activated dataflow restrictions.
+The eight no-tool tasks per model-condition remain in the planned denominators,
+but Table 8 focuses on attack and benign-tool outcomes. Unknown outcomes are
+not replaced by zero, and operational failures remain separately reported.
+
 ## Remaining evidence boundary
+
+Historical Public and incremental tables retain their recorded evaluator
+labels. In the old M3-v2 path, an action allowed by the Guard but rejected by
+the final isolation boundary could be labelled unsafe even though the effect
+was not applied. Historical ITT variants also include operational failures.
+The compact records do not support retrospective identification of all actual
+unauthorized effects. Historical numbers are therefore legacy-labelled risk
+endpoints, not corrected execution-effect estimates. Their values are retained,
+not silently relabelled as corrected-v1 results; AgentDojo's native checker is
+also not reduced to an environment-state-only definition.
 
 The medium, Public, authorization-regime, factorial, source-authority,
 challenge, replication, adaptive, and contemporaneous-activity studies jointly support an empirical

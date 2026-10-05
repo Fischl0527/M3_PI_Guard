@@ -146,6 +146,7 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
         5: (4, 8),
         6: (6, 6),
         7: (4, 4),
+        8: (24, 5),
     }
     expected_supplement_shapes = {
         1: (4, 4),
@@ -178,7 +179,7 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
         for table in supplementary_tables
     } == expected_supplement_shapes
 
-    assert len(list(table_dir.glob("table_*.tex"))) == 7
+    assert len(list(table_dir.glob("table_*.tex"))) == 8
     assert len(list(table_dir.glob("supplement_s*.tex"))) == 12
     assert r"false allow & not applicable & 240" in (
         table_dir / "table_03.tex"
@@ -241,7 +242,7 @@ def test_places_artifacts_once_and_emits_no_absolute_workspace_paths(
         assert results.count(
             rf"\input{{\ProjectRoot/figure_{number:02d}.tex}}"
         ) == 1
-    for number in (2, 3, 4, 5, 6, 7):
+    for number in (2, 3, 4, 5, 6, 7, 8):
         assert results.count(
             rf"\input{{\ProjectRoot/table_{number:02d}.tex}}"
         ) == 1

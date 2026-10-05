@@ -81,7 +81,7 @@ AUTHORITATIVE_OVERRIDES = {
             "Software Engineering (ICSE)"
         ),
         "year": "2026",
-        "pages": "1--12",
+        "pages": "2938--2950",
         "doi": "10.1145/3744916.3764546",
         "url": "https://doi.org/10.1145/3744916.3764546",
         "source": (
@@ -502,6 +502,12 @@ def _generic_bib_from_metadata(metadata: Mapping[str, Any]) -> str:
 
 
 def write() -> dict[str, Any]:
+    if OUTPUT_BIB.is_file() and re.search(
+        r"^@\w+\{L3[5-9],", OUTPUT_BIB.read_text(encoding="utf-8"), re.M
+    ):
+        raise BibliographyBuildError(
+            "refusing to replace the current library with the historical 34-entry export"
+        )
     bibliography, report = build()
     OUTPUT_BIB.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_BIB.write_text(bibliography, encoding="utf-8")
@@ -509,7 +515,8 @@ def write() -> dict[str, Any]:
     return report
 
 
-def verify() -> dict[str, Any]:
+def verify_frozen_export() -> dict[str, Any]:
+    """Check the historical 34-entry export, not the subsequently edited library."""
     bibliography = OUTPUT_BIB.read_text(encoding="utf-8")
     report = _load_json(OUTPUT_REPORT)
     manifest = _load_json(MANIFEST_PATH)
@@ -542,13 +549,56 @@ def verify() -> dict[str, Any]:
     return report
 
 
+def verify() -> dict[str, Any]:
+    """Validate current metadata and citations without rewriting frozen receipts.
+
+    This is a local integrity check, not a new online audit of every publication.
+    The original export check remains available as ``verify_frozen_export``.
+    """
+    bibliography = OUTPUT_BIB.read_text(encoding="utf-8")
+    entries = re.findall(r"(?ms)^@(\w+)\{(L\d{2}),\n(.*?)^\}", bibliography)
+    keys = [key for _, key, _ in entries]
+    frozen_ids = {str(entry["citation_id"]) for entry in _load_json(MANIFEST_PATH)["entries"]}
+    expected_ids = frozen_ids | {"L35", "L36", "L37", "L38", "L39"}
+    if len(keys) != len(set(keys)) or set(keys) != expected_ids:
+        raise BibliographyBuildError("current bibliography keys are missing or duplicated")
+    reports = []
+    for kind, key, body in entries:
+        required = ["author", "title", "year", "url"]
+        if kind.lower() in {"article", "inproceedings"}:
+            required.append("journal" if kind.lower() == "article" else "booktitle")
+        for field in required:
+            if not re.search(rf'(?ms)^\s*{field}\s*=\s*[{{"]\s*[^\s}}"]', body):
+                raise BibliographyBuildError(f"{key}: missing or empty {field}")
+        if key == "L20" and not re.search(
+            r"doi\s*=\s*\{10\.1145/3744916\.3764546\}", body
+        ):
+            raise BibliographyBuildError("L20: verified AgentSpec DOI is missing")
+        reports.append({"citation_id": key, "complete": True})
+    for name in ("manuscript_deepseek_v1.md", "manuscript_zh_v1.md"):
+        source = OUTPUT_BIB.with_name(name)
+        if source.is_file():
+            cited = set(re.findall(r"@(L\d{2})", source.read_text(encoding="utf-8")))
+            if cited - set(keys):
+                raise BibliographyBuildError(f"{name}: citation keys missing from library")
+    return {
+        "status": "current_local_metadata_and_citation_integrity",
+        "entry_count": len(entries), "entries": reports,
+        "frozen_export_readonly": True, "network_calls": 0,
+        "scope": "required fields, unique keys, citation coverage, verified L20 DOI",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--write", action="store_true")
     action.add_argument("--verify", action="store_true")
+    action.add_argument("--verify-frozen-export", action="store_true")
     args = parser.parse_args()
-    value = write() if args.write else verify()
+    value = write() if args.write else (
+        verify_frozen_export() if args.verify_frozen_export else verify()
+    )
     print(json.dumps(value, ensure_ascii=False, sort_keys=True))
     return 0
 
