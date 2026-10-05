@@ -30,7 +30,7 @@ from experiments.paper_v2.lean_empirical_runner import (
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT = (
-    PROJECT_ROOT / "docs/research/paper_v2/lean_empirical/authorization_results_v1.json"
+    PROJECT_ROOT / "outputs/experiments/lean_empirical/analysis/authorization_results_v1.json"
 )
 BOOTSTRAP_REPLICATES = 10_000
 BOOTSTRAP_SEED = "m3-q2-lean-analysis-2026-08-20-v1"

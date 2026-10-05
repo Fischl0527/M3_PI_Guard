@@ -84,11 +84,11 @@ PUBLIC_MERGE_PATH = (
 )
 SCORECARD_PATH = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/manuscript/completion_scorecard_v2.json"
+    / "harness/state/paper_v2/completion_scorecard_v2.json"
 )
 BIBLIOGRAPHY_BUILD_PATH = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/manuscript/bibliography_build_v1.json"
+    / "outputs/manuscript/checks/bibliography_build_v1.json"
 )
 REFERENCES_PATH = (
     PROJECT_ROOT / "docs/research/paper_v2/manuscript/references_v1.bib"

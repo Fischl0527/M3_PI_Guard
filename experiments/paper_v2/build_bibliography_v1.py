@@ -30,7 +30,7 @@ OUTPUT_BIB = (
 )
 OUTPUT_REPORT = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/manuscript/bibliography_build_v1.json"
+    / "outputs/manuscript/checks/bibliography_build_v1.json"
 )
 USER_AGENT = (
     "M3-PI-Guard-Academic-Metadata/1.0 "

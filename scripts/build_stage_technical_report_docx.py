@@ -21,7 +21,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "docs/research/paper_v2/reports/M3_PI_Guard_阶段技术报告_2026-08-06_artifact.json"
+SOURCE = ROOT / "outputs/reports/paper_v2/M3_PI_Guard_阶段技术报告_2026-08-06_artifact.json"
 OUTPUT = ROOT / "docs/research/paper_v2/reports/M3_PI_Guard_阶段技术状态报告_2026-08-06.docx"
 QA_DIR = ROOT / "outputs/report_qa/stage_technical_report_20260806"
 

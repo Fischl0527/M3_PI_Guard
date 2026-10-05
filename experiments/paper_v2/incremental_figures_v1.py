@@ -24,10 +24,10 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ANALYSIS_ROOT = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1"
 EXISTING_ANALYSIS = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json"
+    / "outputs/experiments/lean_empirical/analysis/existing_results_analysis_v1.json"
 )
 OUTPUT_ROOT = (
-    PROJECT_ROOT / "docs/research/paper_v2/incremental_empirical_v1/figures"
+    PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/figures"
 )
 
 INK = "#17212B"

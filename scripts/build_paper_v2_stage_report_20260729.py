@@ -85,11 +85,11 @@ ANALYSIS_PATH = (
 )
 SCORECARD_PATH = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/manuscript/completion_scorecard_v1.json"
+    / "harness/state/paper_v2/completion_scorecard_v1.json"
 )
 CLAIM_LEDGER_PATH = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/manuscript/claim_evidence_ledger_v1.json"
+    / "harness/state/paper_v2/claim_evidence_ledger_v1.json"
 )
 PUBLIC_FREEZE_PATH = (
     PROJECT_ROOT / "protocols/paper_upgrade_v2/public_benchmark_freeze_v1.json"

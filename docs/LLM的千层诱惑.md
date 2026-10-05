@@ -353,7 +353,7 @@ E7a 的原始文件特别容易误读：一次请求会先记录“开始”，�
 4. 对照[运行前计划](../protocols/paper_upgrade_v2/e7_confirmation_usability_v1/plan_v1.md)，确认没有临时换分母。
 5. 看[判定代码](../experiments/paper_v2/e7_confirmation_runner_v1.py)里的 `score_proposal`。这个函数名意思是“为动作提案判分”；它目前没有提交后端效果。
 
-对于历史 Pro/Flash 大矩阵，优先看[已有结果汇总](../docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json)及[论文结果源](../docs/research/paper_v2/manuscript/results_shell.md)，不要从所有历史控制器中猜哪一版正在生效。
+对于历史 Pro/Flash 大矩阵，优先看[已有结果汇总](../outputs/experiments/lean_empirical/analysis/existing_results_analysis_v1.json)及[论文结果源](../docs/research/paper_v2/manuscript/results_shell.md)，不要从所有历史控制器中猜哪一版正在生效。
 
 ## 9. 要读代码，按职责读，不要从第一行读到最后一行
 
@@ -651,6 +651,6 @@ E8 已能加载环境，但给定示例轨迹在固定 18 个任务中只得到 
 - [E6 最终报告](../outputs/experiments/e6_cross_provider_calibration_v2/report_v2.md)：单执行块及不完整 Gemini 的解释。
 - [本次论文更新报告](../docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md)：新增表格、引用及排版情况。
 - [中文论文对照](../docs/research/paper_v2/manuscript/manuscript_zh_v1.md)：完整论文内容。
-- [当前研究主张与证据清单](../docs/research/paper_v2/manuscript/claim_evidence_ledger_lean_v1.json)：claim 指论文主张，evidence 指证据，ledger 指逐项清单。
+- [当前研究主张与证据清单](../harness/state/paper_v2/claim_evidence_ledger_lean_v1.json)：claim 指论文主张，evidence 指证据，ledger 指逐项清单。
 
 **交接的重点不是让下一位同学记住所有目录，而是知道：要回答什么问题、该看哪份材料、每个结果究竟证明到了哪一步。**

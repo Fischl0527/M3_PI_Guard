@@ -391,7 +391,12 @@ def main() -> int:
             "authorization_probes": 48,
         },
     }
-    (ASSET_ROOT / "stage_report_data.json").write_text(
+    data_path = (
+        PROJECT_ROOT
+        / "outputs/reports/paper_v2/assets/stage_report_20260724/stage_report_data.json"
+    )
+    data_path.parent.mkdir(parents=True, exist_ok=True)
+    data_path.write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )

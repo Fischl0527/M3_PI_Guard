@@ -11,11 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT_DIR = REPO_ROOT / "docs" / "research" / "paper_v2" / "manuscript"
 FIGURE_SOURCE_DIR = (
     REPO_ROOT
-    / "docs"
-    / "research"
-    / "paper_v2"
-    / "incremental_empirical_v1"
-    / "figures"
+    / "outputs" / "experiments" / "incremental_empirical_v1" / "figures"
 )
 TEMPLATE_DIR = REPO_ROOT / "LaTeX通用模板"
 OUTPUT_DIR = TEMPLATE_DIR / "M3_PI_Guard_JISA"
@@ -704,11 +700,7 @@ def build(
     manuscript_dir = repo_root / "docs" / "research" / "paper_v2" / "manuscript"
     figure_dir = (
         repo_root
-        / "docs"
-        / "research"
-        / "paper_v2"
-        / "incremental_empirical_v1"
-        / "figures"
+        / "outputs" / "experiments" / "incremental_empirical_v1" / "figures"
     )
     template_dir = repo_root / "LaTeX通用模板"
     output_root = output_root or template_dir / "M3_PI_Guard_JISA"

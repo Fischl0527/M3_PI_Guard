@@ -18,7 +18,7 @@ from typing import Any, Mapping, Sequence
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_PATH = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json"
+    / "outputs/experiments/lean_empirical/analysis/existing_results_analysis_v1.json"
 )
 
 PRIMARY_FILES = (

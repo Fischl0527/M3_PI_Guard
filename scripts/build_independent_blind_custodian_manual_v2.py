@@ -825,7 +825,7 @@ def _build_manual_body(
     _add_code_block(doc, "运行者：保管人；任意 PowerShell 初始目录", commands["create_root"])
     _add_body(
         doc,
-        f"项目负责人只可从 {PROJECT_ROOT / 'docs/research/paper_v2/reports/M3_PI_Guard_Blind_Custodian_Toolkit_v2_final'} 复制整个目录并交给保管人。保管人再把它复制为 D:\\M3_Blind_Custodian_v2。不要从聊天窗口零散复制 Python 代码；工具包必须携带 SHA-256 manifest。未带 `_v2_final` 的早期目录已被标记为 superseded，禁止使用。",
+        f"项目负责人只可从 {PROJECT_ROOT / 'release/archive/blind_custodian_toolkits/M3_PI_Guard_Blind_Custodian_Toolkit_v2_final'} 复制整个目录并交给保管人。保管人再把它复制为 D:\\M3_Blind_Custodian_v2。不要从聊天窗口零散复制 Python 代码；工具包必须携带 SHA-256 manifest。未带 `_v2_final` 的早期目录已被标记为 superseded，禁止使用。",
     )
     _add_code_block(doc, "运行者：保管人；工作目录：D:\\M3_Blind_Custodian_v2", commands["toolkit_preflight"])
     _add_heading(doc, "5.3 填写、签署并验证登记", 2)

@@ -18,11 +18,7 @@ MANUSCRIPT = (
 BIBLIOGRAPHY = MANUSCRIPT.with_name("references_v1.bib")
 FIGURES = (
     REPO_ROOT
-    / "docs"
-    / "research"
-    / "paper_v2"
-    / "incremental_empirical_v1"
-    / "figures"
+    / "outputs" / "experiments" / "incremental_empirical_v1" / "figures"
 )
 
 

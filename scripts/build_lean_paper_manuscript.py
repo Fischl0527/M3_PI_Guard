@@ -11,8 +11,8 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT_DIR = PROJECT_ROOT / "docs/research/paper_v2/manuscript"
-FIGURE_DIR = PROJECT_ROOT / "docs/research/paper_v2/incremental_empirical_v1/figures"
-TABLE_DIR = PROJECT_ROOT / "docs/research/paper_v2/incremental_empirical_v1/tables"
+FIGURE_DIR = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/figures"
+TABLE_DIR = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/tables"
 OUTPUT_PATH = MANUSCRIPT_DIR / "manuscript_deepseek_v1.md"
 
 TITLE = (
@@ -238,7 +238,7 @@ def _figure_block() -> str:
         path = FIGURE_DIR / filename
         if not path.is_file():
             raise ManuscriptBuildError(f"Missing paper figure: {path}")
-        relative = Path("../incremental_empirical_v1/figures") / filename
+        relative = Path("../../../../outputs/experiments/incremental_empirical_v1/figures") / filename
         lines.append(f"![Figure {number}. {caption}]({relative.as_posix()})")
         lines.append("")
     return "\n".join(lines).strip()
@@ -706,7 +706,8 @@ def build_manuscript() -> str:
         "shard evidence reviews",
         "Author action:",
     )
-    present = [token for token in forbidden if token in manuscript]
+    reader_text = re.sub(r"\]\([^)]+\)", "]()", manuscript)
+    present = [token for token in forbidden if token in reader_text]
     if present:
         raise ManuscriptBuildError(
             "Reader-facing manuscript contains workflow metadata: "

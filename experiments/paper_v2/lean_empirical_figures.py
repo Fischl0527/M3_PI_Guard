@@ -22,13 +22,13 @@ from matplotlib.patches import FancyBboxPatch  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_AUTHORIZATION_ANALYSIS = (
-    PROJECT_ROOT / "docs/research/paper_v2/lean_empirical/authorization_results_v1.json"
+    PROJECT_ROOT / "outputs/experiments/lean_empirical/analysis/authorization_results_v1.json"
 )
 DEFAULT_EXISTING_ANALYSIS = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/lean_empirical/existing_results_analysis_v1.json"
+    / "outputs/experiments/lean_empirical/analysis/existing_results_analysis_v1.json"
 )
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "docs/research/paper_v2/lean_empirical/figures"
+DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "outputs/experiments/lean_empirical/figures"
 
 INK = "#17212B"
 MUTED = "#667085"

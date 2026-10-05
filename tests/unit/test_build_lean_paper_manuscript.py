@@ -29,7 +29,8 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert positions == sorted(positions)
     assert "Status:" not in manuscript
     assert "SHA-256" not in manuscript
-    assert "outputs/" not in manuscript
+    # 图链接指向实际实验产物；正文仍不能夹带工程路径说明。
+    assert "outputs/" not in re.sub(r"\]\([^)]+\)", "]()", manuscript)
     assert "[Insert" not in manuscript
     assert "[If" not in manuscript
     assert "Full Harness" not in manuscript

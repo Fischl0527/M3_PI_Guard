@@ -474,15 +474,15 @@ DeepSeek 授权制度结果为这些建议提供了观察依据：精确与压�
 
 ## 图
 
-![图 1. 在线字段与来源权威边界。](../incremental_empirical_v1/figures/figure_1_authority_boundary.png)
+![图 1. 在线字段与来源权威边界。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_1_authority_boundary.png)
 
-![图 2. 提示词、运行时模块与交互效应。](../incremental_empirical_v1/figures/figure_2_factorial_interactions.png)
+![图 2. 提示词、运行时模块与交互效应。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_2_factorial_interactions.png)
 
-![图 3. 来源权威性反事实决策与动作变化。](../incremental_empirical_v1/figures/figure_3_provenance_counterfactual.png)
+![图 3. 来源权威性反事实决策与动作变化。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_3_provenance_counterfactual.png)
 
-![图 4. 代表性、风险富集与 Flash 队列的因子效应。](../incremental_empirical_v1/figures/figure_4_factor_effect_forest.png)
+![图 4. 代表性、风险富集与 Flash 队列的因子效应。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_4_factor_effect_forest.png)
 
-![图 5. 完整 B50/B200 证据与 B200-survivor 条件尾部。](../incremental_empirical_v1/figures/figure_5_adaptive_tail.png)
+![图 5. 完整 B50/B200 证据与 B200-survivor 条件尾部。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_5_adaptive_tail.png)
 
 ## 表
 

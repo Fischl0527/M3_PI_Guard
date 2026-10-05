@@ -10,7 +10,7 @@ WORKSPACE = ROOT / "docs/research/paper_v2/manuscript"
 
 
 def _json(name: str) -> dict:
-    return json.loads((WORKSPACE / name).read_text(encoding="utf-8"))
+    return json.loads((ROOT / "harness/state/paper_v2" / name).read_text(encoding="utf-8"))
 
 
 def test_claim_ledger_keeps_effectiveness_and_blind_claims_locked() -> None:
@@ -185,7 +185,7 @@ def test_post_public_scorecard_preserves_incomplete_external_gates() -> None:
 
 
 def test_evidence_80_v3_arithmetic_and_scorecard_binding() -> None:
-    scorecard_path = WORKSPACE / "completion_scorecard_v1.json"
+    scorecard_path = ROOT / "harness/state/paper_v2/completion_scorecard_v1.json"
     scorecard = json.loads(scorecard_path.read_text(encoding="utf-8"))
     roadmap_path = (
         ROOT

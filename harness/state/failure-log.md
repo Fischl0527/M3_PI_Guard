@@ -6351,3 +6351,12 @@ credential, changed a historical ledger, or enabled an external effect.
 - Recovery: rename only the temporary helper to `qa_pdf.py` and rerun the same
   read-only checks. Do not change the validation hypothesis or repeat any build or
   experiment execution because of this naming error.
+# 2026-10-05 目录整理定向检查
+
+- 首轮8个模块检查：25 passed、7 failed。1项迁移相关失败是测试仍从 WORKSPACE 读取 completion_scorecard_v1.json，已改为 harness/state/paper_v2。
+- 另4项LaTeX构建失败均为当前未提交生成器要求主稿尚缺的 4.14 Corrected development study；2项参考文献失败为既存34条构建记录与后来修改的BIB不一致/AgentSpec DOI缺失。本轮不改主稿、引用内容或重算历史构建记录。
+- 后续只验证迁移路径并用临时构建材料做冒烟，不将上述未完成论文工作伪称为通过。
+
+- 新图链接指向 outputs 后，生成器把链接目标误识别为正文工程说明；已仅排除链接URL再检查正文，保留原有禁止项。新路径测试的常量名和旧工具包README文件名假设已按真实结构修正。
+- D盘整包跨盘迁移命令被执行工具策略拒绝（CreateProcess blocked by policy，命令未启动）；D盘两处原目录保留，E盘对应目标尚未创建。不换工具绕过拒绝。本轮完成其他范围，报告明确列出这两项待用户本地迁移。
+- Runtime联接后的PromptGuard和bootstrap解释器可启动；CaMeL报告基础Python缺失，pyvenv.cfg指向的 E:\AI_Cache\uv\python\cpython-3.10.12-windows-x86_64-none\python.exe 不存在。本轮未移动/删除该基础安装；联接不能修复基础环境缺失，不安装依赖或伪称CaMeL验证通过。

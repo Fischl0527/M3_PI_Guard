@@ -1652,15 +1652,15 @@ DeepSeek findings.
 
 ## Figures
 
-![Figure 1. Online fields and the source-authority boundary.](../incremental_empirical_v1/figures/figure_1_authority_boundary.png)
+![Figure 1. Online fields and the source-authority boundary.](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_1_authority_boundary.png)
 
-![Figure 2. Prompt, runtime-module, and interaction effects.](../incremental_empirical_v1/figures/figure_2_factorial_interactions.png)
+![Figure 2. Prompt, runtime-module, and interaction effects.](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_2_factorial_interactions.png)
 
-![Figure 3. Source-authority counterfactual decisions and action changes.](../incremental_empirical_v1/figures/figure_3_provenance_counterfactual.png)
+![Figure 3. Source-authority counterfactual decisions and action changes.](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_3_provenance_counterfactual.png)
 
-![Figure 4. Factor effects across representative, enriched, and Flash cohorts.](../incremental_empirical_v1/figures/figure_4_factor_effect_forest.png)
+![Figure 4. Factor effects across representative, enriched, and Flash cohorts.](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_4_factor_effect_forest.png)
 
-![Figure 5. Complete B50/B200 evidence and the conditional B200-survivor tail.](../incremental_empirical_v1/figures/figure_5_adaptive_tail.png)
+![Figure 5. Complete B50/B200 evidence and the conditional B200-survivor tail.](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_5_adaptive_tail.png)
 
 ## Tables
 

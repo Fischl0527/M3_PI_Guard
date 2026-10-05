@@ -60,11 +60,11 @@ RESULT_ADMISSION_PATH = (
 )
 SCORECARD_PATH = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/manuscript/completion_scorecard_v1.json"
+    / "harness/state/paper_v2/completion_scorecard_v1.json"
 )
 CLAIM_LEDGER_PATH = (
     PROJECT_ROOT
-    / "docs/research/paper_v2/manuscript/claim_evidence_ledger_v1.json"
+    / "harness/state/paper_v2/claim_evidence_ledger_v1.json"
 )
 SOURCE_AUDIT_SUMMARY_PATH = (
     PROJECT_ROOT / "protocols/paper_upgrade_v2/source_audit_summary_v1.md"

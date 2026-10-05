@@ -11,7 +11,7 @@ from typing import Any, Mapping, Sequence
 from experiments.paper_v2.incremental_figures_v1 import ANALYSIS_ROOT, PROJECT_ROOT
 
 
-OUTPUT_ROOT = PROJECT_ROOT / "docs/research/paper_v2/incremental_empirical_v1/tables"
+OUTPUT_ROOT = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/tables"
 E6_ANALYSIS = (
     PROJECT_ROOT
     / "outputs/experiments/e6_cross_provider_calibration_v2/analysis_v2.json"
