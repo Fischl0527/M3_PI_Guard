@@ -7,7 +7,7 @@
 -73 focused tests and17 post-pagination tests passed; Ruff passed. Four real LaTeX builds passed, review55pages/67bookmarks and official61pages/66bookmarks with0 layout errors. Source-only review package compiles without local private fonts.
 - Restored CaMeL basePython3.10.12 inside archived runtime; four core modules import and120 installed packages pass compatibility checks. No global environment change or model request.
 - Preserved historical raw/frozen exports and unrelated correctness/submodule/template changes. D-drive backups remain unmoved after tool-policy rejection; no bypass. Overall documentation/paper features remain in_progress.
-- Detailed report: docs/迁移环境与论文检查修复报告_2026-10-06.md. Scope-specific Git delivery receipt is recorded in the task and session handoff.
+- Detailed report: docs/迁移环境与论文检查修复报告_2026-10-06.md.61-file repair commitbd1636e pushed to origin/codex/directory-migration-fixes; git ls-remote matches. Software/build substage closed; D-backup archival and overall scientific project remain incomplete.
 
 ## 2026-10-05 — Consolidate archives and separate docs from artifacts
 

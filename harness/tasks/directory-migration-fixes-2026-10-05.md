@@ -2,7 +2,7 @@
 
 - 目标：修复迁移引入的问题，检查确认后提交并推送新分支。
 - 分支：codex/directory-migration-fixes；起点3c32923；保留已有科研、论文生成器、模板和第三方dirty内容。
-- 关联F-DOC-001；状态in_progress。必要验证：路径读写、成稿图链接、文档构建、归档位置与目录边界；不API、不Full Harness、不历史重算。
+- 关联F-DOC-001；状态verified_fix_substage，外围归档整体仍in_progress。必要验证：路径读写、成稿图链接、文档构建、归档位置与目录边界；不API、不Full Harness、不历史重算。
 - 用户补充授权“迁移、环境和论文检查都修”：修复CaMeL基础Python缺失、当前BIB检查及生成器/主稿不同步；这些既存问题仍与迁移引入的问题分别记录。
 - 不修改科研运行语义、历史原始记录或冻结导出；同步论文只使用已有结果并保留研究边界。
 
@@ -44,3 +44,10 @@
 - CaMeL缺失的3.10.12基础解释器已用现有uv下载到归档runtime/python，pyvenv.cfg明确改用新路径；旧runtime联接下启动及依赖导入通过，无永久环境变量。
 - 模板class/BST原在本机但未被Git跟踪，补为必要源码依赖；class对可选私有字体文件提供系统字体回退，原字体文件不上传、不删除。审阅入口仍统一Times New Roman。
 - 未修科研权限逻辑、未调用模型、未重新分析历史大文件。D盘迁移仍因先前工具策略拒绝未执行，已向用户请求资源管理器迁移，绝不绕过。
+
+## Git交付与收口
+
+- 修复提交bd1636eed0bd1d039b6dda18327eb98ecd92b8cb，61个范围内文件，基于3c32923。
+- git push -u origin codex/directory-migration-fixes成功；git ls-remote --heads origin codex/directory-migration-fixes返回同一SHA。没有force-push或改写旧分支。
+- 随后仅报告/Harness交付回执提交；最新SHA通过分支Git记录核对。其余既有current-task16行、correctness源码、第三方子模块、字体和素材保留未提交。
+- 本轮软件/环境/论文检查修复及新分支交付完成；D盘备份实际迁移不在完成声明内，仍待用户手动搬迁。科研缺口也不因构建通过而关闭。

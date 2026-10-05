@@ -1,6 +1,6 @@
 # 会话移交
 
-## 2026-10-06 — 修复验证通过，范围化新分支交付
+## 2026-10-06 — 修复验证通过，新分支已推送
 
 - 当前分支codex/directory-migration-fixes，起点3c32923；远程origin为RedTeam_LLM_Security。任务：harness/tasks/directory-migration-fixes-2026-10-05.md；报告：docs/迁移环境与论文检查修复报告_2026-10-06.md。
 - 迁移图片URL、BIB当前/历史口径、24引用/8编号表/9总表、4.14正文、模板源码依赖均修复；73项定向测试、17项页码后复核与Ruff通过。
@@ -10,8 +10,9 @@
 - 未调用API、未Full Harness、未重算历史矩阵；旧raw/冻结BIB导出未改写。correctness_runtime、generic-v2、跟进实验、第三方子模块和额外模板素材dirty保留，不随本次提交。
 - D:\M3_Blind_Custodian_Python_v3、D:\M3_Signer仍原位，E归档目标未建。执行工具策略拒绝，不能绕过。用户资源管理器迁移后只验元数据，不读私钥/标签。
 - F-DOC-001、F-PAPER-002整体保持in_progress；本轮软件与构建修复可独立验收，不等于整个归档/科研完成。不要自动启动模型、新矩阵或论文扩写。
-- Git修复提交和最终远端一致性回执在本节及任务末尾补记。
+- 修复提交bd1636eed0bd1d039b6dda18327eb98ecd92b8cb（61文件）已推送origin/codex/directory-migration-fixes，git ls-remote与本地HEAD一致。随后仅文档交付回执提交，最新SHA以分支git log/对话回执为准。
 - 暂存区独立检查：80个必要输入、23项测试通过，英文稿逐字重现；10源码内存编译、3个入口本地链接、JSON和scoped diff检查通过。没有依赖未提交科研源码或字体。
+- 当前修复任务可关闭，不自动追加验证或实验；D盘迁移未完成、整体功能不改为verified。若用户已手动搬迁，另做一次范围内元数据检查即可。
 
 ## 2026-10-05 — 目录整理主体完成，外围两项未完成
 
