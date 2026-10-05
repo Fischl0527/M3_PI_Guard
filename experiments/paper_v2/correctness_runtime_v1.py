@@ -19,7 +19,7 @@ from experiments.paper_v2.formal_condition_executors import (
     ALL_CONDITION_PROFILES, ConditionProfile, OnlineExecutorContext,
 )
 from experiments.paper_v2.live_condition_runtime import LiveConditionRuntime, M3SandboxEffectBackend
-from experiments.paper_v2.medium_runtime import FROZEN_GENERATED_AT, _runtime_inputs, _source_projection
+from experiments.paper_v2.medium_runtime import FROZEN_GENERATED_AT, _runtime_inputs, _source_projection, _transform_manifest
 from experiments.paper_v2.public_agentdojo_live_dependency_v2 import PublicFrozenAgentDojoCaseResolverV2
 from experiments.paper_v2.public_m3_live_dependency_v4 import PublicFrozenM3CaseResolverV4
 from experiments.paper_v2.public_matrix_plan_v1 import _read_source_record
@@ -40,6 +40,8 @@ SAFE_ONLY_PROFILE = ConditionProfile(
     m3_prompt_profile="safe_prompt", agentdojo_prompt_profile="safe_prompt",
     dependency="same_safe_prompt_without_runtime_guard",
 )
+
+CORRECTED_REGIMES = {"auto_compiled", "exact_target_v2", "broad", "underspecified", "conflicting"}
 
 
 def profile_for(condition: str) -> ConditionProfile:
@@ -64,7 +66,7 @@ def compile_manifest(context: OnlineExecutorContext, view: Any, schemas: Any, *,
 
 
 def hydrate(work_item: Mapping[str, Any], *, compiler_revision: str = "corrected_v1", authorization_regime: str = "auto_compiled") -> tuple[dict[str, Any], dict[str, Any]]:
-    if authorization_regime not in {"auto_compiled", "exact_target_v2"}:
+    if authorization_regime not in CORRECTED_REGIMES:
         raise ValueError("unsupported corrected authorization regime")
     source = work_item["source_reference"]
     case = {
@@ -81,6 +83,7 @@ def hydrate(work_item: Mapping[str, Any], *, compiler_revision: str = "corrected
         trusted_user_request=request, trusted_app_context=app,
         tool_schemas=schemas, generated_at=FROZEN_GENERATED_AT,
     )
+    guard_manifest = _transform_manifest(manifest, authorization_regime) if authorization_regime in {"broad", "underspecified", "conflicting"} else manifest
     condition = str(work_item["condition_id"])
     profile = profile_for(condition)
     guarded = condition.startswith("m3_")
@@ -93,10 +96,10 @@ def hydrate(work_item: Mapping[str, Any], *, compiler_revision: str = "corrected
             guard_modules=["policy"] if condition in {"m3_policy_only", "m3_policy_safe_prompt"} else sorted(FULL_RUNTIME_MODULES),
             authorization={
                 "schema_version": "m3-paper-v2-authorization-envelope-1.0",
-                "authorization_regime": "auto_compiled",
+                "authorization_regime": authorization_regime,
                 "source_class": "online_compiled_authorization",
                 "compiler_inputs": ["trusted_user_request", "trusted_app_context", "tool_schemas"],
-                "manifest": manifest.to_dict(),
+                "manifest": guard_manifest.to_dict(),
             },
         )
         if authorization_regime == "exact_target_v2":
@@ -178,8 +181,8 @@ class CorrectnessRuntime:
         self.compiler_revision = compiler_revision
         if runtime_revision not in {"corrected_v1", "corrected_v2"}:
             raise ValueError("unknown corrected runtime revision")
-        if authorization_regime not in {"auto_compiled", "exact_target_v2"} or authorization_regime == "exact_target_v2" and runtime_revision != "corrected_v2":
-            raise ValueError("exact_target_v2 requires the explicit corrected_v2 runtime")
+        if authorization_regime not in CORRECTED_REGIMES or authorization_regime != "auto_compiled" and runtime_revision != "corrected_v2":
+            raise ValueError("new regimes require the explicit corrected_v2 runtime")
         self.runtime_revision = runtime_revision
         self.authorization_regime = authorization_regime
         self.agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
@@ -223,11 +226,16 @@ class CorrectnessRuntime:
             oracle.attach_runtime_restrictions(manifest, modules=modules, tracker=tracker)
             return oracle
 
+        def corrected_monitor(manifest, modules):
+            # Keep model-facing policy identical; regime only changes Guard scope.
+            guard_manifest = _transform_manifest(manifest, self.authorization_regime) if self.authorization_regime in {"broad", "underspecified", "conflicting"} else manifest
+            return RuntimeMonitorCorrectedV2(guard_manifest, modules=modules, tracker=tracker, tool_schemas=schema_holder)
+
         live = LiveConditionRuntime(
             provider_client_factory=lambda context: client,
             effect_backend_factory=backend_factory,
             policy_manifest_factory=manifest_factory,
-            monitor_factory=(lambda manifest, modules: RuntimeMonitorCorrectedV2(manifest, modules=modules, tracker=tracker, tool_schemas=schema_holder)) if self.runtime_revision == "corrected_v2" else RuntimeMonitorCorrectedV1,
+            monitor_factory=corrected_monitor if self.runtime_revision == "corrected_v2" else RuntimeMonitorCorrectedV1,
             oracle_monitor_factory=oracle_factory if self.authorization_regime == "exact_target_v2" else None,
             provenance_tracker_factory=lambda: tracker,
             safety_receipt_factory=build_boundary_aware_safety_receipt_v3,

@@ -438,7 +438,7 @@ def build_model_plan() -> list[dict[str, Any]]:
     ]
 
 
-def run_live_probe(work_item: Mapping[str, Any], client: Any) -> dict[str, Any]:
+def run_live_probe(work_item: Mapping[str, Any], client: Any, *, runtime_revision: str = "corrected_v1") -> dict[str, Any]:
     """Explicit caller-owned client; compatible with DevelopmentRequestClient.
 
     This function never loads credentials, starts a batch or retries. Only the
@@ -446,6 +446,8 @@ def run_live_probe(work_item: Mapping[str, Any], client: Any) -> dict[str, Any]:
     """
     if dict(work_item) not in build_model_plan():
         raise ValueError("work item is outside the bounded follow-up plan")
+    if runtime_revision not in {"corrected_v1", "corrected_v2"}:
+        raise ValueError("unsupported synthetic runtime revision")
     if getattr(client, "max_provider_calls", None) != MAX_CALLS_PER_ITEM:
         raise ValueError("client must enforce the three-request cap")
     if (
@@ -479,7 +481,7 @@ def run_live_probe(work_item: Mapping[str, Any], client: Any) -> dict[str, Any]:
         provider_client_factory=lambda _: client,
         effect_backend_factory=lambda *_: backend,
         policy_manifest_factory=lambda *_: manifest,
-        monitor_factory=RuntimeMonitorCorrectedV1,
+        monitor_factory=(lambda policy, modules: _corrected_v2_monitor(policy, modules, tracker)) if runtime_revision == "corrected_v2" else RuntimeMonitorCorrectedV1,
         provenance_tracker_factory=lambda: tracker,
         capture_runtime_failures=True,
         message_builder=lambda context, view, schemas, policy, profile: (
@@ -525,8 +527,15 @@ def run_live_probe(work_item: Mapping[str, Any], client: Any) -> dict[str, Any]:
             if key in raw
         },
         "evidence_level": "bounded_synthetic_development_probe",
-        "runtime_version": VERSION,
+        "runtime_version": VERSION if runtime_revision == "corrected_v1" else "corrected_v2",
     }
+
+
+def _corrected_v2_monitor(policy, modules, tracker):
+    from m3_core.policy_compiler import DEFAULT_TOOL_SCHEMAS
+    from m3_guard.runtime_monitor_corrected_v2 import RuntimeMonitorCorrectedV2
+
+    return RuntimeMonitorCorrectedV2(policy, modules=modules, tracker=tracker, tool_schemas=DEFAULT_TOOL_SCHEMAS)
 
 
 def _records(output: FilePath) -> list[dict[str, Any]]:

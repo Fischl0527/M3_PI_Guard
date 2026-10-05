@@ -6388,3 +6388,8 @@ credential, changed a historical ledger, or enabled an external effect.
 - 新图链接指向 outputs 后，生成器把链接目标误识别为正文工程说明；已仅排除链接URL再检查正文，保留原有禁止项。新路径测试的常量名和旧工具包README文件名假设已按真实结构修正。
 - D盘整包跨盘迁移命令被执行工具策略拒绝（CreateProcess blocked by policy，命令未启动）；D盘两处原目录保留，E盘对应目标尚未创建。不换工具绕过拒绝。本轮完成其他范围，报告明确列出这两项待用户本地迁移。
 - Runtime联接后的PromptGuard和bootstrap解释器可启动；CaMeL报告基础Python缺失，pyvenv.cfg指向的 E:\AI_Cache\uv\python\cpython-3.10.12-windows-x86_64-none\python.exe 不存在。本轮未移动/删除该基础安装；联接不能修复基础环境缺失，不安装依赖或伪称CaMeL验证通过。
+# 2026-10-06 新实验离线资格化：混合计划解析边界
+
+- 首轮69定向测试：5failed/64passed/1deselected。合成场景混在M3基准计划时，原生resolver要求其不存在的source_reference。
+- 修正假设：合成控制不是M3-v2冻结基准行，使用synthetic-m3独立基准标记；仍通过相同内存Live循环，不放宽原生resolver。
+- 只撤回本轮刚生成、尚未调用/提交的准备计划并重新生成；不存在模型raw被删除/改写。重新测试后再执行正式前缀。
