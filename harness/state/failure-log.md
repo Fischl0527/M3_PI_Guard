@@ -1,5 +1,11 @@
 # Failure Log
 
+## 2026-10-05 — Scoped documentation staging
+
+- A hand-written current-task patch sent through PowerShell failed `git apply --cached --check` with a context mismatch; the failed check changed no index or working file.
+- Changed method rather than repeating: built a UTF-8 unified diff from the actual Git index text and only the new planning subsection, then used subprocess stdin for check/apply. Both returned0.
+- This preserves prior uncommitted current-task sections and stages only the present plan; no source/raw/history rewrite or experiment occurred.
+
 ## 2026-09-20 — Gemini recovery remaining-call integration
 
 - First analysis writer incorrectly used a sibling gemini_recovery_v1 directory and read

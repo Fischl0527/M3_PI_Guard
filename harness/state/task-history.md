@@ -1,5 +1,11 @@
 # Task History
 
+## 2026-10-05 — Review Claude findings and deliver a revision plan
+
+- Compared both Claude reports with current code, artifacts and manuscript; reproduced exact-argument incompatibility (27/30 M3 benign cases) and policy-only ambiguity bypass offline.
+- Delivered docs/research/paper_v2/Claude审核整改计划_2026-10-05.md with versioned fixes, endpoint limits, prospective paired studies and manuscript/LaTeX tasks.
+- Planning/documentation only: no API, runtime fix, raw rewrite, historical replay or manuscript build. Preserved existing dirty work and deferred Gemini; overall F-PAPER-002 remains in_progress.
+
 ## 2026-10-05 — Merge top-level documentation folders
 
 - Moved all three tracked Markdown files from `docx/` to `docs/`, removed the empty source directory, updated active links and documentation index.

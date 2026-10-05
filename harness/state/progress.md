@@ -1,5 +1,13 @@
 # 进展记录
 
+## 2026-10-05 — Claude审核核对与整改计划
+
+- 普通Markdown计划已交付；关键复现为30个M3良性案例中27个因完整参数被旧exact监视器拒绝，以及未提交generic-v2的policy-only模糊权限放行。
+- 现有followup/历史指标分类/E6与稿件已交叉阅读；不把Claude乐观投稿判断当科研验收。
+- 本轮仅文档与状态；0 API、0代码修复、0历史矩阵重跑、0论文构建。原有未提交工作保留。
+- 验证：新计划501行、9个链接目标均存在且已在Git跟踪；另5个仅本地未发布来源使用明示路径，不制造GitHub断链。Harness feature JSON可解析、scoped diff --check通过。
+- F-PAPER-002仍in_progress；Gemini暂缓，未来实验须待用户实施指令。
+
 ## 2026-10-05 — 顶层文档目录合并
 
 - `docx/` 原有三份 Markdown 全部保留并移入 `docs/`；空目录已删除。

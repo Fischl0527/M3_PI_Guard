@@ -1,5 +1,15 @@
 # 当前任务
 
+### 2026-10-05 Claude审核核对与整改计划（规划完成，未实施）
+
+- 用户本轮只要求核对审核建议并交付Markdown计划；未授权本轮修权限代码、改论文或启动实验。
+- 交付：docs/research/paper_v2/Claude审核整改计划_2026-10-05.md。
+- 两项离线复现：30个M3良性任务完整接口参数仅3个全允许；模糊权限在未提交generic-v2下policy ALLOW、full ASK。
+- 读取已有followup、历史端点分类、E6与当前稿件；不重扫历史大文件、不调用API、不编译论文。
+- 建议先修exact目标比较/基础模糊权限/缺分类放行，再新同期900条主研究和有界回归；本地模型复现为建议补充，均尚未执行。
+- Gemini继续deferred；旧raw和既有未提交修补保留。F-PAPER-002整体仍in_progress。
+- 恢复入口：harness/tasks/claude-review-revision-plan-2026-10-05.md；收到实施指令后再修复。
+
 ### 2026-09-20 暂缓Gemini，收尾原开发批非Gemini部分
 
 - 用户明确要求先忽略Gemini；不再诊断、等待服务或调度其283项恢复，保留失败证据。

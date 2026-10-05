@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-10-05 — Claude审核计划交付，等待实施指令
+
+- 新入口：docs/research/paper_v2/Claude审核整改计划_2026-10-05.md；任务：harness/tasks/claude-review-revision-plan-2026-10-05.md。
+- 已复现旧exact结构性拒绝27/30，以及未提交generic-v2在policy-only下过宽授权；没有在本轮修复。
+- 现有16条合成模型回归中full的missing_classification仍有危险模拟效果；旧Public/E6指标不能直接当修正版实际越权效果。主稿尚有旧结论。
+- 本轮只写计划和最小状态；没有API/Full Harness/论文构建/历史重放，Gemini保持暂缓。
+- 验证：计划501行、9个链接目标存在且均在Git跟踪，5个本地未发布来源明确说明；feature JSON有效，scoped git diff --check通过；两项离线诊断exit0。
+- 下一步需用户实施指令；先修精确目标比较、模糊授权基础边界、缺分类保护，随后有限新同期配对研究；不要直接启动计划矩阵。
+- 既有源码、文稿、模板和第三方dirty状态保留。F-PAPER-002整体in_progress，不能据本计划声称论文整改完成。
+
 ## 2026-10-05 — 文档目录合并
 
 - 当前仓库的顶层文档入口统一为 `docs/`，旧 `docx/` 已删除；新增的两份外部评审报告和交接指南副本均在 `docs/`。
