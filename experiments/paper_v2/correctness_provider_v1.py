@@ -177,6 +177,7 @@ class DevelopmentRequestClient:
         transport: Any = None,
         generation_profile: str | None = None,
         max_provider_calls: int = 8,
+        call_budget_ceiling: int = 8,
     ) -> None:
         if APPROVED_MODEL_GROUPS.get(model_group) != model:
             raise official.ProviderIdentityError(
@@ -191,8 +192,10 @@ class DevelopmentRequestClient:
         ):
             raise official.ProviderPayloadError("unapproved generation profile")
         self.generation_profile = generation_profile
-        if type(max_provider_calls) is not int or not 1 <= max_provider_calls <= 8:
-            raise official.ProviderPayloadError("per-task request cap must be 1..8")
+        if type(call_budget_ceiling) is not int or call_budget_ceiling not in {8, 16} or call_budget_ceiling == 16 and model_group != "deepseek_pro":
+            raise official.ProviderPayloadError("unapproved explicit study call ceiling")
+        if type(max_provider_calls) is not int or not 1 <= max_provider_calls <= call_budget_ceiling:
+            raise official.ProviderPayloadError("per-task request cap exceeds explicit study ceiling (default 1..8)")
         self.max_provider_calls = max_provider_calls
         self.requests: list[dict[str, Any]] = []
         self._trace_path = trace_path
@@ -220,6 +223,11 @@ class DevelopmentRequestClient:
         )
         if self.provider_id == "deepseek":
             policy = deepseek_policy(model)
+            if call_budget_ceiling == 16:
+                # Explicit VIGIL study only; historical default policy stays eight.
+                part = policy["deepseek"]
+                part["hard_spend_limit_cny"] *= 2
+                part["abort_ceiling_cny"] *= 2
             self._client = DevelopmentDeepSeekClient(
                 **common,
                 policy=policy,

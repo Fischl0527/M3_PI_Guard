@@ -1,5 +1,17 @@
 # 当前任务
 
+### 2026-10-06 后续研究实施（进行中）
+
+- 用户已授权按综合计划最大限度推进；先P0公开事件原因分类，再冻结P1同期校准，P2本地模型/P3原生动态基准及VIGIL仅在技术适配合格时增加。
+- 任务harness/tasks/research-followup-execution-2026-10-06.md；输出outputs/experiments/research_followup_20261006_v1。历史916行不重跑，Gemini暂缓，真实工具/外部效果始终禁用。
+- 当前codex/claude-review-repairs；不Full Harness、盲测、日期等待或递归证据链。保留无关dirty，F-PAPER-002仍in_progress。
+
+### 2026-10-06 综合评估与新研究计划（本轮仅规划）
+
+- 用户要求结合Downloads新计划、Claude计划和当前项目重新规划；新文档docs/research/paper_v2/M3_PI_Guard_综合评估与后续研究计划_2026-10-06.md，任务harness/tasks/research-followup-plan-2026-10-06.md。
+- 已完成916条和版本化修复不重复；先定位AgentDojo低效用与非正常结束，建议核心360同期no-defense/policy/full，独立模型180/E8 108/VIGIL120为有条件补充。
+- 当前codex/claude-review-repairs/44ea311；本轮不API/启动实验/服务/改论文/Full Harness/历史重算/Git提交推送。原有dirty保留，F-PAPER-002保持in_progress；新增研究待实施指令。
+
 ### 2026-10-06 Claude整改后新实验（本实验子阶段完成）
 
 - 最新用户授权实际实验；900行授权矩阵+16行修复后合成模型控制，先定向测试与正式前缀。Gemini暂缓，历史成功记录不重跑。

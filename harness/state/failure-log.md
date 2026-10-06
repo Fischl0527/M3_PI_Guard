@@ -1,5 +1,10 @@
 # Failure Log
 
+## 2026-10-06 — Follow-up calibration offline fixture failures
+
+- Initial bounded suite:83passed/8failed. Six failures expected an empty list where the established visible-field contract is a booleanFalse. Corrected the fixture to requireFalse; did not change runtime isolation.
+- Two VIGIL fixtures supplied an empty constraint list, correctly causing source generator fallback rejection. Replaced the invalid mock response with one valid official-schemaforbid constraint; kept silent-fallback rejection intact.
+- NoAPI, result replay or model dispatch occurred before these fixes. Rerun only affected eight integration nodes before final focused qualification.
 ## 2026-10-06 — Claude-review regressions and fixes
 
 - Public-interface repro found ambiguous generic-v2 target ALLOW in policy-only and missing_classification simulated unsafe effect in old full followup. Four initial regression nodes failed; narrow unresolved scope and later explicit V2 classification resolved them. Old negative controls remain unchanged.

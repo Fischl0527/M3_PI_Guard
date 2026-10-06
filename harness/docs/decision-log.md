@@ -1,5 +1,11 @@
 # 决策日志
 
+## 2026-10-06 — Follow-up同期校准与显式VIGIL适配
+
+- P0公开事件显示AgentDojo自动授权的主要限制是缺工具许可；45解析失败未出现length截断，没有足够公开证据证明编译器违约。不自动扩权或改变corrected_v2历史语义。
+- 新120案例配对研究采用normal/auto；无防护、policy和full共用原模拟后端及宿主边界，额外VIGIL在首API前离线资格化。配置为固定源码hybrid规则审计、模型生成约束、关闭LLM二次验证，不冒称完整官方默认系统。
+- 仅显式DeepSeekPro研究可使用16-call客户端上限，默认8不变；CorrectnessRuntime仅在VIGIL条件及已注入官方factory时允许16。字段/实际调用参数进入结果，不改变模型提示或权限编译逻辑。
+- 论文功能仍in_progress；保留旧raw、参数和无关dirty。P2/E8资格与科研解释分开，不以有利结果决定纳入。
 ## 2026-10-06 — New post-repair model study, identical model-facing policy
 
 - User authorized actual experiments after the code-only substage. Freeze900 new paired authorization rows and16 synthetic controls; retain original180/60 cohort selection without new outcome selection.

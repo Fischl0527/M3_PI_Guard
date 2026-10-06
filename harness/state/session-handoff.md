@@ -1,5 +1,21 @@
 # 会话移交
 
+## 2026-10-06 — 最新用户已授权实施后续研究
+
+- 任务harness/tasks/research-followup-execution-2026-10-06.md；P0诊断输出outputs/experiments/research_followup_20261006_v1/diagnosis。900公开事件一次分类，300去重诊断行，动态目标根因未知，不自动扩权。
+- P1新480计划已生成calibration/plan.jsonl：120案例×normal/auto三主条件及配置明确VIGIL，未运行API。代码入口research_followup_calibration_v1，先--canary-only16正式前缀，再--resume-pending-only464；默认8/VIGIL16明确计数，禁止成功重跑。
+- 离线资格最终22定向通过、Ruff通过；初次8失败是fixture合同不一致，已修正。旧冻结bridge再现测试不做历史递归。P2本地Qwen模型缓存存在，未启动服务/诊断；P3 E8仍待资格解释。
+- 历史916/原raw及其他dirty保留；Gemini暂缓，不能宣布科研/论文完成。当前codex/claude-review-repairs，范围Git推送待完成。
+
+## 2026-10-06 — 最新用户任务：综合评估与新计划，非运行指令
+
+- 已写docs/research/paper_v2/M3_PI_Guard_综合评估与后续研究计划_2026-10-06.md；依据DDownloads新计划、Claude计划和当前44ea311证据。任务harness/tasks/research-followup-plan-2026-10-06.md。
+- 下次用户实施时先诊断已有AgentDojoauto2/30及105非正常结束，不再修同一exact缺陷或重跑900/916。建议新360同期活性/正常任务校准；180本地复现、108 E8及120 VIGIL有条件加入，未生成运行计划/runner。
+- 现有900无同期no-defense、攻击0/490有地板；旧E6端点限制不可跳过。E8参考8/18不是模型成绩。独立模型服务当前未重新测试，Gemini仍暂缓。
+- 当前分支codex/claude-review-repairs，origin RedTeam_LLM_Security；本轮没有commit/push、API、服务启动、实验、代码/论文修改、编译或历史统计。所有旧dirty保留，计划与本轮状态新增尚在工作区。
+- F-PAPER-002整体in_progress；新计划交付不等于研究/论文结项，下一研究须用户确认实施。本轮文档验证记录见任务文件。
+- 交付检查完成：417行、8本地链接0断链、围栏/尾空格及feature JSON/scoped diff检查通过。无Git提交推送；已有current-task原16行及论文/第三方/模板dirty均保留。
+
 ## 2026-10-06 — 修复后实验与报告完成，请勿再运行成功行
 
 - 最新完成：outputs/experiments/claude_revision_v1，900授权+16合成=916唯一终态，1796请求；两个runner/一次analysis exit0。目前没有活动实验进程。

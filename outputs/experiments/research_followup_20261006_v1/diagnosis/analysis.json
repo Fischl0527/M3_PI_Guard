@@ -1,0 +1,151 @@
+{
+  "source_rows": 900,
+  "main_benign_rows": 240,
+  "abnormal_rows": 105,
+  "diagnostic_rows": 300,
+  "cells": [
+    {
+      "benchmark": "agentdojo-v1",
+      "regime": "auto_compiled",
+      "condition": "m3_full_normal_prompt",
+      "rows": 30,
+      "completed_tasks": 2,
+      "first_blocks": {
+        "missing_tool_permission": 26,
+        "no_observed_block": 1,
+        "source_order_dataflow_or_confirmation_restriction": 3
+      },
+      "final_states": {
+        "blocked_without_observed_execution": 25,
+        "executed_actions_but_task_not_completed": 3,
+        "observed_task_completed": 2
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "regime": "auto_compiled",
+      "condition": "m3_policy_only",
+      "rows": 30,
+      "completed_tasks": 2,
+      "first_blocks": {
+        "missing_tool_permission": 26,
+        "no_observed_block": 1,
+        "source_order_dataflow_or_confirmation_restriction": 3
+      },
+      "final_states": {
+        "blocked_without_observed_execution": 25,
+        "executed_actions_but_task_not_completed": 3,
+        "observed_task_completed": 2
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "regime": "exact_target_v2",
+      "condition": "m3_full_normal_prompt",
+      "rows": 30,
+      "completed_tasks": 11,
+      "first_blocks": {
+        "exact_target_or_sequence_restriction": 22,
+        "no_observed_block": 8
+      },
+      "final_states": {
+        "executed_actions_but_task_not_completed": 13,
+        "observed_task_completed": 11,
+        "blocked_without_observed_execution": 6
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "regime": "exact_target_v2",
+      "condition": "m3_policy_only",
+      "rows": 30,
+      "completed_tasks": 13,
+      "first_blocks": {
+        "exact_target_or_sequence_restriction": 20,
+        "no_observed_block": 10
+      },
+      "final_states": {
+        "executed_actions_but_task_not_completed": 10,
+        "observed_task_completed": 13,
+        "blocked_without_observed_execution": 7
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "regime": "auto_compiled",
+      "condition": "m3_full_normal_prompt",
+      "rows": 30,
+      "completed_tasks": 17,
+      "first_blocks": {
+        "no_observed_block": 24,
+        "invalid_model_proposal": 5,
+        "missing_tool_permission": 1
+      },
+      "final_states": {
+        "observed_task_completed": 17,
+        "no_completion_cause_in_public_events": 4,
+        "blocked_without_observed_execution": 6,
+        "executed_actions_but_task_not_completed": 3
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "regime": "auto_compiled",
+      "condition": "m3_policy_only",
+      "rows": 30,
+      "completed_tasks": 16,
+      "first_blocks": {
+        "no_observed_block": 23,
+        "invalid_model_proposal": 4,
+        "missing_tool_permission": 3
+      },
+      "final_states": {
+        "observed_task_completed": 16,
+        "no_completion_cause_in_public_events": 4,
+        "blocked_without_observed_execution": 7,
+        "executed_actions_but_task_not_completed": 3
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "regime": "exact_target_v2",
+      "condition": "m3_full_normal_prompt",
+      "rows": 30,
+      "completed_tasks": 16,
+      "first_blocks": {
+        "no_observed_block": 20,
+        "exact_target_or_sequence_restriction": 5,
+        "invalid_model_proposal": 5
+      },
+      "final_states": {
+        "observed_task_completed": 16,
+        "no_completion_cause_in_public_events": 4,
+        "blocked_without_observed_execution": 10
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "regime": "exact_target_v2",
+      "condition": "m3_policy_only",
+      "rows": 30,
+      "completed_tasks": 14,
+      "first_blocks": {
+        "no_observed_block": 19,
+        "invalid_model_proposal": 5,
+        "exact_target_or_sequence_restriction": 6
+      },
+      "final_states": {
+        "observed_task_completed": 14,
+        "blocked_without_observed_execution": 11,
+        "no_completion_cause_in_public_events": 5
+      }
+    }
+  ],
+  "abnormal_statuses": {
+    "max_steps": 60,
+    "parse_failure": 45
+  },
+  "length_truncated_rows": 0,
+  "completion_before_failure_rows": 2,
+  "scope": "public events only; no retrospective causal repair claim; no API or historical statistics replay"
+}

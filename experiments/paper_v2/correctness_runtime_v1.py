@@ -176,7 +176,7 @@ def public_events(events: Any) -> list[dict[str, Any]]:
 
 
 class CorrectnessRuntime:
-    def __init__(self, *, plan_path: Any, execution_identity: str, compiler_revision: str = "corrected_v1", runtime_revision: str = "corrected_v1", authorization_regime: str = "auto_compiled") -> None:
+    def __init__(self, *, plan_path: Any, execution_identity: str, compiler_revision: str = "corrected_v1", runtime_revision: str = "corrected_v1", authorization_regime: str = "auto_compiled", vigil_factory: Any = None) -> None:
         _compiler("agentdojo-v1", compiler_revision)
         self.compiler_revision = compiler_revision
         if runtime_revision not in {"corrected_v1", "corrected_v2"}:
@@ -185,6 +185,7 @@ class CorrectnessRuntime:
             raise ValueError("new regimes require the explicit corrected_v2 runtime")
         self.runtime_revision = runtime_revision
         self.authorization_regime = authorization_regime
+        self.vigil_factory = vigil_factory
         self.agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
         self.m3 = PublicFrozenM3CaseResolverV4(plan_path=plan_path, execution_identity=execution_identity)
         self.m3_evaluator = CorrectedM3OutcomeEvaluator(self.m3)
@@ -201,7 +202,11 @@ class CorrectnessRuntime:
         state, digest = hydrate(work_item, compiler_revision=self.compiler_revision, authorization_regime=self.authorization_regime)
         condition = str(work_item["condition_id"])
         remaining_calls = getattr(client, "max_provider_calls", 8)
-        if type(remaining_calls) is not int or not 1 <= remaining_calls <= 8:
+        baseline = condition == "strongest_peer_reviewed_structural_baseline"
+        ceiling = 16 if baseline and self.vigil_factory is not None else 8
+        if baseline and self.vigil_factory is None:
+            raise ValueError("VIGIL requires an explicit source-backed factory")
+        if type(remaining_calls) is not int or not 1 <= remaining_calls <= ceiling:
             raise ValueError("invalid remaining development request budget")
         context = OnlineExecutorContext(
             execution_identity=str(work_item["execution_identity"]),
@@ -238,6 +243,7 @@ class CorrectnessRuntime:
             monitor_factory=corrected_monitor if self.runtime_revision == "corrected_v2" else RuntimeMonitorCorrectedV1,
             oracle_monitor_factory=oracle_factory if self.authorization_regime == "exact_target_v2" else None,
             provenance_tracker_factory=lambda: tracker,
+            vigil_factory=self.vigil_factory if baseline else None,
             safety_receipt_factory=build_boundary_aware_safety_receipt_v3,
             capture_runtime_failures=True,
             message_builder=lambda context, view, schemas, manifest, profile: build_research_messages_v2(
@@ -269,5 +275,6 @@ class CorrectnessRuntime:
             "online_forbidden_fields_present": digest["forbidden_fields_present"],
             "online_visible_field_digest": digest,
             "safety_receipt": raw.get("safety_receipt"),
+            **({"vigil_constraint_generation_calls": raw.get("vigil_constraint_generation_calls")} if baseline else {}),
             **{key: raw[key] for key in ("failure_stage", "failure_class", "http_category") if key in raw},
         }

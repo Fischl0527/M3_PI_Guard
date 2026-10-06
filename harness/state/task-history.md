@@ -1,5 +1,16 @@
 # Task History
 
+## 2026-10-06 — Approved follow-up execution and offline qualification
+
+- P0 one-pass public diagnosis:900 rows,240 main benign and105 abnormal with300 deduplicated task explanations. No length truncation,2 completion-before-failure rows; no automatic scope expansion from redacted evidence.
+- New480-row contemporaneous calibration freezes120 tasks with coreND/policy/full and source-pinnedconfiguredVIGIL.16 formal-prefix rows are included once; default8-call clients unchanged, explicitPro/VIGIL16 supported.
+- Initial regression83pass/8fixturefail, failed-node recovery8pass, final focused22pass/Ruffpass; counts overlap. No API at this checkpoint, no Full Harness/historical replay/Gemini. P2/P3 remain conditional, overall F-PAPER-002in_progress.
+## 2026-10-06 — Follow-up research plan after completed corrected study
+
+- Compared the1784-line supplied plan with the501-line Claude plan, current44ea311 checkout,916-row study evidence,E8 qualification and manuscript. Exact repair/fresh900 are complete; old E6 remains a bounded legacy endpoint, not corrected-effect proof.
+- Delivered docs/research/paper_v2/M3_PI_Guard_综合评估与后续研究计划_2026-10-06.md: diagnose utility/failure first, then propose360 contemporaneous ND/policy/full; local180/E8 108/VIGIL120 conditional additions. No experiments or paper edits authorized by this planning task.
+- Verified primary AgentDojo and AgentDyn metadata; JISA fetch403 and institutional JCR remain unresolved. Documentation/state only; no API/service/test matrix/Full Harness/history replay/Git commit or push. F-PAPER-002 staysin_progress.
+
 ## 2026-10-06 — Post-repair900+16 execution and single-pass analysis completed
 
 - 916/916 fresh terminal records,1796 official requests,1712733tokens; main795completed/60max_steps/45parse_failure and16 completed synthetic controls. No retries, successful replay, provider tools or real external effects; runners and analysis exit0.
