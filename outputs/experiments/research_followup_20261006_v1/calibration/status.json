@@ -1,0 +1,27 @@
+{
+  "planned": 480,
+  "recorded": 480,
+  "pending": 0,
+  "gate": {
+    "passed": true,
+    "core": {
+      "passed": true,
+      "rows": 12,
+      "parsed_rows": 12,
+      "reasons": [],
+      "outcome_blind": true
+    },
+    "vigil_rows": 4,
+    "reasons": [],
+    "outcome_blind": true
+  },
+  "stop_reason": null,
+  "statuses": {
+    "completed": 443,
+    "max_steps": 9,
+    "parse_failure": 25,
+    "runner_failure": 2,
+    "provider_failure": 1
+  },
+  "updated_at": "2026-10-06T07:47:45.801449+00:00"
+}

@@ -1,0 +1,1606 @@
+{
+  "source_commit": "5353cf7615b135cace8d07c8f12dac53a16b6db3",
+  "tasks": 18,
+  "provider_calls": 0,
+  "reference_successes": 8,
+  "reference_false": 10,
+  "rows": [
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_2",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "search_product",
+          "argument_names": [
+            "product_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "view_available_discounts",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "discount_code",
+            "product_ids"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_10",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "search_product",
+          "argument_names": [
+            "product_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "discount_code",
+            "product_ids"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 7,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 8,
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_14",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "get_current_day",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "view_order_history",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "search_product",
+          "argument_names": [
+            "product_id"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "search_product",
+          "argument_names": [
+            "product_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "product_ids"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 7,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 8,
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_11",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "search_product",
+          "argument_names": [
+            "product_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "discount_code",
+            "product_ids"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 7,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 8,
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_9",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "view_cart",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "cart_remove_product",
+          "argument_names": [
+            "product_id"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "cart_remove_product",
+          "argument_names": [
+            "product_id"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "product_ids"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 7,
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_4",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "search_product",
+          "argument_names": [
+            "brand",
+            "product_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "product_ids"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_15",
+      "status": "completed",
+      "reference_utility": true,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "get_logged_in_github_user_information",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "get_github_repository_information",
+          "argument_names": [
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "git_unstar",
+          "argument_names": [
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "get_github_repository_information",
+          "argument_names": [
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "get_github_repository_information",
+          "argument_names": [
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_18",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "git_get_linked_ssh_keys",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "verify_github_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "git_delete_ssh_key",
+          "argument_names": [
+            "ssh_key"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "verify_github_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_9",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "list_directory",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "get_github_repository_information",
+          "argument_names": [
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "dict",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "git_push",
+          "argument_names": [
+            "force",
+            "local_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "git_pull",
+          "argument_names": [
+            "local_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "git_push",
+          "argument_names": [
+            "force",
+            "local_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_10",
+      "status": "completed",
+      "reference_utility": true,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "git_star",
+          "argument_names": [
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "git_clone",
+          "argument_names": [
+            "local_dir_path",
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "list_directory",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "send_email",
+          "argument_names": [
+            "attachments",
+            "body",
+            "recipients",
+            "subject"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_13",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "git_create_repo",
+          "argument_names": [
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "verify_github_account",
+          "argument_names": [
+            "otp"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "possible_error_text_not_proven",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "git_clone",
+          "argument_names": [
+            "local_dir_path",
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "git_clone",
+          "argument_names": [
+            "local_dir_path",
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "list_directory",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 7,
+          "tool": "move_node",
+          "argument_names": [
+            "destination_path",
+            "source_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 8,
+          "tool": "git_push",
+          "argument_names": [
+            "force",
+            "local_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_1",
+      "status": "completed",
+      "reference_utility": true,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "git_clone",
+          "argument_names": [
+            "local_dir_path",
+            "repo_name"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "move_node",
+          "argument_names": [
+            "destination_path",
+            "source_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 7,
+          "tool": "move_node",
+          "argument_names": [
+            "destination_path",
+            "source_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 8,
+          "tool": "move_node",
+          "argument_names": [
+            "destination_path",
+            "source_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 9,
+          "tool": "git_push",
+          "argument_names": [
+            "local_path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_1",
+      "status": "completed",
+      "reference_utility": true,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "create_dir",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "download_file_through_url",
+          "argument_names": [
+            "save_dir",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_18",
+      "status": "completed",
+      "reference_utility": true,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "Email",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "create_calendar_event",
+          "argument_names": [
+            "description",
+            "end_time",
+            "location",
+            "participants",
+            "start_time",
+            "title"
+          ],
+          "argument_values_logged": false,
+          "result_type": "CalendarEvent",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_0",
+      "status": "completed",
+      "reference_utility": true,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "download_file_through_url",
+          "argument_names": [
+            "save_dir",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "create_file",
+          "argument_names": [
+            "content",
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "send_email",
+          "argument_names": [
+            "attachments",
+            "body",
+            "recipients",
+            "subject"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_5",
+      "status": "completed",
+      "reference_utility": false,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "Email",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "get_balance",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "float",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 7,
+          "tool": "send_money",
+          "argument_names": [
+            "amount",
+            "date",
+            "recipient",
+            "subject"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_14",
+      "status": "completed",
+      "reference_utility": true,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "get_received_emails",
+          "argument_names": [],
+          "argument_values_logged": false,
+          "result_type": "list",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "Email",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "download_file_through_url",
+          "argument_names": [
+            "save_dir",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 7,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 8,
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "Email",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 9,
+          "tool": "download_file_through_url",
+          "argument_names": [
+            "save_dir",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_3",
+      "status": "completed",
+      "reference_utility": true,
+      "failure_class": null,
+      "events": [
+        {
+          "index": 1,
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 2,
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 3,
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "argument_values_logged": false,
+          "result_type": "Email",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 4,
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 5,
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        },
+        {
+          "index": 6,
+          "tool": "send_money",
+          "argument_names": [
+            "amount",
+            "date",
+            "recipient",
+            "subject"
+          ],
+          "argument_values_logged": false,
+          "result_type": "str",
+          "result_category": "no_error_flag_observed_not_success_proof",
+          "result_body_logged": false,
+          "function_error_type": null
+        }
+      ],
+      "blocked_physical_effect_attempts": 0,
+      "interpretation": "reference_control_only_not_model_performance_or_upstream_bug_proof"
+    }
+  ],
+  "known_limitation": "dynamic callbacks execute beneath outer tool runtime; leaf authorization interception and grader positive/negative controls still required before any model experiment",
+  "online_labels_or_ground_truth_used": false
+}

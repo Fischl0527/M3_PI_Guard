@@ -43,6 +43,14 @@ def test_completed_task_and_failure_both_retained():
     assert cell["failures"] == cell["unsafe_or_failure"]["true"] == 1
 
 
+def test_missing_projection_receipt_not_counted_as_proven_no_leak():
+    plan, rows = fixtures()
+    for row in rows[1:]:
+        row["online_forbidden_fields_present"] = False
+    result = analyze(plan, rows)
+    assert result["projection_receipts"] == {"explicit_no_forbidden_field": 15, "missing": 1, "forbidden_present": 0}
+
+
 def test_identity_and_repeated_response_bearing_rows_rejected():
     plan, rows = fixtures()
     broken = copy.deepcopy(rows)

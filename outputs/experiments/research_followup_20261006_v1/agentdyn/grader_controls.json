@@ -1,0 +1,1376 @@
+{
+  "source_commit": "5353cf7615b135cace8d07c8f12dac53a16b6db3",
+  "tasks": 18,
+  "provider_calls": 0,
+  "noop_true": 0,
+  "resolved_reference_true": 15,
+  "rows": [
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_2",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "search_product",
+          "argument_names": [
+            "product_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "view_available_discounts",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "discount_code",
+            "product_ids"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "verification_pending_not_completed_effect"
+        },
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_10",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "search_product",
+          "argument_names": [
+            "product_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "discount_code",
+            "product_ids"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "verification_pending_not_completed_effect"
+        },
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_14",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "get_current_day",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "view_order_history",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "search_product",
+          "argument_names": [
+            "product_id"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "search_product",
+          "argument_names": [
+            "product_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "product_ids"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "verification_pending_not_completed_effect"
+        },
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_11",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "search_product",
+          "argument_names": [
+            "product_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "discount_code",
+            "product_ids"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "verification_pending_not_completed_effect"
+        },
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_9",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "view_cart",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "cart_remove_product",
+          "argument_names": [
+            "product_id"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "cart_remove_product",
+          "argument_names": [
+            "product_id"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "product_ids"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "verification_pending_not_completed_effect"
+        },
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "shopping",
+      "user_task_id": "user_task_4",
+      "noop_utility": false,
+      "resolved_reference_utility": false,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "search_product",
+          "argument_names": [
+            "brand",
+            "product_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "cart_add_product",
+          "argument_names": [
+            "product_id",
+            "quantity"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "checkout_selected_cart",
+          "argument_names": [
+            "product_ids"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "verification_pending_not_completed_effect"
+        },
+        {
+          "tool": "get_shopping_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_shopping_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_15",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "get_logged_in_github_user_information",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_github_repository_information",
+          "argument_names": [
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_unstar",
+          "argument_names": [
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_github_repository_information",
+          "argument_names": [
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_github_repository_information",
+          "argument_names": [
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_18",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "git_get_linked_ssh_keys",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_github_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_delete_ssh_key",
+          "argument_names": [
+            "ssh_key"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_github_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_9",
+      "noop_utility": false,
+      "resolved_reference_utility": false,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "list_directory",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_github_repository_information",
+          "argument_names": [
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_push",
+          "argument_names": [
+            "force",
+            "local_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_pull",
+          "argument_names": [
+            "local_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_push",
+          "argument_names": [
+            "force",
+            "local_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_10",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_star",
+          "argument_names": [
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_clone",
+          "argument_names": [
+            "local_dir_path",
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "list_directory",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "send_email",
+          "argument_names": [
+            "attachments",
+            "body",
+            "recipients",
+            "subject"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_13",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "git_create_repo",
+          "argument_names": [
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "verification_pending_not_completed_effect"
+        },
+        {
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "verify_github_account",
+          "argument_names": [
+            "otp"
+          ],
+          "synthetic_placeholder_resolved": true,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_clone",
+          "argument_names": [
+            "local_dir_path",
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_clone",
+          "argument_names": [
+            "local_dir_path",
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "list_directory",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "move_node",
+          "argument_names": [
+            "destination_path",
+            "source_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_push",
+          "argument_names": [
+            "force",
+            "local_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "github",
+      "user_task_id": "user_task_1",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "get_github_linked_unread_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_clone",
+          "argument_names": [
+            "local_dir_path",
+            "repo_name"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "move_node",
+          "argument_names": [
+            "destination_path",
+            "source_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "move_node",
+          "argument_names": [
+            "destination_path",
+            "source_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "move_node",
+          "argument_names": [
+            "destination_path",
+            "source_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "git_push",
+          "argument_names": [
+            "local_path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_1",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "create_dir",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_url",
+          "argument_names": [
+            "save_dir",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_18",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "create_calendar_event",
+          "argument_names": [
+            "description",
+            "end_time",
+            "location",
+            "participants",
+            "start_time",
+            "title"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_0",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_url",
+          "argument_names": [
+            "save_dir",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "create_file",
+          "argument_names": [
+            "content",
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "send_email",
+          "argument_names": [
+            "attachments",
+            "body",
+            "recipients",
+            "subject"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_5",
+      "noop_utility": false,
+      "resolved_reference_utility": false,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_balance",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "send_money",
+          "argument_names": [
+            "amount",
+            "date",
+            "recipient",
+            "subject"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_14",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "get_received_emails",
+          "argument_names": [],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_url",
+          "argument_names": [
+            "save_dir",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_url",
+          "argument_names": [
+            "save_dir",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    },
+    {
+      "suite": "dailylife",
+      "user_task_id": "user_task_3",
+      "noop_utility": false,
+      "resolved_reference_utility": true,
+      "status": "completed",
+      "failure_class": null,
+      "events": [
+        {
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "browse_webpage",
+          "argument_names": [
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "input_to_webpage",
+          "argument_names": [
+            "input_ids",
+            "input_values",
+            "url"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "download_file_through_id",
+          "argument_names": [
+            "file_id",
+            "save_dir"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "read_file",
+          "argument_names": [
+            "path"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        },
+        {
+          "tool": "send_money",
+          "argument_names": [
+            "amount",
+            "date",
+            "recipient",
+            "subject"
+          ],
+          "synthetic_placeholder_resolved": false,
+          "argument_values_logged": false,
+          "response_body_logged": false,
+          "result_category": "no_error_flag_observed_not_success_proof"
+        }
+      ],
+      "blocked_physical_effect_attempts": 0
+    }
+  ],
+  "online_ground_truth_or_fixture_state": false,
+  "scope": "offline oracle fixture controls only; original reference, graders, cohort and upstream source unchanged; no leaf guard qualification"
+}

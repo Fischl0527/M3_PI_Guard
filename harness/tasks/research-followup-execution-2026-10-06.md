@@ -42,3 +42,20 @@ VIGIL适配使用既有固定源码bridge（单次约束生成、禁止静默fal
 - 新研究telemetry_v1.1仅修复线程输出和截断错误分类，512/T0/提示/权限/任务/工作键不变。当前线程logger过滤不替换stdout/stderr；身份有效length约束失败记parse_failure且端点未知；其他系统错误仍停。2定向回归通过，Ruff/编译通过。即将继续未触碰360；不恢复任何120终态。
 - P2隐藏启动被工具策略执行前拒绝，不绕过；本地180未执行。P3新18参考链诊断0API、8true/10false、无物理效果；叶子动态调用监控和合法/越权状态评分对照尚不合格，不启动108模型研究。
 - 分析模块4定向测试通过：未知ITT、Holm家族、退化CI、完成与失败共存、身份/成功重复。实际480统计尚待终态一次执行。
+
+## 动态占位评分控制及当前进度
+
+- 当前95802正常运行，已记录400/480，无新stop。d0d0e2d日志修正已推送；第一阶段所有120记录原样保留，新续跑不重发其请求。
+- 新agentdyn_followup_controls_v1是离线oracle夹具控制，仅为verify_shopping/github的原固定占位参数读取当前虚拟账户唯一待验证队列，不改变工具、评分或原参考；歧义队列拒绝，不记录虚拟值/正文，也不进入在线授权。
+- 4单元测试及Ruff通过；fresh UTF8进程执行18控制，15参考完成、3仍false、无操作0/18，0 API。原8true/10false不改写。shopping_task4参考购买quantity1而评分要求quantity2，源内不一致已看到；github9与dailylife5仍需进一步评分状态分析，不声称修好上游。
+- 原生动态网页注册函数及验证码回调在外层runtime下面执行，叶子Guard全覆盖未合格；108模型项不启动。先交付诊断，不凭15/18将整个原生环境判为可部署。
+
+## 本研究批次收尾
+
+运行器95802正常exit0，480唯一work key/attempt1，443completed/9max_steps/25parse_failure/2runner_failure/1provider_failure，1172官方响应/1578814tokens。首次120全部保留，其余360telemetry_v1.1不改科学条件。无活动研究进程。
+
+`python -X utf8 -m experiments.paper_v2.research_followup_analysis_v1`仅执行一次；Newcombe/10k任务聚类/Holm/Wilson/McNemar实际表图完成，图目视通过。随后只补公共收据计数和说明，不重做统计。478字段投影明确false、2缺；476结构化效果收据、4缺（VIGIL约束生成失败），旧记录不后补。
+
+最终`pytest tests/unit/test_research_followup_diagnosis_v1.py tests/unit/test_research_followup_calibration_v1.py tests/unit/test_research_followup_analysis_v1.py tests/unit/test_agentdyn_followup_controls_v1.py -q`：27passed/1既有Pydantic warning；收据计数负例后`pytest tests/unit/test_research_followup_analysis_v1.py -q`：5passed。范围Ruff全通过。批次重叠不相加；不Full Harness或历史复验。
+
+根report.md已记录实际480、P0原因、P2策略拒绝/P3离线15/18和安全资格缺口，清楚解释outputs目录。AgentDojo正常任务17/30→2/30代价显著，安全3/30→0/30区间跨零；M3无防护仍全零，不支持模块领先。科研整体和论文未完成，F-PAPER-002保持in_progress，下一步批准的稿件/LaTeX同步。

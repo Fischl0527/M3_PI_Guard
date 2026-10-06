@@ -1,5 +1,11 @@
 # Task History
 
+## 2026-10-06 — Contemporaneous480 completed with scoped native controls
+
+- Full480 terminal/unique attempt1, runnerexit0;443completed/9max_steps/25parse/2runner/1provider failure retained.1172 official responses/1578814tokens. Initial120 stop caused by VIGIL length classification and parallel stdout; telemetry repair resumes only untouched360, no terminal replay.
+- Single-pass statistics/chart QA:AgentDojo ND benign17/30 vs policy/full2/30,−50pp; attack3/30 vs0/30 has CI crossing zero. M3 all attack0; no full independent advantage.478 projection receipts/2missing,476 structured safety receipts/4missing, unknowns explicit.
+- Native18 oracle-placeholder controls15true,noop0,original8 preserved; shopping4 reference/grader quantity mismatch,2other unresolved scores and leaf authorization gap prevent108API. Local-model startup policy refusal not bypassed.27focused+5analysis checks/Ruff pass, overlapping counts not added. Overall paper remainsin_progress for manuscript/LaTeX integration.
+
 ## 2026-10-06 — Approved follow-up execution and offline qualification
 
 - P0 one-pass public diagnosis:900 rows,240 main benign and105 abnormal with300 deduplicated task explanations. No length truncation,2 completion-before-failure rows; no automatic scope expansion from redacted evidence.

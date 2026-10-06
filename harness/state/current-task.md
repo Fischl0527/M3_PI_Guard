@@ -5,6 +5,9 @@
 - 用户已授权按综合计划最大限度推进；先P0公开事件原因分类，再冻结P1同期校准，P2本地模型/P3原生动态基准及VIGIL仅在技术适配合格时增加。
 - 任务harness/tasks/research-followup-execution-2026-10-06.md；输出outputs/experiments/research_followup_20261006_v1。历史916行不重跑，Gemini暂缓，真实工具/外部效果始终禁用。
 - 当前codex/claude-review-repairs；不Full Harness、盲测、日期等待或递归证据链。保留无关dirty，F-PAPER-002仍in_progress。
+- P1运行器95802 exit0：480唯一终态/attempt1，443completed/9max_steps/25parse_failure/2runner_failure/1provider_failure；1172官方响应/1578814tokens。一次统计完成；不重跑初始120或任何已响应行。P2服务启动被策略拒绝，未绕过。
+- 当前报告outputs/experiments/research_followup_20261006_v1/report.md。AgentDojo ND良性17/30，policy/full2/30；攻击ND3/30，policy/full0/30，安全CI跨零。M3无防护0/30，不支持领先。478投影收据完整/2缺、476安全收据/4缺，未知留ITT。
+- P3固定18原参考8true/10false；新增动态占位控制15true/3false，无操作0/18，0 API。叶子安全适配未合格，108不启动。27组合定向+5统计测试通过（重叠不相加）/Ruff通过；无活动模型批次。论文双语/LaTeX同步尚待，不宣布整体完成。
 
 ### 2026-10-06 综合评估与新研究计划（本轮仅规划）
 

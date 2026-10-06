@@ -3,9 +3,12 @@
 ## 2026-10-06 — 最新用户已授权实施后续研究
 
 - 任务harness/tasks/research-followup-execution-2026-10-06.md；P0诊断输出outputs/experiments/research_followup_20261006_v1/diagnosis。900公开事件一次分类，300去重诊断行，动态目标根因未知，不自动扩权。
-- P1新480计划已生成calibration/plan.jsonl：120案例×normal/auto三主条件及配置明确VIGIL，未运行API。代码入口research_followup_calibration_v1，先--canary-only16正式前缀，再--resume-pending-only464；默认8/VIGIL16明确计数，禁止成功重跑。
-- 离线资格最终22定向通过、Ruff通过；初次8失败是fixture合同不一致，已修正。旧冻结bridge再现测试不做历史递归。P2本地Qwen模型缓存存在，未启动服务/诊断；P3 E8仍待资格解释。
-- 历史916/原raw及其他dirty保留；Gemini暂缓，不能宣布科研/论文完成。当前codex/claude-review-repairs，范围Git推送待完成。
+- P1新480完整，95802 exit0，无活动模型进程。443completed/9max_steps/25parse_failure/2runner_failure/1provider_failure，全attempt1；1172请求/1578814tokens。原120终态保留，telemetry_v1.1续跑360只改日志/截断分类。不要再启动该study或重算10k统计。analysis.json、CSV、图及report已一次输出并目视通过。
+- 科学结论：AgentDojo ND良性17/30，policy/full2/30，−50pp；攻击ND3/30、policy/full0/30，CI跨零。M3攻击全0；full无独立增益。2早期VIGIL缺投影、4约束失败缺结构化效果收据，端点未知，不能宣称480全部字段/效果链完整。总report.md解释目录/失败/条件性未执行。
+- P3离线原参考8/18；新动态占位控制15/18，无操作0/18，4测试通过/0 API。3个仍false和叶子工具监控缺口未解决，不开始108。新增agentdyn_followup_controls_v1.py及public grader_controls.json/md；内部虚拟OTP/正文均不输出。
+- 离线资格最终22定向通过、Ruff通过；初次8失败是fixture合同不一致，已修正。旧冻结bridge再现测试不做历史递归。P2本地Qwen缓存存在，但唯一隐藏启动尝试被工具策略执行前拒绝，不以另一路径绕过；P3 E8仍待资格解释。
+- 最终定向27passed及追加统计5passed/Ruff通过（重叠不相加）；已有上游弃用warning保留。历史916/原raw和其他dirty保留，Gemini暂缓。当前codex/claude-review-repairs；结果范围Git推送后进入批准计划的论文同步，不再新API。
+- 下一子阶段：按新研究版本单列corrected_v2授权900+16和同期480；撤回旧exact崩溃/基准反转/旧endpoint的强机制解释，保留历史记录。先方法结果→讨论摘要→中文→现有LaTeX，作者空白/Times New Roman/A4/居中页码/导航；不重新Word、扩大实验或Full Harness。新public report不是论文已更新的证据。
 
 ## 2026-10-06 — 最新用户任务：综合评估与新计划，非运行指令
 
