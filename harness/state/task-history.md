@@ -1,5 +1,17 @@
 # Task History
 
+## 2026-10-06 — Latency-only measurement repair
+
+- Reproduced scalar-only loss of runtime latency objects; repaired total/components, legacy scalar compatibility and explicit missing/invalid counts.16 focused tests and Ruff pass.
+- One `--refresh-latency-only` run reads480 existing rows:476 usable,4 missing,0 invalid; writes independent JSON/16-cell CSV/Markdown.Original raw,analysis.json,cells.csv unchanged; cached inference is not recomputed and no API/Harness/history replay occurs.
+- Overall goal remainsactive/F-PAPER-002 in_progress; trusted-intent explanation and bilingual/LaTeX synchronization remain.Conditional model/native work stays unqualified rather than treated as complete.
+
+## 2026-10-06 — Evidence-current research and manuscript plan v2
+
+- Reconciled the supplied1784-line plan and Claude501-line roadmap with completed916 post-repair records and480 contemporaneous rows. Delivered a separate v2 Markdown plan, retaining the implemented v1 and all historical evidence.
+- Found a derived latency-shape mismatch:476 raw component objects/4missing versus scalar-only analyzer. No fix or analysis replay performed. Plan prioritizes bounded measurement/utility explanation and bilingual/LaTeX claim correction; optional360 repaired-version,180 local and108 native rows require real scientific/technical prerequisites, not volume targets.
+- Documentation checks:382lines,11local links,0broken,balanced fences,0trailing/replacement characters; feature JSON/scope diff pass. No API/process change/code or paper edits/Full Harness/recomputation/commit/push. Overall paper remainsin_progress.
+
 ## 2026-10-06 — Contemporaneous480 completed with scoped native controls
 
 - Full480 terminal/unique attempt1, runnerexit0;443completed/9max_steps/25parse/2runner/1provider failure retained.1172 official responses/1578814tokens. Initial120 stop caused by VIGIL length classification and parallel stdout; telemetry repair resumes only untouched360, no terminal replay.

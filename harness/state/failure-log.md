@@ -1,5 +1,13 @@
 # Failure Log
 
+## 2026-10-06 — 延迟分项对象被统计器丢弃（定向复现）
+
+- `pytest tests/unit/test_research_followup_analysis_v1.py -q -k real_runtime_latency_object`：1 failed/5 deselected；对象total=2100时p50仍None。
+- 原因：仅接受int/float，实际runtime写分项dict；不是API/模型或raw缺失。
+- 修正假设：读取对象total并保留分项/缺失分母，兼容旧标量，另做latency-only派生输出；不重跑模型或已有推断。
+- 首次编辑因误用日志中文标题而未应用；核对实际标题后改用精确上下文，不重复无效补丁。
+- 修后完整受影响统计16passed/Ruff passed；实际一次延迟刷新476可用/4缺失，原科学统计不改。本缺陷子项闭合，不代表论文整体完成。
+
 ## 2026-10-06 — P1 stopped at120 due to misclassified VIGIL truncation
 
 - Two VIGIL rows have valid official response/identity andfinish_reason=length at512 output tokens; source generator rejects malformed constraints. Existing generic wrapper recordedrunner_failure/VigilLiveDependencyError, so repeated-system-error stop also interrupted one already response-bearingND row. All120 raw terminals retained; none eligible for retry.

@@ -1,5 +1,19 @@
 # 进展记录
 
+## 2026-10-06 — 延迟汇总修复完成，主目标继续
+
+- 已复现runtime对象total被丢弃（1定向失败），修正对象/旧标量及缺失/非法/分项；统计定向16passed、Ruff通过。无权限行为改动。
+- 仅执行一次`research_followup_analysis_v1 --refresh-latency-only`：480原记录，476可用/4缺失/0非法，16-cell派生表；旧raw/analysis.json/cells.csv的Git差异为0。不API、不调用已有配对/bootstrap或Full Harness。
+- 输出calibration/latency_analysis_v2.json、tables/latency_v2.csv、latency_note_v2.md；总report.md更新目录与说明。原有推断未改，短延迟不能解释为Guard计算性能优势。
+- F-PAPER-002仍in_progress；低效用受信意图核对、英中/LaTeX与主张同步尚未完成。本地/原生模型可选项未合格、不绕过服务拒绝、不重跑历史记录。
+
+## 2026-10-06 — 当前成果后的综合计划v2（仅规划交付）
+
+- 重新完整阅读Downloads1784行、Claude501行及当前916/480报告、原因表、动态环境控制和稿件；保留原同日v1，新增docs/research/paper_v2/M3_PI_Guard_综合评估与后续研究计划_2026-10-06_v2.md。
+- 已完成修复、916研究、300诊断和480校准不重复；现有AgentDojo良性17/30→2/30表明效用代价，安全3/30→0/30区间跨零，M3全零不支持领先。新计划不采用下载文档预设的“安全且可用”叙事。
+- 新确认的派生缺陷：latency_ms原始476分项对象/4缺失，分析器只收数值导致延迟列空；本轮未修、不API。必要线先修汇总/解释许可边界/同步英中与LaTeX；新360、本地180、原生108均为条件性建议，不自动开跑。
+- 文档382行，11本地链接0断链、围栏成对、0尾空格/替换字符；feature JSON与范围diff检查通过。没有pytest/科研代码/论文构建/Full Harness/历史重算/Git提交推送；F-PAPER-002仍in_progress，科研及投稿整体未完成。
+
 ## 2026-10-06 — 综合后续研究开始实施
 
 - P1收尾：480/480唯一终态，全部attempt1，runner正常exit0；443completed、9max_steps、25parse_failure、2runner_failure、1provider_failure。1172官方响应，1578814tokens，历史峰时参考CNY4.742778非账单。不重复初始120或成功/有响应失败行。

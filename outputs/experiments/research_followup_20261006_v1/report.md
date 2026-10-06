@@ -8,6 +8,8 @@
 
 本轮采用academic-research-suite的实验执行与统计解释约束：先技术资格、后模型调用；负面结果、未知和失败全部保留；不把程序测试、离线夹具或权限许可误当模型安全性能。
 
+2026-10-06后续更新：已修复分析器漏读延迟分项对象的问题，476条总延迟可用、4条真实缺失、0非法；新增[延迟修正说明](calibration/latency_note_v2.md)及16-cell派生表。不重新调用模型或重做原安全/完成推断，原raw/analysis/cells均保持不变。短延迟可能来自更早阻断，不能直接称性能优势。正文和双语LaTeX仍未同步，整体未完成。
+
 ## 2. 实际做了什么
 
 |工作|完成情况|模型请求|用途|
@@ -126,6 +128,9 @@ research_followup_20261006_v1/
 │   ├── status.json                        # 前缀技术门及终态进度
 │   ├── analysis.json                      # 一次统计及收据完整性
 │   ├── tables/cells.csv                    # 16个分层单元与负担
+│   ├── latency_analysis_v2.json            # 修正后的延迟分项/分母，不替换原推断
+│   ├── tables/latency_v2.csv                # 16个分层单元的延迟派生表
+│   ├── latency_note_v2.md                  # 只修延迟的说明，0新API
 │   ├── figures/contemporaneous_endpoints.png
 │   ├── report.md                          # 完整配对结果与区间
 │   └── internal/                          # Git忽略；不上传
@@ -148,6 +153,6 @@ research_followup_20261006_v1/
 
 尚未完成：独立模型复现、AgentDyn叶子级防护适配、原生3条评分差异的完整定位、论文与LaTeX同步。条件性研究未完成不伪称完成，不能保证现有证据已达到特定SCI二区期刊录用标准。
 
-Git阶段记录：资格提交5676768、日志修正d0d0e2d均已推送至RedTeam_LLM_Security的codex/claude-review-repairs；本报告及480条公开最小产物按结果节点单独提交。内部请求记录和无关模板/第三方修改不提交，不force-push。
+Git阶段记录：资格提交5676768、日志修正d0d0e2d均已推送至RedTeam_LLM_Security的codex/claude-review-repairs；本报告及480条公开最小产物的结果节点为7b1114f，已推送并核对远端SHA一致。本段回执将在下一正常阶段提交，不创建额外审计包。内部请求记录和无关模板/第三方修改不提交，不force-push。
 
 可信度：9/10。依据：480唯一终态、一次统计、定向测试及固定上游控制；泛化、原生动态适配和论文整体完成度仍有限。

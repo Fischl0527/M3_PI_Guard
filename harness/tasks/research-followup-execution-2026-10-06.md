@@ -59,3 +59,19 @@ VIGIL适配使用既有固定源码bridge（单次约束生成、禁止静默fal
 最终`pytest tests/unit/test_research_followup_diagnosis_v1.py tests/unit/test_research_followup_calibration_v1.py tests/unit/test_research_followup_analysis_v1.py tests/unit/test_agentdyn_followup_controls_v1.py -q`：27passed/1既有Pydantic warning；收据计数负例后`pytest tests/unit/test_research_followup_analysis_v1.py -q`：5passed。范围Ruff全通过。批次重叠不相加；不Full Harness或历史复验。
 
 根report.md已记录实际480、P0原因、P2策略拒绝/P3离线15/18和安全资格缺口，清楚解释outputs目录。AgentDojo正常任务17/30→2/30代价显著，安全3/30→0/30区间跨零；M3无防护仍全零，不支持模块领先。科研整体和论文未完成，F-PAPER-002保持in_progress，下一步批准的稿件/LaTeX同步。
+
+公开结果提交7b1114f43f4cbf21e933b48ad064b287726ed38f已push，ls-remote精确一致。21范围文件；内部trace未上传，原其他dirty和current-task16行保留。后续纸稿同步有明确批准范围，不能因为本批480完成就把整体目标标complete。
+
+## 继续实施：已确认的测量缺陷
+
+持续目标下先实施v2计划P0-A。原480条中476条latency_ms为包含total/model/guard/tool的对象，4条缺失；现有分析器只采集标量，使p50/p95为空。修复不改变许可或评分，不重复调用模型，也不重新计算已完成的bootstrap/配对分析。
+
+本切片允许修改research_followup_analysis_v1.py及其定向测试、当前calibration下独立延迟派生表/JSON和简短说明，以及本任务/必要Harness。禁止改raw、原analysis.json/cells.csv、历史计划、推断结果、模型参数、权限逻辑或内部trace。
+
+步骤：①针对真实对象格式新增可复现测试；②兼容对象total和旧标量，拒绝bool/非有限/负数，保留缺失和分项；③新增显式latency-only入口，读缓存推断结果但不调用analyze/paired，输出独立版本化延迟产物；④一次运行与定向pytest/Ruff/内存编译；⑤记录量、字段与原科学统计保持不变，范围Git推送。
+
+验收：476可用/4缺失如实反映，任务总延迟与分项分开，统计刷新不触发配对/bootstrap，旧raw与主统计未改，失败/未运行仍保留。论文及可选研究不因这个修复被标为完成。
+
+实际验证：初始真实对象负例1failed/5deselected，随后完整受影响统计测试16passed in0.62s，Ruff passed。`python -X utf8 -B -m experiments.paper_v2.research_followup_analysis_v1 --refresh-latency-only`只运行一次，exit0；480原记录、476可用/4缺失/0非法、16分层cell。`git diff --exit-code`针对raw_records.jsonl/analysis.json/tables/cells.csv为0；没有重新模型请求或原推断。派生表与普通说明独立，根报告目录入口更新。论文同步仍待，不能据此结项。
+
+本次有限源码查找确认generic-v2会删除必填目标未解析的工具规则（policy_compiler_corrected_v2.py），说明“词法选中后因范围未解而不允许”可解释某些缺许可，但未对60个受信任务完成个案核对，不能直接认定新缺陷或放宽全部参数。

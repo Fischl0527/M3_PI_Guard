@@ -1,0 +1,773 @@
+{
+  "study_id": "m3-research-followup-calibration-20261006-v1",
+  "analysis_revision": "latency_v2",
+  "unit": "milliseconds",
+  "scope": "reported task total and components; no inferential recomputation, API calls or raw edits",
+  "planned": 480,
+  "recorded": 480,
+  "overall": {
+    "latency_p50_ms": 2471.6730500000003,
+    "latency_p95_ms": 11457.388625,
+    "latency_sample_count": 476,
+    "latency_missing_count": 4,
+    "latency_invalid_count": 0,
+    "latency_format_counts": {
+      "object": 476,
+      "missing": 4
+    },
+    "latency_components": {
+      "total": {
+        "observed": 476,
+        "missing": 4,
+        "invalid": 0,
+        "p50_ms": 2471.6730500000003,
+        "p95_ms": 11457.388625
+      },
+      "model": {
+        "observed": 476,
+        "missing": 4,
+        "invalid": 0,
+        "p50_ms": 2365.2942000000003,
+        "p95_ms": 10558.548925
+      },
+      "guard": {
+        "observed": 476,
+        "missing": 4,
+        "invalid": 0,
+        "p50_ms": 0.18795,
+        "p95_ms": 0.69085
+      },
+      "tool": {
+        "observed": 476,
+        "missing": 4,
+        "invalid": 0,
+        "p50_ms": 1.98265,
+        "p95_ms": 24.281075
+      }
+    }
+  },
+  "cells": [
+    {
+      "benchmark": "agentdojo-v1",
+      "evaluation_case_type": "attack",
+      "condition_id": "m3_full_normal_prompt",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 1191.9473,
+      "latency_p95_ms": 2213.960344999999,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1191.9473,
+          "p95_ms": 2213.960344999999
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1094.0435,
+          "p95_ms": 2077.4338399999983
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.20555,
+          "p95_ms": 0.46696999999999994
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.0,
+          "p95_ms": 0.0
+        }
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "evaluation_case_type": "attack",
+      "condition_id": "m3_policy_only",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 1359.72555,
+      "latency_p95_ms": 4743.8993749999945,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1359.72555,
+          "p95_ms": 4743.8993749999945
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1206.0497500000001,
+          "p95_ms": 1627.1932499999998
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.24114999999999998,
+          "p95_ms": 0.3315499999999999
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.0,
+          "p95_ms": 0.0
+        }
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "evaluation_case_type": "attack",
+      "condition_id": "no_defense",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 7667.1338,
+      "latency_p95_ms": 12124.890114999995,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 7667.1338,
+          "p95_ms": 12124.890114999995
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 6304.66465,
+          "p95_ms": 10029.56109
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.3458,
+          "p95_ms": 0.652825
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1.2162,
+          "p95_ms": 2.892399999999998
+        }
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "evaluation_case_type": "attack",
+      "condition_id": "strongest_peer_reviewed_structural_baseline",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 10350.4427,
+      "latency_p95_ms": 20994.642634999997,
+      "latency_sample_count": 28,
+      "latency_missing_count": 2,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 28,
+        "missing": 2
+      },
+      "latency_components": {
+        "total": {
+          "observed": 28,
+          "missing": 2,
+          "invalid": 0,
+          "p50_ms": 10350.4427,
+          "p95_ms": 20994.642634999997
+        },
+        "model": {
+          "observed": 28,
+          "missing": 2,
+          "invalid": 0,
+          "p50_ms": 10044.5656,
+          "p95_ms": 20630.46038
+        },
+        "guard": {
+          "observed": 28,
+          "missing": 2,
+          "invalid": 0,
+          "p50_ms": 0.4621,
+          "p95_ms": 1.4861899999999997
+        },
+        "tool": {
+          "observed": 28,
+          "missing": 2,
+          "invalid": 0,
+          "p50_ms": 1.19245,
+          "p95_ms": 3.70917
+        }
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "evaluation_case_type": "benign_tool",
+      "condition_id": "m3_full_normal_prompt",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 1278.6786,
+      "latency_p95_ms": 3002.9719249999957,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1278.6786,
+          "p95_ms": 3002.9719249999957
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1229.7806500000002,
+          "p95_ms": 2905.256994999996
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.20655,
+          "p95_ms": 0.5323699999999996
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.0,
+          "p95_ms": 0.38861499999999966
+        }
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "evaluation_case_type": "benign_tool",
+      "condition_id": "m3_policy_only",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 1208.70355,
+      "latency_p95_ms": 3028.560884999996,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1208.70355,
+          "p95_ms": 3028.560884999996
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1146.74435,
+          "p95_ms": 2933.976829999996
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.16695,
+          "p95_ms": 0.5540999999999998
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.0,
+          "p95_ms": 0.6195649999999993
+        }
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "evaluation_case_type": "benign_tool",
+      "condition_id": "no_defense",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 5082.51865,
+      "latency_p95_ms": 11574.814775,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 5082.51865,
+          "p95_ms": 11574.814775
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 4955.58685,
+          "p95_ms": 11371.22367
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.29159999999999997,
+          "p95_ms": 0.6812999999999999
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1.09855,
+          "p95_ms": 2.5335749999999986
+        }
+      }
+    },
+    {
+      "benchmark": "agentdojo-v1",
+      "evaluation_case_type": "benign_tool",
+      "condition_id": "strongest_peer_reviewed_structural_baseline",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 8145.2196,
+      "latency_p95_ms": 20290.568235,
+      "latency_sample_count": 28,
+      "latency_missing_count": 2,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 28,
+        "missing": 2
+      },
+      "latency_components": {
+        "total": {
+          "observed": 28,
+          "missing": 2,
+          "invalid": 0,
+          "p50_ms": 8145.2196,
+          "p95_ms": 20290.568235
+        },
+        "model": {
+          "observed": 28,
+          "missing": 2,
+          "invalid": 0,
+          "p50_ms": 7809.6685,
+          "p95_ms": 19842.240909999997
+        },
+        "guard": {
+          "observed": 28,
+          "missing": 2,
+          "invalid": 0,
+          "p50_ms": 0.32215,
+          "p95_ms": 0.9633649999999998
+        },
+        "tool": {
+          "observed": 28,
+          "missing": 2,
+          "invalid": 0,
+          "p50_ms": 1.1275,
+          "p95_ms": 3.283074999999999
+        }
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "evaluation_case_type": "attack",
+      "condition_id": "m3_full_normal_prompt",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 1528.30035,
+      "latency_p95_ms": 2529.0250249999995,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1528.30035,
+          "p95_ms": 2529.0250249999995
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1504.50675,
+          "p95_ms": 2469.4971599999994
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.11699999999999999,
+          "p95_ms": 0.5335349999999993
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 3.06635,
+          "p95_ms": 20.002579999999995
+        }
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "evaluation_case_type": "attack",
+      "condition_id": "m3_policy_only",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 1437.7487,
+      "latency_p95_ms": 2470.980629999999,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1437.7487,
+          "p95_ms": 2470.980629999999
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1415.4396,
+          "p95_ms": 2419.6657099999993
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.15005000000000002,
+          "p95_ms": 0.41744499999999995
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 3.60845,
+          "p95_ms": 11.255814999999998
+        }
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "evaluation_case_type": "attack",
+      "condition_id": "no_defense",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 1500.35585,
+      "latency_p95_ms": 2563.72289,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1500.35585,
+          "p95_ms": 2563.72289
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 1473.8817,
+          "p95_ms": 2504.50394
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.08845,
+          "p95_ms": 0.17858999999999997
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 3.3921,
+          "p95_ms": 46.77521499999993
+        }
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "evaluation_case_type": "attack",
+      "condition_id": "strongest_peer_reviewed_structural_baseline",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 4091.2686,
+      "latency_p95_ms": 5889.07105,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 4091.2686,
+          "p95_ms": 5889.07105
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 3968.5705500000004,
+          "p95_ms": 5709.270409999999
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.0936,
+          "p95_ms": 0.18240999999999996
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 2.9278,
+          "p95_ms": 23.580314999999942
+        }
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "evaluation_case_type": "benign_tool",
+      "condition_id": "m3_full_normal_prompt",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 2613.0128000000004,
+      "latency_p95_ms": 4201.495639999999,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 2613.0128000000004,
+          "p95_ms": 4201.495639999999
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 2543.00345,
+          "p95_ms": 4128.337584999999
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.34514999999999996,
+          "p95_ms": 1.1181399999999995
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 10.724799999999998,
+          "p95_ms": 84.14704999999996
+        }
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "evaluation_case_type": "benign_tool",
+      "condition_id": "m3_policy_only",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 2471.6730500000003,
+      "latency_p95_ms": 3953.1407549999994,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 2471.6730500000003,
+          "p95_ms": 3953.1407549999994
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 2403.83695,
+          "p95_ms": 3870.8329049999993
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.4094,
+          "p95_ms": 0.7394099999999999
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 12.377099999999999,
+          "p95_ms": 112.40051999999999
+        }
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "evaluation_case_type": "benign_tool",
+      "condition_id": "no_defense",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 2695.0456000000004,
+      "latency_p95_ms": 3898.596929999998,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 2695.0456000000004,
+          "p95_ms": 3898.596929999998
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 2644.60545,
+          "p95_ms": 3848.8669399999976
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.1402,
+          "p95_ms": 0.246445
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 11.11525,
+          "p95_ms": 43.99364999999999
+        }
+      }
+    },
+    {
+      "benchmark": "m3-v2",
+      "evaluation_case_type": "benign_tool",
+      "condition_id": "strongest_peer_reviewed_structural_baseline",
+      "planned": 30,
+      "recorded": 30,
+      "latency_p50_ms": 5153.237,
+      "latency_p95_ms": 6225.909669999998,
+      "latency_sample_count": 30,
+      "latency_missing_count": 0,
+      "latency_invalid_count": 0,
+      "latency_format_counts": {
+        "object": 30
+      },
+      "latency_components": {
+        "total": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 5153.237,
+          "p95_ms": 6225.909669999998
+        },
+        "model": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 4992.855100000001,
+          "p95_ms": 6068.339284999998
+        },
+        "guard": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 0.1861,
+          "p95_ms": 0.29882499999999995
+        },
+        "tool": {
+          "observed": 30,
+          "missing": 0,
+          "invalid": 0,
+          "p50_ms": 9.723700000000001,
+          "p95_ms": 31.856979999999993
+        }
+      }
+    }
+  ]
+}

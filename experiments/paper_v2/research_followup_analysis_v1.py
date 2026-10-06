@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 from collections import Counter, defaultdict
 
 import numpy as np
@@ -15,7 +16,7 @@ from experiments.paper_v2.research_followup_calibration_v1 import CORE, OUTPUT, 
 from m3_eval.statistics import holm_adjust
 
 
-def analyze(plan, raw):
+def _validated_records(plan, raw):
     expected = {r["work_key"]: r for r in plan}
     if len(expected) != len(plan):
         raise ValueError("duplicate plan key")
@@ -36,6 +37,45 @@ def analyze(plan, raw):
             request_ids.add(local)
             if req.get("response_received") and not all(req.get(f) for f in ("provider_response_id", "returned_model")):
                 raise ValueError("official identity missing")
+    return records
+
+
+def summarize_latency(rows):
+    """汇总实际任务总延迟；未知不补零，分项不当作总延迟。"""
+    samples = {name: [] for name in ("total", "model", "guard", "tool")}
+    missing, invalid, formats = Counter(), Counter(), Counter()
+    for row in rows:
+        value = row.get("latency_ms")
+        if isinstance(value, dict):
+            formats["object"] += 1
+            components = value
+        elif value is None:
+            formats["missing"] += 1
+            components = {}
+        else:
+            formats["scalar" if isinstance(value, (int, float)) and not isinstance(value, bool) else "invalid"] += 1
+            components = {"total": value}
+        for name in samples:
+            component = components.get(name)
+            if component is None:
+                missing[name] += 1
+            elif isinstance(component, (int, float)) and not isinstance(component, bool) and math.isfinite(component) and component >= 0:
+                samples[name].append(float(component))
+            else:
+                invalid[name] += 1
+    summaries = {name: {"observed": len(values), "missing": missing[name], "invalid": invalid[name],
+                        "p50_ms": float(np.quantile(values, .5)) if values else None,
+                        "p95_ms": float(np.quantile(values, .95)) if values else None}
+                 for name, values in samples.items()}
+    total = summaries["total"]
+    return {"latency_p50_ms": total["p50_ms"], "latency_p95_ms": total["p95_ms"],
+            "latency_sample_count": total["observed"], "latency_missing_count": total["missing"],
+            "latency_invalid_count": total["invalid"], "latency_format_counts": dict(formats),
+            "latency_components": summaries}
+
+
+def analyze(plan, raw):
+    records = _validated_records(plan, raw)
     groups = defaultdict(list)
     for row in plan:
         groups[(row["benchmark"], row["evaluation_case_type"], row["condition_id"])].append(row)
@@ -43,15 +83,13 @@ def analyze(plan, raw):
     for (benchmark, category, condition), group in sorted(groups.items()):
         rows = [records[r["work_key"]] for r in group if r["work_key"] in records]
         failure_sensitive = [{**r, "unsafe_or_failure": True if r["operational_status"] != "completed" or r.get("unsafe_effect") is True else r.get("unsafe_effect")} for r in rows]
-        latencies = [r["latency_ms"] for r in rows if isinstance(r.get("latency_ms"), (int, float))]
         cells.append({"benchmark": benchmark, "evaluation_case_type": category, "condition_id": condition, "planned": len(group), "recorded": len(rows),
                       "unsafe": endpoint(rows, "unsafe_effect", len(group)), "completion": endpoint(rows, "task_completion", len(group)),
                       "unsafe_or_failure": endpoint(failure_sensitive, "unsafe_or_failure", len(group)),
                       "statuses": dict(Counter(r["operational_status"] for r in rows)), "failures": sum(r["operational_status"] != "completed" for r in rows),
                       "ask_count": sum(r.get("ask_count", 0) for r in rows), "deny_count": sum(r.get("deny_count", 0) for r in rows),
                       "provider_calls": sum(r["provider_call_count"] for r in rows),
-                      "latency_p50_ms": float(np.quantile(latencies, .5)) if latencies else None,
-                      "latency_p95_ms": float(np.quantile(latencies, .95)) if latencies else None})
+                      **summarize_latency(rows)})
     paired_rows = [{**r, **records.get(r["work_key"], {})} for r in plan]
     comparisons = []
     for benchmark in ("agentdojo-v1", "m3-v2"):
@@ -82,6 +120,66 @@ def analyze(plan, raw):
             "cost_note": "2026-09-20 fixedCNY tariff estimate, not invoice; current provider metadata verified, currentCNY page unavailable",
             "baseline_scope": "pinnedVIGIL hybrid deterministic auditor with official one-call constraint generator; LLM verification disabled; 16 vs8 request cap disclosed",
             "inference": "controlled fixed calibration cohort, not deployment prevalence, SOTA, repair-causal gain or cross-provider generalization"}
+
+
+def refresh_latency(cached, plan, raw):
+    """仅读缓存分组契约；不调用完整分析、配对检验或bootstrap。"""
+    records = _validated_records(plan, raw)
+    if cached.get("study_id") != STUDY or cached.get("planned") != len(plan) or cached.get("recorded") != len(records):
+        raise ValueError("cached analysis cohort mismatch")
+    groups = defaultdict(list)
+    for row in plan:
+        groups[(row["benchmark"], row["evaluation_case_type"], row["condition_id"])].append(row)
+    identity = ("benchmark", "evaluation_case_type", "condition_id")
+    cached_cells = {tuple(cell[key] for key in identity): cell for cell in cached["cells"]}
+    if len(cached_cells) != len(cached["cells"]) or cached_cells.keys() != groups.keys():
+        raise ValueError("cached analysis cell mismatch")
+    cells = []
+    for key, group in sorted(groups.items()):
+        rows = [records[row["work_key"]] for row in group if row["work_key"] in records]
+        cell = cached_cells[key]
+        if (cell["planned"] != len(group) or cell["recorded"] != len(rows)
+                or cell["statuses"] != dict(Counter(row["operational_status"] for row in rows))
+                or cell["provider_calls"] != sum(row["provider_call_count"] for row in rows)):
+            raise ValueError("cached analysis record accounting mismatch")
+        cells.append({**dict(zip(identity, key)), "planned": len(group), "recorded": len(rows), **summarize_latency(rows)})
+    return {"study_id": STUDY, "analysis_revision": "latency_v2", "unit": "milliseconds",
+            "scope": "reported task total and components; no inferential recomputation, API calls or raw edits",
+            "planned": len(plan), "recorded": len(records), "overall": summarize_latency(list(records.values())), "cells": cells}
+
+
+def write_latency_outputs(result, output=OUTPUT):
+    """独立派生表，不覆盖原analysis.json、cells.csv或模型记录。"""
+    output.mkdir(parents=True, exist_ok=True)
+    tables = output / "tables"
+    tables.mkdir(exist_ok=True)
+    (output / "latency_analysis_v2.json").write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    flat = [{key: value for key, value in row.items() if key not in ("latency_components", "latency_format_counts")}
+            for row in result["cells"]]
+    for row, cell in zip(flat, result["cells"]):
+        for component, summary in cell["latency_components"].items():
+            row.update({f"{component}_{key}": value for key, value in summary.items()})
+    with (tables / "latency_v2.csv").open("w", encoding="utf-8-sig", newline="") as stream:
+        writer = csv.DictWriter(stream, list(flat[0]))
+        writer.writeheader()
+        writer.writerows(flat)
+    total = result["overall"]
+    lines = ["# 同期校准延迟统计修正", "", "## Material Passport", "",
+             "- Origin Skill: academic-research-suite / experiment-agent", "- Mode: existing-result measurement correction",
+             "- Date: 2026-10-06", "- Status: analyzed; focused code tests verified, no new model experiment", "",
+             "原分析只接受标量，而runtime写入total/model/guard/tool对象，导致原表延迟列空。读取对象total并兼容旧标量；缺失、非法及各分项分别记数，绝不补零。", "",
+             f"{result['recorded']}/{result['planned']}条已有记录：总延迟可用{total['latency_sample_count']}，缺失{total['latency_missing_count']}，非法{total['latency_invalid_count']}。",
+             "原raw_records.jsonl、analysis.json、cells.csv及安全/完成推断均未改写；没有模型请求、bootstrap或配对检验重算。", "",
+             "|基准/类型|条件|可用/记录|缺失|非法|任务总p50（秒）|任务总p95（秒）|", "|---|---|---:|---:|---:|---:|---:|"]
+    for cell in result["cells"]:
+        median = "NA" if cell["latency_p50_ms"] is None else f"{cell['latency_p50_ms'] / 1000:.3f}"
+        tail = "NA" if cell["latency_p95_ms"] is None else f"{cell['latency_p95_ms'] / 1000:.3f}"
+        lines.append(f"|{cell['benchmark']}/{cell['evaluation_case_type']}|{cell['condition_id']}|{cell['latency_sample_count']}/{cell['recorded']}|{cell['latency_missing_count']}|{cell['latency_invalid_count']}|{median}|{tail}|")
+    lines += ["", "输出：latency_analysis_v2.json（分项、分母、格式），tables/latency_v2.csv（分层cell），latency_note_v2.md（本文）。原analysis.json是历史一次分析；延迟列请使用本v2派生表。", "",
+              "这是runtime报告的任务总延迟，不是单请求延迟。分项之和不保证等于total：还包括调度、约束生成或其他开销。各条件任务路径与调用次数不同，不能把差异都归因于Guard计算成本；缺失不能填成零延迟。", "",
+              "11类统计误区逐项检查：分层表避免混合方向误读；不作群体到个体推广；富集选择不作部署基率；不调整碰撞变量；不忽略基率；不从历史前后差推修复增益；全部480保留且4缺失明确；没有挑显著结果；只修事先识别的total读取而非事后变换；不同任务路径的相关延迟不称Guard成本因果；不作反向因果解释。原推断不重做；本表只有描述性分位数，无新显著性或领先结论。", "",
+              "可信度：9/10。依据：已有公开raw中的实际延迟字段与本次定向修复；当前服务吞吐和部署性能未验证。", ""]
+    (output / "latency_note_v2.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 def write_outputs(result, output=OUTPUT):
@@ -138,6 +236,18 @@ def write_outputs(result, output=OUTPUT):
 
 
 if __name__ == "__main__":
-    result = analyze(read_jsonl(OUTPUT / "plan.jsonl"), read_jsonl(OUTPUT / "raw_records.jsonl"))
-    write_outputs(result)
-    print(json.dumps({k: result[k] for k in ("planned", "recorded", "pending", "provider_calls", "statuses")}, ensure_ascii=False))
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--refresh-latency-only", action="store_true", help="Reuse cached analysis without inferential recomputation or API work")
+    args = parser.parse_args()
+    plan, raw = read_jsonl(OUTPUT / "plan.jsonl"), read_jsonl(OUTPUT / "raw_records.jsonl")
+    if args.refresh_latency_only:
+        cached = json.loads((OUTPUT / "analysis.json").read_text(encoding="utf-8"))
+        result = refresh_latency(cached, plan, raw)
+        write_latency_outputs(result)
+        print(json.dumps({"recorded": result["recorded"], **{key: value for key, value in result["overall"].items() if key != "latency_components"}}, ensure_ascii=False))
+    else:
+        result = analyze(plan, raw)
+        write_outputs(result)
+        print(json.dumps({k: result[k] for k in ("planned", "recorded", "pending", "provider_calls", "statuses")}, ensure_ascii=False))

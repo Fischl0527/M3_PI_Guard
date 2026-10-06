@@ -1,5 +1,22 @@
 # 会话移交
 
+## 2026-10-06 — 持续目标已推进：延迟汇总修复完成
+
+- 当前任务仍harness/tasks/research-followup-execution-2026-10-06.md；codex/claude-review-repairs，origin RedTeam_LLM_Security。继续目标，不把规划或本切片当整体完成。
+- 新`research_followup_analysis_v1 --refresh-latency-only`只读480raw和缓存统计：476 total对象可用/4缺失/0非法。只生成latency_analysis_v2.json、tables/latency_v2.csv、latency_note_v2.md；旧raw/analysis.json/cells.csv未改，无API/配对/bootstrap重算。不要再运行默认完整analyze或旧runner。
+- 修复定向16passed/Ruff通过；覆盖dict/scalar/None/bool/NaN/inf/负数、分项、缓存不变、统计不重算、输出不覆盖、缓存错队列与重复response行。初始1失败是正确复现，已修。
+- 正常任务低效用仍待受信请求与编译规则的有限核对；generic-v2源码明确会删除必填目标未解析的整条规则，只能作为原因线索，尚未对60任务证明违约，不自动扩权或创建corrected_v3。
+- 下一步优先同步最新900+16及480的Methods/Results、讨论摘要、中文和现有LaTeX；作者空白/Times New Roman/A4居中页码/导航保持。当前稿仍含旧exact/旧端点强解释，尚未更新；不宣称论文完成。
+- P2启动拒绝不绕过；P3原参考8/18与离线oracle15/18不是模型成绩，3评分问题/叶子监控未合格，不启动180/108或新360。其他用户dirty/current-task原16行保留；仅本轮范围Git推送。
+
+## 2026-10-06 — 最新用户请求：结合当前结果重新规划（v2已交付）
+
+- 本轮仅评估与Markdown计划，不启动新实验/服务、不改科研代码/论文或构建、不Git提交推送。交付docs/research/paper_v2/M3_PI_Guard_综合评估与后续研究计划_2026-10-06_v2.md；任务harness/tasks/research-followup-replan-2026-10-06-v2.md。
+- 旧同日v1及其实施证据保留；916授权/合成、300诊断与480校准均已完成，不重复执行。当前7b1114f/codex/claude-review-repairs；用户原dirty及先前回执修改保留。
+- 延迟聚合发现确定源码问题：476条latency_ms为分项对象、4缺失，分析只收标量使CSV空。本轮只识别；下一步可仅修派生延迟，不重跑API、旧raw或10k统计。
+- 新计划建议必要测量/原因解释与准确论文同步优先；授权行为新修复须有正负例，再另行确认新360批次。开放模型180/动态108条件性，Gemini继续暂缓。不要把建议上界648视为必须执行。
+- 本轮文档检查382行/11本地链接0断链、围栏/空格/编码检查通过，feature JSON与范围diff正常；科研整体验证未完成，F-PAPER-002仍in_progress。此前批准执行任务的论文同步也仍待办，不因规划交付关闭整体目标。
+
 ## 2026-10-06 — 最新用户已授权实施后续研究
 
 - 任务harness/tasks/research-followup-execution-2026-10-06.md；P0诊断输出outputs/experiments/research_followup_20261006_v1/diagnosis。900公开事件一次分类，300去重诊断行，动态目标根因未知，不自动扩权。
@@ -9,6 +26,7 @@
 - 离线资格最终22定向通过、Ruff通过；初次8失败是fixture合同不一致，已修正。旧冻结bridge再现测试不做历史递归。P2本地Qwen缓存存在，但唯一隐藏启动尝试被工具策略执行前拒绝，不以另一路径绕过；P3 E8仍待资格解释。
 - 最终定向27passed及追加统计5passed/Ruff通过（重叠不相加）；已有上游弃用warning保留。历史916/原raw和其他dirty保留，Gemini暂缓。当前codex/claude-review-repairs；结果范围Git推送后进入批准计划的论文同步，不再新API。
 - 下一子阶段：按新研究版本单列corrected_v2授权900+16和同期480；撤回旧exact崩溃/基准反转/旧endpoint的强机制解释，保留历史记录。先方法结果→讨论摘要→中文→现有LaTeX，作者空白/Times New Roman/A4/居中页码/导航；不重新Word、扩大实验或Full Harness。新public report不是论文已更新的证据。
+- 结果节点7b1114f43f4cbf21e933b48ad064b287726ed38f已推送origin/codex/claude-review-repairs，ls-remote一致。21相关文件，仅公开raw/统计/控制/报告与必要状态；Git未纳入internal或无关dirty，current-task原16行仍未提交。目标仍active：实验主阶段已闭合，批准计划的稿件同步仍待实施。
 
 ## 2026-10-06 — 最新用户任务：综合评估与新计划，非运行指令
 
