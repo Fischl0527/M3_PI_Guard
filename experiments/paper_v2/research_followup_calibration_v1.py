@@ -6,6 +6,7 @@ import argparse
 import copy
 import hashlib
 import json
+import logging
 import threading
 from collections import Counter
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
@@ -17,8 +18,8 @@ from experiments.paper_v2.contracts import sha256_canonical_json
 from experiments.paper_v2.correctness_plan_v1 import ROOT, read_jsonl, round_robin, underlying_task
 from experiments.paper_v2.correctness_provider_v1 import DevelopmentRequestClient, RequestPacer, append_row, now
 from experiments.paper_v2.correctness_runner_v1 import critical_error, execute_one, latest_records, model_lock, pending_rows
-from experiments.paper_v2.correctness_runtime_v1 import CorrectnessRuntime
-from experiments.paper_v2.formal_matrix_controller_v2 import RedactedVigilConstraintFactory
+from experiments.paper_v2.correctness_runtime_v1 import CorrectnessRuntime, hydrate
+from experiments.paper_v2.vigil_live_dependency import VigilLiveDependencyError, VigilOfficialConstraintFactory
 
 STUDY = "m3-research-followup-calibration-20261006-v1"
 OUTPUT = ROOT / "outputs/experiments/research_followup_20261006_v1/calibration"
@@ -26,6 +27,46 @@ CORE = ("no_defense", "m3_policy_only", "m3_full_normal_prompt")
 VIGIL = "strongest_peer_reviewed_structural_baseline"
 CONDITIONS = (*CORE, VIGIL)
 SEED = "m3-followup-calibration-20261006-v1"
+
+
+class QuietVigilConstraintFactory(VigilOfficialConstraintFactory):
+    """Suppress body-bearing upstream logs without swapping process stdout."""
+
+    def __call__(self, *args, **kwargs):
+        owner = threading.get_ident()
+
+        class ThisCallFilter(logging.Filter):
+            def filter(self, record):
+                return record.thread != owner
+
+        logger = logging.getLogger("vigil.constraint_generator")
+        silence = ThisCallFilter()
+        logger.addFilter(silence)
+        try:
+            return super().__call__(*args, **kwargs)
+        finally:
+            logger.removeFilter(silence)
+
+
+class CalibrationRuntime(CorrectnessRuntime):
+    def execute(self, row, client):
+        try:
+            return {**super().execute(row, client), "runner_revision": "calibration_telemetry_v1.1"}
+        except VigilLiveDependencyError:
+            # A validated response explicitly reporting length truncation is a
+            # response-bearing model-output failure, not a repeated code fault.
+            if row["condition_id"] != VIGIL or not client.requests or client.requests[-1].get("finish_reason") != "length":
+                raise
+            if any(not r.get("response_received") or r.get("returned_model") != row["model_id"] for r in client.requests):
+                raise
+            _, digest = hydrate(row, compiler_revision="corrected_v2")
+            return {"unsafe_effect": None, "unsafe_effect_observed": False, "task_completion": None, "task_completion_observed": False,
+                    "operational_status": "parse_failure", "failure_stage": "vigil_constraint_generation", "failure_class": "constraint_output_truncated",
+                    "evaluation_details": {"unknown_reasons": ["constraint_generation_failed_before_simulated_environment_execution"]},
+                    "events": [{"step": 1, "tool": None, "parse_ok": False, "reason_code": "constraint_output_truncated", "execution_attempted": False, "simulated_action_executed": False}],
+                    "ask_count": 0, "deny_count": 0, "latency_ms": None,
+                    "online_forbidden_fields_present": digest["forbidden_fields_present"], "online_visible_field_digest": digest,
+                    "provider_tools_enabled": False, "real_external_effects": 0, "runner_revision": "calibration_telemetry_v1.1"}
 
 
 def select_cases():
@@ -121,7 +162,7 @@ def run(*, canary_only=False, retry_key=None, output=OUTPUT):
             pending = [(r, a) for r, a in pending if r["formal_prefix"]]
         elif not retry_key and not calibration_gate([r for r in history.values() if r["formal_prefix"]])["passed"]:
             raise ValueError("formal prefix must pass before extension")
-        runtime = CorrectnessRuntime(plan_path=path, execution_identity=plan[0]["execution_identity"], compiler_revision="corrected_v2", runtime_revision="corrected_v2", vigil_factory=RedactedVigilConstraintFactory())
+        runtime = CalibrationRuntime(plan_path=path, execution_identity=plan[0]["execution_identity"], compiler_revision="corrected_v2", runtime_revision="corrected_v2", vigil_factory=QuietVigilConstraintFactory())
         stop = threading.Event()
         pacer = RequestPacer(0, stop)
         key = load_key()

@@ -1,5 +1,16 @@
 # Failure Log
 
+## 2026-10-06 — P1 stopped at120 due to misclassified VIGIL truncation
+
+- Two VIGIL rows have valid official response/identity andfinish_reason=length at512 output tokens; source generator rejects malformed constraints. Existing generic wrapper recordedrunner_failure/VigilLiveDependencyError, so repeated-system-error stop also interrupted one already response-bearingND row. All120 raw terminals retained; none eligible for retry.
+- ExistingRedactedVigilConstraintFactory redirects process-globalstdout/stderr outside its generation lock, causing concurrent progress capture/lost output; logging handlers retain original streams and can print response excerpts. New study factory uses a current-threadlogger filter, does not replace process streams or hide failure status.
+- New study-onlyCalibrationRuntime labels validatedlength truncation asparse_failure/unknown endpoints; defaults, old rows, prompts, model identity,512 cap and permissions unchanged. Nonlength/contract failures still propagate. Regression tests precede only-pending360 continuation.
+## 2026-10-06 — Optional local model startup denied before execution
+
+- P2 cache metadata confirmedqwen2.5:7b-instruct-q4_K_M under externalarchive/models; no recursive model hash audit was run.
+- One hiddenStart-Process attempt with process-localOLLAMA_MODELS/loopback-onlyOLLAMA_HOST was rejected by tool policy before execution. No directory/service/model request started; did not retry through.NET,cmd or another tool to bypass denial.
+- P2 remainsunexecuted/conditional; P1 continues independently. This is an execution-boundary issue, not a model format/utility failure. Existing cache and global environment unchanged.
+
 ## 2026-10-06 — Follow-up calibration offline fixture failures
 
 - Initial bounded suite:83passed/8failed. Six failures expected an empty list where the established visible-field contract is a booleanFalse. Corrected the fixture to requireFalse; did not change runtime isolation.

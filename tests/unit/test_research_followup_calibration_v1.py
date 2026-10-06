@@ -1,5 +1,7 @@
 import copy
 import json
+import logging
+import sys
 import threading
 from collections import Counter
 from functools import partial
@@ -11,7 +13,8 @@ from experiments.paper_v2.correctness_runner_v1 import execute_one, latest_recor
 from experiments.paper_v2.correctness_runtime_v1 import CorrectnessRuntime, hydrate
 from experiments.paper_v2.formal_matrix_controller_v2 import RedactedVigilConstraintFactory
 from experiments.paper_v2.official_provider_executor import HTTPResponseEnvelope, ProviderPayloadError
-from experiments.paper_v2.research_followup_calibration_v1 import CORE, VIGIL, build_plan, calibration_gate, select_cases, write_plan
+from experiments.paper_v2.research_followup_calibration_v1 import CORE, VIGIL, CalibrationRuntime, QuietVigilConstraintFactory, build_plan, calibration_gate, select_cases, write_plan
+from experiments.paper_v2.vigil_live_dependency import VigilOfficialConstraintFactory
 
 
 def test_unique_underlying_attacks_and_complete_cohort():
@@ -95,3 +98,38 @@ def test_gate_ignores_outcomes_but_checks_baseline_identity():
     assert calibration_gate(rows)["passed"]
     next(r for r in rows if r["condition_id"] == VIGIL)["provider_requests"][0]["returned_model"] = "wrong-model"
     assert not calibration_gate(rows)["passed"]
+
+
+def test_factory_does_not_redirect_parallel_stdout_or_log_model_body(monkeypatch, caplog):
+    before = sys.stdout
+    logger = logging.getLogger("vigil.constraint_generator")
+
+    def generate(*args, **kwargs):
+        assert sys.stdout is before
+        logger.error("Raw content: synthetic body must not be logged")
+        return "prepared"
+
+    monkeypatch.setattr(VigilOfficialConstraintFactory, "__call__", generate)
+    assert QuietVigilConstraintFactory()(None, "synthetic", None) == "prepared"
+    assert sys.stdout is before
+    assert "synthetic body" not in caplog.text
+    logger.warning("post-call benign marker")
+    assert "post-call benign marker" in caplog.text
+
+
+def test_constraint_truncation_is_terminal_unknown_not_system_error(tmp_path):
+    path = write_plan(tmp_path)
+    row = next(r for r in build_plan() if r["condition_id"] == VIGIL)
+
+    def transport(endpoint, headers, payload, timeout):
+        return HTTPResponseEnvelope(200, {}, {"id": "official-truncation-fixture", "model": payload["model"], "choices": [{"message": {"role": "assistant", "content": '{"constraints":['}, "finish_reason": "length"}], "usage": {"prompt_tokens": 20, "completion_tokens": 512, "total_tokens": 532, "prompt_cache_hit_tokens": 0, "prompt_cache_miss_tokens": 20}})
+
+    runtime = CalibrationRuntime(plan_path=path, execution_identity=row["execution_identity"], compiler_revision="corrected_v2", runtime_revision="corrected_v2", vigil_factory=QuietVigilConstraintFactory())
+    factory = partial(DevelopmentRequestClient, transport=transport, max_provider_calls=16, call_budget_ceiling=16)
+    result = execute_one(row, 1, runtime=runtime, api_key="offline-fixture", pacer=RequestPacer(0, threading.Event()), output=tmp_path, client_factory=factory)
+    assert result["operational_status"] == "parse_failure"
+    assert result["failure_class"] == "constraint_output_truncated"
+    assert result["unsafe_effect"] is result["task_completion"] is None
+    assert result["response_obtained"] and result["provider_call_count"] == 1
+    assert result["online_forbidden_fields_present"] is False
+    assert result["real_external_effects"] == 0
