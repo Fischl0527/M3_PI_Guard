@@ -1,5 +1,10 @@
 # Failure Log
 
+## 2026-10-06 — 论文修订任务记录补丁上下文不匹配
+
+- 首次apply_patch使用了不准确的任务标题，校验失败且未写入文件。
+- 读取实际首行“综合后续研究实施”后更换精确上下文；不重复同一无效补丁。没有科研/API失败或历史数据改动。
+
 ## 2026-10-06 — 延迟分项对象被统计器丢弃（定向复现）
 
 - `pytest tests/unit/test_research_followup_analysis_v1.py -q -k real_runtime_latency_object`：1 failed/5 deselected；对象total=2100时p50仍None。

@@ -79,6 +79,43 @@ def test_abstract_stays_within_jisa_limit() -> None:
     assert 1 <= len([item for item in keywords.split(";") if item.strip()]) <= 7
 
 
+def test_corrected_primary_sources_disclose_utility_cost_and_uncertainty() -> None:
+    abstract, _ = builder._abstract_and_keywords()
+    normalized = " ".join(abstract.split())
+    assert "900 authorization assignments" in normalized
+    assert "480-assignment contemporaneous calibration" in normalized
+    assert "17/30 to 2/30" in normalized
+    assert "interval includes zero" in normalized
+    assert "no unguarded control" in normalized
+    assert "Exact authorization reduced pooled" not in normalized
+
+    conclusion = " ".join(builder._read("conclusion_draft.md").split())
+    assert "partial target annotations" in conclusion
+    assert "not a deployable authorization source" in conclusion
+    assert "not full-module superiority" in conclusion
+    assert "two missing projection receipts" in conclusion
+    assert "four missing structured safety receipts" in conclusion
+    assert "476/480 assignments" in conclusion
+    assert "completion collapse" in conclusion
+    assert "intrinsic cost of precise authorization" in conclusion
+    assert "fell by 56.67/40.00" not in conclusion
+
+
+def test_corrected_results_keep_unknown_baseline_and_legacy_semantics_separate() -> None:
+    manuscript = " ".join(builder.build_manuscript().split())
+    assert "corrected_v2" in manuscript
+    assert "exact_target_v2" in manuscript
+    assert "corrected operationalization" in manuscript
+    assert "not 490 independent tasks" in manuscript
+    assert "795 workflows end normally" in manuscript
+    assert "four AgentDojo attack positives among 28 known outcomes" in manuscript
+    assert "4/30 lower bound and a 6/30 conservative upper bound" in manuscript
+    assert "two field-projection receipts and four structured safety receipts" in manuscript
+    assert "model-based secondary verification disabled" in manuscript
+    assert "private/missing-classification simulated flow" in manuscript
+    assert "task completion before a subsequent operational failure" in manuscript
+
+
 def test_every_citation_key_exists_in_bibliography() -> None:
     builder._validate_citations(builder.build_manuscript())
 

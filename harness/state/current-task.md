@@ -1,5 +1,18 @@
 # 当前任务
 
+### 2026-10-06 持续目标：当前英文源的科学口径修订
+
+- 最新持续目标要求继续根据计划推进；回到research-followup-execution-2026-10-06任务，已交付v3规划不作为整体结项。
+- 本切片修abstract/methods/results/discussion/conclusion的旧exact和安全端点解释，并加入900/16/480当前结果；只做文稿内容定向验证，不API/历史统计/授权行为/Full Harness。
+- 中文、生成稿表图重排和最新PDF若未完成则明确待办；作者空白和已有模板不动，F-PAPER-002仍in_progress。
+
+### 2026-10-06 当前成果后的综合评估与计划 v3（本轮仅文档）
+
+- 最新用户要求再结合下载计划、Claude建议和项目实际成果写新Markdown；任务harness/tasks/research-followup-replan-2026-10-06-v3.md。
+- 计划放docs/research/paper_v2，保留同日v1/v2及旧raw；900授权、16合成、480同期和延迟修复已完成，不重复安排。
+- 本轮不API/实验/服务/科研代码/权限/论文修改或编译/历史统计/Full Harness/Git提交推送；仅计划和必要Harness记录，原dirty保留。
+- 论文双语/LaTeX尚未同步当前研究，低效用受信意图核对及可选模型/动态环境仍待；F-PAPER-002保持in_progress，不因规划交付关闭科研整体。
+
 ### 2026-10-06 后续研究继续实施：测量修复与论文同步
 
 - 持续目标要求按已批准计划推进；先修已确认latency_ms分项对象被漏算的问题，复用480条公开raw和现有统计，不API、不重跑旧终态、不重算10k推断。

@@ -1,5 +1,19 @@
 # 会话移交
 
+## 2026-10-06 — 英文源修订已落盘，下一切片继续整体同步
+
+- 当前任务research-followup-execution-2026-10-06；英文abstract/methods/results/discussion/conclusion和生成主稿已更新900/16/480，旧exact/旧安全端点强解释在修改段落撤回。原raw和推断未重算。
+- 定向文稿15passed、Ruff通过；英文生成exit0，6主节/全文件18117词，包括表与引用，不是最终正文篇幅。没有当前PDF构建/视觉验收。
+- 下一步：先修Introduction和主表/主图/章节主次，避免旧结果仍占主位；中文按同一口径逐节同步，然后当前LaTeX/PDF与版式检查。作者空白，字体/边距/页码/导航保留。不要恢复Word、旧模型运行或统计重算。
+- 60任务受信意图核对仍待；本地启动拒绝不绕过，AgentDyn3评分与叶子监控仍未合格，不启动180/108或默认360。全目标仍active/F-PAPER-002 in_progress。
+- 此切片及v3计划范围Git交付待填实际结果；原16行current-task与其余用户dirty必须继续保留。
+
+## 2026-10-06 — 计划v3交付后继续持续目标
+
+- 用户指定下载计划与Claude建议已核对，v3在docs/research/paper_v2/M3_PI_Guard_综合评估与后续研究计划_2026-10-06_v3.md；238行/6本地链接0断链/格式与JSON检查通过。规划文件不是新实验成绩，不再把延迟列为待修。
+- 916/480及延迟成果保留；60任务受信意图核对、最新英中/LaTeX同步仍未完成，本地180/动态108未合格，不绕过服务拒绝，不启动重复矩阵。
+- 最新持续目标要求根据计划尽量推进；实施回到harness/tasks/research-followup-execution-2026-10-06.md，优先真实稿件修订。本规划切片没有API/论文构建或Git提交推送；整体F-PAPER-002仍in_progress。
+
 ## 2026-10-06 — 持续目标已推进：延迟汇总修复完成
 
 - 当前任务仍harness/tasks/research-followup-execution-2026-10-06.md；codex/claude-review-repairs，origin RedTeam_LLM_Security。继续目标，不把规划或本切片当整体完成。
@@ -8,6 +22,7 @@
 - 正常任务低效用仍待受信请求与编译规则的有限核对；generic-v2源码明确会删除必填目标未解析的整条规则，只能作为原因线索，尚未对60任务证明违约，不自动扩权或创建corrected_v3。
 - 下一步优先同步最新900+16及480的Methods/Results、讨论摘要、中文和现有LaTeX；作者空白/Times New Roman/A4居中页码/导航保持。当前稿仍含旧exact/旧端点强解释，尚未更新；不宣称论文完成。
 - P2启动拒绝不绕过；P3原参考8/18与离线oracle15/18不是模型成绩，3评分问题/叶子监控未合格，不启动180/108或新360。其他用户dirty/current-task原16行保留；仅本轮范围Git推送。
+- 修复提交a3ed482262b87d0187e7d094d157c3eb10135305已推送origin/codex/claude-review-repairs，ls-remote精确一致；15相关文件，包括已交付v2计划/任务、延迟代码/测试/独立派生表及必要状态。没有提交内部trace、模板资产或其他dirty。此行是推送后的普通交接回执，整体目标保持active，下一切片继续主稿同步。
 
 ## 2026-10-06 — 最新用户请求：结合当前结果重新规划（v2已交付）
 

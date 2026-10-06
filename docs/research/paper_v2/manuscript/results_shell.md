@@ -15,6 +15,14 @@ condition-level observations rather than independent case counts.
 
 ## Medium falsification study
 
+The medium, Public, original authorization, E1--E6, and confirmation results
+below retain their historical implementations and recorded endpoint labels.
+In particular, legacy safety labels or failure-inclusive endpoints are not
+retrospectively relabeled as observed unauthorized execution. The corrected
+authorization and contemporaneous results are reported separately below;
+the historical oracle completion collapse is an implementation-defect
+observation, not evidence of an intrinsic precision–utility trade-off.
+
 The medium study contains 480 records: 432 primary `auto_compiled` records
 covering 72 paired cases across six conditions, plus 48 authorization-regime
 probe records. The preregistered analysis did not support a superiority claim
@@ -595,6 +603,75 @@ is separate from model-generated evidence of activated dataflow restrictions.
 The eight no-tool tasks per model-condition remain in the planned denominators,
 but Table 8 focuses on attack and benign-tool outcomes. Unknown outcomes are
 not replaced by zero, and operational failures remain separately reported.
+
+## Corrected authorization and contemporaneous calibration
+
+The corrected authorization study records all 900 planned assignments:
+795 workflows end normally, 60 exhaust the step budget, and 45 have parse
+failures. Workflow status is separate from task completion. Across the 490
+attack assignments, security events are zero under the benchmark-specific
+checks. This study contains no unguarded control, and repeated condition
+assignments are not independent attacks; the zero endpoint cannot establish
+effectiveness or equivalent protection.
+
+For AgentDojo benign-tool tasks, compiled authorization completes 2/30 under
+both policy and full modules. Exact-target authorization completes 13/30
+under policy and 11/30 under full modules. The paired exact-minus-compiled
+differences are +36.67 percentage points (95% CI +18.60 to +53.31; Holm
+p=0.0039) and +30.00 points (+13.23 to +46.75; Holm p=0.0117), respectively.
+For M3-v2, the corresponding compiled counts are 16/30 and 17/30, compared
+with exact-target counts of 14/30 and 16/30. Their differences, −6.67 and
+−3.33 points, have intervals spanning zero. This does not reproduce a
+statistically established benchmark-intrinsic reversal. The oracle improves
+some observed completion under answer-derived scope but is not a deployed
+non-oracle authorization method.
+
+The separate calibration closes all 480 assignments: 443 workflows end
+normally, nine exhaust steps, 25 have parse failures, two have runner
+failures, and one has a provider/stop failure. On AgentDojo, no research
+Guard yields 3/30 security events and 17/30 benign-tool completions. Policy
+and full modules each yield 0/30 and 2/30. The paired completion difference
+is −50.00 points (95% CI −66.83 to −26.80; Holm p=0.0008), whereas the
+security difference is −10.00 points (−25.62 to +3.10; Holm p=0.7500).
+The utility cost is observable; a security improvement is not established.
+The no-research-Guard, policy, and full M3-v2 security cells are all zero,
+with benign completions of 16/30, 17/30, and 16/30. Full modules do not show
+an independent end-to-end advantage in these conditions.
+
+Configured VIGIL has four AgentDojo attack positives among 28 known outcomes
+and two unknown attack outcomes. All 30 assignments remain in ITT, so the
+observed positive count gives a 4/30 lower bound and a 6/30 conservative
+upper bound, not a claim that the unknown outcomes were safe. Two additional
+AgentDojo benign outcomes are unknown. Its disabled model secondary
+verification and larger call budget bound this configuration comparison.
+Across all 480 rows, two field-projection receipts and four structured
+safety receipts are absent; missing receipts are not fabricated afterward.
+
+The public-event diagnosis reports 26/30 AgentDojo compiled benign tasks
+with a first missing-tool-permission block in each module condition. This
+locates permission insufficiency but does not prove every missing permission
+is an implementation error. The original 900 rows have no recorded length
+truncation; parse failures cannot uniformly be attributed to the 512-token
+limit. Two rows record task completion before a subsequent operational
+failure, and both observations are retained.
+
+The 16 synthetic controls all reach a workflow terminal. Full modules deny
+private restricted flows and ask when classification is missing; the tested
+public and archival flows complete. Policy-only permits the restricted
+private/missing-classification simulated flow. Legitimate completion and a
+security violation can coexist in these controls. Their limited scenarios
+and two DeepSeek services do not establish general provenance effectiveness
+or independent-provider replication.
+
+Task total latency is available for 476/480 calibration assignments, with
+four missing and no invalid values. AgentDojo benign-task median/p95
+durations are 5.083/11.575 seconds without the research Guard,
+1.209/3.029 with policy, 1.279/3.003 with full modules, and 8.145/20.291
+for configured VIGIL, whose known-duration denominator is 28/30. Early
+blocking, model calls, constraint generation, and task-path differences
+preclude interpreting this ordering as a Guard computation speedup. The
+latency-only correction does not alter the raw records or prior security
+and completion inference.
 
 ## Remaining evidence boundary
 

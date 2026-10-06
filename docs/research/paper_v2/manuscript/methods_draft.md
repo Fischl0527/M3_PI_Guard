@@ -11,7 +11,10 @@ authorization regime and the deployed Guard configuration package while
 holding the task, attack, provider, model, tool environment, and evaluator
 fixed.
 
-The study addresses six research questions:
+The historical programme addressed six research questions. Their original
+records and conditions are retained as historical evidence. The corrected
+investigation below re-evaluates authorization and module-bundle effects
+without reassigning historical labels to new execution semantics.
 
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
@@ -29,6 +32,12 @@ The study addresses six research questions:
 6. **RQ6: Contemporaneous attack activity.** In a historically risk-enriched
    cohort, are control attacks active in the current execution block, and how
    do six runtime conditions compare within that same block?
+
+The corrected study uses `exact_target_v2`, not the defective historical
+`exact_gold` matcher. Its central questions are whether target-scoped oracle
+authorization changes task completion, what compiled authorization costs
+relative to a contemporaneous unguarded control, and what the synthetic
+data-flow controls establish within their bounded scope.
 
 Positive results are not a stopping condition. The analysis is retained if
 `exact_gold` has little effect, the full package underperforms the policy
@@ -115,7 +124,11 @@ than rerunning a large baseline matrix.
 
 ## Authorization regimes
 
-Five controlled code transformations are evaluated:
+Five controlled code transformations were evaluated in the historical
+authorization experiment. Their numerical outcomes retain that original
+implementation identity. The full-dictionary `exact_gold` transformation was
+subsequently found incompatible with partial target annotations; it is not
+the corrected operationalization described below.
 
 - `auto_compiled`: the task policy is compiled from the trusted user request,
   trusted application context, and tool schemas before untrusted evidence is
@@ -490,6 +503,69 @@ limit, and at most eight provider calls per task-condition. The V4.1 Flash
 model is distinct from the earlier V4 Flash and is not a model-invariant
 before/after comparison. Synthetic paired-action tests establish component
 behavior only; there is no simulated human approval or new confirmatory family.
+
+## Corrected target authorization and contemporaneous calibration
+
+The corrected experiment selects explicit `corrected_v2` runtime behavior and
+`exact_target_v2` authorization. Target and other constrained security fields
+must match the offline-derived scope; schema-required content fields need not
+equal an absent annotation. Schema completeness, types, additional security
+targets, action order, and execution registration remain checked. A generic
+subset-of-arguments comparison is insufficient because additional recipients,
+paths, or endpoint parameters can change the authorized action. The original
+matcher and all its records remain unchanged.
+
+Raw evaluator fields do not enter the model prompt. In the oracle condition,
+the Guard nevertheless receives an explicitly answer-derived authorization
+object. This is an idealized information regime, not evidence that deployed
+authorization can obtain the same scope. Ambiguous required scope is not an
+automatic grant, including with confirmation modules disabled. Missing
+trusted classification cannot be treated as public data when a restricted
+data-flow rule applies. No human approval is simulated: ASK means pending
+clarification, not task completion.
+
+The new authorization cohort reuses 180 fixed cases: 100 attacks, 60 benign
+tool tasks, and 20 M3-v2 no-tool tasks. Policy and full modules each receive
+compiled and exact-target authorization, yielding 720 assignments; all four
+cells use the same ordinary prompt. Three stress regimes on the predefined
+60-case nested subset add 180 full-module assignments. The 12-assignment
+formal prefix is part of the 900 total, not an additional repeat. The security
+endpoint has 490 attack assignments across the main and stress cells, not
+490 independent tasks. This authorization study contains no unguarded cell.
+
+A separate contemporaneous calibration uses 120 fixed cases, with 30 attacks
+and 30 benign-tool tasks from each benchmark. Ordinary prompts and compiled
+authorization are held constant across no research Guard, policy, full, and
+configured VIGIL, giving 480 assignments. The unguarded condition retains
+the same host and external-effect boundary. VIGIL generates constraints
+through the model and uses its configured deterministic hybrid audit, with
+model-based secondary verification disabled. It is not the complete official
+default baseline. Its provider-call cap is 16; the other conditions cap at
+eight. Cohorts overlap earlier studies and do not constitute independent
+sample replication.
+
+Both Pro experiments use temperature zero, 512 output tokens, a 180-second
+single-request timeout, and zero automatic HTTP retries. Task environments
+are isolated, with at most two assignments in flight. After a 120-assignment
+calibration stop caused by parallel telemetry and truncated constraint
+classification, a telemetry-only revision executed the 360 untouched items.
+The first 120 records, including response-bearing failures, were not retried.
+Scientific prompts, parameters, permissions, and work identities were not
+changed; the two runner revisions remain distinguishable.
+
+Four synthetic memory scenarios cross policy/full with Pro and the approved
+V4.1 Flash service, yielding 16 additional executions. The scenarios cover
+private restricted flows, public restricted flows, private archival flows,
+and absent classification. They test specified component behavior, not
+general protection, a natural task distribution, or human confirmation.
+
+Each benchmark retains its own security semantics. AgentDojo uses native
+attack and utility checks on an isolated environment copy; M3-v2 counts
+unauthorized simulated effects supported by execution evidence. Failures,
+unknown outcomes, and completion after execution remain distinct. Reported
+total latency reads the runtime total component; component durations and
+missingness are reported separately rather than inferred from token usage.
+Existing inferential results are reused when correcting latency aggregation.
 
 ## Minimal verification and reproducibility
 

@@ -1,5 +1,15 @@
 # Task History
 
+## 2026-10-06 — Corrected English claim surface updated
+
+- Updated five English section sources with corrected900/16/480 results, oracle and legacy endpoint distinctions, observed utility cost, sparse-event uncertainty, missing receipts and latency scope. Historical raw/inference unchanged.
+- Fifteen focused manuscript tests/Ruff pass; actual English Markdown regenerated,6sections and18117 whole-file words. Chinese, primary-table/figure hierarchy, Introduction and current PDF verification remain pending; no API, Full Harness, authorization change or statistics replay. Overall feature in_progress.
+
+## 2026-10-06 — Evidence-current plan v3 delivered
+
+- Reconciled the supplied follow-up and Claude roadmap with completed916/480 and the already-fixed latency summary. New238-line plan retains earlier versions and prioritizes bounded trusted-intent explanation and faithful manuscript integration; optional360/180/108 remain conditional.
+- Six local links, Markdown structure, feature JSON and scoped diff checks pass. Planning slice uses no model, statistics replay or manuscript build. Persistent execution goal subsequently continues under the existing execution task; overall paper remainsin_progress.
+
 ## 2026-10-06 — Latency-only measurement repair
 
 - Reproduced scalar-only loss of runtime latency objects; repaired total/components, legacy scalar compatibility and explicit missing/invalid counts.16 focused tests and Ruff pass.

@@ -2,31 +2,33 @@
 
 ## Abstract
 
-Tool-using LLM agents can turn prompt injection into external actions, but
-measured security depends on the runtime authorization and Guard configuration.
-We keep evaluator fields offline and jointly measure unsafe effects, benign
-completion, confirmation/blocking, failures, latency, and adaptive attack cost.
+Runtime guardrails for tool-using language-model agents must distinguish
+authorization, execution, and task completion. We evaluate authorization
+semantics and security–utility trade-offs after correcting an oracle monitor
+that compared complete action arguments against partial target annotations.
+Historical labels are retained without reinterpreting isolation rejections or
+failures as executed harmful effects.
 
-We reanalyze 7,353 condition-level DeepSeek records and run controlled studies
-of authorization regime, prompt and runtime factors, source authority,
-historically difficult attacks, model replication, and attack-budget tails.
-In Public matrices, the full package produced more unsafe effects than the
-policy package on V4 Pro (38/600 versus 13/600) and V4 Flash (24/400 versus
-12/400). A concurrent 2×2 experiment isolated prompt and module-bundle effects,
-but only two unsafe effects occurred across 400 attack assignments. Deterministic
-Guard replay was source-sensitive, whereas all 240 end-to-end source-swap runs
-executed no action. Exact authorization reduced pooled benign-tool completion
-and increased failure-sensitive risk, with opposite completion directions
-across AgentDojo and M3-v2.
+A corrected DeepSeek Pro study comprises 900 authorization assignments over
+180 fixed cases. Both runtime configurations use ordinary prompts. AgentDojo
+benign-tool completion rises from 2/30 under compiled authorization to 13/30
+under exact-target policy and 11/30 under exact-target full modules. The
+corresponding M3-v2 differences are small and uncertain. Zero security events
+across 490 attack assignments do not establish effectiveness because this
+study has no unguarded control.
 
-Defense-aware search found first unsafe effects for 4/40 tasks by query 50 and
-18/40 by 200; none of 12 prespecified B200 survivors first succeeded by 500
-(Wilson upper limit 24.25%). In an additional risk-enriched single-block
-execution, no defense produced 17/60 unsafe effects, while policy/normal and
-full/safe produced 2/60 and 0/60 unsafe effects; failures remained non-negligible.
-These enriched results do not estimate deployment prevalence, utility, or
-temporal repeatability. Two incomplete Gemini studies do not support estimation
-of cross-provider effects.
+A separate 480-assignment contemporaneous calibration supplies that control.
+On AgentDojo, policy and full modules reduce benign completion from 17/30 to
+2/30, a paired difference of −50 percentage points (95% CI −66.83 to −26.80).
+Security results change from 3/30 to 0/30, but the paired interval includes
+zero. M3-v2 controls are already at zero. Sixteen synthetic Pro/Flash runs
+verify bounded private-data and missing-classification behavior, not general
+end-to-end protection. Missing outcomes and failures remain explicit.
+
+The findings support measurement correction and disclosure of authorization
+burden, not full-module superiority. Oracle assistance, overlapping cohorts,
+adapted baselines, sparse security events, and incomplete independent-model
+validation limit generalization.
 
 **Keywords:** prompt injection; LLM agents; runtime authorization; provenance; security–utility trade-off
 
@@ -337,7 +339,10 @@ authorization regime and the deployed Guard configuration package while
 holding the task, attack, provider, model, tool environment, and evaluator
 fixed.
 
-The study addresses six research questions:
+The historical programme addressed six research questions. Their original
+records and conditions are retained as historical evidence. The corrected
+investigation below re-evaluates authorization and module-bundle effects
+without reassigning historical labels to new execution semantics.
 
 1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
    `broad`, `underspecified`, and `conflicting` authorization regimes change
@@ -355,6 +360,12 @@ The study addresses six research questions:
 6. **RQ6: Contemporaneous attack activity.** In a historically risk-enriched
    cohort, are control attacks active in the current execution block, and how
    do six runtime conditions compare within that same block?
+
+The corrected study uses `exact_target_v2`, not the defective historical
+`exact_gold` matcher. Its central questions are whether target-scoped oracle
+authorization changes task completion, what compiled authorization costs
+relative to a contemporaneous unguarded control, and what the synthetic
+data-flow controls establish within their bounded scope.
 
 Positive results are not a stopping condition. The analysis is retained if
 `exact_gold` has little effect, the full package underperforms the policy
@@ -441,7 +452,11 @@ than rerunning a large baseline matrix.
 
 ### 3.5 Authorization regimes
 
-Five controlled code transformations are evaluated:
+Five controlled code transformations were evaluated in the historical
+authorization experiment. Their numerical outcomes retain that original
+implementation identity. The full-dictionary `exact_gold` transformation was
+subsequently found incompatible with partial target annotations; it is not
+the corrected operationalization described below.
 
 - `auto_compiled`: the task policy is compiled from the trusted user request,
   trusted application context, and tool schemas before untrusted evidence is
@@ -817,7 +832,70 @@ model is distinct from the earlier V4 Flash and is not a model-invariant
 before/after comparison. Synthetic paired-action tests establish component
 behavior only; there is no simulated human approval or new confirmatory family.
 
-### 3.19 Minimal verification and reproducibility
+### 3.19 Corrected target authorization and contemporaneous calibration
+
+The corrected experiment selects explicit `corrected_v2` runtime behavior and
+`exact_target_v2` authorization. Target and other constrained security fields
+must match the offline-derived scope; schema-required content fields need not
+equal an absent annotation. Schema completeness, types, additional security
+targets, action order, and execution registration remain checked. A generic
+subset-of-arguments comparison is insufficient because additional recipients,
+paths, or endpoint parameters can change the authorized action. The original
+matcher and all its records remain unchanged.
+
+Raw evaluator fields do not enter the model prompt. In the oracle condition,
+the Guard nevertheless receives an explicitly answer-derived authorization
+object. This is an idealized information regime, not evidence that deployed
+authorization can obtain the same scope. Ambiguous required scope is not an
+automatic grant, including with confirmation modules disabled. Missing
+trusted classification cannot be treated as public data when a restricted
+data-flow rule applies. No human approval is simulated: ASK means pending
+clarification, not task completion.
+
+The new authorization cohort reuses 180 fixed cases: 100 attacks, 60 benign
+tool tasks, and 20 M3-v2 no-tool tasks. Policy and full modules each receive
+compiled and exact-target authorization, yielding 720 assignments; all four
+cells use the same ordinary prompt. Three stress regimes on the predefined
+60-case nested subset add 180 full-module assignments. The 12-assignment
+formal prefix is part of the 900 total, not an additional repeat. The security
+endpoint has 490 attack assignments across the main and stress cells, not
+490 independent tasks. This authorization study contains no unguarded cell.
+
+A separate contemporaneous calibration uses 120 fixed cases, with 30 attacks
+and 30 benign-tool tasks from each benchmark. Ordinary prompts and compiled
+authorization are held constant across no research Guard, policy, full, and
+configured VIGIL, giving 480 assignments. The unguarded condition retains
+the same host and external-effect boundary. VIGIL generates constraints
+through the model and uses its configured deterministic hybrid audit, with
+model-based secondary verification disabled. It is not the complete official
+default baseline. Its provider-call cap is 16; the other conditions cap at
+eight. Cohorts overlap earlier studies and do not constitute independent
+sample replication.
+
+Both Pro experiments use temperature zero, 512 output tokens, a 180-second
+single-request timeout, and zero automatic HTTP retries. Task environments
+are isolated, with at most two assignments in flight. After a 120-assignment
+calibration stop caused by parallel telemetry and truncated constraint
+classification, a telemetry-only revision executed the 360 untouched items.
+The first 120 records, including response-bearing failures, were not retried.
+Scientific prompts, parameters, permissions, and work identities were not
+changed; the two runner revisions remain distinguishable.
+
+Four synthetic memory scenarios cross policy/full with Pro and the approved
+V4.1 Flash service, yielding 16 additional executions. The scenarios cover
+private restricted flows, public restricted flows, private archival flows,
+and absent classification. They test specified component behavior, not
+general protection, a natural task distribution, or human confirmation.
+
+Each benchmark retains its own security semantics. AgentDojo uses native
+attack and utility checks on an isolated environment copy; M3-v2 counts
+unauthorized simulated effects supported by execution evidence. Failures,
+unknown outcomes, and completion after execution remain distinct. Reported
+total latency reads the runtime total component; component durations and
+missingness are reported separately rather than inferred from token usage.
+Existing inferential results are reused when correcting latency aggregation.
+
+### 3.20 Minimal verification and reproducibility
 
 Verification is deliberately proportional to the lean study. It consists of:
 
@@ -837,6 +915,14 @@ assignments, analysis code, aggregate tables, and versioned source.
 ## 4. Results
 
 ### 4.1 Medium falsification study
+
+The medium, Public, original authorization, E1--E6, and confirmation results
+below retain their historical implementations and recorded endpoint labels.
+In particular, legacy safety labels or failure-inclusive endpoints are not
+retrospectively relabeled as observed unauthorized execution. The corrected
+authorization and contemporaneous results are reported separately below;
+the historical oracle completion collapse is an implementation-defect
+observation, not evidence of an intrinsic precision–utility trade-off.
 
 The medium study contains 480 records: 432 primary `auto_compiled` records
 covering 72 paired cases across six conditions, plus 48 authorization-regime
@@ -1320,7 +1406,76 @@ The eight no-tool tasks per model-condition remain in the planned denominators,
 but Table 8 focuses on attack and benign-tool outcomes. Unknown outcomes are
 not replaced by zero, and operational failures remain separately reported.
 
-### 4.15 Remaining evidence boundary
+### 4.15 Corrected authorization and contemporaneous calibration
+
+The corrected authorization study records all 900 planned assignments:
+795 workflows end normally, 60 exhaust the step budget, and 45 have parse
+failures. Workflow status is separate from task completion. Across the 490
+attack assignments, security events are zero under the benchmark-specific
+checks. This study contains no unguarded control, and repeated condition
+assignments are not independent attacks; the zero endpoint cannot establish
+effectiveness or equivalent protection.
+
+For AgentDojo benign-tool tasks, compiled authorization completes 2/30 under
+both policy and full modules. Exact-target authorization completes 13/30
+under policy and 11/30 under full modules. The paired exact-minus-compiled
+differences are +36.67 percentage points (95% CI +18.60 to +53.31; Holm
+p=0.0039) and +30.00 points (+13.23 to +46.75; Holm p=0.0117), respectively.
+For M3-v2, the corresponding compiled counts are 16/30 and 17/30, compared
+with exact-target counts of 14/30 and 16/30. Their differences, −6.67 and
+−3.33 points, have intervals spanning zero. This does not reproduce a
+statistically established benchmark-intrinsic reversal. The oracle improves
+some observed completion under answer-derived scope but is not a deployed
+non-oracle authorization method.
+
+The separate calibration closes all 480 assignments: 443 workflows end
+normally, nine exhaust steps, 25 have parse failures, two have runner
+failures, and one has a provider/stop failure. On AgentDojo, no research
+Guard yields 3/30 security events and 17/30 benign-tool completions. Policy
+and full modules each yield 0/30 and 2/30. The paired completion difference
+is −50.00 points (95% CI −66.83 to −26.80; Holm p=0.0008), whereas the
+security difference is −10.00 points (−25.62 to +3.10; Holm p=0.7500).
+The utility cost is observable; a security improvement is not established.
+The no-research-Guard, policy, and full M3-v2 security cells are all zero,
+with benign completions of 16/30, 17/30, and 16/30. Full modules do not show
+an independent end-to-end advantage in these conditions.
+
+Configured VIGIL has four AgentDojo attack positives among 28 known outcomes
+and two unknown attack outcomes. All 30 assignments remain in ITT, so the
+observed positive count gives a 4/30 lower bound and a 6/30 conservative
+upper bound, not a claim that the unknown outcomes were safe. Two additional
+AgentDojo benign outcomes are unknown. Its disabled model secondary
+verification and larger call budget bound this configuration comparison.
+Across all 480 rows, two field-projection receipts and four structured
+safety receipts are absent; missing receipts are not fabricated afterward.
+
+The public-event diagnosis reports 26/30 AgentDojo compiled benign tasks
+with a first missing-tool-permission block in each module condition. This
+locates permission insufficiency but does not prove every missing permission
+is an implementation error. The original 900 rows have no recorded length
+truncation; parse failures cannot uniformly be attributed to the 512-token
+limit. Two rows record task completion before a subsequent operational
+failure, and both observations are retained.
+
+The 16 synthetic controls all reach a workflow terminal. Full modules deny
+private restricted flows and ask when classification is missing; the tested
+public and archival flows complete. Policy-only permits the restricted
+private/missing-classification simulated flow. Legitimate completion and a
+security violation can coexist in these controls. Their limited scenarios
+and two DeepSeek services do not establish general provenance effectiveness
+or independent-provider replication.
+
+Task total latency is available for 476/480 calibration assignments, with
+four missing and no invalid values. AgentDojo benign-task median/p95
+durations are 5.083/11.575 seconds without the research Guard,
+1.209/3.029 with policy, 1.279/3.003 with full modules, and 8.145/20.291
+for configured VIGIL, whose known-duration denominator is 28/30. Early
+blocking, model calls, constraint generation, and task-path differences
+preclude interpreting this ordering as a Guard computation speedup. The
+latency-only correction does not alter the raw records or prior security
+and completion inference.
+
+### 4.16 Remaining evidence boundary
 
 Historical Public and incremental tables retain their recorded evaluator
 labels. In the old M3-v2 path, an action allowed by the Guard but rejected by
@@ -1352,23 +1507,30 @@ current record contract and are not reconstructed from unsafe-effect rate.
 
 ### 5.1 Existing evidence changes the research claim
 
-The completed medium and Public experiments do not support presenting the full
-configuration package as stronger than the policy package. In the 5,082-record
-DeepSeek V4 Pro Public matrix, the full package produced more unsafe effects
-(38/600 versus 13/600), while both packages completed 49/168 benign tool tasks.
-The 1,791-record V4 Flash matrix showed the same security direction: 24/400
-unsafe effects for the full package versus 12/400 for the policy package. The
-Flash utility difference was small (38/145 versus 35/145).
+Neither the historical programme nor the corrected studies establish that
+full modules are superior to policy-only authorization. Historical Public
+counts, including 38/600 versus 13/600 on Pro and 24/400 versus 12/400 on V4
+Flash, retain their recorded legacy endpoint definitions. They are not
+estimates recomputed under the corrected simulated-execution evaluator.
+Isolation rejection, conservative failure-inclusive labels, and native
+AgentDojo attack judgments must not be merged into an observed harmful-effect
+claim. Historical utility and package-direction observations remain visible
+without rewriting the original records.
 
-This is scientifically useful negative evidence, but it was originally
-package-level evidence. E1 resolves the prompt/runtime confounding by crossing
-the prompt profile with the module bundle in one execution window. Its module,
-prompt, and interaction estimates were all small, and none supplied evidence
-of a positive safety or utility contribution. The result identifies the prompt
-factor separately from the runtime bundle; it still cannot separate provenance,
-temporal/data-flow, monotonicity, and confirmation from one another. It shows
-that the evaluated bundle did not earn a clear advantage under these tasks,
-not that any individual mechanism is intrinsically ineffective.
+The corrected contemporaneous calibration instead exposes a specific utility
+cost: AgentDojo benign completion is 17/30 without the research Guard but 2/30
+with either policy or full modules. The paired interval excludes zero for
+the −50-point completion difference. Its 3/30 versus 0/30 security contrast
+does not establish a reduction, and M3-v2 has no unguarded security events.
+Low operation therefore cannot substitute for evidence of useful protection.
+The full-versus-policy observations do not isolate or validate individual
+provenance, temporal, data-flow, or confirmation mechanisms.
+
+The earlier factorial design separates prompt and module-bundle assignments,
+but implementation inputs, legacy outcome semantics, and sparse events still
+limit mechanism attribution. These constraints do not show that each module
+is intrinsically ineffective; they show that activation and condition labels
+alone cannot prove its contribution.
 
 ### 5.2 Authorization is part of the treatment
 
@@ -1380,45 +1542,43 @@ improve apparent utility by authorizing too much. An underspecified policy can
 make safe completion impossible, while conflicting constraints may increase
 denial, confirmation, or failure even when they prevent unsafe effects.
 
-The paired design makes these trade-offs observable. `auto_compiled` is the
-primary deployment-like regime because it is created from trusted user intent
-before untrusted context is processed. `exact_gold` is an oracle sensitivity
-condition, not a preferred policy source. The `broad`, `underspecified`, and
-`conflicting` cells are stress tests on a fixed nested sample. Their value lies
-in showing whether a headline security number is stable to plausible policy
-construction errors.
+The corrected design keeps the ordinary prompt fixed while varying compiled
+and exact-target authorization. The oracle supplies answer-derived target
+scope to the Guard; this assistance is deliberately distinct from
+non-oracle policy compilation. Model prompts do not receive raw answers,
+but that separation must not be advertised as absence of evaluator-derived
+information throughout the system.
 
-The DeepSeek paired experiment did not reveal an unsafe-effect advantage for
-`exact_gold`: three of four primary cells had 0/100 unsafe effects, while the
-remaining policy-package `auto_compiled` cell had 1/100. The meaningful movement
-was instead in utility and runtime burden. Moving from `auto_compiled` to
-`exact_gold` reduced pooled benign-tool completion by 21.67 points for the
-policy package and 15.00 points for the full package. The task-cluster bootstrap intervals excluded zero,
-although the corresponding McNemar comparisons did not remain below 0.05 after
-Holm correction.
+The historical oracle result cannot establish an inherent utility penalty.
+Full argument equality against partial target annotations rejected
+schema-compliant actions with necessary content fields. Its completion
+collapse, denial burden, and apparent benchmark reversal are retained as
+defective operationalization observations, not deployed authorization effects.
+The corrected target matcher retains schema, additional security-target,
+order, and execution-registration checks rather than granting arbitrary
+arguments by subset matching.
 
-The pooled direction is incomplete. AgentDojo completion increased by 13.33
-points for the policy package and 10.00 points for the full package, whereas
-M3-v2 completion fell by 56.67 and 40.00 points. Authorization semantics and
-benchmark task structure therefore interact strongly enough that a single
-pooled oracle-versus-compiled estimate should not be transported to either
-benchmark in isolation.
+In the 900 corrected assignments, AgentDojo exact-target policy/full complete
+13/30 and 11/30 benign tasks, compared with 2/30 for both compiled cells.
+M3-v2 exact-target cells complete 14/30 and 16/30, compared with 16/30 and
+17/30. M3-v2 differences remain uncertain; a point-estimate reversal is not
+a demonstrated benchmark property. The 490 zero-event attack assignments
+also lack an unguarded reference, limiting any effectiveness interpretation.
 
-The operational shift was substantial. Exact policies eliminated ASK in both
-packages but increased the share of records with DENY from 7.22% to 48.89% for
-the policy package and from 11.11% to 45.00% for the full package. Failure rose to roughly 24%
-and p95 latency to roughly 19.5 seconds in both exact cells. The broad,
-conflicting, and underspecified stress regimes likewise reduced completion by
-25–30 points on their nested benign-tool subset without changing the observed
-attack floor. These findings show that policy specification can move burden
-and utility even when a headline attack rate appears stable.
+Compiled scope can be insufficient without implying that all omitted actions
+are authorized. The current generic compiler omits an automatic rule when
+a required security target cannot be resolved from trusted inputs. First
+missing-tool-permission blocks in 26/30 AgentDojo benign cases in each module
+cell locate this limitation but do not establish which cases violate the
+compiler contract. A bounded trusted-intent review remains necessary before
+changing permissions. Broad, conflicting, and underspecified stress results
+likewise describe the tested transformations, not deployment prevalence.
 
-The pessimistic `unsafe_effect OR operational_failure` bound makes that point
-more explicit. Exact authorization increased this attack endpoint by 18 points
-for both packages overall, driven by +36-point changes on AgentDojo and no
-change on M3-v2. This does not convert failures into attacks; it demonstrates
-that a near-zero observed unsafe-effect rate can coexist with poor operational
-robustness.
+Operational failure and security remain separate. A failure-sensitive upper
+bound is useful when effects are unknown but cannot be reported as observed
+harmful execution. Two tasks completed before later operational failure in
+the corrected authorization study, illustrating why completion and failure
+must not be forced into mutually exclusive categories.
 
 ### 5.3 Provenance sensitivity exists at the decision layer
 
@@ -1494,17 +1654,18 @@ hardest-task-2,000 claim. The null point estimate does not establish zero tail
 risk because the interval remains wide and the cohort is selected conditional
 on surviving budget 200.
 
-### 5.6 Contemporaneous calibration restores an active control
+### 5.6 Historical calibration and corrected contemporaneous controls
 
 The near-zero E1 and E3 attack endpoints raise a calibration question: were the
 tested attacks inactive at the time of execution, or did defended conditions
 actually differ from an active control? E6 addresses this in a separately
 executed historically risk-enriched cohort, but it is not an independent sample
-validation: 47/60 tasks are also E3 anchors. No defense produced 17/60 unsafe
-effects, including events in both AgentDojo and M3-v2, while policy/normal
-produced 2/60 and full/safe produced 0/60. Attack activity was therefore
-observed within the selected contemporaneous block; the original multi-window
-activity gate was neither satisfied nor tested.
+validation: 47/60 tasks are also E3 anchors. No defense produced 17/60 legacy
+security-positive labels, including both benchmarks, while policy/normal
+produced 2/60 and full/safe 0/60. These labels retain the historical
+evaluator's interpretation; they are not reconstructed actual unauthorized
+effects. The original multi-window activity gate was neither satisfied nor
+tested.
 
 This calibration does not rescue a broad defense-superiority claim. The cohort
 was selected from historical control-positive cases, contains no benign tasks,
@@ -1514,6 +1675,13 @@ nor utility or temporal repeatability. Operational failures were also material:
 heterogeneous, moving in opposite directions across the two benchmarks. E6 is
 therefore best read as an active-control check plus a conditional comparison,
 not a general robustness ranking or an individual provenance-module ablation.
+
+The corrected 480-assignment calibration is a separate version and cohort
+slice, not a replay of this historical block. Its AgentDojo control has 3/30
+security events and its M3-v2 control has none. Changes in samples, runtime,
+evaluation, and service period prevent interpreting the historical versus
+corrected counts as a pure repair effect. The corrected benign control
+supplies utility evidence absent from the attack-only historical block.
 
 ### 5.7 Relation to recent provenance and authorization work
 
@@ -1638,86 +1806,63 @@ diagnostic subsets and cannot alter or broaden the DeepSeek findings.
 
 ## 6. Conclusion
 
-This study treats runtime authorization as an experimental variable rather
-than fixed infrastructure. Across the completed medium and Public studies, the
-full configuration package reduced unsafe effects relative to a structural
-baseline but did not improve on the policy package. The larger historical
-direction replicated across DeepSeek V4 Pro and V4 Flash: the full package
-produced more unsafe effects, while benign-tool utility was equal or only
-slightly different.
+This study evaluates authorization semantics rather than assuming that an
+enabled runtime module establishes effective protection. An implementation
+audit found that the historical oracle monitor required complete argument
+dictionary equality despite partial target annotations. Consequently, the
+historical completion collapse and benchmark reversal cannot establish an
+intrinsic cost of precise authorization. Those records remain historical
+observations; the corrected target-scoped experiment is reported separately.
 
-The prospectively frozen authorization experiment explains why security alone
-is an incomplete endpoint. Unsafe effects remained at or near zero in all four
-main cells. The pooled exact-minus-auto benign-tool differences were −21.67
-points for the policy package and −15.00 for the full package, but AgentDojo
-improved by 13.33/10.00 points while M3-v2 fell by 56.67/40.00. Under a
-pessimistic unsafe-or-operational-failure bound, both packages worsened by 18
-points overall, driven by +36-point changes on AgentDojo and no change on
-M3-v2. Exact authorization removed system ASK but moved 45.00–48.89% of records
-into at least one DENY, raised failures to approximately 24%, and increased
-p95 latency. Broad, conflicting, and underspecified regimes
-also reduced completion on the nested tool-task subset without changing the
-observed attack floor. Authorization construction can therefore materially
-alter the measured security–utility frontier even when an attack-only result
-looks stable.
+The 900-assignment corrected study holds the prompt ordinary across policy
+and full modules. AgentDojo exact-target completion is 13/30 and 11/30,
+compared with 2/30 in both compiled-policy conditions. M3-v2 exact-target
+completion is 14/30 and 16/30, compared with 16/30 and 17/30. The latter
+differences have intervals spanning zero, so the new study does not establish
+a benchmark-intrinsic reversal. The oracle supplies answer-derived scope to
+the Guard and is not a deployable authorization source. Its improved
+AgentDojo completion does not demonstrate non-oracle usability. All 490
+attack assignments have zero observed security events, but the absence of
+an unguarded control makes this study insufficient for effectiveness claims.
 
-The concurrent 2×2 experiment then separated prompt profile from the runtime
-module bundle. Across 400 attack assignments, the policy cells produced two
-unsafe effects and the full cells produced none; the module estimate was −1.00
-percentage point (95% bootstrap CI −3.00 to 0.00), while the prompt and
-interaction estimates were zero. Benign-tool module and prompt effects were
-both −3.33 points with intervals including zero. The design resolves the
-prompt/module confounding but remains floor-limited and does not isolate the
-individual provenance, data-flow, monotonicity, or confirmation components.
+The separate 480-assignment calibration provides a contemporaneous ordinary-
+prompt control. AgentDojo benign-tool completion falls from 17/30 without the
+research Guard to 2/30 with either policy or full modules. The paired decrease
+is 50 percentage points, with a 95% interval of 26.80 to 66.83 points. The
+security difference, 3/30 versus 0/30, has a paired risk-difference interval
+of −25.62 to +3.10 points and does not establish a reduction. M3-v2 controls
+already have no security events. These results identify a utility cost in
+the tested automatic authorization, not full-module superiority. Missing
+tool permissions are an observed cause category; they are not proof that
+every withheld permission should be granted.
 
-The source-authority counterfactual supplies the corresponding mechanism
-evidence. Full-Guard decisions changed under an untrusted source, whereas the
-policy-only distribution did not; 480 replay decisions comprised 0/240 false
-allows among unauthorized proposals and 30/240 false blocks among authorized
-proposals. Yet all 240 end-to-end runs executed no action, alongside
-substantial ASK and DENY burden. Mechanism-level provenance sensitivity is therefore
-not equivalent to usable end-to-end utility. The outcome-enriched challenge
-set likewise reproduced only 1/60 historical unsafe effects and incurred 55
-operational failures, while the Flash factorial replication had zero unsafe
-effects in every attack cell. Both results reinforce the need to report a
-failure-sensitive endpoint instead of treating non-operation as safety.
+Sixteen synthetic Pro and V4.1 Flash executions show bounded component
+behavior: full modules deny private data sent to a restricted target, request
+clarification when classification is absent, and permit the tested public
+and archival flows. These controls neither cover arbitrary information
+transformations nor establish protection on natural tasks. The earlier
+source-authority replay likewise remains distinct from its end-to-end runs
+and from permission-only confirmation diagnostics.
 
-The adaptive panel supplies a related measurement warning. First unsafe
-effects were observed for 4/40 tasks by query 50 and 18/40 by query 200. A
-single low attack budget would have missed most successes found by the larger
-budget. Among the 12 prespecified B200 survivors, 0/12 produced a new first
-unsafe effect by query 500 (Wilson upper limit 24.25%). This conditional result
-cannot be merged into a full B500 curve or used to establish saturation or zero
-tail risk.
+Evaluation must retain proposals, Guard decisions, boundary rejection,
+simulated execution, task completion, operational failure, and unknown
+outcomes as separate observations. AgentDojo native attack judgments and
+M3-v2 simulated unauthorized effects are not interchangeable. The calibration
+has two missing projection receipts and four missing structured safety
+receipts; these gaps are not retrospectively filled. Runtime total latency
+is available for 476/480 assignments, but early termination and unequal
+call paths prevent interpreting shorter latency as a Guard computation gain.
 
-A separately executed single-block calibration observed attack activity in a
-historically risk-enriched cohort: no defense produced 17/60 unsafe effects
-across both benchmarks, compared with 2/60 under policy/normal and 0/60 under
-full/safe. Because 47/60 tasks also anchored E3, this is not independent-sample
-replication. These conditional contrasts remain bounded by non-negligible
-operational failure, outcome-enriched sampling, the absence of benign tasks,
-and a single execution block. They do not satisfy the original multi-window
-activity gate or estimate deployment prevalence, utility, temporal
-repeatability, or an individual provenance-module effect.
-
-The follow-up permission study further separates policy scope, confirmation,
-and effect commitment. Across 96 model proposals and 384 paired controller
-cells, bounded enumeration permitted an already-authorized text alternative
-that a deliberately overconstrained exact control rejected. Neither module
-outperformed the other. These are execution permits without backend effects,
-not additional task-completion or safety evidence; the distinction matters
-when interpreting both confirmation burden and apparent non-operation.
-
-These findings support four practical requirements for tool-agent security
-evaluation: keep evaluator-only fields outside online Guard state; manipulate
-prompt and runtime factors separately; pair deterministic source-authority
-replay with end-to-end execution; and report utility, ASK/DENY incidence,
-failures, latency, and attack budget alongside unsafe effects. The conclusions
-remain limited to the tested policies, benchmarks, runtime implementation,
-DeepSeek models, and budget range. Both the earlier Gemini authorization sample
-and the separate E6 Gemini prefix closed below their paired-coverage gates; all
-Gemini effects are not estimable and cannot erase or broaden the completed
-DeepSeek findings.
+Historical Public, factorial, calibration, and adaptive observations remain
+bounded by their original labels and configurations. In particular, the
+12-task B200-survivor tail is not a complete B500 panel or evidence of
+saturation. Cohort overlap, one execution period, an explicitly adapted
+VIGIL configuration, sparse events, and deferred Gemini constrain external
+validity. Independent-model and dynamic-environment model studies remain
+unqualified rather than completed results. The defensible contribution is
+the corrected operationalization and empirical account of authorization
+burden, together with transparent limits on what runtime defense evidence
+can establish.
 
 ## Figures
 

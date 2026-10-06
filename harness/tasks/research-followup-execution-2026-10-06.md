@@ -1,5 +1,22 @@
 # 综合后续研究实施
 
+## 2026-10-06 当前稿件科学修订切片
+
+持续目标继续实施，前一目标轮的延迟修复是实际进展。最新v3规划已交付；本切片按既有论文同步授权修改英文abstract/methods/results/discussion/conclusion源，先纠正旧exact和旧安全端点强解释，并加入900/16/480及延迟说明。保留原始结果，不API、不统计重算、不修改授权、不Full Harness。
+
+允许本切片修改上述五份源、必要的文稿内容定向测试和既有Harness。先核对原段落及已有结果→精确apply_patch修订→内存文稿生成/定向pytest/Ruff及格式检查。英文生成稿、中文、图表主次重排和当前PDF如未完成，须明确保持待办，不把局部文字修正称为完整论文同步。
+
+使用学术研究技能做忠实修订；用户禁止额外工程包装，故使用普通源码补丁和Git差异，不新增ARS哈希/锚点/签名/Revision Bundle，也不声称通过那些契约。
+
+### 本切片实际结果
+
+- 英文五份源已修订：撤回旧exact崩溃/固有反转与旧E6强效果叙事，加入新版900授权、16合成、480同期、缺失收据和延迟边界。历史原raw/统计不改，oracle派生权限和模型原始答案隔离明确区分。
+- `F:\robot\Anaconda3\python.exe -X utf8 -B -m pytest tests/unit/test_build_lean_paper_manuscript.py -q`：15passed；`-m ruff check tests/unit/test_build_lean_paper_manuscript.py`：通过。新增内容负例约束旧强结论不回流、未知VIGIL边界和模型/模块贡献限制。
+- `F:\robot\Anaconda3\python.exe -X utf8 -B -m scripts.build_lean_paper_manuscript`：exit0，实际更新manuscript_deepseek_v1.md，6主节；生成器全文件计数18117词（含表/引用等），不是已完成的目标正文篇幅验收。
+- 中文仍旧版本，主表/主图仍以前期研究为主，Introduction与整体章节主次尚须同步整理；没有本轮PDF编译/版式验收。不要将局部源修订及生成成功解释为投稿就绪。
+- 无API、授权行为修改、历史统计重算、Full Harness、服务启动或成功实验重跑。60任务受信意图核对仍待，可选180/108仍未合格。
+- 接下来对本切片及新计划做范围化Git提交推送；保留原16行current-task与其他用户dirty，不纳入internal/模板资产/第三方改动。
+
 日期：2026-10-06。功能F-PAPER-002。状态：in_progress。
 
 ## 授权与范围
@@ -75,3 +92,5 @@ VIGIL适配使用既有固定源码bridge（单次约束生成、禁止静默fal
 实际验证：初始真实对象负例1failed/5deselected，随后完整受影响统计测试16passed in0.62s，Ruff passed。`python -X utf8 -B -m experiments.paper_v2.research_followup_analysis_v1 --refresh-latency-only`只运行一次，exit0；480原记录、476可用/4缺失/0非法、16分层cell。`git diff --exit-code`针对raw_records.jsonl/analysis.json/tables/cells.csv为0；没有重新模型请求或原推断。派生表与普通说明独立，根报告目录入口更新。论文同步仍待，不能据此结项。
 
 本次有限源码查找确认generic-v2会删除必填目标未解析的工具规则（policy_compiler_corrected_v2.py），说明“词法选中后因范围未解而不允许”可解释某些缺许可，但未对60个受信任务完成个案核对，不能直接认定新缺陷或放宽全部参数。
+
+Git修复节点：a3ed482262b87d0187e7d094d157c3eb10135305，15文件；已推送origin/codex/claude-review-repairs，远端SHA与本地一致。最后追加writer不覆盖原文件的1项测试再通过（属于同16项，不相加），Ruff/两源内存编译/JSON/16行延迟计数及暂存diff检查通过。原current-task16行保留未提交，其他dirty未打包；该节点不含论文科学同步。
