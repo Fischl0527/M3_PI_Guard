@@ -3,6 +3,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+import pytest
+
 from scripts import build_jisa_latex as builder
 
 
@@ -20,6 +22,23 @@ FIGURES = (
     REPO_ROOT
     / "outputs" / "experiments" / "incremental_empirical_v1" / "figures"
 )
+
+
+def test_semantic_placement_survives_number_changes_without_dropping_text() -> None:
+    original = "### 4.9 Evidence\n\nkept 900\n\n### 4.10 Legacy\n\nkept 480"
+    moved = original.replace("4.9 Evidence", "4.1 Evidence")
+    for markdown in (original, moved):
+        result = builder._inject_after_subsections(markdown, {"Evidence": ("table_01",)})
+        assert result.count("@@ARTIFACT:table_01@@") == 1
+        assert result.index("kept 900") < result.index("@@ARTIFACT:table_01@@")
+        assert result.index("@@ARTIFACT:table_01@@") < result.index("### 4.10 Legacy")
+        assert result.replace("\n\n@@ARTIFACT:table_01@@\n", "") == markdown
+
+
+def test_semantic_placement_rejects_missing_and_duplicate_titles() -> None:
+    for markdown in ("### 4.1 Other", "### 4.1 Evidence\nx\n### 4.2 Evidence\ny"):
+        with pytest.raises(builder.LatexBuildError, match="exactly once"):
+            builder._inject_after_subsections(markdown, {"Evidence": ("table_01",)})
 
 
 def _build(tmp_path: Path) -> builder.BuildPaths:
@@ -118,7 +137,7 @@ def test_preserves_citations_figures_and_scientific_boundary_text(tmp_path: Path
     for compound in (
         "verify-before-commit",
         "outcome-enriched",
-        "oracle-sensitivity",
+        "target-scoped",
         "execution-plan",
         "full-package",
     ):

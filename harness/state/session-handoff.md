@@ -1,12 +1,21 @@
 # 会话移交
 
+## 2026-10-06 — 当前引言及中文核心完成，接续主表图
+
+- 当前任务research-followup-execution-2026-10-06；引言三个当前RQ和历史六问题分开，900/480/16为当前主证据，旧exact/旧端点强解释撤回。Methods补齐当前RQ及native/simulated端点区别。
+- 生成器只重排唯一corrected Results至4.1，不丢旧词项；中文核心摘要/引言/方法/当前结果/讨论/结论已同步，旧表图明确待办。18pytest、Ruff通过，英文生成exit0，6主节/17904全文件词数（含表引用）。
+- 下一步主表主图聚焦现有900/480/16，旧表图转有标注补充；读取既有JSON/CSV，不能重跑分析器或模型。随后当前LaTeX/PDF定向构建及版式检查，作者空白、Times New Roman、A4、居中页码/导航保持。
+- 60任务受信意图核对仍待；本地启动拒绝不能绕过，AgentDyn评分及叶子操作未合格，不默认运行360/180/108。F-PAPER-002 in_progress/目标active；保留current-task原16行及其他用户dirty，不将局部稿件同步记为投稿完成。
+- 本轮不API/统计重算/授权修改/Full Harness或PDF构建。确切命令、文件及Git范围见现有任务记录，内部trace不提交。
+- 相邻build_jisa_latex数字锚点已修为唯一语义标题定位；临时生成测试合并24passed/Ruff通过，不代表当前模板/PDF已更新。后续不要恢复硬编码4.x锚点。
+
 ## 2026-10-06 — 英文源修订已落盘，下一切片继续整体同步
 
 - 当前任务research-followup-execution-2026-10-06；英文abstract/methods/results/discussion/conclusion和生成主稿已更新900/16/480，旧exact/旧安全端点强解释在修改段落撤回。原raw和推断未重算。
 - 定向文稿15passed、Ruff通过；英文生成exit0，6主节/全文件18117词，包括表与引用，不是最终正文篇幅。没有当前PDF构建/视觉验收。
 - 下一步：先修Introduction和主表/主图/章节主次，避免旧结果仍占主位；中文按同一口径逐节同步，然后当前LaTeX/PDF与版式检查。作者空白，字体/边距/页码/导航保留。不要恢复Word、旧模型运行或统计重算。
 - 60任务受信意图核对仍待；本地启动拒绝不绕过，AgentDyn3评分与叶子监控仍未合格，不启动180/108或默认360。全目标仍active/F-PAPER-002 in_progress。
-- 此切片及v3计划范围Git交付待填实际结果；原16行current-task与其余用户dirty必须继续保留。
+- 此切片及v3计划17文件提交6eefc97e6da1d366de678b4d8f4dd356a82892b1已推送origin/codex/claude-review-repairs，ls-remote精确一致；原16行current-task与其余用户dirty保留。此推送后回执未再循环提交。
 
 ## 2026-10-06 — 计划v3交付后继续持续目标
 

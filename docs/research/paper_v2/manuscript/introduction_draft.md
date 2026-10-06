@@ -1,6 +1,6 @@
 # Introduction — empirical authorization study draft
 
-Status: `deepseek_authorization_results_complete_gemini_diagnostic_closed`
+Status: `corrected_v2_narrative_updated_tables_layout_pending`
 
 ## Motivation
 
@@ -46,122 +46,101 @@ we frame this as authorization uncertainty rather than a domain-wide
 answer-key defect.
 
 Third, low attack success can be purchased by blocking useful work. A runtime
-defense must therefore report executed unsafe effects, benign task completion,
-system confirmation-request incidence, operational failures, latency, tokens, and cost under a
-common intention-to-treat denominator. Static attacks are also insufficient
+defense must therefore report benchmark-specific security judgments, observed
+simulated effects, benign completion, confirmation requests, failures, and
+runtime burden under an explicit intention-to-treat denominator. Unknown
+outcomes are not safe zeros, and task completion can precede a subsequent
+failure. Static attacks are also insufficient
 for a robustness claim when an attacker can adapt to the public defense
 interface [@L27].
 
 ## Research questions
 
-The study asks six questions.
+The corrected evaluation addresses three questions. The earlier six-question
+factorial, source-swap, replication, and adaptive program is retained as
+historical evidence, not retrospectively relabelled as corrected execution.
 
-1. **RQ1: Authorization regime.** How do `exact_gold`, `auto_compiled`,
-   `broad`, `underspecified`, and `conflicting` authorization regimes change
-   unsafe effect, benign task completion, and `ASK/DENY` burden?
-2. **RQ2: Prompt and runtime components.** What are the independent main
-   effects of the prompt profile and the runtime module bundle, and do they
-   interact?
-3. **RQ3: Conditional robustness and model replication.** Are the factorial
-   effect directions consistent in a representative sample, an outcome-
-   enriched challenge set, and a same-provider Flash replication?
-4. **RQ4: Source authority.** When proposition, value, position, and policy
-   are held fixed, how does moving a critical argument between trusted and
-   untrusted origins change model--Guard behavior?
-5. **RQ5: Adaptive tail risk.** Among attacks with no unsafe effect by budget
-   200, how often does a first unsafe effect appear by budget 500?
-6. **RQ6: Contemporaneous attack activity.** In a historically risk-enriched
-   cohort, do control attacks remain active in the current execution block, and
-   how do six runtime conditions compare under the same provider window?
+1. **RQ1: Authorization semantics.** How does target-scoped oracle
+   authorization, rather than complete-argument equality, change completion
+   relative to authorization compiled from trusted intent?
+2. **RQ2: Security, utility, and runtime burden.** Under ordinary prompts,
+   what security judgments, benign completion, unknown outcomes, and
+   confirmation/blocking burden occur with no research Guard, policy modules,
+   full modules, and the explicitly configured structural comparator?
+3. **RQ3: Component evidence and applicability.** What do controlled
+   sensitive-data and missing-classification cases establish about component
+   behavior, and what remains unsupported on natural tasks, other models,
+   dynamic environments, and adaptive attacks?
 
 ## Study design
 
-M3 uses a three-state runtime decision (`ALLOW`, `ASK`, `DENY`), a projection
-that excludes evaluator-only fields from online state, permission monotonicity
-for automatic paths, parameter-source evidence, and independent confirmation
-for privilege expansion. The completed authorization experiment crosses a
-policy package and a full package with non-oracle `auto_compiled` and oracle-
-sensitivity `exact_gold`; a nested subset adds three authorization stress
-regimes. The incremental factorial experiment then holds `auto_compiled` fixed
-and crosses prompt profile (`normal`/`safe`) with runtime modules
-(`policy`/`full`). A source-authority counterfactual holds text, parameter value,
-relative position, and policy fixed while changing only provenance authority.
-Separate challenge, Flash-replication, adaptive-tail, and single-block activity
-calibration studies test conditional robustness. Timeouts,
-parsing failures, refusals, maximum-step outcomes, and provider failures remain
-in the intention-to-treat denominator.
+M3 produces three runtime decisions: `ALLOW` permits a proposed action,
+`ASK` waits for independent confirmation, and `DENY` blocks it. The automatic
+path may restrict, but not expand, privileges. Runtime projections keep raw
+answers and evaluator labels outside the model input. An exact-target oracle
+nevertheless supplies answer-derived authorization to the Guard; excluding
+raw answers does not make that condition non-oracle.
 
-The authorization-regime sample contains 180 paired cases and 900 DeepSeek V4
-Pro work items. The incremental design adds 720 Pro factorial runs, 240 Pro
-source-authority runs plus 480 deterministic Guard decisions, 240 Pro challenge
-runs, 360 Flash replication runs, and a conditional adaptive tail of at most
-3,600 additional queries. A final calibration adds 360 DeepSeek work items over
-60 historically control-positive attacks and six concurrent conditions. The
-design separately reuses the completed 480-record medium study,
-5,082-record Pro Public matrix, 1,791-record Flash Public matrix, and the
-40-task adaptive evidence at budgets 50 and 200. Two bounded Gemini attempts
-remain diagnostic only. Provider tools and real external effects are prohibited
-throughout.
+The 900-assignment corrected authorization study uses 180 fixed cases and
+ordinary prompts in both policy and full conditions. Four primary conditions
+cross the module bundle with `auto_compiled` and `exact_target_v2`; a nested
+subset adds broad, underspecified, and conflicting policies. A separate
+480-assignment contemporaneous calibration uses 120 fixed cases, split evenly
+between benchmarks and between attacks and benign tool tasks. It compares
+no research Guard, policy, full, and a source-pinned VIGIL adaptation with
+model-based secondary verification disabled. Sixteen synthetic Pro and
+V4.1 Flash executions provide bounded positive and negative flow controls.
+Case overlap and repeated condition assignments preclude interpreting their
+sum as an independent sample count.
+
+Earlier Public, factorial, source-authority, confirmation, and adaptive
+experiments retain their original records and endpoint definitions. The
+historical factorial crosses prompt profile (`normal`/`safe`) with runtime
+modules (`policy`/`full`); its source swap varies provenance authority while
+holding the proposition and policy fixed. Those studies contextualize the
+current evaluation but do not substitute for corrected execution evidence.
+Gemini and optional independent-model or native dynamic-environment studies
+do not contribute a qualified effect estimate. Provider-managed tools and
+real external effects remain disabled throughout.
 
 ## Empirical motivation and study framing
 
-The completed medium falsification study did not support full-package
-superiority. The full package reduced unsafe effects from 8/36 under the
-structural condition to 0/36, but the policy package also produced 0/36.
-Benign tool completion fell from 12/24 under the structural condition to 6/24
-under the full package, violating the preregistered
-non-inferiority margin. These observations motivate an empirical study of
-authorization uncertainty and the security–utility frontier rather than a
-claim that the full package is a new or state-of-the-art defense.
+An implementation audit found that the historical oracle monitor compared
+complete action arguments with partial security-target annotations. Its
+completion collapse is therefore not evidence of an intrinsic cost of
+precise authorization or a benchmark-intrinsic reversal. Corrected target
+matching changes that interpretation without overwriting old records.
 
-The larger Public primary matrix reinforced this
-finding. Across 600 attacks, the full package reduced unsafe effects from 133
-under the structural condition to 38, but the policy package produced only 13. Across 168
-benign tool tasks, both M3 variants completed 49 versus 103 under the
-structural condition. The full package therefore shows neither incremental
-security nor utility value beyond the policy package in the primary-model evidence.
-The 1.4955% retained diagnostic fraction also exceeds the predefined 1%
-threshold for a clean configuration-quality claim.
+Current results reveal a more defensible problem: restrictive automatic
+authorization impedes benign AgentDojo work, while the sparse attack
+endpoint cannot establish security improvement. Exact-target assistance
+improves some completion but relies on an offline oracle. Full modules show
+no identifiable end-to-end advantage over policy modules in the tested
+conditions. Sensitive-data controls demonstrate bounded component behavior,
+not general natural-task efficacy. These studies do not establish full-module
+superiority, and their negative or uncertain outcomes are retained.
 
-The completed 40-task adaptive panel observed first unsafe effect for 4/40
-tasks by budget 50 and 18/40 by budget 200. These points show substantial
-budget sensitivity but do not establish saturation. The incremental tail
-extended only a prespecified subset of 12 B200 survivors toward 500. No new
-first success was observed (0/12; Wilson 95% upper limit 24.25%); this is a
-conditional analysis rather than a complete B500 curve or saturation result.
-
-The prospectively frozen authorization-regime experiment is now complete for
-DeepSeek. Unsafe effects remained at or near zero across all four main cells,
-but exact authorization produced opposite benign-tool directions across the
-two benchmarks and increased failure-sensitive attack risk on AgentDojo. It
-also replaced ASK with more frequent DENY and increased latency. The full
-package showed no stable advantage over the policy package. These unfavorable
-results are retained. A separate risk-enriched single-block calibration found
-17/60 unsafe effects under no defense, confirming contemporaneous activity in
-the selected cohort; full/safe produced 0/60, but failures and the enriched
-sampling frame preclude deployment-prevalence, utility, or temporal-repeatability
-claims. Gemini free-tier execution remained too incomplete in both attempted
-studies for a cross-provider effect estimate.
+Historical adaptive observations still illustrate budget sensitivity, but
+their success labels are not retrospectively verified unauthorized effects.
+Extending 12 selected budget-200 survivors is not a complete budget-500 panel
+or evidence of saturation. Likewise, the historical risk-enriched calibration
+is a single execution block rather than temporal-repeatability evidence.
 
 ## Contributions
 
-The current evidence supports six bounded contributions:
+The defensible contributions are:
 
-1. an evaluator/online-state contract that makes authorization visibility
-   explicit and prevents evaluator-only fields from entering runtime state;
-2. a contemporaneous factorial evaluation that identifies prompt-profile and
-   runtime-module-bundle effects separately;
-3. a controlled source-authority counterfactual that separates deterministic
-   Guard decisions from end-to-end action and utility outcomes;
-4. an intention-to-treat experiment that records official model identity,
-   request commitments, isolated effects, and terminal diagnostics while
-   retrying only response-less failed rows; and
-5. an empirical account of authorization regime, confirmation/blocking burden,
-   outcome-enriched instability, same-provider replication, and conditional
-   defense-aware attack budget; and
-6. a contemporaneous activity calibration that distinguishes an active control
-   attack set from low event rates under defended conditions without treating a
-   historical risk-enriched sample as deployment prevalence.
+1. corrected operationalization of target authorization, with an explicit
+   separation between raw evaluator information and oracle-derived scope;
+2. a paired empirical account of authorization burden, benign completion,
+   sparse security events, failures, and unknowns under current runtime
+   configurations;
+3. bounded component controls that separate sensitive-data restrictions
+   from end-to-end efficacy, complemented by clearly labelled historical
+   factorial, provenance, and adaptive diagnostics; and
+4. version-aware reporting that preserves proposals, decisions, isolation
+   rejection, simulated execution, completion, and failure as different
+   observations rather than deriving protection from a module-enable flag.
 
 These contributions do not assert first, only, or SOTA status. Preprints are
 used to define the contemporary novelty boundary, not as peer-reviewed

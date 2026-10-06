@@ -1,5 +1,12 @@
 # Task History
 
+## 2026-10-06 — Current evidence leads the narrative; Chinese core synchronized
+
+- Revised Introduction to three corrected-evaluation RQs, retaining the historical six-question programme and endpoint caveats. Clarified benchmark-specific security semantics in Methods.
+- Results generator moves the unique corrected900/480/16 section to4.1 without losing or duplicating words. Chinese core narrative mirrors the corrected counts, oracle scope, unknowns, missing receipts, utility cost and uncertain security difference; old tables/figures remain explicitly pending.
+- 18 focused manuscript tests, Ruff and actual English Markdown build pass;6sections/17904 whole-file words, not body-length acceptance. No API, statistics rerun, raw changes, authorization change, Full Harness or current PDF build. Overall status remainsin_progress.
+- Adjacent LaTeX generation failed on old numeric placement anchors; repaired unique semantic-title placement and added missing/duplicate/renumbering tests. Combined24 focused tests pass; generated only in temporary test directories, not the current PDF.
+
 ## 2026-10-06 — Corrected English claim surface updated
 
 - Updated five English section sources with corrected900/16/480 results, oracle and legacy endpoint distinctions, observed utility cost, sparse-event uncertainty, missing receipts and latency scope. Historical raw/inference unchanged.

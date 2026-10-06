@@ -1,5 +1,22 @@
 # 综合后续研究实施
 
+## 2026-10-06 当前切片：引言、结果层级与中文科学口径
+
+沿用已批准的必要稿件同步，不新建实验或规划。允许修改Introduction、中文对照、英文结果排列生成逻辑、对应定向测试、生成英文MD及既有Harness/总报告。先明确当前900/480/16与历史研究的层级，再同步核心摘要、研究问题、方法、结果、讨论和结论。旧数字保留为历史标签；旧表图仍待下一切片重排，不借本切片宣称最终双语/PDF完成。
+
+验收：英文Results以修正版研究开头且旧段落不丢失/不重复；引言不再将旧exact效用崩溃及旧E6当当前机制效果；中文核心数字、未知、oracle与端点边界与英文一致；定向pytest/Ruff/文稿生成通过。原raw/分析JSON与CSV不改、不API、不启动服务、不做统计重算、Full Harness或LaTeX编译。无关dirty保留，范围提交并推送。
+
+相邻生成冒烟发现`build_jisa_latex.py`将图表插入锚点硬编码为旧小节号，重排后4项测试失败。必要范围扩展仅修该生成器与其定向测试，改为唯一语义标题匹配；仍只在测试临时目录生成，不覆盖模板、不编译PDF。
+
+### 本切片已执行
+
+- Introduction改为三项当前RQ，保留历史六问题为研究演进；Methods补齐相同映射及基准安全定义。Results层级生成只移位current节，旧内容字项守恒、缺失/重复当前标题fail-closed。
+- 中文核心改为当前900/480/16叙事，历史章节显式标注；新增4.1及3.17，当前未知/478与476分母/oracle/完成后失败等与英文一致。旧8表5图尚待下一切片，不说最新PDF或完整版式验收完成。
+- `F:\robot\Anaconda3\python.exe -X utf8 -B -m pytest tests/unit/test_build_lean_paper_manuscript.py -q`：18passed/0.35s；`-m ruff check scripts/build_lean_paper_manuscript.py tests/unit/test_build_lean_paper_manuscript.py`：通过。
+- `-m scripts.build_lean_paper_manuscript`：exit0，6主节/17904全文件词数（含表/引用）。初始3失败确认旧口径与层级，后来断言措辞/换行问题已修；最终没有削弱端点、数字和内容保留约束。
+- 原raw与分析输出不变，不API/统计重算/权限修改/Full Harness/当前LaTeX编译。整体目标保持active，主表图与最新PDF、60任务受信意图及可选研究仍未闭合。
+- 相邻生成器首次4失败暴露旧4.8锚点，改用既有`_strip_number`解析唯一语义标题，未改表图/模板。`-m pytest tests/unit/test_build_lean_paper_manuscript.py tests/unit/test_build_jisa_latex.py -q`：24passed/0.76s；四相关源码/测试的Ruff通过。只在测试tmp生成，未编译或覆盖主LaTeX/PDF。
+
 ## 2026-10-06 当前稿件科学修订切片
 
 持续目标继续实施，前一目标轮的延迟修复是实际进展。最新v3规划已交付；本切片按既有论文同步授权修改英文abstract/methods/results/discussion/conclusion源，先纠正旧exact和旧安全端点强解释，并加入900/16/480及延迟说明。保留原始结果，不API、不统计重算、不修改授权、不Full Harness。
@@ -15,7 +32,7 @@
 - `F:\robot\Anaconda3\python.exe -X utf8 -B -m scripts.build_lean_paper_manuscript`：exit0，实际更新manuscript_deepseek_v1.md，6主节；生成器全文件计数18117词（含表/引用等），不是已完成的目标正文篇幅验收。
 - 中文仍旧版本，主表/主图仍以前期研究为主，Introduction与整体章节主次尚须同步整理；没有本轮PDF编译/版式验收。不要将局部源修订及生成成功解释为投稿就绪。
 - 无API、授权行为修改、历史统计重算、Full Harness、服务启动或成功实验重跑。60任务受信意图核对仍待，可选180/108仍未合格。
-- 接下来对本切片及新计划做范围化Git提交推送；保留原16行current-task与其他用户dirty，不纳入internal/模板资产/第三方改动。
+- 本切片及新计划17文件提交6eefc97e6da1d366de678b4d8f4dd356a82892b1已推送origin/codex/claude-review-repairs，远端精确匹配；原16行current-task与其他用户dirty保留，未纳入internal/模板资产/第三方改动。此行是推送后回执，不再循环提交。
 
 日期：2026-10-06。功能F-PAPER-002。状态：in_progress。
 

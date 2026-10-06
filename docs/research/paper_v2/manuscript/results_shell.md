@@ -19,7 +19,7 @@ The medium, Public, original authorization, E1--E6, and confirmation results
 below retain their historical implementations and recorded endpoint labels.
 In particular, legacy safety labels or failure-inclusive endpoints are not
 retrospectively relabeled as observed unauthorized execution. The corrected
-authorization and contemporaneous results are reported separately below;
+authorization and contemporaneous results lead the generated Results section;
 the historical oracle completion collapse is an implementation-defect
 observation, not evidence of an intrinsic precision–utility trade-off.
 

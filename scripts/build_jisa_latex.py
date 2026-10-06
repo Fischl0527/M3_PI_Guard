@@ -41,25 +41,25 @@ SECTION_FILES = {
 
 PLACEMENTS = {
     "3. Methods": {
-        "3.8 Concurrent prompt-by-module factorial": ("table_01",),
-        "3.9 Source-authority counterfactual": ("figure_01",),
+        "Concurrent prompt-by-module factorial": ("table_01",),
+        "Source-authority counterfactual": ("figure_01",),
     },
     "4. Results": {
-        "4.8 Concurrent prompt-by-module factorial experiment": (
+        "Concurrent prompt-by-module factorial experiment": (
             "figure_02",
             "table_02",
         ),
-        "4.9 Source-authority counterfactual": ("figure_03", "table_03"),
-        "4.10 Outcome-enriched challenge and Flash replication": (
+        "Source-authority counterfactual": ("figure_03", "table_03"),
+        "Outcome-enriched challenge and Flash replication": (
             "figure_04",
             "table_04",
         ),
-        "4.12 Defense-aware adaptive evidence and conditional tail through budget 500": (
+        "Defense-aware adaptive evidence and conditional tail through budget 500": (
             "figure_05",
             "table_05",
         ),
-        "4.13 Authorization diagnostics and execution permits": ("table_07",),
-        "4.14 Corrected development study": ("table_08",),
+        "Authorization diagnostics and execution permits": ("table_07",),
+        "Corrected development study": ("table_08",),
     },
 }
 
@@ -245,14 +245,21 @@ def _render_inline_table(lines: list[str]) -> str:
 
 
 def _inject_after_subsections(markdown: str, placements: dict[str, tuple[str, ...]]) -> str:
+    """Locate unique semantic titles independently of rendered section numbers."""
     lines = markdown.splitlines()
     inserts: list[tuple[int, tuple[str, ...]]] = []
     for heading, artifacts in placements.items():
-        marker = f"### {heading}"
-        try:
-            start = lines.index(marker)
-        except ValueError as exc:
-            raise LatexBuildError(f"Placement heading is missing: {heading}") from exc
+        matches = [
+            index
+            for index, line in enumerate(lines)
+            if line.startswith("### ")
+            and _strip_number(line[4:]) == heading
+        ]
+        if len(matches) != 1:
+            raise LatexBuildError(
+                f"Placement heading must occur exactly once: {heading} (found {len(matches)})"
+            )
+        start = matches[0]
         end = len(lines)
         for index in range(start + 1, len(lines)):
             if lines[index].startswith("### "):

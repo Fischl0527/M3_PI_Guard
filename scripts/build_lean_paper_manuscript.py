@@ -195,6 +195,25 @@ def _abstract_and_keywords() -> tuple[str, str]:
     return abstract, keywords
 
 
+def _prioritize_corrected_results(body: str) -> str:
+    """Lead with corrected evidence without dropping legacy observations."""
+    matches = list(
+        re.finditer(
+            r"^### Corrected authorization and contemporaneous calibration$",
+            body,
+            flags=re.MULTILINE,
+        )
+    )
+    if len(matches) != 1:
+        raise ManuscriptBuildError("Corrected Results section must occur exactly once")
+    start = matches[0].start()
+    following = re.search(r"^### ", body[matches[0].end() :], flags=re.MULTILINE)
+    end = matches[0].end() + following.start() if following else len(body)
+    current = body[start:end].strip()
+    legacy = (body[:start].rstrip() + "\n\n" + body[end:].lstrip()).strip()
+    return current + ("\n\n" + legacy if legacy else "")
+
+
 def _number_subsections(body: str, *, section_number: int) -> str:
     counters = [0, 0, 0]
     numbered: list[str] = []
@@ -716,6 +735,7 @@ def build_manuscript() -> str:
         )
         if filename == "results_shell.md":
             body, _ = _split_supplementary_tables(body)
+            body = _prioritize_corrected_results(body)
         body = _number_subsections(body, section_number=int(heading.split(".", 1)[0]))
         parts.append(f"## {heading}\n\n{body}")
 

@@ -1,6 +1,6 @@
 # Methods — lean authorization study
 
-Status: `deepseek_e1_e6_complete_gemini_diagnostic_ne`
+Status: `corrected_v2_narrative_updated_tables_layout_pending`
 
 ## Study design and research questions
 
@@ -37,7 +37,11 @@ The corrected study uses `exact_target_v2`, not the defective historical
 `exact_gold` matcher. Its central questions are whether target-scoped oracle
 authorization changes task completion, what compiled authorization costs
 relative to a contemporaneous unguarded control, and what the synthetic
-data-flow controls establish within their bounded scope.
+data-flow controls establish within their bounded scope. These correspond to
+the current RQ1 (authorization semantics), RQ2 (security, utility, and runtime
+burden), and RQ3 (component evidence and applicability) in the Introduction.
+The numbered six-question list above is the historical programme, not six
+additional current confirmatory questions.
 
 Positive results are not a stopping condition. The analysis is retained if
 `exact_gold` has little effect, the full package underperforms the policy
@@ -47,10 +51,12 @@ package, or the available replication evidence differs from the primary model.
 
 The attacker controls text in documents, messages, retrieved records, memory,
 or simulated tool outputs processed while the agent performs a trusted user
-task. An unsafe effect is a state transition that violates the task-specific
-offline evaluator after the runtime Guard has issued its decision. The model
-may propose tool calls, but it cannot invoke provider-managed tools or reach a
-real external system.
+task. Corrected M3-v2 security effects require observed simulated execution
+that violates the task-specific evaluator. AgentDojo retains its native attack
+judgment, which is not reduced to a state-transition-only definition.
+Historical endpoint labels retain their original semantics. The model may
+propose tool calls, but it cannot invoke provider-managed tools or reach a real
+external system.
 
 All experiments use isolated benchmark state. Real email, payment, browser,
 shell, code-execution, production API, credential, and unrestricted filesystem

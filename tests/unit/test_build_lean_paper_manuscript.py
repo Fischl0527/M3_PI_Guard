@@ -79,6 +79,57 @@ def test_abstract_stays_within_jisa_limit() -> None:
     assert 1 <= len([item for item in keywords.split(";") if item.strip()]) <= 7
 
 
+def test_current_results_precede_legacy_studies_without_loss() -> None:
+    manuscript = builder.build_manuscript()
+    results = manuscript.split("## 4. Results\n", 1)[1].split("## 5. Discussion", 1)[0]
+    assert results.lstrip().startswith(
+        "### 4.1 Corrected authorization and contemporaneous calibration"
+    )
+    assert results.count("795 workflows end normally") == 1
+    assert results.count("### 4.2 Medium falsification study") == 1
+    normalized = " ".join(results.split())
+    assert "historical implementations and recorded endpoint labels" in normalized
+    assert "Across the 384 paired confirmation cells" in normalized
+    source = builder._drop_wrapper(
+        builder._read("results_shell.md"), start_heading="## Medium falsification study"
+    )
+    cleaned, _ = builder._split_supplementary_tables(source)
+    assert sorted(cleaned.split()) == sorted(builder._prioritize_corrected_results(cleaned).split())
+
+
+def test_results_priority_rejects_missing_or_duplicate_current_section() -> None:
+    with pytest.raises(builder.ManuscriptBuildError, match="exactly once"):
+        builder._prioritize_corrected_results("### Legacy\n\nold")
+    with pytest.raises(builder.ManuscriptBuildError, match="exactly once"):
+        builder._prioritize_corrected_results(
+            "### Corrected authorization and contemporaneous calibration\n\nx\n"
+            "### Corrected authorization and contemporaneous calibration\n\ny"
+        )
+
+
+def test_introduction_and_chinese_distinguish_current_and_historical_evidence() -> None:
+    intro = " ".join(builder._read("introduction_draft.md").split())
+    assert "**RQ1: Authorization semantics.**" in intro
+    assert "**RQ2: Security, utility, and runtime burden.**" in intro
+    assert "**RQ3: Component evidence and applicability.**" in intro
+    assert "900-assignment corrected" in intro
+    assert "480-assignment contemporaneous" in intro
+    assert "model-based secondary verification disabled" in intro
+    assert "benchmark-intrinsic reversal" in intro
+    assert "These studies do not establish full-module superiority" in intro
+    assert "exact authorization produced opposite benign-tool directions" not in intro
+    chinese = builder._read("manuscript_zh_v1.md")
+    assert "修正版900条授权" in chinese
+    assert "490个攻击条件分配" in chinese
+    assert "17/30降至2/30" in chinese
+    assert "−25.62至+3.10" in chinese
+    assert "478/480" in chinese and "476/480" in chinese
+    assert "历史完整参数相等判定" in chinese
+    assert "原始答案不进入模型" in chinese
+    assert "私有数据" in chinese and "V4.1 Flash" in chinese
+    assert "中文旧表图尚待重排" in chinese
+
+
 def test_corrected_primary_sources_disclose_utility_cost_and_uncertainty() -> None:
     abstract, _ = builder._abstract_and_keywords()
     normalized = " ".join(abstract.split())
@@ -288,14 +339,15 @@ def test_incremental_revision_identifies_factors_and_keeps_claims_bounded() -> N
     assert "**RQ5: Adaptive tail risk.**" in manuscript
     assert "**RQ6: Contemporaneous attack activity.**" in manuscript
     assert "**RQ2: Module contribution.**" not in manuscript
-    assert "crosses prompt profile (`normal`/`safe`) with runtime modules" in manuscript
-    assert "changing only provenance authority" in manuscript
+    assert "crosses prompt profile (`normal`/`safe`) with runtime modules" in normalized
+    assert "its source swap varies provenance authority" in normalized
     assert "from 17/30 to 0/30" in manuscript
     assert "`unsafe_effect OR operational_failure`" in manuscript
     assert "robustness bound and is not reported as observed attack success" in manuscript
     assert "`ASK` is a runtime confirmation request" in manuscript
     assert "0/12" in manuscript and "24.25%" in manuscript
-    assert "17/60" in manuscript and "risk-enriched single-block" in manuscript
+    assert "17/60" in manuscript
+    assert "historically risk-enriched single execution block" in normalized
     assert "0/240 unauthorized proposals" in manuscript
     assert "30/240 authorized proposals" in manuscript
     assert "47/60 tasks were E3 anchors" in normalized
