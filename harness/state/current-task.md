@@ -1,5 +1,13 @@
 # 当前任务
 
+### 2026-10-06 Claude整改后新实验（本实验子阶段完成）
+
+- 最新用户授权实际实验；900行授权矩阵+16行修复后合成模型控制，先定向测试与正式前缀。Gemini暂缓，历史成功记录不重跑。
+- 任务harness/tasks/claude-revision-experiments-2026-10-06.md；输出outputs/experiments/claude_revision_v1。F-PAPER-002保持in_progress。
+- 新corrected_v2配置及normal提示控制；不做Full Harness、递归哈希包或论文改写。实际运行和失败按本任务更新，不把计划量冒充完成量。
+- 实际916/916终态，主矩阵795completed/60max_steps/45parse_failure；16合成completed。1796请求，1,712,733tokens，峰时估计CNY4.35603144；无重试或成功重跑。
+- 一次性分析/必要检查通过；报告outputs/experiments/claude_revision_v1/report.md。主攻击0/490不能支持防御领先；控制确认DENY/ASK及公开/归档完成。Gemini和本地240未执行；无活动实验进程，不自动启动新实验。
+
 ### 2026-10-06 Claude审核实现修复（本子阶段完成并推送）
 
 - 用户授权修复审核指出的实现问题；以已交付整改计划P0-A/B/C/D为本轮范围。

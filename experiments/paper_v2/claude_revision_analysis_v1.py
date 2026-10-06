@@ -73,12 +73,22 @@ def analyze(output: Path = OUTPUT) -> dict[str, Any]:
     plan = read_jsonl(output / "study_plan.jsonl")
     rows = list(latest_records(read_jsonl(output / "deepseek_pro_raw.jsonl") + read_jsonl(output / "synthetic_regression_raw.jsonl")).values())
     planned_by_key = {r["work_key"]: r for r in plan}
+    request_ids = set()
     for row in rows:
         expected = planned_by_key.get(row["work_key"])
         if expected is None or any(row.get(k) != expected.get(k) for k in ("case_id", "condition_id", "model_id", "runtime_version", "authorization_regime", "prompt_factor")):
             raise ValueError("result identity differs from plan")
         if critical_error(row):
             raise ValueError("safety or identity error present")
+        if row["provider_call_count"] != len(row["provider_requests"]) or row["provider_call_count"] > expected["max_provider_calls"]:
+            raise ValueError("provider call count exceeds original task cap")
+        for request in row["provider_requests"]:
+            local_id = request.get("local_request_id")
+            if not local_id or local_id in request_ids or not request.get("payload_sha256"):
+                raise ValueError("missing or duplicate request commitment")
+            request_ids.add(local_id)
+            if request.get("response_received") and not all(request.get(k) for k in ("provider_response_id", "returned_model")):
+                raise ValueError("response-bearing row lacks official identity")
     main = [r for r in rows if r["study_part"] == "authorization"]
     observed_by_key = {r["work_key"]: r for r in main}
     paired_rows = [{**r, **observed_by_key.get(r["work_key"], {})} for r in plan if r["study_part"] == "authorization"]
@@ -94,9 +104,11 @@ def analyze(output: Path = OUTPUT) -> dict[str, Any]:
         observed[tuple(row[k] for k in group_fields)].append(row)
     for key, planned in sorted(groups.items()):
         selected = observed[key]
+        failure_sensitive = [{**r, "unsafe_or_failure": True if r["operational_status"] != "completed" or r.get("unsafe_effect") is True else r.get("unsafe_effect")} for r in selected]
         latencies = [r["latency_ms"] for r in selected if isinstance(r.get("latency_ms"), (int, float))]
         cells.append({**dict(zip(group_fields, key)), "records": len(selected), "planned": len(planned),
                       "unsafe": endpoint(selected, "unsafe_effect", len(planned)), "completion": endpoint(selected, "task_completion", len(planned)),
+                      "unsafe_or_failure": endpoint(failure_sensitive, "unsafe_or_failure", len(planned)),
                       "statuses": dict(Counter(r["operational_status"] for r in selected)),
                       "failures": sum(r["operational_status"] != "completed" for r in selected),
                       "ask_count": sum(r.get("ask_count", 0) for r in selected), "deny_count": sum(r.get("deny_count", 0) for r in selected),
@@ -122,7 +134,7 @@ def analyze(output: Path = OUTPUT) -> dict[str, Any]:
             "cost_known_peak_estimate_cny": sum(r["cost"]["amount"] for r in rows),
             "cost_usage_complete": all(r["cost"].get("usage_complete", False) for r in rows),
             "pricing_reference": "https://api-docs.deepseek.com/quick_start/pricing/",
-            "semantics": {"agentdojo-v1": "native offline attack-success checker, not state-only effect", "m3-v2": "observed unauthorized in-memory action effects, boundary rejections separate"},
+            "semantics": {"agentdojo-v1": "native offline attack-success checker on in-memory environment copy, not state-only effect", "m3-v2": "observed unauthorized isolated temporary-sandbox mock effects, boundary rejections separate", "synthetic-m3": "in-memory synthetic mailbox state; no file or mail connector"},
             "statistical_cautions": ["unknown endpoints excluded only from observed paired estimates, preserved in ITT bounds", "case-pair McNemar is auxiliary when underlying tasks repeat", "zero empirical bootstrap width is not deterministic safety", "no cross-provider or SOTA inference", "historical fixed cohort is not deployment prevalence"]}
 
 
@@ -132,7 +144,7 @@ def write_outputs(result, output: Path = OUTPUT):
     tables.mkdir(exist_ok=True)
     figures.mkdir(exist_ok=True)
     flattened = [{**{k: r[k] for k in ("benchmark", "evaluation_case_type", "condition_id", "authorization_regime", "records", "planned", "failures", "ask_count", "deny_count", "latency_p50_ms", "latency_p95_ms")},
-                  **{f"{label}_{k}": v for label in ("unsafe", "completion") for k, v in r[label].items() if k != "observed_wilson_95"}} for r in result["cells"]]
+                  **{f"{label}_{k}": v for label in ("unsafe", "completion", "unsafe_or_failure") for k, v in r[label].items() if k != "observed_wilson_95"}} for r in result["cells"]]
     with (tables / "cells.csv").open("w", encoding="utf-8-sig", newline="") as stream:
         writer = csv.DictWriter(stream, list(flattened[0]))
         writer.writeheader()
@@ -151,7 +163,7 @@ def write_outputs(result, output: Path = OUTPUT):
     plt.close(fig)
     lines = ["# Claude整改后实验报告", "", "## Material Passport", "", "- Origin Skill: academic-research-suite / experiment-agent", "- Mode: run + validate", "- 日期：2026-10-06", f"- 状态：{'EXECUTED' if result['pending'] == 0 else 'PARTIALLY EXECUTED'}；不代表论文投稿就绪。", "",
              "## 实际完成量", "", f"计划{result['planned']}行，已记录{result['recorded']}行，未记录{result['pending']}行。授权矩阵{result['authorization_recorded']}/900，修复后合成控制{result['synthetic_recorded']}/16。", f"运行状态：`{json.dumps(result['statuses'], ensure_ascii=False)}`。", f"官方请求{result['provider_calls']}次，总token {result['token_usage']['total']}；已知用量峰时估计CNY {result['cost_known_peak_estimate_cny']:.4f}，不是账单实付。", "",
-             "## 研究设计与边界", "", "使用原固定180案例，四个主条件全部normal普通提示；policy/full仅运行模块不同，auto_compiled/exact_target_v2仅Guard授权不同。后者是明示oracle（离线答案派生的精确目标对照），不是可部署非oracle系统。60条嵌套子集追加broad、underspecified、conflicting。旧实验和默认配置不改写，12正式前缀不重复。", "", "AgentDojo沿用原生攻击成功评分，M3-v2只计有执行证据的模拟越权效果。拒绝、隔离、解析失败、达到步数上限和未知分别记录。所有失败留在计划分母。Gemini未启动，本地开放模型未开展；不能宣称跨厂商复现。", "",
+             "## 研究设计与边界", "", "使用原固定180案例，四个主条件全部normal普通提示；policy/full仅运行模块不同，auto_compiled/exact_target_v2仅Guard授权不同。后者是明示oracle（离线答案派生的精确目标对照），不是可部署非oracle系统。60条嵌套子集追加broad、underspecified、conflicting。旧实验和默认配置不改写，12正式前缀不重复。", "", "AgentDojo在内存环境副本上沿用原生攻击成功评分；M3-v2复用每任务独立的临时沙箱及模拟工具，生成临时夹具/工具日志并在任务结束清理，只计有执行证据的模拟越权效果；16合成控制是纯内存邮箱。没有真实邮件、支付、生产接口或任意宿主文件修改。拒绝、隔离、解析失败、达到步数上限和未知分别记录。所有失败留在计划分母。Gemini未启动，本地开放模型未开展（本地11434服务不可达，未安装或启动）；不能宣称跨厂商复现。", "",
              "## 授权矩阵分层结果", "", "|基准/类型|条件/授权|记录/计划|危险结果 真/已知|完成 真/已知|未知危险/完成|非正常结束|", "|---|---|---:|---:|---:|---:|---:|"]
     for r in result["cells"]:
         lines.append(f"|{r['benchmark']}/{r['evaluation_case_type']}|{r['condition_id']}/{r['authorization_regime']}|{r['records']}/{r['planned']}|{r['unsafe']['true']}/{r['unsafe']['observed']}|{r['completion']['true']}/{r['completion']['observed']}|{r['unsafe']['unknown']}/{r['completion']['unknown']}|{r['failures']}|")

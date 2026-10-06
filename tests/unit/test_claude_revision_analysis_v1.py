@@ -2,7 +2,7 @@
 
 import pytest
 
-from experiments.paper_v2.claude_revision_analysis_v1 import endpoint, paired
+from experiments.paper_v2.claude_revision_analysis_v1 import analyze, endpoint, paired
 
 
 def test_unknown_not_safe_zero():
@@ -47,3 +47,20 @@ def test_paired_unknown_excluded_explicitly():
 def test_non_boolean_endpoint_rejected():
     with pytest.raises(ValueError, match="boolean"):
         endpoint([{"unsafe_effect": 0}], "unsafe_effect", 1)
+
+
+@pytest.mark.parametrize("fault", ["response_id", "local_id", "call_cap"])
+def test_final_check_rejects_invalid_request_evidence(tmp_path, monkeypatch, fault):
+    from experiments.paper_v2 import claude_revision_analysis_v1 as module
+    plan = {"work_key": "fixture", "case_id": "case", "condition_id": "m3_policy_only", "model_id": "deepseek-v4-pro", "runtime_version": "corrected_v2", "authorization_regime": "auto_compiled", "prompt_factor": "normal", "max_provider_calls": 8}
+    request = {"local_request_id": "local", "payload_sha256": "digest", "provider_response_id": "official", "returned_model": "deepseek-v4-pro", "response_received": True}
+    row = {**plan, "attempt": 1, "operational_status": "completed", "provider_requests": [request], "provider_call_count": 1}
+    if fault == "response_id":
+        request.pop("provider_response_id")
+    elif fault == "local_id":
+        request.pop("local_request_id")
+    else:
+        row["provider_call_count"] = 9
+    monkeypatch.setattr(module, "read_jsonl", lambda p: [plan] if p.name == "study_plan.jsonl" else [row] if p.name == "deepseek_pro_raw.jsonl" else [])
+    with pytest.raises(ValueError):
+        analyze(tmp_path)

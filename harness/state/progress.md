@@ -1,5 +1,13 @@
 # 进展记录
 
+## 2026-10-06 — 修复后916条新实验完成，一次统计完成
+
+- 主矩阵900/900：795completed、60max_steps、45parse_failure；合成16/16completed。两个runner exit0，无重试/成功重跑。1796请求，1,712,733tokens，已知峰时估计CNY4.35603144，非账单。
+- 主攻击0/490仍有安全地板效应，不能证明full独立安全增益；AgentDojo良性auto2/30、exact policy13/30/full11/30；M3-v2auto16/30/17/30、exact14/30/16/30。合成明确私有/缺分类full DENY/ASK，公开/归档仍完成。
+- 单次统计与身份/请求唯一/次数上限/未知ITT检查通过；Wilson、配对Newcombe、10k底层任务bootstrap与Holm保留，退化bootstrap区间记NA。非正常结束105/900同危险端点并列解释。
+- 后续55定向测试、最后9统计负例、Ruff/4源内存编译及图目视检查通过；批次有重叠，不相加。报告outputs/experiments/claude_revision_v1/report.md，CSV/PNG/analysis/原始JSONL同目录。
+- 无活动实验Python进程；本地11434不可达，240开放模型未执行；Gemini/论文/盲测/Full Harness/历史重算未开展。F-PAPER-002保持in_progress；本实验子阶段完成，下一步由用户选择，不自动新矩阵。
+
 ## 2026-10-06 — 修复后新实验已启动
 
 - 用户新增授权执行实验；新916行计划与runner资格化提交6bb7c0b已推送。当前窗口保留历史结果；全部主条件normal提示，权限/完整模块及auto/exact_target_v2可分别比较。

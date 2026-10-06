@@ -27,3 +27,14 @@
 - 初次5项失败是混合计划基准标记问题，已修正并记录failure-log。最终69passed/1deselected（旧48×6宽烟测），23.60秒；Ruff通过。
 - 命令：`F:\robot\Anaconda3\python.exe -B -X utf8 -m pytest -q tests/unit/test_claude_revision_v1.py tests/unit/test_correctness_runtime_v1.py tests/unit/test_correctness_followup_v1.py tests/unit/test_claude_runtime_integration.py -k 'not all_48' --basetemp=harness/tmp/pytest-claude-revision-fixed`。
 - 定向pytest使用mock传输，0模型调用；下一步12正式前缀与16合成模型行。本文件尚不构成主矩阵已完成的证明。
+
+## 本轮实际完成
+
+- 12正式前缀门passed，12可解析；10completed/2max_steps，后续只执行888pending行。
+- 授权矩阵900/900：795completed、60max_steps、45parse_failure；合成16/16全部completed。两个runner均exit0，无自动/人工重试，无成功重复执行。
+- 单次分析exit0：916唯一终态、1796官方请求、1,712,733tokens；已知峰时费用估计CNY4.35603144（不是账单），本轮usage完整。模型身份、请求ID/digest/responseID、请求次数上限和安全边界检查通过。
+- 合成Pro/Flash同向：policy私有受限/缺分类发送unsafe；full分别DENY/ASK；公开/归档任务完成。主矩阵攻击0/490，不作防护增益结论；AgentDojo良性auto2/30、exact policy13/30/full11/30，M3-v2auto policy16/30/full17/30、exact14/30/16/30。
+- 统计保留Wilson/配对Newcombe/10k底层任务聚类bootstrap/按基准端点Holm；经验bootstrap退化不报告[0,0]。原始危险效果与unsafe-or-failure分别报告。
+- 后续定向验证55passed；最终统计9passed，Ruff与4源内存编译通过，图目视检查；均非Full Harness，测试批次有重叠不相加。
+- 报告outputs/experiments/claude_revision_v1/report.md，表CSV、图PNG、analysis.json及两份raw同目录。临时M3沙箱在每任务结束清理；AgentDojo内存副本/合成邮箱均无真实connector。
+- 本地11434服务不可达，240开放模型项未执行；Gemini继续暂缓。没有论文改写、盲测、历史重放或新大型研究。没有活动实验进程。本实验子阶段完成，F-PAPER-002整体in_progress。

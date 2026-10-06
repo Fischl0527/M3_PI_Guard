@@ -1,5 +1,12 @@
 # Task History
 
+## 2026-10-06 — Post-repair900+16 execution and single-pass analysis completed
+
+- 916/916 fresh terminal records,1796 official requests,1712733tokens; main795completed/60max_steps/45parse_failure and16 completed synthetic controls. No retries, successful replay, provider tools or real external effects; runners and analysis exit0.
+- Main attack outcomes0/490 are a floor, not superiority evidence. Synthetic Pro/Flash controls confirm classification-sensitive DENY/ASK and allowed public/archive completion. AgentDojo benign auto2/30 versus exact policy13/30/full11/30; M3-v2 auto16/30/17/30 versus exact14/30/16/30.
+- Single-pass ITT/identity/request/cap checks and planned stats completed; posterior test batches overlap and are not summed.55 targeted plus final9 analysis checks/Ruff/4-source compile/chart QA pass. Report/tables/figure inoutputs/experiments/claude_revision_v1.
+- Gemini/local optional240 not run, no paper edit/Full Harness/history replay; no active experiment process. Experiment substage complete, overall F-PAPER-002 staysin_progress. Final scoped data/report/Harness push follows.
+
 ## 2026-10-06 — Fresh corrected authorization experiment execution (in progress)
 
 - User authorized model experiments after repair delivery. Frozen916-row plan and bounded runner pushed in6bb7c0b; 12 formal prefix passed and16 new synthetic controls completed. Main900-row study continues without repeating its prefix or historical rows.

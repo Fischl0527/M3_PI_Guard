@@ -1,5 +1,14 @@
 # 会话移交
 
+## 2026-10-06 — 修复后实验与报告完成，请勿再运行成功行
+
+- 最新完成：outputs/experiments/claude_revision_v1，900授权+16合成=916唯一终态，1796请求；两个runner/一次analysis exit0。目前没有活动实验进程。
+- 主900中795completed/60max_steps/45parse_failure全留ITT；无重试。主攻击0/490，不能宣称full有效或SOTA；合成Pro/Flash同向DENY/ASK且正常公开/归档完成。AgentDojoauto良性2/30，exact13/30/11/30；M3-v2auto16/30/17/30，exact14/30/16/30。
+- report.md写明全部outputs结构、参数、表图和限制；analysis.json/CSV包括未知上下界和unsafe-or-failure。统计只做一次，未知不填零，退化bootstrap不报[0,0]。不要重跑analysis来获得更好结果。
+- 新入口、合成、统计后续55passed/最后9passed（重叠不相加）；Ruff/4源内存编译、图目视检查通过。无Full Harness或历史验证。
+- 当前codex/claude-review-repairs，origin RedTeam_LLM_Security；阶段提交6bb7c0b/503398a，最终SHA见git log。只范围推送本轮数据/报告/Harness；稿件/模板/第三方dirty保留。
+- Gemini暂缓，本地11434未运行故240开放模型未执行；论文LaTeX/作者不动。F-PAPER-002整体in_progress。后续建议先定位AgentDojo授权2/30和M3 stress良性0/10原因，或新同期无防护活性/独立模型；需要新的明确任务，不自动启动。
+
 ## 2026-10-06 — Claude整改后授权矩阵正在执行
 
 - 最新用户要求实际实验，任务harness/tasks/claude-revision-experiments-2026-10-06.md；900授权+16合成，不修改论文。新输出outputs/experiments/claude_revision_v1。
