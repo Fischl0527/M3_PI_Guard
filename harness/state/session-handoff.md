@@ -1,5 +1,28 @@
 # 会话移交
 
+## 2026-10-06 — 最新请求只交付综合计划
+
+- 用户要求读下载推进计划，结合Claude路线与当前项目写新MD；新统一入口docs/research/paper_v2/M3_PI_Guard_研究收束与论文推进计划_2026-10-06.md，任务research-followup-consolidation-plan-2026-10-06。旧计划保留，不把规划当科研完成。
+- 当前四主表/20补充已完成，主图/宽补充表/最新PDF及60正常任务意图解释仍待；900/16/480、300诊断和延迟v2直接复用。条件性360/180/108须有新缺陷或资格，不自动开跑；Gemini继续暂缓。
+- 本轮未模型/API/服务/权限/论文修改构建/历史统计/Full Harness/推送，不停止进程。F-PAPER-002仍in_progress；此前执行任务和持续目标状态未变。现有表格集成及用户dirty均保留。
+- 计划253行、6本地链接0断链、围栏/格式、feature JSON与范围diff检查通过；首次PowerShell参数组合问题已记录并修正，未改实验。计划未提交GitHub，后续可在正常阶段限定范围提交。
+- 后续实施优先解释低效用、缓存四主图和实际可读PDF。当前未提交表格切片不能说成GitHub已更新；Git时限定文件，不带原16行current-task、第三方或用户字体。
+
+## 2026-10-06 — 当前表已集成，下一步主图与最终格式
+
+- 持续目标仍active，F-PAPER-002 in_progress。当前英中文四主表覆盖900/480/16；旧八主表移补充S13–S20，原S1–S12不改。生成器同读缓存，不调用分析器或API。
+- 实际命令`python -X utf8 -B -m scripts.build_lean_paper_manuscript --sync-chinese-tables`及`python -X utf8 -B -m scripts.build_lean_paper_supplement --markdown-only`成功；无新Word。26文稿/表测试、6临时LaTeX测试、Ruff通过。
+- 主图仍旧五图；不要把历史factor图当当前900/480的图。下一安全步骤从缓存生成当前四主图，旧图转补充，再处理宽补充表的非旋转可读版式，实际构建当前模板/elsarticle并看PDF。60任务受信意图核对也未完成，不预设权限bug、不自动扩权。
+- 当前未修改实际LaTeX模板或PDF，测试仅写临时目录。可选本地180/AgentDyn108仍未合格，不绕过此前服务拒绝；Gemini暂停、历史终态不重跑。保留current-task原16行、字体/第三方与其他用户dirty。
+
+## 2026-10-06 — 最新请求仅规划：v4交付范围
+
+- 本轮任务research-followup-replan-2026-10-06-v4；文档docs/research/paper_v2/M3_PI_Guard_综合评估与后续研究计划_2026-10-06_v4.md。保留之前执行任务及持续目标状态，不把规划等同整体结项。
+- 当前900/16/480/延迟已完成、英中核心与当前Results优先已更新；主表仍旧八表、主图/最新PDF/60受信意图解释未完成。下一实施建议先缓存表图与PDF，同步做有限意图解释；不重跑统计或模型。
+- 新360/本地180/动态108均条件性，Gemini暂缓、启动拒绝不绕过。F-PAPER-002 in_progress；作者空白，Times New Roman/A4/居中页码/导航保留。
+- 本轮只新增v4计划/任务及必要Harness记录；无API/服务/权限/科研代码/论文构建/统计重算/Full Harness/Git提交推送。原dirty及原current-task16行未丢弃；实际文档验证见任务记录。
+- 计划297行/10个本地链接0断链/围栏格式、feature JSON及范围diff均通过；规划交付完成，科研整体未完成。新文档和状态尚未提交，后续Git须限定相关文件、不打包其他dirty。
+
 ## 2026-10-06 — 当前引言及中文核心完成，接续主表图
 
 - 当前任务research-followup-execution-2026-10-06；引言三个当前RQ和历史六问题分开，900/480/16为当前主证据，旧exact/旧端点强解释撤回。Methods补齐当前RQ及native/simulated端点区别。
@@ -8,6 +31,7 @@
 - 60任务受信意图核对仍待；本地启动拒绝不能绕过，AgentDyn评分及叶子操作未合格，不默认运行360/180/108。F-PAPER-002 in_progress/目标active；保留current-task原16行及其他用户dirty，不将局部稿件同步记为投稿完成。
 - 本轮不API/统计重算/授权修改/Full Harness或PDF构建。确切命令、文件及Git范围见现有任务记录，内部trace不提交。
 - 相邻build_jisa_latex数字锚点已修为唯一语义标题定位；临时生成测试合并24passed/Ruff通过，不代表当前模板/PDF已更新。后续不要恢复硬编码4.x锚点。
+- 本切片17相关文件提交a44281cdf54dd46e85121d4a763d4d39d561d208已推送origin/codex/claude-review-repairs，ls-remote与本地HEAD精确一致。current-task原16行及其他用户dirty仍未提交；本行是推送后普通回执，不为它循环提交。
 
 ## 2026-10-06 — 英文源修订已落盘，下一切片继续整体同步
 

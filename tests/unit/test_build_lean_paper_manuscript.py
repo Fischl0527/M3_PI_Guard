@@ -51,7 +51,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
         "## References"
     )
     assert manuscript.count("![Figure ") == 5
-    assert len(re.findall(r"^### Table [1-8]\. ", manuscript, flags=re.MULTILINE)) == 8
+    assert len(re.findall(r"^### Table [1-4]\. ", manuscript, flags=re.MULTILINE)) == 4
     assert "Supplementary Table S1" in manuscript
     assert "Supplementary Table S6" in manuscript
     assert "Supplementary Table S10" in manuscript
@@ -62,8 +62,10 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "### Figures" not in manuscript
     assert "22/60 tasks (36.67%" in manuscript
     assert "CNY 24.5551236" in manuscript
-    assert "| Condition cell | Prompt | Modules | Authorization |" in manuscript
-    assert "| Stratum | Tasks | Successes by 500 |" in manuscript
+    assert "| Study | Cases | Assignments | Conditions | Scope |" in manuscript
+    assert "| Stratum | Tasks | Successes by 500 |" not in manuscript
+    assert "Supplementary Table S19 reports execution-permit" in manuscript
+    assert "Supplementary Table S20 separates" in manuscript
     assert "excluding evaluator and gold fields" not in manuscript
     assert "`exact_gold` condition is an explicitly labeled oracle sensitivity" in manuscript
     assert re.search(
@@ -127,7 +129,7 @@ def test_introduction_and_chinese_distinguish_current_and_historical_evidence() 
     assert "历史完整参数相等判定" in chinese
     assert "原始答案不进入模型" in chinese
     assert "私有数据" in chinese and "V4.1 Flash" in chinese
-    assert "中文旧表图尚待重排" in chinese
+    assert "中文旧主图尚待重排" in chinese
 
 
 def test_corrected_primary_sources_disclose_utility_cost_and_uncertainty() -> None:
@@ -293,7 +295,7 @@ def test_supplementary_tables_are_split_without_losing_results_narrative() -> No
 
 
 def test_incremental_table_notes_preserve_claim_boundaries() -> None:
-    notes = builder._table_notes()
+    notes = builder._historical_table_notes()
 
     assert len(notes) == 8
     assert "contemporaneous cells" in notes[0]
@@ -347,7 +349,7 @@ def test_incremental_revision_identifies_factors_and_keeps_claims_bounded() -> N
     assert "`ASK` is a runtime confirmation request" in manuscript
     assert "0/12" in manuscript and "24.25%" in manuscript
     assert "17/60" in manuscript
-    assert "historically risk-enriched single execution block" in normalized
+    assert "historically risk-enriched single execution block" in builder._historical_table_notes()[5]
     assert "0/240 unauthorized proposals" in manuscript
     assert "30/240 authorized proposals" in manuscript
     assert "47/60 tasks were E3 anchors" in normalized

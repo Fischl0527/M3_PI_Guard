@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import shutil
 import subprocess
 import tempfile
@@ -17,6 +18,8 @@ from scripts.build_lean_paper_manuscript import (
     _drop_wrapper,
     _read,
     _split_supplementary_tables,
+    _historical_main_tables,
+    _historical_table_notes,
 )
 
 
@@ -38,13 +41,17 @@ def build_supplementary_markdown() -> str:
         "# Supplementary material",
         f"**Article:** {TITLE}",
         (
-            "These twelve tables provide detailed results referenced by the main "
-            "manuscript. They introduce no additional hypothesis family or "
-            "claim beyond the analyses reported in the article."
+            "Tables S1-S12 retain the existing supplementary results. Tables S13-S20 "
+            "preserve the former main tables as historical or development evidence, "
+            "with their original endpoint definitions and limitations. These tables "
+            "introduce no additional hypothesis family or claim beyond the analyses "
+            "reported in the article. Current corrected-v2 studies appear in the main tables."
         ),
     ]
     for number, title, table in tables:
         parts.append(f"## Supplementary Table S{number}. {title}\n\n{table}")
+    for (number, title, table), note in zip(_historical_main_tables(), _historical_table_notes(), strict=True):
+        parts.append(f"## Supplementary Table S{number + 12}. {title}\n\n{note}\n\n{table}")
     return "\n\n".join(parts).strip() + "\n"
 
 
@@ -82,9 +89,15 @@ def build_supplementary_docx(markdown: str) -> Path:
     return DOCX_PATH
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--markdown-only", action="store_true")
+    args = parser.parse_args(argv)
     markdown = build_supplementary_markdown()
     MARKDOWN_PATH.write_text(markdown, encoding="utf-8", newline="\n")
+    if args.markdown_only:
+        print(f"wrote={MARKDOWN_PATH.relative_to(PROJECT_ROOT)} tables=20 no_docx=True")
+        return 0
     output = build_supplementary_docx(markdown)
     document = Document(output)
     print(

@@ -4,6 +4,10 @@
 
 ## 后续稿件进展：本轮非新实验
 
+2026-10-06最新切片：四张当前主表已生成，旧八张主表原数字/注释移至补充S13–S20；原S1–S12保留，共20表。中文表使用同份缓存JSON，历史表及引用同步。主表明确Wilson观察区间、未知/ITT界限、失败、确认与组件控制含义；不重算900/480/16、不API。26项文稿/表格测试及6项临时LaTeX生成测试通过，Ruff通过。实际仅更新Markdown，未新建Word，当前主图和最新模板/PDF仍待；60任务意图核对也仍待，整体未完成。
+
+目录入口仍为`docs/research/paper_v2/manuscript/`下的`manuscript_deepseek_v1.md`、`manuscript_zh_v1.md`和`supplementary_tables_v1.md`。表源仍是`outputs/experiments/claude_revision_v1/analysis.json`与`outputs/experiments/research_followup_20261006_v1/calibration/analysis.json`；这次没有新增实验输出树或哈希包。LaTeX测试仅写测试临时目录，不能用其代替当前PDF视觉验收。
+
 当前英文摘要、方法、结果、讨论和结论源以及生成Markdown已加入修复后900授权、16合成和本报告的480同期校准，纠正旧exact与旧安全标签的强解释。文稿定向15项通过、Ruff通过、英文生成exit0；本报告以下实验数字和原始记录没有重算或改写。
 
 后续切片已更新Introduction、Methods当前RQ/端点定义及中文核心摘要、方法/结果、讨论与结论；生成英文Results以修正版研究开头，旧正文字项完整保留。18定向文稿测试/Ruff通过，英文生成exit0、6主节/17904全文件词数（含表引用）。主表主图、中文旧表图与最新LaTeX/PDF仍未同步，不称论文整体完成。新版后续计划在`docs/research/paper_v2/M3_PI_Guard_综合评估与后续研究计划_2026-10-06_v3.md`，延迟修复已完成，不再安排重复900/480。

@@ -41,45 +41,26 @@ SECTION_FILES = {
 
 PLACEMENTS = {
     "3. Methods": {
-        "Concurrent prompt-by-module factorial": ("table_01",),
+        "Corrected target authorization and contemporaneous calibration": ("table_01",),
         "Source-authority counterfactual": ("figure_01",),
     },
     "4. Results": {
+        "Corrected authorization and contemporaneous calibration": ("table_02", "table_03", "table_04"),
         "Concurrent prompt-by-module factorial experiment": (
             "figure_02",
-            "table_02",
         ),
-        "Source-authority counterfactual": ("figure_03", "table_03"),
+        "Source-authority counterfactual": ("figure_03",),
         "Outcome-enriched challenge and Flash replication": (
             "figure_04",
-            "table_04",
         ),
         "Defense-aware adaptive evidence and conditional tail through budget 500": (
             "figure_05",
-            "table_05",
-        ),
-        "Authorization diagnostics and execution permits": ("table_07",),
-        "Corrected development study": ("table_08",),
-    },
-}
-
-# A rotated wide-table float always starts on a fresh page.  For E6, placing
-# that table after the two short supplementary-table pointers stranded those
-# lines on an otherwise blank page.  The semantic order remains unchanged if
-# the primary result table appears first and the pointers follow it, while the
-# rendered article avoids the isolated-page artefact.
-PLACEMENTS_BEFORE_TEXT = {
-    "4. Results": {
-        "Supplementary Table S11 reports the E6 DeepSeek activity and operational outcomes.": (
-            "table_06",
         ),
     },
 }
 
-# The manuscript discusses E6 before E5, so table numbers must follow rendered
-# order rather than experiment identifiers.  Source Table 6 (E6) is the fifth
-# numbered table encountered; source Table 5 (E5) is the sixth.
-MAIN_TABLE_DISPLAY_NUMBERS = {5: 6, 6: 5}
+PLACEMENTS_BEFORE_TEXT = {}
+MAIN_TABLE_DISPLAY_NUMBERS = {}
 
 
 class LatexBuildError(RuntimeError):
@@ -387,7 +368,7 @@ def _parse_numbered_tables(markdown: str, *, supplementary: bool) -> list[Markdo
         rf"(?m)^{re.escape(level)} {re.escape(prefix)}(\d+)\. (.+)$"
     )
     matches = list(pattern.finditer(markdown))
-    expected = 12 if supplementary else 8
+    expected = 20 if supplementary else 4
     if len(matches) != expected:
         raise LatexBuildError(f"Expected {expected} tables, found {len(matches)}.")
 
@@ -446,7 +427,7 @@ def _render_numbered_table(
     header = " & ".join(_inline(cell) for cell in table.header) + r" \\"
     body = [" & ".join(_inline(cell) for cell in row) + r" \\" for row in table.rows]
 
-    if table.number == "7":
+    if table.number == "S19":
         # This four-row diagnostic must travel with its semantic-limit note.
         # longtable allowed the note to split over the next page in the review
         # template; an ordinary portrait float keeps the complete unit intact.

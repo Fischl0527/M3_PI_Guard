@@ -1,5 +1,11 @@
 # 综合后续研究实施
 
+## 2026-10-07 持续实施：当前表提交与缓存主图
+
+上一目标回合只有综合计划，按no progress处理；本轮实际推进已有设计。先提交已完成四当前主表、历史S13–S20、英中文引用和对应测试（既有32项通过），以及已交付普通规划文件/状态。只提交本轮明确拥有的路径，current-task保留用户原16行，第三方/模板资产/其他未完成工作不纳入。
+
+随后用既有Python绘图工作流从cached900/480/16读取当前图数据，不调用统计分析器、模型或历史重放。科学图技能用于可读Times New Roman、缓存区间、未知分母和实际渲染检查；用户禁止额外工程包，故不建立签名、递归哈希、figure gate体系。允许新图脚本、定向测试、必要图件和普通说明；历史图/数据不覆盖，当前PDF和60意图审查保持未完成直到实际验收。
+
 ## 2026-10-06 当前切片：引言、结果层级与中文科学口径
 
 沿用已批准的必要稿件同步，不新建实验或规划。允许修改Introduction、中文对照、英文结果排列生成逻辑、对应定向测试、生成英文MD及既有Harness/总报告。先明确当前900/480/16与历史研究的层级，再同步核心摘要、研究问题、方法、结果、讨论和结论。旧数字保留为历史标签；旧表图仍待下一切片重排，不借本切片宣称最终双语/PDF完成。
@@ -16,6 +22,7 @@
 - `-m scripts.build_lean_paper_manuscript`：exit0，6主节/17904全文件词数（含表/引用）。初始3失败确认旧口径与层级，后来断言措辞/换行问题已修；最终没有削弱端点、数字和内容保留约束。
 - 原raw与分析输出不变，不API/统计重算/权限修改/Full Harness/当前LaTeX编译。整体目标保持active，主表图与最新PDF、60任务受信意图及可选研究仍未闭合。
 - 相邻生成器首次4失败暴露旧4.8锚点，改用既有`_strip_number`解析唯一语义标题，未改表图/模板。`-m pytest tests/unit/test_build_lean_paper_manuscript.py tests/unit/test_build_jisa_latex.py -q`：24passed/0.76s；四相关源码/测试的Ruff通过。只在测试tmp生成，未编译或覆盖主LaTeX/PDF。
+- 范围提交a44281cdf54dd46e85121d4a763d4d39d561d208（17文件）推送RedTeam_LLM_Security的codex/claude-review-repairs，远端精确核验一致；保留current-task原16行和其他用户dirty。未公开内部trace/密钥/第三方或模板字体资产，目标active。
 
 ## 2026-10-06 当前稿件科学修订切片
 
@@ -111,3 +118,12 @@ VIGIL适配使用既有固定源码bridge（单次约束生成、禁止静默fal
 本次有限源码查找确认generic-v2会删除必填目标未解析的工具规则（policy_compiler_corrected_v2.py），说明“词法选中后因范围未解而不允许”可解释某些缺许可，但未对60个受信任务完成个案核对，不能直接认定新缺陷或放宽全部参数。
 
 Git修复节点：a3ed482262b87d0187e7d094d157c3eb10135305，15文件；已推送origin/codex/claude-review-repairs，远端SHA与本地一致。最后追加writer不覆盖原文件的1项测试再通过（属于同16项，不相加），Ruff/两源内存编译/JSON/16行延迟计数及暂存diff检查通过。原current-task16行保留未提交，其他dirty未打包；该节点不含论文科学同步。
+## 继续实施：当前主表与历史补充表
+
+上一目标回合仅交付v4计划，无实施进展；当前安全可执行步骤是缓存证据的稿件集成。范围：现有稿件/补充/LaTeX生成器、对应测试、双语表与引用、必要报告和状态。四张当前主表读取900/480/16缓存JSON；旧八表原数据和注释移到S13–S20，原S1–S12保留。不API、统计重算、权限改动、Full Harness或当前PDF构建。主图与PDF仍待下一切片，不能宣称整体排版完成。
+
+验证计划：数值/未知/观察与计划分母测试、历史表内容保留、英中文表同源、四张主表与二十张补充表及临时LaTeX语义定位测试；Ruff和内存编译。实际只生成Markdown（无新Word），相关Git里程碑推送，保留无关dirty和current-task原16行。
+
+实际完成：四主表、S1–S20补充及英中引用生成。`python -X utf8 -B -m scripts.build_lean_paper_manuscript --sync-chinese-tables`和`python -X utf8 -B -m scripts.build_lean_paper_supplement --markdown-only`exit0；前者全文件16949词（最终引用补充前），不是目标正文词数。表格/文稿26passed，LaTeX临时生成6passed，范围Ruff通过。三项初始失败为缓存区间测试值及旧注释读取位置，纠正后通过，未改统计。现有八历史表的全部数字/注释及S1–S12正文由定向测试保留；主表最多五列、不旋转。旧宽补充布局与当前主图/PDF仍待，未实际构建模板、不称视觉通过。
+
+最终合并定向pytest（current_evidence_tables、build_lean_paper_manuscript、build_lean_paper_supplement、build_jisa_latex四模块）32passed in1.09s；之后仅格式化新增helper/test并复查同32项通过。范围Ruff与四源码内存compile通过，最终英文16987全文件词数。Git差异检查确认900/16/480的raw、analysis与原cells.csv未修改；feature JSON合法且in_progress。原始统计只格式转换，不重新做推断。

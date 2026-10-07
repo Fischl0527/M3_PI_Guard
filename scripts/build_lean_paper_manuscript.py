@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import re
 from collections import OrderedDict
 from pathlib import Path
+
+from scripts.current_evidence_tables import current_tables
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -278,7 +281,7 @@ def _read_table(name: str) -> list[dict[str, str]]:
         return list(csv.DictReader(stream))
 
 
-def _table_notes() -> tuple[str, ...]:
+def _historical_table_notes() -> tuple[str, ...]:
     legacy_note = (
         " Historical tables retain their recorded endpoint, not a retrospectively "
         "verified count of committed unauthorized effects. See the measurement "
@@ -695,8 +698,8 @@ def _corrected_development_table() -> str:
     return _markdown_table(("Model", "Benchmark", "Configuration", "Attack endpoint", "Benign tool completion"), rows)
 
 
-def _table_block() -> str:
-    tables = (
+def _historical_main_tables() -> tuple:
+    return (
         (1, "Prompt-by-module factorial design", _incremental_table("table_1_factor_design.csv")),
         (2, "E1 factorial estimates", _incremental_table("table_2_e1_factor_estimates.csv")),
         (3, "E2 source-authority evidence", _incremental_table("table_3_e2_provenance.csv")),
@@ -706,10 +709,31 @@ def _table_block() -> str:
         (7, "E7a execution-permit diagnostic", _e7_permit_table()),
         (8, "Corrected development study by benchmark", _corrected_development_table()),
     )
+
+
+def _table_block() -> str:
     parts = ["## Tables"]
-    for (number, title, table), note in zip(tables, _table_notes(), strict=True):
+    for number, title, table, note in current_tables(PROJECT_ROOT):
         parts.append(f"### Table {number}. {title}\n\n{note}\n\n{table}")
     return "\n\n".join(parts)
+
+
+def sync_chinese_tables(source: str) -> str:
+    """Replace only the current table block; preserve historical table contents."""
+    if "## 历史补充表\n" in source:
+        before, old = source.split("## 表\n", 1)
+        _, historical = old.split("## 历史补充表\n", 1)
+    else:
+        before, historical = source.split("## 表\n", 1)
+        historical = re.sub(r"(?m)^### 表 ([1-8])\. ",
+            lambda m: f"### 补充表 S{int(m.group(1)) + 12}. ", historical)
+    headings = re.findall(r"(?m)^### 补充表 S(\d+)\. ", historical)
+    if headings != [str(i) for i in range(13, 21)]:
+        raise ManuscriptBuildError("Chinese historical tables must retain S13-S20")
+    parts = ["## 表", ""]
+    for number, title, table, note in current_tables(PROJECT_ROOT, chinese=True):
+        parts.append(f"### 表 {number}. {title}\n\n{note}\n\n{table}\n")
+    return before + "\n".join(parts) + "\n## 历史补充表\n" + historical
 
 
 def _submission_statements() -> str:
@@ -787,9 +811,15 @@ def build_manuscript() -> str:
     return manuscript
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--sync-chinese-tables", action="store_true")
+    args = parser.parse_args(argv)
     manuscript = build_manuscript()
     OUTPUT_PATH.write_text(manuscript, encoding="utf-8", newline="\n")
+    if args.sync_chinese_tables:
+        chinese_path = MANUSCRIPT_DIR / "manuscript_zh_v1.md"
+        chinese_path.write_text(sync_chinese_tables(_read("manuscript_zh_v1.md")), encoding="utf-8", newline="\n")
     print(
         f"wrote={OUTPUT_PATH.relative_to(PROJECT_ROOT)} "
         f"words={_word_count(manuscript)} sections={len(SECTION_FILES)}"

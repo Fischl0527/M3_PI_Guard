@@ -512,6 +512,8 @@ behavior only; there is no simulated human approval or new confirmatory family.
 
 ## Corrected target authorization and contemporaneous calibration
 
+Table 1 summarizes the current cohorts and their distinct evidence roles.
+
 The corrected experiment selects explicit `corrected_v2` runtime behavior and
 `exact_target_v2` authorization. Target and other constrained security fields
 must match the offline-derived scope; schema-required content fields need not

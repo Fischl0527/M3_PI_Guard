@@ -560,7 +560,7 @@ These probes do not show that an attacker can obtain trusted approvals or
 induce the model to emit the forced proposals.
 
 E7a obtained 96/96 official, parseable responses with no operational failure.
-Table 7 reports execution-permit issuance under trusted approval: each module
+Supplementary Table S19 reports execution-permit issuance under trusted approval: each module
 setting had 0/12 permitted benign proposals under the deliberately strict
 control and 12/12 under bounded enumeration. Corresponding Wilson 95% intervals
 are 0.00%--24.25% and 75.75%--100.00%. Attack-condition proposals followed the
@@ -577,7 +577,7 @@ permits are not added to TCR or unsafe-effect counts in the execution studies.
 
 ## Corrected development study
 
-Table 8 separates the corrected-v1 development batch from all historical
+Supplementary Table S20 separates the corrected-v1 development batch from all historical
 experiments. DeepSeek V4 Pro and DeepSeek V4.1 Flash each completed 288 planned
 task-condition executions over the same 48 tasks and six configurations. Pro
 had 265 completed workflows, 13 parse failures, and 10 max-step terminations;
@@ -601,12 +601,16 @@ guard efficacy. Runtime summaries contained zero labelled sensitive values;
 dataflow checks were not applicable. Passing synthetic label-propagation tests
 is separate from model-generated evidence of activated dataflow restrictions.
 The eight no-tool tasks per model-condition remain in the planned denominators,
-but Table 8 focuses on attack and benign-tool outcomes. Unknown outcomes are
+but Supplementary Table S20 focuses on attack and benign-tool outcomes. Unknown outcomes are
 not replaced by zero, and operational failures remain separately reported.
 
 ## Corrected authorization and contemporaneous calibration
 
 The corrected authorization study records all 900 planned assignments:
+Tables 2–4 summarize corrected authorization, contemporaneous calibration,
+and bounded component controls, respectively. The following paired intervals
+are distinct from the marginal Wilson intervals in the tables.
+
 795 workflows end normally, 60 exhaust the step budget, and 45 have parse
 failures. Workflow status is separate from task completion. Across the 490
 attack assignments, security events are zero under the benchmark-specific

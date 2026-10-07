@@ -159,13 +159,9 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
 
     expected_main_shapes = {
         1: (4, 5),
-        2: (9, 10),
-        3: (10, 10),
-        4: (15, 10),
-        5: (4, 8),
-        6: (6, 6),
-        7: (4, 4),
-        8: (24, 5),
+        2: (8, 5),
+        3: (8, 5),
+        4: (8, 5),
     }
     expected_supplement_shapes = {
         1: (4, 4),
@@ -180,6 +176,14 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
         10: (9, 2),
         11: (6, 6),
         12: (6, 6),
+        13: (4, 5),
+        14: (9, 10),
+        15: (10, 10),
+        16: (15, 10),
+        17: (4, 8),
+        18: (6, 6),
+        19: (4, 4),
+        20: (24, 5),
     }
 
     _, main_sections = builder._split_h2(MANUSCRIPT.read_text(encoding="utf-8"))
@@ -198,33 +202,33 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
         for table in supplementary_tables
     } == expected_supplement_shapes
 
-    assert len(list(table_dir.glob("table_*.tex"))) == 8
-    assert len(list(table_dir.glob("supplement_s*.tex"))) == 12
+    assert len(list(table_dir.glob("table_*.tex"))) == 4
+    assert len(list(table_dir.glob("supplement_s*.tex"))) == 20
     assert r"false allow & not applicable & 240" in (
-        table_dir / "table_03.tex"
+        table_dir / "supplement_s15.tex"
     ).read_text(encoding="utf-8")
     assert r"all selected survivors & 12 & 0" in (
-        table_dir / "table_05.tex"
+        table_dir / "supplement_s17.tex"
     ).read_text(encoding="utf-8")
-    assert r"\label{tab:6}" in (table_dir / "table_05.tex").read_text(
+    assert r"\label{tab:s17}" in (table_dir / "supplement_s17.tex").read_text(
         encoding="utf-8"
     )
     assert r"No defense & 17/60" in (
-        table_dir / "table_06.tex"
+        table_dir / "supplement_s18.tex"
     ).read_text(encoding="utf-8")
-    assert r"\label{tab:5}" in (table_dir / "table_06.tex").read_text(
+    assert r"\label{tab:s18}" in (table_dir / "supplement_s18.tex").read_text(
         encoding="utf-8"
     )
-    wide_main = (table_dir / "table_06.tex").read_text(encoding="utf-8")
+    historical_wide = (table_dir / "supplement_s18.tex").read_text(encoding="utf-8")
     wide_supplement = (table_dir / "supplement_s12.tex").read_text(
         encoding="utf-8"
     )
-    assert wide_main.startswith("\\clearpage\n\\begin{sidewaystable}[p]")
+    assert historical_wide.startswith("\\clearpage\n\\begin{sidewaystable}[p]")
     assert wide_supplement.startswith("\\clearpage\n\\begin{sidewaystable}[p]")
-    assert r"\begin{minipage}{\textheight}" in wide_main
-    assert r"\begin{tabular}" in wide_main
-    assert r"\begin{longtable}" not in wide_main
-    assert "landscape" not in wide_main + wide_supplement
+    assert r"\begin{minipage}{\textheight}" in historical_wide
+    assert r"\begin{tabular}" in historical_wide
+    assert r"\begin{longtable}" not in historical_wide
+    assert "landscape" not in historical_wide + wide_supplement
     assert r"\scriptsize" in (table_dir / "supplement_s12.tex").read_text(
         encoding="utf-8"
     )
@@ -234,7 +238,11 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
     assert r"\begin{longtable}" in narrow_main
     assert "sidewaystable" not in narrow_main
 
-    permit_table = (table_dir / "table_07.tex").read_text(encoding="utf-8")
+    for number in range(1, 5):
+        assert "sidewaystable" not in (table_dir / f"table_{number:02d}.tex").read_text(encoding="utf-8")
+    assert "4/28" in (table_dir / "table_03.tex").read_text(encoding="utf-8")
+    assert "4/30 to 6/30" in (table_dir / "table_03.tex").read_text(encoding="utf-8")
+    permit_table = (table_dir / "supplement_s19.tex").read_text(encoding="utf-8")
     assert "sidewaystable" not in permit_table
     assert permit_table.startswith(r"\begin{table}[!htbp]")
     assert permit_table.rstrip().endswith(r"\end{table}")
@@ -261,13 +269,14 @@ def test_places_artifacts_once_and_emits_no_absolute_workspace_paths(
         assert results.count(
             rf"\input{{\ProjectRoot/figure_{number:02d}.tex}}"
         ) == 1
-    for number in (2, 3, 4, 5, 6, 7, 8):
+    for number in (2, 3, 4):
         assert results.count(
             rf"\input{{\ProjectRoot/table_{number:02d}.tex}}"
         ) == 1
-    assert results.index(r"\input{\ProjectRoot/table_06.tex}") < results.index(
-        "Supplementary Table S11 reports"
+    assert results.index(r"\input{\ProjectRoot/table_02.tex}") < results.index(
+        "Medium falsification study"
     )
+    assert "table_05.tex" not in results
 
     all_text = "\n".join(
         path.read_text(encoding="utf-8")

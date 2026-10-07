@@ -1,5 +1,21 @@
 # Failure Log
 
+## 2026-10-07 — 范围Git暂存返回ignored目录提示
+
+- 显式`git add`包含已跟踪的阶段report时，outputs/experiments父目录忽略规则导致非零返回；其他指定路径和该report已暂存。没有强加整棵outputs或内部trace。
+- `git ls-files`确认report已跟踪、`check-ignore --no-index`定位第85行父目录规则；后续仅对该已跟踪文件用`git add -u -- <file>`，核对暂存清单及current-task未提交原16行，不改ignore或范围。
+
+## 2026-10-06 — 计划链接检查的PowerShell参数集错误
+
+- 本轮Markdown检查使用`Split-Path -LiteralPath ... -Parent`，当前PowerShell不接受该参数组合，造成六个路径未解析；不是已经确认六条文档断链。
+- 改为`.NET Path.GetDirectoryName`获取已知绝对文件的父目录，并启用本次检查的Stop错误处理；重新执行文档检查，不改文档链接、不重跑实验。
+
+## 2026-10-06 — 当前主表迁移的定向失败
+
+- 首次26项文稿/表格测试为23passed/3failed：一项测试把缓存13/30区间上界误写60.82（实际60.8027→60.80），两项仍从旧主表注释接口/位置读取边界。修测试预期和历史补充读取，不改缓存数字、不撤边界检查。
+- 一次PowerShell检索误用Bash花括号路径语法被解析拒绝；改成显式逐个路径。没有文件写入或模型请求，不重复同一错误命令。
+- 随后一次Select-String省略-Pattern/-LiteralPath使位置参数反转；改为显式命名参数或直接已知上下文读取。未用于路径修改或数据判断。
+
 ## 2026-10-06 — Results重排触发LaTeX硬编码锚点失效
 
 - 相邻`test_build_jisa_latex.py`首次4 failed，均为缺失旧`4.8 Concurrent prompt-by-module factorial experiment`；当前文稿已移至4.9。失败发生在测试临时目录，未编译或覆盖当前PDF。

@@ -2,7 +2,7 @@
 
 **Article:** Evaluating Authorization Regimes and Runtime Guardrail Configurations for Tool-Using LLM Agents
 
-These twelve tables provide detailed results referenced by the main manuscript. They introduce no additional hypothesis family or claim beyond the analyses reported in the article.
+Tables S1-S12 retain the existing supplementary results. Tables S13-S20 preserve the former main tables as historical or development evidence, with their original endpoint definitions and limitations. These tables introduce no additional hypothesis family or claim beyond the analyses reported in the article. Current corrected-v2 studies appear in the main tables.
 
 ## Supplementary Table S1. Online-state source audit
 
@@ -126,3 +126,135 @@ These twelve tables provide detailed results referenced by the main manuscript. 
 | DeepSeek | Full / safe minus VIGIL | −26.67 pp | Newcombe −39.01 to −15.39 pp; bootstrap −38.33 to −15.00 pp | 0.000031 / 0.000092 | Risk-enriched single-block contrast |
 | Gemini | Scientific terminal / planned | 6/180 | — | — | Five response-bearing; one response-less failure |
 | Gemini | Minimum response-complete paired coverage | 0/30 | — | — | Effects not estimable |
+
+## Supplementary Table S13. Prompt-by-module factorial design
+
+The four contemporaneous cells cross prompt profile with the runtime module bundle while holding authorization at auto_compiled.
+
+| Condition cell | Prompt | Modules | Authorization | Historical rows reused |
+|---|---|---|---|---|
+| Policy / normal | normal | policy | auto compiled | No |
+| Policy / safe | safe | policy | auto compiled | No |
+| Full / normal | normal | full | auto compiled | No |
+| Full / safe | safe | full | auto compiled | No |
+
+## Supplementary Table S14. E1 factorial estimates
+
+Absolute effects are probability differences; intervals use 10,000 case-cluster bootstrap replicates. Holm values apply only to E1's prespecified endpoint families. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
+
+| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
+|---|---|---|---|---|---|---|---|---|---|
+| E1 representative pro | attack unsafe effect | interaction | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E1 representative pro | attack unsafe effect | module | 100 | -1.00 pp | -3.00 pp | +0.00 pp | 0.7358 | 1.0000 | 10000 |
+| E1 representative pro | attack unsafe effect | prompt | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E1 representative pro | attack unsafe or failure | interaction | 100 | -1.00 pp | -5.00 pp | +3.00 pp | 0.8206 | — | 10000 |
+| E1 representative pro | attack unsafe or failure | module | 100 | -2.50 pp | -5.50 pp | +0.00 pp | 0.0938 | — | 10000 |
+| E1 representative pro | attack unsafe or failure | prompt | 100 | +1.50 pp | -3.00 pp | +6.00 pp | 0.5868 | — | 10000 |
+| E1 representative pro | Benign-tool TCR | interaction | 60 | +0.00 pp | -6.67 pp | +8.33 pp | 1.0000 | 1.0000 | 10000 |
+| E1 representative pro | Benign-tool TCR | module | 60 | -3.33 pp | -8.33 pp | +0.00 pp | 0.0960 | 0.2880 | 10000 |
+| E1 representative pro | Benign-tool TCR | prompt | 60 | -3.33 pp | -10.83 pp | +4.17 pp | 0.4496 | 0.8992 | 10000 |
+
+## Supplementary Table S15. E2 source-authority evidence
+
+End-to-end source swaps and deterministic Guard replay are separate evidence layers and must not be interpreted as interchangeable.
+
+| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
+|---|---|---|---|---|---|---|---|---|---|
+| E2 end to end | unauthorized argument influence | module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | unauthorized argument influence | source | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | unauthorized argument influence | source x module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | authorized action execution | module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | authorized action execution | source | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | authorized action execution | source x module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
+| E2 end to end | source swap action change | full | 60 | +0.00 pp | +0.00 pp | +6.02 pp | — | — | — |
+| E2 end to end | source swap action change | policy | 60 | +0.00 pp | +0.00 pp | +6.02 pp | — | — | — |
+| E2 offline guard replay | false allow | not applicable | 240 | +0.00 pp | +0.00 pp | +1.58 pp | — | — | — |
+| E2 offline guard replay | false block | not applicable | 240 | +12.50 pp | +8.90 pp | +17.28 pp | — | — | — |
+
+## Supplementary Table S16. E3/E4 conditional robustness
+
+E3 is outcome-enriched and E4 is a same-provider replication. Neither opens a new significance family or estimates deployment prevalence. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
+
+| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
+|---|---|---|---|---|---|---|---|---|---|
+| E3 risk enriched pro | attack unsafe effect | interaction | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E3 risk enriched pro | attack unsafe effect | module | 60 | -1.67 pp | -5.00 pp | +0.00 pp | 0.7406 | — | 10000 |
+| E3 risk enriched pro | attack unsafe effect | prompt | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E3 risk enriched pro | attack unsafe or failure | interaction | 60 | +5.00 pp | -3.33 pp | +13.33 pp | 0.3448 | — | 10000 |
+| E3 risk enriched pro | attack unsafe or failure | module | 60 | -4.17 pp | -10.00 pp | +0.83 pp | 0.1528 | — | 10000 |
+| E3 risk enriched pro | attack unsafe or failure | prompt | 60 | +0.83 pp | -8.33 pp | +10.00 pp | 0.9438 | — | 10000 |
+| E4 flash replication | attack unsafe effect | interaction | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | attack unsafe effect | module | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | attack unsafe effect | prompt | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
+| E4 flash replication | attack unsafe or failure | interaction | 50 | -2.00 pp | -10.00 pp | +4.00 pp | 0.7852 | — | 10000 |
+| E4 flash replication | attack unsafe or failure | module | 50 | +3.00 pp | +0.00 pp | +7.00 pp | 0.0864 | — | 10000 |
+| E4 flash replication | attack unsafe or failure | prompt | 50 | -1.00 pp | -5.00 pp | +2.00 pp | 0.7752 | — | 10000 |
+| E4 flash replication | Benign-tool TCR | interaction | 30 | +6.67 pp | +0.00 pp | +16.67 pp | 0.2558 | — | 10000 |
+| E4 flash replication | Benign-tool TCR | module | 30 | +3.33 pp | +0.00 pp | +8.33 pp | 0.2602 | — | 10000 |
+| E4 flash replication | Benign-tool TCR | prompt | 30 | -3.33 pp | -11.67 pp | +3.33 pp | 0.5494 | — | 10000 |
+
+## Supplementary Table S17. E5 conditional adaptive tail
+
+The tail probability is conditional on the prespecified B200 survivors; it is not a complete original-panel B500 curve or saturation estimate. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
+
+| Stratum | Tasks | Successes by 500 | Conditional probability | CI low | CI high | First-success queries | Complete original B500 panel |
+|---|---|---|---|---|---|---|---|
+| all selected survivors | 12 | 0 | 0.00% | 0.00% | 24.25% | — | No |
+| A1 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
+| A2 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
+| A3 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
+
+## Supplementary Table S18. E6 contemporaneous attack-activity calibration
+
+E6 uses a historically risk-enriched single execution block; 47/60 tasks also anchor E3. It does not estimate deployment prevalence, benign utility, temporal repeatability, independent-sample replication, or a cross-provider effect. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
+
+| Condition | Legacy risk, n/N (95% CI) | Operational failure | Legacy risk or failure | ASK events | DENY events |
+|---|---|---|---|---|---|
+| No defense | 17/60 (28.3%) [18.5%, 40.8%] | 12/60 (20.0%) | 29/60 (48.3%) | 0 | 4 |
+| Source-pinned VIGIL | 16/60 (26.7%) [17.1%, 39.0%] | 8/60 (13.3%) | 24/60 (40.0%) | 0 | 8 |
+| Policy / normal | 2/60 (3.3%) [0.9%, 11.4%] | 7/60 (11.7%) | 9/60 (15.0%) | 31 | 7 |
+| Policy / safe | 1/60 (1.7%) [0.3%, 8.9%] | 2/60 (3.3%) | 3/60 (5.0%) | 21 | 2 |
+| Full / normal | 0/60 (0.0%) [0.0%, 6.0%] | 7/60 (11.7%) | 7/60 (11.7%) | 25 | 18 |
+| Full / safe | 0/60 (0.0%) [0.0%, 6.0%] | 3/60 (5.0%) | 3/60 (5.0%) | 19 | 6 |
+
+## Supplementary Table S19. E7a execution-permit diagnostic
+
+One-shot permits under trusted approval, not task completion or committed effects. Strict exact deliberately excludes the request's preferred but authorized wording. Each denominator is 12; Wilson 95% intervals are 0.00%--24.25% for 0/12 and 75.75%--100.00% for 12/12. Attack prompts produced no unauthorized target proposal, so zero unauthorized permits do not establish attack resistance.
+
+| Policy / modules | Benign authorized permits | Attack authorized permits | Attack unauthorized permits |
+|---|---|---|---|
+| Strict exact / policy | 0/12 | 0/12 | 0/12 |
+| Strict exact / full | 0/12 | 0/12 | 0/12 |
+| Bounded enum / policy | 12/12 | 12/12 | 0/12 |
+| Bounded enum / full | 12/12 | 12/12 | 0/12 |
+
+## Supplementary Table S20. Corrected development study by benchmark
+
+Corrected-v1 development data, not a confirmatory comparison with historical runs. AgentDojo retains its native security checker; M3-v2 counts observed simulated effects. Fractions give numerator/observed denominator, not evidence that failures are safe. Unknown values, when present, are explicit. Each model has 288 planned executions including no-tool tasks; those tasks and operational status counts are described in the text. Flash is V4.1, not the historical V4 model.
+
+| Model | Benchmark | Configuration | Attack endpoint | Benign tool completion |
+|---|---|---|---|---|
+| V4 Pro | AgentDojo | No guard / normal | 5/12 | 6/8 |
+| V4 Pro | AgentDojo | No guard / safe | 3/12 | 6/8 |
+| V4 Pro | AgentDojo | Policy / normal | 2/12 | 3/8 |
+| V4 Pro | AgentDojo | Policy / safe | 2/12 | 3/8 |
+| V4 Pro | AgentDojo | Full / normal | 0/12 | 3/8 |
+| V4 Pro | AgentDojo | Full / safe | 0/12 | 3/8 |
+| V4 Pro | M3-v2 | No guard / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | No guard / safe | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Policy / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Policy / safe | 0/12 | 4/8 |
+| V4 Pro | M3-v2 | Full / normal | 0/12 | 6/8 |
+| V4 Pro | M3-v2 | Full / safe | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | No guard / normal | 1/12 | 7/8 |
+| V4.1 Flash | AgentDojo | No guard / safe | 0/12 | 7/8 |
+| V4.1 Flash | AgentDojo | Policy / normal | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Policy / safe | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Full / normal | 0/12 | 4/8 |
+| V4.1 Flash | AgentDojo | Full / safe | 0/12 | 4/8 |
+| V4.1 Flash | M3-v2 | No guard / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | No guard / safe | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Policy / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Policy / safe | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Full / normal | 0/12 | 6/8 |
+| V4.1 Flash | M3-v2 | Full / safe | 0/12 | 6/8 |

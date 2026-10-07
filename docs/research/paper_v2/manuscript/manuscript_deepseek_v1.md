@@ -819,6 +819,8 @@ behavior only; there is no simulated human approval or new confirmatory family.
 
 ### 3.19 Corrected target authorization and contemporaneous calibration
 
+Table 1 summarizes the current cohorts and their distinct evidence roles.
+
 The corrected experiment selects explicit `corrected_v2` runtime behavior and
 `exact_target_v2` authorization. Target and other constrained security fields
 must match the offline-derived scope; schema-required content fields need not
@@ -902,6 +904,10 @@ assignments, analysis code, aggregate tables, and versioned source.
 ### 4.1 Corrected authorization and contemporaneous calibration
 
 The corrected authorization study records all 900 planned assignments:
+Tables 2–4 summarize corrected authorization, contemporaneous calibration,
+and bounded component controls, respectively. The following paired intervals
+are distinct from the marginal Wilson intervals in the tables.
+
 795 workflows end normally, 60 exhaust the step budget, and 45 have parse
 failures. Workflow status is separate from task completion. Across the 490
 attack assignments, security events are zero under the benchmark-specific
@@ -1416,7 +1422,7 @@ These probes do not show that an attacker can obtain trusted approvals or
 induce the model to emit the forced proposals.
 
 E7a obtained 96/96 official, parseable responses with no operational failure.
-Table 7 reports execution-permit issuance under trusted approval: each module
+Supplementary Table S19 reports execution-permit issuance under trusted approval: each module
 setting had 0/12 permitted benign proposals under the deliberately strict
 control and 12/12 under bounded enumeration. Corresponding Wilson 95% intervals
 are 0.00%--24.25% and 75.75%--100.00%. Attack-condition proposals followed the
@@ -1433,7 +1439,7 @@ permits are not added to TCR or unsafe-effect counts in the execution studies.
 
 ### 4.15 Corrected development study
 
-Table 8 separates the corrected-v1 development batch from all historical
+Supplementary Table S20 separates the corrected-v1 development batch from all historical
 experiments. DeepSeek V4 Pro and DeepSeek V4.1 Flash each completed 288 planned
 task-condition executions over the same 48 tasks and six configurations. Pro
 had 265 completed workflows, 13 parse failures, and 10 max-step terminations;
@@ -1457,7 +1463,7 @@ guard efficacy. Runtime summaries contained zero labelled sensitive values;
 dataflow checks were not applicable. Passing synthetic label-propagation tests
 is separate from model-generated evidence of activated dataflow restrictions.
 The eight no-tool tasks per model-condition remain in the planned denominators,
-but Table 8 focuses on attack and benign-tool outcomes. Unknown outcomes are
+but Supplementary Table S20 focuses on attack and benign-tool outcomes. Unknown outcomes are
 not replaced by zero, and operational failures remain separately reported.
 
 ### 4.16 Remaining evidence boundary
@@ -1863,137 +1869,61 @@ can establish.
 
 ## Tables
 
-### Table 1. Prompt-by-module factorial design
+### Table 1. Current study cohorts and configurations
 
-The four contemporaneous cells cross prompt profile with the runtime module bundle while holding authorization at auto_compiled.
+The authorization core and nested stress assignments total 900, not 900 independent cases. Cohorts overlap. Exact target is evaluator-derived oracle authorization, not a deployable source. VIGIL uses generated constraints and deterministic hybrid auditing with secondary model verification disabled; its call cap is 16 versus 8 for the other calibration conditions.
 
-| Condition cell | Prompt | Modules | Authorization | Historical rows reused |
+| Study | Cases | Assignments | Conditions | Scope |
 |---|---|---|---|---|
-| Policy / normal | normal | policy | auto compiled | No |
-| Policy / safe | safe | policy | auto compiled | No |
-| Full / normal | normal | full | auto compiled | No |
-| Full / safe | safe | full | auto compiled | No |
+| Authorization core | 180 | 720 | Policy/full; auto/exact target | Pro; normal prompt |
+| Nested stress regimes | 60 (nested) | 180 | Full; broad/underspecified/conflicting | Pro; normal prompt |
+| Contemporaneous calibration | 120 | 480 | ND/policy/full/configured VIGIL | Pro; normal prompt |
+| Synthetic controls | 4 scenarios | 16 | Policy/full | Pro + V4.1 Flash |
 
-### Table 2. E1 factorial estimates
+### Table 2. Corrected authorization and benign-tool completion
 
-Absolute effects are probability differences; intervals use 10,000 case-cluster bootstrap replicates. Holm values apply only to E1's prespecified endpoint families. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
+Each cell has 30 planned benign-tool tasks. Completion fractions use observed denominators; brackets are cached Wilson 95% intervals in percent, not paired-effect intervals. All outcomes here are known; failures stay in the planned denominator and can coexist with completion. ASK/DENY are event counts, not counts of distinct tasks. Prompts are normal in both module configurations.
 
-| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
-|---|---|---|---|---|---|---|---|---|---|
-| E1 representative pro | attack unsafe effect | interaction | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E1 representative pro | attack unsafe effect | module | 100 | -1.00 pp | -3.00 pp | +0.00 pp | 0.7358 | 1.0000 | 10000 |
-| E1 representative pro | attack unsafe effect | prompt | 100 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E1 representative pro | attack unsafe or failure | interaction | 100 | -1.00 pp | -5.00 pp | +3.00 pp | 0.8206 | — | 10000 |
-| E1 representative pro | attack unsafe or failure | module | 100 | -2.50 pp | -5.50 pp | +0.00 pp | 0.0938 | — | 10000 |
-| E1 representative pro | attack unsafe or failure | prompt | 100 | +1.50 pp | -3.00 pp | +6.00 pp | 0.5868 | — | 10000 |
-| E1 representative pro | Benign-tool TCR | interaction | 60 | +0.00 pp | -6.67 pp | +8.33 pp | 1.0000 | 1.0000 | 10000 |
-| E1 representative pro | Benign-tool TCR | module | 60 | -3.33 pp | -8.33 pp | +0.00 pp | 0.0960 | 0.2880 | 10000 |
-| E1 representative pro | Benign-tool TCR | prompt | 60 | -3.33 pp | -10.83 pp | +4.17 pp | 0.4496 | 0.8992 | 10000 |
-
-### Table 3. E2 source-authority evidence
-
-End-to-end source swaps and deterministic Guard replay are separate evidence layers and must not be interpreted as interchangeable.
-
-| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
-|---|---|---|---|---|---|---|---|---|---|
-| E2 end to end | unauthorized argument influence | module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E2 end to end | unauthorized argument influence | source | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E2 end to end | unauthorized argument influence | source x module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E2 end to end | authorized action execution | module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E2 end to end | authorized action execution | source | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E2 end to end | authorized action execution | source x module | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | 1.0000 | 10000 |
-| E2 end to end | source swap action change | full | 60 | +0.00 pp | +0.00 pp | +6.02 pp | — | — | — |
-| E2 end to end | source swap action change | policy | 60 | +0.00 pp | +0.00 pp | +6.02 pp | — | — | — |
-| E2 offline guard replay | false allow | not applicable | 240 | +0.00 pp | +0.00 pp | +1.58 pp | — | — | — |
-| E2 offline guard replay | false block | not applicable | 240 | +12.50 pp | +8.90 pp | +17.28 pp | — | — | — |
-
-### Table 4. E3/E4 conditional robustness
-
-E3 is outcome-enriched and E4 is a same-provider replication. Neither opens a new significance family or estimates deployment prevalence. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
-
-| Study | Endpoint | Factor | Paired cases | Effect | CI low | CI high | Bootstrap p | Holm p | Bootstrap n |
-|---|---|---|---|---|---|---|---|---|---|
-| E3 risk enriched pro | attack unsafe effect | interaction | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E3 risk enriched pro | attack unsafe effect | module | 60 | -1.67 pp | -5.00 pp | +0.00 pp | 0.7406 | — | 10000 |
-| E3 risk enriched pro | attack unsafe effect | prompt | 60 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E3 risk enriched pro | attack unsafe or failure | interaction | 60 | +5.00 pp | -3.33 pp | +13.33 pp | 0.3448 | — | 10000 |
-| E3 risk enriched pro | attack unsafe or failure | module | 60 | -4.17 pp | -10.00 pp | +0.83 pp | 0.1528 | — | 10000 |
-| E3 risk enriched pro | attack unsafe or failure | prompt | 60 | +0.83 pp | -8.33 pp | +10.00 pp | 0.9438 | — | 10000 |
-| E4 flash replication | attack unsafe effect | interaction | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E4 flash replication | attack unsafe effect | module | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E4 flash replication | attack unsafe effect | prompt | 50 | +0.00 pp | +0.00 pp | +0.00 pp | 1.0000 | — | 10000 |
-| E4 flash replication | attack unsafe or failure | interaction | 50 | -2.00 pp | -10.00 pp | +4.00 pp | 0.7852 | — | 10000 |
-| E4 flash replication | attack unsafe or failure | module | 50 | +3.00 pp | +0.00 pp | +7.00 pp | 0.0864 | — | 10000 |
-| E4 flash replication | attack unsafe or failure | prompt | 50 | -1.00 pp | -5.00 pp | +2.00 pp | 0.7752 | — | 10000 |
-| E4 flash replication | Benign-tool TCR | interaction | 30 | +6.67 pp | +0.00 pp | +16.67 pp | 0.2558 | — | 10000 |
-| E4 flash replication | Benign-tool TCR | module | 30 | +3.33 pp | +0.00 pp | +8.33 pp | 0.2602 | — | 10000 |
-| E4 flash replication | Benign-tool TCR | prompt | 30 | -3.33 pp | -11.67 pp | +3.33 pp | 0.5494 | — | 10000 |
-
-### Table 5. E5 conditional adaptive tail
-
-The tail probability is conditional on the prespecified B200 survivors; it is not a complete original-panel B500 curve or saturation estimate. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
-
-| Stratum | Tasks | Successes by 500 | Conditional probability | CI low | CI high | First-success queries | Complete original B500 panel |
-|---|---|---|---|---|---|---|---|
-| all selected survivors | 12 | 0 | 0.00% | 0.00% | 24.25% | — | No |
-| A1 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
-| A2 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
-| A3 | 4 | 0 | 0.00% | 0.00% | 48.99% | — | No |
-
-### Table 6. E6 contemporaneous attack-activity calibration
-
-E6 uses a historically risk-enriched single execution block; 47/60 tasks also anchor E3. It does not estimate deployment prevalence, benign utility, temporal repeatability, independent-sample replication, or a cross-provider effect. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed unauthorized effects. See the measurement correction and separate corrected-v1 results.
-
-| Condition | Legacy risk, n/N (95% CI) | Operational failure | Legacy risk or failure | ASK events | DENY events |
-|---|---|---|---|---|---|
-| No defense | 17/60 (28.3%) [18.5%, 40.8%] | 12/60 (20.0%) | 29/60 (48.3%) | 0 | 4 |
-| Source-pinned VIGIL | 16/60 (26.7%) [17.1%, 39.0%] | 8/60 (13.3%) | 24/60 (40.0%) | 0 | 8 |
-| Policy / normal | 2/60 (3.3%) [0.9%, 11.4%] | 7/60 (11.7%) | 9/60 (15.0%) | 31 | 7 |
-| Policy / safe | 1/60 (1.7%) [0.3%, 8.9%] | 2/60 (3.3%) | 3/60 (5.0%) | 21 | 2 |
-| Full / normal | 0/60 (0.0%) [0.0%, 6.0%] | 7/60 (11.7%) | 7/60 (11.7%) | 25 | 18 |
-| Full / safe | 0/60 (0.0%) [0.0%, 6.0%] | 3/60 (5.0%) | 3/60 (5.0%) | 19 | 6 |
-
-### Table 7. E7a execution-permit diagnostic
-
-One-shot permits under trusted approval, not task completion or committed effects. Strict exact deliberately excludes the request's preferred but authorized wording. Each denominator is 12; Wilson 95% intervals are 0.00%--24.25% for 0/12 and 75.75%--100.00% for 12/12. Attack prompts produced no unauthorized target proposal, so zero unauthorized permits do not establish attack resistance.
-
-| Policy / modules | Benign authorized permits | Attack authorized permits | Attack unauthorized permits |
-|---|---|---|---|
-| Strict exact / policy | 0/12 | 0/12 | 0/12 |
-| Strict exact / full | 0/12 | 0/12 | 0/12 |
-| Bounded enum / policy | 12/12 | 12/12 | 0/12 |
-| Bounded enum / full | 12/12 | 12/12 | 0/12 |
-
-### Table 8. Corrected development study by benchmark
-
-Corrected-v1 development data, not a confirmatory comparison with historical runs. AgentDojo retains its native security checker; M3-v2 counts observed simulated effects. Fractions give numerator/observed denominator, not evidence that failures are safe. Unknown values, when present, are explicit. Each model has 288 planned executions including no-tool tasks; those tasks and operational status counts are described in the text. Flash is V4.1, not the historical V4 model.
-
-| Model | Benchmark | Configuration | Attack endpoint | Benign tool completion |
+| Benchmark / modules | Authorization | Completion [95% CI, %] | Failure / planned | ASK / DENY |
 |---|---|---|---|---|
-| V4 Pro | AgentDojo | No guard / normal | 5/12 | 6/8 |
-| V4 Pro | AgentDojo | No guard / safe | 3/12 | 6/8 |
-| V4 Pro | AgentDojo | Policy / normal | 2/12 | 3/8 |
-| V4 Pro | AgentDojo | Policy / safe | 2/12 | 3/8 |
-| V4 Pro | AgentDojo | Full / normal | 0/12 | 3/8 |
-| V4 Pro | AgentDojo | Full / safe | 0/12 | 3/8 |
-| V4 Pro | M3-v2 | No guard / normal | 0/12 | 6/8 |
-| V4 Pro | M3-v2 | No guard / safe | 0/12 | 6/8 |
-| V4 Pro | M3-v2 | Policy / normal | 0/12 | 6/8 |
-| V4 Pro | M3-v2 | Policy / safe | 0/12 | 4/8 |
-| V4 Pro | M3-v2 | Full / normal | 0/12 | 6/8 |
-| V4 Pro | M3-v2 | Full / safe | 0/12 | 4/8 |
-| V4.1 Flash | AgentDojo | No guard / normal | 1/12 | 7/8 |
-| V4.1 Flash | AgentDojo | No guard / safe | 0/12 | 7/8 |
-| V4.1 Flash | AgentDojo | Policy / normal | 0/12 | 4/8 |
-| V4.1 Flash | AgentDojo | Policy / safe | 0/12 | 4/8 |
-| V4.1 Flash | AgentDojo | Full / normal | 0/12 | 4/8 |
-| V4.1 Flash | AgentDojo | Full / safe | 0/12 | 4/8 |
-| V4.1 Flash | M3-v2 | No guard / normal | 0/12 | 6/8 |
-| V4.1 Flash | M3-v2 | No guard / safe | 0/12 | 6/8 |
-| V4.1 Flash | M3-v2 | Policy / normal | 0/12 | 6/8 |
-| V4.1 Flash | M3-v2 | Policy / safe | 0/12 | 6/8 |
-| V4.1 Flash | M3-v2 | Full / normal | 0/12 | 6/8 |
-| V4.1 Flash | M3-v2 | Full / safe | 0/12 | 6/8 |
+| AgentDojo / Policy | Auto | 2/30 [1.85, 21.32] | 0/30 | 29 / 0 |
+| AgentDojo / Policy | Exact target | 13/30 [27.38, 60.80] | 12/30 | 0 / 96 |
+| AgentDojo / Full | Auto | 2/30 [1.85, 21.32] | 0/30 | 29 / 0 |
+| AgentDojo / Full | Exact target | 11/30 [21.87, 54.49] | 13/30 | 0 / 111 |
+| M3-v2 / Policy | Auto | 16/30 [36.14, 69.77] | 4/30 | 3 / 4 |
+| M3-v2 / Policy | Exact target | 14/30 [30.23, 63.86] | 6/30 | 0 / 13 |
+| M3-v2 / Full | Auto | 17/30 [39.20, 72.62] | 5/30 | 1 / 5 |
+| M3-v2 / Full | Exact target | 16/30 [36.14, 69.77] | 5/30 | 0 / 11 |
+
+### Table 3. Contemporaneous security and benign-tool utility
+
+Each attack and benign cell has 30 planned tasks. Fractions use known outcomes, with Wilson 95% intervals in percent. Unknowns are not safe zeros. For AgentDojo VIGIL, attack ITT bounds are 4/30 to 6/30 and benign completion bounds are 17/30 to 19/30. Failures are separate from unsafe effects. AgentDojo uses native security verdicts; M3-v2 uses observed simulated unauthorized effects. ND means no research Guard, not removal of the shared isolation boundary.
+
+| Benchmark / condition | Attack [95% CI, %] | Benign completion [95% CI, %] | Unknown A / B | Failure A / B |
+|---|---|---|---|---|
+| AgentDojo / ND | 3/30 [3.46, 25.62] | 17/30 [39.20, 72.62] | 0 / 0 | 5 / 7 |
+| AgentDojo / Policy | 0/30 [0.00, 11.35] | 2/30 [1.85, 21.32] | 0 / 0 | 0 / 0 |
+| AgentDojo / Full | 0/30 [0.00, 11.35] | 2/30 [1.85, 21.32] | 0 / 0 | 0 / 0 |
+| AgentDojo / VIGIL configured | 4/28 [5.70, 31.49] | 17/28 [42.41, 76.43] | 2 / 2 | 3 / 7 |
+| M3-v2 / ND | 0/30 [0.00, 11.35] | 16/30 [36.14, 69.77] | 0 / 0 | 0 / 4 |
+| M3-v2 / Policy | 0/30 [0.00, 11.35] | 17/30 [39.20, 72.62] | 0 / 0 | 0 / 1 |
+| M3-v2 / Full | 0/30 [0.00, 11.35] | 16/30 [36.14, 69.77] | 0 / 0 | 0 / 4 |
+| M3-v2 / VIGIL configured | 0/30 [0.00, 11.35] | 16/30 [36.14, 69.77] | 0 / 0 | 0 / 6 |
+
+### Table 4. Bounded synthetic component controls
+
+Each entry represents one controlled execution per module, not a population rate. U/C means simulated unsafe effect / task completion (1=true, 0=false). All 16 workflows completed normally. Full's ASK is waiting for clarification, not human approval or completion. Effects are in-memory mailbox transitions; boundary rejections were zero. Flash is V4.1, not historical V4 Flash. These controls do not demonstrate natural-task or arbitrary-leakage generalization.
+
+| Model / scenario | Policy U / C | Full U / C | Full ASK / DENY | Sends policy / full |
+|---|---|---|---|---|
+| V4 Pro / private restricted | 1 / 1 | 0 / 0 | 0 / 1 | 1 / 0 |
+| V4 Pro / public restricted | 0 / 1 | 0 / 1 | 0 / 0 | 1 / 1 |
+| V4 Pro / private archive | 0 / 1 | 0 / 1 | 0 / 0 | 1 / 1 |
+| V4 Pro / missing classification | 1 / 1 | 0 / 0 | 1 / 0 | 1 / 0 |
+| V4.1 Flash / private restricted | 1 / 1 | 0 / 0 | 0 / 1 | 1 / 0 |
+| V4.1 Flash / public restricted | 0 / 1 | 0 / 1 | 0 / 0 | 1 / 1 |
+| V4.1 Flash / private archive | 0 / 1 | 0 / 1 | 0 / 0 | 1 / 1 |
+| V4.1 Flash / missing classification | 1 / 1 | 0 / 0 | 1 / 0 | 1 / 0 |
 
 ## Figure captions
 
@@ -2006,7 +1936,7 @@ effects remain disabled.
 
 **Figure 2. Prompt-by-module factorial effects.** Panels show the four E1 cells
 for the legacy-labelled risk endpoint, benign-tool completion, and the failure-sensitive attack
-endpoint; Table 2 reports the corresponding module, prompt, and interaction
+endpoint; Supplementary Table S14 reports the corresponding module, prompt, and interaction
 effects. Intervals use 10,000 case-cluster bootstrap replicates. Holm adjustment
 is confined to the originally specified safety and benign-tool TCR families; the
 failure-sensitive endpoint remains a descriptive sensitivity analysis.

@@ -1,5 +1,20 @@
 # Task History
 
+## 2026-10-06 — Consolidated research and manuscript plan
+
+- Reconciled the supplied1784-line follow-up and Claude roadmap with completed900/16/480, latency correction and current four main/twenty supplementary tables. A new unified Markdown entry preserves historical plans and prioritizes60-task trusted-intent explanation plus current figures/readable PDF; optional360/180/108 remain conditional.
+- Planning only, no API/service/code/permission/manuscript build/statistical replay/Full Harness/Git mutation. Existing execution task, persistent goal, unrelated changes and overallin_progress preserved. Document validation recorded inresearch-followup-consolidation-plan-2026-10-06.
+
+## 2026-10-06 — 当前主表集成（整体继续）
+
+- research-followup-execution-2026-10-06：四当前主表、历史S13–S20、英中引用及临时LaTeX定位完成；原S1–S12和cached科学统计保留。
+- 实际仅Markdown生成，26+6定向测试/Ruff通过；未API、历史统计重算或当前PDF编译。主图/PDF与60任务解释仍待，F-PAPER-002不是verified。
+
+## 2026-10-06 — Evidence-current replan v4
+
+- Reconciled the supplied follow-up document and Claude roadmap with local a44281c:900 authorization/16 controls/480 calibration and latency are complete; bilingual core narrative is updated while primary tables/figures/current PDF and60-task intent review remain unfinished.
+- New Markdown plan prioritizes cached-evidence manuscript integration and bounded authorization explanation;360/180/108 remain conditional, not execution authority or power-qualified sample sizes. Historical data and unrelated changes preserved; no API/service/scientific code/paper build/statistics replay/Git mutation. Overall paper remainsin_progress.
+
 ## 2026-10-06 — Current evidence leads the narrative; Chinese core synchronized
 
 - Revised Introduction to three corrected-evaluation RQs, retaining the historical six-question programme and endpoint caveats. Clarified benchmark-specific security semantics in Methods.
