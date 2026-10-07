@@ -20,6 +20,7 @@ from scripts.build_lean_paper_manuscript import (
     _split_supplementary_tables,
     _historical_main_tables,
     _historical_table_notes,
+    _historical_figure_block,
 )
 
 
@@ -52,6 +53,7 @@ def build_supplementary_markdown() -> str:
         parts.append(f"## Supplementary Table S{number}. {title}\n\n{table}")
     for (number, title, table), note in zip(_historical_main_tables(), _historical_table_notes(), strict=True):
         parts.append(f"## Supplementary Table S{number + 12}. {title}\n\n{note}\n\n{table}")
+    parts.append(_historical_figure_block())
     return "\n\n".join(parts).strip() + "\n"
 
 
@@ -96,7 +98,7 @@ def main(argv: list[str] | None = None) -> int:
     markdown = build_supplementary_markdown()
     MARKDOWN_PATH.write_text(markdown, encoding="utf-8", newline="\n")
     if args.markdown_only:
-        print(f"wrote={MARKDOWN_PATH.relative_to(PROJECT_ROOT)} tables=20 no_docx=True")
+        print(f"wrote={MARKDOWN_PATH.relative_to(PROJECT_ROOT)} tables=20 historical_figures=5 no_docx=True")
         return 0
     output = build_supplementary_docx(markdown)
     document = Document(output)

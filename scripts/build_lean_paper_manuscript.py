@@ -14,7 +14,8 @@ from scripts.current_evidence_tables import current_tables
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT_DIR = PROJECT_ROOT / "docs/research/paper_v2/manuscript"
-FIGURE_DIR = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/figures"
+FIGURE_DIR = PROJECT_ROOT / "outputs/experiments/research_followup_20261006_v1/manuscript_figures"
+HISTORICAL_FIGURE_DIR = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/figures"
 TABLE_DIR = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/tables"
 OUTPUT_PATH = MANUSCRIPT_DIR / "manuscript_deepseek_v1.md"
 
@@ -38,6 +39,13 @@ SECTION_FILES = (
 )
 
 FIGURES = (
+    (1, "current_01_boundaries.png", "Authorization, execution and evaluation boundaries."),
+    (2, "current_02_authorization.png", "Corrected authorization and benign-tool completion."),
+    (3, "current_03_calibration.png", "Contemporaneous security and benign-tool utility."),
+    (4, "current_04_restrictions.png", "First restrictions and final workflow states."),
+)
+
+HISTORICAL_FIGURES = (
     (1, "figure_1_authority_boundary.png", "Online fields and the source-authority boundary."),
     (2, "figure_2_factorial_interactions.png", "Prompt, runtime-module, and interaction effects."),
     (3, "figure_3_provenance_counterfactual.png", "Source-authority counterfactual decisions and action changes."),
@@ -267,10 +275,45 @@ def _figure_block() -> str:
         path = FIGURE_DIR / filename
         if not path.is_file():
             raise ManuscriptBuildError(f"Missing paper figure: {path}")
-        relative = Path("../../../../outputs/experiments/incremental_empirical_v1/figures") / filename
+        relative = Path("../../../..") / FIGURE_DIR.relative_to(PROJECT_ROOT) / filename
         lines.append(f"![Figure {number}. {caption}]({relative.as_posix()})")
         lines.append("")
     return "\n".join(lines).strip()
+
+
+def _historical_figure_block() -> str:
+    lines = ["## Historical supplementary figures", "",
+             "The following figures preserve historical analyses and their original "
+             "endpoint definitions; they are not current corrected-v2 main evidence.", ""]
+    for number, filename, caption in HISTORICAL_FIGURES:
+        if not (HISTORICAL_FIGURE_DIR / filename).is_file():
+            raise ManuscriptBuildError(f"Missing historical figure: {filename}")
+        relative = Path("../../../..") / HISTORICAL_FIGURE_DIR.relative_to(PROJECT_ROOT) / filename
+        lines.extend([f"![Supplementary Figure S{number}. {caption}]({relative.as_posix()})", ""])
+    lines.extend(["## Historical figure captions", "",
+                  _drop_wrapper(_read("historical_figure_captions_v1.md"))])
+    return "\n".join(lines).strip()
+
+
+def sync_chinese_figures(source: str) -> str:
+    """Update only main figure links; preserve five historical figures verbatim."""
+    before, remaining = source.split("## 图\n", 1)
+    figures, after = remaining.split("## 表\n", 1)
+    if "## 历史补充图\n" in figures:
+        _, historical = figures.split("## 历史补充图\n", 1)
+    else:
+        historical = re.sub(r"!\[图 ([1-5])\.", r"![补充图 S\1.", figures)
+    if re.findall(r"!\[补充图 S(\d+)\.", historical) != list("12345"):
+        raise ManuscriptBuildError("Chinese historical figures must retain S1-S5")
+    titles = (
+        "授权、执行与评价边界。", "修正版授权与良性工具任务完成。",
+        "同期安全与良性工具任务效用。", "首次限制与流程终态。",
+    )
+    lines = ["## 图", ""]
+    for (number, filename, _), title in zip(FIGURES, titles, strict=True):
+        relative = Path("../../../..") / FIGURE_DIR.relative_to(PROJECT_ROOT) / filename
+        lines.extend([f"![图 {number}. {title}]({relative.as_posix()})", ""])
+    return before + "\n".join(lines) + "\n## 历史补充图\n" + historical + "## 表\n" + after
 
 
 def _read_table(name: str) -> list[dict[str, str]]:
@@ -814,12 +857,16 @@ def build_manuscript() -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sync-chinese-tables", action="store_true")
+    parser.add_argument("--sync-chinese-figures", action="store_true")
     args = parser.parse_args(argv)
     manuscript = build_manuscript()
     OUTPUT_PATH.write_text(manuscript, encoding="utf-8", newline="\n")
     if args.sync_chinese_tables:
         chinese_path = MANUSCRIPT_DIR / "manuscript_zh_v1.md"
         chinese_path.write_text(sync_chinese_tables(_read("manuscript_zh_v1.md")), encoding="utf-8", newline="\n")
+    if args.sync_chinese_figures:
+        chinese_path = MANUSCRIPT_DIR / "manuscript_zh_v1.md"
+        chinese_path.write_text(sync_chinese_figures(_read("manuscript_zh_v1.md")), encoding="utf-8", newline="\n")
     print(
         f"wrote={OUTPUT_PATH.relative_to(PROJECT_ROOT)} "
         f"words={_word_count(manuscript)} sections={len(SECTION_FILES)}"

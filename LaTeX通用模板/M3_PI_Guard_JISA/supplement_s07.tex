@@ -1,22 +1,62 @@
-\clearpage
-\begin{sidewaystable}[p]
-\centering
-\begin{minipage}{\textheight}
-\centering
 \begingroup
-\scriptsize
-\caption{E1 runtime burden and cost}\label{tab:s7}
-\begin{tabular}{@{}*{7}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/7-2\tabcolsep\relax}}@{}}
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\renewcommand{\theHtable}{s7.part1}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{E1 runtime burden and cost (part A)}\label{tab:s7} \\
 \toprule
-Cell & ASK incidence & DENY incidence & Operational failure & Latency p95 & Tokens & Cost (CNY) \\
+Row & Cell & ASK incidence & DENY incidence & Operational failure \\
 \midrule
-Policy / normal & 65/180 & 15/180 & 15/180 & 8.11 s & 305,672 & 0.9651852 \\
-Policy / safe & 55/180 & 16/180 & 16/180 & 9.12 s & 334,370 & 0.8439636 \\
-Full / normal & 63/180 & 22/180 & 16/180 & 8.26 s & 306,306 & 0.7615200 \\
-Full / safe & 62/180 & 21/180 & 16/180 & 9.13 s & 327,845 & 1.0896174 \\
+\endfirsthead
+\caption[]{E1 runtime burden and cost (part A) (continued)} \\
+\toprule
+Row & Cell & ASK incidence & DENY incidence & Operational failure \\
+\midrule
+\endhead
+1 & Policy / normal & 65/180 & 15/180 & 15/180 \\
+2 & Policy / safe & 55/180 & 16/180 & 16/180 \\
+3 & Full / normal & 63/180 & 22/180 & 16/180 \\
+4 & Full / safe & 62/180 & 21/180 & 16/180 \\
 \bottomrule
-\end{tabular}
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s7.part2}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{E1 runtime burden and cost (part B)} \\
+\toprule
+Row & Cell & ASK incidence & Latency p95 & Tokens \\
+\midrule
+\endfirsthead
+\caption[]{E1 runtime burden and cost (part B) (continued)} \\
+\toprule
+Row & Cell & ASK incidence & Latency p95 & Tokens \\
+\midrule
+\endhead
+1 & Policy / normal & 65/180 & 8.11 s & 305,672 \\
+2 & Policy / safe & 55/180 & 9.12 s & 334,370 \\
+3 & Full / normal & 63/180 & 8.26 s & 306,306 \\
+4 & Full / safe & 62/180 & 9.13 s & 327,845 \\
+\bottomrule
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s7.part3}
+\begin{longtable}{@{}*{4}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/4-2\tabcolsep\relax}}@{}}
+\caption[]{E1 runtime burden and cost (part C)} \\
+\toprule
+Row & Cell & ASK incidence & Cost (CNY) \\
+\midrule
+\endfirsthead
+\caption[]{E1 runtime burden and cost (part C) (continued)} \\
+\toprule
+Row & Cell & ASK incidence & Cost (CNY) \\
+\midrule
+\endhead
+1 & Policy / normal & 65/180 & 0.9651852 \\
+2 & Policy / safe & 55/180 & 0.8439636 \\
+3 & Full / normal & 63/180 & 0.7615200 \\
+4 & Full / safe & 62/180 & 1.0896174 \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.
 \endgroup
-\end{minipage}
-\end{sidewaystable}
-\clearpage

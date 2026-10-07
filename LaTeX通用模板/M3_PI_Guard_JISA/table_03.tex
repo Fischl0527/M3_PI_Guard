@@ -1,30 +1,27 @@
-\clearpage
-\begin{sidewaystable}[p]
-\centering
-\begin{minipage}{\textheight}
-\centering
 \begingroup
-\scriptsize
-\caption{E2 source-authority evidence}\label{tab:3}
-\begin{tabular}{@{}*{10}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/10-2\tabcolsep\relax}}@{}}
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{Contemporaneous security and benign-tool utility}\label{tab:3} \\
 \toprule
-Study & Endpoint & Factor & Paired cases & Effect & CI low & CI high & Bootstrap p & Holm p & Bootstrap n \\
+Benchmark / condition & Attack [95\% CI, \%] & Benign completion [95\% CI, \%] & Unknown A / B & Failure A / B \\
 \midrule
-E2 end to end & un\-au\-thor\-ized argument influence & module & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
-E2 end to end & un\-au\-thor\-ized argument influence & source & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
-E2 end to end & un\-au\-thor\-ized argument influence & source x module & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
-E2 end to end & authorized action execution & module & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
-E2 end to end & authorized action execution & source & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
-E2 end to end & authorized action execution & source x module & 60 & +0.00 pp & +0.00 pp & +0.00 pp & 1.0000 & 1.0000 & 10000 \\
-E2 end to end & source swap action change & full & 60 & +0.00 pp & +0.00 pp & +6.02 pp & --- & --- & --- \\
-E2 end to end & source swap action change & policy & 60 & +0.00 pp & +0.00 pp & +6.02 pp & --- & --- & --- \\
-E2 offline guard replay & false allow & not applicable & 240 & +0.00 pp & +0.00 pp & +1.58 pp & --- & --- & --- \\
-E2 offline guard replay & false block & not applicable & 240 & +12.50 pp & +8.90 pp & +17.28 pp & --- & --- & --- \\
+\endfirsthead
+\caption[]{Contemporaneous security and benign-tool utility (continued)} \\
+\toprule
+Benchmark / condition & Attack [95\% CI, \%] & Benign completion [95\% CI, \%] & Unknown A / B & Failure A / B \\
+\midrule
+\endhead
+AgentDojo / ND & 3/30 [3.46, 25.62] & 17/30 [39.20, 72.62] & 0 / 0 & 5 / 7 \\
+AgentDojo / Policy & 0/30 [0.00, 11.35] & 2/30 [1.85, 21.32] & 0 / 0 & 0 / 0 \\
+AgentDojo / Full & 0/30 [0.00, 11.35] & 2/30 [1.85, 21.32] & 0 / 0 & 0 / 0 \\
+AgentDojo / VIGIL configured & 4/28 [5.70, 31.49] & 17/28 [42.41, 76.43] & 2 / 2 & 3 / 7 \\
+M3-v2 / ND & 0/30 [0.00, 11.35] & 16/30 [36.14, 69.77] & 0 / 0 & 0 / 4 \\
+M3-v2 / Policy & 0/30 [0.00, 11.35] & 17/30 [39.20, 72.62] & 0 / 0 & 0 / 1 \\
+M3-v2 / Full & 0/30 [0.00, 11.35] & 16/30 [36.14, 69.77] & 0 / 0 & 0 / 4 \\
+M3-v2 / VIGIL configured & 0/30 [0.00, 11.35] & 16/30 [36.14, 69.77] & 0 / 0 & 0 / 6 \\
 \bottomrule
-\end{tabular}
-\par\vspace{0.35\baselineskip}
-\noindent\textit{Note.} End-to-end source swaps and deterministic Guard replay are separate evidence layers and must not be interpreted as interchangeable.
+\end{longtable}
+\noindent\textit{Note.} Each attack and benign cell has 30 planned tasks. Fractions use known outcomes, with Wilson 95\% intervals in percent. Unknowns are not safe zeros. For AgentDojo VIGIL, attack ITT bounds are 4/30 to 6/30 and benign completion bounds are 17/30 to 19/30. Failures are separate from unsafe effects. AgentDojo uses native security verdicts; M3-v2 uses observed simulated un\-au\-thor\-ized effects. ND means no research Guard, not removal of the shared isolation boundary.
 \endgroup
-\end{minipage}
-\end{sidewaystable}
-\clearpage

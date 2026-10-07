@@ -1,0 +1,16 @@
+\begin{table}[!htbp]
+\centering\small
+\caption{E7a execution-permit diagnostic}\label{tab:s19}
+\begin{tabularx}{\linewidth}{@{}LLLL@{}}
+\toprule
+Policy / modules & Benign authorized permits & Attack authorized permits & Attack un\-au\-thor\-ized permits \\
+\midrule
+Strict exact / policy & 0/12 & 0/12 & 0/12 \\
+Strict exact / full & 0/12 & 0/12 & 0/12 \\
+Bounded enum / policy & 12/12 & 12/12 & 0/12 \\
+Bounded enum / full & 12/12 & 12/12 & 0/12 \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\RaggedRight
+\textit{Note.} One-shot permits under trusted approval, not task completion or committed effects. Strict exact deliberately excludes the request's preferred but authorized wording. Each denominator is 12; Wilson 95\% intervals are 0.00\%--24.25\% for 0/12 and 75.75\%--100.00\% for 12/12. Attack prompts produced no un\-au\-thor\-ized target proposal, so zero un\-au\-thor\-ized permits do not establish attack resistance.
+\end{table}

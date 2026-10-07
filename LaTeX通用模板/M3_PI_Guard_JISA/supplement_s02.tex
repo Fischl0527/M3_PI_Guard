@@ -1,24 +1,47 @@
-\clearpage
-\begin{sidewaystable}[p]
-\centering
-\begin{minipage}{\textheight}
-\centering
 \begingroup
-\footnotesize
-\caption{Completed medium security and utility outcomes}\label{tab:s2}
-\begin{tabular}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\renewcommand{\theHtable}{s2.part1}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{Completed medium security and utility outcomes (part A)}\label{tab:s2} \\
 \toprule
-Condition & Unsafe effects / 36 attacks & Unsafe-effect rate (Wilson 95\% CI) & Tool completions / 24 & Tool TCR (Wilson 95\% CI) & No-tool TCR \\
+Row & Condition & Unsafe effects / 36 attacks & Unsafe-effect rate (Wilson 95\% CI) & Tool completions / 24 \\
 \midrule
-No defense & 8/36 & 22.22\% (11.72--38.08) & 12/24 & 50.00\% (31.43--68.57) & 12/12 \\
-Safe prompt / spotlighting & 8/36 & 22.22\% (11.72--38.08) & 11/24 & 45.83\% (27.89--64.93) & 12/12 \\
-PromptGuard (detector-only) & 8/36 & 22.22\% (11.72--38.08) & 12/24 & 50.00\% (31.43--68.57) & 12/12 \\
-Structural baseline & 8/36 & 22.22\% (11.72--38.08) & 12/24 & 50.00\% (31.43--68.57) & 12/12 \\
-Policy package (\nolinkurl{m3_policy_only}) & 0/36 & 0.00\% (0.00--9.64) & 7/24 & 29.17\% (14.91--49.17) & 12/12 \\
-Full package (\nolinkurl{m3_full}) & 0/36 & 0.00\% (0.00--9.64) & 6/24 & 25.00\% (12.00--44.90) & 12/12 \\
+\endfirsthead
+\caption[]{Completed medium security and utility outcomes (part A) (continued)} \\
+\toprule
+Row & Condition & Unsafe effects / 36 attacks & Unsafe-effect rate (Wilson 95\% CI) & Tool completions / 24 \\
+\midrule
+\endhead
+1 & No defense & 8/36 & 22.22\% (11.72--38.08) & 12/24 \\
+2 & Safe prompt / spotlighting & 8/36 & 22.22\% (11.72--38.08) & 11/24 \\
+3 & PromptGuard (detector-only) & 8/36 & 22.22\% (11.72--38.08) & 12/24 \\
+4 & Structural baseline & 8/36 & 22.22\% (11.72--38.08) & 12/24 \\
+5 & Policy package (\nolinkurl{m3_policy_only}) & 0/36 & 0.00\% (0.00--9.64) & 7/24 \\
+6 & Full package (\nolinkurl{m3_full}) & 0/36 & 0.00\% (0.00--9.64) & 6/24 \\
 \bottomrule
-\end{tabular}
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s2.part2}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{Completed medium security and utility outcomes (part B)} \\
+\toprule
+Row & Condition & Unsafe effects / 36 attacks & Tool TCR (Wilson 95\% CI) & No-tool TCR \\
+\midrule
+\endfirsthead
+\caption[]{Completed medium security and utility outcomes (part B) (continued)} \\
+\toprule
+Row & Condition & Unsafe effects / 36 attacks & Tool TCR (Wilson 95\% CI) & No-tool TCR \\
+\midrule
+\endhead
+1 & No defense & 8/36 & 50.00\% (31.43--68.57) & 12/12 \\
+2 & Safe prompt / spotlighting & 8/36 & 45.83\% (27.89--64.93) & 12/12 \\
+3 & PromptGuard (detector-only) & 8/36 & 50.00\% (31.43--68.57) & 12/12 \\
+4 & Structural baseline & 8/36 & 50.00\% (31.43--68.57) & 12/12 \\
+5 & Policy package (\nolinkurl{m3_policy_only}) & 0/36 & 29.17\% (14.91--49.17) & 12/12 \\
+6 & Full package (\nolinkurl{m3_full}) & 0/36 & 25.00\% (12.00--44.90) & 12/12 \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.
 \endgroup
-\end{minipage}
-\end{sidewaystable}
-\clearpage

@@ -46,3 +46,16 @@ def test_supplement_uses_the_manuscript_title() -> None:
     supplement = builder.build_supplementary_markdown()
 
     assert f"**Article:** {builder.TITLE}" in supplement
+
+
+def test_historical_figures_and_captions_remain_separate_from_current_main() -> None:
+    from scripts import build_lean_paper_manuscript as manuscript
+
+    supplement = builder.build_supplementary_markdown()
+    assert re.findall(r"!\[Supplementary Figure S(\d+)\.", supplement) == list("12345")
+    assert re.findall(r"\*\*Supplementary Figure S(\d+)\.", supplement) == list("12345")
+    assert "current_01_boundaries" not in supplement
+    for _, filename, _ in manuscript.HISTORICAL_FIGURES:
+        assert filename in supplement
+    assert "historical evaluator endpoint" in supplement
+    assert "not an estimate of saturation" in supplement

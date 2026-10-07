@@ -1,5 +1,10 @@
-\documentclass[preprint,12pt]{elsarticle}
-\usepackage{booktabs,tabularx,longtable,array,rotating,microtype,ragged2e}
+\documentclass[preprint,12pt,a4paper]{elsarticle}
+\usepackage{booktabs,tabularx,longtable,array,rotating,microtype,ragged2e,graphicx}
+\usepackage{fontspec}
+\usepackage[a4paper,margin=25mm]{geometry}
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Times New Roman}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
 \newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
@@ -8,6 +13,7 @@
 \setlength{\emergencystretch}{3em}
 \hyphenation{un-au-thor-ized}
 \renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
 
 \begin{document}
 \begin{frontmatter}
@@ -15,7 +21,7 @@
 \end{frontmatter}
 \hypersetup{pdfauthor={}}
 
-These twelve tables provide detailed results referenced by the main manuscript.
+These twenty tables and five historical figures provide detailed results referenced by the main manuscript.
 They introduce no additional hypothesis family or claim beyond the analyses
 reported in the article.
 
@@ -31,4 +37,20 @@ reported in the article.
 \input{\ProjectRoot/supplement_s10.tex}
 \input{\ProjectRoot/supplement_s11.tex}
 \input{\ProjectRoot/supplement_s12.tex}
+\input{\ProjectRoot/supplement_s13.tex}
+\input{\ProjectRoot/supplement_s14.tex}
+\input{\ProjectRoot/supplement_s15.tex}
+\input{\ProjectRoot/supplement_s16.tex}
+\input{\ProjectRoot/supplement_s17.tex}
+\input{\ProjectRoot/supplement_s18.tex}
+\input{\ProjectRoot/supplement_s19.tex}
+\input{\ProjectRoot/supplement_s20.tex}
+\clearpage
+\section*{Historical supplementary figures}
+The following figures retain historical endpoint definitions and are not current corrected-v2 main evidence.
+\input{\ProjectRoot/historical_figure_s01.tex}
+\input{\ProjectRoot/historical_figure_s02.tex}
+\input{\ProjectRoot/historical_figure_s03.tex}
+\input{\ProjectRoot/historical_figure_s04.tex}
+\input{\ProjectRoot/historical_figure_s05.tex}
 \end{document}

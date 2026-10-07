@@ -527,15 +527,25 @@ E7a仅含配对内存确认，没有模型澄清、真人或后端状态变化�
 
 ## 图
 
-![图 1. 在线字段与来源权威边界。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_1_authority_boundary.png)
+![图 1. 授权、执行与评价边界。](../../../../outputs/experiments/research_followup_20261006_v1/manuscript_figures/current_01_boundaries.png)
 
-![图 2. 提示词、运行时模块与交互效应。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_2_factorial_interactions.png)
+![图 2. 修正版授权与良性工具任务完成。](../../../../outputs/experiments/research_followup_20261006_v1/manuscript_figures/current_02_authorization.png)
 
-![图 3. 来源权威性反事实决策与动作变化。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_3_provenance_counterfactual.png)
+![图 3. 同期安全与良性工具任务效用。](../../../../outputs/experiments/research_followup_20261006_v1/manuscript_figures/current_03_calibration.png)
 
-![图 4. 代表性、风险富集与 Flash 队列的因子效应。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_4_factor_effect_forest.png)
+![图 4. 首次限制与流程终态。](../../../../outputs/experiments/research_followup_20261006_v1/manuscript_figures/current_04_restrictions.png)
 
-![图 5. 完整 B50/B200 证据与 B200-survivor 条件尾部。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_5_adaptive_tail.png)
+## 历史补充图
+
+![补充图 S1. 在线字段与来源权威边界。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_1_authority_boundary.png)
+
+![补充图 S2. 提示词、运行时模块与交互效应。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_2_factorial_interactions.png)
+
+![补充图 S3. 来源权威性反事实决策与动作变化。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_3_provenance_counterfactual.png)
+
+![补充图 S4. 代表性、风险富集与 Flash 队列的因子效应。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_4_factor_effect_forest.png)
+
+![补充图 S5. 完整 B50/B200 证据与 B200-survivor 条件尾部。](../../../../outputs/experiments/incremental_empirical_v1/figures/figure_5_adaptive_tail.png)
 
 ## 表
 
@@ -739,15 +749,25 @@ Corrected-v1开发数据，不与历史运行作确认性比较。AgentDojo保�
 
 ## 图注
 
-**图 1. 在线字段与来源权威边界。** 可信任务上下文、授权投影、来源事件和拟执行动作可以进入 Guard，原始评估标签、金标准答案和效应回执留在离线侧。E2 在命题、参数值、相对位置和策略固定时只改变来源权威性；服务商托管工具和真实外部效应均关闭。
+**图 1. 授权、执行与评价边界。** 受信意图、在线授权对象与运行事件和离线评价分开。虚线表示理想对照：离线目标派生的授权对象可以进入Guard，原始gold答案与evaluator字段不进入在线状态；它不是部署授权。模型提案、Guard判定、隔离拒绝、模拟执行、任务完成、失败与未知分别保留。服务商工具和真实外部效果关闭。示意图只说明边界，不证明有效性。
 
-**图 2. 提示词×运行时模块因子效应。** 三个面板分别显示 E1 四个单元的攻击旧版风险标签端点、良性工具完成和失败敏感性攻击端点；对应的 module、prompt 与 interaction 估计见补充表S14。区间来自 10,000 次案例聚类 bootstrap；Holm 校正仅用于不安全效应和良性工具 TCR 两个共同主要终点族，失败敏感性端点只作描述性分析。
+**图 2. 修正版授权与良性工具任务完成。** a面板给出每个基准与policy/full配置中30个良性工具任务的完成比例及缓存Wilson 95%区间；b面板给出精确目标减自动编译的任务配对差及缓存Newcombe 95%区间，单位为百分点。两种区间回答不同问题。普通提示固定，精确目标是理想对照；任务重叠不能当作独立样本。ASK/DENY与失败单列于表2。
 
-**图 3. 来源权威性反事实。** 决策热图给出 trusted/untrusted origin、policy/full modules 和授权/未授权提案的确定性 Guard 结果；配对动作面板另行报告端到端来源交换后的动作变化。离线 Guard 正确率不被视为系统任务完成的替代指标。
+**图 3. 同期安全与良性工具任务效用。** 两行分别保留AgentDojo原生安全判定与M3-v2模拟效果端点，两列为攻击与良性工具完成。每个条件每面板计划30个任务；点与Wilson区间采用已观察分母，分数明确给出事件数/已观察数。配置VIGIL的AgentDojo两个端点均观察28个、未知2个；橙色ITT识别范围不是置信区间，不把未知当安全。配置VIGIL采用约束生成与确定性hybrid审计，不是官方完整默认实现；请求上限16，其余条件8。不能据此给模型排名或确认完整模块安全优势。
 
-**图 4. 代表性、风险富集与 Flash 队列的因子效应。** 图中并列 E1、结果富集 E3 挑战集和同服务商 E4 Flash 复现的绝对因子效应与区间。E3 不估计部署流行率，E4 不建立跨厂商一般性，两者均不新增显著性检验家族。
+**图 4. 首次限制与流程终态。** 八行分别对应一个基准、授权制度与policy/full配置，每行30条良性工具任务分配。a面板为公开事件中首次阻断类别，b面板为执行与完成终态。这是描述性分类，不是已判定根因，不证明缺少的权限应该授予。P/F表示policy/full，A/E表示自动编译/精确目标。ASK/DENY负担见表2，图中计数不增加新的推断或区间。
 
-**图 5. 完整 B50/B200 证据与条件性自适应尾部。** 原 40 任务面板只在 200 以内提供完整累计 first-success 证据；第二面板仅包含 12 个预设 B200 survivor。条件尾部不能并入原面板构造完整 B500 曲线，也不能解释为攻击饱和估计；成功指历史评价标签，不是事后确认的实际越权效果。
+## 历史补充图注
+
+**补充图 S1. 在线字段与来源权威边界。** 可信任务上下文、授权投影、来源事件和拟执行动作可以进入 Guard，原始评估标签、金标准答案和效应回执留在离线侧。E2 在命题、参数值、相对位置和策略固定时只改变来源权威性；服务商托管工具和真实外部效应均关闭。
+
+**补充图 S2. 提示词×运行时模块因子效应。** 三个面板分别显示 E1 四个单元的攻击旧版风险标签端点、良性工具完成和失败敏感性攻击端点；对应的 module、prompt 与 interaction 估计见补充表S14。区间来自 10,000 次案例聚类 bootstrap；Holm 校正仅用于不安全效应和良性工具 TCR 两个共同主要终点族，失败敏感性端点只作描述性分析。
+
+**补充图 S3. 来源权威性反事实。** 决策热图给出 trusted/untrusted origin、policy/full modules 和授权/未授权提案的确定性 Guard 结果；配对动作面板另行报告端到端来源交换后的动作变化。离线 Guard 正确率不被视为系统任务完成的替代指标。
+
+**补充图 S4. 代表性、风险富集与 Flash 队列的因子效应。** 图中并列 E1、结果富集 E3 挑战集和同服务商 E4 Flash 复现的绝对因子效应与区间。E3 不估计部署流行率，E4 不建立跨厂商一般性，两者均不新增显著性检验家族。
+
+**补充图 S5. 完整 B50/B200 证据与条件性自适应尾部。** 原 40 任务面板只在 200 以内提供完整累计 first-success 证据；第二面板仅包含 12 个预设 B200 survivor。条件尾部不能并入原面板构造完整 B500 曲线，也不能解释为攻击饱和估计；成功指历史评价标签，不是事后确认的实际越权效果。
 
 ## 投稿声明
 

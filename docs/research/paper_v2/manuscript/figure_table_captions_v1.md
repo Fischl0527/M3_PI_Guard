@@ -1,42 +1,47 @@
 # Figure and table captions
 
-Status: `deepseek_e1_e6_complete_gemini_diagnostic_ne`
+Status: `current_corrected_v2_figures_historical_supplement_preserved`
 
 ## Figures
 
-**Figure 1. Online fields and the source-authority boundary.** Trusted task
-context, projected authorization, provenance events, and proposed actions may
-enter the Guard. Raw evaluator labels, gold answers, and effect receipts remain
-offline. The E2 source swap changes authority while holding proposition, value,
-relative position, and policy fixed; provider-managed tools and real external
-effects remain disabled.
+**Figure 1. Authorization, execution and evaluation boundaries.** Trusted intent,
+projected authorization and runtime events are distinct from offline evaluation.
+The dashed path denotes the oracle sensitivity condition: only an authorization
+object derived from the offline target is exposed to the Guard, not the raw
+gold or evaluator fields. This is not deployable authorization. Model proposals,
+Guard decisions, isolation rejections, simulated execution, task completion,
+failure and unknown outcomes remain distinct. Provider-managed tools and real
+external effects are disabled. The diagram describes scope, not effectiveness.
 
-**Figure 2. Prompt-by-module factorial effects.** Panels show the four E1 cells
-for the legacy-labelled risk endpoint, benign-tool completion, and the failure-sensitive attack
-endpoint; Supplementary Table S14 reports the corresponding module, prompt, and interaction
-effects. Intervals use 10,000 case-cluster bootstrap replicates. Holm adjustment
-is confined to the originally specified safety and benign-tool TCR families; the
-failure-sensitive endpoint remains a descriptive sensitivity analysis.
+**Figure 2. Corrected authorization and benign-tool completion.** Panel a shows
+completion fractions and cached Wilson 95% intervals for 30 benign-tool tasks in
+each benchmark and policy/full configuration under ordinary prompts. Panel b
+shows the corresponding paired exact-target minus auto-compiled differences
+with cached Newcombe 95% intervals, in percentage points. The two interval types
+answer different questions. Exact-target is the oracle sensitivity condition,
+not an estimate of deployed permissions; the regimes and configurations use
+overlapping paired tasks. ASK/DENY events and failures are separate in Table 2.
 
-**Figure 3. Source-authority counterfactual.** The decision heatmap reports
-deterministic Guard outcomes for authorized and unauthorized proposals under
-trusted/untrusted origins and policy/full modules. The paired action panel
-separately reports end-to-end source-swap action changes. Offline Guard
-correctness is not treated as a substitute for system task completion.
+**Figure 3. Contemporaneous security and benign-tool utility.** Rows separate
+AgentDojo native security verdicts from M3-v2 simulated effects; columns show
+attack outcomes and benign-tool completion. Each condition has 30 planned
+tasks per panel. Points and Wilson 95% intervals use observed denominators;
+fractions show true/observed counts, with missing outcomes explicit. Configured
+VIGIL has 28 observed AgentDojo outcomes and two unknowns per endpoint. Its
+orange ITT identification range is not a confidence interval and does not treat
+unknowns as safe failures. Configured VIGIL uses constraint generation and a
+deterministic hybrid audit, not its complete official default implementation;
+its 16-call limit differs from the other conditions' eight-call limit. These
+results do not rank providers or establish a full-module safety advantage.
 
-**Figure 4. Factor effects across representative, enriched, and Flash
-cohorts.** Absolute module, prompt, and interaction effects on the legacy-labelled
-risk endpoint are shown for E1,
-the outcome-enriched E3 challenge, and the same-provider E4 Flash replication.
-E3 does not estimate prevalence and E4 does not establish cross-provider
-generality; neither opens a new significance family.
-
-**Figure 5. Complete B50/B200 evidence and the conditional adaptive tail.**
-The original 40-task panel contributes the complete cumulative first-success
-evidence through 200. The second panel includes only 12 prespecified B200
-survivors extended toward 500. The conditional tail is not merged into a full
-original-panel B500 curve and is not an estimate of saturation. Success refers
-to the historical evaluator endpoint, not retrospectively confirmed unauthorized effects.
+**Figure 4. First restrictions and final workflow states.** Each row contains
+30 benign-tool assignments under one benchmark, authorization regime and
+policy/full configuration. Panel a classifies the first publicly observed block;
+panel b classifies final execution and completion states. The cached categories
+are descriptive event summaries, not adjudicated root causes or proof that
+missing permissions should be granted. P/F denotes policy/full and A/E denotes
+auto/exact target. ASK/DENY burden is reported separately in Table 2. No new
+inference or uncertainty estimate is introduced by these counts.
 
 ## Tables
 

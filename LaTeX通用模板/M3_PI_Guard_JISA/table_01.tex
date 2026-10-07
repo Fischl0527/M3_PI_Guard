@@ -1,23 +1,23 @@
 \begingroup
-\footnotesize
+\small
 \setlength{\LTpre}{0.5\baselineskip}
 \setlength{\LTpost}{0.5\baselineskip}
 \begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
-\caption{Prompt-by-module factorial design}\label{tab:1} \\
+\caption{Current study cohorts and configurations}\label{tab:1} \\
 \toprule
-Condition cell & Prompt & Modules & Authorization & Historical rows reused \\
+Study & Cases & Assignments & Conditions & Scope \\
 \midrule
 \endfirsthead
-\caption[]{Prompt-by-module factorial design (continued)} \\
+\caption[]{Current study cohorts and configurations (continued)} \\
 \toprule
-Condition cell & Prompt & Modules & Authorization & Historical rows reused \\
+Study & Cases & Assignments & Conditions & Scope \\
 \midrule
 \endhead
-Policy / normal & normal & policy & auto compiled & No \\
-Policy / safe & safe & policy & auto compiled & No \\
-Full / normal & normal & full & auto compiled & No \\
-Full / safe & safe & full & auto compiled & No \\
+Authorization core & 180 & 720 & Policy/\allowbreak{}full; auto/\allowbreak{}exact target & Pro; normal prompt \\
+Nested stress regimes & 60 (nested) & 180 & Full; broad/\allowbreak{}underspecified/\allowbreak{}conflicting & Pro; normal prompt \\
+Con\-tem\-po\-ra\-ne\-ous calibration & 120 & 480 & ND/\allowbreak{}policy/\allowbreak{}full/\allowbreak{}configured VIGIL & Pro; normal prompt \\
+Synthetic controls & 4 scenarios & 16 & Policy/\allowbreak{}full & Pro + V4.1 Flash \\
 \bottomrule
 \end{longtable}
-\noindent\textit{Note.} The four contemporaneous cells cross prompt profile with the runtime module bundle while holding authorization at auto\_compiled.
+\noindent\textit{Note.} The authorization core and nested stress assignments total 900, not 900 independent cases. Cohorts overlap. Exact target is evaluator-derived oracle authorization, not a deployable source. VIGIL uses generated constraints and deterministic hybrid auditing with secondary model verification disabled; its call cap is 16 versus 8 for the other calibration conditions.
 \endgroup

@@ -11,8 +11,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT_DIR = REPO_ROOT / "docs" / "research" / "paper_v2" / "manuscript"
 FIGURE_SOURCE_DIR = (
     REPO_ROOT
-    / "outputs" / "experiments" / "incremental_empirical_v1" / "figures"
+    / "outputs" / "experiments" / "research_followup_20261006_v1" / "manuscript_figures"
 )
+HISTORICAL_FIGURE_SOURCE_DIR = REPO_ROOT / "outputs/experiments/incremental_empirical_v1/figures"
 TEMPLATE_DIR = REPO_ROOT / "LaTeX通用模板"
 OUTPUT_DIR = TEMPLATE_DIR / "M3_PI_Guard_JISA"
 REVIEW_ENTRY = TEMPLATE_DIR / "数模通用模板.tex"
@@ -23,6 +24,13 @@ SUPPLEMENT_MARKDOWN = "supplementary_tables_v1.md"
 BIBLIOGRAPHY = "references_v1.bib"
 
 FIGURE_FILES = {
+    1: "current_01_boundaries.pdf",
+    2: "current_02_authorization.pdf",
+    3: "current_03_calibration.pdf",
+    4: "current_04_restrictions.pdf",
+}
+
+HISTORICAL_FIGURE_FILES = {
     1: "figure_1_authority_boundary.pdf",
     2: "figure_2_factorial_interactions.pdf",
     3: "figure_3_provenance_counterfactual.pdf",
@@ -41,20 +49,11 @@ SECTION_FILES = {
 
 PLACEMENTS = {
     "3. Methods": {
-        "Corrected target authorization and contemporaneous calibration": ("table_01",),
-        "Source-authority counterfactual": ("figure_01",),
+        "Corrected target authorization and contemporaneous calibration": ("table_01", "figure_01"),
     },
     "4. Results": {
-        "Corrected authorization and contemporaneous calibration": ("table_02", "table_03", "table_04"),
-        "Concurrent prompt-by-module factorial experiment": (
-            "figure_02",
-        ),
-        "Source-authority counterfactual": ("figure_03",),
-        "Outcome-enriched challenge and Flash replication": (
-            "figure_04",
-        ),
-        "Defense-aware adaptive evidence and conditional tail through budget 500": (
-            "figure_05",
+        "Corrected authorization and contemporaneous calibration": (
+            "table_02", "table_03", "table_04", "figure_02", "figure_03", "figure_04", "float_barrier",
         ),
     },
 }
@@ -287,7 +286,10 @@ def _markdown_blocks(
 
         artifact = re.fullmatch(r"@@ARTIFACT:([a-z0-9_]+)@@", line.strip())
         if artifact:
-            output.append(rf"\input{{\ProjectRoot/{artifact.group(1)}.tex}}")
+            output.append(
+                r"\FloatBarrier" if artifact.group(1) == "float_barrier"
+                else rf"\input{{\ProjectRoot/{artifact.group(1)}.tex}}"
+            )
             index += 1
             continue
 
@@ -409,6 +411,13 @@ def _longtable_column_spec(column_count: int) -> str:
     return "@{}" + f"*{{{column_count}}}{{{column}}}" + "@{}"
 
 
+def _table_inline(text: str) -> str:
+    # Slash-joined word lists may wrap without changing any scientific values.
+    # Numeric fractions deliberately retain their unbroken numerator/denominator.
+    rendered = re.sub(r"(?<=[A-Za-z])/(?=[A-Za-z])", r"/\\allowbreak{}", _inline(text))
+    return re.sub(r"\bContemporaneous\b", r"Con\\-tem\\-po\\-ra\\-ne\\-ous", rendered)
+
+
 def _render_numbered_table(
     table: MarkdownTable,
     *,
@@ -416,16 +425,12 @@ def _render_numbered_table(
 ) -> str:
     column_count = len(table.header)
     label_number = label_number or table.number.lower()
-    # Wide evidence tables need the long edge of the sheet, but rotating the
-    # *page* with pdflscape also rotates the template footer and moves its page
-    # number to the left edge.  sidewaystable rotates only the float contents;
-    # the physical page, template geometry, and footer stay portrait.
+    # Preserve wide tables as portrait panels with row IDs and repeated context.
+    # Never rotate a page/float or shrink numeric text merely to fit its width.
     wide = column_count >= 6
-    font_size = (
-        r"\scriptsize" if column_count >= 7 or table.number == "S12" else r"\footnotesize"
-    )
-    header = " & ".join(_inline(cell) for cell in table.header) + r" \\"
-    body = [" & ".join(_inline(cell) for cell in row) + r" \\" for row in table.rows]
+    font_size = r"\small"
+    header = " & ".join(_table_inline(cell) for cell in table.header) + r" \\"
+    body = [" & ".join(_table_inline(cell) for cell in row) + r" \\" for row in table.rows]
 
     if table.number == "S19":
         # This four-row diagnostic must travel with its semantic-limit note.
@@ -445,38 +450,39 @@ def _render_numbered_table(
         return "\n".join(lines)
 
     if wide:
-        lines = [
-            r"\clearpage",
-            r"\begin{sidewaystable}[p]",
-            r"\centering",
-            r"\begin{minipage}{\textheight}",
-            r"\centering",
-            r"\begingroup",
-            font_size,
-            rf"\caption{{{_inline(table.title)}}}\label{{tab:{label_number}}}",
-            rf"\begin{{tabular}}{{{_longtable_column_spec(column_count)}}}",
-            r"\toprule",
-            header,
-            r"\midrule",
-            *body,
-            r"\bottomrule",
-            r"\end{tabular}",
-        ]
-        if table.note:
-            lines.extend(
-                [
-                    r"\par\vspace{0.35\baselineskip}",
-                    r"\noindent\textit{Note.} " + _inline(table.note),
-                ]
-            )
-        lines.extend(
-            [
-                r"\endgroup",
-                r"\end{minipage}",
-                r"\end{sidewaystable}",
-                r"\clearpage",
+        lines = [r"\begingroup", font_size,
+                 r"\setlength{\LTpre}{0.5\baselineskip}",
+                 r"\setlength{\LTpost}{0.5\baselineskip}"]
+        for part, start in enumerate(range(2, column_count, 2)):
+            indices = [0, 1, *range(start, min(start + 2, column_count))]
+            panel_header = " & ".join(["Row", *(_table_inline(table.header[i]) for i in indices)]) + r" \\"
+            panel_body = [
+                " & ".join([str(n), *(_table_inline(row[i]) for i in indices)]) + r" \\"
+                for n, row in enumerate(table.rows, 1)
             ]
-        )
+            title = _inline(f"{table.title} (part {chr(65 + part)})")
+            if part:
+                # longtable increments once per panel; retain one logical table
+                # number and only one label across all parts.
+                lines.append(r"\addtocounter{table}{-1}")
+            # Hyperref also uses the table counter for destinations. Give each
+            # continued panel a distinct destination without changing its number.
+            lines.append(rf"\renewcommand{{\theHtable}}{{{label_number}.part{part + 1}}}")
+            caption = (
+                rf"\caption{{{title}}}\label{{tab:{label_number}}} \\"
+                if not part else rf"\caption[]{{{title}}} \\"
+            )
+            lines.extend([
+                rf"\begin{{longtable}}{{{_longtable_column_spec(len(indices) + 1)}}}",
+                caption, r"\toprule", panel_header, r"\midrule", r"\endfirsthead",
+                rf"\caption[]{{{title} (continued)}} \\",
+                r"\toprule", panel_header, r"\midrule", r"\endhead",
+                *panel_body, r"\bottomrule", r"\end{longtable}",
+            ])
+        lines.append(r"\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.")
+        if table.note:
+            lines.extend([r"\par\smallskip", r"\noindent\textit{Note.} " + _inline(table.note)])
+        lines.append(r"\endgroup")
         return "\n".join(lines)
 
     lines = [
@@ -505,25 +511,32 @@ def _render_numbered_table(
     return "\n".join(lines)
 
 
-def _parse_figure_captions(markdown: str) -> dict[int, tuple[str, str]]:
+def _parse_figure_captions(
+    markdown: str, *, historical: bool = False,
+) -> dict[int, tuple[str, str]]:
+    prefix = "Supplementary Figure S" if historical else "Figure "
     pattern = re.compile(
-        r"\*\*Figure (\d+)\.\s*(.+?)\.\*\*\s*(.+?)(?=\n\n\*\*Figure|\Z)",
+        rf"\*\*{prefix}(\d+)\.\s*(.+?)\.\*\*\s*(.+?)(?=\n\n\*\*{prefix}|\Z)",
         flags=re.DOTALL,
     )
     captions: dict[int, tuple[str, str]] = {}
     for match in pattern.finditer(markdown):
         number = int(match.group(1))
+        if number in captions:
+            raise LatexBuildError(f"Duplicate figure caption: {prefix}{number}")
         captions[number] = (
             " ".join(match.group(2).split()),
             " ".join(match.group(3).split()),
         )
-    if set(captions) != set(FIGURE_FILES):
-        raise LatexBuildError(f"Expected figure captions 1--5, found {sorted(captions)}.")
+    expected = HISTORICAL_FIGURE_FILES if historical else FIGURE_FILES
+    if set(captions) != set(expected):
+        raise LatexBuildError(f"Expected {prefix}captions {sorted(expected)}, found {sorted(captions)}.")
     return captions
 
 
-def _render_figure(number: int, title: str, description: str) -> str:
-    filename = FIGURE_FILES[number]
+def _render_figure(number: int, title: str, description: str, *, historical: bool = False) -> str:
+    filename = (HISTORICAL_FIGURE_FILES if historical else FIGURE_FILES)[number]
+    label = f"S{number:02d}" if historical else f"{number:02d}"
     caption = f"{title}. {description}"
     return "\n".join(
         [
@@ -531,7 +544,7 @@ def _render_figure(number: int, title: str, description: str) -> str:
             r"\centering",
             rf"\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{{\ProjectRoot/{filename}}}",
             rf"\caption{{{_inline(caption)}}}",
-            rf"\label{{fig:{number:02d}}}",
+            rf"\label{{fig:{label}}}",
             r"\end{figure}",
         ]
     )
@@ -558,8 +571,13 @@ def _official_entry(title: str) -> str:
     section_inputs = "\n".join(
         rf"\input{{\ProjectRoot/{filename}}}" for filename in SECTION_FILES.values()
     )
-    return rf"""\documentclass[preprint,12pt]{{elsarticle}}
-\usepackage{{booktabs,tabularx,longtable,array,graphicx,rotating,enumitem,microtype,ragged2e}}
+    return rf"""\documentclass[preprint,12pt,a4paper]{{elsarticle}}
+\usepackage{{booktabs,tabularx,longtable,array,graphicx,rotating,enumitem,microtype,ragged2e,placeins}}
+\usepackage{{fontspec}}
+\usepackage[a4paper,margin=25mm]{{geometry}}
+\setmainfont{{Times New Roman}}
+\setsansfont{{Times New Roman}}
+\setmonofont{{Times New Roman}}
 \usepackage[hidelinks]{{hyperref}}
 \usepackage{{xurl}}
 \newcolumntype{{L}}{{>{{\RaggedRight\arraybackslash}}X}}
@@ -598,7 +616,7 @@ def _review_entry(title: str) -> str:
     )
     return rf"""%! TEX program = xelatex
 \documentclass[withoutpreface,bwprint]{{cumcmthesis}}
-\usepackage{{rotating,microtype,ragged2e}}
+\usepackage{{rotating,microtype,ragged2e,placeins}}
 \usepackage{{xurl}}
 \usepackage[numbers,sort&compress]{{natbib}}
 \setmainfont{{Times New Roman}}
@@ -652,10 +670,19 @@ def _review_entry(title: str) -> str:
 def _supplement_entry(title: str) -> str:
     table_inputs = "\n".join(
         rf"\input{{\ProjectRoot/supplement_s{number:02d}.tex}}"
-        for number in range(1, 13)
+        for number in range(1, 21)
     )
-    return rf"""\documentclass[preprint,12pt]{{elsarticle}}
-\usepackage{{booktabs,tabularx,longtable,array,rotating,microtype,ragged2e}}
+    figure_inputs = "\n".join(
+        rf"\input{{\ProjectRoot/historical_figure_s{number:02d}.tex}}"
+        for number in HISTORICAL_FIGURE_FILES
+    )
+    return rf"""\documentclass[preprint,12pt,a4paper]{{elsarticle}}
+\usepackage{{booktabs,tabularx,longtable,array,rotating,microtype,ragged2e,graphicx}}
+\usepackage{{fontspec}}
+\usepackage[a4paper,margin=25mm]{{geometry}}
+\setmainfont{{Times New Roman}}
+\setsansfont{{Times New Roman}}
+\setmonofont{{Times New Roman}}
 \usepackage[hidelinks]{{hyperref}}
 \usepackage{{xurl}}
 \newcolumntype{{L}}{{>{{\RaggedRight\arraybackslash}}X}}
@@ -664,6 +691,7 @@ def _supplement_entry(title: str) -> str:
 \setlength{{\emergencystretch}}{{3em}}
 \hyphenation{{un-au-thor-ized}}
 \renewcommand{{\thetable}}{{S\arabic{{table}}}}
+\renewcommand{{\thefigure}}{{S\arabic{{figure}}}}
 
 \begin{{document}}
 \begin{{frontmatter}}
@@ -671,11 +699,15 @@ def _supplement_entry(title: str) -> str:
 \end{{frontmatter}}
 \hypersetup{{pdfauthor={{}}}}
 
-These twelve tables provide detailed results referenced by the main manuscript.
+These twenty tables and five historical figures provide detailed results referenced by the main manuscript.
 They introduce no additional hypothesis family or claim beyond the analyses
 reported in the article.
 
 {table_inputs}
+\clearpage
+\section*{{Historical supplementary figures}}
+The following figures retain historical endpoint definitions and are not current corrected-v2 main evidence.
+{figure_inputs}
 \end{{document}}
 """
 
@@ -689,8 +721,9 @@ def build(
     manuscript_dir = repo_root / "docs" / "research" / "paper_v2" / "manuscript"
     figure_dir = (
         repo_root
-        / "outputs" / "experiments" / "incremental_empirical_v1" / "figures"
+        / "outputs" / "experiments" / "research_followup_20261006_v1" / "manuscript_figures"
     )
+    historical_figure_dir = repo_root / "outputs/experiments/incremental_empirical_v1/figures"
     template_dir = repo_root / "LaTeX通用模板"
     output_root = output_root or template_dir / "M3_PI_Guard_JISA"
     use_canonical_template_entry = review_entry is None
@@ -723,6 +756,11 @@ def build(
     main_tables = _parse_numbered_tables(sections["Tables"], supplementary=False)
     supplement_tables = _parse_numbered_tables(supplementary, supplementary=True)
     captions = _parse_figure_captions(sections["Figure captions"])
+    if "## Historical figure captions\n" not in supplementary:
+        raise LatexBuildError("Historical figure captions section is missing.")
+    historical_captions = _parse_figure_captions(
+        supplementary.split("## Historical figure captions\n", 1)[1], historical=True,
+    )
 
     _write(output_root / "abstract.tex", abstract)
     _write(output_root / "keywords.tex", keywords)
@@ -780,6 +818,16 @@ def build(
         _write(
             output_root / f"figure_{number:02d}.tex",
             _render_figure(number, figure_title, figure_description),
+        )
+
+    for number, filename in HISTORICAL_FIGURE_FILES.items():
+        source = historical_figure_dir / filename
+        if not source.is_file():
+            raise LatexBuildError(f"Required historical vector figure is missing: {source}")
+        shutil.copyfile(source, output_root / filename)
+        _write(
+            output_root / f"historical_figure_s{number:02d}.tex",
+            _render_figure(number, *historical_captions[number], historical=True),
         )
 
     bibliography_output = output_root / "references.bib"

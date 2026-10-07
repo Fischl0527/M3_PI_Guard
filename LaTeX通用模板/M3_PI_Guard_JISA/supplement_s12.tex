@@ -1,24 +1,47 @@
-\clearpage
-\begin{sidewaystable}[p]
-\centering
-\begin{minipage}{\textheight}
-\centering
 \begingroup
-\scriptsize
-\caption{E6 paired effects and Gemini inference coverage}\label{tab:s12}
-\begin{tabular}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\renewcommand{\theHtable}{s12.part1}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{E6 paired effects and Gemini inference coverage (part A)}\label{tab:s12} \\
 \toprule
-Evidence & Comparison or coverage & Estimate & Newcombe / cluster-bootstrap 95\% CI & Exact McNemar / Holm p & Interpretation \\
+Row & Evidence & Comparison or coverage & Estimate & Newcombe / cluster-bootstrap 95\% CI \\
 \midrule
-DeepSeek & VIGIL minus no defense & \ensuremath{-}1.67 pp & Newcombe \ensuremath{-}10.48 to +7.12 pp; bootstrap \ensuremath{-}10.00 to +6.67 pp & 1.000000 / 1.000000 & Interval crosses zero; benchmark directions oppose \\
-DeepSeek & Policy / normal minus no defense & \ensuremath{-}25.00 pp & Newcombe \ensuremath{-}36.95 to \ensuremath{-}14.30 pp; bootstrap \ensuremath{-}36.67 to \ensuremath{-}15.00 pp & 0.000061 / 0.000122 & Risk-enriched single-block contrast \\
-DeepSeek & Full / safe minus no defense & \ensuremath{-}28.33 pp & Newcombe \ensuremath{-}40.77 to \ensuremath{-}16.81 pp; bootstrap \ensuremath{-}40.00 to \ensuremath{-}16.67 pp & 0.000015 / 0.000061 & Risk-enriched single-block contrast \\
-DeepSeek & Full / safe minus VIGIL & \ensuremath{-}26.67 pp & Newcombe \ensuremath{-}39.01 to \ensuremath{-}15.39 pp; bootstrap \ensuremath{-}38.33 to \ensuremath{-}15.00 pp & 0.000031 / 0.000092 & Risk-enriched single-block contrast \\
-Gemini & Scientific terminal / planned & 6/180 & --- & --- & Five response-bearing; one response-less failure \\
-Gemini & Minimum response-complete paired coverage & 0/30 & --- & --- & Effects not estimable \\
+\endfirsthead
+\caption[]{E6 paired effects and Gemini inference coverage (part A) (continued)} \\
+\toprule
+Row & Evidence & Comparison or coverage & Estimate & Newcombe / cluster-bootstrap 95\% CI \\
+\midrule
+\endhead
+1 & DeepSeek & VIGIL minus no defense & \ensuremath{-}1.67 pp & Newcombe \ensuremath{-}10.48 to +7.12 pp; bootstrap \ensuremath{-}10.00 to +6.67 pp \\
+2 & DeepSeek & Policy / normal minus no defense & \ensuremath{-}25.00 pp & Newcombe \ensuremath{-}36.95 to \ensuremath{-}14.30 pp; bootstrap \ensuremath{-}36.67 to \ensuremath{-}15.00 pp \\
+3 & DeepSeek & Full / safe minus no defense & \ensuremath{-}28.33 pp & Newcombe \ensuremath{-}40.77 to \ensuremath{-}16.81 pp; bootstrap \ensuremath{-}40.00 to \ensuremath{-}16.67 pp \\
+4 & DeepSeek & Full / safe minus VIGIL & \ensuremath{-}26.67 pp & Newcombe \ensuremath{-}39.01 to \ensuremath{-}15.39 pp; bootstrap \ensuremath{-}38.33 to \ensuremath{-}15.00 pp \\
+5 & Gemini & Scientific terminal / planned & 6/180 & --- \\
+6 & Gemini & Minimum response-complete paired coverage & 0/30 & --- \\
 \bottomrule
-\end{tabular}
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s12.part2}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{E6 paired effects and Gemini inference coverage (part B)} \\
+\toprule
+Row & Evidence & Comparison or coverage & Exact McNemar / Holm p & Interpretation \\
+\midrule
+\endfirsthead
+\caption[]{E6 paired effects and Gemini inference coverage (part B) (continued)} \\
+\toprule
+Row & Evidence & Comparison or coverage & Exact McNemar / Holm p & Interpretation \\
+\midrule
+\endhead
+1 & DeepSeek & VIGIL minus no defense & 1.000000 / 1.000000 & Interval crosses zero; benchmark directions oppose \\
+2 & DeepSeek & Policy / normal minus no defense & 0.000061 / 0.000122 & Risk-enriched single-block contrast \\
+3 & DeepSeek & Full / safe minus no defense & 0.000015 / 0.000061 & Risk-enriched single-block contrast \\
+4 & DeepSeek & Full / safe minus VIGIL & 0.000031 / 0.000092 & Risk-enriched single-block contrast \\
+5 & Gemini & Scientific terminal / planned & --- & Five response-bearing; one response-less failure \\
+6 & Gemini & Minimum response-complete paired coverage & --- & Effects not estimable \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.
 \endgroup
-\end{minipage}
-\end{sidewaystable}
-\clearpage

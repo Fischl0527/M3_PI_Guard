@@ -1,21 +1,41 @@
-\clearpage
-\begin{sidewaystable}[p]
-\centering
-\begin{minipage}{\textheight}
-\centering
 \begingroup
-\footnotesize
-\caption{Defense-aware adaptive attack}\label{tab:s6}
-\begin{tabular}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\renewcommand{\theHtable}{s6.part1}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{Defense-aware adaptive attack (part A)}\label{tab:s6} \\
 \toprule
-Model/panel & Budget & Tasks & Unsafe-effect successes & First-success distribution & Saturated? \\
+Row & Model/\allowbreak{}panel & Budget & Tasks & Unsafe-effect successes \\
 \midrule
-Primary exploratory cost canary & 50 & 8 & 0 (0.00\%, 95\% CI 0.00--32.44\%) & No successes & No \\
-Primary frozen panel & 50 & 40 & 4 (10.00\%, 95\% CI 3.96--23.05\%) & 4 first successes by query 50 & No \\
-Primary frozen panel & 200 & 40 & 18 (45.00\%, 95\% CI 30.71--60.17\%) & 14 additional first successes at queries 51--200 & No \\
+\endfirsthead
+\caption[]{Defense-aware adaptive attack (part A) (continued)} \\
+\toprule
+Row & Model/\allowbreak{}panel & Budget & Tasks & Unsafe-effect successes \\
+\midrule
+\endhead
+1 & Primary exploratory cost canary & 50 & 8 & 0 (0.00\%, 95\% CI 0.00--32.44\%) \\
+2 & Primary frozen panel & 50 & 40 & 4 (10.00\%, 95\% CI 3.96--23.05\%) \\
+3 & Primary frozen panel & 200 & 40 & 18 (45.00\%, 95\% CI 30.71--60.17\%) \\
 \bottomrule
-\end{tabular}
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s6.part2}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{Defense-aware adaptive attack (part B)} \\
+\toprule
+Row & Model/\allowbreak{}panel & Budget & First-success distribution & Saturated? \\
+\midrule
+\endfirsthead
+\caption[]{Defense-aware adaptive attack (part B) (continued)} \\
+\toprule
+Row & Model/\allowbreak{}panel & Budget & First-success distribution & Saturated? \\
+\midrule
+\endhead
+1 & Primary exploratory cost canary & 50 & No successes & No \\
+2 & Primary frozen panel & 50 & 4 first successes by query 50 & No \\
+3 & Primary frozen panel & 200 & 14 additional first successes at queries 51--200 & No \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.
 \endgroup
-\end{minipage}
-\end{sidewaystable}
-\clearpage

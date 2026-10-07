@@ -50,7 +50,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert manuscript.index("## Submission statements") < manuscript.index(
         "## References"
     )
-    assert manuscript.count("![Figure ") == 5
+    assert manuscript.count("![Figure ") == 4
     assert len(re.findall(r"^### Table [1-4]\. ", manuscript, flags=re.MULTILINE)) == 4
     assert "Supplementary Table S1" in manuscript
     assert "Supplementary Table S6" in manuscript
@@ -72,6 +72,31 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
         r"`exact_gold`\s+exposed only its derived authorization object",
         manuscript,
     )
+
+
+def test_current_figures_replace_main_only_and_chinese_sync_is_idempotent() -> None:
+    manuscript = builder.build_manuscript()
+    figures = manuscript.split("## Figures\n", 1)[1].split("## Tables\n", 1)[0]
+    assert "research_followup_20261006_v1/manuscript_figures" in figures
+    assert "incremental_empirical_v1/figures" not in figures
+    assert "**Figure 5." not in manuscript
+    captions = manuscript.split("## Figure captions\n", 1)[1].split("## Submission statements", 1)[0]
+    assert "oracle sensitivity" in captions
+    assert "not a confidence interval" in captions
+    assert "not adjudicated root causes" in captions
+    chinese = builder._read("manuscript_zh_v1.md")
+    synced = builder.sync_chinese_figures(chinese)
+    assert builder.sync_chinese_figures(synced) == synced
+    assert len(re.findall(r"!\[图 [1-4]\.", synced)) == 4
+    assert len(re.findall(r"!\[补充图 S[1-5]\.", synced)) == 5
+    assert synced.split("## 表\n", 1)[1] == chinese.split("## 表\n", 1)[1]
+
+
+def test_chinese_sync_rejects_missing_historical_figure() -> None:
+    source = builder._read("manuscript_zh_v1.md")
+    source = source.replace("![补充图 S5.", "![图 5.") if "![补充图 S5." in source else source.replace("![图 5.", "![missing.")
+    with pytest.raises(builder.ManuscriptBuildError, match="S1-S5"):
+        builder.sync_chinese_figures(source)
 
 
 def test_abstract_stays_within_jisa_limit() -> None:

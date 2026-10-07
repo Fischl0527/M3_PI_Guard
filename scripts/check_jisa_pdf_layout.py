@@ -19,6 +19,15 @@ DOCUMENTS = {
 }
 
 
+def centered_footer(page_rect, box, direction, baseline: float) -> bool:
+    """Use the rendered baseline, not a font-dependent glyph-box top."""
+    return (
+        baseline > page_rect.height - 100
+        and abs((box.x0 + box.x1) / 2 - page_rect.width / 2) < 4
+        and abs(direction[0] - 1) < 0.01
+    )
+
+
 def inspect(name: str, path: Path) -> dict:
     doc = fitz.open(path)
     result = {
@@ -43,14 +52,13 @@ def inspect(name: str, path: Path) -> dict:
                 box = fitz.Rect(span["bbox"])
                 if not page.rect.contains(box):
                     result["errors"].append(f"page {number}: text outside page")
-                if span["text"].strip().isdigit() and box.y0 > page.rect.height - 100:
-                    footer.append((box, line["dir"]))
+                if span["text"].strip().isdigit():
+                    footer.append((box, line["dir"], span["origin"][1]))
         # cumcm hides the title-page number; elsarticle uses its frontmatter
         # footer instead. Subsequent pages must have centered upright numbers.
         if index != 0:
-            centered = [box for box, direction in footer
-                        if abs((box.x0 + box.x1) / 2 - page.rect.width / 2) < 4
-                        and abs(direction[0] - 1) < 0.01]
+            centered = [box for box, direction, baseline in footer
+                        if centered_footer(page.rect, box, direction, baseline)]
             if not centered:
                 result["errors"].append(f"page {number}: centered upright footer missing")
         pix = page.get_pixmap(matrix=fitz.Matrix(0.55, 0.55), alpha=False)

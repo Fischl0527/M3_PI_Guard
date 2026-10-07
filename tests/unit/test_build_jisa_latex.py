@@ -20,7 +20,7 @@ MANUSCRIPT = (
 BIBLIOGRAPHY = MANUSCRIPT.with_name("references_v1.bib")
 FIGURES = (
     REPO_ROOT
-    / "outputs" / "experiments" / "incremental_empirical_v1" / "figures"
+    / "outputs" / "experiments" / "research_followup_20261006_v1" / "manuscript_figures"
 )
 
 
@@ -58,7 +58,7 @@ def test_builds_shared_official_review_and_supplement_packages(tmp_path: Path) -
 
     assert builder.REVIEW_ENTRY.name == "数模通用模板.tex"
     assert builder.LEGACY_REVIEW_ENTRY.name == "M3_PI_Guard_template_review.tex"
-    assert r"\documentclass[preprint,12pt]{elsarticle}" in official
+    assert r"\documentclass[preprint,12pt,a4paper]{elsarticle}" in official
     assert r"\documentclass[withoutpreface,bwprint]{cumcmthesis}" in review
     assert r"\author" not in official
     assert r"\author" not in review
@@ -66,10 +66,11 @@ def test_builds_shared_official_review_and_supplement_packages(tmp_path: Path) -
     assert r"\newcommand{\ProjectRoot}{.}" in official
     assert r"\newcommand{\ProjectRoot}{M3_PI_Guard_JISA}" in review
     assert r"\usepackage[numbers,sort&compress]{natbib}" in review
-    assert r"\usepackage{rotating,microtype,ragged2e}" in review
+    assert r"\usepackage{rotating,microtype,ragged2e,placeins}" in review
     assert r"\setmainfont{Times New Roman}" in review
     assert r"\setsansfont{Times New Roman}" in review
     assert r"\setmonofont{Times New Roman}" in review
+    assert r"\setmainfont{Times New Roman}" in official + supplement
     assert r"\urlstyle{same}" in review
     assert r"\captionsetup[figure]{font={rm,minusfour,bf}}" in review
     assert r"\captionsetup[table]{font={rm,minusfour,bf}}" in review
@@ -223,15 +224,21 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
     wide_supplement = (table_dir / "supplement_s12.tex").read_text(
         encoding="utf-8"
     )
-    assert historical_wide.startswith("\\clearpage\n\\begin{sidewaystable}[p]")
-    assert wide_supplement.startswith("\\clearpage\n\\begin{sidewaystable}[p]")
-    assert r"\begin{minipage}{\textheight}" in historical_wide
-    assert r"\begin{tabular}" in historical_wide
-    assert r"\begin{longtable}" not in historical_wide
-    assert "landscape" not in historical_wide + wide_supplement
-    assert r"\scriptsize" in (table_dir / "supplement_s12.tex").read_text(
-        encoding="utf-8"
-    )
+    assert historical_wide.startswith(r"\begingroup")
+    assert wide_supplement.startswith(r"\begingroup")
+    assert historical_wide.count(r"\begin{longtable}") == 2
+    assert "part A" in historical_wide and "part B" in historical_wide
+    assert "Row IDs identify the same original row" in historical_wide
+    assert r"\small" in historical_wide + wide_supplement
+    assert historical_wide.count(r"\label{tab:s18}") == 1
+    for table in supplementary_tables:
+        rendered = (table_dir / f"supplement_s{int(table.number[1:]):02d}.tex").read_text(encoding="utf-8")
+        assert not any(token in rendered for token in ("sidewaystable", "landscape", r"\scriptsize", r"\resizebox"))
+        for heading in table.header:
+            assert builder._table_inline(heading) in rendered
+        for row in table.rows:
+            for value in row:
+                assert builder._table_inline(value) in rendered
 
     narrow_main = (table_dir / "table_01.tex").read_text(encoding="utf-8")
     assert narrow_main.startswith(r"\begingroup")
@@ -265,7 +272,7 @@ def test_places_artifacts_once_and_emits_no_absolute_workspace_paths(
 
     assert methods.count(r"\input{\ProjectRoot/table_01.tex}") == 1
     assert methods.count(r"\input{\ProjectRoot/figure_01.tex}") == 1
-    for number in range(2, 6):
+    for number in range(2, 5):
         assert results.count(
             rf"\input{{\ProjectRoot/figure_{number:02d}.tex}}"
         ) == 1
@@ -277,6 +284,9 @@ def test_places_artifacts_once_and_emits_no_absolute_workspace_paths(
         "Medium falsification study"
     )
     assert "table_05.tex" not in results
+    assert "figure_05.tex" not in results
+    assert results.index(r"\input{\ProjectRoot/figure_04.tex}") < results.index("Medium falsification study")
+    assert results.index(r"\input{\ProjectRoot/figure_04.tex}") < results.index(r"\FloatBarrier") < results.index("Medium falsification study")
 
     all_text = "\n".join(
         path.read_text(encoding="utf-8")
@@ -291,3 +301,50 @@ def test_places_artifacts_once_and_emits_no_absolute_workspace_paths(
     assert len(labels) == len(set(labels))
     assert "sec:methods-source-authority-counterfactual" in labels
     assert "sec:results-source-authority-counterfactual" in labels
+
+
+def test_supplement_entry_includes_all_tables_and_historical_figures(tmp_path: Path) -> None:
+    paths = _build(tmp_path)
+    entry = paths.supplement_entry.read_text(encoding="utf-8")
+    assert re.findall(r"supplement_s(\d+)\.tex", entry) == [f"{n:02d}" for n in range(1, 21)]
+    assert re.findall(r"historical_figure_s(\d+)\.tex", entry) == [f"{n:02d}" for n in range(1, 6)]
+    assert "current_" not in entry
+    for number, filename in builder.HISTORICAL_FIGURE_FILES.items():
+        assert (paths.output_root / filename).read_bytes() == (builder.HISTORICAL_FIGURE_SOURCE_DIR / filename).read_bytes()
+        figure = (paths.output_root / f"historical_figure_s{number:02d}.tex").read_text(encoding="utf-8")
+        assert rf"\label{{fig:S{number:02d}}}" in figure
+        assert filename in figure
+
+
+def test_figure_caption_parser_rejects_duplicate_or_incomplete_sets() -> None:
+    source = "\n\n".join(f"**Figure {n}. Title.** Description." for n in range(1, 5))
+    assert set(builder._parse_figure_captions(source)) == {1, 2, 3, 4}
+    with pytest.raises(builder.LatexBuildError, match="Duplicate"):
+        builder._parse_figure_captions(source + "\n\n**Figure 4. Title.** Description.")
+    with pytest.raises(builder.LatexBuildError, match="Expected"):
+        builder._parse_figure_captions(source.replace("Figure 4.", "Figure 5."))
+
+
+def test_portrait_wide_panels_preserve_every_row_and_column_without_new_numbers() -> None:
+    table = builder.MarkdownTable(
+        number="S14", title="Controlled table", note="Original note.",
+        header=tuple(f"column{i}" for i in range(10)),
+        rows=tuple(tuple(f"r{r}c{c}" for c in range(10)) for r in range(3)),
+    )
+    rendered = builder._render_numbered_table(table)
+    assert rendered.count(r"\begin{longtable}") == 4
+    assert rendered.count(r"\label{tab:s14}") == 1
+    assert rendered.count(r"\addtocounter{table}{-1}") == 3
+    assert re.findall(r"\\renewcommand\{\\theHtable\}\{([^}]+)\}", rendered) == [
+        "s14.part1", "s14.part2", "s14.part3", "s14.part4",
+    ]
+    for row in table.rows:
+        for i, value in enumerate(row):
+            assert len(re.findall(rf"(?<!\w){value}(?!\w)", rendered)) == (4 if i < 2 else 1)
+    assert "Original note." in rendered
+    assert all(token not in rendered for token in ("sidewaystable", r"\scriptsize", r"\resizebox"))
+
+
+def test_word_list_line_breaks_preserve_numeric_fractions() -> None:
+    assert builder._table_inline("ND/policy/full") == r"ND/\allowbreak{}policy/\allowbreak{}full"
+    assert builder._table_inline("0/30") == "0/30"

@@ -1,0 +1,43 @@
+\begingroup
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{Corrected development study by benchmark}\label{tab:s20} \\
+\toprule
+Model & Benchmark & Configuration & Attack endpoint & Benign tool completion \\
+\midrule
+\endfirsthead
+\caption[]{Corrected development study by benchmark (continued)} \\
+\toprule
+Model & Benchmark & Configuration & Attack endpoint & Benign tool completion \\
+\midrule
+\endhead
+V4 Pro & AgentDojo & No guard / normal & 5/12 & 6/8 \\
+V4 Pro & AgentDojo & No guard / safe & 3/12 & 6/8 \\
+V4 Pro & AgentDojo & Policy / normal & 2/12 & 3/8 \\
+V4 Pro & AgentDojo & Policy / safe & 2/12 & 3/8 \\
+V4 Pro & AgentDojo & Full / normal & 0/12 & 3/8 \\
+V4 Pro & AgentDojo & Full / safe & 0/12 & 3/8 \\
+V4 Pro & M3-v2 & No guard / normal & 0/12 & 6/8 \\
+V4 Pro & M3-v2 & No guard / safe & 0/12 & 6/8 \\
+V4 Pro & M3-v2 & Policy / normal & 0/12 & 6/8 \\
+V4 Pro & M3-v2 & Policy / safe & 0/12 & 4/8 \\
+V4 Pro & M3-v2 & Full / normal & 0/12 & 6/8 \\
+V4 Pro & M3-v2 & Full / safe & 0/12 & 4/8 \\
+V4.1 Flash & AgentDojo & No guard / normal & 1/12 & 7/8 \\
+V4.1 Flash & AgentDojo & No guard / safe & 0/12 & 7/8 \\
+V4.1 Flash & AgentDojo & Policy / normal & 0/12 & 4/8 \\
+V4.1 Flash & AgentDojo & Policy / safe & 0/12 & 4/8 \\
+V4.1 Flash & AgentDojo & Full / normal & 0/12 & 4/8 \\
+V4.1 Flash & AgentDojo & Full / safe & 0/12 & 4/8 \\
+V4.1 Flash & M3-v2 & No guard / normal & 0/12 & 6/8 \\
+V4.1 Flash & M3-v2 & No guard / safe & 0/12 & 6/8 \\
+V4.1 Flash & M3-v2 & Policy / normal & 0/12 & 6/8 \\
+V4.1 Flash & M3-v2 & Policy / safe & 0/12 & 6/8 \\
+V4.1 Flash & M3-v2 & Full / normal & 0/12 & 6/8 \\
+V4.1 Flash & M3-v2 & Full / safe & 0/12 & 6/8 \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Note.} Corrected-v1 development data, not a confirmatory comparison with historical runs. AgentDojo retains its native security checker; M3-v2 counts observed simulated effects. Fractions give numerator/observed denominator, not evidence that failures are safe. Unknown values, when present, are explicit. Each model has 288 planned executions including no-tool tasks; those tasks and operational status counts are described in the text. Flash is V4.1, not the historical V4 model.
+\endgroup

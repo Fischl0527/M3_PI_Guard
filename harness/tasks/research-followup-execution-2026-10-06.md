@@ -1,5 +1,19 @@
 # 综合后续研究实施
 
+## 2026-10-08 本切片已执行与验证
+
+从既有缓存实现四当前主图、英中接入与旧五图历史补充；三当前PDF实际构建。源figure12文件、四主表、20补充表保持独立来源。宽表每部分最大五列，原始行号/前两列重复作连接键；原数据列全部保留，无旋转、缩放、scriptsize。图件9pt，最终PDF字最小8.229/8.229/8.635pt。
+
+命令：Python3.13.5运行-m scripts.current_evidence_figures、-m scripts.build_lean_paper_manuscript --sync-chinese-figures、-m scripts.build_lean_paper_supplement --markdown-only、-m scripts.build_jisa_latex；pytest五组43passed，五源码/五测试Ruff通过。绝对latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -file-line-error -cd三个入口，均exit0。旧check_jisa_pdf_layout.inspect在当前114页输出结构0错误；只保存必要派生预览，未写QA JSON/哈希包。联系图与当前主图/表、补充宽表大图已查看。
+
+首次发现图裁切、图例碰撞、旧补充入口仅12表、续表链接重复、长条件名溢出与字体字框页码误报；逐项修复并通过负例。普通报告manuscript_figures/README.md完整说明outputs结构与区间/未知边界。没有API/服务/统计重算/权限改变/Full Harness/raw覆盖。保持60任务解释与方法/主张审查未完成，不把版式闭合当研究或投稿闭合。
+
+## 2026-10-07 续推：四当前主图
+
+上一目标轮计划交付属于no progress。本轮以当前表3dd0137为基线，先实现scripts/current_evidence_figures.py和定向测试，读取900/480/诊断缓存，画边界、授权完成与配对差、分基准同期安全/效用、首次阻断与终态四图。数值与区间直接取缓存，不统计重算/模型请求。Times New Roman，175mm宽，正文图字至少8pt；Python既有工作流，图/脚本之外不新建审计包。
+
+图1是边界解释，不是有效性证明；图2区分Wilson观察区间与配对Newcombe差；图3明确未知/ITT、AgentDojo原生和M3模拟端点、适配VIGIL；图4为每cell30个正常任务的首个限制/终态分解，不称已证明根因。定向测试覆盖漏字段、重复单元、未知、不一致分母、缓存配对、字体与PDF渲染。导出后直接检查字形、碰撞、轴区对齐及四PNG；普通说明记录结果，不新增alignment/collision JSON。真实当前PDF和60任务解释未验收前整体in_progress。
+
 ## 2026-10-07 持续实施：当前表提交与缓存主图
 
 上一目标回合只有综合计划，按no progress处理；本轮实际推进已有设计。先提交已完成四当前主表、历史S13–S20、英中文引用和对应测试（既有32项通过），以及已交付普通规划文件/状态。只提交本轮明确拥有的路径，current-task保留用户原16行，第三方/模板资产/其他未完成工作不纳入。

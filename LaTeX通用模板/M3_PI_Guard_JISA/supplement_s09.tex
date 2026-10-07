@@ -1,20 +1,56 @@
-\clearpage
-\begin{sidewaystable}[p]
-\centering
-\begin{minipage}{\textheight}
-\centering
 \begingroup
-\scriptsize
-\caption{E3/E4 operational summary}\label{tab:s9}
-\begin{tabular}{@{}*{7}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/7-2\tabcolsep\relax}}@{}}
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\renewcommand{\theHtable}{s9.part1}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{E3/E4 operational summary (part A)}\label{tab:s9} \\
 \toprule
-Study & Planned/latest & Completed & Parse failure & Provider failure & Max steps & Cost (CNY) \\
+Row & Study & Planned/\allowbreak{}latest & Completed & Parse failure \\
 \midrule
-E3 outcome-enriched Pro & 240/240 & 185 & 17 & 38 & 0 & 1.0690866 \\
-E4 Flash replication & 360/360 & 347 & 8 & 4 & 1 & 0.5410834 \\
+\endfirsthead
+\caption[]{E3/E4 operational summary (part A) (continued)} \\
+\toprule
+Row & Study & Planned/\allowbreak{}latest & Completed & Parse failure \\
+\midrule
+\endhead
+1 & E3 outcome-enriched Pro & 240/240 & 185 & 17 \\
+2 & E4 Flash replication & 360/360 & 347 & 8 \\
 \bottomrule
-\end{tabular}
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s9.part2}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{E3/E4 operational summary (part B)} \\
+\toprule
+Row & Study & Planned/\allowbreak{}latest & Provider failure & Max steps \\
+\midrule
+\endfirsthead
+\caption[]{E3/E4 operational summary (part B) (continued)} \\
+\toprule
+Row & Study & Planned/\allowbreak{}latest & Provider failure & Max steps \\
+\midrule
+\endhead
+1 & E3 outcome-enriched Pro & 240/240 & 38 & 0 \\
+2 & E4 Flash replication & 360/360 & 4 & 1 \\
+\bottomrule
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s9.part3}
+\begin{longtable}{@{}*{4}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/4-2\tabcolsep\relax}}@{}}
+\caption[]{E3/E4 operational summary (part C)} \\
+\toprule
+Row & Study & Planned/\allowbreak{}latest & Cost (CNY) \\
+\midrule
+\endfirsthead
+\caption[]{E3/E4 operational summary (part C) (continued)} \\
+\toprule
+Row & Study & Planned/\allowbreak{}latest & Cost (CNY) \\
+\midrule
+\endhead
+1 & E3 outcome-enriched Pro & 240/240 & 1.0690866 \\
+2 & E4 Flash replication & 360/360 & 0.5410834 \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.
 \endgroup
-\end{minipage}
-\end{sidewaystable}
-\clearpage

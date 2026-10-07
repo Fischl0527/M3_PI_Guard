@@ -1,5 +1,21 @@
 # 会话移交
 
+## 2026-10-08 — 已实施当前主图、竖版宽表与当前PDF
+
+- 从3dd0137继续执行，不再重复规划。scripts/current_evidence_figures.py缓存绘制四主图12文件；英中图/图注/LaTeX实际接入。旧五图/图注保留S1–S5，补充20表均在入口，宽表分栏续表不旋转/不scriptsize。
+- 43定向pytest/Ruff通过；latexmk三入口exit0。审阅51页69导航、正式39页68导航、补充24页；A4/空作者/居中页码/无裁切旋转、缺字、未定义引用、Overfull。114页结构与联系图、重点图表放大检查完成。字最小8.229/8.229/8.635pt。源四图9pt且碰撞0 fail/0 warn；静态模式识别检查没有全部通过，不做错误证书。
+- 实施报告outputs/experiments/research_followup_20261006_v1/manuscript_figures/README.md；总report最新段已更新。预览outputs/manuscript/previews/current_evidence_20261007仅本地，不随Git上传。三PDF与必要TeX/图副本可阶段提交。
+- 持续目标active、F-PAPER-002 in_progress。下一实际工作：60正常任务受信意图核对（不依据gold扩权）、最后方法/主张审查及过长历史正文收束；条件性360/180/108仍未运行，不绕过本地服务拒绝。
+- current-task用HEAD旧段拼接仅暂存新增前缀，保留用户16行；字体/thirdparty/其他user dirty继续不纳入。禁止API/成功记录重跑/权限扩大/Full Harness/历史重算/盲测/Gemini/额外证据包。
+
+## 2026-10-07 — 最新请求：只交付评估与新计划
+
+- 新入口docs/research/paper_v2/M3_PI_Guard_综合评估与推进计划_2026-10-07.md；任务research-followup-plan-2026-10-07。D下载指定原文缺失，前次已记录完整阅读1784行，本次不假称重读；若恢复更新版只补差异。
+- 3dd0137已推送origin/codex/claude-review-repairs且远端一致，四当前主表/20补充不再列待办。60意图解释、缓存四主图、宽表和最新PDF未完成，两个可选模型/动态环境未合格。
+- 本次只评估计划/必要状态，没有API/服务/科研或论文改动/编译/统计重算/Full Harness/提交，所有原dirty和current-task用户16行保留。F-PAPER-002及持续目标未关闭；实施继续旧execution任务，但不在此规划请求中自动展开。
+- 文档与JSON检查结果见任务记录；新计划未提交GitHub，后续阶段提交须限定范围。
+- 实际检查通过：216行、6本地链接0断链、围栏/空白/字符正常，feature JSON与范围diff exit0；只是文档交付，当前PDF和60任务审查仍未完成。
+
 ## 2026-10-06 — 最新请求只交付综合计划
 
 - 用户要求读下载推进计划，结合Claude路线与当前项目写新MD；新统一入口docs/research/paper_v2/M3_PI_Guard_研究收束与论文推进计划_2026-10-06.md，任务research-followup-consolidation-plan-2026-10-06。旧计划保留，不把规划当科研完成。

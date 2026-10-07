@@ -1,5 +1,16 @@
 # Task History
 
+## 2026-10-08 — Current figures and portrait PDF implemented
+
+- Cache-only generator exported four current main figures in12 formats; English/Chinese and TeX now use them. Original five figures/captions preserved asS1–S5. Fixed supplement entry omissionS13–S20 and replaced rotated wide tables with row-keyed portrait panels without value changes.
+- Focused pytest43passed/Ruff passed; three latexmk builds exit0. Reviewed51+39+24 current pages, centered footers, A4, blank authors, minimum8.229/8.229/8.635pt, no clipping/rotation/undefined refs/Overfull. Source figure collision audits0fail/0warn; static pattern checker limitations remain disclosed.
+- No API/statistical replay/permission/runtime change/Full Harness. Report in manuscript_figures/README.md.60-task trusted-intent explanation and scientific closeout remain; F-PAPER-002 in_progress, goalactive, unrelated dirty preserved.
+
+## 2026-10-07 — Evidence-current follow-up plan
+
+- Latest user request is planning only. The named download is absent; the new Markdown explicitly uses prior reading notes rather than claiming fresh source access. Claude501-line roadmap and current cached evidence/Git checked.
+- Published four current main/twenty supplement tables at3dd0137 are complete;60-task intent review/current figures/readable PDF remain. No API/code/manuscript build/reanalysis or other experiment; persistent goal andF-PAPER-002 in_progress preserved. See research-followup-plan-2026-10-07 for document verification.
+
 ## 2026-10-06 — Consolidated research and manuscript plan
 
 - Reconciled the supplied1784-line follow-up and Claude roadmap with completed900/16/480, latency correction and current four main/twenty supplementary tables. A new unified Markdown entry preserves historical plans and prioritizes60-task trusted-intent explanation plus current figures/readable PDF; optional360/180/108 remain conditional.

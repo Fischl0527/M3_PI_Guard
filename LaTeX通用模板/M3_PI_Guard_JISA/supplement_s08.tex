@@ -1,26 +1,51 @@
-\clearpage
-\begin{sidewaystable}[p]
-\centering
-\begin{minipage}{\textheight}
-\centering
 \begingroup
-\footnotesize
-\caption{E2 source-authority decisions}\label{tab:s8}
-\begin{tabular}{@{}*{6}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/6-2\tabcolsep\relax}}@{}}
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\renewcommand{\theHtable}{s8.part1}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{E2 source-authority decisions (part A)}\label{tab:s8} \\
 \toprule
-Evidence layer / cell & ALLOW & ASK & DENY & Operational failure & Executed actions \\
+Row & Evidence layer / cell & ALLOW & ASK & DENY \\
 \midrule
-End-to-end policy / trusted & --- & 60/60 records & 0/60 & 0/60 & 0/60 \\
-End-to-end policy / untrusted & --- & 53/60 records & 0/60 & 0/60 & 0/60 \\
-End-to-end full / trusted & --- & 57/60 records & 0/60 & 0/60 & 0/60 \\
-End-to-end full / untrusted & --- & 0/60 & 55/60 records & 1/60 & 0/60 \\
-Replay policy / trusted & 60 & 60 & 0 & --- & --- \\
-Replay policy / untrusted & 60 & 60 & 0 & --- & --- \\
-Replay full / trusted & 60 & 60 & 0 & --- & --- \\
-Replay full / untrusted & 30 & 30 & 60 & --- & --- \\
+\endfirsthead
+\caption[]{E2 source-authority decisions (part A) (continued)} \\
+\toprule
+Row & Evidence layer / cell & ALLOW & ASK & DENY \\
+\midrule
+\endhead
+1 & End-to-end policy / trusted & --- & 60/60 records & 0/60 \\
+2 & End-to-end policy / untrusted & --- & 53/60 records & 0/60 \\
+3 & End-to-end full / trusted & --- & 57/60 records & 0/60 \\
+4 & End-to-end full / untrusted & --- & 0/60 & 55/60 records \\
+5 & Replay policy / trusted & 60 & 60 & 0 \\
+6 & Replay policy / untrusted & 60 & 60 & 0 \\
+7 & Replay full / trusted & 60 & 60 & 0 \\
+8 & Replay full / untrusted & 30 & 30 & 60 \\
 \bottomrule
-\end{tabular}
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s8.part2}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{E2 source-authority decisions (part B)} \\
+\toprule
+Row & Evidence layer / cell & ALLOW & Operational failure & Executed actions \\
+\midrule
+\endfirsthead
+\caption[]{E2 source-authority decisions (part B) (continued)} \\
+\toprule
+Row & Evidence layer / cell & ALLOW & Operational failure & Executed actions \\
+\midrule
+\endhead
+1 & End-to-end policy / trusted & --- & 0/60 & 0/60 \\
+2 & End-to-end policy / untrusted & --- & 0/60 & 0/60 \\
+3 & End-to-end full / trusted & --- & 0/60 & 0/60 \\
+4 & End-to-end full / untrusted & --- & 1/60 & 0/60 \\
+5 & Replay policy / trusted & 60 & --- & --- \\
+6 & Replay policy / untrusted & 60 & --- & --- \\
+7 & Replay full / trusted & 60 & --- & --- \\
+8 & Replay full / untrusted & 30 & --- & --- \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.
 \endgroup
-\end{minipage}
-\end{sidewaystable}
-\clearpage

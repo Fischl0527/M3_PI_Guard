@@ -1,24 +1,68 @@
-\clearpage
-\begin{sidewaystable}[p]
-\centering
-\begin{minipage}{\textheight}
-\centering
 \begingroup
-\scriptsize
-\caption{Runtime burden and operational quality}\label{tab:s4}
-\begin{tabular}{@{}*{7}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/7-2\tabcolsep\relax}}@{}}
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\renewcommand{\theHtable}{s4.part1}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{Runtime burden and operational quality (part A)}\label{tab:s4} \\
 \toprule
-Condition & ASK / 72 & Benign ASK rate & Operational failures / 72 & Provider calls & Trace-bundle cost (CNY) & Total latency p95 \\
+Row & Condition & ASK / 72 & Benign ASK rate & Operational failures / 72 \\
 \midrule
-No defense & 0 & 0.00\% & 4 & 181 & 0.1821176 & 16.924 s \\
-Safe prompt / spotlighting & 0 & 0.00\% & 5 & 167 & 0.1812942 & 15.971 s \\
-PromptGuard (detector-only) & 0 & 0.00\% & 5 & 180 & 0.0986064 & 18.249 s \\
-Structural baseline & 0 & 0.00\% & 4 & 249 & 0.2568822 & 21.251 s \\
-Policy package & 16 & 19.44\% & 1 & 112 & 0.0548220 & 7.897 s \\
-Full package & 22 & 22.22\% & 2 & 117 & 0.1441772 & 10.701 s \\
+\endfirsthead
+\caption[]{Runtime burden and operational quality (part A) (continued)} \\
+\toprule
+Row & Condition & ASK / 72 & Benign ASK rate & Operational failures / 72 \\
+\midrule
+\endhead
+1 & No defense & 0 & 0.00\% & 4 \\
+2 & Safe prompt / spotlighting & 0 & 0.00\% & 5 \\
+3 & PromptGuard (detector-only) & 0 & 0.00\% & 5 \\
+4 & Structural baseline & 0 & 0.00\% & 4 \\
+5 & Policy package & 16 & 19.44\% & 1 \\
+6 & Full package & 22 & 22.22\% & 2 \\
 \bottomrule
-\end{tabular}
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s4.part2}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{Runtime burden and operational quality (part B)} \\
+\toprule
+Row & Condition & ASK / 72 & Provider calls & Trace-bundle cost (CNY) \\
+\midrule
+\endfirsthead
+\caption[]{Runtime burden and operational quality (part B) (continued)} \\
+\toprule
+Row & Condition & ASK / 72 & Provider calls & Trace-bundle cost (CNY) \\
+\midrule
+\endhead
+1 & No defense & 0 & 181 & 0.1821176 \\
+2 & Safe prompt / spotlighting & 0 & 167 & 0.1812942 \\
+3 & PromptGuard (detector-only) & 0 & 180 & 0.0986064 \\
+4 & Structural baseline & 0 & 249 & 0.2568822 \\
+5 & Policy package & 16 & 112 & 0.0548220 \\
+6 & Full package & 22 & 117 & 0.1441772 \\
+\bottomrule
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s4.part3}
+\begin{longtable}{@{}*{4}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/4-2\tabcolsep\relax}}@{}}
+\caption[]{Runtime burden and operational quality (part C)} \\
+\toprule
+Row & Condition & ASK / 72 & Total latency p95 \\
+\midrule
+\endfirsthead
+\caption[]{Runtime burden and operational quality (part C) (continued)} \\
+\toprule
+Row & Condition & ASK / 72 & Total latency p95 \\
+\midrule
+\endhead
+1 & No defense & 0 & 16.924 s \\
+2 & Safe prompt / spotlighting & 0 & 15.971 s \\
+3 & PromptGuard (detector-only) & 0 & 18.249 s \\
+4 & Structural baseline & 0 & 21.251 s \\
+5 & Policy package & 16 & 7.897 s \\
+6 & Full package & 22 & 10.701 s \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.
 \endgroup
-\end{minipage}
-\end{sidewaystable}
-\clearpage

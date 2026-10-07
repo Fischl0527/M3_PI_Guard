@@ -4,6 +4,8 @@
 
 ## 后续稿件进展：本轮非新实验
 
+2026-10-08实际实施更新：四张当前主图已生成PDF/SVG/PNG并接入英中稿和LaTeX；旧五图保留为补充S1–S5。修复补充入口漏收S13–S20、旋转宽表、重复链接、长条件名溢出和字体字框导致的页码检查误报。43项定向测试/Ruff及三PDF编译通过；实际114页结构检查无错误，当前图表与宽表放大页已查看。模板51页/正式39页/补充24页，A4竖版、底部居中页码、空作者、普通文字Times New Roman。完成说明及本次outputs结构见[四主图与稿件接入记录](manuscript_figures/README.md)。没有API、旧统计重算、权限变动或Full Harness；60任务受信意图核对及最终科学审查仍待，整体未结项。下文旧“主图/PDF仍待”是此前切片历史状态，以本段为当前状态。
+
 2026-10-06最新切片：四张当前主表已生成，旧八张主表原数字/注释移至补充S13–S20；原S1–S12保留，共20表。中文表使用同份缓存JSON，历史表及引用同步。主表明确Wilson观察区间、未知/ITT界限、失败、确认与组件控制含义；不重算900/480/16、不API。26项文稿/表格测试及6项临时LaTeX生成测试通过，Ruff通过。实际仅更新Markdown，未新建Word，当前主图和最新模板/PDF仍待；60任务意图核对也仍待，整体未完成。
 
 目录入口仍为`docs/research/paper_v2/manuscript/`下的`manuscript_deepseek_v1.md`、`manuscript_zh_v1.md`和`supplementary_tables_v1.md`。表源仍是`outputs/experiments/claude_revision_v1/analysis.json`与`outputs/experiments/research_followup_20261006_v1/calibration/analysis.json`；这次没有新增实验输出树或哈希包。LaTeX测试仅写测试临时目录，不能用其代替当前PDF视觉验收。

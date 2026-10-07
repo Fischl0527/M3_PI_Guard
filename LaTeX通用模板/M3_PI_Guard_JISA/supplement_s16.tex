@@ -1,0 +1,127 @@
+\begingroup
+\small
+\setlength{\LTpre}{0.5\baselineskip}
+\setlength{\LTpost}{0.5\baselineskip}
+\renewcommand{\theHtable}{s16.part1}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption{E3/E4 conditional robustness (part A)}\label{tab:s16} \\
+\toprule
+Row & Study & Endpoint & Factor & Paired cases \\
+\midrule
+\endfirsthead
+\caption[]{E3/E4 conditional robustness (part A) (continued)} \\
+\toprule
+Row & Study & Endpoint & Factor & Paired cases \\
+\midrule
+\endhead
+1 & E3 risk enriched pro & attack unsafe effect & interaction & 60 \\
+2 & E3 risk enriched pro & attack unsafe effect & module & 60 \\
+3 & E3 risk enriched pro & attack unsafe effect & prompt & 60 \\
+4 & E3 risk enriched pro & attack unsafe or failure & interaction & 60 \\
+5 & E3 risk enriched pro & attack unsafe or failure & module & 60 \\
+6 & E3 risk enriched pro & attack unsafe or failure & prompt & 60 \\
+7 & E4 flash replication & attack unsafe effect & interaction & 50 \\
+8 & E4 flash replication & attack unsafe effect & module & 50 \\
+9 & E4 flash replication & attack unsafe effect & prompt & 50 \\
+10 & E4 flash replication & attack unsafe or failure & interaction & 50 \\
+11 & E4 flash replication & attack unsafe or failure & module & 50 \\
+12 & E4 flash replication & attack unsafe or failure & prompt & 50 \\
+13 & E4 flash replication & Benign-tool TCR & interaction & 30 \\
+14 & E4 flash replication & Benign-tool TCR & module & 30 \\
+15 & E4 flash replication & Benign-tool TCR & prompt & 30 \\
+\bottomrule
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s16.part2}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{E3/E4 conditional robustness (part B)} \\
+\toprule
+Row & Study & Endpoint & Effect & CI low \\
+\midrule
+\endfirsthead
+\caption[]{E3/E4 conditional robustness (part B) (continued)} \\
+\toprule
+Row & Study & Endpoint & Effect & CI low \\
+\midrule
+\endhead
+1 & E3 risk enriched pro & attack unsafe effect & +0.00 pp & +0.00 pp \\
+2 & E3 risk enriched pro & attack unsafe effect & -1.67 pp & -5.00 pp \\
+3 & E3 risk enriched pro & attack unsafe effect & +0.00 pp & +0.00 pp \\
+4 & E3 risk enriched pro & attack unsafe or failure & +5.00 pp & -3.33 pp \\
+5 & E3 risk enriched pro & attack unsafe or failure & -4.17 pp & -10.00 pp \\
+6 & E3 risk enriched pro & attack unsafe or failure & +0.83 pp & -8.33 pp \\
+7 & E4 flash replication & attack unsafe effect & +0.00 pp & +0.00 pp \\
+8 & E4 flash replication & attack unsafe effect & +0.00 pp & +0.00 pp \\
+9 & E4 flash replication & attack unsafe effect & +0.00 pp & +0.00 pp \\
+10 & E4 flash replication & attack unsafe or failure & -2.00 pp & -10.00 pp \\
+11 & E4 flash replication & attack unsafe or failure & +3.00 pp & +0.00 pp \\
+12 & E4 flash replication & attack unsafe or failure & -1.00 pp & -5.00 pp \\
+13 & E4 flash replication & Benign-tool TCR & +6.67 pp & +0.00 pp \\
+14 & E4 flash replication & Benign-tool TCR & +3.33 pp & +0.00 pp \\
+15 & E4 flash replication & Benign-tool TCR & -3.33 pp & -11.67 pp \\
+\bottomrule
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s16.part3}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{E3/E4 conditional robustness (part C)} \\
+\toprule
+Row & Study & Endpoint & CI high & Bootstrap p \\
+\midrule
+\endfirsthead
+\caption[]{E3/E4 conditional robustness (part C) (continued)} \\
+\toprule
+Row & Study & Endpoint & CI high & Bootstrap p \\
+\midrule
+\endhead
+1 & E3 risk enriched pro & attack unsafe effect & +0.00 pp & 1.0000 \\
+2 & E3 risk enriched pro & attack unsafe effect & +0.00 pp & 0.7406 \\
+3 & E3 risk enriched pro & attack unsafe effect & +0.00 pp & 1.0000 \\
+4 & E3 risk enriched pro & attack unsafe or failure & +13.33 pp & 0.3448 \\
+5 & E3 risk enriched pro & attack unsafe or failure & +0.83 pp & 0.1528 \\
+6 & E3 risk enriched pro & attack unsafe or failure & +10.00 pp & 0.9438 \\
+7 & E4 flash replication & attack unsafe effect & +0.00 pp & 1.0000 \\
+8 & E4 flash replication & attack unsafe effect & +0.00 pp & 1.0000 \\
+9 & E4 flash replication & attack unsafe effect & +0.00 pp & 1.0000 \\
+10 & E4 flash replication & attack unsafe or failure & +4.00 pp & 0.7852 \\
+11 & E4 flash replication & attack unsafe or failure & +7.00 pp & 0.0864 \\
+12 & E4 flash replication & attack unsafe or failure & +2.00 pp & 0.7752 \\
+13 & E4 flash replication & Benign-tool TCR & +16.67 pp & 0.2558 \\
+14 & E4 flash replication & Benign-tool TCR & +8.33 pp & 0.2602 \\
+15 & E4 flash replication & Benign-tool TCR & +3.33 pp & 0.5494 \\
+\bottomrule
+\end{longtable}
+\addtocounter{table}{-1}
+\renewcommand{\theHtable}{s16.part4}
+\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
+\caption[]{E3/E4 conditional robustness (part D)} \\
+\toprule
+Row & Study & Endpoint & Holm p & Bootstrap n \\
+\midrule
+\endfirsthead
+\caption[]{E3/E4 conditional robustness (part D) (continued)} \\
+\toprule
+Row & Study & Endpoint & Holm p & Bootstrap n \\
+\midrule
+\endhead
+1 & E3 risk enriched pro & attack unsafe effect & --- & 10000 \\
+2 & E3 risk enriched pro & attack unsafe effect & --- & 10000 \\
+3 & E3 risk enriched pro & attack unsafe effect & --- & 10000 \\
+4 & E3 risk enriched pro & attack unsafe or failure & --- & 10000 \\
+5 & E3 risk enriched pro & attack unsafe or failure & --- & 10000 \\
+6 & E3 risk enriched pro & attack unsafe or failure & --- & 10000 \\
+7 & E4 flash replication & attack unsafe effect & --- & 10000 \\
+8 & E4 flash replication & attack unsafe effect & --- & 10000 \\
+9 & E4 flash replication & attack unsafe effect & --- & 10000 \\
+10 & E4 flash replication & attack unsafe or failure & --- & 10000 \\
+11 & E4 flash replication & attack unsafe or failure & --- & 10000 \\
+12 & E4 flash replication & attack unsafe or failure & --- & 10000 \\
+13 & E4 flash replication & Benign-tool TCR & --- & 10000 \\
+14 & E4 flash replication & Benign-tool TCR & --- & 10000 \\
+15 & E4 flash replication & Benign-tool TCR & --- & 10000 \\
+\bottomrule
+\end{longtable}
+\noindent\textit{Panel key.} Row IDs identify the same original row in every part; the first two data columns repeat for context.
+\par\smallskip
+\noindent\textit{Note.} E3 is outcome-enriched and E4 is a same-provider replication. Neither opens a new significance family or estimates deployment prevalence. Historical tables retain their recorded endpoint, not a retrospectively verified count of committed un\-au\-thor\-ized effects. See the measurement correction and separate corrected-v1 results.
+\endgroup
