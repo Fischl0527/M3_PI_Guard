@@ -1,5 +1,13 @@
 # 综合后续研究实施
 
+## 2026-10-08 60正常任务解释已实际完成
+
+不另写计划。读固定60个受信请求/可信应用声明及工具接口，生成一个版本化只读解释器trusted_intent_review_v1.py；候选接口由逐项阅读注释，不是gold必需列表。联结四条件240既有记录，输出trusted_intent_review/review.csv（60行）和report.md，无内部正文/目标值/新哈希包。
+
+验证：Python3.13.5 -m pytest tests/unit/test_trusted_intent_review_v1.py -q：9passed；Ruff两文件通过。-m experiments.paper_v2.trusted_intent_review_v1实际exit0，60任务/两个基准各30/established contract violations0/API0。负例验证声明缺失、unknown保持、完成后失败、缺失/重复/越界/身份变化结果及未审查任务不会被自动编解释。源码和对应输出不改变旧runtime或raw。
+
+解释：M37可信声明逐字段保留、13直接目标有规则、10须独立确认且没有具体目标；AgentDojo30通用词法路线不保证任意表达。三个模拟API任务有执行/final但评分未完成，脱敏参数不足，保留原因未知。没有足够证据要求新增有界合同修复，不能为效用扩权。最终科学审查/正文收束仍待，整体in_progress。
+
 ## 2026-10-08 本切片已执行与验证
 
 从既有缓存实现四当前主图、英中接入与旧五图历史补充；三当前PDF实际构建。源figure12文件、四主表、20补充表保持独立来源。宽表每部分最大五列，原始行号/前两列重复作连接键；原数据列全部保留，无旋转、缩放、scriptsize。图件9pt，最终PDF字最小8.229/8.229/8.635pt。

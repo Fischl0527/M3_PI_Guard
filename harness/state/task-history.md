@@ -1,5 +1,11 @@
 # Task History
 
+## 2026-10-08 — All sixty trusted intents reviewed
+
+- Implemented an offline explanatory review and completed60unique benign tasks/240existing condition records. Output is exactlyreview.csv+report.md, with source locators, authority notes, rule types, public first restriction/final outcome and evidence gaps; no protected target values or provider bodies.
+- Seven trusted declarations preserved, thirteen direct target tasks have rules, ten need unavailable independent target confirmation. Generic AgentDojo coverage is bounded; not proof of arbitrary semantic correctness. Three mockAPI executions lack completion, exact parameter cause unknown. No new contract violation established or permission extended.
+- Nine focused tests/Ruff pass; actual review exits0. No API/effect/statistical replay/Full Harness/raw rewrite. Figures/PDF milestoned71b1f9pushed/matchingremote. Scientific closeout remainsin_progress.
+
 ## 2026-10-08 — Current figures and portrait PDF implemented
 
 - Cache-only generator exported four current main figures in12 formats; English/Chinese and TeX now use them. Original five figures/captions preserved asS1–S5. Fixed supplement entry omissionS13–S20 and replaced rotated wide tables with row-keyed portrait panels without value changes.

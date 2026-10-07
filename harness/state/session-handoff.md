@@ -1,5 +1,12 @@
 # 会话移交
 
+## 2026-10-08 — 60任务解释已执行，继续科学收束
+
+- 四当前图/竖版宽表/英中接入/三PDF阶段88文件提交d71b1f93dd9387dd1ac68b9b96280b592b8e4dc5已push到origin/codex/claude-review-repairs，ls-remote精确一致；current-task用户16行未提交。
+- 新experiments/paper_v2/trusted_intent_review_v1.py及9项测试；实际python -X utf8 -B -m experiments.paper_v2.trusted_intent_review_v1 exit0，60任务/0新合同违约/0 API。只读当前plan/raw和源在线投影，生成review.csv/report.md；不读取internal模型正文或把gold当授权。
+- -m pytest tests/unit/test_trusted_intent_review_v1.py -q：9passed/1.35s；-m ruff check该源码与测试通过。7声明保留、13直接目标、10未确认目标，3模拟API完成原因仍有缺口；未知和失败不改写。主报告及manuscript_figures/README.md入口更新。
+- 该60任务待办已关闭；下一步最终方法/主张审查及正文历史内容收束，不新写计划、不API/扩权/成功重跑/Full Harness/递归哈希。F-PAPER-002仍in_progress，整体尚未投稿就绪。保留无关dirty及原16行用户改动；本段推送回执在后续阶段记录，不循环自提交。
+
 ## 2026-10-08 — 已实施当前主图、竖版宽表与当前PDF
 
 - 从3dd0137继续执行，不再重复规划。scripts/current_evidence_figures.py缓存绘制四主图12文件；英中图/图注/LaTeX实际接入。旧五图/图注保留S1–S5，补充20表均在入口，宽表分栏续表不旋转/不scriptsize。
