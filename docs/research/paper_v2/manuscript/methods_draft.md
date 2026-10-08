@@ -1,6 +1,45 @@
 # Methods — lean authorization study
 
-Status: `corrected_v2_narrative_updated_tables_layout_pending`
+Status: `corrected_v2_current_evidence_and_trusted_intent_review_integrated`
+
+## Current cohorts and statistical specification
+
+The current investigation addresses authorization semantics, joint security
+and utility, and bounded component evidence. It is separate from the earlier
+six-question programme. The fixed 180-case authorization sample contains
+100 attacks, 60 benign tool tasks and 20 no-tool tasks. Its 60-case stress
+subset and the 120-case contemporaneous calibration overlap earlier samples;
+neither a condition assignment nor a reused cohort is an independent task.
+Model prompts are ordinary in both policy and full cells. Oracle-derived scope
+is supplied only to the Guard and is explicitly distinct from deployed,
+non-oracle authorization.
+
+The current authorization comparisons cross policy/full modules with compiled
+and corrected exact-target scope. The additional broad, underspecified and
+conflicting transformations are nested descriptive stress tests. Calibration
+contrasts policy, full and the explicitly configured VIGIL adapter with an
+unguarded control that retains the same external-effect boundary. Sixteen
+synthetic controls test specified label and data-flow behavior; they do not
+open an additional confirmatory family or estimate natural-task performance.
+
+We retain the prespecified inferential results rather than re-estimating
+historical outcomes. Cell proportions use Wilson 95% intervals; paired
+absolute differences use Newcombe intervals and exact McNemar tests, with
+Holm correction within the defined endpoint/contrast family. Bootstrap
+intervals, when reported, keep task-level paired assignments together rather
+than resampling condition rows independently. Marginal cell intervals,
+paired-difference intervals and identification bounds for missing outcomes
+are different objects and are labelled accordingly. Zero-event empirical
+bootstrap intervals do not establish equivalence or absence of risk.
+
+Benchmark panels are reported separately because native AgentDojo security
+judgments and M3-v2 observed simulated effects are not interchangeable.
+Completion and operational failure may coexist. All assignments remain in
+ITT, observed-value denominators accompany unknown counts, and sensitivity
+bounds never substitute for observed unsafe effects. The benign-task review
+is post-outcome descriptive interpretation, not an additional significance
+family or an adjudication of every false block. Provider identities, module
+inputs and configured baseline limits bound each claim.
 
 ## Study design and research questions
 
@@ -92,7 +131,8 @@ all terminal records; it does not recursively replay historical evidence.
 ## Runtime conditions
 
 The common runtime interfaces are `TaskPolicyManifest`, `ActionProposal`,
-`GuardDecision`, and `ProvenanceEvent`. The two M3 conditions share the agent,
+`GuardDecision`, and `ProvenanceEvent`. In the historical bundled comparison,
+the two M3 conditions share the agent,
 model, parser, evaluator, tool environment, and task-policy representation, but
 they are not a single-module ablation:
 
@@ -108,10 +148,13 @@ they are not a single-module ablation:
 
 The earlier authorization experiment changed prompt profile and runtime modules
 together and is therefore retained only as a bundled configuration comparison.
-The new concurrent factorial crosses both factors explicitly: policy versus
+The historical E1 concurrent factorial crosses both factors explicitly: policy versus
 full modules and normal versus safe prompt. Its module main effect, prompt main
 effect, and module-by-prompt interaction are therefore separately identified
-within the fixed paired sample.
+within the fixed paired sample. The current corrected authorization and
+calibration studies instead hold both module conditions at the same ordinary
+prompt; their assignments must not be described using the earlier bundled
+prompt profiles.
 
 `ALLOW`, `ASK`, and `DENY` are runtime decisions, not security outcomes by
 themselves. Security is scored from the isolated post-enforcement effect
@@ -314,8 +357,11 @@ and later replaced by a CNY 1,000 runaway-protection ceiling at the project
 owner's direction. The selected tasks, query range, attacker, model, seed,
 first-success stopping, ITT rules, and estimand were unchanged, and no successful
 query was replayed. Final analysis-attributed cost was CNY 24.5551236.
-Provider calls for E1--E6 and the earlier studies were made during July and
-August 2026; the additional E7a proposal study ran on September 5, 2026.
+Historical provider calls for E1--E6 and the earlier studies were made during
+July and August 2026; the additional E7a proposal study ran on September 5,
+2026. The corrected development and follow-up studies are separate later
+executions, not part of that July--August service window. Their request-time
+model identities and execution timestamps remain attached to their records.
 The returned names are provider-managed model aliases and therefore
 identify the served model at request time without freezing its hidden weights.
 
@@ -357,13 +403,15 @@ attack family. `ASK` is a runtime confirmation request; without a human study it
 is not interpreted as measured human burden.
 
 All terminal work items remain in the intention-to-treat denominator. The
-analysis reports raw numerator/denominator values alongside proportions. A
-provider or parser failure is not silently removed and is not relabeled as a
-successful security outcome. Its unsafe-effect indicator records whether an
-isolated unsafe effect was observed, while its operational failure remains a
-separate reported outcome and it cannot count as task completion. Latency and
-burden summaries likewise include all terminal work items, not only completed
-ones.
+analysis reports raw numerator/denominator values alongside proportions.
+Observed security outcomes, unknown outcomes, task completion, and operational
+failure are recorded separately. A provider or parser failure is neither
+silently removed nor relabeled as successful protection. If the benchmark
+establishes completion before a later failure, both observations are retained;
+without completion evidence the failure cannot create a successful task.
+Missing effect evidence remains unknown, not a safe zero. Burden summaries
+include terminal failures, and latency summaries report their available-value
+denominator rather than imputing missing durations.
 
 Because observed unsafe effects are rare, we also report a pessimistic
 sensitivity endpoint on attack tasks: `unsafe_effect OR operational_failure`.
@@ -574,6 +622,31 @@ unknown outcomes, and completion after execution remain distinct. Reported
 total latency reads the runtime total component; component durations and
 missingness are reported separately rather than inferred from token usage.
 Existing inferential results are reused when correcting latency aggregation.
+
+## Trusted-intent review of benign tasks
+
+We subsequently reviewed the fixed calibration cohort's 60 benign tool tasks,
+30 per benchmark, and linked their 240 existing condition records. This is
+a post-outcome explanatory review, not a blind evaluation, a new sample, or
+an independent replication. Trusted user requests, trusted application context,
+and tool interfaces define the authority interpretation; evaluator answers and
+model-declared permissions do not supply grants.
+
+For each task we retain an intent paraphrase, possible tool routes, declared
+action fields, generated rule types, first restriction, successful simulated
+execution count, completion, operational status, and source locators. Possible
+tool routes are not a gold list of necessary actions. Interpretation categories
+may overlap, and the same task may have a completed benchmark outcome and a
+later failed workflow. We inspect declared action--target pairs for loss or
+mismatch without treating every natural-language intent as a contract requiring
+the current lexical compiler to infer a dynamic target.
+
+The review uses only existing public records and projected trusted inputs.
+Redacted proposal arguments and final-answer content limit diagnosis of cases
+with successful simulated execution but unsuccessful completion. No new model
+call, permission expansion, evaluator relabeling, or runtime revision follows
+from the descriptive review, and no independent reviewer-agreement estimate
+is available.
 
 ## Minimal verification and reproducibility
 

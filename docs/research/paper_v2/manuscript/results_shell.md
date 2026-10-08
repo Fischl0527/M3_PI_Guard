@@ -677,6 +677,33 @@ preclude interpreting this ordering as a Guard computation speedup. The
 latency-only correction does not alter the raw records or prior security
 and completion inference.
 
+## Trusted-intent review of benign completion
+
+The fixed 60-task review finds no lost or mismatched action--target pair among
+the seven trusted application declarations. Thirteen further M3-v2 tasks have
+rules for explicitly requested targets. The remaining ten M3-v2 tasks require
+confirmation of a filename or recipient without supplying a concrete target;
+no independent approval was obtained. These counts describe the trusted
+inputs and generated rules, not an adjudicated false-block rate.
+
+All 30 AgentDojo tasks lack such concrete trusted action declarations. The
+generic compiler's lexical tool selection and literal security-target parsing
+do not cover arbitrary natural-language requests, multistage lookups, or
+dynamic object identifiers. The requests can express legitimate goals even
+when this bounded compiler cannot derive an executable grant. The review does
+not establish a new bounded-contract violation or justify automatic authority
+expansion.
+
+Six M3-v2 tasks show successful simulated execution without completion under
+at least one policy/full condition; four of these also have a model-format or
+operational failure. Categories overlap. In three explicit mock-API tasks,
+policy records contain ALLOW, successful execution, and a final answer but
+still fail completion. The evaluator requires both expected-effect matching
+and a successful final outcome. Redacted public arguments and answer content
+do not identify the exact mismatch, so this observation is not evidence of an
+evaluator defect. Native AgentDojo completion likewise does not prove that
+a particular blocked action was executed.
+
 ## Remaining evidence boundary
 
 Historical Public and incremental tables retain their recorded evaluator

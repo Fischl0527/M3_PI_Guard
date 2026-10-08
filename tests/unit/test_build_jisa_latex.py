@@ -49,6 +49,27 @@ def _build(tmp_path: Path) -> builder.BuildPaths:
     )
 
 
+def test_current_article_is_an_explicit_entry_without_dropping_current_artifacts(tmp_path: Path) -> None:
+    paths = builder.build(
+        repo_root=REPO_ROOT,
+        output_root=tmp_path / "M3_PI_Guard_JISA",
+        review_entry=tmp_path / "review.tex",
+        main_markdown="manuscript_current_v2.md",
+    )
+    methods = (paths.output_root / "03_methods.tex").read_text(encoding="utf-8")
+    results = (paths.output_root / "04_results.tex").read_text(encoding="utf-8")
+    assert "Current cohorts and statistical specification" in methods
+    assert "Trusted-intent review of benign completion" in results
+    assert "Medium falsification study" not in results
+    for number in range(2, 5):
+        assert rf"\input{{\ProjectRoot/table_{number:02d}.tex}}" in results
+    for number in range(2, 5):
+        assert rf"\input{{\ProjectRoot/figure_{number:02d}.tex}}" in results
+    assert r"\FloatBarrier" in results
+    with pytest.raises(builder.LatexBuildError, match="Unsupported manuscript entry"):
+        builder.build(main_markdown="../anything.md")
+
+
 def test_builds_shared_official_review_and_supplement_packages(tmp_path: Path) -> None:
     paths = _build(tmp_path)
 
@@ -241,8 +262,19 @@ def test_preserves_main_and_supplementary_table_shapes(tmp_path: Path) -> None:
                 assert builder._table_inline(value) in rendered
 
     narrow_main = (table_dir / "table_01.tex").read_text(encoding="utf-8")
-    assert narrow_main.startswith(r"\begingroup")
-    assert r"\begin{longtable}" in narrow_main
+    assert narrow_main.startswith(r"\begin{table}[!htbp]")
+    assert r"\begin{table}[!htbp]" in narrow_main
+    assert r"\begin{longtable}" not in narrow_main
+    assert narrow_main.index(r"\caption") < narrow_main.index(r"\begin{tabular}")
+    assert narrow_main.index(r"\textit{Note.}") < narrow_main.index(r"\end{table}")
+    for table in main_tables:
+        rendered = (table_dir / f"table_{int(table.number):02d}.tex").read_text(encoding="utf-8")
+        assert rendered.startswith(r"\begin{table}[!htbp]")
+        assert rendered.rstrip().endswith(r"\end{table}")
+        assert r"\begin{longtable}" not in rendered
+        assert builder._inline(table.note) in rendered
+        for row in table.rows:
+            assert " & ".join(builder._table_inline(cell) for cell in row) in rendered
     assert "sidewaystable" not in narrow_main
 
     for number in range(1, 5):

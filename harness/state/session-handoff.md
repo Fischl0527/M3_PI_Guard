@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-10-08 — 当前正文和实际PDF已收束，非仅计划
+
+- 前节点536f40556022065e4c77f63af21f911c93f37de8为60任务审查，已推送。当前科学修订：完成与失败并存、未知不归零、历史bundled配置/服务时间与当前900/480普通提示分开、历史风险标签不能当修正版效果，60任务事后解释英中接入。
+- 新manuscript_current_v2.md正文8,148词/全文10,116，完整工作稿正文15,838保留；manuscript_current_zh_v2.md内容对照，非逐句等长翻译。默认full不改；构建必须显式--profile current和--main-markdown manuscript_current_v2.md。claim ledger顶部新增当前证据边界，旧LC记录保留并标历史。
+- 受影响pytest命令：F:\robot\Anaconda3\python.exe -X utf8 -B -m pytest tests/unit/test_build_lean_paper_manuscript.py tests/unit/test_build_jisa_latex.py tests/unit/test_trusted_intent_review_v1.py -q，46passed。Ruff对应两个builder/两个test通过。两个Markdown profile实际exit0；current LaTeX实际生成exit0。
+- TeXLive2026 latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -file-line-error -cd分别编译数模通用模板.tex、M3_PI_Guard_JISA.tex，均exit0。最终模板35页/40导航、正式26页/39导航；61页布局/空作者/TNR/居中页码/旋转/界限检查及四联系图、表3放大页已完成。表3完整表注分别第18/13页；正式3处Underfull保留。24页补充未变未重编译。PDF技能附带运行时不可用，使用本机TeXLive/PyMuPDF，不称附带工具通过。
+- 报告docs/research/paper_v2/manuscript/current_manuscript_closeout_2026-10-08.md；根研究report与两README同步。仅范围Git当前origin/codex/claude-review-repairs；原current-task16用户行、第三方/font/tmp/旧endpoint文件与其他dirty不提交。预览outputs/manuscript/previews/current_article_20261008仅本地。
+- F-PAPER-002保持in_progress；这一稿件切片已执行，科研/投稿整体未完成。作者字段空白，外部独立方法审阅、投稿时书目/期刊与作者确认仍需真实处理。无新API/统计重算/权限变化/Full Harness；可选360无新缺陷不启动，本地180/原生108未资格合格不绕过。
+- 后续不得重跑已成功行或重写历史原raw；不为了补量新开矩阵或恢复Gemini。阶段提交回执以Git/对话为准，不为自引用循环提交。
+
 ## 2026-10-08 — 60任务解释已执行，继续科学收束
 
 - 四当前图/竖版宽表/英中接入/三PDF阶段88文件提交d71b1f93dd9387dd1ac68b9b96280b592b8e4dc5已push到origin/codex/claude-review-repairs，ls-remote精确一致；current-task用户16行未提交。

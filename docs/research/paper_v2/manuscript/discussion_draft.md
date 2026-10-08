@@ -1,6 +1,6 @@
 # Discussion — lean empirical study draft
 
-Status: `corrected_v2_sources_updated_bilingual_layout_pending`
+Status: `corrected_v2_current_evidence_and_trusted_intent_review_integrated`
 
 ## Existing evidence changes the research claim
 
@@ -67,8 +67,15 @@ are authorized. The current generic compiler omits an automatic rule when
 a required security target cannot be resolved from trusted inputs. First
 missing-tool-permission blocks in 26/30 AgentDojo benign cases in each module
 cell locate this limitation but do not establish which cases violate the
-compiler contract. A bounded trusted-intent review remains necessary before
-changing permissions. Broad, conflicting, and underspecified stress results
+compiler contract. The completed 60-task trusted-intent review preserves all
+seven explicit application declarations, finds thirteen further direct-target
+rules, and identifies ten M3-v2 tasks awaiting target clarification without
+independent approval. AgentDojo's thirty tasks expose the bounded compiler's
+natural-language and dynamic-target coverage limits, not thirty proven
+contract defects. Execution without completion in three mock-API tasks remains
+partly unexplained because public arguments are redacted. These observations
+do not justify widening permissions to improve completion. Broad, conflicting,
+and underspecified stress results
 likewise describe the tested transformations, not deployment prevalence.
 
 Operational failure and security remain separate. A failure-sensitive upper
@@ -117,8 +124,9 @@ and a parser/provider failure may look secure if the evaluator counts only
 successful executions. We therefore treat isolated executed effect as the
 security endpoint and benign tool-task completion as a joint primary endpoint.
 
-The Public evidence already illustrates the problem. Relative to the
-structural condition, both M3 variants reduced unsafe effects but also had much
+The historical Public evidence illustrates a related measurement problem.
+Relative to the structural condition, both M3 variants reduced recorded legacy
+risk labels but also had much
 lower benign-tool completion. The policy package then outperformed the full
 package on security without losing additional utility. The interpretation is
 not that provenance is intrinsically harmful. It is that the evaluated bundle
@@ -222,12 +230,15 @@ incomplete and contribute no cross-provider inference. Although execution dates,
 response identifiers, and returned model names are retained, provider-managed
 aliases do not make the underlying weights immutable.
 
-Second, the new authorization experiment has a strong attack-endpoint floor:
-only one unsafe effect occurred across the 400 primary attack records. It can
-therefore estimate utility and operational burden more informatively than
-small security differences between its four primary cells. Security-direction
-evidence comes mainly from the larger Public matrices and must not be inferred
-from these near-zero cells alone.
+Second, both authorization studies have a strong attack-endpoint floor. The
+historical study recorded one risk-positive label among 400 main attack
+assignments; the corrected study observes none among its 490 main and stress
+attack assignments. Neither has an unguarded reference. Their utility and
+operational outcomes are more informative than small security differences.
+The corrected calibration adds that reference, but its sparse AgentDojo
+events and zero-event M3-v2 control still do not establish a security gain.
+Larger historical matrices cannot repair that inferential gap because their
+recorded endpoints are not the corrected executed-effect measure.
 
 Third, E1 separates prompt profile from the runtime module bundle, but the full
 module factor still combines provenance, data-flow, monotonicity, and
@@ -278,7 +289,10 @@ an additional benchmark or robustness finding.
 Finally, this paper does not include an independent blind set. It also does not
 claim first, only, or SOTA status. Its external-validity claims are limited to
 the models, benchmarks, policy compiler, stress regimes, and attack budgets
-actually evaluated.
+actually evaluated. The benign-task review is post-outcome and has no
+independent reviewer-agreement calibration. It distinguishes authority and
+execution evidence but does not adjudicate every false block or recover
+redacted arguments.
 
 ## Practical implications
 

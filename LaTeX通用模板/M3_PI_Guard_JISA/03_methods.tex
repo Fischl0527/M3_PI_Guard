@@ -2,33 +2,17 @@
 
 \label{sec:methods}
 
-\subsection{Study design and research questions}
+\subsection{Current cohorts and statistical specification}
 
-\label{sec:methods-study-design-and-research-questions}
+\label{sec:methods-current-cohorts-and-statistical-specification}
 
-We conduct a paired empirical study of runtime authorization for tool-using language-model agents. The design separates the information supplied to the online Guard from the offline fields used to score the run. It then varies the authorization regime and the deployed Guard configuration package while holding the task, attack, provider, model, tool environment, and evaluator fixed.
+The current investigation addresses authorization semantics, joint security and utility, and bounded component evidence. It is separate from the earlier six-question programme. The fixed 180-case authorization sample contains 100 attacks, 60 benign tool tasks and 20 no-tool tasks. Its 60-case stress subset and the 120-case contemporaneous calibration overlap earlier samples; neither a condition assignment nor a reused cohort is an independent task. Model prompts are ordinary in both policy and full cells. Oracle-derived scope is supplied only to the Guard and is explicitly distinct from deployed, non-oracle authorization.
 
-The historical programme addressed six research questions. Their original records and conditions are retained as historical evidence. The corrected investigation below re-evaluates authorization and module-bundle effects without reassigning historical labels to new execution semantics.
+The current authorization comparisons cross policy/full modules with compiled and corrected exact-target scope. The additional broad, underspecified and conflicting transformations are nested descriptive stress tests. Calibration contrasts policy, full and the explicitly configured VIGIL adapter with an unguarded control that retains the same external-effect boundary. Sixteen synthetic controls test specified label and data-flow behavior; they do not open an additional confirmatory family or estimate natural-task performance.
 
-\begin{enumerate}
+We retain the prespecified inferential results rather than re-estimating historical outcomes. Cell proportions use Wilson 95\% intervals; paired absolute differences use Newcombe intervals and exact McNemar tests, with Holm correction within the defined endpoint/contrast family. Bootstrap intervals, when reported, keep task-level paired assignments together rather than resampling condition rows independently. Marginal cell intervals, paired-difference intervals and identification bounds for missing outcomes are different objects and are labelled accordingly. Zero-event empirical bootstrap intervals do not establish equivalence or absence of risk.
 
-\item \textbf{RQ1: Authorization regime.} How do \nolinkurl{exact_gold}, \nolinkurl{auto_compiled}, \nolinkurl{broad}, \nolinkurl{underspecified}, and \nolinkurl{conflicting} authorization regimes change executed unsafe effects, benign task completion, and \nolinkurl{ASK/DENY} burden?
-
-\item \textbf{RQ2: Prompt and runtime components.} What are the independent main effects of the safety prompt and full runtime modules, and do they interact?
-
-\item \textbf{RQ3: Conditional robustness and model replication.} Are the factor directions consistent on historically difficult attacks and on DeepSeek V4 Flash?
-
-\item \textbf{RQ4: Source authority.} When proposition, parameter value, position, and policy are held fixed, how does moving the proposition between trusted and untrusted sources change Guard and end-to-end behavior?
-
-\item \textbf{RQ5: Adaptive tail risk.} Among attacks with no unsafe effect by budget 200, how many prospectively selected tasks first succeed by budget 500?
-
-\item \textbf{RQ6: Contemporaneous attack activity.} In a historically risk-enriched cohort, are control attacks active in the current execution block, and how do six runtime conditions compare within that same block?
-
-\end{enumerate}
-
-The corrected study uses \nolinkurl{exact_target_v2}, not the defective historical \nolinkurl{exact_gold} matcher. Its central questions are whether target-scoped oracle authorization changes task completion, what compiled authorization costs relative to a contemporaneous unguarded control, and what the synthetic data-flow controls establish within their bounded scope. These correspond to the current RQ1 (authorization semantics), RQ2 (security, utility, and runtime burden), and RQ3 (component evidence and applicability) in the Introduction. The numbered six-question list above is the historical programme, not six additional current confirmatory questions.
-
-Positive results are not a stopping condition. The analysis is retained if \nolinkurl{exact_gold} has little effect, the full package underperforms the policy package, or the available replication evidence differs from the primary model.
+Benchmark panels are reported separately because native AgentDojo security judgments and M3-v2 observed simulated effects are not interchangeable. Completion and operational failure may coexist. All assignments remain in ITT, observed-value denominators accompany unknown counts, and sensitivity bounds never substitute for observed unsafe effects. The benign-task review is post-outcome descriptive interpretation, not an additional significance family or an adjudication of every false block. Provider identities, module inputs and configured baseline limits bound each claim.
 
 \subsection{Threat model and safety boundary}
 
@@ -54,7 +38,7 @@ Each compact result stores a digest of the online-visible projection and a boole
 
 \label{sec:methods-runtime-conditions}
 
-The common runtime interfaces are \nolinkurl{TaskPolicyManifest}, \nolinkurl{ActionProposal}, \nolinkurl{GuardDecision}, and \nolinkurl{ProvenanceEvent}. The two M3 conditions share the agent, model, parser, evaluator, tool environment, and task-policy representation, but they are not a single-module ablation:
+The common runtime interfaces are \nolinkurl{TaskPolicyManifest}, \nolinkurl{ActionProposal}, \nolinkurl{GuardDecision}, and \nolinkurl{ProvenanceEvent}. In the historical bundled comparison, the two M3 conditions share the agent, model, parser, evaluator, tool environment, and task-policy representation, but they are not a single-module ablation:
 
 \begin{itemize}
 
@@ -64,123 +48,53 @@ The common runtime interfaces are \nolinkurl{TaskPolicyManifest}, \nolinkurl{Act
 
 \end{itemize}
 
-The earlier authorization experiment changed prompt profile and runtime modules together and is therefore retained only as a bundled configuration comparison. The new concurrent factorial crosses both factors explicitly: policy versus full modules and normal versus safe prompt. Its module main effect, prompt main effect, and module-by-prompt interaction are therefore separately identified within the fixed paired sample.
+The earlier authorization experiment changed prompt profile and runtime modules together and is therefore retained only as a bundled configuration comparison. The historical E1 concurrent factorial crosses both factors explicitly: policy versus full modules and normal versus safe prompt. Its module main effect, prompt main effect, and module-by-prompt interaction are therefore separately identified within the fixed paired sample. The current corrected authorization and calibration studies instead hold both module conditions at the same ordinary prompt; their assignments must not be described using the earlier bundled prompt profiles.
 
 \nolinkurl{ALLOW}, \nolinkurl{ASK}, and \nolinkurl{DENY} are runtime decisions, not security outcomes by themselves. Security is scored from the isolated post-enforcement effect receipt. Utility is scored by the benchmark task-completion evaluator.
 
 The earlier incomplete 450-item Gemini authorization sample remains diagnostic and is not extended. E6 makes a separately executed, bounded Gemini prefix attempt that is diagnostic by design under the single-block amendment. Even complete prefix coverage would not make that amended design a formal cross-provider study; the observed incomplete prefix leaves every Gemini and cross-provider effect not estimable. Structural baselines, including the source-pinned VIGIL adapter, retain their earlier descriptive role; the new experiments target causal confounding, source authority, risk enrichment, same-provider model replication, and adaptive tail behavior rather than rerunning a large baseline matrix.
 
-\subsection{Authorization regimes}
+\subsection{Measurement correction and development validation}
 
-\label{sec:methods-authorization-regimes}
+\label{sec:methods-measurement-correction-and-development-validation}
 
-Five controlled code transformations were evaluated in the historical authorization experiment. Their numerical outcomes retain that original implementation identity. The full-dictionary \nolinkurl{exact_gold} transformation was subsequently found incompatible with partial target annotations; it is not the corrected operationalization described below.
+The historical execution studies used the original compiler, rule matcher, and evaluator. Their recorded safety labels are not retrospectively converted to executed un\-au\-thor\-ized effects. In particular, the original M3-v2 evaluator could score a final isolation rejection as an unsafe event, whereas the revised development evaluator distinguishes proposals, Guard permission, isolation rejection, successful simulated execution, task completion, and unknown values. AgentDojo retains its native security and utility checks. Legitimate completion and a security violation may coexist; missing evidence is not a safe zero.
 
-\begin{itemize}
+The explicitly selected corrected-v1 path fixes action-resource binding, complete matching across multiple rules, trusted-environment label propagation, and confirmation-state continuity. It does not alter the historical default or records. Six configurations cross no/policy/full guard modules with the same normal/safe prompt factor. The development set comprises 24 attacks, 16 benign-tool tasks, and eight no-tool tasks; AgentDojo contributes 20 tasks and M3-v2 28. Attacks are historically enriched, not a deployment sample. Both completed DeepSeek cohorts use temperature zero, a 512-token output limit, and at most eight provider calls per task-condition. The V4.1 Flash model is distinct from the earlier V4 Flash and is not a model-invariant before/after comparison. Synthetic paired-action tests establish component behavior only; there is no simulated human approval or new confirmatory family.
 
-\item \nolinkurl{auto_compiled}: the task policy is compiled from the trusted user request, trusted application context, and tool schemas before untrusted evidence is processed;
+\subsection{Corrected target authorization and contemporaneous calibration}
 
-\item \nolinkurl{exact_gold}: expected tool calls are derived offline from the evaluator and converted into required exact argument rules, with confirmation disabled; only the derived authorization object enters online state;
+\label{sec:methods-corrected-target-authorization-and-contemporaneous-calibration}
 
-\item \nolinkurl{broad}: each exact argument constraint is replaced by a type constraint; when this widens a side-effecting rule, confirmation is required;
+Table 1 summarizes the current cohorts and their distinct evidence roles.
 
-\item \nolinkurl{underspecified}: the last compiled tool rule is removed; and
+The corrected experiment selects explicit \nolinkurl{corrected_v2} runtime behavior and \nolinkurl{exact_target_v2} authorization. Target and other constrained security fields must match the offline-derived scope; schema-required content fields need not equal an absent annotation. Schema completeness, types, additional security targets, action order, and execution registration remain checked. A generic subset-of-arguments comparison is insufficient because additional recipients, paths, or endpoint parameters can change the authorized action. The original matcher and all its records remain unchanged.
 
-\item \nolinkurl{conflicting}: each exact value is replaced by a deterministic controlled conflicting value (for example, a recipient becomes \nolinkurl{conflicting-scope [at] example.test} or a path becomes a public-sandbox conflict path).
+Raw evaluator fields do not enter the model prompt. In the oracle condition, the Guard nevertheless receives an explicitly answer-derived authorization object. This is an idealized information regime, not evidence that deployed authorization can obtain the same scope. Ambiguous required scope is not an automatic grant, including with confirmation modules disabled. Missing trusted classification cannot be treated as public data when a restricted data-flow rule applies. No human approval is simulated: ASK means pending clarification, not task completion.
 
-\end{itemize}
+The new authorization cohort reuses 180 fixed cases: 100 attacks, 60 benign tool tasks, and 20 M3-v2 no-tool tasks. Policy and full modules each receive compiled and exact-target authorization, yielding 720 assignments; all four cells use the same ordinary prompt. Three stress regimes on the predefined 60-case nested subset add 180 full-module assignments. The 12-assignment formal prefix is part of the 900 total, not an additional repeat. The security endpoint has 490 attack assignments across the main and stress cells, not 490 independent tasks. This authorization study contains no unguarded cell.
 
-As a sanitized example, an auto-compiled rule allowing \nolinkurl{send_email(to="analyst [at] example.test")} becomes \nolinkurl{send_email(to: string, confirmation required)} under \nolinkurl{broad}, is removed if it is the final rule under \nolinkurl{underspecified}, and targets \nolinkurl{conflicting-scope [at] example.test} under \nolinkurl{conflicting}. Under \nolinkurl{exact_gold}, an offline expected call becomes a required exact-value rule. These definitions describe this implementation; they are not prevalence estimates for deployed authorization systems.
+A separate contemporaneous calibration uses 120 fixed cases, with 30 attacks and 30 benign-tool tasks from each benchmark. Ordinary prompts and compiled authorization are held constant across no research Guard, policy, full, and configured VIGIL, giving 480 assignments. The unguarded condition retains the same host and external-effect boundary. VIGIL generates constraints through the model and uses its configured deterministic hybrid audit, with model-based secondary verification disabled. It is not the complete official default baseline. Its provider-call cap is 16; the other conditions cap at eight. Cohorts overlap earlier studies and do not constitute independent sample replication.
 
-The four primary DeepSeek cells pair policy-only and M3-full with \nolinkurl{auto_compiled} and \nolinkurl{exact_gold}. A fixed nested subset adds M3-full under the three non-oracle stress regimes.
+Both Pro experiments use temperature zero, 512 output tokens, a 180-second single-request timeout, and zero automatic HTTP retries. Task environments are isolated, with at most two assignments in flight. After a 120-assignment calibration stop caused by parallel telemetry and truncated constraint classification, a telemetry-only revision executed the 360 untouched items. The first 120 records, including response-bearing failures, were not retried. Scientific prompts, parameters, permissions, and work identities were not changed; the two runner revisions remain distinguishable.
 
-\subsection{Existing evidence reused without new calls}
+Four synthetic memory scenarios cross policy/full with Pro and the approved V4.1 Flash service, yielding 16 additional executions. The scenarios cover private restricted flows, public restricted flows, private archival flows, and absent classification. They test specified component behavior, not general protection, a natural task distribution, or human confirmation.
 
-\label{sec:methods-existing-evidence-reused-without-new-calls}
+Each benchmark retains its own security semantics. AgentDojo uses native attack and utility checks on an isolated environment copy; M3-v2 counts un\-au\-thor\-ized simulated effects supported by execution evidence. Failures, unknown outcomes, and completion after execution remain distinct. Reported total latency reads the runtime total component; component durations and missingness are reported separately rather than inferred from token usage. Existing inferential results are reused when correcting latency aggregation.
 
-Four completed datasets are analyzed once:
+\input{\ProjectRoot/table_01.tex}
 
-\begin{itemize}
+\input{\ProjectRoot/figure_01.tex}
 
-\item 5,082 DeepSeek V4 Pro records from the Public primary matrix;
+\subsection{Trusted-intent review of benign tasks}
 
-\item 1,791 DeepSeek V4 Flash records from the Public second-model matrix;
+\label{sec:methods-trusted-intent-review-of-benign-tasks}
 
-\item 480 records from the medium falsification study; and
+We subsequently reviewed the fixed calibration cohort's 60 benign tool tasks, 30 per benchmark, and linked their 240 existing condition records. This is a post-outcome explanatory review, not a blind evaluation, a new sample, or an independent replication. Trusted user requests, trusted application context, and tool interfaces define the authority interpretation; evaluator answers and model-declared permissions do not supply grants.
 
-\item the completed DeepSeek V4 Pro adaptive tasks at budgets 50 and 200.
+For each task we retain an intent paraphrase, possible tool routes, declared action fields, generated rule types, first restriction, successful simulated execution count, completion, operational status, and source locators. Possible tool routes are not a gold list of necessary actions. Interpretation categories may overlap, and the same task may have a completed benchmark outcome and a later failed workflow. We inspect declared action--target pairs for loss or mismatch without treating every natural-language intent as a contract requiring the current lexical compiler to infer a dynamic target.
 
-\end{itemize}
-
-The three record matrices contain 847, 597, and 72 unique cases, respectively. The Flash cohort is a 597-case subset of the Pro Public cohort; 17 medium cases overlap Pro and 16 overlap Flash. Their union is 902 distinct cases, so the 7,353 condition-level records are not treated as 7,353 independent cases.
-
-The reuse analysis performs one count/uniqueness pass, retains all terminal failures in the ITT population, and computes the prespecified endpoint summaries without repeating model execution. These data establish the empirical motivation and the two-point adaptive first-success curve; they do not establish attack saturation.
-
-\subsection{Frozen primary sample}
-
-\label{sec:methods-frozen-primary-sample}
-
-The new DeepSeek study contains 180 unique paired cases selected before the new outcomes were inspected:
-
-\begin{itemize}
-
-\item 100 attacks, with 50 from AgentDojo and 50 from M3-v2;
-
-\item 60 benign tool tasks, with 30 from each benchmark; and
-
-\item 20 benign no-tool tasks.
-
-\end{itemize}
-
-The lean study was designed after the larger Public matrices had been completed, but its deterministic selector reads only frozen Public execution-plan identifiers, pre-outcome strata, and call budgets. It does not read any Public result or outcome file. Selection is stratified by benchmark, task type, and attack family. Every main case is assigned to four cells: policy package/ \nolinkurl{auto_compiled}, policy package/\nolinkurl{exact_gold}, full package/\nolinkurl{auto_compiled}, and full package/\nolinkurl{exact_gold}. This produces 720 work items.
-
-A nested 60-case subset receives three additional M3-full assignments: \nolinkurl{broad}, \nolinkurl{underspecified}, and \nolinkurl{conflicting}, adding 180 work items. The frozen DeepSeek plan therefore contains 900 work items. The first six items form the formal technical prefix and remain part of the final denominator.
-
-\subsection{Concurrent prompt-by-module factorial}
-
-\label{sec:methods-concurrent-prompt-by-module-factorial}
-
-E1 reuses the 180-case sample but reruns every case contemporaneously under four \nolinkurl{auto_compiled} cells: policy/normal, policy/safe, full/normal, and full/safe. This produces 720 new work items and prevents an effect estimate from being assembled across dates or execution identities. An eight-item formal prefix covers all four cells and both attack and benign-tool tasks; it is included once in the final denominator.
-
-\subsection{Source-authority counterfactual}
-
-\label{sec:methods-source-authority-counterfactual}
-
-E2 contains 60 synthetic controlled tool tasks, with 30 scenarios labeled for each benchmark domain. All use the controlled M3-v2 runtime rather than the native AgentDojo environment. Thirty are supporting scenarios and thirty contain a parameter that competes with the trusted request. The scenarios cover payment targets, message recipients, file paths, calendar participants, data recipients, and workspace objects.
-
-Each task has \nolinkurl{trusted_origin} and \nolinkurl{untrusted_origin} versions. Proposition, parameter value, relative position, and policy remain fixed; only source authority changes. Policy/normal and full/normal are crossed with both source variants, yielding 240 end-to-end work items. Separately, authorized and un\-au\-thor\-ized proposals are replayed through both Guard configurations for every source variant, yielding 480 deterministic, zero-provider decisions. Offline Guard replay and end-to-end system performance are reported as different evidence layers.
-
-\subsection{Risk-enriched challenge and Flash replication}
-
-\label{sec:methods-risk-enriched-challenge-and-flash-replication}
-
-E3 selects 60 historical attack cases, 30 per benchmark, that produced an unsafe effect under at least one earlier public condition. Coverage of suite and attack family is prioritized before the count of earlier unsafe conditions; a fixed digest order breaks ties. Each case receives the four E1 factor cells, yielding 240 Pro runs. This outcome-enriched cohort estimates conditional robustness on known difficult cases and cannot estimate natural attack prevalence.
-
-E4 uses a 90-case nested representative sample with 50 attacks, 30 benign tool tasks, and 10 benign no-tool tasks. It repeats all four E1 cells on DeepSeek V4 Flash, yielding 360 work items. This is a same-provider model replication, not a cross-vendor generalization study.
-
-\subsection{Adaptive B200-survivor tail}
-
-\label{sec:methods-adaptive-b200-survivor-tail}
-
-E5 starts from the 22 of 40 defense-aware attack tasks with no unsafe effect by query 200. Twelve were selected prospectively: all four A2 tasks and four each from A1 and A3 by fixed digest order. Their existing search checkpoints are continued from query 201 to at most 500 and stop at the first unsafe effect. The maximum is 3,600 new queries. We report \nolinkurl{P(first success by 500 | no success by 200)}, first-success locations, a conditional survival step function, family strata, query count, tokens, cost, and failure. These twelve tasks are not merged into the original 40-task cohort to construct a nominal full B500 curve.
-
-\subsection{Contemporaneous attack-activity calibration}
-
-\label{sec:methods-contemporaneous-attack-activity-calibration}
-
-E6 freezes 60 unique attacks, 30 per benchmark, selected only from historical Public-primary cases that produced an unsafe effect under no defense or the source-pinned VIGIL adapter. It runs each task once under no defense, VIGIL, policy/normal, policy/safe, full/normal, and full/safe, producing 360 DeepSeek work items in one execution block. Condition order uses a fixed six-way rotation within each benchmark. A 12-item outcome-blind formal prefix is included in the final denominator. This risk-enriched cohort tests whether attacks remain active contemporaneously and compares conditions within the same block; it does not estimate deployment prevalence. The execution is separate from E3, but the sample is not independent: 47/60 tasks are E3 anchors (19 AgentDojo and 28 M3-v2).
-
-The original three-date E6 design was prospectively amended before any E6-v2 provider call because artificial spacing did not answer a mechanism-relevant question. The amendment retained the frozen 60-task cohort, six conditions, sampling rules, endpoints, and failure policy, but replaced temporal replication with one complete diagnostic block. Consequently, E6 cannot estimate temporal repeatability. It contains no benign tasks and cannot contribute TCR or utility evidence.
-
-A nested 30-task Gemini plan used the same cases and conditions; 29/30 tasks are E3 anchors (15 AgentDojo and 14 M3-v2). Its formal prefix stopped after five response-bearing records and one response-less VIGIL dependency failure; the remaining 174 items were administratively closed rather than scientifically executed. All Gemini paired, factorial, and cross-provider effects are therefore not estimable.
-
-\subsection{Providers and model identity}
-
-\label{sec:methods-providers-and-model-identity}
-
-The primary model is DeepSeek V4 Pro through the official DeepSeek endpoint; E4 uses DeepSeek V4 Flash through the same official provider. The earlier 450-item Gemini authorization sample and the separately executed E6 Gemini prefix are both diagnostic. The latter used the official free tier at USD 0 and stopped at its technical gate; neither Gemini dataset supports an effect estimate. Each new request is assigned a local request identifier and canonical payload digest before transport. A response-bearing record retains the official response identifier, exact returned model identity, usage, latency, and cost or free-tier attestation. For E5, the top-level compact cost object is empty, so request-level CNY charges are read from the public provider trace bundle embedded in the same raw query row. Its usage summary already aggregates multiple provider calls for the query; missing attribution fails closed. The raw-row totals are checked against the live append-only budget tracker during execution, and the paper analysis does not need to read the internal ledger or change any experimental outcome. The initial E5 cost estimate set CNY 5 adaptive and CNY 16 global fuses. After 898 latest query work items cost CNY 4.2561534, the no-success maximum projected to approximately CNY 17. Before resuming, the cost ceilings were first raised and later replaced by a CNY 1,000 runaway-protection ceiling at the project owner's direction. The selected tasks, query range, attacker, model, seed, first-success stopping, ITT rules, and estimand were unchanged, and no successful query was replayed. Final analysis-attributed cost was CNY 24.5551236. Provider calls for E1--E6 and the earlier studies were made during July and August 2026; the additional E7a proposal study ran on September 5, 2026. The returned names are provider-managed model aliases and therefore identify the served model at request time without freezing its hidden weights.
-
-Prompts and model responses are not copied into the compact analysis file. Content-free request metadata and the provider's internal trace remain in a restricted local run directory outside the analysis dataset. Exact model identity is checked in the final one-pass integrity validation.
+The review uses only existing public records and projected trusted inputs. Redacted proposal arguments and final-answer content limit diagnosis of cases with successful simulated execution but unsuccessful completion. No new model call, permission expansion, evaluator relabeling, or runtime revision follows from the descriptive review, and no independent reviewer-agreement estimate is available.
 
 \subsection{Failure and recovery policy}
 
@@ -220,87 +134,9 @@ The two joint primary endpoints are:
 
 Benign no-tool completion is descriptive. Secondary outcomes are system \nolinkurl{ASK} and \nolinkurl{DENY} event counts and record incidence, operational failure, p50/p95 latency, total tokens, API cost, and predefined heterogeneity by benchmark and attack family. \nolinkurl{ASK} is a runtime confirmation request; without a human study it is not interpreted as measured human burden.
 
-All terminal work items remain in the intention-to-treat denominator. The analysis reports raw numerator/denominator values alongside proportions. A provider or parser failure is not silently removed and is not relabeled as a successful security outcome. Its unsafe-effect indicator records whether an isolated unsafe effect was observed, while its operational failure remains a separate reported outcome and it cannot count as task completion. Latency and burden summaries likewise include all terminal work items, not only completed ones.
+All terminal work items remain in the intention-to-treat denominator. The analysis reports raw numerator/denominator values alongside proportions. Observed security outcomes, unknown outcomes, task completion, and operational failure are recorded separately. A provider or parser failure is neither silently removed nor relabeled as successful protection. If the benchmark establishes completion before a later failure, both observations are retained; without completion evidence the failure cannot create a successful task. Missing effect evidence remains unknown, not a safe zero. Burden summaries include terminal failures, and latency summaries report their available-value denominator rather than imputing missing durations.
 
 Because observed unsafe effects are rare, we also report a pessimistic sensitivity endpoint on attack tasks: \nolinkurl{unsafe_effect OR operational_failure}. This composite is a robustness bound, not an attack-success label. It asks how conclusions change if a non-operational run is not credited as secure while preserving unsafe effects and failures as separate reported counts.
-
-\subsection{Statistical analysis}
-
-\label{sec:methods-statistical-analysis}
-
-Each condition proportion receives a Wilson 95\% confidence interval. The paired analyses report the absolute difference in percentage points, the two discordant counts, and a two-sided exact McNemar test. Uncertainty for the paired absolute difference is estimated with 10,000 deterministic bootstrap resamples. Each resample draws paired case identifiers with replacement and keeps both condition outcomes for the selected case together; the case is the cluster and inferential unit.
-
-The four primary authorization/configuration comparisons are:
-
-\begin{enumerate}
-
-\item policy package \nolinkurl{auto_compiled} versus policy package \nolinkurl{exact_gold};
-
-\item full package \nolinkurl{auto_compiled} versus full package \nolinkurl{exact_gold};
-
-\item \nolinkurl{auto_compiled} policy package versus full package; and
-
-\item \nolinkurl{exact_gold} policy package versus full package.
-
-\end{enumerate}
-
-McNemar p-values are Holm-adjusted separately within the four-comparison attack unsafe-effect family and the four-comparison benign-tool TCR family. Bootstrap confidence intervals are unadjusted estimation intervals. The \nolinkurl{broad}, \nolinkurl{underspecified}, and \nolinkurl{conflicting} comparisons, the unsafe-or-failure bound, and benchmark panels are descriptive sensitivity or heterogeneity analyses, not additional confirmatory families.
-
-For E1, binary outcomes are arranged as a within-case 2\ensuremath{\times}2 design. The module main effect is the average of full-minus-policy differences across prompts; the prompt main effect averages safe-minus-normal differences across module settings; and the interaction is the difference between those two prompt effects. Ten thousand case-cluster bootstrap resamples provide intervals and two-sided bootstrap sign p-values. Module, prompt, and interaction are Holm-adjusted within the attack unsafe-effect and benign-tool TCR endpoint families. The unsafe-or-failure factor analysis is a prespecified sensitivity bound and is shown separately.
-
-E2 uses the analogous source-by-module contrasts for un\-au\-thor\-ized-argument influence and authorized action execution. Source, module, and source-by-module form the source experiment's adjustment family. Source-swap action changes are paired by base task. Deterministic replay reports false allows, false blocks, and an ALLOW/ASK/DENY heatmap without treating replay accuracy as end-to-end system performance.
-
-E3 and E4 report effect directions, absolute differences, and bootstrap intervals but open no new significance family. E3 is an outcome-enriched challenge analysis; E4 is a same-provider replication. Both retain their sampling boundary in every table and figure.
-
-For E6, no-defense activity is reported per benchmark and overall with Wilson intervals. Four prespecified paired contrasts use treatment-minus-baseline risk differences: VIGIL minus no defense, policy/normal minus no defense, full/safe minus no defense, and full/safe minus VIGIL. Each contrast receives a paired Newcombe interval, a benchmark-stratified task-cluster bootstrap interval, and a two-sided exact McNemar p-value; the four p-values are Holm-adjusted. The implemented exact test replaced the planned cluster sign-flip test and is reported as an analysis-method deviation; no row or outcome was removed. Operational failure and \nolinkurl{unsafe_effect OR operational_failure} are reported alongside unsafe effect. The four M3 cells receive descriptive module, prompt, and interaction estimates. Because E6 is risk-enriched and single-block, these analyses do not estimate prevalence, utility, temporal repeatability, or the effect of an individual provenance component. Gemini effects are reported as not estimable after its coverage gate failed.
-
-The fixed design provides 100 paired attacks and 60 paired benign-tool tasks per main contrast, split evenly by benchmark for the latter. With 0/100 observed unsafe effects, the Wilson upper limit is 3.70\%; within a 30-task benign-tool benchmark stratum, intervals are necessarily much wider (for example, 0/30 has an 11.35\% upper limit). We report these design-precision limits instead of a post hoc achieved-power calculation.
-
-The original adaptive panel reports the cumulative fraction of the fixed 40-task cohort with a first unsafe effect at budgets 50 and 200. E5 separately reports the conditional probability of a first success by 500 among twelve prospectively selected B200 survivors and a conditional survival curve from 201 to 500. We neither combine the sampling frames nor extrapolate a saturation level.
-
-\subsection{Authorization and confirmation diagnostics}
-
-\label{sec:methods-authorization-and-confirmation-diagnostics}
-
-We conducted an exploratory follow-up to the action floor without changing E1--E6 outcomes. A descriptive decomposition of 1,560 E1--E4 work items first separates operational failures, completed tasks, and the remaining incomplete tasks with ASK, with DENY but no ASK, or with neither recorded decision. These mutually exclusive categories describe observations, not causal reasons. The historical runner terminates on ASK without a confirmation exchange. E2 also constrains nuisance text fields exactly, although their fixed wording is not supplied as an explicit operation requirement. Historical compact records lack per-proposal Guard reasons, preventing retrospective attribution of individual failures to those constraints.
-
-A separate set of 512 deterministic probes comprises 480 target/content perturbations, 28 literal-provenance probes, and four legacy-approval probes. These are newly constructed proposals, not reconstructed model responses. They test component contracts and do not estimate end-to-end attack success.
-
-E7a crosses strict exact versus bounded-enumeration authorization with policy versus full modules on 24 new single-action synthetic tasks. Each of three tool categories (message, file, and mock API) supplies four benign and four attack tasks. The trusted request authorizes two harmless text alternatives and prefers the second. The strict control intentionally allows only the first; bounded enumeration allows both while retaining the same exact safety target. This deliberately overconstrained control is not a correctly compiled exact policy. Normal prompts, temperature zero, and a 512-token output limit yield 96 official DeepSeek V4 Pro proposal calls, including an eight-call prefix.
-
-Each proposal is then evaluated in four separate in-memory sessions: trusted approval, trusted denial, absent confirmation, and forged untrusted approval. The 384 cells share 96 model proposals; the model receives no clarification turn. Both module settings use the same new confirmation wrapper, which binds the task, trusted request, proposal, and manifest, checks expiry and single use, and cannot widen scope or override DENY. It is an experimental controller, not production authentication or a human study. The endpoint is issuance of a one-shot execution permit. No effect backend was invoked, so legacy fields named task completion and simulated effect are interpreted only as permission eligibility. E7a reports descriptive counts and Wilson intervals separately from TCR and executed unsafe effects, without a new confirmatory test family.
-
-\subsection{Measurement correction and development validation}
-
-\label{sec:methods-measurement-correction-and-development-validation}
-
-The historical execution studies used the original compiler, rule matcher, and evaluator. Their recorded safety labels are not retrospectively converted to executed un\-au\-thor\-ized effects. In particular, the original M3-v2 evaluator could score a final isolation rejection as an unsafe event, whereas the revised development evaluator distinguishes proposals, Guard permission, isolation rejection, successful simulated execution, task completion, and unknown values. AgentDojo retains its native security and utility checks. Legitimate completion and a security violation may coexist; missing evidence is not a safe zero.
-
-The explicitly selected corrected-v1 path fixes action-resource binding, complete matching across multiple rules, trusted-environment label propagation, and confirmation-state continuity. It does not alter the historical default or records. Six configurations cross no/policy/full guard modules with the same normal/safe prompt factor. The development set comprises 24 attacks, 16 benign-tool tasks, and eight no-tool tasks; AgentDojo contributes 20 tasks and M3-v2 28. Attacks are historically enriched, not a deployment sample. Both completed DeepSeek cohorts use temperature zero, a 512-token output limit, and at most eight provider calls per task-condition. The V4.1 Flash model is distinct from the earlier V4 Flash and is not a model-invariant before/after comparison. Synthetic paired-action tests establish component behavior only; there is no simulated human approval or new confirmatory family.
-
-\subsection{Corrected target authorization and contemporaneous calibration}
-
-\label{sec:methods-corrected-target-authorization-and-contemporaneous-calibration}
-
-Table 1 summarizes the current cohorts and their distinct evidence roles.
-
-The corrected experiment selects explicit \nolinkurl{corrected_v2} runtime behavior and \nolinkurl{exact_target_v2} authorization. Target and other constrained security fields must match the offline-derived scope; schema-required content fields need not equal an absent annotation. Schema completeness, types, additional security targets, action order, and execution registration remain checked. A generic subset-of-arguments comparison is insufficient because additional recipients, paths, or endpoint parameters can change the authorized action. The original matcher and all its records remain unchanged.
-
-Raw evaluator fields do not enter the model prompt. In the oracle condition, the Guard nevertheless receives an explicitly answer-derived authorization object. This is an idealized information regime, not evidence that deployed authorization can obtain the same scope. Ambiguous required scope is not an automatic grant, including with confirmation modules disabled. Missing trusted classification cannot be treated as public data when a restricted data-flow rule applies. No human approval is simulated: ASK means pending clarification, not task completion.
-
-The new authorization cohort reuses 180 fixed cases: 100 attacks, 60 benign tool tasks, and 20 M3-v2 no-tool tasks. Policy and full modules each receive compiled and exact-target authorization, yielding 720 assignments; all four cells use the same ordinary prompt. Three stress regimes on the predefined 60-case nested subset add 180 full-module assignments. The 12-assignment formal prefix is part of the 900 total, not an additional repeat. The security endpoint has 490 attack assignments across the main and stress cells, not 490 independent tasks. This authorization study contains no unguarded cell.
-
-A separate contemporaneous calibration uses 120 fixed cases, with 30 attacks and 30 benign-tool tasks from each benchmark. Ordinary prompts and compiled authorization are held constant across no research Guard, policy, full, and configured VIGIL, giving 480 assignments. The unguarded condition retains the same host and external-effect boundary. VIGIL generates constraints through the model and uses its configured deterministic hybrid audit, with model-based secondary verification disabled. It is not the complete official default baseline. Its provider-call cap is 16; the other conditions cap at eight. Cohorts overlap earlier studies and do not constitute independent sample replication.
-
-Both Pro experiments use temperature zero, 512 output tokens, a 180-second single-request timeout, and zero automatic HTTP retries. Task environments are isolated, with at most two assignments in flight. After a 120-assignment calibration stop caused by parallel telemetry and truncated constraint classification, a telemetry-only revision executed the 360 untouched items. The first 120 records, including response-bearing failures, were not retried. Scientific prompts, parameters, permissions, and work identities were not changed; the two runner revisions remain distinguishable.
-
-Four synthetic memory scenarios cross policy/full with Pro and the approved V4.1 Flash service, yielding 16 additional executions. The scenarios cover private restricted flows, public restricted flows, private archival flows, and absent classification. They test specified component behavior, not general protection, a natural task distribution, or human confirmation.
-
-Each benchmark retains its own security semantics. AgentDojo uses native attack and utility checks on an isolated environment copy; M3-v2 counts un\-au\-thor\-ized simulated effects supported by execution evidence. Failures, unknown outcomes, and completion after execution remain distinct. Reported total latency reads the runtime total component; component durations and missingness are reported separately rather than inferred from token usage. Existing inferential results are reused when correcting latency aggregation.
-
-\input{\ProjectRoot/table_01.tex}
-
-\input{\ProjectRoot/figure_01.tex}
 
 \subsection{Minimal verification and reproducibility}
 

@@ -1,9 +1,10 @@
 {
   "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.1",
-  "updated_at": "2026-09-05T00:00:00+08:00",
+  "updated_at": "2026-10-08T00:00:00+08:00",
   "paper_route": "authorization_regime_and_security_utility_empirical_study",
   "scope": {
-    "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
+    "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_current_v2.md",
+    "full_working_manuscript": "docs/research/paper_v2/manuscript/manuscript_deepseek_v1.md",
     "deepseek_authorization_work_items": 900,
     "gemini_authorization_planned_work_items": 450,
     "gemini_authorization_terminal_work_items": 32,
@@ -19,6 +20,37 @@
     "e6_gemini_effect_status": "not_estimable",
     "full_harness_required": false
   },
+  "current_evidence": {
+    "runtime": "corrected_v2",
+    "authorization_assignments": 900,
+    "calibration_assignments": 480,
+    "synthetic_control_executions": 16,
+    "trusted_intent_review_tasks": 60,
+    "claims": [
+      {
+        "claim": "Corrected target scope improves some AgentDojo completion under an explicitly oracle-derived information regime.",
+        "evidence": ["outputs/experiments/claude_revision_v1/analysis.json"],
+        "observed": "AgentDojo compiled policy/full complete 2/30 each; exact-target policy/full complete 13/30 and 11/30. M3-v2 paired differences span zero.",
+        "boundary": "Not deployed non-oracle authorization. All 490 attack assignments have zero events but no unguarded reference, so no safety effectiveness or equivalence claim."
+      },
+      {
+        "claim": "The corrected contemporaneous calibration identifies a utility cost, not established safety superiority.",
+        "evidence": ["outputs/experiments/research_followup_20261006_v1/calibration/analysis.json"],
+        "observed": "AgentDojo benign completion falls from 17/30 to 2/30 for either M3 module condition; paired difference -50pp, CI[-66.83,-26.80]. Security 3/30 versus0/30 has CI[-25.62,+3.10]pp.",
+        "boundary": "M3-v2 unguarded security is already zero. Configured VIGIL is adapted, not full official default; unknowns and missing receipts are retained. Completion and failure can coexist."
+      },
+      {
+        "claim": "The fixed60-task trusted-intent review explains authority inputs and observed restrictions without establishing a new bounded-contract violation.",
+        "evidence": [
+          "outputs/experiments/research_followup_20261006_v1/trusted_intent_review/review.csv",
+          "outputs/experiments/research_followup_20261006_v1/trusted_intent_review/report.md"
+        ],
+        "observed": "7 trusted declarations preserved;13 additional direct-target rules;10 M3-v2 tasks await independent target confirmation. AgentDojo30 tasks expose bounded generic coverage. Three mock-API execution/completion mismatches remain partly unexplained.",
+        "boundary": "Post-outcome same-author descriptive review, not blind, independent, false-block adjudication, permission expansion or end-to-end mechanism verification. Redacted arguments remain unknown."
+      }
+    ]
+  },
+  "historical_claim_notice": "The legacy claims below retain their historical recorded endpoint and configuration. Their verified labels are not verification of corrected executed effects; use current_evidence and manuscript_current_v2.md for current conclusions. Historical E2 replay is mechanism-only, E7a is permit-only, and adaptive labels do not retrospectively verify committed effects.",
   "development_addendum": {
     "status": "manuscript_integrated_permission_only_not_end_to_end",
     "manuscript_revision_report": "docs/research/paper_v2/manuscript/usability_manuscript_update_v1.md",

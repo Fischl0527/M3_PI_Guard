@@ -1,12 +1,14 @@
 # M3-PI Guard LaTeX 稿件
 
-2026-10-06 更新：修正版开发批已同步到第 3.18、4.14 节与表 8；旧版评价标签
-与修正版实际效果分开解释，不改历史原始记录。当前审阅稿 55 页、67 个 PDF
-书签；elsarticle 主稿 61 页；补充材料维持 12 页。
-主稿为 5 图、8 张编号结果表、24 篇实际引用；文献库共 39 条。表 7 使用不旋转的窄表，表题、表体与
-表注保持同页。详细内容/版式复核见
-`../docs/迁移环境与论文检查修复报告_2026-10-06.md`。
-E7a 仅为提案获许可，不计为任务完成或已提交效应；本次没有启动新实验。
+2026-10-08 更新：当前精简英文正文8,148词，纳入900授权、480同期、
+16组件控制及60正常任务的事后解释性审查。完整工作稿另存，不删除历史结果。
+当前审阅稿35页、40个PDF导航条目；elsarticle主稿26页、39个导航条目。
+主稿为4图、4张结果表；独立补充包含20张历史表与5张历史图，24页PDF
+保留上一阶段检查结果，本轮未重新编译。作者信息仍留空。
+四个短主表的标题、数据与表注作为整体竖版浮动表，不旋转、不缩小数字。
+详细实际执行、测试和限制见
+[正文收束报告](../docs/research/paper_v2/manuscript/current_manuscript_closeout_2026-10-08.md)。
+历史E7a仅为提案许可，不计为完成或实际效果。本次没有启动新模型实验。
 
 本目录现在包含两种用途明确分离的 LaTeX 入口。作者审阅时优先打开用户原模板
 直接生成的 `数模通用模板.pdf`，其编辑入口就是 `数模通用模板.tex`，而不是 Word
@@ -15,7 +17,7 @@ E7a 仅为提案获许可，不计为任务完成或已提交效应；本次没�
 - `M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex`：正式英文投稿主稿，使用
   Elsevier `elsarticle` 类和 `elsarticle-num` 参考文献样式。
 - `M3_PI_Guard_JISA/M3_PI_Guard_JISA_supplement.tex`：独立补充材料，含
-  Supplementary Tables S1--S12。
+  Supplementary Tables S1--S20 和 Figures S1--S5。
 - `数模通用模板.tex`：模板审阅母版，直接使用本目录原有的
   `cumcmthesis`、字体和 `gbt7714-numerical.bst`。页面严格继承模板的 A4、
   四边 25 mm 和底部居中页码；拉丁正文、标题、行内标识和图表文字统一使用
@@ -37,16 +39,20 @@ E7a 仅为提案获许可，不计为任务完成或已提交效应；本次没�
 面板显示完整的 section、subsection 和 subsubsection。若文件已在修改前打开，
 请重新打开主文件或执行 Idefix 的“刷新结构”。
 
-六列及以上的宽表只旋转表格内容，PDF 纸张、模板页边距与页码均保持纵向；不要
-把这些表改回 `pdflscape/landscape`，否则阅读器会把页码旋到页面左侧。
+历史宽表按原始行号和身份列拆成竖版续表，全部列、行和值保留；
+不使用旋转表格、`pdflscape/landscape`、缩放盒或微小字体。
 
 ## 重新生成源文件
 
 在仓库根目录执行：
 
 ```powershell
-& 'F:\robot\Anaconda3\python.exe' -B .\scripts\build_jisa_latex.py
+& 'F:\robot\Anaconda3\python.exe' -X utf8 -B -m scripts.build_lean_paper_manuscript --profile current
+& 'F:\robot\Anaconda3\python.exe' -X utf8 -B -m scripts.build_jisa_latex --main-markdown manuscript_current_v2.md
 ```
+
+这两个显式选项选择当前精简稿。默认生成器仍保留完整工作稿行为；
+不要用省略选项的默认构建误覆盖当前精简正文。
 
 ## 编译正式主稿和补充材料
 

@@ -1,6 +1,6 @@
 # Conclusion — provisional DeepSeek evidence
 
-Status: `corrected_v2_sources_updated_bilingual_layout_pending`
+Status: `corrected_v2_current_evidence_and_trusted_intent_review_integrated`
 
 This study evaluates authorization semantics rather than assuming that an
 enabled runtime module establishes effective protection. An implementation
@@ -30,7 +30,13 @@ of −25.62 to +3.10 points and does not establish a reduction. M3-v2 controls
 already have no security events. These results identify a utility cost in
 the tested automatic authorization, not full-module superiority. Missing
 tool permissions are an observed cause category; they are not proof that
-every withheld permission should be granted.
+every withheld permission should be granted. The subsequent fixed 60-task
+review retains seven trusted application declarations, identifies thirteen
+additional direct-target rules and ten M3-v2 tasks requiring unavailable
+independent confirmation, and exposes bounded generic-compiler coverage on
+AgentDojo. No new declared-contract violation was established. The cause of
+three mock-API execution/completion mismatches remains unresolved in redacted
+records; successful execution is not sufficient for task completion.
 
 Sixteen synthetic Pro and V4.1 Flash executions show bounded component
 behavior: full modules deny private data sent to a restricted target, request

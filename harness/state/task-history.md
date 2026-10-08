@@ -1,5 +1,12 @@
 # Task History
 
+## 2026-10-08 — Current main article and PDFs actually closed out
+
+- Integrated the60-task post-outcome review into bilingual sections and corrected completion/failure, prompt-profile, provider-period and legacy/current-endpoint contradictions. No independent peer-review claim.
+- Added explicit compact profiles preserving the complete working drafts: English body8,148 versus15,838 words, compact total10,116; Chinese content comparison generated separately. Four short main tables keep all data/notes inside portrait floats.
+- Focused pytest46passed/Ruff passed; actual two latexmk builds exit0. Template35pages/40outline and official26pages/39outline pass layout/metadata/font/footer checks and contact/enlargedTable3 inspection. Three officialUnderfull warnings disclosed. Supplement24pages unchanged, not newly rebuilt.
+- Execution report and outputs map delivered. No API/raw/statistical replay/permission change/Full Harness. Feature remainsin_progress for actual author/submission and external review qualifications; unrelated user edits remain unstaged.
+
 ## 2026-10-08 — All sixty trusted intents reviewed
 
 - Implemented an offline explanatory review and completed60unique benign tasks/240existing condition records. Output is exactlyreview.csv+report.md, with source locators, authority notes, rule types, public first restriction/final outcome and evidence gaps; no protected target values or provider bodies.

@@ -432,6 +432,18 @@ def _render_numbered_table(
     header = " & ".join(_table_inline(cell) for cell in table.header) + r" \\"
     body = [" & ".join(_table_inline(cell) for cell in row) + r" \\" for row in table.rows]
 
+    if table.number in {"1", "2", "3", "4"} and not wide and len(table.rows) <= 8:
+        # Short current main tables fit a page. Keep the caption, data and the
+        # interpretation/missingness note together rather than orphaning it.
+        return "\n".join([
+            r"\begin{table}[!htbp]", r"\centering\small",
+            rf"\caption{{{_inline(table.title)}}}\label{{tab:{label_number}}}",
+            rf"\begin{{tabular}}{{{_longtable_column_spec(column_count)}}}",
+            r"\toprule", header, r"\midrule", *body, r"\bottomrule",
+            r"\end{tabular}", r"\par\smallskip\RaggedRight",
+            r"\textit{Note.} " + _inline(table.note), r"\end{table}",
+        ])
+
     if table.number == "S19":
         # This four-row diagnostic must travel with its semantic-limit note.
         # longtable allowed the note to split over the next page in the review
@@ -717,7 +729,10 @@ def build(
     repo_root: Path = REPO_ROOT,
     output_root: Path | None = None,
     review_entry: Path | None = None,
+    main_markdown: str = MAIN_MARKDOWN,
 ) -> BuildPaths:
+    if main_markdown not in {MAIN_MARKDOWN, "manuscript_current_v2.md"}:
+        raise LatexBuildError("Unsupported manuscript entry")
     manuscript_dir = repo_root / "docs" / "research" / "paper_v2" / "manuscript"
     figure_dir = (
         repo_root
@@ -729,7 +744,7 @@ def build(
     use_canonical_template_entry = review_entry is None
     review_entry = review_entry or template_dir / "数模通用模板.tex"
 
-    manuscript = _join_hard_hyphen_wraps(_read(manuscript_dir / MAIN_MARKDOWN))
+    manuscript = _join_hard_hyphen_wraps(_read(manuscript_dir / main_markdown))
     supplementary = _join_hard_hyphen_wraps(
         _read(manuscript_dir / SUPPLEMENT_MARKDOWN)
     )
@@ -857,11 +872,17 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
     parser.add_argument("--output-root", type=Path)
     parser.add_argument("--review-entry", type=Path)
+    parser.add_argument(
+        "--main-markdown",
+        choices=(MAIN_MARKDOWN, "manuscript_current_v2.md"),
+        default=MAIN_MARKDOWN,
+    )
     args = parser.parse_args(argv)
     paths = build(
         repo_root=args.repo_root.resolve(),
         output_root=args.output_root.resolve() if args.output_root else None,
         review_entry=args.review_entry.resolve() if args.review_entry else None,
+        main_markdown=args.main_markdown,
     )
     print(paths.official_entry)
     print(paths.review_entry)

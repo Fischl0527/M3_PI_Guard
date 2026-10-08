@@ -1,5 +1,17 @@
 # 综合后续研究实施
 
+## 2026-10-08 当前正文与PDF已实际执行收束
+
+沿用已批准执行任务，不再生成待执行计划。允许修改现有英中科学源、两个文稿/LaTeX生成器及定向测试、当前生成稿/TeX/PDF和必要状态；禁止改原raw/冻结计划/统计、扩权、API/Full Harness及无关dirty。
+
+已执行：60任务解释纳入英中四部分；修复完成与失败并存、历史配置/服务时间/风险标签与当前效果的区别；新增独立current主稿保留完整全文。英文正文8,148词、完整15,838词，减少48.6%；current全文件10,116词。精简中文是内容对照，作者继续空白。四主表全部数据与表注置整体竖版float；历史长表/全文不删除。
+
+实际命令（Python3.13.5，-X utf8 -B）：pytest三个模块test_build_lean_paper_manuscript、test_build_jisa_latex、test_trusted_intent_review_v1，46passed；Ruff两builder/两个test通过。build_lean_paper_manuscript --profile full和--profile current exit0；build_jisa_latex --main-markdown manuscript_current_v2.md exit0。TeXLive2026 latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -file-line-error -cd两个正式入口均exit0。
+
+最终审阅35页/40导航、正式26页/39导航；61页结构0错误，空作者/A4/底部居中/TNR/无旋转裁切缺字未定义引用及Overfull。四联系图与表3重点页实际看过；表3完整注释分别第18/13页。正式3处Underfull保留；24页补充未改未重编译。PDF技能附带运行时不可用，使用既有TeXLive/PyMuPDF；内部聚焦审查不是独立同行评审。报告current_manuscript_closeout_2026-10-08.md包含outputs目录。
+
+这一稿件切片实施完成，整体F-PAPER-002仍in_progress；作者/投稿确认、外部独立方法审阅及可选模型资格仍缺。0新API/原raw改写/统计推断重算/权限变化/Full Harness。Git仅当前相关文件推送origin/codex/claude-review-repairs，用户current-task原16行与其他dirty保留。
+
 ## 2026-10-08 60正常任务解释已实际完成
 
 不另写计划。读固定60个受信请求/可信应用声明及工具接口，生成一个版本化只读解释器trusted_intent_review_v1.py；候选接口由逐项阅读注释，不是gold必需列表。联结四条件240既有记录，输出trusted_intent_review/review.csv（60行）和report.md，无内部正文/目标值/新哈希包。

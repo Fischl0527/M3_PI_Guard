@@ -154,7 +154,92 @@ def test_introduction_and_chinese_distinguish_current_and_historical_evidence() 
     assert "历史完整参数相等判定" in chinese
     assert "原始答案不进入模型" in chinese
     assert "私有数据" in chinese and "V4.1 Flash" in chinese
-    assert "中文旧主图尚待重排" in chinese
+    assert "当前四张主图" in chinese
+    assert "中文旧主图尚待重排" not in chinese
+
+
+def test_completion_failure_and_latency_missingness_are_not_conflated() -> None:
+    methods = " ".join(builder._read("methods_draft.md").split())
+    assert "completion before a later failure, both observations are retained" in methods
+    assert "Missing effect evidence remains unknown, not a safe zero" in methods
+    assert "available-value denominator rather than imputing missing durations" in methods
+    assert "and it cannot count as task completion" not in methods
+    assert "same ordinary prompt" in methods
+    assert "not part of that July--August service window" in methods
+
+
+def test_trusted_intent_review_is_integrated_without_overclaim() -> None:
+    manuscript = " ".join(builder.build_manuscript().split())
+    assert "60 benign tool tasks" in manuscript
+    assert "240 existing condition records" in manuscript
+    assert "seven trusted application declarations" in manuscript
+    assert "Thirteen further M3-v2 tasks" in manuscript
+    assert "remaining ten M3-v2 tasks require confirmation" in manuscript
+    assert "post-outcome explanatory review, not a blind evaluation" in manuscript
+    assert "no independent reviewer-agreement estimate" in manuscript
+    assert "not evidence of an evaluator defect" in manuscript
+    assert "not thirty proven contract defects" in manuscript
+    assert "A bounded trusted-intent review remains necessary" not in manuscript
+    chinese = builder._read("manuscript_zh_v1.md")
+    assert "四条件240份已有记录" in chinese
+    assert "不是裁定的误阻断率" in chinese
+    assert "本次没有建立新的有界合同违约" in chinese
+    assert "受信意图审查仍待完成" not in chinese
+
+
+def test_floor_limits_are_version_specific_not_restored_from_history() -> None:
+    discussion = " ".join(builder._read("discussion_draft.md").split())
+    assert "historical study recorded one risk-positive label among 400" in discussion
+    assert "corrected study observes none among its 490" in discussion
+    assert "Larger historical matrices cannot repair that inferential gap" in discussion
+    assert "reduced recorded legacy risk labels" in discussion
+    assert "Security-direction evidence comes mainly from the larger Public matrices" not in discussion
+
+
+def test_current_article_preserves_full_working_draft_and_current_evidence() -> None:
+    full = builder.build_manuscript()
+    current = builder.build_manuscript(profile="current")
+    normalized = " ".join(current.split())
+    assert 7500 <= builder.body_word_count(current) <= 8500
+    assert builder.body_word_count(current) < builder.body_word_count(full)
+    assert "795 workflows end normally" in current
+    assert "480 assignments" in current
+    assert "60 benign tool tasks" in current
+    assert "not 490 independent tasks" in normalized
+    assert "4/30 lower bound and a 6/30 conservative upper bound" in normalized
+    assert "### 4.2 Medium falsification study" not in current
+    assert "### 4.2 Medium falsification study" in full
+    assert "Supplementary Tables S1-S20 retain" in current
+    assert "0/240 false allows and 30/240 false blocks" in current
+    assert "first legacy risk success" in normalized
+    assert "not a complete B500 curve" in normalized
+    assert current.count("![Figure ") == full.count("![Figure ") == 4
+    assert len(re.findall(r"^### Table [1-4]\. ", current, re.MULTILINE)) == 4
+    builder._validate_citations(current)
+
+
+def test_current_profile_rejects_silent_missing_or_duplicate_sections() -> None:
+    with pytest.raises(builder.ManuscriptBuildError, match="Missing current subsections"):
+        builder._select_subsections("### A\n\ntext", ("B",))
+    with pytest.raises(builder.ManuscriptBuildError, match="Duplicate subsection"):
+        builder._select_subsections("### A\n\ntext\n\n### A\n\nagain", ("A",))
+    with pytest.raises(builder.ManuscriptBuildError, match="Unknown manuscript profile"):
+        builder.build_manuscript(profile="shorter_by_guess")
+
+
+def test_current_chinese_is_separate_and_keeps_four_current_figures_and_tables() -> None:
+    source = builder._read("manuscript_zh_v1.md")
+    current = builder.build_current_chinese()
+    assert builder._read("manuscript_zh_v1.md") == source
+    assert "四条件240份已有记录" in current
+    assert "本次没有建立新的有界合同违约" in current
+    assert "### 4.2 历史中型证伪实验" not in current
+    assert "## 历史补充表" not in current
+    assert "## 历史补充图" not in current
+    assert "0/240" in current and "30/240" in current
+    assert len(re.findall(r"!\[图 [1-4]\.", current)) == 4
+    assert len(re.findall(r"^### 表 [1-4]\. ", current, re.MULTILINE)) == 4
+    assert re.findall(r"^## ([1-6])\. ", current, re.MULTILINE) == list("123456")
 
 
 def test_corrected_primary_sources_disclose_utility_cost_and_uncertainty() -> None:

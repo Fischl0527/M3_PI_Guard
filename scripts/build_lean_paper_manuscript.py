@@ -18,6 +18,38 @@ FIGURE_DIR = PROJECT_ROOT / "outputs/experiments/research_followup_20261006_v1/m
 HISTORICAL_FIGURE_DIR = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/figures"
 TABLE_DIR = PROJECT_ROOT / "outputs/experiments/incremental_empirical_v1/tables"
 OUTPUT_PATH = MANUSCRIPT_DIR / "manuscript_deepseek_v1.md"
+CURRENT_OUTPUT_PATH = MANUSCRIPT_DIR / "manuscript_current_v2.md"
+
+# Exact semantic headings keep the complete working draft intact while
+# selecting current evidence for a separate reader-facing article.
+CURRENT_SECTIONS = {
+    "methods_draft.md": (
+        "Current cohorts and statistical specification",
+        "Threat model and safety boundary",
+        "Online-state and evaluator separation",
+        "Runtime conditions",
+        "Measurement correction and development validation",
+        "Corrected target authorization and contemporaneous calibration",
+        "Trusted-intent review of benign tasks",
+        "Failure and recovery policy",
+        "Outcomes",
+        "Minimal verification and reproducibility",
+    ),
+    "results_shell.md": (
+        "Corrected authorization and contemporaneous calibration",
+        "Trusted-intent review of benign completion",
+        "Corrected development study",
+        "Remaining evidence boundary",
+    ),
+    "discussion_draft.md": (
+        "Existing evidence changes the research claim",
+        "Authorization is part of the treatment",
+        "Executed effects and utility must be reported together",
+        "Relation to recent provenance and authorization work",
+        "Limitations",
+        "Practical implications",
+    ),
+}
 
 TITLE = (
     "Evaluating Authorization Regimes and Runtime Guardrail Configurations "
@@ -252,6 +284,112 @@ def _number_subsections(body: str, *, section_number: int) -> str:
         )
         numbered.append(f"{marks} {prefix} {title}")
     return "\n".join(numbered)
+
+
+def _select_subsections(body: str, titles: tuple[str, ...]) -> str:
+    matches = list(re.finditer(r"(?m)^### (.+)$", body))
+    sections: dict[str, str] = {}
+    for index, match in enumerate(matches):
+        title = match.group(1)
+        if title in sections:
+            raise ManuscriptBuildError(f"Duplicate subsection: {title}")
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(body)
+        sections[title] = body[match.start():end].strip()
+    missing = sorted(set(titles) - sections.keys())
+    if missing:
+        raise ManuscriptBuildError(f"Missing current subsections: {missing}")
+    return "\n\n".join(sections[title] for title in titles)
+
+
+def _current_body(filename: str, body: str) -> str:
+    titles = CURRENT_SECTIONS.get(filename)
+    if titles is None:
+        return body
+    selected = _select_subsections(body, titles)
+    if filename == "results_shell.md":
+        selected += (
+            "\n\n### Historical diagnostic context\n\n"
+            "The full working draft and Supplementary Tables S1-S20 retain "
+            "the earlier medium, Public, authorization, factorial, provenance, "
+            "challenge, replication, adaptive and permit studies. Their "
+            "recorded endpoint definitions are not retrospectively replaced "
+            "by corrected execution outcomes. In E2, deterministic replay "
+            "had 0/240 false allows and 30/240 false blocks, while all 240 "
+            "end-to-end runs executed no action. This establishes bounded "
+            "decision sensitivity, not useful end-to-end protection. "
+            "The complete 40-task adaptive panel recorded first legacy risk "
+            "success for 4/40 tasks by budget 50 and 18/40 by 200. Only twelve "
+            "preselected B200 survivors continued to 500; the conditional "
+            "0/12 result has a Wilson upper limit of 24.25%, not a complete "
+            "B500 curve or a saturation estimate. Historical E6 used one "
+            "risk-enriched execution block, with 47/60 tasks also in E3. "
+            "It supplies neither independent-sample nor temporal replication. "
+            "E7a issued execution permits without a backend state transition "
+            "and therefore supplies neither TCR nor executed-effect evidence."
+        )
+    return selected
+
+
+def body_word_count(manuscript: str) -> int:
+    """Count English body tokens, excluding abstract, headings, tables and refs."""
+    body = manuscript.split("## 1. Introduction\n", 1)[1].split("## Figures", 1)[0]
+    body = "\n".join(
+        line for line in body.splitlines()
+        if not line.startswith(("#", "|", "!["))
+    )
+    return _word_count(re.sub(r"\[@[^\]]+\]", "", body))
+
+
+def build_current_chinese() -> str:
+    """Select the matching current Chinese narrative; leave the full source alone."""
+    source = _read("manuscript_zh_v1.md")
+    narrative, assets = source.split("## 图\n", 1)
+    matches = list(re.finditer(r"(?m)^## ([1-6])\. (.+)$", narrative))
+    if [match.group(1) for match in matches] != list("123456"):
+        raise ManuscriptBuildError("Chinese current article requires six main sections")
+    selections = {
+        3: ("研究设计与研究问题", "威胁模型与安全边界", "在线状态与评估器分离",
+            "运行时条件", "测量修正与开发验证", "当前目标授权、同期校准及组件控制",
+            "正常任务的受信意图审查", "失败与恢复策略", "结果变量", "统计分析",
+            "最小验证与可复现性"),
+        4: ("修正版授权与同期校准", "正常完成的受信意图审查",
+            "corrected-v1开发研究", "剩余证据边界"),
+        5: ("既有证据改变了研究主张", "授权是实验处理的一部分",
+            "必须联合报告执行效应与效用", "与近期来源和授权工作的关系",
+            "局限性", "实践启示"),
+    }
+    prefix = narrative[:matches[0].start()].strip()
+    prefix += (
+        "\n\n本文件是精简英文稿manuscript_current_v2.md的内容对照，不是新实验。"
+        "完整中文工作稿及全部历史表图保留在manuscript_zh_v1.md；"
+        "历史详细方法与结果不再与当前主要证据并列展开。"
+    )
+    parts = [prefix]
+    for index, match in enumerate(matches):
+        number = int(match.group(1))
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(narrative)
+        body = narrative[match.end():end].strip()
+        body = re.sub(r"(?m)^### [1-6]\.\d+ ", "### ", body)
+        if number in selections:
+            body = _select_subsections(body, selections[number])
+        if number == 4:
+            body += (
+                "\n\n### 历史诊断背景\n\n"
+                "完整工作稿与补充表S1–S20保留中型、Public、因子、来源、挑战、复现、"
+                "自适应与许可研究，旧端点不改称修正后的执行结果。"
+                "E2离线false allow为0/240、false block为30/240，240端到端运行均无动作。"
+                "原40任务自适应面板B50为4/40、B200为18/40；仅12个预选survivor延长到500，"
+                "0/12的Wilson上限仍为24.25%，不是完整B500或饱和证据。"
+                "历史E6仅单块且47/60与E3重叠；E7a只发许可而无后端状态变化，不计TCR或执行效果。"
+            )
+        parts.append(f"## {number}. {match.group(2)}\n\n" + _number_subsections(body, section_number=number))
+    asset_text = "## 图\n" + assets
+    asset_parts = re.split(r"(?m)(?=^## )", asset_text)
+    parts.extend(
+        part.strip() for part in asset_parts
+        if part.strip() and not part.startswith(("## 历史补充图\n", "## 历史补充表\n", "## 历史补充图注\n"))
+    )
+    return "\n\n".join(parts).strip() + "\n"
 
 
 def _word_count(text: str) -> int:
@@ -784,7 +922,9 @@ def _submission_statements() -> str:
     return "## Submission statements\n\n" + body
 
 
-def build_manuscript() -> str:
+def build_manuscript(*, profile: str = "full") -> str:
+    if profile not in {"full", "current"}:
+        raise ManuscriptBuildError(f"Unknown manuscript profile: {profile}")
     abstract, keywords = _abstract_and_keywords()
     if _word_count(abstract) > 250:
         raise ManuscriptBuildError("Abstract exceeds the JISA 250-word limit")
@@ -803,6 +943,8 @@ def build_manuscript() -> str:
         if filename == "results_shell.md":
             body, _ = _split_supplementary_tables(body)
             body = _prioritize_corrected_results(body)
+        if profile == "current":
+            body = _current_body(filename, body)
         body = _number_subsections(body, section_number=int(heading.split(".", 1)[0]))
         parts.append(f"## {heading}\n\n{body}")
 
@@ -858,18 +1000,25 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sync-chinese-tables", action="store_true")
     parser.add_argument("--sync-chinese-figures", action="store_true")
+    parser.add_argument("--profile", choices=("full", "current"), default="full")
     args = parser.parse_args(argv)
-    manuscript = build_manuscript()
-    OUTPUT_PATH.write_text(manuscript, encoding="utf-8", newline="\n")
+    manuscript = build_manuscript(profile=args.profile)
+    output_path = CURRENT_OUTPUT_PATH if args.profile == "current" else OUTPUT_PATH
+    output_path.write_text(manuscript, encoding="utf-8", newline="\n")
     if args.sync_chinese_tables:
         chinese_path = MANUSCRIPT_DIR / "manuscript_zh_v1.md"
         chinese_path.write_text(sync_chinese_tables(_read("manuscript_zh_v1.md")), encoding="utf-8", newline="\n")
     if args.sync_chinese_figures:
         chinese_path = MANUSCRIPT_DIR / "manuscript_zh_v1.md"
         chinese_path.write_text(sync_chinese_figures(_read("manuscript_zh_v1.md")), encoding="utf-8", newline="\n")
+    if args.profile == "current":
+        (MANUSCRIPT_DIR / "manuscript_current_zh_v2.md").write_text(
+            build_current_chinese(), encoding="utf-8", newline="\n",
+        )
     print(
-        f"wrote={OUTPUT_PATH.relative_to(PROJECT_ROOT)} "
-        f"words={_word_count(manuscript)} sections={len(SECTION_FILES)}"
+        f"wrote={output_path.relative_to(PROJECT_ROOT)} "
+        f"words={_word_count(manuscript)} body_words={body_word_count(manuscript)} "
+        f"sections={len(SECTION_FILES)} profile={args.profile}"
     )
     return 0
 

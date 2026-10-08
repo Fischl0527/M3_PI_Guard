@@ -1,18 +1,10 @@
-\begingroup
-\small
-\setlength{\LTpre}{0.5\baselineskip}
-\setlength{\LTpost}{0.5\baselineskip}
-\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
-\caption{Corrected authorization and benign-tool completion}\label{tab:2} \\
+\begin{table}[!htbp]
+\centering\small
+\caption{Corrected authorization and benign-tool completion}\label{tab:2}
+\begin{tabular}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
 \toprule
 Benchmark / modules & Authorization & Completion [95\% CI, \%] & Failure / planned & ASK / DENY \\
 \midrule
-\endfirsthead
-\caption[]{Corrected authorization and benign-tool completion (continued)} \\
-\toprule
-Benchmark / modules & Authorization & Completion [95\% CI, \%] & Failure / planned & ASK / DENY \\
-\midrule
-\endhead
 AgentDojo / Policy & Auto & 2/30 [1.85, 21.32] & 0/30 & 29 / 0 \\
 AgentDojo / Policy & Exact target & 13/30 [27.38, 60.80] & 12/30 & 0 / 96 \\
 AgentDojo / Full & Auto & 2/30 [1.85, 21.32] & 0/30 & 29 / 0 \\
@@ -22,6 +14,7 @@ M3-v2 / Policy & Exact target & 14/30 [30.23, 63.86] & 6/30 & 0 / 13 \\
 M3-v2 / Full & Auto & 17/30 [39.20, 72.62] & 5/30 & 1 / 5 \\
 M3-v2 / Full & Exact target & 16/30 [36.14, 69.77] & 5/30 & 0 / 11 \\
 \bottomrule
-\end{longtable}
-\noindent\textit{Note.} Each cell has 30 planned benign-tool tasks. Completion fractions use observed denominators; brackets are cached Wilson 95\% intervals in percent, not paired-effect intervals. All outcomes here are known; failures stay in the planned denominator and can coexist with completion. ASK/DENY are event counts, not counts of distinct tasks. Prompts are normal in both module configurations.
-\endgroup
+\end{tabular}
+\par\smallskip\RaggedRight
+\textit{Note.} Each cell has 30 planned benign-tool tasks. Completion fractions use observed denominators; brackets are cached Wilson 95\% intervals in percent, not paired-effect intervals. All outcomes here are known; failures stay in the planned denominator and can coexist with completion. ASK/DENY are event counts, not counts of distinct tasks. Prompts are normal in both module configurations.
+\end{table}

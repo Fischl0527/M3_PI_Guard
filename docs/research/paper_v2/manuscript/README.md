@@ -1,6 +1,23 @@
 # paper-v2 lean empirical manuscript workspace
 
-Status: `e1_e6_complete_e7a_permission_diagnostic_integrated_gemini_not_estimable`
+Status: `current_corrected_evidence_integrated_submission_in_progress`
+
+2026-10-08 current entry: [English main article](manuscript_current_v2.md)
+and [Chinese content comparison](manuscript_current_zh_v2.md). The English
+body is 8,148 words; the separate complete working draft remains 15,838 body
+words. Current evidence covers the corrected 900 authorization assignments,
+480 contemporary calibration assignments, 16 component controls and the
+post-outcome review of 60 benign tasks. Four current main figures and four main
+tables are included; twenty historical supplementary tables and five historical
+figures remain available separately. This does not establish defense superiority,
+cross-provider generalization or submission readiness.
+
+See [the executed closeout report](current_manuscript_closeout_2026-10-08.md)
+for exact checks, limitations and the outputs directory map. Current PDFs have
+35 pages (local template) and 26 pages (Elsevier article); authors remain blank.
+The unchanged 24-page supplement retains its preceding verification result.
+The dated September descriptions below are historical context, not current
+page counts or current scientific acceptance.
 
 2026-09-05 update: Methods/Results now include the P0/P2 diagnostics and E7a
 execution-permit study, with its permission-only, no-backend-effect boundary.
@@ -33,8 +50,9 @@ reproduced, the 1,791-record DeepSeek Flash replication is complete, and the
 incremental E1--E6 studies are complete. E5 closed at 0/12 new first successes
 among selected B200 survivors through query 500 (Wilson upper limit 24.25%). E6
 closed as a 360-row DeepSeek, risk-enriched single-block calibration; its nested
-Gemini prefix failed the technical gate. The package uses five main figures,
-seven main tables and twelve supplementary tables. Neither incomplete Gemini
+Gemini prefix failed the technical gate. That historical package used five main figures,
+seven main tables and twelve supplementary tables; the current four/twenty
+layout is described above. Neither incomplete Gemini
 dataset supports estimation of a cross-provider effect.
 
 Files:
@@ -42,12 +60,19 @@ Files:
 - `../../../../LaTeX通用模板/M3_PI_Guard_JISA/` is the submission-facing,
   flat Elsevier LaTeX package. Its `M3_PI_Guard_JISA.tex` entry uses
   `elsarticle`; the independent `M3_PI_Guard_JISA_supplement.tex` entry carries
-  Tables S1--S12. The verified PDFs have 59 and 12 pages, respectively, and
+  Tables S1--S20 and Figures S1--S5. The current PDFs have 26 and 24 pages, respectively, and
   deliberately contain no author metadata. Rebuild instructions are in
   `LaTeX通用模板/README.md` at the repository root. This LaTeX package, rather
   than the Word rendering, is now the formatting source of truth. The user's
-  `数模通用模板.tex` review entry has 52 A4 pages with Times New Roman and
-  65 PDF outline entries; the submission-facing entry retains elsarticle style.
+  `数模通用模板.tex` review entry has 35 A4 pages with Times New Roman and
+  40 PDF outline entries; the submission-facing entry retains elsarticle style.
+- `manuscript_current_v2.md` / `manuscript_current_zh_v2.md`: current compact
+  English article and Chinese content comparison. From the repository root run
+  `python -X utf8 -B -m scripts.build_lean_paper_manuscript --profile current`,
+  then `python -X utf8 -B -m scripts.build_jisa_latex --main-markdown manuscript_current_v2.md`.
+  These explicit options select the compact article. The default build remains
+  the full working draft for compatibility; it must not be mistaken for the
+  compact publication-facing entry.
 - `manuscript_deepseek_v1.md`: reader-facing unified English working draft
   assembled from the reviewed sections. Rebuild it with
   `F:\robot\Anaconda3\python.exe -B scripts/build_lean_paper_manuscript.py`;
@@ -61,9 +86,9 @@ Files:
   `python scripts/build_lean_paper_docx.py` using a Python environment with
   `python-docx` and Pandoc. Structural and accessibility checks pass; the
   current 35-page WPS render passed page-by-page visual review on 2026-09-04.
-- `manuscript_zh_v1.md`: current Simplified Chinese comparison, synchronized
-  to the six-section English paper, 24 active references, seven main tables,
-  five figures, and the permission-only E7a / diagnostic Gemini boundaries.
+- `manuscript_zh_v1.md`: complete Simplified Chinese working comparison with
+  six sections, current main evidence and retained historical detail. It is
+  not the compact main article; use `manuscript_current_zh_v2.md` for that.
   `M3_PI_Guard_JISA_chinese_comparison.docx` remains a historical review copy
   (21 references and six main tables), not updated in this LaTeX-only revision.
   The Chinese files are for author review and team communication rather than
@@ -71,13 +96,10 @@ Files:
   `python -m scripts.build_lean_paper_chinese_docx` in an environment with
   `python-docx` and Pandoc. The current 30-page WPS render passed page-by-page
   visual review on 2026-09-04.
-- `supplementary_tables_v1.md` and
-  `M3_PI_Guard_JISA_supplementary_tables.docx`: the twelve detailed tables S1-S12
-  referenced from Results. Rebuild both with
-  `python -m scripts.build_lean_paper_supplement`; the main manuscript retains
-  every interpretation and denominator while the editable supplement carries
-  the full tables. The current 4-page WPS render passed page-by-page visual
-  review on 2026-09-04.
+- `supplementary_tables_v1.md`: all twenty detailed historical tables S1-S20
+  and five historical figures S1-S5. The Word supplement remains historical;
+  for Markdown-only rebuilding use
+  `python -m scripts.build_lean_paper_supplement --markdown-only`.
 - `introduction_draft.md`: source-status-aware motivation, RQs, bounded
   contributions, admitted medium route decision and exploratory adaptive
   boundary.
@@ -139,7 +161,7 @@ Files:
 - `related_work_draft.md`: source-status-aware positioning, audited contexts
   for the closest innovation-boundary papers, and the completed bibliography
   binding; submission-date refresh remains pending.
-- `claim_evidence_ledger_lean_v1.json`: active E1--E6 claim ledger for the lean
+- `../../../../harness/state/paper_v2/claim_evidence_ledger_lean_v1.json`: current and historical claim ledger for the lean
   empirical manuscript, including completed DeepSeek claims, both closed Gemini diagnostics and JCR
   gates, and explicit forbidden claims.
 - `claim_evidence_ledger_v1.json`: retained historical paper-v2 ledger; it is
@@ -155,8 +177,8 @@ Files:
   result-dependent submission gates.
 
 Historical lean DeepSeek analysis products are under
-`docs/research/paper_v2/lean_empirical/`: the compact analysis JSON is
-`authorization_results_deepseek_v1.json`, the five PNG/SVG/PDF figure triplets are in
+`outputs/experiments/lean_empirical/`: the compact analysis JSON is
+`analysis/authorization_results_deepseek_v1.json`, the five PNG/SVG/PDF figure triplets are in
 `figures_deepseek_v1/`, and its six legacy CSV tables are in
 `tables_deepseek_v1/`. These are single-model products; their metadata
 explicitly disables a cross-provider claim because Gemini closed incomplete.

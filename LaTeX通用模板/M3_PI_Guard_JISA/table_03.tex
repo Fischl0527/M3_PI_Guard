@@ -1,18 +1,10 @@
-\begingroup
-\small
-\setlength{\LTpre}{0.5\baselineskip}
-\setlength{\LTpost}{0.5\baselineskip}
-\begin{longtable}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
-\caption{Contemporaneous security and benign-tool utility}\label{tab:3} \\
+\begin{table}[!htbp]
+\centering\small
+\caption{Contemporaneous security and benign-tool utility}\label{tab:3}
+\begin{tabular}{@{}*{5}{>{\RaggedRight\arraybackslash}p{\dimexpr\linewidth/5-2\tabcolsep\relax}}@{}}
 \toprule
 Benchmark / condition & Attack [95\% CI, \%] & Benign completion [95\% CI, \%] & Unknown A / B & Failure A / B \\
 \midrule
-\endfirsthead
-\caption[]{Contemporaneous security and benign-tool utility (continued)} \\
-\toprule
-Benchmark / condition & Attack [95\% CI, \%] & Benign completion [95\% CI, \%] & Unknown A / B & Failure A / B \\
-\midrule
-\endhead
 AgentDojo / ND & 3/30 [3.46, 25.62] & 17/30 [39.20, 72.62] & 0 / 0 & 5 / 7 \\
 AgentDojo / Policy & 0/30 [0.00, 11.35] & 2/30 [1.85, 21.32] & 0 / 0 & 0 / 0 \\
 AgentDojo / Full & 0/30 [0.00, 11.35] & 2/30 [1.85, 21.32] & 0 / 0 & 0 / 0 \\
@@ -22,6 +14,7 @@ M3-v2 / Policy & 0/30 [0.00, 11.35] & 17/30 [39.20, 72.62] & 0 / 0 & 0 / 1 \\
 M3-v2 / Full & 0/30 [0.00, 11.35] & 16/30 [36.14, 69.77] & 0 / 0 & 0 / 4 \\
 M3-v2 / VIGIL configured & 0/30 [0.00, 11.35] & 16/30 [36.14, 69.77] & 0 / 0 & 0 / 6 \\
 \bottomrule
-\end{longtable}
-\noindent\textit{Note.} Each attack and benign cell has 30 planned tasks. Fractions use known outcomes, with Wilson 95\% intervals in percent. Unknowns are not safe zeros. For AgentDojo VIGIL, attack ITT bounds are 4/30 to 6/30 and benign completion bounds are 17/30 to 19/30. Failures are separate from unsafe effects. AgentDojo uses native security verdicts; M3-v2 uses observed simulated un\-au\-thor\-ized effects. ND means no research Guard, not removal of the shared isolation boundary.
-\endgroup
+\end{tabular}
+\par\smallskip\RaggedRight
+\textit{Note.} Each attack and benign cell has 30 planned tasks. Fractions use known outcomes, with Wilson 95\% intervals in percent. Unknowns are not safe zeros. For AgentDojo VIGIL, attack ITT bounds are 4/30 to 6/30 and benign completion bounds are 17/30 to 19/30. Failures are separate from unsafe effects. AgentDojo uses native security verdicts; M3-v2 uses observed simulated un\-au\-thor\-ized effects. ND means no research Guard, not removal of the shared isolation boundary.
+\end{table}

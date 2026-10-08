@@ -1,5 +1,12 @@
 # 进展记录
 
+## 2026-10-08 — 当前正文、科学口径和PDF实际收束
+
+- 已接入60任务事后受信意图审查；修正失败/完成互斥、当前普通提示与历史bundled配置/服务日期、旧风险标签与当前效果的混淆。保留未知、负面效用和安全差异不确定，不扩权。
+- 新独立英中current稿；英文正文8,148词，相比完整15,838词工作稿缩短48.6%，全文10,116词。默认full与历史全文保留；显式current/LaTeX输入防止混用。
+- 46项受影响pytest/Ruff通过；两latexmk exit0，最终审阅35页40导航、正式26页39导航，全部61页A4/空作者/居中页码/无旋转裁切、缺字、未定义引用及Overfull；联系图和表3放大页已查看。四短主表数据/注释同页；正式3处Underfull保留，不伪造全零警告。补充24页未重编译。
+- 报告docs/research/paper_v2/manuscript/current_manuscript_closeout_2026-10-08.md及README已更新，包含outputs结构。0API/历史统计重算/原raw覆盖/Full Harness。F-PAPER-002仍in_progress：作者和投稿确认、外部独立方法审阅及未合格可选研究不能代填完成。
+
 ## 2026-10-08 — 60任务受信意图逐项解释完成
 
 - 60唯一正常工具任务（AgentDojo/M3-v2各30）、240既有条件记录已联结，生成trusted_intent_review/review.csv和report.md；没有取新结果筛样本。候选工具来自逐请求阅读，不是gold要求或新许可。
