@@ -26,9 +26,10 @@ records will be stated explicitly in the archival record.
 During preparation of this work, the authors used OpenAI Codex for software
 editing, statistical-script review, figure-generation support, and language
 revision. An earlier DeepSeek-generated project-planning note supplied by the
-project owner was consulted during study scoping. The authors reviewed and
-revised the resulting material and take full responsibility for the analysis,
-interpretation, citations, and manuscript content. DeepSeek and Gemini API
+project owner was consulted during study scoping. Author review and approval
+of the resulting material must be completed before submission; final
+responsibility for the analysis, interpretation, citations, and manuscript
+content rests with the authors. DeepSeek and Gemini API
 outputs reported in the experiments are evaluated research data; they were not
 used to generate outcome labels or statistical conclusions.
 

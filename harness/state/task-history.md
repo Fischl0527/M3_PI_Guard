@@ -1,5 +1,11 @@
 # Task History
 
+## 2026-10-08 — Current citation and internal-method repair executed
+
+- Checked24active official records (22pages/2primary-domain search results); repaired10arXivDOIs, L35classification, DRIFTauthor and protected acronyms. Current report distinguishes abstracts/metadata from full reading and external review.
+- Disclosed existing four/three-contrast Holm families and descriptive VIGIL; removed premature author-approval claim, regenerated bilingual manuscripts/currentLaTeX.45focused tests/Ruff, bothactuallatexmk builds pass. Current body8256words, review35pages/40outline and official27pages/39outline;62pages structural0errors,8reference and2methodpages visually inspected,3Underfull disclosed.
+- No API/raw/statistical replay/permission/FullHarness. F-PAPER-002 remainsin_progress for author/institution/external qualifications; userdirty preserved, scope-only origin push.
+
 ## 2026-10-08 — Current main article and PDFs actually closed out
 
 - Integrated the60-task post-outcome review into bilingual sections and corrected completion/failure, prompt-profile, provider-period and legacy/current-endpoint contradictions. No independent peer-review claim.

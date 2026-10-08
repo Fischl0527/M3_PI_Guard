@@ -283,6 +283,19 @@ def test_every_citation_key_exists_in_bibliography() -> None:
     builder._validate_citations(builder.build_manuscript())
 
 
+def test_current_statistical_families_and_author_review_are_explicit() -> None:
+    manuscript = " ".join(builder.build_manuscript(profile="current").split())
+    assert "four contrasts form one Holm family" in manuscript
+    assert "three-contrast family within each benchmark and endpoint" in manuscript
+    assert "comparisons are descriptive and have no Holm-adjusted p value" in manuscript
+    assert "Author review and approval of the resulting material must be completed before submission" in manuscript
+    assert "The authors reviewed and revised the resulting material" not in manuscript
+    chinese = builder.build_current_chinese()
+    assert "四个比较单独构成Holm校正族" in chinese
+    assert "作者必须在投稿前完成生成材料的审阅与批准" in chinese
+    assert "生成 Word 对照稿" not in chinese
+
+
 def test_e7_reports_permission_only_and_preserves_external_validity_boundary() -> None:
     manuscript = builder.build_manuscript()
     normalized = " ".join(manuscript.split())

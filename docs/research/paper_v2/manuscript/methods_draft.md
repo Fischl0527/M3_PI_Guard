@@ -32,6 +32,18 @@ paired-difference intervals and identification bounds for missing outcomes
 are different objects and are labelled accordingly. Zero-event empirical
 bootstrap intervals do not establish equivalence or absence of risk.
 
+For the current authorization study, four contrasts form one Holm family
+within each benchmark and endpoint: exact minus compiled authorization for
+policy and for full modules, and full minus policy under compiled and under
+exact-target authorization. For contemporaneous calibration, policy minus
+no Guard, full minus no Guard, and full minus policy form a separate
+three-contrast family within each benchmark and endpoint. The endpoints are
+attack security and benign tool-task completion. The configured VIGIL
+comparisons are descriptive and have no Holm-adjusted p value; stress
+regimes and synthetic controls do not join these families. These are the
+families implemented in the existing analyses, not additional tests selected
+after inspecting results.
+
 Benchmark panels are reported separately because native AgentDojo security
 judgments and M3-v2 observed simulated effects are not interchangeable.
 Completion and operational failure may coexist. All assignments remain in

@@ -50,6 +50,30 @@ def test_agentspec_uses_verified_icse_identity() -> None:
     assert "11588348" not in body
 
 
+def test_active_preprint_identifiers_match_primary_arxiv_records() -> None:
+    """Offline regression for the active identifiers checked on 2026-10-08."""
+    text = bibliography.OUTPUT_BIB.read_text(encoding="utf-8")
+    entries = dict(re.findall(r"(?ms)^@\w+\{(L\d{2}),\n(.*?)^\}", text))
+    expected = {
+        "L21": "2605.03378", "L22": "2605.26497", "L23": "2604.10134",
+        "L24": "2504.11703", "L26": "2503.18813", "L27": "2510.09023",
+        "L30": "2403.14720", "L31": "2404.13208", "L35": "2607.20827",
+        "L36": "2607.27267", "L38": "2602.03117", "L39": "2605.17324",
+    }
+    for key, identifier in expected.items():
+        assert f"eprint = {{{identifier}}}" in entries[key], key
+        assert f"doi = {{10.48550/arXiv.{identifier}}}" in entries[key], key
+        assert "Preprint" in entries[key], key
+    assert "primaryClass = {cs.AI}" in entries["L35"]
+    assert "primaryClass = {cs.LG}" in entries["L27"]
+    assert "Chiu, Hung-Chun" in entries["L02"]
+    assert "Chun, CHIU" not in entries["L02"]
+    for key in ("L02", "L09", "L20", "L21", "L22", "L31", "L34", "L35"):
+        assert "{LLM}" in entries[key], key
+    for key, acronym in (("L02", "DRIFT"), ("L21", "ARGUS"), ("L34", "ASB"), ("L36", "FAVA")):
+        assert "{" + acronym + "}" in entries[key], key
+
+
 def test_historical_writer_cannot_replace_the_current_library(monkeypatch) -> None:
     def forbidden_build():
         raise AssertionError("must reject before fetching or writing metadata")

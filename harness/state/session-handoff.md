@@ -1,5 +1,14 @@
 # 会话移交
 
+## 2026-10-08 — 当前引用与内部方法复核已实际闭合
+
+- 前一正文节点1737205e7ae6494ff04cd674dea0b2e2a26e41d8已push。当前沿用codex/claude-review-repairs/origin RedTeam_LLM_Security，不切旧分支或强推。当前24引用核对为22官方页面+2官方检索；NeurIPS正文抓取超时，DRIFT姓名以官方演示材料核实。10 DOI/L35分类/DRIFT姓名/缩写已修，报告citation_compliance_active_v1.md；full_citation_refresh用户dirty不碰。
+- 读取现有两分析器证明授权4比较/同期3比较分别按基准及端点Holm；VIGIL仅描述。英中Methods明列，不新算统计。作者最终批准未取得，声明改待投稿前确认。两稿profile full/current均已生成，正文15946/8256词，current全文件10231词；原历史raw不改。
+- 实际最终命令：F:\robot\Anaconda3\python.exe -X utf8 -B -m pytest tests/unit/test_paper_v2_bibliography_v1.py tests/unit/test_build_lean_paper_manuscript.py tests/unit/test_build_jisa_latex.py -q，45passed；两test Ruff通过。两个Markdown profile/currentLaTeX生成exit0；TeXLive2026 latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -file-line-error -cd两个入口exit0。
+- 最新PDF审阅35页40导航/正式27页39导航；62页A4/空作者/居中页码/界限/旋转/文本检查0错误，10 DOI与缩写可检索。8参考页+模板8/正式6方法页已渲染查看；3正式Underfull与locale回退保留。旧24页补充未重编译。附带PDF标记运行时前次不可用，继续既有TeXLive/PyMuPDF不伪称其通过。
+- 本次内部方法/反方审查不是独立同行评审，不变更统计家族、权限、科研记录或计划队列。0新API/成功重跑/统计推断重算/Full Harness。必要稿件收束已实际推进，可选360无新合同缺陷不跑、本地180服务未合格不绕过、原生AgentDyn108未合格不跑；作者/机构/外部独立审阅仍缺，整体in_progress。
+- 仅当前源码/稿件/两PDF/普通报告与必要状态提交；current-task原16用户行、字体资产、外部子模块、旧endpoint文件、tmp/预览保留未提交。确切本节点push回执以Git及对话为准，不为自引用循环提交。
+
 ## 2026-10-08 — 当前正文和实际PDF已收束，非仅计划
 
 - 前节点536f40556022065e4c77f63af21f911c93f37de8为60任务审查，已推送。当前科学修订：完成与失败并存、未知不归零、历史bundled配置/服务时间与当前900/480普通提示分开、历史风险标签不能当修正版效果，60任务事后解释英中接入。
