@@ -1,5 +1,13 @@
 # 进展记录
 
+## 2026-10-09 — 四环境可迁移性交付与教师演示完成切片
+
+- 最终release/M3_PI_Guard_portable_20261009独立解包：Windows11/Python3.13.5、Ubuntu24.04.4/Python3.12.3、阿里云Ubuntu22.04.5/Python3.10.12、VMware Ubuntu26.04.1/Python3.14.4各119定向pytest通过，分别25.54/40.89/26.21/8.51秒；四端pip check通过。不是新增模型实验或全历史跨平台验收。
+- 修交付缺配置/原生AgentDojo依赖/CRLF清单，以及Python3.10 f-string/tomllib问题；正则等价、180修复前后输入权限完全一致。四端180编译0gold/0差异、900/480/16raw计数一致；无旧统计推断重算。
+- 演示真实corrected_v2组件、八邮件配置与三文件提案；固定动作非现场模型。浏览器public/private/full/policy/ASK及390px无横向溢出、桌面/手机截图已查；只有favicon404非JS错误，临时浏览器/HTTP关闭。
+- 新桌面VM经明确授权的一次SSH认证与现有公钥登记后，BatchMode连通并完成同包验证；没有读私钥或将密码写入项目。Python3.14相对路径prefix提示已用绝对路径诊断定位；Google SDK一条弃用警告如实保留，不重复整套测试。
+- 报告docs/可迁移性验证报告_2026-10-09.md和运行指南含outputs结构/真实解包目录/论文限定表述。Kali仍待实测；F-PORT-001保持in_progress。0API/Full Harness/系统Python修改/sudo/生产服务/永久变量/原raw/论文改写；用户dirty保留，范围Git。
+
 ## 2026-10-08 — 当前引用与内部方法复核实际完成
 
 - 24活动官方记录核对，修10个arXiv DOI、L35分类、DRIFT作者姓名/缩写格式；22页面与2官方检索记录分开披露，未冒称24篇全文精读。普通报告citation_compliance_active_v1.md复用，无引用哈希包。

@@ -5,6 +5,15 @@ __pycache__/
 .cache/
 *.log
 
+# Scoped portable deliveries, downloaded wheels and browser scratch stay local.
+# Track source/guide and curated small verification results explicitly instead.
+release/portable_v*_20261009/
+release/M3_PI_Guard_portable_20261009/
+outputs/portability/preview/
+outputs/portability/linux310_wheels/
+outputs/portability/*.tar.gz
+outputs/portability/get-pip*.py
+
 # Team-shared configuration uses config/project.env.example. Real credentials
 # and machine-local paths stay in the ignored local companion file.
 config/project.local.env

@@ -12,7 +12,10 @@ import importlib
 import json
 import subprocess
 import sys
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10 uses the compatible TOML backport.
+    import tomli as tomllib
 from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from pathlib import Path

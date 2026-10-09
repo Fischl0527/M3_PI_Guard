@@ -629,8 +629,11 @@ def _explicit_argument_value(
         if token not in _GENERIC_STOPWORDS
     )
     if phrase:
+        # Python 3.10/3.11 forbid backslashes inside an f-string expression.
+        # Compute the same regex fragment separately; authorization is unchanged.
+        phrase_pattern = re.escape(phrase).replace(r"\ ", r"\s+")
         pattern = re.compile(
-            rf"\b{re.escape(phrase).replace(r'\ ', r'\s+')}\b\s*(?:is|=|:|number)?\s*[\"']?([A-Za-z0-9_.@+-]+)",
+            rf"\b{phrase_pattern}\b\s*(?:is|=|:|number)?\s*[\"']?([A-Za-z0-9_.@+-]+)",
             flags=re.IGNORECASE,
         )
         match = pattern.search(request)

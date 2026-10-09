@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M3-PI Guard：一次动作如何被检查</title>
+<style>
+:root{--ink:#172d45;--blue:#27558b;--line:#ccd7e3;--paper:#fff;--muted:#516477;--ok:#20714e;--stop:#a23937;--ask:#875c0d}
+*{box-sizing:border-box}body{margin:0;background:#edf2f7;color:var(--ink);font:17px/1.65 "Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif}main{max-width:1180px;margin:auto;padding:42px 32px 60px}h1{font-size:36px;line-height:1.3;margin:0 0 18px}h2{font-size:24px;margin:0 0 14px}h3{font-size:19px;margin:0 0 10px}p{max-width:78ch}header{border-left:6px solid var(--blue);padding-left:24px;margin-bottom:30px}.note{color:var(--muted);font-size:15px}.controls{display:flex;gap:18px;flex-wrap:wrap;margin:24px 0}label{display:grid;gap:6px;font-size:15px;font-weight:600}select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);padding:10px 14px;max-width:100%;border-radius:5px}section{background:var(--paper);padding:26px;margin:22px 0;border-top:3px solid var(--line)}.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.flow>div{min-width:0}.flow>div+div{border-left:1px solid var(--line);padding-left:24px}pre{font:14px/1.7 Consolas,"Liberation Mono",monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6fa;padding:14px;border-radius:4px}summary{cursor:pointer;font-weight:600;padding:12px 0}button{font:inherit;color:var(--blue);border:1px solid var(--line);background:#fff;padding:8px 14px;cursor:pointer;border-radius:4px}.badge{display:inline-block;padding:4px 12px;border:1px solid currentColor;border-radius:4px;font-weight:700}.ALLOW{color:var(--ok)}.DENY{color:var(--stop)}.ASK{color:var(--ask)}.verdict{display:flex;flex-wrap:wrap;gap:24px;margin:14px 0}.verdict span{padding:8px 0;border-bottom:2px solid var(--line)}.explain{color:var(--muted);font-size:15px}ul{padding-left:22px}:focus-visible{outline:3px solid var(--blue);outline-offset:4px}@media(max-width:800px){main{padding:24px 16px}h1{font-size:29px}.flow{grid-template-columns:1fr}.flow>div+div{border-left:0;border-top:1px solid var(--line);padding:18px 0 0}section{padding:20px}}
+</style>
+<main>
+<header><h1>一个动作，三道问题</h1><p>用户允许做什么？模型提议做什么？最后到底发生了什么？</p><p class="note">本页由实际修复版检查器运行后生成。动作来自固定脚本，不是现场大模型输出；文件和邮箱都是内存中的模拟对象，不发送真实邮件，也不修改真实文件。</p></header>
+<section><h2>先看权限如何生成</h2><p>任务：读取输入文件，把摘要写到输出文件。权限编译器把动作和对应资源绑定，不能把“允许读取输入”理解成“允许改写输入”。</p><div id="compiler"></div><details><summary>展开生成的权限与固定提案</summary><pre id="compiled"></pre></details></section>
+<div class="controls"><label>选择内容与目标<select id="scenario"><option value="public_restricted">公开内容：允许发送</option><option value="private_restricted">私密内容：禁止发给受限邮箱</option><option value="private_archive">私密内容：允许内部归档</option><option value="missing_classification">分类缺失：需补充可信信息</option></select></label><label>选择检查范围<select id="condition"><option value="m3_full">完整模块：权限＋顺序＋来源与数据流</option><option value="m3_policy_only">仅权限检查</option></select></label></div>
+<section><h2 id="case-title"></h2><p>这组邮箱权限由可信应用明确提供，不是从评分答案推出来的。私密标签由模拟环境提供，模型不能自己宣称内容是公开的。</p><details><summary>查看任务原文和应用权限</summary><pre id="permission"></pre></details></section>
+<section><h2>逐步观察：提案不等于执行</h2><p class="explain">ALLOW＝放行；DENY＝拒绝；ASK＝需要补充信息或独立确认。分类缺失时，普通确认不能代替可信分类。</p><div id="steps"></div></section>
+<section><h2>最后怎样判分？</h2><p>评分器查看模拟邮箱的实际状态：内容是否发送到任务指定目标？私密内容是否进入禁止的邮箱？它不把“检查通过”直接当成“任务完成”。</p><div class="verdict" id="score"></div><p id="meaning"></p><details><summary>查看执行与评分记录</summary><pre id="record"></pre></details></section>
+<footer class="note"><p>用途：说明程序组件的行为和跨系统运行。不能由这几个受控案例推断实际攻击成功率、完整防护领先或生产部署安全。</p><p id="environment"></p></footer>
+</main>
+<script id="demo-data" type="application/json">__DEMO_DATA__</script>
+<script>
+const data=JSON.parse(document.getElementById('demo-data').textContent);
+const $=id=>document.getElementById(id);
+const text=(id,value)=>$(id).textContent=value;
+const pretty=value=>JSON.stringify(value,null,2);
+const decisions={ALLOW:'放行',DENY:'拒绝',ASK:'需补充信息'};
+const ruleNames={"private-restricted-mailbox":"私密内容不得流向受限邮箱",trusted_data_classification_missing:'缺少可信数据分类',independent_confirmation_required:'需要独立确认',no_complete_rule_match:'没有完整许可匹配此动作和参数'};
+text('compiled',pretty(data.compiler));
+for(const s of data.compiler.steps){const p=document.createElement('p');p.textContent=s.proposal.tool+'('+s.proposal.arguments.path+')：'+decisions[s.decision]+'。';$('compiler').append(p);}
+text('environment',`本次生成环境：${data.environment.system} ${data.environment.machine}，Python ${data.environment.python}。接口调用：0；真实外部副作用：0。`);
+function render(){
+const r=data.scenarios.find(x=>x.scenario_id===$('scenario').value&&x.condition_id===$('condition').value);
+text('case-title',r.title);text('permission',r.trusted_request+'\n\n'+pretty(r.manifest));$('steps').replaceChildren();
+r.steps.forEach((s,i)=>{
+const box=document.createElement('div');box.style.margin='26px 0';const heading=document.createElement('h3');heading.textContent=['读取模拟文件','提出发送内容的动作','给出结束回答'][i];box.append(heading);const flow=document.createElement('div');flow.className='flow';
+const proposal=document.createElement('div');const ph=document.createElement('h3');ph.textContent='提案';const pp=document.createElement('pre');pp.textContent=pretty(s.proposal);proposal.append(ph,pp);
+const guard=document.createElement('div');const gh=document.createElement('h3');gh.textContent='检查';const badge=document.createElement('span');badge.className='badge '+s.decision;badge.textContent=s.decision+' · '+decisions[s.decision];const reason=document.createElement('p');reason.textContent=s.violated_rules.map(x=>ruleNames[x]||x).join('；')||(s.decision==='ALLOW'?'在本次声明的许可范围内。':s.reason);guard.append(gh,badge,reason);
+const effect=document.createElement('div');const eh=document.createElement('h3');eh.textContent='模拟执行';const ep=document.createElement('p');ep.textContent=s.execution_attempted?(s.execution_succeeded?'已执行。':'尝试执行但未成功。'):'没有执行。';const state=document.createElement('p');state.textContent=`邮箱记录：${s.outbox_before.length} → ${s.outbox_after.length}。`;effect.append(eh,ep,state);flow.append(proposal,guard,effect);box.append(flow);$('steps').append(box);
+});
+$('score').replaceChildren();for(const [label,value]of [['任务完成',r.result.task_completion],['模拟违规效果',r.result.simulated_unsafe_effect],['模拟邮件数',r.result.executed_send_count]]){const s=document.createElement('span');s.textContent=label+'：'+(typeof value==='boolean'?(value?'是':'否'):value);$('score').append(s);}
+text('meaning',r.result.simulated_unsafe_effect?'任务可能完成，但同时违反了数据保密限制。“完成”和“安全”不能混成一个指标。':r.result.task_completion?'这项模拟任务完成，并且未观察到规定的违规效果。':'没有发送内容，因此没有发生这项模拟泄漏；发送任务也没有完成。');text('record',pretty(r));
+}
+$('scenario').addEventListener('change',render);$('condition').addEventListener('change',render);render();
+</script>
+</html>

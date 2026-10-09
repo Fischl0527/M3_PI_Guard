@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-10-09 — 四环境已验证，Kali虚拟机待用户开机
+
+- 当前F-PORT-001/in_progress，任务harness/tasks/portability-demo-20261009.md。最终包release/M3_PI_Guard_portable_20261009/M3_PI_Guard_portable.tar.gz；docs/可迁移性验证报告_2026-10-09.md及演示与跨环境运行指南.md，演示outputs/portability/demo/index.html。不要恢复调试期portable_v1/v2/v3/v4交付。
+- 四主机最终各119pytest通过：Windows11/Py3.13.5、Ubuntu24.04.4/Py3.12.3、阿里云Ubuntu22.04.5/Py3.10.12、VMware Ubuntu26.04.1/Py3.14.4。180编译/0gold/0差异、900/480/16count一致、pip check通过；修复前后180投影完全相同。V2受控组件、V1兼容native-final-only测试分别披露，非完整当前原生轨迹或模型实验复现。
+- Windows新envC:/Users/gaohang/AppData/Local/Temp/M3 portable 中文 20261009-v1/.venv；最终解包同Temp的M3 portable 中文 20261009-final。两服务器各/home/lfischl/m3-portability-20261009-final，独立env各在m3-portability-20261009-v1/.venv；没有sudo/系统Python修改/生产服务重启。阿里云慢PyPI改为官方Linux310 wheels的--no-index安装，保留普通结果，不新建依赖哈希包。
+- 修改：scripts/portable_demo.py、portable_verify.py、build_portable_package.py、assets/portable_demo.html、requirements-portable.txt、两新test、README/.gitignore/普通报告与状态；产品只有policy_compiler等价f-string和structural_baselines的tomli兼容。历史raw/计划/论文内容不动。
+- 实际命令：包build；三端各python -X utf8 -B -m scripts.portable_demo、scripts.portable_verify、pytest按pytest-portable.txt -q --tb=short --junitxml=outputs/portability/pytest.xml；三端pip check；27本地新tests与7修改Python文件Ruff通过。浏览器CLI切换private/policy/missing/full、截图、390px宽度验证；浏览器close与HTTP Ctrl-C退出已完成，不停止其他会话进程。
+- 用户现已打开UbuntuVM；实际26.04.1而非先前称24。经明确授权向自己的账户登记本机现有公钥，不读私钥、不记录密码、不改sshd；BatchMode成功。VM包/home/fischl/m3-portability-20261009-v1/M3_PI_Guard_portable，venv同父目录/.venv；用规范绝对解释器路径避免Python3.14的../prefix提示。119passed/8.51秒、1Google SDK弃用警告；结果outputs/portability/ubuntu26/verification.json和本地pytest.xml，raw_counts与Windows逐对象一致。所有本任务SSH和安装/测试会话已结束。
+- Kali仍未验证。下一步仅在用户开机后导入同一包并运行指南，收回verification.json/pytest.xml/OS版本；未验不冒称完成。无API/FullHarness/历史推断/永久变量或秘密文件访问。当前codex/claude-review-repairs推送origin RedTeam_LLM_Security，原用户16行current-task及其他dirty不提交；回执以Git/对话为准。
+
 ## 2026-10-08 — 当前引用与内部方法复核已实际闭合
 
 - 前一正文节点1737205e7ae6494ff04cd674dea0b2e2a26e41d8已push。当前沿用codex/claude-review-repairs/origin RedTeam_LLM_Security，不切旧分支或强推。当前24引用核对为22官方页面+2官方检索；NeurIPS正文抓取超时，DRIFT姓名以官方演示材料核实。10 DOI/L35分类/DRIFT姓名/缩写已修，报告citation_compliance_active_v1.md；full_citation_refresh用户dirty不碰。

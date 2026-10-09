@@ -1,5 +1,12 @@
 # Task History
 
+## 2026-10-09 — Scoped portability and teacher demo executed
+
+- Added actual corrected-runtime offline trace-board demo, scoped exporter/verifier, portable dependencies and focused tests. Repaired omitted assets/native benchmark code and CRLF; fixed Python3.10 syntax and TOML import without authorization changes.
+- Same final package in fresh Windows/Python3.13.5, Ubuntu24/Python3.12.3, Ubuntu22/Python3.10.12 and VMware Ubuntu26/Python3.14.4:119focused tests each passed;180compiled projections and900/480/16counts match, pip check passes. Pre/post180projections identical. Fixed-response/native plumbing is not model performance.
+- Browser interactions and desktop/mobile visuals inspected; task-only browser/HTTP closed. UbuntuVM subsequently tested after explicitly authorized public-key enrollment, without private-key access or passwords in project files. One SDK deprecation warning retained; absolute interpreter path resolves3.14prefix warning. All task SSH/install/test sessions ended. Kali remains untested; F-PORT-001 staysin_progress, not complete-all or paper acceptance.
+- 0API/FullHarness/legacy inference replay/production/systemPython/secret-file access/permanentenv. Scope-only current-branch origin push, unrelated userdirty preserved.
+
 ## 2026-10-08 — Current citation and internal-method repair executed
 
 - Checked24active official records (22pages/2primary-domain search results); repaired10arXivDOIs, L35classification, DRIFTauthor and protected acronyms. Current report distinguishes abstracts/metadata from full reading and external review.

@@ -1,5 +1,23 @@
 # Failure Log
 
+## 2026-10-09 — 新桌面VM自动认证缺失，公钥登记后解决
+
+- 用户已能手动密码登录；首次BatchMode自动探测返回Permission denied (publickey,password)，不能把手动登录当作自动执行已完成。
+- 用户明确允许公钥配置，随后明确允许一次密码认证。只在SSH终端完成该次认证，登记本机现有公钥；没有读取/展示私钥，没有将密码写入脚本、配置、仓库或状态记录，没有关闭密码登录或修改sshd服务。
+- 后续BatchMode/StrictHostKeyChecking连接exit0；实际读取Ubuntu26.04.1/Python3.14.4/Git2.53.0。在全新任务目录建隔离venv并上传同一最终包，验证结果另记；认证成功本身不代表项目测试通过。
+
+## 2026-10-09 — 干净环境暴露的交付与Python兼容问题已修
+
+- 首包Windows92passed/16failed：缺provider_safety/public_budget/E6选样和原生评分依赖。补现有文件及200条已选源记录摘录、固定官方AgentDojo真实浅克隆；不删除测试/伪造Git身份或复制原配置。Linux清单CRLF导致找不到测试，显式LF并加回归。
+- 阿里云Python3.10实际导入失败：policy_compiler的f-string表达式含反斜线，随后structural_baselines缺tomllib。等价片段计算移到字符串外，3.10使用tomli；180修复前后权限投影完全一致，未扩权。最终三端119passed及pip check通过。
+- 官方get-pip下载超时/残缺，未把残缺脚本当成功；改用本机成功下载的官方脚本安装到任务隔离env。阿里云PyPI慢且tqdm解析失败，改输送官方PyPI的Linux3.10 wheels/no-index安装；没有sudo或系统包更改。
+- 浏览器CLI禁止file协议，改用仅127.0.0.1的临时生成页服务器，不取消工具安全策略；工具命令引用错误按真实snapshot纠正。favicon404披露，未称控制台全零；临时浏览器和HTTP均关闭。没有科研实验失败或重跑旧response-bearing记录。
+
+## 2026-10-09 — 演示断言与真实三态语义不一致
+
+- 新演示首次测试5通过/2失败：预期未获写权限的提案为DENY，但真实corrected监视器返回ASK/no_complete_rule_match，仍不执行。打印受控结果确认读取/合法写入均ALLOW，错误写入ASK且输入未改变。
+- 修正演示与测试的预期为ALLOW/ASK/ALLOW，保留原防护逻辑；不为演示改成更强的拒绝语义。四种邮件/分类场景已通过首轮测试。后续复验见任务记录。
+
 ## 2026-10-08 — 当前引用核对的抓取和渲染问题
 
 - NeurIPS两篇正文页面及DRIFT论文PDF通过浏览工具抓取超时。改查原站限定检索记录取得题名/摘要/DOI，姓名以官方演示材料核实；不重复同一无效抓取、不把网络失败说成论文不存在或全文核验通过。

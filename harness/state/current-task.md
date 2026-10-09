@@ -1,5 +1,12 @@
 # 当前任务
 
+### 2026-10-09 四环境可迁移性已验证，Kali待开机
+
+- 用户目标：跨环境实际运行验证与教师演示，不由操作系统兼容性推导防护泛化。任务harness/tasks/portability-demo-20261009.md，F-PORT-001。
+- 最终相同交付包在Windows11/Python3.13.5、Ubuntu24.04.4/Python3.12.3、Ubuntu22.04.5/Python3.10.12、VMware Ubuntu26.04.1/Python3.14.4各119定向测试通过；180权限及900/480/16计数一致。Python3.10等价f-string和tomli兼容已修，没有授权行为变化。
+- 最终包release/M3_PI_Guard_portable_20261009；演示outputs/portability/demo/index.html；报告docs/可迁移性验证报告_2026-10-09.md。用户授权公钥登记后桌面Ubuntu实测完成；Kali仍待验证，拷包本地运行不要求SSH。
+- 0API/Full Harness/历史推断重算/raw或论文数字修改；临时浏览器和HTTP会话已关闭，不动其他会话进程。F-PORT-001保持in_progress；范围Git沿用当前分支，原用户dirty保留。
+
 ### 2026-10-08 当前引用、方法披露和PDF实际修复完成
 
 - 24官方记录核对完成（22页面/2原站检索，后两正文抓取超时）；补10 DOI、L35分类、DRIFT作者姓名及缩写保护。内部方法/反方复核发现Holm家族未明列和作者批准提前断言，已修英中源/当前稿并实际编译。报告citation_compliance_active_v1.md，不新写待执行计划。
