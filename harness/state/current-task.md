@@ -1,5 +1,12 @@
 # 当前任务
 
+### 2026-10-09 docs 入口更新与重复文档合并（文档已验证，Git+PR交付中）
+
+- 用户授权仔细整理 docs；先核对当前状态，再合并重复的综述/架构/交接/运行入口，保留旧快照，不删实验结果或论文正文。任务 harness/tasks/docs-consolidation-20261009.md。
+- 允许 docs 文档及本任务 Harness 状态；不改科研代码、protocols、raw、LaTeX/Word/PDF，不执行实验或 Full Harness。原用户修改的两份计划/引用审核及未跟踪旧端点说明不动。
+- 七份旧入口整份归档，当前综述合并架构与交接；研究、证据、论文、outputs及清单入口已更新。422本地链接0缺失/0坏锚点/0未闭合代码块，七原文与Git版本7/7一致，读者检查修正主文tex入口后PASS。F-DOC-001 verified；F-PAPER-002仍in_progress。
+- 用户追加确认正常推送origin当前分支，并向Alysia163/RedTeam_LLM_Security:new-test创建PR，不直接覆盖或自动合并。报告docs/文档整理报告_2026-10-09.md；回执后补。
+
 ### 2026-10-09 用户授权覆盖朋友仓库 new-test 已完成
 
 - 用户明确授权将当前已提交版本覆盖到 Alysia163/RedTeam_LLM_Security 的 new-test；不动 main、本地分支或用户未提交文件。任务 harness/tasks/github-new-test-overwrite-20261009.md。

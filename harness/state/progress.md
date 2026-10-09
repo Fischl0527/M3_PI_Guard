@@ -1,5 +1,11 @@
 # 进展记录
 
+## 2026-10-09 — 当前文档入口更新与重复说明合并
+
+- 巡检117份Markdown的标题/状态/路径，按当前900/480/16及60事后复核更新活跃入口；不重审历史15份Word或改论文正文。七份旧入口原样归档，架构/移交/运行改导航，综述合并当前说明；research/paper-v2单一导航及论文索引、清单、outputs树已同步。
+- 422本地链接0缺失/0坏锚点/0未闭合代码块；七原文与起始Git文本7/7一致；JSON及活动改动空白检查通过。完整暂存检查的5处旧Markdown硬换行双空格保留并披露，排除对应两份原样快照后其他暂存文件通过。读者八问仅指出主文tex入口不具体，修正后PASS。七原样快照保留原链接基准、1外部绝对路径未核验，不称全网络链接通过。
+- F-DOC-001 verified；F-PAPER-002仍in_progress。0API/实验/历史统计/Full Harness/编译，无科研、raw、论文正文或既有dirty改写。用户追加授权Git+PR并明确new-test目标；先正常推送origin当前分支，再建PR，不覆盖main/new-test、不自动合并。
+
 ## 2026-10-09 — 授权覆盖朋友仓库 new-test
 
 - 用户明确要求覆盖新分支；只对 Alysia163/RedTeam_LLM_Security:new-test 使用精确旧 SHA 的 force-with-lease，成功替换为当前已提交 c006b72。main 经 ls-remote 仍为 e33e5a8，未修改。

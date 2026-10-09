@@ -8,6 +8,26 @@
   ],
   "features": [
     {
+      "id": "F-DOC-001",
+      "name": "Current documentation consolidation",
+      "description": "Unify current reader entry points and distinguish corrected evidence, working manuscripts and preserved historical snapshots.",
+      "status": "verified",
+      "priority": "normal",
+      "acceptanceCriteria": [
+        "Current navigation links to the actual runtime, evidence and manuscript entries",
+        "Duplicate architecture and handover material is consolidated with historical originals preserved",
+        "No experiment, raw result, scientific code, manuscript body or user dirty file is changed",
+        "Changed document links and reader questions are checked before scoped Git delivery"
+      ],
+      "verification": [
+        "2026-10-09: seven historical entry originals preserved; text comparison with prior Git version passes 7/7",
+        "422 repository-local Markdown links: zero missing paths, bad anchors or unclosed fences; seven unchanged snapshots excluded; one external absolute path not checked",
+        "Fresh-context reader check: eight handover questions answered; direct main LaTeX entry clarified and rechecked PASS",
+        "127 Markdown, 15 Word, 14 PNG and one BibTeX remain in docs; no executable or experiment data files introduced",
+        "Feature JSON parses; active staged whitespace check passes; five inherited Markdown hard-break warnings in two unchanged snapshots disclosed; no runtime, experiment, raw, manuscript body, LaTeX, PDF or existing user dirty changes included"
+      ]
+    },
+    {
       "id": "F-GIT-001",
       "name": "User-authorized new-test branch replacement",
       "description": "Replace only Alysia163/RedTeam_LLM_Security:new-test with the committed research branch while preserving main and local user edits.",

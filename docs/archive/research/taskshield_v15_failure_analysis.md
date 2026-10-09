@@ -36,12 +36,12 @@ AgentDojo 源码和官方分析把攻击场景日志中的 `security=true` 当�
 
 本报告只读取并交叉核对以下已存在证据，不修改、不恢复、不重跑：
 
-- [v1.5 freeze](../../protocols/paper_upgrade_v1/taskshield_paper_formal_freeze_v15.json)
-- [v1.5 qualification analysis](../../protocols/paper_upgrade_v1/execution/taskshield_v15_expanded_qualification_v1/qualification_analysis.json)
+- [v1.5 freeze](../../../protocols/paper_upgrade_v1/taskshield_paper_formal_freeze_v15.json)
+- [v1.5 qualification analysis](../../../protocols/paper_upgrade_v1/execution/taskshield_v15_expanded_qualification_v1/qualification_analysis.json)
 - `outputs/paper_upgrade_v1/baselines/taskshield_paper_qualification_v15_expanded/`
-- [Task Shield v1.5 runtime](../../experiments/paper_v1/benchmarks/taskshield_paper_runtime_v15.py)
-- [Task Shield legacy runner](../../experiments/paper_v1/benchmarks/run_taskshield_paper_formal.py)
-- [AgentDojo adapter runner](../../experiments/paper_v1/benchmarks/run_agentdojo_official_detector_formal.py)
+- [Task Shield v1.5 runtime](../../../experiments/paper_v1/benchmarks/taskshield_paper_runtime_v15.py)
+- [Task Shield legacy runner](../../../experiments/paper_v1/benchmarks/run_taskshield_paper_formal.py)
+- [AgentDojo adapter runner](../../../experiments/paper_v1/benchmarks/run_agentdojo_official_detector_formal.py)
 - 固定 AgentDojo checkout `external/benchmarks/agentdojo`，Git HEAD
   `089ed468cf3ed0322acc66b0211f26d9d90dbf60`
 

@@ -1,5 +1,12 @@
 # 会话移交
 
+## 2026-10-09 — docs整理已验证，范围Git+PR接续交付
+
+- 任务harness/tasks/docs-consolidation-20261009.md，F-DOC-001 verified。总入口docs/README，当前综述合并架构/交接；运行手册跳当前演示指南，研究和论文索引分当前/历史。七原入口整份在docs/archive/entry_snapshots_202607保存，文本7/7与起始Git一致。
+- 报告docs/文档整理报告_2026-10-09.md；127MD/15Word/14PNG/1Bib，422本地链接0缺失/0坏锚点/0未闭合代码块，JSON和活动暂存空白检查通过。完整暂存检查的5处归档原文硬换行双空格保留，原文不为绿色改写。旧快照相对基准未改、1外部绝对路径不核验。读者检查八问PASS，非外部审稿；主文tex入口已明确。
+- 用户已确认Git+PR目标Alysia163/RedTeam_LLM_Security:new-test，源origin的codex/claude-review-repairs；起始双方基线e81ac385。先范围提交、正常推送后建PR；不直接推朋友目标或合并，回执接续登记。
+- 原用户dirty两份计划/引用审核、16行current-task、旧端点代码/说明、模板、子模块及其他本地产物不暂存。只提交本任务docs和必要Harness。无实验/pytest/Ruff/编译/Full Harness/API/递归哈希；F-PAPER-002仍in_progress，作者与投稿/发布待确认。
+
 ## 2026-10-09 — 用户授权 new-test 覆盖完成
 
 - 用户在截图明确同意覆盖 Alysia163/RedTeam_LLM_Security:new-test。来源当前已提交 c006b729a06a1140f8adfcc2488596e0cc3e36d1；原目标 e33e5a8462d87662e37c7090077b4de266255e2c。精确 force-with-lease 已成功，main 未变；本地恢复分支 codex/backup-alysia-new-test-20261009 保留原提交。

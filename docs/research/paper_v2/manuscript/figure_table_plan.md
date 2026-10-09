@@ -1,5 +1,11 @@
 # Figure and table plan — incremental empirical study
 
+> 历史图表计划：下文描述旧E1–E6文章的表图，不是当前精简文章的布局。
+> 2026-10-09文档更新：当前四幅主图、四张主表的来源见
+> [论文工作区说明](README.md)和
+> [当前主图目录](../../../../outputs/experiments/research_followup_20261006_v1/manuscript_figures/)。
+> 历史数量、生成状态和原始来源保留，不能当作修复版的新证据。
+
 Status: `e1_e6_complete`
 
 The paper uses the frozen 180-case factorial cohort, 60-task source-authority
