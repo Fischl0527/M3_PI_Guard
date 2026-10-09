@@ -8,6 +8,24 @@
   ],
   "features": [
     {
+      "id": "F-GIT-001",
+      "name": "User-authorized new-test branch replacement",
+      "description": "Replace only Alysia163/RedTeam_LLM_Security:new-test with the committed research branch while preserving main and local user edits.",
+      "status": "verified",
+      "priority": "normal",
+      "acceptanceCriteria": [
+        "Exact old-SHA force-with-lease protects against concurrent target changes",
+        "Remote new-test matches the committed source and main remains unchanged",
+        "Local recovery ref preserves the former target and unrelated dirty files remain unstaged"
+      ],
+      "verification": [
+        "2026-10-09 explicit user authorization; GitHub push=true and target protected=false checked",
+        "Exact-SHA force-with-lease succeeded: new-test now c006b729a06a1140f8adfcc2488596e0cc3e36d1; main remains e33e5a8462d87662e37c7090077b4de266255e2c",
+        "Local codex/backup-alysia-new-test-20261009 preserves the former target; source working branch and user dirty files unchanged",
+        "PR22 reports CLOSED and mergedAt=null; no merge or close API used; only ordinary state-record pushes follow replacement"
+      ]
+    },
+    {
       "id": "F-PORT-001",
       "name": "Corrected runtime portability and teacher demo",
       "description": "A credential-free demo and clean-environment validation of the current corrected runtime and selected research artifacts.",

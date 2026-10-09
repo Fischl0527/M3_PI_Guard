@@ -1,5 +1,11 @@
 # 进展记录
 
+## 2026-10-09 — 授权覆盖朋友仓库 new-test
+
+- 用户明确要求覆盖新分支；只对 Alysia163/RedTeam_LLM_Security:new-test 使用精确旧 SHA 的 force-with-lease，成功替换为当前已提交 c006b72。main 经 ls-remote 仍为 e33e5a8，未修改。
+- 原目标保留本地 codex/backup-alysia-new-test-20261009；本地当前分支和用户 dirty 不动、不提交。PR22 当前 CLOSED/mergedAt=null，本轮未关闭或合并 PR。F-GIT-001 verified；F-PAPER-002 状态不变。
+- 仅补充本操作 Harness 记录并正常推送 origin 当前分支和目标 new-test。不运行测试/实验/Full Harness/论文构建，不新增远端、保护规则或认证配置。历史大文件两条警告不影响成功，不擅自清理。
+
 ## 2026-10-09 — Kali同包验证与五环境任务闭合
 
 - 用户已开启Kali，实测2026.1 Rolling/Python3.13.12/Git2.51.0/内核6.18.12+kali-amd64；在新的/home/kali/m3-portability-20261009-v1目录解包相同最终tar.gz，独立venv从官方PyPI安装现有requirements-portable.txt。无需新代码、依赖清单或论文改动，未修改系统Python、服务或SSH认证。

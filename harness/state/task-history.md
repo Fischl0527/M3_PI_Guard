@@ -1,5 +1,11 @@
 # Task History
 
+## 2026-10-09 — User-authorized new-test replacement
+
+- Explicit authorization applied only to Alysia163/RedTeam_LLM_Security:new-test. Exact old-SHA force-with-lease replaced e33e5a8 with committed source c006b72; remote main stayed e33e5a8. Local recovery ref retained the original target.
+- PR22 observed CLOSED, mergedAt=null; no PR merge/close operation performed. Existing local user dirty changes remain unstaged. F-GIT-001 verified; necessary state records alone are committed and normally pushed to both branches.
+- No product changes, tests, model calls, history replay or manuscript builds. Historical large-object warnings reported, not treated as failed push or authorization for cleanup.
+
 ## 2026-10-09 — Kali validation and scoped portability closeout
 
 - Tested the unchanged portable delivery on Kali2026.1/Python3.13.12 in a fresh user venv:119passed/7.39s,0failures/errors/skips,180authorization projections match,900/480/16raw counts match Windows, pip check passes. No new runtime code or API experiment; prior four environments not rerun.

@@ -1,5 +1,11 @@
 # 当前任务
 
+### 2026-10-09 用户授权覆盖朋友仓库 new-test 已完成
+
+- 用户明确授权将当前已提交版本覆盖到 Alysia163/RedTeam_LLM_Security 的 new-test；不动 main、本地分支或用户未提交文件。任务 harness/tasks/github-new-test-overwrite-20261009.md。
+- 精确 force-with-lease 已成功将 new-test 更新为 c006b729a06a1140f8adfcc2488596e0cc3e36d1；ls-remote 证实 main 仍为 e33e5a8462d87662e37c7090077b4de266255e2c。本地恢复分支 codex/backup-alysia-new-test-20261009 保存旧提交。
+- PR #22 查询为 CLOSED、mergedAt=null；本轮没有调用关闭/合并接口。必要状态记录单独提交并正常推送双方分支；原用户 dirty 不提交，无代码/论文/实验变化。
+
 ### 2026-10-09 五环境迁移验证与文档更新完成
 
 - Kali2026.1 Rolling/Python3.13.12/Git2.51.0，原包在新/home/kali/m3-portability-20261009-v1/.venv环境实际119passed/7.39秒、0失败/错误/跳过，演示、180权限、900/480/16原始计数与pip check通过。此前四环境不重跑，不改系统Python、服务或Kali SSH配置。

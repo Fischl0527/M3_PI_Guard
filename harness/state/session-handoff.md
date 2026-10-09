@@ -1,5 +1,12 @@
 # 会话移交
 
+## 2026-10-09 — 用户授权 new-test 覆盖完成
+
+- 用户在截图明确同意覆盖 Alysia163/RedTeam_LLM_Security:new-test。来源当前已提交 c006b729a06a1140f8adfcc2488596e0cc3e36d1；原目标 e33e5a8462d87662e37c7090077b4de266255e2c。精确 force-with-lease 已成功，main 未变；本地恢复分支 codex/backup-alysia-new-test-20261009 保留原提交。
+- F-GIT-001 verified；任务 harness/tasks/github-new-test-overwrite-20261009.md 有确切命令。PR22 查询 CLOSED/mergedAt=null，不冒称 PR 合并，本轮没有调用关闭/合并接口。接续状态记录普通推送双方分支，回执以 Git/对话为准，不再递归登记自己的 commit。
+- 当前工作分支 codex/claude-review-repairs、原用户16行 current-task 及其他 dirty 保留；只暂存本操作新增记录，不把未提交代码/论文一起上传。不修改 origin/main、朋友 main、其他分支或 Git 权限配置。
+- GitHub历史56.13MB/53.33MB对象警告不阻止推送；不为此清理或重写历史。本操作无代码行为变化、测试/API/Full Harness/论文构建，所有其他科研状态保留。
+
 ## 2026-10-09 — 五环境迁移与演示任务已验证完成
 
 - F-PORT-001=verified；F-PAPER-002仍in_progress。任务harness/tasks/portability-demo-20261009.md，本轮不自动续跑研究或重编论文。相同最终包release/M3_PI_Guard_portable_20261009/M3_PI_Guard_portable.tar.gz代码/数据未改变，旧调试包不使用。
