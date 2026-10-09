@@ -1,6 +1,6 @@
 # docs 文档更新与合并
 
-日期：2026-10-09。状态：文档整理verified；范围提交、推送及PR交付接续执行。
+日期：2026-10-09。状态：文档整理verified；范围提交已推送，PR #23已创建，未合并。
 
 ## 目标与范围
 
@@ -38,3 +38,5 @@
 沿用codex/claude-review-repairs，origin指向Fischl0527/RedTeam_LLM_Security。PR目标new-test已由用户确认；远端基线e81ac385与本轮前HEAD相同，可形成仅本轮的审阅差异。先提交推送，再创建PR，回执另记；不把原16行用户current-task、80-percent-v2、full_citation_refresh、legacy_endpoint以及模板/子模块等dirty一并提交。
 
 报告docs/文档整理报告_2026-10-09.md。历史Word正文未重审、期刊/JCR未重新外部核验、论文未重编译；文档整理完成不代表投稿完成。
+
+实际Git回执：35个范围文件提交dde7c1068f6537255ae91fe7705e912df617f1db，git push origin codex/claude-review-repairs exit0，ls-remote确认匹配。gh pr create --repo Alysia163/RedTeam_LLM_Security --base new-test --head Fischl0527:codex/claude-review-repairs成功创建https://github.com/Alysia163/RedTeam_LLM_Security/pull/23。只记录本次回执并正常追加推送，不再次覆盖目标，也不执行合并。

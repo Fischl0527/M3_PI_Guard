@@ -6,6 +6,7 @@
 - Updated current evidence, data semantics, ethics, outputs map, manuscript entry and checklists. No raw, scientific code, manuscript body, LaTeX, Word, PDF or user-owned dirty edits changed.
 - Checked422 local links with0 missing/anchor/fence errors;7/7 archived texts match prior Git; feature JSON and active whitespace checks pass. Five inherited Markdown hard-break warnings in two unchanged snapshots are disclosed and preserved. Fresh-context reader test passes after clarifying the main.tex entry. F-DOC-001 verified; F-PAPER-002 remains in_progress.
 - User requested Git+PR and selected Alysia163/RedTeam_LLM_Security:new-test. Normal origin push and new PR only; no force push, target replacement, automatic merge or additional research.
+- Delivered scoped commitdde7c10 to origin/codex/claude-review-repairs; remote ref matches. Created PR23 at https://github.com/Alysia163/RedTeam_LLM_Security/pull/23 targetingnew-test; receipt-only followup updates the same PR without automatic merge.
 
 ## 2026-10-09 — User-authorized new-test replacement
 
