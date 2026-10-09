@@ -1,5 +1,14 @@
 # 会话移交
 
+## 2026-10-09 — 五环境迁移与演示任务已验证完成
+
+- F-PORT-001=verified；F-PAPER-002仍in_progress。任务harness/tasks/portability-demo-20261009.md，本轮不自动续跑研究或重编论文。相同最终包release/M3_PI_Guard_portable_20261009/M3_PI_Guard_portable.tar.gz代码/数据未改变，旧调试包不使用。
+- Kali实测2026.1 Rolling、Py3.13.12、Git2.51.0、kernel6.18.12+kali-amd64。包/home/kali/m3-portability-20261009-v1/M3_PI_Guard_portable，venv/home/kali/m3-portability-20261009-v1/.venv；已安装完。Ubuntu桌面包同模式/home/fischl/，Py3.14.4。其他三个环境及包路径见报告；不是复制原Anaconda环境。
+- Kali命令：绝对venv/bin/python -m pip install --isolated --index-url https://pypi.org/simple --disable-pip-version-check --no-cache-dir -r requirements-portable.txt；python -X utf8 -B -m scripts.portable_demo；scripts.portable_verify；pytest $(cat pytest-portable.txt) -q --tb=short --junitxml=outputs/portability/pytest.xml；pip check。均exit0，119passed/7.39秒，0failures/errors/skips、180/0gold/0差异、900/480/16一致、pip check通过。没有重跑前四环境。
+- 公开结果outputs/portability/kali/verification.json已push c8d84cc，测试XML本地保留。报告docs/可迁移性验证报告_2026-10-09.md、指南docs/演示与跨环境运行指南.md与四个项目入口同步，六文档94local links/0broken。仅记录必要公开结果，不新建哈希包或host audit。
+- Kali按本轮授权的密码SSH认证，不读私钥、不将密码写入项目或脚本、不更改其SSH配置。所有任务SSH/安装/测试会话已结束；不停止其他用户会话。没有API/sudo/系统包/服务/永久变量/论文/raw/统计重算/FullHarness。
+- 文档更新独立提交推送当前codex/claude-review-repairs/origin RedTeam_LLM_Security，原用户16行current-task及其他dirty保持未提交。后续只按新用户请求推进；五环境兼容不等于安全泛化、全历史发行或投稿完成。
+
 ## 2026-10-09 — 四环境已验证，Kali虚拟机待用户开机
 
 - 当前F-PORT-001/in_progress，任务harness/tasks/portability-demo-20261009.md。最终包release/M3_PI_Guard_portable_20261009/M3_PI_Guard_portable.tar.gz；docs/可迁移性验证报告_2026-10-09.md及演示与跨环境运行指南.md，演示outputs/portability/demo/index.html。不要恢复调试期portable_v1/v2/v3/v4交付。

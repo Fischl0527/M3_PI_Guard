@@ -11,19 +11,20 @@
       "id": "F-PORT-001",
       "name": "Corrected runtime portability and teacher demo",
       "description": "A credential-free demo and clean-environment validation of the current corrected runtime and selected research artifacts.",
-      "status": "in_progress",
+      "status": "verified",
       "priority": "high",
       "acceptanceCriteria": [
         "Demonstrate actual corrected permission, provenance, effect and scoring components without API or external effects",
         "Package runs in fresh Windows and Linux paths without original drive or environment dependencies",
-        "Report the exact tested OS/Python and preserve pending Ubuntu and Kali VM validation",
+        "Report the exact tested OS/Python and actual validation status of the specified Ubuntu and Kali VMs",
         "Read current study inputs and derive selected raw counts without historical replay or inference recomputation"
       ],
       "verification": [
-        "2026-10-09 same final delivery: Windows11/Python3.13.5, Ubuntu24.04.4/Python3.12.3, Ubuntu22.04.5/Python3.10.12, VMware Ubuntu26.04.1/Python3.14.4 each119focused pytest passed; pip check passed",
+        "2026-10-09 same final delivery: Windows11/Python3.13.5, Ubuntu24.04.4/Python3.12.3, Ubuntu22.04.5/Python3.10.12, VMware Ubuntu26.04.1/Python3.14.4, Kali2026.1/Python3.13.12 each119focused pytest passed; pip check passed",
         "Each environment compiled180inputs with0evaluator fields/0manifest mismatch and reproduced900/480/16raw counts; pre/post compatibility fix180projections identical",
         "Real corrected_v2 guarded demo and native AgentDojo fixed-response compatibility plumbing checked; browser private/policy/ASK interactions and mobile layout inspected",
-        "Desktop UbuntuVM tested after explicitly authorized public-key enrollment; Kali remains untested; no all-historical-baselines or model-performance claim"
+        "Desktop UbuntuVM and KaliVM tested; Kali119passed in7.39s with0failures/errors/skips and no new code changes; earlier four environments not rerun",
+        "Six updated documents checked:94local links,0broken; scope limited to selected runtime paths and offline artifacts, not all baselines or model performance"
       ]
     },
     {

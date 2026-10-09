@@ -1,5 +1,11 @@
 # 当前任务
 
+### 2026-10-09 五环境迁移验证与文档更新完成
+
+- Kali2026.1 Rolling/Python3.13.12/Git2.51.0，原包在新/home/kali/m3-portability-20261009-v1/.venv环境实际119passed/7.39秒、0失败/错误/跳过，演示、180权限、900/480/16原始计数与pip check通过。此前四环境不重跑，不改系统Python、服务或Kali SSH配置。
+- 五个指定环境都已通过限定验收，F-PORT-001为verified；任务harness/tasks/portability-demo-20261009.md。先推送Kali公开结果c8d84cc，再更新六个文档及Harness；94个本地文档链接0断链。新包安装流程与现成VM运行入口分开，交接指南旧研究待办和页数标为历史。
+- 报告docs/可迁移性验证报告_2026-10-09.md、运行指南、README/文档索引/目录指南/LLM交接入口已同步。0API/FullHarness/历史推断/论文改写；密码不写项目，原用户dirty保留，任务SSH和测试均结束。F-PAPER-002仍in_progress，不把迁移完成当论文投稿就绪。
+
 ### 2026-10-09 四环境可迁移性已验证，Kali待开机
 
 - 用户目标：跨环境实际运行验证与教师演示，不由操作系统兼容性推导防护泛化。任务harness/tasks/portability-demo-20261009.md，F-PORT-001。

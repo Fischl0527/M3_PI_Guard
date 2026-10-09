@@ -1,5 +1,12 @@
 # 进展记录
 
+## 2026-10-09 — Kali同包验证与五环境任务闭合
+
+- 用户已开启Kali，实测2026.1 Rolling/Python3.13.12/Git2.51.0/内核6.18.12+kali-amd64；在新的/home/kali/m3-portability-20261009-v1目录解包相同最终tar.gz，独立venv从官方PyPI安装现有requirements-portable.txt。无需新代码、依赖清单或论文改动，未修改系统Python、服务或SSH认证。
+- Kali真实命令portable_demo、portable_verify、按pytest-portable.txt的119定向测试和pip check均exit0；119passed/7.39秒、0failures/errors/skips，180权限/0gold/0差异和900/480/16原始计数一致。结果已收回outputs/portability/kali/，公开JSON已单独提交推送c8d84cc；XML仅本地。
+- 五指定环境完成同一限定验收，F-PORT-001设verified；早期四环境没有重复运行。更新六文档：README、docs索引/目录指南/LLM交接文章/运行指南/验证报告。94本地链接0断链、范围diff通过；指南给出已安装两VM的实际路径，初次安装另列，旧研究建议/分支/页数不再冒充当前待办。
+- 更新任务、feature、history、handoff和架构入口，范围Git沿用codex/claude-review-repairs推送origin RedTeam_LLM_Security；原16用户current-task行和其他dirty保留。任务SSH/安装/测试已正常退出，无后台实验或网站。0API/FullHarness/历史统计重算/秘密文件/永久变量/论文改写；F-PAPER-002仍in_progress。
+
 ## 2026-10-09 — 四环境可迁移性交付与教师演示完成切片
 
 - 最终release/M3_PI_Guard_portable_20261009独立解包：Windows11/Python3.13.5、Ubuntu24.04.4/Python3.12.3、阿里云Ubuntu22.04.5/Python3.10.12、VMware Ubuntu26.04.1/Python3.14.4各119定向pytest通过，分别25.54/40.89/26.21/8.51秒；四端pip check通过。不是新增模型实验或全历史跨平台验收。

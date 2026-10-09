@@ -1,5 +1,11 @@
 # Task History
 
+## 2026-10-09 — Kali validation and scoped portability closeout
+
+- Tested the unchanged portable delivery on Kali2026.1/Python3.13.12 in a fresh user venv:119passed/7.39s,0failures/errors/skips,180authorization projections match,900/480/16raw counts match Windows, pip check passes. No new runtime code or API experiment; prior four environments not rerun.
+- Published only Kali verification.json in result commit c8d84cc; retained pytest.xml locally. Updated six human-facing documents and necessary Harness state;94local links checked,0broken. Existing VM commands separated from first-time install, historical research instructions and page counts labeled accordingly.
+- F-PORT-001 verified for the stated five-environment scope; F-PAPER-002 remainsin_progress. All task SSH/install/test sessions ended; no Kali authentication config change, secret files, systemPython/service mutations or unrelated userdirty committed. Current-branch scope-only Git push, no force push.
+
 ## 2026-10-09 — Scoped portability and teacher demo executed
 
 - Added actual corrected-runtime offline trace-board demo, scoped exporter/verifier, portable dependencies and focused tests. Repaired omitted assets/native benchmark code and CRLF; fixed Python3.10 syntax and TOML import without authorization changes.

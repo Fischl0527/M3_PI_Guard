@@ -4,7 +4,7 @@
 
 范围：新增演示、可移植交付生成器、必要依赖清单、定向测试与普通说明；复用真实权限编译器、corrected_v2监视器、来源标签和模拟效果。不修改授权逻辑、历史原始记录、论文数字或第三方源码，不启动模型实验。
 
-环境：Windows当前Python3.13.5；已连通Ubuntu24.04.4/Python3.12.3与阿里云Ubuntu22.04.5/Python3.10.12。初始Ubuntu/Kali桌面虚拟机未开机；本轮用户打开Ubuntu，经授权公钥登记后实测Ubuntu26.04.1/Python3.14.4；Kali仍待验证。
+环境：Windows当前Python3.13.5；已连通Ubuntu24.04.4/Python3.12.3与阿里云Ubuntu22.04.5/Python3.10.12。初始Ubuntu/Kali桌面虚拟机未开机，后续均已由用户开启并完成验证：Ubuntu26.04.1/Python3.14.4、Kali2026.1/Python3.13.12。
 
 验收：
 - 一个Python入口展示任务、权限、固定提案、放行/拒绝/请求信息、模拟执行与独立评分；明确不是在线模型性能。
@@ -17,7 +17,7 @@
 
 初始检查：两SSH探测exit0；Ubuntu24基础Python没有pip，阿里云pip22.0.2可用。只在新用户目录建隔离环境，不sudo、不重启服务、不修改系统Python。两个目标m3-portability-20261009-v1均不存在。
 
-状态：in_progress。后续实际命令与结果附在本记录，不新建哈希包或Runpro控制体系。
+状态：verified（五个指定环境的限定交付范围）。实际命令与结果附在本记录，不新建哈希包或Runpro控制体系。历史进行中记录保留；论文整体不在本任务结项范围。
 
 ## 已实施与验证
 
@@ -30,3 +30,14 @@
 - 新开机桌面VM在用户明确授权的一次认证及公钥登记后BatchMode通过，实测Ubuntu26.04.1/Python3.14.4/Git2.53.0；同包上传至/home/fischl/m3-portability-20261009-v1，新venv安装requirements-portable.txt成功，不改系统Python或服务。没有读取私钥或将密码写入项目。
 - VM同样执行portable_demo、portable_verify、pytest按清单、pip check，exit0：119passed/8.51秒、180/0gold/0差异、900/480/16一致。Google SDK一条弃用警告保留；../解释器路径prefix提示使用规范绝对路径探测消失，不重跑测试。verification.json和本地pytest.xml已收回，四端raw_counts对象一致。
 - 报告docs/可迁移性验证报告_2026-10-09.md含outputs/路径/错误修复/教师讲解/论文边界。Kali仍待验；本任务整体in_progress，四环境实施切片已完成。原userdirty保留，范围Git不强推。
+
+## Kali补验：2026-10-09已完成
+
+- 用户提供已开机Kali登录信息并授权运行。只使用已有密码认证，不更改Kali的SSH认证配置；不保存密码或读取私钥。
+- 步骤：实测OS/Python/Git及目录冲突→同包拷贝和新venv安装→演示/权限/原始计数/119定向测试/pip check→公开结果Git→文档与Harness更新及Git。
+- 允许：任务独立用户目录、outputs/portability/kali/、本任务报告/运行指南/项目入口及必要Harness状态。禁止：系统包/服务/权限规则/论文/raw数据/历史重算/Full Harness/API/其他用户dirty。
+- 验收：119测试无失败或跳过、180权限与参考一致、900/480/16原始计数一致；如不满足则记录真实原因，不提前将F-PORT-001设为verified。
+- 实测Kali2026.1 Rolling/Py3.13.12/Git2.51.0/内核6.18.12+kali-amd64，35GB空闲；目标原不存在，在/home/kali/m3-portability-20261009-v1新建venv，从原包解压并安装原依赖。所有修改仅在任务目录，无sudo、系统Python或服务/SSH配置改动。
+- 实际执行：/home/kali/m3-portability-20261009-v1/.venv/bin/python -m pip install --isolated --index-url https://pypi.org/simple --disable-pip-version-check --no-cache-dir -r requirements-portable.txt；相同绝对解释器-X utf8 -B -m scripts.portable_demo；scripts.portable_verify；pytest $(cat pytest-portable.txt) -q --tb=short --junitxml=outputs/portability/pytest.xml；pip check。全部exit0，119passed/7.39秒，0failures/errors/skips；180/0gold/0差异、900/480/16一致。
+- 回收outputs/portability/kali/verification.json和本地pytest.xml，与Windows逐对象raw_counts一致；结果先提交推送c8d84cc。再更新六文档及必要Harness，94本地链接0断链，范围diff和feature JSON通过。F-PORT-001 verified，F-PAPER-002不变。
+- 此前四端不重跑，原包/科研数据/统计/PDF不改，没有FullHarness或API。SSH、安装与测试都已正常退出，密码没有写入文件/仓库；原用户dirty保留。

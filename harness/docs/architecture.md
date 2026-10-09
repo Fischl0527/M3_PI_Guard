@@ -27,6 +27,12 @@ RunLog + Manifest + 失败记录
 
 ## 模块边界
 
+### 2026-10-09 限定可移植演示与验证入口
+
+`scripts/portable_demo.py`使用真实修复版组件和固定动作产生教师页面，`scripts/portable_verify.py`离线重编译180输入及读取900/480/16原始计数；`scripts/build_portable_package.py`导出选定代码、公开原生基准及必要数据，不复制旧运行环境或秘密。结果在`outputs/portability/`，包在本地`release/M3_PI_Guard_portable_20261009/`，说明在docs。
+
+同包在Windows11/Py3.13.5、Ubuntu24/Py3.12.3、Ubuntu22/Py3.10.12、Ubuntu26/Py3.14.4和Kali2026.1/Py3.13.12各通过119定向测试。F-PORT-001限定范围verified，不代表所有历史基线可运行、模型安全泛化或F-PAPER-002完成。此入口不运行FullHarness、历史推断或模型API。
+
 ### 2026-10-05 文档和产物边界
 
 `docs/`只保留文档和必要说明插图；统计JSON/CSV/实验图放在`outputs/`，论文机器状态在`harness/state/paper_v2/`，七套停用公开工具包在`release/archive/blind_custodian_toolkits/`。冻结文件内容和产品公共接口不变。外围归档在仓库外的`E:\M3_PI_Guard_archive`，旧runtime路径仅作目录联接；D盘备份尚因工具拒绝待迁移。入口为`docs/项目目录指南.md`。

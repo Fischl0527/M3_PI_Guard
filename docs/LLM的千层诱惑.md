@@ -4,7 +4,9 @@
 
 适用项目：M3-PI Guard。这里把它简称为“本项目”。Guard 的意思是“守卫”，PI 是 Prompt Injection 的缩写，中文是“提示注入”；M3 是项目使用的代号，不需要先理解这个名称才能接手。
 
-交接日期：2026 年 9 月 7 日。本文按当前已保存的结果和代码说明；最近一轮实验结果及论文更新记录日期为 9 月 5 日。文件后面的 `.md` 表示 Markdown：一种用普通文字、标题和表格组织内容的文档格式。
+交接初稿日期：2026 年 9 月 7 日；运行与迁移说明于2026年10月9日更新。本文保留早期研究解释，不把其中旧整改待办当作今天的执行清单。最新科研状态看`harness/state/current-task.md`最上方和相应结果报告。文件后面的`.md`表示Markdown：一种用普通文字、标题和表格组织内容的文档格式。
+
+**现在给老师演示或换机器，先看[演示与跨环境运行指南](演示与跨环境运行指南.md)。**同一包已在Windows、三个Ubuntu环境和Kali各通过119项定向测试；180份权限及900/480/16原始结果计数一致。已装好的虚拟机不用重装、不要求Docker；固定动作演示不调用模型，也不是新防御效果数据。详细目录及边界见[五环境验证报告](可迁移性验证报告_2026-10-09.md)。
 
 **先记住一句话：我们给能替人办事的人工智能加了一道“操作前检查”，然后用实验研究它能否防止越权，又会不会把正常事情也拦住。**
 
@@ -483,13 +485,15 @@ git branch --show-current
 
 这些命令只查看 Python 版本和版本库状态，不调用模型。`git status` 看有没有未提交修改，`git branch` 看当前开发分支；**分支**就是单独保存一条修改路线的版本记录。
 
-当前使用的分支是 `codex/q2-empirical-study`；远程仓库是：
+当前工作分支是`codex/claude-review-repairs`；`codex/q2-empirical-study`是前一阶段路线，不要因旧文章而自动切换。远程仓库是：
 
 [项目 GitHub 仓库](https://github.com/Fischl0527/RedTeam_LLM_Security.git)
 
 远程别名 `origin` 指向这个仓库。“本地提交”只是保存到电脑上的 Git；“推送”才会把提交传到 GitHub。不要覆盖已有修改，也不要强制改写远程历史。
 
 ### 11.2 先跑小测试，不跑整套历史验证
+
+如果只是演示操作检查，打开主项目`outputs/portability/demo/index.html`即可。要在另一台机器运行代码，使用可移植包和[运行指南](演示与跨环境运行指南.md)，不要复制`F:`盘Anaconda环境，也不需要API密钥。
 
 例如，只检查当前论文生成代码：
 
@@ -514,17 +518,17 @@ git branch --show-current
 然后在仓库根目录运行：
 
 ```powershell
-& 'F:\robot\Anaconda3\python.exe' -X utf8 scripts/build_lean_paper_manuscript.py
-& 'F:\robot\Anaconda3\python.exe' -X utf8 scripts/build_jisa_latex.py
+& 'F:\robot\Anaconda3\python.exe' -X utf8 scripts/build_lean_paper_manuscript.py --profile current
+& 'F:\robot\Anaconda3\python.exe' -X utf8 scripts/build_jisa_latex.py --main-markdown manuscript_current_v2.md
 ```
 
-这两个命令分别生成合并英文文稿和 LaTeX 章节，会改写相应生成文件，但不运行实验。`build` 在这里是生成文件，不是训练模型。
+这两个命令分别生成当前精简英文文稿和LaTeX章节，会改写相应生成文件，但不运行实验；显式参数避免默认生成完整历史工作稿。本次Kali验证没有执行它们或修改论文正文。`build`在这里是生成文件，不是训练模型。
 
 最后用 TeXstudio 打开 [数模通用模板.tex](../LaTeX通用模板/数模通用模板.tex)，使用 XeLaTeX 编译。XeLaTeX 是支持中文和系统字体的 LaTeX 编译程序。完整命令见[模板说明](../LaTeX通用模板/README.md)。
 
-这份审阅稿当前为 52 页，正文使用 Times New Roman，即新罗马字体；保持 A4 纸张、四边 25 毫米和底部居中页码。左侧结构来自各章的字面引用路径，别改回隐藏路径的宏而导致编辑器看不到章节。
+旧稿曾为52页，不再把这个旧页数当作当前状态；当前页数以实际编译PDF和最新正文收束报告为准。正文使用Times New Roman，即新罗马字体；保持A4纸张、四边25毫米和底部居中页码。左侧结构来自各章的字面引用路径，别改回隐藏路径的宏而导致编辑器看不到章节。
 
-正式投稿样式的入口另在 [M3_PI_Guard_JISA.tex](../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex)，目前 59 页；JISA 是目标期刊 Journal of Information Security and Applications 的简称，即《信息安全与应用杂志》。它使用该出版体系的排版类，不等于数模审阅模板。
+正式投稿样式的入口另在[M3_PI_Guard_JISA.tex](../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex)，旧稿59页也不是当前页数承诺；JISA是目标期刊Journal of Information Security and Applications的简称，即《信息安全与应用杂志》。它使用该出版体系的排版类，不等于数模审阅模板。
 
 `.tex` 是 LaTeX 源文件，`.bib` 是参考文献数据，PDF 是固定版式的阅读文件。Word 是文字处理软件，项目中保留的是历史文档。不要只改生成的某个 `.tex` 章节而忘记 Markdown 源，否则下次生成会覆盖你的手工修改。也不要改旧 Word 文件后误以为当前论文会自动同步。
 
@@ -543,6 +547,8 @@ git branch --show-current
 本文不提供针对已结束 E6/E7a 的一键续跑命令。新实验需要独立计划；接口限额、余额及可用模型在正式启动时再核对，不能照搬旧截图。Gemini 如使用仍限官方免费层，不启用付费结算或自动更换账号。
 
 ## 12. 接下来最值得做什么
+
+**以下保留的是早期科研推进建议，不是2026-10-09的待执行队列。**`exact_gold`修复等已有后续版本和900条授权研究，不能照本节重复重跑。当前结果及论文边界以Harness最新状态和[当前正文收束报告](research/paper_v2/manuscript/current_manuscript_closeout_2026-10-08.md)为准；本轮只补齐Kali软件验证，没有追加模型实验。
 
 当前最先要处理的不是扩大实验，而是先修正已经确认的测量缺陷，再继续补新的证据。
 
