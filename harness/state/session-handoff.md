@@ -7,6 +7,7 @@
 - 实际276pytest passed／43.59秒，准确命令在报告；20改动Python文件Ruff通过，另runtime_monitor.py既有未用Sequence的F401从HEAD复现，不删导入。120MD／445links为0missing／anchor／fence；七原样快照和两userdirty排除。读者五问／49文件链接通过，输出目录歧义修后复读PASS。
 - 主仓库原demo/index.html和demo_results.json起始为用户删除，未恢复未提交；指南只把默认位置用于解包交付包，主仓库显式demo-local-preview，本轮未生成。没有API、FullHarness、新研究、统计推断重算、PDF或Word编译。
 - Git只暂存本轮相关文件；current-task下方用户16行、两份修改文档、旧端点文件、字体模板、子模块及其他本地产物保持未提交。普通push origin/codex/claude-review-repairs后更新现有PR23，目标Alysia163:new-test；不直接推目标、不自动合并、不强推。确切commit/ref回执以Git及对话为准，后续不为自引用循环提交。
+- 实际实现提交b874dca01dc55f0bb206d03a8303014c53ec565d已正常push且远端SHA核对一致；PR23中文标题／body、open/new-test/head均已核实。GraphQL更新遇EOF，先读现状再REST修改成功。本回执只追加一次；不继续递归记录回执自身SHA。
 - 下一建议：按中文入口提前演练“读取A→写入B”，显式生成独立演示目录后做现场检查。没有用户新命令不自动启动实验或恢复Gemini。
 
 ## 2026-10-09 — docs整理与Git+PR交付完成

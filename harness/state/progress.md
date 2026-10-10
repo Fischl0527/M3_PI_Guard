@@ -7,6 +7,7 @@
 - 276定向pytest通过／43.59秒；20变更Python文件Ruff通过，runtime_monitor.py既有F401在HEAD输入复现且保留。120MD／445local links为0缺失／坏锚点／未闭合围栏；读者五问与49文件链接通过，主仓库／交付包演示输出歧义已修。
 - F-DOC-002选定范围verified；F-PAPER-002仍in_progress。报告docs/中文注释与文档整理报告_2026-10-10.md，0API／新实验／FullHarness／历史推断重算／新PDF或Word。用户删除HTML/JSON不恢复、不暂存。
 - 沿用现有PR23，正常范围提交及origin推送、不强推或自动合并；实际Git回执另由Git／对话提供，不递归登记自引用提交。
+- 实际66文件提交b874dca已push并经ls-remote核实，PR23仍open/base=new-test且head一致，中文标题和说明核对通过；GraphQL网络EOF改REST完成，无认证／权限变化。仅一次状态回执补充。
 
 ## 2026-10-09 — 当前文档入口更新与重复说明合并
 

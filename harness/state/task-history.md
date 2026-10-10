@@ -5,6 +5,7 @@
 - 十九关键模块补中文注释且AST不变；中文表格renderer及test同步，英文输出不变，两中文稿引用及主表数字守恒。新增代码指南、论文阅读说明、术语表和报告，更新活动文档／历史解释，不动raw或科研逻辑。
 - 276定向pytest通过；20变更Python文件Ruff通过、1既有F401原样披露；120MD／445本地链接零错误，读者五问及49文件链接PASS。默认演示目录上下文歧义已修，不重建用户删除产物。
 - F-DOC-002按选定范围verified，F-PAPER-002仍in_progress；英文投稿／冻结／第三方和用户dirty保留。0API／新实验／FullHarness／新PDF或Word／历史推断重算。正常origin推送更新现有PR23，不强推或自动合并。
+- 66文件实现提交b874dca已push、ls-remote一致；PR23中文说明核实，base=new-test/open/head一致，未合并。一次状态回执后停止，不追加研究或自引用哈希产物。
 
 ## 2026-10-09 — Documentation consolidation and current navigation
 
