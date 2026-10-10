@@ -8,6 +8,7 @@
 - 主仓库原demo/index.html和demo_results.json起始为用户删除，未恢复未提交；指南只把默认位置用于解包交付包，主仓库显式demo-local-preview，本轮未生成。没有API、FullHarness、新研究、统计推断重算、PDF或Word编译。
 - Git只暂存本轮相关文件；current-task下方用户16行、两份修改文档、旧端点文件、字体模板、子模块及其他本地产物保持未提交。普通push origin/codex/claude-review-repairs后更新现有PR23，目标Alysia163:new-test；不直接推目标、不自动合并、不强推。确切commit/ref回执以Git及对话为准，后续不为自引用循环提交。
 - 实际实现提交b874dca01dc55f0bb206d03a8303014c53ec565d已正常push且远端SHA核对一致；PR23中文标题／body、open/new-test/head均已核实。GraphQL更新遇EOF，先读现状再REST修改成功。本回执只追加一次；不继续递归记录回执自身SHA。
+- 回执首次push的curl56不是成功，REST确认远端仍旧；单次命令HTTP/1.1普通push成功后补记真实失败。没有永久Git／TLS／权限变化。只同步本条实际运输问题，不继续自引用或启动研究。
 - 下一建议：按中文入口提前演练“读取A→写入B”，显式生成独立演示目录后做现场检查。没有用户新命令不自动启动实验或恢复Gemini。
 
 ## 2026-10-09 — docs整理与Git+PR交付完成

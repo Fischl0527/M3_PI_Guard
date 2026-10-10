@@ -6,6 +6,7 @@
 - 全部变更Python文件的Ruff检查发现runtime_monitor.py已有F401：typing.Sequence未使用；将HEAD文本输入同一检查也复现。确定不是本轮注释引入，故不为全绿删除导入或关闭检查。另20文件通过；完整检查的一项继承失败如实保留，不称全绿。
 - 读者指出运行指南默认demo输出与主仓库独立预览上下文歧义；明确默认命令仅用于解包交付包后复读PASS。主仓库用户删除的HTML/JSON未重建，未启动API或新的演示生成。
 - 实现提交正常push成功后，首次gh pr edit的GraphQL调用返回unexpected EOF，不能假称PR说明已更新。先用REST读取现状，再通过REST PATCH更新指定PR23；返回标题／body及head核对成功。没有改权限／认证、重复推送或换目标，不把网络问题当代码／研究失败。
+- 随后回执提交首次git push返回curl56／SSL_ERROR_SYSCALL和unexpected disconnect；虽然附带Everything up-to-date，REST远端ref确认仍在前一实现提交，故不据该文本称成功。只为本次命令指定http.version=HTTP/1.1，再正常push同一分支成功；不改永久Git配置、不关闭TLS、不强推。该真实运输失败补记一次，不递归写提交哈希。
 
 ## 2026-10-09 — 文档检查脚本错误，已修正检查而非改动历史
 
