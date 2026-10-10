@@ -419,6 +419,7 @@ class RuntimeMonitor:
         return evaluate_action(proposal, self.manifest, modules=self.modules)
 
     def record_execution(self, proposal: ActionProposal, decision: GuardDecision) -> None:
+        # 调用者必须先确认模拟执行成功；ALLOW 自身不是执行成功的证据。
         if decision.decision != "ALLOW":
             raise ValueError("only allowed actions may enter the execution trace")
         if proposal.tool != "final":

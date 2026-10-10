@@ -1,6 +1,6 @@
-# Active citation compliance review
+# 活动引用合规复核
 
-## 2026-10-08 — Current article: executed reference repair
+## 2026-10-08：当前文章已执行的引用修复
 
 本次实际处理当前精简英文稿 `manuscript_current_v2.md` 使用的24个引用。
 没有增加论文、模型调用或实验分母。以下旧审核保留为历史记录，不代表其
@@ -111,120 +111,83 @@ PDF预览仅在 `outputs/manuscript/previews/`，没有把实验脚本或原始�
 
 可信度：9/10。实际文件、主来源、定向测试和PDF可复核；全文精读、外部独立评审和投稿确认未冒称完成。
 
-## 2026-09-05 incremental update
+## 2026-09-05：增量更新
 
-The current manuscript cites 24 of 39 entries: the 21 previously reviewed
-contexts below plus L37--L39. The 15 unused candidates are not printed. This
-revision checks only the three newly activated primary records and abstract
-claims; it is not a new full review of the earlier 21 sources.
+当时稿件引用39项中的24项：下方已审的21项加L37–L39；15个未引用候选不打印。本节点只核对三个新增原始记录及摘要层主张，不是重新全文审查此前21项。
 
-| Key | Primary record and status | Checked manuscript use |
+| 编号 | 原始记录和状态 | 已检查的稿件用途 |
 |---|---|---|
-| L37 | [PIArena, ACL 2026](https://aclanthology.org/2026.acl-long.1533/), DOI 10.18653/v1/2026.acl-long.1533, pp. 33170--33192 | Abstract: unified attacks/defenses/benchmarks and defense-feedback adaptive evaluation; no performance figure imported. |
-| L38 | [AgentDyn, arXiv v3](https://arxiv.org/abs/2602.03117v3), preprint, DOI 10.48550/arXiv.2602.03117 | Abstract: dynamic planning, open-ended tasks and helpful third-party instructions; not presented as completed M3 native evaluation. |
-| L39 | [ASPI, arXiv v1](https://arxiv.org/abs/2605.17324v1), preprint, DOI 10.48550/arXiv.2605.17324 | Abstract: matched clarification/execution states; motivates a limitation, not a result for M3's controller-only approval channel. |
+| L37 | [PIArena, ACL 2026](https://aclanthology.org/2026.acl-long.1533/), DOI 10.18653/v1/2026.acl-long.1533，页33170--33192 | 摘要支持统一攻击/防御/基准与防御反馈自适应评估，不导入性能数字。 |
+| L38 | [AgentDyn, arXiv v3](https://arxiv.org/abs/2602.03117v3)，预印本，DOI 10.48550/arXiv.2602.03117 | 动态规划、开放任务和有益第三方指令，不称M3已完成原生评估。 |
+| L39 | [ASPI, arXiv v1](https://arxiv.org/abs/2605.17324v1)，预印本，DOI 10.48550/arXiv.2605.17324 | 匹配澄清/执行状态，用于说明限制，不当作M3仅控制器批准通道的已测结果。 |
 
-Titles, author lists, identifiers and publication status were checked against
-these primary records. Active render: 24 resolved references, no uncited printed
-items. The prior split becomes 12 formally published and 12 preprint sources.
-Submission-date status refresh and institutional JCR verification remain open.
+当时按原始记录核对题名、作者、标识符和发表状态。24项引用可解析，无未引用打印项；正式发表与预印本各12项。投稿日状态更新及学校JCR分区核验仍待完成。
 
-## Historical review of the earlier active set
+## 早期活动引用集的历史复核
 
-Review date: 2026-08-23
+历史复核日期：2026-08-23
 
-Scope: the 21 references actually cited by `manuscript_deepseek_v1.md`. The
-remaining 15 entries in `references_v1.bib` are a dormant candidate corpus and
-are not rendered by citeproc; they were intentionally excluded from this
-submission-focused review.
+范围：当时`manuscript_deepseek_v1.md`实际引用的21项。书目中其余15项是未激活候选，不由引用排版器citeproc打印，故不在本次历史复核范围。
 
-## Outcome
+## 当时结果
 
-- All 21 in-text keys resolve to an entry in `references_v1.bib`.
-- No bibliography item is rendered without an in-text citation.
-- Eleven cited works have a formal conference or workshop publication record;
-  ten are explicitly represented as preprints.
-- Titles, author order, publication status, year, and stable landing page were
-  checked against the publisher, conference, proceedings, or arXiv record.
-- Five deterministic metadata defects were corrected across the pre-review and
-  final-integrity passes:
-  - `L02` (DRIFT): year corrected from 2026 to the official NeurIPS 2025
-    proceedings year, and DOI `10.52202/085713-2791` added.
-  - `L20` (AgentSpec): the unregistered DOI and unverified page range were
-    removed; the citation now points to the official ICSE 2026 Research Track
-    page.
-  - `L08` (Contextual Agent Security): the first author's surname was corrected
-    from `Bagdasarian` to `Bagdasaryan` to match the official Google Research
-    record.
-  - `L27` (The Attacker Moves Second): the `LLM` acronym was protected in the
-    BibTeX title so citeproc cannot render it as `Llm`.
-  - `L34` (Agent Security Bench): the entry type, `booktitle`, editors, page
-    separator, and paper URL were aligned with the official ICLR proceedings
-    BibTeX record.
+- 21个正文引用键均对应`references_v1.bib`书目项，没有未引用却打印的书目。
+- 11项有正式会议或工作坊发表记录，10项明确标为预印本。
+- 题名、作者顺序、状态、年份、稳定页面按出版社、会议、论文集或arXiv记录核对。
+- 历史预审与最终检查共修正五项确定性元数据问题：
+  - L02（DRIFT）：2026改为官方NeurIPS 2025年份，补DOI `10.52202/085713-2791`。
+  - L20（AgentSpec）：去除未注册DOI和未核实页码，指向官方ICSE 2026研究轨道页。
+  - L08：第一作者姓氏`Bagdasarian`改为官方的`Bagdasaryan`。
+  - L27：保护书目题名中的`LLM`缩写，不排成`Llm`。
+  - L34：条目类型、`booktitle`（论文集名）、编辑、页码分隔符及链接与官方ICLR书目一致。
 
-## Active-source ledger
+## 活动来源台账
 
-| Key | Short name | Status used in manuscript | Primary metadata source | Result |
+| 编号 | 名称 | 稿中发表状态 | 元数据原始来源 | 当时结果 |
 |---|---|---|---|---|
-| L01 | VIGIL | ACL 2026 long paper | [ACL Anthology](https://aclanthology.org/2026.acl-long.443/) | verified |
-| L02 | DRIFT | NeurIPS 2025 conference paper | [NeurIPS Proceedings](https://proceedings.neurips.cc/paper_files/paper/2025/hash/77f3b26c7907aa27b207df9b9d43f29a-Abstract-Conference.html) | corrected and verified |
-| L03 | Task Shield | ACL 2025 long paper | [ACL Anthology](https://aclanthology.org/2025.acl-long.1435/) | verified |
-| L07 | StruQ | USENIX Security 2025 paper | [USENIX](https://www.usenix.org/conference/usenixsecurity25/presentation/chen-sizhe) | verified |
-| L08 | Contextual Agent Security | HotOS 2025 workshop paper | [Google Research](https://research.google/pubs/context-is-key-for-agent-security/) | corrected and verified |
-| L09 | AgentDojo | NeurIPS 2024 benchmark paper | [NeurIPS Proceedings](https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html) | verified |
-| L10 | InjecAgent | ACL Findings 2024 paper | [ACL Anthology](https://aclanthology.org/2024.findings-acl.624/) | verified |
-| L20 | AgentSpec | ICSE 2026 Research Track paper | [ICSE programme](https://conf.researchr.org/details/icse-2026/icse-2026-research-track/29/AgentSpec-Customizable-Runtime-Enforcement-for-Safe-and-Reliable-LLM-Agents) | corrected and verified |
-| L21 | ARGUS | 2026 preprint | [arXiv](https://arxiv.org/abs/2605.03378) | verified as preprint |
-| L22 | AuthGraph | 2026 preprint | [arXiv](https://arxiv.org/abs/2605.26497) | verified as preprint |
-| L23 | PlanGuard | 2026 preprint | [arXiv](https://arxiv.org/abs/2604.10134) | verified as preprint |
-| L24 | Progent | 2025 preprint, revised 2026 | [arXiv](https://arxiv.org/abs/2504.11703) | verified as preprint |
-| L25 | IPIGuard | EMNLP 2025 paper | [ACL Anthology](https://aclanthology.org/2025.emnlp-main.53/) | verified |
-| L26 | CaMeL | 2025 preprint | [arXiv](https://arxiv.org/abs/2503.18813) | verified as preprint |
-| L27 | The Attacker Moves Second | 2025 preprint | [arXiv](https://arxiv.org/abs/2510.09023) | verified as preprint |
-| L30 | Spotlighting | 2024 preprint | [arXiv](https://arxiv.org/abs/2403.14720) | verified as preprint |
-| L31 | Instruction Hierarchy | 2024 preprint | [arXiv](https://arxiv.org/abs/2404.13208) | verified as preprint |
-| L32 | Indirect-injection detection | ACL 2025 long paper | [ACL Anthology](https://aclanthology.org/2025.acl-long.890/) | verified |
-| L34 | Agent Security Bench | ICLR 2025 paper | [ICLR Proceedings](https://proceedings.iclr.cc/paper_files/paper/2025/hash/5750f91d8fb9d5c02bd8ad2c3b44456b-Abstract-Conference.html) | verified |
-| L35 | Provenance sensitivity audit | 2026 preprint | [arXiv](https://arxiv.org/abs/2607.20827) | verified as preprint |
-| L36 | FAVA | 2026 preprint | [arXiv](https://arxiv.org/abs/2607.27267) | verified as preprint |
+| L01 | VIGIL | ACL 2026 长论文 | [ACL Anthology](https://aclanthology.org/2026.acl-long.443/) | 已核对 |
+| L02 | DRIFT | NeurIPS 2025 会议论文 | [NeurIPS Proceedings](https://proceedings.neurips.cc/paper_files/paper/2025/hash/77f3b26c7907aa27b207df9b9d43f29a-Abstract-Conference.html) | 已修正并核对 |
+| L03 | Task Shield | ACL 2025 长论文 | [ACL Anthology](https://aclanthology.org/2025.acl-long.1435/) | 已核对 |
+| L07 | StruQ | USENIX Security 2025论文 | [USENIX](https://www.usenix.org/conference/usenixsecurity25/presentation/chen-sizhe) | 已核对 |
+| L08 | Contextual Agent Security | HotOS 2025 工作坊论文 | [Google Research](https://research.google/pubs/context-is-key-for-agent-security/) | 已修正并核对 |
+| L09 | AgentDojo | NeurIPS 2024 基准论文 | [NeurIPS Proceedings](https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html) | 已核对 |
+| L10 | InjecAgent | ACL Findings 2024论文 | [ACL Anthology](https://aclanthology.org/2024.findings-acl.624/) | 已核对 |
+| L20 | AgentSpec | ICSE 2026研究轨道论文 | [ICSE programme](https://conf.researchr.org/details/icse-2026/icse-2026-research-track/29/AgentSpec-Customizable-Runtime-Enforcement-for-Safe-and-Reliable-LLM-Agents) | 已修正并核对 |
+| L21 | ARGUS | 2026预印本 | [arXiv](https://arxiv.org/abs/2605.03378) | 按预印本核对 |
+| L22 | AuthGraph | 2026预印本 | [arXiv](https://arxiv.org/abs/2605.26497) | 按预印本核对 |
+| L23 | PlanGuard | 2026预印本 | [arXiv](https://arxiv.org/abs/2604.10134) | 按预印本核对 |
+| L24 | Progent | 2025预印本、2026修订 | [arXiv](https://arxiv.org/abs/2504.11703) | 按预印本核对 |
+| L25 | IPIGuard | EMNLP 2025论文 | [ACL Anthology](https://aclanthology.org/2025.emnlp-main.53/) | 已核对 |
+| L26 | CaMeL | 2025预印本 | [arXiv](https://arxiv.org/abs/2503.18813) | 按预印本核对 |
+| L27 | The Attacker Moves Second | 2025预印本 | [arXiv](https://arxiv.org/abs/2510.09023) | 按预印本核对 |
+| L30 | Spotlighting | 2024预印本 | [arXiv](https://arxiv.org/abs/2403.14720) | 按预印本核对 |
+| L31 | Instruction Hierarchy | 2024预印本 | [arXiv](https://arxiv.org/abs/2404.13208) | 按预印本核对 |
+| L32 | Indirect-injection detection | ACL 2025 长论文 | [ACL Anthology](https://aclanthology.org/2025.acl-long.890/) | 已核对 |
+| L34 | Agent Security Bench | ICLR 2025论文 | [ICLR Proceedings](https://proceedings.iclr.cc/paper_files/paper/2025/hash/5750f91d8fb9d5c02bd8ad2c3b44456b-Abstract-Conference.html) | 已核对 |
+| L35 | Provenance sensitivity audit | 2026预印本 | [arXiv](https://arxiv.org/abs/2607.20827) | 按预印本核对 |
+| L36 | FAVA | 2026预印本 | [arXiv](https://arxiv.org/abs/2607.27267) | 按预印本核对 |
 
-## Claim-fit check
+## 引用与主张对应检查
 
-The citations support the roles assigned to them in the manuscript: benchmark
-descriptions cite the benchmark papers; runtime enforcement, task alignment,
-privilege control, provenance, and data-flow statements cite the corresponding
-method papers; the adaptive-attack motivation cites `L27`. No cited source is
-used to claim that M3 is first, unique, state of the art, or universally
-superior. Preprint-only mechanisms remain distinguishable from peer-reviewed
-work through their BibTeX type and note.
+引用用途分别对应基准说明、运行时执行、目标一致性、权限、来源与数据流；自适应攻击动机对应L27。没有用引用证明M3首次、唯一、当前最优或普遍优越。预印本与同行评审文献通过书目类型和备注区分。
 
-All 21 active citations received a fresh citation-context check against an
-official abstract, proceedings summary, conference page, or official preprint
-PDF during the Stage 4.5 review. The checked roles were:
+历史阶段4.5对当时21项引用分别核对官方摘要、论文集说明、会议页或官方预印本PDF的引用语境。用途如下，不代表本次语言整理重新核对：
 
-| Keys | Manuscript claim role | Context result |
+| 编号 | 稿件引用用途 | 当时语境核对 |
 |---|---|---|
-| L01, L02, L03 | verify-before-commit, dynamic control/data constraints, and user-goal/tool-call alignment | supported by the official ACL/NeurIPS records |
-| L07, L30, L31, L32 | structured input, spotlighting, instruction hierarchy, and indirect-injection detection | supported by USENIX, ACL, or the official preprints; used only as prompt/output-layer comparisons |
-| L08, L20 | contextual policies and runtime rule enforcement | supported by the official Google Research and ICSE records |
-| L09, L10, L34 | benchmark task/security framing | supported by the official AgentDojo, InjecAgent, and ICLR records |
-| L21, L22, L23 | influence provenance, authorization/execution graphs, and isolated planning | supported by the official preprint records and kept explicitly preprint-only |
-| L24, L25, L26 | privilege narrowing/approval, tool dependencies, and trusted control/data flow | supported by the official preprint PDF and ACL record |
-| L27 | adaptive attacker motivation | supported by the official preprint and not used to claim saturation |
-| L35, L36 | controlled source-authority sensitivity and formal evidence-backed authorization | supported by the official 2026 preprints |
+| L01, L02, L03 | 执行前验证、动态控制/数据约束、用户目标与工具动作对齐 | 官方ACL/NeurIPS记录支持 |
+| L07, L30, L31, L32 | 结构化输入、不可信文本标记、指令层级、间接注入检测 | 官方记录支持，只作提示/输出层对照 |
+| L08, L20 | 上下文策略和运行时规则执行 | 官方Google Research及ICSE记录支持 |
+| L09, L10, L34 | 基准任务与安全问题定义 | 官方AgentDojo、InjecAgent、ICLR记录支持 |
+| L21, L22, L23 | 影响来源、授权/执行图、隔离规划 | 官方预印本支持，仍只按预印本引用 |
+| L24, L25, L26 | 权限收缩/批准、工具依赖、可信控制/数据流 | 官方预印本和ACL记录支持 |
+| L27 | 自适应攻击者动机 | 官方预印本支持，不用于声称饱和 |
+| L35, L36 | controlled source-authority sensitivity and formal evidence-backed authorization | supported by the official 2026预印本s |
 
-No checked context attributes an isolated causal effect to the paper's bundled
-policy/full comparison, and no context supports a first, only, SOTA, or
-cross-provider-generalization claim.
+这些语境不支持把成套policy/full（仅权限/完整模块）比较归因为独立单组件效应，也不支持首次、唯一、当前最优或跨厂商普遍泛化。
 
-An unauthenticated Semantic Scholar secondary cross-check was attempted but was
-unavailable during the final-integrity pass. Following the review protocol, it
-was not retried repeatedly; publisher, conference, proceedings, and arXiv
-primary records controlled the decisions.
+最终历史检查曾尝试无认证Semantic Scholar（学术检索服务）二次核对，但当时不可用，未反复重试；依据仍为出版社、会议、论文集及arXiv原始记录。
 
-## Remaining submission gate
+## 待投稿日完成的检查
 
-This review is complete for the current 21-key active set. It must be rerun only
-if the manuscript adds or replaces a citation before submission. Institutional
-verification of JISA's current SCIE/JCR quartile is a separate author-side gate
-and is not established by this citation review.
+当时21项引用集的复核完成；新增或替换引用时需检查对应项。顶部2026-10-08记录才是后续24项状态。学校对JISA收录/分区的核验是独立作者待办，不由文献检查代替。

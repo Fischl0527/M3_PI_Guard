@@ -7,6 +7,9 @@ the single-attempt HTTP observer also records responses that fail JSON decoding.
 
 from __future__ import annotations
 
+# 当前开发客户端：每次请求只有一次 HTTP 尝试；恢复由运行器显式调度。
+# 日志保存请求身份、返回模型、用量和状态，不保存密钥、提示正文或响应正文。
+
 import copy
 import json
 import os
@@ -33,7 +36,7 @@ from experiments.paper_v2.public_provider_budget_v1 import (
 
 PRICING_URL = "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
 PRICING_CHECKED = "2026-09-20"
-# Official peak tariff; estimates are an upper bound (off-peak is half).
+# 固定核价日期对应的官方峰时价格，仅用于本研究估算；不是今天的实时报价。
 PEAK_TARIFF = {
     "deepseek-v4-pro": (0.30, 9.0, 27.0),
     "deepseek-flash": (0.04, 2.0, 8.0),
@@ -142,6 +145,7 @@ class DispatchStopped(official.ProviderTransportError):
 
 
 class RequestPacer:
+    # 请求节流器：并发线程共用同一提供商节拍；停止信号能打断等待。
     def __init__(self, interval_seconds: float, stopped: threading.Event) -> None:
         self.interval = interval_seconds
         self.stopped = stopped
@@ -157,6 +161,7 @@ class RequestPacer:
 
 
 class DevelopmentRequestClient:
+    # 只在实际客户端内使用凭据；公开回执不含认证头或内容正文。
     """Content-free request log, including malformed response identities.
 
     Only the raw official client receives the credential. HTTP observer data

@@ -8,6 +8,9 @@ DENY. Historical m3_guard and E1--E6 remain unchanged.
 
 from __future__ import annotations
 
+# ASK 的独立确认模拟：不是生产认证，也不是模型自己说“用户已批准”就有效。
+# 票据绑定任务、可信请求、完整动作和权限清单，且过期后失效、只能消费一次。
+
 import copy
 from dataclasses import dataclass, replace
 from typing import Any, Callable
@@ -56,7 +59,7 @@ class ConfirmationSession:
     ) -> ConfirmationOutcome:
         if not task_id or not request_digest:
             raise ValueError("task and trusted request identity are mandatory")
-        # Legacy approvals cannot satisfy the new independent session.
+        # 历史批准记录不能冒充本次独立会话的批准。
         clean = replace(manifest, approvals=(), manifest_sha256="")
         if monitor is None:
             decision = RuntimeMonitor(clean, modules=modules).decide(proposal)
@@ -74,8 +77,8 @@ class ConfirmationSession:
             return ConfirmationOutcome(
                 "blocked_scope_not_expandable", decision.violated_rules
             )
-        # The common wrapper deliberately requests confirmation even for policy-only.
-        # No control is auto-executed here; an allow is only a simulation eligibility.
+        # 本实验封装对 policy-only 也请求确认，以保持对照一致。
+        # 这里只创建待确认资格，不自动执行，也不能用确认扩大现有权限。
         ticket = str(uuid4())
         self._pending[ticket] = _Pending(
             task_id,
@@ -87,7 +90,7 @@ class ConfirmationSession:
         return ConfirmationOutcome("awaiting_confirmation", (), ticket)
 
     def receive_untrusted(self, payload: Any) -> ConfirmationOutcome:
-        # No deserialization, authority inference or task mutation from tool/model text.
+        # 不解析不可信文本中的批准，不从中推断身份，也不修改任务。
         del payload
         return ConfirmationOutcome("untrusted_confirmation_rejected")
 
@@ -138,6 +141,7 @@ class ConfirmationSession:
                 "denied" if pending.vote == "denied" else "confirmation_absent"
             )
         pending.consumed = True
+        # 先标记已使用再返回资格，后续重复消费必须拒绝。
         return ConfirmationOutcome("allow_simulated_effect_once")
 
 

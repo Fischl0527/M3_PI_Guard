@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+# 工具参数的格式检查，不是权限判断：字段、类型、枚举合法后还须经过监视器。
+# bool 在 Python 中属于 int 的子类，此处用精确类型避免把 True 当作整数金额。
+
 import json
 import math
 from typing import Any, Mapping
@@ -34,6 +37,7 @@ def argument_contract_error(
     if any(not isinstance(name, str) for name in (*arguments, *fields)):
         return "tool_schema_invalid"
     if set(arguments) - set(fields):
+        # 额外字段可能携带新目标，不能静默丢弃后再放行原提案。
         return "undeclared_argument"
     try:
         json.dumps(dict(arguments), allow_nan=False)

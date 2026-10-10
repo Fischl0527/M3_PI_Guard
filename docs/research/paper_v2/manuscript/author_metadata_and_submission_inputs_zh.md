@@ -77,7 +77,7 @@ Visualization、Writing – original draft、Writing – review and editing。
 按 JISA 当前作者指南准备：每位作者一段不超过 100 个英文单词的 biography，以及
 单独的证件式照片。每位作者复制一份下列区块。
 
-### 〔Author name〕
+### 〔作者姓名，待填写〕
 
 - Biography（≤100 English words）：〔必填〕
 - 照片文件名：〔必填〕

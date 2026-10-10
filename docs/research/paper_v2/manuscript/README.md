@@ -4,6 +4,8 @@
 
 ## 1. 今天应该打开哪一份
 
+先看[论文中文阅读说明](论文中文阅读说明.md)：解释研究问题、900/480/16与60任务复核的关系，以及表格中的配置、区间、失败和未知。正文中的英文配置名另见[中文术语表](术语表_中文.md)。2026-10-10只改中文阅读与显示词，没有重编PDF；下面页数仍是既有回执。
+
 | 用途 | 文件 | 说明 |
 |---|---|---|
 | 当前英文主文章 | [manuscript_current_v2.md](manuscript_current_v2.md) | 最新记录：正文 8,256 词，当前四图、四表 |
@@ -38,7 +40,7 @@
 - [活动引用检查](citation_compliance_active_v1.md)：现有 24 项活动引用的元数据和主张对应检查；不能等同于 24 篇文献的独立全文审查。
 - [声明草稿](declarations_draft.md)及[投稿声明](submission_statements_draft.md)：需作者批准，不替作者推断伦理审批、利益冲突或资助。
 - [Cover Letter 草稿](cover_letter_draft.md)与[Highlights](highlights_v1.md)：保留草稿，投稿前需与当前文章及官方要求一起核对。
-- [术语说明](glossary_v1.md)：英文专业词的解释。
+- [术语说明](术语表_中文.md)：英文专业词的解释。
 - [Devil’s Advocate 内部审查](devils_advocate_review.md)：历史内部问题清单，不是期刊审稿意见。
 
 正式投稿前须确认当期期刊要求、学校数据库的 SCIE/JCR Q2、作者信息、代码／数据公开方案和最终上传文件。本次未进行这些外部核验。

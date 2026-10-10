@@ -8,6 +8,10 @@ encoding, paraphrase and arbitrary semantic transformations are not covered.
 
 from __future__ import annotations
 
+# 来源（谁提供参数）与保密标签（数据能去哪里）是两种不同约束。
+# 标签只来自实际工具返回后的可信元数据通道；模型或工具正文不能自行盖章。
+# 本实现只识别字面值及大小写/空白归一化，不声称覆盖编码或语义改写泄漏。
+
 import re
 from dataclasses import dataclass, replace
 from typing import Any, Iterable, Mapping
@@ -49,6 +53,7 @@ def _carries_value(argument: Any, known_value: str) -> bool:
     sentence containing those three letters. Empty/nontext values never taint.
     """
     needle = _normalized(known_value)
+    # 正确方向是“受保护原值出现在出站参数里”；短值仅完全相等才传播标签。
     if not needle:
         return False
     for text in _text_leaves(argument):
@@ -142,6 +147,7 @@ class TrustedDataLabelTracker:
     """Run-local labels for returned data; raw values never appear in summaries."""
 
     def __init__(self) -> None:
+        # 每次运行单独建立实例，禁止任务之间共享敏感值或分类历史。
         self._values: dict[str, list[str]] = {}
         self._classified_observations = 0
         self._unclassified_observations = 0
@@ -166,6 +172,7 @@ class TrustedDataLabelTracker:
         cannot self-declare labels, execution success or authority.
         """
         del tool, args
+        # None 表示分类缺失；明确提供空标签元组才表示“已分类且无保密标签”。
         if trusted_metadata is None:
             self._unclassified_observations += 1
             return self.summary()
@@ -174,6 +181,7 @@ class TrustedDataLabelTracker:
                 "trusted_metadata must be backend-created TrustedObservationMetadata"
             )
         if not trusted_metadata.execution_succeeded:
+            # 读取被隔离层拒绝时没有真实返回数据，不能登记预测内容。
             self._failed_observations += 1
             return self.summary()
         if not trusted_metadata.observation_is_data:
@@ -196,6 +204,7 @@ class TrustedDataLabelTracker:
         return infer_argument_provenance(**kwargs)
 
     def summary(self) -> dict[str, Any]:
+        # 公共记录仅含计数/标签名，内部用于匹配的原始值不进入日志。
         return {
             "version": VERSION,
             "classified_observation_count": self._classified_observations,
@@ -243,6 +252,7 @@ class TrustedDataLabelTracker:
         )
         triggered = tuple(item for item in applicable if item.data_label in labels)
         if not module_enabled:
+            # 四类状态分开报告：不适用、触发、缺输入、检查通过。缺输入不是通过。
             status, reason = "not_applicable", "module_disabled"
         elif not applicable:
             status, reason = "not_applicable", "no_applicable_constraint"

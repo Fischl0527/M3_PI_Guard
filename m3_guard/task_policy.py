@@ -8,6 +8,10 @@ an explicit approval record from an independent confirmation interface.
 
 from __future__ import annotations
 
+# 公共数据契约：ParameterConstraint 约束一个参数，ToolRule 约束完整动作，
+# TaskPolicyManifest 汇总可信任务权限。字段名是稳定接口，不随中文文档重命名。
+# 本文件同时服务历史路径；修复版通过显式编译器/监视器选择，不能混用批准语义。
+
 import hashlib
 import json
 from dataclasses import asdict, dataclass, field, replace

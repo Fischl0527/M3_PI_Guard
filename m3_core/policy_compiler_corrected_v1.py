@@ -7,6 +7,10 @@ replace inferred grants, and contradictory negative instructions are rejected.
 
 from __future__ import annotations
 
+# 阅读入口：把可信请求编译成 TaskPolicyManifest（任务权限清单）。
+# 这是有边界的词法解析，不是能理解任意自然语言的授权模型；历史编译器保持原样。
+# 工具名、参数名与资源必须一起匹配，不能把“读 A、写 B”扩大为可写 A 和 B。
+
 import re
 from dataclasses import replace
 from datetime import datetime, timezone
@@ -75,7 +79,7 @@ def _actions(request: str) -> list[tuple[str, int, int, bool]]:
     for match in _ACTION.finditer(request):
         if any(start <= match.start() < end for start, end in resource_spans):
             continue
-        # A new clause/action resets negation. No arbitrary distance cutoff.
+        # 新分句重新判断否定；不能按固定字数截断，否则较远的“禁止”可能失效。
         prefix = request[result[-1][2] if result else 0 : match.start()]
         clauses = re.split(r"\.(?:\s+|$)|[;!?。；！？\n]|\bbut\b|但是|但", prefix)
         prefix = _without_resources(clauses[-1])
@@ -137,7 +141,7 @@ def _resource_rules(
     result: list[ToolRule] = []
     for index, (kind, start, end, negated) in enumerate(actions):
         if kind not in _RESOURCE:
-            continue  # Code execution is never inferred as an automatic grant.
+            continue  # 不从自然语言推断自动执行代码的权限。
         stop = actions[index + 1][1] if index + 1 < len(actions) else len(request)
         segment = _action_segment(request, end, stop)
         resources = list(_RESOURCE[kind].finditer(segment))
@@ -191,9 +195,8 @@ def _resource_rules(
                         description="corrected_v1: resource bound to its explicit trusted action.",
                     )
                 )
-    # A negative mention wins for the same tool/resource; there is no deny rule
-    # in the public manifest contract. Conservatively suppress that tool if the
-    # natural-language request mixes positive and negative grants for it.
+    # 当前清单没有资源级“禁止”规则。同一工具出现肯定/否定混合描述时，
+    # 保守撤掉该工具的自动许可，不能为了提高完成率把禁止描述忽略。
     negative_tools = _negative_tools(request, actions)
     return [rule for rule in result if rule.tool not in negative_tools]
 
@@ -207,8 +210,8 @@ def _declarations(
         raise ValueError(
             "trusted requested_actions conflicts with a negative user instruction"
         )
-    # Retain duplicate-scope restrictions rather than silently dropping a stricter
-    # declaration whose legacy rule_id depends only on its argument constraints.
+    # 即使两条规则参数范围相同，也必须保留较严格的来源/确认要求。
+    # 旧 rule_id 只由参数约束决定，因此补上声明序号，避免去重丢失限制。
     result: list[ToolRule] = []
     for index, rule in enumerate(rules):
         result.append(replace(rule, rule_id=f"{rule.rule_id}-decl-{index}"))
@@ -231,12 +234,14 @@ def compile_task_policy_corrected_v1(
     )
     context = dict(trusted_app_context or {})
     legacy._reject_evaluator_fields(context)
+    # 可信应用声明优先，启发式推断不能在声明之外偷偷增加权限。
     rules = (
         _declarations(context, request, schemas)
         if "requested_actions" in context
         else legacy._deduplicate_rules(_resource_rules(request, schemas))
     )
     temporal: list[TemporalConstraint] = []
+    # 只有请求明确包含先后顺序才生成时序限制；读过工具不等于读过任意资源。
     tools = {rule.tool for rule in rules}
     kinds = [kind for kind, _, _, negative in _actions(request) if not negative]
     if re.search(r"\bthen\b|之后|然后|再", request, re.IGNORECASE) and "read" in kinds:

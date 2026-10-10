@@ -1,5 +1,14 @@
 # 会话移交
 
+## 2026-10-10 — 中文阅读范围已验证，按现有PR交付
+
+- 任务harness/tasks/chinese-localization-20261010.md，F-DOC-002 verified仅指本轮当前阅读路径；F-PAPER-002仍in_progress，不扩大成全库翻译／独立科学审阅／投稿完成。新报告docs/中文注释与文档整理报告_2026-10-10.md，代码指南及中文论文阅读说明给出直接入口。
+- 十九模块仅中文注释，AST与起始HEAD一致；renderer和test仅中文显示调整，英文表格相同。两中文稿引用／主表数字守恒，当前中文与builder相同；英文正文源、英文glossary、参考原题名、作者空白、冻结raw不变。
+- 实际276pytest passed／43.59秒，准确命令在报告；20改动Python文件Ruff通过，另runtime_monitor.py既有未用Sequence的F401从HEAD复现，不删导入。120MD／445links为0missing／anchor／fence；七原样快照和两userdirty排除。读者五问／49文件链接通过，输出目录歧义修后复读PASS。
+- 主仓库原demo/index.html和demo_results.json起始为用户删除，未恢复未提交；指南只把默认位置用于解包交付包，主仓库显式demo-local-preview，本轮未生成。没有API、FullHarness、新研究、统计推断重算、PDF或Word编译。
+- Git只暂存本轮相关文件；current-task下方用户16行、两份修改文档、旧端点文件、字体模板、子模块及其他本地产物保持未提交。普通push origin/codex/claude-review-repairs后更新现有PR23，目标Alysia163:new-test；不直接推目标、不自动合并、不强推。确切commit/ref回执以Git及对话为准，后续不为自引用循环提交。
+- 下一建议：按中文入口提前演练“读取A→写入B”，显式生成独立演示目录后做现场检查。没有用户新命令不自动启动实验或恢复Gemini。
+
 ## 2026-10-09 — docs整理与Git+PR交付完成
 
 - 任务harness/tasks/docs-consolidation-20261009.md，F-DOC-001 verified。总入口docs/README，当前综述合并架构/交接；运行手册跳当前演示指南，研究和论文索引分当前/历史。七原入口整份在docs/archive/entry_snapshots_202607保存，文本7/7与起始Git一致。

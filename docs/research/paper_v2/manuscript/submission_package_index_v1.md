@@ -1,85 +1,54 @@
-# JISA submission package index
+# JISA投稿材料导航与交接索引
 
-Status: `latex_primary_verified_author_completion_required`
+更新：2026-10-10。供作者和项目组阅读。英文投稿材料保留英文，中文参考稿不作为英文期刊投稿正文。作者信息仍待本人填写；本文不表示投稿完成。
 
-This is the handoff index for the LaTeX-based submission route to the
-*Journal of Information Security and Applications* (JISA). The flat package
-under `../../../../LaTeX通用模板/M3_PI_Guard_JISA/` follows Elsevier's source-file
-constraint that an Editorial Manager LaTeX submission must not depend on
-subdirectories. The Markdown manuscript remains the scientific-content source;
-the LaTeX package is the formatting and submission source of truth.
+## 1. 当前入口
 
-## Files for Editorial Manager
+| 用途 | 入口 | 当前边界 |
+|---|---|---|
+| 当前英文内容 | [当前英文主稿](manuscript_current_v2.md) | 最新已记录正文8,256词，不是旧完整工作稿 |
+| 中文内容参考 | [当前中文稿](manuscript_current_zh_v2.md)、[阅读说明](论文中文阅读说明.md) | 2026-10-10整理语言，未重新编译PDF |
+| 正式LaTeX源 | [期刊主入口](../../../../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex)及同级输入 | 采用Elsevier的elsarticle模板；上传规则需投稿日复核 |
+| 正式PDF | [主文PDF](../../../../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.pdf) | 最新既有回执27页；不拿旧PDF证明新中文文字排版 |
+| 本地模板审阅 | [数模模板入口](../../../../LaTeX通用模板/数模通用模板.tex) | 最新既有回执35页，不当期刊正式模板提交 |
+| 补充材料 | [补充表](supplementary_tables_v1.md) | 历史20表、5图；最新既有补充PDF24页，未在本轮重编 |
+| 主图 | [当前主图目录](../../../../outputs/experiments/research_followup_20261006_v1/manuscript_figures/) | 当前四图，旧E1–E6五图不是当前主图 |
+| 参考文献 | [书目源](references_v1.bib)、[活动引用检查](citation_compliance_active_v1.md) | 最新既有24项活动引用记录，不表示本轮阅读全文核验 |
 
-| Upload role | Controlled file | State at this checkpoint | Final action |
-|---|---|---|---|
-| Main LaTeX source | `../../../../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex` plus same-level inputs | Official `elsarticle` source; six main sections, six numbered main tables, one inline decision table, five vector figures and 21 cited references | Add approved author/title-page information, then upload all same-level source files |
-| Main review PDF | `../../../../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.pdf` | 55 pages; XeLaTeX/BibTeX exit 0; no unresolved citation/reference, overfull box or author metadata; rendered pages visually checked | Recompile after author completion and upload if requested |
-| Supplementary LaTeX source | `../../../../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA_supplement.tex` plus same-level table inputs | Twelve supplementary tables; independent 12-page PDF compiled and visually checked | Confirm the final supplementary-material label in Editorial Manager |
-| Highlights | `M3_PI_Guard_JISA_highlights.docx` | Five current editable highlights; every item is at most 85 characters and the 1/1-page render passed visual review | Upload as the separate Highlights file |
-| Cover letter | `M3_PI_Guard_JISA_cover_letter.docx` | Current E1--E6 scientific wording is synchronized, contains no cross-provider or SOTA claim, and the 1/1-page render passed visual review | Fill the submission date and corresponding-author signature block |
-| Glossary | `M3_PI_Guard_JISA_glossary.docx` | Fifteen field-specific terms are prepared in editable form | Upload only if requested by the live submission workflow |
-| Figure 1 | `../incremental_empirical_v1/figures/figure_1_authority_boundary.pdf` | Separate vector PDF prepared | Upload as Figure 1 |
-| Figure 2 | `../incremental_empirical_v1/figures/figure_2_factorial_interactions.pdf` | Separate vector PDF prepared | Upload as Figure 2 |
-| Figure 3 | `../incremental_empirical_v1/figures/figure_3_provenance_counterfactual.pdf` | Separate vector PDF prepared | Upload as Figure 3 |
-| Figure 4 | `../incremental_empirical_v1/figures/figure_4_factor_effect_forest.pdf` | Separate vector PDF prepared | Upload as Figure 4 |
-| Figure 5 | `../incremental_empirical_v1/figures/figure_5_adaptive_tail.pdf` | Separate vector PDF prepared | Upload as Figure 5 |
-| Local template review only | `../../../../LaTeX通用模板/M3_PI_Guard_template_review.tex` | Uses the supplied `cumcmthesis` assets and compiles to a 49-page local comparison PDF | Do not submit as a JISA source file |
+Markdown保存科学内容，LaTeX保存排版与投稿源。构建方法见[论文工作区](README.md)，当前状态见[2026-10-08收束报告](current_manuscript_closeout_2026-10-08.md)。
 
-The relative figure paths above are resolved from this manuscript directory.
-SVG files in the same figure directory remain editable sources; PNG files are
-review previews and should not replace the vector PDFs unless the live portal
-rejects PDF artwork.
+## 2. 作者应填写和批准什么
 
-## Internal author-completion files
+- [中文作者信息表](author_metadata_and_submission_inputs_zh.md)：姓名、排序、单位、通讯作者、ORCID（研究者身份编号）。
+- [英文信息表](author_metadata_and_submission_inputs.md)：投稿系统所需的同项信息。
+- [投稿检查清单](jisa_submission_checklist.md)：作者、机构和实际投稿日要求。
+- [投稿声明英文源](submission_statements_draft.md)：利益冲突、资助、代码数据可用性、AI辅助写作、伦理、作者贡献。
+- [投稿信英文草稿](cover_letter_draft.md)：即Cover Letter，需要日期和通讯作者签名。
+- [研究亮点英文稿](highlights_v1.md)：即Highlights，需与当前稿和实际期刊要求核对。
+- [中文术语表](术语表_中文.md)：内部阅读用，不把旧英文Word术语表当本次已更新材料。
 
-Do not upload these files with unresolved placeholders:
+有占位符或未经作者批准的材料不能直接上传。作者贡献分类CRediT是贡献角色说明，不由程序猜测。所有作者须批准稿件与贡献分配。
 
-- `M3_PI_Guard_JISA_author_input_form.docx`: editable English completion form.
-- `author_metadata_and_submission_inputs.md`: controlled English source form.
-- `author_metadata_and_submission_inputs_zh.md`: Chinese direct-fill companion.
-- `M3_PI_Guard_JISA_chinese_comparison.docx`: internal Chinese comparison copy,
-  not the JISA manuscript.
-- `jisa_submission_checklist.md`: live author and institutional checklist.
+## 3. 建议的提交顺序
 
-## Author-owned completion order
+1. 填写姓名、单位、通讯作者及身份编号，确认作者排序。
+2. 由每位作者批准正文、贡献、利益冲突、资助、致谢及伦理表述。
+3. 确定代码/数据实际公开范围和版本；如有归档DOI（数字对象标识符）再补充，不编造公开链接。
+4. 核对投稿系统是否仍要求每人不超过100词简介和证件式照片。
+5. 按当前英文稿重新构建LaTeX，实际检查每页的页码、表格、图和字体。
+6. 投稿当天通过学校订阅数据库核对SCIE收录和JCR Q2分区，并完成作者负责的相似性/自我重复检查。
+7. 按实际Editorial Manager（期刊投稿系统）上传正文源、必要PDF、图和已批准附件。
 
-1. Fill author names/order, affiliations, corresponding-author details and
-   ORCID values in the internal form.
-2. Obtain every author's approval of the manuscript and CRediT allocation;
-   confirm competing interests, funding, acknowledgements and ethics wording.
-3. Replace provisional data/code release wording with the intended public tag
-   and, when available, an archival DOI or other immutable identifier.
-4. Add each author biography (100 words maximum) and passport-type photograph
-   if the live JISA workflow still requests them.
-5. Recompile the final LaTeX source with XeLaTeX/BibTeX and inspect every PDF
-   page for pagination, figure placement, table wrapping and font substitution.
-6. On the actual submission date, use the institution's subscribed database to
-   confirm that JISA is still SCIE indexed and JCR Q2, then complete the
-   similarity/self-plagiarism check and upload.
+## 4. 旧交付节点保留什么事实
 
-## Current verification boundary
+此前本页记录的旧节点采用六张主表、一张文内决策表、五图、21项引用；主PDF55页、补充PDF12页、本地模板49页。这些数值属于旧版本，不是当前文件状态。旧构建记录中的exit 0表示当时编译正常，不替代作者填表后的最终检查。
 
-- The historical Stage 4.5 integrity gate remains recorded. The current E1--E6
-  claim ledger, tables and bilingual prose were rebuilt from the admitted compact
-  analyses; E5 remains a conditional B200-survivor tail and E6 remains a
-  risk-enriched single execution block.
-- The submission-facing `elsarticle` main manuscript (55 pages), independent
-  supplement (12 pages), and local template review copy (49 pages) compile with
-  exit 0. Logs contain no LaTeX error, undefined citation/reference or overfull
-  box; the PDFs contain no raw citation marker, `??` or replacement glyph.
-  Page-level visual review found no clipping, overlap, repeated caption or
-  missing figure. An initially isolated portrait page and an avoidable S12
-  continuation page were corrected before this checkpoint.
-- Author names, affiliations, corresponding-author details and CRediT roles
-  remain intentionally unfilled for the owner to complete. The internal author
-  form and Chinese comparison copy are not upload-ready submission files.
-- Gemini's E6 prefix did not qualify for effect estimation; all Gemini paired,
-  factorial and cross-provider effects remain `NE`. The manuscript makes no
-  cross-provider, temporal-repeatability, deployment-prevalence or SOTA claim.
-- No provider API, new experiment, Full Harness, historical replay, blind test,
-  or additional evidence bundle was run for this manuscript integration.
+旧附件包含英文/中文对照Word、作者表、术语表、投稿信和亮点稿。它们保留为内部历史副本，不随本次中文整理重建，也不覆盖LaTeX。旧五幅增量实验图有PDF（矢量图）、SVG（可编辑矢量图）和PNG（栅格预览）三种形式，查找见[历史图表计划](figure_table_plan.md)；当前图应使用上方主图目录。
 
-The former Word files are retained only as historical/internal review copies.
-They are not the current formatting source and should not be used to overwrite
-the verified LaTeX manuscript.
+阶段4.5及各内部审查仍是历史过程记录，不是外部独立同行评审。作者和机构资格、期刊适配、最终视觉检查、实际公开安排分别核对，不能因为内部审查通过就宣布可投稿。
+
+## 5. 科学主张边界
+
+Gemini现有尝试不足以估计合格跨厂商效应，保留不可估计（NE）；历史E6是风险富集单块，不证明跨日期重复或部署发生率；E5仅为B200未成功任务的条件尾部，不是完整B500曲线。
+
+当前研究不宣称首次、唯一、当前最优（SOTA）或完整模块已证明优越。本轮没有模型请求、新实验、完整工程验收、历史递归重放或新增证据包。

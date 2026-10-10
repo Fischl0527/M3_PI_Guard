@@ -8,6 +8,26 @@
   ],
   "features": [
     {
+      "id": "F-DOC-002",
+      "name": "中文注释与文档阅读入口",
+      "description": "解释当前权限、来源、模拟执行和判分路径，中文化活动文档，并维护英文投稿稿对应的中文参考版。",
+      "status": "verified",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "关键路径中文注释清楚且可执行语法树保持不变",
+        "本轮活动文档标题和解释中文化，保留命令和机器标识",
+        "中文论文章节、图表和引用完整且数值未改变",
+        "定向验证记录完整，历史原文与未翻译材料如实披露"
+      ],
+      "verification": [
+        "2026-10-10: nineteen important runtime/statistics/portability modules have Chinese comments; executable AST matches starting HEAD for all nineteen",
+        "Chinese display renderer and test updated; English main tables identical to starting version; both Chinese manuscripts preserve citation-marker and primary-table-number sequences, and current Chinese matches builder output",
+        "276 focused pytest passed in43.59s; twenty changed Python files pass Ruff; runtime_monitor.py has one inherited F401 reproduced from HEAD and disclosed without changing runtime code",
+        "120 Markdown documents and445 local links: zero missing paths, bad anchors or unclosed fences; seven frozen snapshots and two user-dirty documents excluded; five fresh-context reader questions and49 links pass after clarifying demo output",
+        "Scope verified for selected current reader paths only, not all historical translations, PDF visual QA or paper submission; English source, historical records, blank authors and unrelated user edits preserved; no API/experiment/Full Harness/replay"
+      ]
+    },
+    {
       "id": "F-DOC-001",
       "name": "Current documentation consolidation",
       "description": "Unify current reader entry points and distinguish corrected evidence, working manuscripts and preserved historical snapshots.",

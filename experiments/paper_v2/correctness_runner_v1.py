@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+# 48任务开发试跑入口：各模型独立输出，任务内状态隔离，已获响应的行不重跑。
+# not_run（未运行）、无响应故障和有响应终态分别记录，不能用计划数量冒充完成量。
+
 import argparse
 import copy
 import json
@@ -57,6 +60,7 @@ def credential(values: Mapping[str, str], group: str) -> str:
 
 
 def latest_records(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    # 恢复最多一次，只允许此前完全未取得响应的任务；成功/有响应失败均保留。
     result: dict[str, dict[str, Any]] = {}
     for row in rows:
         if type(row.get("attempt")) is not int:
@@ -103,7 +107,7 @@ def make_unrun(item: Mapping[str, Any], reason: str) -> dict[str, Any]:
 def execute_one(item: dict[str, Any], attempt: int, *, runtime: Any, api_key: str, pacer: RequestPacer, output: Path = OUTPUT, client_factory: Any = DevelopmentRequestClient) -> dict[str, Any]:
     trace = output / "internal" / item["model_group"] / f"{item['work_key']}.attempt{attempt}.jsonl"
     if trace.exists():
-        # An interrupted open request must be diagnosed, never silently replayed.
+        # 已开放但无终态的请求须先诊断，不能猜测失败并再次发送。
         raise RuntimeError("request trace exists without selected terminal record")
     client = client_factory(
         model_group=item["model_group"], model=item["model_id"], api_key=api_key,
@@ -115,8 +119,7 @@ def execute_one(item: dict[str, Any], attempt: int, *, runtime: Any, api_key: st
     try:
         outcome = runtime.execute(item, client)
     except Exception as exc:
-        # Preserve observed HTTP receipts even if evaluation/close raises later.
-        # Error message may contain context: publish only the exception class.
+        # 后续评价/关闭异常不抹去已收到的 HTTP 回执；只公开异常类型，不泄露上下文。
         outcome = {
             "unsafe_effect": None, "task_completion": None, "evaluation_details": {},
             "operational_status": "runner_failure", "failure_stage": "runtime_or_evaluator",
@@ -130,6 +133,7 @@ def execute_one(item: dict[str, Any], attempt: int, *, runtime: Any, api_key: st
         "total": sum(r.get("usage", {}).get("total_tokens", 0) for r in requests),
     }
     record = {
+        # 保存完整评价摘要，尤其未知值与细分端点；后续分析读取这些实际记录。
         **copy.deepcopy(item), **outcome, "attempt": attempt, "status": "terminal",
         "provider_requests": requests, "provider_call_count": len(requests),
         "response_obtained": any(r.get("response_received") for r in requests),

@@ -6,6 +6,8 @@ results can be written directly to experiment manifests and JSON reports.
 
 from __future__ import annotations
 
+# 比例同时返回分子、分母与区间。分母为零是未定义，不是观察到零风险。
+# 调用方须先处理未知和失败；本模块不会替实验决定哪些记录应进入分母。
 import math
 import random
 from collections import defaultdict
@@ -137,6 +139,7 @@ def mcnemar_exact(
     if b < 0 or c < 0:
         raise ValueError("discordant counts must be non-negative")
 
+    # 配对检验只利用两配置结论不同的任务；事件为 True 不一定表示好结果。
     discordant = b + c
     if discordant == 0:
         p_value = 1.0

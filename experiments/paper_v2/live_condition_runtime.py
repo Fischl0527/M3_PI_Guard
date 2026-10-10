@@ -10,6 +10,10 @@ no network or model call and persists no experiment result.
 
 from __future__ import annotations
 
+# 总运行循环：可信输入→生成文本→严格解析提案→来源分析→防护判定→模拟执行。
+# 服务商只生成文本，不执行其自带工具；真实外部操作始终不在本运行器范围内。
+# 本文件兼容历史与显式修复版，默认分支不能因文档整理而改变。
+
 import argparse
 import copy
 import hashlib
@@ -927,7 +931,7 @@ class LiveConditionRuntime:
         self.physical_attempt_namespace = _validate_physical_attempt_namespace(
             physical_attempt_namespace
         )
-        # Explicit prospective injection; absent options retain historical behavior.
+        # 显式注入修复版组件；未指定选项时保持历史行为，不能悄悄升级旧实验。
         self.policy_manifest_factory = policy_manifest_factory
         self.monitor_factory = monitor_factory
         self.oracle_monitor_factory = oracle_monitor_factory
@@ -1262,6 +1266,7 @@ class LiveConditionRuntime:
         ):
             raise LiveConditionRuntimeError("research message builder returned invalid messages")
         backend = self.effect_backend_factory(context, schemas)
+        # 每个任务只使用对应的隔离后端，身份不一致即停止，不能回退到真实工具。
         if backend.backend_id != profile.effect_backend(context.benchmark):
             backend.close()
             raise LiveConditionRuntimeError("effect backend identity drift")
@@ -1436,6 +1441,7 @@ class LiveConditionRuntime:
                     break
 
                 proposal_id = f"{context.work_key}:step:{step}"
+                # 模型只提出动作；来源由运行环境与上下文计算，不接受模型自报可信度。
                 provenance_inferer = (
                     provenance_tracker.infer_argument_provenance
                     if provenance_tracker is not None
@@ -1588,6 +1594,7 @@ class LiveConditionRuntime:
                     }
 
                 execution_attempted = decision_name == "ALLOW"
+                # ALLOW 仅表示可以尝试模拟执行；隔离层仍可能拒绝，二者必须分开记录。
                 observation: Any
                 execution_succeeded = False
                 if execution_attempted:
@@ -1620,6 +1627,7 @@ class LiveConditionRuntime:
                             trusted_metadata=metadata,
                         )
                     if monitor is not None and execution_succeeded:
+                        # 只有成功执行才进入顺序历史，失败调用不能满足“先读再写”。
                         monitor.record_execution(proposal, decision)
                     if oracle_monitor is not None and execution_succeeded:
                         oracle_monitor.record_execution(proposal, decision)
@@ -1651,6 +1659,7 @@ class LiveConditionRuntime:
                     }
                 )
                 if decision_name == "ASK":
+                    # 本轮没有真人批准，ASK 结束模型循环但不等于合法任务完成。
                     operational_status = "completed"
                     break
                 if parsed.tool == "final" and execution_succeeded:

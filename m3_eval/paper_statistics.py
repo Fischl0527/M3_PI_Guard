@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+# 历史论文方案的统计适配层：按预先声明的任务/模板聚类，保留同任务配对关系。
+# Holm 校正用于控制一组比较的误报，不能在看到结果后挑出有利比较组成家族。
 from typing import Any, Iterable, Mapping
 
 from .statistics import clustered_paired_bootstrap, holm_adjust, mcnemar_exact
@@ -18,6 +20,7 @@ def template_clustered_difference(
 
     if set(baseline) != set(treatment):
         raise ValueError("baseline and treatment must contain the same template clusters")
+    # 同模板的多种攻击变体不能当作相互独立的新任务。
     pairs: list[tuple[str, float, float]] = []
     for cluster in sorted(baseline):
         left = [float(value) for value in baseline[cluster]]

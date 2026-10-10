@@ -1,41 +1,24 @@
-# Stage 3 Scientific Review Package
+# 阶段3内部科学审查目录
 
-This directory contains the internal author-side Stage 3 review of the English
-JISA working manuscript frozen at commit
-`119b1b1c0d158c41de485b969830c370ca951b1a`.
+本目录保存作者侧内部审查，目标是冻结于提交`119b1b1c0d158c41de485b969830c370ca951b1a`的英文工作稿。不是期刊审稿，也不是今天重新出具的独立评价。详细英文审查、合同和评分原文保留，避免改变历史承诺。
 
-## Contents
+## 文件怎样分工
 
-1. `stage3_reviewer_configuration_v1.md` — venue/field fit, panel, contract,
-   review boundaries.
-2. `stage3_phase1_contract_commitments_v1.md` — paper-content-blind scoring
-   commitments for all five reviewer roles.
-3. `stage3_eic_review_v1.md` — editorial fit and readiness review.
-4. `stage3_methodology_review_v1.md` — design, estimand, statistics, failure,
-   and uncertainty review.
-5. `stage3_domain_review_v1.md` — LLM-agent security, authorization, provenance,
-   and baseline review.
-6. `stage3_perspective_review_v1.md` — usable-security and operational-burden
-   review.
-7. `stage3_devils_advocate_review_v1.md` — strongest rejection case and claim
-   stress test.
-8. `stage3_editorial_decision_v1.md` — mechanical score matrix, decision, and
-   consolidated Stage 4 roadmap.
+| 文件 | 中文用途 |
+|---|---|
+| `stage3_reviewer_configuration_v1.md` | 期刊/领域适配、角色、合同和边界 |
+| `stage3_phase1_contract_commitments_v1.md` | 五个审阅角色在读正文前的评分承诺 |
+| `stage3_eic_review_v1.md` | 主编视角：适配与就绪程度 |
+| `stage3_methodology_review_v1.md` | 方法、估计对象、统计、失败和不确定性 |
+| `stage3_domain_review_v1.md` | 智能体安全、授权、来源和基线 |
+| `stage3_perspective_review_v1.md` | 安全可用性与运行负担 |
+| `stage3_devils_advocate_review_v1.md` | 反方审阅：最强拒稿理由与主张压力检查 |
+| `stage3_editorial_decision_v1.md` | 评分矩阵、综合判断与阶段4路线 |
 
-## Outcome
+## 当时结论
 
-The mechanical decision is **major revision; not submission-ready**. Two
-reviewers block methodology because the full/policy comparison changes prompt
-profile in addition to runtime modules. Four of five reviewers also find at
-least two mandatory dimensions warn-or-worse.
+大修，尚不可投稿。两位角色因完整/仅权限比较同时改变提示而阻断方法就绪；五位中四位认为至少两个必需维度达到警告或更差。
 
-The review does not require new API calls. It recommends:
+建议不新增API（模型程序接口）调用，先将比较改称配置包对比，报告基准间效用方向差异、失败敏感界限、明确授权变换、将不完整Gemini移出主设计，按基准/任务报告确认、拒绝和失败负担。
 
-- reframing full versus policy-only as a configuration-bundle comparison;
-- reporting the benchmark-specific utility direction reversal;
-- adding a failure-sensitive attack endpoint as an offline robustness bound;
-- documenting exact authorization transformations;
-- moving incomplete Gemini execution out of the main scientific design; and
-- stratifying system ASK/DENY/failure burden by task type and benchmark.
-
-The manuscript itself was not edited during Stage 3.
+这些是当时结论，不把后续发现的参数匹配缺陷或修复版实验写回旧评分。当前解释见[论文工作区](../README.md)。

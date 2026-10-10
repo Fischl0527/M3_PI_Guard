@@ -1,6 +1,6 @@
 # M3-PI Guard 增量实证强化阶段报告
 
-## Material Passport
+## 材料与状态说明
 
 - 项目：M3-PI Guard
 - 研究路线：授权制度与运行时 Guard 配置的实证评估

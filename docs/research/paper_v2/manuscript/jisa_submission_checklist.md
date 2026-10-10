@@ -1,4 +1,4 @@
-# JISA submission readiness checklist
+# JISA投稿就绪检查清单
 
 ## 当前清单（2026-10-09）
 
@@ -20,150 +20,53 @@
 盲测、完整Gemini矩阵、80分评分门槛和Full Harness不属于当前投稿清单。
 需要入口和构建方式时看[论文工作区说明](README.md)。
 
-## 历史清单（以下为2026年9月节点原文）
+## 历史清单（2026年9月节点的中文说明）
 
-下文的勾选、21引用、旧Word页数和E1–E6条件只描述当时的版本；
-不能解释为当前修复版已通过所有科学或投稿门槛。旧期刊要求亦须在投稿日复核。
+下方勾选、21项引用、旧Word页数及E1–E6配置只描述当时版本，不能代表当前修复版通过全部投稿门。原文件的提交历史保留，期刊要求须投稿日复核。
 
-Status: `incremental_e1_e6_integrated_final_author_review_pending`
-Checked: 2026-09-04
+历史状态：`incremental_e1_e6_integrated_final_author_review_pending`；检查日期：2026-09-04。
 
-## Venue fit
+### 期刊适配
 
-- [x] The official JISA scope includes authentication/access control, security
-  management and policies, and practice-driven information-security
-  applications. The paper is framed as runtime authorization and enforcement
-  for tool-using agents, not as a general NLP jailbreak paper.
-- [x] The journal has hosted collections on large-language-model cybersecurity
-  and security/privacy in large AI models. This supports topical fit but does
-  not guarantee editorial admission.
-- [x] The official scope excludes routine application of existing AI/ML to a
-  standard security dataset. The manuscript therefore leads with the
-  authorization-regime evaluation method, executed-effect endpoint, paired
-  runtime comparison, and security–utility/operational trade-off—not with
-  off-the-shelf model benchmarking.
-- [x] The submission target remains the regular Journal of Information Security
-  and Applications track unless an open, applicable collection is confirmed at
-  submission.
-- [ ] An authorized institutional user must verify that the journal is SCIE and
-  JCR Q2 on the actual submission date. Public or third-party metrics are not
-  sufficient for the final claim.
+- [x] 当时核对的JISA范围涵盖认证/访问控制、安全管理和策略、应用驱动的信息安全；文章定位为工具智能体运行时授权，不是通用语言模型越狱。
+- [x] 当时有大语言模型网络安全及大型AI安全/隐私专题，说明主题可能适配，不保证编辑接收。
+- [x] 不以现成模型套常规安全数据集为主线，而强调授权评估、执行效果、配对比较及安全—效用/运行负担。
+- [x] 默认常规投稿通道；只有投稿日确认有合适开放专题时才调整。
+- [ ] 授权的学校数据库用户在实际投稿日确认SCIE/JCR Q2，不能用第三方指标代替。
 
-Official sources:
+历史官方来源：[期刊范围](https://www.sciencedirect.com/journal/journal-of-information-security-and-applications)、[作者指南](https://www.sciencedirect.com/journal/journal-of-information-security-and-applications/publish/guide-for-authors)、[专题列表](https://www.sciencedirect.com/journal/journal-of-information-security-and-applications/special-issues)。本次语言整理未重新浏览这些页面。
 
-- Journal scope:
-  https://www.sciencedirect.com/journal/journal-of-information-security-and-applications
-- Guide for authors:
-  https://www.sciencedirect.com/journal/journal-of-information-security-and-applications/publish/guide-for-authors
-- Article collections:
-  https://www.sciencedirect.com/journal/journal-of-information-security-and-applications/special-issues
+2026-08-23曾记录的格式要求：单匿名审稿；摘要不超过250词；1–7个英文关键词；建议3–5条亮点且每条不超过85字符；章节采用1、1.1、1.1.1；可编辑单栏Word或LaTeX；数据可用性声明及数据存储/不可用原因；AI辅助声明位于参考文献前；标题页含作者、单位、通讯信息与现地址；另有术语表、每人不超过100词简介和照片。**这是历史核验，不是今天已确认的要求。**
 
-Current official format requirements checked on 2026-08-23:
+当时摘要及五条亮点符合上述界限，Gemini停止规则已按无跨厂商主张封闭。
 
-- JISA uses single-anonymized review, so the submission does not require a
-  separate author-blinded manuscript variant;
-- the abstract must not exceed 250 words;
-- 1–7 English keywords are required; and
-- 3–5 highlights are recommended, each no longer than 85 characters;
-- sections and subsections use 1, 1.1 and 1.1.1 numbering;
-- Word source is editable, single-column `.doc`/`.docx` (or editable LaTeX);
-- a data-availability statement is required and the journal's Option C data
-  policy calls for repository deposit or an explanation of non-availability;
-  and
-- any required generative-AI declaration appears in its own section before the
-  references;
-- the title page supplies author names/order, full affiliations, corresponding
-  author contact details and any present/permanent address; and
-- a separate glossary plus an editable biography (100 words maximum) and
-  passport-type photograph for each author are requested.
+### 当时的科学检查
 
-The abstract and five-highlight file satisfy these bounds. Gemini's
-prespecified stopping rule is closed without a cross-provider claim.
+- [x] 中型证伪研究480条完成并准入。
+- [x] 按冻结门选择机制路线或实证转向，不删除不利结果。
+- [x] Public Pro 5,082、Public Flash 1,791、中型480及自适应预算50/200完成一次精简复用分析。
+- [x] 旧900条DeepSeek授权研究终态完整，失败有状态。
+- [x] 450项Gemini计划按免费层三配额日规则终态处理或透明降级，不把计划数当执行数。
+- [x] E1–E4：720条Pro因子、240条Pro来源及480次离线防护决策、240条Pro风险挑战、360条Flash复现完成。
+- [x] E5十二个B200未成功任务延伸至500：新增首次成功0/12，Wilson上限24.25%。完整B500、预算2,000、盲测和完整第二模型自适应不在范围。
+- [x] E6 DeepSeek单块360条，无防护17/60；不满足也不测试原多窗口门，47/60与E3重叠。Gemini前缀失败，嵌套集合15/30与E3重叠且效应不可估计（NE）。
 
-## Scientific gates before manuscript completion
+### 当时的投稿附件
 
-- [x] The 480-record medium falsification study is complete and admitted.
-- [x] The mechanism route or empirical-study redirect is selected by the frozen
-  gate, without removing unfavorable results.
-- [x] Existing Public Pro 5,082, Public Flash 1,791, medium 480 and Adaptive
-  budget-50/200 evidence has received one compact reuse analysis.
-- [x] The frozen 900-row DeepSeek authorization study is terminal, including
-  explicit failed-row disposition.
-- [x] The 450-row Gemini diagnostic cross-provider study is terminal, or has
-  transparently downgraded after the three-quota-day free-tier rule.
-- [x] E1--E4 are complete: 720 Pro factorial rows, 240 Pro source-authority
-  rows plus 480 offline Guard decisions, 240 outcome-enriched Pro rows and 360
-  Flash replication rows.
-- [x] E5 finished all twelve selected B200 survivors and received one-pass
-  conditional-tail analysis: 0/12 new first successes through 500, with a
-  24.25% Wilson upper limit. A complete original-panel B500 curve, budget
-  2,000, blind study and full second-model adaptive panel remain out of scope.
-- [x] E6 completed its 360-row DeepSeek risk-enriched single-block calibration;
-  no-defense activity was 17/60. This observed block activity neither satisfies
-  nor tests the original multi-window gate, and 47/60 tasks overlap E3. The
-  separately executed Gemini prefix failed its technical gate; its nested set
-  overlaps E3 for 29/30 tasks, so all Gemini effects remain not estimable.
-- [x] Rebuild every current incremental numeric claim once from the five compact
-  E1--E5 artifacts and the E6-v2 analysis; do not rerun provider rows.
-- [x] All 21 active citations have complete authors, title, year, DOI or stable
-  URL, publication-status verification, and a reviewed claim context. The 15
-  unused BibTeX candidates do not render and require review only if activated.
+- [x] 五幅增量图有矢量PDF、可编辑SVG及PNG预览；E6整合为表6，不伪造Gemini效应图。
+- [ ] 按实际系统填写利益冲突。
+- [ ] 确认资助及资助方角色，或批准无特定资助声明。
+- [ ] 确定作者排序并取得全体批准。
+- [x] 英文标题页/作者信息表及对应中文填表模板已备，作者值未填写。
+- [x] 专业术语表和旧可编辑Word副本已备。
+- [ ] 如实际系统要求，为每位作者提供不超过100词简介和独立照片。
+- [x] 暂定数据/代码声明和仓库入口已备，公开前改为实际发布标识或归档DOI。
+- [x] AI辅助准备声明已备，作者仍须核实文献、分析和解释并批准表述。
+- [x] 暂定投稿信已备，通讯作者、日期需补。
+- [x] E1–E6主张、图表和稿件定向检查完成；2026-08-23阶段4.5报告仅为历史。
+- [ ] 作者身份与出版清单齐备后做相似性/自我重复检查。
+- [x] 旧Word包曾逐页检查：英文35页、中文30页、补充4页，六主表和十二补充表已整合。不是当前LaTeX稿，也不代表作者占位符已填。
 
-## Journal package
+### 当时仍禁止的主张
 
-- [x] Number sections and subsections; do not number the abstract.
-- [x] Provisional title, abstract, keywords and highlights contain no unsupported
-  first/only/SOTA wording.
-- [x] Prepare the five highlights as a separate editable Word file; each item is
-  at most 85 characters.
-- [ ] Upload the manuscript, the separate editable supplementary-tables file,
-  and all other required editable source files.
-- [x] Retain the five completed incremental figure triplets as separate vector
-  PDF, editable SVG and PNG previews; E6 is integrated as Table 6 rather than a
-  misleading Gemini effect figure.
-- [ ] Prepare the competing-interests declaration in the format requested by
-  the submission system.
-- [ ] Record funding sources and sponsor roles, or the journal’s recommended
-  no-specific-funding statement.
-- [ ] Finalize author order and obtain every author’s approval before
-  submission.
-- [x] Prepare a structured title-page/author-input template covering names,
-  full affiliations, corresponding-author details, CRediT, declarations and
-  release metadata; an equivalent Chinese direct-fill companion is provided,
-  while author-owned values remain unfilled.
-- [x] Prepare a separate glossary of the field-specific terms used in the
-  manuscript, including a separate editable Word copy for upload if requested.
-- [ ] Supply a biography of at most 100 words and a separate passport-type
-  photograph for every author.
-- [x] Add a provisional research-data/code-availability statement and repository
-  link; replace the private-review wording with the archival DOI or immutable
-  public release identifier before publication.
-- [x] Add the required generative-AI-use declaration before the references
-  using the guide's manuscript-preparation-process section title.
-  Human authors retain full responsibility for literature verification,
-  analysis, interpretation and manuscript content; all authors must confirm
-  the wording before submission.
-- [x] Prepare a provisional cover letter focused on the security problem,
-  verified contribution, benchmark breadth and practical relevance. Add the
-  corresponding-author details and submission date to the separate editable
-  Word copy before submission.
-- [x] Run the targeted E1--E6 claim–evidence, figure/table and manuscript build
-  checks. The 2026-08-23 Stage 4.5 report remains historical and is not treated
-  as E1--E6 verification.
-- [ ] Complete the author-owned similarity/self-plagiarism check after author
-  identities and publication lists are available.
-- [x] Rebuild and visually inspect the incremental Word package after six main
-  tables and twelve supplementary tables are integrated. Read-only WPS renders
-  passed page-by-page review for the 35-page English manuscript, 30-page Chinese
-  comparison and 4-page supplement. Author-owned fields remain intentionally
-  unfilled and require a final author check.
-
-## Current prohibition
-
-The earlier Gemini study closed at 32/450 terminal work items with only five
-responses. The E6 Gemini prefix adds five response-bearing records, one
-response-less failure and 174 administrative closures; it does not create an
-effect estimate. No cross-provider abstract, conclusion, cover-letter or result
-claim may fill unobserved Gemini cells. JCR Q2/SCIE status must still be checked through the
-institution on the actual submission date, and author-owned submission fields
-remain incomplete.
+早期Gemini为32/450终态工作项、其中5条有响应。E6前缀另有5条有响应、1条无响应失败及174项行政封存，不能据此构成效应估计。摘要、结论、投稿信或结果不能填补未观察单元。实际投稿日的分区/收录及作者信息仍待本人核对。

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+# 只打包指定运行入口的源码依赖与公开输入/结果，不复制整个仓库或本地环境。
+# 路径校验和复制边界保护凭据、内部追踪及宿主文件；已有包不会证明新改动已验证。
 import argparse
 import ast
 import importlib.util

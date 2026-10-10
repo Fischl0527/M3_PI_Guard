@@ -45,7 +45,7 @@ review 永久封存；下一次工作必须使用新版本、新 segment、新 r
 
 ## 3. 新增的版本化复核组件
 
-### 3.1 Recovery evidence review v4
+### 3.1 恢复证据复核（第4版）
 
 新增 `public_second_recovery_evidence_review_v4.py`，目标是把两个概念彻底分开：
 
@@ -67,7 +67,7 @@ v4 工件 manifest：
 - shard 0：`1faf69b8606cb85d2adf5defad0697ed4b69cc33b31506b90408ea1b0e31292c`
 - shard 1：`cac90f24257734ee5b7c286dee2cf1efe94ea5e3ce241b73b8efd847335fcc36`
 
-### 3.2 Second-role evidence merge v1
+### 3.2 第二模型证据合并（第1版）
 
 新增 `public_second_evidence_merge_v1.py`。它只读取已封存技术证据，执行以下检查：
 

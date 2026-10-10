@@ -6,6 +6,9 @@ including when the optional confirmation module is disabled.
 """
 from __future__ import annotations
 
+# 通用工具的第二版修复：只把明确写出的目标值编译成精确参数。
+# 无法确定的安全目标不变成通配许可；正文内容可生成，接收者/路径等不能猜。
+
 import re
 from dataclasses import replace
 from typing import Any, Mapping
@@ -25,7 +28,7 @@ def _explicit_literal(request: str, name: str, argument_type: str) -> Any | None
         return legacy._explicit_argument_value(request, name, argument_type)
     phrase = re.escape(re.sub(r"(?<=[a-z0-9])(?=[A-Z])", " ", name).replace("_", " "))
     phrase = phrase.replace(r"\ ", r"\s+")
-    # Quotes delimit an entire value, including spaces and words like 'and'.
+    # 引号界定完整参数值，其中的空格或 and 不再被误拆成多个动作。
     quoted = re.search(
         rf"\b{phrase}\b\s*(?:(?:is|=|:)\s*)?([\"'])(.*?)\1",
         request, re.IGNORECASE,
@@ -33,8 +36,7 @@ def _explicit_literal(request: str, name: str, argument_type: str) -> Any | None
     if quoted:
         candidate = quoted.group(2)
     else:
-        # Only machine-delimited assignments support an unquoted token. Plain
-        # 'channel and ...' / 'content of ...' / 'is the summary' stay unknown.
+        # 无引号时只接受冒号/等号赋值；普通叙述里的 channel and 等不能当目标值。
         match = re.search(
             rf"\b{phrase}\b\s*[:=]\s*([A-Za-z0-9_@+#/.-]+?)(?=[,;.!?](?:\s|$)|$)",
             request, re.IGNORECASE,
@@ -61,6 +63,7 @@ def compile_generic_task_policy_corrected_v2(
         generated_at=generated_at, max_tools=max_tools,
     )
     if "requested_actions" in (trusted_app_context or {}):
+        # 应用已经声明的权限不能再被词法猜测覆盖或扩大。
         return base
     rules = []
     for rule in base.rules:
@@ -72,6 +75,7 @@ def compile_generic_task_policy_corrected_v2(
             argument_type = str(detail.get("type", "object"))
             value = _explicit_literal(trusted_user_request, name, argument_type)
             if value is None and name not in CONTENT_ARGUMENTS:
+                # 必需目标未解析时，后续不能通过关闭确认模块获得自动执行许可。
                 unresolved_required_scope |= old.required
                 # 未请求的可选安全字段不得携带新目标；仅允许省略或明确接口默认值。
                 constraints[name] = ParameterConstraint(

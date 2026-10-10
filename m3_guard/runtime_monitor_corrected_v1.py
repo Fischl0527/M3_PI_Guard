@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+# 权限检查的修复主线：先检查全局限制，再寻找一条完整匹配的工具规则。
+# “规则甲允许接收者、规则乙允许正文”不能拼成两条都没有授权的新动作。
+
 from dataclasses import replace
 
 from m3_guard.provenance import SOURCE_TYPES
@@ -47,6 +50,7 @@ def evaluate_action_corrected_v1(
     if proposal.tool == "final":
         return evaluate_action(proposal, manifest, modules=modules)
     global_rule = ToolRule(
+        # 内部临时规则仅用于复用全局时序/数据流检查，不是给模型新增许可。
         "corrected-global-check",
         proposal.tool,
         permitted_argument_sources=tuple(sorted(SOURCE_TYPES)),
@@ -68,6 +72,7 @@ def evaluate_action_corrected_v1(
             recovery=global_decision.suggested_recovery,
         )
     candidates = sorted(
+        # 固定规则顺序只保证结果可重复；不得通过重排绕过更严格的重叠规则。
         (rule for rule in manifest.rules if rule.tool == proposal.tool),
         key=lambda rule: rule.rule_id,
     )
@@ -87,6 +92,7 @@ def evaluate_action_corrected_v1(
             recovery="Supply a complete narrowly scoped trusted rule; never combine fragments of different rules.",
         )
     sources = set(matches[0].permitted_argument_sources)
+    # 多条完整规则同时适用：允许来源取交集，确认要求取“任一需要就需要”。
     for rule in matches[1:]:
         sources.intersection_update(rule.permitted_argument_sources)
     selected = replace(
@@ -96,7 +102,7 @@ def evaluate_action_corrected_v1(
     )
     narrowed = replace(manifest, rules=(selected,), approvals=(), manifest_sha256="")
     decision = evaluate_action(proposal, narrowed, modules=modules)
-    # The decision belongs to the actual whole manifest, not an internal view.
+    # 对外决策绑定原始完整权限清单，而非内部临时视图，便于定位实际依据。
     return _make_decision(
         proposal,
         manifest,
@@ -113,6 +119,7 @@ class RuntimeMonitorCorrectedV1(RuntimeMonitor):
     """Same public monitor interface, explicitly selected by new experiments."""
 
     def decide(self, proposal: ActionProposal) -> GuardDecision:
+        # 历史由监视器保存，不相信模型自报“此前已执行哪些工具”。
         proposal = replace(proposal, preceding_tools=self.executed_tools)
         return evaluate_action_corrected_v1(
             proposal, self.manifest, modules=self.modules

@@ -31,8 +31,16 @@ def test_current_tables_preserve_counts_uncertainty_and_component_limits() -> No
 def test_bilingual_tables_use_identical_numeric_cells() -> None:
     english = current_tables(manuscript.PROJECT_ROOT)
     chinese = current_tables(manuscript.PROJECT_ROOT, chinese=True)
-    for en, zh in zip(english[1:], chinese[1:], strict=True):
-        assert en[2].splitlines()[2:] == zh[2].splitlines()[2:]
+    # 翻译条件和场景名称后，文字列允许不同，所有分数、区间和计数列必须逐格相同。
+    for index, (en, zh) in enumerate(zip(english[1:], chinese[1:], strict=True), 1):
+        skip_labels = 2 if index == 1 else 1
+        en_rows = [line.split("|")[1:-1] for line in en[2].splitlines()[2:]]
+        zh_rows = [line.split("|")[1:-1] for line in zh[2].splitlines()[2:]]
+        assert [row[skip_labels:] for row in en_rows] == [row[skip_labels:] for row in zh_rows]
+    assert "自动编译" in chinese[1][2] and "精确目标" in chinese[1][2]
+    assert "VIGIL适配配置" in chinese[2][2]
+    assert "私密内容发往受限邮箱" in chinese[3][2]
+    assert "等待确认/拒绝" in chinese[1][2]
     source = manuscript._read("manuscript_zh_v1.md")
     updated = manuscript.sync_chinese_tables(source)
     assert updated == manuscript.sync_chinese_tables(updated)

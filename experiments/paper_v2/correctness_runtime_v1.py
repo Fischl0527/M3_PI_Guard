@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+# 当前修复版的装配入口：选择编译器/监视器版本，把模型提案交给隔离模拟工具，
+# 最后由离线评价器判分。版本必须显式注入，不能全局替换并改变历史实验语义。
+
 import copy
 from collections.abc import Mapping
 from dataclasses import replace
@@ -76,7 +79,7 @@ def hydrate(work_item: Mapping[str, Any], *, compiler_revision: str = "corrected
     }
     record = _read_source_record(case)
     projection = _source_projection(record, str(work_item["benchmark"]))
-    # Compiler consumes only the projection; offline labels never reach it.
+    # 编译器只接收可信输入投影；离线答案/攻击标签不能进入自动权限编译。
     request, app, schemas = _runtime_inputs(projection, str(work_item["benchmark"]))
     compiler = _compiler(str(work_item["benchmark"]), compiler_revision)
     manifest = compiler(
@@ -121,9 +124,8 @@ class DevelopmentM3Backend(CorrectedM3EffectBackend):
             or isinstance(observation, str) and observation.startswith("ERROR:")
         ) and observation is not None
         is_data = tool == "read_file" and succeeded
-        # Classification is the immutable fixture namespace, never model
-        # claims or expected unsafe labels. Existing boundary may reject this
-        # virtual sensitive path; a rejected read never registers its content.
+        # 分类依据是固定测试环境的命名空间，不是模型声明或预期攻击结果。
+        # 若隔离层拒绝读取，则没有取得数据，不登记其内容或保密标签。
         try:
             sensitive = _is_virtual_secret(_normalize_logical_path(str(arguments.get("path", ""))))
         except ValueError:
@@ -220,6 +222,7 @@ class CorrectnessRuntime:
             return self.agentdojo.build_backend(context, schemas)
 
         tracker = TrustedDataLabelTracker()
+        # 追踪器及工具模式表每个任务独立创建，并发任务不得共享这些可变状态。
         schema_holder = {}
 
         def manifest_factory(context, view, schemas):
@@ -232,7 +235,7 @@ class CorrectnessRuntime:
             return oracle
 
         def corrected_monitor(manifest, modules):
-            # Keep model-facing policy identical; regime only changes Guard scope.
+            # 模型所见提示保持一致；授权制度只改变防护检查范围，防止混杂。
             guard_manifest = _transform_manifest(manifest, self.authorization_regime) if self.authorization_regime in {"broad", "underspecified", "conflicting"} else manifest
             return RuntimeMonitorCorrectedV2(guard_manifest, modules=modules, tracker=tracker, tool_schemas=schema_holder)
 
@@ -253,13 +256,14 @@ class CorrectnessRuntime:
             physical_attempt_namespace=client.physical_attempt_namespace,
         )
         before = sha256_canonical_json(state)
-        # A recovery spends only the unconsumed part of the original eight calls.
-        # Keep the immutable historical condition profile unchanged.
+        # 故障恢复只用原调用上限中未消耗的部分，不为重试额外增加研究预算。
+        # 历史条件配置保持不变，当前剩余上限仅存在于这次任务的实例中。
         profile = replace(profile_for(condition), max_provider_calls=remaining_calls)
         raw = dict(live.execute(context, profile))
         if before != sha256_canonical_json(state):
             raise ValueError("online state mutation")
         evaluator = self.m3_evaluator if context.benchmark == "m3-v2" else self.agentdojo_evaluator
+        # 判分在执行之后进行。运行状态、任务完成和危险效果是不同字段，可以并存。
         outcome = evaluator.evaluate(work_item, raw)
         events = public_events(raw.get("events"))
         return {

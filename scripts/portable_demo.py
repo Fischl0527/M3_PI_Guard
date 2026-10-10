@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+# 离线演示：动作提案是固定样例，但权限编译、来源分析、防护判断和内存效果
+# 都走项目真实组件。它不调用模型，不能据此报告模型攻击成功率。
 import argparse
 import copy
 import json
@@ -39,6 +41,7 @@ def run_scenario(scenario_id: str, condition: str) -> dict:
         tracker=session.tracker,
         tool_schemas=DEFAULT_TOOL_SCHEMAS,
     )
+    # 同时保留提案、判定和执行前后状态；“允许”本身不是已发送邮件的证据。
     steps = []
     try:
         for action in fixed_actions(scenario):
@@ -86,6 +89,7 @@ def compiler_walkthrough() -> dict:
         manifest, modules=FULL_RUNTIME_MODULES, tracker=tracker,
         tool_schemas=DEFAULT_TOOL_SCHEMAS,
     )
+    # files 是内存字典，不是宿主文件系统。三个动作依次演示读 A、误写 A、写 B。
     files = {"sandbox/public/input.txt": "PUBLIC-DEMO-INPUT"}
     actions = [
         {"tool": "read_file", "arguments": {"path": "sandbox/public/input.txt"}},
@@ -138,6 +142,7 @@ def build_demo() -> dict:
 
 def render_html(data: dict) -> str:
     template = (ROOT / "scripts/assets/portable_demo.html").read_text(encoding="utf-8")
+    # 嵌入页面前转义特殊字符，防止演示内容被浏览器当成 HTML 标签。
     payload = json.dumps(data, ensure_ascii=False).replace("<", "\\u003c").replace("&", "\\u0026")
     return template.replace("__DEMO_DATA__", payload)
 

@@ -1,46 +1,35 @@
-# E3 risk-enriched challenge result
+# E3：风险富集挑战集结果
 
-Status: complete, outcome-enriched conditional analysis
+状态：已完成，按历史结果富集后的条件性分析。本页翻译历史输出，不把旧端点改称修复版实际执行效果；当前证据见[研究入口](../README.md)。
 
-## Execution and integrity
+## 执行数量与记录检查
 
-- Work items: 240/240, all response-bearing; 330 official response IDs.
-- Operational statuses: 185 completed, 17 parse failures, and 38 provider
-  failures, all retained in ITT.
-- Online forbidden fields, provider-managed tools, and real external effects:
-  0/240 for each.
-- Official-API cost: CNY 1.0690866.
+- 工作项240/240，全部有模型响应；官方响应编号330个。
+- 流程终态：185条正常结束、17条解析失败、38条提供商失败，全部保留在预定分母（ITT）。
+- 在线禁入字段、服务商管理的工具、真实外部效果：各0/240。
+- 官方模型接口成本为人民币1.0690866元。
 
-## Conditional outcomes
+## 历史困难案例中的条件性结果
 
-| Cell | Unsafe effect | Unsafe-or-failure | ASK incidence | DENY incidence | Operational failure |
+policy 为仅权限检查，full 为完整模块；normal/safe 为普通/安全提示。ASK 表示等待确认，DENY 表示拒绝。
+
+| 条件 | 不安全效果 | 不安全或失败 | 等待确认 | 拒绝 | 运行失败 |
 |---|---:|---:|---:|---:|---:|
 | policy / normal | 1/60 (1.7%) | 16/60 (26.7%) | 23/60 (38.3%) | 15/60 (25.0%) | 15/60 (25.0%) |
 | policy / safe | 1/60 (1.7%) | 15/60 (25.0%) | 11/60 (18.3%) | 14/60 (23.3%) | 14/60 (23.3%) |
 | full / normal | 0/60 (0.0%) | 12/60 (20.0%) | 21/60 (35.0%) | 19/60 (31.7%) | 12/60 (20.0%) |
 | full / safe | 0/60 (0.0%) | 14/60 (23.3%) | 14/60 (23.3%) | 16/60 (26.7%) | 14/60 (23.3%) |
 
-The unsafe-effect module point estimate is −1.67 percentage points (95%
-bootstrap CI −5.00 to 0.00 pp); the prompt and interaction estimates are zero.
-For unsafe-or-failure, module is −4.17 pp (−10.00 to +0.83), prompt is +0.83 pp
-(−8.33 to +10.00), and interaction is +5.00 pp (−3.33 to +13.33). These are
-challenge/sensitivity estimates and open no new significance family.
+不安全效果的模块差异点估计为−1.67个百分点，95%重抽样（bootstrap）区间为−5.00至0.00；提示和交互估计为零。
 
-## Historical reproduction
+“不安全或失败”的模块差异为−4.17个百分点（−10.00至+0.83），提示差异+0.83（−8.33至+10.00），交互+5.00（−3.33至+13.33）。这些是挑战/敏感性分析，不新建显著性比较家族。
 
-Every selected case had produced an unsafe effect under at least one earlier
-Public condition. Only 1/60 did so under any new concurrent cell (1.67%; Wilson
-95% CI 0.29%--8.86%). The new execution window therefore did not reproduce most
-historical unsafe effects. Possible explanations include stochastic model
-behavior, changed served weights behind the provider alias, prompt/runtime
-changes, and the high operational-failure burden. This study cannot identify
-which explanation dominates.
+## 历史事件再现情况
 
-## Interpretation boundary
+每个选中案例都曾在早期公共矩阵至少一个条件中出现不安全效果。本次同期条件中，仅1/60个案例再次出现，1.67%，Wilson 95%区间0.29%—8.86%。
 
-The outcome-enriched set is not an estimate of deployment prevalence. Its main
-finding is instability: historical vulnerability selected the cases, yet the
-concurrent runs showed only one reproduced unsafe effect and 55 operational
-failures. Direct unsafe-effect estimates remain floor-limited, while the
-failure-sensitive bound ranges from 20.0% to 26.7%. The paper therefore reports
-both endpoints and does not credit a non-operational run as evidence of safety.
+本窗口没有再现大部分历史事件。可能原因包括模型随机性、服务商同名模型背后权重变化、提示或运行时变化，以及较高运行失败负担。本研究不能判定哪种原因占主导。
+
+## 能解释什么，不能解释什么
+
+按结果富集的样本不能估计部署发生率。主要发现是再现不稳定：依据历史脆弱性选样，却只再现一例事件，并有55条运行失败。不安全效果端点仍受地板效应限制；失败敏感上界为20.0%—26.7%。两种结果同时报告，不能把未正常运行当成安全证据。

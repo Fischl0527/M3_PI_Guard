@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+# 换环境验收只核对受信输入、权限编译和原始计数，不调用模型、不重算历史推断。
+# fixtures/portability 的输入由交付包构建器导出；本脚本应在完整交付包中运行。
 import argparse
 import json
 import platform
@@ -55,6 +57,7 @@ def derive_counts(rows: list[dict]) -> dict:
     for key, selected in sorted(groups.items(), key=lambda item: str(item[0])):
         cell = dict(zip(("benchmark", "case_type", "condition", "regime", "model"), key))
         cell["planned_or_recorded"] = len(selected)
+        # True/False/未知分别计数。缺少执行或评分证据不能自动归入“安全”或“完成”。
         for endpoint in ("unsafe_effect", "task_completion"):
             counts = Counter("true" if row.get(endpoint) is True else "false" if row.get(endpoint) is False else "unknown" for row in selected)
             cell[endpoint] = {name: counts[name] for name in ("true", "false", "unknown")}

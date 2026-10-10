@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+# 表格只展示缓存分析。中文分支只改显示词，不改条件键、分子/分母、区间或端点。
 import json
 from pathlib import Path
 
@@ -130,7 +131,12 @@ def current_tables(
         ]
         design_headers = ("研究", "案例", "执行分配", "条件", "范围")
         names = ("授权主队列", "嵌套压力授权", "同期校准", "合成控制")
-        designs = [(names[i], *row[1:]) for i, row in enumerate(designs)]
+        designs = [
+            (names[0], "180", "720", "仅权限/完整模块；自动编译/精确目标", "Pro；普通提示"),
+            (names[1], "60（嵌套）", "180", "完整模块；宽泛/约束不足/冲突授权", "Pro；普通提示"),
+            (names[2], "120", "480", "无研究防护/仅权限/完整模块/VIGIL适配配置", "Pro；普通提示"),
+            (names[3], "4种场景", "16", "仅权限/完整模块", "Pro + V4.1 Flash"),
+        ]
         notes = [
             "授权主队列与压力授权合计900条分配，不是900个独立任务；队列重叠。精确目标是离线答案派生的理想对照，不是部署授权。配置VIGIL生成约束、确定性hybrid审计，关闭模型二次验证；请求上限16，其他校准条件8。",
             "每单元30个计划良性工具任务。分数使用已观察分母；方括号是缓存Wilson 95%区间（百分比），不是配对差区间。本表结果均已知；失败仍在原分母，且可与完成同时成立。ASK/DENY是事件数，不是不同任务数。两模块都用普通提示。",
@@ -154,15 +160,19 @@ def current_tables(
             ("m3_policy_only", "Policy"),
             ("m3_full_normal_prompt", "Full"),
         ):
+            module_display = ("仅权限" if module == "Policy" else "完整模块") if chinese else module
             for regime, regime_label in (
                 ("auto_compiled", "Auto"),
                 ("exact_target_v2", "Exact target"),
             ):
                 cell = authorization_cells[benchmark, "benign_tool", condition, regime]
+                regime_display = (
+                    "自动编译" if regime == "auto_compiled" else "精确目标"
+                ) if chinese else regime_label
                 authorization_rows.append(
                     (
-                        f"{label} / {module}",
-                        regime_label,
+                        f"{label} / {module_display}",
+                        regime_display,
                         _fraction(cell["completion"]),
                         f"{cell['failures']}/{cell['planned']}",
                         f"{cell['ask_count']} / {cell['deny_count']}",
@@ -176,9 +186,13 @@ def current_tables(
         ):
             attack = calibration_cells[benchmark, "attack", condition]
             benign = calibration_cells[benchmark, "benign_tool", condition]
+            role_display = {
+                "ND": "无研究防护", "Policy": "仅权限", "Full": "完整模块",
+                "VIGIL configured": "VIGIL适配配置",
+            }[role] if chinese else role
             calibration_rows.append(
                 (
-                    f"{label} / {role}",
+                    f"{label} / {role_display}",
                     _fraction(attack["unsafe"]),
                     _fraction(benign["completion"]),
                     f"{attack['unsafe']['unknown']} / {benign['completion']['unknown']}",
@@ -213,9 +227,15 @@ def current_tables(
                     )
                 return f"{int(row['unsafe_effect'])} / {int(row['task_completion'])}"
 
+            scenario_display = {
+                "private_restricted": "私密内容发往受限邮箱",
+                "public_restricted": "公开内容发往受限邮箱",
+                "private_archive": "私密内容内部归档",
+                "missing_classification": "数据分类缺失",
+            }[scenario] if chinese else scenario.replace("_", " ")
             control_rows.append(
                 (
-                    f"{label} / {scenario.replace('_', ' ')}",
+                    f"{label} / {scenario_display}",
                     uc(policy),
                     uc(full),
                     f"{full['ask_count']} / {full['deny_count']}",
@@ -248,7 +268,7 @@ def current_tables(
     ]
     if chinese:
         headers[1:] = [
-            ("基准/模块", "授权", "完成 [95%区间, %]", "失败/计划", "ASK/DENY"),
+            ("基准/模块", "授权", "完成 [95%区间, %]", "失败/计划", "等待确认/拒绝"),
             (
                 "基准/条件",
                 "攻击 [95%区间, %]",
@@ -258,10 +278,10 @@ def current_tables(
             ),
             (
                 "模型/场景",
-                "Policy U/C",
-                "Full U/C",
-                "Full ASK/DENY",
-                "发送 Policy/Full",
+                "仅权限 危险/完成",
+                "完整模块 危险/完成",
+                "完整模块 等待/拒绝",
+                "发送 仅权限/完整模块",
             ),
         ]
     return [

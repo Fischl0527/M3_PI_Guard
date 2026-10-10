@@ -1,54 +1,45 @@
-# E1 concurrent prompt-by-module factorial result
+# E1：同期提示词与模块因子实验结果
 
-Status: complete, prespecified ITT analysis
+状态：已完成，按预先规定的全部分配分母（ITT）分析。
 
-## Execution and integrity
+阅读说明：本页翻译历史结果，不重新判分。此处“不安全效果”的名称保留当时端点定义，不等同于修复版实际执行效果。表中的零宽重抽样区间是历史输出，不能解释为风险确定为零。当前主证据见[研究入口](../README.md)。
 
-- Planned/latest terminal work items: 720/720 (180 per cell).
-- Response-bearing work items: 720; official response IDs: 1,102.
-- Append-only physical rows: 722, including two superseded response-less
-  engineering attempts; no successful work item was rerun.
-- Operational statuses: 657 completed, 54 parse failures, and 9 provider
-  failures. All 63 non-completed outcomes remain in ITT.
-- Online forbidden fields, provider-managed tools, and real external effects:
-  0/720 for each.
-- Conservative official-API cost: CNY 3.6602862, below the CNY 8 fuse.
+## 执行数量与记录检查
 
-## Cell outcomes
+- 计划项及最新终态：720/720，每个条件180条。
+- 有模型响应的工作项720条；官方响应编号1,102个。
+- 只追加、不覆盖的原始记录722行，包括两条被后续尝试取代的无响应工程记录；成功项没有重跑。
+- 流程终态：657条正常结束、54条解析失败、9条提供商失败。63条非正常结束均保留在预定分母。
+- 在线禁入字段、服务商管理的工具、真实外部效果：各0/720。
+- 保守官方接口成本为人民币3.6602862元，低于当时8元保护线。
 
-| Cell | Attack unsafe effect | Attack unsafe-or-failure | Benign-tool TCR | ASK incidence | DENY incidence | Operational failure |
+## 四个条件的结果
+
+policy 表示仅权限检查，full 表示完整模块；normal/safe 分别是普通/安全提示。ASK 为等待确认，DENY 为拒绝，TCR 为任务完成率。
+
+| 条件 | 攻击不安全效果 | 攻击不安全或失败 | 良性工具任务完成 | 等待确认 | 拒绝 | 运行失败 |
 |---|---:|---:|---:|---:|---:|---:|
 | policy / normal | 1/100 (1.0%) | 9/100 (9.0%) | 23/60 (38.3%) | 65/180 (36.1%) | 15/180 (8.3%) | 15/180 (8.3%) |
 | policy / safe | 1/100 (1.0%) | 11/100 (11.0%) | 21/60 (35.0%) | 55/180 (30.6%) | 16/180 (8.9%) | 16/180 (8.9%) |
 | full / normal | 0/100 (0.0%) | 7/100 (7.0%) | 21/60 (35.0%) | 63/180 (35.0%) | 22/180 (12.2%) | 16/180 (8.9%) |
 | full / safe | 0/100 (0.0%) | 8/100 (8.0%) | 19/60 (31.7%) | 62/180 (34.4%) | 21/180 (11.7%) | 16/180 (8.9%) |
 
-## Prespecified factor estimates
+## 预先规定的因子估计
 
-Absolute effects are probability differences. Confidence intervals use 10,000
-case-cluster bootstrap replicates. The three factors are Holm-adjusted within
-each co-primary endpoint family (`unsafe_effect` and benign-tool TCR). The
-prespecified `unsafe-or-failure` sensitivity endpoint is reported with its
-descriptive bootstrap p-value and is not part of a Holm family.
+效应是概率的绝对差，pp 表示百分点。区间来自10,000次按案例聚类的重抽样（bootstrap）。每个共同主终点家族（不安全效果、良性工具完成）内，三个因子采用 Holm 多重比较校正。“不安全或失败”是预定敏感性终点，只报告描述性重抽样 p 值，不纳入 Holm 家族。
 
-| Endpoint | Factor | Effect | 95% bootstrap CI | p-value role |
+| 终点 | 因子 | 效应 | 95%重抽样区间 | p值用途 |
 |---|---|---:|---:|---:|
-| Attack unsafe effect | modules (full − policy) | −1.00 pp | [−3.00, 0.00] pp | Holm 1.000 |
-| Attack unsafe effect | prompt (safe − normal) | 0.00 pp | [0.00, 0.00] pp | Holm 1.000 |
-| Attack unsafe effect | module × prompt | 0.00 pp | [0.00, 0.00] pp | Holm 1.000 |
-| Attack unsafe-or-failure | modules | −2.50 pp | [−5.50, 0.00] pp | descriptive bootstrap 0.0938 |
-| Attack unsafe-or-failure | prompt | +1.50 pp | [−3.00, +6.00] pp | descriptive bootstrap 0.5868 |
-| Attack unsafe-or-failure | module × prompt | −1.00 pp | [−5.00, +3.00] pp | descriptive bootstrap 0.8206 |
-| Benign-tool TCR | modules | −3.33 pp | [−8.33, 0.00] pp | Holm 0.2880 |
-| Benign-tool TCR | prompt | −3.33 pp | [−10.83, +4.17] pp | Holm 0.8992 |
-| Benign-tool TCR | module × prompt | 0.00 pp | [−6.67, +8.33] pp | Holm 1.000 |
+| 攻击不安全效果 | 模块（full − policy） | −1.00 pp | [−3.00, 0.00] pp | Holm 1.000 |
+| 攻击不安全效果 | 提示词（safe − normal） | 0.00 pp | [0.00, 0.00] pp | Holm 1.000 |
+| 攻击不安全效果 | 模块 × 提示词 | 0.00 pp | [0.00, 0.00] pp | Holm 1.000 |
+| 攻击不安全或失败 | 模块 | −2.50 pp | [−5.50, 0.00] pp | 描述性重抽样 0.0938 |
+| 攻击不安全或失败 | 提示词 | +1.50 pp | [−3.00, +6.00] pp | 描述性重抽样 0.5868 |
+| 攻击不安全或失败 | 模块 × 提示词 | −1.00 pp | [−5.00, +3.00] pp | 描述性重抽样 0.8206 |
+| 良性工具完成率 | 模块 | −3.33 pp | [−8.33, 0.00] pp | Holm 0.2880 |
+| 良性工具完成率 | 提示词 | −3.33 pp | [−10.83, +4.17] pp | Holm 0.8992 |
+| 良性工具完成率 | 模块 × 提示词 | 0.00 pp | [−6.67, +8.33] pp | Holm 1.000 |
 
-## Interpretation boundary
+## 能解释什么，不能解释什么
 
-E1 successfully removes the prompt-profile/runtime-module confounding, but it
-does not resolve the safety-floor limitation: only two unsafe effects occurred
-across 400 assigned attack runs. The point estimates do not provide evidence
-of a prompt main effect or interaction, and the module estimates are small with
-intervals including zero. The challenge study (E3) is therefore necessary for
-conditional robustness on historically difficult cases; it cannot be used to
-estimate deployment prevalence.
+E1 将提示配置与运行模块分开操纵，但没有解决安全事件过少的问题：400条攻击分配中仅出现两条不安全效果。点估计没有提供提示主效应或交互的证据，模块差异较小且区间含零。E3 因而用于观察历史困难案例的条件性稳健程度，不能据此估计部署中的攻击发生率。

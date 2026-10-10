@@ -1,63 +1,45 @@
-# E2 source-authority counterfactual result
+# E2：来源权威性反事实实验结果
 
-Status: complete, end-to-end and deterministic Guard evidence separated
+状态：已完成，端到端执行与确定性防护回放分开报告。本页为历史结果中文说明，不重新判分；当前证据边界见[研究入口](../README.md)。
 
-## Execution and integrity
+## 执行数量与记录检查
 
-- End-to-end work items: 240/240, all response-bearing.
-- Official response IDs: 295; operational status: 239 completed and one
-  provider failure, retained in ITT.
-- Online forbidden fields, provider-managed tools, and real external effects:
-  0/240 for each.
-- End-to-end official-API cost: CNY 0.4254876.
-- Deterministic Guard replay: 480/480 decisions and zero provider calls.
+- 端到端工作项240/240，全部取得模型响应。
+- 官方响应编号295个；239条流程正常结束、1条提供商失败，失败保留在全部预定分配分母（ITT）。
+- 在线禁入字段、服务商管理的工具、真实外部效果：各0/240。
+- 官方模型接口成本为人民币0.4254876元。
+- 确定性防护回放480/480次判定，不调用模型。
 
-## End-to-end result
+## 端到端结果
 
-No cell executed an authorized, unauthorized, or other action. Consequently,
-unauthorized-argument influence, authorized-action execution, and their source,
-module, and source-by-module contrasts are all 0. This is an endpoint floor,
-not evidence that source authority has no effect: confirmation and blocking
-intervened before any action was executed.
+四个条件均没有执行授权、未授权或其他动作。因此，未授权参数影响、授权动作执行及其来源、模块、来源×模块对比都为零。这是动作在执行前被确认或阻断形成的地板效应，不能证明来源权威性没有影响。
 
-| Cell | ASK incidence | DENY incidence | Operational failure | Executed actions |
+policy 表示仅权限检查，full 表示完整模块；trusted/untrusted 表示可信/不可信来源。ASK 为等待确认，DENY 为拒绝。
+
+| 条件 | 等待确认 | 拒绝 | 运行失败 | 已执行动作 |
 |---|---:|---:|---:|---:|
 | policy / trusted | 60/60 (100.0%) | 0/60 | 0/60 | 0/60 |
 | policy / untrusted | 53/60 (88.3%) | 0/60 | 0/60 | 0/60 |
 | full / trusted | 57/60 (95.0%) | 0/60 | 0/60 | 0/60 |
 | full / untrusted | 0/60 | 55/60 (91.7%) | 1/60 (1.7%) | 0/60 |
 
-The paired source swap changed the actual executed-action tuple in 0/60 tasks
-for both policy and full modules. It changed operational status in 0/60 policy
-pairs and 1/60 full pairs; the latter is reported separately and is not counted
-as an action change.
+只交换来源后，两种模块配置均为0/60个任务改变了实际执行动作。运行状态改变分别为policy的0/60和full的1/60；后一项单列，不能计为动作变化。
 
-## Deterministic Guard replay
+## 确定性防护回放
 
-The replay sends an authorized and an unauthorized proposal through each
-source-by-module context:
+每个来源×模块上下文分别接收一个授权提案和一个未授权提案：
 
-- false allow: 0/240 unauthorized proposals (0.0%; Wilson 95% CI
-  0.0%--1.58%);
-- false block: 30/240 authorized proposals (12.50%; 95% CI
-  8.90%--17.28%);
-- policy/trusted: 60 ALLOW and 60 ASK;
-- policy/untrusted: 60 ALLOW and 60 ASK;
-- full/trusted: 60 ALLOW and 60 ASK; and
-- full/untrusted: 30 ALLOW, 30 ASK, and 60 DENY.
+- 错误放行：未授权提案0/240，0.0%；Wilson 95%比例区间0.0%—1.58%。
+- 错误阻断：授权提案30/240，12.50%；95%区间8.90%—17.28%。
+- policy/trusted：60次允许（ALLOW），60次等待确认（ASK）。
+- policy/untrusted：60次允许，60次等待确认。
+- full/trusted：60次允许，60次等待确认。
+- full/untrusted：30次允许、30次等待确认、60次拒绝（DENY）。
 
-The replay therefore demonstrates mechanism-level provenance sensitivity in
-the full configuration: the same proposals become DENY-eligible when their
-critical proposition is moved to an untrusted origin. Policy-only does not
-change its decision distribution under the source swap.
+受控回放显示完整配置的机制级来源敏感性：关键命题移到不可信来源时，同一提案可能变为拒绝。仅权限配置的判定分布没有随来源交换而改变。
 
-## Interpretation boundary
+## 能解释什么，不能解释什么
 
-The end-to-end study reveals a confirmation bottleneck rather than usable task
-completion: trusted-origin tasks were overwhelmingly routed to ASK and none
-executed without independent confirmation. The offline result may support a
-claim about deterministic Guard behavior, but it cannot be substituted for
-end-to-end task utility or for a human confirmation study. The correct paper
-claim is therefore two-part: provenance affects full-Guard decisions under a
-controlled source swap, while the tested model--Guard system did not convert
-that mechanism into completed actions and incurred high ASK/DENY burden.
+端到端研究揭示确认瓶颈，而非可用的任务完成：可信来源任务大量等待确认，没有任务在独立确认前执行动作。离线结果可以支持受控防护判定的主张，不能替代端到端效用或真人确认研究。
+
+因此结论分两层：来源影响受控完整防护的判断；所测模型与防护组合没有将其转成已完成动作，并产生较高确认/拒绝负担。

@@ -41,7 +41,7 @@ non-authorizing closeout gate v4，并建立了真正绑定
 这一处理保留了历史证据不可变性，也使本次运行身份、candidate、admission、
 quota day、work-key 和输出根形成一条前瞻闭合链。
 
-## 3. fresh Harness gate v4
+## 3. 新工程准入检查（第4版）
 
 gate v4 绑定 fresh Harness v6 的 launch、running、stdout、stderr、receipt、helper
 和 launcher，同时重放以下前置证据：
