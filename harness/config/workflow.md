@@ -154,10 +154,16 @@ stateDiagram-v2
 
 ## 精简实证阶段的 Git 检查点
 
-`F-PAPER-002` 在 `codex/q2-empirical-study` 分支工作。正式 GitHub 远程
-`origin` 指向 `https://github.com/Fischl0527/RedTeam_LLM_Security.git`；
-`m3-guard` 仅保留为旧 `M3_PI_Guard` 仓库的兼容远程。禁止 force-push，
-按已获授权将研究里程碑推送到 `origin/codex/q2-empirical-study`。
+2026-10-11 用户选择独立科研仓库后，正式 GitHub 远程 `origin` 指向
+`https://github.com/Fischl0527/M3_PI_Guard.git`，默认研究分支仍为
+`codex/q2-empirical-study`。`m3-guard` 保留为同一独立仓库的兼容远程；
+`competition-origin` 保留原 `Fischl0527/RedTeam_LLM_Security` 关联，仅供历史参考。
+不改朋友仓库、旧 PR、可见性、许可证或原提交作者，不 force-push。
+
+当前开发分支 `codex/claude-review-repairs` 同步到独立仓库的同名分支，
+并跟踪 `origin/codex/claude-review-repairs`；科研里程碑发布时显式使用
+`git push origin HEAD:refs/heads/codex/q2-empirical-study`，禁止默认推回比赛仓库。
+后续分支切换仍应先保留正在进行的本地工作，不通过丢弃未提交内容换分支。
 
 按以下研究里程碑提交，避免在每条记录或每次失败后制造提交：
 

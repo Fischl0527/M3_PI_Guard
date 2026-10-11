@@ -8,6 +8,42 @@
   ],
   "features": [
     {
+      "id": "F-GIT-002",
+      "name": "独立科研主仓库同步",
+      "description": "将当前已提交科研项目与已验证中文手册正常同步至个人独立仓库，保留历史贡献和本地进行中的工作。",
+      "status": "in_progress",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "独立私有仓库默认研究分支获得当前项目和已验证中文主手册",
+        "只正常快进，不改原提交作者、旧PR、朋友仓库或仓库可见性",
+        "本地origin及活动Git工作流指向独立仓库，保留旧比赛remote",
+        "已有用户暂存、未验证代码、资料搬移、子模块及秘密/临时产物不混入本次提交",
+        "公开范围与远端提交经过核对，必要Harness状态和移交同步"
+      ],
+      "verification": []
+    },
+    {
+      "id": "F-DOC-003",
+      "name": "单篇中文项目手册",
+      "description": "在一个自足文档中串起任务、权限、提案、运行检查、模拟效果、评分、研究证据及跨环境运行，减少必读文档跳转。",
+      "status": "verified",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "旧交接原文完整保留，当前事实与历史解释分开",
+        "主体不依赖其他文档即可理解项目并按说明演示",
+        "真实模型案例、固定动作演示和科研统计的证据层级明确",
+        "当前数字、目录、命令及链接经过定向检查和新上下文读者检查",
+        "不修改科研代码、论文、原始结果或无关用户改动"
+      ],
+      "verification": [
+        "2026-10-11: existing handover rewritten into twelve self-contained Chinese chapters with fixed-action walkthrough, public real-model case, current900/480/16/60 evidence, statistics, outputs map, cross-environment commands and teacher Q&A; old text preserved as normalized-text snapshot",
+        "Two current documents:71 repository-local links,13 unique explicit chapter anchors, zero missing paths/bad anchors/unclosed fences; main manual contains zero required outbound Markdown links;11 real code/package operation paths checked",
+        "Fresh-context single-file reader answers8/8 core questions; followup confirms ND/trace definitions, tested-Python boundary and uncounted cross-study task union; source-aware reviewer checks current numerators/denominators, CIs, failures and commands",
+        "Scoped git diff --check and feature JSON pass; all other feature objects including F-PAPER-002 preserved; user-deleted demo HTML/JSON and unrelated dirty remain untouched",
+        "Documentation-only scope: no API, new demo, test execution, statistics rerun, Full Harness, manuscript/LaTeX edits, Git commit/push/PR;119/276 tests are historical evidence, not this task execution"
+      ]
+    },
+    {
       "id": "F-DOC-002",
       "name": "中文注释与文档阅读入口",
       "description": "解释当前权限、来源、模拟执行和判分路径，中文化活动文档，并维护英文投稿稿对应的中文参考版。",

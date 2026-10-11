@@ -1,5 +1,21 @@
 # 会话移交
 
+## 2026-10-11 — 独立科研仓库同步进行中
+
+- 用户已授权当前研究同步到`Fischl0527/M3_PI_Guard`；默认研究分支`codex/q2-empirical-study`。本地仍为`E:\M3_PI_Guard_test`、`codex/claude-review-repairs`。
+- 仅提交本次入口/工作流/状态及上轮已验证主手册；历史提交原样保留。用户参考论文搬移、17条已有PDF暂存、字体、未验证旧端点代码、子模块dirty、预览和默认demo删除不覆盖或消费。
+- 任务`harness/tasks/research-repository-sync-20261011.md`列出确切范围与检查；推送前不能称完成。F-PAPER-002保持in_progress；不自动启动任何实验或论文编译。
+
+## 2026-10-11 — 单篇手册完成，等待用户阅读
+
+- 当前入口 `docs/LLM的千层诱惑.md` 为12章完整中文手册（约4.4万字符），没有必读外部跳转；README指向它。旧文原样内容归档在 `docs/archive/entry_snapshots_20261010/LLM的千层诱惑.md`，保留原链接基准，不当当前导航。
+- 变更仅上述3份docs与 `harness/tasks/single-file-project-manual-20261011.md`、feature_list、current-task、progress、task-history、session-handoff、failure-log、decision-log。本轮不改代码、论文/raw、外部项目或用户既有dirty。
+- 验证：71本地链接、13显式唯一锚点、11实际运行依赖路径、围栏无错；主体0外部Markdown链接。原文归一化文本保存、feature JSON及范围diff空白检查通过；F-DOC-003=verified，其他feature对象未变，F-PAPER-002仍in_progress。
+- 新上下文读者仅主文回答8问PASS，四处小缺已补清并复读；来源复核确认当前数字、CI、失败、model与主仓库/包路径。不是外部独立审稿或新运行资格验证。119/276为历史测试，本轮没有pytest/Ruff/新演示/API/统计/FullHarness/PDF构建。
+- 原默认outputs/portability/demo页面与JSON仍删除；主仓库需要用户按第10章生成独立preview，本轮未生成。完整包verify必须在嵌套包根，不能因根脚本存在忽略输入。旧包不会自动包含今天手册。
+- 无Git commit/push/PR。本轮权限不自动交付远端；如用户随后授权Git，单独核对branch/remote/已暂存内容，仅提交这次文档状态，不混入已有论文计划、旧端点、字体、子模块和默认页面删除。
+- 下一建议：用户先按1–4章理解例子，再看6、8章讲实际证据，10章用于自己的演练。没有新命令不恢复Gemini、启动模型研究或改论文。
+
 ## 2026-10-10 — 中文阅读范围已验证，按现有PR交付
 
 - 任务harness/tasks/chinese-localization-20261010.md，F-DOC-002 verified仅指本轮当前阅读路径；F-PAPER-002仍in_progress，不扩大成全库翻译／独立科学审阅／投稿完成。新报告docs/中文注释与文档整理报告_2026-10-10.md，代码指南及中文论文阅读说明给出直接入口。
