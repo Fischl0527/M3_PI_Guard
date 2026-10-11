@@ -1,10 +1,12 @@
 # 会话移交
 
-## 2026-10-11 — 独立科研仓库同步进行中
+## 2026-10-11 — 独立科研仓库同步完成
 
 - 用户已授权当前研究同步到`Fischl0527/M3_PI_Guard`；默认研究分支`codex/q2-empirical-study`。本地仍为`E:\M3_PI_Guard_test`、`codex/claude-review-repairs`。
 - 仅提交本次入口/工作流/状态及上轮已验证主手册；历史提交原样保留。用户参考论文搬移、17条已有PDF暂存、字体、未验证旧端点代码、子模块dirty、预览和默认demo删除不覆盖或消费。
-- 任务`harness/tasks/research-repository-sync-20261011.md`列出确切范围与检查；推送前不能称完成。F-PAPER-002保持in_progress；不自动启动任何实验或论文编译。
+- 任务`harness/tasks/research-repository-sync-20261011.md`列出确切范围与检查；主体3cc6bd3已正常推送且两个远端分支SHA一致。origin指向独立M3_PI_Guard，旧个人比赛fork为competition-origin，m3-guard同目标兼容；本地分支upstream已指新origin。
+- 14提交文件、71实际提交树本地链接、JSON及活动空白检查通过；原17条用户PDF暂存不变，16行既有current-task仍保留未提交。旧包README在线断链改为本地生成路径说明；历史大文件只警告、不清理或改历史。
+- F-GIT-002 verified仅指Git交付；F-PAPER-002保持in_progress。仅将这一真实回执追加提交并正常推送一次，最终ref以对话/Git核对为准，不继续自引用。旧PR未改，不自动启动实验、Gemini恢复或论文编译。
 
 ## 2026-10-11 — 单篇手册完成，等待用户阅读
 

@@ -11,7 +11,7 @@
       "id": "F-GIT-002",
       "name": "独立科研主仓库同步",
       "description": "将当前已提交科研项目与已验证中文手册正常同步至个人独立仓库，保留历史贡献和本地进行中的工作。",
-      "status": "in_progress",
+      "status": "verified",
       "priority": "high",
       "acceptanceCriteria": [
         "独立私有仓库默认研究分支获得当前项目和已验证中文主手册",
@@ -20,7 +20,14 @@
         "已有用户暂存、未验证代码、资料搬移、子模块及秘密/临时产物不混入本次提交",
         "公开范围与远端提交经过核对，必要Harness状态和移交同步"
       ],
-      "verification": []
+      "verification": [
+        "2026-10-11: target API confirms Fischl0527/M3_PI_Guard is private and not a fork; default branch codex/q2-empirical-study remains unchanged",
+        "Remote 0c7a905 is an ancestor of local619cf24; normal push preserves current history and publishes commit3cc6bd3 to q2 and claude-review-repairs, both verified with ls-remote",
+        "Fourteen explicitly selected files include completed Chinese manual and preserved old text, reader entries, Git workflow and task/state; staged tree has71 valid local links, no missing targets, valid feature JSON and no new file over1MB",
+        "Independent staging preserves original17 PDF moves exactly; current-task16 preexisting user lines remain local; default demo deletion, unverified code, fonts, downloaded papers and submodule changes not consumed",
+        "origin now points to independent M3_PI_Guard; competition-origin retains old personal competition fork, m3-guard compatibility alias retained; current branch tracks origin/codex/claude-review-repairs",
+        "Only Git and documentation/state checks performed; no API, scientific rerun, Full Harness, dependency changes or manuscript build; F-PAPER-002 remains in_progress; inherited large-file warnings disclosed"
+      ]
     },
     {
       "id": "F-DOC-003",

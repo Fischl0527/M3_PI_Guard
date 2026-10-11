@@ -38,3 +38,11 @@
 修正后实际检查exit0：14个暂存文件与允许清单完全一致，三入口在实际提交树中的71个本地链接均存在，围栏/feature JSON通过，F-PAPER-002仍in_progress；旧文归一化一致、新文件均小于1MB。活动范围`git diff --cached --check`通过，原样归档不为格式警告改写。原索引`git diff --cached --raw --no-renames`前后逐字相同，17条用户PDF搬移仍在。
 
 本轮不修改Python或科研执行逻辑，故不运行pytest/Ruff/编译或软件全量验收；Git交付成功不等于模型实验、完整论文或所有本地未提交工作已验收。
+
+### 实际Git交付
+
+- `git commit -m 'docs: establish independent research repository and publish Chinese manual'`在临时独立index中完成14文件提交`3cc6bd350575741561d60e53ebde4db406d220f9`；随后仅将允许文件的原index与HEAD对齐，用户17条PDF暂存前后raw逐字一致、current-task既有16行仍为未提交。
+- `git push m3-guard HEAD:refs/heads/codex/q2-empirical-study HEAD:refs/heads/codex/claude-review-repairs`成功，q2正常快进、claude新分支创建。`git ls-remote`确认两者均为上述提交；没有force/mirror或历史改写。
+- GitHub仅提示历史raw56.13MB与PDF53.33MB大于建议50MB，推送exit0；不进行LFS迁移、额外打包或重复研究哈希。
+- `git remote rename origin competition-origin`、`git remote rename m3-guard origin`、`git remote add m3-guard https://github.com/Fischl0527/M3_PI_Guard.git`与`git branch --set-upstream-to=origin/codex/claude-review-repairs codex/claude-review-repairs`均成功；远程host/path与branch remote/merge核对正确，没有认证或GitHub权限变化。
+- GitHub API再次确认仓库private=true/fork=false/default_branch=q2；F-GIT-002设verified，其他科研状态保持。该回执追加提交后正常推送一次，最终commit由Git及对话核对，不循环记录回执自身SHA。
