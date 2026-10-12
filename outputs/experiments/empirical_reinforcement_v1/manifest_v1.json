@@ -1,0 +1,58 @@
+{
+  "activity_selection_outcomes": "historical Public primary no_defense/configured VIGIL only",
+  "confirmation_policy": "ASK without real approval is not task completion",
+  "e3_e6_outcomes_accessed": false,
+  "external_effects_enabled": false,
+  "frozen_date": "2026-10-12",
+  "independent_blind_set_used": false,
+  "m3_language_and_authorization_profile_coupled": true,
+  "m3_workflow_types": 4,
+  "max_provider_calls": 18280,
+  "planned_records": 2165,
+  "plans": {
+    "activity_flash": {
+      "case_count": 40,
+      "cases_path": "activity/flash/cases_v1.jsonl",
+      "confirmation_tasks": 0,
+      "formal_prefix_records": 16,
+      "max_provider_calls": 1600,
+      "model_id": "deepseek-flash",
+      "plan_path": "activity/flash/plan_v1.jsonl",
+      "planned_records": 160
+    },
+    "activity_pro": {
+      "case_count": 80,
+      "cases_path": "activity/pro/cases_v1.jsonl",
+      "confirmation_tasks": 0,
+      "formal_prefix_records": 16,
+      "max_provider_calls": 3200,
+      "model_id": "deepseek-v4-pro",
+      "plan_path": "activity/pro/plan_v1.jsonl",
+      "planned_records": 320
+    },
+    "utility_flash": {
+      "case_count": 120,
+      "cases_path": "utility/flash/cases_v1.jsonl",
+      "confirmation_tasks": 20,
+      "formal_prefix_records": 30,
+      "max_provider_calls": 4800,
+      "model_id": "deepseek-flash",
+      "plan_path": "utility/flash/plan_v1.jsonl",
+      "planned_records": 600
+    },
+    "utility_pro": {
+      "case_count": 217,
+      "cases_path": "utility/pro/cases_v1.jsonl",
+      "confirmation_tasks": 40,
+      "formal_prefix_records": 30,
+      "max_provider_calls": 8680,
+      "model_id": "deepseek-v4-pro",
+      "plan_path": "utility/pro/plan_v1.jsonl",
+      "planned_records": 1085
+    }
+  },
+  "provider_tools_enabled": false,
+  "schema_version": "m3-empirical-reinforcement-1.0",
+  "selection_seed": "m3-reinforcement-20261012-v1",
+  "utility_prior_outcomes_accessed": false
+}

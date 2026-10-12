@@ -1,5 +1,12 @@
 # 会话移交
 
+## 2026-10-13 强化实验实施交接
+
+- 实现及定向检查已通过；先Git再执行utility Pro/Flash各30前缀。通过技术门后pending-only，之后activity各16前缀。
+- 输出outputs/experiments/empirical_reinforcement_v1；无自动重试，开放trace先诊断，成功项不重跑。
+- 服务器Ubuntu24 .167/Ubuntu22 LFischl仅离线，不搬密钥；历史/论文/17暂存PDF及另一任务注释保留。
+
+
 ## 2026-10-11 — 独立科研仓库同步完成
 
 - 用户已授权当前研究同步到`Fischl0527/M3_PI_Guard`；默认研究分支`codex/q2-empirical-study`。本地仍为`E:\M3_PI_Guard_test`、`codex/claude-review-repairs`。

@@ -21,7 +21,11 @@ from experiments.paper_v2.exact_target_ablation_v2 import ExactTargetMonitorV2, 
 from experiments.paper_v2.formal_condition_executors import (
     ALL_CONDITION_PROFILES, ConditionProfile, OnlineExecutorContext,
 )
-from experiments.paper_v2.live_condition_runtime import LiveConditionRuntime, M3SandboxEffectBackend
+from experiments.paper_v2.live_condition_runtime import (
+    LiveConditionRuntime,
+    M3SandboxEffectBackend,
+    ProposalCaptureSink,
+)
 from experiments.paper_v2.medium_runtime import FROZEN_GENERATED_AT, _runtime_inputs, _source_projection, _transform_manifest
 from experiments.paper_v2.public_agentdojo_live_dependency_v2 import PublicFrozenAgentDojoCaseResolverV2
 from experiments.paper_v2.public_m3_live_dependency_v4 import PublicFrozenM3CaseResolverV4
@@ -178,7 +182,7 @@ def public_events(events: Any) -> list[dict[str, Any]]:
 
 
 class CorrectnessRuntime:
-    def __init__(self, *, plan_path: Any, execution_identity: str, compiler_revision: str = "corrected_v1", runtime_revision: str = "corrected_v1", authorization_regime: str = "auto_compiled", vigil_factory: Any = None) -> None:
+    def __init__(self, *, plan_path: Any, execution_identity: str, compiler_revision: str = "corrected_v1", runtime_revision: str = "corrected_v1", authorization_regime: str = "auto_compiled", vigil_factory: Any = None, proposal_capture_sink: ProposalCaptureSink | None = None) -> None:
         _compiler("agentdojo-v1", compiler_revision)
         self.compiler_revision = compiler_revision
         if runtime_revision not in {"corrected_v1", "corrected_v2"}:
@@ -188,6 +192,7 @@ class CorrectnessRuntime:
         self.runtime_revision = runtime_revision
         self.authorization_regime = authorization_regime
         self.vigil_factory = vigil_factory
+        self.proposal_capture_sink = proposal_capture_sink
         self.agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
         self.m3 = PublicFrozenM3CaseResolverV4(plan_path=plan_path, execution_identity=execution_identity)
         self.m3_evaluator = CorrectedM3OutcomeEvaluator(self.m3)
@@ -246,6 +251,7 @@ class CorrectnessRuntime:
             monitor_factory=corrected_monitor if self.runtime_revision == "corrected_v2" else RuntimeMonitorCorrectedV1,
             oracle_monitor_factory=oracle_factory if self.authorization_regime == "exact_target_v2" else None,
             provenance_tracker_factory=lambda: tracker,
+            proposal_capture_sink=self.proposal_capture_sink,
             vigil_factory=self.vigil_factory if baseline else None,
             safety_receipt_factory=build_boundary_aware_safety_receipt_v3,
             capture_runtime_failures=True,

@@ -1,5 +1,12 @@
 # 当前任务
 
+### 2026-10-13 强化实验：离线资格化完成，模型前缀待执行
+
+- F-EXP-REINFORCE-001 in_progress；2165计划项，R3最多457捕获对及320受控判定。
+- 已修并发孤儿、终态门、Python3.10兼容；定向测试及两服务器独立统计/机制检查。
+- 任务：harness/tasks/empirical-reinforcement-20261012.md；不重跑历史/Gemini/FullHarness/论文。
+
+
 ### 2026-10-11 独立科研仓库同步（已核验）
 
 - 用户授权将当前研究同步至 `Fischl0527/M3_PI_Guard`；任务 `harness/tasks/research-repository-sync-20261011.md`，F-GIT-002。

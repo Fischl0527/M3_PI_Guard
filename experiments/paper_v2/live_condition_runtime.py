@@ -191,6 +191,18 @@ class ResearchMessageBuilder(Protocol):
     ) -> list[dict[str, str]]: ...
 
 
+class ProposalCaptureSink(Protocol):
+    """在经解析的提案、Guard 判定前边界处的预期观察器。"""
+
+    def __call__(
+        self,
+        proposal: ActionProposal,
+        manifest: TaskPolicyManifest,
+        tool_schemas: Mapping[str, Mapping[str, Any]],
+        capture_context: Mapping[str, Any],
+    ) -> None: ...
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -914,6 +926,7 @@ class LiveConditionRuntime:
         monitor_factory: Callable[..., Any] | None = None,
         oracle_monitor_factory: Callable[..., Any] | None = None,
         provenance_tracker_factory: Callable[[], Any] | None = None,
+        proposal_capture_sink: ProposalCaptureSink | None = None,
         safety_receipt_factory: Callable[..., dict[str, Any]] | None = None,
         capture_runtime_failures: bool = False,
     ) -> None:
@@ -936,6 +949,7 @@ class LiveConditionRuntime:
         self.monitor_factory = monitor_factory
         self.oracle_monitor_factory = oracle_monitor_factory
         self.provenance_tracker_factory = provenance_tracker_factory
+        self.proposal_capture_sink = proposal_capture_sink
         self.safety_receipt_factory = safety_receipt_factory
         self.capture_runtime_failures = capture_runtime_failures
 
@@ -1280,6 +1294,8 @@ class LiveConditionRuntime:
 
         events: list[dict[str, Any]] = []
         outputs: list[Any] = []
+        # 实际执行历史独立于Guard状态，仅供显式注入的本研究观察器使用。
+        actual_executed_tools: list[str] = []
         receipts: list[dict[str, Any]] = [
             dict(completion.receipt)
             for completion in vigil_preparation_completions
@@ -1473,6 +1489,23 @@ class LiveConditionRuntime:
                     ),
                     step=step,
                 )
+                if self.proposal_capture_sink is not None:
+                    # Deep copies make this an observation seam: a sink cannot
+                    # mutate the live proposal, manifest, or schema objects.
+                    self.proposal_capture_sink(
+                        copy.deepcopy(proposal),
+                        copy.deepcopy(manifest),
+                        copy.deepcopy(schemas),
+                        {
+                            "phase": "before_guard",
+                            "work_key": context.work_key,
+                            "benchmark": context.benchmark,
+                            "condition_id": context.condition_id,
+                            "provider_call_index": call_index,
+                            "prior_executed_tools": list(actual_executed_tools),
+                            "prior_successful_tool_count": len(actual_executed_tools),
+                        },
+                    )
                 guard_started = perf_counter_ns()
                 if oracle_monitor is not None:
                     decision = oracle_monitor.decide(proposal)
@@ -1631,6 +1664,8 @@ class LiveConditionRuntime:
                         monitor.record_execution(proposal, decision)
                     if oracle_monitor is not None and execution_succeeded:
                         oracle_monitor.record_execution(proposal, decision)
+                    if execution_succeeded and parsed.tool != "final":
+                        actual_executed_tools.append(parsed.tool)
                 else:
                     observation = {
                         "guard_decision": decision_name,
