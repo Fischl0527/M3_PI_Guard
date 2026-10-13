@@ -11,7 +11,7 @@
       "id": "F-DOC-007",
       "name": "Gemini中文注释审查勘误与限定交付",
       "description": "以c5cc2cd为审查基准，修正六处误导性注释并只交付不改变执行逻辑的中文注释。",
-      "status": "in_progress",
+      "status": "verified",
       "priority": "high",
       "acceptanceCriteria": [
         "六处已确认注释错误纠正，五个修复文件执行AST不变",
@@ -23,7 +23,9 @@
         "2026-10-13: six misleading comments corrected; five repair-file executable ASTs unchanged",
         "365 tracked Python files selected by executable AST equality against155e0cc; unrelated logic changes excluded",
         "64 focused offline tests passed in32.57s; no model API or experiment rerun",
-        "19 new docstring whitespace issues corrected; isolated-index git diff --cached --check passed; commit and remote verification pending"
+        "19 new docstring whitespace issues corrected; isolated-index git diff --cached --check passed",
+        "dbd83a7 committed365 comment-only Python files and7 task/state increments; origin/codex/claude-review-repairs push and ls-remote verification passed",
+        "Original17 staged PDF moves preserved byte-for-byte in raw Git diff; unrelated worktree edits excluded"
       ]
     },
     {
