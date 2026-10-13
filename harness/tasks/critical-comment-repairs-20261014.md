@@ -1,7 +1,7 @@
 # 重要代码中文注释勘误与限定交付
 
 - 用户授权：修正上一轮重要代码审查确认的24项注释问题并提交、推送。
-- 功能：F-DOC-008，in_progress；不代表全项目注释审查完成。
+- 功能：F-DOC-008，verified；仅24项重要注释勘误及限定交付，不代表全项目注释审查完成。
 - 起始提交：`790268b126834eac9c11376f48d5c54b41c0c31b`。历史审查基准c5cc2cd；不回退后续功能提交。
 - 允许：13个已审源码文件中的文档字符串/说明，本任务记录与必要Harness状态增量。
 - 禁止：修改执行逻辑、接口、字段、常量、认证授权算法、v3新代码、模型实验、论文/PDF/产物以及其他任务改动。原17个PDF暂存保持。
@@ -41,5 +41,7 @@
 - 测试命令：`python -X utf8 -B -m pytest -q -p no:cacheprovider tests/unit/test_core_runtime.py tests/unit/test_core_batch.py tests/unit/test_project_config.py tests/unit/test_paper_v1_runtime.py tests/unit/test_paper_metrics.py tests/unit/test_statistics_formal.py tests/unit/test_tool_sandbox_safety.py tests/unit/test_check_logs.py -k 'not test_frontier_api_audit_redacts_configured_credentials_and_keeps_registry_gate'`。
 - 测试结果：91 passed, 1 deselected in 7.97s；退出码0。排除的一项会写入固定`config/project.local.env.frontier-test`路径，避免触碰配置目录；不是因测试失败而排除。
 - 首次收集失败：ApprovalRecord.__post_init__的docstring缩进错误，已恢复方法体8空格后重新编译/AST检查与上述测试通过。未提交语法错误，详情登记failure-log。
-- Git差异空白检查通过，原17个PDF暂存原始差异哈希保持`88e0c85ab9d266796cda65774808f483f4e4b9a85917cd0a3d2b81c5a724b2e7`；限定提交/推送与远端核对待执行。
+- Git差异与隔离暂存空白检查通过；提交`6f56e06f916c704b1b3547da90fa23b72e09ea05`，父级790268b，包含13源码文件及7个本任务状态/记录增量，不包含其他任务内容。
+- `git push origin 6f56e06f916c704b1b3547da90fa23b72e09ea05:refs/heads/codex/claude-review-repairs`成功；`git ls-remote origin refs/heads/codex/claude-review-repairs`核对远端6f56e06一致。原17个PDF暂存原始差异哈希保持`88e0c85ab9d266796cda65774808f483f4e4b9a85917cd0a3d2b81c5a724b2e7`。
+- 验证记录作为独立收尾提交正常推送并核对；本任务不改变v3研究状态或科研结论。
 - 不调用模型、不重跑实验、不创建PR；不代表全部科研代码或新v3已审查。

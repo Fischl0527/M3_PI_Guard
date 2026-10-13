@@ -11,7 +11,7 @@
       "id": "F-DOC-008",
       "name": "重要代码中文注释语义与接口勘误",
       "description": "修正重要运行路径审查确认的24项中文注释误述，限定说明修改与Git交付，不改变算法。",
-      "status": "in_progress",
+      "status": "verified",
       "priority": "high",
       "acceptanceCriteria": [
         "24项说明与当前实现一致，13源码文件仅改docstring且执行AST保持",
@@ -24,7 +24,8 @@
         "13 source files compile in memory and executable ASTs match790268b and pre-edit snapshots",
         "91 focused offline tests passed in7.97s; one fixed-config-path writer explicitly excluded",
         "First docstring-indentation collection failure repaired and regression rerun passed; scoped Git whitespace check passed",
-        "Original17 staged PDF moves preserved; commit and remote verification pending"
+        "6f56e06 committed13 source files and7 task/state increments; current origin branch push and ls-remote verification passed",
+        "Original17 staged PDF moves preserved byte-for-byte; other worktree tasks excluded; no API/experiment execution"
       ]
     },
     {
