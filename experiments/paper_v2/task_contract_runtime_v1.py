@@ -25,6 +25,20 @@ SAFE_FIELDS = frozenset({"id", "object_id", "id_", "filename", "name", "email", 
     "recipients", "participants", "start_time", "end_time", "date", "timestamp", "status", "version",
     "account", "recipient", "amount", "currency", "channel_id", "user_id", "members", "active"})
 TEXT_FIELDS = frozenset({"body", "content", "description", "subject", "message", "displayname", "text"})
+NATIVE_DISCOVERY_TYPES = {
+    "search_emails": "email", "get_email": "email", "get_unread_emails": "email",
+    "search_files_by_filename": "file", "search_files": "file", "list_files": "file", "get_file": "file",
+    "search_contacts": "contact", "get_contact": "contact",
+    "search_contacts_by_email": "contact", "search_contacts_by_name": "contact",
+    "get_file_by_id": "file", "read_file": "file",
+    "get_received_emails": "email", "get_sent_emails": "email", "get_draft_emails": "email",
+    "get_day_calendar_events": "event", "create_calendar_event": "event",
+    "get_channels": "channel", "get_user_info": "user", "get_user_information": "user",
+    "get_most_recent_transactions": "transaction",
+    "search_calendar_events": "event", "get_calendar_events": "event", "get_event": "event",
+    "get_all_channels": "channel", "get_channel_info": "channel", "get_users_in_channel": "user",
+    "get_recent_transactions": "transaction", "get_scheduled_transactions": "transaction",
+}
 
 
 def _mapping(value: Any) -> dict[str, Any]:
@@ -62,7 +76,7 @@ class NativeBindingResolver:
     def __init__(self, backend: Any, *, trusted_environment: Any = None) -> None:
         self.backend = backend
         self._baseline = _native_metadata(trusted_environment) if trusted_environment is not None else {}
-        self._discoveries: dict[str, set[str]] = {}
+        self._discoveries: dict[str, set[tuple[str, str]]] = {}
         self._complete: dict[str, bool] = {}
 
     def trusted_fields(self, object_type: str) -> frozenset[str]:
@@ -85,10 +99,13 @@ class NativeBindingResolver:
                 for item in value:
                     visit(item)
         visit(observation)
-        native_ids = {key[1] for key in _native_metadata(getattr(self.backend, "_environment", None))}
+        # 类型由固定工具目录给出，而非模型的binding.object_type或返回正文声明。
+        object_type = NATIVE_DISCOVERY_TYPES.get(proposal.tool)
+        native_keys = set(_native_metadata(getattr(self.backend, "_environment", None)))
+        found_keys = {(object_type, object_id) for object_id in found} if object_type else set()
         for action_id in action_ids:
-            self._discoveries[action_id] = found & native_ids
-            self._complete[action_id] = bool(found) and found <= native_ids
+            self._discoveries[action_id] = found_keys & native_keys
+            self._complete[action_id] = bool(found_keys) and found_keys <= native_keys
 
     def resolve(self, binding: Any, *, candidate_value: Any, successful_actions: tuple[str, ...]) -> Any:
         from m3_guard.task_contract_v1 import BindingResolution, VerifiedObject
@@ -98,6 +115,8 @@ class NativeBindingResolver:
         current = _native_metadata(getattr(self.backend, "_environment", None))
         objects, all_verified = [], []
         found = self._discoveries[binding.from_action]
+        if not found or any(object_type != binding.object_type for object_type, _ in found):
+            return BindingResolution(status="conflict", objects=(), complete=False)
         for object_type, object_id in sorted(current):
             if object_type != binding.object_type:
                 continue
@@ -110,16 +129,16 @@ class NativeBindingResolver:
             verified_object = VerifiedObject(object_type=binding.object_type, object_id=object_id,
                 attributes=attrs, verified_fields=verified, current=True)
             all_verified.append(verified_object)
-            if object_id in found:
+            if (object_type, object_id) in found:
                 objects.append(verified_object)
         # 单个返回结果不能证明唯一性：独立枚举全部当前对象，遗漏任何同谓词对象即ASK。
         predicate = binding.predicate
         complete = self._complete[binding.from_action]
         if any(not predicate.fields <= obj.verified_fields for obj in all_verified):
             complete = False
-        elif any(predicate.matches_object(obj) and obj.object_id not in found for obj in all_verified):
+        elif any(predicate.matches_object(obj) and (obj.object_type, obj.object_id) not in found for obj in all_verified):
             complete = False
-        if any(object_id not in {obj.object_id for obj in objects} for object_id in found):
+        if any(key not in {(obj.object_type, obj.object_id) for obj in objects} for key in found):
             complete = False
         return BindingResolution(status="resolved", objects=tuple(objects), complete=complete)
 

@@ -383,8 +383,13 @@ def main() -> None:
     parser.add_argument("--stop-reason", default="explicit_provider_stop")
     args = parser.parse_args()
     if args.offline_replay:
-        from experiments.paper_v2.task_contract_cases_v1 import build_case_cohorts
-        print(json.dumps({"cohorts": {k: len(v) for k, v in build_case_cohorts().items()}, "provider_calls": 0}))
+        from experiments.paper_v2.task_contract_offline_replay_v1 import OfflineReplayUnavailable, run_offline_replay
+        try:
+            result = run_offline_replay(args.output)
+        except OfflineReplayUnavailable as exc:
+            print(json.dumps(exc.summary, ensure_ascii=False))
+            raise SystemExit(2) from None
+        print(json.dumps(result, ensure_ascii=False))
         return
     if args.compile_contracts:
         from experiments.paper_v2.claude_revision_v1 import load_key

@@ -239,6 +239,8 @@ def load_task_contract_case(base: Mapping[str, Any], scenario: str = "benign") -
             online, offline = copy.deepcopy(frozen[scenario]), copy.deepcopy(scoring["offline_evaluation"])
         else:
             online, offline = load_synthetic_case(str(base["base_task_id"]), scenario)
+        from experiments.paper_v2.task_contract_synthetic_v1 import corrected_semantic_metadata_v2
+        offline = corrected_semantic_metadata_v2(offline)
         return {"live_case": online, "offline_evaluation": offline, "backend": SyntheticTaskBackend(online)}
     source = _source_row(base["attack_reference"] if scenario == "attack" else base["source_reference"])
     offline = copy.deepcopy(source.pop("offline_evaluation", {}))
@@ -311,3 +313,33 @@ def write_case_assets(output: Path = OUTPUT) -> dict[str, Any]:
         "old_results_read": False, "model_calls": 0, "raw_results_created": False}
     _write_new_or_same(output / "assets/dataset_summary_v1.json", _json(summary) + "\n")
     return summary
+
+
+def write_semantic_metadata_v2(output: Path = OUTPUT) -> dict[str, Any]:
+    """追加经实体join核对的结构元数据；不改v1选择、动作或在线输入。"""
+    from experiments.paper_v2.task_contract_synthetic_v1 import corrected_semantic_metadata_v2, semantic_graph, semantic_graph_id
+    if Path(output).resolve() != OUTPUT.resolve():
+        raise ValueError("semantic metadata must remain in the approved study output")
+    rows = []
+    for split, cases in build_case_cohorts().items():
+        for base in cases:
+            if base["benchmark"] != "task-contract-synthetic-v1":
+                continue
+            frozen = _source_row(base["offline_reference"])["offline_evaluation"]
+            repaired = corrected_semantic_metadata_v2(frozen)
+            rows.append({"base_task_id": base["base_task_id"], "split": split,
+                "family": base["family"], "language": base["language"],
+                "frozen_selection_graph_id": base["semantic_graph_id"],
+                "validated_semantic_graph_id": semantic_graph_id(repaired["expected_graph"]),
+                "semantic_graph": semantic_graph(repaired["expected_graph"]),
+                "online_inputs_changed": False, "reference_actions_changed": False,
+                "revision": "task_contract_semantic_v2_verified_join"})
+    by_split = {split: {r["validated_semantic_graph_id"] for r in rows if r["split"] == split}
+                for split in ("development", "evaluation")}
+    if len(rows) != 480 or len(by_split["development"]) != 80 or len(by_split["evaluation"]) != 400 or by_split["development"] & by_split["evaluation"]:
+        raise ValueError("corrected semantic graphs collide or development/evaluation structure overlaps")
+    _write_new_or_same(OUTPUT / "assets/semantic_graph_metadata_v2.jsonl", "".join(_json(row) + "\n" for row in rows))
+    return {"rows": len(rows), "development_unique_graphs": 80, "evaluation_unique_graphs": 400,
+        "changed_metadata_graphs": sum(row["frozen_selection_graph_id"] != row["validated_semantic_graph_id"] for row in rows),
+        "development_evaluation_overlap": 0, "online_inputs_changed": False, "reference_actions_changed": False,
+        "model_calls": 0, "scientific_scope": "programmatic_structure_validation_not_independent_workflow_sampling"}

@@ -148,6 +148,47 @@ def test_routing_metadata_is_not_an_application_authorization_declaration():
     assert compiled.status != "ready"
 
 
+def test_decimal_action_labels_are_safe_graph_identifiers_not_executable_code():
+    draft = update_draft()
+    draft["actions"][0]["action_id"] = "1"
+    compiled = compile_task_contract_v1(trusted_user_request="Update B field status to ready.",
+                                      tool_schemas=SCHEMAS, draft=draft)
+    assert compiled.status == "ready"
+    for unsafe in ("1;exec", "../1", "1()", "gold_1"):
+        draft["actions"][0]["action_id"] = unsafe
+        assert compile_task_contract_v1(trusted_user_request="Update B field status to ready.",
+                                        tool_schemas=SCHEMAS, draft=draft).status != "ready"
+
+
+def test_question_form_request_can_authorize_scoped_read_but_not_write():
+    request = "What is in object B?"
+    schema = {"read_object": {"operation": "read", "arguments": {"object_id": {"type": "string", "required": True}},
+                              "argument_roles": {"object_id": "target"}, "side_effect": False}}
+    draft = {"schema_version": "m3-task-contract-draft-1.0", "actions": [{"action_id": "1", "tool": "read_object", "role": "read",
+        "constraints": {"object_id": {"op": "eq", "value": "B"}}, "evidence": [{"quote": request}]}]}
+    assert compile_task_contract_v1(trusted_user_request=request, tool_schemas=schema, draft=draft).status == "ready"
+    draft["actions"][0]["constraints"]["object_id"]["value"] = "not_requested"
+    assert compile_task_contract_v1(trusted_user_request=request, tool_schemas=schema, draft=draft).status != "ready"
+    assert compile_task_contract_v1(trusted_user_request=request, tool_schemas=SCHEMAS,
+                                    draft=update_draft()).status != "ready"
+
+
+def test_finite_array_argument_scope_is_preserved_not_replaced_by_any_array():
+    request = "Invite alice and bob to event meeting."
+    schemas = {"invite_event": {"operation": "modify", "side_effect": True,
+        "arguments": {"participants": {"type": "array", "required": True}, "event_id": {"type": "string", "required": True}},
+        "argument_roles": {"participants": "target", "event_id": "target"}}}
+    draft = {"schema_version": "m3-task-contract-draft-1.0", "actions": [{"action_id": "a1", "tool": "invite_event", "role": "modify",
+        "constraints": {"participants": {"op": "eq", "value": ["alice", "bob"]}, "event_id": {"op": "eq", "value": "meeting"}},
+        "evidence": [{"quote": request[:-1]}]}]}
+    contract = compile_task_contract_v1(trusted_user_request=request, tool_schemas=schemas, draft=draft)
+    assert contract.status == "ready"
+    assert contract.actions[0].constraints["participants"].matches(["alice", "bob"])
+    assert not contract.actions[0].constraints["participants"].matches(["alice", "bob", "mallory"])
+    draft["actions"][0]["constraints"]["participants"]["value"] = ["alice", "mallory"]
+    assert compile_task_contract_v1(trusted_user_request=request, tool_schemas=schemas, draft=draft).status != "ready"
+
+
 def test_application_prohibited_tools_do_not_depend_on_model_prohibitions():
     compiled = compile_task_contract_v1(trusted_user_request="Update B field status to ready.",
                                       tool_schemas=SCHEMAS, draft=update_draft(),

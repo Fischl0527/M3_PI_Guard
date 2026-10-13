@@ -38,11 +38,11 @@ _INTENTS = {
     "read": r"\b(read|open|inspect|review|summari[sz]e|get|fetch|show)\b|读取|阅读|打开|审阅|总结|查看",
     "modify": r"\b(update|edit|modify|change|set|write|save|append|add|invite|schedule_event|reschedule|move|pay|transfer)\b|更新|修改|设置|写入|保存|添加|加为|邀请|移动|转账|支付|安排日历",
     "create": r"\b(create|make|schedule|book|reserve)\b|创建|新建|安排|预订",
-    "send": r"\b(send|email|mail|forward|share|post)\b|发送|转发|分享|发给",
+    "send": r"\b(send|email|mail|forward|share|post|pay|transfer)\b|发送|转发|分享|发给|支付|转账",
     "delete": r"\b(delete|remove|cancel)\b|删除|移除|取消",
     "confirm": r"\b(confirm|approve)\b|确认|批准",
 }
-_NEGATIVE = re.compile(r"\b(do\s+not|don't|never|must\s+not|without|avoid|cannot|can't|not)\b|不要|禁止|不得|不能|不许", re.I)
+_NEGATIVE = re.compile(r"\b(do\s+not|don't|never|must\s+not|without|avoid|cannot|can't)\b|\bnot\s+(send|write|delete|remove|pay|transfer)\b|不要|禁止|不得|不能|不许", re.I)
 
 
 class _Invalid(ValueError):
@@ -58,7 +58,7 @@ def _keys(value: Any, allowed: set[str], required: set[str] = frozenset()) -> Ma
 
 
 def _identifier(value: Any) -> str:
-    if not isinstance(value, str) or re.fullmatch(r"[A-Za-z][A-Za-z0-9_.-]{0,63}", value) is None:
+    if not isinstance(value, str) or re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,63}", value) is None:
         raise _Invalid("invalid_identifier")
     if re.search(r"gold|evaluator|expected_|ground_truth|attacker_", value, re.I):
         raise _Invalid("forbidden_evaluator_field")
@@ -75,6 +75,22 @@ def _scalar(value: Any) -> Any:
     raise _Invalid("non_scalar_literal")
 
 
+def _finite_literal(value: Any, depth: int = 0) -> Any:
+    """等值约束支持工具的有限JSON实参，不把JSON当可执行程序。"""
+    if depth > 4:
+        raise _Invalid("literal_too_deep")
+    if isinstance(value, list):
+        if len(value) > 64:
+            raise _Invalid("literal_too_large")
+        return [_finite_literal(item, depth + 1) for item in value]
+    if isinstance(value, Mapping):
+        if len(value) > 64 or any(not isinstance(key, str) for key in value):
+            raise _Invalid("invalid_object_literal")
+        legacy._reject_evaluator_fields(value)
+        return {key: _finite_literal(item, depth + 1) for key, item in value.items()}
+    return _scalar(value)
+
+
 def _predicate(raw: Any, *, object_predicate: bool = False, depth: int = 0) -> Predicate:
     if depth > 4:
         raise _Invalid("predicate_depth_exceeded")
@@ -83,7 +99,7 @@ def _predicate(raw: Any, *, object_predicate: bool = False, depth: int = 0) -> P
     extra = {"field"} if object_predicate and op != "and" else set()
     if op in {"eq", "type"}:
         _keys(raw, {"op", "value"} | extra, {"op", "value"} | extra)
-        value = _scalar(raw["value"])
+        value = _finite_literal(raw["value"]) if op == "eq" and not object_predicate else _scalar(raw["value"])
         if op == "type" and (object_predicate or value not in {"string", "integer", "number", "boolean", "array", "object", "null"}):
             raise _Invalid("unsupported_type_predicate")
         result = Predicate(op, value=value)
@@ -139,6 +155,36 @@ def _evidence(raw: Any, request: str) -> tuple[EvidenceAnchor, ...]:
     return tuple(result)
 
 
+def _execution_evidence(request: str, evidence: tuple[EvidenceAnchor, ...], operation: str) -> bool:
+    """模型摘录不能剥离信息、假设或引述语境后变成副作用授权。
+
+    这里仅识别有限的保守语境，不宣称完整自然语言意图识别。无法明确
+    判断时返回待澄清；真正的条件分支仍由契约when及可信状态单独验证。
+    """
+    quoted = tuple(re.finditer(r'"[^"\n]*"|“[^”\n]*”|‘[^’\n]*’|(?<!\w)\x27[^\x27\n]*\x27(?!\w)', request))
+    for anchor in evidence:
+        if not re.search(_INTENTS[operation], anchor.quote, re.I):
+            continue
+        if any(span.start() < anchor.start and anchor.end < span.end() for span in quoted):
+            continue
+        before = request[:anchor.start]
+        after = request[anchor.end:]
+        start = max((before.rfind(char) for char in ".!?;。！？；\n"), default=-1) + 1
+        stops = [after.find(char) for char in ".!?;。！？；\n" if char in after]
+        stop = min(stops) if stops else len(after)
+        clause = request[start:anchor.end + stop]
+        information = re.search(
+            r"\b(explain|describe|discuss|translate|quote|hypothetical|suppose|imagine)\b"
+            r"|\btell\s+me\s+(?:whether|what|how)\b|\bwhat\s+(?:happens|would|if)\b"
+            r"|\b(?:just|only|an?)\s+(?:an?\s+)?example\b|\bif\s+(?:I|we)\b"
+            r"|\bis\s+it\s+(?:possible|safe)\b|解释|说明.*(?:含义|意思)|假设|如果.*(?:会怎样|怎么办)|例如|举例",
+            clause, re.I,
+        )
+        if not information:
+            return True
+    return False
+
+
 def _catalog(tool: str, schema: Mapping[str, Any]) -> tuple[str, dict[str, str]]:
     known_operation, known_roles = _KNOWN_CATALOG.get(tool, (None, {}))
     operation = schema.get("operation", known_operation)
@@ -168,10 +214,21 @@ def _ground_literals(predicate: Predicate, evidence: str, context: Mapping[str, 
     for name in ("requested_actions", "task_scope", "task_constraints", "calendar_constraints"):
         if name in context:
             collect(context[name])
+    # 只有请求明确引用的固定应用资源别名可提供参数，路由/评测ID仍无权授予目标。
+    for name in ("current_user_id", "source_id", "group_id"):
+        if name in context and re.search(r"(?<!\w)" + name + r"(?!\w)", evidence):
+            collect(context[name])
     if isinstance(context.get("hard_constraints"), Mapping):
         collect(context["hard_constraints"].get("argument_constraints", {}))
     for leaf in _leaves(predicate):
         values = (leaf.value,) if leaf.op == "eq" else leaf.values if leaf.op == "in" else (leaf.minimum, leaf.maximum) if leaf.op in {"number_range", "date_range"} else ()
+        def atoms(value):
+            if isinstance(value, Mapping):
+                return [atom for key, child in value.items() for atom in [key, *atoms(child)]]
+            if isinstance(value, (list, tuple)):
+                return [atom for child in value for atom in atoms(child)]
+            return [value]
+        values = [atom for value in values for atom in atoms(value)]
         for value in values:
             if value is None or type(value) is bool:
                 continue  # 布尔谓词受可信字段类型/后端条件验证，不是权限正文。
@@ -260,7 +317,9 @@ def compile_task_contract_v1(
             quotes = " ".join(item.quote for item in evidence)
             if _NEGATIVE.search(quotes):
                 raise _Invalid("negative_action_evidence", "conflict")
-            if not re.search(_INTENTS[operation], quotes, re.I):
+            # 问题式请求可要求必要读取/查找；资源仍须由下方有限约束限定。
+            # 副作用不适用此闭包，不能以“需要查询”为写入/支付授予权限。
+            if operation not in {"read", "discover"} and not _execution_evidence(request, evidence, operation):
                 raise _Invalid("evidence_does_not_authorize_operation", "ambiguous")
             constraints = {key: _predicate(value) for key, value in _keys(node["constraints"], set(tool_schemas[tool].get("arguments", {}))).items()}
             bindings = {}
