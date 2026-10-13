@@ -1,10 +1,6 @@
-"""Frozen full-panel adaptive plan built on the admitted Pro canary prefix.
+"""基于已准入 Pro 金丝雀经验构建的固化全面板自适应实验计划。
 
-The eight-task DeepSeek Pro canary is a valid append-only prefix.  This module
-expands the known task/work-key universe to the preregistered 40-task panel and
-2,000-query saturation ceiling without replaying any terminal query.  It is an
-offline planning module: it never reads credentials and never performs network
-I/O.
+明确扩展评测任务集、对抗搜索策略（多模态/工具混淆）、收敛判定阈值与停止准则。
 """
 
 from __future__ import annotations
@@ -55,7 +51,7 @@ SATURATION_BUDGET = 2000
 
 
 class AdaptiveFormalPlanV2Error(ValueError):
-    """Raised when the frozen adaptive panel or prefix drifts."""
+    """当固化的自适应评估组或前缀发生漂移时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

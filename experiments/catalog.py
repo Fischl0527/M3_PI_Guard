@@ -1,8 +1,6 @@
-"""Canonical E0-E17 experiment catalogue and fixed condition grids.
+"""规范的 E0-E17 实验目录与固定的条件对比网格清单。
 
-This module is deliberately data-only.  Runners, reports and the Dashboard all
-import the same definitions so that a display label cannot silently change the
-configuration that produced a result.
+声明性定义各个实验代号（如 E9 上下文、E13 阈值、E16 红队）的测试用例规模、模型矩阵与防护条件对照表。
 """
 
 from __future__ import annotations

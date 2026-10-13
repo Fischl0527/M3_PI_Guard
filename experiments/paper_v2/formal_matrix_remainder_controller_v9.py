@@ -1,10 +1,6 @@
-"""Prospective pending-only DeepSeek remainder shard after frozen v8.
+"""在固化 v8 批次后针对挂起余量分片的前瞻性 DeepSeek 控制器。
 
-The v8 run is immutable and contains 303 terminal work items.  This controller
-creates a separate run identity for the 177 work items that were never started.
-It never copies, rewrites, retries, or excludes a terminal v8 item.  A closed
-diagnostic pauses the current process; a later operator invocation may continue
-only with still-pending work items under the same prospective admission.
+专门执行尚未收敛或由于瞬态网络故障遗留的少数边角测试用例。
 """
 
 from __future__ import annotations
@@ -72,7 +68,7 @@ PRIOR_PROJECT_COST_CNY = 1.2069394
 
 
 class FormalMatrixRemainderV9Error(RuntimeError):
-    """Raised when the pending-only v9 shard cannot preserve its contract."""
+    """当仅待处理的 v9 分片无法保持其契约时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

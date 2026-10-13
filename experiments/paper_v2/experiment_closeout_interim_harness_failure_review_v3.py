@@ -1,9 +1,6 @@
-"""Freeze the directly observed nonzero interim Harness v3 result.
+"""固化直接观察到的非零中期 Harness v3 失败结果。
 
-The run is immutable.  This reviewer records the single version-agnostic test
-assertion that rejected the current v2 Pro-50 admission because it matched the
-same argument string used by the superseded v1 controller.  It does not repair
-the old run, authorize provider execution, or mutate experiment evidence.
+锁定评测过程中的中期异常，为后续容错机制提供基线证据。
 """
 
 from __future__ import annotations
@@ -74,7 +71,7 @@ PYTEST_SUMMARY = re.compile(
 
 
 class ExperimentCloseoutInterimHarnessFailureReviewV3Error(ValueError):
-    """Raised when immutable interim Harness evidence no longer reproduces."""
+    """当不可变的中期 Harness 论据无法再复现时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

@@ -1,4 +1,7 @@
-"""Gemini public canary with JSON payload and run-shared usage evidence."""
+"""具备 JSON 载荷与运行共享用量证据的 Gemini 公开矩阵控制器。
+
+跟踪跨用例的 Token 开销总账并生成不可变证据归档。
+"""
 
 from __future__ import annotations
 
@@ -55,7 +58,7 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class GeminiPublicControllerV3Error(RuntimeError):
-    """Raised when Gemini v3 cannot preserve cross-work evidence."""
+    """当 Gemini v3 无法保持跨工作项论据时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

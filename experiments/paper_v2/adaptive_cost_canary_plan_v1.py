@@ -1,9 +1,6 @@
-"""Frozen, outcome-blind plan for the DeepSeek adaptive cost canary.
+"""DeepSeek 自适应成本金丝雀实验的固化盲测计划。
 
-The plan selects eight primary-model tasks without consulting outcomes.  Each
-adaptive query receives a unique work key and changes only the M3-v2
-``untrusted_content`` field.  Trusted task inputs and the auto-compiled
-authorization envelope remain frozen.
+在实验执行前锁定 8 大代表性任务、固定查询轮次上限与搜索空间，防止就地调整偏差。
 """
 
 from __future__ import annotations
@@ -49,7 +46,7 @@ RUN_ID = "adaptive-cost-canary-primary-v1"
 
 
 class AdaptiveCostCanaryPlanError(ValueError):
-    """Raised when an adaptive canary plan or query projection drifts."""
+    """当自适应金丝雀计划或查询投影发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -100,7 +97,7 @@ def _selection_rank(task: Mapping[str, Any]) -> str:
 def select_cost_canary_tasks(
     freeze: Mapping[str, Any],
 ) -> list[dict[str, Any]]:
-    """Choose eight distinct attack families by frozen hash order."""
+    """按固化的哈希顺序选择八个不同的攻击家族任务。"""
 
     primary = freeze.get("primary_model")
     if not isinstance(primary, Mapping):
@@ -295,7 +292,7 @@ def build_query_work_item_and_state(
     query_index: int,
     mutated_payload: str,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Project one mutation into untrusted content and nothing else."""
+    """仅将单个变异投影到不可信内容中，不引入任何其他副作用。"""
 
     if not isinstance(mutated_payload, str) or not mutated_payload:
         raise AdaptiveCostCanaryPlanError("mutated payload is required")

@@ -1,4 +1,7 @@
-"""Bind the directly observed Day-2 full-Harness exit before provider canaries."""
+"""在允许模型调用前绑定直接观察到的第 2 日全量 Harness 退出码门禁。
+
+前置阻断未通过测试时的后续昂贵实验调用。
+"""
 
 from __future__ import annotations
 
@@ -60,7 +63,7 @@ PYTEST_SUMMARY = re.compile(
 
 
 class ExperimentCloseoutDay2HarnessGateV1Error(ValueError):
-    """Raised when the Day-2 Harness evidence is incomplete or drifts."""
+    """当 Day-2 Harness 论据不完整或发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

@@ -1,10 +1,6 @@
-"""Bind the fresh v6 Harness evidence without authorizing provider execution.
+"""绑定全新的 v6 Harness 证据（不授权提供商执行）。
 
-This gate is deliberately non-authorizing.  It proves that the latest complete
-Harness run ended with a directly observed zero exit and that the current
-closeout prerequisites still reproduce.  A provider run additionally needs a
-separate exact prospective admission, an untouched output root, and its own
-budget/quota-day reservation.
+校验测试覆盖率与断言完整性后生成门禁签名。
 """
 
 from __future__ import annotations
@@ -96,7 +92,7 @@ SECRET_PATTERNS = (
 
 
 class ExperimentCloseoutHarnessGateV4Error(ValueError):
-    """Raised when v6 Harness evidence or a closeout prerequisite drifts."""
+    """当 v6 Harness 论据或收官前置条件发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

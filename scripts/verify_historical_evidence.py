@@ -1,9 +1,6 @@
-"""Verify immutable historical evidence alongside the current V2 freeze.
+"""并排验证历史不可变实验证据与当前 V2 固化版本的一致性。
 
-Historical E11, context-correction and sampled-E17 bundles intentionally keep
-their original freeze hashes.  This verifier admits only an exact, declared set
-of current-source drifts and requires the current remediation claim to have its
-own fully matching freeze.
+防止历史基准实验数据在后续演进中发生意外篡改或漂移。
 """
 
 from __future__ import annotations
@@ -21,7 +18,7 @@ SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 class HistoricalEvidenceError(RuntimeError):
-    """Raised when an immutable bundle or declared drift no longer matches."""
+    """当不可变数据包或声明的漂移不再匹配时抛出。"""
 
 
 def sha256_file(path: Path) -> str:

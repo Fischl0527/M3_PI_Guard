@@ -1,7 +1,6 @@
-"""Custodian-gated import and execution-plan contract for 600 blind cases.
+"""面向 600 例盲测用例的托管人门禁导入与执行计划契约。
 
-The module validates a label-free execution set and its custody manifest.  It
-never reads a label file and never generates independent-blind case content.
+支持第三方托管人环境下的盲测数据集导入，前置检验防泄露标记与元数据完整性。
 """
 
 from __future__ import annotations
@@ -60,7 +59,7 @@ SLOT_BOUND_FIELDS = (
 
 
 class IndependentBlindCloseoutV1Error(ValueError):
-    """Raised when a custody or label-separation invariant fails."""
+    """当托管或标签隔离不变量失败时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -150,7 +149,7 @@ def audit_sealed_execution_set(
     custody_manifest_path: Path,
     slots_path: Path = DEFAULT_SLOTS,
 ) -> dict[str, Any]:
-    """Validate custody and label isolation without opening a label file."""
+    """在不打开标签文件的情况下验证托管和标签隔离。"""
 
     execution_set_path = execution_set_path.resolve()
     custody_manifest_path = custody_manifest_path.resolve()

@@ -1,4 +1,7 @@
-"""Frozen outcome-blind gate from adaptive cost canary to formal search."""
+"""从自适应成本金丝雀迈向形式化搜索的固化结果盲审门禁。
+
+前置评估金丝雀阶段的方差与稳定性，决定是否放行全量自适应搜索。
+"""
 
 from __future__ import annotations
 
@@ -28,7 +31,7 @@ FROZEN_AT = "2026-07-28T05:00:00+08:00"
 
 
 class AdaptiveResultGateError(ValueError):
-    """Raised when the frozen adaptive result gate drifts."""
+    """当固化的自适应结果门禁发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -171,7 +174,7 @@ def verify_adaptive_result_gate(
 def validate_technical_review_for_continuation(
     review: Mapping[str, Any],
 ) -> None:
-    """Enforce only the preregistered technical gate fields."""
+    """仅强制执行预先注册的技术门禁字段。"""
 
     required = {
         "technical_gate_passed": True,

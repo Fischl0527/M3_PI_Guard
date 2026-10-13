@@ -1,12 +1,6 @@
-"""Deterministically derive the dedicated E7-E11 and E15 experiment sets.
+"""确定性派生专用的 E7-E11 与 E15 实验用例集合。
 
-The canonical 300-case corpus remains immutable.  Every row written here keeps
-``parent_case_id`` and receives a new ``case_id`` so dedicated experiments can
-be analysed separately from the frozen main-matrix denominator.
-
-The module intentionally uses only local sandbox paths, ``.test`` addresses,
-and ``/mock/`` API routes.  It never reads sandbox contents or contacts a
-network endpoint.
+通过规则变换从基础数据集中生成消融实验所需的边界用例，杜绝随机性。
 """
 
 from __future__ import annotations
@@ -155,7 +149,7 @@ def _language_bucket(language: str) -> str:
 
 
 def derive_e7(canonical: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
-    """Select every validation case and normalize its language stratum."""
+    """选择所有验证用例并规范化其语言分层。"""
 
     parents = sorted(
         (row for row in canonical if row.get("split") == "validation"),
@@ -587,7 +581,7 @@ def derive_e15(canonical: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
 
 
 def derive_smoke(canonical: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
-    """Build the six shared pre-model smoke cases from validation parents."""
+    """从验证父用例构建六个共享的模型前冒烟测试用例。"""
 
     validation = sorted(
         (row for row in canonical if row.get("split") == "validation"),

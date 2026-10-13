@@ -1,4 +1,7 @@
-"""Shared execution primitives for context-correction experiment runners."""
+"""面向上下文修正实验运行的共享底层执行原语。
+
+提供严格的输入 Token 长度控制、沙箱环境清理与执行计时器支持。
+"""
 
 from __future__ import annotations
 
@@ -136,7 +139,7 @@ def semantic_failure_progress(
     failed_jobs: int,
     unresolved_cases: int,
 ) -> dict[str, Any]:
-    """Represent a semantic-gate failure without inventing a failed job."""
+    """表示语义门禁失败，且不凭空伪造失败作业。"""
 
     return {
         "expected_runs": int(expected_runs),
@@ -172,7 +175,7 @@ def max_interval_overlap(intervals: Sequence[tuple[float, float]]) -> int:
 
 
 def _case_run_overlap(rows: Sequence[Mapping[str, Any]]) -> int:
-    """Measure overlap of complete case-run intervals from durable timestamps."""
+    """根据持久化时间戳度量完整用例运行区间的重叠情况。"""
 
     grouped: dict[str, list[Mapping[str, Any]]] = {}
     for row in rows:
@@ -357,7 +360,7 @@ def execute_matrix_job(
     telemetry_poll_seconds: float = 0.5,
     prompt_verification: Mapping[str, int] | None = None,
 ) -> dict[str, Any]:
-    """Run one condition/cell with independently offered client lanes."""
+    """使用独立提供的客户端通道运行单个条件/单元格作业。"""
 
     job_dir = Path(output_dir) / "work" / str(job["id"])
     job_dir.mkdir(parents=True, exist_ok=True)
@@ -510,7 +513,7 @@ def first_step_rows(rows: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
 
 
 def effective_prompt_eval_count(row: Mapping[str, Any]) -> int | None:
-    """Return raw usage, or the frozen proof for an exact first-turn only."""
+    """返回原始 Token 用量，或仅针对精确第一轮的固化证明。"""
 
     raw = row.get("prompt_eval_count")
     if raw is not None:
@@ -523,7 +526,7 @@ def effective_prompt_eval_count(row: Mapping[str, Any]) -> int | None:
 
 
 def provider_incomplete_is_safely_retained(row: Mapping[str, Any]) -> bool:
-    """Verify that a partial native response remained a non-executable outcome."""
+    """验证部分原生响应依然作为不可执行的结果被安全保留。"""
 
     if row.get("provider_done") is not False:
         return True
@@ -572,7 +575,7 @@ def reusable_job_evidence(
     *,
     tolerance: float = 0.05,
 ) -> bool:
-    """Return true only for complete, semantically valid durable job evidence."""
+    """仅当持久化作业论据完整且在语义上有效时返回 True。"""
 
     raw_path = Path(str(record.get("raw_path", "")))
     if record.get("status") != "completed" or not raw_path.exists():
@@ -641,7 +644,7 @@ def archive_invalid_job_attempt(
     *,
     attempt: int,
 ) -> Path | None:
-    """Preserve an invalid attempt before rerunning the whole affected job."""
+    """在重新运行整个受影响的作业之前，归档保留无效的尝试。"""
 
     source = Path(output_dir) / "work" / str(job_id)
     if not source.exists():
@@ -658,7 +661,7 @@ def archive_invalid_job_attempt(
 
 
 def verify_freeze(freeze_path: str | Path) -> dict[str, Any]:
-    """Verify every frozen file before formal execution or resume."""
+    """在形式化执行或恢复之前，验证每个固化文件。"""
 
     path = Path(freeze_path)
     payload = json.loads(path.read_text(encoding="utf-8"))

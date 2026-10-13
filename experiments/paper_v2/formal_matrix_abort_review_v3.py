@@ -1,4 +1,7 @@
-"""Content-free abort review for the stopped DeepSeek v7 canary."""
+"""针对已停止的 DeepSeek v7 金丝雀执行无内容偏见的中止复核。
+
+对金丝雀批次的中止原因进行结构化分类与归档。
+"""
 
 from __future__ import annotations
 
@@ -24,7 +27,7 @@ DEFAULT_REVIEW = OUTPUT_ROOT / "formal_matrix_abort_review_v3.json"
 
 
 class FormalMatrixAbortReviewV3Error(RuntimeError):
-    """Raised when stopped-v7 technical evidence cannot be verified."""
+    """当停止的 v7 技术论据无法验证时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

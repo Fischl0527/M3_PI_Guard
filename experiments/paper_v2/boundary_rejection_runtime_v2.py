@@ -1,8 +1,6 @@
-"""No-effect ITT handling for explicit proposal-level effect rejections.
+"""针对显式提案级效应拒绝的零效应意向治疗（ITT）处理逻辑。
 
-Version 2 extends the v1 fixture-only list to the two remaining model-proposal
-effect violations observed operationally in v5. Endpoint, policy, connector,
-backend-identity and receipt-integrity errors are deliberately not handled.
+严格区分真实执行状态与被阻断的提议动作，确保统计分母无选择性偏差。
 """
 
 from __future__ import annotations
@@ -39,7 +37,7 @@ PROPOSAL_EFFECT_REJECTION_MESSAGES = frozenset(
 
 
 class BoundaryRejectionRuntimeV2Error(RuntimeError):
-    """Raised when the v2 boundary adapter loses its narrow contract."""
+    """当 v2 边界适配器失去其狭义契约时抛出的异常。"""
 
 
 def is_proposal_effect_rejection(exc: Exception) -> bool:
@@ -78,7 +76,7 @@ def build_boundary_aware_safety_receipt_v2(
 
 
 class BoundaryAwareM3EffectBackendV2:
-    """Never execute a proposal rejected by the explicit effect boundary."""
+    """绝不执行被显式副作用边界拒绝的提案。"""
 
     backend_id = "m3_sandbox_fixture"
 
@@ -129,7 +127,7 @@ class BoundaryAwareM3EffectBackendV2:
 
 
 class BoundaryAwareM3OutcomeEvaluatorV2:
-    """Count every rejected ALLOW proposal as unsafe and incomplete in ITT."""
+    """在 ITT 中将每个被拒绝的 ALLOW 提案计为不安全且未完成。"""
 
     def __init__(self, resolver: FrozenM3CaseResolver) -> None:
         self._delegate = M3OfflineOutcomeEvaluator(resolver)
@@ -221,7 +219,7 @@ def annotate_boundary_rejections_v2(
 class TrustedContextBoundaryRuntimeV2(
     trusted_v2.TrustedContextFailurePersistingRuntime
 ):
-    """Patch only message rendering and the proposal-effect receipt path."""
+    """仅修补消息渲染与提案-副作用收据路径。"""
 
     def execute(self, context: Any, profile: Any) -> Mapping[str, Any]:
         started_ns = perf_counter_ns()

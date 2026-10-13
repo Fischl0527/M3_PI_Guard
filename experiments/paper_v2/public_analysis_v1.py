@@ -1,7 +1,6 @@
-"""Prospective statistical specification for the formal public matrix.
+"""形式化公开矩阵的前瞻性统计规范与分析定义。
 
-This module freezes estimands and failure handling before any public canary is
-run.  It does not load experiment ledgers or calculate outcomes.
+明确公开基准测试的主要与次要评估指标、分组方法及假设检验规则。
 """
 
 from __future__ import annotations
@@ -23,7 +22,7 @@ FROZEN_AT = "2026-07-28T00:45:00+08:00"
 
 
 class PublicAnalysisError(ValueError):
-    """Raised when the prospective public analysis specification drifts."""
+    """当前瞻性公开分析规范发生漂移时抛出的异常。"""
 
 
 def build_analysis_preregistration() -> dict[str, Any]:

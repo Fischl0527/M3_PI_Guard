@@ -1,9 +1,6 @@
-"""Bind Fresh Harness v7 and current closeout evidence without execution authority.
+"""绑定全新 Harness v7 与当前收官证据（不执行新的模型请求）。
 
-The gate is deliberately non-authorizing.  It verifies immutable v7 Harness
-evidence plus the exact prospective Adaptive Pro-50 path and the completed
-Gemini Public-v5 segment-0 technical chain.  Provider transport still requires
-the separately activated admission and a guarded, single-use wrapper.
+验证阶段交付物的自包含性与不可变性。
 """
 
 from __future__ import annotations
@@ -124,12 +121,12 @@ SAFE_GIT_CHECKOUTS = tuple(
 
 
 class ExperimentCloseoutHarnessGateV5Error(ValueError):
-    """Raised when Fresh Harness v7 or a bound prerequisite drifts."""
+    """当 Fresh Harness v7 或绑定的前置条件发生漂移时抛出的异常。"""
 
 
 @contextmanager
 def _process_scoped_safe_directories() -> Iterator[None]:
-    """Append exact process-only Git safe.directory entries and restore them."""
+    """追加精确的仅限当前进程的 Git safe.directory 条目并在此后恢复。"""
 
     count_key = "GIT_CONFIG_COUNT"
     previous_count = os.environ.get(count_key)

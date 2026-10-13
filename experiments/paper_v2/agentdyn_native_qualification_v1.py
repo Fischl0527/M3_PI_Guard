@@ -1,7 +1,6 @@
-"""Bounded native AgentDyn loader/evaluator qualification, no provider calls.
+"""有边界的原生 AgentDyn 加载器与判分器合格性校验（不调用外部模型提供商）。
 
-Known-answer execution below is an OFFLINE fixture check, never online policy
-compilation or experimental model evidence. No default benchmark script runs.
+离线验证测试集完整性、用例结构契约及评分函数在本地环境下的正确性。
 """
 
 from __future__ import annotations
@@ -33,7 +32,7 @@ def selected_ids(suite: str, ids: list[str]) -> list[str]:
 
 @contextlib.contextmanager
 def offline_boundary():
-    """Block network, process creation and physical writes during native execution."""
+    """在原生执行期间阻断网络、进程创建和物理写操作。"""
     active = [True]
     observed: list[str] = []
 

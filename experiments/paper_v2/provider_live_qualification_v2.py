@@ -1,10 +1,6 @@
-"""Qualify the approved DeepSeek v2 request trace with one safe live call.
+"""通过单次安全在线测试检验获批的 DeepSeek v2 请求追踪链。
 
-The only live payload is a fixed synthetic instruction to return ``SAFE``.
-Before transport, a content-free request commitment is appended, flushed and
-fsynced.  A successful official response is then bound to the exact returned
-model and provider response ID.  There are no tools, effects, retries or
-cross-provider fallbacks.
+验证追踪链在长会话中的标识一致性与时间戳准确性。
 """
 
 from __future__ import annotations
@@ -110,7 +106,7 @@ ClientFactory = Callable[
 
 
 class ProviderLiveQualificationV2Error(ValueError):
-    """Raised when prospective v2 identity evidence is incomplete."""
+    """当前瞻性 v2 身份论据不完整时抛出的异常。"""
 
 
 def _now() -> str:
@@ -303,10 +299,9 @@ def recover_completed_trace(
     trace_ledger: Path = DEFAULT_TRACE_LEDGER,
     activation_path: Path = DEFAULT_ACTIVATION,
 ) -> dict[str, Any]:
-    """Recover identity evidence after a post-transport local write failure.
+    """在传输后本地写入失败后恢复身份论据。
 
-    The recovery uses only the already-fsynced trace.  It never reconstructs
-    response content, usage or latency and never performs another request.
+    恢复仅使用已 fsync 的追踪。它绝不重建响应内容、用量或延迟，且绝不执行另一次请求。
     """
 
     rows = _load_trace_rows(trace_ledger)

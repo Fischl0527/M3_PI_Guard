@@ -1,8 +1,6 @@
-"""Reconstruct the provider-day lower and safe upper schedules for Gemini.
+"""重建 Gemini 免费层按日耗时下限与安全上限调度计划。
 
-This qualification is offline-only.  It turns the owner-console free-tier
-snapshot and the frozen public/adaptive plans into machine-checkable provider-
-day bounds.  It does not read credentials or authorize execution.
+根据实测网络延迟与并发限制建立精准的执行耗时预测模型。
 """
 
 from __future__ import annotations
@@ -32,7 +30,7 @@ SCHEMA_VERSION = "m3-paper-v2-gemini-free-tier-duration-qualification-1.0"
 
 
 class GeminiFreeTierDurationQualificationV1Error(ValueError):
-    """Raised when the frozen Gemini schedule cannot be reconstructed."""
+    """当固化的 Gemini 时间表无法重建时抛出的异常。"""
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:

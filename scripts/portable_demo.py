@@ -1,4 +1,8 @@
-"""Credential-free walkthrough of the actual corrected guard, not an LLM trial."""
+"""免凭证离线运行演示程序：完整走通实际修正后的防护机制，非模型在线评测。
+
+动作提案采用固定样例，但权限编译、来源追踪、防护判定和内存隔离均经过真实组件运行。
+它不调用外部大模型 API，因此不可直接用于报告模型攻击成功率。
+"""
 
 from __future__ import annotations
 
@@ -32,7 +36,7 @@ SCENARIO_NAMES = {
 
 
 def run_scenario(scenario_id: str, condition: str) -> dict:
-    """Run fixed proposals through shared provenance, monitor and memory effects."""
+    """通过共享的数据来源分析、运行时监视器和内存状态模拟，运行预设动作提案。"""
     scenario = SCENARIOS[scenario_id]
     session = FollowupSession(scenario, condition)
     session.monitor = RuntimeMonitorCorrectedV2(
@@ -79,7 +83,7 @@ def run_scenario(scenario_id: str, condition: str) -> dict:
 
 
 def compiler_walkthrough() -> dict:
-    """Show actual prose compilation; all filesystem effects remain dictionaries."""
+    """演示真实的任务策略编译流程；所有的文件系统操作仅在内存字典中模拟，不影响宿主磁盘。"""
     request = "Read public/input.txt, then write the summary to public/output.txt."
     manifest = compile_task_policy_corrected_v1(
         trusted_user_request=request, generated_at="2026-10-09T00:00:00Z",

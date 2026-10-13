@@ -1,7 +1,6 @@
-"""Verify the paper-v2 literature matrix and freeze citation-admission metadata.
+"""验证 paper-v2 论文文献矩阵并冻结文献准入清单。
 
-This is a local structural check, not a substitute for opening every publisher
-record immediately before submission.
+检查正文引用标签与 BibTeX 条目的双向一致性，防止未引用条目或空悬引用。
 """
 
 from __future__ import annotations
@@ -50,7 +49,7 @@ LINK_PATTERN = re.compile(r"\[([^\]]+)\]\((https://[^)]+)\)")
 
 
 class CitationIntegrityError(ValueError):
-    """Raised when the literature registry is incomplete or inconsistent."""
+    """当文献注册表不完整或不一致时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

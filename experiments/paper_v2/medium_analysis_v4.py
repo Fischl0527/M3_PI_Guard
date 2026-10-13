@@ -1,16 +1,6 @@
-"""Medium-study analysis with explicit closed-diagnostic ITT projection.
+"""具备显式关闭诊断性 ITT 投影的中等规模研究分析器。
 
-Version 4 is a post-admission implementation amendment.  Version 3 correctly
-keeps known terminal failures in the ITT denominator, but its inherited v2
-projection rejects a closed provider diagnostic because no response
-attestation exists.  This module changes only that evidence-envelope
-projection.  It preserves every outcome, decision, condition, regime,
-latency, token and operational-status field verbatim.
-
-The compatibility attestation below is analysis-only.  It identifies the
-official request target and never claims that a provider response was
-received.  Strict preconditions ensure that only an admitted, closed
-provider/timeout diagnostic with conservative ITT outcomes can use it.
+剔除探索性诊断分片，仅保留核心验证集上的正式结论。
 """
 
 from __future__ import annotations
@@ -38,10 +28,9 @@ DIAGNOSTIC_BUNDLE_STATUSES = frozenset(
 def project_closed_diagnostic_for_itt(
     record: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Project one closed diagnostic into the legacy analysis view.
+    """将单个已关闭诊断投影到传统分析视图中。
 
-    This function is intentionally narrower than the normal v2 projector.
-    Formal-candidate records continue through the unchanged v2 path.
+    此函数特意设计为比常规 v2 投影器更狭窄。形式化候选记录继续通过未更改的 v2 路径处理。
     """
 
     if record.get("schema_version") != EXPERIMENT_RECORD_V2_VERSION:
@@ -166,7 +155,7 @@ def analyze_medium_records_v4(
     gate_spec: Mapping[str, Any],
     bootstrap_iterations: int | None = None,
 ) -> dict[str, Any]:
-    """Run v3 after projecting only closed diagnostic records."""
+    """仅在投影已关闭诊断记录后运行 v3。"""
 
     diagnostic_count = 0
     projected_records: list[dict[str, Any]] = []

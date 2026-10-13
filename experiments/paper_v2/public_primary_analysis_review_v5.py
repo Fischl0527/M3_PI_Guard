@@ -1,4 +1,7 @@
-"""Independently review the projected-envelope Public primary analysis."""
+"""独立审查具备包络投影（Projected-Envelope）的公开主分析结果（版本 V5）。
+
+复核在包络投影边界下统计估算的严密性，确保置信区间不超出定义域。
+"""
 
 from __future__ import annotations
 

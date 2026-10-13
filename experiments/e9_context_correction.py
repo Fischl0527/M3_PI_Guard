@@ -1,4 +1,7 @@
-"""Run and analyze the token-calibrated E9 context/position correction."""
+"""运行并分析经过 Token 校准的 E9 上下文长度与载荷位置修正实验。
+
+探究注入 Prompt 位于上下文首部、中部或尾部时对防御监视器拦截率的影响（大海捞针鲁棒性）。
+"""
 
 from __future__ import annotations
 

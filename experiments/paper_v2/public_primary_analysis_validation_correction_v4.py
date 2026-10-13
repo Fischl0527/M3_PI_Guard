@@ -1,16 +1,6 @@
-"""Admit projection-safe reading of the Public primary result ledgers.
+"""准入对公开主结果账本的投影安全读取规范。
 
-Public terminal provider failures are intentionally retained as diagnostic ITT
-rows.  Their incomplete trace summaries must not be reinterpreted as completed
-provider executions during result aggregation.  This prospective amendment
-therefore separates two already frozen responsibilities:
-
-* the locked shard reviews and primary merge prove ledger/request-chain
-  integrity and retain every terminal diagnostic;
-* the analysis reader validates record v2.2 structure, online-visibility,
-  decision, outcome, tier, and safety-receipt semantics before aggregation.
-
-No statistical method, record, denominator, or claim boundary is changed.
+规范化数据访问接口，确保评测代码与基准账本物理隔离。
 """
 
 from __future__ import annotations
@@ -66,7 +56,7 @@ GENERATED_AT = "2026-07-30T09:50:00+08:00"
 
 
 class PublicPrimaryAnalysisCorrectionV4Error(ValueError):
-    """Raised when the projection-safe analysis correction drifts."""
+    """当投影安全分析修正发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

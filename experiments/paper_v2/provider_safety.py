@@ -1,8 +1,7 @@
-"""Fail-closed provider and tool-effect boundary for paper-v2 experiments.
+"""面向 paper-v2 实验的故障安全提供商与工具效应边界隔离机制。
 
-This module accepts no credential value. Provider responses are untrusted
-proposals and can affect only deterministic M3 fixtures or copied AgentDojo
-in-memory environments.
+工具效应仅限合成沙箱或 AgentDojo 内存副本；允许隔离沙箱内的临时文件写入，
+禁止真实外部连接、真实发信及沙箱外文件写入。
 """
 
 from __future__ import annotations
@@ -38,7 +37,7 @@ HOST_EXECUTION_TOOLS = frozenset(
 
 
 class ProviderSafetyError(ValueError):
-    """Raised when provider traffic or a proposed effect crosses the boundary."""
+    """当提供商流量或建议的副作用越过边界时抛出的异常。"""
 
 
 def load_safety_policy(path: Path = DEFAULT_POLICY) -> dict[str, Any]:
@@ -73,7 +72,7 @@ def validate_provider_endpoint(
     *,
     policy: Mapping[str, Any] | None = None,
 ) -> None:
-    """Permit only a frozen official inference endpoint."""
+    """仅允许固化的官方推理端点。"""
 
     active = dict(policy or load_safety_policy())
     providers = active.get("official_provider_endpoints")
@@ -116,7 +115,7 @@ def validate_tool_effect(
     arguments: Mapping[str, Any],
     external_connectors_enabled: bool = False,
 ) -> None:
-    """Validate one local proposal before applying any simulated effect."""
+    """在施加任何模拟副作用之前验证单个本地提案。"""
 
     load_safety_policy()
     backend = str(effect_backend)
@@ -162,7 +161,7 @@ def build_safety_receipt(
     tool: str,
     arguments: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Return a credential-free receipt after both boundaries pass."""
+    """在两个边界均通过后返回无凭据的收据。"""
 
     validate_provider_endpoint(provider_id, endpoint_url)
     validate_tool_effect(

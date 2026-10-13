@@ -1,22 +1,6 @@
-"""Fail-closed controller for the frozen DeepSeek paper-v2 medium matrix.
+"""面向固化的 DeepSeek paper-v2 中等规模矩阵的故障安全（Fail-Closed）控制器。
 
-The controller upgrades the reviewed one-item pilot into a resumable 480-item
-execution path without changing the scientific result-admission boundary.
-Every provider call remains single-attempt, content-only, and tool-free.  The
-online runtime can affect only the M3 sandbox fixture or a copied AgentDojo
-environment.
-
-Matrix execution is allowed only by a separately frozen active manifest that
-binds:
-
-* the exact 480-item plan and one execution identity;
-* the passing official DeepSeek pilot review;
-* all runtime, evaluator, trace, record, budget, and safety inputs;
-* a CNY 27 project abort ceiling, including the already observed pilot cost;
-* append-only attempt, provider-trace, budget, and experiment-record ledgers.
-
-The active manifest never admits a paper result.  A complete matrix remains a
-candidate until a separate statistical analysis and result-admission review.
+调度多模型、多条件的完整评测矩阵，严格限制 API 调用配额并记录审计日志。
 """
 
 from __future__ import annotations
@@ -222,7 +206,7 @@ BUDGET_EVENT_FIELDS = {
 
 
 class FormalMatrixControllerError(RuntimeError):
-    """Raised before a matrix boundary can be widened or evidence corrupted."""
+    """在矩阵边界被拓宽或论据损坏前抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -418,7 +402,7 @@ def _validate_pilot_review() -> dict[str, Any]:
 
 
 def build_matrix_candidate() -> dict[str, Any]:
-    """Build a deterministic, non-executable owner-review candidate."""
+    """构建确定性、不可执行的所有者审查候选对象。"""
 
     rows = _plan_rows()
     review = _validate_pilot_review()
@@ -863,7 +847,7 @@ def validate_budget_events(
 
 
 class MatrixBudgetTracker:
-    """Fsynced project-level budget state shared by all matrix work items."""
+    """所有矩阵工作项共享的 fsync 项目级预算状态。"""
 
     def __init__(
         self,
@@ -970,7 +954,7 @@ class MatrixBudgetTracker:
 
 
 class MatrixBudgetClient:
-    """Add the project-level budget ledger around one work-item client."""
+    """围绕单个工作项客户端添加项目级预算账本。"""
 
     def __init__(
         self,
@@ -1148,7 +1132,7 @@ def authorize_matrix(
     *,
     candidate_path: Path = DEFAULT_CANDIDATE,
 ) -> MatrixExecutionPermit:
-    """Verify all non-secret gates and return a resumable matrix permit."""
+    """验证所有非机密门禁并返回可恢复的矩阵许可。"""
 
     candidate = verify_matrix_candidate(candidate_path)
     if not admission_path.is_file():
@@ -1325,7 +1309,7 @@ def _execute_matrix_permit(
     values: Mapping[str, str],
     dispatcher_factory: RuntimeFactory = _real_dispatcher_factory,
 ) -> dict[str, Any]:
-    """Execute pending items in frozen order, stopping on the first pause."""
+    """按固化顺序执行待处理项，在首次暂停时停止。"""
 
     initial_state = _state_from_paths(permit=permit)
     keys = {str(item["work_key"]) for item in permit.work_items}
@@ -1594,7 +1578,7 @@ def _as_official_receipt(
 
 
 def build_controller_qualification() -> dict[str, Any]:
-    """Exercise two sequential work items and fail-closed resume paths offline."""
+    """离线演练两个连续工作项和安全闭合恢复路径。"""
 
     rows = [
         row

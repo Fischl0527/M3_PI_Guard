@@ -1,4 +1,7 @@
-"""Zero-network end-to-end qualification of live per-call v2 evidence wiring."""
+"""零网络开销下的在线单次调用 v2 证据端到端合格性验证。
+
+离线模拟提供商响应，验证追踪数据解析器的鲁棒性。
+"""
 
 from __future__ import annotations
 
@@ -55,7 +58,7 @@ RECORDED_AT = "2026-07-24T03:30:00+08:00"
 
 
 class ProviderTraceRuntimeQualificationError(ValueError):
-    """Raised when the live v2 wiring no longer reproduces."""
+    """当实时 v2 布线无法再复现时抛出的异常。"""
 
 
 class _OneCallVigilFactory:

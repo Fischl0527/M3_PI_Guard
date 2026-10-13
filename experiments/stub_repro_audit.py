@@ -1,8 +1,6 @@
-"""Compare two Stub matrices at the semantic-result level.
+"""在语义结果层面对比两组桩测试（Stub）矩阵。
 
-Wall-clock fields and run identifiers are intentionally excluded.  The audit
-compares the deterministic inputs, model actions, Guard decisions, tool
-observations, and terminal states for every case/condition/step.
+在完全不消耗真实 API 预算的前提下快速验证测试管道逻辑的确定性与一致性。
 """
 
 from __future__ import annotations
@@ -56,7 +54,7 @@ _TEMP_SANDBOX_ROOT = re.compile(
 
 
 def _canonical(value: Any) -> Any:
-    """Canonicalize one complete RunLog row for semantic comparison."""
+    """将单个完整的 RunLog 记录行规范化以进行语义比较。"""
 
     if isinstance(value, dict):
         canonical_observation = (
@@ -80,7 +78,7 @@ def _canonical(value: Any) -> Any:
 
 
 def _canonical_value(value: Any) -> Any:
-    """Preserve semantic payloads while normalizing ephemeral runtime roots."""
+    """保留语义载荷，同时规范化临时运行时根路径。"""
 
     if isinstance(value, dict):
         return {key: _canonical_value(item) for key, item in sorted(value.items())}

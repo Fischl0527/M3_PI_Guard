@@ -1,4 +1,7 @@
-"""One-pass contemporaneous calibration statistics and readable report."""
+"""单遍同时期校准统计与易读学术报告生成器。
+
+分析同一时间窗口下各防御机制的横向对比数据，生成标准报告。
+"""
 
 from __future__ import annotations
 

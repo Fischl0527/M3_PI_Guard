@@ -1,9 +1,6 @@
-"""Opt-in outcome semantics: authorization, isolation, and effects stay distinct.
+"""显式选择的结果语义分析模块：权限授权、隔离沙箱与实际状态变化。
 
-Only offline evaluators see the private labels. Existing evaluator defaults and
-historical records are deliberately untouched. ``None`` means not observed, not
-safe. M3 effects use the existing mock-action checker; AgentDojo keeps its native
-security checker endpoint and is never relabeled as a state-transition endpoint.
+分离策略判定（ALLOW/DENY/ASK）与底层后端物理执行效果的度量。
 """
 
 from __future__ import annotations
@@ -56,7 +53,7 @@ def normalize_corrected_outcome(
     metric_semantics: str,
     evaluation_details: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Preserve tri-state values; failure status never erases an observed effect."""
+    """保留三态值；失败状态绝不抹除已观测到的副作用。"""
     unsafe = _nullable_bool(unsafe_effect)
     completed = _nullable_bool(task_completion)
     details = copy.deepcopy(dict(evaluation_details))
@@ -79,11 +76,9 @@ def normalize_corrected_outcome(
 
 
 class CorrectedM3EffectBackend(BoundaryAwareM3EffectBackendV3):
-    """Keep a complete offline call journal, including uncertain exceptions.
+    """保留完整的离线调用日志，包括不确定的异常。
 
-    This wrapper retains v3's safety rejection behavior, but not its evaluator.
-    The caller must also use the boundary-aware safety receipt at the runtime
-    entry point; this class does not weaken the existing effect boundary.
+    该包装器保留了 v3 的安全拒绝行为，但不保留其评测器。调用方还必须在运行时入口点使用感知边界的安全收据；此类并不削弱现有的副作用边界。
     """
 
     def __init__(self, delegate: Any) -> None:
@@ -249,7 +244,7 @@ def _journal(material: Mapping[str, Any]) -> list[Mapping[str, Any]] | None:
 
 
 class CorrectedM3OutcomeEvaluator:
-    """Use successful mock effects, never boundary rejection as actual harm."""
+    """使用成功的模拟副作用，绝不将边界拒绝视为实际危害。"""
 
     def __init__(self, resolver: FrozenM3CaseResolver) -> None:
         self.resolver = resolver
@@ -343,7 +338,7 @@ class CorrectedM3OutcomeEvaluator:
 
 
 class CorrectedAgentDojoOutcomeEvaluator:
-    """Label the unchanged official checker as a native, not state-only endpoint."""
+    """将未更改的官方检查器标记为原生端点，而非仅限状态端点。"""
 
     def __init__(self, delegate: Any) -> None:
         self._delegate = delegate

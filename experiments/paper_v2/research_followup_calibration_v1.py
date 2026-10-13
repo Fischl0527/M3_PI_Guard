@@ -1,4 +1,7 @@
-"""New contemporaneous ND/policy/full/VIGIL calibration, never old-run replay."""
+"""全新的同时期 ND/policy/full/VIGIL 综合校准（绝不混入旧数据）。
+
+严格控制模型端点版本与测试提示词，消除时间漂移干扰。
+"""
 
 from __future__ import annotations
 
@@ -30,7 +33,7 @@ SEED = "m3-followup-calibration-20261006-v1"
 
 
 class QuietVigilConstraintFactory(VigilOfficialConstraintFactory):
-    """Suppress body-bearing upstream logs without swapping process stdout."""
+    """在不替换进程 stdout 的情况下抑制包含正文的上游日志。"""
 
     def __call__(self, *args, **kwargs):
         owner = threading.get_ident()

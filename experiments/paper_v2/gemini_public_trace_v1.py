@@ -1,4 +1,7 @@
-"""Prospective, append-only request trace for official Gemini public runs."""
+"""面向官方 Gemini 公开矩阵的前瞻性仅追加请求追踪器。
+
+记录 API 请求时间戳、输入载荷哈希与底层 HTTP 状态码。
+"""
 
 from __future__ import annotations
 
@@ -25,7 +28,7 @@ USAGE_SCHEMA_VERSION = "m3-paper-v2-gemini-free-usage-evidence-1.0"
 
 
 class GeminiPublicTraceV1Error(ValueError):
-    """Raised when the prospective Gemini evidence chain is incomplete."""
+    """当预期 Gemini 论据链不完整时抛出的异常。"""
 
 
 def _usage_totals(items: Sequence[Mapping[str, Any]]) -> dict[str, int]:
@@ -385,7 +388,7 @@ def validate_trace_bundle(value: Any) -> dict[str, Any]:
 
 
 class GeminiPublicTracedProviderClient:
-    """Wrap one official client and precommit each exact payload to disk."""
+    """包装单个官方客户端并将每个精确载荷预先提交到磁盘。"""
 
     def __init__(
         self,

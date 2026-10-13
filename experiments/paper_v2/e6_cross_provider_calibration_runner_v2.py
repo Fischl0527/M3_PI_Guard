@@ -1,22 +1,6 @@
-"""Prospective E6-v2 runner with isolated physical-attempt recovery.
+"""具备隔离物理尝试恢复机制的前瞻性 E6-v2 运行器。
 
-E6-v1 records, ledgers, stops, and window artifacts are immutable.  This module
-reuses only the frozen v1 *case membership and source work-key mapping* while
-deriving new study, work, run, execution, output, trace, call-ledger, and stop
-identities.  The
-untouched source-W3 rows form one immediately runnable diagnostic execution
-block; they are not a third temporal replicate.  This module never
-reads or mutates any E6-v1 output path.
-
-The only generic recovery admitted here is one explicit outer attempt 2 for the
-single unresolved work key whose complete v2 execution history is response-less
-and contains a valid pretransport payload commitment.  HTTP 429 is never
-converted into this generic recovery and closes as a diagnostic-block terminal.
-One separately typed repair is admitted for the observed v2 projection defect:
-an immutable attempt-1 local resolver failure with zero provider calls may run
-one explicit failed-key attempt 2 after the source-v1 resolver is rebound to the
-active v2 work key.  No payload comparison is possible or required because the
-first attempt produced no provider payload.
+支持网络中断等异常情况下的安全幂等恢复，杜绝重复扣费与计数膨胀。
 """
 
 from __future__ import annotations
@@ -105,7 +89,7 @@ POST_RESPONSE_VIGIL_CONTINUATION_KIND = (
 
 
 class E6CalibrationRunnerV2Error(RuntimeError):
-    """Raised when prospective E6-v2 cannot preserve its repair contract."""
+    """当预期 E6-v2 无法保持其修复契约时抛出的异常。"""
 
 
 def _is_lower_sha256(value: Any) -> bool:
@@ -117,12 +101,9 @@ def _is_lower_sha256(value: Any) -> bool:
 
 
 def _is_local_projection_contract_failure(row: Mapping[str, Any]) -> bool:
-    """Recognize the one pre-provider projection defect eligible for repair.
+    """识别单个符合修复条件的提供商前投影缺陷。
 
-    The exception must occur after online-state projection (proved by its
-    visible-field digest) but before any provider request.  This deliberately
-    excludes every identity, payload, usage, ledger, provider, and
-    response-bearing fatal boundary.
+    该异常必须发生在在线状态投影之后（由其可见字段摘要证明），但发生在任何提供商请求之前。这特意排除了所有标识、载荷、用量、账本、提供商和带有响应的致命边界。
     """
 
     benchmark = str(row.get("benchmark", ""))
@@ -166,13 +147,9 @@ def _is_local_projection_recovery_record(row: Mapping[str, Any]) -> bool:
 def _is_allowlisted_post_response_vigil_record(
     row: Mapping[str, Any],
 ) -> bool:
-    """Recognize one terminal VIGIL parse failure that may not stop the queue.
+    """识别单个不应阻止队列推进的终端 VIGIL 解析失败。
 
-    This is deliberately a persisted-record predicate, rather than a broad
-    exception-class allowance.  Continuation is safe only after the official
-    response chain, exact model identity, online-field isolation, and disabled
-    tool/effect boundaries have all been materialized in the public record.
-    The failed work item remains terminal, non-retryable, and in ITT.
+    这特意设计为一个持久化记录谓词，而非宽泛的异常类宽容。仅在官方响应链、确切模型身份、在线字段隔离以及禁用的工具/副作用边界均在公开记录中实体化后，接续才安全。失败的工作项仍保持终端状态、不可重试且保留在 ITT 中。
     """
 
     provider_id = row.get("provider_id")
@@ -475,7 +452,7 @@ def _latest_records(provider_id: str) -> dict[str, dict[str, Any]]:
 
 
 def _latest_execution_records(provider_id: str) -> dict[str, dict[str, Any]]:
-    """Return the latest physical execution, excluding administrative overlays."""
+    """返回最新的物理执行记录，排除管理性覆盖层。"""
 
     latest: dict[str, dict[str, Any]] = {}
     for key, history in _execution_history(provider_id).items():
@@ -508,11 +485,9 @@ def _has_response_evidence(row: Mapping[str, Any]) -> bool:
 def _provider_unavailable_evidence(
     provider_id: str,
 ) -> dict[str, Any] | None:
-    """Return minimal auditable evidence for an explicit unavailable seal.
+    """为显式的不可用封存提供最少的可审计论据。
 
-    The operator flag alone is not evidence.  A rate-limit terminal may close the
-    remaining block immediately; a generic transport failure may do so only after
-    the single payload-bound recovery attempt has also ended without a response.
+    仅凭操作员标志位不能作为论据。速率限制终端状态可立即关闭剩余块；通用传输故障仅在单次受载荷绑定的恢复尝试同样无响应结束后才可关闭。
     """
 
     for work_key, history in sorted(_execution_history(provider_id).items()):
@@ -621,7 +596,7 @@ def _expected_recovery_payloads(permit: lean.LeanPermit) -> dict[int, str]:
 
 
 class _PayloadBoundRecoveryClient:
-    """Fail before transport if outer attempt 2 changes canonical payload."""
+    """若外部第 2 次尝试改变了规范载荷，则在传输前直接失败。"""
 
     def __init__(
         self,
@@ -874,12 +849,9 @@ def _bind_projected_resolver_items(
     benchmark: str,
     execution_identity: str,
 ) -> None:
-    """Add v2 work keys while retaining the frozen v1 case binding.
+    """在保留固化 v1 用例绑定的同时添加 v2 工作键。
 
-    Resolver case indexes stay frozen.  Only their private work-key lookup is
-    extended in memory, after proving that the projected row names the same
-    source record, selection, and case as its source-v1 row.  The active permit
-    identity is then rebound for the M3 offline material commitment.
+    解析器用例索引保持固化。仅在证明投影行指定的源记录、选择和用例与其 source-v1 行相同后，才在内存中扩展其私有工作键查找。然后为 M3 离线材料承诺重新绑定活动许可身份。
     """
 
     items = getattr(resolver, "_items", None)
@@ -1244,7 +1216,7 @@ def _runtime_failure_diagnostic(result: Mapping[str, Any]) -> dict[str, Any] | N
 
 
 def _is_fatal_physical_record(row: Mapping[str, Any]) -> bool:
-    """Return whether a persisted physical row proves a fatal provider boundary."""
+    """返回持久化的物理数据行是否证明了致命的提供商边界。"""
 
     if (
         row.get("record_kind") != "execution"
@@ -1276,13 +1248,9 @@ def _is_fatal_physical_record(row: Mapping[str, Any]) -> bool:
 def _require_provider_stop(
     provider_id: str, block: str
 ) -> dict[str, Any] | None:
-    """Validate a provider stop against the frozen plan and latest raw evidence.
+    """根据固化计划和最新原始论据验证提供商停止文件。
 
-    A stop file is a fail-closed control artifact, not an authority by itself.  It
-    is accepted only when it binds the B1 identity and exactly corroborates a
-    physical raw record that independently satisfies the fatal-row contract.
-    One strict, response-bearing VIGIL record may resolve its historical stop
-    without replay; the immutable row remains terminal and in ITT.
+    停止文件是一个安全闭合控制构件，其本身不具备授权。仅当其绑定 B1 身份并精确印证独立满足致命行契约的物理原始记录时才被接受。单条严格的、带有响应的 VIGIL 记录可在不重放的情况下解析其历史停止；不可变行仍保持终端状态且留在 ITT 中。
     """
 
     path = _provider_stop_path(provider_id)

@@ -1,10 +1,6 @@
-"""Bind Fresh Harness v8 and completed prefix evidence for Pro-200.
+"""为 Pro-200 绑定全新 Harness v8 与已完成的前缀证据。
 
-This gate is deliberately non-authorizing.  It verifies the immutable Fresh
-Harness v8 receipt, the completed Adaptive Pro-50 and Gemini Public-v5 s1
-technical chains, and the exact prospective Pro-200 candidate/admission.  A
-provider call still requires the separate single-use wrapper and a later full
-Harness that includes this gate.
+保障长序列评估前置依赖链的完备性与可溯源性。
 """
 
 from __future__ import annotations
@@ -112,7 +108,7 @@ PYTEST_SUMMARY = re.compile(
 
 
 class ExperimentCloseoutHarnessGateV6Error(ValueError):
-    """Raised when v8 or a completed/prospective prefix artifact drifts."""
+    """当 v8 或已完成/预期的前缀构件发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

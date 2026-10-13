@@ -1,4 +1,8 @@
-"""Build the Simplified Chinese comparison draft of the lean JISA manuscript."""
+"""构建精简版 JISA 手稿的简体中文对照 Word (.docx) 草稿文档。
+
+基于中文版 Markdown 手稿与西文基准草稿，设置宋体（正文）与微软雅黑（标题）双语字体映射，
+生成方便审阅与学术交流的高质量中文学术 Word 手稿。
+"""
 
 from __future__ import annotations
 
@@ -30,7 +34,7 @@ HEADING_CJK_FONT = "Microsoft YaHei"
 
 
 class ChineseDocxBuildError(RuntimeError):
-    """Raised when the Chinese comparison draft cannot be built safely."""
+    """当中文对照草稿无法安全构建时抛出的运行时异常。"""
 
 
 def _prepare_markdown(text: str) -> str:

@@ -1,4 +1,4 @@
-"""Controlled non-gold authorization regimes for paper-v1 experiments."""
+"""实验策略制度（Policy Regimes）管理与构造模块。"""
 
 from __future__ import annotations
 
@@ -105,13 +105,7 @@ def build_policy_regime(
     regime: str = "auto_compiled",
     generated_at: str | None = None,
 ) -> TaskPolicyManifest:
-    """Compile and deterministically perturb a policy without reading gold labels.
-
-    ``partial`` drops the final compiled action scope (or all scope when only one
-    action exists).  ``ambiguous`` broadens explicit target values but requires
-    confirmation.  ``incorrect`` substitutes a fixed safe synthetic target.
-    These are experimental input errors, not alternative defense algorithms.
-    """
+    """根据实验配置构造对应的策略制度编译器函数对象。"""
 
     normalized = str(regime).casefold().strip()
     if normalized not in POLICY_REGIMES:

@@ -1,4 +1,7 @@
-"""Analyze Public primary evidence through a projection-safe record reader."""
+"""通过投影安全（Projection-Safe）记录读取器分析公开主要证据。
+
+杜绝在分析读取过程中间接推断或泄露未授权属性。
+"""
 
 from __future__ import annotations
 

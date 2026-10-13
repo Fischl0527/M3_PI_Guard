@@ -1,15 +1,6 @@
-"""Freeze the Pro-200 host-timeout evidence without upgrading a null exit.
+"""固化 Pro-200 实验宿主超时证据（严禁将空结果或超时回退升级为阳性结论）。
 
-The original guarded wrapper outlived its host command and never produced its
-own receipt.  A watcher later observed that the execute child disappeared, but
-its exit-code field is JSON ``null``.  This review therefore recomputes the
-direct-exit claim as false, preserves the v1 finalizer's fail-closed result, and
-separately binds the v2 finalizer's directly observed technical-review exit 0.
-
-Only outcome-blind metadata ledgers are replayed here.  Query records,
-checkpoint contents, provider traces, credentials, and scientific outcomes are
-not opened or aggregated.  This review does not reconstruct the missing wrapper
-receipt and does not authorize result access or successor execution.
+记录并在审计日志中锁定由于网络超时或网关截断导致的未决案例，确保统计透明。
 """
 
 from __future__ import annotations
@@ -220,7 +211,7 @@ EXECUTE_SUMMARY_KEYS = frozenset(
 
 
 class AdaptiveFormalPro200HostTimeoutReviewV1Error(ValueError):
-    """Raised when the bounded Pro-200 host-timeout evidence drifts."""
+    """当有界的 Pro-200 主机超时论据发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -519,7 +510,7 @@ def _validate_embedded_manifest(
 def recompute_direct_exit_observation(
     observation: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Recompute directness; a JSON null can never prove an OS exit code."""
+    """重新计算直接性；JSON null 绝不能证明 OS 退出码。"""
 
     raw_claim = observation.get("operating_system_exit_code_directly_observed")
     raw_exit = observation.get("execute_child_exit_code")

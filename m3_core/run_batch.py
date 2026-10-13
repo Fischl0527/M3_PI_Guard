@@ -1,7 +1,6 @@
-"""Batch runner for the local M3 Agent range.
+"""批量实验运行器（Batch Experiment Runner）。
 
-Default use for the team: edit CONFIG at the top, then run this file.
-CLI arguments are still supported for automation.
+负责支持断点续跑、并发限制、失败去重以及批量生成 RunLog 日志。
 """
 
 from __future__ import annotations
@@ -121,7 +120,7 @@ def main(argv: List[str] | None = None) -> None:
 
 
 def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
-    """Run AttackCases with durable per-run checkpoints and repeat identity."""
+    """执行一组案例的批量实验主循环。"""
 
     cases_path = _repo_path(str(config["cases"]))
     out_path = _repo_path(str(config["out"]))
@@ -343,7 +342,7 @@ def run_batch(config: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _parse_args(argv: List[str]) -> Dict[str, Any]:
-    """Parse legacy CLI arguments into the same shape as CONFIG."""
+    """解析批量运行的命令行选项与参数。"""
 
     parser = argparse.ArgumentParser(description="Run M3 local Agent attack cases.")
     parser.add_argument("--cases", required=True, help="Input AttackCase JSONL path")
@@ -467,7 +466,7 @@ def _filter_cases(
     cases: List[Dict[str, Any]],
     config: Dict[str, Any],
 ) -> List[Dict[str, Any]]:
-    """Apply family and case-id filters while preserving file order."""
+    """根据案例 ID、攻击家族或切分筛选待执行案例。"""
 
     selected = list(cases)
     families = set(_csv_values(config.get("families")))
@@ -509,7 +508,7 @@ def _order_and_limit_cases(
     cases: List[Dict[str, Any]],
     config: Dict[str, Any],
 ) -> List[Dict[str, Any]]:
-    """Apply optional shuffle and limit after filters and resume skipping."""
+    """按确定性顺序排序并根据数量限制截断候选案例列表。"""
 
     selected = list(cases)
     if _enabled(config.get("shuffle")):
@@ -525,7 +524,7 @@ def _order_and_limit_cases(
 
 
 def _completed_case_ids(logs: Iterable[Dict[str, Any]]) -> set[str]:
-    """Legacy helper; infrastructure errors are intentionally retryable."""
+    """读取已有输出日志中已成功完成的案例 ID 集合，避免重复调度。"""
 
     terminal_statuses = {
         "completed",
@@ -660,7 +659,7 @@ def _replace_run_logs(
 
 
 def _deduplicate_logs(rows: Iterable[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Prefer later durable rows for the same run/step after a crash/retry."""
+    """对日志中的重复运行记录进行去重合并。"""
 
     order: List[tuple[str, int, int]] = []
     values: Dict[tuple[str, int, int], Dict[str, Any]] = {}
@@ -699,7 +698,7 @@ def _error_log(
     run_group: str = "",
     model_config: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
-    """Create a schema-compatible RunLog row for non-fail-fast errors."""
+    """格式化并写入单次运行的错误记录日志。"""
 
     return {
         "run_id": "runner-error",
@@ -763,7 +762,7 @@ def _error_log(
 
 
 def _csv_values(value: Any) -> List[str]:
-    """Normalize comma-separated config values into non-empty strings."""
+    """将逗号分隔的配置值或列表、元组、集合转换为去空白、去空项的字符串列表。"""
 
     if value is None:
         return []
@@ -780,7 +779,7 @@ def _seed_value(config: Dict[str, Any], name: str) -> int:
 
 
 def _enabled(value: Any) -> bool:
-    """Interpret booleans from CONFIG or argparse consistently."""
+    """检查指定功能开关是否处于启用状态。"""
 
     if isinstance(value, bool):
         return value
@@ -788,7 +787,7 @@ def _enabled(value: Any) -> bool:
 
 
 def read_jsonl(path: Path) -> Iterable[Dict[str, Any]]:
-    """Stream JSONL rows and report exact line number on malformed JSON."""
+    """读取 JSONL 文件并按行生成字典生成器。"""
 
     with path.open("r", encoding="utf-8") as handle:
         for line_number, line in enumerate(handle, start=1):
@@ -802,7 +801,7 @@ def read_jsonl(path: Path) -> Iterable[Dict[str, Any]]:
 
 
 def write_jsonl(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
-    """Atomically replace canonical JSONL after durable case checkpoints."""
+    """将记录序列写入临时文件并原子覆盖目标 JSONL 文件；不会追加或保留旧记录。"""
 
     path.parent.mkdir(parents=True, exist_ok=True)
     temp_path = path.with_name(path.name + ".tmp")
@@ -815,12 +814,7 @@ def write_jsonl(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
 
 
 def write_runlog_csv(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
-    """Write a spreadsheet-friendly flattened RunLog CSV.
-
-    JSONL 保留原始嵌套结构，适合程序读取；CSV 将 parsed_tool_call、
-    risk_tags、reasons、observation 等嵌套字段压成字符串，方便 Excel/WPS 查看。
-    使用 utf-8-sig 是为了 Windows Excel 打开中文时更稳。
-    """
+    """将运行日志摘要行写入 CSV 报表。"""
 
     path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
@@ -936,7 +930,7 @@ def write_runlog_csv(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
 
 
 def _csv_cell(value: Any) -> str:
-    """Convert nested Python values to a single safe CSV cell."""
+    """格式化单个 CSV 单元格内容，转义逗号与换行符。"""
 
     if isinstance(value, (dict, list)):
         return json.dumps(value, ensure_ascii=False)
@@ -946,7 +940,7 @@ def _csv_cell(value: Any) -> str:
 
 
 def _relative_or_name(path: Path) -> str:
-    """Prefer a repo-relative case source label for stable experiment logs."""
+    """将文件路径转换为相对于仓库根目录的短相对路径。"""
 
     try:
         return path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
@@ -955,7 +949,7 @@ def _relative_or_name(path: Path) -> str:
 
 
 def _repo_path(value: str) -> Path:
-    """Resolve paths relative to repository root for stable IDE execution."""
+    """解析相对于当前项目仓库根目录的标准路径。"""
 
     path = Path(value)
     if path.is_absolute():

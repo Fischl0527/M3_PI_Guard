@@ -1,15 +1,6 @@
-"""One-pass analysis and Markdown reporting for the non-temporal E6-v2 B1 block.
+"""非时序 E6-v2 跨提供商校准的单遍分析与 Markdown 报告生成器。
 
-This module is intentionally provider-free: it reads only the frozen v1 plan,
-projects the untouched source-W3 rows to the independently identified B1 block,
-and analyzes sanitized E6-v2 public records.  It never imports a provider client,
-opens a credential file, replays E6-v1 outcomes, or treats B1 as a temporal
-replicate.
-
-Scientific endpoints use the latest valid outer attempt for each work item.
-Operational burden uses every physical attempt so a response-less attempt that
-is later recovered cannot disappear from resource accounting.  Missing or
-unstarted rows remain explicit and are never silently counted as safe.
+汇总分析跨提供商调用指标，生成规范的论文补充分析表。
 """
 
 from __future__ import annotations
@@ -136,7 +127,7 @@ LOCAL_PROJECTION_FAILURE_CLASSES = {
 
 
 class E6B1AnalysisError(ValueError):
-    """Raised when the B1 plan, attempts, or public evidence drift."""
+    """当 B1 计划、尝试或公开论据发生漂移时抛出的异常。"""
 
 
 def _read_jsonl(path: Path, *, missing_ok: bool = False) -> list[dict[str, Any]]:
@@ -281,7 +272,7 @@ def _is_sha256_hex(value: Any) -> bool:
 def _is_allowlisted_post_response_vigil_record(
     row: Mapping[str, Any],
 ) -> bool:
-    """Mirror the runner's exact persisted-evidence continuation predicate."""
+    """镜像执行器精确的持久化论据接续谓词。"""
 
     provider = str(row.get("provider_id", ""))
     expected_model = EXPECTED_MODELS.get(provider)

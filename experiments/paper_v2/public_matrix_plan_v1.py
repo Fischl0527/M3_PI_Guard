@@ -1,11 +1,6 @@
-"""Build the result-blind paper-v2 public benchmark execution plan.
+"""构建对结果盲审的 paper-v2 公开基准执行方案。
 
-The public freeze stores case references and condition panels, not executable
-condition-specific work items.  This module expands the frozen 6,873-record
-matrix, reconstructs every initial online state without evaluator fields, and
-binds separate DeepSeek V4 Pro and V4 Flash execution identities.
-
-It never reads credentials, constructs a provider client, or calls a model.
+在不提前窥探实验数据的前提下排布完整的交叉对照实验矩阵。
 """
 
 from __future__ import annotations
@@ -73,7 +68,7 @@ MODEL_ROLES = {
 
 
 class PublicMatrixPlanError(ValueError):
-    """Raised when the public freeze cannot produce an exact safe plan."""
+    """当公开固化无法生成确切安全计划时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -334,7 +329,7 @@ def build_public_execution_plan(
     *,
     freeze_path: Path = DEFAULT_FREEZE,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Expand the frozen public cases into exact condition work items."""
+    """将固化的公开用例展开为确切的条件工作项。"""
 
     freeze = _load_json(freeze_path)
     _validate_freeze(freeze)
@@ -583,7 +578,7 @@ def build_public_execution_plan(
 def reconstruct_public_initial_online_state(
     work_item: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Reconstruct and verify the exact public work-item online state."""
+    """重建并验证确切的公开工作项在线状态。"""
 
     source = work_item.get("source_reference")
     if not isinstance(source, Mapping):
@@ -622,7 +617,7 @@ def reconstruct_public_initial_online_state(
 def hydrate_public_work_item(
     work_item: Mapping[str, Any],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Return a dispatcher-compatible work item and its verified online state."""
+    """返回分发器兼容的工作项及其经验证的在线状态。"""
 
     state = reconstruct_public_initial_online_state(work_item)
     hydrated = dict(work_item)

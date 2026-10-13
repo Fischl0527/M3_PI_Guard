@@ -1,11 +1,6 @@
-"""Freeze and qualify the remediated paper-v2 public-matrix candidate v2.
+"""冻结并校验修复后的 paper-v2 公开矩阵候选版本 v2。
 
-This version preserves the 6,873-record result-blind plan but derives fresh
-execution identities after Public-v1 exposed that the medium-plan AgentDojo
-resolver could not resolve public work keys. The public-plan resolver and the
-content-free Public-v1 abort review are qualified and hash-bound here.
-
-No command in this module reads credentials or performs network I/O.
+修正了早期批次中的数据加载边界与类型转换问题。
 """
 
 from __future__ import annotations
@@ -88,7 +83,7 @@ EXPECTED_PAIRS = 18
 
 
 class PublicMatrixControllerError(ValueError):
-    """Raised when the public execution candidate cannot fail closed."""
+    """当公开执行候选对象无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

@@ -1,4 +1,7 @@
-"""Build bounded, non-scientific charts for the paper-v2 stage report."""
+"""为 paper-v2 阶段报告构建有边界约束的非科学展示性辅助图表资产。
+
+包括版本演进时间线图、运行模式构成图等流程说明图，严禁伪造科学因果关系。
+"""
 
 from __future__ import annotations
 

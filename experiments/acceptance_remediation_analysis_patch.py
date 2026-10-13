@@ -1,9 +1,6 @@
-"""Transparent post-freeze report-field adapter for Remediation V2.
+"""针对 Remediation V2 的冻结后报告字段透明适配补丁。
 
-The frozen analyzer expected ``proportion_result()['estimate']`` although the
-stable statistics API names that value ``value``. This wrapper adds only the
-alias required by report serialization; it does not change cases, RunLogs,
-metric functions, thresholds, numerators, denominators, or confidence intervals.
+在不篡改底层实验原始记录的前提下，安全映射分析报告字段以对齐最新评估规范。
 """
 
 from __future__ import annotations
@@ -25,7 +22,7 @@ def adapt_legal_result(value: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def normalize_figure_manifest_anchor(manifest: Mapping[str, Any]) -> dict[str, Any]:
-    """Add the dashboard's artifact-kind discriminator without changing evidence."""
+    """添加仪表盘的构件类型鉴别器，且不改变论据证据内容。"""
     result = dict(manifest)
     records: list[Any] = []
     for value in result.get("artifacts", []):
@@ -41,7 +38,7 @@ def normalize_figure_manifest_anchor(manifest: Mapping[str, Any]) -> dict[str, A
 
 
 def repair_chart_presentation() -> dict[str, Any]:
-    """Re-render two charts whose original data labels failed visual QA."""
+    """重新渲染两张原始数据标签未通过视觉质量验收（QA）的图表。"""
     import matplotlib.pyplot as plt
 
     output = frozen.OUTPUT

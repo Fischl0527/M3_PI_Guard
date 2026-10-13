@@ -1,4 +1,7 @@
-"""Separate scientific-result access for the completed public primary matrix."""
+"""面向已完成的公开主评测矩阵的独立科研结果准入通道。
+
+签发正式的结果准入数字签名，将其固化为不可变研究产物。
+"""
 
 from __future__ import annotations
 
@@ -45,7 +48,7 @@ GENERATED_AT = "2026-07-30T06:20:00+08:00"
 
 
 class PublicPrimaryResultAdmissionError(ValueError):
-    """Raised when primary public outcome access is not exactly admitted."""
+    """当主公开结果访问未获得精确准入时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

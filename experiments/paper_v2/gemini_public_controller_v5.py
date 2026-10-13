@@ -1,9 +1,6 @@
-"""Prospective Gemini canary recovery under the local-precommit v2 contract.
+"""在本地预提交 v2 契约下的前瞻性 Gemini 金丝雀恢复控制器。
 
-The historical v4 segment-0 record and segment-1 abort remain immutable.  This
-controller selects only the ten untouched canary work keys, assigns fresh run
-and execution identities, uses the v2 trace-attaching runtime, and keeps each
-free-tier segment behind a separate exact-command admission.
+增强了对跨日网络重连与鉴权失效时的自动重建支持。
 """
 
 from __future__ import annotations
@@ -70,7 +67,7 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class GeminiPublicControllerV5Error(RuntimeError):
-    """Raised when prospective Gemini recovery cannot remain fail closed."""
+    """当预期 Gemini 恢复无法保持安全闭合时抛出的异常。"""
 
 
 def _now() -> str:

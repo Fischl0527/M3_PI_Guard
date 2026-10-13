@@ -1,8 +1,6 @@
-"""Conservative TaskPolicyManifest compiler for the paper-v1 runtime.
+"""历史版本的任务策略编译器。
 
-Only the trusted user request, trusted application context and tool schemas are
-accepted.  Evaluator fields are rejected even when nested so a dataset adapter
-cannot accidentally turn gold labels into online permission.
+从受信任请求文本中提取操作动作并编译出初始工具规则。注：新实验推荐显式选用 corrected_v1/v2 编译器。
 """
 
 from __future__ import annotations
@@ -193,8 +191,7 @@ def compile_task_policy(
     manifest_id: str | None = None,
     generated_at: str | None = None,
 ) -> TaskPolicyManifest:
-    """Compile a least-privilege policy before observing external content."""
-
+    """将受信任的用户请求编译为结构化的任务策略清单（TaskPolicyManifest）。"""
     request = str(trusted_user_request).strip()
     if not request:
         raise ValueError("trusted_user_request must not be empty")
@@ -519,8 +516,7 @@ def _ordered_lexical_tokens(value: str) -> list[str]:
 
 
 def _positive_directive_text(request: str) -> str:
-    """Remove explicit negative scopes before detecting requested side effects."""
-
+    """提取请求中的肯定性指令正文，剥离否定词与附加限定修饰。"""
     text = re.sub(
         r"\b(?:without|avoid(?:ing)?|refrain(?:ing)?\s+from)\b[^,.;]*",
         " ",
@@ -659,13 +655,7 @@ def compile_generic_task_policy(
     generated_at: str | None = None,
     max_tools: int = 6,
 ) -> TaskPolicyManifest:
-    """Compile a non-gold lexical policy for arbitrary benchmark tool names.
-
-    This is intentionally a measurable baseline compiler, not an oracle.  It
-    ranks tools only from the trusted request and public tool descriptions;
-    official task ground truths and attacker labels are absent from the API.
-    """
-
+    """面向通用非文件场景的策略编译器入口。"""
     request = str(trusted_user_request).strip()
     if not request:
         raise ValueError("trusted_user_request must not be empty")

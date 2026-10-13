@@ -1,4 +1,8 @@
-"""Sensitive-data flow checks for the local M3 Guard."""
+"""本地 M3 Guard 的敏感数据流与信宿泄露分析模块。
+
+本模块追踪金丝雀标记（Canary Tokens）、API 密钥、密码、系统令牌等敏感数据，
+并审计这些受保护标签是否正在从系统内部观测流向外部受限工具（如发邮件、外部 API 调用）。
+"""
 
 from __future__ import annotations
 
@@ -33,13 +37,13 @@ class DataflowFinding:
 
 
 def contains_sensitive_data(text: Any) -> bool:
-    """Return True if text contains local canary or common secret markers."""
+    """检查文本是否包含本地测试金丝雀或常见的凭证/秘密标记。"""
 
     return bool(extract_data_labels(text))
 
 
 def extract_data_labels(text: Any) -> list[str]:
-    """Extract coarse labels for sensitive data seen in text."""
+    """提取在文本中观察到的粗粒度敏感数据标签列表。"""
 
     normalized = normalize_text(text)
     labels: list[str] = []
@@ -61,7 +65,7 @@ def extract_data_labels(text: Any) -> list[str]:
 
 
 def detect_sensitive_flow(context: dict[str, Any], tool_call: dict[str, Any]) -> list[str]:
-    """Detect sensitive labels flowing from observations into external tools."""
+    """检测敏感标签是否正在从环境观测流向外部不可信工具。"""
 
     if not isinstance(context, dict):
         context = {}

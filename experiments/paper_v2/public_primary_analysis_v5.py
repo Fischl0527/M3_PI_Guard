@@ -1,4 +1,7 @@
-"""Analyze Public primary evidence through a validated v1 statistics view."""
+"""通过已验证的 v1 统计分析引擎分析公开主要证据。
+
+调用经过严格数学审计的纯净统计例程生成可复现的论文终稿表格。
+"""
 
 from __future__ import annotations
 

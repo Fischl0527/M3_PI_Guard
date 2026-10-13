@@ -1,10 +1,6 @@
-"""Atomically register passing Context Correction V2 evidence for E9 and E14.
+"""原子性注册通过验证的 Context Correction V2 实验证据（针对 E9 与 E14）。
 
-This is the only supported completion path for the corrected context
-experiments.  It never calls the generic experiment registrar.  A stored pass
-audit is required, the entire audit is re-run, and both registry entries are
-updated in one atomic payload replacement.  Any admission failure occurs
-before that replacement, leaving the registry byte-for-byte unchanged.
+更新实验注册表与清单哈希，确保实验证据链闭环可溯源。
 """
 
 from __future__ import annotations
@@ -42,7 +38,7 @@ DEFAULT_REGISTRY = ROOT / "experiments" / "registry.json"
 
 
 class ContextCorrectionRegistrationError(RuntimeError):
-    """Raised before the atomic registry write when admission is invalid."""
+    """在原子注册表写入之前，当准入无效时抛出。"""
 
 
 def _utc_now() -> str:
@@ -98,7 +94,7 @@ def _load_object(path: Path, *, label: str) -> dict[str, Any]:
 
 
 def _restore_bytes_atomic(path: Path, content: bytes) -> None:
-    """Restore the pre-transaction registry bytes after an unexpected save error."""
+    """在发生意外保存错误后，恢复事务处理前的注册表字节内容。"""
 
     handle, temporary = tempfile.mkstemp(
         prefix=f".{path.name}.restore.", suffix=".tmp", dir=path.parent
@@ -276,7 +272,7 @@ def prepare_registration(
     audit_path: str | Path,
     expected_freeze_paths: Sequence[str] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Return a fully validated candidate registry without writing it."""
+    """返回完全验证通过的候选注册表，且不执行实际写操作。"""
 
     root = Path(repository_root).resolve()
     registry_file = _inside_root(registry_path, root, label="registry")

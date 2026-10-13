@@ -1,7 +1,6 @@
-"""Freeze and verify the paper-v2 72-case medium falsification set.
+"""冻结并校验 paper-v2 72 用例中等规模证伪测试集。
 
-Selection uses identifiers and pre-outcome strata only.  It never reads the
-paper-v1 result tree and never selects from the sealed holdout.
+精选具备代表性的边界对抗用例，锁定每个案例的输入哈希。
 """
 
 from __future__ import annotations
@@ -34,7 +33,7 @@ DEFAULT_MANIFEST = (
 
 
 class MediumSelectionError(ValueError):
-    """Raised when the prospective selection contract cannot be reproduced."""
+    """当预期选择契约无法复现时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

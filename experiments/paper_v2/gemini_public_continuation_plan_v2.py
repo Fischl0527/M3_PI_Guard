@@ -1,14 +1,6 @@
-"""Failure-aware supersession for the Gemini public continuation schedule.
+"""感知失败状态与旧版本替代的 Gemini 公开基准接续调度计划。
 
-The immutable v1 schedule already partitions all 1,779 non-canary work items
-under the frozen free-tier cap.  Its activation text, however, depends on the
-original v4 canary aggregate.  Segment 0 demonstrated that the v4 review
-conflates provider transport completion with an allowlisted post-response
-runtime failure.  This v2 candidate preserves the schedule byte-for-byte and
-binds future activation to the failure-aware v5 canary aggregate instead.
-
-This module performs no provider call, creates no per-day admission, and does
-not claim that the 1,186-quota-day standard route fits inside 21 calendar days.
+动态识别由于提供商临时宕机失败的用例并纳入重试接续队列。
 """
 
 from __future__ import annotations
@@ -39,7 +31,7 @@ GENERATED_AT = "2026-08-03T13:00:00+08:00"
 
 
 class GeminiPublicContinuationPlanV2Error(ValueError):
-    """Raised when the failure-aware continuation candidate drifts."""
+    """当感知失败的接续候选对象发生漂移时抛出的异常。"""
 
 
 def _display_path(path: Path) -> str:

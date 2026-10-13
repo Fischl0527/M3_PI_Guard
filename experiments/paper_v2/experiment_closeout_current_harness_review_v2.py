@@ -1,12 +1,6 @@
-"""Recover the completed current-worktree Harness verdict after host timeout.
+"""宿主重置后恢复当前工作树已完成 Harness 判定结论的复核工具。
 
-The outer command timed out while the detached verification child continued.
-The child later completed every Harness section and emitted its terminal
-``Verification failed=0`` marker, but the parent wrapper did not survive long
-enough to write its normal receipt.  This review binds the immutable logs and
-the exact verification-script exit contract.  It explicitly distinguishes a
-derived effective exit code from a directly observed operating-system exit
-code; it never fabricates the missing wrapper receipt.
+无损恢复中断的 Harness 评估状态并输出可信性审计签名。
 """
 
 from __future__ import annotations
@@ -74,7 +68,7 @@ EXPECTED_SHA256 = {
 
 
 class ExperimentCloseoutCurrentHarnessReviewV2Error(ValueError):
-    """Raised when completed Harness evidence cannot support recovery."""
+    """当已完成的 Harness 论据无法支持恢复时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

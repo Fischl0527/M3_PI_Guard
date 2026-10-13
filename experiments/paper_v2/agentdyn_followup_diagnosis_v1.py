@@ -1,4 +1,7 @@
-"""Native-reference trace diagnosis, offline only and separate from online inputs."""
+"""原生基准参考轨迹离线诊断模块（仅限离线使用，与正式评测解耦）。
+
+深入分析智能体在 AgentDyn 基准下的执行轨迹差异与潜在攻击拦截点。
+"""
 
 from __future__ import annotations
 

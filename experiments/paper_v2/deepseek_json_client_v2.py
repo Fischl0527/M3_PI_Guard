@@ -1,9 +1,7 @@
-"""DeepSeek non-thinking client with prospective JSON Output commitment.
+"""具备前瞻性 JSON Output 模式承诺的 DeepSeek 非思考型模型客户端。
 
-The v3 canary retained one strict-parser failure because the official request
-used DeepSeek's default text response format.  This version adds only
-``response_format={"type": "json_object"}`` and includes that field in the
-pretransport payload hash.  Provider-managed tools remain forbidden.
+调用官方 DeepSeek API，显式声明关闭思考链以确保单次动作提案的纯净性，
+并强制以预先承诺的 JSON 架构输出工具调用动作。
 """
 
 from __future__ import annotations
@@ -84,7 +82,7 @@ def _payload(
 
 
 class DeepSeekJsonOfficialClient(nt.DeepSeekNonThinkingOfficialClient):
-    """Single-attempt official client with non-thinking and JSON Output."""
+    """单次尝试的官方客户端，支持非思考模式与 JSON 输出。"""
 
     def complete(
         self,
@@ -290,7 +288,7 @@ def build_json_request_commitment(
     attempt_id: str,
     precommitted_at: str,
 ) -> dict[str, Any]:
-    """Commit the exact non-thinking JSON Output payload before transport."""
+    """在网络传输前提交精确的非思考模式 JSON 输出载荷承诺。"""
 
     if not execution_identity or not work_key or not attempt_id:
         raise ProviderPayloadError(
@@ -329,7 +327,7 @@ def build_json_request_commitment(
 
 
 class DeepSeekJsonTracedProviderClient(TracedProviderClient):
-    """Trace wrapper whose payload hash includes JSON Output."""
+    """载荷哈希包含 JSON 输出配置的追踪包装器。"""
 
     def complete(
         self,
@@ -421,7 +419,7 @@ def _load_policy() -> dict[str, Any]:
 
 
 def build_qualification() -> dict[str, Any]:
-    """Qualify exact JSON payload and precommitment with no network."""
+    """在无网络环境下对精确 JSON 载荷与预先承诺进行资格认证。"""
 
     observed_payloads: list[dict[str, Any]] = []
 

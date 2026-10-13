@@ -1,4 +1,7 @@
-"""Structural and content QA for the external-custodian Word SOP."""
+"""针对外部托管人 Word SOP 文档执行结构化与内容质量 QA。
+
+检查托管手册中的操作步骤、签名指引与格式规范完整性。
+"""
 
 from __future__ import annotations
 
@@ -65,7 +68,7 @@ FORBIDDEN_TEXT = (
 
 
 class ManualValidationError(ValueError):
-    """Raised when the Word SOP is incomplete or structurally unsafe."""
+    """当 Word 标准作业程序（SOP）不完整或结构不安全时抛出。"""
 
 
 def _sha256_file(path: Path) -> str:

@@ -1,10 +1,6 @@
-"""Offline pending-only Gemini public continuation schedule.
+"""离线仅挂起用例（Pending-Only）的 Gemini 公开基准接续调度表。
 
-The 12 public-v4 canary rows are the formal prefix of the frozen 1,791-row
-Gemini matrix.  This module removes those exact work keys, packs the remaining
-1,779 rows into quota-day units under the local 18-request ceiling, and groups
-those units into four contiguous logical shard families.  It never authorizes
-or performs provider execution.
+自动过滤已完成用例，仅保留未执行项组成接续队列。
 """
 
 from __future__ import annotations
@@ -37,7 +33,7 @@ EXPECTED_QUOTA_SEGMENTS = 1_186
 
 
 class GeminiPublicContinuationPlanV1Error(ValueError):
-    """Raised when the pending-only Gemini schedule drifts."""
+    """当仅待处理的 Gemini 时间表发生漂移时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

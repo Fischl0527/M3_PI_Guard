@@ -1,9 +1,6 @@
-"""Audit whether E9/E14 actually exercise the declared context lengths.
+"""审计 E9/E14 实验是否实际检验了所声明的上下文长度。
 
-This is a non-causal post-freeze audit.  It reads only usage/metric metadata and
-never rewrites the original bundles.  A failed audit means the experiment must
-be reopened and corrected under a new protocol/freeze; it is not permission to
-change the historical blind freeze.
+检查模型输入 token 长度分布，防止上下文截断导致评估失真。
 """
 
 from __future__ import annotations

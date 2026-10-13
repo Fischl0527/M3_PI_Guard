@@ -1,9 +1,6 @@
-"""E14 real-model latency, throughput, token, and GPU benchmark runner.
+"""E14 真实大模型延迟、吞吐量、Token 与 GPU 显存基准测试运行器。
 
-The shared core remains sequential by design.  E14 obtains concurrency by
-launching independent, disjoint ``m3_core.run_matrix`` lanes, each with its own
-recoverable output directory.  Unit tests inject a lane executor and never
-start Ollama or a model.
+捕获真实推理场景下的系统资源占用曲线，评估工程实用性。
 """
 
 from __future__ import annotations
@@ -219,7 +216,7 @@ def build_execution_plan(
     repeats: int = 1,
     warmup: bool = True,
 ) -> dict[str, Any]:
-    """Create a deterministic, counterbalanced E14 job plan."""
+    """创建确定性的、经过抗衡平衡的 E14 作业计划。"""
 
     models = tuple(dict.fromkeys(str(model) for model in models))
     contexts = tuple(dict.fromkeys(int(value) for value in contexts))
@@ -416,7 +413,7 @@ def _tail(path: Path, lines: int = 50) -> list[str]:
 
 
 def subprocess_lane_executor(spec: dict[str, Any]) -> dict[str, Any]:
-    """Run one recoverable lane with process-alive and hard-timeout monitoring."""
+    """运行带有进程存活与硬超时监控的单条可恢复通道。"""
 
     started = time.perf_counter()
     timed_out = False
@@ -503,7 +500,7 @@ def execute_job(
     lane_executor: Callable[[dict[str, Any]], dict[str, Any]] = subprocess_lane_executor,
     gpu_provider: Callable[[], dict[str, Any]] = gpu_snapshot,
 ) -> dict[str, Any]:
-    """Execute all lanes for one condition/context/concurrency cell."""
+    """针对单个条件/上下文/并发度单元格执行所有通道。"""
 
     specs = _lane_specs(
         job,
@@ -834,11 +831,9 @@ def _na_wilcoxon(pair_count: int = 0) -> dict[str, Any]:
 
 
 def _signed_summary(values: Iterable[float]) -> dict[str, Any]:
-    """Summarize a finite signed effect sample without clipping improvements.
+    """汇总有界的带符号效应样本，且不裁剪正向改进。
 
-    End-to-end overhead is a signed effect: negative values mean the guarded
-    run happened to be faster than its paired baseline.  Reusing
-    ``latency_summary`` here incorrectly rejects those legitimate observations.
+    端到端开销是一个带符号效应：负值意味着受防护运行恰好比配对的基线更快。在此复用 ``latency_summary`` 会错误地拒绝这些合法的观测值。
     """
 
     sample = [float(value) for value in values]
@@ -1082,7 +1077,7 @@ def build_chart_data(metrics: Sequence[dict[str, Any]]) -> tuple[list[dict[str, 
 
 
 def build_gpu_chart_data(metrics: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Build the adjacent, NA-preserving data surface for GPU memory figures."""
+    """为 GPU 显存图表构建相邻的、保留 NA 缺失值的表面数据。"""
 
     rows: list[dict[str, Any]] = []
     for row in metrics:
@@ -1350,7 +1345,7 @@ def _render_gpu_memory_chart(
     png_path: Path,
     svg_path: Path,
 ) -> dict[str, Any]:
-    """Render device-wide VRAM peak and peak-minus-before delta as two heatmaps."""
+    """将整机 VRAM 峰值以及峰值减去初始值的增量渲染为两张热力图。"""
 
     import matplotlib
 
@@ -1707,7 +1702,7 @@ def build_analysis(
 
 
 def _e14_implementation_sha256() -> str:
-    """Hash the code paths that define E14 execution and post-processing."""
+    """对定义 E14 执行与后处理的代码路径进行哈希计算。"""
 
     paths = [ROOT / relative for relative in E14_IMPLEMENTATION_FILES]
     for relative in E14_IMPLEMENTATION_ROOTS:
@@ -2015,7 +2010,7 @@ def run_e14(
     inventory_provider: Callable[[], dict[str, dict[str, str]]] = installed_models,
     model_stopper: Callable[[str], None] = stop_model,
 ) -> dict[str, Any]:
-    """Plan or execute E14. Formal execution always uses the Ollama backend."""
+    """规划或执行 E14。形式化执行始终使用 Ollama 后端。"""
 
     if not 0.0 <= ask_threshold <= deny_threshold <= 1.0:
         raise ValueError("require 0 <= ask_threshold <= deny_threshold <= 1")

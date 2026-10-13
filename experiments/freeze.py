@@ -1,8 +1,6 @@
-"""Freeze and verify every code/data boundary that can affect blind testing.
+"""冻结并验证所有可能影响盲测证据链的代码与数据边界。
 
-The boundary intentionally includes runtime, Guard, attack data, scoring code,
-schemas, canonical fixtures, and experiment executors.  Mutable orchestration
-state and generated outputs are explicitly excluded.
+为全库关键代码和固定数据集计算防篡改 SHA-256 哈希树并持久化至清单文件。
 """
 
 from __future__ import annotations
@@ -145,7 +143,7 @@ def _excluded(relative: str) -> bool:
 
 
 def boundary_missing(repo_root: Path = REPO_ROOT) -> dict[str, list[str]]:
-    """Return missing mandatory roots/files without raising."""
+    """返回缺失的必选根目录/文件，且不抛出异常。"""
 
     root = _resolved_root(repo_root)
     missing_roots: list[str] = []
@@ -178,11 +176,9 @@ def protected_paths(
     *,
     require_complete: bool = True,
 ) -> list[Path]:
-    """Enumerate current protected regular files inside ``repo_root``.
+    """枚举 ``repo_root`` 内当前受保护的常规文件。
 
-    ``require_complete=False`` is used by verification so deletion becomes a
-    returned problem instead of aborting verification before it can report all
-    changed/added/missing paths.
+    校验使用 ``require_complete=False``，使得文件删除成为返回的待办问题，而非在报告所有修改/新增/缺失路径之前提前中断校验。
     """
 
     root = _resolved_root(repo_root)
@@ -223,7 +219,7 @@ def _resolve_user_path(value: str | Path, root: Path, *, label: str) -> Path:
 
 
 def _manifest_relative(value: object, root: Path) -> tuple[str | None, Path | None, str | None]:
-    """Validate one portable, canonical, repo-relative freeze entry."""
+    """验证单个可移植、规范且相对于仓库根目录的固化条目。"""
 
     relative = str(value)
     pure = PurePosixPath(relative)

@@ -1,13 +1,6 @@
-"""Offline-qualified shells for the six paper-v2 medium-study conditions.
+"""面向 paper-v2 中等规模研究 6 种防护条件的离线合格执行外壳。
 
-The shell separates online execution from offline outcome evaluation.  A
-condition runtime receives only the frozen online state and minimal scheduling
-identity; evaluation labels and source locations remain available only to the
-post-run evaluator.  Runtime events are reduced to content hashes and explicit
-action/decision fields before they can enter an experiment record.
-
-The built-in qualification uses deterministic injected runtime/evaluator
-fixtures.  It makes no provider/model call and persists no experiment record.
+定义从无防护（ND）到完整策略防护（Full）的各条件配置模板与调度接口。
 """
 
 from __future__ import annotations
@@ -86,12 +79,12 @@ CONTROLLER_EVIDENCE_FIELDS = frozenset(
 
 
 class FormalConditionExecutorError(ValueError):
-    """Raised when a condition shell or redacted event violates its contract."""
+    """当条件外壳或脱敏事件违反其契约时抛出的异常。"""
 
 
 @dataclass(frozen=True)
 class ConditionProfile:
-    """Frozen runtime semantics for one medium-study condition."""
+    """单个中等规模研究条件的固化运行时语义。"""
 
     condition_id: str
     controller: str
@@ -211,7 +204,7 @@ E6_CALIBRATION_CONDITIONS = (
 
 @dataclass(frozen=True)
 class OnlineExecutorContext:
-    """The complete input visible to a condition runtime."""
+    """条件运行时完全可见的输入上下文。"""
 
     execution_identity: str
     work_key: str
@@ -225,7 +218,7 @@ class OnlineExecutorContext:
 
 
 class OnlineConditionRuntime(Protocol):
-    """Execute online behavior without access to any evaluator field."""
+    """执行在线行为，且不访问任何评测者字段。"""
 
     def execute(
         self,
@@ -235,7 +228,7 @@ class OnlineConditionRuntime(Protocol):
 
 
 class OfflineOutcomeEvaluator(Protocol):
-    """Evaluate an already completed trace after online execution has ended."""
+    """在线执行结束后评估已完成的追踪轨迹。"""
 
     def evaluate(
         self,
@@ -376,7 +369,7 @@ def _controller_evidence(event: Mapping[str, Any], decision: str) -> dict[str, A
 
 
 def sanitize_runtime_event(event: Mapping[str, Any]) -> dict[str, Any]:
-    """Strip response/observation content while preserving action evidence."""
+    """剥离响应/观察内容，同时保留动作证据。"""
 
     step = event.get("step")
     if isinstance(step, bool) or not isinstance(step, int) or step < 1:
@@ -465,7 +458,7 @@ def sanitize_runtime_events(
 def reduce_first_proposal(
     events: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Reduce one multi-step run using its first successfully parsed proposal."""
+    """使用其首次成功解析的提案规约单次多步运行。"""
 
     first = next((event for event in events if event["parse_ok"]), None)
     if first is None:
@@ -605,7 +598,7 @@ def _stub_attestation() -> dict[str, Any]:
 
 
 class ConditionExecutorShell:
-    """Bridge a condition runtime and a post-run evaluator without label leakage."""
+    """在条件运行时和运行后评测器之间建立桥梁，防止标签泄漏。"""
 
     def __init__(
         self,
@@ -793,10 +786,9 @@ def build_incremental_condition_dispatcher(
     runtime: OnlineConditionRuntime,
     evaluator: OfflineOutcomeEvaluator,
 ) -> ConditionDispatcher:
-    """Build the four-cell prompt-by-module dispatcher.
+    """构建四单元格的按模块提示词分发器。
 
-    The historical six-condition registry remains unchanged; this versioned
-    dispatcher is used only by the prospective incremental studies.
+    历史六条件注册表保持不变；此版本化分发器仅由前瞻性增量研究使用。
     """
 
     dispatcher = ConditionDispatcher(INCREMENTAL_FACTOR_CONDITIONS)
@@ -823,11 +815,9 @@ def build_e6_calibration_condition_dispatcher(
     runtime: OnlineConditionRuntime,
     evaluator: OfflineOutcomeEvaluator,
 ) -> ConditionDispatcher:
-    """Build the isolated six-cell E6 calibration dispatcher.
+    """构建隔离的六单元格 E6 校准分发器。
 
-    E1--E5 continue to use :func:`build_incremental_condition_dispatcher`.
-    E6 adds contemporaneous no-defense and source-pinned VIGIL controls without
-    changing either historical registry.
+    E1-E5 继续使用 :func:`build_incremental_condition_dispatcher`。E6 添加同时期的无防御和源固定 VIGIL 对照，且不改变任一历史注册表。
     """
 
     dispatcher = ConditionDispatcher(E6_CALIBRATION_CONDITIONS)
@@ -919,7 +909,7 @@ def _load_plan(path: Path = DEFAULT_V2_PLAN) -> list[dict[str, Any]]:
 
 
 def build_condition_executor_qualification() -> dict[str, Any]:
-    """Validate all benchmark/condition shells in memory with zero model calls."""
+    """在内存中验证所有基准/条件外壳，零模型调用。"""
 
     plan = _load_plan()
     representatives: dict[tuple[str, str], dict[str, Any]] = {}

@@ -1,9 +1,6 @@
-"""Require a fresh directly observed green Harness before provider canaries.
+"""在发起提供商调用前要求直接观察到全新的全绿 Harness 门禁。
 
-The gate is intentionally non-authorizing.  It binds a single-use detached
-Harness receipt, the current verifier, the Day-2 exit-one review, the adaptive
-supersession order, and the current Day-1 custodian acceptance.  Provider
-execution still requires a separate frozen candidate, admission, and budget.
+强制执行测试全绿准入准则，确保软件栈健康度。
 """
 
 from __future__ import annotations
@@ -76,7 +73,7 @@ PYTEST_SUMMARY = re.compile(
 
 
 class ExperimentCloseoutDay2HarnessGateV2Error(ValueError):
-    """Raised when fresh green Harness evidence is missing or drifts."""
+    """当全新的全绿 Harness 论据缺失或发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

@@ -1,4 +1,4 @@
-"""Non-oracle paper-v1 Agent runner with stateful policy enforcement."""
+"""面向科学研究与消融对比的高级智能体运行器（Research Runner）。"""
 
 from __future__ import annotations
 
@@ -81,7 +81,7 @@ class PaperRuntimeView:
 
 
 def paper_runtime_view(case: Mapping[str, Any] | None) -> PaperRuntimeView:
-    """Project an evaluation case into the only fields visible online."""
+    """构造符合论文规范要求的标准化运行时案例输入对象。"""
 
     source = case if isinstance(case, Mapping) else {}
     request = source.get("trusted_user_request", source.get("user_task", ""))
@@ -130,7 +130,7 @@ def build_research_messages(
     manifest: TaskPolicyManifest,
     prompt_profile: str = "safe_prompt",
 ) -> list[dict[str, str]]:
-    """Build a prompt from trusted task inputs and clearly bounded data only."""
+    """构造用于模型输入的提示词消息列表（包含系统角色、防护指令与上下文）。"""
 
     prompt_profile = str(prompt_profile).casefold().strip()
     if prompt_profile not in PAPER_PROMPT_PROFILES:
@@ -222,12 +222,7 @@ def _hash_messages(messages: list[dict[str, str]]) -> str:
 
 
 def _extract_tool_call_safely(raw_output: str) -> dict[str, Any]:
-    """Contain parser faults caused by adversarial or malformed model text.
-
-    A parser exception is an observed parse failure, not grounds for silently
-    dropping the case from its denominator.  The historical parser remains
-    unchanged so frozen E0--E17 evidence is byte-compatible.
-    """
+    """安全提取模型响应中的工具调用 JSON，兼容多种非标准围栏格式。"""
 
     paper_compat = _paper_compat_tool_call(raw_output)
     if paper_compat is not None:
@@ -243,7 +238,7 @@ def _extract_tool_call_safely(raw_output: str) -> dict[str, Any]:
 
 
 def _paper_compat_tool_call(raw_output: str) -> dict[str, Any] | None:
-    """Normalize bounded paper-model formats without changing frozen parsers."""
+    """转换工具调用格式以保持论文统一协议格式兼容性。"""
 
     text = str(raw_output or "").strip()
     final_match = re.fullmatch(
@@ -332,11 +327,7 @@ def run_research_case(
     policy_regime: str = "auto_compiled",
     replicate_id: int = 0,
 ) -> list[dict[str, Any]]:
-    """Run one case without evaluator authorization entering online state.
-
-    ``oracle_stub`` is an explicit regression-only escape hatch.  Its rows are
-    tagged and must never enter effectiveness tables.
-    """
+    """执行单个科研评测案例的完整端到端生命周期，记录所有中间状态。"""
 
     view = paper_runtime_view(case)
     schemas = dict(tool_schemas or DEFAULT_TOOL_SCHEMAS)

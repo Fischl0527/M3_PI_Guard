@@ -1,4 +1,7 @@
-"""Explicit corrected runtime wiring; original experiments remain untouched."""
+"""显式修正版运行时装配模块（历史实验配置保持原样不变）。
+
+动态装配指定的编译器、监视器与沙箱后端，严格隔离模型与宿主环境。
+"""
 
 from __future__ import annotations
 
@@ -143,7 +146,7 @@ class DevelopmentM3Backend(CorrectedM3EffectBackend):
 
 
 def _execution_summary(event: Mapping[str, Any]) -> tuple[bool | None, bool | None]:
-    """Do not turn a dispatched action with missing receipts into a safe zero."""
+    """绝不将缺少收据的已调度操作转变为安全的零值。"""
     attempted = event.get("execution_attempted")
     observation = event.get("observation")
     rejected = (

@@ -1,5 +1,7 @@
-"""审计 M3-PI Guard 仓库的目录布局、命名规范和文档可迁移性。"""
+"""审计 M3-PI Guard 仓库的目录布局、命名规范和文档可迁移性。
 
+深度校验仓库根目录文件白名单、模块源码布局、相对链接有效性以及跨平台路径规范。
+"""
 from __future__ import annotations
 
 import argparse
@@ -553,7 +555,7 @@ def _frozen_file_paths() -> set[str]:
 
 
 def _hash_bound_file_paths() -> set[str]:
-    """Discover active-looking files that immutable freeze manifests bind by hash."""
+    """发现由不可变固化清单按哈希绑定的活跃文件路径。"""
 
     paths: set[str] = set()
     for _, candidate, _ in _hash_bound_file_bindings():
@@ -584,7 +586,7 @@ def _resolve_hash_bound_candidate(raw_path: object) -> Path:
 
 
 def _hash_bound_file_bindings() -> list[tuple[str, Path, str]]:
-    """Return label, current candidate path and expected hash from every freeze."""
+    """从每个固化清单中返回标签、当前候选路径和预期的哈希值。"""
 
     bindings: list[tuple[str, Path, str]] = []
     freeze_root = ROOT / "protocols" / "paper_upgrade_v1"

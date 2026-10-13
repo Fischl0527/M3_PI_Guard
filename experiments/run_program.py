@@ -1,9 +1,6 @@
-"""Recoverable stage orchestration for the complete M3 experiment program.
+"""面向完整 M3 实验方案的可恢复阶段编排调度器。
 
-This module plans coarse jobs around :func:`m3_core.run_matrix.run_matrix`.
-The matrix runner remains responsible for per-case durability; this layer adds
-cross-matrix gates, exact scale checks, model failure propagation, and one
-atomic program manifest spanning all stages.
+支持断点续跑、顺序依赖校验与并行流水线控制，是全局实验运行的总控制台。
 """
 
 from __future__ import annotations
@@ -78,15 +75,15 @@ STABILITY_CONDITIONS = ("stability_normal_full=normal:full_guard",)
 
 
 class ProgramError(RuntimeError):
-    """Base exception for program orchestration failures."""
+    """程序编排失败的基础异常类。"""
 
 
 class ProgramGateError(ProgramError):
-    """Raised when a non-negotiable pre-execution gate fails."""
+    """当不可协商的执行前门禁检查失败时抛出。"""
 
 
 class ResultValidationError(ProgramError):
-    """Raised when a matrix result does not match its declared scale."""
+    """当矩阵结果与其声明的规模不匹配时抛出。"""
 
 
 @dataclass(frozen=True)
@@ -607,7 +604,7 @@ def _verified_freeze_snapshot(
     path: str | Path,
     verifier: Callable[..., list[str]],
 ) -> tuple[dict[str, Any], list[str]]:
-    """Verify one stable blind-freeze file and return its raw-byte identity."""
+    """验证单个稳定的盲测固化文件并返回其原始字节标识。"""
 
     freeze_path = Path(path).resolve()
     before = sha256_file(freeze_path) if freeze_path.is_file() else None
@@ -638,7 +635,7 @@ def build_stage_plan(
     output_root: str | Path = DEFAULT_OUTPUT_ROOT,
     include_derived_coverage: bool = False,
 ) -> StagePlan:
-    """Create a deterministic stage plan without starting any experiment."""
+    """创建确定性的阶段计划，且不启动任何实验。"""
 
     output = Path(output_root).resolve()
     builders: dict[str, Callable[[], StagePlan]] = {
@@ -682,7 +679,7 @@ def _validate_plan(plan: StagePlan) -> None:
 
 
 def matrix_command(config: Mapping[str, Any]) -> list[str]:
-    """Return a CLI command equivalent to the matrix config stored in a job."""
+    """返回等价于作业中存储的矩阵配置的 CLI 命令。"""
 
     command = [sys.executable, "-m", "m3_core.run_matrix"]
     value_options = (
@@ -860,7 +857,7 @@ def _smoke_status_by_model(manifest: Mapping[str, Any]) -> dict[str, str]:
 
 
 def matrix_result_counts(result: Mapping[str, Any]) -> dict[str, int]:
-    """Aggregate the three mandatory counters across matrix conditions."""
+    """汇总跨矩阵条件的三个强制性计数器。"""
 
     matrix_results = result.get("results")
     if not isinstance(matrix_results, list) or not matrix_results:
@@ -881,7 +878,7 @@ def validate_matrix_result(
     *,
     expected_conditions: int | None = None,
 ) -> dict[str, int]:
-    """Verify every matrix counter before a coarse job can be completed."""
+    """在粗粒度作业完成前验证每个矩阵计数器。"""
 
     matrix_results = result.get("results")
     counts = matrix_result_counts(result)
@@ -1051,7 +1048,7 @@ def run_stage(
     require_frozen_thresholds: bool = True,
     manage_model_lifecycle: bool | None = None,
 ) -> dict[str, Any]:
-    """Execute one program stage and atomically update its durable manifest."""
+    """执行单个程序阶段并原子化更新其持久化清单。"""
 
     path = Path(manifest_path).resolve()
     plan = build_stage_plan(

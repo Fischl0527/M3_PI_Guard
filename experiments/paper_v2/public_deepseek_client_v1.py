@@ -1,4 +1,7 @@
-"""Public-matrix DeepSeek JSON client with exact Pro/Flash role binding."""
+"""具备精确 Pro/Flash 角色绑定的公开矩阵 DeepSeek JSON 客户端。
+
+针对不同规模评测路由到对应的模型端点并统一返回结构。
+"""
 
 from __future__ import annotations
 
@@ -23,7 +26,7 @@ from experiments.paper_v2.public_provider_budget_v1 import (
 
 @dataclass
 class PublicDeepSeekJsonOfficialClient(DeepSeekJsonOfficialClient):
-    """Reuse the admitted JSON payload while replacing medium-only validation."""
+    """复用准入的 JSON 载荷，同时替换仅中等规模适用的验证。"""
 
     model_role: str = "primary"
     budget_state: PublicProviderBudgetState = field(repr=False)

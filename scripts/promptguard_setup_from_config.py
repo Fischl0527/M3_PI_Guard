@@ -1,4 +1,7 @@
-"""Download and hash-freeze PromptGuard using the ignored local config."""
+"""使用本地配置下载并哈希冻结 PromptGuard 基线模型。
+
+读取配置文件指定的缓存目录与版本号，完成模型的拉取与完整性哈希校验。
+"""
 
 from __future__ import annotations
 

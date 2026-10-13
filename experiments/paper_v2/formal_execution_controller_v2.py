@@ -1,16 +1,6 @@
-"""Fail-closed controller for one prospective DeepSeek paper-v2 pilot.
+"""面向单次前瞻性 DeepSeek paper-v2 先导实验的故障安全（Fail-Closed）控制器。
 
-The default artifact produced by this module is an owner-review candidate.  It
-cannot authorize execution.  The live path accepts only a separately supplied
-active manifest that:
-
-* binds the exact frozen work item, provider/model, policies, and output paths;
-* records an explicit project-owner pilot-checkpoint approval;
-* authorizes one pilot work item but never the formal matrix or result admission;
-* passes every gate before local credentials are read or a client is created.
-
-No command in this module activates a candidate.  There are no retries,
-cross-provider fallbacks, provider-managed tools, or external effects.
+在遇到未捕获异常或策略冲突时默认拦截所有外部动作，保障沙箱安全。
 """
 
 from __future__ import annotations
@@ -122,12 +112,12 @@ LOCKED_INPUTS = (
 
 
 class FormalExecutionControllerV2Error(ValueError):
-    """Raised before credentials or network access when a pilot gate fails."""
+    """在凭据或网络访问前，当试验门禁失败时抛出的异常。"""
 
 
 @dataclass(frozen=True)
 class PilotExecutionPermit:
-    """Validated one-work-item permit produced before credential access."""
+    """在凭据访问前生成的经过验证的单工作项许可。"""
 
     admission_manifest_sha256: str
     run_id: str
@@ -231,7 +221,7 @@ def validate_admission_manifest(
     schema_path: Path = DEFAULT_SCHEMA,
     expected_role: str | None = None,
 ) -> dict[str, Any]:
-    """Validate schema, self-digests, and role-specific authorization semantics."""
+    """验证 Schema、自摘要以及角色专属的授权语义。"""
 
     if not isinstance(value, Mapping):
         raise FormalExecutionControllerV2Error(
@@ -341,7 +331,7 @@ def _locked_inputs() -> list[dict[str, Any]]:
 
 
 def build_admission_candidate() -> dict[str, Any]:
-    """Build the deterministic, non-executable owner-review artifact."""
+    """构建确定性、不可执行的所有者审查构件。"""
 
     plan_rows = _load_jsonl(DEFAULT_PLAN)
     if len(plan_rows) != 480:
@@ -541,10 +531,9 @@ def authorize_single_pilot(
     candidate_path: Path = DEFAULT_CANDIDATE,
     path_exists: PathExists = Path.exists,
 ) -> PilotExecutionPermit:
-    """Validate all non-secret gates and return a one-item permit.
+    """验证所有非机密门禁并返回单项许可。
 
-    This function deliberately performs no credential access and no network
-    operation.  It must complete before a credential loader is called.
+    此函数特意不执行凭据访问和网络操作。在调用凭据加载器之前必须完成此操作。
     """
 
     candidate = verify_admission_candidate(candidate_path)
@@ -665,7 +654,7 @@ def execute_authorized_single_pilot(
         Callable[[Mapping[str, Any]], Mapping[str, Any]] | None
     ) = None,
 ) -> dict[str, Any]:
-    """Execute exactly one admitted pilot after every non-secret gate passes."""
+    """在所有非机密门禁通过后，执行确切的一个已准入试验。"""
 
     permit = authorize_single_pilot(
         admission_path,
@@ -691,7 +680,7 @@ def _execute_pilot_permit(
         Callable[[Mapping[str, Any]], Mapping[str, Any]] | None
     ) = None,
 ) -> dict[str, Any]:
-    """Run a previously authorized permit; used by live and offline fixtures."""
+    """运行先前授权的许可；由实时和离线固件使用。"""
 
     policy = _load_json(DEFAULT_BUDGET_POLICY)
     client = client_factory(values, policy, permit)
@@ -788,7 +777,7 @@ def _qualification_active_manifest(
 
 
 def build_controller_qualification() -> dict[str, Any]:
-    """Exercise admission ordering with zero credentials and zero network."""
+    """以零凭据和零网络执行准入排序演练。"""
 
     candidate = build_admission_candidate()
     credential_reads = 0

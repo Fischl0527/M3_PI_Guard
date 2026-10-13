@@ -1,8 +1,6 @@
-"""Export the six lean-paper tables from compact analysis artifacts.
+"""从紧凑分析工件导出精简论文的 6 张核心数据表格。
 
-The exporter reads the frozen execution plan and compact analysis JSON files.
-It never opens provider traces or raw prompt/response content and does not
-create integrity or hash bundles.
+包含完整样本量、观察通过率及 95% Wilson 置信区间。
 """
 
 from __future__ import annotations
@@ -68,7 +66,7 @@ def _table_1(plan_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _included_providers(analysis: Mapping[str, Any]) -> tuple[str, ...]:
-    """Return providers eligible for the manuscript's inferential tables."""
+    """返回符合手稿推断表格资格的提供商列表。"""
 
     providers = ["deepseek"]
     if analysis.get("gemini", {}).get("cross_vendor_claim_eligible") is True:
@@ -168,7 +166,7 @@ def _table_4(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
 
 
 def _table_5(analysis: Mapping[str, Any]) -> list[dict[str, Any]]:
-    """Return benchmark-stratified paired estimates for the two key endpoints."""
+    """返回两个关键端点的基准分层配对估计值。"""
 
     rows: list[dict[str, Any]] = []
     for benchmark, endpoints in analysis["deepseek"][

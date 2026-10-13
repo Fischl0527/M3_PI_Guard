@@ -1,8 +1,6 @@
-"""Freeze the 21-day experiment closeout without making provider calls.
+"""在不进行模型调用的前提下冻结 21 天实验收官产物。
 
-This module creates only prospective, versioned protocol artifacts.  It never
-modifies paper-v1 inputs, the historical v7 run, or any append-only execution
-ledger.
+固化全周期实验数据仓库、哈希凭单与归档目录。
 """
 
 from __future__ import annotations
@@ -65,7 +63,7 @@ IDENTITY_FIELDS = frozenset(
 
 
 class ExperimentCloseoutFreezeV1Error(RuntimeError):
-    """Raised when an immutable source or a prospective freeze drifts."""
+    """当不可变数据源或预期固化发生漂移时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -302,7 +300,7 @@ def _adaptive_prefix_locks() -> list[dict[str, Any]]:
 
 @functools.lru_cache(maxsize=4)
 def _verify_v7_review_for_sha(review_sha256: str) -> dict[str, Any]:
-    """Deep-verify v7 once per observed review digest in this process."""
+    """在此进程中对每个观测到的审查摘要深度验证 v7 一次。"""
 
     if _sha256_file(V7_ABORT_REVIEW) != review_sha256:
         raise ExperimentCloseoutFreezeV1Error(

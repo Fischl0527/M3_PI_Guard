@@ -1,9 +1,6 @@
-"""Gemini OpenAI-compatible JSON client with exact pretransport commitment.
+"""具备传输前精确承诺的 Gemini OpenAI 兼容 JSON 客户端。
 
-The generic official client intentionally emits a minimal chat payload.  VIGIL,
-however, explicitly requests JSON output.  This prospective adapter adds only
-``response_format={"type": "json_object"}``, hashes that exact payload before
-transport, and preserves the free-tier/no-tools/single-attempt controls.
+将请求转换为规范的 OpenAI 兼容格式并约束输出为结构化 JSON 载荷。
 """
 
 from __future__ import annotations
@@ -42,11 +39,11 @@ JSON_OUTPUT_CONTROL = {"type": "json_object"}
 
 
 class GeminiJsonClientV1Error(ValueError):
-    """Raised when the Gemini JSON transport or evidence binding drifts."""
+    """当 Gemini JSON 传输或论据绑定发生漂移时抛出的异常。"""
 
 
 class GeminiUsageRegistry:
-    """Run-local ordered usage state shared by per-work traced clients."""
+    """每个工作项追踪客户端共享的运行本地有序用量状态。"""
 
     def __init__(self) -> None:
         self._items: list[dict[str, Any]] = []
@@ -105,7 +102,7 @@ def _payload(
 
 @dataclass
 class GeminiJsonOfficialClient(official.OfficialProviderClient):
-    """One-attempt official Gemini client whose response is constrained to JSON."""
+    """响应限制为 JSON 的单次尝试官方 Gemini 客户端。"""
 
     reasoning_effort: str | None = None
 
@@ -315,7 +312,7 @@ def build_json_request_commitment(
     attempt_id: str,
     precommitted_at: str,
 ) -> dict[str, Any]:
-    """Bind the exact Gemini JSON payload before provider transport."""
+    """在提供商传输前绑定确切的 Gemini JSON 载荷。"""
 
     if not execution_identity or not work_key or not attempt_id:
         raise GeminiJsonClientV1Error(
@@ -349,7 +346,7 @@ def build_json_request_commitment(
 class GeminiJsonTracedProviderClient(
     gemini_trace.GeminiPublicTracedProviderClient
 ):
-    """Gemini trace wrapper whose commitment includes JSON output control."""
+    """承诺包含 JSON 输出控制的 Gemini 追踪包装器。"""
 
     def __init__(
         self,
@@ -500,7 +497,7 @@ def _client(
 
 
 def build_qualification() -> dict[str, Any]:
-    """Exercise JSON payload and VIGIL parsing with injected transports only."""
+    """仅使用注入的传输演练 JSON 载荷和 VIGIL 解析。"""
 
     observed_payloads: list[dict[str, Any]] = []
     constraint_json = json.dumps(
@@ -625,7 +622,7 @@ def verify_qualification(
 
 
 def build_shared_usage_qualification() -> dict[str, Any]:
-    """Qualify cumulative usage across two distinct work-item clients."""
+    """跨两个不同工作项客户端限定累积用量资格。"""
 
     policy = fallback._effective_policy()
     budget = official.ProviderBudgetState(provider_id="gemini", policy=policy)

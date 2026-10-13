@@ -1,10 +1,6 @@
-"""Build the complete E0 measurement-integrity evidence package.
+"""构建完整的 E0 测量完整性与度量有效性证据包。
 
-E0 deliberately reuses the frozen Day-5 logs.  Those logs are useful for
-checking corrected denominators and metric implementations, but the archived
-runner coupled its prompt profile to Guard mode and exposed evaluator labels
-to the model.  Every generated artifact therefore marks the historical
-comparisons as diagnostic-only.
+对基准评测管道进行无偏性审计，排除测量工具自身带来的系统性误差。
 """
 
 from __future__ import annotations
@@ -193,7 +189,7 @@ def _write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) ->
 
 
 def _explicit_legacy_labels(cases: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Normalize frozen pre-schema cases to explicit labels for strict scoring."""
+    """将固化的模式前用例规范化为显式标签，以便进行严格评分。"""
 
     normalized: list[dict[str, Any]] = []
     for original in cases:

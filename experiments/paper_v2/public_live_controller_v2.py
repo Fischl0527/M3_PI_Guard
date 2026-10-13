@@ -1,8 +1,6 @@
-"""Admission-gated official DeepSeek canary for public matrix v2.
+"""面向公开矩阵 v2 的带准入门禁官方 DeepSeek 金丝雀控制器。
 
-Public-v2 uses a fresh run/execution identity and the qualified public-plan
-AgentDojo resolver after Public-v1 stopped before its first provider request.
-It remains inert without a separately written exact-command admission.
+优化网络重试策略，适应大规模公开数据集的评测要求。
 """
 
 from __future__ import annotations
@@ -107,7 +105,7 @@ TECHNICAL_REVIEW_NAME = "technical_canary_review_v2.json"
 
 
 class PublicLiveControllerError(ValueError):
-    """Raised when official public execution cannot be authorized safely."""
+    """当官方公开执行无法安全授权时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -685,7 +683,7 @@ def build_canary_technical_review(
     *,
     admission_path: Path,
 ) -> dict[str, Any]:
-    """Review only execution integrity; never aggregate scientific outcomes."""
+    """仅审查执行完整性；绝不聚合科学评测结果。"""
 
     permit = authorize_canary(
         model_role,

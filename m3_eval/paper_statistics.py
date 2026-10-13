@@ -1,4 +1,4 @@
-"""Confirmatory statistical helpers for the paper-v1 protocol."""
+"""面向学术论文报告的正式统计检验接口封装。"""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ def template_clustered_difference(
     iterations: int = 10_000,
     seed: int = 20260718,
 ) -> dict[str, Any]:
-    """Paired bootstrap over semantic templates, not individual mutations."""
+    """计算以案例模板为聚类单位的配对差异置信区间。"""
 
     if set(baseline) != set(treatment):
         raise ValueError("baseline and treatment must contain the same template clusters")
@@ -38,7 +38,7 @@ def template_clustered_difference(
 def paired_binary_family(
     comparisons: Mapping[str, tuple[Iterable[int | bool], Iterable[int | bool]]]
 ) -> dict[str, Any]:
-    """McNemar tests with Holm correction across a declared hypothesis family."""
+    """针对配对二分类指标族计算全套置信区间与假设检验 p 值。"""
 
     raw: dict[str, dict[str, Any]] = {}
     names = sorted(comparisons)
@@ -61,12 +61,7 @@ def fit_mixed_effect_logit(
     fixed_effects: tuple[str, ...],
     cluster: str = "template_id",
 ) -> dict[str, Any]:
-    """Fit a binomial mixed model with a random intercept per template.
-
-    The function imports the optional scientific stack lazily and returns a
-    serializable coefficient table.  Formal use must freeze the formula before
-    the holdout is opened.
-    """
+    """拟合广义线性混合效应模型（GLMM Logit）以评估防御条件主效应。"""
 
     import pandas as pd
     from statsmodels.genmod.bayes_mixed_glm import BinomialBayesMixedGLM

@@ -1,4 +1,7 @@
-"""Independently review the corrected Public primary analysis."""
+"""独立审查修正后的公开主分析输出结果（版本 V2）。
+
+复查分母校正与缺失值处理是否完全符合规范。
+"""
 
 from __future__ import annotations
 

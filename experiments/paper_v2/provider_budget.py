@@ -1,8 +1,6 @@
-"""Offline budget and quota fuse for the paper-v2 DeepSeek/Gemini matrices.
+"""面向 paper-v2 DeepSeek/Gemini 矩阵的离线预算与配额保险丝。
 
-The module never reads credentials and never sends network requests.  It validates
-the user-approved budget boundary, calculates conservative DeepSeek cache-cost
-scenarios, and supplies fail-closed checks for a later formal executor.
+实时监控 Token 消耗与金额开销，一旦达到预设阈值立即熔断终止请求。
 """
 
 from __future__ import annotations
@@ -52,7 +50,7 @@ MILLION = Decimal(1_000_000)
 
 
 class BudgetPolicyError(ValueError):
-    """Raised when a budget boundary is malformed or would fail open."""
+    """当预算边界畸形或可能安全放开时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -134,7 +132,7 @@ def _as_int(
 
 
 def validate_policy(policy: dict[str, Any]) -> dict[str, Any]:
-    """Validate the static user-approved boundary without reading credentials."""
+    """在不读取凭据的情况下验证静态用户批准的边界。"""
 
     _reject_secrets(policy)
     if (
@@ -280,7 +278,7 @@ def deepseek_cost_cny(
     cache_miss_input_tokens: int,
     output_tokens: int,
 ) -> Decimal:
-    """Calculate actual DeepSeek cost from the provider's cache usage fields."""
+    """根据提供商的缓存使用字段计算实际 DeepSeek 成本。"""
 
     validate_policy(policy)
     for name, value in {
@@ -299,7 +297,7 @@ def deepseek_cost_cny(
 
 
 def deepseek_scenario_costs(policy: dict[str, Any]) -> list[dict[str, Any]]:
-    """Return full-plan prices for declared aggregate cache-hit ratios."""
+    """针对声明的聚合缓存命中率返回完整计划价格。"""
 
     validate_policy(policy)
     input_tokens = EXPECTED_STUDY_BOUNDS["input_tokens_upper_bound"]
@@ -335,7 +333,7 @@ def deepseek_scenario_costs(policy: dict[str, Any]) -> list[dict[str, Any]]:
 def minimum_cache_hit_ratio_for_abort_ceiling(
     policy: dict[str, Any],
 ) -> Decimal:
-    """Solve the minimum full-plan hit ratio needed to stay under the fuse."""
+    """求解保持在保险丝阈值以下所需的最低全计划命中率。"""
 
     validate_policy(policy)
     input_tokens = Decimal(EXPECTED_STUDY_BOUNDS["input_tokens_upper_bound"])
@@ -355,7 +353,7 @@ def _decimal_float(value: Decimal, places: str = "0.000001") -> float:
 
 
 def validate_deepseek_usage(usage: dict[str, Any]) -> dict[str, int]:
-    """Require exact cache accounting before a subsequent formal request."""
+    """在后续形式化请求前要求精确的缓存计费。"""
 
     required = (
         "prompt_tokens",
@@ -383,7 +381,7 @@ def check_deepseek_headroom(
     policy: dict[str, Any],
     cumulative_usage: dict[str, Any],
 ) -> dict[str, Any]:
-    """Fail closed before a request that could cross the CNY abort ceiling."""
+    """在可能超过人民币中止上限的请求之前执行安全闭合失败。"""
 
     validate_policy(policy)
     usage = validate_deepseek_usage(cumulative_usage)
@@ -459,7 +457,7 @@ def check_gemini_free_batch(
     charged_usd: float,
     billing_tier: str,
 ) -> dict[str, Any]:
-    """Enforce local free-tier caps without claiming they are provider quotas."""
+    """强制执行本地免费层上限，而不声称它们是提供商配额。"""
 
     validate_policy(policy)
     for name, value in {
@@ -495,7 +493,7 @@ def check_gemini_free_batch(
 
 
 def classify_provider_error(provider: str, http_status: int) -> dict[str, Any]:
-    """Classify quota errors without creating an automatic retry path."""
+    """对配额错误进行分类，且不创建自动重试路径。"""
 
     if provider not in {"deepseek", "gemini"}:
         raise BudgetPolicyError(f"unsupported provider: {provider}")
@@ -535,7 +533,7 @@ def build_preflight(
     policy_path: Path = DEFAULT_POLICY,
     source_preflight_path: Path = DEFAULT_SOURCE_PREFLIGHT,
 ) -> dict[str, Any]:
-    """Build a deterministic, offline preflight for the full two-model target."""
+    """为完整双模型目标构建确定性、离线预检。"""
 
     policy = validate_policy(_load_json(policy_path))
     source = _load_json(source_preflight_path)

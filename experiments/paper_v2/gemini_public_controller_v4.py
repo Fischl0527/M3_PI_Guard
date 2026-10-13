@@ -1,9 +1,6 @@
-"""Quota-day segmented Gemini public canary for the official free tier.
+"""面向官方免费层的按配额日分段 Gemini 公开矩阵控制器。
 
-The twelve frozen canary work items are preserved in source order, but each
-formal root is small enough that the sum of frozen per-work provider-call caps
-does not exceed the local 18-request daily ceiling.  Every segment receives a
-new execution identity and one append-only project-day reservation.
+将 1,791 规模矩阵按天切分为多个独立可审计的安全执行分段。
 """
 
 from __future__ import annotations
@@ -68,7 +65,7 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class GeminiPublicControllerV4Error(RuntimeError):
-    """Raised when segmented Gemini canary evidence cannot remain formal."""
+    """当分段 Gemini 金丝雀论据无法保持形式化时抛出的异常。"""
 
 
 def _now() -> str:
@@ -557,7 +554,7 @@ def _build_dispatcher(
     budget_state: ProviderBudgetState,
     recorded_at: Callable[[], str] = _now,
 ) -> Any:
-    """Build the prospective Gemini dispatcher with explicit bundle attachment."""
+    """构建具有显式包附加的预期 Gemini 分发器。"""
 
     registry = v1._Registry()
     agentdojo = v1.PublicFrozenAgentDojoCaseResolverV2(

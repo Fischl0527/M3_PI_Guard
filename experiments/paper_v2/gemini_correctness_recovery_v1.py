@@ -1,4 +1,7 @@
-"""Standalone Gemini recovery; immutable old results, no DeepSeek dispatch."""
+"""独立 Gemini 恢复执行器（历史旧结果不可变，杜绝跨模型数据污染）。
+
+在隔离环境中重跑异常退出的 Gemini 用例，生成独立的恢复记录分支。
+"""
 
 from __future__ import annotations
 
@@ -33,7 +36,7 @@ RECOVERY_OUTPUT = OUTPUT / PROFILE
 
 
 class ServiceBackoff:
-    """Scheduling metadata only; HTTP clients retain zero automatic retries."""
+    """仅调度元数据；HTTP 客户端保留零次自动重试。"""
 
     def __init__(self):
         self.consecutive_503 = 0
@@ -66,7 +69,7 @@ def has_response(row: dict[str, Any]) -> bool:
 
 
 def select_pending(plan, old_rows, recovery_rows):
-    """Return original-order (item, attempt, remaining_calls) without mutation."""
+    """返回原始顺序的 (item, attempt, remaining_calls)，不发生突变。"""
     original = {r["work_key"]: r for r in old_rows}
     if len(original) != len(old_rows):
         raise ValueError("duplicate original Gemini work key")
@@ -174,7 +177,7 @@ def run_diagnostics(
     client_factory=DevelopmentRequestClient,
     interval=15,
 ):
-    """Six independently logged synthetic proposals, never execute a tool."""
+    """独立记录的六个合成提案，绝不执行工具。"""
     output = Path(output)
     raw = output / "diagnostics.jsonl"
     with model_lock(output / "internal/runner.lock"):
@@ -302,7 +305,7 @@ def record_issue(row):
 
 
 def technical_prefix(plan, old_rows, new_rows):
-    """No unsafe/task-completion outcome participates in expansion."""
+    """任何不安全/任务完成结果都不参与扩展。"""
     prior = {r["work_key"]: r for r in old_rows}
     latest = {r["work_key"]: r for r in new_rows}
     pending = {r["work_key"] for r, _, _ in select_pending(plan, old_rows, new_rows)}
@@ -337,7 +340,7 @@ def run_recovery(
     interval=15,
     sleeper=bounded_sleep,
 ):
-    """Explicit bounded attempts, no automatic HTTP retry or other-model jobs."""
+    """显式有界尝试，无自动 HTTP 重试或其他模型作业。"""
     old_root, output = Path(old_root), Path(output)
     if output.resolve() == old_root.resolve():
         raise ValueError("recovery output must be separate from historical output")

@@ -1,9 +1,6 @@
-"""Build and verify the resumable paper-v2 medium-experiment execution ledger.
+"""构建并校验可断点续跑的 paper-v2 中等规模实验执行计划。
 
-The generated plan contains 480 pending work items and no outcomes.  This module
-does not call a model.  It binds later progress events to frozen inputs and
-rejects duplicate terminal results, identity drift, and spend beyond the
-pre-approved abort ceiling.
+实现任务分片、依赖跟踪与实时结果同步存储。
 """
 
 from __future__ import annotations
@@ -54,7 +51,7 @@ ALLOWED_EVENT_TYPES = {"started", *TERMINAL_EVENT_TYPES}
 
 
 class MediumExecutionError(ValueError):
-    """Raised when execution-plan or progress evidence violates the contract."""
+    """当执行计划或进度论据违反契约时抛出的异常。"""
 
 
 def _sha256_bytes(value: bytes) -> str:
@@ -139,7 +136,7 @@ def build_execution_plan(
     provider_decision_path: Path = DEFAULT_PROVIDER_DECISION,
     provider_preflight_path: Path = DEFAULT_PROVIDER_PREFLIGHT,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Build the result-blind 480-item plan and its input identity manifest."""
+    """构建对结果盲视的 480 项计划及其输入标识清单。"""
 
     cases = _load_jsonl(index_path)
     case_manifest = _load_json(case_manifest_path)
@@ -282,7 +279,7 @@ def validate_progress_events(
     execution_identity: str,
     known_work_keys: set[str],
 ) -> dict[str, str]:
-    """Validate append-only progress and return terminal status by work key."""
+    """验证仅追加进度并按工作键返回终端状态。"""
 
     started: set[str] = set()
     terminal: dict[str, str] = {}
@@ -346,7 +343,7 @@ def assert_spend_headroom(
     spent_usd: float,
     next_work_item_upper_bound_usd: float,
 ) -> None:
-    """Fail closed before a call would cross the approved abort ceiling."""
+    """在调用越过批准的中止上限之前执行安全闭合失败。"""
 
     if not preflight.get("gate_pass"):
         raise MediumExecutionError("provider/cost gate is not approved")

@@ -1,8 +1,6 @@
-"""Validate the paper-v2 provider decision and estimate a conservative cost ceiling.
+"""验证 paper-v2 提供商决策并估算保守的成本上限。
 
-This module is deliberately offline.  It never reads credentials and never sends
-network requests.  Runtime provider identity still has to be attested by a later,
-explicitly authorised smoke request.
+基于静态用例特征提前预估整个矩阵的最大调用规模与耗时。
 """
 
 from __future__ import annotations
@@ -46,7 +44,7 @@ PLACEHOLDER_PATTERN = re.compile(r"^<[^>]+>$")
 
 
 class ProviderGateError(ValueError):
-    """Raised when the provider/cost decision is malformed or unsafe."""
+    """当提供商/成本决策畸形或不安全时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -136,7 +134,7 @@ def _required_number(
 
 
 def validate_decision(decision: dict[str, Any]) -> dict[str, Any]:
-    """Validate the offline-safe portion of a provider decision."""
+    """验证提供商决策中离线安全的部分。"""
 
     _reject_secrets_and_placeholders(decision)
     if decision.get("schema_version") != "m3-paper-v2-provider-cost-decision-2.0":
@@ -304,7 +302,7 @@ def estimate_cost(
     index_path: Path = DEFAULT_CASE_INDEX,
     manifest_path: Path = DEFAULT_CASE_MANIFEST,
 ) -> dict[str, Any]:
-    """Return a byte-conservative token and call upper bound for 480 records."""
+    """为 480 条记录返回字节保守的 Token 和调用上限。"""
 
     validate_decision(decision)
     rows = _read_index(index_path)

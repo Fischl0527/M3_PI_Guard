@@ -1,4 +1,7 @@
-"""DeepSeek v7 controller with end-to-end boundary evidence qualification."""
+"""具备端到端边界证据合格性校验的 DeepSeek v7 控制器。
+
+在实验执行全程动态校验边界拒绝收据的真实性与时间戳有效性。
+"""
 
 from __future__ import annotations
 
@@ -82,7 +85,7 @@ PRIOR_PROJECT_COST_CNY = 0.9066668
 
 
 class FormalMatrixControllerV7Error(RuntimeError):
-    """Raised when v7 cannot preserve its prospective contract."""
+    """当 v7 无法保持其前瞻性契约时抛出的异常。"""
 
 
 def _now() -> str:

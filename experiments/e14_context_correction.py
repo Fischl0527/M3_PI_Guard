@@ -1,4 +1,7 @@
-"""Run the calibrated E14 latency, throughput and resource correction."""
+"""运行校准后的 E14 延迟、吞吐量与计算资源开销修正实验。
+
+测量在不同长上下文规模下防护监视器带来的额外时间与内存开销。
+"""
 
 from __future__ import annotations
 

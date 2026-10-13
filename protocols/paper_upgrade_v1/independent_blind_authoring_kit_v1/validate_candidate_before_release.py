@@ -1,9 +1,8 @@
-"""Self-contained pre-release validator for M3-v2 independent blind candidates.
+"""M3-v2 独立盲测候选集发布前自包含验证器。
 
-Run this in the independent author/custodian environment before releasing the
-candidate to M3 developers.  It performs only content-free contract checks.  It
-does not compare against M3 development data; the repository-side admission audit
-will still perform reference-overlap checks after release.
+在将候选集发布给 M3 开发团队之前，在独立作者/托管人环境中运行此脚本。
+它仅执行无内容的格式与契约检查（Content-free contract checks），不与 M3 开发数据进行比对；
+代码库端的准入审计仍将在发布后执行参考重叠检查。
 """
 
 from __future__ import annotations

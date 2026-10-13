@@ -1,4 +1,7 @@
-"""Deterministic development cohort; no new historical evidence replay."""
+"""确定性的开发验证队列实验方案（不引入新的历史数据重算）。
+
+声明性定义参与评测的案例集合、防护条件对比矩阵与环境约束。
+"""
 
 from __future__ import annotations
 

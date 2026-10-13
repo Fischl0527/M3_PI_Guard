@@ -1,10 +1,6 @@
-"""Policy-aware, CNY-5-bounded DeepSeek Flash public continuation.
+"""策略感知、严格限制 5 元人民币预算的 DeepSeek Flash 公开接续控制器。
 
-This version is intentionally separate from continuation-v1.  The primary v1
-run proved that rebuilding state with the global role policy after appending a
-shard-policy record invalidates otherwise sound evidence.  Every state read in
-this controller therefore receives the exact per-shard policy.  It is inert
-until the second-role canary passes and new per-shard admissions are written.
+微调单次调用延迟与最大尝试次数，严格控制小额预算消耗。
 """
 
 from __future__ import annotations
@@ -61,7 +57,7 @@ MODEL_ID = "deepseek-v4-flash"
 
 
 class PublicSecondContinuationV2Error(ValueError):
-    """Raised when the Flash continuation cannot remain fail-closed."""
+    """当 Flash 接续无法保持安全闭合时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

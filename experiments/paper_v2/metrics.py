@@ -1,8 +1,6 @@
-"""Primary paper-v2 metric semantics.
+"""paper-v2 首要指标计算与语义定义规范。
 
-All registered records stay in their intention-to-treat denominator.  Runtime
-failures are separately visible and conservatively count as failures for both
-security and utility primary endpoints.
+实现安全拦截率（SR）、任务完成率（TCR）、良性可用率等核心统计公式及 Wilson 区间推断。
 """
 from __future__ import annotations
 
@@ -14,7 +12,7 @@ from .contracts import validate_experiment_record
 
 
 class PaperV2MetricError(ValueError):
-    """Raised when records cannot form an unambiguous paper-v2 analysis set."""
+    """当记录无法构成明确的 paper-v2 分析集时抛出的异常。"""
 
 
 def _rate(numerator: int, denominator: int) -> float | None:
@@ -28,7 +26,7 @@ def summarize_experiment_records(
     *,
     validate: bool = True,
 ) -> dict[str, Any]:
-    """Summarize one condition using the frozen paper-v2 endpoint semantics."""
+    """使用固化的 paper-v2 端点语义汇总单个条件。"""
 
     rows = [dict(record) for record in records]
     if not rows:

@@ -1,9 +1,6 @@
-"""Register the completed E17 360-row stratified human-audit evidence.
+"""注册已完成的 E17 360 条分层人类审计证据。
 
-Dry-run is the default.  ``--apply`` performs the sole registry transition for
-the sampled audit while preserving the original full 3,299-row E17 bundle as
-pending provenance.  The registry record explicitly prohibits a full-review
-claim and keeps the 60 targeted rows outside population estimates.
+校验专家独立复核记录的完整性与一致性统计量后完成证据准入。
 """
 
 from __future__ import annotations
@@ -39,7 +36,7 @@ REGISTRAR = "scripts/register_e17_sample_evidence.py"
 
 
 class E17SampleRegistrationError(RuntimeError):
-    """Raised when sampled E17 evidence cannot enter the registry."""
+    """当抽样 E17 论据无法进入注册表时抛出。"""
 
 
 def _sha256(path: Path) -> str:

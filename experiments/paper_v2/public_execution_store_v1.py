@@ -1,4 +1,7 @@
-"""Append-only public-matrix record and cache-cost ledgers."""
+"""面向公开矩阵的仅追加记录存储器与缓存开销账本。
+
+记录评测执行产物与 Prompt 缓存命中收益，支持透明成本审计。
+"""
 
 from __future__ import annotations
 
@@ -61,7 +64,7 @@ USAGE_FIELDS = (
 
 
 class PublicExecutionStoreError(ValueError):
-    """Raised when a public append-only ledger cannot be reconstructed."""
+    """当公开仅追加账本无法重建时抛出的异常。"""
 
 
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -203,7 +206,7 @@ def validate_public_budget_events(
 
 
 class PublicBudgetTracker:
-    """Fsynced role-level budget state reconstructed before every execution."""
+    """每次执行前重建的 fsync 角色级预算状态。"""
 
     def __init__(
         self,
@@ -317,7 +320,7 @@ class PublicBudgetTracker:
 
 
 class PublicBudgetClient:
-    """Record one official completion in the role-level budget ledger."""
+    """在角色级预算账本中记录单个官方完成事件。"""
 
     def __init__(
         self,

@@ -1,8 +1,6 @@
-"""E16 local adaptive-red-team robustness benchmark.
+"""E16 本地自适应红队对抗鲁棒性基准评测模块。
 
-The benchmark mutates only the wording/format of canonical local attack cases.
-It never adds a tool capability, contacts a network target, executes a system
-command itself, or contributes rows to the frozen main-matrix denominator.
+模拟具有反分析和规避能力的攻击者，在本地环境下自动化执行多轮白盒/黑盒变异攻击。
 """
 
 from __future__ import annotations
@@ -82,7 +80,7 @@ AttemptRunner = Callable[[dict[str, Any], dict[str, Any]], list[dict[str, Any]]]
 
 
 class E16Error(RuntimeError):
-    """Base E16 execution error."""
+    """E16 执行的基础异常类。"""
 
 
 def load_jsonl(path: str | Path) -> list[dict[str, Any]]:
@@ -110,7 +108,7 @@ def _load_threshold_provenance(
     ask_threshold: float,
     deny_threshold: float,
 ) -> tuple[str | None, str | None]:
-    """Validate an optional frozen-threshold input and hash its exact bytes."""
+    """验证可选的固化阈值输入并计算其精确字节哈希。"""
 
     if thresholds_path is None:
         return None, None
@@ -289,7 +287,7 @@ def _trace_modules(previous: Mapping[str, Any]) -> list[str]:
 
 
 def choose_mutation(previous: Mapping[str, Any]) -> tuple[str, dict[str, Any]]:
-    """Choose one predefined mutation from the prior local Guard outcome."""
+    """根据先前的本地 Guard 结果选择一种预定义的变异算子。"""
 
     decision = str(previous.get("guard_decision", "")).lower()
     reasons = [str(value) for value in previous.get("reasons", [])]
@@ -442,7 +440,7 @@ def mutate_case(
 
 
 def real_attempt_runner(case: dict[str, Any], config: dict[str, Any]) -> list[dict[str, Any]]:
-    """Run one E16 attempt against an approved local Ollama model."""
+    """针对已批准的本地 Ollama 模型运行单次 E16 攻击尝试。"""
 
     return run_case(
         case,
@@ -726,7 +724,7 @@ def _validate_resume_state(
     plan: Mapping[str, Any],
     out_dir: Path,
 ) -> None:
-    """Reject durable-state or configuration drift before resume writes anything."""
+    """在断点续跑写入任何内容之前，拒绝持久化状态或配置漂移。"""
 
     if manifest.get("plan_hash") != plan["plan_hash"] or manifest.get("plan") != dict(plan):
         raise E16Error("refusing E16 resume because the plan hash or frozen plan changed")
@@ -907,7 +905,7 @@ def analyze_attempts(
 
 
 def _focused_y_max_percent(values: Sequence[float], upper_bounds: Sequence[float]) -> float:
-    """Return a zero-anchored, data-driven ASR ceiling with visible headroom."""
+    """返回以零为锚点的、由数据驱动且带有可见余量的 ASR 上限。"""
 
     data_max = max([0.0, *values, *upper_bounds])
     if data_max >= 100.0:

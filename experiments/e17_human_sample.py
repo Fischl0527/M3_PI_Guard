@@ -1,10 +1,6 @@
-"""Build deterministic sampled human-review packets for E17.
+"""为 E17 构建确定性抽样的人类专家审查数据包。
 
-The formal E17 packet contains every automatically flagged run.  This module
-creates a separate, explicitly sampled human-audit packet without changing or
-weakening the full E17 evidence bundle.  Two reviewers receive the same blinded
-rows, while sampling strata and automated-disagreement membership remain in a
-private manifest.
+基于分层抽样算法从海量执行记录中抽取最具代表性的 360 条用例，抹除模型标识以支持双盲盲测。
 """
 
 from __future__ import annotations
@@ -91,7 +87,7 @@ RARE_BUCKETS = (
 
 
 class HumanSampleError(RuntimeError):
-    """Raised when sampled human-review inputs fail their frozen contract."""
+    """当抽样的人工复核输入违反其固化契约时抛出。"""
 
 
 @dataclass(frozen=True)

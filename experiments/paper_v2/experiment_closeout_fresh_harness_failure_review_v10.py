@@ -1,11 +1,6 @@
-"""Freeze the directly observed Fresh Harness v10 state-transition failure.
+"""固化直接观察到的全新 Harness v10 状态转移失败证据。
 
-Fresh Harness v10 finished naturally with a directly observed exit code one.
-The provider-free run exposed one stale prospective test/replay: the Pro-200
-gate correctly required its output root to be absent before execution, but the
-same gate was rebuilt after the authorized Pro-200 stage had completed.  This
-review binds that exact terminal record and the later immutable Pro-200
-host-timeout closure.  It neither rewrites v10 nor authorizes Pro-500.
+深度捕获状态迁移异常堆栈，支持根本原因分析。
 """
 
 from __future__ import annotations
@@ -125,7 +120,7 @@ SECRET_PATTERNS = (
 
 
 class ExperimentCloseoutFreshHarnessFailureReviewV10Error(ValueError):
-    """Raised when immutable Fresh Harness v10 evidence drifts."""
+    """当不可变的 Fresh Harness v10 论据发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

@@ -1,8 +1,6 @@
-"""Prospective technical admission gate for the DeepSeek v4 medium matrix.
+"""面向 DeepSeek v4 中等规模矩阵的前瞻性技术准入门禁。
 
-The gate is intentionally blind to scientific outcomes until a complete,
-hash-verified, operationally clean matrix has been admitted.  It never mutates
-the append-only execution ledgers and makes no network calls.
+执行数据完整性与统计指标硬性门槛审核，决定是否允许纳入正式结果库。
 """
 
 from __future__ import annotations
@@ -74,7 +72,7 @@ OWNER_APPROVAL_STATEMENT_SHA256 = (
 
 
 class FormalResultGateError(RuntimeError):
-    """Raised when result evidence cannot cross the prospective gate."""
+    """当结果论据无法跨越前瞻门禁时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -183,7 +181,7 @@ def evaluate_operational_gate(
     open_attempts: int,
     budget_paused: bool,
 ) -> dict[str, Any]:
-    """Evaluate only technical/evidence fields, never scientific outcomes."""
+    """仅评估技术/证据字段，绝不访问科学评测结果。"""
 
     statuses = Counter(str(record["operational_status"]) for record in records)
     tiers = Counter(str(record["result_tier"]) for record in records)

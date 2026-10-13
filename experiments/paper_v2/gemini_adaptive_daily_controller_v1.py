@@ -1,4 +1,7 @@
-"""Daily free-tier successors for the frozen Gemini adaptive panel."""
+"""面向固化的 Gemini 自适应评测面板的按日免费层接续控制器。
+
+管理 Gemini 免费层每日请求配额，分天有序推进自适应对抗评测，杜绝超额被限流。
+"""
 
 from __future__ import annotations
 
@@ -52,7 +55,7 @@ MAX_DAILY_PROVIDER_REQUESTS = 16
 
 
 class GeminiAdaptiveDailyControllerV1Error(RuntimeError):
-    """Raised when a Gemini adaptive daily successor cannot fail closed."""
+    """当 Gemini 自适应每日后继无法安全闭合时抛出的异常。"""
 
 
 @dataclass(frozen=True)

@@ -1,9 +1,7 @@
-"""Separate runtime-visible case data from offline evaluation labels.
+"""在线运行时视图与离线评测元数据字段隔离投影视图模块。
 
-AttackCase rows intentionally contain both the task presented to an Agent and
-labels used by the evaluator.  Passing the original dictionary through the
-runtime makes it very easy to leak an answer field into a prompt or a Guard.
-This module provides the only two supported projections of an AttackCase.
+严格贯彻安全界限：仅向在线运行时暴露解密后的必要输入字段，
+离线黄金标准（Ground Truth）与评测器专用答案保留在离线边界，严防数据泄漏作弊。
 """
 
 from __future__ import annotations
@@ -65,8 +63,7 @@ FORBIDDEN_RUNTIME_FIELDS = frozenset(
 
 
 def runtime_case_view(case: Dict[str, Any] | None) -> Dict[str, Any]:
-    """Return an allow-listed copy safe for prompts and online Guard logic."""
-
+    """向在线智能体运行时暴露的最小安全案例文本视图。"""
     source = case if isinstance(case, dict) else {}
     view: Dict[str, Any] = {}
     for field in RUNTIME_CASE_FIELDS:
@@ -82,8 +79,7 @@ def runtime_case_view(case: Dict[str, Any] | None) -> Dict[str, Any]:
 
 
 def evaluation_metadata(case: Dict[str, Any] | None) -> Dict[str, Any]:
-    """Return labels retained for offline scoring, never runtime decisions."""
-
+    """保留在离线边界、供评测器评分使用的完整审计元数据。"""
     source = case if isinstance(case, dict) else {}
     return {
         field: deepcopy(source[field])

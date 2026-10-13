@@ -1,9 +1,4 @@
-"""Strict, self-contained figure bundle manifests.
-
-Each figure references one adjacent data file plus PNG and SVG renderings.  All
-paths are POSIX-style paths relative to the bundle directory.  Writers record
-file sizes and SHA-256 digests; loaders reject traversal, links, and any drift.
-"""
+"""实验图表清册生成器，维护图件与生成数据来源哈希的映射绑定。"""
 
 from __future__ import annotations
 
@@ -43,7 +38,7 @@ _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 class FigureManifestError(ValueError):
-    """Raised when a figure bundle violates its schema or integrity contract."""
+    """当图表包违反其模式（Schema）或完整性契约时抛出。"""
 
 
 def sha256_file(path: str | Path) -> str:
@@ -180,7 +175,7 @@ def write_figure_manifest(
     evidence_tier: str,
     figures: Sequence[Mapping[str, Any]],
 ) -> Path:
-    """Write a deterministic figure manifest after validating every asset."""
+    """在验证所有图表资产后，写入确定性的图表清单文件。"""
 
     root = _bundle_root(bundle_dir)
     experiment = _string(experiment_id, label="experiment_id", pattern=_EXPERIMENT_RE)
@@ -241,7 +236,7 @@ def load_figure_manifest(
     *,
     expected_experiment_id: str | None = None,
 ) -> dict[str, Any]:
-    """Load and re-verify a figure manifest, adding resolved paths in memory."""
+    """加载并重新验证图表清单，在内存中添加解析后的文件路径。"""
 
     source = Path(path_or_bundle).expanduser()
     if source.is_dir():

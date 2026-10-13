@@ -1,11 +1,6 @@
-"""Composable, no-provider-tools runtime for the six paper-v2 conditions.
+"""面向 6 种 paper-v2 防护条件的可组合、免提供商工具运行时。
 
-The runtime treats every model response as an untrusted JSON proposal.  It
-uses the existing PromptGuard adapter, source-pinned VIGIL adapter and M3
-RuntimeMonitor, and delegates effects only to an injected isolated backend.
-The built-in qualification uses an injected official-provider transport,
-temporary M3 sandboxes and copied in-memory AgentDojo-style state.  It performs
-no network or model call and persists no experiment result.
+在完全受控的本地沙箱中模拟工具执行，杜绝大模型直接调用外部危险命令。
 """
 
 from __future__ import annotations
@@ -113,11 +108,11 @@ M3_POLICY_MODULES = frozenset({"policy"})
 
 
 class LiveConditionRuntimeError(ValueError):
-    """Raised when a live condition crosses its frozen execution contract."""
+    """当在线条件越过其固化执行契约时抛出的异常。"""
 
 
 class StrictProposalError(LiveConditionRuntimeError):
-    """Raised when provider text is not one exact, schema-valid proposal."""
+    """当提供商文本不是单个精确的、符合 Schema 的提案时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -230,7 +225,7 @@ def _provider_attempt_id(
     physical_attempt_namespace: int,
     purpose: str | None = None,
 ) -> str:
-    """Build the historical attempt identity unless a later physical run is explicit."""
+    """构建历史尝试身份，除非显式指定了后续的物理运行。"""
 
     identity: dict[str, Any] = {
         "execution_identity": context.execution_identity,
@@ -245,7 +240,7 @@ def _provider_attempt_id(
 
 
 def _http_failure_category(exc: Exception) -> str:
-    """Return a coarse, public-safe HTTP category without inspecting messages."""
+    """返回粗粒度、对公开安全的 HTTP 类别，且不检查消息内容。"""
 
     status = getattr(exc, "http_status", None)
     if isinstance(status, bool) or not isinstance(status, int):
@@ -266,7 +261,7 @@ def _failure_diagnostics(
     provider_call_index: int,
     http_category: str,
 ) -> dict[str, Any]:
-    """Create an allowlisted diagnostic that never includes exception text."""
+    """创建绝不包含异常文本的白名单诊断信息。"""
 
     return {
         "failure_stage": stage,
@@ -327,7 +322,7 @@ def parse_strict_tool_proposal(
     tool_schemas: Mapping[str, Mapping[str, Any]],
     max_bytes: int = MAX_PROPOSAL_BYTES,
 ) -> ParsedProposal:
-    """Accept one JSON object and reject repair, fences, extras and schema drift."""
+    """接受单个 JSON 对象，并拒绝修复、栅栏、多余内容和 Schema 漂移。"""
 
     if not isinstance(raw_output, str):
         raise StrictProposalError("provider output must be text")
@@ -380,7 +375,7 @@ def parse_strict_tool_proposal(
 
 
 class PromptGuardRuntimeDetector:
-    """Use the existing PromptGuard normalization with an injected classifier."""
+    """结合注入的分类器使用现有的 PromptGuard 规范化。"""
 
     detector_id = "promptguard_detector_only"
 
@@ -442,7 +437,7 @@ def _jsonable(value: Any) -> Any:
 
 
 class M3SandboxEffectBackend:
-    """Execute only M3 mock tools in a fresh temporary sandbox."""
+    """仅在全新的临时沙箱中执行 M3 模拟工具。"""
 
     backend_id = "m3_sandbox_fixture"
 
@@ -501,7 +496,7 @@ class M3SandboxEffectBackend:
 
 
 class AgentDojoInMemoryEffectBackend:
-    """Run AgentDojo functions against a deep copy, never the source environment."""
+    """针对深拷贝运行 AgentDojo 函数，绝不直接操作源环境。"""
 
     backend_id = "agentdojo_in_memory_copy"
 
@@ -606,7 +601,7 @@ def _tool_rule(value: Mapping[str, Any]) -> ToolRule:
 
 
 def deserialize_task_policy_manifest(value: Mapping[str, Any]) -> TaskPolicyManifest:
-    """Reconstruct and hash-check a frozen online TaskPolicyManifest."""
+    """重构并哈希校验固化的在线 TaskPolicyManifest。"""
 
     try:
         rules = tuple(
@@ -905,7 +900,7 @@ class _NullCallSink:
 
 
 class LiveConditionRuntime:
-    """Execute one frozen condition with strict parsing and isolated effects."""
+    """以严格解析和隔离副作用执行单个固化条件。"""
 
     def __init__(
         self,
@@ -1294,7 +1289,9 @@ class LiveConditionRuntime:
 
         events: list[dict[str, Any]] = []
         outputs: list[Any] = []
-        # 实际执行历史独立于Guard状态，仅供显式注入的本研究观察器使用。
+        # Independent of Guard state: this is the actual successful simulated
+        # tool prefix, including for an unmonitored control.  It is exposed
+        # only to an explicitly injected prospective capture sink.
         actual_executed_tools: list[str] = []
         receipts: list[dict[str, Any]] = [
             dict(completion.receipt)
@@ -1980,7 +1977,7 @@ def _load_plan() -> list[dict[str, Any]]:
 
 
 def build_live_runtime_qualification() -> dict[str, Any]:
-    """Exercise all 12 primary benchmark-condition routes with zero network."""
+    """以零网络演练全部 12 条主要基准-条件路由。"""
 
     plan = _load_plan()
     representatives: dict[tuple[str, str], dict[str, Any]] = {}

@@ -1,9 +1,6 @@
-"""Lean B200-survivor to B500 adaptive-tail runner.
+"""精简版从 B200 幸存用例到 B500 扩展预算的自适应长尾攻击运行器。
 
-Only query indices 201--500 for the twelve prospectively selected survivors
-are eligible.  The runner copies the existing 200-query search state once,
-persists one compact raw row per new query, and never replays provider calls or
-performs recursive historical evidence validation.
+对在初始 200 轮对抗中未被攻破的防御实例追加至 500 轮深度自适应搜索，评估防御长尾稳健性。
 """
 
 from __future__ import annotations
@@ -65,11 +62,11 @@ CANARY_NEW_QUERIES = 5
 
 
 class IncrementalAdaptiveTailError(RuntimeError):
-    """Raised when E5 cannot preserve its frozen continuation boundary."""
+    """当 E5 无法保持其固化的接续边界时抛出的异常。"""
 
 
 class IncrementalAdaptiveTailStop(RuntimeError):
-    """Clean stop after one response-less or otherwise non-continuable query."""
+    """单次无响应或其他不可接续查询后的正常停止异常。"""
 
 
 def _now() -> str:
@@ -245,13 +242,9 @@ def _latest_raw() -> dict[str, dict[str, Any]]:
 
 
 def _explicit_retry_allowed(key: str, latest: Mapping[str, Any]) -> bool:
-    """Return whether an explicitly named response-less row may be retried.
+    """返回显式命名的无响应记录行是否允许重试。
 
-    A second response-less attempt is normally terminal.  The sole exception is
-    the local trace-directory collision produced by the old recovery-root
-    selector: it failed before a provider request and therefore did not consume
-    the scientific work item.  The exception is deliberately narrow and still
-    rejects every response-bearing history.
+    第二次无响应尝试通常是终端状态。唯一的例外是由旧版恢复根目录选择器产生的本地追踪目录冲突：它在提供商请求之前发生故障，因此未消耗科学工作项。该例外特意被收窄，并且仍拒绝任何带有响应的历史记录。
     """
 
     history = [
@@ -290,7 +283,7 @@ def _explicit_retry_allowed(key: str, latest: Mapping[str, Any]) -> bool:
 
 
 def _fresh_recovery_trace_root(trace_root: Path = TRACE_ROOT) -> Path:
-    """Choose a never-before-used trace root for an explicit recovery process."""
+    """为显式恢复进程选择一个从未使用过的全新追踪根目录。"""
 
     suffix = 2
     while True:

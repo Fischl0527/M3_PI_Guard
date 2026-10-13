@@ -1,4 +1,7 @@
-"""Outcome-blind technical merge gate for the public primary role."""
+"""面向公开主要角色的对结果盲审技术合并门禁。
+
+在不提前解封实验具体结果的前提下，验证分片账本哈希的合法性。
+"""
 
 from __future__ import annotations
 
@@ -69,7 +72,7 @@ REQUIRED_BOUNDARY_FALSE = {
 
 
 class PublicPrimaryMergeReviewError(ValueError):
-    """Raised when the primary technical merge cannot fail closed."""
+    """当主要技术合并无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

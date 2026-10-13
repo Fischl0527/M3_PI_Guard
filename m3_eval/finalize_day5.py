@@ -1,4 +1,4 @@
-"""Build final DAY5 summary files from individual experiment summaries."""
+"""阶段性实验数据固化与归档收尾工具脚本。"""
 
 from __future__ import annotations
 

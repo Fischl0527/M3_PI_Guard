@@ -1,9 +1,6 @@
-"""Build a single-use, label-empty toolkit for an independent blind custodian.
+"""为独立盲测托管人构建单次使用、标签置空的工具套件。
 
-The builder copies only an explicit public/interface allowlist and writes a
-small standard-library-only runtime support module.  It never enumerates
-credentials, configuration, prior outputs, candidates, or scientific data.
-The destination must be a new absolute directory and is never overwritten.
+提供无真值先验污染的交互式评测工具集，保障盲审过程严密可靠。
 """
 
 from __future__ import annotations
@@ -1294,7 +1291,7 @@ receipt 状态必须为 `custodian_scoring_result_signature_verified`。随后�
 
 
 class CustodianToolkitV2Error(ValueError):
-    """Raised when the label-empty toolkit cannot be safely produced."""
+    """当无法安全生成无标签工具包时抛出的异常。"""
 
 
 def _canonical_json_bytes(value: Any) -> bytes:
@@ -1406,7 +1403,7 @@ def build_custodian_toolkit(
     *,
     project_root: Path = PROJECT_ROOT,
 ) -> dict[str, Any]:
-    """Create a new immutable-interface tree plus empty private work folders."""
+    """创建新的不可变接口树加上空的私有工作文件夹。"""
 
     root = project_root.resolve(strict=True)
     if not root.is_dir():

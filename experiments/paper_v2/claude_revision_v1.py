@@ -1,4 +1,7 @@
-"""Fresh, bounded post-repair authorization study; never replays old runs."""
+"""全新的、有明确边界的修复后权限基准研究（绝不重放旧数据）。
+
+在修正确权编译器后，重新在标准测试集上评估任务策略编译质量与安全性。
+"""
 
 from __future__ import annotations
 

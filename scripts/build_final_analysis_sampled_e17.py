@@ -1,10 +1,7 @@
-"""Build the final synthesis with the admitted E17 stratified human audit.
+"""基于已准入的 E17 分层人工审计样本构建最终综合分析报告。
 
-The historical ``build_final_analysis.py`` is hash-bound by the completed E11
-post-hoc execution freeze and therefore remains byte-for-byte unchanged.  This
-adapter adds the later E17 sampled-human evidence admission boundary, records
-its own hash in the final input ledger, and delegates every other calculation
-and rendering path to the frozen builder.
+加载并验证 360 条两名专家独立审核样本，执行契约与身份一致性检查，
+生成失效模式分类学汇总及分层抽样权重推断分析。
 """
 
 from __future__ import annotations
@@ -316,7 +313,7 @@ def _render_sampled_failure(
 
 
 def _adaptive_save_figure(fig: Any, png: Path, svg: Path) -> None:
-    """Expand dense categorical plots before the frozen layout QA runs."""
+    """在运行固化布局 QA 之前扩展密集的分类图表。"""
 
     max_dense_labels = 0
     max_label_length = 0
@@ -545,7 +542,7 @@ def validate_inputs_sampled_e17(
     *,
     repository_root: str | Path,
 ) -> tuple[dict[str, Any], dict[str, base.Bundle], list[dict[str, Any]]]:
-    """Run sampled-E17 admission without leaking monkeypatches to callers."""
+    """运行抽样 E17 准入检查，且不向调用方泄漏猴子补丁（monkeypatch）。"""
 
     names = (
         "_validate_formal_identity",

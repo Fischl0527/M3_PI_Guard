@@ -1,10 +1,8 @@
-"""Independent statistical and evidence audit for a completed final analysis.
+"""针对已完成的最终综合分析报告执行独立统计学与证据完整性审计。
 
-The validator does not import the synthesis builder.  It re-hashes the final
-bundle and its input ledger, independently recomputes count-based acceptance
-claims plus the E9 and E13 gates, validates the stored paired-test contracts,
-and emits a machine-readable Material Passport with an explicit Verification
-Status.  The input bundle is read-only; ``--out`` is optional.
+本验证器不导入任何分析构建代码，而是完全独立重新哈希最终数据包与输入账本，
+独立重新计算基于计数的准入验收指标及 E9、E13 门禁准则，
+验证配对检验契约，并签发带明确校验状态的机器可读“材料护照”（Material Passport）。
 """
 
 from __future__ import annotations
@@ -32,7 +30,7 @@ E13_TARGETS = {
 
 
 class StatisticalValidationError(RuntimeError):
-    """Raised when the validation input itself is unsafe or malformed."""
+    """当审计输入本身不安全或格式异常时抛出的运行时异常。"""
 
 
 def _sha256(path: Path) -> str:
@@ -117,7 +115,7 @@ def _evaluate(value: float, operator: str, target: float) -> bool:
 
 
 def independent_mcnemar_exact(baseline_only: int, treatment_only: int) -> float:
-    """Independently recompute the two-sided exact discordant-pair p-value."""
+    """独立重新计算双侧精确不一致对 McNemar p 值。"""
 
     if baseline_only < 0 or treatment_only < 0:
         raise ValueError("discordant counts must be non-negative")
@@ -132,7 +130,7 @@ def independent_mcnemar_exact(baseline_only: int, treatment_only: int) -> float:
 
 
 def independent_holm(p_values: Sequence[float]) -> list[float]:
-    """Independently recompute Holm step-down adjusted p-values."""
+    """独立重新计算 Holm 逐步向下调整后的 p 值。"""
 
     values = [float(value) for value in p_values]
     if any(value < 0.0 or value > 1.0 for value in values):
@@ -156,7 +154,7 @@ def _walk(value: Any, path: str = "$") -> Iterable[tuple[str, Mapping[str, Any]]
 
 
 def validate_statistical_contract(payload: Mapping[str, Any]) -> dict[str, Any]:
-    """Validate McNemar/bootstrap/Holm/Wilcoxon records without project helpers."""
+    """在不依赖项目辅助函数的前提下验证 McNemar/bootstrap/Holm/Wilcoxon 记录。"""
 
     findings: list[dict[str, Any]] = []
     method_counts = {"mcnemar": 0, "bootstrap": 0, "wilcoxon": 0, "holm_families": 0}

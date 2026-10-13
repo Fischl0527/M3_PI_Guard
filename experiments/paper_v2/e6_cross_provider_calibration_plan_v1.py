@@ -1,9 +1,6 @@
-"""Freeze the E6 cross-provider activity and repeatability calibration plans.
+"""冻结 E6 跨提供商活性与可重复性校准实验计划。
 
-This module is deliberately offline.  It selects one attack instance for each
-underlying task from the already-completed Public primary experiment, using
-only unsafe outcomes from the no-defense and source-pinned VIGIL controls.
-E3 is read solely as a case-membership anchor; no E3 outcome is inspected.
+锁定测试案例子集、提供商端点及请求重试策略，确保实验可重复。
 """
 
 from __future__ import annotations
@@ -115,7 +112,7 @@ PROVIDER_SPECS: dict[str, dict[str, Any]] = {
 
 
 class E6PlanError(ValueError):
-    """Raised when an E6 frozen-input or design invariant drifts."""
+    """当 E6 固化输入或设计不变量发生漂移时抛出的异常。"""
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:

@@ -1,15 +1,6 @@
-"""Qualify a prospective v2 request trace without activating it.
+"""检验候选 v2 请求追踪链条的合法性（暂不全局激活）。
 
-The paper-v2 v1 experiment contract requires both a provider request header ID
-and a provider response ID.  Some official endpoints do not document or return
-the former.  This module evaluates a prospective alternative: fsync a
-content-free local request commitment before transport, then bind it to the
-official response ID, exact model identity, payload hash and safe provider
-receipt.
-
-The candidate is deliberately not an experiment-record admission path.  It
-cannot retroactively upgrade an earlier smoke and requires an explicit future
-protocol/schema decision before formal execution.
+对拟启用的追踪中间件执行离线沙箱测试。
 """
 
 from __future__ import annotations
@@ -62,7 +53,7 @@ FIXED_MESSAGES = [
 
 
 class ProviderRequestTraceError(ValueError):
-    """Raised when a prospective request trace is incomplete or drifts."""
+    """当前瞻性请求追踪不完整或发生漂移时抛出的异常。"""
 
 
 def _write_fsynced_jsonl(path: Path, row: Mapping[str, Any]) -> None:
@@ -105,7 +96,7 @@ def _load_trace_rows(path: Path) -> list[dict[str, Any]]:
 
 
 def load_trace_rows(path: Path) -> list[dict[str, Any]]:
-    """Load and validate a provider trace without exposing mutable internals."""
+    """加载并验证提供商追踪，且不暴露可变内部状态。"""
 
     return _load_trace_rows(path)
 

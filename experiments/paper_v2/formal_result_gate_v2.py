@@ -1,9 +1,6 @@
-"""Prospective technical result gate for the DeepSeek v5 medium matrix.
+"""面向 DeepSeek v5 中等规模矩阵的前瞻性技术结果准入门禁。
 
-The gate is blind to scientific outcomes until execution evidence has passed a
-separate integrity review. Known protocol terminal states remain in the ITT
-denominator. They do not become runner crashes merely because their scientific
-outcomes are unfavorable.
+检验 v5 批次边界拒绝事件的一致性与评测指标无偏性。
 """
 
 from __future__ import annotations
@@ -60,7 +57,7 @@ OWNER_APPROVAL_STATEMENT_SHA256 = matrix.OWNER_STATEMENT_SHA256
 
 
 class FormalResultGateV2Error(RuntimeError):
-    """Raised when v5 evidence cannot cross the prospective result gate."""
+    """当 v5 论据无法跨越前瞻结果门禁时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -238,7 +235,7 @@ def evaluate_operational_gate(
     budget_paused: bool,
     gate_spec: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Evaluate technical evidence only, without accessing scientific outcomes."""
+    """仅评估技术论据，不访问科学评测结果。"""
 
     policy = gate_spec["technical_result_admission"]
     statuses = Counter(str(record["operational_status"]) for record in records)

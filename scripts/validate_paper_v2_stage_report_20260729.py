@@ -1,4 +1,7 @@
-"""Structural QA for the 2026-07-29 M3-PI Guard stage report."""
+"""针对 2026-07-29 阶段报告 DOCX 执行结构与事实数据一致性 QA 校验。
+
+验证报告表格单元格内容与已固化实验数据之间的严格对应关系。
+"""
 
 from __future__ import annotations
 

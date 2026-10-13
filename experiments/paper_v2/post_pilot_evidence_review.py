@@ -1,10 +1,6 @@
-"""Fail-closed evidence review for the prospective DeepSeek single pilot.
+"""面向前瞻性 DeepSeek 单次先导实验的故障安全证据审查模块。
 
-The reviewer is intentionally post-transport and credential-free.  It reads
-only the frozen admission artifacts, the content-free provider trace and the
-append-only experiment-record ledger.  Passing this reviewer never authorizes
-the 480-item matrix or admits a scientific result; it only makes a real
-official pilot eligible for a separate project-owner expansion review.
+在先导实验结束后全量核实执行产物，杜绝数据截断或漏判情况。
 """
 
 from __future__ import annotations
@@ -75,7 +71,7 @@ OFFLINE_REVIEWED_AT = "2026-07-24T09:20:00+08:00"
 
 
 class PostPilotEvidenceReviewError(ValueError):
-    """Raised when pilot evidence is absent, inconsistent, or tampered."""
+    """当试验论据缺失、不一致或被篡改时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -521,7 +517,7 @@ def review_official_single_pilot(
     active_path: Path = DEFAULT_ACTIVE_ADMISSION,
     reviewed_at: str,
 ) -> dict[str, Any]:
-    """Review the exact frozen official pilot without reading credentials."""
+    """审查确切固化的官方试验，且不读取凭据。"""
 
     return _review_pilot_evidence(
         candidate_path=candidate_path,
@@ -613,7 +609,7 @@ def _expect_review_rejection(
 
 
 def build_reviewer_qualification() -> dict[str, Any]:
-    """Qualify the reviewer with one injected pilot and integrity failures."""
+    """使用注入的试验和完整性故障限定审查器资格。"""
 
     candidate = build_admission_candidate()
     rejected: list[str] = []

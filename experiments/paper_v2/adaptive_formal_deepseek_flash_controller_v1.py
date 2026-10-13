@@ -1,4 +1,7 @@
-"""Staged 20-task DeepSeek Flash adaptive panel under the shared CNY-180 fuse."""
+"""共享人民币计费预算下的 20 任务分阶段 DeepSeek Flash 自适应实验控制器。
+
+调度执行高并发 Flash 模型的自适应提示注入对抗，按任务跟踪开销与攻击成功状态。
+"""
 
 from __future__ import annotations
 
@@ -72,11 +75,11 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class AdaptiveFormalDeepSeekFlashControllerV1Error(ValueError):
-    """Raised when the Flash adaptive evidence boundary drifts."""
+    """当 Flash 自适应论据边界发生漂移时抛出的异常。"""
 
 
 def _technical_checks_pass(checks: Mapping[str, bool]) -> bool:
-    """Evaluate a technical gate whose keys are all affirmative invariants."""
+    """评估技术门禁，其所有键均为肯定性不变量。"""
 
     if (
         "scientific_outcomes_not_aggregated" not in checks
@@ -90,7 +93,7 @@ def _technical_checks_pass(checks: Mapping[str, bool]) -> bool:
 
 
 class AdaptiveFlashStop(RuntimeError):
-    """Clean stop after a terminal diagnostic query."""
+    """终端诊断查询后的正常停止异常。"""
 
 
 def _now() -> str:

@@ -1,4 +1,7 @@
-"""Prospective technical result gate for the DeepSeek v8 medium matrix."""
+"""面向 DeepSeek v8 中等规模矩阵的前瞻性技术结果准入门禁。
+
+锁定生命周期适配器捕获的证据收据，生成防伪准入签证。
+"""
 
 from __future__ import annotations
 
@@ -53,7 +56,7 @@ _BUILD_ADMITTED_ANALYSIS = previous.build_admitted_analysis
 
 
 class FormalResultGateV5Error(RuntimeError):
-    """Raised when v8 evidence cannot cross the prospective result gate."""
+    """当 v8 论据无法跨越前瞻结果门禁时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

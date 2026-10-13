@@ -1,4 +1,7 @@
-"""Run the admitted Public primary analysis with v2.2 record validation."""
+"""采用 v2.2 记录验证规范运行已准入的公开主分析。
+
+增强了对异构模型响应字段的兼容性校验与容错解析。
+"""
 
 from __future__ import annotations
 

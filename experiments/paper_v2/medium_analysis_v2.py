@@ -1,10 +1,6 @@
-"""Expanded, preregistered paper-v2 medium-study analysis.
+"""扩展的预注册 paper-v2 中等规模研究综合分析模块。
 
-This module preserves every primary analysis in ``medium_analysis`` and adds
-descriptive confirmation burden, latency, token/cost, authorization-regime,
-and benchmark/context heterogeneity summaries.  Metrics not identifiable from
-the frozen record contract are reported as such instead of being relabelled
-from a proxy.
+深入分析不同攻击变体下的防御衰减曲线与关键断裂点。
 """
 
 from __future__ import annotations
@@ -109,10 +105,9 @@ def _numeric_summary(values: Sequence[float]) -> dict[str, Any]:
 def project_record_for_primary_analysis(
     record: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Create a v1 analysis view from a validated v2 evidence record.
+    """从经验证的 v2 论据记录创建 v1 分析视图。
 
-    The view changes only evidence-envelope representation. Outcome, decision,
-    condition, regime, latency and token fields are copied verbatim.
+    该视图仅更改论据包络的表示形式。结果、决策、条件、体制、延迟和 Token 字段逐字复制。
     """
 
     version = record.get("schema_version")

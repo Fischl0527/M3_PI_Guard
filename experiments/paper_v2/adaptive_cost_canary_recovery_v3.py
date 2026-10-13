@@ -1,9 +1,6 @@
-"""Append-only recovery of the adaptive-v2 cost canary.
+"""自适应 V2 成本金丝雀实验的仅追加（Append-Only）恢复执行器。
 
-Version 2 produced a valid, closed evidence prefix and then stopped after a
-diagnostic query.  This version never retries that query.  It freezes the
-complete prefix, treats the affected task as terminal in the ITT population,
-and executes only the four untouched tasks under a new admission.
+保证在断点恢复过程中历史记录不可变，所有新实验探索仅能追加写入新账本。
 """
 
 from __future__ import annotations
@@ -73,7 +70,7 @@ MAX_DIAGNOSTIC_FRACTION = 0.01
 
 
 class AdaptiveCostCanaryRecoveryV3Error(ValueError):
-    """Raised when the adaptive recovery cannot fail closed."""
+    """当自适应恢复无法执行安全闭合（fail-closed）时抛出的异常。"""
 
 
 def _now() -> str:

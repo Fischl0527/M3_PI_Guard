@@ -1,4 +1,7 @@
-"""Download and hash-freeze an official Hugging Face PromptGuard snapshot."""
+"""下载并哈希冻结官方 Hugging Face PromptGuard 模型快照。
+
+用于在本地拉取指定版本的 PromptGuard 权重，并按 8MB 分块计算所有文件的 SHA-256 哈希清单。
+"""
 
 from __future__ import annotations
 

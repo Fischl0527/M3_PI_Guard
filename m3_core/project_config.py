@@ -1,10 +1,4 @@
-"""Load the ignored team-local configuration without exposing secrets.
-
-The tracked ``config/project.env.example`` is the shared schema. Every team
-member owns an ignored ``config/project.local.env`` containing machine paths
-and personal credentials. This module deliberately has no third-party dotenv
-dependency so migration/bootstrap checks work in the base Python runtime.
-"""
+"""项目全局配置加载、环境变量解析与秘密凭据脱敏管理。"""
 
 from __future__ import annotations
 
@@ -37,7 +31,7 @@ REQUIRED_SHARED_KEYS = (
 
 
 class ProjectConfigError(ValueError):
-    """Raised when the local project configuration is malformed."""
+    """项目配置解析或校验失败异常基类。"""
 
 
 def _unquote(value: str, *, line_number: int) -> str:
@@ -52,12 +46,7 @@ def _unquote(value: str, *, line_number: int) -> str:
 
 
 def parse_env_file(path: Path | str) -> dict[str, str]:
-    """Parse a conservative KEY=VALUE file.
-
-    Inline comments and variable expansion are intentionally unsupported:
-    secrets containing ``#`` or ``$`` remain byte-for-byte values and the
-    configuration file cannot execute commands.
-    """
+    """解析本地 .env 环境变量配置文件。"""
 
     config_path = Path(path)
     if not config_path.is_file():
@@ -102,7 +91,7 @@ def is_secret_key(key: str) -> bool:
 
 
 def redacted_config(values: Mapping[str, str]) -> dict[str, str]:
-    """Return a logging-safe view that never reveals credential material."""
+    """返回已脱敏敏感密钥信息（API Keys、Tokens）的安全配置字典副本。"""
 
     result: dict[str, str] = {}
     for key, value in values.items():
@@ -116,7 +105,7 @@ def redacted_config(values: Mapping[str, str]) -> dict[str, str]:
 def validate_project_config(
     values: Mapping[str, str], *, require_promptguard_token: bool = False
 ) -> list[str]:
-    """Return validation errors without including any secret values."""
+    """校验项目各目录路径与运行时依赖环境的有效性。"""
 
     errors: list[str] = []
     for key in REQUIRED_SHARED_KEYS:
@@ -165,7 +154,7 @@ def load_project_config(
     *,
     override: bool = False,
 ) -> tuple[Path, dict[str, str]]:
-    """Load the selected local file into this process environment."""
+    """加载并初始化项目单例全局配置。"""
 
     config_path = resolve_config_path(path)
     values = parse_env_file(config_path)

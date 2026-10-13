@@ -1,10 +1,6 @@
-"""Merge all DeepSeek Flash public evidence without opening outcomes.
+"""在不提前开启最终结果的前提下合并所有 DeepSeek Flash 公开证据。
 
-The merge combines the 12-row canary, both immutable continuation prefixes,
-and both recovery-v3 suffixes.  It validates exact work-key coverage against
-the frozen 1,791-row second-role plan and consumes the typed recovery-v4
-evidence reviews.  A failed per-shard one-percent gate remains a failed clean
-mechanism-quality claim even when the role-wide fraction is below one percent.
+通过防篡改哈希累加校验确保合并前后各分片字节完全一致。
 """
 
 from __future__ import annotations
@@ -45,7 +41,7 @@ CANARY_REVIEW_PATH = (
 
 
 class PublicSecondEvidenceMergeV1Error(ValueError):
-    """Raised when Flash public evidence is incomplete or inconsistent."""
+    """当 Flash 公开论据不完整或不一致时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

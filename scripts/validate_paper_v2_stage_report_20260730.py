@@ -1,4 +1,7 @@
-"""Structural QA for the 2026-07-30 M3-PI Guard stage report."""
+"""针对 2026-07-30 阶段报告执行终审 QA 结构与事实校验。
+
+深度验证准入证据数字的一致性及最终图表引用的准确性。
+"""
 
 from __future__ import annotations
 

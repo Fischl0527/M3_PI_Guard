@@ -1,15 +1,6 @@
-"""Versioned official DeepSeek client with an explicit non-thinking payload.
+"""具备显式非思考配置的版本化官方 DeepSeek 客户端。
 
-DeepSeek-V4-Pro defaults to thinking mode.  The paper-v2 runtime uses a strict
-structured-text action protocol, so an omitted toggle can spend the entire
-output cap on reasoning and leave no parseable final content.  This client
-preserves the single-attempt, credential-redacting official transport while
-adding the prospectively committed payload field:
-
-``{"thinking": {"type": "disabled"}}``.
-
-The existing provider client remains unchanged because it is hash-pinned by
-the completed pilot and the aborted matrix-v1 evidence.
+支持单次无状态工具提案请求，捕获请求元数据与哈希凭据。
 """
 
 from __future__ import annotations
@@ -78,7 +69,7 @@ THINKING_CONTROL = {"type": "disabled"}
 
 
 class DeepSeekNonThinkingOfficialClient(OfficialProviderClient):
-    """Official single-attempt client with the DeepSeek thinking toggle frozen."""
+    """固化 DeepSeek 思考开关的官方单次尝试客户端。"""
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -307,7 +298,7 @@ def build_nonthinking_request_commitment(
     attempt_id: str,
     precommitted_at: str,
 ) -> dict[str, Any]:
-    """Commit the exact non-thinking payload before network transport."""
+    """在网络传输前提交精确的非思考载荷承诺。"""
 
     if not execution_identity or not work_key or not attempt_id:
         raise ProviderPayloadError(
@@ -362,7 +353,7 @@ def build_nonthinking_request_commitment(
 
 
 class DeepSeekNonThinkingTracedProviderClient(TracedProviderClient):
-    """Trace wrapper whose commitment includes the non-thinking toggle."""
+    """承诺包含非思考开关的追踪包装器。"""
 
     def complete(
         self,
@@ -457,7 +448,7 @@ def _load_policy() -> dict[str, Any]:
 
 
 def build_qualification() -> dict[str, Any]:
-    """Prove payload commitment and redacted evidence with no network."""
+    """在无网络环境下证明载荷承诺与脱敏论据。"""
 
     observed_payloads: list[dict[str, Any]] = []
 

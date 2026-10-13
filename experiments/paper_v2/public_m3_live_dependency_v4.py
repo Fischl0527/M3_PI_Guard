@@ -1,4 +1,7 @@
-"""Execution-identity-aware public M3 evaluator binding for Public-v4."""
+"""具备执行身份感知能力的公开 M3 评测器绑定（版本 V4）。
+
+支持跨用例执行上下文的精确隔离与状态审计。
+"""
 
 from __future__ import annotations
 
@@ -41,7 +44,7 @@ def _validate_execution_identity(value: str) -> str:
 
 
 class PublicFrozenM3CaseResolverV4(PublicFrozenM3CaseResolverV3):
-    """Bind public M3 cases to the active permit execution identity."""
+    """将公开 M3 用例绑定到活动许可执行身份。"""
 
     def __init__(
         self,
@@ -71,7 +74,7 @@ def build_public_m3_resolver_qualification(
     *,
     plan_path: Path = DEFAULT_PLAN,
 ) -> dict[str, Any]:
-    """Run the actual evaluator over attack/benign probes for both roles."""
+    """对两个角色的攻击/良性探测运行实际评测器。"""
 
     rows = _load_jsonl(plan_path)
     probes: list[dict[str, Any]] = []

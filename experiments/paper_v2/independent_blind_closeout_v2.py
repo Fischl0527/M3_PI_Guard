@@ -1,10 +1,6 @@
-"""Versioned custodian-side authoring and developer-side blind import contract.
+"""版本化托管人端撰写规范与开发者端双盲导入协议。
 
-The authoring splitter and pre-release validator are intended for an independent
-custodian and may inspect synthetic or private label data.  The developer-side
-import accepts only a label-free execution set and a custody manifest; it never
-accepts or opens the label file.  This module creates no project candidate or
-label data by itself.
+建立完全物理隔离的数据交换协议，保障盲测评测的独立性与公信力。
 """
 
 from __future__ import annotations
@@ -701,7 +697,7 @@ SIGNED_SCORING_ATTESTATION_EXCLUSIONS = frozenset(
 
 
 class IndependentBlindCloseoutV2Error(ValueError):
-    """Raised when a v2 blind authoring or custody invariant fails."""
+    """当 v2 盲测创作或托管不变量失败时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -770,7 +766,7 @@ def _is_sha256(value: Any) -> bool:
 
 
 def _is_opaque_id(value: Any) -> bool:
-    """Accept short ASCII identifiers only; never free-form prompt/result text."""
+    """仅接受简短 ASCII 标识符；绝不接受自由格式提示词/结果文本。"""
 
     return isinstance(value, str) and OPAQUE_ID_PATTERN.fullmatch(value) is not None
 
@@ -885,7 +881,7 @@ def _forbidden_execution_paths(row: Mapping[str, Any]) -> list[str]:
 
 
 def _forbidden_registration_paths(registration: Mapping[str, Any]) -> list[str]:
-    """Reject sensitive extension payloads while permitting frozen scalar field names."""
+    """拒绝敏感扩展载荷，同时允许固化标量字段名称。"""
 
     forbidden: list[str] = []
     for path in _field_paths(registration):
@@ -913,11 +909,9 @@ def _sensitive_extension_paths(
     top_level_fields: frozenset[str],
     nested_fields: Mapping[str, frozenset[str]],
 ) -> list[str]:
-    """Find label/evaluator-like keys outside a manifest's frozen schema.
+    """在清单的固化模式之外查找类似标签/评测器的键。
 
-    Exact schema checks reject every extension.  This separate recursive check
-    makes the confidentiality boundary explicit and prevents a future schema
-    relaxation from silently accepting a nested answer-key channel.
+    确切的模式检查拒绝所有扩展。此单独的递归检查明确了机密性边界，并防止将来的模式放宽静默接受嵌套的答案通道。
     """
 
     allowed_paths = set(top_level_fields)
@@ -1075,7 +1069,7 @@ def split_authored_pairs(
     *,
     slots_path: Path = DEFAULT_SLOTS,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Deterministically split custodian-private authoring pairs in slot order."""
+    """按槽位顺序确定性拆分托管人私有创作对。"""
 
     executions: list[dict[str, Any]] = []
     labels: list[dict[str, Any]] = []
@@ -1113,7 +1107,7 @@ def split_authored_bundle(
     label_output_path: Path,
     slots_path: Path = DEFAULT_SLOTS,
 ) -> dict[str, Any]:
-    """Custodian-only file splitter; explicit outputs prevent implicit project data."""
+    """仅限托管人使用的文件拆分器；显式输出防止隐式项目数据泄漏。"""
 
     if execution_output_path.resolve() == label_output_path.resolve():
         raise IndependentBlindCloseoutV2Error(
@@ -1160,7 +1154,7 @@ def validate_custodian_pre_release(
     label_file_path: Path,
     slots_path: Path = DEFAULT_SLOTS,
 ) -> dict[str, Any]:
-    """Validate both halves before the custodian releases only the execution set."""
+    """在托管人仅发布执行集之前验证两半数据。"""
 
     if execution_set_path.resolve() == label_file_path.resolve():
         raise IndependentBlindCloseoutV2Error(
@@ -1263,7 +1257,7 @@ def _release_chain_checks(custody: Mapping[str, Any]) -> dict[str, bool]:
 
 
 def registration_signature_payload_sha256(registration: Mapping[str, Any]) -> str:
-    """Digest signed by the custodian for the zero-label Day-1 registration."""
+    """托管人为零标签 Day-1 注册签署的摘要。"""
 
     payload = {
         key: item
@@ -1281,7 +1275,7 @@ def build_unsigned_custodian_registration(
     confirmed_at: str,
     offline_identity_evidence_sha256: str,
 ) -> dict[str, Any]:
-    """Create the zero-label registration payload; never reads a private key."""
+    """创建零标签注册载荷；绝不读取私钥。"""
 
     _, _, fingerprint = _load_ed25519_public_key(public_key_path)
     if not _non_placeholder(custodian_id, minimum_length=3):
@@ -1325,7 +1319,7 @@ def build_unsigned_custodian_registration(
 def finalize_custodian_registration(
     unsigned_registration: Mapping[str, Any], *, custodian_signature: str
 ) -> dict[str, Any]:
-    """Attach a real detached Ed25519 signature; does not access a private key."""
+    """附加真实的独立分离式 Ed25519 签名；不访问私钥。"""
 
     if set(unsigned_registration) != REGISTRATION_UNSIGNED_FIELDS:
         raise IndependentBlindCloseoutV2Error(
@@ -1366,7 +1360,7 @@ def verify_custodian_registration(
     verifier_id: str,
     verified_at: str,
 ) -> dict[str, Any]:
-    """Mathematically verify Day-1 registration and emit a hash-locked receipt."""
+    """数学上验证 Day-1 注册并发放哈希锁定的收据。"""
 
     registration = _read_json(registration_path)
     public_key, _, fingerprint = _load_ed25519_public_key(public_key_path)
@@ -1615,7 +1609,7 @@ def _registration_verifier_receipt_checks(
 
 
 def custody_signature_payload_sha256(custody: Mapping[str, Any]) -> str:
-    """Return the digest an external custodian signature must bind."""
+    """返回外部托管人签名必须绑定的摘要。"""
 
     payload = {
         key: item
@@ -1661,7 +1655,7 @@ def build_unsigned_custody_seal(
     developer_received_execution_set_at: str,
     slots_path: Path = DEFAULT_SLOTS,
 ) -> dict[str, Any]:
-    """Build the deterministic payload to be signed by the real custodian."""
+    """构建由真正托管人签署的确定性载荷。"""
 
     pre_release = validate_custodian_pre_release(
         execution_set_path=execution_set_path,
@@ -1744,7 +1738,7 @@ def build_unsigned_custody_seal(
 def finalize_custody_seal(
     unsigned_custody: Mapping[str, Any], *, custodian_signature: str
 ) -> dict[str, Any]:
-    """Attach a non-placeholder detached signature without fabricating one."""
+    """附加非占位符的独立签名，而不伪造签名。"""
 
     unsigned_schema_checks = _custody_schema_checks(
         unsigned_custody, finalized=False
@@ -1850,7 +1844,7 @@ def verify_custody_signature(
     verifier_id: str,
     verified_at: str,
 ) -> dict[str, Any]:
-    """Reverify Ed25519 custody authenticity and emit a non-self-authorizing receipt."""
+    """重新验证 Ed25519 托管真实性并发出非自授权收据。"""
 
     custody = _read_json(custody_manifest_path)
     registration = _read_json(registration_path)
@@ -2078,7 +2072,7 @@ def audit_developer_execution_import(
     custodian_public_key_path: Path,
     slots_path: Path = DEFAULT_SLOTS,
 ) -> dict[str, Any]:
-    """Import the label-free set without accepting or opening the label file."""
+    """导入无标签集合，而不接受或打开标签文件。"""
 
     execution_set_path = execution_set_path.resolve()
     custody_manifest_path = custody_manifest_path.resolve()
@@ -2322,7 +2316,7 @@ def _require_replayed_passing_admission(
     registration_verifier_receipt_path: Path,
     custodian_public_key_path: Path,
 ) -> None:
-    """Reject any admission that cannot be rebuilt from signed primary evidence."""
+    """拒绝任何无法从经签名的主要证据重建的准入。"""
 
     _require_passing_admission(
         admission=admission,
@@ -2412,12 +2406,9 @@ def _runtime_receipt_bundle_validation(
     provider_receipts: Sequence[Mapping[str, Any]],
     provider_request_chain: Sequence[Mapping[str, Any]],
 ) -> dict[str, bool]:
-    """Validate content-free runtime receipts and the prospective request ledger.
+    """验证无内容的运行时收据和前瞻性请求账本。
 
-    Each provider call is represented by a pre-transport ``started`` event and
-    one terminal ``completed`` or ``failed`` event.  A work item that failed
-    before any provider call remains in ITT through an explicit zero-call
-    diagnostic receipt; callers must never invent a provider response ID.
+    每个提供商调用由传输前 ``started`` 事件和一个终端 ``completed`` 或 ``failed`` 事件表示。在任何提供商调用之前失败的工作项通过显式零调用诊断收据保留在 ITT 中；调用方绝不能伪造提供商响应 ID。
     """
 
     identity_fields = (
@@ -2886,7 +2877,7 @@ def seal_execution_complete_output_package(
     provider_request_chain_bundle_path: Path,
     completed_at: str,
 ) -> dict[str, Any]:
-    """Seal 3,600 content-free terminal output references after model execution."""
+    """在模型执行后封存 3,600 个无内容的终端输出引用。"""
 
     admission = _read_json(execution_admission_path)
     custody = _read_json(custody_manifest_path)
@@ -3002,7 +2993,7 @@ def _revalidate_execution_output_chain(
     provider_request_chain_bundle_path: Path,
     execution_output_seal_path: Path,
 ) -> tuple[dict[str, bool], list[dict[str, Any]]]:
-    """Rebuild every pre-label execution/output check from primary artifacts."""
+    """从主要构件重建每个标签前执行/输出检查。"""
 
     custody = _read_json(custody_manifest_path)
     admission = _read_json(execution_admission_path)
@@ -3163,7 +3154,7 @@ def release_labels_to_custodian_scoring(
     released_at: str,
     custodian_id: str,
 ) -> dict[str, Any]:
-    """Release labels only to the custodian scoring process after execution."""
+    """在执行后仅向托管人评分过程发布标签。"""
 
     chain_checks, _ = _revalidate_execution_output_chain(
         execution_set_path=execution_set_path,
@@ -3309,7 +3300,7 @@ def _scoring_validation(
 def _released_scoring_results_validation(
     rows: Sequence[Mapping[str, Any]],
 ) -> dict[str, bool]:
-    """Validate the non-private scoring release without opening any label data."""
+    """验证非私有评分发布，而不打开任何标签数据。"""
 
     sequences = [row.get("sequence") for row in rows]
     work_keys = [str(row.get("work_key", "")) for row in rows]
@@ -3363,7 +3354,7 @@ def seal_custodian_scoring_results(
     scored_at: str,
     custodian_id: str,
 ) -> dict[str, Any]:
-    """Seal custodian-scored 3,600-row results without releasing private labels."""
+    """封存托管人评分的 3,600 行结果，而不释放私有标签。"""
 
     output_chain_checks, outputs = _revalidate_execution_output_chain(
         execution_set_path=execution_set_path,
@@ -3511,7 +3502,7 @@ def build_unsigned_scoring_attestation(
     custodian_id: str,
     signed_at: str,
 ) -> dict[str, Any]:
-    """Build the final result-manifest payload for the registered custodian to sign."""
+    """构建注册托管人签署的最终结果清单载荷。"""
 
     scoring_seal = _read_json(scoring_result_seal_path)
     custody = _read_json(custody_manifest_path)
@@ -3572,7 +3563,7 @@ def build_unsigned_scoring_attestation(
 def finalize_scoring_attestation(
     unsigned_attestation: Mapping[str, Any], *, custodian_signature: str
 ) -> dict[str, Any]:
-    """Attach the custodian's externally produced Ed25519 result signature."""
+    """附加托管人外部生成的 Ed25519 结果签名。"""
 
     if set(unsigned_attestation) != SCORING_ATTESTATION_UNSIGNED_FIELDS or any(
         isinstance(value, (Mapping, list)) for value in unsigned_attestation.values()
@@ -3619,7 +3610,7 @@ def verify_scoring_attestation(
     verifier_id: str,
     verified_at: str,
 ) -> dict[str, Any]:
-    """Custodian-private artifact replay; this path intentionally opens labels."""
+    """托管人私有构件重放；此路径特意打开标签。"""
 
     attestation = _read_json(scoring_attestation_path)
     scoring_seal = _read_json(scoring_result_seal_path)
@@ -3812,12 +3803,9 @@ def verify_scoring_attestation_integrity_only(
     verifier_id: str,
     verified_at: str,
 ) -> dict[str, Any]:
-    """Developer-safe signature/artifact verification with no private paths.
+    """无私有路径的开发者安全签名/构件验证。
 
-    This verifier deliberately has no label, private scoring-original,
-    output-content, or directory argument.  It accepts only the frozen,
-    non-private scoring release plus public manifests, verifies their ancestry,
-    and cannot independently recompute score semantics.
+    此验证器特意不带标签、私有评分原件、输出内容或目录参数。它仅接受固化的非私有评分发布加上公开清单，验证其溯源，并且不能独立重新计算评分语义。
     """
 
     attestation = _read_json(scoring_attestation_path)

@@ -1,9 +1,6 @@
-"""Activate the Pro-500 wrapper only after a new complete Harness run.
+"""仅在全新完整 Harness 运行通过后激活 Pro-500 包装器的前置门禁。
 
-The source for this gate, the guarded runner, and both detached launchers is
-present before Fresh Harness v11.  After that Harness finishes with a directly
-observed exit zero, this module can freeze one non-result activation artifact.
-The artifact never replaces the separate project-owner stage admission.
+防止在底层 Harness 环境未经完备校验的情况下启动高成本的大规模自适应评测。
 """
 
 from __future__ import annotations
@@ -81,7 +78,7 @@ SECRET_PATTERNS = (
 
 
 class AdaptiveFormalPro500ActivationGateV1Error(ValueError):
-    """Raised when the post-integration activation evidence fails closed."""
+    """当集成后激活论据未通过安全闭合检查时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

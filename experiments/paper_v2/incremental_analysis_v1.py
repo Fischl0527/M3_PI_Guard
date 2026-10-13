@@ -1,9 +1,6 @@
-"""One-pass statistics for the prospective incremental studies.
+"""面向前瞻性增量实验的单遍扫描统计分析模块。
 
-The analyzer reads only each study's frozen plan and compact raw JSONL.  It
-does not replay providers, historical evidence, or request traces.  Earlier
-response-less attempts remain auditable, while only the latest terminal row
-for each planned work key enters the study denominator.
+聚合增量实证研究数据，计算各防护配置的成功防御率、效用损耗与配对检验统计量。
 """
 
 from __future__ import annotations
@@ -66,7 +63,7 @@ FAILURE_STATUSES = {
 
 
 class IncrementalAnalysisError(ValueError):
-    """Raised when a new study cannot support its prespecified analysis."""
+    """当新研究无法支持其预先指定的分析时抛出的异常。"""
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -661,7 +658,7 @@ def _adaptive_tail_analysis(
     checkpoint_values: Mapping[str, Mapping[str, Any]],
     raw_rows: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Analyze only the prospectively selected B200-survivor cohort."""
+    """仅分析前瞻性选择的 B200 幸存者队列。"""
 
     if len(plan_rows) != 12 or len({str(row["case_id"]) for row in plan_rows}) != 12:
         raise IncrementalAnalysisError("E5 requires exactly twelve unique survivors")

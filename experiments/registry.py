@@ -1,4 +1,7 @@
-"""Durable experiment registry with atomic state transitions."""
+"""具备原子状态变迁能力的持久化实验注册表（Registry）。
+
+集中管理所有实验单元（E0-E17）的当前生命周期状态（planned / in_progress / completed / verified）。
+"""
 
 from __future__ import annotations
 
@@ -93,7 +96,7 @@ def _set_status(
     evidence: list[str] | None = None,
     path: str | Path = REGISTRY_PATH,
 ) -> dict[str, Any]:
-    """Persist a validated transition after its public completion gate passes."""
+    """在其公开完成门禁通过后，持久化经验证的状态流转。"""
 
     payload = load_registry(path)
     for item in payload["experiments"]:
@@ -132,7 +135,7 @@ def missing_artifacts(item: dict[str, Any]) -> list[str]:
 
 
 def invalid_artifacts(item: dict[str, Any]) -> list[str]:
-    """Return required artifacts that are missing, empty or not regular files."""
+    """返回缺失、为空或非常规文件的必选构件列表。"""
 
     invalid: list[str] = []
     for value in item.get("required_artifacts", []):
@@ -149,7 +152,7 @@ def complete_experiment(
     evidence: list[str],
     path: str | Path = REGISTRY_PATH,
 ) -> dict[str, Any]:
-    """Mark complete only after the manifest and every declared artifact pass."""
+    """仅在清单和每个声明的构件均通过后才标记为完成。"""
 
     from .manifest import validate_completed_manifest
 

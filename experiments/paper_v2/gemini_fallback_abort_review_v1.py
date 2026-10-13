@@ -1,9 +1,6 @@
-"""Freeze the failed Gemini fallback v1 canary as permanently ineligible.
+"""冻结失败的 Gemini v1 回退金丝雀为永久不合格状态。
 
-The review is content-free.  It binds the prospective candidate, active
-admission, one open work-item attempt, and the closed started/failed call event
-pair left by the VIGIL compatibility failure.  It never reads prompts,
-responses, credentials, or scientific outcome fields.
+忠实记录早期版本回退评测的失效证据，杜绝后续错误采纳。
 """
 
 from __future__ import annotations
@@ -33,7 +30,7 @@ GENERATED_AT = "2026-07-27T01:25:00+08:00"
 
 
 class GeminiFallbackAbortReviewError(ValueError):
-    """Raised when the failed v1 trace no longer matches the frozen review."""
+    """当失败的 v1 追踪不再匹配固化审查时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

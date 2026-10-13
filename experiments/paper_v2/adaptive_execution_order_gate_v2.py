@@ -1,14 +1,6 @@
-"""Zero-call supersession and predecessor gate for the closeout adaptive panel.
+"""收官自适应实验面板的零调用（Zero-Call）前驱状态与替代门禁。
 
-The existing Pro-50 and Flash-50 v1 candidates/admissions are immutable
-historical artifacts.  They were never started, but their admissions no longer
-bind their current candidates and they do not encode the closeout-wide stage
-order.  This module seals those exact bytes and provides the fail-closed gate
-that every replacement candidate and admission must use.
-
-This module has no provider client, credential loader, or execution command.
-It can only build/verify the order review and validate hash-locked technical
-reviews/candidate prerequisites.
+在不产生任何实际 API 开销的前提下，严格校验前序实验依赖项是否满足准入条件。
 """
 
 from __future__ import annotations
@@ -160,7 +152,7 @@ _HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
 
 class AdaptiveExecutionOrderGateV2Error(ValueError):
-    """Raised when adaptive supersession or predecessor evidence drifts."""
+    """当自适应继承或前驱论据发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -350,7 +342,7 @@ def _seal_v1_stage(stage: str) -> dict[str, Any]:
 
 
 def build_supersession_order_review() -> dict[str, Any]:
-    """Rebuild the zero-call v1 seal and exact adaptive stage order."""
+    """重建零调用 v1 封存状态与精确的自适应阶段顺序。"""
 
     order = validate_stage_order(STAGE_ORDER)
     v1_seals = [_seal_v1_stage(stage) for stage in ("pro_50", "flash_50")]
@@ -454,7 +446,7 @@ def _validate_technical_review_payload(
 def build_predecessor_review_lock(
     review_path: Path, *, expected_stage: str
 ) -> dict[str, Any]:
-    """Validate a review first, then return the exact lock a successor must bind."""
+    """先验证审查结果，然后返回后继阶段必须绑定的精确锁。"""
 
     path = _resolve_project_path(str(review_path))
     review = _validate_technical_review_payload(
@@ -472,7 +464,7 @@ def build_predecessor_review_lock(
 def validate_predecessor_review_lock(
     successor_stage: str, lock: Any
 ) -> dict[str, Any]:
-    """Require the exact passing review immediately before ``successor_stage``."""
+    """要求在 ``successor_stage`` 紧邻之前存在精确通过的审查。"""
 
     predecessor = predecessor_for(successor_stage)
     if predecessor is None:
@@ -507,7 +499,7 @@ def validate_predecessor_review_lock(
 def require_predecessor_before_candidate_build(
     successor_stage: str, predecessor_review_lock: Mapping[str, Any] | None = None
 ) -> dict[str, Any]:
-    """Return a candidate-build prerequisite; never create or execute a candidate."""
+    """返回候选集构建前置条件；绝不创建或执行候选集。"""
 
     order_review = verify_supersession_order_review()
     predecessor = predecessor_for(successor_stage)
@@ -540,7 +532,7 @@ def require_predecessor_before_admission(
     successor_candidate_lock: Mapping[str, Any],
     predecessor_review_lock: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Validate a replacement candidate's order binding before admission creation."""
+    """在创建准入凭证之前，验证替换候选集的顺序绑定。"""
 
     context = require_predecessor_before_candidate_build(
         successor_stage, predecessor_review_lock

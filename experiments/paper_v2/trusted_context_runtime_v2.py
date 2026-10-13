@@ -1,13 +1,6 @@
-"""Prospective trusted-context prompt and post-response failure adapter.
+"""前瞻性受信上下文提示词与响应后失效适配运行时。
 
-The frozen paper-v2 runtime received ``trusted_app_context`` for policy
-compilation but did not serialize the context into model messages.  This
-versioned adapter projects only the already-online trusted action parameters
-needed by the agent.  It also converts exceptions that occur *after* at least
-one fully traced provider response into a content-free intention-to-treat
-runtime failure.  Pre-response failures still escape and require a new run.
-
-The frozen runtime and its historical evidence remain unchanged.
+严格区分系统提示词中的受信指令与不可信外部检索输入。
 """
 
 from __future__ import annotations
@@ -45,11 +38,11 @@ _MESSAGE_BUILDER_LOCK = threading.RLock()
 
 
 class TrustedContextRuntimeV2Error(RuntimeError):
-    """Raised when the prospective adapter cannot preserve evidence."""
+    """当预期适配器无法保留论据时抛出的异常。"""
 
 
 class TracedClientRegistry:
-    """Keep one in-memory traced client per work item for failure closure."""
+    """为每个工作项保留一个内存中追踪客户端以进行故障闭合。"""
 
     def __init__(self) -> None:
         self._clients: dict[str, TracedProviderClient] = {}
@@ -74,7 +67,7 @@ class TracedClientRegistry:
 def project_trusted_app_context(
     view: PaperRuntimeView,
 ) -> dict[str, Any]:
-    """Select the minimal trusted parameter context already visible online."""
+    """选择已在线可见的最小可信参数上下文。"""
 
     raw = view.trusted_app_context
     if not isinstance(raw, Mapping):
@@ -128,7 +121,7 @@ def build_research_messages_v2(
     manifest: TaskPolicyManifest,
     prompt_profile: str = "safe_prompt",
 ) -> list[dict[str, str]]:
-    """Build messages with a minimal, explicit trusted parameter projection."""
+    """使用最小、显式的可信参数投影构建消息。"""
 
     messages = build_frozen_research_messages(
         view,
@@ -182,7 +175,7 @@ def _failure_reason(exc: Exception) -> str:
 
 
 class TrustedContextFailurePersistingRuntime:
-    """Patch only message construction and close traced post-response errors."""
+    """仅修补消息构造并关闭追踪的响应后错误。"""
 
     def __init__(
         self,

@@ -1,4 +1,7 @@
-"""Build reproducible public, blind-authoring, and adaptive paper-v2 assets."""
+"""构建可复现的公开评测、双盲撰写与自适应 paper-v2 研究数据资产。
+
+一键打包公开数据集子集、标注模板与评测配置文件。
+"""
 
 from __future__ import annotations
 
@@ -66,7 +69,7 @@ SECOND_MODEL_CONDITIONS = (
 
 
 class ResearchAssetError(ValueError):
-    """Raised when a frozen research asset cannot be reproduced."""
+    """当固化的科研资产无法复现时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

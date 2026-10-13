@@ -1,9 +1,6 @@
-"""Inventory and verify a merged Ollama model store.
+"""清点并验证已合并的本地 Ollama 模型存储库。
 
-This utility is intentionally read-only with respect to model stores.  It
-hashes every file under one or more source roots, detects merge collisions,
-and can verify that a target root contains the byte-identical union.  Only the
-requested JSON evidence file is written.
+检查本地 Ollama 模型镜像的哈希完整性、层结构以及版本绑定状态。
 """
 
 from __future__ import annotations

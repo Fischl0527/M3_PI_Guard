@@ -1,4 +1,7 @@
-"""Build a complete 34-entry bibliography from authoritative metadata."""
+"""从权威元数据构建包含 34 篇论文引用的完整 BibTeX 文献数据库。
+
+规范化作者、期刊、年份、卷期与 DOI 字段，杜绝文献信息错漏。
+"""
 
 from __future__ import annotations
 
@@ -94,7 +97,7 @@ ARXIV_NAMESPACE = {"atom": "http://www.w3.org/2005/Atom"}
 
 
 class BibliographyBuildError(ValueError):
-    """Raised when any bibliography entry lacks authoritative metadata."""
+    """当任一参考文献条目缺少权威元数据时抛出的异常。"""
 
 
 class _MetaParser(HTMLParser):
@@ -516,7 +519,7 @@ def write() -> dict[str, Any]:
 
 
 def verify_frozen_export() -> dict[str, Any]:
-    """Check the historical 34-entry export, not the subsequently edited library."""
+    """检查历史固化的 34 条导出记录，而非后续编辑的文献库。"""
     bibliography = OUTPUT_BIB.read_text(encoding="utf-8")
     report = _load_json(OUTPUT_REPORT)
     manifest = _load_json(MANIFEST_PATH)
@@ -550,10 +553,9 @@ def verify_frozen_export() -> dict[str, Any]:
 
 
 def verify() -> dict[str, Any]:
-    """Validate current metadata and citations without rewriting frozen receipts.
+    """验证当前元数据与引文，且不重写固化的收据。
 
-    This is a local integrity check, not a new online audit of every publication.
-    The original export check remains available as ``verify_frozen_export``.
+    此为本地完整性检查，非对每篇出版物的新在线审计。原始导出检查仍可通过 ``verify_frozen_export`` 使用。
     """
     bibliography = OUTPUT_BIB.read_text(encoding="utf-8")
     entries = re.findall(r"(?ms)^@(\w+)\{(L\d{2}),\n(.*?)^\}", bibliography)

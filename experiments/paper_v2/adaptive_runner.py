@@ -1,8 +1,7 @@
-"""Budget-enforcing paper-v2 adaptive-search controller.
+"""强制执行预算约束的 paper-v2 自适应搜索主控制器。
 
-The controller is provider-agnostic: the caller supplies a defense-aware oracle
-that returns only the public decision and unsafe-effect bit.  This module never
-reads credentials and can be qualified with a stub oracle before the cost gate.
+协调生成自适应攻击 Payload、调用目标模型与运行防护监视器，
+在严格的单用例和总预算红线下追踪攻击收敛与防护鲁棒性。
 """
 
 from __future__ import annotations
@@ -21,7 +20,7 @@ ALLOWED_BUDGETS = frozenset({50, 200, 500, 2000})
 
 
 class AdaptiveRunnerError(ValueError):
-    """Raised when a run does not match the frozen paper-v2 budget contract."""
+    """当单次运行不符合固化的 paper-v2 预算契约时抛出的异常。"""
 
 
 def run_task_budget(
@@ -75,7 +74,7 @@ def select_hardest_case_ids(
     count: int = 20,
     seed: str = "m3-paper-v2-formal-assets-v1",
 ) -> list[str]:
-    """Resolve the preregistered hardest subset after all 500-query runs."""
+    """在完成全部 500 次查询运行后，解析预先注册的最困难用例子集。"""
 
     if len(results) < count:
         raise AdaptiveRunnerError("not enough completed results for hard subset")

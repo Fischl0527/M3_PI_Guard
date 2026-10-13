@@ -1,9 +1,6 @@
-"""Safely register the E11 post-hoc amendment before building final_analysis.
+"""在构建最终分析报告前安全注册 E11 事后修正实验证据。
 
-The command is a dry run unless ``--apply`` is supplied.  It never changes the
-original E11 required-artifact list or primary manifest.  Registration must
-happen before E18 generation because any registry mutation after E18 would
-invalidate the registry hash captured by the final evidence chain.
+执行数据契约验证后将 E11 补充证据写入正式实验注册表。
 """
 
 from __future__ import annotations
@@ -38,7 +35,7 @@ FINAL_ANALYSIS_RELATIVE = Path("outputs/experiments/final_analysis")
 
 
 class RegistrationError(RuntimeError):
-    """Raised before any registry write when the boundary is unsafe."""
+    """在向注册表写入之前，当边界不安全时抛出。"""
 
 
 def _sha256(path: Path) -> str:

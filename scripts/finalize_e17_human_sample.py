@@ -1,4 +1,7 @@
-"""Validate and freeze the completed E17 360-row two-human audit sample."""
+"""验证并固化已完成的 E17 360 条双人独立审核样本集。
+
+执行严格的跨审核员一致性校验与冲突解决，并计算不可变哈希清单。
+"""
 
 from __future__ import annotations
 

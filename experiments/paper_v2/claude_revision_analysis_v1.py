@@ -1,4 +1,7 @@
-"""Single-pass post-repair results; unknown outcomes never become safe zeros."""
+"""单遍扫描修复后实验结果分析器（严禁将未决或未知结果归为安全）。
+
+在 Claude 修订版实验数据上计算各防护组合下的精确 Wilson 置信区间。
+"""
 
 from __future__ import annotations
 

@@ -1,9 +1,6 @@
-"""Offline Python-only workflow for an independent blind-test custodian.
+"""面向独立盲测托管人的纯 Python 离线工作流 CLI 交互工具。
 
-This file is copied to the standalone review-package root as ``custodian.py``.
-It never calls a model, provider, browser, email service, payment service, or
-production API.  It never writes an environment variable.  Runtime artifacts
-stay in the gitignored ``work/`` tree; signing keys stay package-external.
+支持盲测样本包导入、数据完整性封签检查、评测状态记录与解封发布验证。
 """
 
 from __future__ import annotations
@@ -269,7 +266,7 @@ EXPECTED_CONFIG_PATHS = {
 
 
 class CustodianCLIError(ValueError):
-    """Raised when a package or workflow invariant fails closed."""
+    """当数据包或工作流不变量违背闭合失败原则时抛出。"""
 
 
 def canonical_json_bytes(value: Any) -> bytes:
@@ -945,7 +942,7 @@ def command_import_detached_signature(args: argparse.Namespace) -> dict[str, Any
 
 
 def command_sign_request(args: argparse.Namespace) -> dict[str, Any]:
-    """Local fallback using only an external encrypted Ed25519 PEM key."""
+    """仅使用外部加密 Ed25519 PEM 密钥的本地降级签名实现。"""
 
     from cryptography.hazmat.primitives import serialization
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey

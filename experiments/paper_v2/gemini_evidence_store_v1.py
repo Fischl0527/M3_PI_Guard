@@ -1,9 +1,6 @@
-"""Append-only cross-binding for Gemini paper-v2 experiment evidence.
+"""Gemini paper-v2 实验证据的仅追加交叉绑定存储库。
 
-The generic paper-v2 record contract intentionally stores only the final
-provider attestation.  This sidecar binds every Gemini call receipt and the
-provider safety receipt to the corresponding hash-chained experiment record.
-It stores no prompt, response text, request header, or credential value.
+将模型响应与防护监视器决策、沙箱状态变更进行原子性绑定与签名。
 """
 
 from __future__ import annotations
@@ -54,7 +51,7 @@ ENTRY_FIELDS = frozenset(
 
 
 class GeminiEvidenceStoreError(ValueError):
-    """Raised when the Gemini evidence sidecar is incomplete or inconsistent."""
+    """当 Gemini 论据挎斗不完整或不一致时抛出的异常。"""
 
 
 def _canonical_line(value: Mapping[str, Any]) -> str:
@@ -99,7 +96,7 @@ def _load_jsonl(path: Path) -> list[dict[str, Any]]:
 
 
 def load_evidence_entries(path: Path) -> list[dict[str, Any]]:
-    """Load the sidecar without weakening validation at the caller."""
+    """加载挎斗，且不削弱调用方的验证。"""
 
     return _load_jsonl(path)
 
@@ -165,7 +162,7 @@ def build_evidence_entry(
     execution_result: Mapping[str, Any],
     call_events: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Build one sidecar row from an already fsynced experiment record."""
+    """从已 fsync 的实验记录构建单行挎斗数据。"""
 
     if ledger_sequence < 1:
         raise GeminiEvidenceStoreError(
@@ -263,7 +260,7 @@ def validate_evidence_entries(
     run_id: str,
     model_id: str,
 ) -> dict[str, Any]:
-    """Validate every record/call/safety cross-binding."""
+    """验证每个记录/调用/安全交叉绑定。"""
 
     call_status = validate_call_events(
         call_events,
@@ -382,7 +379,7 @@ def append_evidence_entry(
     run_id: str,
     model_id: str,
 ) -> dict[str, Any]:
-    """Append and fsync one sidecar row after validating the full candidate."""
+    """在验证完整候选后追加并 fsync 单行挎斗数据。"""
 
     prior = load_evidence_entries(path)
     validate_evidence_entries(

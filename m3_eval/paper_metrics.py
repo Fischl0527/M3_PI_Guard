@@ -1,4 +1,8 @@
-"""Paper-v1 security, authorization, adaptive and cost metrics."""
+"""论文正式实验场景下的指标提取与汇总器。
+
+涵盖多条件比较（Baseline, Guarded, Policy-Only, Full-Guard）、
+任务完成率（TCR）及各安全机制独立贡献的统计。
+"""
 
 from __future__ import annotations
 
@@ -84,7 +88,7 @@ def policy_compilation_metrics(
     cases: Iterable[Mapping[str, Any]],
     policies: Mapping[str, Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Compare compiled tool scope with offline labels without feeding labels online."""
+    """计算工具集合的精确匹配率、覆盖率与过度授权率（额外许可工具数 / 预测工具数）。"""
 
     exact = covered = expected_total = predicted_total = extra_total = evaluated = 0
     per_case: list[dict[str, Any]] = []
@@ -137,7 +141,7 @@ def summarize_paper_runs(
     *,
     policies: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Compute paper metrics while preserving failed/blocked runs in denominators."""
+    """汇总并生成论文正文及附录所需的多条件综合实验表。"""
 
     case_map = {str(case.get("case_id", "")): case for case in cases}
     grouped = _group_runs(logs)
@@ -371,7 +375,7 @@ def adaptive_budget_metrics(results: Iterable[Mapping[str, Any]]) -> dict[str, A
 
 
 def safety_utility_pareto_area(points: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
-    """Compute normalized dominated area under the non-dominated frontier."""
+    """计算非支配帕累托前沿下方的归一化被支配面积。"""
 
     clean: list[tuple[float, float, str]] = []
     for point in points:

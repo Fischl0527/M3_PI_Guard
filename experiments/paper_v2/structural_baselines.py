@@ -1,8 +1,6 @@
-"""Source-locked adapters for the paper-v2 structural baselines.
+"""源码锁定的 paper-v2 结构化基线系统适配器（VIGIL, StruQ, PromptGuard 等）。
 
-The adapters import the pinned official source trees.  They do not copy or
-reimplement VIGIL/DRIFT algorithms, and they fail closed when source identity or
-the required AgentDojo 0.1.35 interface differs.
+封装行业主流防御系统的调用接口与配置参数，保证作为基线时的公平性。
 """
 
 from __future__ import annotations
@@ -40,7 +38,7 @@ REQUIRED_AGENTDOJO_VERSION = "0.1.35"
 
 
 class StructuralBaselineError(RuntimeError):
-    """Raised when an official structural baseline cannot be used faithfully."""
+    """当官方结构化基线无法如实使用时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -96,7 +94,7 @@ def _agentdojo_version() -> str:
 
 
 class VigilRuntimeAdapter:
-    """Normalize the official VIGIL RuntimeAuditor decision boundary."""
+    """规范化官方 VIGIL RuntimeAuditor 决策边界。"""
 
     def __init__(
         self,
@@ -141,7 +139,7 @@ class VigilRuntimeAdapter:
         constraints: list[Mapping[str, Any]],
         global_rules: list[str] | None = None,
     ) -> None:
-        """Load an official-schema constraint set for deterministic qualification."""
+        """加载官方 Schema 约束集以进行确定性资格认证。"""
 
         constraint_set = self._types.ConstraintSet(
             user_query=user_query,
@@ -157,7 +155,7 @@ class VigilRuntimeAdapter:
     def prepare_from_official_constraint_set(
         self, constraint_set: Any
     ) -> None:
-        """Bind a ConstraintSet returned by the pinned official generator."""
+        """绑定固定官方生成器返回的 ConstraintSet。"""
 
         if not isinstance(constraint_set, self._types.ConstraintSet):
             raise StructuralBaselineError(
@@ -173,7 +171,7 @@ class VigilRuntimeAdapter:
         self._prepared = True
 
     def prepare_from_user_query(self, user_query: str) -> None:
-        """Run the official VIGIL constraint generator after the cost gate opens."""
+        """在成本门禁开启后运行官方 VIGIL 约束生成器。"""
 
         if not self._allow_provider_calls:
             raise StructuralBaselineError(
@@ -218,7 +216,7 @@ class VigilRuntimeAdapter:
 
 
 def default_drift_args(model: str = "provider-model-pending") -> SimpleNamespace:
-    """Return the exact three defense switches used by the official README."""
+    """返回官方 README 使用的确切三个防御开关。"""
 
     return SimpleNamespace(
         model=model,
@@ -243,7 +241,7 @@ def build_official_drift_pipeline(
     logger: Any,
     args: SimpleNamespace | None = None,
 ) -> Any:
-    """Construct the official DRIFT AgentDojo pipeline without making a model call."""
+    """在不进行模型调用的情况下构建官方 DRIFT AgentDojo 流水线。"""
 
     _assert_source(
         DRIFT_ROOT,
@@ -305,7 +303,7 @@ class _MemoryLogger:
 
 
 def qualify_structural_baselines(*, write: bool = True) -> dict[str, Any]:
-    """Run source/import/behavior checks with zero external model calls."""
+    """在零外部模型调用下运行源/导入/行为检查。"""
 
     vigil = VigilRuntimeAdapter()
     vigil.prepare_from_constraint_payload(

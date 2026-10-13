@@ -1,4 +1,7 @@
-"""Create the E11 amendment execution-r2 freeze before any r2 model run."""
+"""在任何 r2 模型重跑之前创建 E11 修正实验 execution-r2 固化版本。
+
+防止修正实验输入在测试运行期间被就地修改。
+"""
 
 from __future__ import annotations
 

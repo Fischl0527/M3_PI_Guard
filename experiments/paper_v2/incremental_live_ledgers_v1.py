@@ -1,15 +1,6 @@
-"""Incremental appenders for already-validated live evidence prefixes.
+"""面向已验证在线证据前缀的增量追加器。
 
-The original ledger helpers intentionally replay the complete append-only
-chain before and after every append.  That is useful for small canaries but
-quadratic for public-scale continuations.  These helpers preserve a stricter
-execution boundary:
-
-1. replay and validate the complete prefix once at construction;
-2. validate and fsync exactly one new event at a time;
-3. require a complete replay again before technical admission.
-
-They do not weaken the persisted schemas or the terminal review requirements.
+确保新产出的实验证据仅能原子性追加至经过验证的既有前缀账本后。
 """
 
 from __future__ import annotations
@@ -44,11 +35,11 @@ from experiments.paper_v2.public_provider_trace_v1 import (
 
 
 class IncrementalLiveLedgerError(ValueError):
-    """Raised when an incremental append would leave a valid frozen prefix."""
+    """当增量追加会遗留有效的固化前缀时抛出的异常。"""
 
 
 class IncrementalPublicBudgetTracker:
-    """Public budget tracker with one full prefix replay per process."""
+    """每个进程具有一次完整前缀重放能力的公开预算追踪器。"""
 
     def __init__(
         self,
@@ -192,7 +183,7 @@ class IncrementalPublicBudgetTracker:
 
 
 class IncrementalAttemptLedger:
-    """Started/terminal attempt appender over one validated prefix."""
+    """在经校验前缀上追加启动/终端尝试的账本。"""
 
     def __init__(
         self,
@@ -295,7 +286,7 @@ class IncrementalAttemptLedger:
 
 
 class IncrementalPublicRecordLedger:
-    """Public experiment-record appender over one validated prefix."""
+    """在经校验前缀上追加公开实验记录的账本。"""
 
     def __init__(
         self,
@@ -402,7 +393,7 @@ class IncrementalPublicRecordLedger:
 
 
 class IncrementalAdaptiveQueryLedger:
-    """Adaptive started/terminal appender over one validated prefix."""
+    """在经校验前缀上追加自适应启动/终端记录的账本。"""
 
     def __init__(
         self,
@@ -592,7 +583,7 @@ def full_cross_bind_public_prefix(
     trace_root: Path,
     role_policy: Mapping[str, Any],
 ) -> None:
-    """Named terminal-review hook for a complete public prefix replay."""
+    """用于完整公开前缀重放的指定终端审查钩子。"""
 
     public_store.cross_bind_public_budget_and_records(
         budget_events=budget_events,

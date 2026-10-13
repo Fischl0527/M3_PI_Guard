@@ -1,4 +1,7 @@
-"""CLI wrapper for :mod:`experiments.e17_human_sample`."""
+""":mod:`experiments.e17_human_sample` 的命令行 CLI 封装工具。
+
+用于执行 E17 人工盲审双盲抽样集生成与初审记录打包。
+"""
 
 from __future__ import annotations
 

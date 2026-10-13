@@ -1,11 +1,6 @@
-"""Analyze the completed lean authorization-regime experiment once.
+"""对已完成的精简权限机制（Authorization-Regime）实验进行单遍分析。
 
-The input is the frozen 1,350-row plan plus one compact raw JSONL per provider.
-For a recovered work item, only its latest terminal attempt contributes to the
-scientific denominator; earlier no-response attempts remain in the raw file and
-are counted in the recovery audit. Gemini retry state also consults the
-content-free pause-event ledger used by the runner. No provider, response trace,
-or historical evidence replay is performed here.
+深度评估最小权限对比宽泛权限在良性任务执行效用与攻击拦截上的帕累托前沿。
 """
 
 from __future__ import annotations
@@ -50,7 +45,7 @@ CELL = tuple[str, str]
 
 
 class LeanAuthorizationAnalysisError(ValueError):
-    """Raised when compact evidence is incomplete or internally inconsistent."""
+    """当紧凑证据不完整或内部不一致时抛出的异常。"""
 
 
 def _wilson(successes: int, total: int) -> dict[str, float | int]:
@@ -404,7 +399,7 @@ def _burden(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
 def _burden_by_case_and_benchmark(
     rows: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Stratify system decision incidence and runtime burden without pooling tasks."""
+    """按用例和基准对系统决策发生率和运行时开销进行分层，不合并任务。"""
 
     grouped: dict[tuple[str, str, str, str], list[Mapping[str, Any]]] = defaultdict(
         list
@@ -432,7 +427,7 @@ def _burden_by_case_and_benchmark(
 
 
 def _condition_metrics(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    """Return chart-ready endpoint summaries without changing study denominators."""
+    """返回图表可用的端点摘要，且不改变研究分母。"""
 
     grouped: dict[CELL, list[Mapping[str, Any]]] = defaultdict(list)
     for row in rows:
@@ -574,7 +569,7 @@ def _failure_sensitive_security(
     rows: Sequence[Mapping[str, Any]],
     definitions: Sequence[tuple[str, CELL, CELL]],
 ) -> dict[str, Any]:
-    """Return a pessimistic robustness bound; it is not an attack-success label."""
+    """返回悲观鲁棒性边界；这不是攻击成功标签。"""
 
     attacks = [row for row in rows if row["evaluation_case_type"] == "attack"]
     grouped: dict[CELL, list[Mapping[str, Any]]] = defaultdict(list)

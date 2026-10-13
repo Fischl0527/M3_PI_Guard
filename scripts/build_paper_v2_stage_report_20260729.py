@@ -1,9 +1,6 @@
-"""Build the 2026-07-29 M3-PI Guard paper-v2 stage report.
+"""构建 2026-07-29 阶段性 paper-v2 进展报告（Word 文档）。
 
-The report is intended for supervisors and research collaborators. It reads
-only admitted or frozen evidence and content-free verification logs. It does
-not read credentials, prompts, response bodies, or unadmitted scientific
-outcomes from the Public-v4 technical canary.
+汇总消融实验与鲁棒性验证最新进展，排版生成正式阶段技术报告。
 """
 
 from __future__ import annotations
@@ -154,7 +151,7 @@ CONDITION_LABELS = {
 
 
 def configure_sections(doc: Document) -> None:
-    """Apply standard_business_brief + memo_masthead tokens."""
+    """初始化页面尺寸与边距布局。"""
 
     def populate_header(header: Any) -> None:
         paragraph = header.paragraphs[0]
@@ -192,7 +189,7 @@ def configure_sections(doc: Document) -> None:
 
 
 def prevent_table_row_splitting(doc: Document) -> None:
-    """Keep every table row on one page for clean external handoff."""
+    """配置表格行禁止跨页断开。"""
 
     for table in doc.tables:
         for row in table.rows:

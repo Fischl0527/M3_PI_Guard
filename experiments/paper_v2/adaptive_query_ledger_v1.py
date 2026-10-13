@@ -1,4 +1,7 @@
-"""Append-only query ledger and provider-call cross-binding for adaptive v1."""
+"""面向自适应实验的仅追加查询账本与提供商调用交叉绑定机制。
+
+记录每一轮对抗查询的 Prompt 载荷、模型响应、消耗 Token 及对应防篡改哈希。
+"""
 
 from __future__ import annotations
 
@@ -25,7 +28,7 @@ SCHEMA_VERSION = "m3-paper-v2-adaptive-query-ledger-event-1.0"
 
 
 class AdaptiveQueryLedgerError(ValueError):
-    """Raised when an adaptive query chain is incomplete or inconsistent."""
+    """当自适应查询链不完整或不一致时抛出的异常。"""
 
 
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -92,7 +95,7 @@ def validate_query_events(
     known_work_keys: set[str],
     role_policy: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Validate the technical chain without aggregating scientific outcomes."""
+    """验证技术调用链，且不汇总科学评测结果。"""
 
     previous: str | None = None
     open_queries: dict[str, Mapping[str, Any]] = {}
@@ -257,7 +260,7 @@ def validate_query_events(
 
 
 class AdaptiveQueryLedger:
-    """Fsynced query ledger with a started-before-provider invariant."""
+    """具有“在提供商调用前已启动”不变量的 fsync 查询账本。"""
 
     def __init__(
         self,
@@ -405,7 +408,7 @@ def cross_bind_query_and_call_ledgers(
     trace_root: Path,
     role_policy: Mapping[str, Any],
 ) -> None:
-    """Prove that every completed provider call belongs to one query."""
+    """证明每个已完成的提供商调用均唯一归属于单个查询。"""
 
     cross_bind_public_budget_and_records(
         budget_events=budget_events,

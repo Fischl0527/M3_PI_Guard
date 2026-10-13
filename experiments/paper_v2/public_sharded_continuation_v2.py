@@ -1,4 +1,7 @@
-"""Fresh result-blind recovery for the paper-v2 public primary shards."""
+"""面向 paper-v2 公开主分片的全新对结果盲审恢复执行器。
+
+改进了分片之间的锁机制，杜绝并发竞争与写覆盖。
+"""
 
 from __future__ import annotations
 
@@ -70,7 +73,7 @@ SHARD_HARD_LIMIT_CNY = 4.9
 
 
 class PublicShardedContinuationV2Error(ValueError):
-    """Raised when the fresh recovery cannot fail closed."""
+    """当全新恢复无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

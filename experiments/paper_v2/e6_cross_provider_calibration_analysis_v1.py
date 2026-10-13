@@ -1,12 +1,6 @@
-"""One-pass analysis for the E6 cross-provider activity calibration study.
+"""E6 跨提供商活性校准（Activity Calibration）单遍扫描分析模块。
 
-The analysis is deliberately plan-aware and provider-tolerant.  It keeps the
-latest append-only attempt for each *window-specific* work key, reports missing
-Gemini rows instead of treating them as safe outcomes, and enables nested
-cross-provider contrasts only after both provider-specific technical and
-attack-activity gates pass.
-
-No provider, benchmark, Guard, or historical evidence is replayed here.
+评估不同模型提供商在相同基准下的调用成功率、活性响应与基线差异。
 """
 
 from __future__ import annotations
@@ -80,7 +74,7 @@ SUCCESS_STATUS = "completed"
 
 
 class E6AnalysisError(ValueError):
-    """Raised when E6 identities or append-only semantics are inconsistent."""
+    """当 E6 身份标识或仅追加语义不一致时抛出的异常。"""
 
 
 def _read_jsonl(path: Path, *, missing_ok: bool = False) -> list[dict[str, Any]]:
@@ -102,7 +96,7 @@ def _read_jsonl(path: Path, *, missing_ok: bool = False) -> list[dict[str, Any]]
 def _latest_attempts(
     rows: Sequence[Mapping[str, Any]],
 ) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
-    """Keep the newest attempt without collapsing distinct replicate windows."""
+    """保留最新尝试，且不折叠不同的重复窗口。"""
 
     latest: dict[str, dict[str, Any]] = {}
     identities: dict[str, tuple[str, str, str, str]] = {}
@@ -269,7 +263,7 @@ def _stratified_cluster_bootstrap(
     label: str,
     replicates: int | None = None,
 ) -> dict[str, Any]:
-    """Bootstrap tasks within benchmark strata and preserve all window repeats."""
+    """在基准分层内对任务执行自举重采样，并保留所有窗口重复项。"""
 
     count = BOOTSTRAP_REPLICATES if replicates is None else int(replicates)
     if count <= 0:
@@ -348,7 +342,7 @@ def _cluster_signflip_p(
 def _newcombe_paired(
     baseline: Sequence[bool], treatment: Sequence[bool]
 ) -> dict[str, Any]:
-    """Newcombe hybrid-score CI for treatment minus baseline paired risk."""
+    """用于处理组减去基线配对风险的 Newcombe 混合评分置信区间。"""
 
     if len(baseline) != len(treatment):
         raise E6AnalysisError("Newcombe paired samples differ in length")

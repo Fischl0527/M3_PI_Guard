@@ -1,4 +1,7 @@
-"""Analyze the admitted 5,082-record public primary-model matrix."""
+"""分析已准入的 5,082 条公开主要模型矩阵记录。
+
+执行大规模公开基准矩阵的全面统计计算，输出指标汇总与分层消融数据。
+"""
 
 from __future__ import annotations
 
@@ -70,7 +73,7 @@ FIGURE_FILES = (
 
 
 class PublicPrimaryAnalysisError(ValueError):
-    """Raised when admitted public primary evidence is incomplete or drifts."""
+    """当准入的公开主论据不完整或发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

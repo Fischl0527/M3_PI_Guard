@@ -1,8 +1,6 @@
-"""Build the external-custodian SOP for the M3-PI Guard blind closeout.
+"""构建 M3-PI Guard 盲测封箱的外部托管人标准作业程序（SOP Word 文档）。
 
-This document is operational guidance only.  The builder reads no credentials,
-provider outputs, blind candidates, or blind labels.  It contains no real
-custodian identity and creates no execution admission.
+指导第三方独立评估人员执行双盲数据集封箱、评测、解封与校验流程。
 """
 
 from __future__ import annotations
@@ -1231,10 +1229,9 @@ def _build_manual_body(
 
 
 def _command_catalog() -> dict[str, str]:
-    """Return the frozen command examples embedded in the manual.
+    """返回嵌入在手册中的固化命令示例。
 
-    This is intentionally populated only after the hardened blind-v2 CLI and
-    standalone toolkit contract are finalized and independently reviewed.
+    此项特意在强化后的 blind-v2 CLI 和独立工具包契约完成终审并经过独立复核后才进行填充。
     """
 
     module = "experiments.paper_v2.independent_blind_closeout_v2"

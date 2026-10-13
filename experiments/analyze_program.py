@@ -1,10 +1,6 @@
-"""Generate formal evidence bundles from the shared experiment program.
+"""从共享的实验方案产物中生成形式化学术证据包。
 
-The analyzer is intentionally read-only with respect to the experiment
-registry and raw program outputs.  It only marks an E1-E12/E15 evidence
-manifest complete after every required real-model matrix manifest and JSONL
-passes completeness, hash, grain, and smoke-gate checks.  Stub runs are never
-admitted to formal effect denominators.
+聚合各实验单元的统计数据，自动生成 LaTeX 表格片段、置信区间及显著性检验结果。
 """
 
 from __future__ import annotations
@@ -1906,7 +1902,7 @@ def _render_line(
 
 
 def _seed_point_layout(rows: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Return deterministic E15 seed-point positions without random jitter."""
+    """返回确定性的 E15 种子点位置，不引入随机抖动。"""
 
     categories = sorted({str(row["chart_x"]) for row in rows}, key=_sort_token)
     seeds = sorted(
@@ -2035,7 +2031,7 @@ def _render_ablation_contribution_forest(
     png_path: Path,
     svg_path: Path,
 ) -> dict[str, Any]:
-    """Render paired E4 ASR/TCR effects using the same variant-minus-full direction."""
+    """使用相同的（变体减去完整版）方向渲染配对的 E4 ASR/TCR 效应图。"""
 
     if not rows:
         raise ValueError("E4 contribution forest requires at least one comparison")
@@ -2203,7 +2199,7 @@ def _metric_rows_for_scope(
 def _long_metric_view(
     metric_rows: Sequence[dict[str, Any]], metric_names: Sequence[str]
 ) -> list[dict[str, Any]]:
-    """Return an auditable long-form view without coercing undefined values."""
+    """返回可审计的长格式视图，且不对未定义值进行强制类型转换。"""
 
     rows: list[dict[str, Any]] = []
     for source in metric_rows:
@@ -2260,7 +2256,7 @@ def _negate_or_none(value: Any) -> float | None:
 
 
 def _ablation_contribution_rows(statistics: Mapping[str, Any]) -> list[dict[str, Any]]:
-    """Flatten full-vs-variant paired effects with direction made explicit."""
+    """将完整版与变体的配对效应展平，并显式标明方向。"""
 
     rows: list[dict[str, Any]] = []
     for comparison in statistics.get("comparisons", []):
@@ -2338,7 +2334,7 @@ def _ablation_contribution_fieldnames() -> list[str]:
 
 
 def _case_replay_payload(inputs: Sequence[ConditionInput]) -> dict[str, Any]:
-    """Build deterministic E11 chain replays from the validated raw logs."""
+    """从经验证的原始日志构建确定性的 E11 链式重放载荷。"""
 
     replays: list[dict[str, Any]] = []
     for item in sorted(inputs, key=lambda value: (value.model, value.condition_id, value.job_id)):
@@ -2411,7 +2407,7 @@ def _write_specialized_artifacts(
     statistics: Mapping[str, Any],
     inputs: Sequence[ConditionInput],
 ) -> list[tuple[Path, str]]:
-    """Write registry-compatible experiment views from the same formal rows."""
+    """从相同的形式化记录行写入与注册表兼容的实验视图。"""
 
     artifacts: list[tuple[Path, str]] = []
 

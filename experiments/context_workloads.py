@@ -1,9 +1,6 @@
-"""Token-calibrated fixtures for the E9/E14 context correction protocol.
+"""面向 E9/E14 上下文修正协议的 Token 精确校准工作负载与夹具。
 
-The original v3 fixtures counted whitespace-delimited strings.  This module
-measures the complete first-turn chat prompt with Ollama's native
-``prompt_eval_count`` and then inserts a one-token neutral carrier.  Existing
-fixtures and result bundles are never modified.
+合成并校准不同长度分阶（从 2K 到 32K Token）的良性及注入载荷，杜绝长度偏差。
 """
 
 from __future__ import annotations
@@ -124,7 +121,7 @@ def calibrated_document(
     filler_units: int,
     position_pct: int,
 ) -> tuple[str, int, int, float]:
-    """Place a uniquely marked payload at an operational filler position."""
+    """将带有唯一标记的载荷放置在操作性填充物位置。"""
 
     if filler_units < 0:
         raise ValueError("filler_units cannot be negative")
@@ -150,7 +147,7 @@ def calibrated_document(
 
 
 class NativePromptTokenProbe:
-    """Reusable native Ollama prompt counter for a single small alias."""
+    """用于单个小型别名的可复用原生 Ollama 提示词计数器。"""
 
     def __init__(
         self,
@@ -187,11 +184,9 @@ def verify_prompt_fixture_counts(
     output_path: str | Path = DEFAULT_PROMPT_VERIFICATION_OUT,
     tolerance: float = 0.01,
 ) -> dict[str, Any]:
-    """Measure every frozen first-turn prompt with its served alias.
+    """使用其所服务的别名度量每个固化的第一轮提示词。
 
-    ``num_predict=1`` prevents model-generation behavior from being confused
-    with prompt-workload measurement.  Generated text is discarded; only a
-    hash and provider counters are retained.
+    ``num_predict=1`` 可防止模型生成行为与提示词工作负载度量发生混淆。生成的文本将被丢弃，仅保留哈希值和提供商计数器。
     """
 
     e9_file = Path(e9_path)
@@ -389,10 +384,9 @@ def load_prompt_verification(
     experiment_id: str | None = None,
     fixture_path: str | Path | None = None,
 ) -> tuple[dict[str, Any], dict[str, int]]:
-    """Load and strictly validate the frozen one-token prompt proof.
+    """加载并严格验证固化的单 Token 提示词证明。
 
-    The returned mapping is valid only for the exact first-turn prompt of each
-    case.  Runtime code must never reuse it for later Agent steps.
+    返回的映射仅对每个用例的确切第一轮提示词有效。运行时代码绝不可将其复用于后续的智能体步骤。
     """
 
     source = Path(path)
@@ -523,8 +517,7 @@ def generate_e9_cases(
     source_rows: Sequence[Mapping[str, Any]],
     token_probe: Callable[[Mapping[str, Any]], int],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Generate the frozen 3 parent × 4 target × 5 position E9 grid."""
-
+    """生成固化的 3 个父节点 × 4 个目标 × 5 个位置的 E9 网格用例。"""
     by_parent: dict[str, Mapping[str, Any]] = {}
     for row in source_rows:
         parent_id = str(row.get("parent_case_id") or row.get("case_id"))
@@ -569,14 +562,9 @@ def generate_e9_cases(
 def select_matched_benign(
     canonical_rows: Sequence[Mapping[str, Any]], *, count: int = 4
 ) -> list[Mapping[str, Any]]:
-    """Build deterministic no-tool controls from four benign schema donors.
+    """从四个良性模式捐赠源构建确定性的无工具对照用例。
 
-    The original matched workload reused heterogeneous language tasks.  At
-    16K those tasks sometimes triggered a tool chain or emitted application
-    JSON instead of the Agent ToolCall envelope.  Revision r2 keeps their
-    benign provenance but replaces the measured task with a deterministic
-    final-only control whose exact legal ToolCall is repeated at the very end
-    of the calibrated document.
+    原始匹配工作负载复用了异构语言任务。在 16K 上下文下，这些任务有时会触发工具链或发出应用程序 JSON，而非智能体 ToolCall 包裹层。修订版 r2 保留了它们的良性溯源，但将所度量的任务替换为确定性的最终对照，其精确合法的 ToolCall 在校准文档的最末尾重复出现。
     """
 
     candidates = [
@@ -649,7 +637,7 @@ def generate_e14_cases(
     benign_rows: Sequence[Mapping[str, Any]],
     token_probe: Callable[[Mapping[str, Any]], int],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Generate mixed-throughput and matched-benign context workloads."""
+    """生成混合吞吐量与匹配良性上下文工作负载。"""
 
     if len(mixed_rows) != 6:
         raise ValueError(f"E14 mixed cohort requires 6 cases, got {len(mixed_rows)}")

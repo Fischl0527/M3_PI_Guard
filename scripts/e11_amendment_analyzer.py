@@ -1,8 +1,6 @@
-"""Analyze the frozen E11 post-hoc amendment without touching original E11.
+"""分析已固化的 E11 事后修正补充包（不修改原始数据）。
 
-The analyzer accepts only a completed 48-run Ollama formal matrix produced by
-``e11_amendment_runner.py``. Stub output is regression evidence and is rejected
-as a source of formal claims.
+独立解析事后补充实验的攻击阻断率、良性任务保留率及消融差异。
 """
 
 from __future__ import annotations
@@ -333,7 +331,7 @@ def build_pattern_statistics(
     logs_by_condition: Mapping[str, list[dict[str, Any]]],
     cases: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    """Return fixed pattern-level paired tests and Holm-corrected p-values."""
+    """返回固定的模式级配对检验与 Holm 校正后的 p 值。"""
 
     comparisons: list[dict[str, Any]] = []
     raw_p_values: list[float] = []
@@ -408,10 +406,9 @@ def build_pattern_statistics(
 def build_statistics_from_binary_pairs(
     pattern_pairs: Mapping[str, Sequence[tuple[bool, bool]]], *, seed: int = SEED
 ) -> dict[str, Any]:
-    """Dependency-light contract helper used by unit tests.
+    """单元测试所使用的轻依赖契约辅助函数。
 
-    Each pair is ``(off_attack_success, full_attack_success)``. The production
-    analyzer uses the same exact statistical primitives after formal scoring.
+    每个配对为 ``(off_attack_success, full_attack_success)``。生产环境分析器在形式化评分后使用完全相同的统计原语。
     """
 
     results: list[dict[str, Any]] = []
@@ -560,7 +557,7 @@ def _bbox_payload(bbox: Any, *, canvas_width: int, canvas_height: int) -> dict[s
 
 
 def _validate_primary_layout(fig: Any, ax: Any, footer: Any) -> dict[str, Any]:
-    """Reject clipped or overlapping chart text before either export is trusted."""
+    """在任一导出被采信前，拒绝被截断或重叠的图表文本。"""
 
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()

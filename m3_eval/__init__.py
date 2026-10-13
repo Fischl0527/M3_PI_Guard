@@ -1,4 +1,8 @@
-"""Evaluation and statistical helpers for M3_PI_Guard run logs."""
+"""M3_PI_Guard 评测与统计分析包。
+
+包含攻击防御指标计算（metrics）、无外部依赖的高级统计方法（statistics: Wilson, Newcombe, Bootstrap, Holm）、
+可视化看板（dashboard）以及论文专用指标生成工具。
+"""
 
 from .metrics import compare_runs, compute_metrics, load_jsonl, summarize_logs
 from .statistics import (

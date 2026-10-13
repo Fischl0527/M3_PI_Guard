@@ -1,13 +1,6 @@
-"""Finalize the frozen E17 two-reviewer stratified human-audit sample.
+"""定稿并冻结 E17 双人独立审查的分层人类审计样本集。
 
-This workflow is intentionally separate from :mod:`experiments.e17_review`.
-The latter remains the full 3,299-row review contract.  This module admits a
-360-row audit only when the frozen sampling design, blinded evidence, two
-distinct reviewer identities, and exact code-set agreement all revalidate.
-
-Only the 300-row representative group is used for population estimates.  The
-40 automated-disagreement rows and 20 rare/complex rows remain diagnostic and
-are never pooled into a population denominator.
+汇总两位安全专家各自独立的判定结果，计算 Cohen's Kappa 一致性系数并解决冲突。
 """
 
 from __future__ import annotations
@@ -48,7 +41,7 @@ PROHIBITED_CLAIM = "all 3299 E17 items received human review"
 
 
 class HumanSampleReviewError(RuntimeError):
-    """Raised when the sampled human-review evidence fails admission."""
+    """当抽样的人工复核论据未通过准入检查时抛出。"""
 
 
 def _sha256(path: Path) -> str:
@@ -476,7 +469,7 @@ def finalize_sample_review(
     bootstrap_iterations: int = BOOTSTRAP_ITERATIONS,
     bootstrap_seed: int = BOOTSTRAP_SEED,
 ) -> dict[str, Any]:
-    """Validate and freeze the completed 360-row dual-review sample."""
+    """验证并固化已完成的 360 行双人复核抽样数据。"""
 
     package = Path(package_dir).resolve()
     reviewer_1_file = Path(reviewer_1_path).resolve()

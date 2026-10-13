@@ -1,8 +1,7 @@
-"""Opt-in repair of generic argument literals; no change to historical v1.
+"""显式选用的通用工具策略编译器（corrected_v2 修复版）。
 
-Lexical tool selection remains deliberately bounded. Ambiguous prose is not an
-authorization literal: an unresolved target never produces an automatic grant,
-including when the optional confirmation module is disabled.
+优先采用受信任的应用上下文声明（Trusted Application Context）；
+当参数解析存在歧义或必填参数缺失时，严格拒绝自动放权，返回收窄的安全包络。
 """
 from __future__ import annotations
 

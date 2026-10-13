@@ -1,7 +1,6 @@
-"""Build the M3-PI Guard 2026-08-06 stage technical report as DOCX.
+"""构建 M3-PI Guard 2026-08-06 阶段技术报告 Word 文档（DOCX）。
 
-The report is generated from the already validated canonical report artifact.
-It performs no provider calls and does not read project secret configuration.
+基于阶段性进展与实验里程碑数据，生成格式规范的阶段性技术报告 Word 文档。
 """
 
 from __future__ import annotations

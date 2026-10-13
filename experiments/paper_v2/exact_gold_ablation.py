@@ -1,8 +1,6 @@
-"""Explicit evaluator-derived authorization monitor for oracle ablations.
+"""用于理想对照（Oracle）消融实验的显式评测者派生授权监视器。
 
-This monitor is intentionally separate from the non-oracle RuntimeMonitor.  It
-is permitted only for frozen ``exact_gold`` probe work items and can never
-enter the paper's primary endpoint.
+评估在已知最完美真值权限（Exact Gold）下的系统理论安全上限。
 """
 
 from __future__ import annotations
@@ -31,7 +29,7 @@ MONITOR_VERSION = "m3-paper-v2-exact-gold-oracle-ablation-monitor-1.0"
 
 
 class ExactGoldAblationError(ValueError):
-    """Raised when evaluator-derived authorization escapes its probe boundary."""
+    """当评测者派生的授权逃逸出其探测边界时抛出的异常。"""
 
 
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -51,7 +49,7 @@ def _load_jsonl(path: Path) -> list[dict[str, Any]]:
 
 
 class ExactGoldAblationMonitor:
-    """Allow only the next evaluator-derived exact action in the frozen sequence."""
+    """仅允许固化序列中下一个评测者派生的确切动作。"""
 
     modules = frozenset(
         {"oracle_ablation", "exact_sequence", "exact_arguments"}

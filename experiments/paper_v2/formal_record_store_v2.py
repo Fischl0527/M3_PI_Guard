@@ -1,4 +1,7 @@
-"""Append-only record store for prospective experiment-record v2 evidence."""
+"""面向前瞻性 experiment-record v2 证据的仅追加记录存储器。
+
+增强了对多轮会话追踪、中间防御决策链与沙箱环境快照的存储支持。
+"""
 
 from __future__ import annotations
 
@@ -335,7 +338,7 @@ def assemble_experiment_record_v2(
     *,
     run_id: str,
 ) -> dict[str, Any]:
-    """Assemble one v2 record from a traced condition result."""
+    """从追踪的条件结果组装单个 v2 记录。"""
 
     events = execution_result.get("runtime_visibility_events")
     if not isinstance(events, list):
@@ -443,7 +446,7 @@ def append_execution_result(
     execution_identity: str,
     run_id: str,
 ) -> dict[str, Any]:
-    """Assemble, append, fsync, and revalidate one traced execution result."""
+    """组装、追加、fsync 并重新验证单个追踪的执行结果。"""
 
     record = assemble_experiment_record_v2(
         work_item,

@@ -1,4 +1,7 @@
-"""Append-only public experiment records for Gemini trace bundles."""
+"""面向 Gemini 轨迹包的仅追加公开实验记录存储器。
+
+持久化保存每个基准用例的完整调用链条与沙箱交互日志。
+"""
 
 from __future__ import annotations
 
@@ -76,7 +79,7 @@ FAILURE_STATUSES = frozenset(
 
 
 class GeminiPublicExecutionStoreV1Error(ValueError):
-    """Raised when a Gemini public record chain is incomplete or drifts."""
+    """当 Gemini 公开记录链不完整或发生漂移时抛出的异常。"""
 
 
 def _expected_record_id(record: Mapping[str, Any]) -> str:

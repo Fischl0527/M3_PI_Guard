@@ -1,4 +1,7 @@
-"""Prospective E7a single-action usability plan; no historical row reuse."""
+"""前瞻性 E7a 单动作可用性实验计划（不重用历史数据行）。
+
+定义针对高风险动作的交互式确认场景、提议拦截规则与测试用例。
+"""
 
 from __future__ import annotations
 

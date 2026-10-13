@@ -1,2 +1,6 @@
-"""Local sandbox attack case set for M3_PI_Guard."""
+"""M3_PI_Guard 本地沙箱攻击案例生成与数据集包。
+
+本包负责管理间接提示注入攻击案例集、变异生成器（AttackGen）
+以及 M3-v2 1,500 案例正式论文评测集的生成与验证逻辑。
+"""
 

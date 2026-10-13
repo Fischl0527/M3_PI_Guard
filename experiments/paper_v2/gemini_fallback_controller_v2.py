@@ -1,13 +1,6 @@
-"""Prospective Gemini policy/full replication after the v1 VIGIL abort.
+"""在 v1 VIGIL 中止后启用的前瞻性 Gemini 策略/完整防护复现控制器。
 
-The controller derives, without outcome access, the frozen second-model subset
-from the 480-row medium plan: M3 policy-only and M3 full for every selected
-case and authorization probe.  VIGIL is excluded from formal v2 execution
-because the frozen v1 canary failed closed during Gemini constraint generation;
-that incompatibility remains a separate diagnostic.  This controller executes
-one official Gemini model with no retry, no provider tools, and only
-in-memory/sandbox effects.  Provider calls, records, attempts, and safety
-cross-bindings are append-only and fsynced.
+在全新修复的运行时下重新评估 Gemini 对复杂提示注入攻击的防御韧性。
 """
 
 from __future__ import annotations
@@ -152,7 +145,7 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class GeminiFallbackControllerError(RuntimeError):
-    """Raised when the prospective Gemini evidence boundary cannot hold."""
+    """当预期 Gemini 论据边界无法维持时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -332,7 +325,7 @@ def _effective_policy() -> dict[str, Any]:
 
 
 def build_plan_rows() -> list[dict[str, Any]]:
-    """Derive the second-model subset without reading any prior outcome."""
+    """派生第二模型子集，且不读取任何先前结果。"""
 
     source = _load_jsonl(DEFAULT_SOURCE_PLAN)
     selected = [
@@ -405,7 +398,7 @@ def verify_plan(path: Path = DEFAULT_PLAN) -> list[dict[str, Any]]:
 
 
 class GeminiCallLedgerSink:
-    """Fsynced, provider-generic call ledger used by the live runtime."""
+    """实时运行时使用的 fsync、提供商通用调用账本。"""
 
     def __init__(
         self,
@@ -453,7 +446,7 @@ class GeminiCallLedgerSink:
 
 
 class GeminiEvidenceClient:
-    """Proxy one official client and expose a content-free failure bundle."""
+    """代理单个官方客户端并暴露无内容的失败包。"""
 
     def __init__(
         self,

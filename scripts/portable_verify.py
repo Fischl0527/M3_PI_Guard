@@ -1,4 +1,8 @@
-"""Offline portability checks: trusted projections and raw numerators only."""
+"""离线可移植性验证脚本：仅核对受信投影与原始计数分子分母。
+
+换环境验收时只核对受信输入、权限编译和原始计数，不调用外部模型 API、不重算历史推断统计。
+输入数据由交付包构建器导出；本脚本可在跨平台独立交付包环境中直接运行。
+"""
 
 from __future__ import annotations
 

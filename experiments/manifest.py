@@ -1,4 +1,7 @@
-"""Atomic, audit-friendly experiment manifests and environment snapshots."""
+"""原子性、便于审计的实验清册（Manifest）与运行环境快照管理器。
+
+记录实验启动时的操作系统、硬件平台、Python 依赖版本与 Git 提交哈希。
+"""
 
 from __future__ import annotations
 
@@ -33,7 +36,7 @@ def sha256_file(path: str | Path) -> str:
 
 
 def sha256_paths(paths: Iterable[str | Path]) -> str:
-    """Hash path labels and bytes in deterministic, repo-relative order."""
+    """以确定性的仓库相对顺序对路径标签和字节计算哈希。"""
 
     digest = hashlib.sha256()
     normalized = sorted(Path(path).resolve() for path in paths)

@@ -1,4 +1,7 @@
-"""DeepSeek v8 controller with execution-lifecycle adapter binding."""
+"""绑定执行生命周期适配器的 DeepSeek v8 控制器。
+
+提供对实验初始化、提案生成、安全仲裁和事后判分各阶段的全生命周期钩子。
+"""
 
 from __future__ import annotations
 
@@ -80,7 +83,7 @@ LIFECYCLE_BINDING = "full_execute_scope"
 
 
 class FormalMatrixControllerV8Error(RuntimeError):
-    """Raised when v8 cannot preserve its prospective contract."""
+    """当 v8 无法保持其前瞻性契约时抛出的异常。"""
 
 
 def _now() -> str:

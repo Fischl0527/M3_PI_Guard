@@ -1,4 +1,7 @@
-"""Append-only query/record chain for quota-day Gemini adaptive successors."""
+"""面向配额日 Gemini 自适应接续评测的仅追加查询与记录链条。
+
+记录每天产生的自适应查询提议、模型回复与安全仲裁结果，形成连续防篡改哈希链条。
+"""
 
 from __future__ import annotations
 
@@ -28,7 +31,7 @@ MODEL_ROLE = "gemini_replication"
 
 
 class GeminiAdaptiveQueryStoreV1Error(ValueError):
-    """Raised when a Gemini adaptive query chain is incomplete or drifts."""
+    """当 Gemini 自适应查询链不完整或发生漂移时抛出的异常。"""
 
 
 def _assert_sha256(value: Any, *, field: str) -> str:
@@ -335,7 +338,7 @@ def validate_events(
 
 
 class GeminiAdaptiveQueryLedger:
-    """Small append-only ledger for one quota-day execution identity."""
+    """用于单个配额日执行身份的小型仅追加账本。"""
 
     def __init__(
         self,

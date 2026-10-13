@@ -1,11 +1,6 @@
-"""Prospective DeepSeek matrix controller after the immutable v2 canary abort.
+"""在不可变 v2 金丝雀后启用的前瞻性 DeepSeek 矩阵控制器。
 
-Version 3 retains the frozen 480-item plan, official non-thinking transport,
-single-call trace chain, CNY budget fuse and six-condition canary.  It adds a
-minimal trusted-application-context prompt projection and auditable terminal
-handling for exceptions that occur after a completed provider response.
-
-The aborted v1 and v2 roots are never resumed, retried or overwritten.
+优化动作提案捕获与工具契约校验逻辑，保障高吞吐下的稳定性。
 """
 
 from __future__ import annotations
@@ -129,7 +124,7 @@ PRIOR_PROJECT_COST_CNY = 0.0205298
 
 
 class FormalMatrixControllerV3Error(RuntimeError):
-    """Raised when matrix v3 cannot preserve its prospective contract."""
+    """当矩阵 v3 无法保持其前瞻性契约时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -262,7 +257,7 @@ def _v2_abort_review() -> dict[str, Any]:
 
 
 def build_matrix_candidate() -> dict[str, Any]:
-    """Build the deterministic, non-executable matrix-v3 candidate."""
+    """构建确定性、不可执行的 matrix-v3 候选对象。"""
 
     base = v2.verify_matrix_candidate(DEFAULT_V2_CANDIDATE)
     qualification = verify_controller_qualification()
@@ -963,7 +958,7 @@ def _qualification_permit(
 
 
 def build_controller_qualification() -> dict[str, Any]:
-    """Qualify trusted prompt visibility and terminal failure persistence."""
+    """限定可信提示词可见性与终端失败持久化资格。"""
 
     rows = v1._plan_rows()[:2]
     if (

@@ -1,9 +1,6 @@
-"""DeepSeek v5 matrix controller with no-effect boundary outcomes.
+"""具备零效应（No-Effect）边界输出的 DeepSeek v5 矩阵控制器。
 
-Version 5 never resumes or rewrites the blocked v4 run.  It preserves the
-non-thinking JSON transport and complete request chain while prospectively
-reclassifying a proposal rejected by the independent M3 fixture boundary as a
-substantive, unexecuted ITT outcome instead of a runner crash.
+确保所有拦截判定均在不改变沙箱外部物理状态的前提下完成记录。
 """
 
 from __future__ import annotations
@@ -125,7 +122,7 @@ _BUDGET_POLICY_LOCK = threading.RLock()
 
 
 class FormalMatrixControllerV5Error(RuntimeError):
-    """Raised when matrix v5 cannot preserve its prospective contract."""
+    """当矩阵 v5 无法保持其前瞻性契约时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -185,7 +182,7 @@ def _manifest_sha256(value: Mapping[str, Any]) -> str:
 
 @contextmanager
 def _budget_policy_binding() -> Iterator[None]:
-    """Bind the v5 policy only while replaying or executing v5 state."""
+    """仅在重放或执行 v5 状态时绑定 v5 策略。"""
 
     with _BUDGET_POLICY_LOCK:
         old_v1 = v1.DEFAULT_BUDGET_POLICY

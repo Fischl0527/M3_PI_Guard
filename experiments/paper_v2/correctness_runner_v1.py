@@ -1,4 +1,7 @@
-"""Bounded, parallel development pilot; no historical experiment replay."""
+"""受控并行的开发先导实验运行器。
+
+调度执行多用例并发验证，记录执行事件并在完成后自动安全落盘。
+"""
 
 from __future__ import annotations
 
@@ -25,7 +28,7 @@ from m3_core.project_config import parse_env_file, resolve_config_path
 
 @contextmanager
 def model_lock(path: Path):
-    """OS releases the lock on process exit, without deleting user files."""
+    """进程退出时由操作系统释放锁，且不删除用户文件。"""
     import msvcrt
 
     path.parent.mkdir(parents=True, exist_ok=True)

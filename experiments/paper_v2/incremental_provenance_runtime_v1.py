@@ -1,8 +1,6 @@
-"""Controlled source-authority state and deterministic Guard replay.
+"""受控数据源权威状态管理与确定性 Guard 防护重放运行时。
 
-This module implements the non-provider half of E2.  It keeps the policy and
-proposal fixed across each trusted/untrusted pair and changes only where the
-registered proposition value is exposed to provenance inference.
+对历史轨迹数据注入确定性数据标签，重放验证来源追踪逻辑的决策一致性。
 """
 
 from __future__ import annotations
@@ -44,7 +42,7 @@ RECORDED_AT = "2026-08-26T00:00:00+08:00"
 
 
 class IncrementalProvenanceError(ValueError):
-    """Raised when a controlled pair or replay item violates its contract."""
+    """当受控配对或重放项违反其契约时抛出的异常。"""
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:

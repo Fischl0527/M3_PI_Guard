@@ -1,14 +1,7 @@
-"""Build the competition report from completed, hash-verified E0-E17 evidence.
+"""基于已完成且通过哈希校验的 E0-E17 实验证据构建完整的总结报告。
 
-The report builder deliberately has no Day4/Day5/Day7 metric or figure inputs.
-Formal claims come from ``outputs/experiments/final_analysis``, the exact
-E0-E17 bundles, and the independently denominated E11 post-hoc supplement
-admitted by that synthesis.  E0, Stub, smoke and the historical
-``FPR=0`` claim are mentioned only as excluded prototype/diagnostic evidence.
-
-The retained competition template remains the layout authority.  Content is
-inserted into its existing section slots, preserving the cover, instructions,
-TOC styles, section breaks, page geometry, headers and footers.
+本报告严格遵循学术与竞赛证据链规范，聚合全套防御评估、
+统计假设检验、消融实验与盲测结果，输出格式严谨的正式技术报告。
 """
 
 from __future__ import annotations
@@ -102,7 +95,7 @@ LEGACY_FORMAL_CLAIMS = (
 
 
 class ReportBuildError(RuntimeError):
-    """Raised before report publication when evidence is incomplete or drifts."""
+    """当报告构建因证据链断裂或格式错误而失败时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -348,7 +341,7 @@ def load_report_evidence(
     analysis_dir: str | Path = DEFAULT_ANALYSIS_DIR,
     registry_path: str | Path = DEFAULT_REGISTRY,
 ) -> ReportEvidence:
-    """Validate the complete evidence chain before returning report inputs."""
+    """在返回报告输入前验证完整的论据证据链。"""
 
     root = Path(repository_root).resolve()
     analysis = Path(analysis_dir).resolve()
@@ -1148,7 +1141,7 @@ def _update_template_front_matter(doc: Document, content: Mapping[str, Any]) -> 
 
 
 def _set_update_fields(doc: Document) -> None:
-    """Request a Word/WPS field refresh without materializing or deleting fields."""
+    """请求刷新 Word/WPS 域代码，且不具体化或删除现有域。"""
 
     settings = doc.settings.element
     update = settings.find(qn("w:updateFields"))
@@ -1355,7 +1348,7 @@ def build_final_report(
     source_markdown: str | Path = DEFAULT_SOURCE_MD,
     quality_report: str | Path = DEFAULT_QUALITY_MD,
 ) -> dict[str, Any]:
-    """Validate evidence, then transactionally build the DOCX and audit files."""
+    """验证论据，然后事务性地构建 DOCX 报告与审计文件。"""
 
     evidence = load_report_evidence(
         repository_root=repository_root,

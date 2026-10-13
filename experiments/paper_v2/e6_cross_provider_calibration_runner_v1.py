@@ -1,10 +1,6 @@
-"""Run the E6 cross-provider activity and repeatability calibration.
+"""运行 E6 跨提供商活性与可重复性校准实验的主运行器。
 
-The runner consumes two frozen provider plans, keeps DeepSeek and Gemini state
-under disjoint roots, and treats W1--W3 as formal temporal replicates rather
-than retries.  It reuses the paper-v2 provider clients, trace ledgers, offline
-evaluator, and isolated effect backends.  No provider-managed tool or external
-effect is available on this path.
+调度执行多提供商并发请求，安全记录每一条响应与异常事件。
 """
 
 from __future__ import annotations
@@ -125,7 +121,7 @@ REQUIRED_PLAN_FIELDS = frozenset(
 
 
 class E6CalibrationRunnerError(RuntimeError):
-    """Raised when E6 execution cannot preserve its frozen contract."""
+    """当 E6 执行无法保持其固化契约时抛出的异常。"""
 
 
 def _now() -> str:
@@ -513,7 +509,7 @@ def _gemini_dispatcher(
     plan_path: Path,
     recorded_at: Callable[[], str] = _now,
 ) -> Any:
-    """Assemble existing Gemini components against the E6 plan identity."""
+    """针对 E6 计划身份装配现有的 Gemini 组件。"""
 
     registry = lean.gemini_public_v1._Registry()
     agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
@@ -957,13 +953,9 @@ def _technical_gate_failure_evidence(
     *,
     latest: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Return outcome-blind evidence that a failed prefix cannot be extended.
+    """返回对结果盲视的论据，证明失败前缀无法被延展。
 
-    A failed gate is administratively closable only after all twelve prefix
-    executions have reached terminal records, or after one response-less
-    prefix execution has exhausted its single recovery.  Administrative
-    closure records are deliberately excluded from both predicates so quota
-    sealing cannot be mistaken for a completed technical prefix.
+    失败门禁仅在所有十二次前缀执行达到终端记录后，或在单次无响应前缀执行耗尽其单次恢复机会后，才可进行管理性关闭。管理性关闭记录特意从两个谓词中排除，以防配额封存被误认为已完成的技术前缀。
     """
 
     gate = evaluate_window_gate(provider_id, window)

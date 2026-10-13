@@ -1,10 +1,6 @@
-"""Seal Gemini public segment 1 after a post-response evidence-contract abort.
+"""在响应后证据契约校验失败时封签 Gemini 公开分段 1。
 
-The review is deliberately content-free.  It proves that one official Gemini
-response was durably bound to a pre-transport local request commitment, while
-the historical experiment-record contract still required a provider request
-identifier that Google's OpenAI-compatible endpoint did not return.  The
-failed segment is never upgraded or resumed; any repair must be prospective.
+严格隔离异常分段，杜绝残缺数据影响全局评测指标。
 """
 
 from __future__ import annotations
@@ -45,7 +41,7 @@ EXPECTED_ERROR = (
 
 
 class GeminiPublicSegmentAbortReviewV1Error(ValueError):
-    """Raised when immutable segment-1 evidence drifts from the abort review."""
+    """当不可变 segment-1 论据偏离中止审查时抛出的异常。"""
 
 
 def _read_object(path: Path) -> dict[str, Any]:
@@ -100,7 +96,7 @@ def classify_request_chain(
     request_trace_complete: Any,
     identity_verified: Any,
 ) -> str:
-    """Classify only the metadata needed to explain the sealed failure."""
+    """仅分类解释封存失败所需的元数据。"""
 
     if (
         provider_request_id is None
@@ -115,7 +111,7 @@ def classify_request_chain(
 
 
 def _raw_sealed_state(permit: Any) -> dict[str, Any]:
-    """Load a failed segment without invoking the success-only state gate."""
+    """加载失败的分段，且不调用仅成功的状态门禁。"""
 
     records = public_v1.load_record_entries(permit.record_ledger_path)
     record_status = public_v1.validate_record_entries(

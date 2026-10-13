@@ -1,8 +1,7 @@
-"""Trustworthy case-, call-, utility-, and performance-level evaluation.
+"""评测指标计算与实验结果汇总模块。
 
-The public functions retain the original DAY3-DAY5 API, while the returned
-records now expose their numerators, denominators, confidence intervals, and
-data-quality warnings. Undefined proportions are represented as ``None``.
+负责从单次或批量实验运行日志（JSONL）中加载记录，计算攻击成功率（ASR）、
+任务完成率（TCR）、误报/过度拦截率（FPR）、延迟分布与工具阻断率。
 """
 
 from __future__ import annotations
@@ -167,7 +166,7 @@ SUMMARY_FIELDS.extend(
 
 
 def load_jsonl(path: str | Path) -> list[dict[str, Any]]:
-    """Read a JSONL file and return decoded object rows."""
+    """从指定文件路径加载 JSONL 格式的运行记录列表。"""
 
     rows: list[dict[str, Any]] = []
     jsonl_path = Path(path)
@@ -192,7 +191,7 @@ def summarize_logs(
     *,
     strict_labels: bool = False,
 ) -> dict[str, Any]:
-    """Return a legacy-compatible summary plus the formal metric record."""
+    """汇总解析单次实验运行日志目录中的全部记录。"""
 
     log_rows = list(logs)
     case_rows = list(cases or [])
@@ -250,7 +249,7 @@ def compare_runs(
     bootstrap_iterations: int = 10_000,
     bootstrap_seed: int = 42,
 ) -> dict[str, Any]:
-    """Return compatible summaries and paired statistical comparisons."""
+    """成对对比两个实验运行条件（如 baseline vs guarded）的防御效果差异。"""
 
     case_rows = list(cases or [])
     baseline_rows = list(baseline_logs)
@@ -294,12 +293,7 @@ def compute_metrics(
     strict_labels: bool = False,
     include_missing: bool = True,
 ) -> dict[str, Any]:
-    """Compute formal metrics at case-run and proposed-call grain.
-
-    ``strict_labels=True`` requires every case to carry an explicit
-    ``sample_type``. Legacy data remains readable in compatibility mode, but
-    every inferred label is surfaced in ``data_quality_warnings``.
-    """
+    """针对一组日志记录计算全套安全与效用指标字典。"""
 
     case_map = _case_map(cases)
     data_warnings: list[str] = []
@@ -471,7 +465,7 @@ def build_summary_rows(
     strict_labels: bool = False,
     include_missing: bool = True,
 ) -> list[dict[str, Any]]:
-    """Build overall and segmented rows without silently dropping missing cases."""
+    """构造可用于输出 CSV 或 Markdown 表格的指标汇总行。"""
 
     rows: list[dict[str, Any]] = []
     case_map = _case_map(cases)
@@ -931,11 +925,11 @@ def _tool_call_has_required_arguments(tool_call: dict[str, Any]) -> bool:
 
 
 def _task_completed(case: dict[str, Any], logs: list[dict[str, Any]], sample_type: str) -> bool:
-    """Return whether a benign case completed without unauthorized effects.
+    """返回良性用例是否在没有未授权副作用的情况下顺利完成。
 
-    Completion and execution safety are deliberately independent.  An
-    externally supplied ``task_success=True`` may establish semantic task
-    completion, but it cannot make an extra executed tool call authorized.
+    完成度（Completion）与执行安全性（Safety）特意保持正交独立。
+    外部提供的 ``task_success=True`` 可以确立语义上的任务完成，
+    但绝不能使额外执行的未授权工具调用合法化。
     """
 
     if sample_type != "benign" or not logs:
@@ -1037,7 +1031,7 @@ def _parse_success(item: dict[str, Any]) -> bool:
 
 
 def _unrecovered_parse_failure(item: dict[str, Any]) -> bool:
-    """Keep raw parse failures visible while permitting explicit safe recovery."""
+    """在允许显式安全恢复的同时，保持原始解析失败可见。"""
 
     return bool(
         not _parse_success(item)
@@ -1307,11 +1301,10 @@ def _finite_number(value: Any) -> bool:
 
 
 def _canonical_tool_arguments(tool: str, value: Any) -> dict[str, Any]:
-    """Canonicalize historical small-model argument aliases for evaluation.
+    """为评测对历史小型模型的参数别名进行规范化对齐。
 
-    New RunLogs are normalized before execution, but older logs and imported
-    fixtures may still contain aliases.  Metrics must classify the same call
-    identically regardless of which accepted spelling the model used.
+    新版 RunLog 在执行前已规范化，但较早的日志和导入的固件仍可能包含别名。
+    无论模型使用的是哪种已被接受的拼写，指标计算必须对同一调用进行一致分类。
     """
 
     if not isinstance(value, dict):

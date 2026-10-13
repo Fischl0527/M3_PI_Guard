@@ -1,9 +1,7 @@
-"""Qualify official AgentDojo environments and offline outcome checkers.
+"""官方 AgentDojo 环境准入与离线结果评分判定依赖。
 
-The online runtime receives only the frozen paper-v2 projection.  This module
-keeps attack-task identity and checker objects in a private work-key resolver,
-constructs a fresh official AgentDojo environment for every run, and exposes
-the official utility/security checks only after execution has ended.
+管理 AgentDojo 基准套件的环境隔离、用例加载与基准答案校验，
+保证评测遵循官方环境规范且杜绝先验泄漏。
 """
 
 from __future__ import annotations
@@ -43,7 +41,7 @@ OFFICIAL_ATTACK_NAME = "direct"
 
 
 class AgentDojoLiveDependencyError(ValueError):
-    """Raised when a case, environment or official checker drifts."""
+    """当用例、环境或官方检查器发生漂移时抛出的异常。"""
 
 
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -130,7 +128,7 @@ class AgentDojoCaseBinding:
 
 
 class FrozenAgentDojoCaseResolver:
-    """Resolve evaluator-only case identity outside the online state."""
+    """在线状态之外仅由评测者解析用例身份。"""
 
     def __init__(
         self,
@@ -269,7 +267,7 @@ class FrozenAgentDojoCaseResolver:
 
 
 class AgentDojoOfflineOutcomeEvaluator:
-    """Apply pinned official utility/security checkers after online execution."""
+    """在线执行后应用固化的官方效用/安全性检查器。"""
 
     def __init__(self, resolver: FrozenAgentDojoCaseResolver) -> None:
         self.resolver = resolver

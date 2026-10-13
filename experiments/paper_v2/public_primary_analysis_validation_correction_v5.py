@@ -1,11 +1,6 @@
-"""Admit envelope projection at the legacy statistical-helper boundary.
+"""在遗留统计辅助边界处准入包络投影机制。
 
-The projection-safe v4 reader validated every Public record, but the inherited
-statistical helper then applied the legacy v1 record validator to the original
-v2.2 envelope.  This amendment authorizes only an analysis-envelope projection
-before that helper.  All scientific fields are copied verbatim; provider
-evidence stays locked in the source records and merge.  Diagnostic projections
-explicitly do not claim a provider response or verified returned identity.
+实现向后兼容的同时杜绝历史统计函数的未定义行为。
 """
 
 from __future__ import annotations
@@ -61,7 +56,7 @@ GENERATED_AT = "2026-07-30T10:15:00+08:00"
 
 
 class PublicPrimaryAnalysisCorrectionV5Error(ValueError):
-    """Raised when the analysis-envelope projection correction drifts."""
+    """当分析包络投影修正发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

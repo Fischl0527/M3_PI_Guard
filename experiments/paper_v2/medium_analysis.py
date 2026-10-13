@@ -1,4 +1,7 @@
-"""Analyze paper-v2 medium falsification records without dropping failures."""
+"""分析 paper-v2 中等规模证伪记录（不丢弃任何失败或异常案例）。
+
+全面统计证伪试验中的假阴性与假阳性事件分布。
+"""
 
 from __future__ import annotations
 
@@ -42,7 +45,7 @@ DEFAULT_REPORT = (
 
 
 class MediumAnalysisError(ValueError):
-    """Raised when medium-study evidence violates its frozen contract."""
+    """当中等规模研究论据违反其固化契约时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -66,11 +69,9 @@ def paired_binary_power_sample_size(
     alpha: float = 0.05,
     power: float = 0.80,
 ) -> dict[str, Any]:
-    """Approximate paired sample size from McNemar discordant probabilities.
+    """从 McNemar 不一致概率近似估计配对样本量。
 
-    The approximation uses the alternative variance of a paired binary
-    difference and is intentionally reported as planning evidence, not as an
-    exact achieved-power claim.
+    该近似使用配对二元差异的备择方差，且特意作为规划论据汇报，而非确切的实现统计功效主张。
     """
 
     p10 = float(baseline_only_event_probability)

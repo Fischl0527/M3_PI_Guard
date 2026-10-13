@@ -1,4 +1,8 @@
-"""Policy matrix for M3 Guard tool calls."""
+"""M3 Guard 工具调用策略矩阵与核心判定引擎。
+
+本模块根据工具的类型（read_file, write_file, send_email, call_api 等）、目标路径及实参，
+比对上下文授权状态与敏感数据流，输出具体的策略裁决结果（allow/ask/deny）。
+"""
 
 from __future__ import annotations
 
@@ -29,12 +33,16 @@ def decide(
     dataflow_result: Any = None,
     enable_dataflow: bool = True,
 ) -> PolicyResult:
-    """Apply the tool policy without implicitly contaminating ablations.
+    """执行工具策略判定，且不隐式污染消融实验条件。
 
-    ``enable_dataflow=False`` is the important policy-only contract.  Older
-    callers retain the previous behavior because the default remains True.
-    Full Guard callers pass their already-computed finding to avoid evaluating
-    the same data flow twice.
+    参数:
+        context: 任务上下文字典。
+        tool_call: 拟调用的工具调用描述。
+        dataflow_result: 预先计算好的数据流分析结果（避免重复评估）。
+        enable_dataflow: 是否启用数据流敏感性检查（在 policy_only 消融模式下置为 False）。
+
+    返回:
+        PolicyResult: 策略判定结果（包含 decision, risk, reasons, forced 标志）。
     """
 
     if not isinstance(context, dict):
@@ -209,11 +217,10 @@ def is_authorized_action(
     tool: str,
     arguments: dict[str, Any],
 ) -> bool:
-    """Match a call against trusted, evaluator-provided positive authorization.
+    """将工具调用与可信的、评测者提供的正向授权规则进行匹配。
 
-    Structured actions use subset matching, allowing an experiment to authorize
-    only the relevant destination/path without depending on argument order.
-    A compact ``tool:target`` form is supported for legacy JSONL fixtures.
+    结构化操作使用子集匹配，允许实验仅授权相关的目标/路径，
+    而不依赖参数顺序。为兼容旧版 JSONL 测试固件，支持紧凑的 ``tool:target`` 格式。
     """
 
     case = context.get("case", {}) if isinstance(context, dict) else {}

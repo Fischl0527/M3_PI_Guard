@@ -1,4 +1,7 @@
-"""Independently review the projection-safe Public primary analysis."""
+"""独立审查具备投影安全保障的公开主分析结果（版本 V4）。
+
+确保所有投影到运行时的输入数据均不存在先验真值泄露。
+"""
 
 from __future__ import annotations
 

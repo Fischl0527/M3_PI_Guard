@@ -1,9 +1,6 @@
-"""Append-only project-day reservations for the official Gemini free tier.
+"""官方 Gemini 免费层按日项目级配额预留的仅追加账本。
 
-One execution identity may reserve at most the prospectively frozen local cap
-on one America/Los_Angeles quota day.  A second formal reservation for the same
-project day is rejected, so public and adaptive runs cannot accidentally share
-or overbook the free-tier allowance.
+跨进程跟踪当日已消耗请求数与剩余配额，提供严格的防超限租约管理。
 """
 
 from __future__ import annotations
@@ -39,7 +36,7 @@ LOCAL_OUTPUT_TOKEN_CAP = 16_000
 
 
 class GeminiDailyQuotaLedgerV1Error(ValueError):
-    """Raised when a free-tier project-day reservation is unsafe."""
+    """当免费层项目日预留不安全时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

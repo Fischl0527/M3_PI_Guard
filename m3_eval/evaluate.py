@@ -1,4 +1,4 @@
-"""CLI for evaluating M3_PI_Guard RunLog JSONL files."""
+"""M3 智能体评测命令行入口与评测驱动器。"""
 
 from __future__ import annotations
 
@@ -168,7 +168,7 @@ def _pairwise_comparisons(
     bootstrap_iterations: int,
     bootstrap_seed: int,
 ) -> list[dict[str, Any]]:
-    """Pair baseline files with compatible guarded-condition files."""
+    """将基线文件与兼容的带防护条件文件进行成对匹配。"""
 
     entries: list[tuple[str, list[dict[str, Any]], str, str, str]] = []
     for path, logs in logs_by_file.items():

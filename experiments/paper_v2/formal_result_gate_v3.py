@@ -1,8 +1,6 @@
-"""Prospective technical result gate for the DeepSeek v6 medium matrix.
+"""面向 DeepSeek v6 中等规模矩阵的前瞻性技术结果准入门禁。
 
-Version 3 binds the already frozen v6 matrix and its six-condition canary. It
-reuses the qualified v2 operational checks while keeping scientific outcomes
-closed until the complete 480-record evidence chain passes technical review.
+自动比对提案拒绝率与预期基线，阻断异常退化的评测数据入库。
 """
 
 from __future__ import annotations
@@ -52,7 +50,7 @@ _fixture_record = base._fixture_record
 
 
 class FormalResultGateV3Error(RuntimeError):
-    """Raised when v6 evidence cannot cross the prospective result gate."""
+    """当 v6 论据无法跨越前瞻结果门禁时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

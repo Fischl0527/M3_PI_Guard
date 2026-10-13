@@ -1,10 +1,6 @@
-"""Frozen E11 post-hoc amendment runner.
+"""已固化的 E11 事后修正补充实验运行器。
 
-This workflow is intentionally separate from ``experiments.run_program`` and
-the E0-E17 registry.  Execution revision r2 preserves the original protocol
-and historical freeze, binds the current runtime in a new freeze, materializes
-fixed tool-observation history, and delegates the actual cases to the existing
-matrix runtime.
+在严格受控的受限沙箱环境中执行 E11 补充模式的重放验证。
 """
 
 from __future__ import annotations
@@ -100,7 +96,7 @@ _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 class ProtocolIntegrityError(RuntimeError):
-    """Raised when the amendment protocol or a bound artifact has drifted."""
+    """当修订协议或绑定的中间构件发生漂移时抛出。"""
 
 
 def utc_now() -> str:
@@ -168,7 +164,7 @@ def _strict_repo_relative(value: Any) -> tuple[str, Path]:
 
 
 def verify_hash_entries(payload: Mapping[str, Any]) -> dict[str, dict[str, str]]:
-    """Verify every amendment-freeze entry against the current repository."""
+    """根据当前代码仓库验证每个修订固化条目。"""
 
     entries = payload.get("artifacts")
     if not isinstance(entries, list) or not entries:
@@ -277,7 +273,7 @@ def canonical_action(tool_call: Mapping[str, Any]) -> str:
 
 
 def semantic_target(tool_call: Mapping[str, Any]) -> str:
-    """Return the concrete target text that must occur in a mock observation."""
+    """返回必须在模拟观察中出现的具体目标文本。"""
 
     tool = str(tool_call.get("tool", "")).strip()
     arguments = tool_call.get("arguments")
@@ -403,7 +399,7 @@ def validate_protocol_data(
 def materialize_case(
     case: Mapping[str, Any], fixture: Mapping[str, Any]
 ) -> dict[str, Any]:
-    """Add only trusted task history and the frozen untrusted tool observation."""
+    """仅添加可信的任务历史与固化的不可信工具观察结果。"""
 
     materialized = copy.deepcopy(dict(case))
     source_tool_call = copy.deepcopy(fixture["source_tool_call"])
@@ -438,7 +434,7 @@ def materialize_cases(
 
 
 def runtime_projection(case: Mapping[str, Any]) -> dict[str, Any]:
-    """Public helper used by tests to enforce the label-leakage boundary."""
+    """测试所使用的公开辅助函数，用于强制执行标签泄漏边界。"""
 
     return runtime_case_view(dict(case))
 
@@ -508,7 +504,7 @@ def build_plan() -> dict[str, Any]:
 def selected_case_ids_for_phase(
     cases: Iterable[Mapping[str, Any]], phase: str
 ) -> list[str]:
-    """Return an explicit, auditable case list for either execution phase."""
+    """为任一执行阶段返回明确的、可审计的用例列表。"""
 
     case_ids = [str(case.get("case_id", "")).strip() for case in cases]
     if any(not case_id for case_id in case_ids) or len(case_ids) != len(set(case_ids)):

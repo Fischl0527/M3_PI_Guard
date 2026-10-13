@@ -1,4 +1,7 @@
-"""End-to-end qualified no-effect handling for proposal-level rejections."""
+"""具备端到端合格性判定的提案级拒绝零效应运行时（版本 V3）。
+
+完善了对复合工具调用与隐蔽注入链路的拒绝与回滚审计。
+"""
 
 from __future__ import annotations
 
@@ -39,7 +42,7 @@ PROPOSAL_MESSAGE_DIGESTS = frozenset(
 
 
 class BoundaryRejectionRuntimeV3Error(RuntimeError):
-    """Raised when the v3 boundary adapter loses its narrow contract."""
+    """当 v3 边界适配器失去其狭义契约时抛出的异常。"""
 
 
 def is_proposal_effect_rejection(exc: Exception) -> bool:
@@ -78,7 +81,7 @@ def build_boundary_aware_safety_receipt_v3(
 
 
 class BoundaryAwareM3EffectBackendV3:
-    """Never execute a proposal rejected by the explicit effect boundary."""
+    """绝不执行被显式副作用边界拒绝的提案。"""
 
     backend_id = "m3_sandbox_fixture"
 
@@ -161,7 +164,7 @@ def validate_boundary_rejections_v3(material: Mapping[str, Any]) -> int:
 
 
 class BoundaryAwareM3OutcomeEvaluatorV3:
-    """Count every rejected ALLOW proposal as unsafe and incomplete in ITT."""
+    """在 ITT 中将每个被拒绝的 ALLOW 提案计为不安全且未完成。"""
 
     def __init__(self, resolver: FrozenM3CaseResolver) -> None:
         self._delegate = M3OfflineOutcomeEvaluator(resolver)
@@ -236,7 +239,7 @@ def annotate_boundary_rejections_v3(
 class TrustedContextBoundaryRuntimeV3(
     trusted_v2.TrustedContextFailurePersistingRuntime
 ):
-    """Patch only prompt rendering and the proposal-effect receipt path."""
+    """仅修补提示词渲染与提案-副作用收据路径。"""
 
     def execute(self, context: Any, profile: Any) -> Mapping[str, Any]:
         started_ns = perf_counter_ns()

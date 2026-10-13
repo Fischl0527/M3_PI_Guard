@@ -1,9 +1,6 @@
-"""Freeze the five prospective incremental paper-v2 studies.
+"""冻结 5 项前瞻性增量 paper-v2 实证研究方案。
 
-The builder is deliberately offline.  It reads the already-frozen lean case
-selection plus the minimum historical outcomes required by the registered E3
-and E5 conditional selections.  It never reads credentials, calls a provider,
-or rewrites an existing experiment artifact.
+预先声明实验假说、对照变量、样本容量与分析管线，杜绝事后假设调优（HARKing）。
 """
 
 from __future__ import annotations
@@ -75,7 +72,7 @@ GLOBAL_FUSE_CNY = 1000.0
 
 
 class IncrementalPlanError(ValueError):
-    """Raised when a prospective selection or plan drifts."""
+    """当前瞻性选择或计划发生漂移时抛出的异常。"""
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:

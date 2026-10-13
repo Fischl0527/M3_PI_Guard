@@ -1,9 +1,6 @@
-"""Prospective technical result gate for the DeepSeek v7 medium matrix.
+"""面向 DeepSeek v7 中等规模矩阵的前瞻性技术结果准入门禁。
 
-Version 4 freezes its operational policy and v7 boundary-evidence consumers
-before the first v7 API call.  The final gate candidate can only be written
-after a passing six-condition technical canary review, while scientific
-outcomes remain closed.
+综合评估模型抗攻击成功率（ASR）与良性任务效用保留率。
 """
 
 from __future__ import annotations
@@ -53,7 +50,7 @@ _fixture_record = base._fixture_record
 
 
 class FormalResultGateV4Error(RuntimeError):
-    """Raised when v7 evidence cannot cross the prospective result gate."""
+    """当 v7 论据无法跨越前瞻结果门禁时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

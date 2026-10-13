@@ -1,8 +1,6 @@
-"""Freeze the prospective Gemini local-precommit evidence contract.
+"""冻结前瞻性 Gemini 本地预提交证据契约。
 
-This artifact is deliberately non-executable.  It binds the new runtime,
-its negative tests, the Gemini trace/store boundaries and the immutable
-segment-1 abort review before any fresh provider identity is admitted.
+在发起实际远程 API 调用前预先锁定本地请求参数、目标用例与预期动作结构。
 """
 
 from __future__ import annotations
@@ -34,7 +32,7 @@ GENERATED_AT = "2026-08-04T02:45:00+08:00"
 
 
 class GeminiLocalPrecommitContractV2CandidateError(ValueError):
-    """Raised when the prospective contract or its frozen inputs drift."""
+    """当预期契约或其固化输入发生漂移时抛出的异常。"""
 
 
 def _display(path: Path) -> str:

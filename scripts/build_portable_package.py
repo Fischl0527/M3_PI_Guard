@@ -1,4 +1,8 @@
-"""Build a scoped source/data delivery, never a copy of secrets or the whole repo."""
+"""构建限定范围的源码与数据交付包（仅打包指定依赖与公开数据，绝不复制密钥或全库）。
+
+仅打包指定运行入口的源码闭包依赖与公开输入/结果，严格执行路径边界与安全过滤，
+杜绝凭据文件（.env、密钥）、内部跟踪信息或宿主系统私有文件外泄。
+"""
 
 from __future__ import annotations
 
@@ -48,7 +52,7 @@ def resolve_module(root: Path, module: str) -> Path | None:
 
 
 def source_closure(root: Path, seeds: list[str]) -> set[Path]:
-    """Static import closure, including package initializers and function imports."""
+    """执行静态导入闭包分析，自动递归提取包括包初始化器与函数级导入在内的全部源码依赖树。"""
     queue = [Path(name) for name in seeds]
     found = set()
     while queue:
@@ -102,11 +106,9 @@ def copy_public(root: Path, target: Path, relative: str | Path) -> None:
 
 
 def export_selected_source_rows(root: Path, target: Path, cases: list[dict]) -> int:
-    """Retain selected offline records at their original lines, not whole datasets.
+    """在原始行号处保留选定的离线记录，而非导出整个数据集。
 
-    Unselected lines contain empty JSON objects. The existing per-record identity
-    and digest validation remains unchanged; these files are scoped excerpts,
-    never represented as the complete historical dataset.
+    未选中的行保留为空 JSON 对象。现有的单条记录身份与摘要校验保持不变；这些文件是限定范围的摘录，绝不可表述为完整的历史数据集。
     """
     from experiments.paper_v2.contracts import sha256_canonical_json
 
@@ -135,10 +137,9 @@ def export_selected_source_rows(root: Path, target: Path, cases: list[dict]) -> 
 
 
 def export_agentdojo(target: Path) -> None:
-    """Fresh shallow clone of public pinned code, not the original Git config.
+    """对公开固化代码执行全新的浅层克隆，而非直接使用原始 Git 配置。
 
-    A real checkout is required by the existing native evaluator; do not replace
-    the commit check with a fabricated marker or weaken it for portability.
+    现有的原生评测器需要真实的签出目录；绝不可使用伪造标记替换提交检查，也不可为可移植性而削弱该检查。
     """
     from experiments.paper_v2.medium_runtime import (
         DEFAULT_AGENTDOJO_CHECKOUT, FROZEN_AGENTDOJO_COMMIT, _assert_agentdojo_identity,

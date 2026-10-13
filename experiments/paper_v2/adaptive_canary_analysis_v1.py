@@ -1,4 +1,8 @@
-"""Admitted analysis for the eight-task adaptive DeepSeek canary."""
+"""八任务自适应 DeepSeek 金丝雀实验的准入分析模块。
+
+计算并汇总自适应金丝雀测试的防御拦截率、查询预算消耗、有效攻击载荷比率，
+生成格式规范的准入分析统计字典与报告。
+"""
 
 from __future__ import annotations
 
@@ -38,7 +42,7 @@ ANALYZED_AT = "2026-07-30T03:05:00+08:00"
 
 
 class AdaptiveCanaryAnalysisError(ValueError):
-    """Raised when admitted adaptive analysis inputs drift."""
+    """当准入的自适应分析输入发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

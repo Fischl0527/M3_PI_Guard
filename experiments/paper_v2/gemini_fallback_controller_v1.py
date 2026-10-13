@@ -1,11 +1,6 @@
-"""Prospective Gemini replication of the paper-v2 empirical fallback.
+"""paper-v2 实证回退研究的前瞻性 Gemini 复现实验控制器。
 
-The controller derives, without outcome access, the frozen second-model subset
-from the 480-row medium plan: the strongest peer-reviewed structural baseline,
-M3 policy-only, and M3 full for every selected case and authorization probe.
-It executes one official Gemini model with no retry, no provider tools, and
-only in-memory/sandbox effects.  Provider calls, records, attempts, and safety
-cross-bindings are append-only and fsynced.
+调度执行 Gemini 在防护拦截失败时的降级回退策略与安全兜底行为评测。
 """
 
 from __future__ import annotations
@@ -148,7 +143,7 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class GeminiFallbackControllerError(RuntimeError):
-    """Raised when the prospective Gemini evidence boundary cannot hold."""
+    """当预期 Gemini 论据边界无法维持时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -328,7 +323,7 @@ def _effective_policy() -> dict[str, Any]:
 
 
 def build_plan_rows() -> list[dict[str, Any]]:
-    """Derive the second-model subset without reading any prior outcome."""
+    """派生第二模型子集，且不读取任何先前结果。"""
 
     source = _load_jsonl(DEFAULT_SOURCE_PLAN)
     selected = [
@@ -401,7 +396,7 @@ def verify_plan(path: Path = DEFAULT_PLAN) -> list[dict[str, Any]]:
 
 
 class GeminiCallLedgerSink:
-    """Fsynced, provider-generic call ledger used by the live runtime."""
+    """实时运行时使用的 fsync、提供商通用调用账本。"""
 
     def __init__(
         self,
@@ -449,7 +444,7 @@ class GeminiCallLedgerSink:
 
 
 class GeminiEvidenceClient:
-    """Proxy one official client and expose a content-free failure bundle."""
+    """代理单个官方客户端并暴露无内容的失败包。"""
 
     def __init__(
         self,

@@ -1,4 +1,7 @@
-"""Independently review the Public-family-validator analysis."""
+"""独立审查基于公开家族验证器的分析结果（版本 V3）。
+
+按攻击家族分类复核各防御机制的拦截有效性。
+"""
 
 from __future__ import annotations
 

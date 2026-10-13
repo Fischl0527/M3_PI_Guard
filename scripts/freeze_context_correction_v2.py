@@ -1,4 +1,7 @@
-"""Create the Context Correction V2 execution-r3 freeze after both smoke gates pass."""
+"""在两套套件均通过后创建 Context Correction V2 execution-r3 固化冻结版本。
+
+锁定输入数据、环境配置与基准产物，杜绝后续执行漂移。
+"""
 
 from __future__ import annotations
 
@@ -63,7 +66,7 @@ TEST_FILES = (
 
 
 class FreezeError(RuntimeError):
-    """Raised when a pre-freeze admission gate fails."""
+    """当固化前准入门禁检查失败时抛出。"""
 
 
 def _utc_now() -> str:
@@ -244,7 +247,7 @@ def build_freeze(
     e9_smoke_path: str | Path = DEFAULT_E9_SMOKE,
     e14_smoke_path: str | Path = DEFAULT_E14_SMOKE,
 ) -> dict[str, Any]:
-    """Validate all preconditions, write one freeze, and immediately reverify it."""
+    """验证所有前置条件，写入单个固化记录，并立即重新验证。"""
 
     output = Path(output_path).resolve()
     if output.exists():

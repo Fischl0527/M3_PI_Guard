@@ -1,7 +1,8 @@
-"""Dependency-free statistical helpers for M3_PI_Guard experiments.
+"""面向 M3_PI_Guard 实验的无外部依赖纯 Python 严谨统计学辅助函数模块。
 
-The functions in this module deliberately return plain dictionaries so their
-results can be written directly to experiment manifests and JSON reports.
+本模块中的函数经过专门设计，直接返回普通字典结构，以便将其计算结果
+原样写入实验清单（Manifest）与 JSON 科学报告中。
+核心原则：比例计算必须同时返回分子、分母与区间；分母为 0 属于未定义，严禁擅自转为 0。
 """
 
 from __future__ import annotations
@@ -16,7 +17,7 @@ from typing import Any, Iterable, Sequence
 
 
 def safe_ratio(numerator: int | float, denominator: int | float) -> float | None:
-    """Return a proportion, or ``None`` when its denominator is zero."""
+    """安全计算两个数值的比例；当分母为零或负数时返回 ``None``。"""
 
     if denominator <= 0:
         return None
@@ -29,10 +30,18 @@ def wilson_interval(
     *,
     confidence: float = 0.95,
 ) -> tuple[float | None, float | None]:
-    """Wilson score interval for a binomial proportion.
+    """计算二项分布比例的 Wilson 得分置信区间（Wilson Score Interval）。
 
-    A zero denominator is undefined and therefore returns ``(None, None)``;
-    callers must not turn that state into a numeric zero.
+    注意：分母为零属于未定义状态，返回 ``(None, None)``；
+    调用方严禁将未定义状态隐式转换为数字 0。
+
+    参数:
+        successes (int): 成功次数（需满足 0 <= successes <= total）。
+        total (int): 样本总数。
+        confidence (float): 置信水平，默认 0.95。
+
+    返回:
+        tuple[float | None, float | None]: 置信区间的下界与上界。
     """
 
     if total < 0 or successes < 0 or successes > total:
@@ -61,7 +70,7 @@ def proportion_result(
     *,
     confidence: float = 0.95,
 ) -> dict[str, Any]:
-    """Return counts, value, and Wilson interval for a proportion."""
+    """构造包含分子、分母、点估计比值以及 Wilson 置信区间的标准字典。"""
 
     low, high = wilson_interval(numerator, denominator, confidence=confidence)
     return {
@@ -75,7 +84,7 @@ def proportion_result(
 
 
 def percentile(values: Iterable[float], q: float) -> float | None:
-    """Linear-interpolated percentile with an explicit empty-data state."""
+    """基于有序序列计算指定百分位数（Percentile）。"""
 
     if not 0.0 <= q <= 1.0:
         raise ValueError("q must be between 0 and 1")
@@ -94,7 +103,7 @@ def percentile(values: Iterable[float], q: float) -> float | None:
 
 
 def latency_summary(values: Iterable[float]) -> dict[str, Any]:
-    """Validate and summarize a non-negative latency sample."""
+    """计算耗时/延迟数据的完整统计摘要（均值、中位数、P95、P99 等）。"""
 
     sample = [float(value) for value in values]
     if any(not math.isfinite(value) or value < 0.0 for value in sample):
@@ -115,12 +124,7 @@ def mcnemar_exact(
     baseline_only_success: int | None = None,
     treatment_only_success: int | None = None,
 ) -> dict[str, Any]:
-    """Two-sided exact McNemar test using the discordant-pair binomial test.
-
-    Pass either two equally-sized boolean sequences, or the two discordant
-    counts explicitly. A ``True`` value denotes the measured event (for
-    example, attack success), not whether the result is desirable.
-    """
+    """针对配对二分类数据计算 McNemar 精确检验的双侧 p 值。"""
 
     if baseline is not None or treatment is not None:
         if baseline is None or treatment is None:
@@ -163,11 +167,9 @@ def clustered_paired_bootstrap(
     seed: int = 42,
     confidence: float = 0.95,
 ) -> dict[str, Any]:
-    """Cluster-resampled CI for ``treatment - baseline`` mean difference.
+    """聚类配对 Bootstrap 置信区间重采样估计。
 
-    Each tuple is ``(cluster_id, baseline_value, treatment_value)``. Entire
-    clusters are sampled with replacement, preserving within-template or
-    within-case dependence.
+    按照底层模板/任务单位进行聚类成对重采样，以忠实保留相同用例在不同防御条件下的配对相关性。
     """
 
     if iterations <= 0:
@@ -224,12 +226,7 @@ def wilcoxon_signed_rank(
     baseline: Sequence[float],
     treatment: Sequence[float],
 ) -> dict[str, Any]:
-    """Paired Wilcoxon signed-rank test and rank-biserial effect size.
-
-    Exact sign enumeration is used for up to 20 non-zero pairs; larger samples
-    use a tie-corrected normal approximation. Differences are defined as
-    ``treatment - baseline``.
-    """
+    """计算连续配对差异的 Wilcoxon 符号秩检验。"""
 
     if len(baseline) != len(treatment):
         raise ValueError("paired samples must have equal length")
@@ -294,7 +291,7 @@ def wilcoxon_signed_rank(
 
 
 def holm_adjust(p_values: Sequence[float]) -> list[float]:
-    """Holm step-down family-wise error correction."""
+    """使用 Holm-Bonferroni 方法对族系多重假设检验的 p 值进行循序校正，控制 FWER。"""
 
     values = [float(value) for value in p_values]
     if any(not 0.0 <= value <= 1.0 for value in values):

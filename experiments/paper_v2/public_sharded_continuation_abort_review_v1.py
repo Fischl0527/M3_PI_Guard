@@ -1,4 +1,7 @@
-"""Freeze the content-free abort review for public continuation-v1 shards."""
+"""冻结公开接续 v1 分片的无内容偏见中止审查记录。
+
+记录多机分布式接续过程中的异常节点状态。
+"""
 
 from __future__ import annotations
 
@@ -47,7 +50,7 @@ EXPECTED_ERROR = "public usage summary drift"
 
 
 class PublicShardedContinuationAbortReviewError(ValueError):
-    """Raised when the stopped continuation-v1 evidence has drifted."""
+    """当停止的接续-v1 论据发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

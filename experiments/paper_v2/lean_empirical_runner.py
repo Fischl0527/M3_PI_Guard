@@ -1,13 +1,6 @@
-"""Minimal provider runner for the lean authorization-regime study.
+"""面向精简权限机制研究的最小化提供商运行器。
 
-The runner consumes the single frozen 1,350-row plan, persists one compact raw
-JSONL per provider, and keeps content-free operational traces under the ignored
-output root.  It never invokes provider-managed tools: all proposed effects are
-evaluated against the existing isolated AgentDojo/M3 backends.
-
-There is no automatic retry.  A work item with any official response is final.
-Only a row that failed before receiving an official response may be retried,
-and only when ``--retry-failed`` is supplied explicitly.
+以最小开销驱动代表性模型完成关键用例集的全量测试。
 """
 
 from __future__ import annotations
@@ -118,7 +111,7 @@ GEMINI_FREE_CAPS = {
 
 
 class LeanEmpiricalRunnerError(RuntimeError):
-    """Raised when the lean execution boundary cannot be kept fail-closed."""
+    """当精简执行边界无法保持安全闭合时抛出的异常。"""
 
 
 @dataclass(frozen=True)

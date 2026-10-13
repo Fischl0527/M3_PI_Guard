@@ -1,8 +1,6 @@
-"""Post-outcome explanation of all sixty fixed benign tools tasks, no API.
+"""对全部 60 例固定良性工具任务的事后解释与意图复核。
 
-Trusted input and projected manifests are used for authorization explanation.
-Existing public outcomes are joined only after the explanation. No offline
-answer is treated as authority; no runtime, label, or result is rewritten.
+深入分析良性任务被防御机制误拦截（假阳性）的具体语义成因。
 """
 
 from __future__ import annotations
@@ -71,7 +69,7 @@ AGENT_NOTES = {
 
 
 def explanation(case, request, app, schemas, rules):
-    """Use trusted inputs only; outcomes cannot select the authority category."""
+    """仅使用可信输入；结果不能选择权限类别。"""
     declared = app.get("requested_actions")
     tools = {rule["tool"] for rule in rules}
     if case["benchmark"] == "agentdojo-v1":

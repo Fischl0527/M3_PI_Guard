@@ -1,12 +1,6 @@
-"""Failure-aware technical review for segmented Gemini public evidence.
+"""面向分段 Gemini 公开证据的异常感知技术复核工具。
 
-Gemini v4 correctly retained a post-response VIGIL parsing failure as an ITT
-``runner_failure``.  Its technical gate nevertheless compared only call-ledger
-``completed`` terminals with completed provider traces, conflating provider
-transport success with downstream runtime success.  This review never changes
-either ledger.  It reconciles the exact, allowlisted post-response failure while
-requiring the official trace, terminal runtime record, free-tier boundary, and
-isolated-effect evidence to remain complete.
+全面审查各分段的数据完整性、错误分布与指标收敛情况。
 """
 
 from __future__ import annotations
@@ -41,7 +35,7 @@ ALLOWLISTED_POST_RESPONSE_FAILURES = frozenset({"VigilLiveDependencyError"})
 
 
 class GeminiPublicTechnicalReviewV5Error(ValueError):
-    """Raised when transport/runtime evidence cannot be reconciled exactly."""
+    """当传输/运行时论据无法精确核对时抛出的异常。"""
 
 
 def _now() -> str:

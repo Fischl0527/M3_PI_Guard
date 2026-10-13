@@ -1,4 +1,7 @@
-"""Outcome-blind primary merge with separate integrity and quality routes."""
+"""具备独立完整性与质量复核的对结果盲审主合并工具。
+
+分离数据传输完整性校验与统计学质量达标判定。
+"""
 
 from __future__ import annotations
 
@@ -31,7 +34,7 @@ REQUIRED_NEGATIVE_CHECKS = evidence_v1.NEGATIVE_BOUNDARY_CHECKS
 
 
 class PublicPrimaryMergeReviewV2Error(ValueError):
-    """Raised when the public primary evidence cannot be merged safely."""
+    """当公开主要论据无法安全合并时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

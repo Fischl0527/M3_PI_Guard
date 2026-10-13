@@ -1,7 +1,7 @@
-"""Build the canonical portable-report artifact.json from final evidence.
+"""从最终实验证据构建规范的便携式报告工件（artifact.json）。
 
-The HTML itself is produced only by the Data Analytics portable artifact
-builder.  This script prepares its bounded, source-backed report payload.
+HTML 页面本身由便携式工件构建器生成，本脚本负责准备有明确边界、
+完全基于源证据支撑的报告负载数据（Payload），杜绝幻觉与外部推断。
 """
 
 from __future__ import annotations
@@ -22,7 +22,7 @@ DEFAULT_OUTPUT = ANALYSIS / "report" / "artifact.json"
 
 
 class HtmlReportArtifactError(RuntimeError):
-    """Raised when final evidence is missing or internally inconsistent."""
+    """当最终实验证据缺失或内部逻辑不一致时抛出的运行时异常。"""
 
 
 def _json(path: Path) -> dict[str, Any]:

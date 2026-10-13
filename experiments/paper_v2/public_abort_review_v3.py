@@ -1,4 +1,7 @@
-"""Freeze the content-free abort review for the Public-v3 primary canary."""
+"""冻结 Public-v3 主金丝雀的无内容偏见中止审查记录。
+
+固化第三轮金丝雀测试的中止审计证据。
+"""
 
 from __future__ import annotations
 
@@ -57,7 +60,7 @@ OPEN_WORK_KEY = (
 
 
 class PublicAbortReviewV3Error(ValueError):
-    """Raised when the frozen Public-v3 abort evidence drifts."""
+    """当固化的 Public-v3 中止论据发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

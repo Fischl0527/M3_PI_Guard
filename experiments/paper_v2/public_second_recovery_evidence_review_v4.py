@@ -1,12 +1,6 @@
-"""Separate Flash recovery evidence integrity from its frozen quality gate.
+"""分离 Flash 恢复证据完整性与已固化的质量基线复核。
 
-Recovery-v3 completed both append-only shards, but its aggregate technical
-review mixed positive checks with the negative fact
-``source_terminal_records_retried=false`` and then called ``all``.  This
-prospective reviewer does not rewrite that historical artifact.  It replays the
-ledgers, keeps the one-percent claim-quality result unchanged, and records a
-typed evidence-integrity decision suitable only for a later independent result
-admission.
+独立评估数据修复过程中的数据无损性。
 """
 
 from __future__ import annotations
@@ -51,7 +45,7 @@ NEGATIVE_BOUNDARY_CHECKS = frozenset(
 
 
 class PublicSecondRecoveryEvidenceReviewV4Error(ValueError):
-    """Raised when Flash recovery evidence cannot be typed safely."""
+    """当 Flash 恢复论据无法安全定型时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

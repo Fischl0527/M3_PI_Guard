@@ -1,4 +1,7 @@
-"""Build the 2026-07-26 M3-PI Guard paper-v2 stage report."""
+"""构建 2026-07-26 阶段性 paper-v2 进展报告（Word 文档）。
+
+汇总 paper-v2 阶段截至 2026-07-26 的实验设计、指标数据与阶段性产物。
+"""
 
 from __future__ import annotations
 

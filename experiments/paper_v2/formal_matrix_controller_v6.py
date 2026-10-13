@@ -1,8 +1,6 @@
-"""DeepSeek v6 controller for explicit proposal-effect boundary rejections.
+"""针对显式提案效应边界拒绝的 DeepSeek v6 控制器。
 
-Version 6 never resumes or mutates the stopped v5 matrix. It reuses the
-qualified v5 transport/evidence machinery under a new run identity and swaps
-only the prospectively qualified boundary adapter.
+实现提案级别的细粒度拒绝审计与精确因果追踪。
 """
 
 from __future__ import annotations
@@ -88,7 +86,7 @@ PRIOR_PROJECT_COST_CNY = 0.8384096
 
 
 class FormalMatrixControllerV6Error(RuntimeError):
-    """Raised when v6 cannot preserve its prospective contract."""
+    """当 v6 无法保持其前瞻性契约时抛出的异常。"""
 
 
 def _now() -> str:

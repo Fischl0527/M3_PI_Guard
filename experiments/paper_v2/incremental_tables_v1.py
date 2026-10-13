@@ -1,4 +1,7 @@
-"""Build compact main tables from the E1--E6 analysis artifacts."""
+"""从 E1--E6 分析工件中构建紧凑的论文主表格。
+
+导出格式统一的三线表 Markdown 与数据对象，严格对齐论文引用数据。
+"""
 
 from __future__ import annotations
 

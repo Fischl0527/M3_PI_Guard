@@ -1,9 +1,6 @@
-"""Freeze the directly observed nonzero Day-2 Harness result.
+"""固化直接观察到的非零第 2 日 Harness 失败结果。
 
-The failed run is immutable.  This reviewer records the single stale Harness
-command that treated already-superseded adaptive v1 admissions as current.  It
-does not repair the run, authorize provider execution, or mutate any historical
-candidate, admission, ledger, trace, or result.
+忠实记录失败原因与追踪日志，绝不掩盖测试未通过状态。
 """
 
 from __future__ import annotations
@@ -75,7 +72,7 @@ PYTEST_SUMMARY = re.compile(
 
 
 class ExperimentCloseoutDay2HarnessFailureReviewV1Error(ValueError):
-    """Raised when the failed Day-2 Harness evidence no longer reproduces."""
+    """当失败的 Day-2 Harness 论据无法再复现时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

@@ -1,9 +1,6 @@
-"""E13 validation-only Guard threshold calibration.
+"""E13 仅验证阶段的 Guard 防护阈值校准实验。
 
-The calibrator never calls a model.  It builds an offline-labelled candidate
-set from canonical validation actions and, optionally, already-produced
-Qwen normal-prompt/Guard-off logs.  Labels are used only after Guard scoring;
-the Guard receives exactly ``runtime_case_view(case)``.
+在验证集上搜寻最优的安全判定阈值，严禁使用测试集进行阈值调优（防止过拟合）。
 """
 
 from __future__ import annotations
@@ -130,7 +127,7 @@ def load_validation_cases(
     *,
     expected_count: int | None = 60,
 ) -> list[dict[str, Any]]:
-    """Load only canonical validation cases and enforce their basic contract."""
+    """仅加载规范的验证用例并强制执行其基础契约。"""
 
     rows = _load_jsonl(path)
     cases = [row for row in rows if row.get("split") == "validation"]
@@ -157,7 +154,7 @@ def load_validation_cases(
 
 
 def canonical_tool_call(action: Any) -> dict[str, Any]:
-    """Convert an action label or parsed call into the canonical ToolCall shape."""
+    """将动作标签或解析出的调用转换为规范的 ToolCall 结构。"""
 
     if isinstance(action, dict):
         tool = str(action.get("tool", "")).strip()
@@ -269,10 +266,9 @@ def load_baseline_proposals(
     paths: Sequence[str | Path],
     cases: Sequence[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Load optional, pre-existing Qwen normal/off validation ToolCalls.
+    """加载可选的、预先存在的 Qwen normal/off 验证 ToolCall。
 
-    Rows from any other split, prompt profile, Guard condition, or non-Qwen
-    model are rejected rather than silently contaminating calibration.
+    来自任何其他划分、提示词配置、Guard 条件或非 Qwen 模型的记录行将被拒绝，以防静默污染校准。
     """
 
     case_by_id = {str(case["case_id"]): case for case in cases}
@@ -358,7 +354,7 @@ def build_calibration_candidates(
     cases: Sequence[dict[str, Any]],
     proposals: Sequence[dict[str, Any]] = (),
 ) -> list[dict[str, Any]]:
-    """Build and deduplicate canonical actions while retaining offline labels."""
+    """构建并去重规范动作，同时保留离线标签。"""
 
     case_by_id = {str(case["case_id"]): case for case in cases}
     pending: dict[tuple[str, str], dict[str, Any]] = {}
@@ -402,11 +398,9 @@ def score_candidates(
     *,
     evaluator: Callable[..., Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Run full Guard once per candidate without exposing offline labels.
+    """对每个候选对象运行一次全量 Guard，且不暴露离线标签。
 
-    Thresholds 1/1 reveal the threshold-independent decision floor.  A risk of
-    exactly 1 is denied at every legal threshold, so it remains exact even
-    though its returned floor includes the threshold decision.
+    阈值 1/1 揭示了与阈值无关的决策底线。严格为 1 的风险在每个法定阈值下都会被拒绝，因此即使返回的底线包含阈值决策，它仍然保持精确。
     """
 
     guard = evaluator or evaluate_guard
@@ -444,7 +438,7 @@ def score_candidates(
 
 
 def threshold_grid(step: float = 0.01) -> list[tuple[float, float]]:
-    """Return all ask<=deny threshold pairs from 0 through 1, inclusively."""
+    """返回从 0 到 1（含两端）的所有满足 ask<=deny 的阈值对。"""
 
     step = float(step)
     if not math.isfinite(step) or step <= 0.0 or step > 1.0:
@@ -621,7 +615,7 @@ def select_thresholds(
     *,
     targets: dict[str, float] = TARGETS,
 ) -> dict[str, Any]:
-    """Freeze a feasible point, or honestly freeze the least-violating failure."""
+    """固化一个可行点，或如实固化违规程度最低的失败点。"""
 
     if not scan_rows:
         raise ValueError("cannot select thresholds from an empty scan")
@@ -760,7 +754,7 @@ HEATMAP_FIELDS = (
 def build_heatmap_data(
     scan_rows: Sequence[dict[str, Any]], selection: dict[str, Any]
 ) -> list[dict[str, Any]]:
-    """Build a rich threshold-surface table without replacing undefined values."""
+    """构建丰富的阈值曲面表格，且不替换未定义值。"""
 
     selected = selection["selected"]
     rows: list[dict[str, Any]] = []
@@ -798,8 +792,7 @@ def render_threshold_heatmap(
     png_path: Path,
     svg_path: Path,
 ) -> dict[str, Any]:
-    """Render weighted error and constraint violation over the ASK×DENY surface."""
-
+    """在 ASK×DENY 曲面上渲染加权误差与约束违规情况。"""
     import matplotlib
 
     matplotlib.use("Agg")
@@ -912,7 +905,7 @@ def render_curve(
     png_path: Path,
     svg_path: Path,
 ) -> dict[str, Any]:
-    """Render only observed points; undefined metrics are never changed to zero."""
+    """仅渲染观测到的数据点；未定义的指标绝不修改为零。"""
 
     import matplotlib
 
@@ -1078,7 +1071,7 @@ def run_e13(
     evaluator: Callable[..., Any] | None = None,
     command: Sequence[str] | None = None,
 ) -> dict[str, Any]:
-    """Generate the complete E13 evidence package without invoking a model."""
+    """生成完整的 E13 论据包，且不调用实际模型。"""
 
     if thresholds is None and float(grid_step) > 0.01:
         raise ValueError("formal E13 scans require grid_step <= 0.01")

@@ -1,14 +1,6 @@
-"""Append-only, content-minimized record storage for paper-v2 medium runs.
+"""面向 paper-v2 中等规模研究的仅追加、内容最小化实验记录存储器。
 
-The store accepts only experiment records assembled from the frozen work item,
-the reconstructed online state and already-sanitized runtime events.  Before
-every append it revalidates the complete candidate ledger, so a resumed run
-fails closed on identity drift, duplicate terminal records, corruption or raw
-content leakage.
-
-The built-in qualification writes stub entries only inside an automatically
-cleaned temporary directory.  It makes no provider/model call and creates no
-project experiment result.
+高效存储实验元数据与关键判定结果，自动计算每条记录的 SHA-256 校验和。
 """
 
 from __future__ import annotations
@@ -97,7 +89,7 @@ FORBIDDEN_LEDGER_KEYS = FORBIDDEN_EVENT_STORAGE_KEYS | frozenset(
 
 
 class FormalRecordStoreError(ValueError):
-    """Raised when a persisted experiment-record chain violates its contract."""
+    """当持久化的实验记录链违反其契约时抛出的异常。"""
 
 
 def _sha256_bytes(value: bytes) -> str:
@@ -127,7 +119,7 @@ def validate_persisted_ledger_value(
     *,
     path: str = "$",
 ) -> None:
-    """Reject raw-content keys and secret-shaped strings recursively."""
+    """递归拒绝原始内容键和类机密字符串。"""
 
     if isinstance(value, Mapping):
         for key, child in value.items():
@@ -456,7 +448,7 @@ def validate_record_entries(
     run_id: str,
     qualification_mode: bool = False,
 ) -> dict[str, Any]:
-    """Validate a complete terminal-record chain and return recovery state."""
+    """验证完整的终端记录链并返回恢复状态。"""
 
     if not isinstance(run_id, str) or not run_id:
         raise FormalRecordStoreError("run_id is required")
@@ -510,7 +502,7 @@ def build_record_entry(
     ledger_sequence: int,
     qualification_mode: bool = False,
 ) -> dict[str, Any]:
-    """Assemble one record and its sanitized runtime-event evidence envelope."""
+    """组装单条记录及其脱敏的运行时事件证据包络。"""
 
     if (
         isinstance(ledger_sequence, bool)
@@ -550,7 +542,7 @@ def build_record_entry(
 
 
 def load_record_entries(path: Path) -> list[dict[str, Any]]:
-    """Load an append-only JSONL ledger, rejecting blank or malformed rows."""
+    """加载仅追加的 JSONL 账本，拒绝空白或畸形行。"""
 
     if not path.exists():
         return []
@@ -591,7 +583,7 @@ def append_record_entry(
     run_id: str,
     qualification_mode: bool = False,
 ) -> dict[str, Any]:
-    """Validate the complete candidate ledger, then append and fsync one row."""
+    """验证完整的候选账本，然后追加并 fsync 单行。"""
 
     prior = load_record_entries(path)
     validate_record_entries(
@@ -709,7 +701,7 @@ class _QualificationEvaluator:
 
 
 def build_record_store_qualification() -> dict[str, Any]:
-    """Exercise disk append/recovery in a transient directory with zero calls."""
+    """在临时目录中以零调用演练磁盘追加/恢复。"""
 
     work_items = _load_plan()
     representatives: dict[tuple[str, str], dict[str, Any]] = {}

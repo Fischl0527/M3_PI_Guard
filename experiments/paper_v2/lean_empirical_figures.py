@@ -1,8 +1,6 @@
-"""Build the five preregistered figures for the lean empirical paper.
+"""为精简实证论文构建 5 张预注册标准图表。
 
-The module consumes only the two compact analysis JSON files.  It does not
-open raw provider traces, call a model, replay historical evidence, or create
-hash manifests.
+直观展示权限方案差异、防护机制消融以及跨模型防御边界。
 """
 
 from __future__ import annotations

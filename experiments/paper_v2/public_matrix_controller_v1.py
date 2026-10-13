@@ -1,11 +1,6 @@
-"""Freeze and qualify the paper-v2 public-matrix execution candidate.
+"""冻结并校验 paper-v2 公开矩阵执行候选版本。
 
-Stage-A actions in this version are deliberately offline.  They reconstruct
-the exact 6,873-record plan, qualify all role/benchmark/condition shells, bind
-both official DeepSeek model identities through injected responses, and freeze
-a non-executable owner-review candidate.
-
-No command in this module reads credentials or performs network I/O.
+锁定参与公开基准对比的所有模型、防护方案与用例参数。
 """
 
 from __future__ import annotations
@@ -80,7 +75,7 @@ EXPECTED_PAIRS = 18
 
 
 class PublicMatrixControllerError(ValueError):
-    """Raised when the public execution candidate cannot fail closed."""
+    """当公开执行候选对象无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

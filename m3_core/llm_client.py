@@ -1,4 +1,7 @@
-"""Local LLM client abstraction for the M3 Agent range."""
+"""统一 LLM 推理客户端抽象层。
+
+支持回环地址本地 Ollama 推理、OpenAI 兼容端点以及用于确定性回归测试的桩后端（Stub）。
+"""
 
 from __future__ import annotations
 
@@ -23,8 +26,7 @@ Message = Dict[str, str]
 
 @dataclass(frozen=True)
 class CompletionResult:
-    """Model text plus provider metadata required by reproducible runs."""
-
+    """单次模型推理补全的不可变结果对象（包含内容、耗时、Token 统计与收据元数据）。"""
     text: str
     model_latency_ms: float
     prompt_tokens: Optional[int] = None
@@ -46,8 +48,7 @@ class CompletionResult:
 
 @dataclass
 class LLMClient:
-    """Thin wrapper around either local Ollama or deterministic stub output."""
-
+    """模型统一推理客户端类。"""
     backend: str = "stub"
     model: Optional[str] = None
     base_url: Optional[str] = None
@@ -87,8 +88,7 @@ class LLMClient:
         step: int = 1,
         observations: Optional[List[Any]] = None,
     ) -> CompletionResult:
-        """Return model text and timing/usage metadata."""
-
+        """向配置的语言模型发起一次推理补全请求。"""
         started = perf_counter_ns()
         if self.backend == "stub":
             text = self._complete_stub(case or {}, step, observations or [])
@@ -159,14 +159,7 @@ class LLMClient:
         *,
         started_ns: Optional[int] = None,
     ) -> CompletionResult:
-        """Call Ollama's native local API and preserve provider counters.
-
-        Context-correction experiments use model aliases whose Modelfiles fix
-        the effective context window.  They deliberately leave ``num_ctx``
-        unset so a request parameter cannot be mistaken for proof that Ollama
-        served a particular capacity.
-        """
-
+        """通过原生 HTTP 接口调用回环地址上的本地 Ollama 服务。"""
         options: Dict[str, Any] = {
             "temperature": float(self.temperature),
             "num_predict": int(self.max_tokens),

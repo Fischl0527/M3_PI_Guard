@@ -1,9 +1,6 @@
-"""Admission-gated official DeepSeek canary for the public matrix.
+"""面向公开矩阵的带准入门禁官方 DeepSeek 金丝雀控制器。
 
-This module is inert without a separately written admission that binds the
-current candidate, one model role, and the exact command approved by the user.
-Every provider call is single-attempt, content-only, JSON Output, tool-free,
-effect-isolated, precommitted, and recorded in append-only ledgers.
+前置评估模型在公开基准上的接口响应稳定性与格式符合率。
 """
 
 from __future__ import annotations
@@ -108,7 +105,7 @@ TECHNICAL_REVIEW_NAME = "technical_canary_review_v1.json"
 
 
 class PublicLiveControllerError(ValueError):
-    """Raised when official public execution cannot be authorized safely."""
+    """当官方公开执行无法安全授权时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -681,7 +678,7 @@ def build_canary_technical_review(
     *,
     admission_path: Path,
 ) -> dict[str, Any]:
-    """Review only execution integrity; never aggregate scientific outcomes."""
+    """仅审查执行完整性；绝不聚合科学评测结果。"""
 
     permit = authorize_canary(
         model_role,

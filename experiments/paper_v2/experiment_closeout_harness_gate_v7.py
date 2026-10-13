@@ -1,10 +1,6 @@
-"""Build the non-authorizing Pro-500 pre-integration Harness gate.
+"""构建非授权性 Pro-500 集成前置 Harness 门禁。
 
-This gate binds the directly observed Fresh Harness v9 run, the immutable
-Pro-200 host-timeout technical closeout, and the exact Pro-500 candidate and
-admission.  It deliberately does not authorize provider execution: source
-added for this gate, the Pro-500 wrapper, and the detached launcher must first
-pass a new complete Harness run.
+在不提前触发大模型计费请求的前提下，完成所有本地测试集与数据契约审查。
 """
 
 from __future__ import annotations
@@ -90,7 +86,7 @@ EXPECTED_RUNTIME_AUDITOR_BLOCKS = 363
 
 
 class ExperimentCloseoutHarnessGateV7Error(ValueError):
-    """Raised when the Pro-500 pre-integration gate cannot be reproduced."""
+    """当 Pro-500 集成前门禁无法复现时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

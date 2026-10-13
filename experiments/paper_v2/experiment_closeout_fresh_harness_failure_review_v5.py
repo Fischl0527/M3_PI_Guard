@@ -1,10 +1,6 @@
-"""Freeze the directly observed nonzero fresh Harness v5 result.
+"""固化直接观察到的非零全新 Harness v5 失败结果。
 
-The immutable v5 run completed after a directly observed child exit.  Pytest
-passed, while the first evidence replay that needed the AgentDojo Git checkout
-failed under the sandbox ownership boundary.  This review binds the complete
-terminal chain and the separately sanitized process-scoped remediation
-qualification.  It does not rewrite v5 or authorize provider execution.
+记录并在历史中冻结该轮次的异常诊断记录。
 """
 
 from __future__ import annotations
@@ -81,7 +77,7 @@ SECRET_PATTERNS = (
 
 
 class ExperimentCloseoutFreshHarnessFailureReviewV5Error(ValueError):
-    """Raised when immutable fresh Harness v5 evidence drifts."""
+    """当不可变的 Fresh Harness v5 论据发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

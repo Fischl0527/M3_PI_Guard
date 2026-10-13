@@ -1,8 +1,6 @@
-"""One-pass historical counts and NEW deterministic usability/provenance probes.
+"""单遍扫描历史计数与全新确定性可用性/来源追踪诊断工具。
 
-No provider, key loader, historical replay runner or external effect is used.
-Unknown historical Guard reasons remain unknown; perturbation probes are not
-retrospective reconstructions of model proposals.
+验证不同权限方案（最小权限 vs 宽泛权限）对良性任务正常执行率的影响。
 """
 
 from __future__ import annotations
@@ -37,7 +35,7 @@ def read_rows(path: Path) -> list[dict[str, Any]]:
 
 
 def latest_rows(rows: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
-    """Reject duplicate attempts and response-bearing replay, retain failed history."""
+    """拒绝重复尝试和带有响应的重放，保留失败历史记录。"""
     grouped: dict[str, dict[int, dict[str, Any]]] = defaultdict(dict)
     for row in rows:
         key, attempt = str(row["work_key"]), int(row["attempt"])
@@ -211,7 +209,7 @@ def constraint_probes(cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def provenance_probes() -> list[dict[str, Any]]:
-    """Literal evidence stress; exact policy prevents confusing attribution with authority."""
+    """字面论据压力测试；精确策略可防止混淆归属性与授权权限。"""
     approved, other = "approved@example.test", "other@example.test"
     scenarios = {
         "untrusted_literal": {
@@ -279,7 +277,7 @@ def provenance_probes() -> list[dict[str, Any]]:
 
 
 def approval_probes() -> list[dict[str, Any]]:
-    """Verify legacy confirmation limitations without installing any approval."""
+    """在不安装任何审批的情况下验证传统确认机制的局限性。"""
     from m3_guard.task_policy import create_approval_record
 
     proposal = proposal_for(

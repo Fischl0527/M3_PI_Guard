@@ -1,4 +1,7 @@
-"""Capture a hash-bound snapshot of one local Ollama model tag."""
+"""为指定的单个本地 Ollama 模型标签捕获哈希绑定的快照清单。
+
+固化模型 Modelfile、权重 digest 及层哈希，确保实验所用模型版本不可变。
+"""
 
 from __future__ import annotations
 

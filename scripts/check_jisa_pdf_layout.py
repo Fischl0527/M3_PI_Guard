@@ -1,4 +1,7 @@
-"""Render the current paper for human QA; never execute experiment code."""
+"""渲染并检查论文 PDF 排版质量（仅执行静态页面与版式 QA，绝不运行实验代码）。
+
+借助 PyMuPDF (fitz) 自动检查页面尺寸、页码居中基线、文本越界及字体完整性。
+"""
 
 from __future__ import annotations
 
@@ -20,7 +23,7 @@ DOCUMENTS = {
 
 
 def centered_footer(page_rect, box, direction, baseline: float) -> bool:
-    """Use the rendered baseline, not a font-dependent glyph-box top."""
+    """依据渲染基线与水平中心距严格判定页脚页码是否正确居中（容差 4 像素以内）。"""
     return (
         baseline > page_rect.height - 100
         and abs((box.x0 + box.x1) / 2 - page_rect.width / 2) < 4

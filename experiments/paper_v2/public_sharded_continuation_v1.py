@@ -1,4 +1,7 @@
-"""Result-blind sharded continuation for the paper-v2 public matrix."""
+"""面向 paper-v2 公开矩阵的对结果盲审分片接续运行器。
+
+支持大规模测试矩阵按分片独立并发推进与状态持久化。
+"""
 
 from __future__ import annotations
 
@@ -59,7 +62,7 @@ SHARD_HARD_LIMITS_CNY = {"primary": 4.9, "second": 2.45}
 
 
 class PublicShardedContinuationError(ValueError):
-    """Raised when a public continuation shard cannot fail closed."""
+    """当公开接续分片无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

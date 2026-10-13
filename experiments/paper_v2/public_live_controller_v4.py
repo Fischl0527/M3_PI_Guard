@@ -1,8 +1,6 @@
-"""Admission-gated official DeepSeek canary for public matrix v4.
+"""面向公开矩阵 v4 的带准入门禁官方 DeepSeek 金丝雀控制器。
 
-Public-v4 uses fresh identities and injects the active execution identity into
-the public M3 resolver before the real offline evaluator is constructed.  The
-module remains inert without a separately written exact-command admission.
+实现严格的执行身份绑定，确保每次调用的归属明确无误。
 """
 
 from __future__ import annotations
@@ -96,7 +94,7 @@ TECHNICAL_REVIEW_NAME = "technical_canary_review_v4.json"
 
 
 class PublicLiveControllerV4Error(ValueError):
-    """Raised when official Public-v4 execution cannot be authorized."""
+    """当官方 Public-v4 执行无法授权时抛出的异常。"""
 
 
 PublicExecutionPermit = v3.PublicExecutionPermit

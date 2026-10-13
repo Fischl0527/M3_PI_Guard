@@ -1,10 +1,6 @@
-"""Attach the Gemini-specific trace bundle without mutating frozen runtimes.
+"""附加 Gemini 专用追踪包（不修改已固化的记录内容）。
 
-The historical live runtime recognizes the DeepSeek ``TracedProviderClient``
-concrete class.  Gemini uses an independently validated trace implementation,
-so a successful Gemini call otherwise reaches the executor shell without its
-bundle.  This prospective adapter keeps the historical runtime immutable and
-attaches only the already-validated, content-free Gemini bundle.
+在不篡改原始实验输出的前提下补充丰富的系统级诊断上下文。
 """
 
 from __future__ import annotations
@@ -16,7 +12,7 @@ from experiments.paper_v2.gemini_public_trace_v1 import validate_trace_bundle
 
 
 class GeminiTraceAttachingRuntimeV1Error(RuntimeError):
-    """Raised when runtime output and the Gemini trace chain do not bind."""
+    """当运行时输出与 Gemini 追踪链无法绑定时抛出的异常。"""
 
 
 def _formal_attestation_from_bundle(
@@ -63,7 +59,7 @@ def _formal_attestation_from_bundle(
 
 
 class GeminiTraceAttachingRuntimeV1:
-    """Decorate an online runtime with a fail-closed Gemini bundle attachment."""
+    """使用安全闭合的 Gemini 包附加修饰在线运行时。"""
 
     def __init__(
         self,

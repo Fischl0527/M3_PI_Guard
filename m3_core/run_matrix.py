@@ -1,4 +1,4 @@
-"""Recoverable experiment-matrix orchestration for M3_PI_Guard."""
+"""多条件/多模型交叉矩阵调度运行器（Run Matrix）。"""
 
 from __future__ import annotations
 

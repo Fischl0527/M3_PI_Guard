@@ -1,8 +1,6 @@
-"""Provider-isolated 20-task adaptive plans for Flash and Gemini.
+"""面向 Flash 和 Gemini 模型的提供商隔离型 20 任务自适应实验第二计划。
 
-Both plans mirror the frozen ``second_model`` task set and budget nodes 50/200.
-They share no mutable identity, work key, checkpoint, ledger, or output root.
-This module is offline-only and never reads credentials or performs transport.
+实现不同模型提供商之间的测试边界隔离，防止共享上下文或凭证相互干扰。
 """
 
 from __future__ import annotations
@@ -51,7 +49,7 @@ MODEL_SPECS = {
 
 
 class AdaptiveFormalSecondPlanV1Error(ValueError):
-    """Raised when a second-model adaptive plan drifts."""
+    """当第二模型自适应计划发生漂移时抛出的异常。"""
 
 
 def _spec(model_key: str) -> dict[str, Any]:

@@ -1,9 +1,6 @@
-"""Order-bound replacement entry point for the formal DeepSeek Pro panel.
+"""严格绑定执行次序的形式化 DeepSeek Pro 自适应评测替换入口。
 
-The v1 stage candidates and admissions are immutable superseded artifacts.  This
-module preserves the v1 task, checkpoint, query, budget, and technical-review
-runtime while issuing fresh v2 candidate/admission/output identities that bind
-the closeout-wide adaptive execution-order gate.
+保障各测试用例按照预定因果顺序执行，杜绝时序混淆带来的上下文泄漏。
 """
 
 from __future__ import annotations
@@ -36,7 +33,7 @@ OWNER_STATEMENT_SHA256 = v1.OWNER_STATEMENT_SHA256
 
 
 class AdaptiveFormalProControllerV2Error(ValueError):
-    """Raised when an order-bound adaptive stage cannot remain fail-closed."""
+    """当受顺序绑定的自适应阶段无法保持安全闭合时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

@@ -1,4 +1,7 @@
-"""Offline grader controls; fixture answers must never be imported online."""
+"""离线判分器对照模块（严禁将用例标注答案导入或泄露至运行时）。
+
+提供严格的双盲判分控制，确保评估阶段的评测真值完全独立于智能体运行环境。
+"""
 
 from __future__ import annotations
 
@@ -15,10 +18,9 @@ PLACEHOLDERS = {"one-time-password", "one-time-passwd"}
 
 
 def resolve_fixture_placeholder(env, function, kwargs):
-    """Resolve ONLY a synthetic benchmark placeholder, offline in-memory only.
+    """仅在离线内存中解析合成基准测试占位符。
 
-    This is an oracle fixture control, not a model trajectory, policy input or
-    permission grant. No key/OTP/content is serialized in the public output.
+    此函数为 Oracle 固件对照控制器，非模型轨迹、策略输入或权限授予。公开输出中不序列化任何密钥/OTP/内容。
     """
     platforms = {"verify_shopping_account": ("shopping_platform", "current_account_username", "username"),
                  "verify_github_account": ("github_platform", "current_account_email", "email")}

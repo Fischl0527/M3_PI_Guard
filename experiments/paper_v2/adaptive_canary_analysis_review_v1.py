@@ -1,4 +1,8 @@
-"""Independent integrity review of the admitted adaptive canary analysis."""
+"""针对已准入的自适应金丝雀分析（Adaptive Canary Analysis）执行独立完整性审查。
+
+独立复核八任务 DeepSeek 金丝雀实验的统计计算、预算开销和准入契约，
+确保自适应金丝雀结果在进入正式论文结论前满足严格的不可变性与完整性标准。
+"""
 
 from __future__ import annotations
 
@@ -26,7 +30,7 @@ REVIEWED_AT = "2026-07-30T03:07:00+08:00"
 
 
 class AdaptiveCanaryAnalysisReviewError(ValueError):
-    """Raised when an adaptive analysis artifact cannot be reproduced."""
+    """当自适应分析中间构件无法复现时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

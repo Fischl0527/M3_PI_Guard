@@ -1,9 +1,6 @@
-"""Experimental in-process confirmation boundary; NOT production authentication.
+"""进程内交互式确认边界实验会话（仅供研究实验使用，非生产授权）。
 
-Only the out-of-band simulation controller calls ``controller_respond``.
-Model/tool text has no route to it. Tickets are task/request/proposal/manifest
-bound, expire, and are single-use. Confirmation cannot widen policy or overturn
-DENY. Historical m3_guard and E1--E6 remain unchanged.
+模拟在遇到不确定敏感动作（ASK）时的人机协同确认逻辑与状态机变迁。
 """
 
 from __future__ import annotations
@@ -39,7 +36,7 @@ class _Pending:
 
 
 class ConfirmationSession:
-    """A common confirmation wrapper for NEW policy/full experimental profiles."""
+    """用于 NEW 策略/完整实验配置的通用确认包装器。"""
 
     def __init__(self, *, clock: Callable[[], float], ttl_seconds: float = 120):
         if ttl_seconds <= 0 or ttl_seconds > 3600:
@@ -95,7 +92,7 @@ class ConfirmationSession:
         return ConfirmationOutcome("untrusted_confirmation_rejected")
 
     def controller_respond(self, ticket_id: str, *, vote: str) -> ConfirmationOutcome:
-        """Trusted simulation-controller entry point, never exposed to the provider."""
+        """受信任的模拟控制器入口点，绝不向提供商暴露。"""
         if vote not in {"approved", "denied"}:
             raise ValueError("invalid controller vote")
         pending = self._pending.get(ticket_id)
@@ -146,5 +143,5 @@ class ConfirmationSession:
 
 
 def without_legacy_approvals(manifest: TaskPolicyManifest) -> TaskPolicyManifest:
-    """Independent copy for callers holding mutable nested mappings."""
+    """为持有可变嵌套映射的调用方提供独立副本。"""
     return replace(copy.deepcopy(manifest), approvals=(), manifest_sha256="")

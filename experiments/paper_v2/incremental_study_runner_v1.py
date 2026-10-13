@@ -1,9 +1,6 @@
-"""Shared fail-closed runner for the five incremental paper-v2 studies.
+"""面向 5 项增量 paper-v2 研究的共享故障安全（Fail-Closed）运行器。
 
-Regular studies use one append-only raw JSONL per study.  The formal prefix is
-part of the final sample and is never repeated.  This runner has no automatic
-retry or model fallback; explicit failed-key recovery is permitted only for a
-response-less record after an engineering fix.
+调度增量实验批次，在任意未捕获异常时自动安全中断并保护现场证据。
 """
 
 from __future__ import annotations
@@ -117,17 +114,15 @@ INCREMENTAL_PEAK_PRICING_CNY_PER_MILLION = {
 
 
 class IncrementalStudyRunnerError(RuntimeError):
-    """Raised when an incremental run cannot preserve its contract."""
+    """当增量运行无法保持其契约时抛出的异常。"""
 
 
 def apply_incremental_peak_pricing(
     policy: Mapping[str, Any], model_id: str
 ) -> dict[str, Any]:
-    """Bind new experiment accounting to the verified peak tariff.
+    """将新实验记账绑定到经验证的高峰费率。
 
-    The historical public-matrix budget policy remains immutable.  Using the
-    peak tariff is deliberately conservative: it preserves the same fuse when
-    DeepSeek applies the lower off-peak tariff.
+    历史公开矩阵预算策略保持不可变。采用高峰费率是刻意保守的设计：当 DeepSeek 采用较低的非高峰费率时，它仍保留相同的预算熔断保险丝。
     """
 
     prices = INCREMENTAL_PEAK_PRICING_CNY_PER_MILLION.get(model_id)

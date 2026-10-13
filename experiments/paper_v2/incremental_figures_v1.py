@@ -1,7 +1,6 @@
-"""Render the five prespecified figures for the incremental empirical study.
+"""渲染增量实证研究预先指定的 5 张论文主图。
 
-The renderer consumes only compact, one-pass analysis JSON files. It never
-opens provider traces, invokes a model, or reconstructs historical evidence.
+包括权限边界分解图、因子交互图、来源反事实图、效应森林图与自适应长尾衰减图。
 """
 
 from __future__ import annotations

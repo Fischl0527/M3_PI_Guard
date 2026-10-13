@@ -1,4 +1,7 @@
-"""Prospective experiment-record v2 contract for approved provider traces."""
+"""面向已批准模型提供商追踪的前瞻性实验记录 V2 数据契约。
+
+拓展支持提供商元数据、Token 消耗账本与多步调用因果收据结构。
+"""
 
 from __future__ import annotations
 
@@ -124,7 +127,7 @@ def validate_experiment_record_v2(
     online_projection: Mapping[str, Any] | None = None,
     activation_path: Path = DEFAULT_ACTIVATION,
 ) -> None:
-    """Validate schema, outcome semantics and the activated request chain."""
+    """验证 Schema 规范、结果语义以及激活的请求链。"""
 
     schema, registry = _schema_registry()
     Draft202012Validator(

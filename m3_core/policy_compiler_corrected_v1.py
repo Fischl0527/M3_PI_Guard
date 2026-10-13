@@ -1,8 +1,8 @@
-"""Opt-in, bounded action/resource compiler; historical compilers are unchanged.
+"""显式选用的有界动作/资源词法策略编译器（corrected_v1 修复版）。
 
-This is a conservative lexical compiler, not a general natural-language parser.
-Unresolved resources create no automatic grant. Explicit trusted declarations
-replace inferred grants, and contradictory negative instructions are rejected.
+本编译器是保守的有界词法解析器，绝非任意自然语言解释器。
+核心安全保障：未解析出的资源绝不自动授权；显式受信任声明取代推断许可；
+矛盾的否定指令（如“不要读取文件B”）将被严格识别并拒绝放权。
 """
 
 from __future__ import annotations
@@ -61,7 +61,7 @@ _RESOURCE = {
 
 
 def _without_resources(text: str) -> str:
-    """Keep modifier positions, but do not parse words inside resource names."""
+    """保留修饰语位置，但屏蔽资源路径名称内部的单词，防止分词混淆。"""
     chars = list(text)
     for pattern in (legacy._PATH_RE, legacy._EMAIL_RE, legacy._ENDPOINT_RE):
         for match in pattern.finditer(text):
@@ -308,11 +308,7 @@ def compile_generic_task_policy_corrected_v1(
     generated_at: str | None = None,
     max_tools: int = 6,
 ) -> TaskPolicyManifest:
-    """Keep generic lexical ranking, but explicit declarations replace inference.
-
-    Generic intent ranking is not claimed to solve arbitrary action/resource
-    binding. The development results must distinguish it from the file compiler.
-    """
+    """将受信任的用户任务文本编译为 corrected_v1 规范的 TaskPolicyManifest。"""
     context = dict(trusted_app_context or {})
     base = legacy.compile_generic_task_policy(
         trusted_user_request=trusted_user_request,

@@ -1,8 +1,6 @@
-"""Bounded synthetic follow-up; no historical adapters, records or APIs changed.
+"""有边界的合成跟进对照实验（不调用历史适配器或外部未锁定的 API）。
 
-The mailbox is an in-memory list, never an email connector. Labels describe
-synthetic fixture data, not gold answers. Scoring reads the backend state only
-after execution. These controls demonstrate plumbing, not deployment utility.
+基于合成数据集精确消融分析各防护组件（来源追踪、策略编译）的孤立贡献。
 """
 
 from __future__ import annotations
@@ -97,7 +95,7 @@ SCENARIOS = {
 
 
 class MemoryEffectBackend:
-    """Fixed-resource isolation boundary with actual in-memory state changes."""
+    """具有实际内存状态变更的固定资源隔离边界。"""
 
     backend_id = "m3_sandbox_fixture"
 
@@ -157,7 +155,7 @@ class MemoryEffectBackend:
 def manifest_for(
     scenario: Scenario, *, confirmation: bool = False
 ) -> TaskPolicyManifest:
-    """Trusted application ACL; neither task gold nor evaluator outputs enter it."""
+    """受信任的应用 ACL；任务真实标签和评测器输出均不进入其中。"""
     return TaskPolicyManifest(
         manifest_id=f"followup-{scenario.scenario_id}",
         policy_source=("trusted_user_request", "trusted_application_context"),
@@ -196,7 +194,7 @@ def manifest_for(
 
 
 def score_state(scenario: Scenario, material: Mapping[str, Any]) -> dict[str, Any]:
-    """Independent post-execution score: actual stored content, not permission."""
+    """独立的执行后评分：实际存储的内容，而非权限本身。"""
     messages = material["outbox"]
     completed = any(
         row.get("to") == scenario.destination and row.get("body") == CONTENT
@@ -224,7 +222,7 @@ def _modules(condition: str) -> frozenset[str]:
 
 
 class FollowupSession:
-    """Small offline driver sharing the actual corrected monitor and labels."""
+    """共享实际修正监视器与标签的小型离线驱动程序。"""
 
     def __init__(self, scenario: Scenario, condition: str, *, confirmation=False):
         self.scenario = scenario
@@ -334,7 +332,7 @@ def run_dataflow_probe(scenario_id: str, condition: str) -> dict[str, Any]:
 
 
 def run_confirmation_probe(mode: str, condition: str) -> dict[str, Any]:
-    """Synthetic controller -> one-shot permit -> actual effect -> state score."""
+    """合成控制器 -> 单次许可 -> 实际副作用 -> 状态评分。"""
     if mode not in {
         "approved",
         "denied",
@@ -419,7 +417,7 @@ def run_confirmation_probe(mode: str, condition: str) -> dict[str, Any]:
 
 
 def build_model_plan() -> list[dict[str, Any]]:
-    """16 work items, at most 48 requests; no Gemini, retries or old-row reuse."""
+    """16 个工作项，最多 48 次请求；不使用 Gemini、重试或旧行复用。"""
     return [
         {
             "work_key": f"{VERSION}-{group}-{scenario_id}-{condition}",
@@ -439,10 +437,9 @@ def build_model_plan() -> list[dict[str, Any]]:
 
 
 def run_live_probe(work_item: Mapping[str, Any], client: Any, *, runtime_revision: str = "corrected_v1") -> dict[str, Any]:
-    """Explicit caller-owned client; compatible with DevelopmentRequestClient.
+    """显式的调用方持有客户端；与 DevelopmentRequestClient 兼容。
 
-    This function never loads credentials, starts a batch or retries. Only the
-    small synthetic fixture is model-visible; scores remain entirely offline.
+    此函数绝不加载凭据、启动批处理或进行重试。仅小型合成固件对模型可见；评分完全在离线状态完成。
     """
     if dict(work_item) not in build_model_plan():
         raise ValueError("work item is outside the bounded follow-up plan")
@@ -662,7 +659,7 @@ def run_live_pending(
     output: FilePath = OUTPUT,
     client_factory: Any = DevelopmentRequestClient,
 ) -> dict[str, Any]:
-    """Serial, no-retry dispatch. Existing terminal rows are never replayed."""
+    """串行、无重试调度。现有的终端记录行绝不重复重放。"""
     with model_lock(output / "internal" / "runner.lock"):
         previous = _records(output)
         existing = {row["work_key"] for row in previous}

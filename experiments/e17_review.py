@@ -1,10 +1,6 @@
-"""E17 blinded dual-review workflow for security failure classification.
+"""E17 安全失效分类双盲双人审查工作流主模块。
 
-This module reads local evidence only. It never invokes a model, a network
-service, or a tool runner, and it never rewrites its input files. The common
-manifest captures read-only Git, Ollama-listing, and GPU environment metadata.
-Automatic signals select review candidates; only independent human review
-(and explicit adjudication where needed) creates final labels.
+提供严格的双盲评审界面与结构化失效标签体系（如策略编译过宽、来源标签丢失等）。
 """
 
 from __future__ import annotations
@@ -182,11 +178,11 @@ FINAL_FIELDS = (
 
 
 class E17Error(RuntimeError):
-    """Base error for the E17 review workflow."""
+    """E17 复核工作流的基础异常类。"""
 
 
 class ReviewValidationError(E17Error):
-    """Raised when a reviewer or adjudicator file is incomplete or invalid."""
+    """当复核员或裁决员文件不完整或无效时抛出。"""
 
 
 def load_jsonl(path: str | Path) -> list[dict[str, Any]]:
@@ -336,7 +332,7 @@ def _manifest_artifact(
 
 
 def _reference_record(path: Path) -> dict[str, Any]:
-    """Return a deterministic repository-relative file reference."""
+    """返回确定性的仓库相对文件引用记录。"""
 
     target = path.resolve()
     if not _inside(target, REPO_ROOT):
@@ -354,7 +350,7 @@ def _manifest_artifact_record(
     *,
     basename: str,
 ) -> tuple[Path, Mapping[str, Any]]:
-    """Resolve one manifest artifact and verify both its byte and hash ledger."""
+    """解析单个清单构件并验证其字节与哈希账本。"""
 
     artifacts = manifest.get("artifacts", [])
     matches = [
@@ -377,7 +373,7 @@ def _manifest_artifact_record(
 
 
 def _logical_run_audit(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    """Recompute logical-run and duplicate-step coverage from raw rows."""
+    """从原始数据行重新计算逻辑运行与重复步骤覆盖率。"""
 
     identities: dict[str, tuple[str, str]] = {}
     step_keys: Counter[tuple[str, int]] = Counter()
@@ -447,7 +443,7 @@ def _validate_correction_audit(
     e14_sha256: str,
     freeze_sha256: str,
 ) -> tuple[Path, dict[str, Any]]:
-    """Verify the independent correction audit and its live source bindings."""
+    """验证独立修正审计及其在线源绑定。"""
 
     path = _verified_reference(descriptor, label="context correction audit", require_repo=True)
     payload = _load_json_object(path, label="context correction audit")
@@ -492,7 +488,7 @@ def _validate_correction_audit(
 def _correction_audit_manifest_binding(
     payload: Mapping[str, Any], *, experiment_id: str
 ) -> dict[str, Any]:
-    """Normalize supported correction-audit manifest binding layouts."""
+    """规范化支持的修正审计清单绑定布局。"""
 
     candidates: list[Mapping[str, Any]] = []
     inputs = payload.get("inputs") if isinstance(payload.get("inputs"), Mapping) else {}
@@ -712,7 +708,7 @@ def _load_corrected_program_sources(
     list[dict[str, Any]],
     dict[str, Any],
 ]:
-    """Load the frozen V3 program while excluding exactly four audited E9 jobs."""
+    """加载固化的 V3 程序，同时精确排除经过审计的四个 E9 作业。"""
 
     allowlist = invalid_e9_allowlist or INVALID_V3_E9_MANIFEST_ALLOWLIST
     if set(allowlist) != set(INVALID_V3_E9_MANIFEST_ALLOWLIST) and invalid_e9_allowlist is None:
@@ -1124,7 +1120,7 @@ def _load_corrected_e14_source(
 def adapt_e16_source(
     descriptor: Mapping[str, Any],
 ) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]], list[Path], dict[str, Any]]:
-    """Normalize a completed E16 adaptive manifest into E17 step logs and cases."""
+    """将已完成的 E16 自适应清单规范化为 E17 步骤日志与用例。"""
 
     manifest_path = _verified_reference(descriptor, label="E16 manifest", require_repo=True)
     manifest = _load_json_object(manifest_path, label="E16 manifest")
@@ -1258,7 +1254,7 @@ def _load_corrected_formal_sources(
     list[dict[str, Any]],
     dict[str, Any],
 ]:
-    """Load and independently audit every schema-2.0 formal source."""
+    """加载并独立审计每个 schema-2.0 形式化数据源。"""
 
     freeze_path, _ = _validate_correction_freeze(index.get("correction_freeze", {}))
     freeze_sha256 = _sha256_file(freeze_path)
@@ -1337,7 +1333,7 @@ def _load_corrected_formal_sources(
 
 
 def recompute_corrected_source_coverage(index: Mapping[str, Any]) -> dict[str, Any]:
-    """Public builder hook: recompute schema-2.0 coverage without trusting a flag."""
+    """公开构建钩子：重新计算 schema-2.0 覆盖率，不轻信标志位。"""
 
     *_, coverage = _load_corrected_formal_sources(
         index, verify_claimed_coverage=False
@@ -1445,7 +1441,7 @@ def _stable_value(value: Any) -> str:
 
 
 def _run_identity(log: Mapping[str, Any]) -> str:
-    """Return a source-independent logical run key used for de-duplication."""
+    """返回用于去重的与源无关的逻辑运行键。"""
 
     explicit = str(
         log.get("e17_logical_run_key") or log.get("run_key") or log.get("run_id") or ""

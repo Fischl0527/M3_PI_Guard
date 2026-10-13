@@ -1,4 +1,8 @@
-"""Validate M3's unified local configuration without printing secrets."""
+"""验证 M3 项目统一本地配置与环境变量安全性（在不打印敏感值的前提下进行检查）。
+
+检查本地 .env 或配置路径是否符合规范、是否正确被 git 忽略，
+并全量扫描 Git 跟踪文件以确保绝无敏感密钥明文外泄。
+"""
 
 from __future__ import annotations
 
@@ -46,7 +50,7 @@ def _git_ignore_status(path: Path) -> dict[str, object]:
 def tracked_secret_hits(
     values: dict[str, str], *, root: Path = ROOT
 ) -> list[dict[str, str]]:
-    """Find configured secret values in tracked files without printing values."""
+    """在 Git 跟踪的文件内容中扫描配置的真实密钥明文（绝不回显密钥具体内容）。"""
 
     completed = subprocess.run(
         ["git", "ls-files", "-z"],

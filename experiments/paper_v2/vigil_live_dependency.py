@@ -1,9 +1,6 @@
-"""Bridge VIGIL's official constraint generator to the frozen provider client.
+"""桥接 VIGIL 官方约束生成器至固化的提供商接口。
 
-The pinned VIGIL parser and generator remain unchanged.  Only its OpenAI client
-construction is dependency-injected so the same single-attempt provider,
-identity, budget and receipt controls used by M3 also govern the baseline.
-Silent VIGIL default-constraint fallback is rejected.
+作为关键的结构化基线系统参与对抗与良性任务评测。
 """
 
 from __future__ import annotations
@@ -49,7 +46,7 @@ _GENERATOR_LOCK = threading.RLock()
 
 
 class VigilLiveDependencyError(ValueError):
-    """Raised when the provider bridge or official generator falls back."""
+    """当提供商桥接或官方生成器发生回退时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -65,7 +62,7 @@ class VigilPreparation:
 
 
 class _OfficialProviderOpenAIFacade:
-    """Expose only the OpenAI call shape used by ConstraintGenerator."""
+    """仅公开 ConstraintGenerator 使用的 OpenAI 调用形式。"""
 
     def __init__(self, client: OfficialProviderClient) -> None:
         self._client = client
@@ -145,7 +142,7 @@ def _vigil_modules() -> tuple[Any, Any]:
 
 
 class VigilOfficialConstraintFactory:
-    """Prepare a source-pinned VIGIL auditor using one controlled model call."""
+    """使用单个受控模型调用准备源固定的 VIGIL 审计器。"""
 
     provider_calls_consumed = 1
 

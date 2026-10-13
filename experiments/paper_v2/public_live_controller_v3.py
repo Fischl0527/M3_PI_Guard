@@ -1,8 +1,6 @@
-"""Admission-gated official DeepSeek canary for public matrix v3.
+"""面向公开矩阵 v3 的带准入门禁官方 DeepSeek 金丝雀控制器。
 
-Public-v3 uses fresh run/execution identities and explicitly wires both
-public-plan resolvers: AgentDojo v2 and M3 v3.  It remains inert without a
-separately written exact-command admission.
+强化对长文本注入载荷的处理能力与令牌消耗跟踪。
 """
 
 from __future__ import annotations
@@ -96,7 +94,7 @@ TECHNICAL_REVIEW_NAME = "technical_canary_review_v3.json"
 
 
 class PublicLiveControllerV3Error(ValueError):
-    """Raised when official Public-v3 execution cannot be authorized."""
+    """当官方 Public-v3 执行无法授权时抛出的异常。"""
 
 
 PublicExecutionPermit = v2.PublicExecutionPermit

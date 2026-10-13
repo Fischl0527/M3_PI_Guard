@@ -1,11 +1,6 @@
-"""Admit the Public-family validator for primary-result reanalysis.
+"""准入公开家族验证器用于主结果重新分析。
 
-The v1 analysis selected the record-v1 validator.  The first correction then
-selected the generic v2.2 validator, which is bound to the medium-matrix cost
-policy and therefore rejected Public-family cost evidence before aggregation.
-This prospective amendment selects the already qualified Public experiment
-record validator with the frozen primary role policy.  It changes neither
-records nor statistics and authorizes no provider activity.
+为多分类攻击评估提供统一的家族归属与拦截判定标准。
 """
 
 from __future__ import annotations
@@ -72,7 +67,7 @@ GENERATED_AT = "2026-07-30T08:30:00+08:00"
 
 
 class PublicPrimaryAnalysisCorrectionV3Error(ValueError):
-    """Raised when the Public-family validator correction drifts."""
+    """当 Public 家族验证器修正发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

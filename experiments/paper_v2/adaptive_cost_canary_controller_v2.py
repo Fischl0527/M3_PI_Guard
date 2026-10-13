@@ -1,4 +1,7 @@
-"""Fresh adaptive cost-canary recovery with the record decision field fixed."""
+"""具备决策字段显式记录的全新自适应成本金丝雀恢复控制器。
+
+修正了记录字段缺失问题，在重放和恢复执行中完整捕获防护判定决策流与中间审计事件。
+"""
 
 from __future__ import annotations
 
@@ -67,7 +70,7 @@ TECHNICAL_REVIEW_NAME = "technical_cost_review_v2.json"
 
 
 class AdaptiveCostCanaryV2Error(ValueError):
-    """Raised when adaptive-v2 cannot preserve its fresh recovery boundary."""
+    """当自适应-v2 无法保持其全新的恢复边界时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

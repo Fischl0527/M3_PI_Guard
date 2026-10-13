@@ -1,4 +1,7 @@
-"""Build non-causal, report-only figures from frozen experiment tables."""
+"""从已固化的实验数据表格中构建非因果性、仅供阶段性报告展示的图表。
+
+绘制注册表状态、吞吐量分布及阶段性诊断概览图，不作为因果结论证据使用。
+"""
 
 from __future__ import annotations
 

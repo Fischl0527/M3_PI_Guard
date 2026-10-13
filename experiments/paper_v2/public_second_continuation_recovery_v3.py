@@ -1,9 +1,6 @@
-"""Outcome-blind recovery for the two sealed DeepSeek Flash public shards.
+"""面向两个已封签 DeepSeek Flash 公开分片的对结果盲审恢复执行器。
 
-The v2 shards each stopped after their first terminal provider diagnostic.  The
-closed prefixes are immutable ITT evidence and the diagnostic work items must
-never be retried.  This version freezes both prefixes and creates two new
-execution identities containing only work items that have never started.
+在封签保护下安全接续执行由于配额中断的 Flash 模型评测。
 """
 
 from __future__ import annotations
@@ -55,7 +52,7 @@ GENERATED_AT = "2026-08-03T13:31:00+08:00"
 
 
 class PublicSecondRecoveryV3Error(ValueError):
-    """Raised when the Flash recovery boundary cannot fail closed."""
+    """当 Flash 恢复边界无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -327,7 +324,7 @@ def _remaining_limit(source_limit: float, spent: float) -> float:
 
 
 def _stop_after_terminal_record(*, budget_paused: bool) -> bool:
-    """Stop only on the frozen budget fuse, never on a closed diagnostic."""
+    """仅在固化预算保险丝处停止，绝不在已关闭的诊断上停止。"""
 
     return budget_paused
 

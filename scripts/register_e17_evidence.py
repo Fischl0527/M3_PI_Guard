@@ -1,14 +1,6 @@
-"""Revalidate a completed E17 bundle and register its evidence atomically.
+"""重新校验已完成的 E17 产物包并原子性注册其证据至实验注册表。
 
-This command is deliberately a dry run unless ``--apply`` is supplied.  It is
-the only supported bridge between the completed blinded human-review workflow
-and the E0--E17 experiment registry.  The E17 workflow itself remains the
-authority for reviewer independence, disagreement resolution, retained-copy
-hashes, and artifact integrity.
-
-Run this command before building ``outputs/experiments/final_analysis``.  A
-pre-existing final-analysis directory is rejected because updating the registry
-after synthesis would stale the registry hash captured by that bundle.
+核实盲审评分数据完整性并提交至形式化结论清单。
 """
 
 from __future__ import annotations
@@ -39,7 +31,7 @@ FINAL_ANALYSIS_RELATIVE = Path("outputs/experiments/final_analysis")
 
 
 class E17RegistrationError(RuntimeError):
-    """Raised before a registry write when the E17 admission boundary fails."""
+    """在向注册表写入之前，当 E17 准入边界检查失败时抛出。"""
 
 
 def _sha256(path: Path) -> str:
@@ -123,7 +115,7 @@ def _source_contract(
     source_index: Path,
     root: Path,
 ) -> dict[str, Any]:
-    """Recompute the corrected source graph and bind it to the E17 plan."""
+    """重新计算修正后的源图并将其绑定到 E17 计划。"""
 
     try:
         bundle = e17_review.load_source_index(source_index)
@@ -220,7 +212,7 @@ def prepare_registration(
     source_index_path: str | Path,
     manifest_path: str | Path,
 ) -> tuple[dict[str, Any], list[str]]:
-    """Run the completed fast path and return a write-free registration summary."""
+    """运行已完成的快速路径，并返回无写操作的注册摘要。"""
 
     root = Path(repository_root).resolve()
     registry_file = _inside_root(registry_path, root, label="registry")
@@ -306,7 +298,7 @@ def _complete_e17_atomically(
     summary: Mapping[str, Any],
     evidence: list[str],
 ) -> None:
-    """Dedicated E17 completion transition; never calls the generic gate."""
+    """专用的 E17 完成态流转函数；绝不调用通用门禁。"""
 
     if _sha256(registry_path) != str(summary.get("registry_sha256_before", "")):
         raise E17RegistrationError("registry changed after E17 validation; rerun admission")

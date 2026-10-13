@@ -1,9 +1,7 @@
-"""Admission-gated DeepSeek Pro bridge for the adaptive 8x50 cost canary.
+"""自适应 8x50 成本金丝雀实验的 DeepSeek Pro 桥接控制器（带准入前置门禁）。
 
-This controller is inert unless a separate hash-bound admission exists.  It
-maps each MCTS mutation to the frozen M3 ``untrusted_content`` field, executes
-M3-full in the isolated sandbox, and binds every adaptive query to zero or more
-official provider calls through independent append-only ledgers.
+控制 8 个选定任务在 50 次迭代预算下的自适应对抗搜索，
+严格限制 API 调用频次并记录精确的 Token 开销账本。
 """
 
 from __future__ import annotations
@@ -106,11 +104,11 @@ ADAPTIVE_SEED = 20260723
 
 
 class AdaptiveCostCanaryControllerError(ValueError):
-    """Raised when the adaptive canary crosses a frozen boundary."""
+    """当自适应金丝雀越过固化边界时抛出的异常。"""
 
 
 class AdaptiveCanaryStop(RuntimeError):
-    """Internal clean stop after a terminal diagnostic or budget pause."""
+    """终端诊断或预算暂停后的内部正常停止异常。"""
 
 
 @dataclass(frozen=True)
@@ -175,7 +173,7 @@ def canonical_canary_command() -> str:
 
 
 def adaptive_role_policy() -> dict[str, Any]:
-    """Project the public Pro price into an independent CNY 5 fuse."""
+    """将公开 Pro 定价映射为独立的人民币 5 元预算保险丝策略。"""
 
     policy = build_role_policy(load_public_policy(), "primary")
     policy["deepseek"]["hard_spend_limit_cny"] = 5.0
@@ -331,7 +329,7 @@ def authorize_canary(
 
 
 class AdaptiveM3CaseResolver:
-    """Resolve evaluator labels by frozen case id after online execution."""
+    """在线执行后通过固化的用例 ID 解析评测者标注。"""
 
     def __init__(self, candidate: Mapping[str, Any]) -> None:
         self.candidate = copy.deepcopy(dict(candidate))
@@ -700,7 +698,7 @@ def build_technical_review(
     *,
     admission_path: Path,
 ) -> dict[str, Any]:
-    """Review query/call integrity and cost without reporting outcomes."""
+    """在不汇报模型输出结果的前提下审查查询/调用完整性与开销。"""
 
     permit = authorize_canary(admission_path=admission_path)
     role_policy = adaptive_role_policy()

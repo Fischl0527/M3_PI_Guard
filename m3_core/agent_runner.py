@@ -1,4 +1,8 @@
-"""Agent main loop for baseline and guarded local runs."""
+"""智能体基线与受保护本地运行主循环模块（Agent Main Loop）。
+
+负责管理智能体与 LLM 的多轮对话交互、提示词模板拼装、宽松工具调用解析（JSON Repair）、
+Guard 防护拦截决策对接以及在隔离沙箱中的安全调用执行。
+"""
 
 from __future__ import annotations
 
@@ -66,7 +70,7 @@ EXPERIMENT_VERSION = "exp-day5-final"
 
 
 def _isolated_tool_sandbox(func: Any) -> Any:
-    """Give every run attempt a fresh sandbox and always clean it afterwards."""
+    """装饰器：为每次运行尝试赋予全新的独立隔离沙箱，并在结束时无条件执行清理。"""
 
     @wraps(func)
     def wrapped(case: Dict[str, Any], *args: Any, **kwargs: Any) -> List[Dict[str, Any]]:
@@ -160,7 +164,19 @@ def run_case(
     experiment_version: str = EXPERIMENT_VERSION,
     _sandbox: SandboxContext | None = None,
 ) -> List[Dict[str, Any]]:
-    """Run one AttackCase and return step-level RunLog records."""
+    """执行单个安全评测案例的主入口函数。
+
+    参数:
+        case: 攻击案例数据字典。
+        model: 模型名称，未指定时由客户端使用默认模型。
+        backend: 推理后端（默认 'stub'）。
+        defense_mode: 防护模式（默认 'baseline'）。
+        max_steps: 允许的最大交互轮数（默认 5 步）。
+        prompt_profile: 提示词策略（'normal' 或 'hardened'）。
+
+    返回:
+        List[Dict[str, Any]]: 按交互步骤组织的运行日志列表，包含工具事件、防护决策及评测字段。
+    """
 
     case_started_ns = perf_counter_ns()
     started_at = datetime.now(timezone.utc).isoformat()
@@ -555,18 +571,13 @@ def run_case(
 
 
 def parse_tool_call(raw_output: str) -> Dict[str, Any]:
-    """Compatibility wrapper returning only the parsed ToolCall."""
+    """从模型输出的原始文本中解析出结构化的工具调用字典（带宽松容错与修复能力）。"""
 
     return extract_tool_call(raw_output)["tool_call"]
 
 
 def extract_tool_call(raw_output: str) -> Dict[str, Any]:
-    """Parse model text into a ToolCall and expose parse diagnostics.
-
-    DAY4 真实模型实验里，小模型常会把 JSON 包在 Markdown 代码块里，
-    或在 JSON 前后输出解释文字。这里按“严格 JSON -> 提取首个对象 ->
-    常见修复 -> 安全降级”的顺序解析，避免把不稳定输出直接送进工具层。
-    """
+    """提取工具调用的主要内部实现函数。"""
 
     text = (raw_output or "").strip()
     candidates = _json_candidates(text)
@@ -594,7 +605,7 @@ def extract_tool_call(raw_output: str) -> Dict[str, Any]:
 
 
 def _json_candidates(text: str) -> List[str]:
-    """Build parse candidates from raw text, code fences, and first JSON object."""
+    """从包含混合自由文本与代码块的模型输出中提取所有潜在的候选 JSON 文本片段。"""
 
     candidates: List[str] = []
 
@@ -622,7 +633,7 @@ def _json_candidates(text: str) -> List[str]:
 
 
 def _loads_relaxed_json(text: str) -> tuple[Any, str]:
-    """Try JSON first, then Python literal syntax for single-quoted objects."""
+    """尝试使用多种容错修复策略（去除尾随逗号、修复转义、单引号转双引号）解析 JSON。"""
 
     try:
         return json.loads(text), ""
@@ -642,7 +653,7 @@ def _loads_relaxed_json(text: str) -> tuple[Any, str]:
 
 
 def _normalize_tool_call(parsed: Any, raw_text: str) -> tuple[Dict[str, Any], bool, str]:
-    """Validate parsed JSON and keep the execution surface to known tools only."""
+    """归一化工具调用字典的键名与参数结构。"""
 
     if not isinstance(parsed, dict):
         return (
@@ -679,14 +690,7 @@ def _normalize_tool_call(parsed: Any, raw_text: str) -> tuple[Dict[str, Any], bo
 
 
 def _canonicalize_tool_arguments(tool: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Normalize common small-model aliases without hiding unknown fields.
-
-    Local 3B/4B models frequently emit ``file`` instead of ``path`` or
-    ``recipient`` instead of ``to``.  Treating those calls as indeterminate
-    would bias ASR and FPR downward.  Unknown fields remain available to the
-    Guard for inspection; recognized aliases are collapsed to one canonical
-    key before policy evaluation and execution.
-    """
+    """将各工具实参格式化为标准规范格式。"""
 
     aliases: Dict[str, Dict[str, tuple[str, ...]]] = {
         "read_file": {"path": ("file", "filename", "file_path")},
@@ -727,7 +731,7 @@ def _canonicalize_tool_arguments(tool: str, arguments: Dict[str, Any]) -> Dict[s
 
 
 def _strip_markdown_json_fence(text: str) -> str:
-    """Remove the common ```json ... ``` wrapper from model output."""
+    """剥离 Markdown 围栏代码块标记（如 ```json ... ```）。"""
 
     stripped = text.strip()
     fence = re.match(r"^```(?:json|JSON)?\s*(.*?)\s*```$", stripped, re.S)
@@ -737,7 +741,7 @@ def _strip_markdown_json_fence(text: str) -> str:
 
 
 def _extract_first_json_object(text: str) -> str:
-    """Return the first balanced {...} span, respecting quoted strings."""
+    """提取文本中第一个平衡大括号对包裹的顶层 JSON 对象。"""
 
     start = text.find("{")
     if start < 0:
@@ -772,23 +776,19 @@ def _extract_first_json_object(text: str) -> str:
 
 
 def _remove_trailing_commas(text: str) -> str:
-    """Drop trailing commas before object/array closers."""
+    """清理 JSON 对象或数组末尾非法的尾随逗号。"""
 
     return re.sub(r",\s*([}\]])", r"\1", text)
 
 
 def _remove_invalid_json_escapes(text: str) -> str:
-    """Remove backslashes before characters that JSON cannot escape.
-
-    Markdown-oriented models often emit identifiers such as ``read\\_file``.
-    The repair is deliberately narrow: valid JSON escapes remain untouched.
-    """
+    """修复由于模型错误生成的非法反斜杠转义序列。"""
 
     return re.sub(r'\\(?!["\\/bfnrtu])', "", text)
 
 
 def _repair_unescaped_final_answer(text: str) -> Dict[str, Any] | None:
-    """Recover an unescaped nested object only inside non-executable final text."""
+    """专门针对包含未转义双引号的 final 回答内容进行容错修复。"""
 
     match = re.fullmatch(
         r'\s*\{\s*"tool"\s*:\s*"final"\s*,\s*"arguments"\s*:\s*'
@@ -802,7 +802,7 @@ def _repair_unescaped_final_answer(text: str) -> Dict[str, Any] | None:
 
 
 def _single_quotes_to_double_quotes(text: str) -> str:
-    """Best-effort repair for simple single-quoted ToolCall objects."""
+    """将合法的 Python 字典风格单引号安全转换为标准 JSON 双引号。"""
 
     if '"' in text:
         return text
@@ -810,7 +810,7 @@ def _single_quotes_to_double_quotes(text: str) -> str:
 
 
 def _compact_error(errors: List[str]) -> str:
-    """Keep parse_error useful but short for CSV/Dashboard display."""
+    """生成紧凑截断的错误原因说明字符串。"""
 
     unique_errors: List[str] = []
     for error in errors:
@@ -825,13 +825,7 @@ def _build_initial_messages(
     prompt_profile: str = "normal",
     defense_mode: Optional[str] = None,
 ) -> List[Dict[str, str]]:
-    """Build messages from the runtime allow-list only.
-
-    ``defense_mode`` is accepted solely for old callers.  New code must pass a
-    prompt profile explicitly so Guard selection cannot alter model behavior.
-    ``conversation_turns`` is a stable injection point for E9/E10; dimensional
-    experiment labels never enter the messages.
-    """
+    """构造初始对话历史消息列表（包含系统设定提示与用户任务输入）。"""
 
     if defense_mode is not None and prompt_profile == "normal":
         prompt_profile = (
@@ -893,14 +887,7 @@ def _build_initial_messages(
 
 
 def _trusted_tool_authorization(runtime_case: Dict[str, Any]) -> str:
-    """Render the trusted execution contract without evaluator-only labels.
-
-    The permission set is already part of the runtime case and Guard context.
-    Making the same contract visible to the model prevents small models from
-    inventing a second tool after the required action has completed.  Attack
-    targets, expected answers, detector labels, and success labels are never
-    included.
-    """
+    """基于受信任用户输入确定当前案例允许访问的工具与参数白名单。"""
 
     requires_tool = bool(runtime_case.get("requires_tool", False))
     actions = runtime_case.get("authorized_actions", [])
@@ -934,7 +921,7 @@ def _trusted_tool_authorization(runtime_case: Dict[str, Any]) -> str:
 
 
 def _model_authorization_contract(actions: List[Any]) -> List[Dict[str, Any]]:
-    """Render compact stored permissions as unambiguous ToolCall constraints."""
+    """构造向模型明示的工具授权边界声明文本。"""
 
     rendered: List[Dict[str, Any]] = []
     for action in actions:
@@ -961,7 +948,7 @@ def _required_authorized_actions_pending(
     runtime_case: Dict[str, Any],
     successful_calls: List[Dict[str, Any]],
 ) -> bool:
-    """Return whether a required trusted action still lacks a successful call."""
+    """检查当前案例是否仍有已授权但尚未执行的关键业务操作。"""
 
     if not bool(runtime_case.get("requires_tool", False)):
         return False
@@ -1044,7 +1031,7 @@ def _resolve_execution_modes(
 
 
 def _guard_mode(defense_mode: str) -> str:
-    """Legacy helper retained for external scripts."""
+    """解析并规范化当前运行所采用的 Guard 防御模式。"""
 
     return _resolve_execution_modes(
         defense_mode,
@@ -1089,7 +1076,7 @@ def _call_guard_evaluate(
     mode: str,
     config: Dict[str, Any],
 ) -> Dict[str, Any]:
-    """Call one known Guard signature without masking internal TypeErrors."""
+    """动态调用运行时 Guard 防护评估接口。"""
 
     parameters = inspect.signature(guard_evaluate).parameters
     kwargs: Dict[str, Any] = {}
@@ -1122,7 +1109,7 @@ def _call_guard_evaluate(
 
 
 def _load_guard_evaluate(*, allow_fallback: bool = False):
-    """Load the real Guard; formal experiments fail instead of downgrading."""
+    """动态加载并缓存 evaluate_guard 函数引用。"""
 
     try:
         from m3_guard.guard_engine import evaluate_guard
@@ -1135,7 +1122,7 @@ def _load_guard_evaluate(*, allow_fallback: bool = False):
 
 
 def _load_guard_decide():
-    """Legacy loader, now fail-fast by default."""
+    """动态加载并缓存 guard_decide 函数引用。"""
 
     from m3_guard.guard_engine import guard_decide
 
@@ -1153,15 +1140,7 @@ def _elapsed_ms(started_ns: int) -> float:
 
 
 def _fallback_guard_decide(context: Dict[str, Any], tool_call: Dict[str, Any]):
-    """Minimal local guard used only when m3_guard is unavailable.
-
-    这个 fallback 只覆盖本地靶场最核心的行为边界：
-    - 读取 sandbox/secrets 或 secret-like 路径：deny
-    - 外发 canary/secret 或发给 redteam@example.test：deny
-    - internal/export/canary API：deny
-    - run_code：ask，主循环会默认拒绝执行
-    - final：allow
-    """
+    """在外部 Guard 模块不可用时的保守回退决策函数。"""
 
     tool = str(tool_call.get("tool", "")).strip()
     args = tool_call.get("arguments")

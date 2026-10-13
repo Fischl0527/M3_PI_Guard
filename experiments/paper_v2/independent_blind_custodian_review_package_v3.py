@@ -1,9 +1,6 @@
-"""Build the Python-first independent blind-custodian review package v3.
+"""构建 Python 原生独立盲测托管人审查材料包（版本 V3）。
 
-The builder reads only an explicit source allowlist.  It never enumerates or
-copies repository configuration, credentials, real candidates, private labels,
-prior run outputs, or a signing key.  The destination must be a new absolute
-directory and is never overwritten.
+打包所有验证脚本、静态类型检查器与报告模板，供托管人一键复核。
 """
 
 from __future__ import annotations
@@ -299,7 +296,7 @@ def test_mutable_config_is_work_scoped_and_private_key_is_external() -> None:
 
 
 class ReviewPackageV3Error(ValueError):
-    """Raised when the review package cannot be built safely."""
+    """当审查包无法安全构建时抛出的异常。"""
 
 
 def canonical_json_bytes(value: Any) -> bytes:

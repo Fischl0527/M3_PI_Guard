@@ -1,10 +1,6 @@
-"""Offline quota-capacity schedule for the frozen Gemini adaptive panel.
+"""面向固化的 Gemini 自适应面板的离线配额容量调度计划。
 
-The schedule enumerates the maximum 4,000 query slots prospectively, using a
-round-robin task order at each query index.  Two slots fit in one provider day
-because every M3-full query has a frozen maximum of eight provider calls and
-the local free-tier ceiling is eighteen requests.  Runtime successors must
-skip future slots after a task reaches success or a terminal diagnostic.
+精确规划每日请求量上限、令牌速率限制与任务批次分配，保障实验平稳执行。
 """
 
 from __future__ import annotations
@@ -36,7 +32,7 @@ QUOTA_SEGMENT_COUNT = QUERY_SLOT_COUNT // QUERIES_PER_QUOTA_DAY
 
 
 class GeminiAdaptiveQuotaScheduleV1Error(ValueError):
-    """Raised when the free-tier adaptive capacity schedule drifts."""
+    """当免费层自适应容量时间表发生漂移时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

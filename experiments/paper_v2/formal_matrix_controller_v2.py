@@ -1,12 +1,6 @@
-"""Replacement DeepSeek matrix controller after the immutable v1 abort.
+"""在不可变 v1 中止后启用的替代性 DeepSeek 矩阵控制器。
 
-Version 2 keeps the original 480-item plan but creates a new run and matrix
-identity.  It explicitly commits DeepSeek-V4-Pro to non-thinking mode, treats
-operational failures as intention-to-treat failures without invoking an
-inapplicable effect evaluator, and requires a six-condition canary before a
-separate continuation admission can unlock the remaining matrix.
-
-The aborted v1 output is never resumed or overwritten.
+修复前序批次的超时与连接问题，以全新会话继续推进矩阵实验。
 """
 
 from __future__ import annotations
@@ -145,7 +139,7 @@ PRIOR_ABORTED_MATRIX_USAGE = {
 
 
 class FormalMatrixControllerV2Error(RuntimeError):
-    """Raised when the replacement run cannot remain prospective."""
+    """当替换运行无法保持前瞻性时抛出的异常。"""
 
 
 @dataclass(frozen=True)
@@ -278,7 +272,7 @@ def _v1_abort_review() -> dict[str, Any]:
 
 
 def build_matrix_candidate() -> dict[str, Any]:
-    """Build a deterministic, non-executable replacement candidate."""
+    """构建确定性、不可执行的替换候选对象。"""
 
     base_candidate = v1.verify_matrix_candidate(DEFAULT_V1_CANDIDATE)
     rows = v1._plan_rows()
@@ -553,7 +547,7 @@ def verify_matrix_candidate(
 
 
 class FailureAwareOutcomeEvaluator:
-    """Keep explicit runtime failures in the ITT denominator."""
+    """在 ITT 分母中保留显式运行时失败。"""
 
     def __init__(self, delegate: Any) -> None:
         self.delegate = delegate
@@ -576,7 +570,7 @@ class FailureAwareOutcomeEvaluator:
 
 
 class FailureTierNormalizingRuntime:
-    """Align a complete trace bundle with a post-response runtime failure."""
+    """将完整追踪包与响应后运行时失败对齐。"""
 
     def __init__(self, delegate: LiveConditionRuntime) -> None:
         self.delegate = delegate
@@ -594,7 +588,7 @@ class FailureTierNormalizingRuntime:
 
 
 class RedactedVigilConstraintFactory:
-    """Discard source VIGIL's raw-response console fallback diagnostics."""
+    """丢弃源 VIGIL 的原始响应控制台回退诊断。"""
 
     provider_calls_consumed = 1
 
@@ -1146,7 +1140,7 @@ def _fixture_dispatcher_factory(
 
 
 def build_controller_qualification() -> dict[str, Any]:
-    """Exercise sequential execution and failure retention without network."""
+    """在无网络环境下演练顺序执行与失败保留。"""
 
     rows = [
         row

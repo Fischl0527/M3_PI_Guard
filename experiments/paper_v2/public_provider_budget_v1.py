@@ -1,11 +1,6 @@
-"""Fail-closed per-role budget state for the paper-v2 public matrix.
+"""面向 paper-v2 公开矩阵的按角色故障安全预算状态控制器。
 
-The earlier medium-matrix policy intentionally hard-codes a 480-item
-DeepSeek-V4-Pro study.  This module leaves that evidence immutable and adapts
-the same cache-aware accounting contract to the frozen 6,873-record public
-matrix with separate Pro and Flash ceilings.
-
-It does not read credentials or make network calls.
+为不同模型角色分配独立额度，防止单个模型异常耗尽全局预算。
 """
 
 from __future__ import annotations
@@ -56,7 +51,7 @@ MILLION = Decimal(1_000_000)
 
 
 class PublicBudgetPolicyError(ValueError):
-    """Raised when the public budget contract would fail open."""
+    """当公开预算契约可能安全放开时抛出的异常。"""
 
 
 def load_public_policy(path: Path = DEFAULT_POLICY) -> dict[str, Any]:
@@ -227,7 +222,7 @@ def build_role_policy(
     policy: Mapping[str, Any],
     role: str,
 ) -> dict[str, Any]:
-    """Project the master policy into the existing trace-cost interface."""
+    """将主策略投影到现有的追踪成本接口中。"""
 
     public = validate_public_policy(policy)
     if role not in ROLE_IDENTITIES:
@@ -367,7 +362,7 @@ def check_role_headroom(
 
 @dataclass
 class PublicProviderBudgetState:
-    """Per-work-item budget state compatible with the traced JSON client."""
+    """与追踪 JSON 客户端兼容的单工作项预算状态。"""
 
     provider_id: str
     policy: Mapping[str, Any]

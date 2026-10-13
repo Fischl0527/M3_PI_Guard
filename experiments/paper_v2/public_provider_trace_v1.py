@@ -1,8 +1,6 @@
-"""Provider trace bundle adapter for public Pro/Flash execution.
+"""面向公开 Pro/Flash 执行的提供商追踪包适配器。
 
-The durable request-chain format remains the admitted paper-v2 v2 bundle.
-Only cache-cost arithmetic is versioned here because the older validator
-intentionally binds a different 480-item/V4-Pro budget policy.
+将不同提供商的私有响应头统一适配为结构化 trace 证据。
 """
 
 from __future__ import annotations
@@ -42,7 +40,7 @@ from experiments.paper_v2.public_provider_budget_v1 import role_cost_cny
 
 
 class PublicProviderTraceError(ValueError):
-    """Raised when a public request chain is incomplete or inconsistent."""
+    """当公开请求链不完整或不一致时抛出的异常。"""
 
 
 def _usage_totals(
@@ -461,7 +459,7 @@ def build_public_trace_bundle(
 
 
 class PublicDeepSeekJsonTracedProviderClient(pt.TracedProviderClient):
-    """Trace the exact JSON payload and public-role cache cost."""
+    """追踪确切 JSON 载荷与公开角色缓存成本。"""
 
     def complete(
         self,

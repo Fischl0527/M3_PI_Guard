@@ -1,8 +1,8 @@
-"""Generate and audit the 1,500-case M3-v2 paper dataset.
+"""生成并审计包含 1,500 个案例的 M3-v2 论文评测基准数据集。
 
-The 600-case holdout is explicitly an automated sealed holdout, not an
-independently authored blind set.  It is stored separately and its evidence
-level remains visible in every manifest and downstream result.
+注意：其中包含的 600 个保留集（Holdout）明确属于自动化密封保留集（Automated Sealed Holdout），
+而非由独立第三方作者编写的盲测集。该数据集单独存储，且其证据层级（Evidence Level）
+在所有实验清册（Manifest）及下游结果中保持透明披露。
 """
 
 from __future__ import annotations

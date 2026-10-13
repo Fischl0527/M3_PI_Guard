@@ -1,10 +1,6 @@
-"""Activate the approved DeepSeek request trace for prospective v2 evidence.
+"""为前瞻性 v2 实验激活获批的 DeepSeek 请求追踪机制。
 
-This activation is deliberately narrower than formal-matrix admission.  It
-records the project owner's approval, binds the already-qualified candidate
-artifacts and validates a new provider-trace attestation schema.  It does not
-modify the v1 experiment-record contract, upgrade any historical smoke, make a
-network request, or authorize the medium experiment by itself.
+开启调用链路全程跟踪，支持精确的因果溯源与中间状态复现。
 """
 
 from __future__ import annotations
@@ -49,7 +45,7 @@ APPROVED_PROVIDER_IDS = ("deepseek",)
 
 
 class ProviderRequestTraceActivationError(ValueError):
-    """Raised when the approved v2 request-trace boundary drifts."""
+    """当批准的 v2 请求追踪边界发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

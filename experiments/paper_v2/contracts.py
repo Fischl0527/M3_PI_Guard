@@ -1,7 +1,6 @@
-"""Versioned experiment-record and online-state contracts for paper-v2.
+"""paper-v2 的版本化实验记录与在线状态数据契约。
 
-This module does not change the public M3 runtime interfaces.  It provides a
-strict evidence boundary around experiment inputs and outcomes.
+定义实验记录 schema 规范、禁止进入运行时的先验泄露字段黑名单及规范哈希算法。
 """
 from __future__ import annotations
 
@@ -80,15 +79,15 @@ OPERATIONAL_FAILURE_STATUSES = frozenset(
 
 
 class PaperV2ContractError(ValueError):
-    """Raised when a paper-v2 evidence contract is violated."""
+    """当违反 paper-v2 论据契约时抛出的异常。"""
 
 
 class ForbiddenOnlineFieldError(PaperV2ContractError):
-    """Raised when evaluator-only data enters an online projection."""
+    """当仅限评测者的数据进入在线投影时抛出的异常。"""
 
 
 def canonical_json_bytes(value: Any) -> bytes:
-    """Return the UTF-8 canonical JSON representation used for paper-v2 hashes."""
+    """返回用于 paper-v2 哈希计算的 UTF-8 规范化 JSON 表示。"""
 
     return json.dumps(
         value,
@@ -100,7 +99,7 @@ def canonical_json_bytes(value: Any) -> bytes:
 
 
 def sha256_canonical_json(value: Any) -> str:
-    """Hash a JSON-compatible value using the paper-v2 canonicalization."""
+    """使用 paper-v2 规范化规则对兼容 JSON 的值计算哈希。"""
 
     return hashlib.sha256(canonical_json_bytes(value)).hexdigest()
 
@@ -135,7 +134,7 @@ def _leaf_field_paths(value: Any, prefix: str = "") -> list[str]:
 
 
 def forbidden_online_field_paths(field_paths: Iterable[str]) -> list[str]:
-    """Return paths whose final mapping key is evaluator-only."""
+    """返回最终映射键仅供评测者使用的路径列表。"""
 
     forbidden = {
         path
@@ -149,7 +148,7 @@ def forbidden_online_field_paths(field_paths: Iterable[str]) -> list[str]:
 def compute_online_visible_field_digest(
     online_projection: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Build the auditable field-name and value digest for an online projection."""
+    """为在线投影构建可审计的字段名和数值摘要。"""
 
     if not online_projection:
         raise PaperV2ContractError("online projection must not be empty")
@@ -170,10 +169,9 @@ def build_online_projection(
     source: Mapping[str, Any],
     visible_top_level_fields: Iterable[str],
 ) -> dict[str, Any]:
-    """Select an explicit runtime projection and reject evaluator-only fields.
+    """选择显式的运行时投影，并拒绝仅限评测者访问的字段。
 
-    Top-level allowlisting is deliberate: experiment records must not pass an
-    entire benchmark case through and then attempt to remove known bad fields.
+    顶层白名单是刻意设计的：实验记录绝不能直接传入整个基准测试用例后再试图剔除已知的不良字段。
     """
 
     requested = tuple(dict.fromkeys(visible_top_level_fields))
@@ -308,10 +306,9 @@ def validate_experiment_record(
     online_projection: Mapping[str, Any] | None = None,
     schema_path: Path = EXPERIMENT_RECORD_SCHEMA,
 ) -> None:
-    """Validate schema plus paper-v2 evidence semantics.
+    """验证 Schema 规范及 paper-v2 论据语义。
 
-    Pass ``online_projection`` at record creation time so both field and value
-    digests are checked against the exact data exposed to the runtime.
+    在创建记录时传入 ``online_projection``，以便根据暴露给运行时的确切数据检查字段和数值摘要。
     """
 
     schema = json.loads(schema_path.read_text(encoding="utf-8"))

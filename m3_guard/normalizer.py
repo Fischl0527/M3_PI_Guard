@@ -1,4 +1,7 @@
-"""Normalization helpers for local, rule-based Guard checks."""
+"""面向规则匹配的文本与路径归一化辅助函数模块。
+
+负责 Unicode NFKC 规范化、零宽字符过滤、空白折叠、拼音转写检测以及沙箱文件路径清洗。
+"""
 
 from __future__ import annotations
 
@@ -61,7 +64,7 @@ PINYIN_EVASION_TERMS = (
 
 
 def to_text(value: Any) -> str:
-    """Convert arbitrary JSON-like data to stable text for scanning."""
+    """将任意类似 JSON 的数据结构转换为用于安全扫描的稳定文本形式。"""
 
     if value is None:
         return ""
@@ -74,13 +77,13 @@ def to_text(value: Any) -> str:
 
 
 def remove_zero_width(text: Any) -> str:
-    """Remove zero-width, soft-hyphen, and bidi control characters."""
+    """清除零宽字符、软连字符（Soft Hyphen）以及双向文本控制字符。"""
 
     return "".join(ch for ch in to_text(text) if ch not in ZERO_WIDTH_CHARS)
 
 
 def normalize_text(text: Any) -> str:
-    """Apply NFKC, strip zero-width chars, lowercase, and collapse spaces."""
+    """应用 NFKC 规范化，剥离零宽字符，转换为小写并折叠多余空白。"""
 
     normalized = unicodedata.normalize("NFKC", to_text(text))
     normalized = remove_zero_width(normalized)
@@ -90,7 +93,7 @@ def normalize_text(text: Any) -> str:
 
 
 def normalize_path(path: Any) -> str:
-    """Normalize a sandbox path for policy comparisons."""
+    """对沙箱路径进行规范化清洗，用于策略安全比对。"""
 
     text = normalize_text(path).replace("\\", "/")
     text = text.strip("'\" ")
@@ -101,7 +104,7 @@ def normalize_path(path: Any) -> str:
 
 
 def detect_language_mix(text: Any) -> dict[str, Any]:
-    """Detect Chinese/English/Japanese/Russian/Korean script mixing."""
+    """检测是否存在混合脚本/多语言混淆注入。"""
 
     raw = normalize_text(text)
     scripts = {
@@ -143,7 +146,7 @@ def detect_language_mix(text: Any) -> dict[str, Any]:
 
 
 def has_suspicious_unicode(text: Any) -> bool:
-    """Flag common Unicode tricks used for prompt-injection obfuscation."""
+    """检测文本是否包含混淆或可疑的 Unicode 变异字符。"""
 
     raw = to_text(text)
     normalized = unicodedata.normalize("NFKC", raw)
@@ -158,7 +161,7 @@ def has_suspicious_unicode(text: Any) -> bool:
 
 
 def has_pinyin_evasion(text: Any) -> bool:
-    """Detect rough pinyin/homophone spellings of sensitive instructions."""
+    """检测文本中是否存在拼音规避敏感词。"""
 
     normalized = normalize_text(text).replace("ü", "u").replace("v", "u")
     compact = re.sub(r"[^a-z0-9]+", "", normalized)
@@ -166,13 +169,13 @@ def has_pinyin_evasion(text: Any) -> bool:
 
 
 def mixed_language_signal(value: Any) -> bool:
-    """Backward-compatible boolean for CJK/Latin language mixing."""
+    """CJK 与拉丁语系混合语言的向下兼容布尔信号判断。"""
 
     return bool(detect_language_mix(value)["cjk_latin"])
 
 
 def suspicious_homoglyph_signal(value: Any) -> bool:
-    """Backward-compatible boolean for homoglyph/confusable script mixing."""
+    """同形异义字/易混淆字符集混合的向下兼容布尔信号判断。"""
 
     return _has_latin_confusable_mix(to_text(value))
 

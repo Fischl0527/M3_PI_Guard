@@ -1,8 +1,6 @@
-"""Build the source-backed M3-PI Guard experiment-stop stage report.
+"""构建基于真实证据支撑的 M3-PI Guard 2026-08-07 实验终止阶段报告。
 
-The builder reads only admitted summaries, immutable technical reviews, and
-process receipts. It performs no provider calls and never reads credentials,
-case-level blind labels, query ledgers, or provider traces.
+汇总实验终止节点的全部固化数据指标、合规性审计结果与后续演进建议。
 """
 
 from __future__ import annotations

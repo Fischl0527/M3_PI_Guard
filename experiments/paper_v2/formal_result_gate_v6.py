@@ -1,9 +1,6 @@
-"""Prospective combined result gate for frozen v8 plus remainder v9.
+"""面向固化 v8 主体及 v9 余量分片的前瞻性联合结果准入门禁。
 
-The gate treats v8 and v9 as two immutable shards of one prespecified
-480-work-item matrix.  It inspects only operational metadata until a separate
-analysis admission is written.  Scientific outcome fields are first consumed
-by ``build_admitted_analysis`` after that admission verifies.
+合并校验主批次与余量批次，出具完整的形式化矩阵准入终审报告。
 """
 
 from __future__ import annotations
@@ -53,7 +50,7 @@ OWNER_APPROVAL_STATEMENT_SHA256 = remainder.OWNER_STATEMENT_SHA256
 
 
 class FormalResultGateV6Error(RuntimeError):
-    """Raised when combined evidence cannot cross the prospective gate."""
+    """当组合论据无法跨越前瞻门禁时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

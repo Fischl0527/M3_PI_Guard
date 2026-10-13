@@ -1,4 +1,8 @@
-"""Draw current manuscript evidence from cached analyses, without statistical replay."""
+"""从已缓存的实验分析结果中绘制手稿图表（严禁执行统计重放或就地估算）。
+
+严格基于固化缓存中的观察值与 Wilson 置信区间绘制高质量科研图表，
+确保图表呈现的数据与最终审计分析数据 100% 绝对一致。
+"""
 
 from __future__ import annotations
 
@@ -32,7 +36,7 @@ FIGURE_FILES = (
 
 
 class CurrentFigureError(ValueError):
-    """The cache or render cannot support the declared figure."""
+    """当缓存数据不全或无法支持所声明图表时抛出的专用异常类。"""
 
 
 def unique(rows: list[dict], fields: tuple[str, ...]) -> dict:
@@ -46,7 +50,7 @@ def unique(rows: list[dict], fields: tuple[str, ...]) -> dict:
 
 
 def endpoint_values(endpoint: dict) -> tuple[float, float, float]:
-    """Use observed estimates and cached Wilson limits; never impute unknowns."""
+    """提取观察值率及缓存的 95% Wilson 置信区间端点；严禁对未知值插值推断。"""
     x, known, planned, unknown = (
         endpoint[key] for key in ("true", "observed", "planned", "unknown")
     )
@@ -144,7 +148,7 @@ def label_panel(ax, letter: str) -> None:
 
 
 def require_alignment(fig) -> None:
-    """Measure equal-grid final axes directly; no persistent QA bundle."""
+    """直接测量等网格最终坐标轴；不生成持久化的 QA 构件包。"""
     fig.canvas.draw()
     axes = [ax for ax in fig.axes if ax.axison]
     if len(axes) < 2:

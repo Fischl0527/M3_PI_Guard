@@ -1,4 +1,7 @@
-"""Small Ollama lifecycle helper for sequential 8 GB GPU experiments."""
+"""针对 8GB 显存显卡串行实验的小型 Ollama 模型生命周期管理工具。
+
+负责模型的显存加载、预热、显存卸载与垃圾回收，防止长周期评测显存溢出（OOM）。
+"""
 
 from __future__ import annotations
 
@@ -110,7 +113,7 @@ def gpu_snapshot() -> dict[str, Any]:
 
 
 def ollama_api_get(path: str, *, timeout: float = 10.0) -> dict[str, Any]:
-    """Read a local Ollama API endpoint without permitting remote hosts."""
+    """读取本地 Ollama API 端点，严禁访问远程主机。"""
 
     endpoint = f"{OLLAMA_API_ROOT}/{str(path).lstrip('/')}"
     try:
@@ -132,7 +135,7 @@ def ollama_api_get(path: str, *, timeout: float = 10.0) -> dict[str, Any]:
 
 
 def ollama_ps_snapshot() -> dict[str, Any]:
-    """Capture resident-model context and VRAM evidence from ``/api/ps``."""
+    """从 ``/api/ps`` 捕获常驻模型上下文与显存（VRAM）证据。"""
 
     payload = ollama_api_get("api/ps")
     models: list[dict[str, Any]] = []

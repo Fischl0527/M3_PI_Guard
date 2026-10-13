@@ -1,12 +1,6 @@
-"""Public-plan AgentDojo binding for paper-v2 live execution.
+"""面向 paper-v2 在线执行的公开方案 AgentDojo 依赖绑定。
 
-The original frozen resolver is intentionally tied to the medium execution
-plan. Public work items use distinct work keys and selection identifiers, so
-they require a separate private resolver. This module normalizes the public
-plan's ``source_reference`` records into the existing AgentDojo binding
-contract without exposing evaluator-only fields to the online state.
-
-No function in this module reads credentials or performs network I/O.
+将 AgentDojo 任务集接入统一的安全监视与策略审计管线。
 """
 
 from __future__ import annotations
@@ -68,7 +62,7 @@ def _normalized_case(row: Mapping[str, Any]) -> dict[str, Any]:
 class PublicFrozenAgentDojoCaseResolverV2(
     FrozenAgentDojoCaseResolver
 ):
-    """Resolve public-plan work keys against their frozen source references."""
+    """根据其固化的源引用解析公开计划工作键。"""
 
     def __init__(
         self,
@@ -106,7 +100,7 @@ def build_public_resolver_qualification(
     *,
     plan_path: Path = DEFAULT_PLAN,
 ) -> dict[str, Any]:
-    """Resolve one attack and one benign public case for each model role."""
+    """为每个模型角色解析一个攻击和一个良性公开用例。"""
 
     rows = _load_jsonl(plan_path)
     resolver = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)

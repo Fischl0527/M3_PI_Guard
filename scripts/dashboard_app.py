@@ -1,12 +1,7 @@
-"""Streamlit-safe entry point for the M3 evidence dashboard.
+"""M3 证据仪表盘的 Streamlit 安全启动入口脚本。
 
-Running a module inside ``m3_eval`` directly puts that directory
-ahead of the standard library on ``sys.path``.  Its local ``statistics.py``
-can then shadow Python's standard-library ``statistics`` module.  Keeping the
-Streamlit entry point under ``scripts`` and importing the dashboard as a
-package preserves normal import resolution.  The enhanced dashboard lives in
-``m3_eval.evidence_dashboard`` so the exact blind-frozen
-``m3_eval.dashboard`` source remains byte-identical for provenance audits.
+避免直接在 m3_eval 目录内部运行导致本地 statistics.py 遮蔽 Python 标准库 statistics 模块。
+通过在 scripts 下作为标准包入口调用，保持清晰规范的 Python import 解析路径。
 """
 
 from __future__ import annotations

@@ -1,4 +1,7 @@
-"""Run a bounded, diagnostic-only smoke over local Ollama model tags."""
+"""对本地 Ollama 模型标签运行有边界的诊断性冒烟测试。
+
+快速验证各候选模型（如 Qwen、Llama 等）的本地响应与基本工具调用接口是否正常。
+"""
 
 from __future__ import annotations
 

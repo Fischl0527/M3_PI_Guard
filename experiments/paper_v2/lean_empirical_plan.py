@@ -1,8 +1,6 @@
-"""Build the fixed lean authorization-regime experiment plan.
+"""构建固化的精简权限机制实验方案。
 
-Selection uses only frozen Public-v1 identifiers and pre-outcome strata.  It
-never reads an existing model result.  The generated plan contains 900
-DeepSeek-Pro work items and a nested 450-item Gemini cross-vendor validation.
+确定性生成核心实验对比组矩阵并锁定环境变量与评测约束。
 """
 
 from __future__ import annotations
@@ -66,7 +64,7 @@ GEMINI_CELLS = (
 
 
 class LeanEmpiricalPlanError(ValueError):
-    """Raised when the fixed sample or execution plan cannot be built."""
+    """当固定样本或执行计划无法构建时抛出的异常。"""
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:

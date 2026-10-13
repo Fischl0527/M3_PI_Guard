@@ -1,5 +1,4 @@
-"""DAY5 RunLog integrity and safety audit tool."""
-
+"""实验运行日志（RunLog）与清册文件完整性校验工具。"""
 from __future__ import annotations
 
 import argparse

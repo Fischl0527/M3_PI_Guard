@@ -1,10 +1,7 @@
-"""Credential-redacting DeepSeek/Gemini transport and append-only call ledger.
+"""凭据脱敏的 DeepSeek/Gemini 官方传输与仅追加调用记录器。
 
-This module is the provider-facing layer for a future paper-v2 formal executor.
-It performs exactly one OpenAI-compatible chat request per ``complete`` call,
-never retries, never declares provider tools, and persists only credential-free
-receipts.  The built-in qualification path injects deterministic transports and
-makes no network call.
+管理向大模型官方 API 的网络传输，强制执行密钥与敏感参数脱敏，
+并将每次调用的入参、耗时和状态原子性写入持久化调用账本。
 """
 
 from __future__ import annotations
@@ -79,23 +76,23 @@ TERMINAL_EVENT_TYPES = frozenset({"completed", "paused", "failed"})
 
 
 class OfficialProviderError(RuntimeError):
-    """Base class for safe provider execution failures."""
+    """安全提供商执行失败的基础类。"""
 
 
 class ProviderConsentError(OfficialProviderError):
-    """Raised when a real network transport lacks explicit consent."""
+    """当真实的真实网络传输缺少显式许可时抛出的异常。"""
 
 
 class ProviderPayloadError(OfficialProviderError):
-    """Raised when an outbound payload crosses the frozen data boundary."""
+    """当出站载荷越过固化数据边界时抛出的异常。"""
 
 
 class ProviderTransportError(OfficialProviderError):
-    """Raised for a credential-redacted HTTP or response error."""
+    """针对脱敏凭据的 HTTP 或响应错误抛出的异常。"""
 
 
 class ProviderPausedError(ProviderTransportError):
-    """Raised on a quota/rate-limit pause; never retried automatically."""
+    """在配额/速率限制暂停时抛出；绝不自动重试。"""
 
     def __init__(
         self,
@@ -111,20 +108,20 @@ class ProviderPausedError(ProviderTransportError):
 
 
 class ProviderIdentityError(OfficialProviderError):
-    """Raised when the official response does not match the frozen model."""
+    """当官方响应与固化模型不匹配时抛出的异常。"""
 
 
 class ProviderUsageError(OfficialProviderError):
-    """Raised when required provider usage evidence is absent or inconsistent."""
+    """当必需的提供商用量论据缺失或不一致时抛出的异常。"""
 
 
 class ProviderLedgerError(ValueError):
-    """Raised when an append-only provider call ledger is invalid."""
+    """当仅追加提供商调用账本无效时抛出的异常。"""
 
 
 @dataclass(frozen=True)
 class HTTPResponseEnvelope:
-    """Transport output containing only safe headers and parsed JSON."""
+    """仅包含安全标头和解析后 JSON 的传输输出。"""
 
     status_code: int
     headers: Mapping[str, str]
@@ -264,11 +261,9 @@ def validate_messages(
     allow_pinned_synthetic_credential_labels: bool = False,
     active_api_key: str | None = None,
 ) -> list[dict[str, str]]:
-    """Validate one public/synthetic prompt without persisting its contents.
+    """验证单个公开/合成提示词，且不持久化其内容。
 
-    The explicit public-benchmark opt-in ignores only generic synthetic
-    credential-label assignments.  High-confidence credential shapes and the
-    active client key remain fail-closed.
+    显式公开基准测试选择仅忽略通用的合成凭据标签分配。高置信度凭据模式和活动客户端密钥仍保持安全闭合失败。
     """
 
     allowed = policy["common_controls"]["payload_classes_allowed"]
@@ -347,7 +342,7 @@ def _validate_persisted_value(value: Any, *, path: str = "$") -> None:
 
 
 def validate_provider_receipt(receipt: Mapping[str, Any]) -> None:
-    """Reject content, headers, credentials, or an invalid receipt digest."""
+    """拒绝内容、标头、凭据或无效的收据摘要。"""
 
     if receipt.get("schema_version") != (
         "m3-paper-v2-official-provider-receipt-1.0"
@@ -366,12 +361,9 @@ def validate_provider_receipt(receipt: Mapping[str, Any]) -> None:
 def provider_receipt_to_attestation(
     receipt: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Project a safe provider receipt into the paper-v2 record contract.
+    """将安全的提供商收据投影到 paper-v2 记录契约中。
 
-    Injected transports are local qualification evidence only.  A real official
-    transport becomes a formal candidate only when the exact model and both
-    provider request/response identifiers are present.  Missing request IDs are
-    retained transparently but force diagnostic evidence.
+    注入的传输仅作为本地资格论据。仅当确切模型和提供商请求/响应标识符均存在时，真正的官方传输才成为形式化候选对象。缺失的请求 ID 将被透明保留，但强制生成诊断论据。
     """
 
     validate_provider_receipt(receipt)
@@ -442,7 +434,7 @@ def provider_receipt_to_attestation(
 
 @dataclass(frozen=True)
 class OfficialProviderCompletion:
-    """Transient model text plus a safe persistable receipt."""
+    """瞬态模型文本加上安全的持久化收据。"""
 
     text: str = field(repr=False)
     model_latency_ms: float
@@ -461,7 +453,7 @@ class OfficialProviderCompletion:
 
 @dataclass
 class ProviderBudgetState:
-    """In-process fuse state; a new batch must be reconstructed from the ledger."""
+    """进程内保险丝状态；新批次必须从账本重建。"""
 
     provider_id: str
     policy: Mapping[str, Any]
@@ -587,7 +579,7 @@ class ProviderBudgetState:
 
 @dataclass
 class OfficialProviderClient:
-    """Single-attempt official OpenAI-compatible client for paper-v2."""
+    """用于 paper-v2 的单次尝试官方 OpenAI 兼容客户端。"""
 
     provider_id: str
     api_key: str = field(repr=False)
@@ -873,7 +865,7 @@ def validate_call_events(
     provider_id: str,
     model_id: str,
 ) -> dict[str, Any]:
-    """Validate single-attempt calls and manual same-provider 429 recovery."""
+    """验证单次尝试调用和手动同提供商 429 恢复。"""
 
     if provider_id not in ALLOWED_PROVIDERS:
         raise ProviderLedgerError("unsupported ledger provider")
@@ -999,7 +991,7 @@ def append_call_event(
     provider_id: str,
     model_id: str,
 ) -> None:
-    """Validate the complete candidate chain, then append and flush one event."""
+    """验证完整的候选调用链，然后追加并刷新单个事件。"""
 
     _validate_persisted_value(event)
     prior = load_call_events(path)
@@ -1107,7 +1099,7 @@ def _fixture_transport(
 def build_offline_transport_qualification(
     policy_path: Path = DEFAULT_BUDGET_POLICY,
 ) -> dict[str, Any]:
-    """Exercise both transports with fixtures; output contains no content."""
+    """使用测试固件演练两种传输；输出不包含实际内容。"""
 
     policy = _load_policy(policy_path)
     providers: dict[str, Any] = {}

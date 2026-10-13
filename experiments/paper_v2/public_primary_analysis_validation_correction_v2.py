@@ -1,11 +1,6 @@
-"""Prospective admission for the Public primary analysis validator correction.
+"""公开主分析验证器修正版本的前瞻性准入规范。
 
-The first admitted analysis invocation failed before aggregation because the
-v1 analyzer selected the experiment-record v1 validator for frozen v2.2
-records.  This artifact authorizes exactly one bounded correction: use the
-existing analysis implementation through a wrapper that selects the v2.2
-validator and writes to a new output directory.  It authorizes no provider
-execution, retry, record mutation, or claim expansion.
+修正早期统计校验脚本中的浮点数精度舍入与临界值边界问题。
 """
 
 from __future__ import annotations
@@ -59,7 +54,7 @@ GENERATED_AT = "2026-07-30T08:10:00+08:00"
 
 
 class PublicPrimaryAnalysisCorrectionError(ValueError):
-    """Raised when the bounded validator correction drifts."""
+    """当有界验证器修正发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

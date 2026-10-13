@@ -1,10 +1,6 @@
-"""DeepSeek medium-matrix controller with precommitted JSON Output.
+"""具备预先承诺 JSON Output 模式的 DeepSeek 中等规模矩阵控制器。
 
-Version 4 prospectively replaces the immutable v3 canary, which retained one
-strict-parser failure under DeepSeek's default text response format.  This
-controller preserves the frozen study plan and all safety/evidence rules while
-adding ``response_format={"type": "json_object"}`` to both transport payload
-and the pretransport payload hash.
+约束模型输出格式，杜绝由于自由文本解析失败导致的无效实验轮次。
 """
 
 from __future__ import annotations
@@ -132,7 +128,7 @@ PRIOR_PROJECT_COST_CNY = 0.0311712
 
 
 class FormalMatrixControllerV4Error(RuntimeError):
-    """Raised when matrix v4 cannot preserve its prospective contract."""
+    """当矩阵 v4 无法保持其前瞻性契约时抛出的异常。"""
 
 
 @dataclass(frozen=True)

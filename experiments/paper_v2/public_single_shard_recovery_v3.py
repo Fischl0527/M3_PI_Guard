@@ -1,4 +1,7 @@
-"""Independently freeze and linearly continue one closed public-v2 shard."""
+"""独立冻结并线性接续单个已关闭的公开 v2 分片。
+
+对单个滞后分片进行单点恢复，不影响其他正常运行节点。
+"""
 
 from __future__ import annotations
 
@@ -54,7 +57,7 @@ MAX_DIAGNOSTIC_FRACTION = 0.01
 
 
 class PublicSingleShardRecoveryV3Error(ValueError):
-    """Raised when one public shard cannot be continued fail closed."""
+    """当单个公开分片无法安全闭合接续时抛出的异常。"""
 
 
 def _validate_shard(shard_index: int) -> None:

@@ -1,10 +1,8 @@
-"""Run-isolated, local-only simulated tools for the M3 Agent range.
+"""内存隔离沙箱工具执行环境（Tool Sandbox）。
 
-The repository ``sandbox/`` directory is a checked-in demo fixture and is never
-used as mutable runtime storage.  Every logical case run receives a fresh
-temporary sandbox seeded from immutable in-code public fixtures.  This keeps
-sequential conditions and concurrent E14 lanes from observing each other's
-files, outbox entries, or audit events.
+本模块是 M3 防护评估的安全基石：
+为智能体工具调用（read_file, write_file, send_email, call_api, run_code）
+提供完全内存虚拟化的假环境，杜绝任何外部物理副作用（严禁修改真实磁盘、严禁发送真实外部网络请求）。
 """
 
 from __future__ import annotations
@@ -84,7 +82,7 @@ FIXTURE_SHA256 = _fixture_sha256()
 
 
 def sandbox_seed_sha256(seed: int | None) -> str:
-    """Return the stable, non-ambiguous seed identity used by run/checkpoint IDs."""
+    """基于种子固定夹具文件计算沙箱初始状态的 SHA-256 校验和。"""
 
     return hashlib.sha256(
         _canonical_json(
@@ -111,7 +109,7 @@ def _read_jsonl_rows(path: Path) -> list[dict[str, Any]]:
 
 
 def _logical_state_sha256(context: "SandboxContext") -> str:
-    """Hash deterministic tool semantics, excluding timestamps and run identity."""
+    """计算当前沙箱内存状态字典的确定性密码学哈希。"""
 
     workspace_files: list[dict[str, Any]] = []
     for path in sorted(
@@ -172,7 +170,7 @@ def _logical_state_sha256(context: "SandboxContext") -> str:
 
 @dataclass
 class SandboxContext:
-    """One fresh sandbox owned by one logical case execution attempt."""
+    """单个执行尝试所绑定的隔离沙箱上下文句柄。"""
 
     run_id: str
     run_key: str
@@ -219,7 +217,7 @@ class SandboxContext:
         return _logical_state_sha256(self)
 
     def cleanup(self) -> str:
-        """Remove the entire attempt tree and fail loudly if anything remains."""
+        """销毁沙箱并清理所有临时内存状态与模拟文件系统。"""
 
         if self._closed:
             return self.reset_status
@@ -250,7 +248,7 @@ def init_sandbox(
     case_id: str = "",
     seed: int | None = None,
 ) -> SandboxContext:
-    """Create a fresh, per-run temporary sandbox from immutable public fixtures."""
+    """基于测试用例夹具数据初始化一个干净的内存沙箱环境。"""
 
     temporary = tempfile.TemporaryDirectory(prefix="m3-pi-guard-sandbox-")
     root = Path(temporary.name) / "sandbox"
@@ -314,12 +312,7 @@ def _normalize_logical_path(path: str) -> tuple[str, ...]:
 
 
 def _validate_portable_path_component(component: str) -> None:
-    """Reject paths that cannot be represented safely on the Windows runner.
-
-    The sandbox is intentionally portable even when tests execute elsewhere:
-    Windows-invalid characters, device names, trailing dot/space aliases and
-    overlong components must become a normal tool error before filesystem I/O.
-    """
+    """验证沙箱内文件路径组件是否符合跨平台安全规范（防止路径穿越逃逸）。"""
 
     if any(ord(character) < 32 for character in component):
         raise ValueError("control characters in path components are forbidden")
@@ -615,7 +608,7 @@ def record_tool_event(
     run_key: str = "",
     sandbox: SandboxContext | None = None,
 ) -> Dict[str, Any]:
-    """Record one per-run, sequence-numbered, redacted sandbox evidence row."""
+    """在沙箱中执行工具调用并记录包含输入输出与耗时的审计事件。"""
 
     context, owned = _context_for_call(sandbox)
     try:
@@ -662,7 +655,7 @@ def record_tool_event(
 
 
 def _observation_preview(observation: Any) -> str:
-    """Convert a tool observation to a short, spreadsheet-friendly preview."""
+    """生成用于模型上下文或审计日志的安全观测文本摘要预览。"""
 
     if isinstance(observation, (dict, list)):
         text = json.dumps(observation, ensure_ascii=False, sort_keys=True)

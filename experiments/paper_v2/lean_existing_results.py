@@ -1,8 +1,6 @@
-"""One-pass analysis of the already completed paper-v2 experiments.
+"""对已完成的 paper-v2 实验进行单遍扫描综合分析。
 
-The module reads each declared raw result file exactly once in one process.  It
-does not call a provider, replay a historical verifier, or rebuild any evidence
-chain.  The output is a compact paper-facing statistical summary.
+交叉比对多个研究阶段的结论一致性，剔除潜在时序退化偏差。
 """
 
 from __future__ import annotations
@@ -47,7 +45,7 @@ ADAPTIVE_FILES = (
 
 
 class LeanExistingResultsError(ValueError):
-    """Raised when the compact one-pass analysis encounters invalid input."""
+    """当紧凑单遍分析遇到无效输入时抛出的异常。"""
 
 
 def _wilson(successes: int, total: int) -> dict[str, float | int]:

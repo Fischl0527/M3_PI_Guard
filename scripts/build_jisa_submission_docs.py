@@ -1,8 +1,7 @@
-"""Build the small editable JISA submission attachments.
+"""构建小巧可编辑的 JISA 投稿 Word 附件包（亮点、投稿信、术语表、作者信息）。
 
-The scientific manuscript is intentionally not rewritten here.  This builder
-only converts already-reviewed Markdown attachments into Word files and keeps
-all author-owned facts as visible placeholders.
+本构建器仅将已评审的 Markdown 附件转换排版为 Word (.docx) 文件，
+并将所有作者专有事实信息保留为清晰可视的占位符，严禁重写学术手稿内容。
 """
 
 from __future__ import annotations

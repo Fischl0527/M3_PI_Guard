@@ -1,4 +1,7 @@
-"""Content-free abort review for the stopped DeepSeek v6 matrix."""
+"""针对已停止的 DeepSeek v6 矩阵执行无内容偏见的中止复核。
+
+捕获异常中断现场，防止未决记录污染后续正式数据集。
+"""
 
 from __future__ import annotations
 
@@ -29,7 +32,7 @@ DEFAULT_REVIEW = OUTPUT_ROOT / "formal_matrix_abort_review_v2.json"
 
 
 class FormalMatrixAbortReviewV2Error(RuntimeError):
-    """Raised when stopped-v6 technical evidence cannot be verified."""
+    """当停止的 v6 技术论据无法验证时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

@@ -1,9 +1,6 @@
-"""Independently review the admitted public-primary analysis outputs.
+"""独立审查已准入的公开主分析输出结果（版本 V1）。
 
-This reviewer deliberately does not reuse the primary aggregation or
-statistical helpers.  It reads the admitted record envelopes directly,
-recomputes the reported counts, Wilson intervals, critical paired
-differences, and exact McNemar tests, and locks the resulting evidence.
+复核第一轮公开评测数据统计指标与图表数据的一致性。
 """
 
 from __future__ import annotations
@@ -74,7 +71,7 @@ COMPARISON_SPECS = {
 
 
 class PublicPrimaryAnalysisReviewError(ValueError):
-    """Raised when independently recomputed evidence does not agree."""
+    """当独立重新计算的论据不一致时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

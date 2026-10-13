@@ -1,7 +1,6 @@
-"""E7a official one-call proposals and isolated post-proposal confirmation cells.
+"""E7a 官方单次调用提案与隔离确认运行器。
 
-Single append-only journal; an open start, identity error or unexpected runner
-error prevents continuation. No automated retries, provider tools or real tools.
+模拟用户对模型提议的敏感动作进行审批确认的人机协同实验流程。
 """
 
 from __future__ import annotations

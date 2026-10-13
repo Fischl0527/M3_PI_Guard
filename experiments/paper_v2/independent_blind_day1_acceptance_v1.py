@@ -1,9 +1,6 @@
-"""Import and replay the public Day-1 blind-custodian registration bundle.
+"""导入并重放公开第 1 日盲测托管人注册绑定产物。
 
-The importer reads exactly three developer-safe files.  It never searches for
-or opens the custodian's private identity attestation, private key, candidate
-rows, or labels.  The resulting project-side receipt stores only identity
-digests and content-free cryptographic/integrity evidence.
+校验第 1 日盲测注册声明与封签哈希，建立不可撤销的时间线基准。
 """
 
 from __future__ import annotations
@@ -47,7 +44,7 @@ EXPECTED_FILENAMES = frozenset(
 
 
 class IndependentBlindDay1AcceptanceV1Error(ValueError):
-    """Raised when the developer-safe Day-1 handoff fails closed."""
+    """当开发者安全的 Day-1 交接未通过安全闭合检查时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

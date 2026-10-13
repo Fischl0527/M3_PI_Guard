@@ -1,9 +1,6 @@
-"""Qualify a process-scoped Git safe-directory remediation for AgentDojo.
+"""验证面向进程作用域的 Git safe.directory 漏洞修复有效性。
 
-The qualification records one sanitized observation of the sandbox ownership
-rejection and proves that an exact, child-process-only ``safe.directory``
-entry can read the frozen AgentDojo commit.  It never writes Git configuration,
-does not access provider credentials, and does not authorize network execution.
+针对 AgentDojo 沙箱环境下的 Git 目录提权风险进行自动化安全验证。
 """
 
 from __future__ import annotations
@@ -31,7 +28,7 @@ QUALIFIED_AT = "2026-08-05T00:00:00+08:00"
 
 
 class SandboxGitSafeDirectoryQualificationV1Error(ValueError):
-    """Raised when the Git compatibility evidence is invalid or drifts."""
+    """当 Git 兼容性论据无效或发生漂移时抛出的异常。"""
 
 
 def _git_environment(*, safe_directory: bool) -> dict[str, str]:

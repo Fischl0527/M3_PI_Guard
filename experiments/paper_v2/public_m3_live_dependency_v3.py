@@ -1,11 +1,6 @@
-"""Public-plan M3 evaluator binding for paper-v2 live execution.
+"""面向 paper-v2 在线执行的公开方案 M3 评测器绑定。
 
-The frozen medium resolver indexes medium-only work keys and selection IDs.
-Public work items therefore require a separate resolver that reconstructs the
-private evaluator binding from each frozen ``source_reference``.  The binding
-is used only after online execution and is never added to the Guard state.
-
-No function in this module reads credentials or performs network I/O.
+将 M3-v2 基准套件接入实时评测引擎并绑定结果判分器。
 """
 
 from __future__ import annotations
@@ -60,7 +55,7 @@ def _normalized_case(row: Mapping[str, Any]) -> dict[str, Any]:
 
 
 class PublicFrozenM3CaseResolverV3(FrozenM3CaseResolver):
-    """Resolve public-plan M3 work keys from their frozen source references."""
+    """从固化的源引用中解析公开计划 M3 工作键。"""
 
     def __init__(
         self,
@@ -91,7 +86,7 @@ def build_public_m3_resolver_qualification(
     *,
     plan_path: Path = DEFAULT_PLAN,
 ) -> dict[str, Any]:
-    """Resolve one attack and one benign M3 case for each model role."""
+    """为每个模型角色解析一个攻击和一个良性 M3 用例。"""
 
     rows = _load_jsonl(plan_path)
     resolver = PublicFrozenM3CaseResolverV3(plan_path=plan_path)

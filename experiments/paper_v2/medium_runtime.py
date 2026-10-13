@@ -1,13 +1,6 @@
-"""Build the paper-v2 condition-specific runtime freeze and evidence records.
+"""构建 paper-v2 条件专有运行时冻结版本与证据清单。
 
-The v1 medium ledger correctly froze cases and work allocation, but its
-``online_visible_field_digest`` described only the case-level source projection.
-It therefore could not prove what each defense actually saw, especially for the
-authorization-regime probes.  This module preserves v1 and derives a v2 ledger
-whose initial digest is rebuilt from the condition-specific runtime state.
-
-No provider call is implemented here.  Executors are injected explicitly, and
-the built-in matrix validation uses in-memory stub executors only.
+锁定每个实验条件下的配置参数、工具清单与版本凭据。
 """
 
 from __future__ import annotations
@@ -95,7 +88,7 @@ ConditionExecutor = Callable[
 
 
 class MediumRuntimeError(ValueError):
-    """Raised when a paper-v2 runtime or evidence invariant is violated."""
+    """当违反 paper-v2 运行时或论据不变量时抛出的异常。"""
 
 
 def _sha256_bytes(value: bytes) -> str:
@@ -493,7 +486,7 @@ def build_initial_online_state(
     case: Mapping[str, Any],
     record: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Return the exact condition-specific state visible before execution."""
+    """返回执行前可见的确切条件专属状态。"""
 
     source_projection = _source_projection(record, str(case["benchmark"]))
     condition = str(work_item["condition_id"])
@@ -583,7 +576,7 @@ def _runtime_identity_payload(
 
 
 def build_runtime_plan() -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Derive 480 condition-specific pending items without using outcomes."""
+    """在不使用结果的前提下派生 480 个条件专属的待处理项。"""
 
     _assert_agentdojo_identity()
     v1_items, v1_manifest = build_v1_execution_plan()
@@ -721,7 +714,7 @@ def reconstruct_initial_online_state(
 
 
 class ConditionDispatcher:
-    """Explicit condition registry; absence is a fail-closed execution error."""
+    """显式条件注册表；缺失属于安全闭合执行错误。"""
 
     def __init__(
         self, allowed_conditions: Iterable[str] = CORE_CONDITIONS
@@ -789,7 +782,7 @@ def assemble_experiment_record(
     *,
     run_id: str,
 ) -> dict[str, Any]:
-    """Create and validate one strict experiment record from executor evidence."""
+    """根据执行器证据创建并验证单条严格的实验记录。"""
 
     events = execution_result.get("runtime_visibility_events", [])
     if not isinstance(events, list):
@@ -947,7 +940,7 @@ def _stub_executor(
 def validate_stub_matrix(
     work_items: Iterable[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Validate all records in memory; never write outcomes or call a provider."""
+    """在内存中验证所有记录；绝不写入结果或调用提供商。"""
 
     dispatcher = ConditionDispatcher()
     for condition in CORE_CONDITIONS:

@@ -1,4 +1,7 @@
-"""Admission-gated official Gemini canary for the 1,791-row public mirror."""
+"""面向 1,791 行公开矩阵的带准入门禁官方 Gemini 金丝雀控制器。
+
+在启动大规模公开矩阵评测前执行前置连通性与格式合规性金丝雀测试。
+"""
 
 from __future__ import annotations
 
@@ -98,7 +101,7 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class GeminiPublicControllerV1Error(RuntimeError):
-    """Raised when Gemini public execution cannot remain fail-closed."""
+    """当 Gemini 公开执行无法保持安全闭合时抛出的异常。"""
 
 
 @dataclass(frozen=True)

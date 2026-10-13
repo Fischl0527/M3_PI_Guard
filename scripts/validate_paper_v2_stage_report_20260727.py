@@ -1,4 +1,7 @@
-"""Structural QA for the 2026-07-27 M3-PI Guard stage report."""
+"""针对 2026-07-27 阶段报告 DOCX 文档执行结构化与内容质量 QA 校验。
+
+检查 Word 文档中的段落数、表格结构、占位符残留与数字事实一致性。
+"""
 
 from __future__ import annotations
 

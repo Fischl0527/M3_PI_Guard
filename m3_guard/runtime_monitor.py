@@ -1,4 +1,9 @@
-"""Stateful provenance-aware ALLOW/ASK/DENY monitor for paper-v1."""
+"""具有状态与来源感知（Provenance-Aware）的 ALLOW/ASK/DENY 运行时监视器模块（Paper-v1/v2）。
+
+本模块是运行时执行拦截的核心决策引擎：
+在模型提案（ActionProposal）执行前，综合考量任务策略（Policy）、来源属性（Provenance）、
+时序前置依赖（Temporal）、数据流敏感约束（Dataflow）和独立人工确认会话（Confirmation）。
+"""
 
 from __future__ import annotations
 
@@ -22,8 +27,9 @@ from .task_policy import (
     sha256_json,
 )
 
-
+# 允许的 Guard 判定结果集合
 DECISIONS = frozenset({"ALLOW", "ASK", "DENY"})
+# 完整运行时检查所包含的子模块集合
 FULL_RUNTIME_MODULES = frozenset(
     {"policy", "provenance", "temporal", "dataflow", "confirmation"}
 )
@@ -31,6 +37,16 @@ FULL_RUNTIME_MODULES = frozenset(
 
 @dataclass(frozen=True)
 class ActionProposal:
+    """由模型生成并提交执行的动作提案。
+
+    属性:
+        proposal_id (str): 提案唯一标识。
+        tool (str): 拟调用的工具名称。
+        arguments (Mapping[str, Any]): 工具实参字典。
+        provenance (tuple[ProvenanceEvent, ...]): 实参来源事件追溯元组。
+        preceding_tools (tuple[str, ...]): 本提案前已成功执行的工具历史序列。
+        step (int): 智能体运行步骤计数。
+    """
     proposal_id: str
     tool: str
     arguments: Mapping[str, Any]
@@ -40,6 +56,7 @@ class ActionProposal:
 
     @property
     def proposal_sha256(self) -> str:
+        """计算提案核心内容的不可变 SHA-256 哈希值。"""
         return sha256_json(
             {
                 "proposal_id": self.proposal_id,
@@ -51,6 +68,7 @@ class ActionProposal:
         )
 
     def to_dict(self) -> dict[str, Any]:
+        """将动作提案序列化为字典。"""
         return {
             "proposal_id": self.proposal_id,
             "proposal_sha256": self.proposal_sha256,
@@ -64,6 +82,20 @@ class ActionProposal:
 
 @dataclass(frozen=True)
 class GuardDecision:
+    """运行时监视器对动作提案做出的权威防护决策。
+
+    属性:
+        decision (str): 决策结果（ALLOW / ASK / DENY）。
+        decision_id (str): 决策凭证唯一标识。
+        proposal_sha256 (str): 关联动作提案哈希。
+        manifest_sha256 (str): 决策依据的策略清单哈希。
+        rule_id (str | None): 匹配的工具规则 ID。
+        violated_rules (tuple[str, ...]): 触发违规的规则或约束标识元组。
+        evidence_paths (tuple[str, ...]): 证明违规的参数或来源路径证据。
+        reason (str): 决策原因说明。
+        suggested_recovery (str): 建议的恢复指引或纠正动作。
+        decided_at (str): 决策时间戳（ISO-8601）。
+    """
     decision: str
     decision_id: str
     proposal_sha256: str
@@ -76,10 +108,12 @@ class GuardDecision:
     decided_at: str
 
     def __post_init__(self) -> None:
+        """校验决策枚举合法性。"""
         if self.decision not in DECISIONS:
             raise ValueError(f"unsupported Guard decision: {self.decision}")
 
     def to_dict(self) -> dict[str, Any]:
+        """序列化决策对象为字典格式。"""
         return {
             "decision": self.decision,
             "decision_id": self.decision_id,
@@ -105,6 +139,7 @@ def _make_decision(
     reason: str,
     recovery: str,
 ) -> GuardDecision:
+    """根据动作提案、策略清单和检查结果构造 GuardDecision 对象。"""
     payload = {
         "proposal_sha256": proposal.proposal_sha256,
         "manifest_sha256": manifest.manifest_sha256,
@@ -127,6 +162,7 @@ def _make_decision(
 
 
 def _constraint_matches(value: Any, constraint: ParameterConstraint) -> bool:
+    """检查具体参数值是否符合 ParameterConstraint 约束规范。"""
     if constraint.kind == "any":
         return True
     if constraint.kind == "exact":
@@ -151,10 +187,12 @@ def _constraint_matches(value: Any, constraint: ParameterConstraint) -> bool:
 
 
 def _top_level_argument(path: str) -> str:
+    """提取参数路径中的顶层字段名称。"""
     return path.removeprefix("arguments.").split(".", 1)[0].split("[", 1)[0]
 
 
 def _approval_matches(approval: ApprovalRecord, proposal: ActionProposal) -> bool:
+    """检查动作提案是否精确匹配或受控落入已有审批凭证的作用域内。"""
     if approval.proposal_sha256 == proposal.proposal_sha256:
         return True
     scope = approval.approved_scope
@@ -167,6 +205,7 @@ def _approval_matches(approval: ApprovalRecord, proposal: ActionProposal) -> boo
 
 
 def _targets(arguments: Mapping[str, Any]) -> tuple[str, ...]:
+    """提取参数中可能的目标指示符（path、to、endpoint）。"""
     values: list[str] = []
     for key in ("path", "to", "endpoint"):
         value = arguments.get(key)
@@ -181,7 +220,18 @@ def evaluate_action(
     *,
     modules: frozenset[str] = FULL_RUNTIME_MODULES,
 ) -> GuardDecision:
-    """Evaluate one proposal against current authority and trace state."""
+    """基于当前权限包络与追踪状态评估单个动作提案。
+
+    依次执行：
+    1. final 工具无外部副作用，直接放行；
+    2. 工具规则匹配与不可信目标注入检查；
+    3. 指令驱动的选择器防护（防止不可信工具输出诱导下一步调用）；
+    4. 时序依赖约束校验（必须按顺序执行前置工具）；
+    5. 数据流敏感情报外泄分析（检查受限标签是否流入外部通道）；
+    6. 实参来源合规性检查（不可信来源不得提供敏感参数）；
+    7. 参数具体数值约束校验；
+    8. 独立人工确认会话（针对 side_effect 等高危动作）。
+    """
 
     unknown_modules = set(modules) - FULL_RUNTIME_MODULES
     if unknown_modules:
@@ -376,7 +426,7 @@ def allow_unmonitored(
     proposal: ActionProposal,
     manifest: TaskPolicyManifest,
 ) -> GuardDecision:
-    """Return an auditable ALLOW for an explicitly configured no-Guard baseline."""
+    """为显式声明无防护的基线配置（no-Guard baseline）返回可审计的 ALLOW 决策记录。"""
 
     return _make_decision(
         proposal,
@@ -388,7 +438,7 @@ def allow_unmonitored(
 
 
 class RuntimeMonitor:
-    """Small state holder that records only successfully executed actions."""
+    """仅记录已成功执行动作的有状态运行时监视器。"""
 
     def __init__(
         self,
@@ -396,6 +446,7 @@ class RuntimeMonitor:
         *,
         modules: frozenset[str] = FULL_RUNTIME_MODULES,
     ) -> None:
+        """初始化运行时监视器实例。"""
         self.manifest = manifest
         if "policy" not in modules or set(modules) - FULL_RUNTIME_MODULES:
             raise ValueError("invalid runtime monitor module set")
@@ -404,9 +455,11 @@ class RuntimeMonitor:
 
     @property
     def executed_tools(self) -> tuple[str, ...]:
+        """返回已执行工具的历史元组。"""
         return tuple(self._executed_tools)
 
     def decide(self, proposal: ActionProposal) -> GuardDecision:
+        """评估提案并返回决策（强制同步监视器内部维护的工具历史）。"""
         if proposal.preceding_tools != self.executed_tools:
             proposal = ActionProposal(
                 proposal_id=proposal.proposal_id,
@@ -419,6 +472,7 @@ class RuntimeMonitor:
         return evaluate_action(proposal, self.manifest, modules=self.modules)
 
     def record_execution(self, proposal: ActionProposal, decision: GuardDecision) -> None:
+        """记录工具动作的成功执行。注意：调用者必须确认模拟环境执行成功后才可记录。"""
         # 调用者必须先确认模拟执行成功；ALLOW 自身不是执行成功的证据。
         if decision.decision != "ALLOW":
             raise ValueError("only allowed actions may enter the execution trace")
@@ -426,6 +480,7 @@ class RuntimeMonitor:
             self._executed_tools.append(proposal.tool)
 
     def update_manifest(self, manifest: TaskPolicyManifest) -> None:
+        """更新策略清单，强制校验哈希链的前后相继连续性。"""
         if manifest.parent_manifest_sha256 != self.manifest.manifest_sha256:
             raise ValueError("manifest update does not extend the current hash chain")
         self.manifest = manifest

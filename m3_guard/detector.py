@@ -1,4 +1,8 @@
-"""Prompt-injection and intent/action mismatch detectors."""
+"""提示注入特征与意图/动作不匹配检测器模块。
+
+本模块包含针对越狱指令、开发者模式伪装、忽略前序指令短语、工具调用诱导标记、
+结构化注入（JSON-RPC/代码块）以及跨语言混淆的多维度静态检测规则。
+"""
 
 from __future__ import annotations
 
@@ -89,7 +93,7 @@ class Detection:
 
 
 def detect_instruction_like_text(text: Any) -> list[str]:
-    """Detect imperative prompt-injection phrases in trusted or untrusted text."""
+    """在受信任或不可信文本中检测祈使型提示注入特征短语。"""
 
     normalized = normalize_text(text)
     reasons = [
@@ -101,7 +105,7 @@ def detect_instruction_like_text(text: Any) -> list[str]:
 
 
 def detect_tool_lure(text: Any) -> list[str]:
-    """Detect attempts to lure the agent into tool-call syntax or tool names."""
+    """检测文本中是否包含诱导智能体触发特定工具调用的诱饵词汇。"""
 
     normalized = normalize_text(text)
     reasons = [
@@ -113,7 +117,7 @@ def detect_tool_lure(text: Any) -> list[str]:
 
 
 def detect_structured_injection(text: Any) -> list[str]:
-    """Detect JSON/RPC-style fields commonly used to smuggle tool instructions."""
+    """检测是否包含结构化格式注入（如假冒 JSON-RPC、伪造函数调用字段）。"""
 
     normalized = normalize_text(text)
     reasons: list[str] = []
@@ -134,7 +138,7 @@ def detect_structured_injection(text: Any) -> list[str]:
 
 
 def detect_multilingual_obfuscation(text: Any) -> list[str]:
-    """Detect multilingual and pinyin/homophone obfuscation around tool lures."""
+    """检测是否存在跨语言混淆或拼音绕过等规避策略。"""
 
     normalized = normalize_text(text)
     language_mix = detect_language_mix(text)

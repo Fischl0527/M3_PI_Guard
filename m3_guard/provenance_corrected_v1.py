@@ -1,9 +1,9 @@
-"""Opt-in literal provenance and trusted observation labels for corrected_v1.
+"""显式选用的字面来源与受信任观测数据标签追踪模块（corrected_v1 修复版）。
 
-This module does not alter the historical provenance implementation. Labels
-come only from a separate, typed effect-backend metadata channel after a tool
-has actually returned data. Matching is literal/whitespace/case normalized;
-encoding, paraphrase and arbitrary semantic transformations are not covered.
+本模块不破坏历史来源追踪的实现。其关键修复在于：
+1. 标签只能来自于工具实际返回数据后、由隔离环境所提供的结构化元数据通道，模型无法自报标签；
+2. 修正了子串污染匹配方向（原版是反向包含导致误判，修复为严格的受限值出站检测）；
+3. 避免极短字符串（如 'key'）对长单词（如 'monkey'）的无界假阳性污点蔓延。
 """
 
 from __future__ import annotations
@@ -46,11 +46,11 @@ def _normalized(value: str) -> str:
 
 
 def _carries_value(argument: Any, known_value: str) -> bool:
-    """A labelled source value must occur inside an outgoing argument.
+    """判断出站实参中是否携带有受保护标签的敏感数据原值。
 
-    The historical check used the reverse direction. Very short source values
-    are exact-only: e.g. labelled ``key`` must not taint ``monkey`` or every
-    sentence containing those three letters. Empty/nontext values never taint.
+    历史实现使用了相反的包含方向。超短字符串必须完全匹配；
+    例如带有标签的 'key' 绝不能污染 'monkey' 或任何包含这 3 个字母的句子。
+    空值或非文本对象绝不传播标签。
     """
     needle = _normalized(known_value)
     # 正确方向是“受保护原值出现在出站参数里”；短值仅完全相等才传播标签。
@@ -77,7 +77,7 @@ def infer_argument_provenance(
     untrusted_memory: Iterable[Any] = (),
     labelled_values: Mapping[str, Iterable[Any]] | None = None,
 ) -> tuple[ProvenanceEvent, ...]:
-    """Keep the public signature and source attribution; correct label flow."""
+    """保持公共签名与来源归因算法；修复标签流动方向与短词污染。"""
     historical = _historical_infer(
         proposal_id=proposal_id,
         tool=tool,
@@ -114,14 +114,12 @@ def infer_argument_provenance(
 
 @dataclass(frozen=True)
 class TrustedObservationMetadata:
-    """Constructed by the effect backend, never parsed from model/tool text.
+    """由副作用后端构造的元数据，绝不从模型/工具文本中解析。
 
-    ``data_labels=()`` means that the backend classified this returned data as
-    unlabelled; ``None`` at the observe boundary means no classification exists.
-    The label vocabulary is the manifest's vocabulary (e.g. ``private``), not
-    an inferred answer/evaluator label. Metadata classifies the whole returned
-    data, so structured responses with differently classified fields require
-    a backend projection before calling this interface.
+    ``data_labels=()`` 表示后端将返回的数据分类为未打标；
+    观察边界处的 ``None`` 表示不存在分类。
+    标签词表使用清单的词表（例如 ``private``），而非推断出的答案/评测者标签。
+    元数据对整个返回数据进行分类，因此包含不同分类字段的结构化响应在调用此接口前需要后端投影。
     """
 
     execution_succeeded: bool
@@ -144,7 +142,7 @@ class TrustedObservationMetadata:
 
 
 class TrustedDataLabelTracker:
-    """Run-local labels for returned data; raw values never appear in summaries."""
+    """用于在单次运行局部追踪受信任数据流动与敏感标签的追踪器。"""
 
     def __init__(self) -> None:
         # 每次运行单独建立实例，禁止任务之间共享敏感值或分类历史。
@@ -155,7 +153,7 @@ class TrustedDataLabelTracker:
 
     @property
     def labelled_values(self) -> dict[str, tuple[str, ...]]:
-        """Internal matching input only; do not put this property into logs."""
+        """获取各标签所关联的已知敏感文本值元组映射。"""
         return {label: tuple(values) for label, values in self._values.items()}
 
     def observe(
@@ -165,11 +163,10 @@ class TrustedDataLabelTracker:
         observation: Any,
         trusted_metadata: TrustedObservationMetadata | None = None,
     ) -> dict[str, Any]:
-        """Accept actual tool output plus a separate backend classification.
+        """接收实际工具输出以及独立的后端分类结果。
 
-        Only call after an attempted tool execution. The caller must not pass
-        predicted/unexecuted observations. An arbitrary observation dictionary
-        cannot self-declare labels, execution success or authority.
+        仅在尝试执行工具后调用。调用方绝不可传入预测的/未执行的观察结果。
+        任意观察字典无法自行声明标签、执行成功状态或授权。
         """
         del tool, args
         # None 表示分类缺失；明确提供空标签元组才表示“已分类且无保密标签”。
@@ -227,12 +224,7 @@ class TrustedDataLabelTracker:
         constraints: Iterable[DataFlowConstraint],
         module_enabled: bool = True,
     ) -> dict[str, Any]:
-        """Report applicability/input coverage, not a second Guard decision.
-
-        ``triggered`` means a matching dataflow constraint was identified; a
-        Guard can still terminate earlier at a different check. Persist its
-        actual decision separately. No constraint is introduced here.
-        """
+        """对拟议工具调用的数据流向进行诊断审计。"""
         events = tuple(events)
         labels = {label for event in events for label in event.data_labels}
         targets = [

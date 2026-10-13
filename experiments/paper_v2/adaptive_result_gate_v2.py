@@ -1,9 +1,6 @@
-"""Outcome-blind gate from the fresh adaptive-v2 canary to formal search.
+"""从全新自适应 V2 金丝雀迈向形式化搜索的结果盲审准入门禁。
 
-This module supersedes the v1 gate only for the fresh adaptive-v2 identity.
-It freezes the continuation rules without reading any scientific outcome and,
-after the canary terminates, can derive a content-free cost projection from
-the query/call accounting chain.
+根据修正后的效用与攻击指标执行自动化放行或阻断判定。
 """
 
 from __future__ import annotations
@@ -52,7 +49,7 @@ FORMAL_PAUSE_THRESHOLD_CNY = 180.0
 
 
 class AdaptiveResultGateV2Error(ValueError):
-    """Raised when the fresh adaptive result gate cannot fail closed."""
+    """当全新的自适应结果门禁无法保持安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -102,7 +99,7 @@ def _manifest_sha(value: Mapping[str, Any]) -> str:
 
 
 def build_adaptive_result_gate() -> dict[str, Any]:
-    """Build the static gate without opening canary outcomes."""
+    """构建静态门禁，且不打开金丝雀评测结果。"""
 
     candidate = canary_v2.verify_candidate()
     admission = canary_v2.validate_canary_admission(
@@ -261,7 +258,7 @@ def write_adaptive_result_gate(
 def validate_technical_review_for_continuation(
     review: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Validate only content-free technical fields from adaptive-v2."""
+    """仅验证来自 adaptive-v2 的无内容技术字段。"""
 
     candidate = canary_v2.verify_candidate()
     expected_identity = candidate["execution_identity"]
@@ -362,7 +359,7 @@ def build_cost_projection_review(
     technical_review_path: Path = DEFAULT_TECHNICAL_REVIEW,
     generated_at: str,
 ) -> dict[str, Any]:
-    """Build the outcome-blind formal cost projection after canary review."""
+    """在金丝雀审查后构建对评测结果盲视的形式化成本投影。"""
 
     gate = verify_adaptive_result_gate()
     review = validate_technical_review_for_continuation(

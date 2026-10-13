@@ -1,4 +1,7 @@
-"""Single-pass public-event diagnosis; never inspect model bodies or labels."""
+"""公开事件单遍扫描诊断模块（绝不窥探模型内部权重或在线状态）。
+
+从黑盒交互日志中提取防御拦截的外部表现特征。
+"""
 
 from __future__ import annotations
 

@@ -1,3 +1,8 @@
+"""M3 提示注入攻击变体生成器（AttackGen）与数据集规范化模块。
+
+本模块负责基于模板与变异策略合成多语言、跨工具调用、JSON-RPC 伪造及隐蔽逃逸等
+多种家族的提示注入攻击案例（Attack Case），并输出符合规范的统一 JSONL 数据集。
+"""
 from __future__ import annotations
 
 import argparse
@@ -41,6 +46,16 @@ REQUIRED_FIELDS = LEGACY_REQUIRED_FIELDS | {
     "expected_detectors",
 }
 
+# 9 大核心攻击家族分类体系：
+# direct_jailbreak: 直接越狱（指令覆盖、开发者伪装模式）
+# rag_indirect: RAG/检索增强间接注入（知识库污染）
+# multilingual_t2l: 跨语言攻击（拼音、繁体、小语种隐写）
+# json_rpc: 结构化注入（假冒 RPC 方法、协议标记欺骗）
+# tool_output_injection: 工具执行输出二次注入（供应链/中间人污染）
+# memory_poisoning: 智能体长期/工作记忆投毒
+# environment_context_pollution: 环境变量/上下文感知污染
+# cross_tool_attack_chain: 跨工具链式攻击（利用合法工具组合达成越权目标）
+# obfuscation_evasion: 零宽字符、Unicode 变异、空白规避混淆
 ATTACK_FAMILIES = (
     "direct_jailbreak",
     "rag_indirect",
@@ -224,7 +239,7 @@ LABEL_FIELD_NAME_RE = re.compile(
 
 
 def iter_case_files(cases_dir: Path, out_path: Path) -> list[Path]:
-    """Return the explicit legacy sources; generated artifacts are never re-ingested."""
+    """返回显式的历史源文件；生成的中间产物绝不重新摄入。"""
 
     del out_path
     files = [cases_dir / name for name in LEGACY_SOURCE_NAMES]
@@ -238,7 +253,7 @@ def iter_case_files(cases_dir: Path, out_path: Path) -> list[Path]:
 
 
 def load_cases(paths: list[Path]) -> list[dict[str, Any]]:
-    """Load and minimally validate the immutable 69-case legacy source set."""
+    """加载并进行基础校验：不可变的 69 个历史用例源集合。"""
 
     cases: list[dict[str, Any]] = []
     seen_ids: dict[str, Path] = {}
@@ -306,7 +321,7 @@ def load_cases(paths: list[Path]) -> list[dict[str, Any]]:
 
 
 def build_canonical_cases(legacy_cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Build the deterministic 300-case v2 dataset from legacy cases and templates."""
+    """基于历史用例与模板构建确定性的 300 用例 v2 数据集。"""
 
     enriched = [_enrich_legacy_case(case) for case in legacy_cases]
     templates = _build_generated_templates()
@@ -913,7 +928,7 @@ def _obfuscate(text: str, mode: str) -> str:
 
 
 def model_visible_payload(case: dict[str, Any]) -> dict[str, str]:
-    """Return the only AttackCase fields that may be serialized into a model prompt."""
+    """返回唯一允许序列化到模型提示词中的 AttackCase 字段。"""
 
     return {field: str(case.get(field, "")) for field in MODEL_VISIBLE_FIELDS}
 

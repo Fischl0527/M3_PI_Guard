@@ -1,8 +1,6 @@
-"""Single-attempt official clients with compact request-level receipts.
+"""带紧凑请求级收据证明的单次尝试官方模型客户端。
 
-No historical ledgers, admission files or recursive trace bundles are loaded.
-Payloads, response parsers and redaction reuse the existing official clients;
-the single-attempt HTTP observer also records responses that fail JSON decoding.
+封装标准 API 调用并捕获不可篡改的请求/响应收据哈希。
 """
 
 from __future__ import annotations
@@ -91,7 +89,7 @@ def deepseek_policy(model: str) -> dict[str, Any]:
 
 
 class DevelopmentBudgetState(PublicProviderBudgetState):
-    """Use existing arithmetic, but bind the newly approved service names."""
+    """使用现有算术逻辑，但绑定新批准的服务名称。"""
 
     def __post_init__(self) -> None:
         if (
@@ -141,7 +139,7 @@ class DevelopmentDeepSeekClient(ds.DeepSeekJsonOfficialClient):
 
 
 class DispatchStopped(official.ProviderTransportError):
-    """No new requests after quota failure or the DeepSeek batch closes."""
+    """在配额失败或 DeepSeek 批处理关闭后不再发出新请求。"""
 
 
 class RequestPacer:
@@ -162,10 +160,9 @@ class RequestPacer:
 
 class DevelopmentRequestClient:
     # 只在实际客户端内使用凭据；公开回执不含认证头或内容正文。
-    """Content-free request log, including malformed response identities.
+    """无内容的请求日志，包括格式错误的响应标识。
 
-    Only the raw official client receives the credential. HTTP observer data
-    never includes headers, bodies, model text or prompts.
+    仅原始官方客户端接收凭据。HTTP 观察者数据绝不包含标头、正文、模型文本或提示词。
     """
 
     def __init__(
@@ -275,12 +272,9 @@ class DevelopmentRequestClient:
     def _network_transport(
         self, endpoint: str, headers: Any, payload: Any, timeout: float
     ) -> Any:
-        """Observe HTTP receipt before JSON decoding; exactly one HTTP attempt.
+        """在 JSON 解码前观察 HTTP 收据；严格执行单次 HTTP 尝试。
 
-        The historical transport raises before returning malformed/429 bodies.
-        Recording only returned envelopes would misclassify those as no response.
-        Reuse its serialization and safe-header filtering, but retain receipt
-        status even when decoding fails. No response text or error body is logged.
+        历史传输层在返回畸形/429 正文前会抛出异常。仅记录返回的包络会将其误判为无响应。复用其序列化和安全标头过滤，但在解码失败时仍保留收据状态。不记录响应文本或错误正文。
         """
         request = urllib_request.Request(
             endpoint,

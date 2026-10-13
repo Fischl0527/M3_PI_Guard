@@ -1,10 +1,6 @@
-"""Ordered, prospective provider-request evidence for one experiment work item.
+"""封装单次实验有序、前瞻性提供商请求证据的轨迹包结构。
 
-The bundle contains hashes and request/response identity metadata only.  It
-never persists prompts, provider response text, credentials, or tool effects.
-Every transport call is preceded by an append/flush/fsync commitment.  A call
-without a completed, activated trace makes the whole bundle diagnostic while
-remaining available for intention-to-treat accounting.
+聚合每次交互的请求报文、应答报文、Token 计量及对应校验摘要。
 """
 
 from __future__ import annotations
@@ -63,7 +59,7 @@ BUNDLE_SCHEMA_VERSION = "m3-paper-v2-provider-trace-bundle-2.1"
 
 
 class ProviderTraceBundleError(PaperV2ContractError):
-    """Raised when a request bundle is incomplete, ambiguous, or tampered."""
+    """当请求包不完整、模糊或被篡改时抛出的异常。"""
 
 
 def _load_schema(path: Path) -> dict[str, Any]:
@@ -179,7 +175,7 @@ def build_deepseek_usage_summary(
     *,
     policy: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Summarize content-free cache and cost evidence for one work item."""
+    """汇总单个工作项的无内容缓存和成本论据。"""
 
     totals = _usage_totals(items)
     expected_cost = _normalized_cost(
@@ -212,7 +208,7 @@ def build_deepseek_usage_evidence(
     prior_items: Sequence[Mapping[str, Any]],
     policy: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Project one official receipt into a content-free cache/cost row."""
+    """将单个官方收据投影到无内容的缓存/成本行。"""
 
     validate_provider_receipt(receipt)
     evidence = receipt["evidence"]
@@ -414,7 +410,7 @@ def validate_provider_trace_bundle(
     activation_path: Path = DEFAULT_ACTIVATION,
     budget_policy_path: Path = DEFAULT_BUDGET_POLICY,
 ) -> dict[str, Any]:
-    """Validate schema, hash chain, call ordering, and activation bindings."""
+    """验证 Schema、哈希链、调用顺序和激活绑定。"""
 
     if not isinstance(value, Mapping):
         raise ProviderTraceBundleError("provider trace bundle must be an object")
@@ -635,7 +631,7 @@ def build_provider_trace_bundle(
 
 
 class TracedProviderClient:
-    """Single-work-item wrapper that precommits every provider transport."""
+    """预先提交每个提供商传输的单工作项包装器。"""
 
     def __init__(
         self,

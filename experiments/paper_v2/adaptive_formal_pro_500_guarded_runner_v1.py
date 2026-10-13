@@ -1,4 +1,7 @@
-"""Run the exact Pro-500 stage in a detached, single-use evidence wrapper."""
+"""在独立单次证据包装器中运行确切的 Pro-500 阶段实验。
+
+提供环境隔离与实时异常捕获，安全收集 500 次自适应搜索的证据轨迹。
+"""
 
 from __future__ import annotations
 
@@ -52,7 +55,7 @@ SECRET_PATTERNS = (
 
 
 class AdaptiveFormalPro500GuardedRunnerV1Error(ValueError):
-    """Raised before or after the single permitted Pro-500 execution."""
+    """在单次允许的 Pro-500 执行之前或之后抛出的异常。"""
 
 
 def _now() -> str:

@@ -1,4 +1,8 @@
-"""Build a single-column Word review draft of the lean JISA manuscript."""
+"""构建精简版 JISA 手稿的单栏 Word (.docx) 评审草稿文档。
+
+基于 Pandoc 将核心 Markdown 手稿转排为符合期刊评审规范的单栏 Word 文档，
+自动配置页边距、Times New Roman 字体、行距与图表排版。
+"""
 
 from __future__ import annotations
 
@@ -45,7 +49,7 @@ HEADING_SPECS = {
 
 
 class DocxBuildError(RuntimeError):
-    """Raised when an editable review draft cannot be built safely."""
+    """当无法安全构建可编辑的评审草稿 Word 文档时抛出的运行时异常。"""
 
 
 def _prepare_markdown(text: str) -> str:

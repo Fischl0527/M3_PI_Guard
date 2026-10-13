@@ -1,4 +1,7 @@
-"""Analyze Public primary evidence with the frozen Public-family validator."""
+"""通过固化的公开家族验证器分析公开主要证据。
+
+按预定义攻击战术分类归纳防御失效率，提供细粒度的安全态势全景。
+"""
 
 from __future__ import annotations
 

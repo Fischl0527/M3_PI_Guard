@@ -1,4 +1,8 @@
-"""Public, modular Guard interface for M3_PI_Guard experiments."""
+"""面向 M3_PI_Guard 实验的公共模块化 Guard 防护引擎接口。
+
+本模块汇聚了策略检查、数据流审计与各类提示注入检测器，对外暴露统一的
+evaluate_guard 与 guard_decide 函数，输出包含决策、风险分数、违规理由和审计追踪的 GuardResult。
+"""
 
 from __future__ import annotations
 
@@ -37,7 +41,7 @@ def guard_decide(
     *,
     config: GuardConfig | dict[str, Any] | None = None,
 ) -> tuple[str, float, list[str]]:
-    """Compatibility API returning ``(decision, risk, reasons)``."""
+    """兼容性 API，返回决策元组 ``(decision, risk, reasons)``。"""
 
     return evaluate_guard(context, tool_call, mode=mode, config=config).as_tuple()
 
@@ -49,7 +53,17 @@ def evaluate_guard(
     *,
     config: GuardConfig | dict[str, Any] | None = None,
 ) -> GuardResult:
-    """Evaluate enabled modules exactly once and retain an auditable trace."""
+    """严格评估一次所有已启用的防御子模块，并保留完整的审计追踪日志（Trace）。
+
+    参数:
+        context: 包含当前任务、观测历史与元数据的上下文环境。
+        tool_call: 包含目标工具名与参数的拟议调用字典。
+        mode: 防护模式名称（默认 'full_guard'）。
+        config: 可选的显式 GuardConfig 配置对象。
+
+    返回:
+        GuardResult: 综合各防御子模块结果所生成的不可变防护决策凭单。
+    """
 
     context = context if isinstance(context, dict) else {}
     if not isinstance(tool_call, dict):

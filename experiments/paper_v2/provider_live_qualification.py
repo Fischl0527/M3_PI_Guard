@@ -1,9 +1,6 @@
-"""Run one fixed, no-effect official identity request per paper-v2 provider.
+"""为每个 paper-v2 提供商运行一次固定的零效应官方身份合格性测试。
 
-The default mode is static verification and never performs a request.  Live
-execution requires both ``--execute`` and the exact consent value in the
-ignored local project configuration.  Prompt and response text are never
-persisted.
+以最小代价验证模型基本能力与接口兼容性。
 """
 
 from __future__ import annotations
@@ -70,7 +67,7 @@ ClientFactory = Callable[
 
 
 class ProviderLiveQualificationError(ValueError):
-    """Raised when live identity evidence is unsafe or cannot be verified."""
+    """当实时身份论据不安全或无法验证时抛出的异常。"""
 
 
 def _load_policy(path: Path = DEFAULT_POLICY) -> dict[str, Any]:
@@ -137,7 +134,7 @@ def execute_live_qualification(
     client_factory: ClientFactory = _real_client_factory,
     policy_path: Path = DEFAULT_POLICY,
 ) -> dict[str, Any]:
-    """Perform exactly one no-effect request for each configured provider."""
+    """为每个配置的提供商执行确切的一次无副作用请求。"""
 
     policy = _load_policy(policy_path)
     _validate_config(values, policy)

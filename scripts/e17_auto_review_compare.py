@@ -1,11 +1,6 @@
-"""Validate and compare the two diagnostic E17 automated blind reviews.
+"""验证并对比两组诊断性 E17 自动化盲审结果。
 
-This module is deliberately separate from :mod:`experiments.e17_review`.
-Automated reviews are diagnostic-only and can never satisfy the formal human
-review or adjudication gates.  The comparator reads the corrected public source
-index contract, the E17 manifest, the two blinded templates, and their
-completed automated copies.  It never reads private E17 labels, human
-submissions, automatic-flag mappings, or the experiment registry.
+对比大模型自动化打分与人类专家评审之间的一致性指标（Kappa 评分等）。
 """
 
 from __future__ import annotations
@@ -60,7 +55,7 @@ DISAGREEMENT_FIELDS = (
 
 
 class AutomatedReviewValidationError(ValueError):
-    """Raised when a diagnostic automated review fails its isolation contract."""
+    """当诊断性自动化审查违反其隔离契约时抛出。"""
 
 
 def _sha256(path: Path) -> str:
@@ -104,7 +99,7 @@ def _validate_source_contract(
     e17_manifest: Path,
     templates: Sequence[Path],
 ) -> dict[str, Any]:
-    """Bind diagnostic reviews to the corrected packet source without private labels."""
+    """将诊断性审查绑定到修正后的数据包源，且不包含私有标签。"""
 
     source_index = source_index.resolve()
     e17_manifest = e17_manifest.resolve()

@@ -1,14 +1,7 @@
-"""Independently audit the corrected E9/E14 context experiments.
+"""独立审计修正后的 E9/E14 长上下文实验。
 
-The experiment runners are intentionally not trusted as the final admission
-gate.  This script reconstructs the evidence graph from the frozen protocol,
-the prompt-token proof, the formal manifests, every durable job record and the
-declared artifact ledgers.  Historical V3 E9/E14 evidence is retained as
-diagnostic provenance but is forbidden from the corrected denominators.
-
-The JSON report contains a deterministic ``evidence_fingerprint``.  The paired
-registrar re-runs this audit and accepts a stored report only when the fresh
-fingerprint is identical.
+验证修正版上下文实验是否切实执行了声明的上下文预算，
+检查数据分块与加载是否满足评测契约，确保无捷径绕过。
 """
 
 from __future__ import annotations
@@ -1269,10 +1262,9 @@ def audit_context_correction_v2(
     output_markdown: str | Path | None = DEFAULT_MARKDOWN,
     expected_freeze_paths: Sequence[str] | None = None,
 ) -> dict[str, Any]:
-    """Audit all corrected evidence and optionally write JSON/Markdown reports.
+    """审计所有修正后的论据，并可选写入 JSON/Markdown 审计报告。
 
-    ``expected_freeze_paths`` exists for isolated unit fixtures.  Production
-    callers and the CLI always use the code-owned exact allowlist.
+    ``expected_freeze_paths`` 专供独立的单测固件使用。生产环境调用方与 CLI 始终使用代码所持有的严格精确白名单。
     """
 
     root = Path(repository_root).resolve()

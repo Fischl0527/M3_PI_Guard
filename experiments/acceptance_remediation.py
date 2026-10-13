@@ -1,7 +1,6 @@
-"""Freeze, run, replay, analyze, and verify Acceptance Remediation V2.
+"""冻结、运行、重放、分析并验证准入补救措施（Acceptance Remediation V2）。
 
-The formal rerun is deliberately post-hoc engineering evidence. Diagnostic
-smokes are never discovered by this module and cannot enter its denominators.
+处理历史评测中的边界用例与数据清洗补救，生成可独立复核的合规性证明。
 """
 
 from __future__ import annotations

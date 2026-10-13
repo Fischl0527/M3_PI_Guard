@@ -1,4 +1,7 @@
-"""Prospective evidence gate for admitting the complete public matrix."""
+"""准入完整公开矩阵的前瞻性证据门禁。
+
+执行样本覆盖率、异常重试率与统计显著性三重门禁审查。
+"""
 
 from __future__ import annotations
 
@@ -27,7 +30,7 @@ FROZEN_AT = "2026-07-28T00:50:00+08:00"
 
 
 class PublicResultGateError(ValueError):
-    """Raised when the prospective public result gate drifts."""
+    """当前瞻性公开结果门禁发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

@@ -1,8 +1,6 @@
-"""Create a redacted provider identity receipt from one explicit smoke response.
+"""通过单次显式冒烟测试生成脱敏的提供商身份证明（Attestation Receipt）。
 
-The caller supplies already-redacted response metadata.  This module performs no
-HTTP request, accepts no authorization header, and stores neither prompts nor
-response content.
+证明评测所用远程模型的模型签名、返回头信息与声明的模型版本完全相符。
 """
 
 from __future__ import annotations
@@ -28,7 +26,7 @@ FORBIDDEN_HEADER_NAMES = {
 
 
 class ProviderAttestationError(ValueError):
-    """Raised when smoke metadata cannot support a formal identity claim."""
+    """当冒烟测试元数据无法支持形式化身份主张时抛出的异常。"""
 
 
 def _nonempty_string(value: Any, *, label: str) -> str:
@@ -52,7 +50,7 @@ def build_smoke_receipt(
     response_metadata: Mapping[str, Any],
     observed_at: str,
 ) -> dict[str, Any]:
-    """Validate one response envelope and return content-free attestation."""
+    """验证单个响应包络并返回无内容的证明。"""
 
     expected_model = _nonempty_string(
         expected_model_id, label="expected_model_id"
@@ -129,7 +127,7 @@ def build_smoke_receipt(
 
 
 def validate_smoke_receipt(receipt: Mapping[str, Any]) -> None:
-    """Validate a stored receipt without needing the original response."""
+    """在不需要原始响应的情况下验证已存储的收据。"""
 
     if receipt.get("schema_version") != (
         "m3-paper-v2-provider-smoke-receipt-1.0"

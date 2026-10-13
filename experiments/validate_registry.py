@@ -1,4 +1,7 @@
-"""Validate registry structure and evidence completeness."""
+"""验证实验注册表结构与关联证据的完整性。
+
+对所有已登记实验进行反向证据链溯源，确保每一项完成声明都有不可变的数据工件支撑。
+"""
 
 from __future__ import annotations
 

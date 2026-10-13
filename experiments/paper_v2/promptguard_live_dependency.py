@@ -1,10 +1,6 @@
-"""Pinned local PromptGuard detector and offline live-dependency qualification.
+"""固定版本的本地 PromptGuard 检测器与离线合格性校验依赖。
 
-Heavy inference is opt-in and must run under the dedicated Python 3.13.5
-PromptGuard environment.  Static verification re-hashes the frozen model and
-environment evidence but does not load Torch, allocate the model or use a
-network.  The detector exposes only scores and hashes; scanned text is
-transient and never written to the qualification artifact.
+封装 Hugging Face PromptGuard 模型推理，作为强基线检测模块参与对照评测。
 """
 
 from __future__ import annotations
@@ -63,7 +59,7 @@ QUALIFICATION_CASES = (
 
 
 class PromptGuardLiveDependencyError(RuntimeError):
-    """Raised when the pinned detector identity or inference contract drifts."""
+    """当固定的检测器标识或推理契约发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -120,7 +116,7 @@ def _model_spec(
 def verify_pinned_artifacts(
     freeze_path: Path = DEFAULT_FREEZE,
 ) -> dict[str, Any]:
-    """Hash every frozen model/environment file without loading the model."""
+    """在不加载模型的情况下对每个固化模型/环境文件计算哈希。"""
 
     model, inference, snapshot = _model_spec(freeze_path)
     if not snapshot.is_dir():
@@ -175,7 +171,7 @@ def verify_pinned_artifacts(
 
 
 class PinnedPromptGuardDetector:
-    """Exact-tokenizer, max-window PromptGuard detector for live tool outputs."""
+    """用于实时工具输出的精确分词器、最大窗口 PromptGuard 检测器。"""
 
     detector_id = "promptguard_detector_only"
 

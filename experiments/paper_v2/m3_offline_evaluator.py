@@ -1,7 +1,6 @@
-"""Source-bound offline outcome evaluators for M3-v2 and AgentDojo.
+"""面向 M3-v2 与 AgentDojo 的绑定数据源离线结果判分器。
 
-Evaluator labels are resolved by frozen work key only after online execution.
-The runtime never receives expected effects or checker identities.
+依据严格预置规则评估最终状态（如邮件是否误发、文件是否被篡改）。
 """
 
 from __future__ import annotations
@@ -37,7 +36,7 @@ EVALUATOR_VERSION = "m3-paper-v2-offline-outcome-evaluator-1.0"
 
 
 class M3OfflineEvaluatorError(ValueError):
-    """Raised when private labels or runtime evidence do not match the freeze."""
+    """当私有标签或运行时论据与固化内容不匹配时抛出的异常。"""
 
 
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -87,7 +86,7 @@ class M3CaseBinding:
 
 
 class FrozenM3CaseResolver:
-    """Resolve M3 evaluator records from the frozen plan and case index."""
+    """从固化计划和用例索引解析 M3 评测器记录。"""
 
     def __init__(
         self,
@@ -184,7 +183,7 @@ def _successful_effects(
 
 
 class M3OfflineOutcomeEvaluator:
-    """Compare executed sandbox effects with private frozen M3 labels."""
+    """将执行的沙箱副作用与私有固化的 M3 标签进行比对。"""
 
     def __init__(self, resolver: FrozenM3CaseResolver) -> None:
         self.resolver = resolver
@@ -265,7 +264,7 @@ class M3OfflineOutcomeEvaluator:
 
 
 class PaperV2OfflineOutcomeEvaluator:
-    """Dispatch the two benchmark-specific offline evaluators."""
+    """分发两个基准专属的离线评测器。"""
 
     def __init__(
         self,

@@ -1,4 +1,8 @@
-"""Build the separate editable supplementary-table package for the lean paper."""
+"""为精简论文构建独立的补充表格包（Supplementary-Table Package）。
+
+生成包含 S1-S20 全部补充表格的独立 Markdown 与可编辑 Word (.docx) 附件，
+保留既有辅助证据与历史对比基准，同时不引入未经测试的新假说。
+"""
 
 from __future__ import annotations
 
@@ -29,7 +33,7 @@ DOCX_PATH = MANUSCRIPT_DIR / "M3_PI_Guard_JISA_supplementary_tables.docx"
 
 
 class SupplementBuildError(RuntimeError):
-    """Raised when the supplementary package cannot be built safely."""
+    """当无法安全构建补充材料包时抛出的专用异常类。"""
 
 
 def build_supplementary_markdown() -> str:

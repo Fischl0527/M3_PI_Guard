@@ -1,9 +1,6 @@
-"""Require a fresh directly observed green Harness before closeout execution.
+"""在收官执行前要求直接观察到全新的绿色 Harness 测试通过证明。
 
-The gate is non-authorizing.  It binds the fresh full-Harness receipt, the
-interim exit-one review, adaptive supersession, Day-1 custodian registration,
-and the current Gemini/Flash recovery candidates.  Provider execution still
-requires a separate exact-command admission and budget ceiling.
+保障各阶段演进代码在基准测试上的稳定性与兼容性。
 """
 
 from __future__ import annotations
@@ -80,7 +77,7 @@ PYTEST_SUMMARY = re.compile(
 
 
 class ExperimentCloseoutHarnessGateV3Error(ValueError):
-    """Raised when the fresh full-Harness prerequisite is missing or drifts."""
+    """当全新的全量 Harness 前置条件缺失或发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

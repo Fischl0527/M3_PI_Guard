@@ -1,9 +1,6 @@
-"""Build the admitted-evidence M3-PI Guard stage report for 2026-07-30.
+"""构建 2026-07-30 基于已准入证据的 M3-PI Guard 阶段报告。
 
-The builder is intentionally post-admission.  It refuses to run until the
-public-primary analysis and independent review both exist and pass.  It reads
-only aggregate scientific outputs and content-free evidence manifests; it
-never reads provider credentials, prompts, or response bodies.
+严格基于已通过准入审计的实验结果生成最终收敛阶段的技术总结报告。
 """
 
 from __future__ import annotations

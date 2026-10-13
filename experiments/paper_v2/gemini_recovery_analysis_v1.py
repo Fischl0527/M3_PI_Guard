@@ -1,4 +1,7 @@
-"""Separate Gemini recovery generations without rewriting the original study."""
+"""独立分析 Gemini 恢复运行生成物（不重写原始历史数据）。
+
+对比恢复前后模型的响应一致性与防御有效率。
+"""
 
 from __future__ import annotations
 
@@ -69,7 +72,7 @@ def analyze_recovery(
     recovery_rows: Sequence[Mapping[str, Any]],
     diagnostics: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
-    """Analyze the 512-token original and 2048-token recovery separately."""
+    """分别分析 512-token 原始版本和 2048-token 恢复版本。"""
     plan = [row for row in plan if row["model_group"] == "gemini_flash"]
     plan_by_key = {str(row["work_key"]): row for row in plan}
     old_by_key = {str(row["work_key"]): row for row in old_rows}
@@ -306,7 +309,7 @@ def report_markdown(result: Mapping[str, Any], figures: Sequence[str]) -> str:
 def write_analysis(
     old_root: Path = DEFAULT_OLD_ROOT, output: Path = DEFAULT_OUTPUT, *, figures: bool = True,
 ) -> dict[str, Any]:
-    """Read original Gemini once and write only the independent recovery folder."""
+    """读取原始 Gemini 一次，仅写入独立恢复文件夹。"""
     old_root, output = Path(old_root).resolve(), Path(output).resolve()
     if (
         output == old_root or output in old_root.parents

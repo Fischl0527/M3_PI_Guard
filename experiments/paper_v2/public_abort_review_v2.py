@@ -1,4 +1,7 @@
-"""Freeze the content-free abort review for the Public-v2 primary canary."""
+"""冻结 Public-v2 主金丝雀的无内容偏见中止审查记录。
+
+复核第二轮金丝雀测试的熔断触发条件与现场快照。
+"""
 
 from __future__ import annotations
 
@@ -45,7 +48,7 @@ GENERATED_AT = "2026-07-28T12:52:00+08:00"
 
 
 class PublicAbortReviewV2Error(ValueError):
-    """Raised when the frozen Public-v2 abort evidence drifts."""
+    """当固化的 Public-v2 中止论据发生漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

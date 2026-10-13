@@ -1,4 +1,4 @@
-"""Generate DAY5 metric figures from an m3_eval summary CSV."""
+"""绘制安全防御与效用指标对比图表（柱状图、雷达图、折线图）。"""
 
 from __future__ import annotations
 

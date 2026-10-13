@@ -1,15 +1,6 @@
-"""Recover the terminal Gemini v4 segment evidence without fabricating a receipt.
+"""恢复终止的 Gemini v4 分段证据（严禁捏造或修补未观察数据）。
 
-The single-use PowerShell wrapper completed all four captured steps, but its
-``finally`` receipt is absent.  The original v4 review rejected the segment
-because it counted only ordinary completed ledger calls.  The separately
-frozen v5 review reconciles the one provider-transport completion with the one
-post-response ``VigilLiveDependencyError`` retained in ITT.
-
-This module binds those immutable files.  It proves the *segment evidence* is
-terminal and eligible for later matrix continuation.  It deliberately leaves
-the wrapper operating-system exit unknown, does not create the missing receipt,
-does not authorize a provider call, and does not admit scientific results.
+提取断点前已完成的合法结果并打上恢复标记归档。
 """
 
 from __future__ import annotations
@@ -117,7 +108,7 @@ AUDITOR_LINE = "[RuntimeAuditor] Blocked tool call: delete_record"
 
 
 class GeminiPublicV4WrapperRecoveryV1Error(ValueError):
-    """Raised when the immutable terminal segment evidence cannot be recovered."""
+    """当不可变的终端分段论据无法恢复时抛出的异常。"""
 
 
 def _display_path(path: Path) -> str:

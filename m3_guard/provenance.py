@@ -1,4 +1,8 @@
-"""Argument-level provenance tracking for paper-v1 tool proposals."""
+"""Paper-v1/v2 工具动作实参级别来源追溯（Argument-Level Provenance Tracking）模块。
+
+本模块负责追溯工具调用参数的源头归属（Trusted User、Trusted App Context、Untrusted Document、
+Untrusted Tool Output 或 Model Generated），并为每个参数绑定可审计的哈希与证据路径。
+"""
 
 from __future__ import annotations
 
@@ -78,7 +82,19 @@ def _value_sha256(value: Any) -> str:
 
 @dataclass(frozen=True)
 class ProvenanceEvent:
-    """One auditable claim about where an action argument originated."""
+    """关于某个动作实参源自何处的一条可审计凭证事件。
+
+    属性:
+        event_id (str): 事件唯一标识。
+        proposal_id (str): 关联动作提案 ID。
+        argument_path (str): 参数访问路径（如 'arguments.path'）。
+        source_type (str): 来源分类（'trusted_user', 'untrusted_document' 等）。
+        trust_level (str): 信任等级（'trusted', 'untrusted', 'model_generated'）。
+        value_sha256 (str): 参数值的 SHA-256 哈希值。
+        source_event_id (str | None): 传播前序事件 ID。
+        data_labels (tuple[str, ...]): 附带的数据敏感标签元组。
+        evidence (str): 判定来源的证据文本摘录。
+    """
 
     event_id: str
     proposal_id: str
@@ -183,11 +199,24 @@ def infer_argument_provenance(
     untrusted_memory: Iterable[Any] = (),
     labelled_values: Mapping[str, Iterable[Any]] | None = None,
 ) -> tuple[ProvenanceEvent, ...]:
-    """Attribute each leaf without exposing its raw value in the audit log.
+    """归因每个叶子参数的来源，同时避免在审计日志中暴露未经脱敏的原始明文。
 
-    Trusted sources take precedence when the same literal is present in both a
-    user request and an untrusted document.  This prevents an attacker from
-    laundering an already user-approved destination merely by repeating it.
+    当同一个字面值同时出现在用户可信请求与不可信文档中时，优先采信受信任来源。
+    这可有效防止攻击者通过单纯重复用户已批准的目标来洗白未经授权的外部恶意信宿。
+
+    参数:
+        proposal_id: 提案唯一 ID。
+        tool: 工具名称。
+        arguments: 实参字典。
+        trusted_user_request: 用户受信请求原文字符串。
+        trusted_app_context: 受信应用上下文。
+        untrusted_document: 不可信文档内容。
+        untrusted_tool_outputs: 不可信历史工具输出列表。
+        untrusted_memory: 不可信记忆项。
+        labelled_values: 预定义的敏感数据标签及值集合映射。
+
+    返回:
+        tuple[ProvenanceEvent, ...]: 逐个实参叶子节点的来源追溯事件元组。
     """
 
     app_context = trusted_app_context or {}

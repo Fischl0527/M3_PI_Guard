@@ -1,8 +1,6 @@
-"""One-pass descriptive analysis of the corrected development cohort only.
+"""修正后开发验证队列的单遍描述性统计分析工具。
 
-No provider clients, credentials, historical raw records, or bootstrap replay are
-used. Unknown endpoints retain null; native AgentDojo security and M3 simulated
-effects are always stratified by benchmark.
+统计核心指标的均值、分位数与置信区间，为论文主表提供数据支撑。
 """
 
 from __future__ import annotations
@@ -183,7 +181,7 @@ def _burden(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
 
 
 def _dataflow_observability(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    """Count persisted pre-decision summaries, not end-to-end label coverage."""
+    """统计持久化的决策前摘要，而非端到端标签覆盖率。"""
     statuses: Counter[str] = Counter()
     sources: Counter[str] = Counter()
     totals: Counter[str] = Counter()

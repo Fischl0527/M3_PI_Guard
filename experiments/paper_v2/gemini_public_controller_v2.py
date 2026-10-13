@@ -1,4 +1,7 @@
-"""Versioned Gemini public canary using exact JSON-output commitments."""
+"""使用精确 JSON 输出承诺的版本化 Gemini 公开矩阵控制器。
+
+保障多工具调用场景下参数解析的严密性与确定性。
+"""
 
 from __future__ import annotations
 
@@ -52,7 +55,7 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class GeminiPublicControllerV2Error(RuntimeError):
-    """Raised when the versioned Gemini canary cannot remain fail-closed."""
+    """当版本化 Gemini 金丝雀无法保持安全闭合时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -81,7 +84,7 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 
 def build_v1_supersession_review() -> dict[str, Any]:
-    """Seal the unexecuted v1 admission without deleting historical files."""
+    """封存未执行的 v1 准入，且不删除历史文件。"""
 
     candidate = v1.verify_canary_candidate()
     admission = v1.validate_canary_admission(

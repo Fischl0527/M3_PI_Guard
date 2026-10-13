@@ -1,8 +1,6 @@
-"""Explicit exact-target oracle control; historical exact_gold is unchanged.
+"""显式精确目标（Exact-Target）理想对照监视器（历史 exact_gold 保持未变）。
 
-Only declared content fields may vary. All other supplied fields must match the
-derived scope or an explicit tool default. Unsupported field roles fail visibly.
-This is not a deployed non-oracle authorization mechanism.
+通过精确匹配目标动作来评估最小必要权限策略对攻击的遏制效果。
 """
 
 from __future__ import annotations
@@ -88,7 +86,7 @@ TOOL_ARGUMENT_ROLES.update(dict.fromkeys((
 
 
 def build_exact_target_authorization_v2(record: Mapping[str, Any], benchmark: str) -> dict[str, Any]:
-    """Offline derivation for the explicit control only; preserve repeated calls."""
+    """仅用于显式对照的离线派生；保留重复调用。"""
     from experiments.paper_v2.medium_runtime import _agentdojo_exact_calls, _m3_exact_calls
 
     if benchmark not in {"m3-v2", "agentdojo-v1"}:
@@ -110,7 +108,7 @@ def build_exact_target_authorization_v2(record: Mapping[str, Any], benchmark: st
 
 
 class ExactTargetMonitorV2(ExactGoldAblationMonitor):
-    """Schema-complete proposals, exact security scope and single-use order."""
+    """规范完整的提案、精确安全范围和单次使用顺序。"""
 
     modules = frozenset({"oracle_ablation", "exact_sequence", "exact_target_v2", "tool_contract"})
 
@@ -165,7 +163,7 @@ class ExactTargetMonitorV2(ExactGoldAblationMonitor):
         self._restriction_decision = None
 
     def attach_runtime_restrictions(self, template: TaskPolicyManifest, *, modules, tracker) -> None:
-        """Derived oracle scope goes to Guard only; the provider keeps template."""
+        """派生的 Oracle 范围仅发送给 Guard；提供商保留模板。"""
         from m3_guard.runtime_monitor_corrected_v2 import RuntimeMonitorCorrectedV2
 
         if self.restriction_monitor is not None or self._decisions_started:

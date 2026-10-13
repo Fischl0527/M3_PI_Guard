@@ -1,10 +1,6 @@
-"""Linear-time append-only recovery for the four public-v2 shards.
+"""面向四个公开 v2 分片的线性时间复杂度仅追加恢复执行器。
 
-Each v2 shard stopped after its first closed diagnostic record.  The records
-are valid ITT observations, not retryable failures.  This controller freezes
-every closed v2 prefix and, under a separate admission, executes only work
-items that have never started.  Diagnostics remain in the denominator and no
-longer stop later untouched work.
+以 O(N) 线性流式扫描快速定位断点并启动接续执行。
 """
 
 from __future__ import annotations
@@ -69,7 +65,7 @@ MAX_DIAGNOSTIC_FRACTION = 0.01
 
 
 class PublicShardedRecoveryV3Error(ValueError):
-    """Raised when a public recovery boundary cannot fail closed."""
+    """当公开恢复边界无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

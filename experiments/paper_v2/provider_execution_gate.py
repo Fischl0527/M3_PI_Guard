@@ -1,4 +1,7 @@
-"""Freeze the paper-v2 official-provider transport identity without running it."""
+"""在不发起付费调用的前提下冻结 paper-v2 官方提供商传输身份。
+
+前置验证 API 密钥配置有效性与网络端点可达性。
+"""
 
 from __future__ import annotations
 
@@ -185,7 +188,7 @@ LOCKED_INPUTS = (
 
 
 class ProviderExecutionGateError(ValueError):
-    """Raised when the v3 provider execution preflight drifts."""
+    """当 v3 提供商执行预检发生漂移时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:
@@ -245,7 +248,7 @@ def build_execution_preflight(
         DEFAULT_POST_PILOT_REVIEW_QUALIFICATION
     ),
 ) -> dict[str, Any]:
-    """Bind the exact transport inputs while retaining all scientific blockers."""
+    """绑定确切的传输输入，同时保留所有科学阻断器。"""
 
     qualification = build_offline_transport_qualification()
     if _load_json(qualification_path) != qualification:

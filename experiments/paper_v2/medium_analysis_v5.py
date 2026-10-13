@@ -1,12 +1,6 @@
-"""Schema-valid closed-diagnostic ITT analysis.
+"""符合 Schema 规范校验的关闭诊断性 ITT 分析模块。
 
-Version 5 supersedes the frozen v4 compatibility attempt.  The diagnostic is
-projected into the closed v1 schema using its existing diagnostic-only,
-unverified-response vocabulary.  The report, not the record, carries the
-explicit no-response disclosure.  Mechanism eligibility uses the separately
-verified technical identity policy for formal responses plus the admitted
-closed diagnostic, instead of pretending that the failed request produced an
-official response attestation.
+确保分析输出严格遵循 `experiment_record_v1.schema.json` 架构。
 """
 
 from __future__ import annotations
@@ -26,7 +20,7 @@ from experiments.paper_v2.medium_analysis_v4 import (
 def project_closed_diagnostic_for_itt_v5(
     record: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Return a schema-valid v1 diagnostic analysis view."""
+    """返回符合 Schema 规范的 v1 诊断分析视图。"""
 
     projected = project_closed_diagnostic_for_itt(record)
     projected.pop("analysis_projection")
@@ -51,7 +45,7 @@ def analyze_medium_records_v5(
     technical_identity_policy_satisfied: bool,
     bootstrap_iterations: int | None = None,
 ) -> dict[str, Any]:
-    """Run v3 with the schema-valid diagnostic compatibility view."""
+    """使用符合 Schema 规范的诊断兼容性视图运行 v3。"""
 
     diagnostic_count = 0
     projected_records: list[dict[str, Any]] = []

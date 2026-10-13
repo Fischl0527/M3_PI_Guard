@@ -1,4 +1,9 @@
-"""Opt-in whole-rule matching with global and overlapping restrictions intact."""
+"""显式选用的整条规则匹配运行时监视器（保持全局限制与重叠约束的完整性）。
+
+本模块解决历史版本中“参数跨规则拼接”的漏洞：
+模型动作提案必须满足单条完整的工具规则（Whole-Rule Matching），同时必须满足所有全局约束；
+当存在多条重叠规则时，允许的参数数据来源取交集，确认要求取逻辑“或”（任一规则要求确认即必须确认）。
+"""
 
 from __future__ import annotations
 
@@ -23,6 +28,15 @@ RUNTIME_VERSION = "corrected_v1"
 
 
 def _matches(proposal: ActionProposal, rule: ToolRule) -> bool:
+    """检查动作提案是否满足特定工具规则的所有参数约束。
+
+    参数:
+        proposal: 待检查的动作提案（包含工具名称与实际调用参数）。
+        rule: 目标工具规则（包含参数约束规范与必填要求）。
+
+    返回:
+        bool: 若提案中所有必填参数均存在且符合约束条件，则返回 True；否则返回 False。
+    """
     return all(
         (
             not constraint.required
@@ -39,13 +53,21 @@ def evaluate_action_corrected_v1(
     *,
     modules: frozenset[str] = FULL_RUNTIME_MODULES,
 ) -> GuardDecision:
-    """An action must satisfy one complete rule and every overlapping restriction.
+    """评估动作提案：动作必须满足单条完整规则并符合所有重叠限制。
 
-    Temporal/dataflow/untrusted-target restrictions apply globally. Parameter
-    grants are alternatives, never a cross-product. For scopes that overlap,
-    permitted sources intersect and confirmation requirements are OR-combined.
-    Old approval records cannot authorize new corrected_v1 executions; the
-    independent, bound, one-shot confirmation session is the only recovery path.
+    时序/数据流/不可信目标等限制全局适用。参数许可是各规则独立选一的备选项，
+    绝不能进行跨规则笛卡尔积拼装。对于重叠的作用域，允许的来源取交集，
+    确认要求取逻辑“或（OR）”结合。
+    历史审批记录不能授权新的 corrected_v1 执行；独立的、强绑定的、单次有效的
+    确认会话是唯一的权限恢复途径。
+
+    参数:
+        proposal: 待评估的动作提案。
+        manifest: 当前任务的策略清单。
+        modules: 启用的运行时防御模块集合（默认启用完整模块 FULL_RUNTIME_MODULES）。
+
+    返回:
+        GuardDecision: 包含决策结果（ALLOW/ASK/DENY）、理由说明、违规标签及执行收据。
     """
     if proposal.tool == "final":
         return evaluate_action(proposal, manifest, modules=modules)
@@ -116,9 +138,10 @@ def evaluate_action_corrected_v1(
 
 
 class RuntimeMonitorCorrectedV1(RuntimeMonitor):
-    """Same public monitor interface, explicitly selected by new experiments."""
+    """保持相同公共监视器接口的 V1 修复版运行时监视器（由新实验显式选用）。"""
 
     def decide(self, proposal: ActionProposal) -> GuardDecision:
+        """评估动作提案并返回防护决策（由监视器自身维护已执行工具历史）。"""
         # 历史由监视器保存，不相信模型自报“此前已执行哪些工具”。
         proposal = replace(proposal, preceding_tools=self.executed_tools)
         return evaluate_action_corrected_v1(

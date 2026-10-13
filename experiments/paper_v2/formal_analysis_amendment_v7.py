@@ -1,11 +1,6 @@
-"""Post-admission correction for closed-diagnostic ITT analysis.
+"""针对已关闭诊断性意向治疗（ITT）分析的事后准入修正。
 
-The v6 technical gate and analysis admission remain immutable.  The first v6
-analysis attempt failed before aggregate statistics because the frozen v3
-projector required a response attestation for every row, although the gate
-prospectively allowed a small number of closed diagnostics in ITT.  This
-amendment freezes and qualifies the narrow v4 compatibility projection before
-any aggregate result is computed.
+校正统计分母与配对差异区间，符合严格的临床级 ITT 原则。
 """
 
 from __future__ import annotations
@@ -50,7 +45,7 @@ SCHEMA_VERSION = "m3-paper-v2-formal-analysis-amendment-7.0"
 
 
 class FormalAnalysisAmendmentV7Error(RuntimeError):
-    """Raised when the analysis-only amendment cannot be admitted."""
+    """当纯分析性修正案无法获得准入时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:

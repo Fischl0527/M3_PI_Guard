@@ -1,4 +1,7 @@
-"""Write a reproducible package snapshot for an isolated experiment runtime."""
+"""为隔离实验运行环境生成可重现的 Python 软件包环境快照。
+
+捕获当前解释器路径、系统架构、依赖包版本及环境变量缓存目录，生成标准化审计 JSON 文件。
+"""
 
 from __future__ import annotations
 

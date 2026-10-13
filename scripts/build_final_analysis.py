@@ -1,10 +1,8 @@
-"""Build the final, audit-ready synthesis for E0-E17 plus the E11 supplement.
+"""构建针对 E0-E17 实验体系及 E11 事后修正补充包的最终、具备审计能力的综合分析报告。
 
-This module is deliberately read-only with respect to experiment evidence.  It
-validates the complete registry, every declared artifact, and the separately
-denominated post-hoc E11 amendment before creating a transactional reporting
-bundle. Historical E0 evidence is diagnostic only; Stub, smoke, and regression
-evidence are never admitted to formal conclusions.
+本模块对实验证据严格执行只读访问原则。它在创建事务性报告包之前，
+完整校验整个实验注册表、声明的每一个数据工件，以及单独计量的 E11 事后补充修正。
+历史 E0 实验数据仅作为诊断用途；任何桩测试（Stub）、冒烟测试（Smoke）和回归测试证据均不得纳入正式学术结论。
 """
 
 from __future__ import annotations
@@ -201,7 +199,7 @@ FAILURE_FIELDS = (
 
 
 class FinalAnalysisError(RuntimeError):
-    """Raised when evidence cannot safely enter the final synthesis."""
+    """当论据无法安全进入最终综合分析时抛出。"""
 
 
 @dataclass(frozen=True)
@@ -645,7 +643,7 @@ def _validate_e17_source_admission(
     registered_paths: Sequence[Path],
     root: Path,
 ) -> dict[str, Any]:
-    """Re-run the corrected source loader and bind registry, plan and manifest."""
+    """重新运行修正后的源加载器，并绑定注册表、计划和清单。"""
 
     configuration = manifest.get("configuration")
     plan = manifest.get("plan")
@@ -1216,7 +1214,7 @@ def validate_e11_supplement(
     *,
     repository_root: str | Path,
 ) -> tuple[E11SupplementBundle, list[dict[str, Any]]]:
-    """Strictly admit the completed post-hoc E11 supplement without pooling it."""
+    """严格准入已完成的事后 E11 补充实验，不进行数据池化混同。"""
 
     root = Path(repository_root).resolve()
     directory = _strict_path(
@@ -1511,7 +1509,7 @@ def validate_result_integrity_audit(
     program_manifest_path: str | Path,
     repository_root: str | Path,
 ) -> IntegrityEvidence:
-    """Validate and bind the final main/derived/stability audit to live inputs."""
+    """针对在线实时输入验证并绑定最终的主/派生/稳定性审计。"""
 
     root = Path(repository_root).resolve()
     audit_file = _strict_path(Path(audit_path), root, label="final result-integrity audit")
@@ -1663,7 +1661,7 @@ def _parse_quality_metric(failures: int, denominator: int, reference: float) -> 
 def build_main_parse_quality(
     integrity: IntegrityEvidence, *, reference_threshold: float
 ) -> dict[str, Any]:
-    """Derive all-condition main parse diagnostics from the audited counters."""
+    """从经审计的计数器中派生全条件的主解析质量诊断指标。"""
 
     reference = _float(reference_threshold, label="main parse reference threshold")
     if reference is None or not 0 <= reference <= 1:
@@ -1733,7 +1731,7 @@ def build_main_parse_quality(
 
 
 def build_e16_provenance(bundle: Bundle, *, repository_root: str | Path) -> dict[str, Any]:
-    """Extract only sandbox-runtime provenance from E16's hash-bound raw JSONL."""
+    """从 E16 哈希绑定的原始 JSONL 中仅提取沙箱运行时溯源信息。"""
 
     root = Path(repository_root).resolve()
     manifest = bundle.manifest
@@ -2307,7 +2305,7 @@ def _build_language_evasion(bundles: Mapping[str, Bundle]) -> ChartResult:
 
 
 def build_e9_data_quality(bundle: Bundle) -> dict[str, Any]:
-    """Recompute E9 unresolved counts from the registered context-position rows."""
+    """从已注册的上下文位置记录行重新计算 E9 未解决计数。"""
 
     rows = _bundle_csv(bundle, "context_position.csv")
     if not rows:

@@ -1,7 +1,6 @@
-"""Build the 2026-07-27 M3-PI Guard paper-v2 stage report.
+"""构建 2026-07-27 阶段性 paper-v2 进展报告（Word 文档）。
 
-The report is generated only from admitted or frozen repository evidence. It
-does not read credentials, prompts, response bodies, or mutable provider state.
+整合 2026-07-27 审计修复后的实验数据与指标对比，生成规范技术报告。
 """
 
 from __future__ import annotations
@@ -118,7 +117,7 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
 
 
 def configure_sections(doc: Document) -> None:
-    """Apply the standard_business_brief preset and memo_masthead furniture."""
+    """统一配置 Word 文档各节页面边距与纸张方向。"""
 
     for section in doc.sections:
         section.orientation = WD_ORIENT.PORTRAIT
@@ -152,7 +151,7 @@ def configure_sections(doc: Document) -> None:
 
 
 def apply_report_style_overrides(doc: Document) -> None:
-    """Resolve the memo masthead title/subtitle tokens into real Word styles."""
+    """覆盖 Word 样式库正文与标题字体规范。"""
 
     title = doc.styles["Title"]
     title.font.name = "Calibri"

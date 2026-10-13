@@ -1,11 +1,6 @@
-"""Freeze and qualify the remediated paper-v2 public candidate v3.
+"""冻结并校验修复后的 paper-v2 公开候选版本 v3。
 
-Public-v3 preserves the result-blind 6,873-record plan while deriving fresh
-execution identities after Public-v2 showed that its M3 evaluator still used
-the medium-only work-key index.  The Public-v2 abort review, public AgentDojo
-resolver and new public M3 resolver are independently verified and hash-bound.
-
-No command in this module reads credentials or performs network I/O.
+提升了评测调度吞吐量与异常容错能力。
 """
 
 from __future__ import annotations
@@ -64,7 +59,7 @@ CANDIDATE_STATUS = "candidate_pending_exact_command_canary_approval"
 
 
 class PublicMatrixControllerV3Error(ValueError):
-    """Raised when the Public-v3 candidate cannot fail closed."""
+    """当 Public-v3 候选对象无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

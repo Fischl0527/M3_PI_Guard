@@ -1,10 +1,4 @@
-"""Streamlit dashboard for final M3 evidence bundles and safe RunLog replay.
-
-The I/O helpers understand analysis bundles, full-program manifests, legacy
-metric summaries, and raw RunLog JSONL.  Data shaping and redaction are kept in
-pure functions so the dashboard's metric semantics and replay safety can be
-unit tested without starting Streamlit.
-"""
+"""M3_PI_Guard 交互式与静态 HTML 评测可视化看板生成器。"""
 
 from __future__ import annotations
 
@@ -80,7 +74,7 @@ CANARY_RE = re.compile(r"(?i)M3_SYNTHETIC_CANARY\s*=\s*[^\s]+")
 
 
 def parse_optional_number(value: Any) -> float | None:
-    """Parse a number while preserving absent/undefined values as ``None``."""
+    """解析可选数值，同时将缺失或未定义的值保留为 ``None``。"""
 
     if value is None or isinstance(value, bool):
         return None
@@ -115,7 +109,7 @@ def _json_list(value: Any) -> list[str]:
 
 
 def derive_evidence_layer(record: Mapping[str, Any], source: str = "") -> str:
-    """Classify evidence without allowing Stub/smoke/history into formal claims."""
+    """对论据层级进行分类，防止将 Stub/冒烟/历史测试混入正式主张中。"""
 
     source_text = source.replace("\\", "/").casefold()
     tier = _string(record.get("evidence_tier")).casefold()
@@ -169,7 +163,7 @@ def normalize_metric_record(
     batch_hint: str = "",
     evidence_hint: str = "",
 ) -> dict[str, Any]:
-    """Return a normalized metric record without mutating the source row."""
+    """返回规范化的指标记录，且不修改原始数据行。"""
 
     result = deepcopy(dict(row))
     if evidence_hint and not result.get("evidence_tier"):
@@ -232,7 +226,7 @@ def normalize_log_record(
     batch_hint: str = "",
     evidence_hint: str = "",
 ) -> dict[str, Any]:
-    """Add safe dashboard dimensions while retaining the original row in memory."""
+    """添加安全的仪表盘维度，同时在内存中保留原始日志行。"""
 
     result = deepcopy(dict(row))
     if evidence_hint and not result.get("evidence_tier"):
@@ -275,7 +269,7 @@ def normalize_manifest_records(
     *,
     source: str = "",
 ) -> list[dict[str, Any]]:
-    """Flatten program, bundle, and matrix manifests into registry rows."""
+    """将程序、清单包与矩阵清单展平为注册表记录行。"""
 
     rows: list[dict[str, Any]] = []
     stages = payload.get("stages")
@@ -364,7 +358,7 @@ def available_filter_values(
     logs: Sequence[Mapping[str, Any]],
     manifests: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, list[str]]:
-    """Return sorted non-empty filter values across all dashboard grains."""
+    """返回跨所有仪表盘粒度的已排序非空过滤取值。"""
 
     records = [*metric_rows, *logs, *manifests]
     return {
@@ -384,7 +378,7 @@ def apply_filters(
     rows: Sequence[Mapping[str, Any]],
     selections: Mapping[str, Sequence[str]],
 ) -> list[dict[str, Any]]:
-    """Filter records exactly; missing dimensions never masquerade as matches."""
+    """精确过滤记录；缺失的维度绝不伪装成匹配项。"""
 
     selected = {
         field: {str(value) for value in values if str(value)}
@@ -401,7 +395,7 @@ def apply_filters(
 def select_nonoverlapping_metric_rows(
     rows: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
-    """Remove aggregate scopes when their disjoint detailed grain is present."""
+    """当存在不相交的明细粒度数据时，移除上层汇总范围记录。"""
 
     scopes_by_batch: dict[str, set[str]] = defaultdict(set)
     for row in rows:
@@ -457,7 +451,7 @@ def aggregate_metric_cards(
     rows: Sequence[Mapping[str, Any]],
     metrics: Sequence[str] = PROPORTION_METRICS,
 ) -> dict[str, dict[str, Any]]:
-    """Pool disjoint count-bearing metric rows; never convert missing values to zero."""
+    """汇总包含计数的不相交指标记录；绝不将缺失值自动转换为零。"""
 
     canonical = select_nonoverlapping_metric_rows(rows)
     result: dict[str, dict[str, Any]] = {}
@@ -524,7 +518,7 @@ def build_breakdown_rows(
     dimension: str,
     metrics: Sequence[str] = PROPORTION_METRICS,
 ) -> list[dict[str, Any]]:
-    """Aggregate each visible dimension slice from disjoint count-bearing rows."""
+    """从包含计数的不相交记录中聚合每个可见维度切片。"""
 
     groups: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     for row in select_nonoverlapping_metric_rows(rows):
@@ -563,7 +557,7 @@ def summarize_latencies(
     logs: Sequence[Mapping[str, Any]],
     metric_rows: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, dict[str, Any]]:
-    """Summarize raw latencies, falling back to reported bundle summaries."""
+    """汇总原始延迟时间，并在缺失时回退至报告的包级汇总。"""
 
     guard_values = [
         value
@@ -646,7 +640,7 @@ def evidence_layer_summary(
 
 
 def redact_sensitive_text(value: Any) -> str:
-    """Redact credential-like values while preserving diagnostic reason labels."""
+    """对凭证类文本进行脱敏脱除，同时保留用于诊断的原因标签。"""
 
     if value is None:
         return ""
@@ -712,7 +706,7 @@ def _safe_guard_trace(value: Any) -> list[dict[str, Any]]:
 
 
 def sanitize_runlog_for_replay(row: Mapping[str, Any]) -> dict[str, Any]:
-    """Return an allow-listed replay record with model inputs and values removed."""
+    """返回白名单允许的重放记录，并剔除模型输入和数值数据。"""
 
     reasons = row.get("reasons") if isinstance(row.get("reasons"), list) else []
     observation = _string(row.get("observation"))
@@ -776,7 +770,7 @@ def select_replay(
     run_key: str = "",
     case_id: str = "",
 ) -> list[dict[str, Any]]:
-    """Select and sanitize a complete run-key or case-id attack chain."""
+    """选择并净化完整的运行键（run-key）或用例 ID 攻击链。"""
 
     if not run_key and not case_id:
         return []
@@ -1078,7 +1072,7 @@ def load_dashboard_sources(
     log_paths: Sequence[str | Path] = (),
     metric_paths: Sequence[str | Path] = (),
 ) -> dict[str, Any]:
-    """Load supported local artifacts into one normalized dashboard model."""
+    """将支持的本地构件加载为统一规范的仪表盘数据模型。"""
 
     metrics: list[dict[str, Any]] = []
     logs: list[dict[str, Any]] = []
@@ -1234,7 +1228,7 @@ def _display_percent(value: Any) -> str:
 
 
 def _display_metric(value: Any) -> str:
-    """Backward-compatible scalar formatter used by the legacy evaluator tests."""
+    """旧版评测测试所使用的向下兼容标量格式化工具。"""
 
     numeric = parse_optional_number(value)
     if numeric is None:
@@ -1341,7 +1335,7 @@ def select_static_figures(
     figures: Sequence[Mapping[str, Any]],
     selections: Mapping[str, Sequence[str]],
 ) -> list[dict[str, Any]]:
-    """Filter bundle-level figures only on dimensions they actually represent."""
+    """仅根据图表实际代表的维度来过滤包级别的静态图表。"""
 
     result: list[dict[str, Any]] = []
     for source in figures:
@@ -1366,7 +1360,7 @@ def select_static_figures(
 
 
 def render_figure_bundle_section(st: Any, figures: Sequence[Mapping[str, Any]]) -> None:
-    """Render verified static figures without reimplementing their statistics."""
+    """渲染已验证的静态图表，无需重新实现其底层统计计算。"""
 
     st.subheader("Experiment figures / 专用实验图")
     if not figures:
@@ -1407,7 +1401,7 @@ def render_figure_bundle_section(st: Any, figures: Sequence[Mapping[str, Any]]) 
 
 
 def render_dashboard(st: Any, data: Mapping[str, Any]) -> None:
-    """Render the Streamlit page; kept separate from command-line loading."""
+    """渲染 Streamlit 仪表盘页面；与命令行加载逻辑解耦隔离。"""
 
     st.set_page_config(page_title="M3_PI_Guard Evidence Dashboard", layout="wide")
     st.title("M3_PI_Guard — Final Evidence Dashboard")

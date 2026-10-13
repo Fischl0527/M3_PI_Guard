@@ -1,4 +1,8 @@
-"""Separate scientific-result admission for the adaptive eight-task canary."""
+"""八任务自适应金丝雀实验结果的独立科研结果准入（Result Admission）门禁。
+
+执行严格的准入前置检查：核对运行账本哈希、查询记录完整性与预算上限，
+只有完全达标的结果才允许正式固化并签发准入凭证。
+"""
 
 from __future__ import annotations
 
@@ -32,7 +36,7 @@ GENERATED_AT = "2026-07-30T03:07:00+08:00"
 
 
 class AdaptiveCanaryResultAdmissionError(ValueError):
-    """Raised when adaptive scientific access is not exactly admitted."""
+    """当自适应科学访问未获得精确准入时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

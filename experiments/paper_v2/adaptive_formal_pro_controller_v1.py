@@ -1,10 +1,6 @@
-"""Staged DeepSeek Pro adaptive panel with immutable checkpoint lineage.
+"""具备不可变检查点线性记录的分阶段 DeepSeek Pro 自适应评测控制器。
 
-The historical 8x50 prefix is bound to its original CNY-5 policy, so it is
-never rewritten under the closeout CNY-180 policy.  Each new budget stage gets
-its own execution identity, ledgers, trace root, and cost allocation.  Search
-continuity is carried only through hash-bound checkpoint copies; terminal query
-records are never replayed.
+分批次推进 Pro 模型自适应测试，各阶段产出不可变哈希检查点，支持可信审计。
 """
 
 from __future__ import annotations
@@ -84,11 +80,11 @@ OWNER_STATEMENT_SHA256 = hashlib.sha256(
 
 
 class AdaptiveFormalProControllerV1Error(ValueError):
-    """Raised when a formal Pro stage cannot preserve evidence boundaries."""
+    """当形式化 Pro 阶段无法保持论据边界时抛出的异常。"""
 
 
 def _technical_checks_pass(checks: Mapping[str, bool]) -> bool:
-    """Evaluate a technical gate whose keys are all affirmative invariants."""
+    """评估技术门禁，其所有键均为肯定性不变量。"""
 
     if (
         "scientific_outcomes_not_aggregated" not in checks
@@ -102,7 +98,7 @@ def _technical_checks_pass(checks: Mapping[str, bool]) -> bool:
 
 
 class AdaptiveFormalStop(RuntimeError):
-    """Clean stop after a terminal diagnostic record."""
+    """终端诊断记录后的正常停止异常。"""
 
 
 def _now() -> str:

@@ -1,11 +1,6 @@
-"""Build the deterministic E17 schema-2.0 corrected formal source index.
+"""构建确定性的 E17 Schema-2.0 修正版形式化源码索引。
 
-The builder is read-only with respect to experiment and reviewer evidence.  It
-hash-pins the completed V3 program, excludes only the four immutable invalid
-V3 E9 matrices, substitutes the corrected E9/E14 bundles, retains E16, and
-recomputes coverage before atomically writing one source-index JSON file.
-It never creates or updates E17 packets, manifests, submissions, or private
-reviewer mappings.
+为 E17 盲测人工审计构建源文件索引映射，确保可追踪性与审计透明度。
 """
 
 from __future__ import annotations
@@ -35,7 +30,7 @@ DEFAULT_OUTPUT = ROOT / "outputs" / "experiments" / "e17_source_index_corrected_
 
 
 class SourceIndexBuildError(RuntimeError):
-    """Raised before a source index can be frozen."""
+    """在源索引固化前发生错误时抛出。"""
 
 
 def _inside(path: Path, root: Path) -> Path:
@@ -85,7 +80,7 @@ def _audit_manifest_reference(
     experiment_id: str,
     root: Path,
 ) -> tuple[Path, dict[str, Any]]:
-    """Resolve a corrected manifest from the independent audit binding."""
+    """从独立审计绑定中解析修正后的清单。"""
 
     try:
         candidate = e17._correction_audit_manifest_binding(
@@ -122,7 +117,7 @@ def build_source_index(
     e16_manifest_path: Path = DEFAULT_E16_MANIFEST,
     invalid_e9_allowlist: Mapping[str, Mapping[str, str]] | None = None,
 ) -> dict[str, Any]:
-    """Construct and fully re-audit a corrected source-index payload."""
+    """构建并完整重新审计修正后的源索引载荷。"""
 
     root = root.resolve()
     program_manifest_path = _inside(program_manifest_path, root)

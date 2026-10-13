@@ -1,9 +1,6 @@
-"""Paper-v2 medium analysis with protocol-terminal ITT quality semantics.
+"""具备协议终止意向治疗（ITT）质量语义的 paper-v2 中等规模分析。
 
-Version 3 preserves every outcome and statistic produced by version 2.  It
-changes only the mechanism-paper operational check: known protocol terminal
-states remain in the ITT denominator, while a prespecified quality envelope
-replaces the brittle requirement that every record end as ``completed``.
+将所有未正常完成的案例统一纳入保守的分母评估框架。
 """
 
 from __future__ import annotations
@@ -69,7 +66,7 @@ def evaluate_operational_quality(
     *,
     gate_spec: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Evaluate the prespecified claim-quality envelope."""
+    """评估预先指定的主张质量包络。"""
 
     quality = gate_spec["operational_quality"]
     statuses = Counter(str(row["operational_status"]) for row in records)

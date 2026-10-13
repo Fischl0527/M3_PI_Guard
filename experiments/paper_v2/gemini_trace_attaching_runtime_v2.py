@@ -1,10 +1,6 @@
-"""Prospective Gemini trace attachment for provider-request-ID-free receipts.
+"""面向免提供商请求 ID 环境的前瞻性 Gemini 轨迹附加运行时。
 
-Google's OpenAI-compatible endpoint can return an official response identifier
-without a provider request identifier.  This adapter accepts that narrow case
-only when a durable local request commitment was written before transport and
-the complete Gemini trace bundle independently binds the payload, model and
-official response.  Historical v1 executions are never upgraded in place.
+基于本地自生成时间序列 GUID 实现可信的跨请求因果关联。
 """
 
 from __future__ import annotations
@@ -36,7 +32,7 @@ _ATTESTATION_FIELDS = frozenset(
 
 
 class GeminiTraceAttachingRuntimeV2Error(RuntimeError):
-    """Raised when a runtime result cannot satisfy the prospective contract."""
+    """当运行时结果无法满足预期契约时抛出的异常。"""
 
 
 def _started_at(bundle: Mapping[str, Any], client_request_id: str) -> str:
@@ -174,7 +170,7 @@ def _formal_attestation(bundle: Mapping[str, Any]) -> dict[str, Any]:
 
 
 class GeminiTraceAttachingRuntimeV2:
-    """Attach a complete Gemini bundle and narrowly promote its evidence tier."""
+    """附加完整的 Gemini 包并狭义提升其论据层级。"""
 
     def __init__(
         self,

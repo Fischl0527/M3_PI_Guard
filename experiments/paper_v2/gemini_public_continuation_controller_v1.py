@@ -1,9 +1,6 @@
-"""One-quota-day successors for the frozen Gemini public continuation.
+"""面向固化的 Gemini 公开基准接续实验的单配额日后继控制器。
 
-Each invocation binds one untouched schedule segment to one provider quota
-day, a fresh execution identity, independent ledgers, and the project-global
-free-tier reservation chain.  The controller is unavailable until the eight
-day public-v4 canary aggregate has passed its outcome-blind technical gate.
+安全调度单日配额内的基准用例执行，按进度输出持久化检查点。
 """
 
 from __future__ import annotations
@@ -52,7 +49,7 @@ OWNER_STATEMENT_SHA256 = canary_v4.OWNER_STATEMENT_SHA256
 
 
 class GeminiPublicContinuationControllerV1Error(RuntimeError):
-    """Raised when a daily continuation cannot preserve the formal boundary."""
+    """当每日接续无法保持形式化边界时抛出的异常。"""
 
 
 def _now() -> str:

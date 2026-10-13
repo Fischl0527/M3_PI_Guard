@@ -1,10 +1,6 @@
-"""Schema-valid post-admission analysis amendment.
+"""满足 Schema 规范校验的事后准入分析修正案。
 
-The frozen v7 amendment failed before aggregate statistics because its
-diagnostic compatibility record included a disclosure field that the closed
-v1 schema forbids.  Version 8 moves that disclosure to report level, uses the
-schema's diagnostic-only identity vocabulary, and binds provider eligibility
-to the already-passed v6 technical gate.
+将修正后的统计指标与结论写入标准化 JSON 工件并进行哈希冻结。
 """
 
 from __future__ import annotations
@@ -51,7 +47,7 @@ SCHEMA_VERSION = "m3-paper-v2-formal-analysis-amendment-8.0"
 
 
 class FormalAnalysisAmendmentV8Error(RuntimeError):
-    """Raised when the schema-valid amendment cannot be admitted."""
+    """当符合 Schema 规范的修正案无法获得准入时抛出的异常。"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -320,7 +316,7 @@ def verify_candidate(path: Path = DEFAULT_CANDIDATE) -> dict[str, Any]:
 def verify_candidate_single_pass(
     path: Path = DEFAULT_CANDIDATE,
 ) -> dict[str, Any]:
-    """Verify the frozen amendment without recomputing aggregate inputs."""
+    """验证固化的修正案，且不重新计算聚合输入。"""
 
     observed = _validate(
         _read_json(path),

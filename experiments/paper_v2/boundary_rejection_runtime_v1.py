@@ -1,10 +1,6 @@
-"""Prospective no-effect handling for rejected M3 fixture proposals.
+"""针对被拒绝的 M3 固件动作提案的前瞻性零效应（No-Effect）处理运行时。
 
-The official-provider runtime must never execute a proposal that violates the
-independent provider-safety boundary.  At the same time, such a rejection is a
-substantive experiment outcome when the online condition already returned
-``ALLOW``: it is not an infrastructure crash.  This module preserves both
-properties without changing the frozen safety policy or any v1-v4 artifact.
+确保当安全监视器拒绝某个危险动作提案时，沙箱与外部世界状态绝对不受污染。
 """
 
 from __future__ import annotations
@@ -39,7 +35,7 @@ PROPOSAL_BOUNDARY_MESSAGES = frozenset(
 
 
 class BoundaryRejectionRuntimeError(RuntimeError):
-    """Raised when the prospective boundary adapter loses its safety contract."""
+    """当预期边界适配器失去其安全契约时抛出的异常。"""
 
 
 def _is_proposal_boundary_rejection(exc: Exception) -> bool:
@@ -57,11 +53,9 @@ def build_boundary_aware_safety_receipt(
     tool: str,
     arguments: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Return an ordinary receipt or an explicit no-effect receipt.
+    """返回普通收据或显式的无副作用收据。
 
-    The rejected proposal remains available to the transient runtime and the
-    existing sanitized event projection.  The safety receipt itself accurately
-    states that no effect was applied.
+    被拒绝的提案仍对临时运行时和现有的脱敏事件投影可用。安全收据本身准确声明未施加任何副作用。
     """
 
     try:
@@ -85,7 +79,7 @@ def build_boundary_aware_safety_receipt(
 
 
 class BoundaryAwareM3EffectBackend:
-    """Wrap the frozen M3 sandbox and never execute a rejected proposal."""
+    """包装固化的 M3 沙箱，绝不执行被拒绝的提案。"""
 
     backend_id = "m3_sandbox_fixture"
 
@@ -135,7 +129,7 @@ class BoundaryAwareM3EffectBackend:
 
 
 class BoundaryAwareM3OutcomeEvaluator:
-    """Treat an ALLOW reaching the safety boundary as unsafe in ITT."""
+    """在意图治疗分析（ITT）中将触及安全边界的 ALLOW 视为不安全。"""
 
     def __init__(self, resolver: FrozenM3CaseResolver) -> None:
         self._delegate = M3OfflineOutcomeEvaluator(resolver)
@@ -183,7 +177,7 @@ class BoundaryAwareM3OutcomeEvaluator:
 def annotate_boundary_rejections(
     raw_trace: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Make a no-effect rejection visible in the sanitized runtime event."""
+    """在脱敏的运行时事件中标记无副作用拒绝。"""
 
     value = copy.deepcopy(dict(raw_trace))
     events = value.get("events")
@@ -227,7 +221,7 @@ def annotate_boundary_rejections(
 class TrustedContextBoundaryRuntime(
     trusted_v2.TrustedContextFailurePersistingRuntime
 ):
-    """Patch only frozen message construction and the no-effect receipt path."""
+    """仅修补固化的消息构造与无副作用收据路径。"""
 
     def execute(self, context: Any, profile: Any) -> Mapping[str, Any]:
         started_ns = perf_counter_ns()

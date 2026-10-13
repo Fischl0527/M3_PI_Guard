@@ -1,4 +1,8 @@
-"""Outcome-blind sealing review for the failed adaptive cost canary v1."""
+"""自适应成本金丝雀运行中止的盲审封签复核模块。
+
+当自适应成本探索触发预算熔断或运行异常中止时，在不窥探未完成结果的前提下，
+固化现场上下文证据并执行规范的中止审查。
+"""
 
 from __future__ import annotations
 
@@ -38,7 +42,7 @@ EXPECTED_ERROR = "KeyError: 'effective_guard_decision'"
 
 
 class AdaptiveCostCanaryAbortReviewError(ValueError):
-    """Raised when the failed adaptive-v1 evidence cannot be sealed."""
+    """当失败的自适应-v1 证据无法被封存固化时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

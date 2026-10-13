@@ -1,8 +1,6 @@
-"""Freeze and qualify the execution-identity-aware public candidate v4.
+"""冻结并校验感知执行身份的公开矩阵候选版本 v4。
 
-Public-v4 supersedes the permanently aborted Public-v3 run.  It binds the
-Public-v3 abort review and the evaluator-level v4 M3 qualification into fresh
-run and execution identities.  This module is offline-only.
+确保每个测试样本的执行结果具备唯一的哈希溯源标识。
 """
 
 from __future__ import annotations
@@ -57,7 +55,7 @@ CANDIDATE_STATUS = "candidate_pending_exact_command_canary_approval"
 
 
 class PublicMatrixControllerV4Error(ValueError):
-    """Raised when the Public-v4 candidate cannot fail closed."""
+    """当 Public-v4 候选对象无法安全闭合时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

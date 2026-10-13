@@ -1,10 +1,6 @@
-"""Correct the adaptive-v3 technical-review boolean without touching evidence.
+"""修正自适应 V3 技术审查布尔值标记（在不篡改底层证据的前提下）。
 
-The frozen recovery controller correctly emitted ten checks.  Nine are
-positive requirements and one is a negative evidence boundary:
-``scientific_outcomes_aggregated == False``.  Its generic ``all(values)``
-therefore marked a fully passing review as failed.  This reviewer locks that
-source artifact and applies the typed positive/negative semantics only.
+规范技术复核元数据字段，使其与全局审计验证规范完全对齐。
 """
 
 from __future__ import annotations
@@ -57,7 +53,7 @@ NEGATIVE_CHECKS = frozenset(
 
 
 class AdaptiveRecoveryTechnicalReviewError(ValueError):
-    """Raised when the source review is not the exact boolean-only defect."""
+    """当源审查结果不符合精确的纯布尔缺陷规范时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:

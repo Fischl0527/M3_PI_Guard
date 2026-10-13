@@ -1,9 +1,6 @@
-"""Create and validate a content-free Gemini AI Studio quota snapshot.
+"""创建并验证无内容泄露的 Gemini AI Studio 配额快照。
 
-The active project's RPM, TPM and RPD values are visible in AI Studio rather
-than being stable global constants.  The checked-in artifact starts as a
-pending template.  A future user-attested transcription can satisfy the quota
-input gate, but it never authorizes formal execution by itself.
+捕获当前 API Key 的层级、RPM/RPD 上限与历史用量统计。
 """
 
 from __future__ import annotations
@@ -30,7 +27,7 @@ MODEL_ID = "gemini-3.6-flash"
 
 
 class GeminiQuotaSnapshotError(ValueError):
-    """Raised when a Gemini quota snapshot is incomplete or unsafe."""
+    """当 Gemini 配额快照不完整或不安全时抛出的异常。"""
 
 
 def _load_budget_policy(

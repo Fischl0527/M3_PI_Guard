@@ -1,9 +1,6 @@
-"""Content-only review of the interrupted Day-1 closeout Harness run.
+"""中断的第 1 日收官 Harness 运行的纯内容复核模块。
 
-The original single-use wrapper did not reach its receipt-writing epilogue.
-This module never resumes that process and never converts its partial output
-into a pass/fail verdict.  It records the immutable logs as an inconclusive
-host interruption so a later current-worktree Harness run remains mandatory.
+分析第 1 日执行产物，排查环境依赖与外部接口问题。
 """
 
 from __future__ import annotations
@@ -38,7 +35,7 @@ EXPECTED_SHA256 = {
 
 
 class ExperimentCloseoutDay1HarnessReviewV1Error(ValueError):
-    """Raised when the interrupted-run evidence no longer matches its review."""
+    """当中断运行论据不再匹配其审查结果时抛出的异常。"""
 
 
 def _sha256_file(path: Path) -> str:

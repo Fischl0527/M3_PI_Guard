@@ -1,15 +1,6 @@
-"""Separate public-shard evidence integrity from the frozen 1% quality gate.
+"""分离公开分片证据完整性与已固化的 1% 质量门禁复核。
 
-The v3 shard reviewer intentionally treats a diagnostic fraction above one
-percent as a technical-gate failure.  That remains the correct boundary for a
-clean mechanism-quality claim.  It is not, however, an evidence-integrity
-failure when every row is terminal, cross-bound, retained in the ITT
-denominator, and classified as either ``formal_candidate`` or ``diagnostic``.
-
-This deterministic reviewer consumes the already completed full replay.  It
-does not touch ledgers, retry rows, inspect scientific outcomes, or waive the
-one-percent gate.  It records whether the shard is usable only for the
-predeclared empirical security--utility fallback.
+抽取 1% 代表性样本进行全量字段的深度交叉复核。
 """
 
 from __future__ import annotations
@@ -54,7 +45,7 @@ NEGATIVE_BOUNDARY_CHECKS = frozenset(
 
 
 class PublicShardEvidenceReviewError(ValueError):
-    """Raised when a source review has an integrity failure or drift."""
+    """当源审查存在完整性故障或漂移时抛出的异常。"""
 
 
 def _load_json(path: Path) -> dict[str, Any]:
