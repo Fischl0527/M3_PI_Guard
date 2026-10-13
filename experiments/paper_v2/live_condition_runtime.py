@@ -919,6 +919,7 @@ class LiveConditionRuntime:
         physical_attempt_namespace: int = 1,
         policy_manifest_factory: Callable[..., TaskPolicyManifest] | None = None,
         monitor_factory: Callable[..., Any] | None = None,
+        bound_monitor_factory: Callable[..., Any] | None = None,
         oracle_monitor_factory: Callable[..., Any] | None = None,
         provenance_tracker_factory: Callable[[], Any] | None = None,
         proposal_capture_sink: ProposalCaptureSink | None = None,
@@ -942,6 +943,7 @@ class LiveConditionRuntime:
         # 显式注入修复版组件；未指定选项时保持历史行为，不能悄悄升级旧实验。
         self.policy_manifest_factory = policy_manifest_factory
         self.monitor_factory = monitor_factory
+        self.bound_monitor_factory = bound_monitor_factory
         self.oracle_monitor_factory = oracle_monitor_factory
         self.provenance_tracker_factory = provenance_tracker_factory
         self.proposal_capture_sink = proposal_capture_sink
@@ -1279,6 +1281,13 @@ class LiveConditionRuntime:
         if backend.backend_id != profile.effect_backend(context.benchmark):
             backend.close()
             raise LiveConditionRuntimeError("effect backend identity drift")
+
+        if self.bound_monitor_factory is not None:
+            # 仅显式新研究装配可依赖隔离后端；历史构造路径不变。
+            monitor = self.bound_monitor_factory(
+                context=context, backend=backend, manifest=manifest,
+                tool_schemas=schemas,
+            )
 
         provenance_tracker = (
             self.provenance_tracker_factory()
@@ -1659,6 +1668,9 @@ class LiveConditionRuntime:
                     if monitor is not None and execution_succeeded:
                         # 只有成功执行才进入顺序历史，失败调用不能满足“先读再写”。
                         monitor.record_execution(proposal, decision)
+                        observe_success = getattr(monitor, "observe_success", None)
+                        if callable(observe_success):
+                            observe_success(proposal, observation)
                     if oracle_monitor is not None and execution_succeeded:
                         oracle_monitor.record_execution(proposal, decision)
                     if execution_succeeded and parsed.tool != "final":

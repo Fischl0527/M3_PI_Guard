@@ -1,5 +1,13 @@
 # Failure Log
 
+## 2026-10-13 任务契约v3集成检查
+
+- 扩大离线回归91通过/1失败：`test_pinned_promptguard_live_inference_artifact_verifies_offline`依赖的固定HuggingFace缓存`E:\ai_cache\huggingface\hub\models--meta-llama--Llama-Prompt-Guard-2-86M`缺失。属于既有可选模型环境，不是v3机制失败；不改冻结输入、不删测试、不下载大模型，后续只跑直接受影响窄回归并明确该项未通过。
+- 代码审查识别合成TCR与unsafe耦合、部分任务族未落地真实日期/多跳/禁止约束、敏感标签未接入合成循环，以及后端返回完整性证明不足。尚无正式数据或模型调用；在资产冻结前修并以负例复验，不能以计划数量或schema通过代替正确性。
+- 新后端负例首跑5失败6通过：review_note字段未执行、TCR与额外unsafe耦合；修正后全部数据/结构测试通过，日期工具和二跳查找另以真实终态/结果验证，174相关回归通过。
+- 扩大回归入口首次选错不存在的Gemini测试名，因此未采集测试；改为实际test_gemini_correctness_recovery_v1.py后通过，不把未运行算通过。
+- 设计隔离提交ccba131成功，但真实index对齐受旧空index.lock阻止；两次只读核对长度0、旧时间及无持续Git写进程，删除该唯一生成锁后限定路径对齐/正常推送，17既有暂存逐字保持。未修改其他用户文件。
+
 ## 2026-10-13 强化实验末轮修复与保留失败
 
 - 报告缺VIGIL二次验证关闭披露：负例先失败，补集中解释后分析器22测试通过，不改变运行条件。

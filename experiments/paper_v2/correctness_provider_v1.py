@@ -125,7 +125,9 @@ class DevelopmentDeepSeekClient(ds.DeepSeekJsonOfficialClient):
             or any(c in self.api_key for c in "\r\n")
         ):
             raise official.ProviderPayloadError("invalid credential configuration")
-        if self.temperature != 0 or self.max_tokens != 512 or self.timeout != 180:
+        profile = getattr(self, "study_generation_profile", None)
+        expected_tokens = 4096 if profile == "task_contract_compiler_v1" else 512
+        if self.temperature != 0 or self.max_tokens != expected_tokens or self.timeout != 180:
             raise official.ProviderPayloadError("development request settings drift")
         if self.transport is None and not self.network_consent:
             raise official.ProviderConsentError("network consent required")
@@ -136,6 +138,12 @@ class DevelopmentDeepSeekClient(ds.DeepSeekJsonOfficialClient):
             content_class=self.content_class,
             policy=active,
         )
+
+
+class TaskContractCompilerClient(DevelopmentDeepSeekClient):
+    """仅显式复杂任务编译请求使用4096输出上限。"""
+
+    study_generation_profile = "task_contract_compiler_v1"
 
 
 class DispatchStopped(official.ProviderTransportError):
@@ -190,16 +198,21 @@ class DevelopmentRequestClient:
             raise official.ProviderPayloadError(
                 "work key and positive attempt are required"
             )
-        if generation_profile not in (None, "gemini_recovery_v1") or (
-            generation_profile is not None and model_group != "gemini_flash"
-        ):
+        profiles = {None, "gemini_recovery_v1", "task_contract_study_v1", "task_contract_compiler_v1"}
+        if generation_profile not in profiles or (
+            generation_profile == "gemini_recovery_v1" and model_group != "gemini_flash"
+        ) or (generation_profile == "task_contract_compiler_v1" and model_group != "deepseek_pro"):
             raise official.ProviderPayloadError("unapproved generation profile")
         self.generation_profile = generation_profile
-        if call_budget_scope not in {None, "empirical_reinforcement_v1"}:
+        if call_budget_scope not in {None, "empirical_reinforcement_v1", "task_contract_v3_validation_v1"}:
             raise official.ProviderPayloadError("unapproved explicit study scope")
         extended_flash = model_group == "deepseek_flash" and call_budget_scope == "empirical_reinforcement_v1"
-        if type(call_budget_ceiling) is not int or call_budget_ceiling not in {8, 16} or call_budget_ceiling == 16 and model_group != "deepseek_pro" and not extended_flash:
+        new_study = call_budget_scope == "task_contract_v3_validation_v1"
+        allowed_ceiling = call_budget_ceiling == 12 if new_study else call_budget_ceiling in {8, 16}
+        if type(call_budget_ceiling) is not int or not allowed_ceiling or call_budget_ceiling == 16 and model_group != "deepseek_pro" and not extended_flash:
             raise official.ProviderPayloadError("unapproved explicit study call ceiling")
+        if generation_profile in {"task_contract_study_v1", "task_contract_compiler_v1"} and not new_study:
+            raise official.ProviderPayloadError("new generation settings require explicit study scope")
         if type(max_provider_calls) is not int or not 1 <= max_provider_calls <= call_budget_ceiling:
             raise official.ProviderPayloadError("per-task request cap exceeds explicit study ceiling (default 1..8)")
         self.max_provider_calls = max_provider_calls
@@ -221,7 +234,7 @@ class DevelopmentRequestClient:
             if benchmark == "agentdojo-v1"
             else "synthetic_m3_case",
             temperature=0.0,
-            max_tokens=2048 if generation_profile == "gemini_recovery_v1" else 512,
+            max_tokens=4096 if generation_profile == "task_contract_compiler_v1" else 2048 if model_group == "gemini_flash" and generation_profile in {"gemini_recovery_v1", "task_contract_study_v1"} else 512,
             timeout=180.0,
             network_consent=True,
             allow_pinned_synthetic_credential_labels=benchmark == "agentdojo-v1",
@@ -229,12 +242,19 @@ class DevelopmentRequestClient:
         )
         if self.provider_id == "deepseek":
             policy = deepseek_policy(model)
+            if new_study:
+                part = policy["deepseek"]
+                # 新研究只使用显式调用上限推导最坏请求预算，不继承旧几元熔断。
+                part["hard_spend_limit_cny"] = 12 * (PEAK_TARIFF[model][1] + common["max_tokens"] * PEAK_TARIFF[model][2] / 1_000_000) + 1
+                part["abort_ceiling_cny"] = part["hard_spend_limit_cny"]
+                part["dynamic_fuse"]["next_request_output_tokens_upper_bound"] = common["max_tokens"]
             if call_budget_ceiling == 16:
                 # Explicit VIGIL study only; historical default policy stays eight.
                 part = policy["deepseek"]
                 part["hard_spend_limit_cny"] *= 2
                 part["abort_ceiling_cny"] *= 2
-            self._client = DevelopmentDeepSeekClient(
+            client_class = TaskContractCompilerClient if generation_profile == "task_contract_compiler_v1" else DevelopmentDeepSeekClient
+            self._client = client_class(
                 **common,
                 policy=policy,
                 budget_state=DevelopmentBudgetState("deepseek", policy),
@@ -253,7 +273,7 @@ class DevelopmentRequestClient:
                 raise official.ProviderPayloadError(
                     "Gemini requires the fixed free-only policy"
                 )
-            if generation_profile == "gemini_recovery_v1":
+            if generation_profile in {"gemini_recovery_v1", "task_contract_study_v1"}:
                 # Historical clients share this bound even for Gemini. Change
                 # only this run-local copy; no DeepSeek or frozen policy edits.
                 policy["deepseek"]["dynamic_fuse"][
@@ -263,7 +283,7 @@ class DevelopmentRequestClient:
                 **common,
                 policy=policy,
                 budget_state=official.ProviderBudgetState("gemini", policy),
-                reasoning_effort="low" if generation_profile == "gemini_recovery_v1" else None,
+                reasoning_effort="low" if generation_profile in {"gemini_recovery_v1", "task_contract_study_v1"} else None,
             )
 
     def __getattr__(self, key: str) -> Any:

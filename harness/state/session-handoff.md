@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-10-13 复杂任务权限编译v3实施交接
+
+- 新活动任务F-EXP-TASK-CONTRACT-003 in_progress；详细范围/所有权/风险harness/tasks/task-contract-v3-validation-20261013.md，批准计划docs/复杂任务权限编译改进与验证计划_2026-10-13.md。
+- Builder分别负责新编译/monitor、样本/后端/plan、运行/provider；根负责文献、分析、最终验证与状态。不要并发编辑共享Harness。
+- 正式API尚未启动；离线共同验证前不得发派。Gemini本研究诊断不同于旧283恢复，USD0不可确认时跳过。
+- 保留现有dirty及原17PDF暂存，不Git add .，不改论文/LaTeX；新输出根task_contract_compiler_v3_validation_v1。
+- 当前174相关测试通过（15.84秒），Ruff/10模块compile通过；真实八类后端/评分与480参考动作链检查完成。生成600评估/157开发、36k主计划/960消融；用户跳过Gemini，调用0。
+- 设计ccba131已推送origin当前分支并核对；真实index17原暂存保持。限定提交先清理经核验的旧空index.lock，非文件/论文删除。当前无模型矩阵数据，下一步少量Pro开发编译；正式16k回放入口尚待完成，当前--offline-replay只给cohort计数，不可当执行证据。
+- 报告outputs/experiments/task_contract_compiler_v3_validation_v1/report.md。本会话Builder额度结束，根代理接续未完成集成；不用private消息作状态。全研究仍in_progress。
+
 ## 2026-10-13 强化实验关闭交接
 
 - 本轮无需继续模型调度：2165全部终态、无活动API runner，成功与响应失败不得重跑。mechanism正式文件已存在，不重复执行run_mechanism；正式10000次统计已单次完成，不重复重算。
