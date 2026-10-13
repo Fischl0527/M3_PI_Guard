@@ -8,6 +8,26 @@
   ],
   "features": [
     {
+      "id": "F-DOC-008",
+      "name": "重要代码中文注释语义与接口勘误",
+      "description": "修正重要运行路径审查确认的24项中文注释误述，限定说明修改与Git交付，不改变算法。",
+      "status": "in_progress",
+      "priority": "high",
+      "acceptanceCriteria": [
+        "24项说明与当前实现一致，13源码文件仅改docstring且执行AST保持",
+        "相关离线测试、限定Git空白检查及源码编译检查通过",
+        "原17个PDF暂存与无关工作区保留，仅交付本任务内容",
+        "当前个人origin分支推送并核对远端成功"
+      ],
+      "verification": [
+        "24 documented findings corrected in13 source files; all changed lines inside actual docstrings",
+        "13 source files compile in memory and executable ASTs match790268b and pre-edit snapshots",
+        "91 focused offline tests passed in7.97s; one fixed-config-path writer explicitly excluded",
+        "First docstring-indentation collection failure repaired and regression rerun passed; scoped Git whitespace check passed",
+        "Original17 staged PDF moves preserved; commit and remote verification pending"
+      ]
+    },
+    {
       "id": "F-EXP-TASK-CONTRACT-003",
       "name": "复杂任务权限编译v3与三模型验证",
       "description": "结构化任务契约、受控延迟绑定和参数角色检查；Pro/Flash主矩阵、可跳过Gemini及新复杂任务评估。",

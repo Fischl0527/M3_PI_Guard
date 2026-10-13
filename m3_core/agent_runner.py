@@ -633,7 +633,10 @@ def _json_candidates(text: str) -> List[str]:
 
 
 def _loads_relaxed_json(text: str) -> tuple[Any, str]:
-    """尝试使用多种容错修复策略（去除尾随逗号、修复转义、单引号转双引号）解析 JSON。"""
+    """依次尝试JSON解析、Python字面量解析和final回答专用引号修复。
+
+    去尾随逗号与一般引号替换由_json_candidates生成候选，本函数不执行这些一般修复。
+    """
 
     try:
         return json.loads(text), ""
@@ -802,7 +805,7 @@ def _repair_unescaped_final_answer(text: str) -> Dict[str, Any] | None:
 
 
 def _single_quotes_to_double_quotes(text: str) -> str:
-    """将合法的 Python 字典风格单引号安全转换为标准 JSON 双引号。"""
+    """含双引号时原样返回，否则仅将单引号替换为双引号；不保证结果是合法JSON。"""
 
     if '"' in text:
         return text
@@ -887,7 +890,7 @@ def _build_initial_messages(
 
 
 def _trusted_tool_authorization(runtime_case: Dict[str, Any]) -> str:
-    """基于受信任用户输入确定当前案例允许访问的工具与参数白名单。"""
+    """将runtime_case中已有的authorized_actions渲染为模型提示文本；不从用户文本推断权限。"""
 
     requires_tool = bool(runtime_case.get("requires_tool", False))
     actions = runtime_case.get("authorized_actions", [])
@@ -921,7 +924,7 @@ def _trusted_tool_authorization(runtime_case: Dict[str, Any]) -> str:
 
 
 def _model_authorization_contract(actions: List[Any]) -> List[Dict[str, Any]]:
-    """构造向模型明示的工具授权边界声明文本。"""
+    """将已有授权动作转换为向模型提供的结构化字典列表；文本渲染由调用方完成。"""
 
     rendered: List[Dict[str, Any]] = []
     for action in actions:

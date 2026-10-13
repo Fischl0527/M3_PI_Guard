@@ -1,4 +1,4 @@
-"""实验运行日志（RunLog）与清册文件完整性校验工具。"""
+"""审计RunLog JSONL的必需字段、状态及模拟执行边界；不校验清册或manifest文件。"""
 from __future__ import annotations
 
 import argparse

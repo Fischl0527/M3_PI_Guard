@@ -1,5 +1,10 @@
 # Failure Log
 
+## 2026-10-14 — 重要注释勘误首次验证收集失败（已修复复核）
+
+- 首次8模块pytest在收集阶段失败：task_policy.py的ApprovalRecord.__post_init__新docstring缩进被替换为4空格，方法体应为8空格，出现IndentationError；未创建提交或推送。
+- 原因：局部补丁上下文未明确保留方法体缩进。按方法定义恢复docstring的8空格缩进；13文件内存编译与执行AST复核通过，重新定向测试91 passed、1 deselected、exit0。排除用例仅因固定配置文件写入边界，与首检失败无关。
+
 ## 2026-10-13 任务契约v3集成检查
 
 - 扩大离线回归91通过/1失败：`test_pinned_promptguard_live_inference_artifact_verifies_offline`依赖的固定HuggingFace缓存`E:\ai_cache\huggingface\hub\models--meta-llama--Llama-Prompt-Guard-2-86M`缺失。属于既有可选模型环境，不是v3机制失败；不改冻结输入、不删测试、不下载大模型，后续只跑直接受影响窄回归并明确该项未通过。

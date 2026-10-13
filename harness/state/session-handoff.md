@@ -1,5 +1,11 @@
 # 会话移交
 
+## 2026-10-14 — 重要代码中文注释勘误（进行中）
+
+- F-DOC-008 in_progress：24项说明修正，13个源码文件；计划与清单见 `harness/tasks/critical-comment-repairs-20261014.md`。
+- 只改docstring，13文件编译/执行AST及逐行范围验证通过；91项离线测试通过、1固定配置写入用例排除，首次缩进收集错误已修正并复测。
+- 不改运行逻辑/权限算法/v3研究，不调用模型。待限定提交/推送；原17个PDF暂存及其他dirty不得混入。
+
 ## 2026-10-13 复杂任务权限编译v3实施交接
 
 - 新活动任务F-EXP-TASK-CONTRACT-003 in_progress；详细范围/所有权/风险harness/tasks/task-contract-v3-validation-20261013.md，批准计划docs/复杂任务权限编译改进与验证计划_2026-10-13.md。

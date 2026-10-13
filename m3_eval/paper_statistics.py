@@ -38,7 +38,7 @@ def template_clustered_difference(
 def paired_binary_family(
     comparisons: Mapping[str, tuple[Iterable[int | bool], Iterable[int | bool]]]
 ) -> dict[str, Any]:
-    """针对配对二分类指标族计算全套置信区间与假设检验 p 值。"""
+    """对声明的配对二分类比较族执行精确 McNemar 检验及 Holm 校正；不计算置信区间。"""
 
     raw: dict[str, dict[str, Any]] = {}
     names = sorted(comparisons)

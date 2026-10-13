@@ -1,6 +1,6 @@
 """批量实验运行器（Batch Experiment Runner）。
 
-负责支持断点续跑、并发限制、失败去重以及批量生成 RunLog 日志。
+按条件与案例顺序调用运行器，支持依据已有终态续跑并生成 RunLog；本模块不实现并发调度。
 """
 
 from __future__ import annotations
@@ -508,7 +508,7 @@ def _order_and_limit_cases(
     cases: List[Dict[str, Any]],
     config: Dict[str, Any],
 ) -> List[Dict[str, Any]]:
-    """按确定性顺序排序并根据数量限制截断候选案例列表。"""
+    """复制案例列表，按配置保留原序或使用seed打乱，再按limit截断；不按字段排序。"""
 
     selected = list(cases)
     if _enabled(config.get("shuffle")):
@@ -524,7 +524,7 @@ def _order_and_limit_cases(
 
 
 def _completed_case_ids(logs: Iterable[Dict[str, Any]]) -> set[str]:
-    """读取已有输出日志中已成功完成的案例 ID 集合，避免重复调度。"""
+    """收集已有日志中完成、阻断、待确认或达到最大步数的终态案例ID，用于续跑去重。"""
 
     terminal_statuses = {
         "completed",
@@ -698,7 +698,7 @@ def _error_log(
     run_group: str = "",
     model_config: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
-    """格式化并写入单次运行的错误记录日志。"""
+    """构造并返回单次运行错误的日志字典；本函数不写文件。"""
 
     return {
         "run_id": "runner-error",
@@ -930,7 +930,7 @@ def write_runlog_csv(path: Path, rows: Iterable[Dict[str, Any]]) -> None:
 
 
 def _csv_cell(value: Any) -> str:
-    """格式化单个 CSV 单元格内容，转义逗号与换行符。"""
+    """将字段转换为字符串或JSON表示；CSV层的引用与转义由调用方DictWriter完成。"""
 
     if isinstance(value, (dict, list)):
         return json.dumps(value, ensure_ascii=False)

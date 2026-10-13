@@ -1,8 +1,9 @@
-"""内存隔离沙箱工具执行环境（Tool Sandbox）。
+"""隔离临时目录中的合成沙箱工具执行环境（Tool Sandbox）。
 
 本模块是 M3 防护评估的安全基石：
 为智能体工具调用（read_file, write_file, send_email, call_api, run_code）
-提供完全内存虚拟化的假环境，杜绝任何外部物理副作用（严禁修改真实磁盘、严禁发送真实外部网络请求）。
+使用真实临时磁盘目录保存合成夹具、模拟输出与审计日志；文件操作限定在该沙箱内。
+发信、API与代码运行均为模拟，不发送真实外部网络请求，也不执行模型生成的代码。
 """
 
 from __future__ import annotations
@@ -82,7 +83,7 @@ FIXTURE_SHA256 = _fixture_sha256()
 
 
 def sandbox_seed_sha256(seed: int | None) -> str:
-    """基于种子固定夹具文件计算沙箱初始状态的 SHA-256 校验和。"""
+    """计算运行时版本与seed的身份摘要；不哈希夹具内容或实际沙箱状态，夹具另有FIXTURE_SHA256。"""
 
     return hashlib.sha256(
         _canonical_json(
@@ -248,7 +249,7 @@ def init_sandbox(
     case_id: str = "",
     seed: int | None = None,
 ) -> SandboxContext:
-    """基于测试用例夹具数据初始化一个干净的内存沙箱环境。"""
+    """创建每次运行独立的临时磁盘目录，并写入固定合成夹具，返回沙箱上下文。"""
 
     temporary = tempfile.TemporaryDirectory(prefix="m3-pi-guard-sandbox-")
     root = Path(temporary.name) / "sandbox"
@@ -608,7 +609,7 @@ def record_tool_event(
     run_key: str = "",
     sandbox: SandboxContext | None = None,
 ) -> Dict[str, Any]:
-    """在沙箱中执行工具调用并记录包含输入输出与耗时的审计事件。"""
+    """向沙箱审计日志追加调用元数据与脱敏观察摘要；不执行工具，也不记录调用耗时。"""
 
     context, owned = _context_for_call(sandbox)
     try:

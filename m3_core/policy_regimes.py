@@ -105,7 +105,7 @@ def build_policy_regime(
     regime: str = "auto_compiled",
     generated_at: str | None = None,
 ) -> TaskPolicyManifest:
-    """根据实验配置构造对应的策略制度编译器函数对象。"""
+    """根据指定策略制度编译并返回 TaskPolicyManifest 清单对象，不返回编译器函数。"""
 
     normalized = str(regime).casefold().strip()
     if normalized not in POLICY_REGIMES:

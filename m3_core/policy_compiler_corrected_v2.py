@@ -1,7 +1,8 @@
 """显式选用的通用工具策略编译器（corrected_v2 修复版）。
 
-优先采用受信任的应用上下文声明（Trusted Application Context）；
-当参数解析存在歧义或必填参数缺失时，严格拒绝自动放权，返回收窄的安全包络。
+存在显式 requested_actions 应用声明时，保留 corrected_v1 编译结果，不再进行二次词法解析。
+其余路径中，未解析的必需非内容安全字段使对应工具规则不获自动授权；
+body/content/subject 等内容字段可以保留类型约束，并非所有必填字段缺少字面值都会被拒绝。
 """
 from __future__ import annotations
 

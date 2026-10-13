@@ -173,7 +173,9 @@ class DataFlowConstraint:
 
 @dataclass(frozen=True)
 class ApprovalRecord:
-    """由人工或受信任应用确认并签署的策略扩权可审计凭证。
+    """记录人工或受信任应用确认的策略扩权信息，并校验记录内容摘要。
+
+    本对象不实现数字签名或审批主体认证；身份与确认来源须由调用边界保证。
 
     属性:
         approval_id (str): 审批凭据唯一标识。
@@ -184,7 +186,7 @@ class ApprovalRecord:
         approved_at (str): 批准时间戳（ISO-8601）。
         expires_at (str | None): 凭据失效时间戳。
         confirmation_channel (str): 确认通道标识（必须为 'independent_interface'）。
-        record_sha256 (str): 该凭证内容的不可变 SHA-256 哈希签名。
+        record_sha256 (str): 记录内容的 SHA-256 摘要，用于一致性校验，不是数字签名。
     """
 
     approval_id: str
@@ -198,7 +200,7 @@ class ApprovalRecord:
     record_sha256: str = ""
 
     def __post_init__(self) -> None:
-        """校验审批主体有效性及内容哈希一致性。"""
+        """检查审批主体标识非空、确认通道标记及内容哈希一致性；不认证审批主体身份。"""
         if not self.approver_id.strip():
             raise ValueError("approval requires a non-empty approver_id")
         if self.confirmation_channel != "independent_interface":
@@ -335,7 +337,7 @@ def expand_manifest(
     approval: ApprovalRecord,
     new_rules: Iterable[ToolRule],
 ) -> TaskPolicyManifest:
-    """基于经签署的独立审批凭证扩充权限并返回新版本清单；原清单对象保持不可变。"""
+    """基于带内容摘要的独立确认记录扩充权限并返回新清单；不在此验证数字签名。"""
 
     if not approval.record_sha256:
         raise ValueError("policy expansion requires a hashed approval record")

@@ -35,7 +35,7 @@ def _matches(proposal: ActionProposal, rule: ToolRule) -> bool:
         rule: 目标工具规则（包含参数约束规范与必填要求）。
 
     返回:
-        bool: 若提案中所有必填参数均存在且符合约束条件，则返回 True；否则返回 False。
+        bool: 所有必填参数均存在，且所有已提供的受约束参数（包括可选参数）均满足约束时为 True。
     """
     return all(
         (
@@ -67,7 +67,7 @@ def evaluate_action_corrected_v1(
         modules: 启用的运行时防御模块集合（默认启用完整模块 FULL_RUNTIME_MODULES）。
 
     返回:
-        GuardDecision: 包含决策结果（ALLOW/ASK/DENY）、理由说明、违规标签及执行收据。
+        GuardDecision: 包含 ALLOW/ASK/DENY、理由、违规标签及决策审计元数据；不代表工具已执行。
     """
     if proposal.tool == "final":
         return evaluate_action(proposal, manifest, modules=modules)

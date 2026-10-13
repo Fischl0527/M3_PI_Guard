@@ -103,7 +103,7 @@ def percentile(values: Iterable[float], q: float) -> float | None:
 
 
 def latency_summary(values: Iterable[float]) -> dict[str, Any]:
-    """计算耗时/延迟数据的完整统计摘要（均值、中位数、P95、P99 等）。"""
+    """返回非负有限延迟样本的数量、均值、中位数、P50和P95；不计算P99。"""
 
     sample = [float(value) for value in values]
     if any(not math.isfinite(value) or value < 0.0 for value in sample):

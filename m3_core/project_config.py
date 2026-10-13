@@ -105,7 +105,7 @@ def redacted_config(values: Mapping[str, str]) -> dict[str, str]:
 def validate_project_config(
     values: Mapping[str, str], *, require_promptguard_token: bool = False
 ) -> list[str]:
-    """校验项目各目录路径与运行时依赖环境的有效性。"""
+    """校验配置必需字段、占位符、修订SHA、数值和可选token格式；不检查目录存在或依赖可用性。"""
 
     errors: list[str] = []
     for key in REQUIRED_SHARED_KEYS:
@@ -154,7 +154,7 @@ def load_project_config(
     *,
     override: bool = False,
 ) -> tuple[Path, dict[str, str]]:
-    """加载并初始化项目单例全局配置。"""
+    """每次读取配置文件并按override规则更新进程环境，返回路径与配置字典；不实现单例或缓存。"""
 
     config_path = resolve_config_path(path)
     values = parse_env_file(config_path)
