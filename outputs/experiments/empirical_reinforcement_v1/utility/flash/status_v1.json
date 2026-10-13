@@ -1,0 +1,23 @@
+{
+  "study": "utility",
+  "model": "flash",
+  "planned": 600,
+  "recorded": 600,
+  "pending": 0,
+  "gate": {
+    "passed": true,
+    "rows": 30,
+    "core_parseable": 29,
+    "vigil_parseable": 0,
+    "reasons": [],
+    "outcome_blind": true
+  },
+  "stop_reason": null,
+  "statuses": {
+    "completed": 578,
+    "max_steps": 19,
+    "parse_failure": 3
+  },
+  "physical_records": 600,
+  "updated_at": "2026-10-12T17:37:22.947368+00:00"
+}

@@ -1,5 +1,13 @@
 # 进展记录
 
+## 2026-10-13 强化实验结果里程碑
+
+- 四个冻结API队列全部2165唯一work key，attempt1；5463官方调用闭合，模型身份和隔离复核通过，无重试、provider tools或外部effect。
+- 1977 completed、76 parse_failure、112 max_steps；五项VIGIL创建环境前截断的结局unknown。188响应/步数失败保留，子计数缺失不填零。
+- 320受控判定/160完整提案对、358实际首提案回放；R3可选study_part标签缺失已修未来接口，既有358项来源用唯一work_key配对冻结plan，不重写或重跑。
+- F-EXP-REINFORCE-001暂in_progress，待最后报告、状态与Git交付。
+
+
 ## 2026-10-13 — 中文注释勘误与限定提交（已验证完成）
 
 - 已修正五个文件的六处注释错误，不改可执行逻辑。F-DOC-007 verified，仅限定注释交付。

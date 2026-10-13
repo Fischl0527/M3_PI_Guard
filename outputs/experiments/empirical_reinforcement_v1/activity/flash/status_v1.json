@@ -1,0 +1,23 @@
+{
+  "study": "activity",
+  "model": "flash",
+  "planned": 160,
+  "recorded": 160,
+  "pending": 0,
+  "gate": {
+    "passed": true,
+    "rows": 16,
+    "core_parseable": 10,
+    "vigil_parseable": 3,
+    "reasons": [],
+    "outcome_blind": true
+  },
+  "stop_reason": null,
+  "statuses": {
+    "parse_failure": 6,
+    "completed": 148,
+    "max_steps": 6
+  },
+  "physical_records": 160,
+  "updated_at": "2026-10-12T17:41:51.240159+00:00"
+}

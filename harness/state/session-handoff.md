@@ -1,5 +1,12 @@
 # 会话移交
 
+## 2026-10-13 强化实验已停止模型执行
+
+- API全部2165项封闭，无活动runner；严禁再次执行已有响应项。R3正式产物已存在，不重复run_mechanism。
+- Ubuntu24正式10000次bootstrap已运行一次；analysis JSON已取回并本地渲染。余下仅最终报告核对、定向测试与Git，不启动其他研究或修改论文。
+- 输出outputs/experiments/empirical_reinforcement_v1；原17暂存PDF及其他论文/注释/译本修改保持独立。
+
+
 ## 2026-10-13 — 中文注释勘误与限定提交（已验证完成）
 
 - F-DOC-007 verified；dbd83a7含365个注释Python文件和7个本任务状态/记录增量，已推送并核对origin当前分支，详细命令与范围见 `harness/tasks/comment-review-repair-20261013.md`。

@@ -1,0 +1,23 @@
+{
+  "study": "activity",
+  "model": "pro",
+  "planned": 320,
+  "recorded": 320,
+  "pending": 0,
+  "gate": {
+    "passed": true,
+    "rows": 16,
+    "core_parseable": 12,
+    "vigil_parseable": 4,
+    "reasons": [],
+    "outcome_blind": true
+  },
+  "stop_reason": null,
+  "statuses": {
+    "max_steps": 11,
+    "completed": 296,
+    "parse_failure": 13
+  },
+  "physical_records": 320,
+  "updated_at": "2026-10-12T18:08:12.837609+00:00"
+}

@@ -130,6 +130,12 @@ def make_capture_sink(
             "authorization_regime",
         )
     }
+    # 实际冻结计划使用study；旧测试和捕获记录使用study_part。
+    # 仅修正未来采集的元数据，已有捕获与公开结果不改写。
+    identity["study_part"] = row.get("study_part") or row.get("study")
+    for key in ("provider_id", "model_id", "model_role", "model_group"):
+        if row.get(key) is not None:
+            identity[key] = row[key]
     captured = _validate_existing_capture(path, identity)
 
     def sink(proposal, manifest, tool_schemas, capture_context) -> None:
@@ -267,6 +273,10 @@ def replay_capture(capture: Mapping[str, Any]) -> dict[str, Any]:
         "schema_version": PUBLIC_REPLAY_SCHEMA,
         "study_id": capture.get("study_id"),
         "study_part": capture.get("study_part"),
+        "provider_id": capture.get("provider_id"),
+        "model_id": capture.get("model_id"),
+        "model_role": capture.get("model_role"),
+        "model_group": capture.get("model_group"),
         "work_key": capture.get("work_key"),
         "case_id": capture.get("case_id"),
         "underlying_task_id": capture.get("underlying_task_id"),

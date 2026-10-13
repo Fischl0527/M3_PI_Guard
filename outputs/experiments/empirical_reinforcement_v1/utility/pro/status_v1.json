@@ -1,0 +1,23 @@
+{
+  "study": "utility",
+  "model": "pro",
+  "planned": 1085,
+  "recorded": 1085,
+  "pending": 0,
+  "gate": {
+    "passed": true,
+    "rows": 30,
+    "core_parseable": 29,
+    "vigil_parseable": 0,
+    "reasons": [],
+    "outcome_blind": true
+  },
+  "stop_reason": null,
+  "statuses": {
+    "completed": 955,
+    "parse_failure": 54,
+    "max_steps": 76
+  },
+  "physical_records": 1085,
+  "updated_at": "2026-10-12T17:56:55.074948+00:00"
+}

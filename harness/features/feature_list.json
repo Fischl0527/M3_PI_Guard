@@ -41,7 +41,13 @@
         "按任务配对并预定校正，确定性回放与端到端结果分开",
         "实际结果MD报告、outputs入口与Harness/Git更新，不伪称计划量已完成"
       ],
-      "verification": []
+      "verification": [
+        "2026-10-13:2165/2165 planned work keys have unique attempt1 terminal records;no pending rows or active model runners",
+        "Pro utility1085 and activity320;current deepseek-flash V4.1 utility600/activity160;5463 unique official response and local request IDs across isolated study-model outputs",
+        "All new safety receipts and online isolation reviewed;provider tools/external effects0;76 parse failures112 max steps retained;5 pre-environment VIGIL unknown outcomes not imputed",
+        "R3 single run:40 fixtures320 decisions160 same-input pairs;358 captured first proposals within457 eligible ND work keys;zero new model calls/effects",
+        "Optional R3 study_part alias corrected for future capture with regression;existing outputs preserved and source identities uniquely joined through frozen work keys"
+      ]
     },
     {
       "id": "F-GIT-002",

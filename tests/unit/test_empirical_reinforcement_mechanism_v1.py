@@ -198,6 +198,30 @@ def test_controlled_fixture_matrix_has_40_bases_and_320_public_decisions(
     assert "p_value" not in rendered
 
 
+def test_capture_projects_actual_plan_study_and_model_identity(tmp_path) -> None:
+    row = {
+        "study_id": "m3-empirical-reinforcement-utility-v1",
+        "study": "utility", "work_key": "actual-plan-key",
+        "case_id": "case-1", "underlying_task_id": "task-1",
+        "benchmark": "m3-v2", "condition_id": "no_defense",
+        "authorization_regime": "auto_compiled", "provider_id": "deepseek",
+        "model_id": "deepseek-v4-pro", "model_role": "primary",
+        "model_group": "deepseek_pro",
+    }
+    path = tmp_path / "internal" / "proposal_captures" / "actual-plan-key.jsonl"
+    make_capture_sink(path, row)(_proposal(), _manifest(), TOOL_SCHEMAS, {
+        "phase": "before_guard", "prior_executed_tools": [],
+        "prior_successful_tool_count": 0,
+    })
+    capture = json.loads(path.read_text(encoding="utf-8"))
+    public = replay_capture(capture)
+    assert capture["study_part"] == "utility"
+    assert public["study_part"] == "utility"
+    assert public["model_id"] == "deepseek-v4-pro"
+    assert public["model_role"] == "primary"
+    assert public["provider_id"] == "deepseek"
+
+
 def test_common_prefix_divergence_stops_before_target_history(
     tmp_path, monkeypatch
 ) -> None:
