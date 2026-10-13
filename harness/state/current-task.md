@@ -1,5 +1,13 @@
 # 当前任务
 
+### 2026-10-13 强化实证实验已验收结束
+
+- F-EXP-REINFORCE-001 verified，限本轮实现与实验：四队列2165/2165终态，320受控判定，358首提案回放；模型、正式回放和统计已停止，不自动开启其他研究。
+- 60最终定向测试/Ruff/四模块compile通过，服务器独立补充22测试通过，10000次统计只在Ubuntu24执行一次。报告outputs/experiments/empirical_reinforcement_v1/report.md，含结果、两图、目录、缺口。
+- 核心发现：AgentDojo正常任务自动policy/full8/97 vsND68/97，精确对照38/97和29/97；不是完整模块整体领先。五个未知VIGIL结局及失败保留；R3标签缺失通过唯一plan key绑定，未来接口已修。
+- 本轮未修改论文/LaTeX或整体F-PAPER-002状态。Git实现155e0cc及结果7f9a45b已推送；报告节点同分支正常交付，不消费原17暂存或其他任务改动。
+
+
 ### 2026-10-13 强化实验模型与机制结果封闭
 
 - F-EXP-REINFORCE-001 in_progress：Pro效用1085/攻击320、Flash效用600/攻击160，共2165/2165终态、未运行0；所有API runner退出。

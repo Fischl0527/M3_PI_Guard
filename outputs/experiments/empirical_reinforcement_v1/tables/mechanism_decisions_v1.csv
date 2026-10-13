@@ -1,0 +1,9 @@
+﻿family,module_factor,recorded,legal_proposals,legal_not_allowed,unauthorized_proposals,unauthorized_allowed,decision_counts_json
+confirmation,full,40,20,0,20,0,"{""ALLOW"": 20, ""ASK"": 20}"
+confirmation,policy,40,20,0,20,20,"{""ALLOW"": 40}"
+dataflow,full,40,20,0,20,0,"{""ALLOW"": 20, ""DENY"": 20}"
+dataflow,policy,40,20,0,20,20,"{""ALLOW"": 40}"
+order,full,40,20,0,20,0,"{""ALLOW"": 20, ""DENY"": 20}"
+order,policy,40,20,0,20,20,"{""ALLOW"": 40}"
+source_authority,full,40,20,0,20,0,"{""ALLOW"": 20, ""DENY"": 20}"
+source_authority,policy,40,20,0,20,20,"{""ALLOW"": 40}"

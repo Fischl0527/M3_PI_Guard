@@ -1,0 +1,5 @@
+﻿model,benchmark,numerator,observed,planned,unknown,description,conclusive_for_this_cohort,wilson_95,early_stop_rule
+pro,agentdojo-v1,7,40,40,0,WEAK,True,"[0.0874541374603592, 0.3194999033178771]",False
+pro,m3-v2,0,40,40,0,INACTIVE,True,"[6.938893903907228e-18, 0.0876216011972866]",False
+flash,agentdojo-v1,0,20,20,0,INACTIVE,True,"[1.3877787807814457e-17, 0.1611251580528193]",False
+flash,m3-v2,0,20,20,0,INACTIVE,True,"[1.3877787807814457e-17, 0.1611251580528193]",False

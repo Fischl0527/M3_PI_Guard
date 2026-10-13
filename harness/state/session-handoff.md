@@ -1,5 +1,14 @@
 # 会话移交
 
+## 2026-10-13 强化实验关闭交接
+
+- 本轮无需继续模型调度：2165全部终态、无活动API runner，成功与响应失败不得重跑。mechanism正式文件已存在，不重复执行run_mechanism；正式10000次统计已单次完成，不重复重算。
+- 交付入口outputs/experiments/empirical_reinforcement_v1/report.md，原始4组plan/raw/status，mechanism3文件，analysis、4表和2图。完整请求/提案仅本地internal，Git不公开；358回放标签缺失按唯一work_key查四份plan，未来投影已修。
+- 验证60定向测试、Ruff、4模块compile、独立模型技术审查、Ubuntu24/22离线22测试及图表QA。详细命令harness/tasks/empirical-reinforcement-20261012.md；不FullHarness/Gemini/历史重放。
+- 下一步建议仅先读报告，再另行约定授权编译器改进或论文集成；不自动扩实验或修改论文。当前结果显示明显AgentDojo效用损失，安全端点多为低活性/零事件，完整模块非整体领先。
+- 原17暂存PDF、其他注释/译本/论文修改保留；Git到origin/codex/claude-review-repairs的Fischl0527/M3_PI_Guard，不PR/force-push。仅本轮F-EXP-REINFORCE-001 verified，不变更其他feature。
+
+
 ## 2026-10-13 强化实验已停止模型执行
 
 - API全部2165项封闭，无活动runner；严禁再次执行已有响应项。R3正式产物已存在，不重复run_mechanism。

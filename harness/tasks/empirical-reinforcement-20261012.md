@@ -67,3 +67,11 @@
 - 总体1977 completed、76 parse_failure、112 max_steps；188为响应输出/步数失败，未运行0；5个评分未知保留在ITT。tokens6412110，峰值费率估计CNY12.18708388，不是实付账单。
 - R3可选study_part缺标签：真实plan使用study。实际形状测试先失败，未来捕获投影已修并新增模型身份标签，机制7单测通过；原358 capture和公开回放不重写，来源以work_key唯一匹配当前plan，模型实验、正式回放和统计均不重跑。两次抽查用了不存在/空展示字段，改实际schema后通过，不是模型/结果故障。
 - 两幅SVG已本地实际渲染视觉核对；临时PDF文本最低10pt，collision各0fail/0warn，预览仅harness/tmp，不冒充论文投稿排版完成。
+
+### 最终验收与交付
+
+- 最终四套：`F:/robot/Anaconda3/python.exe -X utf8 -B -m pytest tests/unit/test_empirical_reinforcement_plan_v1.py tests/unit/test_empirical_reinforcement_v1.py tests/unit/test_empirical_reinforcement_mechanism_v1.py tests/unit/test_empirical_reinforcement_analysis_v1.py -q`→60 passed/19.08秒；同八源码/测试路径Ruff全部通过，四研究模块compile通过。未运行FullHarness。
+- 根验证R3公开产物：四家族各10基础、320决策、160完整同输入对；358唯一捕获key全部绑定当前ND plan457上界，study_id/case/benchmark/task一致，无正文参数/provider effects。来源utility/pro185、utility/flash108、activity/pro45、activity/flash20；可选标签缺失按真实情况披露。
+- 报告outputs/experiments/empirical_reinforcement_v1/report.md包含原始计数、配对区间/10,000次bootstrap/Holm、ASK与失败负担、成本与模型身份、两图及完整目录说明。Agent97良性任务自动policy/full8/97 vs无防护68/97；精确目标38/97与29/97，正文解释授权负担，不宣称整体防御领先。
+- Git实现155e0cc、结果7f9a45b均已推送origin/codex/claude-review-repairs并核对remote。临时index只含本轮路径，原17暂存及其他论文/注释/PDF改动不消费、不覆盖；最终报告节点随后正常推送，无PR或force-push。
+- 本轮模型、正式回放和正式统计已结束；不再派发其他实验。论文/LaTeX更新、编译器进一步改善、外部方法审查或正式投稿须另开范围，不作为本轮已完成项。

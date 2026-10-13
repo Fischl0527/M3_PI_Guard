@@ -142,6 +142,7 @@ def test_write_outputs_is_self_contained_and_does_not_change_raw(tmp_path):
     assert "raw_records_v1.jsonl" in report
     assert "non_confirmation" in report
     assert "未知" in report and "合理等待" in report
+    assert "未启用模型二次验证" in report
     assert (tmp_path / "tables/cells_v1.csv").exists()
     assert (tmp_path / "tables/paired_comparisons_v1.csv").exists()
 
@@ -228,6 +229,14 @@ def test_no_response_recovery_preserves_attempt_costs_but_not_duplicate_itt(tmp_
     assert result["groups"][0]["attempt_records"] == 31
     assert result["provider_calls"] == 31
     assert result["token_usage"]["total"] == 279
+    cell = next(row for row in result["cells"] if row["benchmark"] == "agentdojo-v1"
+                and row["condition_id"] == "no_defense" and row["cohort_scope"] == "all")
+    assert cell["planned"] == cell["recorded"] == 3
+    assert cell["attempt_records"] == cell["provider_calls"] == 4
+    assert cell["provider_calls_per_work_item"]["observed"] == 3
+    assert cell["provider_calls_per_work_item"]["maximum"] == 2
+    assert cell["token_usage"]["total"] == 36
+    assert cell["cost_estimate_cny"] == pytest.approx(.004)
 
 
 def test_repeated_underlying_task_does_not_inflate_pairing():
@@ -302,3 +311,105 @@ def test_svg_figure_keeps_zero_event_wilson_bar_and_utf8_labels(tmp_path):
     assert "仅权限" in text
     assert "Wilson" in text
     assert "未知/未运行" in text
+
+
+def test_condition_burden_reports_calls_tokens_cost_and_missing_vigil_breakdown(tmp_path):
+    _, raw = _study_files(tmp_path, "activity", "flash")
+    selected = [row for row in raw if row["benchmark"] == "agentdojo-v1"
+                and row["condition_id"] == "strongest_peer_reviewed_structural_baseline"]
+    for index, row in enumerate(selected, 1):
+        request = row["provider_requests"][0]
+        row["provider_requests"] = [
+            {**request, "local_request_id": f"{request['local_request_id']}-{call}"}
+            for call in range(index)]
+        row["provider_call_count"] = index
+        row["token_usage"] = {"input": index * 10, "output": index, "total": index * 11}
+        row["cost"] = {"amount": index / 100, "currency": "CNY", "usage_complete": True}
+        if index > 1:
+            row["vigil_constraint_generation_calls"] = 1
+    selected[2].pop("cost")
+    path = tmp_path / "activity/flash/raw_records_v1.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in raw), encoding="utf-8")
+    result = analyze(tmp_path, bootstrap_draws=100)
+    cell = next(row for row in result["cells"] if row["benchmark"] == "agentdojo-v1"
+                and row["condition_id"] == "strongest_peer_reviewed_structural_baseline")
+    assert cell["provider_calls"] == 6
+    assert cell["provider_call_cap"] == 16
+    assert cell["provider_calls_per_work_item"]["p50"] == 2
+    assert cell["provider_calls_per_work_item"]["p95"] == pytest.approx(2.9)
+    assert cell["token_usage"] == {"input": 60, "output": 6, "total": 66}
+    assert cell["cost_estimate_cny"] == pytest.approx(.03)
+    assert cell["cost_missing_count"] == 1
+    assert cell["vigil_constraint_generation_calls"]["known_total"] == 2
+    assert cell["vigil_constraint_generation_calls"]["missing"] == 1
+    write_outputs(result, tmp_path, figures=False)
+    report = (tmp_path / "report.md").read_text(encoding="utf-8")
+    assert "16" in report and "8" in report and "约束生成" in report
+    table = (tmp_path / "tables/cells_v1.csv").read_text(encoding="utf-8-sig")
+    assert "provider_calls_per_work_item_p95" in table
+    assert "vigil_constraint_generation_calls_missing" in table
+
+
+def test_burden_missing_values_do_not_become_observed_zero(tmp_path):
+    _, raw = _study_files(tmp_path, "utility", "pro")
+    selected = [row for row in raw if row["benchmark"] == "agentdojo-v1"
+                and row["condition_id"] == "m3_policy_only" and row["authorization_regime"] == "auto_compiled"]
+    selected[0]["token_usage"] = {"input": 0, "output": 0, "total": 0}
+    selected[1]["token_usage"] = {}
+    selected[2]["token_usage"] = None
+    selected[0]["cost"] = {"amount": 0, "currency": "CNY", "usage_complete": True}
+    selected[1]["cost"] = {"amount": None, "currency": "CNY", "usage_complete": False}
+    selected[2]["cost"] = None
+    path = tmp_path / "utility/pro/raw_records_v1.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in raw), encoding="utf-8")
+    result = analyze(tmp_path, bootstrap_draws=100)
+    cell = next(row for row in result["cells"] if row["benchmark"] == "agentdojo-v1"
+                and row["condition_id"] == "m3_policy_only" and row["authorization_regime"] == "auto_compiled")
+    assert cell["token_usage"]["total"] == 0
+    assert cell["token_usage_observed_count"]["total"] == 1
+    assert cell["token_usage_missing_count"]["total"] == 2
+    assert cell["cost_estimate_cny"] == 0
+    assert cell["cost_observed_count"] == 1
+    assert cell["cost_missing_count"] == 2
+    assert cell["cost_usage_incomplete_count"] == 2
+
+
+def test_all_missing_cost_and_usage_remain_na_in_report(tmp_path):
+    _, raw = _study_files(tmp_path, "utility", "pro")
+    for row in raw:
+        row["token_usage"] = None
+        row["cost"] = None
+    path = tmp_path / "utility/pro/raw_records_v1.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in raw), encoding="utf-8")
+    result = analyze(tmp_path, bootstrap_draws=100)
+    assert result["token_usage"]["total"] is None
+    assert result["token_usage_missing_count"]["total"] == 30
+    assert result["cost_known_estimate_cny"] is None
+    assert result["cost_missing_count"] == 30
+    write_outputs(result, tmp_path, figures=False)
+    report = (tmp_path / "report.md").read_text(encoding="utf-8")
+    assert "估计CNY NA" in report
+    assert "成本缺失30" in report
+
+
+def test_model_aliases_and_declared_service_versions_are_separate(tmp_path):
+    versions = {"pro": "DeepSeek-V4-Pro-0813", "flash": "DeepSeek-V4.1-Flash"}
+    for model, version in versions.items():
+        plan, raw = _study_files(tmp_path, "activity", model)
+        for row in plan + raw:
+            row["requested_model_id"] = row["model_id"]
+            row["expected_returned_model_version"] = version
+        folder = tmp_path / "activity" / model
+        for name, rows in (("plan_v1.jsonl", plan), ("raw_records_v1.jsonl", raw)):
+            (folder / name).write_text("\n".join(json.dumps(row) for row in rows), encoding="utf-8")
+    result = analyze(tmp_path, bootstrap_draws=100)
+    for group in result["groups"]:
+        alias = "deepseek-v4-pro" if group["model"] == "pro" else "deepseek-flash"
+        assert group["requested_model_ids"] == [alias]
+        assert group["official_returned_model_ids"] == [alias]
+        assert group["declared_service_versions"] == [versions[group["model"]]]
+    write_outputs(result, tmp_path, figures=False)
+    report = (tmp_path / "report.md").read_text(encoding="utf-8")
+    assert "DeepSeek-V4-Pro-0813" in report and "DeepSeek-V4.1-Flash" in report
+    assert "不是历史V4 Flash" in report
+    assert "不能据此宣称模型权重锁定" in report

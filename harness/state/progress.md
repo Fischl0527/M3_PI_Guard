@@ -1,5 +1,14 @@
 # 进展记录
 
+## 2026-10-13 强化实证实验完成
+
+- R1 Pro1085/Flash600，R2 Pro320/Flash160，共2165唯一attempt1终态；未运行0、1977 completed、76 parse_failure、112 max_steps，5463官方调用，5个评分未知不填零。
+- R3：40基础夹具/320判定/160完整提案对，80受控对变化；358自然首提案仅3个ASK→DENY变化。R3不是端到端效果，公开摘要不含动作正文，来源key绑定457预定ND项。
+- 统计预定任务配对/Wilson/Newcombe/exact McNemar/10000分层bootstrap/Holm；模型和基准分别报告。MD报告、4CSV、2SVG完成；模型与正式分析进程结束。
+- 最终60测试通过/19.08秒，Ruff与compile通过；两图视觉、collision0fail/0warn、最小字体10pt。服务器只接收20公开输入文件，不接收internal/密钥。
+- F-EXP-REINFORCE-001 verified仅本轮验收；无SOTA、全面安全提升或论文投稿完成声明。实现/结果两节点已同步个人M3仓库，最终报告节点随后核对remote。
+
+
 ## 2026-10-13 强化实验结果里程碑
 
 - 四个冻结API队列全部2165唯一work key，attempt1；5463官方调用闭合，模型身份和隔离复核通过，无重试、provider tools或外部effect。

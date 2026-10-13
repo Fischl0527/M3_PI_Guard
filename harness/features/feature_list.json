@@ -32,7 +32,7 @@
       "id": "F-EXP-REINFORCE-001",
       "name": "效用、攻击活性与机制强化实验",
       "description": "已批准R1/R2共2165新模型项及R3同动作受控回放；历史结果保持。",
-      "status": "in_progress",
+      "status": "verified",
       "priority": "high",
       "acceptanceCriteria": [
         "样本数量、唯一底层任务、五/四条件和Flash嵌套正确",
@@ -42,11 +42,14 @@
         "实际结果MD报告、outputs入口与Harness/Git更新，不伪称计划量已完成"
       ],
       "verification": [
-        "2026-10-13:2165/2165 planned work keys have unique attempt1 terminal records;no pending rows or active model runners",
-        "Pro utility1085 and activity320;current deepseek-flash V4.1 utility600/activity160;5463 unique official response and local request IDs across isolated study-model outputs",
-        "All new safety receipts and online isolation reviewed;provider tools/external effects0;76 parse failures112 max steps retained;5 pre-environment VIGIL unknown outcomes not imputed",
-        "R3 single run:40 fixtures320 decisions160 same-input pairs;358 captured first proposals within457 eligible ND work keys;zero new model calls/effects",
-        "Optional R3 study_part alias corrected for future capture with regression;existing outputs preserved and source identities uniquely joined through frozen work keys"
+        "2026-10-13：四冻结队列2165/2165唯一终态、attempt1，Pro效用1085/活性320与当前V4.1 Flash效用600/活性160严格嵌套，未运行0",
+        "5463本地请求ID及5463官方响应ID跨队列唯一；精确返回别名、512参数、180秒、调用上限、在线隔离与安全收据复核通过，provider tools/真实effects0",
+        "76 parse_failure及112 max_steps保留；VIGIL创建环境前5个未知评分不填零，约束生成子计数缺失如实披露，成功项无重跑或自动重试",
+        "R3单次：40基础夹具/320决策/160同输入对，358首提案回放在457预定ND项内，0新API/effects；可选标签缺失通过唯一work_key绑定源plan，未来捕获投影红绿修复",
+        "最终四套定向测试60 passed/19.08秒，Ruff及4研究模块编译通过；启动前148相关回归与两服务器离线22检查见任务，未FullHarness",
+        "Ubuntu24正式一次10000分层任务bootstrap及预定Newcombe/exact McNemar/Holm；独立模型/基准报告未知和ITT，不把零事件经验退化视为确定零风险",
+        "中文MD报告、analysis JSON、4CSV与2SVG完成；图已视觉核对，临时PDF最低10pt、collision0fail/0warn；只作阶段图不声明论文投稿排版就绪",
+        "Git155e0cc实现和7f9a45b结果已推送个人M3分支，最终报告节点限定路径交付；原17暂存和其他论文/注释/PDF工作不覆盖，不PR/force-push"
       ]
     },
     {
