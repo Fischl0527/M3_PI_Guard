@@ -16,6 +16,7 @@ from m3_guard.task_contract_v1 import (
 )
 from m3_guard.task_policy import ParameterConstraint, TaskPolicyManifest, ToolRule
 from m3_guard.provenance import SOURCE_TYPES
+from m3_guard.tool_contracts_v2 import JSON_TYPES, _type_matches
 
 COMPILER_VERSION = "corrected_v3"
 _OPERATIONS = frozenset({"discover", "read", "modify", "create", "send", "delete", "confirm"})
@@ -198,6 +199,30 @@ def _leaves(predicate: Predicate) -> tuple[Predicate, ...]:
     return tuple(leaf for item in predicate.items for leaf in _leaves(item)) if predicate.op == "and" else (predicate,)
 
 
+def _validate_constraint_type(predicate: Predicate, detail: Mapping[str, Any]) -> None:
+    """不能把永远不符合可信工具类型的约束标为可运行契约。"""
+    declared = detail.get("type")
+    types = [declared] if isinstance(declared, str) else declared
+    if not isinstance(types, list) or not types or any(kind not in JSON_TYPES for kind in types):
+        raise _Invalid("trusted_argument_type_unsupported", "missing")
+    for leaf in _leaves(predicate):
+        values = (leaf.value,) if leaf.op == "eq" else leaf.values if leaf.op == "in" else ()
+        if any(not any(_type_matches(value, kind) for kind in types) for value in values):
+            raise _Invalid("constraint_argument_type_mismatch", "conflict")
+        if "enum" in detail and values:
+            if not isinstance(detail["enum"], list):
+                raise _Invalid("trusted_argument_enum_invalid", "missing")
+            choices = {json.dumps(value, sort_keys=True, allow_nan=False) for value in detail["enum"]}
+            if any(json.dumps(value, sort_keys=True, allow_nan=False) not in choices for value in values):
+                raise _Invalid("constraint_argument_enum_mismatch", "conflict")
+        compatible = (leaf.op == "type" and leaf.value in types
+                      or leaf.op == "number_range" and bool(set(types) & {"number", "integer"})
+                      or leaf.op == "date_range" and "string" in types
+                      or leaf.op in {"eq", "in"})
+        if not compatible:
+            raise _Invalid("constraint_argument_type_mismatch", "conflict")
+
+
 def _ground_literals(predicate: Predicate, evidence: str, context: Mapping[str, Any]) -> None:
     # 参数值可由可信请求或应用声明提供；模型自己的猜测不算依据。
     context_literals: list[Any] = []
@@ -349,6 +374,7 @@ def compile_task_contract_v1(
                 if detail.get("required", False) and name not in constraints and name not in bindings:
                     raise _Invalid("missing_argument_scope", "missing")
             for name, predicate in constraints.items():
+                _validate_constraint_type(predicate, tool_schemas[tool]["arguments"][name])
                 for leaf in _leaves(predicate):
                     if leaf.op == "type" and not (roles.get(name) in {"content", "query"} and tool_schemas[tool]["arguments"][name].get("allow_generated", False) and (roles[name] != "query" or operation == "discover")):
                         raise _Invalid("unscoped_argument_type", "conflict")

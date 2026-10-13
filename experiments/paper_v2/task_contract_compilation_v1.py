@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import json
 import threading
+from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -157,3 +158,36 @@ def first_contracts(rows: list[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
             raise ValueError("duplicate fixed first draft")
         result[key] = copy.deepcopy(dict(row))
     return result
+
+
+def development_summary(rows: list[Mapping[str, Any]], base_cases: list[Mapping[str, Any]]) -> dict[str, Any]:
+    """仅统计开发编译资格，不能冒充正式安全/效用终点或重写原状态。"""
+    bases = {str(row["base_task_id"]): row for row in base_cases}
+    selected = [row for row in rows if row["base_task_id"] in bases and bases[row["base_task_id"]]["split"] == "development"]
+    if len({(row["base_task_id"], row["draft_index"]) for row in selected}) != len(selected):
+        raise ValueError("duplicate development draft")
+    requests = [request for row in selected for request in row.get("provider_requests", [])]
+    def groups(key):
+        result = {}
+        for row in selected:
+            name = key(row)
+            bucket = result.setdefault(name, {"records": 0, "compiled": 0, "compile_failure": 0})
+            bucket["records"] += 1
+            bucket[row["compile_status"]] += 1
+        return result
+    return {"study_id": "m3-task-contract-v3-validation-v1", "status": "development_qualification_incomplete",
+        "development_records": len(selected), "original_status_counts": dict(Counter(row["compile_status"] for row in selected)),
+        "actual_api_requests": len(requests), "response_bearing_records": sum(any(request.get("response_received") is True for request in row.get("provider_requests", [])) for row in selected),
+        "by_prompt_version": groups(lambda row: row.get("compiler_prompt_version", "initial_unversioned")),
+        "by_benchmark": groups(lambda row: bases[row["base_task_id"]]["benchmark"]),
+        "failure_codes": dict(Counter(row["contract"]["diagnostics"][0]["code"] if row.get("contract") and row["contract"].get("diagnostics") else row.get("failure_class", "unknown")
+            for row in selected if row["compile_status"] == "compile_failure")),
+        "missing_response_identity": sum(request.get("response_received") is True and (not request.get("provider_response_id") or request.get("returned_model") != COMPILER_MODEL) for request in requests),
+        "provider_tools_enabled": sum(request.get("provider_tools_enabled") is not False for request in requests),
+        "external_effects_enabled": sum(request.get("external_effects_enabled") is not False for request in requests),
+        "reported_usage": {field: sum((request.get("usage") or {}).get(field, 0) for request in requests)
+                           for field in ("prompt_tokens", "completion_tokens", "total_tokens", "prompt_cache_hit_tokens", "prompt_cache_miss_tokens")},
+        "formal_matrix_executions": None, "formal_guard_replay_decisions": None,
+        "formal_results_assessed": False,
+        "scientific_scope": "development_compiler_qualification_not_end_to_end_effectiveness",
+        "record_policy": "original_response_bearing_records_preserved_no_best_of_or_reexecution"}

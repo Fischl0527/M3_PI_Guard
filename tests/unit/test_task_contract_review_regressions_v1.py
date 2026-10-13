@@ -116,3 +116,16 @@ def test_multihop_metadata_resolves_deduplicated_contacts_not_project_indices():
     assert corrected_count == 60
     assert len(identities["development"]) == 80 and len(identities["evaluation"]) == 400
     assert not identities["development"] & identities["evaluation"]
+
+
+def test_structured_literal_cannot_compile_for_a_string_tool_argument():
+    from experiments.paper_v2.task_contract_synthetic_v1 import tool_schemas
+    user_text = 'Find file objects with query {"role":"candidate"}.'
+    draft = {"schema_version": "m3-task-contract-draft-1.0", "actions": [{"action_id": "find", "tool": "lookup_objects", "role": "discover",
+        "constraints": {"kind": {"op": "eq", "value": "file"}, "query": {"op": "eq", "value": {"role": "candidate"}}},
+        "evidence": [{"quote": user_text}]}]}
+    result = compile_task_contract_v1(trusted_user_request=user_text, tool_schemas=tool_schemas(), draft=draft)
+    assert result.status != "ready"
+    assert result.diagnostics[0].code == "constraint_argument_type_mismatch"
+    draft["actions"][0]["constraints"]["query"]["value"] = '{"role":"candidate"}'
+    assert compile_task_contract_v1(trusted_user_request=user_text, tool_schemas=tool_schemas(), draft=draft).status == "ready"

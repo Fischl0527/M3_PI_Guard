@@ -1,0 +1,73 @@
+{
+  "study_id": "m3-task-contract-v3-validation-v1",
+  "status": "development_qualification_incomplete",
+  "development_records": 44,
+  "original_status_counts": {
+    "compile_failure": 40,
+    "compiled": 4
+  },
+  "actual_api_requests": 44,
+  "response_bearing_records": 44,
+  "by_prompt_version": {
+    "initial_unversioned": {
+      "records": 3,
+      "compiled": 0,
+      "compile_failure": 3
+    },
+    "task-contract-prompt-v2": {
+      "records": 25,
+      "compiled": 2,
+      "compile_failure": 23
+    },
+    "task-contract-prompt-v3": {
+      "records": 16,
+      "compiled": 2,
+      "compile_failure": 14
+    }
+  },
+  "by_benchmark": {
+    "agentdojo-v1": {
+      "records": 17,
+      "compiled": 1,
+      "compile_failure": 16
+    },
+    "m3-v2": {
+      "records": 11,
+      "compiled": 3,
+      "compile_failure": 8
+    },
+    "task-contract-synthetic-v1": {
+      "records": 16,
+      "compiled": 0,
+      "compile_failure": 16
+    }
+  },
+  "failure_codes": {
+    "invalid_identifier": 3,
+    "invalid_target_binding": 7,
+    "invalid_and_predicate": 1,
+    "literal_not_grounded_in_trusted_evidence": 15,
+    "non_scalar_literal": 1,
+    "negative_action_evidence": 1,
+    "binding_constraint_conflict": 2,
+    "missing_argument_scope": 3,
+    "unscoped_argument_type": 3,
+    "unknown_or_missing_dsl_field": 2,
+    "evidence_does_not_authorize_operation": 2
+  },
+  "missing_response_identity": 0,
+  "provider_tools_enabled": 0,
+  "external_effects_enabled": 0,
+  "reported_usage": {
+    "prompt_tokens": 98118,
+    "completion_tokens": 31090,
+    "total_tokens": 129208,
+    "prompt_cache_hit_tokens": 68224,
+    "prompt_cache_miss_tokens": 29894
+  },
+  "formal_matrix_executions": null,
+  "formal_guard_replay_decisions": null,
+  "formal_results_assessed": false,
+  "scientific_scope": "development_compiler_qualification_not_end_to_end_effectiveness",
+  "record_policy": "original_response_bearing_records_preserved_no_best_of_or_reexecution"
+}

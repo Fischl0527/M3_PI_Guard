@@ -2,7 +2,7 @@
 
 - 功能：F-EXP-TASK-CONTRACT-003，in_progress。
 - 批准依据：用户2026-10-13明确要求实施完整修订计划，包括权限逻辑和三模型官方推理；Gemini可跳过。
-- 当前阶段：开发资格化和反例修复；已调用28次Pro开发编译，正式矩阵尚未启动。
+- 当前阶段：开发资格化和反例修复；已调用44次Pro开发编译，正式矩阵尚未启动。
 - 执行环境：主路径E:\M3_PI_Guard_test，F:\robot\Anaconda3\python.exe / Python3.13.5。
 - 主交付计划：docs/复杂任务权限编译改进与验证计划_2026-10-13.md。
 
@@ -56,6 +56,10 @@
 - 报告入口outputs/experiments/task_contract_compiler_v3_validation_v1/report.md，独立说明完成范围及所有目录。
 
 ## 真实开发诊断（原记录保留）
+
+- 修复c36b67e已推送且远端精确一致；之后一次性`python -X utf8 -m harness.tmp.qualify_task_contract_development`选8未调用M3+8未调用合成开发项，exit0。新增16响应/2compiled/14失败，原28条逐项保持；累计44响应、4compiled/40失败。版本初始3/v2 25/v3 16分开报告；新复杂任务0/16尚不具备正式扩展开发证据。
+- development_summary_v1.json只评估开发资格，正式终点字段null/未评估，不能靠硬编码0假称未来矩阵状态。原始44条usage129208 tokens、ID完整、provider tools/external effect均0；当前本研究正式pro/flash原始结果文件确实尚不存在。
+- 最终可信工具类型检查新增后，只重跑直接涉及的五模块：70 passed，3.22秒；Ruff与两模块py_compile通过。与194相关回归有重叠，不求和；无任何原响应再执行。
 
 - 最终本轮离线命令在原11相关测试模块基础上加入test_task_contract_offline_replay_v1.py和test_task_contract_review_regressions_v1.py：194 passed，26.04秒，exit0。新增反例首次9失败/3通过，修复后全相关通过；未FullHarness。
 - `python -X utf8 -c "from experiments.paper_v2.task_contract_cases_v1 import write_semantic_metadata_v2; print(write_semantic_metadata_v2())"`：480元数据行、修60图、80/400唯一、重叠0、模型调用0。只新增v2映射，未覆盖v1资产或参考动作。

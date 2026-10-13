@@ -19,6 +19,21 @@ def test_compiler_rejects_extra_evaluator_fields():
         subject.compiler_messages({**inputs, "expected_graph": {}})
 
 
+def test_development_summary_separates_versions_and_preserves_original_failure():
+    bases = [{"base_task_id": "a", "split": "development", "benchmark": "unit"},
+             {"base_task_id": "b", "split": "development", "benchmark": "unit"}]
+    rows = [{"base_task_id": "a", "draft_index": 1, "compile_status": "compile_failure", "failure_class": "schema", "provider_requests": []},
+            {"base_task_id": "b", "draft_index": 1, "compile_status": "compiled", "compiler_prompt_version": "v3", "provider_requests": []}]
+    result = subject.development_summary(rows, bases)
+    assert result["original_status_counts"] == {"compiled": 1, "compile_failure": 1}
+    assert result["by_prompt_version"]["initial_unversioned"]["compile_failure"] == 1
+    assert result["by_prompt_version"]["v3"]["compiled"] == 1
+    assert result["formal_matrix_executions"] is None
+    assert result["formal_guard_replay_decisions"] is None
+    assert result["formal_results_assessed"] is False
+    assert rows[0]["compile_status"] == "compile_failure"
+
+
 def test_first_contract_not_selected_by_success():
     rows = [{"base_task_id": "b1", "draft_index": 1, "compile_status": "compile_failure"},
         {"base_task_id": "b1", "draft_index": 2, "compile_status": "compiled"}]
