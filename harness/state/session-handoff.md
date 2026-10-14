@@ -9,6 +9,7 @@
 - 结果入口outputs/experiments/task_contract_compiler_v4_development_v1。编译命令python -m experiments.paper_v2.task_contract_v4_development_v1 compile --cohort debug；执行run --provider pro或flash --cohort debug --prefix-only，通过后--pending-only。资格必须在两模型调试各160终态后进入。
 - 用户授权仅删除旧空Git锁，原暂存tree53fccb7f7260e275ae728dad51d7e0939db49afd保留；实现/测试及结果/报告两个限定节点推个人M3当前分支，不强推，不打包其他论文/文献改动。
 - 共同验收237定向测试/12.19秒、Ruff/8模块compile通过；明确条件与顺序遗漏进入澄清，运行修订标记不覆盖计划身份。下一步限定实现提交/推送，再compile debug；仍无本轮实际模型响应。
+- 最新覆盖上一行：388c012已推且远端一致；debug16编译34请求/34响应，v3最终3ready、v4无ready，不重发。执行初始化失败后已修旧resolver兼容，23runtime含真实冻结native计划冒烟通过，3回放测试通过；执行API0。下一步限定兼容修复Git后pro/flash debug --prefix-only，通过才--pending-only。
 
 ## 2026-10-14 — 任务契约v3开发资格化续行
 

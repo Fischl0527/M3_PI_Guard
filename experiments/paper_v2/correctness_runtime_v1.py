@@ -185,7 +185,7 @@ def public_events(events: Any) -> list[dict[str, Any]]:
 
 
 class CorrectnessRuntime:
-    def __init__(self, *, plan_path: Any, execution_identity: str, compiler_revision: str = "corrected_v1", runtime_revision: str = "corrected_v1", authorization_regime: str = "auto_compiled", vigil_factory: Any = None, proposal_capture_sink: ProposalCaptureSink | None = None) -> None:
+    def __init__(self, *, plan_path: Any, execution_identity: str, compiler_revision: str = "corrected_v1", runtime_revision: str = "corrected_v1", authorization_regime: str = "auto_compiled", vigil_factory: Any = None, proposal_capture_sink: ProposalCaptureSink | None = None, m3_resolver: Any = None) -> None:
         _compiler("agentdojo-v1", compiler_revision)
         self.compiler_revision = compiler_revision
         if runtime_revision not in {"corrected_v1", "corrected_v2"}:
@@ -197,7 +197,7 @@ class CorrectnessRuntime:
         self.vigil_factory = vigil_factory
         self.proposal_capture_sink = proposal_capture_sink
         self.agentdojo = PublicFrozenAgentDojoCaseResolverV2(plan_path=plan_path)
-        self.m3 = PublicFrozenM3CaseResolverV4(plan_path=plan_path, execution_identity=execution_identity)
+        self.m3 = m3_resolver if m3_resolver is not None else PublicFrozenM3CaseResolverV4(plan_path=plan_path, execution_identity=execution_identity)
         self.m3_evaluator = CorrectedM3OutcomeEvaluator(self.m3)
         self.agentdojo_evaluator = CorrectedAgentDojoOutcomeEvaluator(AgentDojoOfflineOutcomeEvaluator(self.agentdojo))
 

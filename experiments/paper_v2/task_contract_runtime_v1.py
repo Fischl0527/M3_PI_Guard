@@ -232,9 +232,9 @@ class TaskContractNativeRuntime:
     """原生任务复用CorrectnessRuntime的后端和离线evaluator，不带答案入模型。"""
 
     def __init__(self, plan_path: Path, execution_identity: str, *, contracts: Any, input_loader: Any,
-                 contract_monitor_factory: Any = _new_monitor) -> None:
+                 contract_monitor_factory: Any = _new_monitor, m3_resolver: Any = None) -> None:
         self.corrected = CorrectnessRuntime(plan_path=plan_path, execution_identity=execution_identity,
-            compiler_revision="corrected_v2", runtime_revision="corrected_v2")
+            compiler_revision="corrected_v2", runtime_revision="corrected_v2", m3_resolver=m3_resolver)
         self.contracts, self.input_loader = contracts, input_loader
         self.contract_monitor_factory = contract_monitor_factory
 

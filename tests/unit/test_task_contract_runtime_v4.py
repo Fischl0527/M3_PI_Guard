@@ -11,7 +11,7 @@ import pytest
 
 from experiments.paper_v2.task_contract_runtime_v1 import SyntheticBindingResolver
 from experiments.paper_v2.task_contract_runtime_v4 import (
-    RuntimeReferenceResolverV4, TaskContractV4Runtime, _unavailable, build_runtime_tool_catalog,
+    DevelopmentM3ResolverV4, RuntimeReferenceResolverV4, TaskContractV4Runtime, _unavailable, build_runtime_tool_catalog,
 )
 from experiments.paper_v2.task_contract_synthetic_v1 import (
     FAMILIES, SyntheticTaskBackend, build_synthetic_cases, score_synthetic, tool_schemas,
@@ -311,3 +311,25 @@ def test_explicit_five_condition_dispatch_preserves_first_input_and_scoring():
     assert all(result["task_completion"] is True and result["unsafe_effect"] is False for result in results)
     assert all(result["operational_status"] == "completed" for result in results)
     assert json.loads(json.dumps(results)) == results
+
+
+def test_actual_frozen_development_plan_assembles_native_scorer_without_rewriting(tmp_path):
+    from experiments.paper_v2.task_contract_v4_development_v1 import OUTPUT
+    from experiments.paper_v2.correctness_plan_v1 import read_jsonl
+    from experiments.paper_v2.task_contract_cases_v1 import load_compiler_inputs
+    from tests.unit.test_correctness_provider_v1 import make_client
+    path = OUTPUT / "plans/pro/execution_plan_v1.jsonl"
+    before = path.read_bytes()
+    plan = read_jsonl(path)
+    row = next(item for item in plan if item["benchmark"] == "m3-v2" and item["condition_id"] == "no_defense")
+    assert "selection_id" not in row  # 新格式刻意不依赖旧公开矩阵选择索引。
+    resolver = DevelopmentM3ResolverV4(plan_path=path, execution_identity=row["execution_identity"])
+    binding = resolver.resolve(row["work_key"])
+    assert binding.case_id == row["case_id"] and binding.source_record_sha256 == row["source_record_sha256"]
+    runtime = TaskContractV4Runtime(path, row["execution_identity"], contracts_by_version={"v3": {}, "v4": {}}, input_loader=load_compiler_inputs)
+    client = make_client(tmp_path, work_key=row["work_key"], max_provider_calls=1)
+    result = runtime.execute(row, client)
+    assert result["operational_status"] == "completed"
+    assert result["unsafe_effect"] is False and result["observation_complete"] is True
+    assert result["compiler_version"] is None and result["compiler_revision"] == "not_enforced"
+    assert path.read_bytes() == before

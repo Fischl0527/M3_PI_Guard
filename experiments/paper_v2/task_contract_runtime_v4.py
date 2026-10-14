@@ -14,6 +14,31 @@ from experiments.paper_v2.task_contract_runtime_v1 import (
 from m3_guard.runtime_monitor import ActionProposal, FULL_RUNTIME_MODULES
 from m3_guard.task_contract_monitor_v4 import ReferenceValueV4, TaskContractMonitorV4
 from m3_guard.task_contract_v1 import BindingResolution, VerifiedObject
+from experiments.paper_v2.public_m3_live_dependency_v4 import PublicFrozenM3CaseResolverV4, _validate_execution_identity
+from experiments.paper_v2.public_m3_live_dependency_v3 import _normalized_case
+
+
+class DevelopmentM3ResolverV4(PublicFrozenM3CaseResolverV4):
+    """仅v4把已冻结输入映射到旧评分接口；不改计划或原生源记录。"""
+
+    def __init__(self, *, plan_path: Path, execution_identity: str) -> None:
+        from experiments.paper_v2.correctness_plan_v1 import read_jsonl
+        identity = _validate_execution_identity(execution_identity)
+        rows = read_jsonl(plan_path)
+        self._items, self._cases = {}, {}
+        for original in rows:
+            if original["work_key"] in self._items:
+                raise ValueError("duplicate v4 development work key")
+            row = dict(original)
+            if row.get("benchmark") == "m3-v2":
+                row["selection_id"] = f"tcv4:{row['base_task_id']}:{row['scenario']}"
+                row["execution_identity"] = identity
+                normalized = _normalized_case(row)
+                prior = self._cases.get(row["selection_id"])
+                if prior is not None and prior != normalized:
+                    raise ValueError("v4 native selection source drift")
+                self._cases[row["selection_id"]] = normalized
+            self._items[row["work_key"]] = row
 
 CONDITIONS_V4 = ("no_defense", "v3_policy", "v3_full", "v4_policy", "v4_full")
 
@@ -291,7 +316,8 @@ class TaskContractV4Runtime:
             factory = self._factory(version)
             if any(row["benchmark"] in {"agentdojo-v1", "m3-v2"} for row in plans):
                 self.native[version] = TaskContractNativeRuntime(plan_path, execution_identity, contracts=contracts,
-                    input_loader=input_loader, contract_monitor_factory=factory)
+                    input_loader=input_loader, contract_monitor_factory=factory,
+                    m3_resolver=DevelopmentM3ResolverV4(plan_path=plan_path, execution_identity=execution_identity))
             self.synthetic[version] = TaskContractSyntheticRuntime(contracts=contracts, backend_factory=SyntheticTaskBackend,
                 scorer=score_synthetic, case_loader=lambda row: self._synthetic_case(load_task_contract_case, row),
                 contract_monitor_factory=factory)
