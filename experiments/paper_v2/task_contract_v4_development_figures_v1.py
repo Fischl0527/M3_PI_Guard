@@ -23,6 +23,43 @@ def render(output: Path) -> list[str]:
     destination = output / "figures"
     destination.mkdir(exist_ok=True)
     files = []
+    # 无完整已观察新旧配对时，空forest不能支持效应结论；改画真实编译状态。
+    if not any(row["observed_pairs"] for row in result["comparisons"]):
+        counts = {}
+        for row in result["compilation"]:
+            key = row["development_cohort"], row["compiler_version"]
+            cell = counts.setdefault(key, {})
+            for status, number in row["statuses"].items():
+                cell[status] = cell.get(status, 0)+number
+        fig, ax = plt.subplots(figsize=(7.2047244, 3.9370079))  # 183×100毫米
+        fig.subplots_adjust(left=.22, right=.97, top=.83, bottom=.36)
+        groups = [("debug", "v3"), ("debug", "v4"), ("qualification", "v3"), ("qualification", "v4")]
+        labels = [f"{cohort.capitalize()} / {version}" for cohort, version in groups]
+        categories = [("Ready", {"ready"}, "#317F99"),
+                      ("Clarification", {"ambiguous", "missing", "needs_clarification"}, "#C9CED2"),
+                      ("Scope conflict", {"conflict"}, "#9AABBC"),
+                      ("Unsupported", {"unsupported"}, "#C8AE90"),
+                      ("Technical invalid", {"technical_invalid", "provider_failure", "response_failure"}, "#9F878C")]
+        left = [0]*len(groups)
+        for label, statuses, color in categories:
+            width = [sum(counts.get(group, {}).get(status, 0) for status in statuses) for group in groups]
+            ax.barh(range(len(groups)), width, left=left, color=color, height=.6, label=label)
+            left = [a+b for a, b in zip(left, width)]
+        if any(number != 16 for number in left):
+            raise ValueError("compilation chart needs16 final statuses per cohort/version; unknown category not dropped")
+        ax.set_yticks(range(len(groups)), labels)
+        ax.invert_yaxis()
+        ax.set_xlim(0, 16)
+        ax.set_xticks([0, 4, 8, 12, 16])
+        ax.set_xlabel("Fixed development tasks (16 in each group)")
+        ax.set_title("Task-contract compilation status", pad=14)
+        fig.legend(loc="lower center", bbox_to_anchor=(.5, .08), frameon=False, ncol=2)
+        name = destination / "compilation_status"
+        fig.savefig(f"{name}.svg")
+        fig.savefig(f"{name}.pdf")
+        fig.savefig(f"{name}.png", dpi=600)
+        plt.close(fig)
+        return [str(name.with_suffix("."+suffix)) for suffix in ("svg", "pdf", "png")]
     for cohort in ("debug", "qualification"):
         rows = [r for r in result["comparisons"] if r["development_cohort"] == cohort]
         # 183×170毫米，以英寸常量装配，避免静态工具把算式误读成183英寸。

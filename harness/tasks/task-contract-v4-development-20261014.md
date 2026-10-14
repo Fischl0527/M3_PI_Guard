@@ -36,3 +36,13 @@
 - be9d063兼容修复已推并核对远端；Pro前缀4/4可调用项解析，调试160实际记录完成（44response-bearing执行项/146官方调用）。Flash前缀4可调用仅2解析，正式20记录保留、未扩展。
 - Flash原生2项完成，合成2项StrictProposalError（均HTTP200、58输出token），不能指称传输故障；不存响应正文，不能事后猜测或重解析。按固定技术门封闭剩余300项，JSON状态声明未运行范围，不生成300假raw行。
 - 仅Pro继续原16资格任务；资格首次前固定实现/prompt。解析门例外仅用于明确封闭模型，不放行共享安全问题。53相关测试/7.11秒和Ruff通过（与此前重叠）。
+
+### 最终交付与停止点
+
+- 资格编译及Pro资格执行均结束，固定1caed15实现/prompt；Pro320实际行、Flash20实际行及300未执行声明，640计划全部有清晰状态，pending0。没有重复响应或成功行；64首次＋3唯一技术修订=67官方编译响应，执行282官方响应，349总调用。
+- v3首稿5/32可运行，v4含预定技术修订0/32；v4需澄清22、不支持5、冲突2、技术无效3。无已观察的v3/v4配对，未计算无数据bootstrap，不能报告安全/效用提升。
+- 实际命令：compile --cohort qualification；run --provider pro --cohort qualification --pending-only；seal-provider --provider flash；analyze；python -m experiments.paper_v2.task_contract_v4_controlled_replay_v1；python -m experiments.paper_v2.task_contract_v4_development_figures_v1 outputs/experiments/task_contract_compiler_v4_development_v1。分析只运行一次，报告增补解读不重算统计。
+- 受控回放：32基础任务/320状态说明，304编译不可用、16无完整M3参考链不适用，实际Guard调用0、API0；不将状态条数写成决策数。
+- 最终13相关测试文件244 passed/19.01秒；16相关源码/测试Ruff通过，编译检查通过。上述数字含此前用例，不累加。单图183×100mm已视觉检查，PDF最低8pt、collision0fail0warn；PNG是报告预览，TIFF不适用，单面板对齐不适用。
+- 主报告outputs/experiments/task_contract_compiler_v4_development_v1/report.md，含实际数字/未知/目录/缺口；成本3.51652148元为峰时估算不是账单。文献26/27原文仅本地；Git只交付导读及公开研究数据，不含internal/。
+- 本批次已收尾但F-EXP-TASK-CONTRACT-004保持in_progress：真正的复杂任务自动编译可用性没有解决。原003正式研究及论文状态不改；报告/结果Git后停止，不自行扩样、重试、改论文或重跑资格组。

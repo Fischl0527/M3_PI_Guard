@@ -59,3 +59,8 @@ def test_missing_usage_is_not_a_zero_cost_complete_receipt():
     result = usage_summary([dict(provider_requests=[dict(response_received=True)], latency_ms=None)])
     assert result["usage_missing_responses"] == 1
     assert not result["cost_complete"] and result["latency_median_ms"] is None
+
+
+def test_native_total_latency_and_scalar_latency_are_both_retained():
+    result = usage_summary([dict(latency_ms={"total": 1000}), dict(latency_ms=2000), dict(latency_ms=None)])
+    assert result["latency_observed"] == 2 and result["latency_median_ms"] == 1500

@@ -20,8 +20,13 @@ def usage_summary(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     fields = ("prompt_tokens", "completion_tokens", "prompt_cache_hit_tokens", "prompt_cache_miss_tokens")
     response_rows = [r for r in requests if r.get("response_received")]
     missing = sum(any(type(r.get("usage", {}).get(f)) is not int for f in fields) for r in response_rows)
-    latencies = [float(row["latency_ms"]) for row in rows
-                 if type(row.get("latency_ms")) in (float, int) and math.isfinite(row["latency_ms"])]
+    latencies = []
+    for row in rows:
+        latency = row.get("latency_ms")
+        if isinstance(latency, Mapping):
+            latency = latency.get("total")
+        if type(latency) in (float, int) and math.isfinite(latency):
+            latencies.append(float(latency))
     costs = [row["cost"] for row in rows if isinstance(row.get("cost"), Mapping)]
     known_cost = sum(float(c.get("amount", 0)) for c in costs)
     return dict(provider_calls=len(requests), response_bearing_calls=len(response_rows),
@@ -113,6 +118,18 @@ def latest_records(plan: Sequence[Mapping[str, Any]], raw: Sequence[Mapping[str,
         for field in ("base_task_id", "model_key", "scenario", "condition_id", "development_cohort"):
             if row.get(field) != expected[key].get(field):
                 raise ValueError("result identity drift: " + field)
+        if "model_id" in expected[key]:
+            for field in ("model_id", "compiler_version", "source_record_sha256"):
+                if row.get(field) != expected[key].get(field):
+                    raise ValueError("result identity drift: " + field)
+            for receipt in row.get("provider_requests", []):
+                if receipt.get("response_received"):
+                    if not all(receipt.get(f) for f in ("local_request_id", "payload_sha256", "provider_response_id", "returned_model")):
+                        raise ValueError("response missing official identity")
+                    if receipt["returned_model"] != row["model_id"]:
+                        raise ValueError("returned model drift")
+            if row.get("evaluator_fields_online") or row.get("provider_tools_enabled") or row.get("real_external_effects"):
+                raise ValueError("online safety receipt violation")
         attempts.add((key, attempt))
         result[key] = row
     return result
@@ -156,7 +173,8 @@ def paired_effect(rows: Sequence[Mapping[str, Any]], baseline: str, treatment: s
     n = len(pairs)
     return dict(baseline=baseline, treatment=treatment, endpoint=endpoint_name, planned_pairs=n,
                 observed_pairs=len(known), unknown_pairs=n - len(known), difference=estimate,
-                cluster_bootstrap95=ci, bootstrap_draws=draws, bootstrap_degenerate=degenerate,
+                cluster_bootstrap95=ci, bootstrap_draws=draws if known else 0,
+                bootstrap_planned_draws=draws, bootstrap_degenerate=degenerate,
                 conservative_wilson_difference95=fallback,
                 itt_difference_lower=lower / n if n else None,
                 itt_difference_upper=upper / n if n else None,
@@ -228,7 +246,9 @@ def write_analysis(output: Path) -> dict[str, Any]:
     result["coverage"]["not_run"] = sum(item["count"] for item in sealed_missing.values())
     result["coverage"]["pending"] -= result["coverage"]["not_run"]
     result["provider_not_extended"] = sealed_missing
-    result["compilation"] = compilation_summary(read_jsonl(output / "compilation/raw_records_v1.jsonl"))
+    compile_rows = read_jsonl(output / "compilation/raw_records_v1.jsonl")
+    result["compilation"] = compilation_summary(compile_rows)
+    result["compilation_burden"] = usage_summary(compile_rows)
     destination.write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     tables = output / "tables"
     tables.mkdir(exist_ok=True)
@@ -273,7 +293,10 @@ def write_report(output: Path, result: Mapping[str, Any]) -> None:
         bound = "不可估计" if lower is None else f"[{100*lower:+.2f}, {100*upper:+.2f}]pp"
         lines.append(f"| {row['model_key']} | {row['development_cohort']} | {row['benchmark']}/{row['scenario']} | {row['treatment']}−{row['baseline']} | {row['endpoint']} | {row['observed_pairs']}/{row['planned_pairs']} | {effect} | {bound} |")
     lines += ["", "pp表示百分点。区间以基础任务聚类，10,000次重采样；经验分布退化时不把[0,0]当作确定性结论，改列保守Wilson差界限。调试组的修复反馈不当作独立泛化证据。",
-              "", "## 负担与用量", "", "```json", json.dumps(result["burden"], ensure_ascii=False, indent=2), "```",
+              "10000是预定重采样次数；无可观察配对时实际次数为0，效应和区间不可估计，不做无数据重算。",
+              "若没有可执行的v4契约，新旧端到端效应不可估计，不能把未知填成全零或解释为更安全。编译状态图只说明校验/可运行状态，不表示权限语义正确率或任务完成率。",
+              "", "## 负担与用量", "", "以下为执行负担（编译另列，不混淆任务条数与API请求次数）。", "```json", json.dumps(result["burden"], ensure_ascii=False, indent=2), "```",
+              "", "编译负担：", "```json", json.dumps(result.get("compilation_burden", {}), ensure_ascii=False, indent=2), "```",
               "", "## 目录结构", "", "```text", str(output),
               "├── assets/                   固定调试/资格任务表及选择说明",
               "├── plans/pro/、plans/flash/   各320项计划（输入与条件身份）",
@@ -282,6 +305,8 @@ def write_report(output: Path, result: Mapping[str, Any]) -> None:
               "├── flash/raw_records_v1.jsonl Flash实际执行记录",
               "├── analysis_v1.json          一次性统计（包括未知与完整计划界限）",
               "├── tables/                   原始计数表与配对差异",
+              "├── figures/                  真实编译状态或可估计配对差；不是模拟数据",
+              "├── controlled_decisions_v1.jsonl  同提案离线判定，与模型效果分开",
               "├── report.md                 本报告",
               "└── internal/及各模型internal/ 本地请求记录，Git忽略，不含公开正文", "```",
               "", "本轮完成不等于原24,960项正式矩阵完成。后续扩大实验须另行决定，本运行器不会自动开启。作者信息、论文和LaTeX不在本次修改范围。", ""]

@@ -2,15 +2,12 @@
 
 ## 2026-10-14 — 权限编译v4开发研究
 
-- 本轮用户批准32任务、两模型640项上限；已生成调试/资格各16，原44和600正式集未改。新API尚未启动，Gemini0调用，不改论文或启动大矩阵。
-- 主计划docs/权限编译v4改进与双模型开发验证计划_2026-10-14.md；实施与精确验收命令见harness/tasks/task-contract-v4-development-20261014.md。
-- core/runtime/runner并行修v4限定路径，共用受信工具能力表；旧v3入口默认保留。实际模型前需所有共同测试、实现提交和技术前缀。
-- 164相关回归通过；后来新增共同runtime/runner测试正在集成。阶段完成数不能用640计划数代替。初次/技术修订、调试/资格分开保存，资格代码变化则转开发诊断。
-- 结果入口outputs/experiments/task_contract_compiler_v4_development_v1。编译命令python -m experiments.paper_v2.task_contract_v4_development_v1 compile --cohort debug；执行run --provider pro或flash --cohort debug --prefix-only，通过后--pending-only。资格必须在两模型调试各160终态后进入。
-- 用户授权仅删除旧空Git锁，原暂存tree53fccb7f7260e275ae728dad51d7e0939db49afd保留；实现/测试及结果/报告两个限定节点推个人M3当前分支，不强推，不打包其他论文/文献改动。
-- 共同验收237定向测试/12.19秒、Ruff/8模块compile通过；明确条件与顺序遗漏进入澄清，运行修订标记不覆盖计划身份。下一步限定实现提交/推送，再compile debug；仍无本轮实际模型响应。
-- 最新覆盖上一行：388c012已推且远端一致；debug16编译34请求/34响应，v3最终3ready、v4无ready，不重发。执行初始化失败后已修旧resolver兼容，23runtime含真实冻结native计划冒烟通过，3回放测试通过；执行API0。下一步限定兼容修复Git后pro/flash debug --prefix-only，通过才--pending-only。
-- 最新覆盖上行执行API0：be9d063推送一致；Pro debug160终态/146调用，Flash20前缀/4调用，前缀4可调用只2解析，余300封闭未执行且不补raw、不重发。53相关测试通过；资格16尚未编译，下一步限定分支关闭修正Git后，仅compile qualification及Pro run qualification --pending-only；Flash仍封闭，最终报告说明局部观察，不能说双模型完整复现。
+- 32固定任务已按调试16/资格16结束；Pro320实际记录、Flash20前缀＋300未执行，pending0。编译67/执行282官方请求全部响应；没有活动API进程，不重发、不扩大到24,960项。
+- v3可运行5/32，v4 0/32；v4完整模块的端到端提升无法估计，真实编译问题仍未解决。F-EXP-TASK-CONTRACT-004及旧003保持in_progress；本次批次停止不表示论文或正式研究结项。
+- 244共同测试19.01秒/Ruff/compile通过，真实冻结原生评分冒烟通过；320受控状态行中Guard调用0（编译不可用或无完整参考链）。统计只生成一次；无已观察配对时不重采样无数据。图视觉/字号8pt/碰撞0fail0warn通过。
+- 报告E:\M3_PI_Guard_test\outputs\experiments\task_contract_compiler_v4_development_v1\report.md，含目录入口和剩余问题。计划及精确命令见harness/tasks/task-contract-v4-development-20261014.md；结果JSON/CSV/图均在同根目录，internal请求记录Git忽略。
+- origin个人Fischl0527/M3_PI_Guard，分支codex/claude-review-repairs。388c012/be9d063/1caed15已推并核对；结果节点随后核对。真实暂存仍仅原17PDF，原始diff不消费；论文/翻译/其他Harness变更未打包。
+- 后续仅等用户命令。若继续，先离线定位局部证据与有限引用能力不匹配；不能重用响应/资格样本修到通过，也不能从本次未知填零得出安全提升。
 
 ## 2026-10-14 — 任务契约v3开发资格化续行
 
