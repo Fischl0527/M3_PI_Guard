@@ -342,3 +342,28 @@ def test_runtime_separate_revision_keeps_prompt_and_plan_identity(cohorts):
     assert saved["runtime_compiler_version"] == "corrected_v4"
     assert saved["compiler_prompt_version"] == subject.PROMPT_VERSIONS["v4"]
     assert subject.runtime_history(plan, [saved])[item["work_key"]] == saved
+
+
+def test_failed_provider_seals_missing_scope_and_does_not_block_other_qualified_model(tmp_path, cohorts, monkeypatch):
+    plans = setup_study(tmp_path, cohorts)
+    pro = [record(row) for row in plans["pro"] if row["development_cohort"] == "debug"]
+    write_rows(tmp_path / "pro/raw_records_v1.jsonl", pro)
+    (tmp_path / "pro/status_v1.json").write_text(json.dumps({"stop_reason": None}), encoding="utf-8")
+    flash = [record(row) for row in plans["flash"] if row["formal_prefix"]]
+    for row in flash[:5]:
+        row.update(operational_status="parse_failure", events=[{"parse_ok": False}])
+    write_rows(tmp_path / "flash/raw_records_v1.jsonl", flash)
+    value = subject.seal_failed_provider("flash", output=tmp_path)
+    assert value["not_run"] == 300 and value["recorded"] == 20 and not value["prefix"]["passed"]
+    subject.qualification_guard(tmp_path, COMMIT)
+    monkeypatch.setattr(subject, "implementation_commit", lambda: COMMIT)
+    with pytest.raises(ValueError, match="branch sealed"):
+        subject.run_provider("flash", "debug", output=tmp_path, api_key="offline-fixture", pending_only=True, runtime=object())
+    assert len(subject.read_jsonl(tmp_path / "flash/raw_records_v1.jsonl")) == 20
+
+
+def test_successful_prefix_cannot_be_sealed_to_skip_records(tmp_path, cohorts):
+    plans = setup_study(tmp_path, cohorts)
+    write_rows(tmp_path / "flash/raw_records_v1.jsonl", [record(row) for row in plans["flash"] if row["formal_prefix"]])
+    with pytest.raises(ValueError, match="failed prefix"):
+        subject.seal_failed_provider("flash", output=tmp_path)

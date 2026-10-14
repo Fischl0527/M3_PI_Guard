@@ -226,10 +226,20 @@ def qualification_guard(output: Path, commit: str) -> None:
         plan = read_jsonl(output / "plans" / provider / "execution_plan_v1.jsonl")
         debug_keys = {row["work_key"] for row in plan if row.get("development_cohort") == "debug"}
         history = latest_records(read_jsonl(output / provider / "raw_records_v1.jsonl"))
-        if len(debug_keys) != 160 or any(key not in history or history[key].get("status") != "terminal" for key in debug_keys):
-            raise ValueError("qualification requires160 terminal debug items per provider")
         status_path = output / provider / "status_v1.json"
         status = json.loads(status_path.read_text(encoding="utf-8")) if status_path.exists() else None
+        # 用户规则为停止受影响部分。另一模型的真实技术失败不能阻止已合格模型。
+        # 不降低失败门，不把缺失行补成执行，也不能据此声称双模型资格复现。
+        if status and status.get("sealed") is True:
+            keys = {row["work_key"] for row in plan if row["formal_prefix"]}
+            gate = technical_prefix([history[key] for key in keys if key in history])
+            if gate["passed"] or status.get("seal_reason") != "technical_prefix_not_extended" or status.get("recorded") != len(history):
+                raise ValueError("sealed provider needs the actual failed formal prefix")
+            if gate["reasons"] != ["callable_parsed_below80percent"] or any(critical_error(row) for row in history.values()):
+                raise ValueError("sealed provider safety/systemic error requires diagnosis before qualification")
+            continue
+        if len(debug_keys) != 160 or any(key not in history or history[key].get("status") != "terminal" for key in debug_keys):
+            raise ValueError("qualification requires160 terminal debug items per provider")
         if status is None or status.get("cohort", "debug") == "debug" and status.get("stop_reason"):
             raise ValueError("qualification requires debug closure without technical halt")
         qualification_rows.extend(row for row in history.values() if row.get("development_cohort") == "qualification")
@@ -564,6 +574,9 @@ def run_provider(provider: str, cohort: str, *, output: Path = OUTPUT, api_key: 
     stopped = threading.Event()
     commit = implementation_commit()
     with study_lock(destination / "internal/runner.lock"):
+        status_path = destination / "status_v1.json"
+        if status_path.exists() and json.loads(status_path.read_text(encoding="utf-8")).get("sealed"):
+            raise ValueError("provider branch sealed; do not extend failed prefix")
         if cohort == "qualification":
             qualification_guard(output, commit)
         prior = read_jsonl(raw_path)
@@ -653,10 +666,33 @@ def run_provider(provider: str, cohort: str, *, output: Path = OUTPUT, api_key: 
         return result
 
 
+def seal_failed_provider(provider: str, *, output: Path = OUTPUT) -> dict[str, Any]:
+    """只封闭真实失败前缀；原始响应不改，缺失仍没有执行记录。"""
+    if provider not in MODELS:
+        raise ValueError("unsupported provider")
+    destination = output / provider
+    with study_lock(destination / "internal/runner.lock"):
+        plan = read_jsonl(output / f"plans/{provider}/execution_plan_v1.jsonl")
+        history = runtime_history(plan, read_jsonl(destination / "raw_records_v1.jsonl"))
+        keys = {row["work_key"] for row in plan if row["formal_prefix"]}
+        gate = technical_prefix([history[key] for key in keys if key in history])
+        if len(keys) != 20 or not keys <= set(history) or gate["passed"]:
+            raise ValueError("only complete actual failed prefix can be sealed")
+        if any(key not in keys for key in history):
+            raise ValueError("failed prefix must not already have extended records")
+        value = dict(provider=provider, cohort="debug", planned=len(plan), recorded=len(history),
+                     sealed=True, seal_reason="technical_prefix_not_extended",
+                     not_run=len(plan)-len(history), not_run_scope="all_missing_frozen_plan_work_keys",
+                     not_run_reason="provider_formal_prefix_below_fixed_technical_gate",
+                     prefix=gate, updated_at=now(), stop_reason="technical_prefix_not_extended")
+        (destination / "status_v1.json").write_text(_json(value)+"\n", encoding="utf-8")
+        return value
+
+
 def main(argv: list[str] | None = None) -> int:
     """只有compile/run入口读取现有Git忽略配置；离线命令不碰凭据。"""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("prepare", "compile", "run", "analyze"))
+    parser.add_argument("command", choices=("prepare", "compile", "run", "analyze", "seal-provider"))
     parser.add_argument("--cohort", choices=COHORTS, default="debug")
     parser.add_argument("--provider", choices=tuple(MODELS), default="pro")
     parser.add_argument("--prefix-only", action="store_true")
@@ -667,6 +703,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.command == "prepare":
         result = prepare()
+    elif args.command == "seal-provider":
+        result = seal_failed_provider(args.provider)
     elif args.command == "analyze":
         from experiments.paper_v2.task_contract_v4_development_analysis_v1 import write_analysis
         result = write_analysis(OUTPUT)

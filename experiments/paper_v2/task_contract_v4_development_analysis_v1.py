@@ -202,16 +202,32 @@ def summarize(plan: Sequence[Mapping[str, Any]], raw: Sequence[Mapping[str, Any]
 
 
 def write_analysis(output: Path) -> dict[str, Any]:
-    """只有本轮640项具明确记录时才做一次bootstrap；不补造not_run。"""
+    """实际执行或明确失败provider封闭后分析；未运行不伪造raw行。"""
     plan = [row for provider in ("pro", "flash") for row in read_jsonl(output / f"plans/{provider}/execution_plan_v1.jsonl")]
     raw = [row for provider in ("pro", "flash") for row in read_jsonl(output / f"{provider}/raw_records_v1.jsonl")]
     latest = latest_records(plan, raw)
-    if len(plan) != 640 or len(latest) != 640:
-        raise ValueError("development plan is not terminal; analysis must not pretend completion")
+    if len(plan) != 640:
+        raise ValueError("development plan must contain640 items")
+    sealed_missing = {}
+    for provider in ("pro", "flash"):
+        items = [row for row in plan if row["model_key"] == provider]
+        missing = [row["work_key"] for row in items if row["work_key"] not in latest]
+        if not missing:
+            continue
+        status_path = output / f"{provider}/status_v1.json"
+        status = json.loads(status_path.read_text(encoding="utf-8")) if status_path.exists() else {}
+        if (status.get("sealed") is not True or status.get("seal_reason") != "technical_prefix_not_extended"
+                or status.get("planned") != len(items) or status.get("not_run") != len(missing)
+                or status.get("recorded") != len(items)-len(missing)):
+            raise ValueError("unresolved pending rows; do not pretend completion")
+        sealed_missing[provider] = {"count": len(missing), "reason": status["not_run_reason"]}
     destination = output / "analysis_v1.json"
     if destination.exists():
         raise ValueError("analysis already exists; do not silently recompute")
     result = summarize(plan, raw)
+    result["coverage"]["not_run"] = sum(item["count"] for item in sealed_missing.values())
+    result["coverage"]["pending"] -= result["coverage"]["not_run"]
+    result["provider_not_extended"] = sealed_missing
     result["compilation"] = compilation_summary(read_jsonl(output / "compilation/raw_records_v1.jsonl"))
     destination.write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     tables = output / "tables"
@@ -235,8 +251,9 @@ def write_report(output: Path, result: Mapping[str, Any]) -> None:
     coverage = result["coverage"]
     lines = ["# 权限编译v4双模型开发验证报告", "", "本报告是开发验证，不是正式评估集或论文结项。",
              "", "## 实际覆盖", "",
-             f"固定基础任务 {coverage['base_tasks']} 个；计划 {coverage['planned']} 项；有记录 {coverage['recorded']} 项；未执行 {coverage['pending']} 项；累计尝试 {coverage['attempts']} 项。",
+             f"固定基础任务 {coverage['base_tasks']} 个；计划 {coverage['planned']} 项；有实际记录 {coverage['recorded']} 项；明确未执行 {coverage.get('not_run', 0)} 项；仍待处理 {coverage['pending']} 项；累计尝试 {coverage['attempts']} 项。",
              "调试16个任务用于排查实现；资格16个任务只运行一轮，两组分别报告。失败、澄清及未知都保留在计划分母。Gemini本轮未调用。",
+             "", "Provider未扩展说明："+json.dumps(result.get("provider_not_extended", {}), ensure_ascii=False),
              "", "## 编译结果", "", "| 队列 | 版本 | 来源 | 任务数 | 首次通过 | 最终通过 | 技术修订 | 最终状态 |",
              "|---|---|---|---:|---:|---:|---:|---|"]
     for row in result.get("compilation", []):
