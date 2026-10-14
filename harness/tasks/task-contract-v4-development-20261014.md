@@ -46,3 +46,4 @@
 - 最终13相关测试文件244 passed/19.01秒；16相关源码/测试Ruff通过，编译检查通过。上述数字含此前用例，不累加。单图183×100mm已视觉检查，PDF最低8pt、collision0fail0warn；PNG是报告预览，TIFF不适用，单面板对齐不适用。
 - 主报告outputs/experiments/task_contract_compiler_v4_development_v1/report.md，含实际数字/未知/目录/缺口；成本3.51652148元为峰时估算不是账单。文献26/27原文仅本地；Git只交付导读及公开研究数据，不含internal/。
 - 本批次已收尾但F-EXP-TASK-CONTRACT-004保持in_progress：真正的复杂任务自动编译可用性没有解决。原003正式研究及论文状态不改；报告/结果Git后停止，不自行扩样、重试、改论文或重跑资格组。
+- 结果提交f90ee66c8c04ca43e5c4622f36b33ae9ccea64c3已推origin/codex/claude-review-repairs，ls-remote一致；限定提交只含23相关文件，无internal/或第三方全文，原17暂存diff仍完整。最终本地/远端状态记录后停止，API进程0。

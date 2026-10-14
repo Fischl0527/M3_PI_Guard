@@ -9,6 +9,7 @@
 - be9d063兼容修复已推远端一致；Pro160调试终态/146官方调用、Flash20前缀/4调用（2可解析）完成。Flash低于80%门，余300只声明未执行，不补造响应或降低门；53阶段相关测试通过，Pro资格16按原样继续，Flash不足不算跨模型复现。
 - 小批次最终：Pro320/Flash20实际记录＋Flash300未执行，全部640明确、pending0；编译67/执行282官方请求均响应。v3最终5/32 ready、v4 0/32 ready，真实编译仍未解决，F-EXP-TASK-CONTRACT-004保持in_progress且本轮停止。
 - 最终244定向测试19.01秒、Ruff/compile通过；32受控回放320状态行但Guard调用0（304编译不可用/16不适用）。一次分析、CSV及单编译状态图/中文MD完成；图最低8pt，碰撞0fail0warn。没有可观察v4配对，不计算无数据bootstrap，也不假称端到端效果。
+- 结果f90ee66正常推送origin/codex/claude-review-repairs且ls-remote一致；原17暂存的原始diff逐字保持，internal/和第三方全文未进入提交。停止于本批次报告交付，不启动其他研究。
 - 旧F-EXP-TASK-CONTRACT-003仍in_progress；本轮仅F-EXP-TASK-CONTRACT-004，640为上限不作完成声明，原17暂存保留。
 
 ## 2026-10-14 — 任务契约v3开发审查与修复（研究仍进行中）
