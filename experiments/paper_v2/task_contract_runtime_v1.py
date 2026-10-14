@@ -231,10 +231,12 @@ def _new_monitor(fixed: Any, inputs: Any, manifest: Any, tracker: Any, schemas: 
 class TaskContractNativeRuntime:
     """原生任务复用CorrectnessRuntime的后端和离线evaluator，不带答案入模型。"""
 
-    def __init__(self, plan_path: Path, execution_identity: str, *, contracts: Any, input_loader: Any) -> None:
+    def __init__(self, plan_path: Path, execution_identity: str, *, contracts: Any, input_loader: Any,
+                 contract_monitor_factory: Any = _new_monitor) -> None:
         self.corrected = CorrectnessRuntime(plan_path=plan_path, execution_identity=execution_identity,
             compiler_revision="corrected_v2", runtime_revision="corrected_v2")
         self.contracts, self.input_loader = contracts, input_loader
+        self.contract_monitor_factory = contract_monitor_factory
 
     def execute(self, row: Mapping[str, Any], client: Any) -> dict[str, Any]:
         condition = "new_full" if row.get("ablation_profile") else str(row["condition_id"])
@@ -266,7 +268,7 @@ class TaskContractNativeRuntime:
         inputs = self.input_loader(row)
         def bound_factory(*, context, backend, manifest, tool_schemas):
             resolver = NativeBindingResolver(backend, trusted_environment=trusted.pop(id(backend))) if context.benchmark == "agentdojo-v1" else None
-            return _new_monitor(self.contracts[row["base_task_id"]], inputs, manifest, tracker,
+            return self.contract_monitor_factory(self.contracts[row["base_task_id"]], inputs, manifest, tracker,
                 tool_schemas, resolver, condition, row.get("ablation_profile"))
         live = LiveConditionRuntime(provider_client_factory=lambda context: client,
             effect_backend_factory=backend_factory, policy_manifest_factory=manifest_factory,
@@ -303,9 +305,11 @@ def synthetic_messages(online: Mapping[str, Any]) -> list[dict[str, str]]:
 class TaskContractSyntheticRuntime:
     """纯内存合成任务执行循环；offline scorer只在执行结束后调用。"""
 
-    def __init__(self, *, case_loader: Any, contracts: Any, backend_factory: Any, scorer: Any) -> None:
+    def __init__(self, *, case_loader: Any, contracts: Any, backend_factory: Any, scorer: Any,
+                 contract_monitor_factory: Any = _new_monitor) -> None:
         self.case_loader, self.contracts = case_loader, contracts
         self.backend_factory, self.scorer = backend_factory, scorer
+        self.contract_monitor_factory = contract_monitor_factory
 
     def execute(self, row: Mapping[str, Any], client: Any) -> dict[str, Any]:
         online, offline = self.case_loader(row)
@@ -323,7 +327,7 @@ class TaskContractSyntheticRuntime:
             monitor = RuntimeMonitorCorrectedV2(manifest, modules=frozenset({"policy"}) if condition == "old_policy" else FULL_RUNTIME_MODULES,
                 tracker=tracker, tool_schemas=schemas)
         elif condition.startswith("new_"):
-            monitor = _new_monitor(self.contracts[row["base_task_id"]], inputs, manifest,
+            monitor = self.contract_monitor_factory(self.contracts[row["base_task_id"]], inputs, manifest,
                 tracker, schemas, SyntheticBindingResolver(backend), condition, row.get("ablation_profile"))
         elif condition != "no_defense":
             raise ValueError("synthetic condition unsupported")

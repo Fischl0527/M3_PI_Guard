@@ -1,5 +1,15 @@
 # 会话移交
 
+## 2026-10-14 — 权限编译v4开发研究
+
+- 本轮用户批准32任务、两模型640项上限；已生成调试/资格各16，原44和600正式集未改。新API尚未启动，Gemini0调用，不改论文或启动大矩阵。
+- 主计划docs/权限编译v4改进与双模型开发验证计划_2026-10-14.md；实施与精确验收命令见harness/tasks/task-contract-v4-development-20261014.md。
+- core/runtime/runner并行修v4限定路径，共用受信工具能力表；旧v3入口默认保留。实际模型前需所有共同测试、实现提交和技术前缀。
+- 164相关回归通过；后来新增共同runtime/runner测试正在集成。阶段完成数不能用640计划数代替。初次/技术修订、调试/资格分开保存，资格代码变化则转开发诊断。
+- 结果入口outputs/experiments/task_contract_compiler_v4_development_v1。编译命令python -m experiments.paper_v2.task_contract_v4_development_v1 compile --cohort debug；执行run --provider pro或flash --cohort debug --prefix-only，通过后--pending-only。资格必须在两模型调试各160终态后进入。
+- 用户授权仅删除旧空Git锁，原暂存tree53fccb7f7260e275ae728dad51d7e0939db49afd保留；实现/测试及结果/报告两个限定节点推个人M3当前分支，不强推，不打包其他论文/文献改动。
+- 共同验收237定向测试/12.19秒、Ruff/8模块compile通过；明确条件与顺序遗漏进入澄清，运行修订标记不覆盖计划身份。下一步限定实现提交/推送，再compile debug；仍无本轮实际模型响应。
+
 ## 2026-10-14 — 任务契约v3开发资格化续行
 
 - 以此行覆盖下方28旧批次描述：44开发响应，原记录4compiled/40失败；提示初始3/v2 25/v3 16独立报告，新增16从未触碰项，原28逐项保持。新任务0/16；不能直接扩主矩阵。无活动本研究API进程，开发一次性helper结束不自动重跑。

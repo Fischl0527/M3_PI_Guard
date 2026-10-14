@@ -1,5 +1,12 @@
 # 当前任务
 
+### 2026-10-14 权限编译v4双模型开发验证（实施中）
+
+- F-EXP-TASK-CONTRACT-004 in_progress：用户批准小IntentIR、确定性物化、后端核验、32开发任务和640双模型项上限；报告/Git后停止。
+- 计划docs/权限编译v4改进与双模型开发验证计划_2026-10-14.md；任务harness/tasks/task-contract-v4-development-20261014.md。三个Builder分离所有权，根代理统一集成。
+- 原44开发记录和v3默认不改，600正式评估不接触，Gemini继续0调用，不改论文/LaTeX/FullHarness。当前新API尚未启动。
+- 最新共同验收237定向测试通过/12.19秒、Ruff及8模块compile通过。准备限定实现提交/推送后进行调试编译；640仍为计划数，资格组未接触。
+
 ### 2026-10-14 重要代码中文注释勘误（已验证完成）
 
 - F-DOC-008 verified：24项注释勘误完成，13源码文件仅改docstring；6f56e06已推送当前origin分支并核对远端。

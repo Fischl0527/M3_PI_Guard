@@ -204,10 +204,12 @@ class DevelopmentRequestClient:
         ) or (generation_profile == "task_contract_compiler_v1" and model_group != "deepseek_pro"):
             raise official.ProviderPayloadError("unapproved generation profile")
         self.generation_profile = generation_profile
-        if call_budget_scope not in {None, "empirical_reinforcement_v1", "task_contract_v3_validation_v1"}:
+        if call_budget_scope not in {None, "empirical_reinforcement_v1", "task_contract_v3_validation_v1", "task_contract_v4_development_v1"}:
             raise official.ProviderPayloadError("unapproved explicit study scope")
+        if call_budget_scope == "task_contract_v4_development_v1" and model_group not in {"deepseek_pro", "deepseek_flash"}:
+            raise official.ProviderPayloadError("v4 development is DeepSeek-only; Gemini remains skipped")
         extended_flash = model_group == "deepseek_flash" and call_budget_scope == "empirical_reinforcement_v1"
-        new_study = call_budget_scope == "task_contract_v3_validation_v1"
+        new_study = call_budget_scope in {"task_contract_v3_validation_v1", "task_contract_v4_development_v1"}
         allowed_ceiling = call_budget_ceiling == 12 if new_study else call_budget_ceiling in {8, 16}
         if type(call_budget_ceiling) is not int or not allowed_ceiling or call_budget_ceiling == 16 and model_group != "deepseek_pro" and not extended_flash:
             raise official.ProviderPayloadError("unapproved explicit study call ceiling")
