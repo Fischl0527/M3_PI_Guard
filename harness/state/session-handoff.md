@@ -1,5 +1,14 @@
 # 会话移交
 
+## 2026-10-15 — 大文件及完整迁移复测收尾
+
+- 复测通过：82大文件2550311194字节完整读/复制一致；239格式/读取、11其他格式、1040迁移目标、156别名通过。F-FILE-001 blocked仅因用户后来追加清理被工具拒绝。没有新独立报告，最终对话汇报；日志outputs/maintenance/file_retest/verification.json及同根运行日志。
+- 开发e2f15a33全树4049文件、远端默认8f436942全树3943文件逐Git对象一致；core.longpaths=false。旧本地默认3c329239失败79路径仅诊断，未覆盖分支。八旧gitlink缺.gitmodules不属于本轮独立包验证。
+- 最终包outputs/maintenance/file_retest/package_build/M3_PI_Guard_portable.tar.gz，72173903字节，Windows中文目录解压37075文件一致、上传压缩包一致；Windows和Ubuntu24各140定向测试、8演示场景/180编译/原始计数入口通过，API0。
+- 仍6891路径超过项目240预算，9历史私有达到260；不能宣称全目录合规。工具拒绝生成副本清理，未绕过；副本原位Git忽略，最终包可复用。原始文件未变、原17暂存/其他文档论文改动保留。
+- 用户追加“汇报后删测试内容，别误删重要文件”：只限本轮7个生成目录，已只读核实路径和无链接。静态LiteralPath删除依然在执行前被拒绝，实际删除0目录；不要改用Python、其他shell或其他工具绕过。正式tests/、源码、数据、交付包和日志保留。
+- 当前停止，不启动新实验或再次Full Harness；需要后续修历史路径时另行限定，不擅动冻结回执。
+
 ## 2026-10-15 — 路径整理与可迁移性
 
 - F-PATH-001实现验收完成。报告docs/路径整理与可迁移验证.md；1040项迁移记录在outputs/maintenance/path_names/moves.csv。旧pytest树在outputs/archived_tests/20260819，原验证报告原位。

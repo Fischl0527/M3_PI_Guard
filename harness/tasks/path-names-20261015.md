@@ -1,5 +1,16 @@
 # 文件命名与长路径整理
 
+## 后续全量复测（2026-10-15，测试通过；追加清理受阻）
+
+- 用户批准F-FILE-001：路径全查、至少10MiB文件完整读取和格式验证、两个分支全树Git检出、中文深目录复制解压、同包Windows/Ubuntu24离线运行及改名兼容。
+- 本次不另建Markdown或Word报告；测试日志outputs/maintenance/file_retest/，完成后对话汇报，现有Harness保留状态与命令。
+- 写入中的文件、9份历史私有长路径及子模块单列；不读凭据、不改原始记录、不运行API或Full Harness。只提交本轮改动，保留原17PDF暂存及其他任务。
+- 实际命令：`python -X utf8 -B harness/tmp/retest_large_files.py inventory|contents|copies|checkouts|default_checkout|binary_formats`各阶段分别执行；临时脚本不属于产品运行器，日志记录实际参数。前一checkouts误用了3c329239本地旧分支，default_checkout明确钉住远端8f436942，不覆盖旧失败。
+- `python -X utf8 -B harness/tmp/retest_portability.py`：现有构建器加本轮路径/批次测试，最终同包在Windows/Ubuntu24各140通过，演示、180编译重现及900/16/480原始计数核对均通过；未重算推断统计。
+- 实际82大文件2.55GB及239格式/读取、11其他格式通过；82中文目录复制逐字节一致；1040目标/156别名完整；开发4049/默认3943完整检出逐Git对象一致。包解压37075文件/上传72173903字节均逐字节一致。
+- 预算扫描仍6891条超过240，其中9条达到260；不把历史例外当命名合规。8历史gitlink与缺.gitmodules不等同独立运行包失败。工具拒绝本轮副本清理，未绕过，副本忽略Git；原始82源文件大小/时间保持，原暂存逐字保持。
+- 后续用户明确要求汇报后删除测试内容并保护重要文件：已逐项核实7个本轮生成目录、位置正确且无链接。静态`Remove-Item -LiteralPath 'E:\M3_PI_Guard_test\outputs\maintenance\file_retest\中文 空格复制' -Recurse -Force`仍在进程创建前被工具拒绝，未实际执行；不换工具绕过。追加清理未完成，F-FILE-001 blocked；正式tests/、源码、原始数据、交付包和必要日志均保留。
+
 - 日期：2026-10-15；状态：verified（限定命名/迁移验收，历史例外保留）。
 - 用户要求：自行处理过长名称，并把长度限制写入Harness；名称应可读，不使用难懂缩写。
 

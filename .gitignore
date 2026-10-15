@@ -114,3 +114,6 @@ sandbox/public/agent_memory.txt
 
 # Keep older generated packages local-only after the final v1.0 package exists.
 release/M3_PI_Guard_v0.5/
+
+# 本轮迁移测试副本与运行包仅本地保留；仅显式提交小型验证日志。
+outputs/maintenance/file_retest/
