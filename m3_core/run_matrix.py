@@ -17,6 +17,7 @@ from typing import Any, Dict, List
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from m3_core.llm_client import DEFAULT_MODEL
+    from m3_core.artifact_paths import matrix_output_paths, require_short_path
     from m3_core.run_batch import run_batch
     from m3_core.tool_sandbox import (
         CLEANUP_POLICY,
@@ -29,6 +30,7 @@ if __package__ in {None, ""}:
     )
 else:
     from .llm_client import DEFAULT_MODEL
+    from .artifact_paths import matrix_output_paths, require_short_path
     from .run_batch import run_batch
     from .tool_sandbox import (
         CLEANUP_POLICY,
@@ -116,7 +118,6 @@ def main(argv: List[str] | None = None) -> None:
 def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
     cases_path = _repo_path(str(config["cases"]))
     out_dir = _repo_path(str(config["out_dir"]))
-    out_dir.mkdir(parents=True, exist_ok=True)
     if not cases_path.exists():
         raise FileNotFoundError(cases_path)
 
@@ -124,6 +125,18 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
     model = _resolve_model(backend, str(config.get("model", "")))
     conditions = _conditions(config)
     run_prefix = str(config.get("run_prefix") or _default_run_prefix(backend))
+    output_paths = {}
+    for condition in conditions:
+        suffix = _safe_name(condition.get("output_suffix", condition["condition_id"]))
+        paths = matrix_output_paths(out_dir, run_prefix, suffix, single=len(conditions) == 1)
+        for path in paths:
+            if not path.exists():
+                require_short_path(path, REPO_ROOT)
+        if any(path in used for used in output_paths.values() for path in paths):
+            raise ValueError("输出名称冲突；请为不同条件使用清楚且不同的名称")
+        output_paths[condition["condition_id"]] = paths
+    require_short_path(out_dir / "manifest.json", REPO_ROOT)
+    out_dir.mkdir(parents=True, exist_ok=True)
     manifest_path = out_dir / "manifest.json"
     request_config = _request_config(config, cases_path, backend, model, conditions)
     config_hash = _json_hash(request_config)
@@ -166,9 +179,7 @@ def run_matrix(config: Dict[str, Any]) -> Dict[str, Any]:
         entry["updated_at"] = _utc_now()
         _write_json_atomic(manifest_path, manifest)
 
-        suffix = _safe_name(condition.get("output_suffix", condition["condition_id"]))
-        jsonl_path = out_dir / f"{run_prefix}_{suffix}.jsonl"
-        csv_path = out_dir / f"{run_prefix}_{suffix}.csv"
+        jsonl_path, csv_path = output_paths[condition["condition_id"]]
         batch_config = {
             "cases": str(cases_path),
             "backend": backend,

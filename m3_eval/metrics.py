@@ -12,6 +12,8 @@ from pathlib import Path
 from statistics import mean
 from typing import Any, Iterable
 
+from m3_core.artifact_paths import resolve_artifact
+
 from .statistics import (
     clustered_paired_bootstrap,
     latency_summary,
@@ -169,7 +171,7 @@ def load_jsonl(path: str | Path) -> list[dict[str, Any]]:
     """从指定文件路径加载 JSONL 格式的运行记录列表。"""
 
     rows: list[dict[str, Any]] = []
-    jsonl_path = Path(path)
+    jsonl_path = resolve_artifact(Path(path))
     with jsonl_path.open("r", encoding="utf-8") as handle:
         for line_number, line in enumerate(handle, start=1):
             stripped = line.strip()

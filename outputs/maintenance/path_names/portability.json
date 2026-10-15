@@ -1,0 +1,10 @@
+{
+  "source_files": 23,
+  "archive_bytes": 77177,
+  "windows_output": ".....................                                                    [100%]\n21 passed in 3.16s\n",
+  "linux_output": "Linux-6.8.0-146-generic-x86_64-with-glibc2.39\nPython 3.12.3\n.....................                                                    [100%]\n21 passed in 0.62s\n\n\nTEST_EXIT 0\n",
+  "remote_directory": "/tmp/m3-path-check-20261015-biatf_ex",
+  "scope": "本轮路径模块与离线批次回归；未执行模型API及历史研究",
+  "windows_path_entry": "路径检查：1项，0个问题\n",
+  "ubuntu_path_entry": "路径检查：1项，0个问题\n\n\n"
+}

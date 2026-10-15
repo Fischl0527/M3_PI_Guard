@@ -195,7 +195,8 @@ def build(output: Path) -> Path:
     output.mkdir(parents=True)
     target = output / "M3_PI_Guard_portable"
     target.mkdir()
-    seeds = ["scripts/portable_demo.py", "scripts/portable_verify.py"] + [node.split("::")[0] for node in TEST_NODES]
+    seeds = ["scripts/portable_demo.py", "scripts/portable_verify.py",
+             "harness/scripts/check_paths.py"] + [node.split("::")[0] for node in TEST_NODES]
     sources = source_closure(ROOT, seeds)
     for relative in sorted(sources):
         copy_public(ROOT, target, relative)

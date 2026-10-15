@@ -1,5 +1,13 @@
 # 会话移交
 
+## 2026-10-15 — 路径整理与可迁移性
+
+- F-PATH-001实现验收完成。报告docs/路径整理与可迁移验证.md；1040项迁移记录在outputs/maintenance/path_names/moves.csv。旧pytest树在outputs/archived_tests/20260819，原验证报告原位。
+- 七工具包位于原archive入口下的review_v3/review_v3_1至review_v3_4、toolkit_v2/toolkit_v2_final；302跟踪文件内容不变。剩余9份私有官方回执不在Git，明确保留，不把它们误删为缓存。
+- 36定向检查、八模块内存编译及新代码Ruff通过；同一最终源码包Windows/Py3.13.5、Ubuntu24.04.4/Py3.12.3各21测试通过，UTF-8检查命令入口两平台通过。Git关闭长路径后当前/默认工具包302文件检出通过，最长243/247。独立集合不相加。
+- 旧文档测试把Obsidian/Copilot配置当实验JSON，保留失败；两个旧模块四条旧lint告警基线一致。未禁用测试，不重跑模型、FullHarness和历史统计。
+- 默认分支按用户确认只同步目录改名，8f436942已推且远端一致；完整修复在当前codex/claude-review-repairs限定提交。原17PDF暂存及其他文档工作保持；当前Git状态和远端可用git log/ls-remote核对，不自行合并其他研究分支。
+
 ## 2026-10-14 — 权限编译v4开发研究
 
 - 32固定任务已按调试16/资格16结束；Pro320实际记录、Flash20前缀＋300未执行，pending0。编译67/执行282官方请求全部响应；没有活动API进程，不重发、不扩大到24,960项。

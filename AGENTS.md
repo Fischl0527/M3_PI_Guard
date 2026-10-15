@@ -109,6 +109,14 @@ The agent must not:
 
 ## Development Workflow
 
+### Readable names and Windows path lengths
+
+New names must retain their meaning: remove repeated context and directory levels,
+not replace descriptive words with opaque abbreviations or identifiers. Before
+creating or moving files, follow `harness/docs/development-rules.md`'s path rules
+and run `harness/scripts/check_paths.py` on the affected new paths. Do not silently
+rename frozen evidence, third-party internals, or unrelated staged files.
+
 Every task must move through these phases.
 
 ### Phase 1: Understand Requirements

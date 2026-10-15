@@ -33,6 +33,7 @@ from experiments.manifest import (
     utc_now,
 )
 from experiments.run_program import ProgramJob, build_stage_plan
+from m3_core.artifact_paths import resolve_artifact
 from m3_eval.figure_manifest import FIGURE_MANIFEST_FILENAME, write_figure_manifest
 from m3_eval.metrics import METRIC_NAMES, compare_runs, compute_metrics, load_jsonl
 from m3_eval.statistics import holm_adjust
@@ -434,11 +435,11 @@ def build_plan(program_root: str | Path = DEFAULT_PROGRAM_ROOT) -> dict[str, Any
 def _resolve_source_path(value: Any, manifest_path: Path) -> Path:
     candidate = Path(str(value))
     if candidate.is_absolute():
-        return candidate.resolve()
-    repo_candidate = (ROOT / candidate).resolve()
+        return resolve_artifact(candidate.resolve())
+    repo_candidate = resolve_artifact((ROOT / candidate).resolve())
     if repo_candidate.exists():
         return repo_candidate
-    local_candidate = (manifest_path.parent / candidate).resolve()
+    local_candidate = resolve_artifact((manifest_path.parent / candidate).resolve())
     if local_candidate.exists():
         return local_candidate
     return repo_candidate

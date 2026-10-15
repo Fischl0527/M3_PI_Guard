@@ -516,6 +516,10 @@ Invoke-Check "Project layout and naming conventions" {
     Invoke-External $PythonExe @("scripts/audit_project_conventions.py", "--check")
 }
 
+Invoke-Check "New readable file paths" {
+    Invoke-External $PythonExe @("-X", "utf8", "-B", "harness/scripts/check_paths.py")
+}
+
 Invoke-Check "JSON contracts" {
     foreach ($Path in @(
         "harness/features/feature_list.json",

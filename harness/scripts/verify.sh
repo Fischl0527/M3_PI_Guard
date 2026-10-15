@@ -38,6 +38,9 @@ if ! resolve_python; then
 fi
 export PYTHON_BIN
 
+# The focused command is also usable alone; no full verification is required.
+"$PYTHON_BIN" -X utf8 -B harness/scripts/check_paths.py || exit 1
+
 run_check() {
   name="$1"
   shift
