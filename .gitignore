@@ -10,6 +10,7 @@ __pycache__/
 .copilot/
 .obsidian/
 .opencode/
+copilot/
 
 # Scoped portable deliveries, downloaded wheels and browser scratch stay local.
 # Track source/guide and curated small verification results explicitly instead.
@@ -123,3 +124,27 @@ release/M3_PI_Guard_v0.5/
 
 # 本轮迁移测试副本与运行包仅本地保留；仅显式提交小型验证日志。
 outputs/maintenance/file_retest/
+
+# 排版质检截图与临时测试日志
+tmp/
+outputs/maintenance/
+outputs/portability/
+outputs/manuscript/
+outputs/references/
+outputs/archived_tests/
+LaTeX通用模板/*.otf
+LaTeX通用模板/*.ttf
+LaTeX通用模板/*.pdf
+LaTeX通用模板/code/
+LaTeX通用模板/figures/
+LaTeX通用模板/fonts/
+
+# 教师汇报生成与文档渲染中间工作区
+harness/workspaces/
+
+# 论文翻译制作过程临时目录与旧版冗余备份
+docs/paper/新建文件夹/
+docs/paper/00_原始双语对照合并版_备份/
+
+# 个人随笔以及杂项便签（待确认后移动到此，本地保留不上传）
+docs/personal notes/
