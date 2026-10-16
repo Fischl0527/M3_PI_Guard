@@ -1,0 +1,74 @@
+{
+  "pdf": "E:\\M3_PI_Guard_test\\docs\\picture\\矢量版\\M3_03_论文主证据组成.pdf",
+  "auditable": true,
+  "verdict": "REVIEW REQUIRED",
+  "page_count": 1,
+  "visible_text_box_count": 7,
+  "text_trace_count": 7,
+  "stroke_path_count": 8,
+  "filled_region_count": 9,
+  "image_region_count": 0,
+  "summary": {
+    "fail": 0,
+    "warn": 2,
+    "contained_fill_overlays": 0,
+    "contained_image_overlays": 0
+  },
+  "thresholds": {
+    "text_inset_pt": 0.6,
+    "min_overlap_ratio": 0.05,
+    "clipping_tolerance_pt": 0.5
+  },
+  "findings": [
+    {
+      "severity": "WARN",
+      "kind": "text-fill-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 2 filled region(s)",
+      "text": "1,396",
+      "text_bbox": [
+        110.89593505859375,
+        112.05506134033203,
+        174.23101806640625,
+        135.0550537109375
+      ],
+      "other_text": null,
+      "other_bbox": [
+        73.13074493408203,
+        66.8131103515625,
+        212.61773681640625,
+        205.50148010253906
+      ],
+      "object_count": 2,
+      "object_indexes": [
+        1,
+        3
+      ]
+    },
+    {
+      "severity": "WARN",
+      "kind": "text-fill-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 2 filled region(s)",
+      "text": "次条件执行",
+      "text_bbox": [
+        115.05999755859375,
+        142.39031982421875,
+        170.05999755859375,
+        153.39031982421875
+      ],
+      "other_text": null,
+      "other_bbox": [
+        73.13074493408203,
+        66.8131103515625,
+        212.61773681640625,
+        205.50148010253906
+      ],
+      "object_count": 2,
+      "object_indexes": [
+        1,
+        3
+      ]
+    }
+  ]
+}

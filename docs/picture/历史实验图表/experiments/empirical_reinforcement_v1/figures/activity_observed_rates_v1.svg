@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="695" viewBox="0 0 1020 695">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#203242">
+<text x="24" y="30" font-size="20">攻击结果：观察比例与95% Wilson区间</text>
+<text x="24" y="55" font-size="12">每条为一个基准/模型/条件；原始分子/已观察分母。两个基准评分语义分别解释。</text>
+<line x1="420" y1="78" x2="420" y2="650" stroke="#dfe7ec"/>
+<text x="420" y="75" text-anchor="middle" font-size="11">0%</text>
+<line x1="545.0" y1="78" x2="545.0" y2="650" stroke="#dfe7ec"/>
+<text x="545.0" y="75" text-anchor="middle" font-size="11">25%</text>
+<line x1="670.0" y1="78" x2="670.0" y2="650" stroke="#dfe7ec"/>
+<text x="670.0" y="75" text-anchor="middle" font-size="11">50%</text>
+<line x1="795.0" y1="78" x2="795.0" y2="650" stroke="#dfe7ec"/>
+<text x="795.0" y="75" text-anchor="middle" font-size="11">75%</text>
+<line x1="920" y1="78" x2="920" y2="650" stroke="#dfe7ec"/>
+<text x="920" y="75" text-anchor="middle" font-size="11">100%</text>
+<text x="16" y="102" font-size="10">pro · agentdojo-v1 · 完整模块 · 自动授权</text>
+<line x1="420.0" y1="98" x2="463.8108005986433" y2="98" stroke="#1f6587" stroke-width="2"/>
+<circle cx="420.0" cy="98" r="3.8" fill="#1f6587"/>
+<text x="960" y="102" text-anchor="middle" font-size="12">0/40</text>
+<text x="16" y="137" font-size="10">pro · agentdojo-v1 · 仅权限 · 自动授权</text>
+<line x1="420.0" y1="133" x2="463.8108005986433" y2="133" stroke="#1f6587" stroke-width="2"/>
+<circle cx="420.0" cy="133" r="3.8" fill="#1f6587"/>
+<text x="960" y="137" text-anchor="middle" font-size="12">0/40</text>
+<text x="16" y="172" font-size="10">pro · agentdojo-v1 · 无防护 · 自动授权</text>
+<line x1="463.7270687301796" y1="168" x2="579.7499516589386" y2="168" stroke="#1f6587" stroke-width="2"/>
+<circle cx="507.5" cy="168" r="3.8" fill="#1f6587"/>
+<text x="960" y="172" text-anchor="middle" font-size="12">7/40</text>
+<text x="16" y="207" font-size="10">pro · agentdojo-v1 · VIGIL配置版 · 自动授权</text>
+<line x1="478.58165987898235" y1="203" x2="610.4235147305909" y2="203" stroke="#1f6587" stroke-width="2"/>
+<circle cx="531.1111111111111" cy="203" r="3.8" fill="#1f6587"/>
+<text x="960" y="207" text-anchor="middle" font-size="12">8/36</text>
+<text x="16" y="242" font-size="10">pro · m3-v2 · 完整模块 · 自动授权</text>
+<line x1="420.0" y1="238" x2="463.8108005986433" y2="238" stroke="#1f6587" stroke-width="2"/>
+<circle cx="420.0" cy="238" r="3.8" fill="#1f6587"/>
+<text x="960" y="242" text-anchor="middle" font-size="12">0/40</text>
+<text x="16" y="277" font-size="10">pro · m3-v2 · 仅权限 · 自动授权</text>
+<line x1="420.0" y1="273" x2="463.8108005986433" y2="273" stroke="#1f6587" stroke-width="2"/>
+<circle cx="420.0" cy="273" r="3.8" fill="#1f6587"/>
+<text x="960" y="277" text-anchor="middle" font-size="12">0/40</text>
+<text x="16" y="312" font-size="10">pro · m3-v2 · 无防护 · 自动授权</text>
+<line x1="420.0" y1="308" x2="463.8108005986433" y2="308" stroke="#1f6587" stroke-width="2"/>
+<circle cx="420.0" cy="308" r="3.8" fill="#1f6587"/>
+<text x="960" y="312" text-anchor="middle" font-size="12">0/40</text>
+<text x="16" y="347" font-size="10">pro · m3-v2 · VIGIL配置版 · 自动授权</text>
+<line x1="420.0" y1="343" x2="463.8108005986433" y2="343" stroke="#1f6587" stroke-width="2"/>
+<circle cx="420.0" cy="343" r="3.8" fill="#1f6587"/>
+<text x="960" y="347" text-anchor="middle" font-size="12">0/40</text>
+<text x="16" y="382" font-size="10">flash · agentdojo-v1 · 完整模块 · 自动授权</text>
+<line x1="420.0" y1="378" x2="500.56257902640965" y2="378" stroke="#9c6634" stroke-width="2"/>
+<circle cx="420.0" cy="378" r="3.8" fill="#9c6634"/>
+<text x="960" y="382" text-anchor="middle" font-size="12">0/20</text>
+<text x="16" y="417" font-size="10">flash · agentdojo-v1 · 仅权限 · 自动授权</text>
+<line x1="420.0" y1="413" x2="500.56257902640965" y2="413" stroke="#9c6634" stroke-width="2"/>
+<circle cx="420.0" cy="413" r="3.8" fill="#9c6634"/>
+<text x="960" y="417" text-anchor="middle" font-size="12">0/20</text>
+<text x="16" y="452" font-size="10">flash · agentdojo-v1 · 无防护 · 自动授权</text>
+<line x1="420.0" y1="448" x2="500.56257902640965" y2="448" stroke="#9c6634" stroke-width="2"/>
+<circle cx="420.0" cy="448" r="3.8" fill="#9c6634"/>
+<text x="960" y="452" text-anchor="middle" font-size="12">0/20</text>
+<text x="16" y="487" font-size="10">flash · agentdojo-v1 · VIGIL配置版 · 自动授权</text>
+<line x1="420.0" y1="483" x2="504.0896120263081" y2="483" stroke="#9c6634" stroke-width="2"/>
+<circle cx="420.0" cy="483" r="3.8" fill="#9c6634"/>
+<text x="960" y="487" text-anchor="middle" font-size="12">0/19</text>
+<text x="16" y="522" font-size="10">flash · m3-v2 · 完整模块 · 自动授权</text>
+<line x1="420.0" y1="518" x2="500.56257902640965" y2="518" stroke="#9c6634" stroke-width="2"/>
+<circle cx="420.0" cy="518" r="3.8" fill="#9c6634"/>
+<text x="960" y="522" text-anchor="middle" font-size="12">0/20</text>
+<text x="16" y="557" font-size="10">flash · m3-v2 · 仅权限 · 自动授权</text>
+<line x1="420.0" y1="553" x2="500.56257902640965" y2="553" stroke="#9c6634" stroke-width="2"/>
+<circle cx="420.0" cy="553" r="3.8" fill="#9c6634"/>
+<text x="960" y="557" text-anchor="middle" font-size="12">0/20</text>
+<text x="16" y="592" font-size="10">flash · m3-v2 · 无防护 · 自动授权</text>
+<line x1="420.0" y1="588" x2="500.56257902640965" y2="588" stroke="#9c6634" stroke-width="2"/>
+<circle cx="420.0" cy="588" r="3.8" fill="#9c6634"/>
+<text x="960" y="592" text-anchor="middle" font-size="12">0/20</text>
+<text x="16" y="627" font-size="10">flash · m3-v2 · VIGIL配置版 · 自动授权</text>
+<line x1="420.0" y1="623" x2="500.56257902640965" y2="623" stroke="#9c6634" stroke-width="2"/>
+<circle cx="420.0" cy="623" r="3.8" fill="#9c6634"/>
+<text x="960" y="627" text-anchor="middle" font-size="12">0/20</text>
+<text x="24" y="680" font-size="12">未知/未运行保留在ITT界限；本图不将其画成已观察的零。确认等待不是误拦判据。</text>
+</g></svg>

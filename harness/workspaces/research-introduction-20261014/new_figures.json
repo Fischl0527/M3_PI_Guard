@@ -1,0 +1,122 @@
+[
+  {
+    "id": "N01",
+    "title": "系统执行流程",
+    "png": "docs/picture/M3_01_系统执行流程.png",
+    "pdf": "docs/picture/矢量版/M3_01_系统执行流程.pdf",
+    "caption": "模型生成动作提案，Guard根据可信规则判断，执行层与评价层分别记录结果。虚线表示外部材料进入模型上下文，不自动获得授权。",
+    "source": "当前中文项目手册第3章；correctness_runtime_v1 / live_condition_runtime"
+  },
+  {
+    "id": "N02",
+    "title": "v1至v4版本演进",
+    "png": "docs/picture/M3_02_v1至v4版本演进.png",
+    "pdf": "docs/picture/矢量版/M3_02_v1至v4版本演进.pdf",
+    "caption": "版本指corrected权限编译链。v1/v2重点修正动作资源与参数语义；v3/v4探索自然语言任务契约及动态对象授权。",
+    "source": "m3_core/policy_compiler_corrected_v1.py 至 policy_compiler_corrected_v4.py"
+  },
+  {
+    "id": "N03",
+    "title": "论文主证据组成",
+    "png": "docs/picture/M3_03_论文主证据组成.png",
+    "pdf": "docs/picture/矢量版/M3_03_论文主证据组成.pdf",
+    "caption": "720+180构成900条授权研究；另有480条同期校准与16条合成控制。120校准案例嵌套于180案例；图中是执行组成，不是独立样本组成。",
+    "source": "manuscript_current_zh_v2.md 表1"
+  },
+  {
+    "id": "N04",
+    "title": "DeepSeek Pro正常任务完成",
+    "png": "docs/picture/M3_04_DeepSeek Pro正常任务完成.png",
+    "pdf": "docs/picture/矢量版/M3_04_DeepSeek Pro正常任务完成.pdf",
+    "caption": "强化实证研究；AgentDojo 97任务；M3-v2 120任务。条形为已观察完成比例，横线为已有95% Wilson区间，标注为完成数/任务数。精确目标为离线目标对照。",
+    "source": "empirical_reinforcement_v1/analysis_v1.json cells / utility"
+  },
+  {
+    "id": "N05",
+    "title": "V4.1 Flash正常任务完成",
+    "png": "docs/picture/M3_05_V4.1 Flash正常任务完成.png",
+    "pdf": "docs/picture/矢量版/M3_05_V4.1 Flash正常任务完成.pdf",
+    "caption": "强化实证研究；AgentDojo与M3-v2各60任务。条形为已观察完成比例，横线为已有95% Wilson区间，标注为完成数/任务数。精确目标为离线目标对照。",
+    "source": "empirical_reinforcement_v1/analysis_v1.json cells / utility"
+  },
+  {
+    "id": "N06",
+    "title": "授权信息的配对效应",
+    "png": "docs/picture/M3_06_授权信息的配对效应.png",
+    "pdf": "docs/picture/矢量版/M3_06_授权信息的配对效应.pdf",
+    "caption": "同一底层任务的完成差异及现有95%配对Newcombe区间。Pro的两项AgentDojo主比较通过预定Holm校正；Flash用于方向复核。直接读取既有统计，没有重新抽样。",
+    "source": "empirical_reinforcement_v1/analysis_v1.json comparisons / utility"
+  },
+  {
+    "id": "N07",
+    "title": "攻击活性与安全观察",
+    "png": "docs/picture/M3_07_攻击活性与安全观察.png",
+    "pdf": "docs/picture/矢量版/M3_07_攻击活性与安全观察.pdf",
+    "caption": "每条件计划40任务；比例和Wilson区间采用已知结果分母。无防护7/40，Policy/Full均0/40；对无防护的两项比较Holm后p=0.078125。VIGIL为指定适配配置。",
+    "source": "empirical_reinforcement_v1/analysis_v1.json cells / activity"
+  },
+  {
+    "id": "N08",
+    "title": "确认负担与任务完成",
+    "png": "docs/picture/M3_08_确认负担与任务完成.png",
+    "pdf": "docs/picture/矢量版/M3_08_确认负担与任务完成.pdf",
+    "caption": "Pro/AgentDojo，97个正常任务。ASK计数表示执行中出现过等待确认的任务；它与完成状态分别统计，不能相加解释为互斥类别。",
+    "source": "empirical_reinforcement_v1/analysis_v1.json utility/pro/agentdojo-v1"
+  },
+  {
+    "id": "N09",
+    "title": "受控机制检查",
+    "png": "docs/picture/M3_09_受控机制检查.png",
+    "pdf": "docs/picture/矢量版/M3_09_受控机制检查.pdf",
+    "caption": "每类20个越权提案；另20个合法提案在两配置下均放行。全研究40基础夹具、160提案对、320次判定，80对决定改变。这里是固定受控夹具的计数。",
+    "source": "empirical_reinforcement_v1/analysis_v1.json mechanism.controlled_cells"
+  },
+  {
+    "id": "N10",
+    "title": "真实首提案回放",
+    "png": "docs/picture/M3_10_真实首提案回放.png",
+    "pdf": "docs/picture/矢量版/M3_10_真实首提案回放.pdf",
+    "caption": "457个可捕获条件项中获得358个首提案。Policy/Full有355对决定一致，3对由ASK变DENY；与受控夹具的判定变化分别解释。",
+    "source": "empirical_reinforcement_v1/analysis_v1.json mechanism.captured_decision_pairs"
+  },
+  {
+    "id": "N11",
+    "title": "v3早期开发编译",
+    "png": "docs/picture/M3_11_v3早期开发编译.png",
+    "pdf": "docs/picture/矢量版/M3_11_v3早期开发编译.pdf",
+    "caption": "44次官方开发响应中4条编译通过、40条失败。来源分别为17/11/16任务；初始、v2、v3提示阶段分别记录，不把提示版本混作编译器版本。",
+    "source": "task_contract_compiler_v3_validation_v1/report.md 与 development_summary_v1.json"
+  },
+  {
+    "id": "N12",
+    "title": "v3与v4编译状态",
+    "png": "docs/picture/M3_12_v3与v4编译状态.png",
+    "pdf": "docs/picture/矢量版/M3_12_v3与v4编译状态.pdf",
+    "caption": "同一32任务的开发比较，分调试16与资格16。v3最终5/32可运行，v4为0/32；图为编译最终状态，不是端到端任务完成率。",
+    "source": "task_contract_compiler_v4_development_v1/analysis_v1.json compilation"
+  },
+  {
+    "id": "N13",
+    "title": "v4开发执行覆盖",
+    "png": "docs/picture/M3_13_v4开发执行覆盖.png",
+    "pdf": "docs/picture/矢量版/M3_13_v4开发执行覆盖.pdf",
+    "caption": "32任务×正常/攻击×五条件×两个执行模型。实际记录340项，Flash余300项明确未执行；任务记录包括编译失败/澄清等状态，不等于640次实际模型执行。",
+    "source": "task_contract_compiler_v4_development_v1/analysis_v1.json coverage；report.md"
+  },
+  {
+    "id": "N14",
+    "title": "v1修复开发结果",
+    "png": "docs/picture/M3_14_v1修复开发结果.png",
+    "pdf": "docs/picture/矢量版/M3_14_v1修复开发结果.pdf",
+    "caption": "历史corrected-v1开发研究每模型48任务×六配置=288执行；本图取Pro/AgentDojo普通提示的8个良性与12个攻击任务，描述原始计数。",
+    "source": "manuscript_current_zh_v2.md corrected-v1开发研究段落；correctness_repair_v1/report.md"
+  },
+  {
+    "id": "N15",
+    "title": "v2权限制度对照",
+    "png": "docs/picture/M3_15_v2权限制度对照.png",
+    "pdf": "docs/picture/矢量版/M3_15_v2权限制度对照.pdf",
+    "caption": "900条修正版授权研究的良性工具子集，每单元30任务。AgentDojo精确目标较自动权限提高完成，M3-v2未呈现同样方向；图为描述性计数，配对区间见正文。",
+    "source": "manuscript_current_zh_v2.md 表2"
+  }
+]

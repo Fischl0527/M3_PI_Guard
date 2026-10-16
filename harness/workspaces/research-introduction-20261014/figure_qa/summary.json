@@ -1,0 +1,389 @@
+{
+  "source_exit": 0,
+  "source_summary": {
+    "ready": true,
+    "strict": false,
+    "counts": {
+      "PASS": 19,
+      "WARN": 2,
+      "FAIL": 0
+    }
+  },
+  "figures": [
+    {
+      "id": "N01",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 17,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N02",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 16,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N03",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 2,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N04",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N05",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N06",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N07",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N08",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N09",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N10",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 2,
+        "contained_fill_overlays": 2,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N11",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N12",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 17,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N13",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 2,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N14",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    },
+    {
+      "id": "N15",
+      "glyph_exit": 0,
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "keys": [
+        "pdf",
+        "auditable",
+        "verdict",
+        "page_count",
+        "visible_text_box_count",
+        "text_trace_count",
+        "stroke_path_count",
+        "filled_region_count",
+        "image_region_count",
+        "summary",
+        "thresholds",
+        "findings"
+      ]
+    }
+  ]
+}

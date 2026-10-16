@@ -1,5 +1,28 @@
 # 当前任务
 
+## 2026-10-16 — 随笔解耦迁移与 .gitignore 规则收窄优化（已验证）
+
+- **个人随笔解耦（方案 B 执行完毕）**：
+  - 用户确认采用第二种方法（正式解耦与测试断言迁移法）。
+  - docs/LLM的千层诱惑.md 已正式迁移至 docs/personal notes/LLM的千层诱惑.md 作为个人随笔本地只读保留。
+  - 公开文档入口全面同步更新至 docs/项目完整综述.md（包括 README.md、docs/README.md、docs/系统架构.md、docs/项目完整综述.md、docs/项目目录指南.md、docs/项目移交报告.md、文件夹说明.md、docs/比赛材料归档说明_2026-10-06.md）。
+  - 测试断言解耦：更新 	ests/unit/test_repository_layout.py 与 scripts/audit_project_conventions.py，不再要求公开仓库包含个人随笔。
+- **.gitignore 规则收窄优化（依据 Codex 审查建议与用户确认范围）**：
+  - 维持 docs/paper/新建文件夹/、docs/paper/00_原始双语对照合并版_备份/ 忽略（用户明确要求辅助翻译用草稿不上传）。
+  - 新增 docs/paper/*.zip 规则，有效拦截了本地 703MB 的大文件压缩包，防止触发 GitHub 100MB 拦截报错。
+  - 收窄 harness/workspaces/：只忽略渲染产物、历史渲染及截图预览，保留验收结论、结构检查与验证证据。
+  - 收窄 outputs/manuscript/：只忽略 previews/，保留 checks/。
+  - 收窄 outputs/portability/：只忽略大型离线包与测试工作树，保留各环境通过的定向测试 XML。
+  - 收窄 outputs/maintenance/：保留 portability.json、erification.json 等关键验证记录。
+  - 恢复 LaTeX通用模板/code/、igures/、onts/ 依赖素材跟踪。
+  - 增补测试缓存规则：/tmp/, /.pytest_cache/, /.ruff_cache/, /qa-cache/, /outputs/archived_tests/。
+- **验证结论**：
+  - 仓库布局定向单元测试 	ests/unit/test_repository_layout.py 9 项针对性测试 100% 全部通过。
+  - 文档链接检查 ctive_document_links 0 断链全部通过。
+  - 根目录文件与命名白名单 
+oot_file_allowlist、pproved_file_renames 全部通过。
+  - Ruff 代码检查 100% 全部通过。
+
 ## 2026-10-16 — 教师介绍引文与局限性修订（已验证）
 
 - 两份原名Word已更新：删除本地路径及内部文档引文，正文仅[1]—[3]论文编号并配完整书目；58处正文改写、37处来源/重复段落移除、136图集路径改中文图名，局限性各一段。

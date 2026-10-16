@@ -1,0 +1,70 @@
+{
+  "scope": "长路径及大文件复测，不代表所有历史命名符合新预算或所有基线可运行",
+  "files_inspected": 304953,
+  "large_files_at_least_10MiB": 82,
+  "large_file_bytes": 2550311194,
+  "full_reads_and_format_checks": {
+    "passed": 239
+  },
+  "additional_format_checks": 11,
+  "large_copy_byte_comparisons": {
+    "passed": 82
+  },
+  "large_copy_maximum_path_units": 231,
+  "windows_invalid_names": 0,
+  "case_collisions": 0,
+  "path_stat_errors": 0,
+  "move_targets_checked": 1040,
+  "legacy_aliases_checked": 156,
+  "full_git_checkouts": [
+    {
+      "branch": "codex/claude-review-repairs",
+      "files": 4049,
+      "maximum_destination_units": 241,
+      "missing_files": 0,
+      "byte_mismatches": 0,
+      "git_core_longpaths": false
+    },
+    {
+      "branch": "origin/codex/q2-empirical-study",
+      "files": 3943,
+      "maximum_destination_units": 253,
+      "missing_files": 0,
+      "byte_mismatches": 0,
+      "git_core_longpaths": false
+    }
+  ],
+  "package_extraction": {
+    "files": 37075,
+    "byte_mismatches": [],
+    "archive_bytes": 72173903,
+    "maximum_path_units": 235
+  },
+  "archive_transferred_byte_identical": true,
+  "windows_tests": "140 passed in 27.85s",
+  "ubuntu24_tests": "140 passed in 53.65s",
+  "windows_and_ubuntu_demo_verify_path_exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "raw_sources_changed": [],
+  "original_staging_unchanged": true,
+  "api_calls": 0,
+  "real_external_effects": 0,
+  "remaining": {
+    "historical_private_paths_at_least_260": 9,
+    "existing_paths_over_project_240_budget": 6891,
+    "legacy_gitlinks_not_initialized_by_clone": 8,
+    "gitmodules_missing_in_existing_repository": true,
+    "old_local_default_branch_preserved": true
+  },
+  "standalone_report_created": false,
+  "generated_copy_cleanup": "blocked_by_tool_policy_after_explicit_user_request",
+  "generated_directories_deleted": 0,
+  "generated_copies_git_ignored": true,
+  "final_archive": "outputs/maintenance/file_retest/package_build/M3_PI_Guard_portable.tar.gz"
+}

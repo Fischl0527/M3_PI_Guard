@@ -60,6 +60,7 @@ ALLOWED_ROOT_FILES = {
     "pytest.ini",
     "requirements-core.txt",
     "requirements-dashboard.txt",
+    "requirements-portable.txt",
     "文件夹说明.md",
 }
 
@@ -73,7 +74,7 @@ REQUIRED_RENAMED_FILES = {
     "docs/证据索引.md",
     "docs/移交与论文检查清单.md",
     "docs/research/Task_Shield_v1_6_失败分析.md",
-    "docs/LLM的千层诱惑.md",
+    # "docs/LLM的千层诱惑.md" 已迁移至 docs/personal notes/ 本地随笔保留
     "docs/比赛材料归档说明_2026-10-06.md",
     "experiments/e17_source_index.md",
     "harness/项目上下文.md",

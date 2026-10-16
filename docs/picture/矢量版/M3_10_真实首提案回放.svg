@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="518.4pt" height="262.8pt" viewBox="0 0 518.4 262.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-14T20:25:55.800558</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.0, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 262.8 
+L 518.4 262.8 
+L 518.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 142.56 65.91024 
+C 132.053155 65.91024 121.687395 68.341187 112.276017 73.01235 
+C 102.864639 77.683512 94.660393 84.469442 88.306985 92.837715 
+C 81.953577 101.205988 77.621631 110.931868 75.651034 121.252263 
+C 73.680436 131.572657 74.124108 142.210403 76.947239 152.330864 
+C 79.77037 162.451324 84.897143 171.782707 91.92531 179.59287 
+C 98.953478 187.403034 107.694293 193.48223 117.461953 197.353487 
+C 127.229612 201.224743 137.761797 202.784093 148.232152 201.90919 
+C 158.702507 201.034287 168.829843 197.748627 177.819569 192.310004 
+L 166.066379 172.882669 
+C 160.073229 176.508418 153.321671 178.698858 146.341435 179.282126 
+C 139.361198 179.865395 132.339741 178.825828 125.827968 176.244991 
+C 119.316196 173.664154 113.488985 169.611356 108.80354 164.40458 
+C 104.118095 159.197805 100.700247 152.976883 98.818159 146.229909 
+C 96.936072 139.482936 96.640291 132.391105 97.954023 125.510842 
+C 99.267754 118.630579 102.155718 112.146659 106.391323 106.56781 
+C 110.626929 100.988961 116.096426 96.465008 122.370678 93.3509 
+C 128.64493 90.236792 135.555437 88.61616 142.56 88.61616 
+z
+" style="fill: #c69b65; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 177.819555 192.31001 
+C 190.282801 184.769974 200.004782 173.427374 205.549631 159.957434 
+C 211.094476 146.487493 212.175073 131.58767 208.631817 117.458623 
+C 205.088558 103.329576 197.104928 90.702893 185.860047 81.443447 
+C 174.615167 72.184001 160.691318 66.771261 146.144946 66.004642 
+L 144.949964 88.679095 
+C 154.647545 89.190174 163.930111 92.798667 171.426698 98.971631 
+C 178.923285 105.144596 184.245705 113.562384 186.607878 122.981749 
+C 188.970049 132.401113 188.249651 142.334329 184.553087 151.31429 
+C 180.856521 160.29425 174.375201 167.855983 166.06637 172.882673 
+z
+" style="fill: #657f98; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 146.144946 66.004642 
+C 145.548 65.97318 144.950682 65.949583 144.353115 65.933846 
+C 143.755548 65.918109 143.157784 65.91024 142.560009 65.91024 
+L 142.560006 88.61616 
+C 142.958522 88.61616 143.357032 88.621406 143.75541 88.631897 
+C 144.153788 88.642388 144.552 88.65812 144.949964 88.679095 
+z
+" style="fill: #82958b; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="142.56" y="129.486816" transform="rotate(-0 142.56 129.486816)">358</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="142.56" y="149.16528" transform="rotate(-0 142.56 149.16528)">个首提案</text>
+   </g>
+  </g>
+  <g id="text_3">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="259.2" y="19.589875" transform="rotate(-0 259.2 19.589875)">真实首提案回放的判定组成</text>
+  </g>
+  <g id="legend_1">
+   <g id="patch_5">
+    <path d="M 309.222 119.310508 
+L 328.222 119.310508 
+L 328.222 112.660508 
+L 309.222 112.660508 
+z
+" style="fill: #c69b65; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="119.310508" transform="rotate(-0 335.822 119.310508)">ASK → ASK   210</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 309.222 134.016211 
+L 328.222 134.016211 
+L 328.222 127.366211 
+L 309.222 127.366211 
+z
+" style="fill: #657f98; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="134.016211" transform="rotate(-0 335.822 134.016211)">ALLOW → ALLOW   145</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 309.222 148.721914 
+L 328.222 148.721914 
+L 328.222 142.071914 
+L 309.222 142.071914 
+z
+" style="fill: #82958b; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="148.721914" transform="rotate(-0 335.822 148.721914)">ASK → DENY   3</text>
+   </g>
+  </g>
+ </g>
+</svg>

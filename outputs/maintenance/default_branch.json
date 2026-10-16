@@ -1,0 +1,11 @@
+{
+  "branch": "codex/q2-empirical-study",
+  "base": "5e9b90fe9bb2b41981b4742cac513ca14eb59180",
+  "commit": "8f4369423563795885e2ae3fd471d00f7fdf5d2d",
+  "renamed_files": 302,
+  "original_blobs_unchanged": true,
+  "git_core_longpaths": false,
+  "maximum_checkout_path": 247,
+  "remote_verified": true,
+  "original_index_unchanged": true
+}

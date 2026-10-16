@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "generated_at": "2026-10-13T10:25:16.415Z",
+  "request": {
+    "topic": "",
+    "title": "Defeating Prompt Injections by Design",
+    "dois": [],
+    "pdf_url": "https://arxiv.org/pdf/2503.18813v2",
+    "si_requested": false,
+    "language_override": "",
+    "route_override": "open_access",
+    "source_url": "",
+    "api_fallback_web": null,
+    "api_fallback_web_for": [],
+    "no_api_fallback_web_for": []
+  },
+  "summary": {
+    "total": 1,
+    "downloaded": 1,
+    "seconds": 2.4
+  },
+  "results": [
+    {
+      "title": "Defeating Prompt Injections by Design",
+      "status": "open_access_downloaded",
+      "provider": "direct_url",
+      "accessMode": "open_access",
+      "ok": true,
+      "file": "E:\\M3_PI_Guard_test\\outputs\\references\\task_contract_v3\\camel\\PDFs\\Defeating_Prompt_Injections_by_Design.pdf",
+      "bytes": 5531468,
+      "sha256": "c3719f6ce73eecf45e3764debef8a3d8ff8c9233b37d128c558b694ec3790cc7",
+      "contentType": "application/pdf",
+      "format": "pdf",
+      "source": "https://arxiv.org/pdf/2503.18813v2",
+      "si_requested": false
+    }
+  ]
+}

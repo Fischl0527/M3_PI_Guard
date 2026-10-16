@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "generated_at": "2026-10-13T10:25:12.367Z",
+  "request": {
+    "topic": "",
+    "title": "AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM Agents",
+    "dois": [],
+    "pdf_url": "https://arxiv.org/pdf/2503.18666v3",
+    "si_requested": false,
+    "language_override": "",
+    "route_override": "open_access",
+    "source_url": "",
+    "api_fallback_web": null,
+    "api_fallback_web_for": [],
+    "no_api_fallback_web_for": []
+  },
+  "summary": {
+    "total": 1,
+    "downloaded": 1,
+    "seconds": 1.8
+  },
+  "results": [
+    {
+      "title": "AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM Agents",
+      "status": "open_access_downloaded",
+      "provider": "direct_url",
+      "accessMode": "open_access",
+      "ok": true,
+      "file": "E:\\M3_PI_Guard_test\\outputs\\references\\task_contract_v3\\agentspec\\PDFs\\AgentSpec_Customizable_Runtime_Enforcement_for_Safe_and_Reliable_LLM_Agents.pdf",
+      "bytes": 751025,
+      "sha256": "a8ef39247392eb49e275768c19aca11a111c997e432225dcbcf74dfbf31abae7",
+      "contentType": "application/pdf",
+      "format": "pdf",
+      "source": "https://arxiv.org/pdf/2503.18666v3",
+      "si_requested": false
+    }
+  ]
+}

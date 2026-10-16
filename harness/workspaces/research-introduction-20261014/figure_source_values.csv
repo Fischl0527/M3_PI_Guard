@@ -1,0 +1,25 @@
+﻿figure_pending,group,metric,numerator,denominator,unknown,estimate,source
+4,pro / agentdojo-v1 / no_defense / auto_compiled,completion,68,97,0,0.7010309278350515,empirical_reinforcement_v1/analysis_v1.json
+4,pro / agentdojo-v1 / m3_policy_only / auto_compiled,completion,8,97,0,0.08247422680412371,empirical_reinforcement_v1/analysis_v1.json
+4,pro / agentdojo-v1 / m3_full_normal_prompt / auto_compiled,completion,8,97,0,0.08247422680412371,empirical_reinforcement_v1/analysis_v1.json
+4,pro / agentdojo-v1 / m3_policy_only / exact_target_v2,completion,38,97,0,0.3917525773195876,empirical_reinforcement_v1/analysis_v1.json
+4,pro / agentdojo-v1 / m3_full_normal_prompt / exact_target_v2,completion,29,97,0,0.29896907216494845,empirical_reinforcement_v1/analysis_v1.json
+4,pro / m3-v2 / no_defense / auto_compiled,completion,60,120,0,0.5,empirical_reinforcement_v1/analysis_v1.json
+4,pro / m3-v2 / m3_policy_only / auto_compiled,completion,59,120,0,0.49166666666666664,empirical_reinforcement_v1/analysis_v1.json
+4,pro / m3-v2 / m3_full_normal_prompt / auto_compiled,completion,58,120,0,0.48333333333333334,empirical_reinforcement_v1/analysis_v1.json
+4,pro / m3-v2 / m3_policy_only / exact_target_v2,completion,56,120,0,0.4666666666666667,empirical_reinforcement_v1/analysis_v1.json
+4,pro / m3-v2 / m3_full_normal_prompt / exact_target_v2,completion,59,120,0,0.49166666666666664,empirical_reinforcement_v1/analysis_v1.json
+5,flash / agentdojo-v1 / no_defense / auto_compiled,completion,46,60,0,0.7666666666666667,empirical_reinforcement_v1/analysis_v1.json
+5,flash / agentdojo-v1 / m3_policy_only / auto_compiled,completion,5,60,0,0.08333333333333333,empirical_reinforcement_v1/analysis_v1.json
+5,flash / agentdojo-v1 / m3_full_normal_prompt / auto_compiled,completion,5,60,0,0.08333333333333333,empirical_reinforcement_v1/analysis_v1.json
+5,flash / agentdojo-v1 / m3_policy_only / exact_target_v2,completion,25,60,0,0.4166666666666667,empirical_reinforcement_v1/analysis_v1.json
+5,flash / agentdojo-v1 / m3_full_normal_prompt / exact_target_v2,completion,20,60,0,0.3333333333333333,empirical_reinforcement_v1/analysis_v1.json
+5,flash / m3-v2 / no_defense / auto_compiled,completion,30,60,0,0.5,empirical_reinforcement_v1/analysis_v1.json
+5,flash / m3-v2 / m3_policy_only / auto_compiled,completion,30,60,0,0.5,empirical_reinforcement_v1/analysis_v1.json
+5,flash / m3-v2 / m3_full_normal_prompt / auto_compiled,completion,30,60,0,0.5,empirical_reinforcement_v1/analysis_v1.json
+5,flash / m3-v2 / m3_policy_only / exact_target_v2,completion,30,60,0,0.5,empirical_reinforcement_v1/analysis_v1.json
+5,flash / m3-v2 / m3_full_normal_prompt / exact_target_v2,completion,30,60,0,0.5,empirical_reinforcement_v1/analysis_v1.json
+7,pro / agentdojo-v1 / no_defense / auto_compiled,unsafe,7,40,0,0.175,empirical_reinforcement_v1/analysis_v1.json
+7,pro / agentdojo-v1 / strongest_peer_reviewed_structural_baseline / auto_compiled,unsafe,8,36,4,0.2222222222222222,empirical_reinforcement_v1/analysis_v1.json
+7,pro / agentdojo-v1 / m3_policy_only / auto_compiled,unsafe,0,40,0,0.0,empirical_reinforcement_v1/analysis_v1.json
+7,pro / agentdojo-v1 / m3_full_normal_prompt / auto_compiled,unsafe,0,40,0,0.0,empirical_reinforcement_v1/analysis_v1.json

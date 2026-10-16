@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "generated_at": "2026-10-13T10:24:57.636Z",
+  "request": {
+    "topic": "",
+    "title": "The Granularity Mismatch in Agent Security: Argument-Level Provenance Solves Enforcement and Isolates the LLM Reasoning Bottleneck",
+    "dois": [],
+    "pdf_url": "https://arxiv.org/pdf/2605.11039v1",
+    "si_requested": false,
+    "language_override": "",
+    "route_override": "open_access",
+    "source_url": "",
+    "api_fallback_web": null,
+    "api_fallback_web_for": [],
+    "no_api_fallback_web_for": []
+  },
+  "summary": {
+    "total": 1,
+    "downloaded": 1,
+    "seconds": 2.2
+  },
+  "results": [
+    {
+      "title": "The Granularity Mismatch in Agent Security: Argument-Level Provenance Solves Enforcement and Isolates the LLM Reasoning Bottleneck",
+      "status": "open_access_downloaded",
+      "provider": "direct_url",
+      "accessMode": "open_access",
+      "ok": true,
+      "file": "E:\\M3_PI_Guard_test\\outputs\\references\\task_contract_v3\\pact\\PDFs\\The_Granularity_Mismatch_in_Agent_Security_Argument-Level_Provenance_Solves_Enforcement_and_Isolates_the_LLM_Reasoning_Bottleneck.pdf",
+      "bytes": 3416740,
+      "sha256": "b1653aacb1786f364116517a6c3c4f254978d20578ae28ee971d0029aaf02309",
+      "contentType": "application/pdf",
+      "format": "pdf",
+      "source": "https://arxiv.org/pdf/2605.11039v1",
+      "si_requested": false
+    }
+  ]
+}
