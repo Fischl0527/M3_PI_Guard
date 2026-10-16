@@ -24,7 +24,7 @@ submission release should identify an immutable public tag or archival DOI and
 state any restrictions on provider-derived raw records. Credentials, raw
 secrets, and real external-action data are not part of the release.
 
-Repository: https://github.com/Fischl0527/RedTeam_LLM_Security
+Repository: https://github.com/Fischl0527/M3_PI_Guard
 
 ## Generative AI use
 

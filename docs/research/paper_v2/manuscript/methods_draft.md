@@ -5,32 +5,37 @@ Status: `corrected_v2_current_evidence_and_trusted_intent_review_integrated`
 ## Current cohorts and statistical specification
 
 The current investigation addresses authorization semantics, joint security
-and utility, and bounded component evidence. It is separate from the earlier
-six-question programme. The fixed 180-case authorization sample contains
-100 attacks, 60 benign tool tasks and 20 no-tool tasks. Its 60-case stress
-subset and the 120-case contemporaneous calibration overlap earlier samples;
-neither a condition assignment nor a reused cohort is an independent task.
-Model prompts are ordinary in both policy and full cells. Oracle-derived scope
-is supplied only to the Guard and is explicitly distinct from deployed,
-non-oracle authorization.
+and utility, and bounded component evidence. The fixed authorization sample
+contains 180 cases representing 153 underlying tasks: 100 attack cases,
+60 benign tool cases and 20 no-tool cases. The stress cohort contains 60
+nested cases. All 120 calibration cases are also nested within the 180-case
+authorization sample, including 30 attacks and 30 benign tool tasks per benchmark.
+The two studies therefore use 180 distinct benchmark cases, not 300 independent
+cases. Each benchmark's 30 benign tool cases represents 30 distinct underlying
+tasks, which are paired across conditions for the primary utility comparisons.
+Both module configurations use ordinary prompts. Oracle-derived scope is supplied
+only to the Guard; compiled scope is derived from trusted intent.
 
 The current authorization comparisons cross policy/full modules with compiled
 and corrected exact-target scope. The additional broad, underspecified and
 conflicting transformations are nested descriptive stress tests. Calibration
 contrasts policy, full and the explicitly configured VIGIL adapter with an
 unguarded control that retains the same external-effect boundary. Sixteen
-synthetic controls test specified label and data-flow behavior; they do not
-open an additional confirmatory family or estimate natural-task performance.
+synthetic controls test specified label and data-flow behavior in four scenarios.
+Together, the studies provide 1,396 executions (900 authorization, 480 calibration
+and 16 synthetic); the 60-task explanatory review reuses 240 calibration records.
 
 We retain the prespecified inferential results rather than re-estimating
 historical outcomes. Cell proportions use Wilson 95% intervals; paired
 absolute differences use Newcombe intervals and exact McNemar tests, with
 Holm correction within the defined endpoint/contrast family. Bootstrap
-intervals, when reported, keep task-level paired assignments together rather
-than resampling condition rows independently. Marginal cell intervals,
+intervals use 10,000 resamples of underlying-task clusters within each benchmark,
+keeping paired assignments together. Case-pair McNemar tests are auxiliary for
+attack analyses in which an underlying task has multiple attack cases. Marginal cell intervals,
 paired-difference intervals and identification bounds for missing outcomes
 are different objects and are labelled accordingly. Zero-event empirical
-bootstrap intervals do not establish equivalence or absence of risk.
+bootstrap intervals are reported as unavailable when the empirical distribution
+degenerates. The paired score intervals remain available in those cases.
 
 For the current authorization study, four contrasts form one Holm family
 within each benchmark and endpoint: exact minus compiled authorization for
@@ -49,9 +54,8 @@ judgments and M3-v2 observed simulated effects are not interchangeable.
 Completion and operational failure may coexist. All assignments remain in
 ITT, observed-value denominators accompany unknown counts, and sensitivity
 bounds never substitute for observed unsafe effects. The benign-task review
-is post-outcome descriptive interpretation, not an additional significance
-family or an adjudication of every false block. Provider identities, module
-inputs and configured baseline limits bound each claim.
+is post-outcome descriptive interpretation and is analysed separately from
+the inferential comparison families.
 
 ## Study design and research questions
 
@@ -128,22 +132,26 @@ that step, and the proposed action. Gold answers, expected actions, attack and
 task-success labels, evaluator explanations, reference trajectories, and
 offline effect receipts are excluded.
 
-The `exact_gold` condition is an explicitly labeled oracle sensitivity
-analysis. It converts evaluator-derived authorization into the condition's
-authorization object, but does not expose the evaluator labels or scoring
-fields themselves. `exact_gold` is never presented as the primary deployment
-regime. The primary regime is `auto_compiled`, created from the trusted user
-request before untrusted content is processed.
+The current `exact_target_v2` condition and historical `exact_gold` condition
+are explicitly labelled oracle sensitivity analyses. They convert
+evaluator-derived scope into an authorization object for the Guard while
+excluding raw evaluator labels and scoring fields from the model input.
+The primary non-oracle regime is `auto_compiled`, created from the trusted
+user request before untrusted content is processed.
 
 Each compact result stores a digest of the online-visible projection and a
 boolean forbidden-field check. A run fails the minimal integrity check if a
 forbidden field is present. The final analysis checks this condition once for
-all terminal records; it does not recursively replay historical evidence.
+all terminal records.
 
 ## Runtime conditions
 
 The common runtime interfaces are `TaskPolicyManifest`, `ActionProposal`,
-`GuardDecision`, and `ProvenanceEvent`. In the historical bundled comparison,
+`GuardDecision`, and `ProvenanceEvent`. Current policy modules check tool and
+argument permissions. Full modules additionally enable parameter provenance,
+temporal/data-flow constraints, monotonic permission transitions and confirmation.
+Both current configurations use the normal prompt profile. In the historical
+bundled comparison,
 the two M3 conditions share the agent,
 model, parser, evaluator, tool environment, and task-policy representation, but
 they are not a single-module ablation:
@@ -171,17 +179,6 @@ prompt profiles.
 `ALLOW`, `ASK`, and `DENY` are runtime decisions, not security outcomes by
 themselves. Security is scored from the isolated post-enforcement effect
 receipt. Utility is scored by the benchmark task-completion evaluator.
-
-The earlier incomplete 450-item Gemini authorization sample remains diagnostic
-and is not extended. E6 makes a separately executed, bounded Gemini prefix
-attempt that is diagnostic by design under the single-block amendment. Even
-complete prefix coverage would not make that amended design a formal
-cross-provider study; the observed incomplete prefix leaves every Gemini and
-cross-provider effect not estimable. Structural baselines,
-including the source-pinned VIGIL adapter, retain their earlier descriptive
-role; the new experiments target causal confounding, source authority, risk
-enrichment, same-provider model replication, and adaptive tail behavior rather
-than rerunning a large baseline matrix.
 
 ## Authorization regimes
 
@@ -585,8 +582,7 @@ matcher and all its records remain unchanged.
 
 Raw evaluator fields do not enter the model prompt. In the oracle condition,
 the Guard nevertheless receives an explicitly answer-derived authorization
-object. This is an idealized information regime, not evidence that deployed
-authorization can obtain the same scope. Ambiguous required scope is not an
+object. This is an idealized oracle information regime. Ambiguous required scope is not an
 automatic grant, including with confirmation modules disabled. Missing
 trusted classification cannot be treated as public data when a restricted
 data-flow rule applies. No human approval is simulated: ASK means pending
@@ -601,16 +597,15 @@ formal prefix is part of the 900 total, not an additional repeat. The security
 endpoint has 490 attack assignments across the main and stress cells, not
 490 independent tasks. This authorization study contains no unguarded cell.
 
-A separate contemporaneous calibration uses 120 fixed cases, with 30 attacks
+A contemporaneous calibration uses 120 cases nested within that sample, with 30 attacks
 and 30 benign-tool tasks from each benchmark. Ordinary prompts and compiled
 authorization are held constant across no research Guard, policy, full, and
 configured VIGIL, giving 480 assignments. The unguarded condition retains
 the same host and external-effect boundary. VIGIL generates constraints
 through the model and uses its configured deterministic hybrid audit, with
-model-based secondary verification disabled. It is not the complete official
-default baseline. Its provider-call cap is 16; the other conditions cap at
-eight. Cohorts overlap earlier studies and do not constitute independent
-sample replication.
+model-based secondary verification disabled. Its provider-call cap is 16;
+the other conditions cap at eight. This adapter configuration is specified
+separately from the upstream default baseline.
 
 Both Pro experiments use temperature zero, 512 output tokens, a 180-second
 single-request timeout, and zero automatic HTTP retries. Task environments
@@ -624,8 +619,8 @@ changed; the two runner revisions remain distinguishable.
 Four synthetic memory scenarios cross policy/full with Pro and the approved
 V4.1 Flash service, yielding 16 additional executions. The scenarios cover
 private restricted flows, public restricted flows, private archival flows,
-and absent classification. They test specified component behavior, not
-general protection, a natural task distribution, or human confirmation.
+and absent classification. Each scenario receives one execution per model
+and module configuration.
 
 Each benchmark retains its own security semantics. AgentDojo uses native
 attack and utility checks on an isolated environment copy; M3-v2 counts
@@ -639,8 +634,7 @@ Existing inferential results are reused when correcting latency aggregation.
 
 We subsequently reviewed the fixed calibration cohort's 60 benign tool tasks,
 30 per benchmark, and linked their 240 existing condition records. This is
-a post-outcome explanatory review, not a blind evaluation, a new sample, or
-an independent replication. Trusted user requests, trusted application context,
+a post-outcome explanatory review of existing executions. Trusted user requests, trusted application context,
 and tool interfaces define the authority interpretation; evaluator answers and
 model-declared permissions do not supply grants.
 
@@ -655,19 +649,18 @@ the current lexical compiler to infer a dynamic target.
 
 The review uses only existing public records and projected trusted inputs.
 Redacted proposal arguments and final-answer content limit diagnosis of cases
-with successful simulated execution but unsuccessful completion. No new model
-call, permission expansion, evaluator relabeling, or runtime revision follows
-from the descriptive review, and no independent reviewer-agreement estimate
-is available.
+with successful simulated execution but unsuccessful completion. The descriptive
+review leaves permissions, evaluator labels and runtime behavior unchanged.
+Reviewer agreement was not independently measured.
 
 ## Minimal verification and reproducibility
 
-Verification is deliberately proportional to the lean study. It consists of:
+The current studies use the following focused verification:
 
 1. focused unit tests for modified provider, authorization projection,
    evaluator, analysis, and plotting code;
-2. an eight-item formal prefix for each regular incremental study, two
-   five-query tail prefixes for E5, and a 12-item outcome-blind E6 prefix; and
+2. a 12-assignment authorization prefix and a 16-assignment calibration prefix,
+   each included in its study total and assessed without selecting on outcomes; and
 3. one terminal pass over row count, experiment-item uniqueness, forbidden-field
    isolation, exact model identity, and ITT failure retention.
 

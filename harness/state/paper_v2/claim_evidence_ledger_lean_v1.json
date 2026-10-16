@@ -1,6 +1,6 @@
 {
   "schema_version": "m3-paper-v2-lean-claim-evidence-ledger-1.1",
-  "updated_at": "2026-10-08T00:00:00+08:00",
+  "updated_at": "2026-10-12T00:00:00+08:00",
   "paper_route": "authorization_regime_and_security_utility_empirical_study",
   "scope": {
     "active_manuscript": "docs/research/paper_v2/manuscript/manuscript_current_v2.md",
@@ -26,6 +26,24 @@
     "calibration_assignments": 480,
     "synthetic_control_executions": 16,
     "trusted_intent_review_tasks": 60,
+    "authorization_cases": 180,
+    "authorization_underlying_tasks": 153,
+    "calibration_cases": 120,
+    "calibration_strictly_nested_in_authorization": true,
+    "current_executions_including_synthetic": 1396,
+    "trusted_intent_review_reused_records": 240,
+    "public_request_summaries": 2968,
+    "calibration_missing_projection_receipts": 2,
+    "calibration_missing_structured_safety_receipts": 4,
+    "latest_review": {
+      "date": "2026-10-12",
+      "scope": "current claims versus public raw, cached statistics and code interfaces; no statistical rerun or internal trace access",
+      "request_identity_fields_complete": true,
+      "pre_call_trace_chronology_independently_reverified": false,
+      "full_payload_digest_recomputed": false,
+      "report": "docs/research/paper_v2/manuscript/实验论据复核与论文表达修订报告_2026-10-12.md",
+      "limitations_location": "manuscript_current_v2.md, Discussion, Limitations"
+    },
     "claims": [
       {
         "claim": "Corrected target scope improves some AgentDojo completion under an explicitly oracle-derived information regime.",

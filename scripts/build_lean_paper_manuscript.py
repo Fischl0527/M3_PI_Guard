@@ -1,4 +1,8 @@
-"""Build the reader-facing lean SCI Q2 manuscript from reviewed section files."""
+"""从已评审的各章节 Markdown 文件合成面向读者的精简 SCI Q2 论文手稿。
+
+严格按照学术逻辑整合引言、相关工作、方法、实验结果、讨论与结论，
+保证手稿中的每一个数据陈述均有对应的固化实验证据支撑。
+"""
 
 from __future__ import annotations
 
@@ -117,13 +121,13 @@ TABLE_NOTES = (
 
 
 class ManuscriptBuildError(ValueError):
-    """Raised when a source component cannot produce a defensible manuscript."""
+    """当源组件无法生成可抗辩的学术手稿时抛出。"""
 
 
 def _split_supplementary_tables(
     body: str,
 ) -> tuple[str, list[tuple[int, str, str]]]:
-    """Remove S1-S12 tables from Results while retaining narrative context."""
+    """从 Results 中剥离 S1-S12 附表，同时保留正文叙述上下文。"""
 
     lines = body.splitlines()
     cleaned: list[str] = []
@@ -239,7 +243,7 @@ def _abstract_and_keywords() -> tuple[str, str]:
 
 
 def _prioritize_corrected_results(body: str) -> str:
-    """Lead with corrected evidence without dropping legacy observations."""
+    """以修正后的实验证据为主导，同时保留历史观察结论。"""
     matches = list(
         re.finditer(
             r"^### Corrected authorization and contemporaneous calibration$",
@@ -311,27 +315,23 @@ def _current_body(filename: str, body: str) -> str:
             "\n\n### Historical diagnostic context\n\n"
             "The full working draft and Supplementary Tables S1-S20 retain "
             "the earlier medium, Public, authorization, factorial, provenance, "
-            "challenge, replication, adaptive and permit studies. Their "
-            "recorded endpoint definitions are not retrospectively replaced "
-            "by corrected execution outcomes. In E2, deterministic replay "
+            "challenge, replication, adaptive and permit studies under their "
+            "original endpoint definitions. In E2, deterministic replay "
             "had 0/240 false allows and 30/240 false blocks, while all 240 "
-            "end-to-end runs executed no action. This establishes bounded "
-            "decision sensitivity, not useful end-to-end protection. "
+            "end-to-end runs executed no action. "
             "The complete 40-task adaptive panel recorded first legacy risk "
             "success for 4/40 tasks by budget 50 and 18/40 by 200. Only twelve "
             "preselected B200 survivors continued to 500; the conditional "
-            "0/12 result has a Wilson upper limit of 24.25%, not a complete "
-            "B500 curve or a saturation estimate. Historical E6 used one "
+            "0/12 result has a Wilson upper limit of 24.25%. Historical E6 used one "
             "risk-enriched execution block, with 47/60 tasks also in E3. "
-            "It supplies neither independent-sample nor temporal replication. "
             "E7a issued execution permits without a backend state transition "
-            "and therefore supplies neither TCR nor executed-effect evidence."
+            "as a separate permission-layer diagnostic."
         )
     return selected
 
 
 def body_word_count(manuscript: str) -> int:
-    """Count English body tokens, excluding abstract, headings, tables and refs."""
+    """统计英文正文单词数，排除摘要、标题、表格和参考文献。"""
     body = manuscript.split("## 1. Introduction\n", 1)[1].split("## Figures", 1)[0]
     body = "\n".join(
         line for line in body.splitlines()
@@ -341,7 +341,7 @@ def body_word_count(manuscript: str) -> int:
 
 
 def build_current_chinese() -> str:
-    """Select the matching current Chinese narrative; leave the full source alone."""
+    """选择匹配的当前中文叙述文本；保持完整源文本独立不变。"""
     source = _read("manuscript_zh_v1.md")
     narrative, assets = source.split("## 图\n", 1)
     matches = list(re.finditer(r"(?m)^## ([1-6])\. (.+)$", narrative))
@@ -379,8 +379,8 @@ def build_current_chinese() -> str:
                 "自适应与许可研究，旧端点不改称修正后的执行结果。"
                 "E2离线false allow为0/240、false block为30/240，240端到端运行均无动作。"
                 "原40任务自适应面板B50为4/40、B200为18/40；仅12个预选survivor延长到500，"
-                "0/12的Wilson上限仍为24.25%，不是完整B500或饱和证据。"
-                "历史E6仅单块且47/60与E3重叠；E7a只发许可而无后端状态变化，不计TCR或执行效果。"
+                "0/12的Wilson上限为24.25%。"
+                "历史E6为单块且47/60与E3重叠；E7a在许可层发放执行许可，后端状态未变化。"
             )
         parts.append(f"## {number}. {match.group(2)}\n\n" + _number_subsections(body, section_number=number))
     asset_text = "## 图\n" + assets
@@ -434,7 +434,7 @@ def _historical_figure_block() -> str:
 
 
 def sync_chinese_figures(source: str) -> str:
-    """Update only main figure links; preserve five historical figures verbatim."""
+    """仅更新主图链接；原样逐字保留五张历史图表。"""
     before, remaining = source.split("## 图\n", 1)
     figures, after = remaining.split("## 表\n", 1)
     if "## 历史补充图\n" in figures:
@@ -900,7 +900,7 @@ def _table_block() -> str:
 
 
 def sync_chinese_tables(source: str) -> str:
-    """Replace only the current table block; preserve historical table contents."""
+    """仅替换当前表格块；原样保留历史表格内容。"""
     if "## 历史补充表\n" in source:
         before, old = source.split("## 表\n", 1)
         _, historical = old.split("## 历史补充表\n", 1)

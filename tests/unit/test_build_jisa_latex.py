@@ -24,6 +24,14 @@ FIGURES = (
 )
 
 
+def test_english_typographic_quotes_do_not_trigger_cjk_font_fallback() -> None:
+    # 中文模板会把原生弯撇号分配给CJK字体；TeX标点保留语义并使用拉丁字体。
+    rendered = builder._inline("Guard’s ‘target’ and “scope” remain fixed.")
+    assert rendered == "Guard's `target' and ``scope'' remain fixed."
+    assert all(mark not in rendered for mark in "‘’“”")
+    assert r"\nolinkurl" not in rendered
+
+
 def test_semantic_placement_survives_number_changes_without_dropping_text() -> None:
     original = "### 4.9 Evidence\n\nkept 900\n\n### 4.10 Legacy\n\nkept 480"
     moved = original.replace("4.9 Evidence", "4.1 Evidence")

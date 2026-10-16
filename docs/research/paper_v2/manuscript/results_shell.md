@@ -577,157 +577,130 @@ permits are not added to TCR or unsafe-effect counts in the execution studies.
 
 ## Corrected development study
 
-Supplementary Table S20 separates the corrected-v1 development batch from all historical
-experiments. DeepSeek V4 Pro and DeepSeek V4.1 Flash each completed 288 planned
-task-condition executions over the same 48 tasks and six configurations. Pro
-had 265 completed workflows, 13 parse failures, and 10 max-step terminations;
-Flash had 272, seven, and nine respectively. Workflow completion is not task
-completion: ending with ASK records a pending approval, not an executed task.
-Gemini is deferred and supplies no model-effect comparison.
+Supplementary Table S20 separates the corrected-v1 development batch from all
+historical experiments. DeepSeek V4 Pro and DeepSeek V4.1 Flash each completed
+288 planned task-condition executions over the same 48 tasks and six
+configurations. Pro had 265 completed workflows, 13 parse failures, and ten
+max-step terminations; Flash had 272, seven, and nine, respectively. Workflow
+completion is separate from task completion: ending with ASK records pending
+approval rather than task execution.
 
-AgentDojo retains its native security checker rather than a state-only endpoint.
-For Pro, normal-prompt attack positives were 5/12 without a guard, 2/12 with
-policy modules, and 0/12 with full modules; benign-tool completion was 6/8,
-3/8, and 3/8. The full-minus-policy paired attack difference was -16.67
-percentage points with a 95% interval from -44.80 to +10.38, crossing zero.
-For Flash, the no-guard normal-prompt attack cell had 1/12 positives and each
-other cell had zero; benign-tool completion was 7/8 in both no-guard cells and
-4/8 in each guarded cell. These small, historically enriched development
-samples do not establish superiority or causal attribution to provenance.
+AgentDojo retains its native security checker. For Pro, normal-prompt attack
+positives were 5/12 without a guard, 2/12 with policy modules, and 0/12 with
+full modules; benign-tool completion was 6/8, 3/8, and 3/8. The full-minus-policy
+paired attack difference was −16.67 percentage points (95% CI −44.80 to +10.38),
+crossing zero. For Flash, the no-guard normal-prompt attack cell had 1/12
+positives and each other cell had zero. Benign-tool completion was 7/8 in both
+no-guard cells and 4/8 in each guarded cell. The attack comparison remained
+uncertain in these historically enriched development samples.
 
 M3-v2 observed simulated unsafe effects were 0/12 in every attack cell for
-both models, including no guard. Thus the null observations do not establish
-guard efficacy. Runtime summaries contained zero labelled sensitive values;
-dataflow checks were not applicable. Passing synthetic label-propagation tests
-is separate from model-generated evidence of activated dataflow restrictions.
-The eight no-tool tasks per model-condition remain in the planned denominators,
-but Supplementary Table S20 focuses on attack and benign-tool outcomes. Unknown outcomes are
-not replaced by zero, and operational failures remain separately reported.
+both models, including no guard. Control and guarded cells therefore shared
+an attack-endpoint floor. Runtime summaries contained zero labelled sensitive
+values, so dataflow checks were not applicable to these trajectories.
+The eight no-tool tasks per model-condition remain in the planned denominators;
+Supplementary Table S20 focuses on attack and benign-tool outcomes. Unknown
+outcomes are not replaced by zero, and operational failures remain separately
+reported.
 
 ## Corrected authorization and contemporaneous calibration
 
-The corrected authorization study records all 900 planned assignments:
-Tables 2–4 summarize corrected authorization, contemporaneous calibration,
-and bounded component controls, respectively. The following paired intervals
-are distinct from the marginal Wilson intervals in the tables.
-
-795 workflows end normally, 60 exhaust the step budget, and 45 have parse
-failures. Workflow status is separate from task completion. Across the 490
-attack assignments, security events are zero under the benchmark-specific
-checks. This study contains no unguarded control, and repeated condition
-assignments are not independent attacks; the zero endpoint cannot establish
-effectiveness or equivalent protection.
+The corrected authorization study records all 900 planned assignments over
+180 fixed cases representing 153 tasks. Tables 2–4 summarize corrected
+authorization, contemporaneous calibration, and bounded component controls,
+respectively. Paired intervals below are distinct from the tables’ marginal
+Wilson intervals. Of the 900 workflows, 795 end normally, 60 exhaust the step
+budget, and 45 have parse failures. Across 490 attack assignments, security
+events are zero under the benchmark-specific checks. With no unguarded control
+in this study, these observations establish an endpoint floor rather than
+a protection contrast.
 
 For AgentDojo benign-tool tasks, compiled authorization completes 2/30 under
-both policy and full modules. Exact-target authorization completes 13/30
-under policy and 11/30 under full modules. The paired exact-minus-compiled
-differences are +36.67 percentage points (95% CI +18.60 to +53.31; Holm
-p=0.0039) and +30.00 points (+13.23 to +46.75; Holm p=0.0117), respectively.
-For M3-v2, the corresponding compiled counts are 16/30 and 17/30, compared
-with exact-target counts of 14/30 and 16/30. Their differences, −6.67 and
-−3.33 points, have intervals spanning zero. This does not reproduce a
-statistically established benchmark-intrinsic reversal. The oracle improves
-some observed completion under answer-derived scope but is not a deployed
-non-oracle authorization method.
+both policy and full modules. Exact-target authorization completes 13/30 under
+policy and 11/30 under full modules. Paired exact-minus-compiled differences
+are +36.67 percentage points (95% CI +18.60 to +53.31; Holm p=0.0039) and
++30.00 points (+13.23 to +46.75; Holm p=0.0117), respectively. For M3-v2,
+compiled counts are 16/30 and 17/30, compared with exact-target counts of
+14/30 and 16/30. Their differences, −6.67 and −3.33 points, have intervals
+spanning zero. The completion gain was supported on AgentDojo, while the
+M3-v2 differences remained uncertain.
 
-The separate calibration closes all 480 assignments: 443 workflows end
-normally, nine exhaust steps, 25 have parse failures, two have runner
-failures, and one has a provider/stop failure. On AgentDojo, no research
-Guard yields 3/30 security events and 17/30 benign-tool completions. Policy
-and full modules each yield 0/30 and 2/30. The paired completion difference
-is −50.00 points (95% CI −66.83 to −26.80; Holm p=0.0008), whereas the
-security difference is −10.00 points (−25.62 to +3.10; Holm p=0.7500).
-The utility cost is observable; a security improvement is not established.
-The no-research-Guard, policy, and full M3-v2 security cells are all zero,
-with benign completions of 16/30, 17/30, and 16/30. Full modules do not show
-an independent end-to-end advantage in these conditions.
+The separately executed calibration uses 120 cases nested within the
+authorization cohort and closes all 480 assignments. Of these, 443 workflows
+end normally, nine exhaust steps, 25 have parse failures, two have runner
+failures, and one has a provider/stop failure. On AgentDojo, no research Guard
+yields 3/30 security events and 17/30 benign-tool completions. Policy and full
+modules each yield 0/30 and 2/30. The paired completion difference is
+−50.00 points (95% CI −66.83 to −26.80; Holm p=0.0008), whereas the security
+difference is −10.00 points (−25.62 to +3.10; Holm p=0.7500). The utility cost
+is observable; a security improvement is not established. No-research-Guard,
+policy, and full M3-v2 security cells are all zero, with benign completions
+of 16/30, 17/30, and 16/30. Full modules show no identifiable independent
+end-to-end advantage in these conditions.
 
-Configured VIGIL has four AgentDojo attack positives among 28 known outcomes
-and two unknown attack outcomes. All 30 assignments remain in ITT, so the
-observed positive count gives a 4/30 lower bound and a 6/30 conservative
-upper bound, not a claim that the unknown outcomes were safe. Two additional
-AgentDojo benign outcomes are unknown. Its disabled model secondary
-verification and larger call budget bound this configuration comparison.
-Across all 480 rows, two field-projection receipts and four structured
-safety receipts are absent; missing receipts are not fabricated afterward.
+Across calibration, seven known security-positive assignments and four unknown
+outcomes are retained. Configured VIGIL has four AgentDojo attack positives
+among 28 known outcomes and two unknown attack outcomes. All 30 assignments
+remain in ITT, giving a 4/30 lower bound and a 6/30 conservative upper bound.
+Two additional AgentDojo benign outcomes are unknown. Across all 480 rows,
+two field-projection receipts and four structured safety receipts are absent.
 
-The public-event diagnosis reports 26/30 AgentDojo compiled benign tasks
-with a first missing-tool-permission block in each module condition. This
-locates permission insufficiency but does not prove every missing permission
-is an implementation error. The original 900 rows have no recorded length
-truncation; parse failures cannot uniformly be attributed to the 512-token
-limit. Two rows record task completion before a subsequent operational
-failure, and both observations are retained.
+The public-event diagnosis reports 26/30 AgentDojo compiled benign tasks with
+a first missing-tool-permission block in each module condition. This locates
+permission insufficiency for the trusted-intent review below. The original
+900 rows have no recorded length truncation, so parse failures cannot uniformly
+be attributed to the 512-token limit. Two rows record task completion before
+a subsequent operational failure, and both observations are retained.
 
-The 16 synthetic controls all reach a workflow terminal. Full modules deny
-private restricted flows and ask when classification is missing; the tested
-public and archival flows complete. Policy-only permits the restricted
-private/missing-classification simulated flow. Legitimate completion and a
-security violation can coexist in these controls. Their limited scenarios
-and two DeepSeek services do not establish general provenance effectiveness
-or independent-provider replication.
+The 16 synthetic controls span four scenarios and two DeepSeek services, Pro
+and V4.1 Flash, and all reach a workflow terminal. Full modules deny private
+restricted flows and ask when classification is missing; tested public and
+archival flows complete. Policy-only permits the restricted private and
+missing-classification simulated flows. Legitimate completion and a security
+violation coexist in the tested controls, making these endpoints separately
+observable.
 
 Task total latency is available for 476/480 calibration assignments, with
-four missing and no invalid values. AgentDojo benign-task median/p95
-durations are 5.083/11.575 seconds without the research Guard,
-1.209/3.029 with policy, 1.279/3.003 with full modules, and 8.145/20.291
-for configured VIGIL, whose known-duration denominator is 28/30. Early
-blocking, model calls, constraint generation, and task-path differences
-preclude interpreting this ordering as a Guard computation speedup. The
-latency-only correction does not alter the raw records or prior security
-and completion inference.
+four missing and no invalid values. AgentDojo benign-task median/p95 durations
+are 5.083/11.575 seconds without the research Guard, 1.209/3.029 with policy,
+1.279/3.003 with full modules, and 8.145/20.291 for configured VIGIL.
+Its known-duration denominator is 28/30. Early blocking, model calls, constraint
+generation, and task-path differences explain why this task-duration ordering
+is not a Guard computation-speed comparison.
 
 ## Trusted-intent review of benign completion
 
-The fixed 60-task review finds no lost or mismatched action--target pair among
-the seven trusted application declarations. Thirteen further M3-v2 tasks have
-rules for explicitly requested targets. The remaining ten M3-v2 tasks require
-confirmation of a filename or recipient without supplying a concrete target;
-no independent approval was obtained. These counts describe the trusted
-inputs and generated rules, not an adjudicated false-block rate.
+The fixed 60-task review reuses 240 calibration records rather than adding
+executions. It finds no lost or mismatched action–target pair among seven
+trusted application declarations. Thirteen further M3-v2 tasks have rules for
+explicitly requested targets. The remaining ten M3-v2 tasks require confirmation
+of a filename or recipient without supplying a concrete target; no independent
+approval was obtained. These counts describe trusted inputs and generated
+authorization rules.
 
-All 30 AgentDojo tasks lack such concrete trusted action declarations. The
-generic compiler's lexical tool selection and literal security-target parsing
-do not cover arbitrary natural-language requests, multistage lookups, or
-dynamic object identifiers. The requests can express legitimate goals even
-when this bounded compiler cannot derive an executable grant. The review does
-not establish a new bounded-contract violation or justify automatic authority
-expansion.
+All 30 AgentDojo tasks lack such concrete trusted action declarations.
+The generic compiler’s lexical tool selection and literal security-target
+parsing do not cover arbitrary natural-language requests, multistage lookups,
+or dynamic object identifiers. Requests can express legitimate goals even when
+this bounded compiler cannot derive an executable grant. No new declared-contract
+violation was established by the review.
 
 Six M3-v2 tasks show successful simulated execution without completion under
-at least one policy/full condition; four of these also have a model-format or
-operational failure. Categories overlap. In three explicit mock-API tasks,
-policy records contain ALLOW, successful execution, and a final answer but
-still fail completion. The evaluator requires both expected-effect matching
-and a successful final outcome. Redacted public arguments and answer content
-do not identify the exact mismatch, so this observation is not evidence of an
-evaluator defect. Native AgentDojo completion likewise does not prove that
-a particular blocked action was executed.
+at least one policy/full condition; four also have a model-format or operational
+failure. Categories overlap. In three explicit mock-API tasks, policy records
+contain ALLOW, successful execution, and a final answer but still fail completion.
+The evaluator requires both expected-effect matching and a successful final
+outcome. Redacted public arguments and answer content do not identify the exact
+mismatch. The cause remains unresolved, with execution and completion retained
+as separate observations.
 
 ## Remaining evidence boundary
 
 Historical Public and incremental tables retain their recorded evaluator
-labels. In the old M3-v2 path, an action allowed by the Guard but rejected by
-the final isolation boundary could be labelled unsafe even though the effect
-was not applied. Historical ITT variants also include operational failures.
-The compact records do not support retrospective identification of all actual
-unauthorized effects. Historical numbers are therefore legacy-labelled risk
-endpoints, not corrected execution-effect estimates. Their values are retained,
-not silently relabelled as corrected-v1 results; AgentDojo's native checker is
-also not reduced to an environment-state-only definition.
-
-The medium, Public, authorization-regime, factorial, source-authority,
-challenge, replication, adaptive, and contemporaneous-activity studies jointly support an empirical
-security–utility paper. They do not support a leading-defense, end-to-end
-provenance-benefit, saturated-adaptive, or cross-provider claim. E2 does
-identify source sensitivity at the deterministic Guard decision layer, but its
-end-to-end action endpoint is floor-limited. E5 supplies only a conditional
-0/12 B200-survivor tail with a 24.25% upper confidence limit. E6 records attack
-activity only within its historically enriched, single-block DeepSeek cohort;
-it neither satisfies nor tests the original multi-window activity gate. The
-earlier Gemini authorization study closed at 32/450
-terminal work items, only five response-bearing; the separately executed E6
-Gemini prefix produced five response-bearing records, one response-less failure, and
-174 administrative closures. Both are retained for operational accounting but
-all Gemini effects are not estimable. UTR and DSR are not identifiable from the
-current record contract and are not reconstructed from unsafe-effect rate.
+labels. The old M3-v2 path could label an allowed action unsafe after isolation
+rejection, even when no effect was applied; historical ITT variants also include
+failures. These values remain legacy-labelled risk endpoints, separate from
+corrected simulated-execution effects. AgentDojo retains its native security
+checker. Historical decision replay, adaptive search, calibration, and provider
+diagnostics remain in their supplementary sections, with their inferential
+boundaries consolidated in Discussion.

@@ -5,9 +5,8 @@ Context audit date: 2026-08-20
 Scope: the ten closest innovation-boundary papers plus the benchmark and
 adaptive-evaluation works needed to position the study.
 
-This draft uses stable source links and the literature-matrix identifiers. It
-does not convert a preprint into peer-reviewed evidence, and it does not repeat
-reported effect sizes unless the surrounding argument needs that number.
+This draft uses stable source links and literature-matrix identifiers, with
+publication status recorded separately from the methodological relationship.
 
 ## Runtime verification and task alignment
 
@@ -17,16 +16,13 @@ peer-reviewed structural comparator to M3 because both systems interpose before
 an effect is committed. DRIFT instead combines dynamic rules with control- and
 data-level constraints and memory-stream isolation [@L02].
 The Task Shield verifies whether instructions and tool calls contribute to the
-user's declared objective [@L03]. Together, these
-peer-reviewed systems prevent us from claiming that M3 introduced
-verify-before-commit, dynamic information-flow checks, or task-alignment
-verification.
+user's declared objective [@L03]. Together, these systems establish verification,
+information-flow constraints, and task alignment as complementary runtime strategies.
 
 PlanGuard is a related preprint that isolates planning from untrusted context
-and applies hierarchical tool and parameter consistency checks [@L23]. Its presence further narrows the
-possible novelty claim: planning consistency is an adjacent mechanism, not an
-unoccupied problem. We therefore use these works to define comparison classes
-and mechanism boundaries rather than to motivate a first-or-only claim.
+and applies hierarchical tool and parameter consistency checks [@L23]. These
+approaches provide comparison classes for studying how enforcement structure
+interacts with the authorization information available to a runtime Guard.
 
 ## Privilege, provenance, and information flow
 
@@ -36,31 +32,24 @@ expansion that requires approval [@L24]. This overlaps directly with M3's
 permission-monotonicity and confirmation design. IPIGuard, published at EMNLP
 2025, constrains execution through a planned tool-dependency graph [@L25].
 CaMeL separates trusted control and data flow and uses capabilities to prevent
-unauthorized flows [@L26]. These systems occupy the privilege,
-dependency, and information-flow design space that a provenance-aware runtime
-must acknowledge.
+unauthorized flows [@L26]. These systems provide the privilege, dependency, and
+information-flow foundations for provenance-aware runtime authorization.
 
 FAVA is a July 2026 preprint that translates natural-language tasks into a
 permission intermediate representation, lowers it to an evidence-backed
 permission graph, and uses an SMT authorizer before effectful execution [@L36].
-It further narrows any mechanism
-novelty claim around structured authorization and data-flow-aware permission
-graphs. Our study differs by treating the authorization regime itself as the
-paired experimental factor and by jointly reporting evaluator-labelled risk,
-benign utility, confirmation/blocking burden, and operational failure. The
-historical risk labels require the measurement qualifications in Methods;
-only the corrected development study separates observed simulated effects
-from proposals and boundary rejections.
+This formulation makes the relationship between task meaning and executable
+permission explicit. Our study treats the authorization regime as a paired
+experimental factor and reports benchmark-specific security, benign utility,
+confirmation/blocking burden, and operational failure together.
 
 Two 2026 preprints overlap even more closely with provenance-aware
 authorization. ARGUS constructs an influence-provenance graph for
 context-dependent decisions [@L21], while AuthGraph compares an
 authorization graph derived in an isolated context against a parameter-source
-execution graph [@L22]. Their existence rules out a claim
-that M3 is the first parameter-source or provenance-aware authorization
-defense. Because neither work is treated here as peer reviewed, their reported
-effects define the contemporary claim boundary but are not used as settled
-comparative facts.
+execution graph [@L22]. Both connect action authorization to the sources that
+influence its parameters. We use these preprints to position the measurement
+question alongside current provenance-aware designs.
 
 *Auditing Provenance Sensitivity in LLM Agent Action Selection* supplies an
 especially close 2026 measurement counterpart: it holds task content and
@@ -71,28 +60,21 @@ it reinforces the need to separate evidence relevance from authorization. Our
 experiment extends that question to full tool trajectories, paired runtime
 Guard conditions, benign utility, `ASK/DENY` burden, and operational failure.
 
-The remaining defensible contribution is consequently methodological and
-empirical. We test whether authorization information itself changes measured
-security and utility; enforce a runtime projection that excludes evaluator
-fields; compare the policy and full configuration packages in paired
-conditions while disclosing their bundled prompt/runtime differences; and
-quantify `ASK` burden and operational failures. Effect semantics are specific
-to the benchmark and evaluator version; the old and corrected endpoints are
-not interchangeable. These are study-design claims and must stand on M3's
-own completed experiments.
+The contribution is methodological and empirical. We vary authorization
+information, separate online inputs from evaluator fields, compare policy and
+full-module conditions, and quantify `ASK` burden and operational failures.
+The current paired comparison holds ordinary prompts fixed; historical
+package comparisons retain their original prompt/runtime assignments.
 
 ## Prompt-level defenses and execution-level outcomes
 
 Structured queries, spotlighting, instruction hierarchy, and injection
 detectors act at the prompt, representation, or model-output layer
-[@L07; @L30; @L31; @L32]. They are relevant
-baselines, but detector scores and model compliance are not equivalent to an
-executed-effect endpoint. The corrected development evaluation therefore
-separates proposals, Guard decisions, sandbox execution receipts and outcome
-scoring. AgentDojo retains its native security checker, whereas M3-v2 uses
-observed simulated effects. This distinction is necessary because a
-defense can appear secure by refusing useful actions or by failing before an
-effect is attempted.
+[@L07; @L30; @L31; @L32]. These approaches complement execution-level monitoring.
+The corrected evaluation links proposals, Guard decisions, sandbox receipts,
+and outcome scoring while reporting completion and failures separately.
+AgentDojo retains its native security checker, whereas M3-v2 uses observed
+simulated effects.
 
 ## Benchmarks and adaptive evaluation
 
@@ -104,13 +86,10 @@ taxonomy [@L34].
 The public expansion retains the benchmarks' unique task identities instead of
 duplicating benign cases to manufacture a denominator.
 
-Static attacks are insufficient for a robustness claim. *The Attacker Moves
-Second* argues that a defense-aware attacker should optimize against the
-defense design rather than replay a fixed attack set [@L27]. The adaptive panel therefore exposes
-only public `ALLOW/ASK/DENY` and legacy evaluator-labelled risk feedback,
-searches frozen tasks at prespecified query budgets, and reports the
-first-success distribution. Since L27 remains a preprint, it motivates the
-protocol but is not described as a peer-reviewed theorem.
+*The Attacker Moves Second* motivates defense-aware optimization rather than
+evaluation against a fixed attack set [@L27]. Our historical adaptive panel
+exposes public `ALLOW/ASK/DENY` and legacy evaluator-labelled risk feedback,
+then measures first success on frozen tasks at prespecified query budgets.
 
 PIArena, published at ACL 2026, integrates attacks, defenses, and benchmarks
 and evaluates feedback-adaptive injection, including cases where the injected
@@ -121,20 +100,16 @@ authorization constraints, not merely counting blocked actions. The ASPI
 preprint evaluates matched execution and clarification-seeking states and
 finds increased vulnerability in its clarification setting [@L39]. That
 interaction differs from our controller-only permission diagnostic, which
-does not send a clarification response back to the model. Neither a low ASK
-rate nor successful permit issuance demonstrates a secure human-confirmation
-workflow.
+measures permit eligibility without a model clarification turn.
 
 ## Positioning summary
 
-M3 is not positioned as the first runtime guard, the first provenance system,
-or a state-of-the-art defense. In the medium experiment, M3-full did not improve
-the reported legacy risk endpoint over M3 policy-only and failed the reported
-benign-tool non-inferiority criterion. Those measurements do not establish
-effects under the repaired execution semantics. The active paper studies how non-oracle
-authorization, provenance-aware enforcement, confirmation, operational
-failure handling, benchmark choice, and adaptive attack budget jointly shape
-the measured security–utility frontier.
+The active paper studies how authorization scope and runtime configuration shape
+the measured security–utility frontier. Its paired design connects this question
+to prior work on verification, least privilege, provenance, and task alignment.
+Historical studies supply context for prompt/runtime factors and attack-budget
+sensitivity; the current evaluation supplies corrected authorization and
+contemporaneous utility measurements.
 
 ## Critical citation-context audit
 
@@ -144,9 +119,9 @@ the measured security–utility frontier.
 | Dynamic rule, control/data constraints, memory isolation | L02 | Peer reviewed, NeurIPS 2025 | Adjacent mechanism boundary |
 | Task/action alignment checking | L03 | Peer reviewed, ACL 2025 | Goal-alignment comparator |
 | Context-dependent provenance auditing | L21 | Preprint | Novelty boundary; reported effects not treated as settled |
-| Authorization/execution dual graph and parameter source | L22 | Preprint | Prohibits first parameter-source claim |
+| Authorization/execution dual graph and parameter source | L22 | Preprint | Parameter-source authorization context |
 | Controlled provenance-sensitivity audit | L35 | Preprint | Closest measurement boundary; motivates paired source-authority analysis |
-| Evidence-backed permission graph and SMT authorization | L36 | Preprint | Further prohibits broad structured-authorization novelty claims |
+| Evidence-backed permission graph and SMT authorization | L36 | Preprint | Structured-authorization context |
 | Isolated planning and hierarchical consistency | L23 | Preprint | Adjacent mechanism, not formal baseline without code admission |
 | Symbolic least privilege and approval-gated expansion | L24 | Preprint, arXiv v3 | Direct monotonic-permission overlap |
 | Tool-dependency-graph enforcement | L25 | Peer reviewed, EMNLP 2025 | Privilege/data-flow comparator |

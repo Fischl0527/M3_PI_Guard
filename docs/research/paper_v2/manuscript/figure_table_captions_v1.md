@@ -8,18 +8,18 @@ Status: `current_corrected_v2_figures_historical_supplement_preserved`
 projected authorization and runtime events are distinct from offline evaluation.
 The dashed path denotes the oracle sensitivity condition: only an authorization
 object derived from the offline target is exposed to the Guard, not the raw
-gold or evaluator fields. This is not deployable authorization. Model proposals,
+gold or evaluator fields. Model proposals,
 Guard decisions, isolation rejections, simulated execution, task completion,
 failure and unknown outcomes remain distinct. Provider-managed tools and real
-external effects are disabled. The diagram describes scope, not effectiveness.
+external effects are disabled.
 
 **Figure 2. Corrected authorization and benign-tool completion.** Panel a shows
 completion fractions and cached Wilson 95% intervals for 30 benign-tool tasks in
 each benchmark and policy/full configuration under ordinary prompts. Panel b
 shows the corresponding paired exact-target minus auto-compiled differences
 with cached Newcombe 95% intervals, in percentage points. The two interval types
-answer different questions. Exact-target is the oracle sensitivity condition,
-not an estimate of deployed permissions; the regimes and configurations use
+answer different questions. Exact-target is the oracle sensitivity condition;
+the regimes and configurations use
 overlapping paired tasks. ASK/DENY events and failures are separate in Table 2.
 
 **Figure 3. Contemporaneous security and benign-tool utility.** Rows separate
@@ -30,24 +30,24 @@ fractions show true/observed counts, with missing outcomes explicit. Configured
 VIGIL has 28 observed AgentDojo outcomes and two unknowns per endpoint. Its
 orange ITT identification range is not a confidence interval and does not treat
 unknowns as safe failures. Configured VIGIL uses constraint generation and a
-deterministic hybrid audit, not its complete official default implementation;
-its 16-call limit differs from the other conditions' eight-call limit. These
-results do not rank providers or establish a full-module safety advantage.
+deterministic hybrid audit with secondary model verification disabled;
+its 16-call limit differs from the other conditions' eight-call limit.
 
 **Figure 4. First restrictions and final workflow states.** Each row contains
 30 benign-tool assignments under one benchmark, authorization regime and
 policy/full configuration. Panel a classifies the first publicly observed block;
 panel b classifies final execution and completion states. The cached categories
-are descriptive event summaries, not adjudicated root causes or proof that
-missing permissions should be granted. P/F denotes policy/full and A/E denotes
+are descriptive event summaries, not adjudicated root causes. P/F denotes
+policy/full and A/E denotes
 auto/exact target. ASK/DENY burden is reported separately in Table 2. No new
-inference or uncertainty estimate is introduced by these counts.
+inferential test is introduced by these counts.
 
 ## Tables
 
 **Table 1. Current study cohorts and configurations.** The corrected authorization,
-contemporaneous calibration and bounded controls are separate, overlapping
-cohorts. Assignments are not independent tasks; oracle targets and configured
+contemporaneous calibration and bounded controls have distinct evidence roles.
+The calibration's 120 cases are nested within the authorization sample's
+180 cases, representing 153 underlying tasks. Oracle targets and configured
 VIGIL's secondary-verification and call-budget limits are disclosed.
 
 **Table 2. Corrected authorization and benign-tool completion.** Ordinary prompts

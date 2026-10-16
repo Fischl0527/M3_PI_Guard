@@ -67,7 +67,7 @@ def test_build_manuscript_is_reader_facing_and_structurally_complete() -> None:
     assert "Supplementary Table S19 reports execution-permit" in manuscript
     assert "Supplementary Table S20 separates" in manuscript
     assert "excluding evaluator and gold fields" not in manuscript
-    assert "`exact_gold` condition is an explicitly labeled oracle sensitivity" in manuscript
+    assert "current `exact_target_v2` condition and historical `exact_gold` condition" in manuscript
     assert re.search(
         r"`exact_gold`\s+exposed only its derived authorization object",
         manuscript,
@@ -112,10 +112,10 @@ def test_current_results_precede_legacy_studies_without_loss() -> None:
     assert results.lstrip().startswith(
         "### 4.1 Corrected authorization and contemporaneous calibration"
     )
-    assert results.count("795 workflows end normally") == 1
+    assert " ".join(results.split()).count("900 workflows, 795 end normally") == 1
     assert results.count("### 4.2 Medium falsification study") == 1
     normalized = " ".join(results.split())
-    assert "historical implementations and recorded endpoint labels" in normalized
+    assert "Historical Public and incremental tables retain their recorded evaluator labels" in normalized
     assert "Across the 384 paired confirmation cells" in normalized
     source = builder._drop_wrapper(
         builder._read("results_shell.md"), start_heading="## Medium falsification study"
@@ -139,14 +139,14 @@ def test_introduction_and_chinese_distinguish_current_and_historical_evidence() 
     assert "**RQ1: Authorization semantics.**" in intro
     assert "**RQ2: Security, utility, and runtime burden.**" in intro
     assert "**RQ3: Component evidence and applicability.**" in intro
-    assert "900-assignment corrected" in intro
+    assert "900-assignment authorization study" in intro
     assert "480-assignment contemporaneous" in intro
-    assert "model-based secondary verification disabled" in intro
-    assert "benchmark-intrinsic reversal" in intro
-    assert "These studies do not establish full-module superiority" in intro
+    assert "source-pinned VIGIL adaptation" in intro
+    # 引言提出实际比较；完整解释边界集中到讨论，不强制在各章重复免责声明。
+    assert "auto_compiled" in intro and "exact_target_v2" in intro
     assert "exact authorization produced opposite benign-tool directions" not in intro
     chinese = builder._read("manuscript_zh_v1.md")
-    assert "修正版900条授权" in chinese
+    assert "900条授权研究" in chinese
     assert "490个攻击条件分配" in chinese
     assert "17/30降至2/30" in chinese
     assert "−25.62至+3.10" in chinese
@@ -175,10 +175,11 @@ def test_trusted_intent_review_is_integrated_without_overclaim() -> None:
     assert "seven trusted application declarations" in manuscript
     assert "Thirteen further M3-v2 tasks" in manuscript
     assert "remaining ten M3-v2 tasks require confirmation" in manuscript
-    assert "post-outcome explanatory review, not a blind evaluation" in manuscript
-    assert "no independent reviewer-agreement estimate" in manuscript
-    assert "not evidence of an evaluator defect" in manuscript
-    assert "not thirty proven contract defects" in manuscript
+    limitations = manuscript.split("Limitations", 1)[1].split("Practical implications", 1)[0]
+    assert "post-outcome" in limitations
+    assert "without independent reviewer-agreement calibration" in limitations
+    assert "redaction prevents resolving three mock-API completion mismatches" in limitations
+    assert "distinguishes permission insufficiency from a declared-contract defect" in manuscript
     assert "A bounded trusted-intent review remains necessary" not in manuscript
     chinese = builder._read("manuscript_zh_v1.md")
     assert "四条件240份已有记录" in chinese
@@ -189,10 +190,11 @@ def test_trusted_intent_review_is_integrated_without_overclaim() -> None:
 
 def test_floor_limits_are_version_specific_not_restored_from_history() -> None:
     discussion = " ".join(builder._read("discussion_draft.md").split())
-    assert "historical study recorded one risk-positive label among 400" in discussion
-    assert "corrected study observes none among its 490" in discussion
-    assert "Larger historical matrices cannot repair that inferential gap" in discussion
-    assert "reduced recorded legacy risk labels" in discussion
+    current = " ".join(builder.build_manuscript(profile="current").split())
+    assert "490 attack assignments, security events are zero" in current
+    assert "only three AgentDojo control events and a zero-event M3-v2 control" in discussion
+    assert "legacy risk labels are not corrected executed-effect estimates" in discussion
+    assert "record totals are not independent sample totals" in discussion
     assert "Security-direction evidence comes mainly from the larger Public matrices" not in discussion
 
 
@@ -200,9 +202,10 @@ def test_current_article_preserves_full_working_draft_and_current_evidence() -> 
     full = builder.build_manuscript()
     current = builder.build_manuscript(profile="current")
     normalized = " ".join(current.split())
-    assert 7500 <= builder.body_word_count(current) <= 8500
+    # 压缩重复限制后不再人为凑字数；完整章节、证据与上限仍受检查。
+    assert 0 < builder.body_word_count(current) <= 8500
     assert builder.body_word_count(current) < builder.body_word_count(full)
-    assert "795 workflows end normally" in current
+    assert "900 workflows, 795 end normally" in normalized
     assert "480 assignments" in current
     assert "60 benign tool tasks" in current
     assert "not 490 independent tasks" in normalized
@@ -212,7 +215,8 @@ def test_current_article_preserves_full_working_draft_and_current_evidence() -> 
     assert "Supplementary Tables S1-S20 retain" in current
     assert "0/240 false allows and 30/240 false blocks" in current
     assert "first legacy risk success" in normalized
-    assert "not a complete B500 curve" in normalized
+    limitations = current.split("### 5.5 Limitations", 1)[1].split("### 5.6", 1)[0]
+    assert "B500" in limitations and "saturation" in limitations
     assert current.count("![Figure ") == full.count("![Figure ") == 4
     assert len(re.findall(r"^### Table [1-4]\. ", current, re.MULTILINE)) == 4
     builder._validate_citations(current)
@@ -245,22 +249,20 @@ def test_current_chinese_is_separate_and_keeps_four_current_figures_and_tables()
 def test_corrected_primary_sources_disclose_utility_cost_and_uncertainty() -> None:
     abstract, _ = builder._abstract_and_keywords()
     normalized = " ".join(abstract.split())
-    assert "900 authorization assignments" in normalized
+    assert "900 DeepSeek Pro assignments" in normalized
     assert "480-assignment contemporaneous calibration" in normalized
     assert "17/30 to 2/30" in normalized
-    assert "interval includes zero" in normalized
-    assert "no unguarded control" in normalized
+    assert "security difference uncertain" in normalized
+    manuscript = " ".join(builder.build_manuscript(profile="current").split())
+    assert "This authorization study contains no unguarded cell" in manuscript
     assert "Exact authorization reduced pooled" not in normalized
 
     conclusion = " ".join(builder._read("conclusion_draft.md").split())
-    assert "partial target annotations" in conclusion
-    assert "not a deployable authorization source" in conclusion
-    assert "not full-module superiority" in conclusion
-    assert "two missing projection receipts" in conclusion
-    assert "four missing structured safety receipts" in conclusion
-    assert "476/480 assignments" in conclusion
-    assert "completion collapse" in conclusion
-    assert "intrinsic cost of precise authorization" in conclusion
+    assert "partial target annotations" in manuscript
+    # 结论只综合核心发现，完整缺失信息与oracle限制应保留在主稿而非逐章复述。
+    assert "oracle" in manuscript
+    assert "two field-projection receipts and four structured safety receipts" in manuscript
+    assert "476/480" in manuscript
     assert "fell by 56.67/40.00" not in conclusion
 
 
@@ -270,12 +272,12 @@ def test_corrected_results_keep_unknown_baseline_and_legacy_semantics_separate()
     assert "exact_target_v2" in manuscript
     assert "corrected operationalization" in manuscript
     assert "not 490 independent tasks" in manuscript
-    assert "795 workflows end normally" in manuscript
+    assert "900 workflows, 795 end normally" in manuscript
     assert "four AgentDojo attack positives among 28 known outcomes" in manuscript
     assert "4/30 lower bound and a 6/30 conservative upper bound" in manuscript
     assert "two field-projection receipts and four structured safety receipts" in manuscript
     assert "model-based secondary verification disabled" in manuscript
-    assert "private/missing-classification simulated flow" in manuscript
+    assert "restricted private and missing-classification simulated flows" in manuscript
     assert "task completion before a subsequent operational failure" in manuscript
 
 
@@ -296,6 +298,25 @@ def test_current_statistical_families_and_author_review_are_explicit() -> None:
     assert "生成 Word 对照稿" not in chinese
 
 
+def test_current_cohort_nesting_and_limitations_survive_compression() -> None:
+    current = builder.build_manuscript(profile="current")
+    normalized = " ".join(current.split())
+    assert "180 cases representing 153 underlying tasks" in normalized
+    assert "All 120 calibration cases are also nested" in normalized
+    assert "1,396 executions" in normalized
+    assert "reuses 240 calibration records" in normalized
+    assert "Case-pair McNemar tests are auxiliary" in normalized
+    assert "12-assignment authorization prefix" in normalized
+    assert "16-assignment calibration prefix" in normalized
+    assert len(re.findall(r"^### \d\.\d+ Limitations$", current, re.M)) == 1
+    assert "https://github.com/Fischl0527/M3_PI_Guard" in current
+    assert "https://github.com/Fischl0527/RedTeam_LLM_Security" not in current
+    assert "repository is private" in normalized
+    assert "17/30" in current and "2/30" in current
+    assert "−66.83" in current and "−26.80" in current
+    assert "−25.62" in current and "+3.10" in current
+
+
 def test_e7_reports_permission_only_and_preserves_external_validity_boundary() -> None:
     manuscript = builder.build_manuscript()
     normalized = " ".join(manuscript.split())
@@ -304,7 +325,7 @@ def test_e7_reports_permission_only_and_preserves_external_validity_boundary() -
     assert "No effect backend was invoked" in normalized
     assert "not a correctly compiled exact policy" in normalized
     assert "All use the controlled M3-v2 runtime" in normalized
-    assert "have not produced model-evaluation results" in normalized
+    assert "Native dynamic-environment model validation remains incomplete" in normalized
     table = builder._e7_permit_table()
     assert "Strict exact / policy | 0/12 | 0/12 | 0/12" in table
     assert "Bounded enum / full | 12/12 | 12/12 | 0/12" in table
@@ -464,8 +485,9 @@ def test_incremental_revision_identifies_factors_and_keeps_claims_bounded() -> N
     assert "**RQ5: Adaptive tail risk.**" in manuscript
     assert "**RQ6: Contemporaneous attack activity.**" in manuscript
     assert "**RQ2: Module contribution.**" not in manuscript
-    assert "crosses prompt profile (`normal`/`safe`) with runtime modules" in normalized
-    assert "its source swap varies provenance authority" in normalized
+    assert "historical E1 concurrent factorial crosses both factors explicitly" in normalized
+    assert "policy/normal, policy/safe, full/normal, and full/safe" in normalized
+    assert "only source authority changes" in normalized
     assert "from 17/30 to 0/30" in manuscript
     assert "`unsafe_effect OR operational_failure`" in manuscript
     assert "robustness bound and is not reported as observed attack success" in manuscript
@@ -478,7 +500,8 @@ def test_incremental_revision_identifies_factors_and_keeps_claims_bounded() -> N
     assert "47/60 tasks were E3 anchors" in normalized
     assert re.search(r"29/30 tasks are\s+E3 anchors", manuscript)
     assert "does not satisfy or test the original multi-window activity gate" in normalized
-    assert "Even complete prefix coverage would not make" in normalized
+    assert "Neither incomplete Gemini attempt meets paired-coverage requirements" in normalized
+    assert "Provider-managed aliases do not pin immutable weights" in normalized
     assert "two-sided exact McNemar p-value" in normalized
     assert "planned cluster sign-flip test" in normalized
     assert "All Gemini paired, factorial, and cross-provider" in normalized

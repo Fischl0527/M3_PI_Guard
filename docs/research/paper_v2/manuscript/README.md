@@ -1,23 +1,23 @@
 # 论文工作区：当前主稿、对照稿与历史材料
 
-更新：2026-10-09。状态：`current_corrected_evidence_integrated_submission_in_progress`。论文功能 F-PAPER-002 未结项，不等于可直接投稿。
+更新：2026-10-12。状态：`current_corrected_evidence_integrated_submission_in_progress`。论文功能 F-PAPER-002 未结项，不等于可直接投稿。
 
 ## 1. 今天应该打开哪一份
 
-先看[论文中文阅读说明](论文中文阅读说明.md)：解释研究问题、900/480/16与60任务复核的关系，以及表格中的配置、区间、失败和未知。正文中的英文配置名另见[中文术语表](术语表_中文.md)。2026-10-10只改中文阅读与显示词，没有重编PDF；下面页数仍是既有回执。
+先看[本轮论据与样本量复核报告](实验论据复核与论文表达修订报告_2026-10-12.md)：集中说明目前能支持什么、30任务精度、已修BUG与缺口。[论文中文阅读说明](论文中文阅读说明.md)解释阅读顺序，英文配置名另见[中文术语表](术语表_中文.md)。
 
 | 用途 | 文件 | 说明 |
 |---|---|---|
-| 当前英文主文章 | [manuscript_current_v2.md](manuscript_current_v2.md) | 最新记录：正文 8,256 词，当前四图、四表 |
+| 当前英文主文章 | [manuscript_current_v2.md](manuscript_current_v2.md) | 本轮正文6,132词，当前四图、四表 |
 | 当前中文内容对照 | [manuscript_current_zh_v2.md](manuscript_current_zh_v2.md) | 项目组理解与作者核对，不是投稿语言版本 |
-| 查看主稿实际构建与检查 | [2026-10-08 收束报告](current_manuscript_closeout_2026-10-08.md) | 页数／词数以报告顶部后续修订记录为准，下方旧节点回执保留 |
-| 正式 LaTeX 主入口 | [M3_PI_Guard_JISA.tex](../../../../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex) | 正文采用 elsarticle；同目录的正式 PDF 最新记录为27页 |
-| 本地模板审阅入口 | [数模通用模板.tex](../../../../LaTeX通用模板/数模通用模板.tex) | 最新模板 PDF 35 页；不是把数模模板当成期刊格式要求 |
+| 查看本轮构建与检查 | [2026-10-12 复核报告](实验论据复核与论文表达修订报告_2026-10-12.md) | 186定向测试通过、Times字体BUG修复；旧节点另见[历史收束报告](current_manuscript_closeout_2026-10-08.md) |
+| 正式 LaTeX 主入口 | [M3_PI_Guard_JISA.tex](../../../../LaTeX通用模板/M3_PI_Guard_JISA/M3_PI_Guard_JISA.tex) | 正文采用elsarticle；本轮PDF23页 |
+| 本地模板审阅入口 | [数模通用模板.tex](../../../../LaTeX通用模板/数模通用模板.tex) | 本轮PDF30页；不是JISA官方投稿类 |
 | 历史补充材料 | [supplementary_tables_v1.md](supplementary_tables_v1.md) | S1–S20 与五幅历史补充图；补充 PDF 24 页沿用既有检查 |
 | 含历史细节的完整英文稿 | [manuscript_deepseek_v1.md](manuscript_deepseek_v1.md) | 与当前精简主文章分开，不是第二份当前主稿 |
 | 含历史细节的完整中文稿 | [manuscript_zh_v1.md](manuscript_zh_v1.md) | 历史工作对照稿 |
 
-上述页数、词数和编译结果来自已记录的 2026-10-08 修订，本次文档整理没有重建 PDF、重新数正文词数或修改稿件。作者信息仍为空。
+当前主稿页数、词数和编译结果来自2026-10-12实际构建与检查；历史补充PDF沿用既有回执，本轮未重编。作者信息仍为空。
 
 当前工作标题：
 
@@ -54,7 +54,7 @@ python -X utf8 -B -m scripts.build_lean_paper_manuscript --profile current
 python -X utf8 -B -m scripts.build_jisa_latex --main-markdown manuscript_current_v2.md
 ~~~
 
-这些命令会写入生成稿件，不是只读检查，本次没有运行。完整编译步骤见 [LaTeX 说明](../../../../LaTeX通用模板/README.md)。
+这些命令会写入生成稿件，不是只读检查，本轮已实际运行。完整编译步骤见 [LaTeX 说明](../../../../LaTeX通用模板/README.md)。
 
 默认构建仍保留完整工作稿的兼容行为，不能把默认输出误当作当前精简文章。独立补充 LaTeX 入口为 `M3_PI_Guard_JISA_supplement.tex`；不要为了更新入口说明重跑历史统计。
 

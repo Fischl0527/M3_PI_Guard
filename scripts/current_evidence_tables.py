@@ -1,4 +1,8 @@
-"""Render current paper tables from cached analyses; never recompute statistics."""
+"""从已缓存的实验分析结果中渲染当前论文表格（严禁重新计算统计量）。
+
+表格仅展示固化分析数据。双语分支仅更改显示表头与文本标签，
+绝不改动实验条件键、分子分母、置信区间或端点定义。
+"""
 
 from __future__ import annotations
 
@@ -8,7 +12,7 @@ from pathlib import Path
 
 
 class EvidenceTableError(ValueError):
-    """Cached evidence cannot support the requested table."""
+    """当缓存证据无法支持所请求的表格渲染时抛出的异常类。"""
 
 
 def _unique(rows: list[dict], fields: tuple[str, ...]) -> dict:
@@ -51,7 +55,7 @@ def _markdown(headers: tuple[str, ...], rows: list[tuple[str, ...]]) -> str:
 def current_tables(
     project_root: Path, *, chinese: bool = False
 ) -> list[tuple[int, str, str, str]]:
-    """Return number, title, table, note using identical evidence in both languages."""
+    """读取固化分析数据并构建 4 大论文核心数据表（支持中英文双语输出）。"""
     authorization = json.loads(
         (
             project_root / "outputs/experiments/claude_revision_v1/analysis.json"
@@ -103,8 +107,10 @@ def current_tables(
         "Bounded synthetic component controls",
     ]
     notes = [
-        "The authorization core and nested stress assignments total 900, not 900 independent cases. "
-        "Cohorts overlap. Exact target is evaluator-derived oracle authorization, not a deployable source. "
+        "The 900 authorization assignments use 180 cases representing 153 underlying tasks. "
+        "All 120 calibration cases and 60 stress cases are nested within those 180 cases. "
+        "The studies total 1,396 executions including 16 synthetic controls; the review reuses 240 records. "
+        "Exact target is evaluator-derived oracle authorization. "
         "VIGIL uses generated constraints and deterministic hybrid auditing with secondary model verification disabled; "
         "its call cap is 16 versus 8 for the other calibration conditions.",
         "Each cell has 30 planned benign-tool tasks. Completion fractions use observed denominators; "
@@ -119,8 +125,7 @@ def current_tables(
         "Each entry represents one controlled execution per module, not a population rate. U/C means "
         "simulated unsafe effect / task completion (1=true, 0=false). All 16 workflows completed normally. "
         "Full's ASK is waiting for clarification, not human approval or completion. Effects are in-memory mailbox "
-        "transitions; boundary rejections were zero. Flash is V4.1, not historical V4 Flash. "
-        "These controls do not demonstrate natural-task or arbitrary-leakage generalization.",
+        "transitions; boundary rejections were zero. Flash is V4.1, not historical V4 Flash.",
     ]
     if chinese:
         titles = [
@@ -138,10 +143,10 @@ def current_tables(
             (names[3], "4种场景", "16", "仅权限/完整模块", "Pro + V4.1 Flash"),
         ]
         notes = [
-            "授权主队列与压力授权合计900条分配，不是900个独立任务；队列重叠。精确目标是离线答案派生的理想对照，不是部署授权。配置VIGIL生成约束、确定性hybrid审计，关闭模型二次验证；请求上限16，其他校准条件8。",
+            "900条授权执行使用180案例、对应153底层任务。120校准案例和60压力案例均严格嵌套于这180案例；加16合成控制共1,396次执行，意图复核复用240条已有记录。精确目标是离线答案派生的理想对照。配置VIGIL生成约束、确定性hybrid审计，关闭模型二次验证；请求上限16，其他校准条件8。",
             "每单元30个计划良性工具任务。分数使用已观察分母；方括号是缓存Wilson 95%区间（百分比），不是配对差区间。本表结果均已知；失败仍在原分母，且可与完成同时成立。ASK/DENY是事件数，不是不同任务数。两模块都用普通提示。",
             "攻击和良性单元各30个计划任务。分数使用已知结果及Wilson 95%区间（百分比）；未知不当安全零。AgentDojo配置VIGIL的攻击ITT界限4/30至6/30，良性完成17/30至19/30。失败与危险效果分开。AgentDojo为原生安全评分，M3-v2为已观察模拟越权效果；无研究防护仍保留共同隔离边界。",
-            "每项为一个受控执行，不是总体发生率。U/C表示模拟危险效果/任务完成（1真、0假）。16条流程均正常结束；full的ASK只是等待澄清，不是真人批准或完成。效果为内存邮箱状态变化；隔离拒绝均0。Flash为V4.1，不是历史V4。本控制不能证明自然任务或任意泄漏泛化。",
+            "每项为一个受控执行，不是总体发生率。U/C表示模拟危险效果/任务完成（1真、0假）。16条流程均正常结束；full的ASK只是等待澄清，不是真人批准或完成。效果为内存邮箱状态变化；隔离拒绝均0。Flash为V4.1，不是历史V4。",
         ]
 
     authorization_cells = _unique(

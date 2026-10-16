@@ -63,7 +63,7 @@ MAIN_TABLE_DISPLAY_NUMBERS = {}
 
 
 class LatexBuildError(RuntimeError):
-    """Raised when a source cannot be converted without silent content loss."""
+    """LaTeX 编译与文档转换失败时抛出的专用异常类。"""
 
 
 @dataclass(frozen=True)
@@ -110,7 +110,7 @@ def _split_h2(markdown: str) -> tuple[str, dict[str, str]]:
 
 
 def _join_hard_hyphen_wraps(markdown: str) -> str:
-    """Undo source-editor wrapping after a lexical hyphen, without changing files."""
+    """撤销源码编辑器在词汇连字符后的自动换行，且不改变物理文件。"""
 
     return re.sub(r"(?<=\S)-\r?\n[ \t]*(?=\S)", "-", markdown)
 
@@ -171,6 +171,10 @@ def _inline(text: str) -> str:
         text,
     )
 
+    # xeCJK把输入中的弯引号视为CJK标点；TeX引号让英文沿用Times字体。
+    # 在Markdown代码/引用保护之后转换，避免新增反引号被误识别为代码。
+    text = text.replace("‘", "`").replace("’", "'")
+    text = text.replace("“", "``").replace("”", "''")
     text = text.replace("−", protect(r"\ensuremath{-}"))
     text = text.replace("×", protect(r"\ensuremath{\times}"))
     text = text.replace("—", "---").replace("–", "--")
@@ -225,7 +229,7 @@ def _render_inline_table(lines: list[str]) -> str:
 
 
 def _inject_after_subsections(markdown: str, placements: dict[str, tuple[str, ...]]) -> str:
-    """Locate unique semantic titles independently of rendered section numbers."""
+    """独立于渲染后的章节编号，根据唯一语义标题进行定位。"""
     lines = markdown.splitlines()
     inserts: list[tuple[int, tuple[str, ...]]] = []
     for heading, artifacts in placements.items():

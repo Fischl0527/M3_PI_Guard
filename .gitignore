@@ -5,6 +5,12 @@ __pycache__/
 .cache/
 *.log
 
+# Editor workspaces and agent metadata
+.agents/
+.copilot/
+.obsidian/
+.opencode/
+
 # Scoped portable deliveries, downloaded wheels and browser scratch stay local.
 # Track source/guide and curated small verification results explicitly instead.
 release/portable_v*_20261009/
