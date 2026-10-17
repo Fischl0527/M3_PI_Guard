@@ -1,5 +1,17 @@
 # 会话移交
 
+## 2026-10-16 — 随笔解耦与忽略规则收窄提交已就绪
+
+- 状态：已完成 Option B 解耦与 .gitignore 规则收窄。
+- 改动：
+  - docs/LLM的千层诱惑.md 迁移至 docs/personal notes/LLM的千层诱惑.md。
+  - tests/unit/test_repository_layout.py 与 scripts/audit_project_conventions.py 解耦断言。
+  - 公开文档入口同步更新至 docs/项目完整综述.md。
+  - .gitignore 收窄 harness/workspaces/、outputs/portability/、outputs/manuscript/，保留必要证据；保留 docs/paper/新建文件夹/、docs/personal notes/；新增 docs/paper/*.zip 拦截本地超大文件。
+  - 核心图表 docs/picture/、模板代码依赖 LaTeX通用模板/、验证数据 outputs/maintenance/ 与任务契约 outputs/references/ 均已就绪。
+- 验证：tests/unit/test_repository_layout.py 单元测试全部通过；active_document_links 0 断链通过；Ruff 代码风格通过。
+- 当前分支：branch1。
+
 ## 2026-10-16 — 教师研究介绍文档修订已验收
 
 - 状态：F-DOC-009 verified。本轮原名两份Word原位更新，文件名日期仍2026-10-14；已删除本地路径和内部文档引文，论文[1]—[3]对应完整书目，局限性各一段。

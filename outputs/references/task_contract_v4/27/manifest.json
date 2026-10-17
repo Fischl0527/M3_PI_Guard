@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "generated_at": "2026-10-13T22:13:02.731Z",
+  "request": {
+    "topic": "",
+    "title": "Leveraging Pre-trained Large Language Models to Construct and Utilize World Models for Model-based Task Planning",
+    "dois": [],
+    "pdf_url": "https://proceedings.neurips.cc/paper_files/paper/2023/file/f9f54762cbb4fe4dbffdd4f792c31221-Paper-Conference.pdf",
+    "si_requested": false,
+    "language_override": "",
+    "route_override": "",
+    "source_url": "",
+    "api_fallback_web": null,
+    "api_fallback_web_for": [],
+    "no_api_fallback_web_for": []
+  },
+  "summary": {
+    "total": 1,
+    "downloaded": 1,
+    "seconds": 2
+  },
+  "results": [
+    {
+      "title": "Leveraging Pre-trained Large Language Models to Construct and Utilize World Models for Model-based Task Planning",
+      "status": "open_access_downloaded",
+      "provider": "direct_url",
+      "accessMode": "open_access",
+      "ok": true,
+      "file": "E:\\M3_PI_Guard_test\\outputs\\references\\task_contract_v4\\27\\PDFs\\Leveraging_Pre-trained_Large_Language_Models_to_Construct_and_Utilize_World_Models_for_Model-based_Task_Planning.pdf",
+      "bytes": 649236,
+      "sha256": "896f4f5ff68592da032844701bd9c6b07fe5e4db5b74dfa0b9fb0cf3a814e2a7",
+      "contentType": "application/pdf",
+      "format": "pdf",
+      "source": "https://proceedings.neurips.cc/paper_files/paper/2023/file/f9f54762cbb4fe4dbffdd4f792c31221-Paper-Conference.pdf",
+      "si_requested": false
+    }
+  ]
+}

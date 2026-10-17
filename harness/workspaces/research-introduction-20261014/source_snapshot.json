@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "outputs/experiments/empirical_reinforcement_v1/analysis_v1.json": "7b384588cc15f2cb753cec0d1ab2fe10fc60c11d113d0ef49bbad7d54e2a418b",
+    "outputs/experiments/task_contract_compiler_v4_development_v1/analysis_v1.json": "66d55efa52c2e9fcd1064f2f2be7c174b2d1e2e3b2f3b7617412eae6392890d3",
+    "docs/research/paper_v2/manuscript/manuscript_current_zh_v2.md": "60886f394b339ec44b136de5793381ca0aa05c5a27f561e0a0ad9f522d5f4a48",
+    "outputs/experiments/empirical_reinforcement_v1/utility/flash/raw_records_v1.jsonl": "160d6d8c4313b63c1b4f62bb0ea01f8c72321352c9e5f85a4ccb262f312a33ae",
+    "outputs/experiments/empirical_reinforcement_v1/utility/pro/raw_records_v1.jsonl": "62ac9dc387d2a2c2fe110fafa6b744cb67f4c7ee82c07e3e52a4bb0d3fe78639",
+    "outputs/experiments/empirical_reinforcement_v1/activity/flash/raw_records_v1.jsonl": "b1c2c3d2af00b798a515dab065e74d22828292a138a7f7507a90dd62f03c1e5c",
+    "outputs/experiments/empirical_reinforcement_v1/activity/pro/raw_records_v1.jsonl": "b158771769b269e25a3813c085071c5a11148b89f767e1fa27497fbd39f14ffb"
+  },
+  "staged_diff_sha256": "e0d17754709c6ab93eb5c5839e785a475f06e7111167d302ba161f96b95c01bf"
+}

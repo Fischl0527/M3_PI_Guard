@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="518.4pt" height="262.8pt" viewBox="0 0 518.4 262.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-14T20:25:57.476765</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.0, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 262.8 
+L 518.4 262.8 
+L 518.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 142.56 65.91024 
+C 124.500975 65.91024 107.163129 73.091811 94.39347 85.86147 
+C 81.623811 98.631129 74.44224 115.968975 74.44224 134.028 
+C 74.44224 152.087025 81.623811 169.424871 94.39347 182.19453 
+C 107.163129 194.964189 124.500975 202.14576 142.56 202.14576 
+L 142.56 179.43984 
+C 130.52065 179.43984 118.962086 174.652126 110.44898 166.13902 
+C 101.935874 157.625914 97.14816 146.06735 97.14816 134.028 
+C 97.14816 121.98865 101.935874 110.430086 110.44898 101.91698 
+C 118.962086 93.403874 130.52065 88.61616 142.56 88.61616 
+z
+" style="fill: #657f98; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 142.560001 202.14576 
+C 144.789598 202.14576 147.017867 202.036295 149.236728 201.817754 
+C 151.455589 201.599213 153.662366 201.271869 155.849122 200.836894 
+L 151.419415 178.567263 
+C 149.961577 178.857246 148.490393 179.075475 147.011152 179.221169 
+C 145.531911 179.366863 144.046398 179.43984 142.560001 179.43984 
+z
+" style="fill: #82958b; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 155.849122 200.836894 
+C 172.429345 197.538879 187.202361 188.183975 197.272689 174.605715 
+C 207.343017 161.027454 212.00674 144.174941 210.349754 127.351294 
+C 208.692768 110.527647 200.830898 94.908795 188.305081 83.556061 
+C 175.779264 72.203327 159.465059 65.910244 142.560009 65.91024 
+L 142.560006 88.61616 
+C 153.830039 88.616163 164.706176 92.811552 173.056721 100.380041 
+C 181.407265 107.94853 186.648512 118.361098 187.753169 129.576863 
+C 188.857826 140.792627 185.748678 152.027636 179.035126 161.07981 
+C 172.321574 170.131983 162.472896 176.368586 151.419415 178.567263 
+z
+" style="fill: #dadada; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="142.56" y="129.486816" transform="rotate(-0 142.56 129.486816)">640</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="142.56" y="149.16528" transform="rotate(-0 142.56 149.16528)">计划条件项</text>
+   </g>
+  </g>
+  <g id="text_3">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="259.2" y="19.589875" transform="rotate(-0 259.2 19.589875)">v4 开发批次的执行计划覆盖</text>
+  </g>
+  <g id="legend_1">
+   <g id="patch_5">
+    <path d="M 309.222 119.310508 
+L 328.222 119.310508 
+L 328.222 112.660508 
+L 309.222 112.660508 
+z
+" style="fill: #657f98; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="119.310508" transform="rotate(-0 335.822 119.310508)">Pro 实际记录  320</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 309.222 134.016211 
+L 328.222 134.016211 
+L 328.222 127.366211 
+L 309.222 127.366211 
+z
+" style="fill: #82958b; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="134.016211" transform="rotate(-0 335.822 134.016211)">Flash 实际前缀  20</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 309.222 148.721914 
+L 328.222 148.721914 
+L 328.222 142.071914 
+L 309.222 142.071914 
+z
+" style="fill: #dadada; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="148.721914" transform="rotate(-0 335.822 148.721914)">Flash 明确未执行  300</text>
+   </g>
+  </g>
+ </g>
+</svg>

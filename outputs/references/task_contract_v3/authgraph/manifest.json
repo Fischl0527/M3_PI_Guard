@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "generated_at": "2026-10-13T10:25:19.849Z",
+  "request": {
+    "topic": "",
+    "title": "Aligning Provenance with Authorization: A Dual-Graph Defense for LLM Agents",
+    "dois": [],
+    "pdf_url": "https://arxiv.org/pdf/2605.26497v1",
+    "si_requested": false,
+    "language_override": "",
+    "route_override": "open_access",
+    "source_url": "",
+    "api_fallback_web": null,
+    "api_fallback_web_for": [],
+    "no_api_fallback_web_for": []
+  },
+  "summary": {
+    "total": 1,
+    "downloaded": 1,
+    "seconds": 1.8
+  },
+  "results": [
+    {
+      "title": "Aligning Provenance with Authorization: A Dual-Graph Defense for LLM Agents",
+      "status": "open_access_downloaded",
+      "provider": "direct_url",
+      "accessMode": "open_access",
+      "ok": true,
+      "file": "E:\\M3_PI_Guard_test\\outputs\\references\\task_contract_v3\\authgraph\\PDFs\\Aligning_Provenance_with_Authorization_A_Dual-Graph_Defense_for_LLM_Agents.pdf",
+      "bytes": 631710,
+      "sha256": "701591d07fc632d18bad66e33d7e33511b91f277e76e02f12f05e30cef31ab5a",
+      "contentType": "application/pdf",
+      "format": "pdf",
+      "source": "https://arxiv.org/pdf/2605.26497v1",
+      "si_requested": false
+    }
+  ]
+}

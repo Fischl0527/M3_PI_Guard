@@ -1,0 +1,474 @@
+{
+  "problems": [],
+  "documents": {
+    "brief": {
+      "errors": [],
+      "text_color_elements": 594,
+      "forced_page_breaks": 0,
+      "fill_elements": 0,
+      "media": {},
+      "tables": 0,
+      "drawings": 0,
+      "local_path_citations": [],
+      "nonpaper_source_paragraphs": [],
+      "paper_references": [
+        "[1] Debenedetti E, Zhang J, Balunović M, et al. AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents. NeurIPS 37, 2024. DOI: 10.52202/079017-2636.",
+        "[2] Shi T, He J, Wang Z, et al. Progent: Programmable Privilege Control for LLM Agents. 2025, arXiv预印本2504.11703v1. https://arxiv.org/abs/2504.11703v1",
+        "[3] Debenedetti E, Shumailov I, Fan T, et al. Defeating Prompt Injections by Design. 2025, arXiv预印本2503.18813v1. https://arxiv.org/abs/2503.18813v1"
+      ],
+      "citation_ids": [
+        "1",
+        "2",
+        "3"
+      ],
+      "limitations_paragraphs": 1,
+      "render": {
+        "kind": "brief",
+        "pdf": "E:\\M3_PI_Guard_test\\harness\\workspaces\\teacher-documents-editorial-20261014\\rendered-brief-v1\\teacher_brief.pdf",
+        "pages": 2,
+        "errors": [],
+        "page_details": [
+          {
+            "page": 1,
+            "characters": 1145,
+            "images": 0,
+            "heading": "1 / M3 PI Guard 研究介绍 / 工具型大语言模型的授权与运行时防护 / 本项目研究大语言模型调用工具时，如何在完成用户任务的同时控制提示注入引起的 / 越权操作。前期从权限清单和运行时检查出发，完成公开"
+          },
+          {
+            "page": 2,
+            "characters": 1295,
+            "images": 0,
+            "heading": "2 / E9 校准上下文实验记录无Guard 与完整Guard 攻击判定阳性36/60、0/60。E14 记录 / Guard 自身p95 延迟约0.45 毫秒、相同正常路径的端到端开销中位数约0.20%。E"
+          }
+        ]
+      }
+    },
+    "detailed": {
+      "errors": [],
+      "text_color_elements": 523,
+      "forced_page_breaks": 0,
+      "fill_elements": 25,
+      "media": {
+        "word/media/image1.png": "1a857f872b71260ba5ca7a0c3c8238aff9586f7479aed6536362e180aa166b8e",
+        "word/media/image10.png": "a6ff22c7bc7ec076bf772ae5dcfc021e223af8650ee743fbfce4233eae973d99",
+        "word/media/image100.png": "bad0c4b177c0988c2de2b9b82053d5ff92cba32ef31ab54be671c51f0bd7ca31",
+        "word/media/image101.png": "d6adc46e74a9c47729d48553068294a8e143ad97aefbb5727c8521674bdaf231",
+        "word/media/image102.png": "3221d8e1b9a7725ab117e7d4412fa550dca86742ff30592f820cef6fc1ccc232",
+        "word/media/image103.png": "43499f0324735d5146dadbb105f4d59a3dcb4eabaa160ee49a4fb62e15e60094",
+        "word/media/image104.png": "682e49f7bdf928e00e8068a82a95f5ea50c945f7affef0a14a4533dbcd7fc0e0",
+        "word/media/image105.png": "edbe1ba8696b9fdd28f81212550d81aed80cefbdb85deb85572a7b9c363c3652",
+        "word/media/image106.png": "604c73b776f47eeda135ad85094fcd13c12f4dd6145f3a9ecbe48b2473d9d54c",
+        "word/media/image107.png": "726affb6e25a58212469e973fce1ea40684c9fab44677de65899ecd7e910a7d1",
+        "word/media/image108.png": "31f6a8c9a91b3af2a070d693021eeca8ae7614bd4b2e368643dd0aafc2a3e279",
+        "word/media/image109.png": "e3c844e3a4ea7d3fac4fd3295c0ecb4158ad6e8383b4eedbc36bfa10b5f2fbda",
+        "word/media/image11.png": "64f045d0d81260780c0982c337fa3ddfc99810349e54e4fdc9fd5ad05f3e469d",
+        "word/media/image110.png": "203c2b0b39146604657124301817ce07b8f995025c64d03bc596f74a9983fadb",
+        "word/media/image111.png": "55806e9491b672059e707d13e8cf2712c60ebd2532355502ac101344f0fedbd2",
+        "word/media/image112.png": "77b759f59afc417574750fa3f4145eec622fd1f21e1c80557d256871f717e784",
+        "word/media/image113.png": "7a211d491460cabbea8f3c1a54fa1edfe86369bd4d583f42d52b53a1148b24d1",
+        "word/media/image114.png": "1bcae9111dc96d60360df021f3f432b700fd933a3a026ec97f5984b12963b4a8",
+        "word/media/image115.png": "dad075249048a9b13b7be10e0ffb5a9ff1c3fc0c8b9574c352c4d4652d23b926",
+        "word/media/image116.png": "96bb8e2899b9519f8773a104b460cdbaa25db61366a80bf434188265a6f9bc0a",
+        "word/media/image117.png": "b028b6fc68db34f335715c3741dfe0e564d3056dc7e4b1467fc37e8fdbfacbff",
+        "word/media/image118.png": "dd92009f30a1a115a35aec00edb494eb20f288fb1ae6c43c5e3577a3af0030ae",
+        "word/media/image119.png": "798ba28dba5c3f1f30229f47ff3026c8f995778a7310bbdbaeb8a140546be568",
+        "word/media/image12.png": "8bdc8ba5c0f988d8d38d46459edda210c44feb66900e7dfd9fa7f4c5deaf9b7b",
+        "word/media/image120.png": "29887dd6c2df40c24e4d8c76ee8beb0322846398993809bfa333d7fe692f2c2c",
+        "word/media/image121.png": "0f5c53f24376d1825dc650e5ac2cb8996f03e0a9dd27ebb69879b4f8af78c5b3",
+        "word/media/image122.png": "f5211b6048e381a6569644143e065ecf3604fac1b7fb129128cbb4c79bea6302",
+        "word/media/image123.png": "f72951daab8e42c38b62d8235bb958a4b0744b6d54cd7b423c075efaa01999c0",
+        "word/media/image124.png": "4822f07230f5249e48af3ff8db3d2aea7005af43249e76ce1142d2fd4eba3e11",
+        "word/media/image125.png": "3e57d23df8373955af9fd36e8b8692f24e4d24f29d42374a1469d2617cc3b242",
+        "word/media/image126.png": "c571bbf8bd2f35ce1748108b9cdd078d810002b9a6165ad988b1168ef2479eb2",
+        "word/media/image127.png": "bb510ff06d4656ba14565104a2a37487efc6a0420eae01fa49bcbe46a08849c3",
+        "word/media/image128.png": "fc77fd7358ab644d6832a6c94a251ee0379ec1c7184a0d6676bb8acfc9762860",
+        "word/media/image129.png": "025d88f7e59b6c34d207823c7688caf1cecb8805c862f56399344cd91641c282",
+        "word/media/image13.png": "3f226294bf92eb4d6f911e89bbfccf39555735d82a912975d2cb432676975165",
+        "word/media/image130.png": "1fa8899476afdd569c054e240b11540d88f56a904f80cdc7acbbfcd170f4a78b",
+        "word/media/image131.png": "5afb793c8afeb827561b7d0b219a54b4af02bd9a340bb72ec6ccb7536fb30f31",
+        "word/media/image132.png": "eb4b9c92b8a68eb4f64936661ca9020c9d25633048709ba1233e32510755af2a",
+        "word/media/image133.png": "bcd8cfa0fd72356ca721dfc4a150a64add8f082b8116de7aa84559626f107ec7",
+        "word/media/image134.png": "42068fde323c6325fd7c2a9ab40c22a088154408a3ec6479c540d4306db45978",
+        "word/media/image135.png": "3c4700ae36591c6f4cd0287e4f3a34407552cbe3c42e60b59da42f773680a504",
+        "word/media/image136.png": "7f8c5f2b0946779b596b70c904a91cb7b97292ddab7154681834dc4c090ec0e3",
+        "word/media/image137.png": "951c25ca1bd6fda66ca8e008ccb04e49278c16467711100acb2f4965281d5c80",
+        "word/media/image138.png": "774956af2408ba518f781579684aad4f09ce48f81999ec33f384fc363156767e",
+        "word/media/image139.png": "201626abf1424d0fddbafb0ba4780da14108536f4fd9c3390bafa8ed46163a4c",
+        "word/media/image14.png": "9b0718977217237260814e235497256f0490c41fec823fde0c480d34d44b12ac",
+        "word/media/image140.png": "826f894919267cc89272071c8abe0f54db4937dbc816057a262e641524b86596",
+        "word/media/image141.png": "f5659b71c911b26bad0489a2aa013a402e086362e756012c1de49179ed14d24d",
+        "word/media/image142.png": "dcf7ff8e5d0a98ced0ee968f1ac70371d8b530fd70644e727a8bed1bd392145a",
+        "word/media/image143.png": "58fccd858d9011c7bb65c2864d3b02a549316d182becaa39e46f8abefa852177",
+        "word/media/image144.png": "1086500a4a0187a7034b8fe0b6d513ef72b56b764b83207dc0d70c2d27ef7daa",
+        "word/media/image145.png": "3a4a19c6680e27c84639c6e503f5d884c9258a53ac2d52f164a168c6958ef4df",
+        "word/media/image146.png": "e924f61f2fba17769312eaae14bb93bd1d07c4e697ea40e2a6cab4c83042ad58",
+        "word/media/image147.png": "b04a7a858ddd8e8f9a8048e90a8dc0a513c1dc02667c5af7c6c0d32a07b4e258",
+        "word/media/image148.png": "706d3fbcf911ef43ab7fba10530f5b36d9e6f2f24d1afa0ab45e7b9ea4c29840",
+        "word/media/image149.png": "1856c19511d31aedb0f60412618378a19fada72700fbc82c96238e9599dfd2f5",
+        "word/media/image15.png": "cbce244983f062536438b42faec67e69e0e8d01501f0f42730cf26dc63a1f11d",
+        "word/media/image150.png": "12fbe104a3cd5483e8a73dd4438a179621593cbd4341e817419afa21797038d1",
+        "word/media/image151.png": "b27304843135739b2c4ee4e0a15474a193e9790d6d280662d1454c9cc0c80491",
+        "word/media/image16.png": "fd506cae4ac3a492d83cf4df1ccd00c43fcb1a57221c5e4d4e0743a0c6bc88e6",
+        "word/media/image17.png": "7cc56861a7c353ee21ee3a0b9209cc7bed4a03e9bd3e36e80fb2d8baedc3db37",
+        "word/media/image18.png": "d6e81e92ac166a58eb7d5d4374e231bcc4f679d741f43b2ab50e80e7b40abea4",
+        "word/media/image19.png": "3c276a45c55ab304fceff20322a2ff65ffd670850b1860f03a4f6133f9aab1a2",
+        "word/media/image2.png": "c5a61610ad3379ffc689515f7bdf0774af15acbfb06e846edbf786c6efc765d7",
+        "word/media/image20.png": "02bc770263b95fd37e92b986cc1a9e6aa1334bfc8ab434ec894d334c5ed8058a",
+        "word/media/image21.png": "e8b17823d84dc7c4a00728d6b919accdc26e9831d24e791a87f5543936d0d0ea",
+        "word/media/image22.png": "cbc3ccc5300f0cb0f46989cc74ffb2e94dc30ef15788ec56e4b5dc6d053ca2b8",
+        "word/media/image23.png": "3b62c68cfad58d492fba4da9562a2027e27ae220c8a0ddc4973c573c206e0408",
+        "word/media/image24.png": "c95f3de7944784a35b7a533c03dc8613bb0553db6b857270b531da043240f5c8",
+        "word/media/image25.png": "75aaa3f4576fc0a8cf67a2c48342d1e3591763417cb98ff41f76588523bc9294",
+        "word/media/image26.png": "8d5e440dd3bcc224ada63419ca697cdbacdcf20680e17327bba440a2d6d92282",
+        "word/media/image27.png": "22d0c4f971935ecd36815c3b4c7ede0b7906a6a1a99d23cefc561a5b037e5b00",
+        "word/media/image28.png": "8a78a38e05c36ce47668407481514da4c71fd18246a383731dede3a7b8a17fe4",
+        "word/media/image29.png": "2b7b20768b8f37539c83ab4784c0dfd5ce6b7b9f2bbf4463f26e0393eedd4fce",
+        "word/media/image3.png": "fb8ab8cb47fa8ce88a503819e1e74a0bc15424cdc4d2a2fc8894472003cfa02d",
+        "word/media/image30.png": "abde467b038519431f35371457b5d2159e2f5480ba6444365f4e1cb0f8fb307a",
+        "word/media/image31.png": "994ca7abc3a6ef5fcad4a258cdc6dada76633d73a6b9333999275f353e0d5136",
+        "word/media/image32.png": "c357b523bc0cfc0eb878ca297ecc395b40b5c7ac8556ffe6cb863df6d23f951c",
+        "word/media/image33.png": "e8dbfd98993b522915af92f0b90cdc714636c21fc430d5fdec414ff9e0b69449",
+        "word/media/image34.png": "11c4fd46f8212c968ad7cd847aa16e46e81f7e059cb97b077b8389e3585bdaa4",
+        "word/media/image35.png": "144a74932a71afa67773b887eb8dc69ba242d57f576d598fa0a80c3684e47960",
+        "word/media/image36.png": "e97666401ba34b1b7a251bbb3180b6cc6a8e6e9f0282ec3ebbb349307353ba5c",
+        "word/media/image37.png": "65a9a4019f9589f8912323db27ab130145db262d98ee28c64c93250e3b352361",
+        "word/media/image38.png": "3981a4b6292469d18c6efa21eb4e2d3881e93aca7554a19367926251e424f66d",
+        "word/media/image39.png": "61f6189b771207bf3b5d0e6deec2fcfa27da0c3ff9ceeb6f373b1a3a03dbda59",
+        "word/media/image4.png": "684c1b1023846b82be6c0e9092601a7999af93746c6fbbfb893838685210127f",
+        "word/media/image40.png": "f30e7a1c7ee098b56b667f3355ee2c6b46efdd8eedccefcc680355b5ac55b33e",
+        "word/media/image41.png": "021e7f1aa44f49c356dbae5993545e3aa77181327f6d3ec8504472ab837bfd6e",
+        "word/media/image42.png": "15dddc2a52ed9560bf3d5fc9e209b204f30158c2d452795ef99a22a75f13ba4a",
+        "word/media/image43.png": "e78c2260e8836b7a1e05aad3b7bce45d52fe80af5390dd842b99bfcbdb4b07b7",
+        "word/media/image44.png": "639bd4474f82315335910cda69711fa50599987094daeba6580c21dc4c531a72",
+        "word/media/image45.png": "157c145a935650e57f4a3bcd4f78174fa62c9f3c9e58d3cff277760f9341a999",
+        "word/media/image46.png": "817aa15fd250bbe9025206b53465264ad4de708c9672fba25b77e95653fd70e7",
+        "word/media/image47.png": "c104ea8d5ea37e8f3afcf624f8ccdfccc4e09be8cb98072bfa620d222480132e",
+        "word/media/image48.png": "7360d7ef6b1262489239d1d4da4aac47ef61f4adce44513fc62b6b5c2f978b7c",
+        "word/media/image49.png": "cc19e1a975a929080eebdef9015e0191928b871bda254ef06156f0ab1ff69390",
+        "word/media/image5.png": "704c27c75bf9c874562c041f53dc82808d9c36a03f296465f864abe380bddf2a",
+        "word/media/image50.png": "87d2d2baa7ab2c7e5553aeb678875c009b92e74b880a7bd9d6dfc567f620c2c3",
+        "word/media/image51.png": "918d56bffa089be8a353ad277ab030dd0014b3ea1c295f4d2f341bb11eabafbd",
+        "word/media/image52.png": "ed7d896ed9e627f8aa2d44bc62f10db6f5f2576699f4aede731580dc2cf5dfc7",
+        "word/media/image53.png": "b20e3a26ceebeb2d6370eca2457955976f33bbd1711f2b72cf2c05b01646b324",
+        "word/media/image54.png": "4a0abe05a8ee559ba7612f25a403dd4bf9013aeadbe55976fe45cb9a1b6de924",
+        "word/media/image55.png": "4b36162bcf0f3ff4f493579ffea07397067161b4fcc9388b87c08edd1dba4d88",
+        "word/media/image56.png": "0c28cc86b1e124f94128f911aa1a1d7315793f516dfbca23d61325fbc65913aa",
+        "word/media/image57.png": "552ebeead75d6de70188ba693d8ec8d071b7cb3a48c0a7f4f60b6038dbbc1d6f",
+        "word/media/image58.png": "d1b7dfc4473126812ecf164490ec4ecd488007f3d4d1f6120ddf026a9ac225b7",
+        "word/media/image59.png": "6d64191166a7565d5b49fd0d9ca272f28022d7759837f3987948e03c239ee65c",
+        "word/media/image6.png": "0bee1f3fee7ac2dae9d7a65f25b8f393e718f10e0b2cd0fee7bae75295d29419",
+        "word/media/image60.png": "4de59ff1dd3299f52d9a9cb0d8bd02cc80df09bbafa6c90af5e40f106f5a0e2f",
+        "word/media/image61.png": "cacf306a2f8208d121393d727c98d178b00033f3713db22a8c45545db284bbed",
+        "word/media/image62.png": "1e193a96151352f9f0318b5ccb06de67f63adde4c32e5c6e7e39d6a4454ea21d",
+        "word/media/image63.png": "5c2914a3a408ebf190d436af982a32c94c7c309d1f5bb03df7814d7cea49d4f3",
+        "word/media/image64.png": "46dbb64f9f7b5274a1d573bfa5f8f1a1db6644ef36197959001f672794c309b4",
+        "word/media/image65.png": "eb4c6ccae9651a8afcdfc935544508a3175db0927200c474f637ef8b173f803e",
+        "word/media/image66.png": "f4f83ccb07b1743350c47cea726eaac13e458a172ceaf42f9cf7e315abcf3cfd",
+        "word/media/image67.png": "3467a02e5b9de05af292b4ef041873254404f94054db23516fbc078807dfb15d",
+        "word/media/image68.png": "427ff38e85efdf1c9d708d019fa5a07c98a2b98ebfb1b40574cf68a523a34a6b",
+        "word/media/image69.png": "fd9a2a0e394bda88068ef3c9764e93f5ff7f5763b920ab4b20ccb9a37e9feb28",
+        "word/media/image7.png": "bfd1653889ffe0127a318b3215ce5533750c8c0d37d0a929940aa33c5aa7a1d4",
+        "word/media/image70.png": "b9b48209be537bfb3adee7a40f4d8aaa447b66b1a557e384e370d15b75f945e0",
+        "word/media/image71.png": "a8151337764e1be61b0128301d61e02be2ba56eedcc8687bd66337817a51c6ae",
+        "word/media/image72.png": "521c8c7fcaa4e3c1d75d8d0f429cb6b52acaf43234d844bf42e74224903f4a1f",
+        "word/media/image73.png": "fe3b1954b44286ae712e990190b29a499a0b78d4aa7e50404cc5c371a17ba0d6",
+        "word/media/image74.png": "6348d19641e3f6fb3b504879f68c6fac0819d37486b2b5210857152d2379a9f0",
+        "word/media/image75.png": "52db1c6288fb80c13ff9bc9030b4fab0da881da75b0fb6d02435561b40625a30",
+        "word/media/image76.png": "00d7024f6d2c7f96798552ce189d8a62790ece3d08c1f41f136e9c86c5b0f757",
+        "word/media/image77.png": "ac7a96e37376658942ff3ecf6708c905f561a65a2ac99b91c42803ecef60854e",
+        "word/media/image78.png": "1ac8623e01a4cd9bec7d216067c2be50276ce1dfd48324dbc2ce54c2b9bca33a",
+        "word/media/image79.png": "621f4e69b2a0f62a5cd92ba102c7411a8d2b9c0658ed4f50921b85f2255d21ba",
+        "word/media/image8.png": "5ca01bc5a05ea6059f97d140a2f6518d3edd6f48d79e52a5d7c4e1b2c1be7588",
+        "word/media/image80.png": "9d9ae0a35ddcae10c6cc2ca58caf43d81875667059e34c2b9ea3863cd469090d",
+        "word/media/image81.png": "93a7b62104c5aebe93e0be7afdf5cc82cdd8edb7fc9b5b7080a6cdd2ef065705",
+        "word/media/image82.png": "e78ea89aa5c8f991a511b92ca281029fdbd9bcc07993edda7a2b0263d34f2a05",
+        "word/media/image83.png": "5269d14f516de2e4c69314df16698ab4d87acd2b7746ac00f0408137a647160c",
+        "word/media/image84.png": "54969c6d9b4fbb11e5acd823c3ddafe7eb362f205fc783874864890050a019f3",
+        "word/media/image85.png": "d3c4cde444cb7ec5fe515d7635ae16498729ff3a2c4d9e5fed4a8b6b80429d31",
+        "word/media/image86.png": "5a3d7337b131adb30076a1bb224764e6533d926cba064d469f0cb1fe37fa1810",
+        "word/media/image87.png": "dbd201f113c11af47068d351408b00cd4167c1c0b58a038dd046bb49489f75d3",
+        "word/media/image88.png": "d34e4784b403fde1c1ae599256a56edc5e2fddf4497be1e68a7d10eef17227ae",
+        "word/media/image89.png": "a2a0f2b9ef9372003520b6301dc66db9c1041cef8050d41897529c59fc496e76",
+        "word/media/image9.png": "9ea7ba6bb6eb0b23943ee83d5d79624a22273b868e3e54fa6b5b8aa460928330",
+        "word/media/image90.png": "a232adb413e1c2a1e9ebcd4f8810a07f4a434f3c1be4b5148cceca6514e6e4e5",
+        "word/media/image91.png": "9f1a1f9fb35021926d7c151ee2a5fe93e429c17c79ec0e151a1ffc8a96f3c847",
+        "word/media/image92.png": "9695886d47abbe9f108aeb792f1c9881c21f5b8cd752687231932d9ca45733db",
+        "word/media/image93.png": "4d6b7fff6b46434b41b6b60b4a1caa9541ae3dd5c030fdde65f753b818c64608",
+        "word/media/image94.png": "707b7f0db34f7a6fc4d67efd678a5e686190a7e546a55f846600a6046d5ba2ac",
+        "word/media/image95.png": "ae00260f147fe815d33d9fd28b87f54f1bc7a6279bb23a6ce4dd922baaa5e7c8",
+        "word/media/image96.png": "5a5c0230704f26aac150f6023cda490fdb92d3e1cbd57441838897e440721558",
+        "word/media/image97.png": "b709939527079982c61632e330adf3b9dc1a239bb381971012d2d7974e506eb2",
+        "word/media/image98.png": "5ccede2cc297accbdfb3c07b1a4e656ff769fa6ddf49d4b9d68f7cd41da8c5b0",
+        "word/media/image99.png": "1d37afc9bb7b0628ca68c913e5d4a72f6aae53fa113728ac49f45fd59f5507d6"
+      },
+      "tables": 42,
+      "drawings": 151,
+      "local_path_citations": [],
+      "nonpaper_source_paragraphs": [],
+      "paper_references": [
+        "[1] Debenedetti E, Zhang J, Balunović M, et al. AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents. NeurIPS 37, 2024. DOI: 10.52202/079017-2636.",
+        "[2] Shi T, He J, Wang Z, et al. Progent: Programmable Privilege Control for LLM Agents. 2025, arXiv预印本2504.11703v1. https://arxiv.org/abs/2504.11703v1",
+        "[3] Debenedetti E, Shumailov I, Fan T, et al. Defeating Prompt Injections by Design. 2025, arXiv预印本2503.18813v1. https://arxiv.org/abs/2503.18813v1"
+      ],
+      "citation_ids": [
+        "1",
+        "2",
+        "3"
+      ],
+      "limitations_paragraphs": 1,
+      "media_unchanged": true,
+      "tables_unchanged": true,
+      "picture_spacing_unchanged": true,
+      "dimensions_unchanged": true,
+      "render": {
+        "kind": "detailed",
+        "pdf": "E:\\M3_PI_Guard_test\\harness\\workspaces\\teacher-documents-editorial-20261014\\rendered-detailed-v1\\detailed_report.pdf",
+        "pages": 40,
+        "errors": [],
+        "page_details": [
+          {
+            "page": 1,
+            "characters": 773,
+            "images": 1,
+            "heading": "第 1 页  共 40 页 / M3 PI Guard 研究介绍 / M3 PI Guard 研究介绍 / 工具型大语言模型的授权与运行时防护 / 1 研究问题与系统流程 / M3 PI Guard 研究大语言模型调用工"
+          },
+          {
+            "page": 2,
+            "characters": 1048,
+            "images": 0,
+            "heading": "第 2 页  共 40 页 / M3 PI Guard 研究介绍 / 2 核心机制与一个完整例子 / 可信用户请求、可信应用声明和工具格式共同构成授权依据。模型读取任务与外部材料后，返回 / 工具名称及参数；Guar"
+          },
+          {
+            "page": 3,
+            "characters": 1204,
+            "images": 0,
+            "heading": "第 3 页  共 40 页 / M3 PI Guard 研究介绍 / 处理。它给出提示层干预的单独作用，并与后续执行检查的实验形成连续对照。 / E3 强化提示后的增量。使用相同强化提示，再比较有无Guard，分"
+          },
+          {
+            "page": 4,
+            "characters": 704,
+            "images": 0,
+            "heading": "第 4 页  共 40 页 / M3 PI Guard 研究介绍 / 果波动、解析状态与运行失败，用于判断现象在不同采样条件下的稳定程度。 / E16 自适应红队。根据前轮响应，从固定变体目录构造后续攻击。42 "
+          },
+          {
+            "page": 5,
+            "characters": 738,
+            "images": 1,
+            "heading": "第 5 页  共 40 页 / M3 PI Guard 研究介绍 / 3 v1 至 v4 的技术演进 / 图 N02  v1 至v4 的权限编译与任务契约演进。v1 修正动作资源对应，v2 区分目标与内容，v3/"
+          },
+          {
+            "page": 6,
+            "characters": 562,
+            "images": 1,
+            "heading": "第 6 页  共 40 页 / M3 PI Guard 研究介绍 / 图 N14  v1 开发研究的Pro/AgentDojo 普通提示子集。正常任务8 个，攻击任务12 个；每模型完整开发研究包含48 任务"
+          },
+          {
+            "page": 7,
+            "characters": 546,
+            "images": 2,
+            "heading": "第 7 页  共 40 页 / M3 PI Guard 研究介绍 / 图 N03  v2 研究的条件执行组成。720 条主授权执行与180 条压力条件执行构成900 条授权研究，另有480 条同期校准与16 / "
+          },
+          {
+            "page": 8,
+            "characters": 831,
+            "images": 0,
+            "heading": "第 8 页  共 40 页 / M3 PI Guard 研究介绍 / 6 同期校准补充无防护参照 / 480 条同期校准使用120 案例、四条件，包括无研究Guard、policy、full 和指定VIGIL 适"
+          },
+          {
+            "page": 9,
+            "characters": 384,
+            "images": 1,
+            "heading": "第 9 页  共 40 页 / M3 PI Guard 研究介绍 / 图 N04  DeepSeek Pro 正常任务完成。强化实证研究；AgentDojo 97 任务；M3-v2 120 任务。条形为已观察"
+          },
+          {
+            "page": 10,
+            "characters": 464,
+            "images": 1,
+            "heading": "第 10 页  共 40 页 / M3 PI Guard 研究介绍 / 8 Flash 服务模型的方向复核 / 图 N05  V4.1 Flash 正常任务完成。强化实证研究；AgentDojo 与M3-v2 各"
+          },
+          {
+            "page": 11,
+            "characters": 460,
+            "images": 1,
+            "heading": "第 11 页  共 40 页 / M3 PI Guard 研究介绍 / 9 配对比较定位授权信息的作用 / 图 N06  授权信息的配对完成差及95%区间。Pro 的两项AgentDojo 主比较通过预定Holm"
+          },
+          {
+            "page": 12,
+            "characters": 645,
+            "images": 1,
+            "heading": "第 12 页  共 40 页 / M3 PI Guard 研究介绍 / 10 攻击活性与安全观察 / 图 N07  Pro/AgentDojo 攻击观察。无防护7/40、Policy 与Full 各0/40；两项"
+          },
+          {
+            "page": 13,
+            "characters": 550,
+            "images": 1,
+            "heading": "第 13 页  共 40 页 / M3 PI Guard 研究介绍 / 11 确认负担与任务结构 / 图 N08  确认负担与任务完成。Pro/AgentDojo，97 个正常任务。ASK 计数表示执行中出现过等"
+          },
+          {
+            "page": 14,
+            "characters": 521,
+            "images": 2,
+            "heading": "第 14 页  共 40 页 / M3 PI Guard 研究介绍 / 12 组件机制与自然提案 / 在受控夹具中，完整模块对来源权威、顺序、数据保密和确认四类越权提案改变了判定，同时保 / 持合法夹具放行。受控研究"
+          },
+          {
+            "page": 15,
+            "characters": 464,
+            "images": 1,
+            "heading": "第 15 页  共 40 页 / M3 PI Guard 研究介绍 / 范围和状态，再形成具体权限。 / 图 N11  v3 开发编译。44 次响应中4 条通过、40 条失败；按任务来源和开发提示阶段分别展示。 / "
+          },
+          {
+            "page": 16,
+            "characters": 466,
+            "images": 2,
+            "heading": "第 16 页  共 40 页 / M3 PI Guard 研究介绍 / 图 N12  同一32 个任务的v3 与v4 最终编译状态，分为16 个调试任务和16 个资格任务。v3 可运行5/32，v4 为0/3"
+          },
+          {
+            "page": 17,
+            "characters": 1254,
+            "images": 0,
+            "heading": "第 17 页  共 40 页 / M3 PI Guard 研究介绍 / 15 研究结论与交流重点 / 15 1 当前最有信息量的发现 / 第一，授权信息直接影响正常任务完成。v2 和强化实证共同观察到，复杂公开任务在"
+          },
+          {
+            "page": 18,
+            "characters": 262,
+            "images": 6,
+            "heading": "第 18 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 1 / 下列图表按研究阶段汇总，H 编号用于查找同一实验的不同视图。 / H015  当前研究 / v2 授权研究  各授权条件"
+          },
+          {
+            "page": 19,
+            "characters": 220,
+            "images": 6,
+            "heading": "第 19 页  共 40 页 / M3 PI Guard 研究介绍 / H087  当前研究 / 同期校准研究  同期攻击与任务完成 / H088  当前研究 / 同期校准研究  首次限制与流程终态 / 附录 A 实验图集 "
+          },
+          {
+            "page": 20,
+            "characters": 229,
+            "images": 6,
+            "heading": "第 20 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 4 / H014  历史研究 / 规则修正研究  运行恢复类型 / H016  历史研究 / v1 修复开发研究  开发任务覆盖 / H"
+          },
+          {
+            "page": 21,
+            "characters": 208,
+            "images": 6,
+            "heading": "第 21 页  共 40 页 / M3 PI Guard 研究介绍 / H022  历史研究 / E10 实验  主要条件比较 / H023  历史研究 / E11 实验  主要条件比较 / 附录 A 实验图集 6 / H024"
+          },
+          {
+            "page": 22,
+            "characters": 227,
+            "images": 6,
+            "heading": "第 22 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 7 / H032  历史研究 / E14 实验  并发负载与系统吞吐 / H033  历史研究 / E14 实验  上下文负载与设备"
+          },
+          {
+            "page": 23,
+            "characters": 211,
+            "images": 6,
+            "heading": "第 23 页  共 40 页 / M3 PI Guard 研究介绍 / H041  历史研究 / E17 实验  代表性样本的失败类型 / H042  历史研究 / E17 实验  人工复核各层组成 / 附录 A 实验图集 "
+          },
+          {
+            "page": 24,
+            "characters": 212,
+            "images": 6,
+            "heading": "第 24 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 10 / H048  历史研究 / E5 实验  主要条件比较 / H049  历史研究 / E6 实验  主要条件比较 / H050 "
+          },
+          {
+            "page": 25,
+            "characters": 214,
+            "images": 6,
+            "heading": "第 25 页  共 40 页 / M3 PI Guard 研究介绍 / H055  历史研究 / E9 实验  主要条件比较 / H059  历史研究 / 早期综合分析  上下文长度与注入位置 / 附录 A 实验图集 12 / "
+          },
+          {
+            "page": 26,
+            "characters": 236,
+            "images": 6,
+            "heading": "第 26 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 13 / H064  历史研究 / 早期综合分析  Guard 组件贡献 / H065  历史研究 / 早期综合分析  多语言及编码"
+          },
+          {
+            "page": 27,
+            "characters": 223,
+            "images": 6,
+            "heading": "第 27 页  共 40 页 / M3 PI Guard 研究介绍 / H070  历史研究 / 早期综合分析  随机种子与温度稳定性 / H071  历史研究 / 早期综合分析  阈值选择与分类指标 / 附录 A 实验图集"
+          },
+          {
+            "page": 28,
+            "characters": 239,
+            "images": 6,
+            "heading": "第 28 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 16 / H078  历史研究 / 后续增量研究  预选任务的自适应尾部 / H079  历史研究 / 授权制度研究  在线任务信息"
+          },
+          {
+            "page": 29,
+            "characters": 221,
+            "images": 6,
+            "heading": "第 29 页  共 40 页 / M3 PI Guard 研究介绍 / H094  历史研究 / 工具智能体实验  四类任务的配置比较 / H097  历史研究 / 工具智能体实验  提示词基线对照 / 附录 A 实验图集 "
+          },
+          {
+            "page": 30,
+            "characters": 246,
+            "images": 6,
+            "heading": "第 30 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 19 / H103  历史研究 / 工具智能体实验  运行条件核验 / H104  历史研究 / 工具智能体实验  契约生成与检查负"
+          },
+          {
+            "page": 31,
+            "characters": 241,
+            "images": 6,
+            "heading": "第 31 页  共 40 页 / M3 PI Guard 研究介绍 / H109  历史研究 / 工具过滤基线资格批次  各任务域的攻击结果 / H110  历史研究 / 工具过滤基线资格批次  任务延迟累计分布 / 附录 "
+          },
+          {
+            "page": 32,
+            "characters": 263,
+            "images": 6,
+            "heading": "第 32 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 22 / H116  历史研究 / 工具过滤基线资格批次  各任务域的正常完成 / H118  历史研究 / CaMeL 基线资格批"
+          },
+          {
+            "page": 33,
+            "characters": 243,
+            "images": 6,
+            "heading": "第 33 页  共 40 页 / M3 PI Guard 研究介绍 / H128  历史研究 / CaMeL 基线资格批次  各任务域的正常完成 / H130  历史研究 / IPIGuard 基线资格批次  任务延迟累"
+          },
+          {
+            "page": 34,
+            "characters": 264,
+            "images": 6,
+            "heading": "第 34 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 25 / H137  历史研究 / 检测器基线正式批次  检测分类曲线 / H138  历史研究 / 检测器基线正式批次  检测分数"
+          },
+          {
+            "page": 35,
+            "characters": 234,
+            "images": 6,
+            "heading": "第 35 页  共 40 页 / M3 PI Guard 研究介绍 / H143  历史研究 / InjecAgent 工具交互  各防护配置的攻击结果 / H144  历史研究 / InjecAgent 工具交互  同"
+          },
+          {
+            "page": 36,
+            "characters": 245,
+            "images": 6,
+            "heading": "第 36 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 28 / H036  诊断与预检 / E14 实验  上下文负载与设备显存 / H037  诊断与预检 / E14 实验  上下文负"
+          },
+          {
+            "page": 37,
+            "characters": 291,
+            "images": 8,
+            "heading": "第 37 页  共 40 页 / M3 PI Guard 研究介绍 / H092  诊断与预检 / 配置与运行诊断  配置诊断比较 / H093  诊断与预检 / 配置与运行诊断  配置诊断比较 / 附录 A 实验图集 30"
+          },
+          {
+            "page": 38,
+            "characters": 223,
+            "images": 6,
+            "heading": "第 38 页  共 40 页 / M3 PI Guard 研究介绍 / H148  诊断与预检 / 配置与运行诊断  功能诊断的运行状态 / H149  诊断与预检 / 配置与运行诊断  功能诊断的执行效果 / 附录 A 实"
+          },
+          {
+            "page": 39,
+            "characters": 232,
+            "images": 6,
+            "heading": "第 39 页  共 40 页 / M3 PI Guard 研究介绍 / 附录 A 实验图集 33 / H003  停用记录 / E13 实验  精确率与召回率 / H004  停用记录 / E13 实验  真阳性与假阳性关系"
+          },
+          {
+            "page": 40,
+            "characters": 85,
+            "images": 2,
+            "heading": "第 40 页  共 40 页 / M3 PI Guard 研究介绍 / H009  停用记录 / E4 实验  组件消融的配对差异 / H010  停用记录 / E4 实验  主要条件比较 / "
+          }
+        ]
+      }
+    }
+  },
+  "staged_diff_unchanged": true
+}

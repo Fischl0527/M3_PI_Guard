@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="518.4pt" height="266.4pt" viewBox="0 0 518.4 266.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-14T20:25:51.753893</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.0, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 266.4 
+L 518.4 266.4 
+L 518.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 142.56 66.81312 
+C 133.204617 66.81312 123.946083 68.714396 115.34781 72.401249 
+C 106.749537 76.088102 98.989546 81.484199 92.54006 88.261168 
+C 86.090573 95.038137 81.085123 103.055666 77.828308 111.825862 
+C 74.571492 120.596059 73.130742 129.93734 73.59373 139.281259 
+C 74.056719 148.625179 76.413861 157.778276 80.521716 166.183555 
+C 84.629572 174.588833 90.40309 182.072268 97.490934 188.178466 
+C 104.578778 194.284664 112.834198 198.887201 121.754824 201.705998 
+C 130.675451 204.524794 140.076587 205.501489 149.386144 204.576646 
+L 147.262455 183.199379 
+C 140.849205 183.836492 134.372866 183.163658 128.227546 181.221821 
+C 122.082225 179.279983 116.395158 176.109346 111.512421 171.902854 
+C 106.629684 167.696362 102.652372 162.541107 99.822516 156.750804 
+C 96.99266 150.960501 95.368851 144.655034 95.049903 138.218112 
+C 94.730955 131.78119 95.723472 125.346085 97.967057 119.304394 
+C 100.210641 113.262703 103.658839 107.739517 108.101819 103.070938 
+C 112.544799 98.402359 117.89057 94.685048 123.813825 92.145216 
+C 129.737079 89.605384 136.115181 88.295616 142.56 88.295616 
+z
+" style="fill: #657f98; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 149.386153 204.576647 
+C 158.695707 203.651805 167.720947 200.844565 175.912629 196.325772 
+C 184.10431 191.80698 191.292835 185.670203 197.04078 178.288859 
+L 180.091204 165.090014 
+C 176.131508 170.17494 171.179413 174.402497 165.536256 177.515443 
+C 159.893097 180.628389 153.67571 182.562265 147.262461 183.199379 
+z
+" style="fill: #b7c6d2; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 197.04078 178.288859 
+C 204.724805 168.421254 209.585538 156.648963 211.101638 144.234646 
+C 212.617733 131.820329 210.732986 119.224246 205.649545 107.797416 
+C 200.566104 96.370587 192.472459 86.536682 182.236671 79.350412 
+C 172.000884 72.164142 160.002469 67.891962 147.528333 66.992094 
+L 145.982629 88.418909 
+C 154.575923 89.038818 162.841498 91.981876 169.892818 96.932417 
+C 176.944138 101.882959 182.519761 108.657426 186.021686 116.529242 
+C 189.523612 124.401058 190.821994 133.07836 189.777573 141.630445 
+C 188.733149 150.18253 185.384644 158.29233 180.091204 165.090014 
+z
+" style="fill: #c69b65; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 147.528333 66.992094 
+C 146.701689 66.93246 145.874038 66.887714 145.045782 66.857879 
+C 144.217527 66.828044 143.388802 66.81312 142.56001 66.81312 
+L 142.560007 88.295616 
+C 143.130953 88.295616 143.701852 88.305897 144.272428 88.32645 
+C 144.843004 88.347003 145.413163 88.377828 145.982629 88.418909 
+z
+" style="fill: #d3c2ab; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="142.56" y="130.493376" transform="rotate(-0 142.56 130.493376)">1,396</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="142.56" y="151.20864" transform="rotate(-0 142.56 151.20864)">次条件执行</text>
+   </g>
+  </g>
+  <g id="text_3">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="259.2" y="19.715875" transform="rotate(-0 259.2 19.715875)">论文主证据的条件执行组成</text>
+  </g>
+  <g id="legend_1">
+   <g id="patch_6">
+    <path d="M 309.222 113.757656 
+L 328.222 113.757656 
+L 328.222 107.107656 
+L 309.222 107.107656 
+z
+" style="fill: #657f98; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="113.757656" transform="rotate(-0 335.822 113.757656)">授权主队列  720 次</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 309.222 128.463359 
+L 328.222 128.463359 
+L 328.222 121.813359 
+L 309.222 121.813359 
+z
+" style="fill: #b7c6d2; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="128.463359" transform="rotate(-0 335.822 128.463359)">嵌套压力授权  180 次</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 309.222 143.169063 
+L 328.222 143.169063 
+L 328.222 136.519063 
+L 309.222 136.519063 
+z
+" style="fill: #c69b65; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="143.169063" transform="rotate(-0 335.822 143.169063)">同期校准  480 次</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 309.222 157.874766 
+L 328.222 157.874766 
+L 328.222 151.224766 
+L 309.222 151.224766 
+z
+" style="fill: #d3c2ab; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 9.5px; font-family: 'Microsoft YaHei', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start" x="335.822" y="157.874766" transform="rotate(-0 335.822 157.874766)">合成组件控制  16 次</text>
+   </g>
+  </g>
+ </g>
+</svg>

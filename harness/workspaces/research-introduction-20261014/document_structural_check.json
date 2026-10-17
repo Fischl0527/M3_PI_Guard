@@ -1,0 +1,24 @@
+{
+  "docx": "docs/M3_PI_Guard_研究介绍_2026-10-14.docx",
+  "bytes": 14767078,
+  "text_colors": [
+    "000000"
+  ],
+  "color_elements": 894,
+  "normalized_color_elements": 7,
+  "east_asian_fonts": [
+    "宋体",
+    "黑体"
+  ],
+  "embedded_images": 151,
+  "media_files": 151,
+  "new_figures": 15,
+  "history_groups": 157,
+  "history_original_files": 317,
+  "history_unique_images": 136,
+  "protected_sources_unchanged": 7,
+  "staged_diff_unchanged": true,
+  "paragraphs": 185,
+  "tables": 45,
+  "problems": []
+}

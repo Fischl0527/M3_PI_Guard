@@ -125,26 +125,40 @@ release/M3_PI_Guard_v0.5/
 # 本轮迁移测试副本与运行包仅本地保留；仅显式提交小型验证日志。
 outputs/maintenance/file_retest/
 
-# 排版质检截图与临时测试日志
+# 测试与工具运行缓存
 tmp/
-outputs/maintenance/
-outputs/portability/
-outputs/manuscript/
-outputs/references/
+.pytest_cache/
+.ruff_cache/
+qa-cache/
+
+# 历史与归档测试输出
 outputs/archived_tests/
+
+# 排版质检截图与临时预览（保留 checks 与验证数据）
+outputs/manuscript/previews/
+
+# 跨环境验证中的大型离线包、临时下载脚本与工作树副本（保留各环境验证记录与 portability.json）
+outputs/portability/preview/
+outputs/portability/linux310_wheels/
+outputs/portability/*.tar.gz
+outputs/portability/*get-pip*.py
+outputs/portability/windows-working-tree/
+
+# LaTeX通用模板临时PDF与字体文件
 LaTeX通用模板/*.otf
 LaTeX通用模板/*.ttf
 LaTeX通用模板/*.pdf
-LaTeX通用模板/code/
-LaTeX通用模板/figures/
-LaTeX通用模板/fonts/
 
-# 教师汇报生成与文档渲染中间工作区
-harness/workspaces/
+# 教师汇报生成与文档渲染中间工作区（保留任务验收结论与必要证据）
+/harness/workspaces/**/rendered*/
+/harness/workspaces/**/history_rendered/
+/harness/workspaces/**/excluded_report_previews/
+/harness/workspaces/**/document_pages_*.png
 
 # 论文翻译制作过程临时目录与旧版冗余备份
 docs/paper/新建文件夹/
+docs/paper/*.zip
 docs/paper/00_原始双语对照合并版_备份/
 
-# 个人随笔以及杂项便签（待确认后移动到此，本地保留不上传）
+# 个人随笔以及杂项便签（本地保留，不上传远程仓库）
 docs/personal notes/

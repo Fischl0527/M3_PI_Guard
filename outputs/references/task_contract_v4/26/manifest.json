@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "generated_at": "2026-10-13T22:13:02.394Z",
+  "request": {
+    "topic": "",
+    "title": "PICARD: Parsing Incrementally for Constrained Auto-Regressive Decoding from Language Models",
+    "dois": [],
+    "pdf_url": "https://aclanthology.org/2021.emnlp-main.779.pdf",
+    "si_requested": false,
+    "language_override": "",
+    "route_override": "",
+    "source_url": "",
+    "api_fallback_web": null,
+    "api_fallback_web_for": [],
+    "no_api_fallback_web_for": []
+  },
+  "summary": {
+    "total": 1,
+    "downloaded": 1,
+    "seconds": 1.7
+  },
+  "results": [
+    {
+      "title": "PICARD: Parsing Incrementally for Constrained Auto-Regressive Decoding from Language Models",
+      "status": "open_access_downloaded",
+      "provider": "direct_url",
+      "accessMode": "open_access",
+      "ok": true,
+      "file": "E:\\M3_PI_Guard_test\\outputs\\references\\task_contract_v4\\26\\PDFs\\PICARD_Parsing_Incrementally_for_Constrained_Auto-Regressive_Decoding_from_Language_Models.pdf",
+      "bytes": 251920,
+      "sha256": "500a85a62dd245a2a3ce17e2117e22c35a4a6fb38dc02a4f5e51e7f0ea5cc4d6",
+      "contentType": "application/pdf",
+      "format": "pdf",
+      "source": "https://aclanthology.org/2021.emnlp-main.779.pdf",
+      "si_requested": false
+    }
+  ]
+}
